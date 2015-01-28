@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:henrichg="http://schemas.android.com/apk/res-auto" >
+	<item android:id="@+id/menu_edit_profiles"
+	    android:title="@string/menu_edit_profiles"
+	    android:orderInCategory="100"
+	    henrichg:showAsAction="ifRoom|withText"
+	    android:icon="?attr/actionEditProfilesIcon" />
+    
+</menu>
