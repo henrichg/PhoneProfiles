@@ -36,7 +36,6 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 			
 			aph.setVolumes(profile, audioManager);
 
-			aph.setVolumes(profile, audioManager);
 			//if (!aph.setVolumes(profile, audioManager))
 			//{
 				// nahodenie ringer modu - hlasitosti zmenia silent/vibrate
