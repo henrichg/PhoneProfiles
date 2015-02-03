@@ -314,7 +314,7 @@ public class VolumeDialogPreference extends
 	@Override
 	public void onDismiss(DialogInterface dialog)
 	{
-		audioManager.setRingerMode(defaultRingerMode);
+		//audioManager.setRingerMode(defaultRingerMode);
 		if (volumeType.equalsIgnoreCase("RINGTONE")) 
 			audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValue, 0);
 		else
