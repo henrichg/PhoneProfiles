@@ -210,7 +210,10 @@ public class VolumeDialogPreference extends
 	 * {@inheritDoc}
 	 */
 	public void onStopTrackingTouch(SeekBar seek) {
-		if (volumeType.equalsIgnoreCase("RINGTONE")) 
+
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+
+        if (volumeType.equalsIgnoreCase("RINGTONE"))
 			audioManager.setStreamVolume(AudioManager.STREAM_RING, value, AudioManager.FLAG_PLAY_SOUND);
 		else
 		if (volumeType.equalsIgnoreCase("NOTIFICATION")) 
@@ -314,28 +317,46 @@ public class VolumeDialogPreference extends
 	@Override
 	public void onDismiss(DialogInterface dialog)
 	{
-	    audioManager.setRingerMode(defaultRingerMode);
-		if (volumeType.equalsIgnoreCase("RINGTONE")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValue, 0);
-		else
-		if (volumeType.equalsIgnoreCase("NOTIFICATION")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValue, 0);
-		else
-		if (volumeType.equalsIgnoreCase("MEDIA")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValue, 0);
-		else
-		if (volumeType.equalsIgnoreCase("ALARM")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValue, 0);
-		else
-		if (volumeType.equalsIgnoreCase("SYSTEM")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValue, 0);
-		else
-		if (volumeType.equalsIgnoreCase("VOICE")) 
-			audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValue, 0);
+        audioManager.setRingerMode(defaultRingerMode);
+
+        if (volumeType.equalsIgnoreCase("RINGTONE"))
+            audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValue, 0);
+        else
+        if (volumeType.equalsIgnoreCase("NOTIFICATION"))
+            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValue, 0);
+        else
+        if (volumeType.equalsIgnoreCase("MEDIA"))
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValue, 0);
+        else
+        if (volumeType.equalsIgnoreCase("ALARM"))
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValue, 0);
+        else
+        if (volumeType.equalsIgnoreCase("SYSTEM"))
+            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValue, 0);
+        else
+        if (volumeType.equalsIgnoreCase("VOICE"))
+            audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValue, 0);
+
+        boolean rechangeRingerMode = false;
+
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             if (defaultRingerMode == AudioManager.RINGER_MODE_SILENT)
-                audioManager.setRingerMode(defaultRingerMode);
+                rechangeRingerMode = true;
         }
+
+        // when volume is set to 0, ringer mode is changed to VIBRATE
+        if ((defaultRingerMode == AudioManager.RINGER_MODE_SILENT) && (defaultValue == 0))
+        {
+            if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)
+            {
+                // ringer mode changed to vibrate
+                defaultRingerMode = AudioManager.RINGER_MODE_SILENT;
+                rechangeRingerMode = true;
+            }
+        }
+
+        if (rechangeRingerMode)
+            audioManager.setRingerMode(defaultRingerMode);
 	}
 	
 }
