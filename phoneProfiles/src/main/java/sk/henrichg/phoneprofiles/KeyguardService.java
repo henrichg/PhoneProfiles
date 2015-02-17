@@ -28,8 +28,9 @@ public class KeyguardService extends Service {
 		Context context = getApplicationContext();
 		
 		KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-		if (!kgMgr.inKeyguardRestrictedInputMode())
-		{
+		//if (!kgMgr.inKeyguardRestrictedInputMode())
+        //if (!kgMgr.isKeyguardSecure())
+		//{
 			GlobalData.logE("KeyguardService.onStartCommand","not keyguard restructed");
 			
 			DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
@@ -53,7 +54,7 @@ public class KeyguardService extends Service {
 				        return START_STICKY;
 				}
 			}
-		}
+		//}
 
 		stopSelf();
 		return START_NOT_STICKY;
