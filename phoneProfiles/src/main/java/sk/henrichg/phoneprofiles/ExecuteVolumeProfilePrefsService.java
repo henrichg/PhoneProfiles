@@ -47,15 +47,17 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
             boolean rechangeRingerMode = false;
             int savedProfileRingerMode = profile._volumeRingerMode;
 
+            // for Android 5.0 set ringer mode again
             if ((android.os.Build.VERSION.SDK_INT >= 21))
             {
-                // for Android 5.0 set ringer mode again
                 rechangeRingerMode = true;
             }
 
-            // when volume is set to 0, ringer mode is changed to VIBRATE
+            // when ringer mode is changed to VIBRATE
+            // and profile ringer mode is RING or SILENT,
+            // change ringer mode to SILENT
             if ((profile._volumeRingerMode == 1) ||  // ring
-                (profile._volumeRingerMode == 4))    // silent
+                    (profile._volumeRingerMode == 4))    // silent
             {
                 if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)
                 {
@@ -65,6 +67,9 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 }
             }
 
+            // for Android 5.0 and profile ringer mode ZEN_MODE,
+            // when ringer mode is changed to VIBRATE,
+            // change ringer mode to SILENT twice
             if ((android.os.Build.VERSION.SDK_INT >= 21)) {
                 if ((profile._volumeRingerMode == 5) && (profile._volumeZenMode != 3)) // NONE
                 {
