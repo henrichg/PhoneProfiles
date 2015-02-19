@@ -364,8 +364,8 @@ public class ActivateProfileListFragment extends Fragment {
 		// reset, aby sa to dalej chovalo ako normalne spustenie z lauchera
 		startupSource = 0;
 
-		//  aplikacia uz je 1. krat spustena
-		GlobalData.setApplicationStarted(getActivity().getBaseContext(), true);
+		//  aplikacia uz je 1. krat spustena - moved to FirstStartService
+		//GlobalData.setApplicationStarted(getActivity().getBaseContext(), true);
 	}
 	
 	

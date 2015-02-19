@@ -295,6 +295,8 @@ public class ActivateProfileHelper {
 	
 	public boolean setVolumes(Profile profile, AudioManager audioManager)
 	{
+        Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
+
 		boolean priorityMode = false;
 
 		if (profile.getVolumeSystemChange())
@@ -372,6 +374,8 @@ public class ActivateProfileHelper {
 	@SuppressWarnings("deprecation")
 	public void setRingerMode(Profile profile, AudioManager audioManager)
 	{
+        Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
+
 		switch (profile._volumeRingerMode) {
 		case 1:  // Ring
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);

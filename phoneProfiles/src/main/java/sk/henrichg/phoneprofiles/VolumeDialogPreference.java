@@ -339,7 +339,7 @@ public class VolumeDialogPreference extends
         if (volumeType.equalsIgnoreCase("VOICE"))
             audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValue, 0);
 
-        boolean rechangeRingerMode = false;
+        /*boolean rechangeRingerMode = false;
 
         // for Android 5.0 set ringer mode again
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -358,7 +358,7 @@ public class VolumeDialogPreference extends
             }
         }
 
-        if (rechangeRingerMode)
+        if (rechangeRingerMode) */
             audioManager.setRingerMode(defaultRingerMode);
 	}
 	
