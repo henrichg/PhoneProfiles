@@ -16,7 +16,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 	//protected void doWakefulWork(Intent intent) {
 	protected void onHandleIntent(Intent intent) {
 		
-		Context context = getBaseContext();
+		Context context = getApplicationContext();
 		
 		GlobalData.loadPreferences(context);
 		
