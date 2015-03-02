@@ -48,7 +48,9 @@ public class FirstStartService extends IntentService {
 		GlobalData.loadPreferences(context);
 		GUIData.setLanguage(context);
 
-        // install phoneprofiles_silent.mp3
+        // remove phoneprofiles_silent.mp3
+        removeTone("phoneprofiles_silent.mp3", context);
+        // install phoneprofiles_silent.ogg
         installTone(R.raw.phoneprofiles_silent, "PhoneProfiles Silent", context);
 
 		// start ReceiverService
@@ -89,7 +91,7 @@ public class FirstStartService extends IntentService {
 
     private boolean installTone(int resID, String title, Context context) {
 
-        Log.e("FirstStartService.copyRawFile", " --- start");
+        Log.e("FirstStartService.installTone", " --- start");
 
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
@@ -100,10 +102,10 @@ public class FirstStartService extends IntentService {
         // Make sure the directory exists
         //noinspection ResultOfMethodCallIgnored
         path.mkdirs();
-        String filename = context.getResources().getResourceEntryName(resID) + ".mp3";
+        String filename = context.getResources().getResourceEntryName(resID) + ".ogg";
         File outFile = new File(path, filename);
 
-        String mimeType = "audio/mpeg";
+        String mimeType = "audio/ogg";
 
         boolean isError = false;
 
@@ -157,11 +159,11 @@ public class FirstStartService extends IntentService {
                 System.out.println(e);
             }
 
-            Log.e("FirstStartService.copyRawFile", "Copied alarm tone " + title + " to " + outAbsPath);
-            Log.e("FirstStartService.copyRawFile", "ID is " + newUri.toString());
+            Log.e("FirstStartService.installTone", "Copied alarm tone " + title + " to " + outAbsPath);
+            Log.e("FirstStartService.installTone", "ID is " + newUri.toString());
 
         } catch (Exception e) {
-            Log.e("FirstStartService.copyRawFile", "Error writing " + filename, e);
+            Log.e("FirstStartService.installTone", "Error writing " + filename, e);
             isError = true;
         } finally {
             // Close the streams
@@ -176,6 +178,30 @@ public class FirstStartService extends IntentService {
         }
 
         return !isError;
+    }
+
+    private void removeTone(String voiceFile, Context context) {
+
+        Log.e("FirstStartService", "removeTone: --- start");
+
+        // Make sure the shared storage is currently writable
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            return;
+
+        File path = Environment.
+                getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES);
+        String filename = voiceFile;
+        File outFile = new File(path, filename);
+
+        String outAbsPath = outFile.getAbsolutePath();
+        Uri contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
+
+        // If the ringtone already exists in the database, delete it first
+        context.getContentResolver().delete(contentUri,
+                MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
+
+        // delete the file
+        outFile.delete();
     }
 
 }
