@@ -206,9 +206,9 @@ public class PhoneProfilesHelper {
 			}
 			if (!OK)
 				Log.e("PhoneProfilesHelper.doInstallPPHelper", "chmod ERROR");
-			//if (OK)
-			//	OK =
-			RootTools.remount("/system", "RO");
+			if (OK)
+				//OK =
+			    RootTools.remount("/system", "RO");
 			//if (!OK)
 			//	Log.e("PhoneProfilesHelper.doInstallPPHelper", "remount RO ERROR");
 			//try {
@@ -407,8 +407,7 @@ public class PhoneProfilesHelper {
 		//if (!OK)
 		//	Log.e("PhoneProfilesHelper.doUninstallPPHelper", "delete file ERROR");
 		//if (OK)
-		//	OK =
-		RootTools.remount("/system", "RO");
+		//	OK = RootTools.remount("/system", "RO");
 		//if (!OK)
 		//	Log.e("PhoneProfilesHelper.doUninstallPPHelper", "remount RO ERROR");
 		if (GlobalData.isSELinuxEnforcing())
