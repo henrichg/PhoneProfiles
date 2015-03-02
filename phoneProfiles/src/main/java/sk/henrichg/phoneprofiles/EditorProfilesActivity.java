@@ -17,6 +17,8 @@ import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnHideActionMode;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRedrawProfileListFragment;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRestartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnShowActionMode;
+
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -602,9 +604,12 @@ public class EditorProfilesActivity extends ActionBarActivity
 			protected void onPreExecute()
 			{
 				super.onPreExecute();
-				
-			     this.dialog.setMessage(getResources().getString(R.string.import_profiles_alert_title));
-			     this.dialog.show();						
+
+                lockScreenOrientation();
+			    this.dialog.setMessage(getResources().getString(R.string.import_profiles_alert_title));
+                this.dialog.setCancelable(false);
+                this.dialog.setIndeterminate(false);
+			    this.dialog.show();
 				
 				// check root, this set GlobalData.rooted for doInBackgroud()
 				GlobalData.isRooted(false);
@@ -644,6 +649,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 				
 			    if (dialog.isShowing())
 		            dialog.dismiss();
+                unlockScreenOrientation();
 				
 				if (result == 1)
 				{
@@ -669,8 +675,22 @@ public class EditorProfilesActivity extends ActionBarActivity
 					importExportErrorDialog(1);
 				}
 			}
-			
-		}
+
+            private void lockScreenOrientation() {
+                int currentOrientation = activity.getResources().getConfiguration().orientation;
+                if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+            }
+
+            private void unlockScreenOrientation() {
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            }
+
+
+        }
 		
 		new ImportAsyncTask().execute();
 	}
@@ -805,8 +825,10 @@ public class EditorProfilesActivity extends ActionBarActivity
 					{
 						super.onPreExecute();
 						
-					     this.dialog.setMessage(getResources().getString(R.string.export_profiles_alert_title));
-					     this.dialog.show();						
+					    this.dialog.setMessage(getResources().getString(R.string.export_profiles_alert_title));
+                        this.dialog.setCancelable(false);
+                        this.dialog.setIndeterminate(false);
+					    this.dialog.show();
 					}
 					
 					@Override
