@@ -12,5 +12,6 @@ Required
 - RootTools - https://github.com/Stericson/RootTools
 - DashClock API - https://code.google.com/p/dashclock/wiki/API
 - FloatingActionButton - https://github.com/makovkastar/FloatingActionButton
+- SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 
 
