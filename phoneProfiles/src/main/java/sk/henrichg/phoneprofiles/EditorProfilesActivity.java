@@ -19,6 +19,7 @@ import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRestartProfilePref
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnShowActionMode;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class EditorProfilesActivity extends ActionBarActivity
                                     implements OnStartProfilePreferences,
@@ -90,7 +93,23 @@ public class EditorProfilesActivity extends ActionBarActivity
 		createApplicationsCache();
 		
 		setContentView(R.layout.activity_editor_profile_list);
-		
+
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            //w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+            // create our manager instance after the content view is set
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            tintManager.setStatusBarTintEnabled(true);
+            // set a custom tint color for status bar
+            if (GlobalData.applicationTheme.equals("material"))
+                tintManager.setStatusBarTintColor(Color.parseColor("#ff237e9f"));
+            else
+                tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
+        }
+
 		if (findViewById(R.id.editor_profile_detail_container) != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and
