@@ -29,6 +29,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -152,7 +154,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 				.remove(fragment).commit();
 			fragmentManager.executePendingTransactions();
 		}
-		
+
 		//getSupportActionBar().setHomeButtonEnabled(true);
 		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.title_activity_editor);
