@@ -1,13 +1,13 @@
 package sk.henrichg.phoneprofiles;
 
-import java.text.Collator;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+
+import java.text.Collator;
+import java.util.Locale;
 
 public class GUIData {
 
@@ -29,8 +29,6 @@ public class GUIData {
 		// jazyk na aky zmenit
 		String lang = GlobalData.applicationLanguage;
 		
-		//Log.d("EditorProfilesActivity.setLanguauge", lang);
-
 		Locale appLocale;
 		
 		if (!lang.equals("system"))
@@ -88,7 +86,6 @@ public class GUIData {
 		
 		if (GlobalData.applicationTheme.equals("material"))
 		{
-			//Log.d("EditorProfilesActivity.setTheme","material");
 			if (forPopup)
 				activity.setTheme(R.style.PopupTheme_material);
 			else
@@ -97,7 +94,6 @@ public class GUIData {
 		else
 		if (GlobalData.applicationTheme.equals("dark"))
 		{
-			//Log.d("EditorProfilesActivity.setTheme","dark");
 			if (forPopup)
 				activity.setTheme(R.style.PopupTheme_dark);
 			else
@@ -106,7 +102,6 @@ public class GUIData {
 		else
 		if (GlobalData.applicationTheme.equals("dlight"))
 		{
-			//Log.d("EditorProfilesActivity.setTheme","dark");
 			if (forPopup)
 				activity.setTheme(R.style.PopupTheme_dlight);
 			else

@@ -1,9 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
-import java.util.Date;
-
 import android.content.Context;
 import android.media.AudioManager;
+
+import java.util.Date;
 
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
@@ -73,7 +73,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 	}
 
     protected void onIncomingCallStarted(String number, Date start) {
-    	//Log.e("PhoneCallBroadcastReceiver.onIncomingCallStarted","xxx");
 		if (audioManager == null )
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
@@ -81,7 +80,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
-    	//Log.e("PhoneCallBroadcastReceiver.onOutgoingCallStarted","xxx");
 		if (audioManager == null )
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
@@ -89,22 +87,18 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     protected void onIncomingCallAnswered(String number, Date start) {
-    	//Log.e("PhoneCallBroadcastReceiver.onIncomingCallAnswered","xxx");
     	callAnswered(false);
     }
 
     protected void onOutgoingCallAnswered(String number, Date start) {
-    	//Log.e("PhoneCallBroadcastReceiver.onOutgoingCallAnswered","xxx");
     	callAnswered(false);
     }
 
     protected void onIncomingCallEnded(String number, Date start, Date end) {
-    	//Log.e("PhoneCallBroadcastReceiver.onIncomingCallEnded","xxx");
     	callEnded(true);
     }
 
     protected void onOutgoingCallEnded(String number, Date start, Date end) {
-    	//Log.e("PhoneCallBroadcastReceiver.onOutgoingCallEnded","xxx");
     	callEnded(false);
     }
 

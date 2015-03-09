@@ -28,8 +28,6 @@ public class FirstStartService extends IntentService {
 	{
 		Context context = getBaseContext();
 		
-		Log.e("FirstStartService.onHandleIntent","xxx");
-
 		// grant root
 		//if (GlobalData.isRooted(false))
 		//{
@@ -90,8 +88,6 @@ public class FirstStartService extends IntentService {
 	}
 
     private boolean installTone(int resID, String title, Context context) {
-
-        Log.e("FirstStartService.installTone", " --- start");
 
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
@@ -159,9 +155,6 @@ public class FirstStartService extends IntentService {
                 System.out.println(e);
             }
 
-            Log.e("FirstStartService.installTone", "Copied alarm tone " + title + " to " + outAbsPath);
-            Log.e("FirstStartService.installTone", "ID is " + newUri.toString());
-
         } catch (Exception e) {
             Log.e("FirstStartService.installTone", "Error writing " + filename, e);
             isError = true;
@@ -181,8 +174,6 @@ public class FirstStartService extends IntentService {
     }
 
     private void removeTone(String voiceFile, Context context) {
-
-        Log.e("FirstStartService", "removeTone: --- start");
 
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))

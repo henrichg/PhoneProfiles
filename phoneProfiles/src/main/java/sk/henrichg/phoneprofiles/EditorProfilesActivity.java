@@ -1,5 +1,35 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceScreen;
+import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,36 +47,6 @@ import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnHideActionMode;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRedrawProfileListFragment;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRestartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnShowActionMode;
-
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceScreen;
-import android.support.v7.app.ActionBarActivity;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
-
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class EditorProfilesActivity extends ActionBarActivity
                                     implements OnStartProfilePreferences,
@@ -210,8 +210,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 	*/	
 
 		
-		//Log.e("EditorProfilesActivity.onCreate", "xxxx");
-		
 	}
 
 	public static EditorProfilesActivity getInstance()
@@ -223,9 +221,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 	protected void onStart()
 	{
 		super.onStart();
-		
-		//Log.d("EditorProfilesActivity.onStart", "xxxx");
-		
 	}
 	
 	@Override
@@ -233,8 +228,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 	{
 		super.onStop();
 		instance = null;
-
-		//Log.e("EditorProfilesActivity.onStop","xxx");
 	}
 	
 	@Override 
@@ -251,8 +244,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 	@Override
 	protected void onDestroy()
 	{
-		//Log.e("EditorProfilesActivity.onDestroy", "xxxx");
-
 		if (!savedInstanceStateChanged)
 		{
 			// no destroy applicationsCache on orientation change
@@ -309,8 +300,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 			
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
-			//Log.d("EditorProfilesActivity.onOptionsItemSelected", "menu_settings");
-			
 			intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
 
 			startActivityForResult(intent, GlobalData.REQUEST_CODE_APPLICATION_PREFERENCES);
@@ -323,14 +312,10 @@ public class EditorProfilesActivity extends ActionBarActivity
 			PhoneProfilesHelper.uninstallPPHelper(this);
 			return true;
 		case R.id.menu_export:
-			//Log.d("EditorProfileListFragment.onOptionsItemSelected", "menu_export");
-
 			exportData();
 			
 			return true;
 		case R.id.menu_import:
-			//Log.d("EditorProfileListFragment.onOptionsItemSelected", "menu_import");
-
 			importData();
 			
 			return true;
@@ -345,8 +330,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 			}			
 			return true;*/
 		case R.id.menu_exit:
-			//Log.d("EditorProfilesActivity.onOptionsItemSelected", "menu_exit");
-			
 			GlobalData.setApplicationStarted(getBaseContext(), false);
 			
 			// zrusenie notifikacie
@@ -437,8 +420,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		//Log.e("EditorProfileListActivity.onActivityResult","requestCode="+requestCode);
-		
 		if (requestCode == GlobalData.REQUEST_CODE_ACTIVATE_PROFILE)
 		{
 			EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -453,12 +434,9 @@ public class EditorProfilesActivity extends ActionBarActivity
 				long profile_id = data.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
 				int newProfileMode = data.getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
 	
-				//Log.e("EditorProfilesActivity.onActivityResult","profile_id="+profile_id);
-				
 				if (profile_id > 0)
 				{
 					Profile profile = getDataWrapper().getDatabaseHandler().getProfile(profile_id);
-					//Log.e("EditorProfilesActivity.onActivityResult","profile="+profile);
 			    	// generate bitmaps
 					profile.generateIconBitmap(getBaseContext(), false, 0);
 					profile.generatePreferencesIndicator(getBaseContext(), false, 0);
@@ -491,8 +469,6 @@ public class EditorProfilesActivity extends ActionBarActivity
 		else
 		if (requestCode == GlobalData.REQUEST_CODE_REMOTE_EXPORT)
 		{
-			//Log.e("EditorProfilesActivity.onActivityResult","resultCode="+resultCode);
-
 			if (resultCode == RESULT_OK)
 			{
 				doImportData(GUIData.REMOTE_EXPORT_PATH);
@@ -1014,11 +990,8 @@ public class EditorProfilesActivity extends ActionBarActivity
 
 	public void onRedrawProfileListFragment(Profile profile, int newProfileMode) 
 	{
-		//Log.e("EditorProfileActivity.onRedrawProfileListFragment","xxx");
-
 		// redraw headeru list fragmentu, notifikacie a widgetov
 		EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
-		//Log.e("EditorProfilesActivity.onRedrawProfileListFragment","fragment="+fragment);
 
 		if (fragment != null)
 		{

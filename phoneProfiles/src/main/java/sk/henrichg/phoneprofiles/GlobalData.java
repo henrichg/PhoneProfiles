@@ -1,21 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.stericson.RootShell.RootShell;
-import com.stericson.RootTools.RootTools;
-
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
@@ -30,6 +14,22 @@ import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
+
+import com.stericson.RootShell.RootShell;
+import com.stericson.RootTools.RootTools;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GlobalData extends Application {
 
@@ -635,7 +635,6 @@ public class GlobalData extends Application {
 				if (canExploitGPS(context))
 				{
 					featurePresented = HARDWARE_CHECK_ALLOWED;
-					//Log.e("GlobalData.hardwareCheck - GPS","exploit");
 			    }
 				else
 				if (android.os.Build.VERSION.SDK_INT < 17)
@@ -644,7 +643,6 @@ public class GlobalData extends Application {
 					{
 						// je nainstalovany PhonProfilesHelper
 						featurePresented = HARDWARE_CHECK_ALLOWED;
-						//Log.e("GlobalData.hardwareCheck - GPS","system app.");
 				    }
 					else
 					{
@@ -924,10 +922,6 @@ public class GlobalData extends Application {
 	{
 		RootShell.debugMode = rootToolsDebug;
 		
-		//Log.e("GlobaData.grantRoot","grantChecked="+grantChecked);
-		//Log.e("GlobaData.grantRoot","force="+force);
-		//Log.e("GlobaData.grantRoot","rootGranted="+rootGranted);
-		
 		if ((!grantChecked) || force)
 		{
 			settingsBinaryExists = false;
@@ -954,9 +948,6 @@ public class GlobalData extends Application {
 			}
 		}
 
-		//Log.e("GlobaData.grantRoot","grantChecked="+grantChecked);
-		//Log.e("GlobaData.grantRoot","rootGranted="+rootGranted);
-		
 		//if (rooted)
 		//	getSUVersion();
 		return rootGranted;
@@ -1022,8 +1013,6 @@ public class GlobalData extends Application {
             
         }
         
-		//Log.e("GlobalData.isSELinuxEnforcing", "isSELinuxEnforcing="+isSELinuxEnforcing);
-        
         return isSELinuxEnforcing;
     }
 
@@ -1044,7 +1033,6 @@ public class GlobalData extends Application {
 	    	{
 	    		@Override
 	    		public void commandOutput(int id, String line) {
-	    			Log.e("GlobalData.getSUVersion","version="+line);
 	    			suVersion = line;
 	    			
 	    			super.commandOutput(id, line);

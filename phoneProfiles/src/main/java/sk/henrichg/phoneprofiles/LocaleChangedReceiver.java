@@ -18,8 +18,6 @@ public class LocaleChangedReceiver extends BroadcastReceiver {
 			notificationManager.cancel(GlobalData.NOTIFICATION_ID);
 		}
 		
-		//Log.d("LocaleChangedReceiver.onReceive", "xxxxx");
-
 	}
 
 }

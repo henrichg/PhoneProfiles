@@ -61,8 +61,6 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
 		String stringValue = preferences.getString(key, "");
 
-		//Log.e("PhoneProfilesPreferencesFragment.setSummary",key+"="+stringValue);
-		
 		if (key.equals(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE))
 		{
 			String sProfileId = stringValue;
@@ -132,7 +130,6 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 		 else {
 			// For all other preferences, set the summary to the value's
 			// simple string representation.
-		    //Log.e("PhoneProfilesPreferencesFragment.setSummary",key+"="+stringValue);
 			preference.setSummary(preference.toString());
 		}
 	}

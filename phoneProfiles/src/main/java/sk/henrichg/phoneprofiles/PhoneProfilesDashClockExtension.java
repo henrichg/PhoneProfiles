@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Intent;
+
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
 

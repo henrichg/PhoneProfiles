@@ -1,10 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.lang.ref.WeakReference;
-import java.util.List;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,10 +7,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-
-import com.melnykov.fab.FloatingActionButton;
-import com.mobeta.android.dslv.DragSortListView;
-
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
+import com.mobeta.android.dslv.DragSortListView;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class EditorProfileListFragment extends Fragment {
 
@@ -187,8 +186,6 @@ public class EditorProfileListFragment extends Fragment {
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				//Log.e("EditorProfileListFragment.onItemClick", "xxxx");
-
 				startProfilePreferencesActivity((Profile)profileListAdapter.getItem(position));
 				
 			}
@@ -199,8 +196,6 @@ public class EditorProfileListFragment extends Fragment {
 
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-				//Log.e("EditorProfileListFragment.onItemLongClick", "xxxx");
-				
 				activateProfile((Profile)profileListAdapter.getItem(position), true);
 				
 				return true;
@@ -213,7 +208,6 @@ public class EditorProfileListFragment extends Fragment {
             	profileListAdapter.changeItemOrder(from, to); // swap profiles
             	databaseHandler.setPOrder(profileList);  // set profiles _porder and write it into db
 				activateProfileHelper.updateWidget();
-        		//Log.d("EditorProfileListFragment.drop", "xxxx");
             }
         });
         
@@ -240,8 +234,6 @@ public class EditorProfileListFragment extends Fragment {
 			updateHeader(profile);
 		}
 		
-		//Log.d("EditorProfileListFragment.onActivityCreated", "xxx");
-        
 	}
 	
 	private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -313,9 +305,6 @@ public class EditorProfileListFragment extends Fragment {
 	public void onStart()
 	{
 		super.onStart();
-
-		//Log.d("EditorProfileListFragment.onStart", "xxxx");
-		
 	}
 	
 	@Override
@@ -351,14 +340,10 @@ public class EditorProfileListFragment extends Fragment {
 		
 		switch (item.getItemId()) {
 		/*case R.id.menu_new_profile:
-			//Log.d("PhoneProfileActivity.onOptionsItemSelected", "menu_new_profile");
-
 			startProfilePreferencesActivity(null);
 			
 			return true;*/
 		case R.id.menu_delete_all_profiles:
-			//Log.d("EditorProfileListFragment.onOptionsItemSelected", "menu_delete_all_profiles");
-			
 			deleteAllProfiles();
 			
 			return true;
@@ -392,8 +377,6 @@ public class EditorProfileListFragment extends Fragment {
 			editMode = EDIT_MODE_INSERT;
 		}
 
-		//Log.d("EditorProfileListFragment.startProfilePreferencesActivity", profile.getID()+"");
-		
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) one must start profile preferences
 		onStartProfilePreferencesCallback.onStartProfilePreferences(_profile, editMode);

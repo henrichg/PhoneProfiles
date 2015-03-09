@@ -1,7 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +11,8 @@ import android.text.style.StyleSpan;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import java.util.List;
 
 @SuppressLint("NewApi")
 public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
@@ -54,7 +54,6 @@ public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsF
 	}
 	
 	public void onCreate() {
-		//Log.e("ProfileListWidgetFactory.onCreate","xxx");
 	}
   
 	public void onDestroy() {
@@ -68,8 +67,6 @@ public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsF
 	}
 
 	public RemoteViews getViewAt(int position) {
-		
-		//Log.e("ProfileListWidgetFactory.getViewAt","xxx");
 		
 		RemoteViews row;
 		if (!GlobalData.applicationWidgetListGridLayout)
@@ -169,12 +166,9 @@ public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsF
 	}
 
 	public void onDataSetChanged() {
-		//Log.e("ProfileListWidgetFactory.onDataSetChanged","xxx");
-
 		createProfilesDataWrapper();
 		
 		dataWrapper.clearProfileList();
 		profileList = dataWrapper.getProfileList();
-		//Log.e("ProfileListWidgetFactory.onDataSetChanged",""+profileList);
 	}
 }

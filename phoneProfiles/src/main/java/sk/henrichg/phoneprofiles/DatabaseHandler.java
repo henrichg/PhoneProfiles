@@ -1,12 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,6 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -189,8 +189,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		
-		//Log.e("DatabaseHandler.onUpgrade", "xxxx");
 		
 		/*
 		// Drop older table if existed
@@ -1425,7 +1423,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			{
 				// zistenie verzie zalohy
 				SQLiteDatabase exportedDBObj = SQLiteDatabase.openDatabase(exportedDB.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
-				//Log.d("DatabaseHandler.importDB", "databaseVersion="+exportedDBObj.getVersion());
 				//if (exportedDBObj.getVersion() == DATABASE_VERSION)
 			//	if (exportedDBObj.getVersion() <= DATABASE_VERSION)
 			//	{	
@@ -1549,7 +1546,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 											values.put(columnNamesExportedDB[i], value);
 										}
 										
-										//Log.d("DatabaseHandler.importDB", "cn="+columnNames[i]+" val="+cursor.getString(i));
 									}
 									
 									// for non existent fields set default value
@@ -1660,9 +1656,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			File dataDB = new File(data, GUIData.DB_FILEPATH + "/" + DATABASE_NAME);
 			File exportedDB = new File(sd, GlobalData.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
 			
-			//Log.d("DatabaseHandler.exportDB", "dataDB="+dataDB.getAbsolutePath());
-			//Log.d("DatabaseHandler.exportDB", "exportedDB="+exportedDB.getAbsolutePath());
-			
 			if (dataDB.exists())
 			{
 				// close db
@@ -1672,7 +1665,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				if (!(exportDir.exists() && exportDir.isDirectory()))
 				{
 					exportDir.mkdirs();
-					//Log.d("DatabaseHandler.exportDB", "mkdir="+exportDir.getAbsolutePath());
 				}
 				
 				FileChannel src = new FileInputStream(dataDB).getChannel();

@@ -1,7 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.util.Calendar;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -10,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.view.WindowManager;
+
+import java.util.Calendar;
 
 public class RemoveBrightnessViewBroadcastReceiver extends BroadcastReceiver
 {

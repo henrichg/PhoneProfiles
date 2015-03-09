@@ -13,8 +13,6 @@ public class ReceiversService extends Service {
 	@Override
     public void onCreate()
 	{
-        //Log.e("ReceiversService.onCreate","xxx");
-        
 		// start service for first start
 		Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
 		getApplicationContext().startService(eventsServiceIntent);
@@ -30,7 +28,6 @@ public class ReceiversService extends Service {
     public void onDestroy()
 	{
 		unregisterReceiver(screenOnOffReceiver);
-        //Log.e("ReceiversService.onDestroy","xxx");
     }
 	 
 	@Override
@@ -45,7 +42,6 @@ public class ReceiversService extends Service {
 	public void onTaskRemoved(Intent rootIntent)
 	{
         GlobalData.setApplicationStarted(getApplicationContext(), false);
-        //Log.e("ReceiversService.onTaskRemoved","xxx");
         super.onTaskRemoved(rootIntent);
 	}
 	

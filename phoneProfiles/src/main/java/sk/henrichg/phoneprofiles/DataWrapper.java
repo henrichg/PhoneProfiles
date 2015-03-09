@@ -1,7 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,6 +10,8 @@ import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class DataWrapper {
 
@@ -233,7 +233,6 @@ public class DataWrapper {
 		Profile profile = getDatabaseHandler().getActivatedProfile();
 		if (forGUI && (profile != null))
 		{
-			//Log.d("ProfilesDataWrapper.getActivatedProfile","forGUI=true");
 			profile.generateIconBitmap(context, monochrome, monochromeValue);
 			profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
 		}
@@ -244,12 +243,10 @@ public class DataWrapper {
 	{
 		if (profileList == null)
 		{
-			//Log.d("ProfilesDataWrapper.getActivatedProfile","profileList=null");
 			return getActivatedProfileFromDB();
 		}
 		else
 		{
-			//Log.d("ProfilesDataWrapper.getActivatedProfile","profileList!=null");
 			Profile profile;
 			for (int i = 0; i < profileList.size(); i++)
 			{
@@ -622,8 +619,6 @@ public class DataWrapper {
 			}
 		}
 			
-		//Log.d("BackgroundActivateProfileActivity.onStart", "actProfile="+String.valueOf(actProfile));
-
 		if ((startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT) ||
 			(startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
 			(startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR) ||
@@ -634,9 +629,6 @@ public class DataWrapper {
 				profile = null;
 			else
 				profile = getProfileById(profile_id);
-
-			//Log.d("BackgroundActivateProfileActivity.onStart","_iconBitmap="+String.valueOf(profile._iconBitmap));
-			//Log.d("BackgroundActivateProfileActivity.onStart","_preferencesIndicator="+String.valueOf(profile._preferencesIndicator));
 		}
 
 		

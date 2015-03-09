@@ -1,14 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import com.stericson.RootTools.RootTools;
-import com.stericson.RootShell.execution.Command;
-import com.stericson.RootShell.execution.Shell;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
@@ -43,6 +34,15 @@ import android.view.Surface;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.RemoteViews;
+
+import com.stericson.RootShell.execution.Command;
+import com.stericson.RootShell.execution.Shell;
+import com.stericson.RootTools.RootTools;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ActivateProfileHelper {
 	
@@ -207,8 +207,6 @@ public class ActivateProfileHelper {
 		{
 			String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 
-			//Log.d("ActivateProfileHelper.execute", provider);
-		    
 			switch (profile._deviceGPS) {
 				case 1 :
 					setGPS(context, true);
@@ -641,7 +639,6 @@ public class ActivateProfileHelper {
 		// nahodenie pozadia
 		if (profile._deviceWallpaperChange == 1)
 		{
-			//Log.d("ActivateProfileHelper.execute","set wallpaper");
 			DisplayMetrics displayMetrics = new DisplayMetrics();
 			WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
@@ -853,7 +850,6 @@ public class ActivateProfileHelper {
 				//notification.flags |= Notification.FLAG_NO_CLEAR; 
 				notification.flags |= Notification.FLAG_ONGOING_EVENT;
 				
-				//Log.e("ActivateProfileHelper.showNotification","notificationManager="+notificationManager);
 				notificationManager.notify(GlobalData.NOTIFICATION_ID, notification);
 		}
 		else
@@ -1033,15 +1029,11 @@ public class ActivateProfileHelper {
 	{
 		boolean isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
 
-		//Log.e("ActivateProfileHelper.setGPS", isEnabled + "");
-	    
 	    //if(!provider.contains(LocationManager.GPS_PROVIDER) && enable)
 		if ((!isEnabled)  && enable)
 	    {
-    		//Log.e("ActivateProfileHelper.setGPS", "enable=true");
 	    	if (GlobalData.canExploitGPS(context))
 	    	{
-	    		//Log.e("ActivateProfileHelper.setGPS", "exploit");
 		        final Intent poke = new Intent();
 		        poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider"); 
 		        poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
@@ -1051,7 +1043,6 @@ public class ActivateProfileHelper {
 	    	if ((android.os.Build.VERSION.SDK_INT >= 17) && GlobalData.grantRoot(false))
 			{
 				// zariadenie je rootnute
-	    		//Log.e("ActivateProfileHelper.setGPS", "root");
 				String command1;
 				//String command2;
 
@@ -1079,7 +1070,6 @@ public class ActivateProfileHelper {
 			}
 			else
 			{
-	    		//Log.e("ActivateProfileHelper.setGPS", "none");
 				/*try {
 					Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
 					intent.putExtra("enabled", enable);
@@ -1098,10 +1088,8 @@ public class ActivateProfileHelper {
         //if(provider.contains(LocationManager.GPS_PROVIDER) && (!enable))
 		if (isEnabled && (!enable))
         {
-			//Log.e("ActivateProfileHelper.setGPS", "enable=false");
     		if (GlobalData.canExploitGPS(context))
 	    	{
-	    		//Log.e("ActivateProfileHelper.setGPS", "exploit");
 	            final Intent poke = new Intent();
 	            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
 	            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
@@ -1112,7 +1100,6 @@ public class ActivateProfileHelper {
 	    	if ((android.os.Build.VERSION.SDK_INT >= 17) && GlobalData.grantRoot(false))
 			{
 				// zariadenie je rootnute
-	    		//Log.e("ActivateProfileHelper.setGPS", "root");
 				String command1;
 				//String command2;
 
@@ -1149,7 +1136,6 @@ public class ActivateProfileHelper {
 			}
 			else
 			{
-	    		//Log.e("ActivateProfileHelper.setGPS", "none");
 			/*	try {
 					Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
 					intent.putExtra("enabled", enable);
@@ -1172,8 +1158,7 @@ public class ActivateProfileHelper {
 		if (GlobalData.grantRoot(false))
 		{
 			// zariadenie je rootnute
-			//Log.e("ActivateProfileHelper.setAirplaneMode_SDK17","root granted");
-		
+
 			String command1;
 			String command2;
 			if (mode)

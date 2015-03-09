@@ -32,8 +32,6 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
 	//protected void doWakefulWork(Intent intent) {
 	protected void onHandleIntent(Intent intent) {
 		
-		//Log.e("ExecuteRadioProfilePrefsService.onHandleIntent", "xxx");
-		
 		Context context = getBaseContext();
 		
 		GlobalData.loadPreferences(context);

@@ -1,15 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import com.stericson.RootTools.RootTools;
-import com.stericson.RootShell.execution.Command;
-import com.stericson.RootShell.execution.Shell;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,9 +9,9 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -32,6 +22,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.stericson.RootShell.execution.Command;
+import com.stericson.RootShell.execution.Shell;
+import com.stericson.RootTools.RootTools;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class PhoneProfilesHelper {
 
@@ -66,8 +66,6 @@ public class PhoneProfilesHelper {
 		if (isPPHelperInstalled(context, 0))		// check PPHelper version
 		{
 			// start PPHelper 
-			
-        	//Log.e("PhoneProfilesHelper.startPPHelper","version OK");
 			
 			// start StartActivity
 			Intent intent = new Intent("phoneprofileshelper.intent.action.START");
@@ -119,8 +117,6 @@ public class PhoneProfilesHelper {
 	        OK = false;
 	    }
 	    
-        //Log.e("PhoneProfilesHelper.doInstallPPHelper", "files.length="+files.length);
-
   		File sd = Environment.getExternalStorageDirectory();
 		File exportDir = new File(sd, GlobalData.EXPORT_PATH);
 		if (!(exportDir.exists() && exportDir.isDirectory()))
@@ -130,8 +126,6 @@ public class PhoneProfilesHelper {
 	    OK = false;
 	    for(String filename : files) 
 	    {
-	        //Log.e("PhoneProfilesHelper.doInstallPPHelper", "filename="+filename);
-	        
 	        if (filename.equals("PhoneProfilesHelper.x"))
 	        {
 		        InputStream in = null;
@@ -170,11 +164,6 @@ public class PhoneProfilesHelper {
 			    destinationFile = "/system/priv-app/"+destinationFile; 
 			else
 			    destinationFile = "/system/app/"+destinationFile;
-			
-			//Log.e("PhoneProfilesHelper.doInstallPPHelper", "sourceFile="+sourceFile);
-			//Log.e("PhoneProfilesHelper.doInstallPPHelper", "destionationFile="+destinationFile);
-			
-
 			
 			if (GlobalData.isSELinuxEnforcing())
 				Shell.defaultContext = Shell.ShellContext.RECOVERY;

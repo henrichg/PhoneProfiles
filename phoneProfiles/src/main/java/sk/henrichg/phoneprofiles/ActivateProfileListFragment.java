@@ -1,26 +1,25 @@
 package sk.henrichg.phoneprofiles;
 
-import java.lang.ref.WeakReference;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Intent;
-
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ActivateProfileListFragment extends Fragment {
 
@@ -46,8 +45,6 @@ public class ActivateProfileListFragment extends Fragment {
 
 		super.onCreate(savedInstanceState);
 
-		//Log.e("ActivateProfileListFragment.onCreate","xxx");
-		
 		// this is really important in order to save the state across screen
 		// configuration changes for example
 		setRetainInstance(true);
@@ -65,8 +62,6 @@ public class ActivateProfileListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		//Log.e("ActivateProfileListFragment.onCreateView","xxx");
-		
 		View rootView;
 		
 		if (!GlobalData.applicationActivatorGridLayout)
@@ -97,8 +92,6 @@ public class ActivateProfileListFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		//Log.e("ActivateProfileListFragment.onViewCreated","xxx");
-		
 		doOnViewCreated(view, savedInstanceState);
 	}
 	
@@ -124,8 +117,6 @@ public class ActivateProfileListFragment extends Fragment {
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				//Log.d("ActivateProfilesActivity.onItemClick", "xxxx");
-
 				if (!GlobalData.applicationLongClickActivation)
 					//activateProfileWithAlert(position);
 					activateProfile(position, GlobalData.STARTUP_SOURCE_ACTIVATOR);
@@ -138,8 +129,6 @@ public class ActivateProfileListFragment extends Fragment {
 
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-				//Log.d("ActivateProfilesActivity.onItemLongClick", "xxxx");
-				
 				if (GlobalData.applicationLongClickActivation)
 					//activateProfileWithAlert(position);
 					activateProfile(position, GlobalData.STARTUP_SOURCE_ACTIVATOR);
@@ -153,22 +142,17 @@ public class ActivateProfileListFragment extends Fragment {
 
 		if (profileList == null)
 		{
-			//Log.e("ActivateProfileListFragment.onViewCreated","profileList==null");
-			
 			LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
 		    this.asyncTaskContext = new WeakReference<LoadProfileListAsyncTask >(asyncTask );
 		    asyncTask.execute();			
 		}
 		else
 		{
-			//Log.e("ActivateProfileListFragment.onViewCreated","profileList!=null");
 			absListView.setAdapter(profileListAdapter);
 			
 			doOnStart();
 		}
 		
-		//Log.d("EditorProfileListFragment.onActivityCreated", "xxx");
-        
 	}
 	
 	private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -249,8 +233,6 @@ public class ActivateProfileListFragment extends Fragment {
 	{
 		//long nanoTimeStart = GlobalData.startMeasuringRunTime();
 
-		//Log.e("ActivateProfileListFragment.doOnStart", "startupSource="+startupSource);
-		
 		/*
 		//if (!GlobalData.getApplicationStarted(getActivity().getBaseContext()))
 		//{
@@ -309,7 +291,6 @@ public class ActivateProfileListFragment extends Fragment {
 				}
 			}
 		}
-		//Log.d("ActivateProfilesActivity.onStart", "actProfile="+String.valueOf(actProfile));
 
 		if (actProfile && (profile != null))
 		{
@@ -355,8 +336,6 @@ public class ActivateProfileListFragment extends Fragment {
 		
 		//GlobalData.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onStart");
 		
-		//Log.d("PhoneProfileActivity.onStart", "xxxx");
-		
 	}
 	
 	private void endOnStart()
@@ -373,19 +352,13 @@ public class ActivateProfileListFragment extends Fragment {
 	public void onStart()
 	{
 		super.onStart();
-
-		//Log.d("EditorProfileListFragment.onStart", "xxxx");
-		
 	}
 	
 	@Override
 	public void onDestroy()
 	{
-		//Log.e("ActivateProfileListFragment.onDestroy","xxx");
-
 		if (!isAsyncTaskPendingOrRunning())
 		{
-			//Log.e("ActivateProfileListFragment.onDestroy","asyncTask not running");
 	        AbsListView absListView;
 			if (!GlobalData.applicationActivatorGridLayout)
 				absListView = listView;
@@ -403,9 +376,7 @@ public class ActivateProfileListFragment extends Fragment {
 				dataWrapper.invalidateDataWrapper();
 			dataWrapper = null;
 		}
-		//else
-			//Log.e("ActivateProfileListFragment.onDestroy","asyncTask running");
-		
+
 		super.onDestroy();
 	}
 
@@ -458,10 +429,7 @@ public class ActivateProfileListFragment extends Fragment {
 	
 	private void activateProfile(int position, int startupSource)
 	{
-		//Log.d("ActivateProfileActivity.activateProfile","size="+profileList.size());
-		//Log.d("ActivateProfileActivity.activateProfile","position="+position);
 		Profile profile = profileList.get(position);
-		//Log.d("ActivateProfileActivity.activateProfile","profile_id="+profile._id);
 		activateProfile(profile, startupSource);
 	} 
 
