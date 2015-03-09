@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.provider.Settings;
 
 public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulIntentService 
 {
@@ -31,7 +32,10 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 		{
 			AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
+            int oldNURM = Settings.System.getInt(context.getContentResolver(), "notifications_use_ring_volume", -10);
+
             // set ringer mode for proper volume change
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             aph.setRingerMode(profile, audioManager);
             try {
                 Thread.sleep(200);
@@ -39,10 +43,15 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 //System.out.println(e);
             }
 
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             aph.setVolumes(profile, audioManager);
 
             // set ringer mode because volumes change silent/vibrate
-            //aph.setRingerMode(profile, audioManager);
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
+            aph.setRingerMode(profile, audioManager);
+
+            if (oldNURM != -10)
+                Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", oldNURM);
 
             /*boolean rechangeRingerMode = false;
             int savedProfileRingerMode = profile._volumeRingerMode;
@@ -87,12 +96,12 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 }
             }
 
-            if (rechangeRingerMode) {*/
+            if (rechangeRingerMode) {
+                Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                 aph.setRingerMode(profile, audioManager);
             //    profile._volumeRingerMode = savedProfileRingerMode;
-            //}
+            //}*/
 
-			
 		/*	if (intent.getBooleanExtra(GlobalData.EXTRA_SECOND_SET_VOLUMES, false))
 			{
 				// run service for execute volumes - second set
