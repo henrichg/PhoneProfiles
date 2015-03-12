@@ -150,7 +150,8 @@ public class ActivateProfileActivity extends ActionBarActivity {
 	protected void onStop()
 	{
 		super.onStop();
-		instance = null;
+        if (instance == this)
+		    instance = null;
 	}
 
 	@Override 
