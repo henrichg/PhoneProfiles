@@ -911,7 +911,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// updating checked = true for profile
 			//profile.setChecked(true);
 			
-			if (activate)
+			if (activate && (profile != null))
 			{
 				ContentValues values = new ContentValues();
 				//values.put(KEY_CHECKED, (profile.getChecked()) ? 1 : 0);
