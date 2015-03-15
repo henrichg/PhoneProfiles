@@ -47,7 +47,7 @@ public class FirstStartService extends IntentService {
 		GUIData.setLanguage(context);
 
         // remove phoneprofiles_silent.mp3
-        removeTone("phoneprofiles_silent.mp3", context);
+        //removeTone("phoneprofiles_silent.mp3", context);
         // install phoneprofiles_silent.ogg
         installTone(R.raw.phoneprofiles_silent, "PhoneProfiles Silent", context);
 
@@ -173,6 +173,7 @@ public class FirstStartService extends IntentService {
         return !isError;
     }
 
+    /*
     private void removeTone(String voiceFile, Context context) {
 
         // Make sure the shared storage is currently writable
@@ -194,5 +195,6 @@ public class FirstStartService extends IntentService {
         // delete the file
         outFile.delete();
     }
+    */
 
 }
