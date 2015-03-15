@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sk.henrichg.phoneprofiles"
-    android:versionCode="1460"
-    android:versionName="4.0.3" >
+    android:versionCode="1470"
+    android:versionName="4.0.3.1b" >
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <supports-screens
         android:anyDensity="true"
