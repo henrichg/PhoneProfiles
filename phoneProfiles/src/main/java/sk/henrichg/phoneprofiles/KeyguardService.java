@@ -28,8 +28,12 @@ public class KeyguardService extends Service {
 		Context context = getApplicationContext();
 		
 		KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-		if (!kgMgr.inKeyguardRestrictedInputMode())
-        //if (!kgMgr.isKeyguardSecure())
+        boolean secureKeyguard;
+        if (android.os.Build.VERSION.SDK_INT >= 16)
+            secureKeyguard = kgMgr.isKeyguardSecure();
+        else
+            secureKeyguard = kgMgr.inKeyguardRestrictedInputMode();
+        if (!secureKeyguard)
 		{
 			GlobalData.logE("KeyguardService.onStartCommand","not keyguard restructed");
 			
