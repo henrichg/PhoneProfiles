@@ -103,6 +103,8 @@
   <string name="phone_profiles_pref_applicationLanguage_it">Italiano</string>
   <string name="phone_profiles_pref_applicationLanguage_fr">Français</string>
   <string name="phone_profiles_pref_applicationLanguage_pl">Polski</string>
+  <string name="phone_profiles_pref_applicationLanguage_nl">Nederlands</string>
+  <string name="phone_profiles_pref_applicationLanguage_sv_SE">Svenska</string>
   <string name="title_activity_shortcut_creator">PhoneProfiles-shortcut</string>
   <string name="phone_profiles_pref_applicationStartOnBoot">Start on phone boot</string>
   <string name="array_pref_value_system">system</string>
@@ -117,6 +119,8 @@
   <string name="array_pref_value_it">it</string>
   <string name="array_pref_value_fr">fr</string>
   <string name="array_pref_value_pl">pl</string>
+  <string name="array_pref_value_nl">nl</string>
+  <string name="array_pref_value_sv_SE">sv-SE</string>
   <string name="profile_preferences_device_not_allowed">Not allowed</string>
   <string name="menu_export">Export app. data</string>
   <string name="menu_import">Import app. data</string>
@@ -143,7 +147,7 @@
   <string name="phone_profiles_pref_applicationTheme_dlight">Light with dark title</string>
   <string name="array_pref_value_material">material</string>
   <string name="array_pref_value_dark">dark</string>
-  <string name="array_pref_value_dlight">dlight</string>
+  <string name="array_pref_value_dlight">dlight</string>Event
   <string name="phone_preferences_actionmode_save">Save</string>
   <string name="phone_preferences_actionmode_cancel">Cancel</string>
   <string name="title_activity_profile_preference_dialog">Set profile</string>
