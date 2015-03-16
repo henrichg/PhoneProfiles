@@ -61,7 +61,9 @@
             android:label="@string/title_activity_phone_profiles"
             android:theme="@style/PopupTheme_material"
             android:configChanges="locale|layoutDirection"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
+            android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -92,7 +94,9 @@
             android:label="@string/title_activity_shortcut_creator"
             android:icon="@drawable/ic_shortcut"
             android:theme="@style/PopupTheme_material"
-            android:configChanges="locale|layoutDirection" >
+            android:configChanges="locale|layoutDirection"
+            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
+            android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
