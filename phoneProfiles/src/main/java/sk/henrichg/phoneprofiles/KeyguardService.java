@@ -26,8 +26,14 @@ public class KeyguardService extends Service {
 		GlobalData.logE("KeyguardService.onStartCommand","xxx");
 		
 		Context context = getApplicationContext();
-		
-		KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+
+        if (!GlobalData.getApplicationStarted(context)) {
+            Keyguard.reenable();
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
         boolean secureKeyguard;
         if (android.os.Build.VERSION.SDK_INT >= 16)
             secureKeyguard = kgMgr.isKeyguardSecure();
@@ -35,29 +41,18 @@ public class KeyguardService extends Service {
             secureKeyguard = kgMgr.inKeyguardRestrictedInputMode();
         if (!secureKeyguard)
 		{
-			GlobalData.logE("KeyguardService.onStartCommand","not keyguard restructed");
-			
-			DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
-			Profile profile = dataWrapper.getActivatedProfile();
-			profile = GlobalData.getMappedProfile(profile, context);
-
-			if (profile != null)
-			{
-				// zapnutie/vypnutie lockscreenu
-				//getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-				switch (profile._deviceKeyguard) {
-					case 1:
-						GlobalData.logE("KeyguardService.onStartCommand","profile keyguard = 1");
-						Keyguard.reenable();
-						stopSelf();
-						return START_NOT_STICKY;
-					case 2:
-						GlobalData.logE("KeyguardService.onStartCommand","profile keyguard = 2");
-						Keyguard.reenable();
-						Keyguard.disable();
-				        return START_STICKY;
-				}
-			}
+            // zapnutie/vypnutie lockscreenu
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+            if (GlobalData.getLockscreenDisabled(context)) {
+                //Keyguard.reenable();
+                Keyguard.disable();
+                return START_STICKY;
+            }
+            else {
+                Keyguard.reenable();
+                stopSelf();
+                return START_NOT_STICKY;
+            }
 		}
 
 		stopSelf();

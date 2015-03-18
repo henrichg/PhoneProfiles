@@ -51,6 +51,8 @@ public class FirstStartService extends IntentService {
         // install phoneprofiles_silent.ogg
         installTone(R.raw.phoneprofiles_silent, "PhoneProfiles Silent", context);
 
+        GlobalData.setLockscreenDisabled(context, false);
+
 		// start ReceiverService
 		context.startService(new Intent(context.getApplicationContext(), ReceiversService.class));
 		

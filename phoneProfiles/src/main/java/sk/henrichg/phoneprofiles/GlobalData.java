@@ -157,7 +157,8 @@ public class GlobalData extends Application {
 	
 	private static final String PREF_APPLICATION_STARTED = "applicationStarted";
 	private static final String PREF_ACTIVATED_PROFILE_FOR_DURATION = "activatedProfileForDuration";
-	
+    private static final String PREF_LOCKSCREEN_DISABLED = "lockscreenDisabled";
+
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
     public static boolean applicationActivateWithAlert;
@@ -537,7 +538,21 @@ public class GlobalData extends Application {
 		editor.putLong(PREF_ACTIVATED_PROFILE_FOR_DURATION, profileId);
 		editor.commit();
 	}
-	
+
+    static public boolean getLockscreenDisabled(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_LOCKSCREEN_DISABLED, false);
+    }
+
+    static public void setLockscreenDisabled(Context context, boolean disabled)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putBoolean(PREF_LOCKSCREEN_DISABLED, disabled);
+        editor.commit();
+    }
+
 	// ----- Hardware check -------------------------------------
 	
 	static int hardwareCheck(String preferenceKey, Context context)
