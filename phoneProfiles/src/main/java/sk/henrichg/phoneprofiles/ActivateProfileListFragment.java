@@ -231,97 +231,19 @@ public class ActivateProfileListFragment extends Fragment {
 	
 	private void doOnStart()
 	{
-		//long nanoTimeStart = GlobalData.startMeasuringRunTime();
-
-		/*
-		//if (!GlobalData.getApplicationStarted(getActivity().getBaseContext()))
-		//{
-			// grant root
-			Intent eventsServiceIntent = new Intent(getActivity().getBaseContext(), GrantRootService.class);
-			getActivity().getBaseContext().startService(eventsServiceIntent);
-		//}
-
-		Profile profile = dataWrapper.getActivatedProfile();
-
-		boolean actProfile = false;
-		if (startupSource == 0)
-		{
-			
-			// aktivita nebola spustena z notifikacie, ani z widgetu
-			// lebo v tychto pripadoch sa nesmie spravit aktivacia profilu
-			// pri starte aktivity
-			
-			if (!GlobalData.getApplicationStarted(getActivity().getBaseContext()))
-			{
-				// aplikacia este nie je nastartovana, takze mozeme
-				// aktivovat profil, ak je nastavene, ze sa tak ma stat
-	
-				if (GlobalData.applicationActivate)
-				{
-					// je nastavene, ze pri starte sa ma aktivita aktivovat
-					long backgroundProfileId = Long.valueOf(GlobalData.applicationBackgroundProfile);
-					if ((profile == null) && 
-						(backgroundProfileId != GlobalData.PROFILE_NO_ACTIVATE))
-					{
-						profile = dataWrapper.getProfileById(backgroundProfileId);
-					}
-					actProfile = true;
-				}
-				else
-				{
-					// profile sa nema aktivovat, tak ho deaktivujeme
-					dataWrapper.getDatabaseHandler().deactivateProfile();
-					profile = null;
-				}
-				
-				// start PPHelper
-				//PhoneProfilesHelper.startPPHelper(getActivity().getBaseContext());
-			}
-			else
-			{
-				if (GlobalData.applicationActivate)
-				{
-					long backgroundProfileId = Long.valueOf(GlobalData.applicationBackgroundProfile);
-					if ((profile == null) && 
-						(backgroundProfileId != GlobalData.PROFILE_NO_ACTIVATE))
-					{
-						profile = dataWrapper.getProfileById(backgroundProfileId);
-						actProfile = true;
-					}
-				}
-			}
-		}
-
-		if (actProfile && (profile != null))
-		{
-			// aktivacia profilu
-			activateProfile(profile, GlobalData.STARTUP_SOURCE_ACTIVATOR_START);
-			endOnStart();
-		}
-		else
-		{
-			updateHeader(profile);
-			if (startupSource == 0)
-			{
-				// aktivita nebola spustena z notifikacie, ani z widgetu
-				// pre profil, ktory je prave aktivny, treba aktualizovat notifikaciu a widgety 
-				activateProfileHelper.showNotification(profile);
-				activateProfileHelper.updateWidget();
-			}
-			endOnStart();
-		}
-		
-		*/
-		
 		if (!GlobalData.getApplicationStarted(getActivity().getBaseContext()))
 		{
 			// start service for first start
-			Intent firstStartServiceIntent = new Intent(getActivity().getBaseContext(), FirstStartService.class);
-			getActivity().getBaseContext().startService(firstStartServiceIntent);
+			Intent firstStartServiceIntent = new Intent(getActivity().getApplicationContext(), FirstStartService.class);
+			getActivity().startService(firstStartServiceIntent);
 		}
 		else
 		{
 			GlobalData.logE("ActivateProfileListFragment.doOnStart", "xxx");
+
+            // start ReceiverService
+            getActivity().startService(new Intent(getActivity().getApplicationContext(), ReceiversService.class));
+
 			Profile profile = dataWrapper.getActivatedProfile();
 			updateHeader(profile);
 			if (startupSource == 0)
