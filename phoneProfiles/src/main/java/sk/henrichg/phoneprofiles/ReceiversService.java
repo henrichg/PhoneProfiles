@@ -21,13 +21,13 @@ public class ReceiversService extends Service {
 		intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
 		intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
 		intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
-		registerReceiver(screenOnOffReceiver, intentFilter5);
+        getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
 	}
 	 
 	@Override
     public void onDestroy()
 	{
-		unregisterReceiver(screenOnOffReceiver);
+        getApplicationContext().unregisterReceiver(screenOnOffReceiver);
     }
 	 
 	@Override
