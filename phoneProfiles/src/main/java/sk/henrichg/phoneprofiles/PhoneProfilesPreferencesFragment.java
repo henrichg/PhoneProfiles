@@ -70,7 +70,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 			} catch (Exception e) {
 				lProfileId = 0;
 			}
-			DataWrapper dataWrapper = new DataWrapper(preferencesActivity.getBaseContext(), false, false, 0);
+			DataWrapper dataWrapper = new DataWrapper(preferencesActivity.getApplicationContext(), false, false, 0);
 		    Profile profile = dataWrapper.getProfileById(lProfileId);
 		    if (profile != null)
 		    {

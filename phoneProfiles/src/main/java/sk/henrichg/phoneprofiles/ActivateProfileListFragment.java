@@ -49,9 +49,9 @@ public class ActivateProfileListFragment extends Fragment {
 		// configuration changes for example
 		setRetainInstance(true);
 	
-		dataWrapper = new DataWrapper(getActivity().getBaseContext(), true, false, 0);
+		dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
 		activateProfileHelper = dataWrapper.getActivateProfileHelper();
-		activateProfileHelper.initialize(getActivity(), getActivity().getBaseContext());
+		activateProfileHelper.initialize(getActivity(), getActivity().getApplicationContext());
 		
 		intent = getActivity().getIntent();
 		startupSource = intent.getIntExtra(GlobalData.EXTRA_START_APP_SOURCE, 0);
@@ -169,7 +169,7 @@ public class ActivateProfileListFragment extends Fragment {
 		
         private LoadProfileListAsyncTask (ActivateProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<ActivateProfileListFragment>(fragment);
-	        this.dataWrapper = new DataWrapper(fragment.getActivity().getBaseContext(), true, false, 0);
+	        this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
         }
 
         @Override
@@ -231,7 +231,7 @@ public class ActivateProfileListFragment extends Fragment {
 	
 	private void doOnStart()
 	{
-		if (!GlobalData.getApplicationStarted(getActivity().getBaseContext()))
+		if (!GlobalData.getApplicationStarted(getActivity().getApplicationContext()))
 		{
 			// start service for first start
 			Intent firstStartServiceIntent = new Intent(getActivity().getApplicationContext(), FirstStartService.class);
@@ -266,7 +266,7 @@ public class ActivateProfileListFragment extends Fragment {
 		startupSource = 0;
 
 		//  aplikacia uz je 1. krat spustena - moved to FirstStartService
-		//GlobalData.setApplicationStarted(getActivity().getBaseContext(), true);
+		//GlobalData.setApplicationStarted(getActivity().getApplicationContext(), true);
 	}
 	
 	

@@ -62,7 +62,7 @@ public class PhoneProfilesPreferencesActivity extends ActionBarActivity
 		getSupportActionBar().setTitle(R.string.title_activity_phone_profiles_preferences);
 		
 		
-        preferences = getBaseContext().getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, MODE_PRIVATE);
+        preferences = getApplicationContext().getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, MODE_PRIVATE);
         activeLanguage = preferences.getString(GlobalData.PREF_APPLICATION_LANGUAGE, "system");
         activeTheme = preferences.getString(GlobalData.PREF_APPLICATION_THEME, "material");
         showEditorPrefIndicator = preferences.getBoolean(GlobalData.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
@@ -125,8 +125,8 @@ public class PhoneProfilesPreferencesActivity extends ActionBarActivity
 	{
 		super.onStop();
 		
-		DataWrapper dataWrapper =  new DataWrapper(this.getBaseContext(), true, false, 0);
-		dataWrapper.getActivateProfileHelper().initialize(this, getBaseContext());
+		DataWrapper dataWrapper =  new DataWrapper(getApplicationContext(), true, false, 0);
+		dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
 		dataWrapper.getActivateProfileHelper().showNotification(dataWrapper.getActivatedProfileFromDB());
 		dataWrapper.getActivateProfileHelper().updateWidget();
 		dataWrapper.invalidateDataWrapper();
@@ -142,7 +142,7 @@ public class PhoneProfilesPreferencesActivity extends ActionBarActivity
 	@Override
 	public void finish() {
 		
-		GlobalData.loadPreferences(getBaseContext());
+		GlobalData.loadPreferences(getApplicationContext());
 		
 		if (activeLanguage != GlobalData.applicationLanguage)
 		{
@@ -172,10 +172,10 @@ public class PhoneProfilesPreferencesActivity extends ActionBarActivity
    			long lApplicationBackgroundProfile = Long.valueOf(GlobalData.applicationBackgroundProfile);
    			if (lApplicationBackgroundProfile != GlobalData.PROFILE_NO_ACTIVATE)
    			{
-   				DataWrapper dataWrapper = new DataWrapper(getBaseContext(), true, false, 0);
+   				DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
    				if (dataWrapper.getActivatedProfile() == null)
    				{
-   					dataWrapper.getActivateProfileHelper().initialize(null, getBaseContext());
+   					dataWrapper.getActivateProfileHelper().initialize(null, getApplicationContext());
    					dataWrapper.activateProfile(lApplicationBackgroundProfile, GlobalData.STARTUP_SOURCE_SERVICE, null);
    				}
    				//invalidateEditor = true;

@@ -267,7 +267,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 
-		boolean isPPHInstalled = PhoneProfilesHelper.isPPHelperInstalled(getBaseContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
+		boolean isPPHInstalled = PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
 		
 		MenuItem menuItem = menu.findItem(R.id.menu_pphelper_install);
 		if (menuItem != null)
@@ -331,7 +331,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 			}			
 			return true;*/
 		case R.id.menu_exit:
-			GlobalData.setApplicationStarted(getBaseContext(), false);
+			GlobalData.setApplicationStarted(getApplicationContext(), false);
 			
 			// zrusenie notifikacie
 			getDataWrapper().getActivateProfileHelper().removeNotification();
@@ -623,7 +623,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 				if (ret == 1)
 				{
 					// check for hardware capability and update data
-					ret = dataWrapper.getDatabaseHandler().updateForHardware(activity.getBaseContext());
+					ret = dataWrapper.getDatabaseHandler().updateForHardware(activity.getApplicationContext());
 				}
 				if (ret == 1)
 				{
@@ -653,7 +653,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 				
 				if (result == 1)
 				{
-					GlobalData.loadPreferences(getBaseContext());
+					GlobalData.loadPreferences(getApplicationContext());
 
 					dataWrapper.clearProfileList();
 					dataWrapper.getDatabaseHandler().deactivateProfile();
@@ -661,7 +661,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 					dataWrapper.getActivateProfileHelper().updateWidget();
 
 					// toast notification
-					Toast msg = Toast.makeText(getBaseContext(), 
+					Toast msg = Toast.makeText(getApplicationContext(),
 							getResources().getString(R.string.toast_import_ok), 
 							Toast.LENGTH_SHORT);
 					msg.show();
@@ -737,7 +737,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 	private void importData()
 	{
 		// test whether the PhoneProfilePlus is installed
-		PackageManager packageManager = getBaseContext().getPackageManager();
+		PackageManager packageManager = getApplicationContext().getPackageManager();
 		Intent phoneProfiles = packageManager.getLaunchIntentForPackage("sk.henrichg.phoneprofilesplus");
 		if (phoneProfiles != null)
 		{
@@ -865,7 +865,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 						{
 
 							// toast notification
-							Toast msg = Toast.makeText(getBaseContext(), 
+							Toast msg = Toast.makeText(getApplicationContext(),
 									getResources().getString(R.string.toast_export_ok), 
 									Toast.LENGTH_SHORT);
 							msg.show();

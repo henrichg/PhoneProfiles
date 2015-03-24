@@ -125,12 +125,12 @@ public class EditorProfileListFragment extends Fragment {
 		// configuration changes for example
 		setRetainInstance(true);
 		
-		dataWrapper = new DataWrapper(getActivity().getBaseContext(), true, false, 0);
+		dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
 		
 		databaseHandler = dataWrapper.getDatabaseHandler(); 
 
 		activateProfileHelper = dataWrapper.getActivateProfileHelper();
-		activateProfileHelper.initialize(getActivity(), getActivity().getBaseContext());
+		activateProfileHelper.initialize(getActivity(), getActivity().getApplicationContext());
 		
 		setHasOptionsMenu(true);
 		
@@ -244,7 +244,7 @@ public class EditorProfileListFragment extends Fragment {
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<EditorProfileListFragment>(fragment);
-	        this.dataWrapper = new DataWrapper(fragment.getActivity().getBaseContext(), true, false, 0);
+	        this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
         }
 
         @Override

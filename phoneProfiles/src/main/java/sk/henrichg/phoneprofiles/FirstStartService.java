@@ -26,7 +26,7 @@ public class FirstStartService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent)
 	{
-		Context context = getBaseContext();
+		Context context = getApplicationContext();
 		
 		// grant root
 		//if (GlobalData.isRooted(false))
@@ -54,7 +54,7 @@ public class FirstStartService extends IntentService {
         GlobalData.setLockscreenDisabled(context, false);
 
 		// start ReceiverService
-		context.startService(new Intent(context.getApplicationContext(), ReceiversService.class));
+		context.startService(new Intent(context, ReceiversService.class));
 		
 		DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 		dataWrapper.getActivateProfileHelper().initialize(null, context);

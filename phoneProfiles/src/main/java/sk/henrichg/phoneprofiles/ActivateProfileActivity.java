@@ -80,7 +80,7 @@ public class ActivateProfileActivity extends ActionBarActivity {
 			popupHeight = popupHeight + 64f * scale;
 		
 		// add list items height
-		DataWrapper dataWrapper = new DataWrapper(getBaseContext(), false, false, 0);
+		DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), false, false, 0);
 		int profileCount = dataWrapper.getDatabaseHandler().getProfilesCount();
 		dataWrapper.invalidateDataWrapper();
 
