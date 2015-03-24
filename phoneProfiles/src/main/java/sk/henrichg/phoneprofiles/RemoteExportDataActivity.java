@@ -1,8 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -10,6 +8,9 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+
+import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,12 +88,15 @@ public class RemoteExportDataActivity extends Activity {
 		class ExportAsyncTask extends AsyncTask<Void, Integer, Integer> 
 		{
 			
-			private ProgressDialog dialog;
+			private MaterialDialog dialog;
 			
 			ExportAsyncTask()
 			{
-		         this.dialog = new ProgressDialog(activity);
-			}
+                this.dialog = new MaterialDialog.Builder(activity)
+                        .content(R.string.export_profiles_alert_title)
+                        .progress(true, 0)
+                        .build();
+            }
 			  
 			@Override
 			protected void onPreExecute()
@@ -100,9 +104,7 @@ public class RemoteExportDataActivity extends Activity {
 				super.onPreExecute();
 
                 lockScreenOrientation();
-			    this.dialog.setMessage(getResources().getString(R.string.export_profiles_alert_title));
                 this.dialog.setCancelable(false);
-                this.dialog.setIndeterminate(false);
 			    this.dialog.show();
 			}
 			
@@ -165,7 +167,7 @@ public class RemoteExportDataActivity extends Activity {
 	
 	private void exportErrorDialog()
 	{
-		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(this);
 		dialogBuilder.setTitle(getResources().getString(R.string.export_profiles_alert_title));
 		String resMessage;
 		resMessage = getResources().getString(R.string.export_profiles_alert_error);

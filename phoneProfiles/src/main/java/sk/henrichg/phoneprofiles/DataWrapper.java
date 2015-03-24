@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +9,8 @@ import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.AlertDialogWrapper;
 
 import java.util.List;
 
@@ -472,7 +473,7 @@ public class DataWrapper {
 			final int _startupSource = startupSource;
 			final Activity _activity = activity;
 
-			AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+			AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(activity);
 			dialogBuilder.setTitle(activity.getResources().getString(R.string.profile_string_0) + ": " + profile._name);
 			dialogBuilder.setMessage(activity.getResources().getString(R.string.activate_profile_alert_message));
 			//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
