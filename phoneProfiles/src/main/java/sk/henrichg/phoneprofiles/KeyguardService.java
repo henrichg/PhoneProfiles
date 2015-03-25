@@ -44,7 +44,7 @@ public class KeyguardService extends Service {
             // zapnutie/vypnutie lockscreenu
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
             if (GlobalData.getLockscreenDisabled(context)) {
-                //Keyguard.reenable();
+                Keyguard.reenable();
                 Keyguard.disable();
                 return START_STICKY;
             }

@@ -25,7 +25,7 @@ public class ImageViewPreferenceDialog extends Dialog {
 										String imageIdentifier, boolean isImageResourceID)
 	{
 		super(context);
-		
+
 		imageViewPreference = preference;
 		imageSource = imgSource;
 
