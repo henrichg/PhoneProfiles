@@ -13,5 +13,5 @@ Required
 - DashClock API - https://code.google.com/p/dashclock/wiki/API
 - FloatingActionButton - https://github.com/makovkastar/FloatingActionButton
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
-
+- Material Dialogs - https://github.com/afollestad/material-dialogs
 
