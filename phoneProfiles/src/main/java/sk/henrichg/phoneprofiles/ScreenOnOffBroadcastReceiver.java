@@ -24,9 +24,8 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 			GlobalData.logE("ScreenOnOffBroadcastReceiver.onReceive","screen on");
 			
 			// enable/disable keyguard
-			if (Keyguard.keyguardService == null)
-				Keyguard.keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class); 
-			context.startService(Keyguard.keyguardService);
+            Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
+            context.startService(keyguardService);
 		}
 
 	}

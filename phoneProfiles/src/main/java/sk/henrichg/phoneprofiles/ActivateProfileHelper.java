@@ -572,9 +572,8 @@ public class ActivateProfileHelper {
                 break;
         }
         if (setLockscreen) {
-            if (Keyguard.keyguardService == null)
-                Keyguard.keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
-            context.startService(Keyguard.keyguardService);
+            Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
+            context.startService(keyguardService);
         }
 		
 		// nahodenie podsvietenia

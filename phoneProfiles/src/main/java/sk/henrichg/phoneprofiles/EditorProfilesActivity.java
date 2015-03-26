@@ -337,10 +337,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 			getDataWrapper().getActivateProfileHelper().removeNotification();
 			
 			stopService(new Intent(getApplicationContext(), ReceiversService.class));
-			if (Keyguard.keyguardService != null)
-				stopService(Keyguard.keyguardService);
-			
-			Keyguard.reenable();
+            stopService(new Intent(getApplicationContext(), KeyguardService.class));
 			
 			finish();
 

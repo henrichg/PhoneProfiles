@@ -201,8 +201,6 @@ public class GlobalData extends Application {
 		// initialization
 		loadPreferences(this);
 		
-		Keyguard.initialize(getApplicationContext());
-		
 		//Log.d("GlobalData.onCreate", "memory usage (after create activateProfileHelper)=" + Debug.getNativeHeapAllocatedSize());
 		
 		//Log.d("GlobalData.onCreate","xxx");
