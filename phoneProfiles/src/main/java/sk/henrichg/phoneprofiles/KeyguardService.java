@@ -6,11 +6,13 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.PowerManager;
 
+//getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
 public class KeyguardService extends Service {
 
-    static final String KEYGUARD_LOCK = "phoneProfiles.keyguardLock";
+    static final String KEYGUARD_LOCK = "phoneProfilesPlus.keyguardLock";
 
     private KeyguardManager keyguardManager;
     private KeyguardManager.KeyguardLock keyguardLock;
@@ -18,21 +20,23 @@ public class KeyguardService extends Service {
     @SuppressWarnings("deprecation")
     @Override
     public void onCreate()
-	{
+    {
+        GlobalData.logE("$$$ KeyguardService.onStartCommand","onCreate");
         keyguardManager = (KeyguardManager)getApplicationContext().getSystemService(Activity.KEYGUARD_SERVICE);
         keyguardLock = keyguardManager.newKeyguardLock(KEYGUARD_LOCK);
-	}
-	 
-	@Override
+    }
+
+    @Override
     public void onDestroy()
-	{
+    {
+        GlobalData.logE("$$$ KeyguardService.onStartCommand", "onDestroy");
         Keyguard.reenable(keyguardLock);
     }
-	 
-	@Override
+
+    @SuppressWarnings("deprecation")
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId)
-	{
-		GlobalData.logE("KeyguardService.onStartCommand","xxx");
+    {
         Context context = getApplicationContext();
 
         if (!GlobalData.getApplicationStarted(context)) {
@@ -40,6 +44,18 @@ public class KeyguardService extends Service {
             stopSelf();
             return START_NOT_STICKY;
         }
+
+        boolean isScreenOn;
+        //if (android.os.Build.VERSION.SDK_INT >= 20)
+        //{
+        //    Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        //    isScreenOn = display.getState() == Display.STATE_ON;
+        //}
+        //else
+        //{
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        isScreenOn = pm.isScreenOn();
+        //}
 
         boolean secureKeyguard;
         if (android.os.Build.VERSION.SDK_INT >= 16)
@@ -50,19 +66,38 @@ public class KeyguardService extends Service {
         if (!secureKeyguard)
         {
             GlobalData.logE("$$$ KeyguardService.onStartCommand xxx","getLockscreenDisabled="+GlobalData.getLockscreenDisabled(context));
-            // zapnutie/vypnutie lockscreenu
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-            if (GlobalData.getLockscreenDisabled(context)) {
-                GlobalData.logE("$$$ KeyguardService.onStartCommand","Keyguard.disable(), START_STICKY");
-                //Keyguard.reenable(keyguardLock);
-                Keyguard.disable(keyguardLock);
-                return START_STICKY;
+
+
+            if (isScreenOn) {
+                GlobalData.logE("$$$ KeyguardService.onStartCommand", "screen on");
+
+                if (GlobalData.getLockscreenDisabled(context)) {
+                    GlobalData.logE("$$$ KeyguardService.onStartCommand", "Keyguard.disable(), START_STICKY");
+                    //    Keyguard.reenable(keyguardLock);
+                    Keyguard.disable(keyguardLock);
+                    return START_STICKY;
+                } else {
+                    GlobalData.logE("$$$ KeyguardService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
+                    Keyguard.reenable(keyguardLock);
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
             }
             else {
-                GlobalData.logE("$$$ KeyguardService.onStartCommand","Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
-                Keyguard.reenable(keyguardLock);
-                stopSelf();
-                return START_NOT_STICKY;
+                GlobalData.logE("$$$ KeyguardService.onStartCommand", "screen off");
+
+                if (GlobalData.getLockscreenDisabled(context)) {
+                    GlobalData.logE("$$$ KeyguardService.onStartCommand", "Keyguard.disable(), START_STICKY");
+
+                    // renable with old keyguardLock
+                    Keyguard.reenable(keyguardLock);
+
+                    // create new keyguardLock
+                    //keyguardLock = keyguardManager.newKeyguardLock(KEYGUARD_LOCK);
+
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
             }
         }
 
@@ -70,11 +105,11 @@ public class KeyguardService extends Service {
         stopSelf();
         return START_NOT_STICKY;
     }
-	
-	@Override
-	public IBinder onBind(Intent intent)
-	{
-		return null;
-	}
+
+    @Override
+    public IBinder onBind(Intent intent)
+    {
+        return null;
+    }
 
 }
