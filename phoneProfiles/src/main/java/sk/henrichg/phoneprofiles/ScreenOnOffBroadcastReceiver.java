@@ -18,9 +18,9 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 		
 		GlobalData.loadPreferences(context);
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)/* ||
-			intent.getAction().equals(Intent.ACTION_USER_PRESENT)*/ ||
-            intent.getAction().equals(Intent.ACTION_SCREEN_OFF))
+        if (/*intent.getAction().equals(Intent.ACTION_SCREEN_ON) ||*/
+                intent.getAction().equals(Intent.ACTION_USER_PRESENT)/* ||
+            intent.getAction().equals(Intent.ACTION_SCREEN_OFF)*/)
 		{
 			// enable/disable keyguard
             Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
