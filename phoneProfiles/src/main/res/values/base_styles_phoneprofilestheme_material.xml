@@ -27,6 +27,7 @@
 	    <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
+        <item name="dialogDivider">@color/dialog_divider</item>
 
    	</style>
 

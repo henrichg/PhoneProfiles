@@ -11,4 +11,6 @@
     <color name="activityPopupBackground_phoneprofilestheme">#FFd0d0d0</color>
     <color name="activityCardBackground_phoneprofilestheme">@android:color/white</color>
     <color name="activityCardSelected_phoneprofilestheme">#4033b5e5</color>
+    <color name="dialog_divider">#10000000</color>
+
 </resources>

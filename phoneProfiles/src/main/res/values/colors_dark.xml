@@ -7,4 +7,6 @@
     <color name="activityPopupBackground_phoneprofilestheme_dark">#FF0F0F0F</color>
     <color name="activityCardBackground_phoneprofilestheme_dark">#FF202020</color>
     <color name="activityCardSelected_phoneprofilestheme_dark">#4033b5e5</color>
+    <color name="dialog_divider_dark">#10FFFFFF</color>
+
 </resources>

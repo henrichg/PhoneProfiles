@@ -47,5 +47,6 @@
     <attr name="actionProfileButtonTextStyle" format="reference" />
     <attr name="editItemMenuIcon" format="reference" />
     <attr name="applicationSettingsLanguageIcon" format="reference" />
-    
+    <attr name="dialogDivider" format="reference" />
+
 </resources>
