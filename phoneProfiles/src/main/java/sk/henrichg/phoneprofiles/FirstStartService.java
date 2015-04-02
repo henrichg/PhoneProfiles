@@ -21,7 +21,7 @@ public class FirstStartService extends IntentService {
 
 	public FirstStartService()
 	{
-		super("GrantRootService");
+		super("FirstStartService");
 	}
 
 	@Override
