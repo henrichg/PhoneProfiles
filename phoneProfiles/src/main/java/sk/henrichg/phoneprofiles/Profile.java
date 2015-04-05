@@ -48,6 +48,7 @@ public class Profile {
 	public int _volumeSpeakerPhone;
 	public int _deviceNFC;
 	public int _deviceKeyguard;
+    public int _vibrationOnTouch;
 	
 	public Bitmap _iconBitmap;
 	public Bitmap _preferencesIndicator;
@@ -102,7 +103,8 @@ public class Profile {
 			   	   int duration,
 			   	   int afterDurationDo,
 			   	   int volumeZenMode,
- 			   	   int deviceKeyguard)
+ 			   	   int deviceKeyguard,
+                   int vibrationOnTouch)
 	{
 		this._id = id;
 		this._name = name;
@@ -143,6 +145,7 @@ public class Profile {
 		this._duration = duration;
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
+        this._vibrationOnTouch = vibrationOnTouch;
 		
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
@@ -186,7 +189,8 @@ public class Profile {
 			   	   int duration,
 			   	   int afterDurationDo,
 			   	   int volumeZenMode,
- 			   	   int deviceKeyguard)
+ 			   	   int deviceKeyguard,
+                   int vibrationOnTouch)
 	{
 		this._name = name;
 		this._icon = icon;
@@ -226,6 +230,7 @@ public class Profile {
 		this._duration = duration;
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
+        this._vibrationOnTouch = vibrationOnTouch;
 		
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
@@ -272,6 +277,7 @@ public class Profile {
 		this._duration = profile._duration;
 		this._afterDurationDo = profile._afterDurationDo;
 		this._deviceKeyguard = profile._deviceKeyguard;
+        this._vibrationOnTouch = profile._vibrationOnTouch;
 		
 		this._iconBitmap = profile._iconBitmap;
 		this._preferencesIndicator = profile._preferencesIndicator;
