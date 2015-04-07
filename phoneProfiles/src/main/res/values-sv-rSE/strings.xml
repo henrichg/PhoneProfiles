@@ -254,4 +254,5 @@
   <string name="preference_profile_adaptiveBrightness">Adaptiv</string>
   <string name="profile_preferences_deviceKeyguard">Låsskärmen</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Dölj profilnamn (widget)</string>
+  <string name="profile_preferences_vibrationOnTouch">Vibrera vid beröring</string>
 </resources>

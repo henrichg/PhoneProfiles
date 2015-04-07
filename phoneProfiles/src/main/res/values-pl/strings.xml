@@ -254,4 +254,5 @@
   <string name="preference_profile_adaptiveBrightness">Adaptacyjna</string>
   <string name="profile_preferences_deviceKeyguard">Ekran blokady</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Ukryj nazwę profilu (widżet)</string>
+  <string name="profile_preferences_vibrationOnTouch">Vibration on touch</string>
 </resources>

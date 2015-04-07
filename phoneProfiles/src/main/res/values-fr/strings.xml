@@ -254,4 +254,5 @@
   <string name="preference_profile_adaptiveBrightness">Adaptatif</string>
   <string name="profile_preferences_deviceKeyguard">Écran de verrouillage</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Cacher le nom du profil (widget)</string>
+  <string name="profile_preferences_vibrationOnTouch">Vibration au toucher</string>
 </resources>
