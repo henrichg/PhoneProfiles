@@ -46,6 +46,7 @@ public class NumberPickerPreference extends DialogPreference {
     protected void showDialog(Bundle state) {
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())
+                .disableDefaultFonts()
                 .icon(getDialogIcon())
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())

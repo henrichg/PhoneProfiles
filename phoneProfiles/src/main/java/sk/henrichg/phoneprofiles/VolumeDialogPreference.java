@@ -106,6 +106,7 @@ public class VolumeDialogPreference extends
     protected void showDialog(Bundle state) {
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())
+                .disableDefaultFonts()
                 .icon(getDialogIcon())
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
