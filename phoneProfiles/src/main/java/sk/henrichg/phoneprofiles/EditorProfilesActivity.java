@@ -26,7 +26,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -503,6 +502,20 @@ public class EditorProfilesActivity extends ActionBarActivity
 
 	private void importExportErrorDialog(int importExport)
 	{
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this);
+        if (importExport == 1) {
+            dialogBuilder.title(R.string.import_profiles_alert_title)
+                    .content(R.string.import_profiles_alert_error);
+        }
+        else {
+            dialogBuilder.title(R.string.export_profiles_alert_title)
+                    .content(R.string.export_profiles_alert_error);
+
+        }
+        dialogBuilder.positiveText(android.R.string.ok)
+                .disableDefaultFonts();
+        dialogBuilder.show();
+        /*
         AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(this);
 		String resString;
 		if (importExport == 1)
@@ -518,6 +531,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 		dialogBuilder.setPositiveButton(android.R.string.ok, null);
 		dialogBuilder.show();
+		*/
 	}
 	
 	@SuppressWarnings({ "unchecked" })
@@ -696,6 +710,43 @@ public class EditorProfilesActivity extends ActionBarActivity
 	private void importDataAlert(boolean remoteExport)
 	{
 		final boolean _remoteExport = remoteExport;
+
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this);
+        if (remoteExport)
+        {
+            dialogBuilder.title(R.string.import_profiles_from_phoneprofilesplus_alert_title2);
+            dialogBuilder.content(R.string.import_profiles_alert_message);
+        }
+        else
+        {
+            dialogBuilder.title(R.string.import_profiles_alert_title);
+            dialogBuilder.content(R.string.import_profiles_alert_message);
+        }
+
+        dialogBuilder.positiveText(R.string.alert_button_yes)
+                .negativeText(R.string.alert_button_no)
+                .disableDefaultFonts();
+        dialogBuilder.callback(new MaterialDialog.ButtonCallback() {
+            @Override
+            public void onPositive(MaterialDialog dialog) {
+                if (_remoteExport)
+                {
+                    // start RemoteExportDataActivity
+                    Intent intent = new Intent("phoneprofilesplus.intent.action.EXPORTDATA");
+
+                    final PackageManager packageManager = getPackageManager();
+                    List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                    if (list.size() > 0)
+                        startActivityForResult(intent, GlobalData.REQUEST_CODE_REMOTE_EXPORT);
+                    else
+                        importExportErrorDialog(1);
+                }
+                else
+                    doImportData(GlobalData.EXPORT_PATH);
+            }
+        });
+        dialogBuilder.show();
+        /*
         AlertDialogWrapper.Builder dialogBuilder2 = new AlertDialogWrapper.Builder(this);
 		if (remoteExport)
 		{
@@ -730,6 +781,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 		});
 		dialogBuilder2.setNegativeButton(R.string.alert_button_no, null);
 		dialogBuilder2.show();
+		*/
 	}
 	
 	private void importData()
@@ -741,6 +793,25 @@ public class EditorProfilesActivity extends ActionBarActivity
 		{
 			// PhoneProfilesPlus is istalled
 
+            MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this)
+                    .title(R.string.import_profiles_from_phoneprofilesplus_alert_title)
+                    .content(R.string.import_profiles_from_phoneprofilesplus_alert_message)
+                    .positiveText(R.string.alert_button_yes)
+                    .negativeText(R.string.alert_button_no)
+                    .disableDefaultFonts();
+            dialogBuilder.callback(new MaterialDialog.ButtonCallback() {
+                @Override
+                public void onPositive(MaterialDialog dialog) {
+                    importDataAlert(true);
+                }
+
+                @Override
+                public void onNegative(MaterialDialog dialog) {
+                    importDataAlert(false);
+                }
+            });
+            dialogBuilder.show();
+            /*
             AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(this);
 			dialogBuilder.setTitle(getResources().getString(R.string.import_profiles_from_phoneprofilesplus_alert_title));
 			dialogBuilder.setMessage(getResources().getString(R.string.import_profiles_from_phoneprofilesplus_alert_message));
@@ -757,6 +828,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 				}
 			});
 			dialogBuilder.show();
+			*/
 		}
 		else
 			importDataAlert(false);
@@ -796,9 +868,97 @@ public class EditorProfilesActivity extends ActionBarActivity
 	
 	private void exportData()
 	{
+        final Activity activity = this;
+
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this)
+                .title(R.string.export_profiles_alert_title)
+                .content(R.string.export_profiles_alert_message)
+                .positiveText(R.string.alert_button_yes)
+                .negativeText(R.string.alert_button_no)
+                .disableDefaultFonts();
+        dialogBuilder.callback(new MaterialDialog.ButtonCallback() {
+            @Override
+            public void onPositive(MaterialDialog dialog) {
+
+                class ExportAsyncTask extends AsyncTask<Void, Integer, Integer>
+                {
+                    private MaterialDialog dialog;
+                    private DataWrapper dataWrapper;
+
+                    ExportAsyncTask()
+                    {
+                        this.dialog = new MaterialDialog.Builder(activity)
+                                .content(R.string.export_profiles_alert_title)
+                                .disableDefaultFonts()
+                                .progress(true, 0)
+                                .build();
+                        this.dataWrapper = getDataWrapper();
+                    }
+
+                    @Override
+                    protected void onPreExecute()
+                    {
+                        super.onPreExecute();
+
+                        this.dialog.setCancelable(false);
+                        this.dialog.show();
+                    }
+
+                    @Override
+                    protected Integer doInBackground(Void... params) {
+
+                        int ret = dataWrapper.getDatabaseHandler().exportDB();
+                        if (ret == 1)
+                        {
+                            File sd = Environment.getExternalStorageDirectory();
+                            File exportFile = new File(sd, GlobalData.EXPORT_PATH + "/" + GUIData.EXPORT_APP_PREF_FILENAME);
+                            if (!exportApplicationPreferences(exportFile, 1))
+                                ret = 0;
+                            else
+                            {
+                                exportFile = new File(sd, GlobalData.EXPORT_PATH + "/" + GUIData.EXPORT_DEF_PROFILE_PREF_FILENAME);
+                                if (!exportApplicationPreferences(exportFile, 2))
+                                    ret = 0;
+                            }
+                        }
+
+                        return ret;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Integer result)
+                    {
+                        super.onPostExecute(result);
+
+                        if (dialog.isShowing())
+                            dialog.dismiss();
+
+                        if (result == 1)
+                        {
+
+                            // toast notification
+                            Toast msg = Toast.makeText(getApplicationContext(),
+                                    getResources().getString(R.string.toast_export_ok),
+                                    Toast.LENGTH_SHORT);
+                            msg.show();
+
+                        }
+                        else
+                        {
+                            importExportErrorDialog(2);
+                        }
+                    }
+
+                }
+
+                new ExportAsyncTask().execute();
+            }
+        });
+        dialogBuilder.show();
+        /*
         AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(this);
 		dialogBuilder.setTitle(getResources().getString(R.string.export_profiles_alert_title));
-		dialogBuilder.setMessage(getResources().getString(R.string.export_profiles_alert_message) + "?");
+		dialogBuilder.setMessage(getResources().getString(R.string.export_profiles_alert_message));
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 
 		final Activity activity = this;
@@ -884,6 +1044,7 @@ public class EditorProfilesActivity extends ActionBarActivity
 		});
 		dialogBuilder.setNegativeButton(R.string.alert_button_no, null);
 		dialogBuilder.show();
+		*/
 	}
 	
 	public void onStartProfilePreferences(Profile profile, int editMode) {
