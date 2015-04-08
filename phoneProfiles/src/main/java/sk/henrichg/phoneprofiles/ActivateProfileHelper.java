@@ -2,7 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -46,7 +45,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Calendar;
 
 public class ActivateProfileHelper {
 	
@@ -809,7 +807,6 @@ public class ActivateProfileHelper {
 				//notificationManager.cancel(GlobalData.NOTIFICATION_ID);
 				// vytvorenie intentu na aktivitu, ktora sa otvori na kliknutie na notifikaciu
 				Intent intent = new Intent(context, ActivateProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				// nastavime, ze aktivita sa spusti z notifikacnej listy
 				intent.putExtra(GlobalData.EXTRA_START_APP_SOURCE, GlobalData.STARTUP_SOURCE_NOTIFICATION);
 				PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -906,15 +903,9 @@ public class ActivateProfileHelper {
 		        
 		        notification.contentView = contentView;
 
-                if (GlobalData.notificationStatusBarPermanent)
-                {
-                    //notification.flags |= Notification.FLAG_NO_CLEAR;
-                    notification.flags |= Notification.FLAG_ONGOING_EVENT;
-                }
-                else
-                {
-                    setAlarmForNotificationCancel();
-                }
+				//notification.flags |= Notification.FLAG_NO_CLEAR;
+				notification.flags |= Notification.FLAG_ONGOING_EVENT;
+
 				notificationManager.notify(GlobalData.NOTIFICATION_ID, notification);
 		}
 		else
@@ -928,27 +919,7 @@ public class ActivateProfileHelper {
 		notificationManager.cancel(GlobalData.NOTIFICATION_ID);
 	}
 
-    private void setAlarmForNotificationCancel()
-    {
-        if (GlobalData.notificationStatusBarCancel.isEmpty() || GlobalData.notificationStatusBarCancel.equals("0"))
-            return;
-
-        Intent intent = new Intent(context, NotificationCancelAlarmBroadcastReceiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
-
-        Calendar now = Calendar.getInstance();
-        long time = now.getTimeInMillis() + Integer.valueOf(GlobalData.notificationStatusBarCancel) * 1000;
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-
-        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
-
-    }
-
-    public void updateWidget()
+	public void updateWidget()
 	{
 		if (lockRefresh)
 			// no refres widgets
