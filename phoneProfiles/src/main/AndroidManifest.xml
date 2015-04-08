@@ -62,8 +62,6 @@
             android:label="@string/title_activity_phone_profiles"
             android:theme="@style/PopupTheme_material"
             android:configChanges="locale|layoutDirection"
-            android:launchMode="singleTask"
-            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,8 +71,7 @@
         <activity
             android:name=".EditorProfilesActivity"
             android:label="@string/title_activity_editor"
-            android:configChanges="locale|layoutDirection"
-            android:launchMode="singleTask" >
+            android:configChanges="locale|layoutDirection" >
         </activity>
         <activity
             android:name=".ProfilePreferencesFragmentActivity"
@@ -96,7 +93,6 @@
             android:icon="@drawable/ic_shortcut"
             android:theme="@style/PopupTheme_material"
             android:configChanges="locale|layoutDirection"
-            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
