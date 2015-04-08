@@ -807,6 +807,7 @@ public class ActivateProfileHelper {
 				//notificationManager.cancel(GlobalData.NOTIFICATION_ID);
 				// vytvorenie intentu na aktivitu, ktora sa otvori na kliknutie na notifikaciu
 				Intent intent = new Intent(context, ActivateProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 				// nastavime, ze aktivita sa spusti z notifikacnej listy
 				intent.putExtra(GlobalData.EXTRA_START_APP_SOURCE, GlobalData.STARTUP_SOURCE_NOTIFICATION);
 				PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
