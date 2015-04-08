@@ -240,6 +240,8 @@
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Aktivuj předvolený profil</string>
   <string name="phone_profiles_pref_applicationGridLayout">Mřížkové rozložení</string>
   <string name="menu_help">Pomoc</string>
+  <string name="phone_profiles_pref_notificationStatusBarPermanent">Probíhající oznámení</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Zruš po (sek.)</string>
   <string name="phoneprofilehepler_install_error_no_root">Instalace PPHelperu vyžaduje ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Odinstalace PPHelperu vyžaduje ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Odinstalace PPHelperu</string>

@@ -241,6 +241,8 @@
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Activer le profil par défaut</string>
   <string name="phone_profiles_pref_applicationGridLayout">Présentation grille</string>
   <string name="menu_help">Aide</string>
+  <string name="phone_profiles_pref_notificationStatusBarPermanent">Notification en cours</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Annuler après (s)</string>
   <string name="phoneprofilehepler_install_error_no_root">l\'installation de PPHelper nécessite un accés ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">La désinstallation de PPHelper nécessite un accés ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Désinstallation de PPHelper</string>

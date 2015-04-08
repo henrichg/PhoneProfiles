@@ -240,6 +240,8 @@
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Активировать профиль по умолчанию</string>
   <string name="phone_profiles_pref_applicationGridLayout">Компоновка-сетка</string>
   <string name="menu_help">Помощь</string>
+  <string name="phone_profiles_pref_notificationStatusBarPermanent">Показывать постоянно</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Отменить через (сек.)</string>
   <string name="phoneprofilehepler_install_error_no_root">Для установки PPHelper требуется ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Для удаления PPHelper требуется ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Удаление PPHelper</string>

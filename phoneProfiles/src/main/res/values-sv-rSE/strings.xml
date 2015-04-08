@@ -241,6 +241,8 @@
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Aktivera standardprofil</string>
   <string name="phone_profiles_pref_applicationGridLayout">Rutnätslayout</string>
   <string name="menu_help">Hjälp</string>
+  <string name="phone_profiles_pref_notificationStatusBarPermanent">Pågående notifiering</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Avbryt efter (sek)</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelper installation kräver ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper avinstallation kräver ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper avinstallation</string>

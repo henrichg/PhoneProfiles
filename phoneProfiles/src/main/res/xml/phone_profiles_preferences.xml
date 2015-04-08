@@ -15,30 +15,44 @@
 		    android:title="@string/phone_profiles_pref_applicationAlert"
 		    android:defaultValue="true" />
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         android:title="@string/phone_profiles_pref_category_notifications"
         android:summary="@string/phone_profiles_pref_category_notifications"
         android:key="categoryNotifications" >
-		<CheckBoxPreference 
-		    android:key="notificationsToast"
-		    android:title="@string/phone_profiles_pref_notificationsToast"
-		    android:defaultValue="false" />
-		<CheckBoxPreference 
-		    android:key="notificationStatusBar"
-		    android:title="@string/phone_profiles_pref_notificationStatusBar"
-		    android:defaultValue="true" />
-		<com.afollestad.materialdialogs.prefs.MaterialListPreference android:title="@string/phone_profiles_pref_notificationStatusBarStyle"
-	           android:summary="@string/phone_profiles_pref_notificationStatusBarStyle_android"
-	           android:key="notificationStatusBarStyle"
-	           android:defaultValue="1"
-	           android:entries="@array/notificationIconStyleArray"
-	           android:entryValues="@array/notificationIconStyleValues" />        
-		<CheckBoxPreference 
-		    android:key="notificationPrefIndicator"
-		    android:title="@string/phone_profiles_pref_notificationPrefIndicator"
-		    android:defaultValue="true" />
-	</PreferenceCategory>
+        <CheckBoxPreference
+            android:key="notificationsToast"
+            android:title="@string/phone_profiles_pref_notificationsToast"
+            android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="notificationStatusBar"
+            android:title="@string/phone_profiles_pref_notificationStatusBar"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="notificationStatusBarPermanent"
+            android:title="@string/phone_profiles_pref_notificationStatusBarPermanent"
+            android:defaultValue="true"
+            android:disableDependentsState="true" />
+        <sk.henrichg.phoneprofiles.NumberPickerPreference
+            android:key="notificationStatusBarCancel"
+            android:summary="@string/phone_profiles_pref_notificationStatusBarCancel"
+            android:title="@string/phone_profiles_pref_notificationStatusBarCancel"
+            android:defaultValue="10"
+            henrichg:min="0"
+            henrichg:max="300"
+            android:dependency="notificationStatusBarPermanent" />
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
+            android:title="@string/phone_profiles_pref_notificationStatusBarStyle"
+            android:summary="@string/phone_profiles_pref_notificationStatusBarStyle_android"
+            android:key="notificationStatusBarStyle"
+            android:defaultValue="1"
+            android:entries="@array/notificationIconStyleArray"
+            android:entryValues="@array/notificationIconStyleValues" />
+        <CheckBoxPreference
+            android:key="notificationPrefIndicator"
+            android:title="@string/phone_profiles_pref_notificationPrefIndicator"
+            android:defaultValue="true" />
+    </PreferenceCategory>
     
     <PreferenceCategory
         android:title="@string/phone_profiles_pref_category_start"

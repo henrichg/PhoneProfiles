@@ -46,64 +46,63 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 	
 	private void setSummary(String key)
 	{
-		
-		Preference preference = prefMng.findPreference(key);
-		
-		if (preference == null)
-			return;
+        Preference preference = prefMng.findPreference(key);
 
-		// Do not bind toggles.
-		if (preference instanceof CheckBoxPreference
-				|| (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
-					&& preference instanceof TwoStatePreference)) {
-			return;
-		}
+        if (preference == null)
+            return;
 
-		String stringValue = preferences.getString(key, "");
+        // Do not bind toggles.
+        if (preference instanceof CheckBoxPreference
+                || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
+                && preference instanceof TwoStatePreference)) {
+            return;
+        }
 
-		if (key.equals(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE))
-		{
-			String sProfileId = stringValue;
-			long lProfileId;
-			try {
-				lProfileId = Long.parseLong(sProfileId);
-			} catch (Exception e) {
-				lProfileId = 0;
-			}
-			DataWrapper dataWrapper = new DataWrapper(preferencesActivity.getApplicationContext(), false, false, 0);
-		    Profile profile = dataWrapper.getProfileById(lProfileId);
-		    if (profile != null)
-		    {
-    	        prefMng.findPreference(key).setSummary(profile._name);
-		    }
-		    else
-		    {
-		    	if (lProfileId == GlobalData.PROFILE_NO_ACTIVATE)
-		    		prefMng.findPreference(key).setSummary(preferencesActivity.getBaseContext().getResources().getString(R.string.profile_preference_profile_end_no_activate));
-		    	else
-		    		prefMng.findPreference(key).setSummary(preferencesActivity.getBaseContext().getResources().getString(R.string.profile_preference_profile_not_set));
-		    }
-		}
-		else
-		if (preference instanceof ListPreference) {
-			// For list preferences, look up the correct display value in
-			// the preference's 'entries' list.
-			ListPreference listPreference = (ListPreference) preference;
-			int index = listPreference.findIndexOfValue(stringValue);
+        String stringValue = preferences.getString(key, "");
 
-			// Set the summary to reflect the new value.
-			// **** Heno changes ** support for "%" in list items
-			CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
-			if (summary != null)
-			{
-				String sSummary = summary.toString();
-				sSummary = sSummary.replace("%", "%%");
-				preference.setSummary(sSummary);
-			}
-			else
-				preference.setSummary(summary);
+        if (key.equals(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE))
+        {
+            String sProfileId = stringValue;
+            long lProfileId;
+            try {
+                lProfileId = Long.parseLong(sProfileId);
+            } catch (Exception e) {
+                lProfileId = 0;
+            }
+            DataWrapper dataWrapper = new DataWrapper(preferencesActivity.getApplicationContext(), false, false, 0);
+            Profile profile = dataWrapper.getProfileById(lProfileId);
+            if (profile != null)
+            {
+                prefMng.findPreference(key).setSummary(profile._name);
+            }
+            else
+            {
+                if (lProfileId == GlobalData.PROFILE_NO_ACTIVATE)
+                    prefMng.findPreference(key).setSummary(preferencesActivity.getBaseContext().getResources().getString(R.string.profile_preference_profile_end_no_activate));
+                else
+                    prefMng.findPreference(key).setSummary(preferencesActivity.getBaseContext().getResources().getString(R.string.profile_preference_profile_not_set));
+            }
+        }
+        else
+        if (preference instanceof ListPreference) {
+            // For list preferences, look up the correct display value in
+            // the preference's 'entries' list.
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(stringValue);
 
-		} 
+            // Set the summary to reflect the new value.
+            // **** Heno changes ** support for "%" in list items
+            CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
+            if (summary != null)
+            {
+                String sSummary = summary.toString();
+                sSummary = sSummary.replace("%", "%%");
+                preference.setSummary(sSummary);
+            }
+            else
+                preference.setSummary(summary);
+
+        }
 		/*else if (preference instanceof RingtonePreference) {
 			// For ringtone preferences, look up the correct display value
 			// using RingtoneManager.
@@ -127,11 +126,12 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 			}
 
 		}*/
-		 else {
-			// For all other preferences, set the summary to the value's
-			// simple string representation.
-			preference.setSummary(preference.toString());
-		}
+        else {
+            // For all other preferences, set the summary to the value's
+            // simple string representation.
+            //preference.setSummary(preference.toString());
+            preference.setSummary(stringValue);
+        }
 	}
 	
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
@@ -154,7 +154,9 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 	    setSummary(GlobalData.PREF_APPLICATION_EDITOR_HEADER);
 	    setSummary(GlobalData.PREF_NOTIFICATION_TOAST);
 	    setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR);
-	    
+        setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR_PERMANENT);
+        setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR_CANCEL);
+
     	if (android.os.Build.VERSION.SDK_INT >= 21)
     	{
     		// for Android 5.0, color notification icon is not supported
