@@ -257,4 +257,5 @@
   <string name="profile_preferences_deviceKeyguard">Lock screen</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Hide profile name (widget)</string>
   <string name="profile_preferences_vibrationOnTouch">Vibration on touch</string>
+  <string name="phone_profiles_pref_notificationShowInStatusBar">Show icon in status bar</string>
 </resources>

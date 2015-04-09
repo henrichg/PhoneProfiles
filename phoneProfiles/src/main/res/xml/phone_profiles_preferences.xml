@@ -29,6 +29,10 @@
             android:title="@string/phone_profiles_pref_notificationStatusBar"
             android:defaultValue="true" />
         <CheckBoxPreference
+            android:key="notificationShowInStatusBar"
+            android:title="@string/phone_profiles_pref_notificationShowInStatusBar"
+            android:defaultValue="true" />
+        <CheckBoxPreference
             android:key="notificationStatusBarPermanent"
             android:title="@string/phone_profiles_pref_notificationStatusBarPermanent"
             android:defaultValue="true"

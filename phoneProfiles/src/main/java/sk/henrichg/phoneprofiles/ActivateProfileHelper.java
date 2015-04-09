@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -45,6 +46,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 public class ActivateProfileHelper {
 	
@@ -794,7 +796,6 @@ public class ActivateProfileHelper {
 		//}
 	}
 	
-	@SuppressLint("InlinedApi")
 	public void showNotification(Profile profile)
 	{
 		if (lockRefresh)
@@ -842,9 +843,14 @@ public class ActivateProfileHelper {
 
 	        	notificationBuilder = new NotificationCompat.Builder(context)
         				.setContentIntent(pIntent);
-	        	
-	        	//if (android.os.Build.VERSION.SDK_INT >= 16)
-	        	//	notificationBuilder.setPriority(Notification.PRIORITY_HIGH); // for heads-up in Android 5.0
+
+                if (android.os.Build.VERSION.SDK_INT >= 16) {
+                    if (GlobalData.notificationShowInStatusBar)
+                        notificationBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    else
+                        notificationBuilder.setPriority(NotificationCompat.PRIORITY_MIN);
+                    //notificationBuilder.setPriority(Notification.PRIORITY_HIGH); // for heads-up in Android 5.0
+                }
 	        	if (android.os.Build.VERSION.SDK_INT >= 21)
 	        	{
 	        		notificationBuilder.setCategory(Notification.CATEGORY_STATUS);
@@ -905,8 +911,15 @@ public class ActivateProfileHelper {
 		        
 		        notification.contentView = contentView;
 
-				//notification.flags |= Notification.FLAG_NO_CLEAR;
-				notification.flags |= Notification.FLAG_ONGOING_EVENT;
+                if (GlobalData.notificationStatusBarPermanent)
+                {
+                    //notification.flags |= Notification.FLAG_NO_CLEAR;
+                    notification.flags |= Notification.FLAG_ONGOING_EVENT;
+                }
+                else
+                {
+                    setAlarmForNotificationCancel();
+                }
 
 				notificationManager.notify(GlobalData.NOTIFICATION_ID, notification);
 		}
@@ -920,6 +933,26 @@ public class ActivateProfileHelper {
 	{
 		notificationManager.cancel(GlobalData.NOTIFICATION_ID);
 	}
+
+    private void setAlarmForNotificationCancel()
+    {
+        if (GlobalData.notificationStatusBarCancel.isEmpty() || GlobalData.notificationStatusBarCancel.equals("0"))
+            return;
+
+        Intent intent = new Intent(context, NotificationCancelAlarmBroadcastReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
+
+        Calendar now = Calendar.getInstance();
+        long time = now.getTimeInMillis() + Integer.valueOf(GlobalData.notificationStatusBarCancel) * 1000;
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+
+        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
+
+    }
 
 	public void updateWidget()
 	{
