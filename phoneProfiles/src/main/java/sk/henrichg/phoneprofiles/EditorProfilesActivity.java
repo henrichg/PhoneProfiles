@@ -623,7 +623,11 @@ public class EditorProfilesActivity extends ActionBarActivity
                 lockScreenOrientation();
                 this.dialog.setCancelable(false);
 			    this.dialog.show();
-				
+
+                EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
+                if (fragment != null)
+                    ((EditorProfileListFragment)fragment).removeAdapter();
+
 				// check root, this set GlobalData.rooted for doInBackgroud()
 				GlobalData.isRooted(false);
 			}

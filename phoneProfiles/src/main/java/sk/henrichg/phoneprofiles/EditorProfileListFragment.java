@@ -667,4 +667,9 @@ public class EditorProfileListFragment extends Fragment {
 		}
 	}
 
+    public void removeAdapter() {
+        if (listView != null)
+            listView.setAdapter(null);
+    }
+
 }
