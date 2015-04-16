@@ -166,6 +166,8 @@ public class FirstStartService extends IntentService {
 
                 // not exists content
 
+                cursor.close();
+
                 //// If the ringtone already exists in the database, delete it first
                 //context.getContentResolver().delete(contentUri,
                 //        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
@@ -189,6 +191,8 @@ public class FirstStartService extends IntentService {
                     }
                 }
             }
+            else
+                cursor.close();
         }
 
 
