@@ -1,4 +1,4 @@
-package sk.henrichg.phoneprofilesplus;
+package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
 import android.content.Intent;
