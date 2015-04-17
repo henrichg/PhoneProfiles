@@ -34,7 +34,7 @@
   <string name="volume_pref_dialog_no_change_chb">Nincs változás</string>
   <string name="imageview_preference_profile_icon_label">Profil ikonja</string>
   <string name="applications_preference_profile_icon_label">Alkalmazás futtatása</string>
-  <string name="phone_profiles_pref_category_activator">Aktivátor</string>
+  <string name="phone_profiles_pref_category_activator">Profilok</string>
   <string name="phone_profiles_pref_category_editor">Szerkesztő</string>
   <string name="phone_profiles_pref_category_gui">Alkalmazás kinézete</string>
   <string name="phone_profiles_pref_category_activation">Profil aktiválása</string>
@@ -67,7 +67,7 @@
   <string name="profile_preferences_soundNotification">Értesítések hangja</string>
   <string name="profile_preferences_soundAlarmChange">Ébresztési hang cseréje</string>
   <string name="profile_preferences_soundAlarm">Ébresztési hang</string>
-  <string name="profile_preferences_deviceAirplaneMode">(R) Repülési mód</string>
+  <string name="profile_preferences_deviceAirplaneMode">(R) Repülőgép üzemmód</string>
   <string name="profile_preferences_deviceWiFi">Wi-Fi</string>
   <string name="profile_preferences_deviceBluetooth">Bluetooth</string>
   <string name="profile_preferences_deviceGPS">(R) GPS</string>
@@ -183,7 +183,7 @@
   <string name="alert_button_yes">Igen</string>
   <string name="alert_button_no">nem</string>
   <string name="profile_preferences_deviceAutoRotation">Kijelző elforgatás</string>
-  <string name="title_activity_activator">Aktivátor</string>
+  <string name="title_activity_activator">Profilok</string>
   <string name="title_activity_editor">Szerkesztő</string>
   <string name="array_pref_value_0_percent" formatted="false">0 %</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
