@@ -17,7 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceScreen;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -48,7 +48,7 @@ import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRedrawProfileListF
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRestartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnShowActionMode;
 
-public class EditorProfilesActivity extends ActionBarActivity
+public class EditorProfilesActivity extends AppCompatActivity
                                     implements OnStartProfilePreferences,
                                                OnRestartProfilePreferences,
                                                OnRedrawProfileListFragment,

@@ -4,7 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
-public class ActivateProfileActivity extends ActionBarActivity {
+public class ActivateProfileActivity extends AppCompatActivity {
 
 	private static ActivateProfileActivity instance;
 	
