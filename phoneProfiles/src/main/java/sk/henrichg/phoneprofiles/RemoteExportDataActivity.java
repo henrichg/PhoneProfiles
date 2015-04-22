@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -9,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -168,22 +168,12 @@ public class RemoteExportDataActivity extends Activity {
 	
 	private void exportErrorDialog()
 	{
-        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this)
-                .title(R.string.export_profiles_alert_title)
-                .content(R.string.export_profiles_alert_error)
-                .positiveText(android.R.string.ok)
-                .disableDefaultFonts();
-        dialogBuilder.show();
-        /*
-        AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(this);
-		dialogBuilder.setTitle(getResources().getString(R.string.export_profiles_alert_title));
-		String resMessage;
-		resMessage = getResources().getString(R.string.export_profiles_alert_error);
-		dialogBuilder.setMessage(resMessage + "!");
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+		dialogBuilder.setTitle(R.string.export_profiles_alert_title);
+		dialogBuilder.setMessage(R.string.export_profiles_alert_error);
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 		dialogBuilder.setPositiveButton(android.R.string.ok, null);
 		dialogBuilder.show();
-		*/
 	}
 	
 	

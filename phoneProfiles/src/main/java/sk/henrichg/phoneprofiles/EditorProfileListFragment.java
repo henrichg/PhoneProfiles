@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +24,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
@@ -423,26 +423,10 @@ public class EditorProfileListFragment extends Fragment {
 	{
         final Profile _profile = profile;
 
-        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(getActivity())
-                .title(getResources().getString(R.string.profile_string_0) + ": " + profile._name)
-                .content(R.string.delete_profile_alert_message)
-                .positiveText(R.string.alert_button_yes)
-                .negativeText(R.string.alert_button_no)
-                .disableDefaultFonts();
-        dialogBuilder.callback(new MaterialDialog.ButtonCallback() {
-            @Override
-            public void onPositive(MaterialDialog dialog) {
-                deleteProfile(_profile);
-            }
-        });
-        dialogBuilder.show();
-        /*
-        AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(getActivity());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 		dialogBuilder.setTitle(getResources().getString(R.string.profile_string_0) + ": " + profile._name);
-		dialogBuilder.setMessage(getResources().getString(R.string.delete_profile_alert_message));
+		dialogBuilder.setMessage(R.string.delete_profile_alert_message);
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
-		
-		final Profile _profile = profile;
 		
 		dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
 			
@@ -452,7 +436,6 @@ public class EditorProfileListFragment extends Fragment {
 		});
 		dialogBuilder.setNegativeButton(R.string.alert_button_no, null);
 		dialogBuilder.show();
-		*/
 	}
 	
 	public void showEditMenu(View view)
@@ -489,34 +472,9 @@ public class EditorProfileListFragment extends Fragment {
 
 	private void deleteAllProfiles()
 	{
-        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(getActivity())
-                .title(R.string.alert_title_delete_all_profiles)
-                .content(R.string.alert_message_delete_all_profiles)
-                .positiveText(R.string.alert_button_yes)
-                .negativeText(R.string.alert_button_no)
-                .disableDefaultFonts();
-        dialogBuilder.callback(new MaterialDialog.ButtonCallback() {
-            @Override
-            public void onPositive(MaterialDialog dialog) {
-                profileListAdapter.clearNoNotify();
-                databaseHandler.deleteAllProfiles();
-
-                profileListAdapter.notifyDataSetChanged();
-                // v pripade, ze sa odmaze aktivovany profil, nastavime, ze nic nie je aktivovane
-                //Profile profile = databaseHandler.getActivatedProfile();
-                //Profile profile = profileListAdapter.getActivatedProfile();
-                updateHeader(null);
-                activateProfileHelper.removeNotification();
-                activateProfileHelper.updateWidget();
-
-                onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE);
-            }
-        });
-        dialogBuilder.show();
-        /*
-        AlertDialogWrapper.Builder dialogBuilder = new AlertDialogWrapper.Builder(getActivity());
-		dialogBuilder.setTitle(getResources().getString(R.string.alert_title_delete_all_profiles));
-		dialogBuilder.setMessage(getResources().getString(R.string.alert_message_delete_all_profiles));
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+		dialogBuilder.setTitle(R.string.alert_title_delete_all_profiles);
+		dialogBuilder.setMessage(R.string.alert_message_delete_all_profiles);
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 		
 		//final Activity activity = getActivity();
@@ -542,7 +500,6 @@ public class EditorProfileListFragment extends Fragment {
 		});
 		dialogBuilder.setNegativeButton(R.string.alert_button_no, null);
 		dialogBuilder.show();
-		*/
 	}
 	
 	public void updateHeader(Profile profile)
