@@ -32,7 +32,3 @@ dependencies {
     compile 'com.afollestad:material-dialogs:0.7.2.7'
     compile files('libs/RootTools.jar')
 }
-
-repositories {
-    maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
-}
