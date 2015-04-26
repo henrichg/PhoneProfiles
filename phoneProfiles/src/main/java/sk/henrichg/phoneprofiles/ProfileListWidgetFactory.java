@@ -63,7 +63,10 @@ public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsF
 	}
 
 	public int getCount() {
-		return(profileList.size());
+        if (profileList != null)
+		    return(profileList.size());
+        else
+            return 0;
 	}
 
 	public RemoteViews getViewAt(int position) {
