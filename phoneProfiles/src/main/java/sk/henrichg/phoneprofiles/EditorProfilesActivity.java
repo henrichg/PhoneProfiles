@@ -593,7 +593,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 			{
                 this.dialog = new MaterialDialog.Builder(activity)
                         .content(R.string.import_profiles_alert_title)
-                        .disableDefaultFonts()
+                        //.disableDefaultFonts()
                         .progress(true, 0)
                         .build();
 
@@ -819,7 +819,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 					{
                         this.dialog = new MaterialDialog.Builder(activity)
                                 .content(R.string.export_profiles_alert_title)
-                                .disableDefaultFonts()
+                                //.disableDefaultFonts()
                                 .progress(true, 0)
                                 .build();
 				        this.dataWrapper = getDataWrapper();

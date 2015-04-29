@@ -94,7 +94,7 @@ public class RemoteExportDataActivity extends Activity {
 			{
                 this.dialog = new MaterialDialog.Builder(activity)
                         .content(R.string.export_profiles_alert_title)
-                        .disableDefaultFonts()
+                        //.disableDefaultFonts()
                         .progress(true, 0)
                         .build();
             }
