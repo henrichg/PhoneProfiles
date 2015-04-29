@@ -12,7 +12,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 	private static int savedMode = AudioManager.MODE_NORMAL;
 	private static boolean savedSpeakerphone = false;
 	private static boolean speakerphoneSelected = false;
-	
+
 	protected boolean onStartReceive()
 	{
 		if (!GlobalData.getApplicationStarted(super.savedContext))
@@ -80,6 +80,23 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
 		savedMode = audioManager.getMode();
+
+        /// for linked ringer and notification volume:
+        // notification volume in profile activatin is set after ringer volume
+        // therefore reset ringer volume
+        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+
+        Profile profile = dataWrapper.getActivatedProfile();
+        profile = GlobalData.getMappedProfile(profile, savedContext);
+
+        if (profile != null) {
+            if (profile.getVolumeRingtoneChange())
+            {
+                int volume = profile.getVolumeRingtoneValue();
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
+                //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
+            }
+        }
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
@@ -87,6 +104,26 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
 		savedMode = audioManager.getMode();
+    }
+
+    private void setBackNotificationVolume() {
+        if (audioManager == null )
+            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+
+        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+
+        Profile profile = dataWrapper.getActivatedProfile();
+        profile = GlobalData.getMappedProfile(profile, savedContext);
+
+        if (profile != null) {
+            if (profile.getVolumeNotificationChange())
+            {
+                int volume = profile.getVolumeNotificationValue();
+                audioManager.setMode(savedMode);
+                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
+                //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
+            }
+        }
     }
 
     protected void onIncomingCallAnswered(String number, Date start) {
@@ -98,14 +135,16 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     protected void onIncomingCallEnded(String number, Date start, Date end) {
-    	callEnded(true);
+        callEnded(true);
+        setBackNotificationVolume();
     }
 
     protected void onOutgoingCallEnded(String number, Date start, Date end) {
-    	callEnded(false);
+        callEnded(false);
     }
 
     protected void onMissedCall(String number, Date start) {
+        setBackNotificationVolume();
     }
     
 }
