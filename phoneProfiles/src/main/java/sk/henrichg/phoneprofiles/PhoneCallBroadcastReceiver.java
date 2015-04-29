@@ -12,6 +12,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 	private static int savedMode = AudioManager.MODE_NORMAL;
 	private static boolean savedSpeakerphone = false;
 	private static boolean speakerphoneSelected = false;
+    private static int notificationVolume = -999;
 
 	protected boolean onStartReceive()
 	{
@@ -80,6 +81,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
 		savedMode = audioManager.getMode();
+        notificationVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
 
         /// for linked ringer and notification volume:
         // notification volume in profile activatin is set after ringer volume
@@ -107,22 +109,15 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     private void setBackNotificationVolume() {
-        if (audioManager == null )
-            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+        if (notificationVolume != -999) {
+            if (audioManager == null )
+                audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
-        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+            audioManager.setMode(savedMode);
+            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, notificationVolume, 0);
+            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
 
-        Profile profile = dataWrapper.getActivatedProfile();
-        profile = GlobalData.getMappedProfile(profile, savedContext);
-
-        if (profile != null) {
-            if (profile.getVolumeNotificationChange())
-            {
-                int volume = profile.getVolumeNotificationValue();
-                audioManager.setMode(savedMode);
-                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
-                //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
-            }
+            notificationVolume = -999;
         }
     }
 
