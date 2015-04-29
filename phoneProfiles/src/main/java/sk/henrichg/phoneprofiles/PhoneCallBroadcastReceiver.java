@@ -81,11 +81,11 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
 		savedMode = audioManager.getMode();
-        notificationVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
 
         /// for linked ringer and notification volume:
         // notification volume in profile activatin is set after ringer volume
         // therefore reset ringer volume
+        notificationVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
         DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
 
         Profile profile = dataWrapper.getActivatedProfile();
