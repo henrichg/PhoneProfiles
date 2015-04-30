@@ -37,10 +37,12 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
             // set ringer mode for proper volume change
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             aph.setRingerMode(profile, audioManager);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                //System.out.println(e);
+            if (!PhoneCallBroadcastReceiver.separateVolumes) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    //System.out.println(e);
+                }
             }
 
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
