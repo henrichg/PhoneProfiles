@@ -794,12 +794,10 @@ public class ActivateProfileHelper {
 						PixelFormat.TRANSLUCENT
 					);
 			params.gravity = Gravity.RIGHT | Gravity.TOP;
-			/*if (profile.getDeviceBrightnessAutomatic())
+			if (profile.getDeviceBrightnessAutomatic())
 				params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
 			else
-				params.screenBrightness = profile.getDeviceBrightnessValue() / 255.0f;*/
-			//params.screenBrightness = Settings.System.getInt(dataWrapper.context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 128) / 255.0f;
-			params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+				params.screenBrightness = profile.getDeviceBrightnessManualValue(context) / (float) 255;
 			GUIData.brightneesView = new BrightnessView(context);
 			windowManager.addView(GUIData.brightneesView, params);
 		//}

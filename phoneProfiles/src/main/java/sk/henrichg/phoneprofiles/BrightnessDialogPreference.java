@@ -155,7 +155,10 @@ public class BrightnessDialogPreference extends
 
         Window win = ProfilePreferencesFragment.getPreferencesActivity().getWindow();
         WindowManager.LayoutParams layoutParams = win.getAttributes();
-        layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        if (savedBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
+            layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        else
+            layoutParams.screenBrightness = savedBrightness / (float) 255;
         win.setAttributes(layoutParams);
     }
 
@@ -186,8 +189,10 @@ public class BrightnessDialogPreference extends
 
         Window win = ProfilePreferencesFragment.getPreferencesActivity().getWindow();
         WindowManager.LayoutParams layoutParams = win.getAttributes();
-        //layoutParams.screenBrightness = (float)(value + minimumValue) / maximumValue;
-        layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        if (automatic == 1)
+            layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        else
+            layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(value + minimumValue, _context) / (float) 255;
         win.setAttributes(layoutParams);
 
         callChangeListener(value);
@@ -273,7 +278,10 @@ public class BrightnessDialogPreference extends
 
             Window win = ProfilePreferencesFragment.getPreferencesActivity().getWindow();
             WindowManager.LayoutParams layoutParams = win.getAttributes();
-            layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+            if (savedBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
+                layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+            else
+                layoutParams.screenBrightness = savedBrightness / (float) 255;
             win.setAttributes(layoutParams);
         }
         else
@@ -292,7 +300,10 @@ public class BrightnessDialogPreference extends
 
             Window win = ProfilePreferencesFragment.getPreferencesActivity().getWindow();
             WindowManager.LayoutParams layoutParams = win.getAttributes();
-            layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+            if (_automatic == 1)
+                layoutParams.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+            else
+                layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(_value + minimumValue, _context) / (float) 255;
             win.setAttributes(layoutParams);
         }
 
