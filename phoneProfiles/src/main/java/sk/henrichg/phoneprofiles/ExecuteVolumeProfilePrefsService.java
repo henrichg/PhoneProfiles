@@ -32,11 +32,15 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 		{
 			AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-            //int oldNURM = Settings.System.getInt(context.getContentResolver(), "notifications_use_ring_volume", -10);
-
-            // set ringer mode for proper volume change
+            // set ringer mode to Ring for proper change ringer mode to Silent
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
-            aph.setRingerMode(profile, audioManager);
+            if (profile._volumeRingerMode == 4) {
+                int ringerMode = profile._volumeRingerMode;
+                profile._volumeRingerMode = 1;
+                aph.setRingerMode(profile, audioManager);
+                profile._volumeRingerMode = ringerMode;
+            }
+
             if (!PhoneCallBroadcastReceiver.separateVolumes) {
                 try {
                     Thread.sleep(200);
@@ -48,62 +52,9 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             aph.setVolumes(profile, audioManager);
 
-            // set ringer mode because volumes change silent/vibrate
+            // set ringer mode after volume because volumes change silent/vibrate
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             aph.setRingerMode(profile, audioManager);
-
-            //if (oldNURM != -10)
-            //    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", oldNURM);
-
-
-            /*boolean rechangeRingerMode = false;
-            int savedProfileRingerMode = profile._volumeRingerMode;
-
-            // for Android 5.0 set ringer mode again
-            if ((android.os.Build.VERSION.SDK_INT >= 21))
-            {
-                rechangeRingerMode = true;
-            }
-
-            // when ringer mode is changed to VIBRATE
-            // and profile ringer mode is RING or SILENT,
-            // change ringer mode to SILENT
-            if ((profile._volumeRingerMode == 1) ||  // ring
-                    (profile._volumeRingerMode == 4))    // silent
-            {
-                if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)
-                {
-                    // ringer mode is changed to VIBRATE, set it to SILENT
-                    profile._volumeRingerMode = 4;
-                    rechangeRingerMode = true;
-                }
-            }
-
-            // for Android 5.0 and profile ringer mode ZEN_MODE,
-            // when ringer mode is changed to VIBRATE,
-            // change ringer mode to SILENT twice
-            if ((android.os.Build.VERSION.SDK_INT >= 21)) {
-                if ((profile._volumeRingerMode == 5) && (profile._volumeZenMode != 3)) // NONE
-                {
-                    if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
-                        profile._volumeRingerMode = 4;
-                        rechangeRingerMode = true;
-                        aph.setRingerMode(profile, audioManager);
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            //System.out.println(e);
-                        }
-                        aph.setVolumes(profile, audioManager);
-                    }
-                }
-            }
-
-            if (rechangeRingerMode) {
-                Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
-                aph.setRingerMode(profile, audioManager);
-            //    profile._volumeRingerMode = savedProfileRingerMode;
-            //}*/
 
 		/*	if (intent.getBooleanExtra(GlobalData.EXTRA_SECOND_SET_VOLUMES, false))
 			{
