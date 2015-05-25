@@ -49,7 +49,7 @@ public class GlobalData extends Application {
 	static final String EXTRA_RESET_EDITOR = "reset_editor";
 	static final String EXTRA_NEW_PROFILE_MODE = "new_profile_mode";
 	static final String EXTRA_PREFERENCES_STARTUP_SOURCE = "preferences_startup_source";
-	static final String EXTRA_SECOND_SET_VOLUMES = "second_set_volumes";
+    static final String EXTRA_SEPARATE_VOLUMES = "separate_volumes";
 
 	static final int STARTUP_SOURCE_NOTIFICATION = 1;
 	static final int STARTUP_SOURCE_WIDGET = 2;
@@ -162,6 +162,8 @@ public class GlobalData extends Application {
 	private static final String PREF_APPLICATION_STARTED = "applicationStarted";
 	private static final String PREF_ACTIVATED_PROFILE_FOR_DURATION = "activatedProfileForDuration";
     private static final String PREF_LOCKSCREEN_DISABLED = "lockscreenDisabled";
+    private static final String PREF_RINGER_VOLUME = "ringer_volume";
+    private static final String PREF_NOTIFICATION_VOLUME = "notification_volume";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -566,7 +568,35 @@ public class GlobalData extends Application {
         editor.commit();
     }
 
-	// ----- Hardware check -------------------------------------
+    static public int getRingerVolume(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(PREF_RINGER_VOLUME, -999);
+    }
+
+    static public void setRingerVolume(Context context, int volume)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putInt(PREF_RINGER_VOLUME, volume);
+        editor.commit();
+    }
+
+    static public int getNotificationVolume(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(PREF_NOTIFICATION_VOLUME, -999);
+    }
+
+    static public void setNotificationVolume(Context context, int volume)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putInt(PREF_NOTIFICATION_VOLUME, volume);
+        editor.commit();
+    }
+
+    // ----- Hardware check -------------------------------------
 	
 	static int hardwareCheck(String preferenceKey, Context context)
 	{

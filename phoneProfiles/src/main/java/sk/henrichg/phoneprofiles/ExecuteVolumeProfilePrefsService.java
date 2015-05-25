@@ -26,6 +26,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 		aph.initialize(null, context);
 		
 		long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+		int separateVolumes = intent.getIntExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 0);
 		Profile profile = dataWrapper.getProfileById(profile_id);
 		profile = GlobalData.getMappedProfile(profile, context);
 		if (profile != null)
@@ -41,7 +42,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 profile._volumeRingerMode = ringerMode;
             }
 
-            if (!PhoneCallBroadcastReceiver.separateVolumes) {
+            if (separateVolumes == 0) {
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
@@ -50,7 +51,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
             }
 
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
-            aph.setVolumes(profile, audioManager);
+            aph.setVolumes(profile, audioManager, separateVolumes);
 
             // set ringer mode after volume because volumes change silent/vibrate
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);

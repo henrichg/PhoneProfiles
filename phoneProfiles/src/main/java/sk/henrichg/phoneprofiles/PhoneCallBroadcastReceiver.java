@@ -13,8 +13,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 	private static int savedMode = AudioManager.MODE_NORMAL;
 	private static boolean savedSpeakerphone = false;
 	private static boolean speakerphoneSelected = false;
-    public static boolean separateVolumes = false;
-    public static int notificationVolume = -999;
 
 	protected boolean onStartReceive()
 	{
@@ -87,17 +85,15 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         /// for linked ringer and notification volume:
         //    notification volume in profile activation is set after ringer volume
         //    therefore reset ringer volume
-
-        separateVolumes = true;
-
         DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
         Profile profile = dataWrapper.getActivatedProfile();
         if (profile != null) {
             Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
             volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_SECOND_SET_VOLUMES, true);
+            volumeServiceIntent.putExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 1);
             savedContext.startService(volumeServiceIntent);
         }
+        ///
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
@@ -108,23 +104,17 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     private void setBackNotificationVolume() {
-        if (notificationVolume != -999) {
-            DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-            Profile profile = dataWrapper.getActivatedProfile();
-            if (profile != null) {
-                Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_SECOND_SET_VOLUMES, true);
-                savedContext.startService(volumeServiceIntent);
-            }
-
-            notificationVolume = -999;
+        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+        Profile profile = dataWrapper.getActivatedProfile();
+        if (profile != null) {
+            Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
+            volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+            volumeServiceIntent.putExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 2);
+            savedContext.startService(volumeServiceIntent);
         }
     }
 
     protected void onIncomingCallAnswered(String number, Date start) {
-        separateVolumes = false;
-
         callAnswered(false);
     }
 
@@ -133,8 +123,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     protected void onIncomingCallEnded(String number, Date start, Date end) {
-        separateVolumes = false;
-
         callEnded(true);
         setBackNotificationVolume();
     }
@@ -144,8 +132,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     protected void onMissedCall(String number, Date start) {
-        separateVolumes = false;
-
         callEnded(true);
         setBackNotificationVolume();
     }
