@@ -746,5 +746,11 @@ public class Profile {
     	}
 	}
 
+	public String getProfileNameWithDuration() {
+		String profileName = _name;
+		if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
+			profileName = "[" + _duration + "] " + profileName;
+		return profileName;
+	}
 
 }

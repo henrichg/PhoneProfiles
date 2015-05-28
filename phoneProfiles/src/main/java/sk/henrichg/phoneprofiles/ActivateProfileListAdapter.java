@@ -181,9 +181,7 @@ public class ActivateProfileListAdapter extends BaseAdapter
         	holder.profileName.setTypeface(null, Typeface.NORMAL);
         }
 
-		String profileName = profile._name;
-		if ((profile._duration > 0) && (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
-			profileName = "[" + profile._duration + "] " + profileName;
+		String profileName = profile.getProfileNameWithDuration();
         holder.profileName.setText(profileName);
 
         if (profile.getIsIconResourceID())

@@ -316,7 +316,7 @@ public class ActivateProfileListFragment extends Fragment {
 		}
 		else
 		{
-			activeProfileName.setText(profile._name);
+			activeProfileName.setText(profile.getProfileNameWithDuration());
 	        if (profile.getIsIconResourceID())
 	        {
 				int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());

@@ -72,7 +72,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
 		{
 			isIconResourceID = profile.getIsIconResourceID();
 			iconIdentifier = profile.getIconIdentifier();
-			profileName = profile._name;
+			profileName = profile.getProfileNameWithDuration();
 		}
 		else
 		{
