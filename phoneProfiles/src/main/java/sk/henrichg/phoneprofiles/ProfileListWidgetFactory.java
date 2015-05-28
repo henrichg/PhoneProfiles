@@ -91,12 +91,19 @@ public class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsF
 		if ((!GlobalData.applicationWidgetListHeader) && (profile._checked))
 		{
 			// hm, interesting, how to set bold style for RemoteView text ;-)
-			Spannable sb = new SpannableString(profile._name);
-			sb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, profile._name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			String profileName = profile._name;
+			if ((profile._duration > 0) && (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
+				profileName = "[" + profile._duration + "] " + profileName;
+			Spannable sb = new SpannableString(profileName);
+			sb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, profileName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			row.setTextViewText(R.id.widget_profile_list_item_profile_name, sb);
 		}	
-		else
-			row.setTextViewText(R.id.widget_profile_list_item_profile_name, profile._name);
+		else {
+			String profileName = profile._name;
+			if ((profile._duration > 0) && (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
+				profileName = "[" + profile._duration + "] " + profileName;
+			row.setTextViewText(R.id.widget_profile_list_item_profile_name, profileName);
+		}
 		int red = 0xFF;
 		int green = 0xFF;
 		int blue = 0xFF;

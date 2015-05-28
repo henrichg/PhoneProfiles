@@ -180,8 +180,12 @@ public class ActivateProfileListAdapter extends BaseAdapter
            		holder.listItemRoot.setBackgroundResource(R.drawable.card);
         	holder.profileName.setTypeface(null, Typeface.NORMAL);
         }
-        
-        holder.profileName.setText(profile._name);
+
+		String profileName = profile._name;
+		if ((profile._duration > 0) && (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
+			profileName = "[" + profile._duration + "] " + profileName;
+        holder.profileName.setText(profileName);
+
         if (profile.getIsIconResourceID())
         {
         	holder.profileIcon.setImageResource(0);
