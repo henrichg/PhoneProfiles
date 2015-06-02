@@ -49,7 +49,6 @@ public class GlobalData extends Application {
 	static final String EXTRA_RESET_EDITOR = "reset_editor";
 	static final String EXTRA_NEW_PROFILE_MODE = "new_profile_mode";
 	static final String EXTRA_PREFERENCES_STARTUP_SOURCE = "preferences_startup_source";
-    static final String EXTRA_SEPARATE_VOLUMES = "separate_volumes";
 
 	static final int STARTUP_SOURCE_NOTIFICATION = 1;
 	static final int STARTUP_SOURCE_WIDGET = 2;

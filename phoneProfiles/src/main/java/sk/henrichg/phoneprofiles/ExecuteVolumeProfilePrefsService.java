@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulIntentService 
 {
@@ -26,7 +27,6 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 		aph.initialize(null, context);
 		
 		long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
-		int separateVolumes = intent.getIntExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 0);
 		Profile profile = dataWrapper.getProfileById(profile_id);
 		profile = GlobalData.getMappedProfile(profile, context);
 		if (profile != null)
@@ -42,16 +42,19 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 profile._volumeRingerMode = ringerMode;
             }
 
-            if (separateVolumes == 0) {
+			/*
+			TelephonyManager telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (telephony.getCallState() != TelephonyManager.CALL_STATE_RINGING) {
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     //System.out.println(e);
                 }
             }
+            */
 
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
-            aph.setVolumes(profile, audioManager, separateVolumes);
+            aph.setVolumes(profile, audioManager);
 
             // set ringer mode after volume because volumes change silent/vibrate
             Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);

@@ -29,6 +29,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.v4.app.NotificationCompat;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -295,7 +296,7 @@ public class ActivateProfileHelper {
         }*/
 	}
 	
-	public boolean setVolumes(Profile profile, AudioManager audioManager, int separateVolumes)
+	public boolean setVolumes(Profile profile, AudioManager audioManager)
 	{
 		boolean priorityMode = false;
 
@@ -305,36 +306,40 @@ public class ActivateProfileHelper {
 			waitForVolumeChange();
 			//Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
 		}
-        // separateVolumes is true only during incomming call
-        // therefore notification volume is not needed to change
-        // and for linked ringer and notification volumes must not by set
-        if (profile.getVolumeRingtoneChange() || (separateVolumes == 1)) {
-            if (profile.getVolumeRingtoneChange())
-                GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
-            int volume = GlobalData.getRingerVolume(context);
-            if (volume != -999) {
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
-                waitForVolumeChange();
-                //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
-                if (volume > 0)
-                    priorityMode = true;
-            }
+		// separateVolumes is true only during incomming call
+		// therefore notification volume is not needed to change
+		// and for linked ringer and notification volumes must not by set
+		TelephonyManager telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+		int callState = telephony.getCallState();
+		if (profile.getVolumeRingtoneChange() || (callState == TelephonyManager.CALL_STATE_RINGING)) {
+			if (profile.getVolumeRingtoneChange())
+				GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
+			int volume = GlobalData.getRingerVolume(context);
+			if (volume != -999) {
+				audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
+				waitForVolumeChange();
+				//Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
+				if (volume > 0)
+					priorityMode = true;
+			}
 		}
-        if (profile.getVolumeNotificationChange() || (separateVolumes == 2) ||
-                profile.getVolumeSystemChange()) { // system volume is linked to notification volume (Nexus 5)
-            if (profile.getVolumeNotificationChange())
-                GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
-            if (separateVolumes != 1) {
-                int volume = GlobalData.getNotificationVolume(context);
-                if (volume != -999) {
-                    audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
-                    waitForVolumeChange();
-                    //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
-                    if (volume > 0)
-                        priorityMode = true;
-                }
-            }
-        }
+		if (profile.getVolumeNotificationChange() ||
+			profile.getVolumeSystemChange() ||  // system volume is linked to notification volume (Nexus 5)
+			(callState != TelephonyManager.CALL_STATE_RINGING))
+		{
+			if (profile.getVolumeNotificationChange())
+				GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
+			if (callState != TelephonyManager.CALL_STATE_RINGING) {
+				int volume = GlobalData.getNotificationVolume(context);
+				if (volume != -999) {
+					audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
+					waitForVolumeChange();
+					//Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
+					if (volume > 0)
+						priorityMode = true;
+				}
+			}
+		}
 		if (profile.getVolumeMediaChange())
 		{
 			audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, profile.getVolumeMediaValue(), 0);

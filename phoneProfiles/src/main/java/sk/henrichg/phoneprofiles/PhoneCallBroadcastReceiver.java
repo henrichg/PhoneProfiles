@@ -90,7 +90,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         if (profile != null) {
             Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
             volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 1);
             savedContext.startService(volumeServiceIntent);
         }
         ///
@@ -109,7 +108,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         if (profile != null) {
             Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
             volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_SEPARATE_VOLUMES, 2);
             savedContext.startService(volumeServiceIntent);
         }
     }
