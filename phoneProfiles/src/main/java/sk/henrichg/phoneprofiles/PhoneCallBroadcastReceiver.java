@@ -10,7 +10,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
 	private static AudioManager audioManager = null;
 	
-	private static int savedMode = AudioManager.MODE_NORMAL;
 	private static boolean savedSpeakerphone = false;
 	private static boolean speakerphoneSelected = false;
 
@@ -71,16 +70,13 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     	{
     	    audioManager.setSpeakerphoneOn(savedSpeakerphone);
     		speakerphoneSelected = false;
+            audioManager.setMode(AudioManager.MODE_NORMAL);
         }
-
-        audioManager.setMode(savedMode);
     }
 
     protected void onIncomingCallStarted(String number, Date start) {
 		if (audioManager == null )
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-		savedMode = audioManager.getMode();
 
         /// for linked ringer and notification volume:
         //    notification volume in profile activation is set after ringer volume
@@ -98,8 +94,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     protected void onOutgoingCallStarted(String number, Date start) {
 		if (audioManager == null )
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-		savedMode = audioManager.getMode();
     }
 
     private void setBackNotificationVolume() {
