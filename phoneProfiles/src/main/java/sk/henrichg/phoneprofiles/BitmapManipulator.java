@@ -11,6 +11,8 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import java.io.File;
 
@@ -51,14 +53,10 @@ public class BitmapManipulator {
     	Paint paint = new Paint();
     	Matrix matrix = new Matrix();
 
-    	ColorFilter filter = new LightingColorFilter(0xFFFFFFFF, 0x00FFFFFF);
-    	paint.setColorFilter(filter);
-    	canvas.drawBitmap(bitmap, matrix, paint);
-
-    	int color = Color.argb(0xFF, value, value, value);
-    	ColorFilter filter2 = new LightingColorFilter(color, 0x00000000);
-    	paint.setColorFilter(filter2);
-    	canvas.drawBitmap(monochromeBitmap, matrix, paint); 
+		int color = Color.argb(0xFF, value, value, value);
+		ColorFilter filter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+		paint.setColorFilter(filter);
+		canvas.drawBitmap(bitmap, matrix, paint);
     	
     	return monochromeBitmap;
 	}
