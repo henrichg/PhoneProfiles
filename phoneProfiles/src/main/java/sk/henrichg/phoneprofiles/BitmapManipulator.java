@@ -38,29 +38,33 @@ public class BitmapManipulator {
 		else
 			return null;
 	}
-	
-	public static Bitmap monochromeBitmap(Bitmap bitmap, int value, Context context)
+
+	public static Bitmap recolorBitmap(Bitmap bitmap, int color, Context context)
 	{
 		if (bitmap == null)
 			return null;
-		
-    	Bitmap monochromeBitmap = Bitmap.createBitmap(bitmap.getWidth(),
-											bitmap.getHeight(),
-											bitmap.getConfig());
-    										//Config.ARGB_8888);
 
-    	Canvas canvas = new Canvas(monochromeBitmap);
-    	Paint paint = new Paint();
-    	Matrix matrix = new Matrix();
+		Bitmap colorBitmap = Bitmap.createBitmap(bitmap.getWidth(),
+				bitmap.getHeight(),
+				bitmap.getConfig());
+		//Config.ARGB_8888);
 
-		int color = Color.argb(0xFF, value, value, value);
+		Canvas canvas = new Canvas(colorBitmap);
+		Paint paint = new Paint();
+		Matrix matrix = new Matrix();
+
 		ColorFilter filter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 		paint.setColorFilter(filter);
 		canvas.drawBitmap(bitmap, matrix, paint);
-    	
-    	return monochromeBitmap;
+
+		return colorBitmap;
 	}
-	
+
+	public static Bitmap monochromeBitmap(Bitmap bitmap, int value, Context context) {
+		int color = Color.argb(0xFF, value, value, value);
+		return recolorBitmap(bitmap, color, context);
+	}
+
 	public static Bitmap grayscaleBitmap(Bitmap bitmap)
 	{
 		if (bitmap == null)

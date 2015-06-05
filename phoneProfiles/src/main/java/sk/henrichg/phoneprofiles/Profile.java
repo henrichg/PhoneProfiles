@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.provider.Settings;
 
 public class Profile {
@@ -49,7 +50,9 @@ public class Profile {
 	public int _deviceNFC;
 	public int _deviceKeyguard;
     public int _vibrationOnTouch;
-	
+	public boolean _useCustomColor;
+	public int _customColor;
+
 	public Bitmap _iconBitmap;
 	public Bitmap _preferencesIndicator;
 	
@@ -61,7 +64,10 @@ public class Profile {
 	
 	// Empty constructorn
 	public Profile(){
-		
+		this._useCustomColor = true;
+		this._customColor = Color.YELLOW;
+
+        this._iconBitmap = null;
 	}
 	
 	// constructor
@@ -146,7 +152,10 @@ public class Profile {
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
-		
+
+		this._useCustomColor = true;
+		this._customColor = Color.YELLOW;
+
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
 	}
@@ -231,7 +240,10 @@ public class Profile {
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
-		
+
+        this._useCustomColor = true;
+        this._customColor = Color.YELLOW;
+
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
 	}
@@ -278,7 +290,9 @@ public class Profile {
 		this._afterDurationDo = profile._afterDurationDo;
 		this._deviceKeyguard = profile._deviceKeyguard;
         this._vibrationOnTouch = profile._vibrationOnTouch;
-		
+		this._useCustomColor = profile._useCustomColor;
+		this._customColor = profile._customColor;
+
 		this._iconBitmap = profile._iconBitmap;
 		this._preferencesIndicator = profile._preferencesIndicator;
 	}
@@ -676,46 +690,63 @@ public class Profile {
 	}
 	
 	//----------------------------------
-	
+
 	public void generateIconBitmap(Context context, boolean monochrome, int monochromeValue)
 	{
-        if (!getIsIconResourceID())
-        {
-        	releaseIconBitmap();
-        	
-        	Resources resources = context.getResources();
-    		int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
-    		int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-    		_iconBitmap = BitmapManipulator.resampleBitmap(getIconIdentifier(), width, height);
-    		
-    		if (_iconBitmap == null)
-    		{
-    			// no icon found, set default icon
+		if (!getIsIconResourceID())
+		{
+			releaseIconBitmap();
+
+			Resources resources = context.getResources();
+			int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
+			int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
+			_iconBitmap = BitmapManipulator.resampleBitmap(getIconIdentifier(), width, height);
+
+			if (_iconBitmap == null)
+			{
+				// no icon found, set default icon
 				_icon = "ic_profile_default|1";
-    			if (monochrome)
-    			{
-    	        	int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
-    	        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-    	        	_iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
-    	        	// getIsIconResourceID must return false
-    	        	_icon = getIconIdentifier() + "|0";
-    			}
-    		}
-    		else
-    		if (monochrome)
-    			_iconBitmap = BitmapManipulator.grayscaleBitmap(_iconBitmap);
-        }
-        else
-        if (monochrome)
-        {
-        	int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
-        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-        	_iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
-        	// getIsIconResourceID must return false
-        	_icon = getIconIdentifier() + "|0";
-        }
-        else
-        	_iconBitmap = null;
+				_useCustomColor = false;
+				if (monochrome)
+				{
+					int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
+					Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
+					_iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
+					// getIsIconResourceID must return false
+					//_icon = getIconIdentifier() + "|0";
+				}
+			}
+			else
+			if (monochrome)
+				_iconBitmap = BitmapManipulator.grayscaleBitmap(_iconBitmap);
+		}
+		else
+		if (monochrome)
+		{
+			int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
+			Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
+			_iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
+			// getIsIconResourceID must return false
+			//_icon = getIconIdentifier() + "|0";
+            /*Drawable drawable;
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                drawable = context.getResources().getDrawable(iconResource, context.getTheme());
+            } else {
+                drawable = context.getResources().getDrawable(iconResource);
+            }
+            _iconDrawable = BitmapManipulator.tintDrawableByValue(drawable, monochromeValue);
+            _iconBitmap = null;*/
+		}
+		else
+		if (_useCustomColor) {
+			int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
+			Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
+			_iconBitmap = BitmapManipulator.recolorBitmap(bitmap, _customColor, context);
+			// getIsIconResourceID must return false
+			//_icon = getIconIdentifier() + "|0";
+		}
+		else
+			_iconBitmap = null;
 	}
 	
 	public void generatePreferencesIndicator(Context context, boolean monochrome, int monochromeValue)

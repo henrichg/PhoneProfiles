@@ -429,11 +429,11 @@ public class EditorProfileListFragment extends Fragment {
 		//dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 		
 		dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				deleteProfile(_profile);
-			}
-		});
+
+            public void onClick(DialogInterface dialog, int which) {
+                deleteProfile(_profile);
+            }
+        });
 		dialogBuilder.setNegativeButton(R.string.alert_button_no, null);
 		dialogBuilder.show();
 	}
@@ -449,22 +449,22 @@ public class EditorProfileListFragment extends Fragment {
 		
 		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
-			public boolean onMenuItemClick(android.view.MenuItem item) {
-				switch (item.getItemId()) {
-				case R.id.profile_list_item_menu_activate:
-					activateProfile(profile, true);
-					return true;
-				case R.id.profile_list_item_menu_duplicate:
-					duplicateProfile(profile);
-					return true;
-				case R.id.profile_list_item_menu_delete:
-					deleteProfileWithAlert(profile);
-					return true;
-				default:
-					return false;
-				}
-			}
-			});		
+            public boolean onMenuItemClick(android.view.MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.profile_list_item_menu_activate:
+                        activateProfile(profile, true);
+                        return true;
+                    case R.id.profile_list_item_menu_duplicate:
+                        duplicateProfile(profile);
+                        return true;
+                    case R.id.profile_list_item_menu_delete:
+                        deleteProfileWithAlert(profile);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
 		
 		
 		popup.show();		
@@ -520,8 +520,12 @@ public class EditorProfileListFragment extends Fragment {
 			activeProfileName.setText(profile._name);
 	        if (profile.getIsIconResourceID())
 	        {
-				int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
-				activeProfileIcon.setImageResource(res); // resource na ikonu
+                if (profile._iconBitmap != null)
+					activeProfileIcon.setImageBitmap(profile._iconBitmap);
+                else {
+                    int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
+                    activeProfileIcon.setImageResource(res); // resource na ikonu
+                }
 	        }
 	        else
 	        {

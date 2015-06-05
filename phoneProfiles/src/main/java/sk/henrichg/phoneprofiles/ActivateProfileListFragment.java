@@ -319,16 +319,15 @@ public class ActivateProfileListFragment extends Fragment {
 			activeProfileName.setText(profile._name);
 	        if (profile.getIsIconResourceID())
 	        {
-				int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
-				activeProfileIcon.setImageResource(res); // resource na ikonu
+                if (profile._useCustomColor)
+                    activeProfileIcon.setImageBitmap(profile._iconBitmap);
+                else {
+                    int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
+                    activeProfileIcon.setImageResource(res); // resource na ikonu
+                }
 	        }
 	        else
 	        {
-        		//Resources resources = getResources();
-        		//int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
-        		//int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-        		//Bitmap bitmap = BitmapResampler.resample(profile.getIconIdentifier(), width, height);
-	        	//activeProfileIcon.setImageBitmap(bitmap);
 	        	activeProfileIcon.setImageBitmap(profile._iconBitmap);
 	        }
 		}
