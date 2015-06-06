@@ -303,7 +303,7 @@ public class Profile {
 		boolean value;
 		try {
 			String[] splits = _icon.split("\\|");
-			value = (splits[1].equals("1")) ? true : false;
+			value = splits[1].equals("1");
 
 		} catch (Exception e) {
 			value = true;
@@ -316,7 +316,7 @@ public class Profile {
         boolean value;
         try {
             String[] splits = _icon.split("\\|");
-            value = (splits[2].equals("1")) ? true : false;
+            value = splits[2].equals("1");
 
         } catch (Exception e) {
             value = true;
@@ -357,7 +357,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeRingtoneDefaultProfile()
@@ -369,7 +369,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getVolumeNotificationValue()
@@ -393,7 +393,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeNotificationDefaultProfile()
@@ -405,7 +405,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getVolumeMediaValue()
@@ -429,7 +429,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeMediaDefaultProfile()
@@ -441,7 +441,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getVolumeAlarmValue()
@@ -465,7 +465,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeAlarmDefaultProfile()
@@ -477,7 +477,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getVolumeSystemValue()
@@ -501,7 +501,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeSystemDefaultProfile()
@@ -513,7 +513,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getVolumeVoiceValue()
@@ -537,7 +537,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getVolumeVoiceDefaultProfile()
@@ -549,7 +549,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public int getDeviceBrightnessValue()
@@ -573,7 +573,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 0) ? true : false;
+		return value == 0;
 	}
 
 	public boolean getDeviceBrightnessDefaultProfile()
@@ -585,7 +585,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 0;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 	
 	public boolean getDeviceBrightnessAutomatic()
@@ -597,7 +597,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return (value == 1) ? true : false;
+		return value == 1;
 	}
 
 	public static int convertPercentsToBrightnessManualValue(int perc, Context context)
