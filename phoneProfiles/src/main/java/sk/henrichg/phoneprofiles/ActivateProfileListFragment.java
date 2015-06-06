@@ -319,7 +319,7 @@ public class ActivateProfileListFragment extends Fragment {
 			activeProfileName.setText(profile._name);
 	        if (profile.getIsIconResourceID())
 	        {
-                if (profile._useCustomColor)
+                if (profile.getUseCustomColorForIcon())
                     activeProfileIcon.setImageBitmap(profile._iconBitmap);
                 else {
                     int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());

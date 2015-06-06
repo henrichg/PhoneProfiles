@@ -103,7 +103,7 @@ public class DataWrapper {
 	{
 		return new Profile(
 				  name, 
-				  icon + "|1", 
+				  icon + "|1|0|0",
 				  false, 
 				  order,
 				  0,

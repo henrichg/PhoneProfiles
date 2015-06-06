@@ -50,8 +50,6 @@ public class Profile {
 	public int _deviceNFC;
 	public int _deviceKeyguard;
     public int _vibrationOnTouch;
-	public boolean _useCustomColor;
-	public int _customColor;
 
 	public Bitmap _iconBitmap;
 	public Bitmap _preferencesIndicator;
@@ -64,9 +62,6 @@ public class Profile {
 	
 	// Empty constructorn
 	public Profile(){
-		this._useCustomColor = true;
-		this._customColor = Color.YELLOW;
-
         this._iconBitmap = null;
 	}
 	
@@ -153,9 +148,6 @@ public class Profile {
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
 
-		this._useCustomColor = true;
-		this._customColor = Color.YELLOW;
-
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
 	}
@@ -241,9 +233,6 @@ public class Profile {
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
 
-        this._useCustomColor = true;
-        this._customColor = Color.YELLOW;
-
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
 	}
@@ -290,8 +279,6 @@ public class Profile {
 		this._afterDurationDo = profile._afterDurationDo;
 		this._deviceKeyguard = profile._deviceKeyguard;
         this._vibrationOnTouch = profile._vibrationOnTouch;
-		this._useCustomColor = profile._useCustomColor;
-		this._customColor = profile._customColor;
 
 		this._iconBitmap = profile._iconBitmap;
 		this._preferencesIndicator = profile._preferencesIndicator;
@@ -323,7 +310,32 @@ public class Profile {
 		}
 		return value;
 	}
-	
+
+	//gettig where icon has custom color
+    public boolean getUseCustomColorForIcon() {
+        boolean value;
+        try {
+            String[] splits = _icon.split("\\|");
+            value = (splits[2].equals("1")) ? true : false;
+
+        } catch (Exception e) {
+            value = true;
+        }
+        return value;
+    }
+
+	// geting icon custom color
+    public int getIconCustomColor() {
+        int value;
+        try {
+            String[] splits = _icon.split("\\|");
+            value = Integer.valueOf(splits[3]);
+        } catch (Exception e) {
+            value = 0;
+        }
+        return value;
+    }
+
 	public int getVolumeRingtoneValue()
 	{
 		int value;
@@ -705,8 +717,7 @@ public class Profile {
 			if (_iconBitmap == null)
 			{
 				// no icon found, set default icon
-				_icon = "ic_profile_default|1";
-				_useCustomColor = false;
+				_icon = "ic_profile_default|1|0|0";
 				if (monochrome)
 				{
 					int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
@@ -738,10 +749,10 @@ public class Profile {
             _iconBitmap = null;*/
 		}
 		else
-		if (_useCustomColor) {
+		if (getUseCustomColorForIcon()) {
 			int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
 			Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-			_iconBitmap = BitmapManipulator.recolorBitmap(bitmap, _customColor, context);
+			_iconBitmap = BitmapManipulator.recolorBitmap(bitmap, getIconCustomColor(), context);
 			// getIsIconResourceID must return false
 			//_icon = getIconIdentifier() + "|0";
 		}
