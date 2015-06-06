@@ -357,7 +357,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeRingtoneDefaultProfile()
@@ -393,7 +393,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeNotificationDefaultProfile()
@@ -429,7 +429,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeMediaDefaultProfile()
@@ -465,7 +465,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeAlarmDefaultProfile()
@@ -501,7 +501,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeSystemDefaultProfile()
@@ -537,7 +537,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getVolumeVoiceDefaultProfile()
@@ -573,7 +573,7 @@ public class Profile {
 		} catch (Exception e) {
 			value = 1;
 		}
-		return value == 0;
+		return value == 0; // in preference dialog is checked=No change
 	}
 
 	public boolean getDeviceBrightnessDefaultProfile()
