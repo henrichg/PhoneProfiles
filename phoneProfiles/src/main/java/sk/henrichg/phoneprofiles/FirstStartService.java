@@ -167,37 +167,38 @@ public class FirstStartService extends IntentService {
             Cursor cursor = context.getContentResolver().query(contentUri,
                     new String[]{MediaStore.MediaColumns.DATA},
                     MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-            if (!cursor.moveToFirst()) {
+            if (cursor != null) {
+                if (!cursor.moveToFirst()) {
 
-                // not exists content
+                    // not exists content
 
-                cursor.close();
+                    cursor.close();
 
-                //// If the ringtone already exists in the database, delete it first
-                //context.getContentResolver().delete(contentUri,
-                //        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
+                    //// If the ringtone already exists in the database, delete it first
+                    //context.getContentResolver().delete(contentUri,
+                    //        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
 
-                // Add the metadata to the file in the database
-                Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
+                    // Add the metadata to the file in the database
+                    Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
-                if (newUri != null) {
-                    // Tell the media scanner about the new ringtone
-                    MediaScannerConnection.scanFile(
-                            context,
-                            new String[]{newUri.toString()},
-                            new String[]{mimeType},
-                            null
-                    );
+                    if (newUri != null) {
+                        // Tell the media scanner about the new ringtone
+                        MediaScannerConnection.scanFile(
+                                context,
+                                new String[]{newUri.toString()},
+                                new String[]{mimeType},
+                                null
+                        );
 
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        System.out.println(e);
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            System.out.println(e);
+                        }
                     }
-                }
+                } else
+                    cursor.close();
             }
-            else
-                cursor.close();
         }
 
 
