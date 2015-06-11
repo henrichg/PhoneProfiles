@@ -409,6 +409,10 @@ public class DataWrapper {
 	
 	private void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
 	{
+		// remove last configured profile duration alarm
+		ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
+		GlobalData.setActivatedProfileForDuration(context, 0);
+
 		final Profile profile = _profile;
 		final boolean interactive = _interactive;
 		final Activity activity = _activity;
@@ -581,7 +585,8 @@ public class DataWrapper {
 			// boot telefonu
 			
 			ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-			
+			GlobalData.setActivatedProfileForDuration(context, 0);
+
 			if (GlobalData.applicationActivate)
 			{
 				// je nastavene, ze pri starte sa ma aktivita aktivovat
@@ -603,7 +608,8 @@ public class DataWrapper {
 			// aktivita bola spustena po boote telefonu
 
 			ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-			
+			GlobalData.setActivatedProfileForDuration(context, 0);
+
 			if (GlobalData.applicationActivate)
 			{
 				// je nastavene, ze pri starte sa ma aktivita aktivovat

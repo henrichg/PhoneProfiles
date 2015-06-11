@@ -403,7 +403,14 @@ public class EditorProfileListFragment extends Fragment {
 		if (dataWrapper.getProfileById(profile._id) == null)
 			// profile not exists
 			return;
-			
+
+        Profile activatedProfile = dataWrapper.getActivatedProfile();
+        if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
+            // remove alarm for profile duration
+            ProfileDurationAlarmBroadcastReceiver.removeAlarm(getActivity().getApplicationContext());
+            GlobalData.setActivatedProfileForDuration(getActivity().getApplicationContext(), 0);
+        }
+
 		profileListAdapter.deleteItemNoNotify(profile);
 		databaseHandler.deleteProfile(profile);
 
@@ -482,7 +489,11 @@ public class EditorProfileListFragment extends Fragment {
 		dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
-				
+
+                // remove alarm for profile duration
+                ProfileDurationAlarmBroadcastReceiver.removeAlarm(getActivity().getApplicationContext());
+                GlobalData.setActivatedProfileForDuration(getActivity().getApplicationContext(), 0);
+
 				profileListAdapter.clearNoNotify();
 				databaseHandler.deleteAllProfiles();
 

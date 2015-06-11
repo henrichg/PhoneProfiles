@@ -332,10 +332,15 @@ public class EditorProfilesActivity extends AppCompatActivity
 			return true;*/
 		case R.id.menu_exit:
 			GlobalData.setApplicationStarted(getApplicationContext(), false);
-			
+
+            // remove alarm for profile duration
+            ProfileDurationAlarmBroadcastReceiver.removeAlarm(getApplicationContext());
+            GlobalData.setActivatedProfileForDuration(getApplicationContext(), 0);
+
 			// zrusenie notifikacie
 			getDataWrapper().getActivateProfileHelper().removeNotification();
-			
+
+
 			stopService(new Intent(getApplicationContext(), ReceiversService.class));
             stopService(new Intent(getApplicationContext(), KeyguardService.class));
 			
