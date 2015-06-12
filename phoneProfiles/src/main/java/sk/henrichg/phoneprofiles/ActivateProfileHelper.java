@@ -360,9 +360,21 @@ public class ActivateProfileHelper {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void setRingerMode(Profile profile, AudioManager audioManager)
+	public void setRingerMode(Profile profile, AudioManager audioManager, boolean forSilent)
 	{
-		switch (profile._volumeRingerMode) {
+		if (!forSilent) {
+			if (profile._volumeRingerMode != 0)
+				GlobalData.setRingerMode(context, profile._volumeRingerMode);
+		}
+		int ringerMode = GlobalData.getRingerMode(context);
+		if (forSilent) {
+			if (ringerMode != 4)
+				return;
+			else
+				ringerMode = 1;
+		}
+
+		switch (ringerMode) {
 		case 1:  // Ring
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 			try
