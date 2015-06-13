@@ -59,12 +59,12 @@ public class ProfileIconColorChooserDialog implements View.OnClickListener {
                 public void onCancel(DialogInterface dialog) {
                 }
             })*/
-            .dismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    ProfileIconColorChooserDialog.this.onDismiss(dialog);
-                }
-            });
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        ProfileIconColorChooserDialog.this.onDismiss(dialog);
+                    }
+                });
 
         mDialog = dialogBuilder.build();
 
@@ -113,6 +113,7 @@ public class ProfileIconColorChooserDialog implements View.OnClickListener {
         if (v.getTag() != null) {
             Integer index = (Integer) v.getTag();
             //mCallback.onColorSelection(index, mColors[index], shiftColor(mColors[index]));
+            profileIconPreference.setCustomColor(true, mColors[index]);
             mDialog.dismiss();
         }
     }

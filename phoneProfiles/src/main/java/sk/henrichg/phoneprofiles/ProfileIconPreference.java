@@ -34,23 +34,24 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 public class ProfileIconPreference extends DialogPreference {
 
-	private String imageIdentifier;
-	private boolean isImageResourceID;
-    private int selectedColorIndex;
+    private String imageIdentifier;
+    private boolean isImageResourceID;
+    private boolean useCustomColor;
+    private int customColor;
 
-	private MaterialDialog mDialog;
+    private MaterialDialog mDialog;
 
-	private ImageView imageView;
+    private ImageView imageView;
     ProfileIconPreferenceAdapter adapter;
-	private Context prefContext;
+    private Context prefContext;
 
-	CharSequence preferenceTitle;
+    CharSequence preferenceTitle;
 
-	public static int RESULT_LOAD_IMAGE = 1971;
+    public static int RESULT_LOAD_IMAGE = 1971;
 
-	public ProfileIconPreference(Context context, AttributeSet attrs)
-	{
-		super(context, attrs);
+    public ProfileIconPreference(Context context, AttributeSet attrs)
+    {
+        super(context, attrs);
 
         /*
 		TypedArray typedArray = context.obtainStyledAttributes(attrs,
@@ -62,47 +63,49 @@ public class ProfileIconPreference extends DialogPreference {
 		*/
 
 
-	    imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
-		isImageResourceID = true;
+        imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+        isImageResourceID = true;
+        useCustomColor = false;
+        customColor = 0;
 
-		prefContext = context;
+        prefContext = context;
 
-		preferenceTitle = getTitle();
+        preferenceTitle = getTitle();
 
-		setWidgetLayoutResource(R.layout.profileicon_preference); // resource na layout custom preference - TextView-ImageView
+        setWidgetLayoutResource(R.layout.profileicon_preference); // resource na layout custom preference - TextView-ImageView
 
-		//typedArray.recycle();
+        //typedArray.recycle();
 
-	}
+    }
 
-	//@Override
-	protected void onBindView(View view)
-	{
-		super.onBindView(view);
+    //@Override
+    protected void onBindView(View view)
+    {
+        super.onBindView(view);
 
-		imageView = (ImageView)view.findViewById(R.id.profileicon_pref_imageview); // resource na Textview v custom preference layoute
+        imageView = (ImageView)view.findViewById(R.id.profileicon_pref_imageview); // resource na Textview v custom preference layoute
 
-	    if (imageView != null)
-	    {
-	    	if (isImageResourceID)
-	    	{
-	    		// je to resource id
-	    		int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
-	    		imageView.setImageResource(res); // resource na ikonu
-	    	}
-	    	else
-	    	{
-	    		// je to file
-        		Resources resources = prefContext.getResources();
-        		int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
-        		int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-        		Bitmap bitmap = BitmapManipulator.resampleBitmap(imageIdentifier, width, height);
+        if (imageView != null)
+        {
+            if (isImageResourceID)
+            {
+                // je to resource id
+                int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
+                imageView.setImageResource(res); // resource na ikonu
+            }
+            else
+            {
+                // je to file
+                Resources resources = prefContext.getResources();
+                int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
+                int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
+                Bitmap bitmap = BitmapManipulator.resampleBitmap(imageIdentifier, width, height);
 
-        		//if (bitmap != null)
-        			imageView.setImageBitmap(bitmap);
-	    	}
-	    }
-	}
+                //if (bitmap != null)
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    }
 
     @Override
     protected void showDialog(Bundle state) {
@@ -169,48 +172,68 @@ public class ProfileIconPreference extends DialogPreference {
         }
     };
 
-	@Override
-	protected Object onGetDefaultValue(TypedArray a, int index)
-	{
-		super.onGetDefaultValue(a, index);
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index)
+    {
+        super.onGetDefaultValue(a, index);
 
-		return a.getString(index);  // ikona bude vratena ako retazec
-	}
+        return a.getString(index);  // ikona bude vratena ako retazec
+    }
 
-	@Override
-	protected void onSetInitialValue(boolean restoreValue, Object defaultValue)
-	{
-		if (restoreValue) {
-			// restore state
-			String value = getPersistedString(imageIdentifier+"|"+((isImageResourceID) ? "1" : "0"));
-			String[] splits = value.split("\\|");
-			try {
-				imageIdentifier = splits[0];
-			} catch (Exception e) {
-				imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
-			}
-			try {
-				isImageResourceID = splits[1].equals("1");
-			} catch (Exception e) {
-				isImageResourceID = true;
-			}
-		}
-		else {
-			// set state
-			String value = (String) defaultValue;
-			String[] splits = value.split("\\|");
-			try {
-				imageIdentifier = splits[0];
-			} catch (Exception e) {
-				imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
-			}
-			try {
-				isImageResourceID = splits[1].equals("1");
-			} catch (Exception e) {
-				isImageResourceID = true;
-			}
-			persistString(value);
-		}
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue)
+    {
+        if (restoreValue) {
+            // restore state
+            String value = getPersistedString(imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor);
+            String[] splits = value.split("\\|");
+            try {
+                imageIdentifier = splits[0];
+            } catch (Exception e) {
+                imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+            }
+            try {
+                isImageResourceID = splits[1].equals("1");
+            } catch (Exception e) {
+                isImageResourceID = true;
+            }
+            try {
+                useCustomColor = splits[2].equals("2");
+            } catch (Exception e) {
+                useCustomColor = false;
+            }
+            try {
+                customColor = Integer.valueOf(splits[3]);
+            } catch (Exception e) {
+                customColor = 0; //TODO farba vyseparovana z ikony
+            }
+        }
+        else {
+            // set state
+            String value = (String) defaultValue;
+            String[] splits = value.split("\\|");
+            try {
+                imageIdentifier = splits[0];
+            } catch (Exception e) {
+                imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+            }
+            try {
+                isImageResourceID = splits[1].equals("1");
+            } catch (Exception e) {
+                isImageResourceID = true;
+            }
+            try {
+                useCustomColor = splits[2].equals("2");
+            } catch (Exception e) {
+                useCustomColor = false;
+            }
+            try {
+                customColor = Integer.valueOf(splits[3]);
+            } catch (Exception e) {
+                customColor = 0; //TODO farba vyseparovana z ikony
+            }
+            persistString(value);
+        }
     }
 
     /*
@@ -260,19 +283,19 @@ public class ProfileIconPreference extends DialogPreference {
 	}
     */
 
-	public String getImageIdentifier()
-	{
-		return imageIdentifier;
-	}
+    public String getImageIdentifier()
+    {
+        return imageIdentifier;
+    }
 
-	public boolean getIsImageResourceID()
-	{
-		return isImageResourceID;
-	}
+    public boolean getIsImageResourceID()
+    {
+        return isImageResourceID;
+    }
 
-	public void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID, boolean saveToPreference)
-	{
-		String newValue = newImageIdentifier+"|"+((newIsImageResourceID) ? "1" : "0");
+    public void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID, boolean saveToPreference)
+    {
+        String newValue = newImageIdentifier+"|"+((newIsImageResourceID) ? "1" : "0");
 
         if (!saveToPreference) {
             String[] splits = newValue.split("\\|");
@@ -293,7 +316,7 @@ public class ProfileIconPreference extends DialogPreference {
                 imageIdentifier = newImageIdentifier;
                 isImageResourceID = false;
             }
-            newValue = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0");
+            newValue = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor;
             if (callChangeListener(newValue)) {
                 persistString(newValue);
                 // Data sa zmenili,notifikujeme
@@ -301,10 +324,15 @@ public class ProfileIconPreference extends DialogPreference {
             }
         }
 
-	}
+    }
 
-	public void startGallery()
-	{
+    public void setCustomColor(boolean newUseCustomColor, int newCustomColor) {
+        useCustomColor = newUseCustomColor;
+        customColor = newCustomColor;
+    }
+
+    public void startGallery()
+    {
         //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -314,10 +342,10 @@ public class ProfileIconPreference extends DialogPreference {
         // hm, neda sa ziskat aktivita z preference, tak vyuzivam static metodu
         ProfilePreferencesFragment.setChangedProfileIconPreference(this);
         ProfilePreferencesFragment.getPreferencesActivity().startActivityForResult(intent, RESULT_LOAD_IMAGE);
-	}
+    }
 
     private void showCustomColorChooser() {
-        final ProfileIconColorChooserDialog dialog = new ProfileIconColorChooserDialog(prefContext, this, selectedColorIndex);
+        final ProfileIconColorChooserDialog dialog = new ProfileIconColorChooserDialog(prefContext, this, customColor);
         dialog.show();
     }
 
