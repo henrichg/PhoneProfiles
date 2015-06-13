@@ -51,6 +51,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 	private int actionModeButtonClicked = BUTTON_UNDEFINED;
 	
 	private static ImageViewPreference changedImageViewPreference;
+    private static ProfileIconPreference changedProfileIconPreference;
 	private static Activity preferencesActivity = null;
 		
 	static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
@@ -406,6 +407,15 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 				// nastavime image identifikatoru na ziskanu cestu ku obrazku
 				changedImageViewPreference.setImageIdentifierAndType(picturePath, false);
 		}
+        if (requestCode == ProfileIconPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
+        {
+            Uri selectedImage = data.getData();
+            String picturePath = ProfileIconPreference.getPath(context, selectedImage);
+
+            if (changedProfileIconPreference != null)
+                // nastavime image identifikatoru na ziskanu cestu ku obrazku
+                changedProfileIconPreference.setImageIdentifierAndType(picturePath, false, true);
+        }
 	}
 	
 	@Override
@@ -997,6 +1007,11 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 	static public void setChangedImageViewPreference(ImageViewPreference changedImageViewPref)
 	{
 		changedImageViewPreference = changedImageViewPref;
+	}
+
+	static public void setChangedProfileIconPreference(ProfileIconPreference changedProfileIconPref)
+	{
+		changedProfileIconPreference = changedProfileIconPref;
 	}
 
 }

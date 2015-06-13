@@ -8,12 +8,11 @@
             android:key="prf_pref_profileName"
             android:summary="@string/profile_preferences_profileName"
             android:title="@string/profile_preferences_profileName"
-            android:selectAllOnFocus="true" /> 
-        <sk.henrichg.phoneprofiles.ImageViewPreference
+            android:selectAllOnFocus="true" />
+        <sk.henrichg.phoneprofiles.ProfileIconPreference
             android:defaultValue="ic_profile_default|1"
             android:key="prf_pref_profileIcon"
-            android:title="@string/profile_preferences_profileIcon"
-            henrichg:imageSource="resource_file" />
+            android:title="@string/profile_preferences_profileIcon" />
  		<sk.henrichg.phoneprofiles.NumberPickerPreference
             android:key="prf_pref_duration"
             android:summary="@string/profile_preferences_duration"
