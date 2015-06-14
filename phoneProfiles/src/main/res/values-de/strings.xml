@@ -45,7 +45,7 @@
   <string name="phone_profiles_pref_applicationHeader">Aktiviertes Profil anzeigen</string>
   <string name="phone_profiles_pref_applicationAlert">Popup beim Aktivieren</string>
   <string name="phone_profiles_pref_notificationsToast">Toast-Nachricht anzeigen</string>
-  <string name="phone_profiles_pref_notificationStatusBar">In Statusleiste anzeigen</string>
+  <string name="phone_profiles_pref_notificationStatusBar">Benachrichtigung anzeigen</string>
   <string name="phone_profiles_pref_notificationStatusBarStyle">Symbol-Stil</string>
   <string name="profile_preferences_category_profileidenification">Allgemein</string>
   <string name="profile_preferences_category_volumes">Lautstärke</string>

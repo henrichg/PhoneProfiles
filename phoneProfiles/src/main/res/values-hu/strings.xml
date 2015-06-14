@@ -44,7 +44,7 @@
   <string name="phone_profiles_pref_applicationClose">Bezárás profil aktiválása után</string>
   <string name="phone_profiles_pref_applicationPrefIndicator">Kijelző beállításai</string>
   <string name="phone_profiles_pref_applicationHeader">Aktív profil mutatása</string>
-  <string name="phone_profiles_pref_applicationAlert">Profil aktiválási jelzés</string>
+  <string name="phone_profiles_pref_applicationAlert">Profil aktiválás előtt engedély kérés</string>
   <string name="phone_profiles_pref_notificationsToast">Felugró értesítések megjelenítése</string>
   <string name="phone_profiles_pref_notificationStatusBar">Állapotsáv-értesítések megjelenítése</string>
   <string name="phone_profiles_pref_notificationStatusBarStyle">Értesítési ikon stílusa</string>

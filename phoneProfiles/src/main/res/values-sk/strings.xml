@@ -168,6 +168,7 @@
   <string name="array_pref_widgetColor_monochrome">Monochromatické</string>
   <string name="phone_profiles_pref_applicationWidgetIconColor">Typ farby ikony</string>
   <string name="phone_profiles_pref_category_widget_one_row">Miniaplikácia-jednoriadková</string>
+  <string name="profile_list_empty">Žiadne profily</string>
   <string name="profile_preferences_deviceAutosync">Auto. synchronizácia</string>
   <string name="toast_default_profiles_generated">Prednastavené profily vygenerované</string>
   <string name="default_profile_name_home">Doma</string>
@@ -175,7 +176,6 @@
   <string name="default_profile_name_work">Práca</string>
   <string name="default_profile_name_meeting">Porada</string>
   <string name="default_profile_name_sleep">Spánok</string>
-  <string name="profile_list_empty">Žiadne profily</string>
   <string name="import_profiles_from_phoneprofilesplus_alert_title">Import apl. dát</string>
   <string name="import_profiles_from_phoneprofilesplus_alert_title2">Importovať z PhoneProfilesPlus</string>
   <string name="import_profiles_from_phoneprofilesplus_alert_message">Importovať z PhoneProfilesPlus?</string>
