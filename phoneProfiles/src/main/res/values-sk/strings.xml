@@ -260,4 +260,9 @@
   <string name="profile_preferences_vibrationOnTouch">Vibrovanie pri klepntí</string>
   <string name="phone_profiles_pref_notificationShowInStatusBar">Zobraziť v stavovom riadku</string>
   <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Zobraziť v stav. riadku a uzamykacej obr.</string>
+  <string name="profileicon_pref_dialog_customColor_button">Zmena farby</string>
+  <string name="colorChooser_pref_dialog_title">Výber  farby</string>
+  <string name="phone_profiles_pref_category_system">Systém</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Oddeľ hlasitosť zvonenia a notif.</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Zrušte začiarknutie políčka ak Vaše zariadenie má oddelenú hlasitosť zvonenia a notifikácií</string>
 </resources>
