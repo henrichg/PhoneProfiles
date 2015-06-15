@@ -16,6 +16,16 @@
 		    android:defaultValue="true" />
     </PreferenceCategory>
 
+	<PreferenceCategory
+		android:title="@string/phone_profiles_pref_category_system"
+		android:summary="@string/phone_profiles_pref_category_system" >
+		<CheckBoxPreference
+			android:key="applicationUnlinkRingerNotificationVolumes"
+			android:title="@string/phone_profiles_pref_applicationUnlinkRingerNotificationVolumes"
+            android:summary="@string/phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary"
+			android:defaultValue="true" />
+	</PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/phone_profiles_pref_category_notifications"
         android:summary="@string/phone_profiles_pref_category_notifications"

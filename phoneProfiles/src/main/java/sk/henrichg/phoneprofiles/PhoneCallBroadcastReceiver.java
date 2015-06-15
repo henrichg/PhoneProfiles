@@ -83,17 +83,19 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 		if (audioManager == null )
 			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
-        /// for linked ringer and notification volume:
-        //    notification volume in profile activation is set after ringer volume
-        //    therefore reset ringer volume
-        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-        Profile profile = dataWrapper.getActivatedProfile();
-        if (profile != null) {
-            Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            savedContext.startService(volumeServiceIntent);
+        if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
+            /// for linked ringer and notification volume:
+            //    notification volume in profile activation is set after ringer volume
+            //    therefore reset ringer volume
+            DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+            Profile profile = dataWrapper.getActivatedProfile();
+            if (profile != null) {
+                Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
+                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                savedContext.startService(volumeServiceIntent);
+            }
+            ///
         }
-        ///
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
@@ -102,12 +104,14 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     private void setBackNotificationVolume() {
-        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-        Profile profile = dataWrapper.getActivatedProfile();
-        if (profile != null) {
-            Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            savedContext.startService(volumeServiceIntent);
+        if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
+            DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+            Profile profile = dataWrapper.getActivatedProfile();
+            if (profile != null) {
+                Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
+                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                savedContext.startService(volumeServiceIntent);
+            }
         }
     }
 
