@@ -284,17 +284,20 @@ public class ActivateProfileHelper {
 			audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, profile.getVolumeSystemValue(), 0);
 			//Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
 		}
-        if (profile.getVolumeRingtoneChange()) {
-            GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
+        // when system volume changed, also set the ringer and notification volume
+        if (profile.getVolumeRingtoneChange() || profile.getVolumeSystemChange()) {
+            if (profile.getVolumeRingtoneChange())
+                GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
             if (!GlobalData.applicationUnlinkRingerNotificationVolumes) {
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, profile.getVolumeRingtoneValue(), 0);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, GlobalData.getRingerVolume(context), 0);
                 //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
             }
         }
-        if (profile.getVolumeNotificationChange()) {
-            GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
+        if (profile.getVolumeNotificationChange() || profile.getVolumeSystemChange()) {
+            if (profile.getVolumeNotificationChange())
+                GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
             if (!GlobalData.applicationUnlinkRingerNotificationVolumes) {
-                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, profile.getVolumeNotificationValue(), 0);
+                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, GlobalData.getNotificationVolume(context), 0);
                 //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
             }
         }
