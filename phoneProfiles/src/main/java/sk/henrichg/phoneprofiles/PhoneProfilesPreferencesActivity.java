@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -40,7 +41,14 @@ public class PhoneProfilesPreferencesActivity extends AppCompatActivity
 		
 		setContentView(R.layout.activity_phone_profiles_preferences);
 
-		String extraScrollTo = getIntent().getStringExtra(EXTRA_SCROLL_TO);
+        String extraScrollTo = "";
+
+        Intent intent = getIntent();
+        if (intent.hasCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES))
+            // activity is started from lockscreen, scroll to notifications cattegory
+            extraScrollTo = "categoryNotifications";
+        else
+            extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
 
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
             Window w = getWindow(); // in Activity's onCreate() for instance
