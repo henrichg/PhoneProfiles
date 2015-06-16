@@ -112,6 +112,7 @@ public class GlobalData extends Application {
 	static final String PREF_PROFILE_AFTER_DURATION_DO = "prf_pref_afterDurationDo";
 	static final String PREF_PROFILE_DEVICE_KEYGUARD = "prf_pref_deviceKeyguard";
     static final String PREF_PROFILE_VIBRATION_ON_TOUCH = "prf_pref_vibrationOnTouch";
+	static final String PREF_PROFILE_VOLUME_UNLINK_VOLUMES_APP_SETTINGS = "prf_pref_volumeUnlinkVolumesAppSettings";
 
 	static final String PROFILE_ICON_DEFAULT = "ic_profile_default";
 	

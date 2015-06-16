@@ -12,6 +12,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
+import android.widget.ListView;
 
 public class PhoneProfilesPreferencesFragment extends PreferenceFragment 
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
@@ -20,6 +21,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 	private PreferenceManager prefMng;
 	private SharedPreferences preferences;
 	private static Activity preferencesActivity = null;
+    String extraScrollTo;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,9 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 			
 		addPreferencesFromResource(R.xml.phone_profiles_preferences);
 
-        preferences.registerOnSharedPreferenceChangeListener(this);  
-        
+        preferences.registerOnSharedPreferenceChangeListener(this);
+
+		extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
     }
 	
 	private void setSummary(String key)
@@ -211,6 +214,21 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 		super.onStart();
 
 		updateSharedPreference();
+
+        PreferenceCategory scrollCategory = (PreferenceCategory) findPreference(extraScrollTo);
+        if (scrollCategory != null) {
+            // scroll to category
+            for (int i = 0; i <  getPreferenceScreen().getRootAdapter().getCount(); i++){
+                Object o = getPreferenceScreen().getRootAdapter().getItem(i);
+                if (o instanceof PreferenceCategory ){
+                    if (o.equals(scrollCategory)){
+                        ListView listView = (ListView) getActivity().findViewById(android.R.id.list);
+                        if (listView != null)
+                            listView.setSelection(i);
+                    }
+                }
+            }
+        }
 	}
 	
 	@Override

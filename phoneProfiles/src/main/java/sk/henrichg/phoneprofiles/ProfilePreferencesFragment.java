@@ -602,6 +602,11 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 	
 	private void setSummary(String key, Object value)
 	{
+		if (key.equals(GlobalData.PREF_PROFILE_VOLUME_UNLINK_VOLUMES_APP_SETTINGS)) {
+			Preference preference = prefMng.findPreference(key);
+			preference.setSummary(context.getResources().getString(R.string.menu_settings)+": "+
+					context.getResources().getString(R.string.phone_profiles_pref_applicationUnlinkRingerNotificationVolumes));
+		}
 		if (key.equals(GlobalData.PREF_PROFILE_NAME))
 		{	
 			Preference preference = prefMng.findPreference(key);
@@ -833,7 +838,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         {	
 
 	    	// updating activity with selected profile preferences
-	    	
+
+			setSummary(GlobalData.PREF_PROFILE_VOLUME_UNLINK_VOLUMES_APP_SETTINGS, "");
+
     		if (startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
     		{
     			setSummary(GlobalData.PREF_PROFILE_NAME, profile._name);
