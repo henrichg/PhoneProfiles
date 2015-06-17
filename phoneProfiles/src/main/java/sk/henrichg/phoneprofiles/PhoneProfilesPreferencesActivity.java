@@ -48,7 +48,7 @@ public class PhoneProfilesPreferencesActivity extends AppCompatActivity
             // activity is started from lockscreen, scroll to notifications cattegory
             extraScrollTo = "categoryNotifications";
         else
-            extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
+			extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
 
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
             Window w = getWindow(); // in Activity's onCreate() for instance

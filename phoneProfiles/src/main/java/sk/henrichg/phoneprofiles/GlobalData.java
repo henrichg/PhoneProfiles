@@ -166,6 +166,7 @@ public class GlobalData extends Application {
     private static final String PREF_RINGER_VOLUME = "ringer_volume";
     private static final String PREF_NOTIFICATION_VOLUME = "notification_volume";
 	private static final String PREF_RINGER_MODE = "ringer_mode";
+    private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START = "show_info_notification_on_start";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -614,7 +615,22 @@ public class GlobalData extends Application {
 		editor.commit();
 	}
 
-    // ----- Hardware check -------------------------------------
+	static public boolean getShowInfoNotificationOnStart(Context context)
+	{
+		SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+		return preferences.getBoolean(PREF_SHOW_INFO_NOTIFICATION_ON_START, true);
+	}
+
+	static public void setShowInfoNotificationOnStart(Context context, boolean volume)
+	{
+		SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean(PREF_SHOW_INFO_NOTIFICATION_ON_START, volume);
+		editor.commit();
+	}
+
+
+	// ----- Hardware check -------------------------------------
 	
 	static int hardwareCheck(String preferenceKey, Context context)
 	{
