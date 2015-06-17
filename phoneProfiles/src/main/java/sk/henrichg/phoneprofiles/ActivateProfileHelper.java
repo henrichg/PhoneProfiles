@@ -76,7 +76,12 @@ public class ActivateProfileHelper {
 		activity = a;
 		context = c;
 	}
-	
+
+	public void setBrightnessHandler(Handler handler)
+	{
+		brightnessHandler = handler;
+	}
+
 	public void deinitialize()
 	{
 		activity = null;

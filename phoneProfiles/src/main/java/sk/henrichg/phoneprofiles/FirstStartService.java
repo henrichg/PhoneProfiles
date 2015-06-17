@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -67,6 +68,12 @@ public class FirstStartService extends IntentService {
 
 		DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 		dataWrapper.getActivateProfileHelper().initialize(null, context);
+
+        // create a handler to post messages to the main thread
+        Handler toastHandler = new Handler(getMainLooper());
+        dataWrapper.setToastHandler(toastHandler);
+        Handler brightnessHandler = new Handler(getMainLooper());
+        dataWrapper.getActivateProfileHelper().setBrightnessHandler(brightnessHandler);
 
 		// zrusenie notifikacie
 		dataWrapper.getActivateProfileHelper().removeNotification();
