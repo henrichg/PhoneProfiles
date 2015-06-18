@@ -137,43 +137,42 @@ public class ActivateProfileHelper {
 		// nahodenie WiFi
 		if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.HARDWARE_CHECK_ALLOWED)
 		{
-			WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-			int wifiState = wifiManager.getWifiState();
-			boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
-			boolean setWifiState = false;
-			switch (profile._deviceWiFi) {
-				case 1 :
-					if (!isWifiEnabled)
-					{
-						isWifiEnabled = true;
+			if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
+				WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+				int wifiState = wifiManager.getWifiState();
+				boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
+				boolean setWifiState = false;
+				switch (profile._deviceWiFi) {
+					case 1:
+						if (!isWifiEnabled) {
+							isWifiEnabled = true;
+							setWifiState = true;
+						}
+						break;
+					case 2:
+						if (isWifiEnabled) {
+							isWifiEnabled = false;
+							setWifiState = true;
+						}
+						break;
+					case 3:
+						isWifiEnabled = !isWifiEnabled;
 						setWifiState = true;
-					}
-					break;
-				case 2 : 
-					if (isWifiEnabled)
-					{
-						isWifiEnabled = false;
-						setWifiState = true;
-					}
-					break;
-				case 3 :
-					isWifiEnabled = !isWifiEnabled;
-					setWifiState = true;
-					break;
-			}
-			if (setWifiState)
-			{
-				try {
-					wifiManager.setWifiEnabled(isWifiEnabled);
-				} catch (Exception e) {
-					// barla pre security exception INTERACT_ACROSS_USERS - chyba ROM 
-					wifiManager.setWifiEnabled(isWifiEnabled);
+						break;
 				}
-				try {
-		        	Thread.sleep(200);
-			    } catch (InterruptedException e) {
-			        System.out.println(e);
-			    }
+				if (setWifiState) {
+					try {
+						wifiManager.setWifiEnabled(isWifiEnabled);
+					} catch (Exception e) {
+						// barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
+						wifiManager.setWifiEnabled(isWifiEnabled);
+					}
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						System.out.println(e);
+					}
+				}
 			}
 		}
 		
