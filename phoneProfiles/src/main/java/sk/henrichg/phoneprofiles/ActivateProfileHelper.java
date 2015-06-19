@@ -134,47 +134,93 @@ public class ActivateProfileHelper {
 			}
 		}
 
-		// nahodenie WiFi
-		if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.HARDWARE_CHECK_ALLOWED)
+		// nahodenie WiFi AP
+        boolean canChangeWifi = true;
+        if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.HARDWARE_CHECK_ALLOWED)
 		{
-			if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
-				WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-				int wifiState = wifiManager.getWifiState();
-				boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
-				boolean setWifiState = false;
-				switch (profile._deviceWiFi) {
-					case 1:
-						if (!isWifiEnabled) {
-							isWifiEnabled = true;
-							setWifiState = true;
-						}
-						break;
-					case 2:
-						if (isWifiEnabled) {
-							isWifiEnabled = false;
-							setWifiState = true;
-						}
-						break;
-					case 3:
-						isWifiEnabled = !isWifiEnabled;
-						setWifiState = true;
-						break;
-				}
-				if (setWifiState) {
-					try {
-						wifiManager.setWifiEnabled(isWifiEnabled);
-					} catch (Exception e) {
-						// barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
-						wifiManager.setWifiEnabled(isWifiEnabled);
-					}
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						System.out.println(e);
-					}
-				}
-			}
+            WifiApManager wifiApManager = null;
+            try {
+                wifiApManager = new WifiApManager(context);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            if (wifiApManager != null) {
+                boolean setWifiAPState = false;
+                boolean isWifiAPEnabled = wifiApManager.isWifiAPEnabled();
+                switch (profile._deviceWiFiAP) {
+                    case 1:
+                        if (!isWifiAPEnabled) {
+                            isWifiAPEnabled = true;
+                            setWifiAPState = true;
+                            canChangeWifi = false;
+                        }
+                        break;
+                    case 2:
+                        if (isWifiAPEnabled) {
+                            isWifiAPEnabled = false;
+                            setWifiAPState = true;
+                            canChangeWifi = true;
+                        }
+                        break;
+                    case 3:
+                        isWifiAPEnabled = !isWifiAPEnabled;
+                        setWifiAPState = true;
+                        canChangeWifi = false;
+                        break;
+                }
+                if (setWifiAPState) {
+                    wifiApManager.setWifiApState(isWifiAPEnabled);
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        System.out.println(e);
+                    }
+                }
+            }
 		}
+
+        if (canChangeWifi) {
+            // nahodenie WiFi
+            if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.HARDWARE_CHECK_ALLOWED) {
+                if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
+                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                    int wifiState = wifiManager.getWifiState();
+                    boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
+                    boolean setWifiState = false;
+                    switch (profile._deviceWiFi) {
+                        case 1:
+                            if (!isWifiEnabled) {
+                                isWifiEnabled = true;
+                                setWifiState = true;
+                            }
+                            break;
+                        case 2:
+                            if (isWifiEnabled) {
+                                isWifiEnabled = false;
+                                setWifiState = true;
+                            }
+                            break;
+                        case 3:
+                            isWifiEnabled = !isWifiEnabled;
+                            setWifiState = true;
+                            break;
+                    }
+                    if (setWifiState) {
+                        try {
+                            wifiManager.setWifiEnabled(isWifiEnabled);
+                        } catch (Exception e) {
+                            // barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
+                            wifiManager.setWifiEnabled(isWifiEnabled);
+                        }
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            System.out.println(e);
+                        }
+                    }
+                }
+            }
+        }
 		
 		// nahodenie bluetooth
 		if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.HARDWARE_CHECK_ALLOWED)

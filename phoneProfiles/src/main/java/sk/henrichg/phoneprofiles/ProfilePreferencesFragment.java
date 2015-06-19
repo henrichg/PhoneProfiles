@@ -807,7 +807,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 		
 		final String NO_CHANGE = "0";
 		final String DEFAULT_PROFILE = "99";
-		
+        final String OFF = "2";
+
 		if (key.equals(GlobalData.PREF_PROFILE_SOUND_RINGTONE_CHANGE))
 		{
 			boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
@@ -833,7 +834,17 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 			boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
 			prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_PACKAGE_NAME).setEnabled(enabled);
 		}
-		
+        if (key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP))
+        {
+            boolean enabled = (sValue.equals(NO_CHANGE) || sValue.equals(OFF));
+            if (!enabled) {
+                Editor editor = preferences.edit();
+                editor.putString(GlobalData.PREF_PROFILE_DEVICE_WIFI, NO_CHANGE);
+                editor.commit();
+            }
+            prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_WIFI).setEnabled(enabled);
+        }
+
 	}
 	
 	private void updateSharedPreference()
@@ -890,7 +901,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 		    disableDependedPref(GlobalData.PREF_PROFILE_SOUND_ALARM_CHANGE, profile._soundAlarmChange);
 		    disableDependedPref(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, profile._deviceWallpaperChange);
 		    disableDependedPref(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
-			
+            disableDependedPref(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, profile._deviceWiFiAP);
+
         }
 	}
 	

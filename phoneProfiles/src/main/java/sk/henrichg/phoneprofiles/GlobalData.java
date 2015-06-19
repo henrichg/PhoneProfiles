@@ -794,11 +794,12 @@ public class GlobalData extends Application {
 			}
 		}
         else
-        if (preferenceKey.equals(PREF_PROFILE_DEVICE_WIFI_AP))
-        {
-            if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI))
-                // device ma Wifi
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
+            // device ma Wifi
+            if (WifiApManager.canExploitWifiAP(context))
+            {
                 featurePresented = HARDWARE_CHECK_ALLOWED;
+            }
         }
 		else
 			featurePresented = HARDWARE_CHECK_ALLOWED;
