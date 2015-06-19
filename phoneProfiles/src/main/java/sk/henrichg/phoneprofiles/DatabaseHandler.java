@@ -26,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Context context;
     
 	// Database Version
-	private static final int DATABASE_VERSION = 1180;
+	private static final int DATABASE_VERSION = 1190;
 
 	// Database Name
 	private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -79,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_AFTER_DURATION_DO = "afterDurationDo";
 	private static final String KEY_DEVICE_KEYGUARD = "deviceKeyguard";
     private static final String KEY_VIBRATE_ON_TOUCH = "vibrateOnTouch";
+	private static final String KEY_DEVICE_WIFI_AP = "deviceWiFiAP";
 
 	/**
      * Constructor takes and keeps a reference of the passed context in order to
@@ -181,7 +182,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_AFTER_DURATION_DO + " INTEGER,"
 				+ KEY_VOLUME_ZEN_MODE + " INTEGER,"
 				+ KEY_DEVICE_KEYGUARD + " INTEGER,"
-                + KEY_VIBRATE_ON_TOUCH + " INTEGER"
+                + KEY_VIBRATE_ON_TOUCH + " INTEGER,"
+				+ KEY_DEVICE_WIFI_AP + " INTEGER"
 				+ ")";
 		db.execSQL(CREATE_PROFILES_TABLE);
 		
@@ -474,6 +476,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VIBRATE_ON_TOUCH + "=0");
         }
 
+        if (oldVersion < 1190)
+        {
+            // pridame nove stlpce
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WIFI_AP + " INTEGER");
+
+            // updatneme zaznamy
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WIFI_AP + "=0");
+        }
+
 	}
 	
 	@Override
@@ -534,6 +545,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
 		values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
         values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
+        values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
 
 		// Inserting Row
 		long id = db.insert(TABLE_PROFILES, null, values);
@@ -588,7 +600,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 								         		KEY_AFTER_DURATION_DO,
 								         		KEY_VOLUME_ZEN_MODE,
 								         		KEY_DEVICE_KEYGUARD,
-                                                KEY_VIBRATE_ON_TOUCH
+                                                KEY_VIBRATE_ON_TOUCH,
+                                                KEY_DEVICE_WIFI_AP
 												}, 
 				                 KEY_ID + "=?",
 				                 new String[] { String.valueOf(profile_id) }, null, null, null, null);
@@ -640,7 +653,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						                      Integer.parseInt(cursor.getString(36)),
 						                      Integer.parseInt(cursor.getString(37)),
 						                      Integer.parseInt(cursor.getString(38)),
-                                              Integer.parseInt(cursor.getString(39))
+                                              Integer.parseInt(cursor.getString(39)),
+                                              Integer.parseInt(cursor.getString(40))
 						                      );
 			}
 			cursor.close();
@@ -694,7 +708,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 								         KEY_AFTER_DURATION_DO + "," +
 								         KEY_VOLUME_ZEN_MODE + "," +
 										 KEY_DEVICE_KEYGUARD + "," +
-                                         KEY_VIBRATE_ON_TOUCH +
+                                         KEY_VIBRATE_ON_TOUCH + "," +
+                                         KEY_DEVICE_WIFI_AP +
 		                     " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
 		//SQLiteDatabase db = this.getReadableDatabase();
@@ -746,6 +761,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
 				profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
                 profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
+                profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
 				// Adding contact to list
 				profileList.add(profile);
 			} while (cursor.moveToNext());
@@ -803,6 +819,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
 		values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
         values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
+        values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
 
 		// updating row
 		int r = db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -974,7 +991,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 								         		KEY_AFTER_DURATION_DO,
 								         		KEY_VOLUME_ZEN_MODE,
 								         		KEY_DEVICE_KEYGUARD,
-                                                KEY_VIBRATE_ON_TOUCH
+                                                KEY_VIBRATE_ON_TOUCH,
+                                                KEY_DEVICE_WIFI_AP
 												},
 				                 KEY_CHECKED + "=?",
 				                 new String[] { "1" }, null, null, null, null);
@@ -1026,7 +1044,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						                      Integer.parseInt(cursor.getString(36)),
 						                      Integer.parseInt(cursor.getString(37)),
 						                      Integer.parseInt(cursor.getString(38)),
-                                              Integer.parseInt(cursor.getString(39))
+                                              Integer.parseInt(cursor.getString(39)),
+                                              Integer.parseInt(cursor.getString(40))
 						                      );
 			}
 			else
@@ -1085,7 +1104,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 								         KEY_AFTER_DURATION_DO + "," +
 						        		 KEY_VOLUME_ZEN_MODE + "," +
 								         KEY_DEVICE_KEYGUARD + "," +
-                                         KEY_VIBRATE_ON_TOUCH +
+                                         KEY_VIBRATE_ON_TOUCH + "," +
+                                         KEY_DEVICE_WIFI_AP +
 						    " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
 		//SQLiteDatabase db = this.getReadableDatabase();
@@ -1138,6 +1158,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
 			profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
             profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
+            profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
 		}
 		
 		cursor.close();
@@ -1282,7 +1303,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 										KEY_DEVICE_GPS + "," + 
 										KEY_DEVICE_LOCATION_SERVICE_PREFS + "," +
 										KEY_DEVICE_NFC + "," +
-										KEY_VOLUME_RINGER_MODE +
+										KEY_VOLUME_RINGER_MODE + "," +
+                                        KEY_DEVICE_WIFI_AP +
 							" FROM " + TABLE_PROFILES;
 
 		//SQLiteDatabase db = this.getWritableDatabase();
@@ -1360,7 +1382,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 							db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
 							   new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });							
 						}
-						
+
+                        if ((Integer.parseInt(cursor.getString(10)) != 0) &&
+                                (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.HARDWARE_CHECK_NOT_ALLOWED))
+                        {
+                            values.put(KEY_DEVICE_WIFI_AP, 0);
+                            db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                        }
+
 						// remove ringer mode "Do not disturb"
 						if ((Integer.parseInt(cursor.getString(9)) == 5) &&
 							((android.os.Build.VERSION.SDK_INT < 21) || 
@@ -1598,6 +1628,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                     if (exportedDBObj.getVersion() < 1180)
                                     {
                                         values.put(KEY_VIBRATE_ON_TOUCH, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1190)
+                                    {
+                                        values.put(KEY_DEVICE_WIFI_AP, 0);
                                     }
 
 									// Inserting Row do db z SQLiteOpenHelper

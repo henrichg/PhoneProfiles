@@ -49,6 +49,7 @@ public class Profile {
 	public int _deviceNFC;
 	public int _deviceKeyguard;
     public int _vibrationOnTouch;
+	public int _deviceWiFiAP;
 
 	public Bitmap _iconBitmap;
 	public Bitmap _preferencesIndicator;
@@ -104,7 +105,8 @@ public class Profile {
 			   	   int afterDurationDo,
 			   	   int volumeZenMode,
  			   	   int deviceKeyguard,
-                   int vibrationOnTouch)
+                   int vibrationOnTouch,
+				   int deviceWiFiAP)
 	{
 		this._id = id;
 		this._name = name;
@@ -146,6 +148,7 @@ public class Profile {
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
+        this._deviceWiFiAP = deviceWiFiAP;
 
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
@@ -190,7 +193,8 @@ public class Profile {
 			   	   int afterDurationDo,
 			   	   int volumeZenMode,
  			   	   int deviceKeyguard,
-                   int vibrationOnTouch)
+                   int vibrationOnTouch,
+                   int deviceWiFiAP)
 	{
 		this._name = name;
 		this._icon = icon;
@@ -231,6 +235,7 @@ public class Profile {
 		this._afterDurationDo = afterDurationDo;
 		this._deviceKeyguard = deviceKeyguard;
         this._vibrationOnTouch = vibrationOnTouch;
+        this._deviceWiFiAP = deviceWiFiAP;
 
 		this._iconBitmap = null;
 		this._preferencesIndicator = null;
@@ -278,6 +283,7 @@ public class Profile {
 		this._afterDurationDo = profile._afterDurationDo;
 		this._deviceKeyguard = profile._deviceKeyguard;
         this._vibrationOnTouch = profile._vibrationOnTouch;
+        this._deviceWiFiAP = profile._deviceWiFiAP;
 
 		this._iconBitmap = profile._iconBitmap;
 		this._preferencesIndicator = profile._preferencesIndicator;
