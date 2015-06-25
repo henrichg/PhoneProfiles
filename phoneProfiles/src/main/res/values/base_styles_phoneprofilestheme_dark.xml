@@ -3,9 +3,9 @@
 
     <style name="Base.Theme.Phoneprofilestheme_dark" parent="@style/Theme.AppCompat">
         
-    	<item name="colorPrimary">@color/primary_dark</item>
-    	<item name="colorPrimaryDark">@color/primaryDark_dark</item>
-<!--      	<item name="colorAccent">@color/accent_dark</item>  -->
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorPrimaryDark">@color/primaryDark_dark</item>
+        <item name="colorAccent">@color/accent_dark</item>
 
         <item name="md_dark_theme">true</item>
 
@@ -24,8 +24,8 @@
         <item name="editItemMenuIcon">@drawable/ic_profile_item_edit_menu_dark</item> 
         <item name="applicationSettingsLanguageIcon">@drawable/ic_settings_language_dark</item> 
         
-	    <item name="android:actionModeBackground">?attr/colorPrimary</item>
-	    <item name="actionModeBackground">?attr/colorPrimary</item>
+        <item name="android:actionModeBackground">?attr/colorPrimary</item>
+        <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
 

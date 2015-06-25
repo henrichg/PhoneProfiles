@@ -3,17 +3,17 @@
 
     <style name="Base.Theme.Phoneprofilestheme_material" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         
- 		<!-- customize the color palette -->
-    	<item name="colorPrimary">@color/primary</item>
-    	<item name="colorPrimaryDark">@color/primaryDark</item>
-<!--      	<item name="colorAccent">@color/accent</item> -->
+        <!-- customize the color palette -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
 
         <item name="actionNewProfileIcon">@drawable/ic_action_new_profile_dark</item>
         <item name="actionDeleteAllIcon">@drawable/ic_action_delete_all_dark</item>
         <item name="actionEditProfilesIcon">@drawable/ic_action_edit_profiles_dark</item>
         <item name="activityPopupBackground">@color/activityPopupBackground_phoneprofilestheme</item>
         <item name="cardShape">@drawable/card</item>
-        <item name="headerCardShape">@drawable/header_card</item>
+        <item name="headerCardShape">@drawable/header_card_dlight</item>
         <item name="cardSelector">@drawable/abc_item_background_holo_light</item>
         <item name="dragHandleIcon">@drawable/ic_drag_handle</item>
         <item name="actionProfilePrefSave">@drawable/ic_action_profile_pref_save_dark</item>
@@ -23,12 +23,12 @@
         <item name="editItemMenuIcon">@drawable/ic_profile_item_edit_menu</item> 
         <item name="applicationSettingsLanguageIcon">@drawable/ic_settings_language</item> 
         
-	    <item name="android:actionModeBackground">?attr/colorPrimary</item>
-	    <item name="actionModeBackground">?attr/colorPrimary</item>
+        <item name="android:actionModeBackground">?attr/colorPrimary</item>
+        <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="dialogDivider">@color/dialog_divider</item>
 
-   	</style>
+    </style>
 
 </resources>

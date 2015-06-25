@@ -15,229 +15,229 @@ import java.util.List;
 public class EditorProfileListAdapter extends BaseAdapter
 {
 
-	private EditorProfileListFragment fragment;
-	private DataWrapper dataWrapper;
-	private List<Profile> profileList;
-	public boolean released = false;
-	
-	public EditorProfileListAdapter(EditorProfileListFragment f, DataWrapper pdw)
-	{
-		fragment = f;
-		dataWrapper = pdw;
-		profileList = dataWrapper.getProfileList();
-	}
-	
-	public void release()
-	{
-		released = true;
+    private EditorProfileListFragment fragment;
+    private DataWrapper dataWrapper;
+    private List<Profile> profileList;
+    public boolean released = false;
 
-		fragment = null;
-		profileList = null;
-	}
-	
-	public int getCount()
-	{
-		if (profileList == null)
-			return 0;
+    public EditorProfileListAdapter(EditorProfileListFragment f, DataWrapper pdw)
+    {
+        fragment = f;
+        dataWrapper = pdw;
+        profileList = dataWrapper.getProfileList();
+    }
 
-		return profileList.size();
-	}
+    public void release()
+    {
+        released = true;
 
-	public Object getItem(int position)
-	{
-		if (profileList == null)
-			return null;
+        fragment = null;
+        profileList = null;
+    }
 
-		if (profileList.size() == 0)
-			return null;
-		
-		return profileList.get(position);
-	}
+    public int getCount()
+    {
+        if (profileList == null)
+            return 0;
 
-	public long getItemId(int position)
-	{
-		return position;
-	}
+        return profileList.size();
+    }
 
-	public int getItemId(Profile profile)
-	{
-		if (profileList == null)
-			return -1;
+    public Object getItem(int position)
+    {
+        if (profileList == null)
+            return null;
 
-		for (int i = 0; i < profileList.size(); i++)
-		{
-			if (profileList.get(i)._id == profile._id)
-				return i;
-		}
-		return -1;
-	}
-	
-	public void setList(List<Profile> pl)
-	{
-		profileList = pl;
-		notifyDataSetChanged();
-	}
-	
-	public void addItem(Profile profile, boolean refresh)
-	{
-		if (profileList == null)
-			return;
+        if (profileList.size() == 0)
+            return null;
 
-		profileList.add(profile);
-		if (refresh)
-			notifyDataSetChanged();
-	}
+        return profileList.get(position);
+    }
+
+    public long getItemId(int position)
+    {
+        return position;
+    }
+
+    public int getItemId(Profile profile)
+    {
+        if (profileList == null)
+            return -1;
+
+        for (int i = 0; i < profileList.size(); i++)
+        {
+            if (profileList.get(i)._id == profile._id)
+                return i;
+        }
+        return -1;
+    }
+
+    public void setList(List<Profile> pl)
+    {
+        profileList = pl;
+        notifyDataSetChanged();
+    }
+
+    public void addItem(Profile profile, boolean refresh)
+    {
+        if (profileList == null)
+            return;
+
+        profileList.add(profile);
+        if (refresh)
+            notifyDataSetChanged();
+    }
 
 /*	
-	public void updateItem(Profile profile)
-	{
-		notifyDataSetChanged();
-	}
+    public void updateItem(Profile profile)
+    {
+        notifyDataSetChanged();
+    }
 */	
-	public void deleteItemNoNotify(Profile profile)
-	{
-		dataWrapper.deleteProfile(profile);
-	}
+    public void deleteItemNoNotify(Profile profile)
+    {
+        dataWrapper.deleteProfile(profile);
+    }
 
-	public void deleteItem(Profile profile)
-	{
-		deleteItemNoNotify(profile);
-		notifyDataSetChanged();
-	}
+    public void deleteItem(Profile profile)
+    {
+        deleteItemNoNotify(profile);
+        notifyDataSetChanged();
+    }
 
-	public void clearNoNotify()
-	{
-		dataWrapper.deleteAllProfiles();
-	}
-	
-	public void clear()
-	{
-		clearNoNotify();
-		notifyDataSetChanged();
-	}
-	
-	public void changeItemOrder(int from, int to)
-	{
-		if (profileList == null)
-			return;
+    public void clearNoNotify()
+    {
+        dataWrapper.deleteAllProfiles();
+    }
 
-		Profile profile = profileList.get(from);
-		profileList.remove(from);
-		profileList.add(to, profile);
-		for (int i = 0; i < profileList.size(); i++)
-		{
-			profileList.get(i)._porder = i+1;
-		}
-		notifyDataSetChanged();
-	}
-	
-	public Profile getActivatedProfile()
-	{
-		if (profileList == null)
-			return null;
+    public void clear()
+    {
+        clearNoNotify();
+        notifyDataSetChanged();
+    }
 
-		for (Profile p : profileList)
-		{
-			if (p._checked)
-			{
-				return p;
-			}
-		}
-		
-		return null;
-	}
-	
-	public void activateProfile(Profile profile)
-	{
-		if (profileList == null)
-			return;
+    public void changeItemOrder(int from, int to)
+    {
+        if (profileList == null)
+            return;
 
-		for (Profile p : profileList)
-		{
-			p._checked = false;
-		}
-		
-		// teraz musime najst profile v profileList 
-		int position = getItemId(profile);
-		if (position != -1)
-		{
-			// najdenemu objektu nastavime _checked
-			Profile _profile = profileList.get(position);
-			if (_profile != null)
-				_profile._checked = true;
-		}
-		notifyDataSetChanged();
-	}
+        Profile profile = profileList.get(from);
+        profileList.remove(from);
+        profileList.add(to, profile);
+        for (int i = 0; i < profileList.size(); i++)
+        {
+            profileList.get(i)._porder = i+1;
+        }
+        notifyDataSetChanged();
+    }
 
-	static class ViewHolder {
-		  RelativeLayout listItemRoot;
-		  ImageView profileIcon;
-		  TextView profileName;
-		  ImageView profileIndicator;
-		  ImageView profileItemEditMenu;
-		  int position;
-		}
-	
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
-		ViewHolder holder;
-		
-		View vi = convertView;
+    public Profile getActivatedProfile()
+    {
+        if (profileList == null)
+            return null;
+
+        for (Profile p : profileList)
+        {
+            if (p._checked)
+            {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    public void activateProfile(Profile profile)
+    {
+        if (profileList == null)
+            return;
+
+        for (Profile p : profileList)
+        {
+            p._checked = false;
+        }
+
+        // teraz musime najst profile v profileList
+        int position = getItemId(profile);
+        if (position != -1)
+        {
+            // najdenemu objektu nastavime _checked
+            Profile _profile = profileList.get(position);
+            if (_profile != null)
+                _profile._checked = true;
+        }
+        notifyDataSetChanged();
+    }
+
+    static class ViewHolder {
+          RelativeLayout listItemRoot;
+          ImageView profileIcon;
+          TextView profileName;
+          ImageView profileIndicator;
+          ImageView profileItemEditMenu;
+          int position;
+        }
+
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        ViewHolder holder;
+
+        View vi = convertView;
         if (convertView == null)
         {
-    		LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
-        	if (GlobalData.applicationEditorPrefIndicator)
-        		vi = inflater.inflate(R.layout.editor_profile_list_item, parent, false);
-        	else
-        		vi = inflater.inflate(R.layout.editor_profile_list_item_no_indicator, parent, false);
+            LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
+            if (GlobalData.applicationEditorPrefIndicator)
+                vi = inflater.inflate(R.layout.editor_profile_list_item, parent, false);
+            else
+                vi = inflater.inflate(R.layout.editor_profile_list_item_no_indicator, parent, false);
             holder = new ViewHolder();
             holder.listItemRoot = (RelativeLayout)vi.findViewById(R.id.main_list_item_root);
             holder.profileName = (TextView)vi.findViewById(R.id.main_list_item_profile_name);
             holder.profileIcon = (ImageView)vi.findViewById(R.id.main_list_item_profile_icon);
-    		holder.profileItemEditMenu = (ImageView)vi.findViewById(R.id.main_list_item_edit_menu);
-    		if (GlobalData.applicationEditorPrefIndicator)
-    			holder.profileIndicator = (ImageView)vi.findViewById(R.id.main_list_profile_pref_indicator);
+            holder.profileItemEditMenu = (ImageView)vi.findViewById(R.id.main_list_item_edit_menu);
+            if (GlobalData.applicationEditorPrefIndicator)
+                holder.profileIndicator = (ImageView)vi.findViewById(R.id.main_list_profile_pref_indicator);
             vi.setTag(holder);        
         }
         else
         {
-        	holder = (ViewHolder)vi.getTag();
+            holder = (ViewHolder)vi.getTag();
         }
-		
+
         final Profile profile = profileList.get(position);
 
         if (profile._checked && (!GlobalData.applicationEditorHeader))
         {
-        	if (GlobalData.applicationTheme.equals("material"))
-        		holder.listItemRoot.setBackgroundResource(R.drawable.header_card);
-        	else
-           	if (GlobalData.applicationTheme.equals("dark"))
-           		holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dark);
-           	else
-           	if (GlobalData.applicationTheme.equals("dlight"))
-           		holder.listItemRoot.setBackgroundResource(R.drawable.header_card);
-        	holder.profileName.setTypeface(null, Typeface.BOLD);
+            if (GlobalData.applicationTheme.equals("material"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
+            else
+            if (GlobalData.applicationTheme.equals("dark"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dark);
+            else
+            if (GlobalData.applicationTheme.equals("dlight"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
+            holder.profileName.setTypeface(null, Typeface.BOLD);
         }
         else
         {
-        	if (GlobalData.applicationTheme.equals("material"))
-        		holder.listItemRoot.setBackgroundResource(R.drawable.card);
-        	else
-           	if (GlobalData.applicationTheme.equals("dark"))
-           		holder.listItemRoot.setBackgroundResource(R.drawable.card_dark);
-           	else
-           	if (GlobalData.applicationTheme.equals("dlight"))
-           		holder.listItemRoot.setBackgroundResource(R.drawable.card);
-        	holder.profileName.setTypeface(null, Typeface.NORMAL);
+            if (GlobalData.applicationTheme.equals("material"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.card);
+            else
+            if (GlobalData.applicationTheme.equals("dark"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.card_dark);
+            else
+            if (GlobalData.applicationTheme.equals("dlight"))
+                holder.listItemRoot.setBackgroundResource(R.drawable.card);
+            holder.profileName.setTypeface(null, Typeface.NORMAL);
         }
 
-		String profileName = profile.getProfileNameWithDuration();
+        String profileName = profile.getProfileNameWithDuration();
         holder.profileName.setText(profileName);
 
         if (profile.getIsIconResourceID())
         {
             if (profile._iconBitmap != null)
-				holder.profileIcon.setImageBitmap(profile._iconBitmap);
+                holder.profileIcon.setImageBitmap(profile._iconBitmap);
             else {
                 holder.profileIcon.setImageResource(0);
                 int res = vi.getResources().getIdentifier(profile.getIconIdentifier(), "drawable",
@@ -247,29 +247,29 @@ public class EditorProfileListAdapter extends BaseAdapter
         }
         else
         {
-        	holder.profileIcon.setImageBitmap(profile._iconBitmap);
+            holder.profileIcon.setImageBitmap(profile._iconBitmap);
         }
         
-		if (GlobalData.applicationEditorPrefIndicator)
-		{
-			//profilePrefIndicatorImageView.setImageBitmap(null);
-			//Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());
-			//profilePrefIndicatorImageView.setImageBitmap(bitmap);
+        if (GlobalData.applicationEditorPrefIndicator)
+        {
+            //profilePrefIndicatorImageView.setImageBitmap(null);
+            //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());
+            //profilePrefIndicatorImageView.setImageBitmap(bitmap);
             if (holder.profileIndicator != null)
-			    holder.profileIndicator.setImageBitmap(profile._preferencesIndicator);
-		}
+                holder.profileIndicator.setImageBitmap(profile._preferencesIndicator);
+        }
         
         holder.profileItemEditMenu.setTag(profile);
         final ImageView profileItemEditMenu = holder.profileItemEditMenu;
         holder.profileItemEditMenu.setOnClickListener(new OnClickListener() {
 
-				public void onClick(View v) {
-					((EditorProfileListFragment)fragment).finishProfilePreferencesActionMode();
-					((EditorProfileListFragment)fragment).showEditMenu(profileItemEditMenu);
-				}
-			}); 
-		
-		return vi;
-	}
+                public void onClick(View v) {
+                    ((EditorProfileListFragment)fragment).finishProfilePreferencesActionMode();
+                    ((EditorProfileListFragment)fragment).showEditMenu(profileItemEditMenu);
+                }
+            });
+
+        return vi;
+    }
 
 }
