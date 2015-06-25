@@ -31,6 +31,9 @@
 
         <item name="dialogDivider">@color/dialog_divider_dark</item>
 
+        <item name="alertDialogTheme">@style/AlertDialogStyleDark</item>
+        <item name="dialogTheme">@style/DialogStyleDark</item>
+
     </style>
     
 </resources>

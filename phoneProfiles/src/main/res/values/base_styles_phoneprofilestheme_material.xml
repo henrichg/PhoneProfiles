@@ -29,6 +29,9 @@
         <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="dialogDivider">@color/dialog_divider</item>
 
+        <item name="alertDialogTheme">@style/AlertDialogStyle</item>
+        <item name="dialogTheme">@style/DialogStyle</item>
+
     </style>
 
 </resources>
