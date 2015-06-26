@@ -71,15 +71,14 @@ public class InfoNotificationActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
                     getActivity().startActivity(intent);
-
-                    getActivity().finish();
+                    getDialog().dismiss();
                 }
             });
             Button okButton = (Button)view.findViewById(R.id.activity_info_notification_dialog_ok_button);
             okButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().finish();
+                    getDialog().dismiss();
                 }
             });
 
