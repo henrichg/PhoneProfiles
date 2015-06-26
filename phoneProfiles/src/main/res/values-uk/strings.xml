@@ -261,9 +261,18 @@
   <string name="profile_preferences_vibrationOnTouch">Вібрація при торканні</string>
   <string name="phone_profiles_pref_notificationShowInStatusBar">Показувати в статус-барі</string>
   <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Показувати в статус-барі та на екрані блокування</string>
-  <string name="profileicon_pref_dialog_customColor_button">Change color</string>
-  <string name="colorChooser_pref_dialog_title">Set color</string>
-  <string name="phone_profiles_pref_category_system">System</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Unlink ringer and notif. volumes</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Uncheck when your device has separated volume for ringer and notifications</string>
+  <string name="profileicon_pref_dialog_customColor_button">Змінити колір</string>
+  <string name="colorChooser_pref_dialog_title">Встановити колір</string>
+  <string name="phone_profiles_pref_category_system">Системний</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Окремі гучності для дзвінка та сповіщень</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Зніміть прапорець, якщо налаштовано окремі гучності для дзвінка та сповіщень</string>
+  <string name="profileicon_pref_dialog_info_about_status_bar_icon">Якщо ви зміните колір іконки, в статус барі іконка стане білою. Якщо оберати користувацьку іконку, то в статус барі відобажатиметься іконка додатку.</string>
+  <string name="info_notification_title">Важлива інформація</string>
+  <string name="info_notification_unlink_ringer_notification_volumes">Якщо в Вашому пристрої роздільне регулювання гучності для дзвінка та сповіщень, натисніть тут щоб скасувати розділення гучності.</string>
+  <string name="info_notification_text">Натисніть тут щоб відобразити важливу інформацію</string>
+  <string name="profile_preferences_deviceWiFiAP">Точка доступу Wi-Fi</string>
+  <string name="array_pref_ringerModeArray_silentL">Режим пріоритету</string>
+  <string name="info_notification_silent_mode_lollipop_rename">Режим тихого дзвінка перейменовано в Режим пріоритетності.</string>
+  <string name="info_notification_silent_mode_lollipop">Режим пріоритетності: Для симуляції режиму тиші, встановіть мінімальну гучність (0) для дзвінків та сповіщень.</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">Коли на вашому пристрої встановлено режим вібрації для мінімальної гучності дзвінків або сповіщень (0), додаток встановить гучність на 1. Ви можете використовувати тип дзвінків та сповіщень \"PhoneProfiles Silent\" для повної тиші.</string>
 </resources>

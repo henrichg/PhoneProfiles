@@ -238,7 +238,7 @@
   <string name="profile_preferences_duration">Продолжительность (минут)</string>
   <string name="profile_preferences_afterDurationDo">По окончанию действия профиля</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ничего</string>
-  <string name="array_pref_afterProfileDurationDo_undoProfile">Аннулировать профиль</string>
+  <string name="array_pref_afterProfileDurationDo_undoProfile">Отменить данный профиль</string>
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Активировать профиль по умолчанию</string>
   <string name="phone_profiles_pref_applicationGridLayout">В виде сетки</string>
   <string name="menu_help">Помощь</string>
@@ -260,9 +260,18 @@
   <string name="profile_preferences_vibrationOnTouch">Вибрация при нажатии</string>
   <string name="phone_profiles_pref_notificationShowInStatusBar">Показывать в строке состояния</string>
   <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Показать в строке состояния и на экране блокировки</string>
-  <string name="profileicon_pref_dialog_customColor_button">Change color</string>
-  <string name="colorChooser_pref_dialog_title">Set color</string>
-  <string name="phone_profiles_pref_category_system">System</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Unlink ringer and notif. volumes</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Uncheck when your device has separated volume for ringer and notifications</string>
+  <string name="profileicon_pref_dialog_customColor_button">Изменить цвет</string>
+  <string name="colorChooser_pref_dialog_title">Выбрать цвет</string>
+  <string name="phone_profiles_pref_category_system">Системные</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Отдельные громкости для звонка и уведомлений</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Снимите флажок, если настроены отдельные громкости для звонка и уведомлений</string>
+  <string name="profileicon_pref_dialog_info_about_status_bar_icon">Если вы измените цвет иконки профиля, то значок профиля в строке состояния будет белого цвета. Если выбрать пользовательскую иконку, то в строке состояния будет показан значок приложения.</string>
+  <string name="info_notification_title">Важная информация</string>
+  <string name="info_notification_unlink_ringer_notification_volumes">Если у Вашего устройства раздельная регулировка громкости для звонка и уведомлений, нажмите здесь чтобы отменить разделение громкости.</string>
+  <string name="info_notification_text">Нажмите для просмотра важной информации</string>
+  <string name="profile_preferences_deviceWiFiAP">Точка доступа Wi-Fi</string>
+  <string name="array_pref_ringerModeArray_silentL">Режим приоритета</string>
+  <string name="info_notification_silent_mode_lollipop_rename">Режим \"Без звука\" переименован в режим \"Приоритет\".</string>
+  <string name="info_notification_silent_mode_lollipop">Режим \"Приоритет\": для имитации режима \"Без звука\", установите минимальную громкость звонка и уведомлений в профиле (0).</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">Когда ваше устройство настроено вибрировать при минимальной громкости звонков и уведомлений (0), приложение устанавливает громкость 1. Для настройки полностью беззвучного режима, используйте режим звонка и уведомлений «PhoneProfiles Silent».</string>
 </resources>
