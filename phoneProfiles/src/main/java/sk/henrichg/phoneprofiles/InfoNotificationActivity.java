@@ -27,13 +27,16 @@ public class InfoNotificationActivity extends AppCompatActivity {
     {
         super.onStart();
 
+        /*
         // set theme and language for dialog alert ;-)
         // not working on Android 2.3.x
         GUIData.setTheme(this, true);
         GUIData.setLanguage(this.getBaseContext());
+        */
 
         FragmentManager fm = getSupportFragmentManager();
         InfoNotificationDialog infoNotificationDialog = new InfoNotificationDialog();
+        infoNotificationDialog.setStyle( DialogFragment.STYLE_NO_TITLE, GUIData.getDialogTheme(true));
         infoNotificationDialog.show(fm, "info_notification_dialog");
     }
 
