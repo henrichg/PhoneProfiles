@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -42,13 +43,13 @@ public class ProfileIconPreference extends DialogPreference {
         super(context, attrs);
 
         /*
-		TypedArray typedArray = context.obtainStyledAttributes(attrs,
-				R.styleable.ProfileIconPreference);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs,
+                R.styleable.ProfileIconPreference);
 
-		// resource, resource_file, file
-		imageSource = typedArray.getString(
-			R.styleable.ProfileIconPreference_iconSource);
-		*/
+        // resource, resource_file, file
+        imageSource = typedArray.getString(
+            R.styleable.ProfileIconPreference_iconSource);
+        */
 
 
         imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
@@ -117,6 +118,21 @@ public class ProfileIconPreference extends DialogPreference {
             }
         });
         mBuilder.customView(layout, false);
+
+        final TextView helpText = (TextView)layout.findViewById(R.id.profileicon_pref_dlg_helpText);
+
+        ImageView helpIcon = (ImageView)layout.findViewById(R.id.profileicon_pref_dlg_helpIcon);
+        helpIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int visibility = helpText.getVisibility();
+                if (visibility == View.VISIBLE)
+                    visibility = View.GONE;
+                else
+                    visibility = View.VISIBLE;
+                helpText.setVisibility(visibility);
+            }
+        });
 
         mDialog = mBuilder.build();
         if (state != null)
@@ -215,50 +231,50 @@ public class ProfileIconPreference extends DialogPreference {
     }
 
     /*
-	@Override
-	protected Parcelable onSaveInstanceState()
-	{
-		// ulozime instance state - napriklad kvoli zmene orientacie
+    @Override
+    protected Parcelable onSaveInstanceState()
+    {
+        // ulozime instance state - napriklad kvoli zmene orientacie
 
-		final Parcelable superState = super.onSaveInstanceState();
-		if (isPersistent()) {
-			// netreba ukladat, je ulozene persistentne
-			return superState;
-		}
+        final Parcelable superState = super.onSaveInstanceState();
+        if (isPersistent()) {
+            // netreba ukladat, je ulozene persistentne
+            return superState;
+        }
 
-		// ulozenie istance state
-		final SavedState myState = new SavedState(superState);
-		myState.imageIdentifierAndType = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0");
-		return myState;
+        // ulozenie istance state
+        final SavedState myState = new SavedState(superState);
+        myState.imageIdentifierAndType = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0");
+        return myState;
 
-	}
+    }
 
-	@Override
-	protected void onRestoreInstanceState(Parcelable state)
-	{
-		if (!state.getClass().equals(SavedState.class)) {
-			// Didn't save state for us in onSaveInstanceState
-			super.onRestoreInstanceState(state);
-			return;
-		}
+    @Override
+    protected void onRestoreInstanceState(Parcelable state)
+    {
+        if (!state.getClass().equals(SavedState.class)) {
+            // Didn't save state for us in onSaveInstanceState
+            super.onRestoreInstanceState(state);
+            return;
+        }
 
-		// restore instance state
-		SavedState myState = (SavedState)state;
-		super.onRestoreInstanceState(myState.getSuperState());
-		String value = (String) myState.imageIdentifierAndType;
-		String[] splits = value.split("\\|");
-		try {
-			imageIdentifier = splits[0];
-		} catch (Exception e) {
-			imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
-		}
-		try {
-			isImageResourceID = splits[1].equals("1");
-		} catch (Exception e) {
-			isImageResourceID = true;
-		}
-		notifyChanged();
-	}
+        // restore instance state
+        SavedState myState = (SavedState)state;
+        super.onRestoreInstanceState(myState.getSuperState());
+        String value = (String) myState.imageIdentifierAndType;
+        String[] splits = value.split("\\|");
+        try {
+            imageIdentifier = splits[0];
+        } catch (Exception e) {
+            imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+        }
+        try {
+            isImageResourceID = splits[1].equals("1");
+        } catch (Exception e) {
+            isImageResourceID = true;
+        }
+        notifyChanged();
+    }
     */
 
     /*
@@ -375,48 +391,48 @@ public class ProfileIconPreference extends DialogPreference {
     }
 
     /*
-	// SavedState class
-	private static class SavedState extends BaseSavedState
-	{
-		String imageIdentifierAndType;
+    // SavedState class
+    private static class SavedState extends BaseSavedState
+    {
+        String imageIdentifierAndType;
 
-		public SavedState(Parcel source)
-		{
-			super(source);
+        public SavedState(Parcel source)
+        {
+            super(source);
 
-			// restore image identifier and type
-			imageIdentifierAndType = source.readString();
-		}
+            // restore image identifier and type
+            imageIdentifierAndType = source.readString();
+        }
 
-		@Override
-		public void writeToParcel(Parcel dest, int flags)
-		{
-			super.writeToParcel(dest, flags);
+        @Override
+        public void writeToParcel(Parcel dest, int flags)
+        {
+            super.writeToParcel(dest, flags);
 
-			// save image identifier and type
-			dest.writeString(imageIdentifierAndType);
-		}
+            // save image identifier and type
+            dest.writeString(imageIdentifierAndType);
+        }
 
-		public SavedState(Parcelable superState)
-		{
-			super(superState);
-		}
+        public SavedState(Parcelable superState)
+        {
+            super(superState);
+        }
 
-		@SuppressWarnings("unused")
-		public static final Creator<SavedState> CREATOR =
-				new Creator<SavedState>() {
-			public SavedState createFromParcel(Parcel in) 
-			{
-				return new SavedState(in);
-			}
-			public SavedState[] newArray(int size)
-			{
-				return new SavedState[size];
-			}
-				
-		};
-	
-	}
-	*/
+        @SuppressWarnings("unused")
+        public static final Creator<SavedState> CREATOR =
+                new Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in)
+            {
+                return new SavedState(in);
+            }
+            public SavedState[] newArray(int size)
+            {
+                return new SavedState[size];
+            }
+
+        };
+
+    }
+    */
 
 }
