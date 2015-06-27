@@ -13,6 +13,7 @@ import java.util.Locale;
 public class GUIData {
 
     public static BrightnessView brightneesView = null;
+    public static BrightnessView keepScreenOnView = null;
 
     public static Collator collator = null;
 

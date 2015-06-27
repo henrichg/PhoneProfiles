@@ -348,6 +348,8 @@ public class EditorProfilesActivity extends AppCompatActivity
             stopService(new Intent(getApplicationContext(), ReceiversService.class));
             stopService(new Intent(getApplicationContext(), KeyguardService.class));
 
+            ActivateProfileHelper.screenTimeoutUnlock(getApplicationContext());
+
             finish();
 
             return true;
