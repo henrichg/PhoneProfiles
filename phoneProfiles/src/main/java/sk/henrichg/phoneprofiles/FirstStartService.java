@@ -81,7 +81,7 @@ public class FirstStartService extends IntentService {
         // show notification about upgrade PPHelper
         PhoneProfilesHelper.showPPHelperUpgradeNotification(context);
         // show info notification
-        InfoNotificationOnStart.showInfoNotification(context);
+        ImportantInfoNotification.showInfoNotification(context);
 
 		GlobalData.setApplicationStarted(context, true);
 			

@@ -5,12 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
-public class InfoNotificationOnStart {
+public class ImportantInfoNotification {
 
     static public void showInfoNotification(Context context) {
 
@@ -42,7 +39,7 @@ public class InfoNotificationOnStart {
                 .setContentText(context.getString(R.string.app_name) + ": " +
                         text) // message for notification
                 .setAutoCancel(true); // clear notification after click
-        Intent intent = new Intent(context, InfoNotificationActivity.class);
+        Intent intent = new Intent(context, ImportantInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
