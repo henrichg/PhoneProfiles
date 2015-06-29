@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Predvolený profil</string>
   <string name="profile_preference_profile_end_no_activate">Neaktivovať</string>
   <string name="profile_preference_profile_not_set">Nevybraný žiadny profil</string>
-  <string name="profile_preferences_duration">Trvanie (min.)</string>
+  <string name="profile_preferences_duration">Trvanie (sek.)</string>
   <string name="profile_preferences_afterDurationDo">Po uplynutí trvania urob</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nič</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Vráť späť profil</string>

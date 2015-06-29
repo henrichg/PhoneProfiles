@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Default profile</string>
   <string name="profile_preference_profile_end_no_activate">No activate</string>
   <string name="profile_preference_profile_not_set">Profile not set</string>
-  <string name="profile_preferences_duration">Duration (min)</string>
+  <string name="profile_preferences_duration">Duration (sec)</string>
   <string name="profile_preferences_afterDurationDo">After duration do</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nothing</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Undo the profile</string>
