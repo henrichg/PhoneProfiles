@@ -191,7 +191,7 @@ public class ProfilePreference extends Preference {
 
     }
 
-    private void setSummary(long profileId)
+    public void setSummary(long profileId)
     {
         Profile profile = dataWrapper.getProfileById(profileId);
         if (profile != null)
