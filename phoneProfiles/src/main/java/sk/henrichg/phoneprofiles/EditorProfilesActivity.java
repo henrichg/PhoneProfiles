@@ -618,6 +618,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 lockScreenOrientation();
                 this.dialog.setCancelable(false);
+                this.dialog.setCanceledOnTouchOutside(false);
                 this.dialog.show();
 
                 EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -842,6 +843,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         super.onPreExecute();
 
                         this.dialog.setCancelable(false);
+                        this.dialog.setCanceledOnTouchOutside(false);
                         this.dialog.show();
                     }
 

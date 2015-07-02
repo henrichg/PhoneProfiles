@@ -286,6 +286,7 @@ public class PhoneProfilesHelper {
 
                         lockScreenOrientation();
                         this.dialog.setCancelable(false);
+                        this.dialog.setCanceledOnTouchOutside(false);
                         this.dialog.show();
                     }
 
@@ -470,6 +471,7 @@ public class PhoneProfilesHelper {
 
                         lockScreenOrientation();
                         this.dialog.setCancelable(false);
+                        this.dialog.setCanceledOnTouchOutside(false);
                         this.dialog.show();
                     }
 
