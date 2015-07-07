@@ -275,4 +275,10 @@
   <string name="info_notification_silent_mode_lollipop_rename">Ljudlöst ringsignalläge är omdöpt till prioriterat läge.</string>
   <string name="info_notification_silent_mode_lollipop">Prioriterat läge: för att simulera tyst läge, ändrar volymen för ring- och meddelandesignaler i profil till minimal (0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">När din enhet sätter vibration till minimal volym (0), anges volym 1. Du kan använda \"PhoneProfiles Silent\" för fullständig tystnad.</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
+  <string name="important_info_profiles">Profiles</string>
+  <string name="important_info_system">System</string>
+  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
+  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
 </resources>

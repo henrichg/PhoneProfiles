@@ -275,4 +275,10 @@
   <string name="info_notification_silent_mode_lollipop_rename">Mode en silenci es re-nombrat al  mode prioritat.</string>
   <string name="info_notification_silent_mode_lollipop">Mode de prioritat: per simular mode silenciós, canviar el volum, del so i de les notificacions, en el perfil pel mínim (0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Quan el seu dispositiu estableix la vibració al mínim, volum (0), l\'aplicació defineix el volum a 1. Pot utilitzar so i notificació \"PhoneProfiles silenci\" per silenci absolut.</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
+  <string name="important_info_profiles">Profiles</string>
+  <string name="important_info_system">System</string>
+  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
+  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
 </resources>

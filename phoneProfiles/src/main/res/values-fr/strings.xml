@@ -275,4 +275,10 @@
   <string name="info_notification_silent_mode_lollipop_rename">Le mode silencieux est renommé en mode priorité.</string>
   <string name="info_notification_silent_mode_lollipop">Mode priorité : pour simuler le mode silencieux, modifier le volume de sonnerie et de notification à la valeur minimale (0) dans profil.</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Lorsque votre appareil met le mode vibration quand le volmue de sonnerie ou de notification est à (0), l\'application met le volume à 1. Vous pouvez mettre la sonnerie « PhoneProfiles silencieux » pour obtenir le silence complet.</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
+  <string name="important_info_profiles">Profiles</string>
+  <string name="important_info_system">System</string>
+  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
+  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
 </resources>

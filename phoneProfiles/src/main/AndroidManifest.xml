@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sk.henrichg.phoneprofiles"
-    android:versionCode="1562"
-    android:versionName="4.0.5b" >
+    android:versionCode="1570"
+    android:versionName="4.1b" >
 
 <!--
     <uses-sdk
@@ -82,10 +82,10 @@
             android:name=".PhoneProfilesPreferencesActivity"
             android:label="@string/title_activity_phone_profiles_preferences"
             android:configChanges="locale|layoutDirection" >
- 			<intent-filter>
-        		<action android:name="android.intent.action.MAIN" />
-        		<category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
-    		</intent-filter>            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ShortcutCreatorActivity"
@@ -132,11 +132,11 @@
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:excludeFromRecents="true"
             android:theme="@style/EmptyActivity" >
-		    <intent-filter>
-		        <action android:name="phoneprofiles.intent.action.EXPORTDATA"/>
-		        <category android:name="android.intent.category.DEFAULT"/>
-		    </intent-filter>
-		</activity>
+            <intent-filter>
+                <action android:name="phoneprofiles.intent.action.EXPORTDATA"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         
         <receiver
             android:name=".IconWidgetProvider"
@@ -171,8 +171,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/profile_list_widget_info" />
         </receiver>
-    	<service android:name=".ProfileListWidgetService"
-             	android:permission="android.permission.BIND_REMOTEVIEWS" />        
+        <service android:name=".ProfileListWidgetService"
+                android:permission="android.permission.BIND_REMOTEVIEWS" />
         
         <receiver 
             android:name=".LocaleChangedReceiver" 
@@ -220,19 +220,19 @@
             <meta-data android:name="description"
                 android:value="@string/dashclock_extension_description" />
         </service>
-	    <receiver android:name=".DashClockBroadcastReceiver"
-	        android:enabled="true"
-	        android:exported="false" >
-	        <intent-filter>
-	         	<action android:name="sk.henrichg.phoneprofiles.REFRESH_DASHCLOCK" />
+        <receiver android:name=".DashClockBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="sk.henrichg.phoneprofiles.REFRESH_DASHCLOCK" />
                 <category android:name="android.intent.category.DEFAULT" />
-   	      	</intent-filter>
-	   	</receiver>   
-	   	
-	    <service android:name=".ExecuteRadioProfilePrefsService"
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".ExecuteRadioProfilePrefsService"
             android:exported="false">
         </service>
-	    <service android:name=".ExecuteVolumeProfilePrefsService"
+        <service android:name=".ExecuteVolumeProfilePrefsService"
             android:exported="false">
         </service>
         <service android:name=".ExecuteWallpaperProfilePrefsService"
@@ -244,34 +244,34 @@
         </service>
         <service android:name=".ReceiversService"
             android:exported="false"
-    		android:stopWithTask="false" >
+            android:stopWithTask="false" >
         </service>
         <service android:name=".KeyguardService"
             android:exported="false" >
         </service>
         
-        	    	    
-	    <receiver android:name=".RefreshGUIBroadcastReceiver"
-	        android:enabled="true"
-	        android:exported="false" >
-	        <intent-filter>
-	         	<action android:name="sk.henrichg.phoneprofiles.REFRESH_GUI" />
-                <category android:name="android.intent.category.DEFAULT" />
-   	      	</intent-filter>
-	   	</receiver>
 
-		<receiver android:name=".PhoneCallBroadcastReceiver" >
-			<intent-filter>
-            	<action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-        	</intent-filter>
-		    <intent-filter>
+        <receiver android:name=".RefreshGUIBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="sk.henrichg.phoneprofiles.REFRESH_GUI" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".PhoneCallBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
-        	    	   	
+
         <receiver android:name=".ProfileDurationAlarmBroadcastReceiver"
-	        android:enabled="true" 
-	        android:exported="false">
+            android:enabled="true"
+            android:exported="false">
         </receiver>
 
         <receiver
