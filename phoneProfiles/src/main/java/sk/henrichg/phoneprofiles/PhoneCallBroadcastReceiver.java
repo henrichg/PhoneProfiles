@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -86,6 +87,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         speakerphoneSelected = false;
 
+        Log.e("PhoneCallBroadcastReceiver", "onIncomingCallStarted - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
+
         if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
             /// for linked ringer and notification volume:
             //    notification volume in profile activation is set after ringer volume
@@ -109,10 +112,16 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     private void setBackNotificationVolume() {
+        Log.e("PhoneCallBroadcastReceiver", "setBackNotificationVolume - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
+
         if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
             DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
+                try {
+                    Thread.sleep(500); // Delay 0,5 seconds to wait for change audio mode
+                } catch (InterruptedException e) {
+                }
                 Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 savedContext.startService(volumeServiceIntent);
