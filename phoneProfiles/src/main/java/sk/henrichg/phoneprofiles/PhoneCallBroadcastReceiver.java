@@ -14,6 +14,10 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     private static boolean savedSpeakerphone = false;
     private static boolean speakerphoneSelected = false;
 
+    public static final int LINKMODE_NONE = 0;
+    public static final int LINKMODE_LINK = 1;
+    public static final int LINKMODE_UNLINK = 2;
+
     protected boolean onStartReceive()
     {
         if (!GlobalData.getApplicationStarted(super.savedContext))
@@ -98,6 +102,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             if (profile != null) {
                 Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_UNLINK);
                 savedContext.startService(volumeServiceIntent);
             }
             ///
@@ -124,6 +129,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 }
                 Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_LINK);
                 savedContext.startService(volumeServiceIntent);
             }
         }
