@@ -8,28 +8,28 @@ import java.util.Date;
 
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
-	private static AudioManager audioManager = null;
-	
-	private static boolean savedSpeakerphone = false;
-	private static boolean speakerphoneSelected = false;
+    private static AudioManager audioManager = null;
 
-	protected boolean onStartReceive()
-	{
-		if (!GlobalData.getApplicationStarted(super.savedContext))
-			return false;
+    private static boolean savedSpeakerphone = false;
+    private static boolean speakerphoneSelected = false;
 
-		GlobalData.loadPreferences(savedContext);
+    protected boolean onStartReceive()
+    {
+        if (!GlobalData.getApplicationStarted(super.savedContext))
+            return false;
 
-		return true;
-	}
+        GlobalData.loadPreferences(savedContext);
 
-	protected void onEndReceive()
-	{
-	}
-	
-	private void callAnswered(boolean incoming)
-	{
-		DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
+        return true;
+    }
+
+    protected void onEndReceive()
+    {
+    }
+
+    private void callAnswered(boolean incoming)
+    {
+        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
 
         Profile profile = dataWrapper.getActivatedProfile();
         profile = GlobalData.getMappedProfile(profile, savedContext);
@@ -61,27 +61,30 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 }
             }
         }
-	}
-	
-	private void callEnded(boolean incoming)
-	{
-    	//Deactivate loudspeaker
-		
-		if (audioManager == null )
-			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-		
-    	//if (audioManager.isSpeakerphoneOn())
-       	if (speakerphoneSelected)
-    	{
-    	    audioManager.setSpeakerphoneOn(savedSpeakerphone);
-    		speakerphoneSelected = false;
+    }
+
+    private void callEnded(boolean incoming)
+    {
+        //Deactivate loudspeaker
+
+        if (audioManager == null )
+            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+
+        //if (audioManager.isSpeakerphoneOn())
+        if (speakerphoneSelected)
+        {
+            audioManager.setSpeakerphoneOn(savedSpeakerphone);
             audioManager.setMode(AudioManager.MODE_NORMAL);
         }
+
+        speakerphoneSelected = false;
     }
 
     protected void onIncomingCallStarted(String number, Date start) {
-		if (audioManager == null )
-			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+        if (audioManager == null )
+            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+
+        speakerphoneSelected = false;
 
         if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
             /// for linked ringer and notification volume:
@@ -99,8 +102,10 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
-		if (audioManager == null )
-			audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+        if (audioManager == null )
+            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+
+        speakerphoneSelected = false;
     }
 
     private void setBackNotificationVolume() {
@@ -120,7 +125,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     protected void onOutgoingCallAnswered(String number, Date start) {
-    	callAnswered(false);
+        callAnswered(false);
     }
 
     protected void onIncomingCallEnded(String number, Date start, Date end) {
