@@ -51,16 +51,17 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 } catch (InterruptedException e) {
                 }
 
-                //Activate loudspeaker
+                ///  change mode to MODE_IN_CALL
                 audioManager.setMode(AudioManager.MODE_IN_CALL);
 
                 savedSpeakerphone = audioManager.isSpeakerphoneOn();
                 boolean changeSpeakerphone = false;
-                if (savedSpeakerphone && (profile._volumeSpeakerPhone == 2))
+                if (savedSpeakerphone && (profile._volumeSpeakerPhone == 2)) // 2=speakerphone off
                     changeSpeakerphone = true;
-                if ((!savedSpeakerphone) && (profile._volumeSpeakerPhone == 1))
+                if ((!savedSpeakerphone) && (profile._volumeSpeakerPhone == 1)) // 1=speakerphone on
                     changeSpeakerphone = true;
                 if (changeSpeakerphone) {
+                    /// activate SpeakerPhone
                     audioManager.setSpeakerphoneOn(profile._volumeSpeakerPhone == 1);
                     speakerphoneSelected = true;
                 }
@@ -127,6 +128,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                     Thread.sleep(500); // Delay 0,5 seconds to wait for change audio mode
                 } catch (InterruptedException e) {
                 }
+                audioManager.setMode(AudioManager.MODE_NORMAL);
                 Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_LINK);
