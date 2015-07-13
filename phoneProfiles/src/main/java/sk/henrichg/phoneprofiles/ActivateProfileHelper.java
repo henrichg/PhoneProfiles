@@ -917,7 +917,7 @@ public class ActivateProfileHelper {
             GUIData.keepScreenOnView = null;
         }
 
-        GlobalData.logE("@@@ screenTimeoutLock.unlock","xxx");
+        GlobalData.logE("@@@ screenTimeoutLock.unlock", "xxx");
     }
 
 
@@ -949,6 +949,15 @@ public class ActivateProfileHelper {
             GUIData.brightneesView = new BrightnessView(context);
             windowManager.addView(GUIData.brightneesView, params);
         //}
+    }
+
+    public static void removeBrightnessView(Context context) {
+        if (GUIData.brightneesView != null)
+        {
+            WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager.removeView(GUIData.brightneesView);
+            GUIData.brightneesView = null;
+        }
     }
 
     public void showNotification(Profile profile)
