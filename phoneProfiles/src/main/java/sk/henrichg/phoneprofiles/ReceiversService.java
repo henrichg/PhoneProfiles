@@ -3,12 +3,15 @@ package sk.henrichg.phoneprofiles;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.IBinder;
 
 
 public class ReceiversService extends Service {
 
     private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
+
+    private static SettingsContentObserver settingsContentObserver;
 
     @Override
     public void onCreate()
@@ -22,12 +25,18 @@ public class ReceiversService extends Service {
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
         getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
+
+        settingsContentObserver = new SettingsContentObserver(getApplicationContext(), new Handler());
+        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
+
     }
 
     @Override
     public void onDestroy()
     {
         getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+
+        getApplicationContext().getContentResolver().unregisterContentObserver(settingsContentObserver);
     }
 
     @Override
