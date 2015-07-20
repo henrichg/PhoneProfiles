@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Профіль за замовчуванням</string>
   <string name="profile_preference_profile_end_no_activate">Не активуй</string>
   <string name="profile_preference_profile_not_set">Профіль не вибрано</string>
-  <string name="profile_preferences_duration">Тривалість (хвилин)</string>
+  <string name="profile_preferences_duration">Тривалість (сек.)</string>
   <string name="profile_preferences_afterDurationDo">Після тривалість зробити</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Нічого</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Анулювати профіль</string>
@@ -275,10 +275,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Режим тихого дзвінка перейменовано в Режим пріоритетності.</string>
   <string name="info_notification_silent_mode_lollipop">Режим пріоритетності: Для симуляції режиму тиші, встановіть мінімальну гучність (0) для дзвінків та сповіщень.</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Коли на вашому пристрої встановлено режим вібрації для мінімальної гучності дзвінків або сповіщень (0), додаток встановить гучність на 1. Ви можете використовувати тип дзвінків та сповіщень \"PhoneProfiles Silent\" для повної тиші.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
-  <string name="important_info_system">System</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 хвилин</string>
+  <string name="important_info_profiles">Профілі</string>
+  <string name="important_info_system">Системний</string>
   <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
   <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
   <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
 </resources>

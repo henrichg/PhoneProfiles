@@ -185,7 +185,7 @@
   <string name="profile_preferences_deviceAutoRotation">Obrót ekranu</string>
   <string name="title_activity_activator">Aktywator</string>
   <string name="title_activity_editor">Edytor</string>
-  <string name="array_pref_value_0_percent" formatted="false">0 %</string>
+  <string name="array_pref_value_0_percent" formatted="false">0%</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
   <string name="array_pref_value_50_percent" formatted="false">50%</string>
   <string name="array_pref_value_75_percent" formatted="false">75%</string>
@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Domyślny profil</string>
   <string name="profile_preference_profile_end_no_activate">Nie aktywuj</string>
   <string name="profile_preference_profile_not_set">Profil nie ustawiony</string>
-  <string name="profile_preferences_duration">Czas trwania (min)</string>
+  <string name="profile_preferences_duration">Czas trwania (s)</string>
   <string name="profile_preferences_afterDurationDo">Po czasie trwania wykonaj</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nic nie rób</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Cofnij profil</string>
@@ -266,19 +266,20 @@
   <string name="phone_profiles_pref_category_system">System</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Rozłącz ustawienia głośności dzwonka i powiadomień</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Usuń zaznaczenie gdy urządzenie ma oddzielne ustawienia głośności dla dzwonka i powiadomień</string>
-  <string name="profileicon_pref_dialog_info_about_status_bar_icon">If you change the color of the icon, the icon in the status bar will be white. If you select custom icon, in status bar will be application icon.</string>
+  <string name="profileicon_pref_dialog_info_about_status_bar_icon">Jeśli zmienisz kolor ikony, ikona w pasku stanu będzie biała. Jeśli zaznaczysz ikonę niestandardową, w pasku stanu będzie ikona aplikacji.</string>
   <string name="info_notification_title">Ważne informacje</string>
-  <string name="info_notification_unlink_ringer_notification_volumes">If your device has separated volume for ringer and notifications, click here for disabling volumes separation.</string>
+  <string name="info_notification_unlink_ringer_notification_volumes">Jeśli urządzenie ma oddzielne ustawienia głośności dzwonka i powiadomień, kliknij tutaj, aby to wyłączyć.</string>
   <string name="info_notification_text">Kliknij tutaj, aby pokazać ważne informacje</string>
   <string name="profile_preferences_deviceWiFiAP">Wi-Fi hotspot</string>
   <string name="array_pref_ringerModeArray_silentL">Tryb priorytetu</string>
-  <string name="info_notification_silent_mode_lollipop_rename">Silent ringer mode is renamed to Priority mode.</string>
-  <string name="info_notification_silent_mode_lollipop">Priority mode: For simulating silent mode, change volume for ringer and notifications in profile to minimal (0).</string>
-  <string name="info_notification_minimal_ringer_and_notification_volumes">When your device sets vibrate for minimal ringer or notification volume (0), application sets volume to 1. You can use ringer and notification tone \"PhoneProfiles Silent\" for full silence.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
+  <string name="info_notification_silent_mode_lollipop_rename">Tryb Cichy dzwonka jest przemianowany na tryb Priorytetu.</string>
+  <string name="info_notification_silent_mode_lollipop">Tryb priorytetu: Aby zasymulować tryb cichy, zmień głośność dzwonka oraz powiadomień w profilu na minimalne (0).</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">When your device sets vibration for minimal ringer or notification volume (0), application sets volume to 1. You can use ringer and notification tone \"PhoneProfiles Silent\" for full silence.</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minut</string>
+  <string name="important_info_profiles">Profile</string>
   <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="important_info_profile_root">Niektóre ustawienia profilu wymagają uprawnień ROOTA. Preferencje te oznaczone są \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Niektóre ustawienia profilu wymagają zainstalowanego PPHelper. Preferencje te oznaczone są \"(H)\".</string>
+  <string name="important_info_pphelper_installation">Instalacja PPHelper wymaga uprawnień ROOTA. Instalacji PPHelper można dokonać w Edytorze, za pośrednictwem elementu menu \"Zainstaluj PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">Jeśli masz urządzenie Sony z włączonym trybem \"Stamina\" w \"Zarządzanie energią\", proszę dodać PhoneProfiless do \"Aplikacji działających w trybie gotowości\". Bez tego aplikacja nie będzie działać poprawnie.</string>
 </resources>

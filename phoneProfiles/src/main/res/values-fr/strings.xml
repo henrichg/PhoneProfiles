@@ -72,7 +72,7 @@
   <string name="profile_preferences_deviceBluetooth">Bluetooth</string>
   <string name="profile_preferences_deviceGPS">(R) GPS</string>
   <string name="profile_preferences_deviceNFC">(H) NFC</string>
-  <string name="profile_preferences_deviceScreenTimeout">Timeout écran</string>
+  <string name="profile_preferences_deviceScreenTimeout">Extinction écran</string>
   <string name="profile_preferences_deviceBrightness">Luminosité de l\'écran</string>
   <string name="profile_preferences_deviceWallpaper">Fond d\'écran</string>
   <string name="profile_preferences_deviceWallpaperChange">Changer le papier peint</string>
@@ -89,7 +89,7 @@
   <string name="array_pref_screenTimeoutArray_1minute">1 minute</string>
   <string name="array_pref_screenTimeoutArray_2minutes">2 minutes</string>
   <string name="array_pref_screenTimeoutArray_10minutes">10 minutes</string>
-  <string name="array_pref_screenTimeoutArray_never_timeout">Jamais de timeout</string>
+  <string name="array_pref_screenTimeoutArray_never_timeout">Aucun délai</string>
   <string name="phone_profiles_pref_applicationLanguage">Langue</string>
   <string name="phone_profiles_pref_applicationLanguage_system">Système</string>
   <string name="phone_profiles_pref_applicationLanguage_en">English</string>
@@ -185,7 +185,7 @@
   <string name="profile_preferences_deviceAutoRotation">Rotation d\'écran</string>
   <string name="title_activity_activator">Sélection</string>
   <string name="title_activity_editor">Editeur</string>
-  <string name="array_pref_value_0_percent" formatted="false">0 %</string>
+  <string name="array_pref_value_0_percent" formatted="false">0%</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
   <string name="array_pref_value_50_percent" formatted="false">50%</string>
   <string name="array_pref_value_75_percent" formatted="false">75%</string>
@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Profil par défaut</string>
   <string name="profile_preference_profile_end_no_activate">Aucune activation</string>
   <string name="profile_preference_profile_not_set">Profil non défini</string>
-  <string name="profile_preferences_duration">Durée (min)</string>
+  <string name="profile_preferences_duration">Durée (sec)</string>
   <string name="profile_preferences_afterDurationDo">Après la durée faire</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Rien</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Désactiver le profil</string>
@@ -263,7 +263,7 @@
   <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Afficher dans la barre d\'État et dans l\'écran de verrouillage</string>
   <string name="profileicon_pref_dialog_customColor_button">Changer de couleur</string>
   <string name="colorChooser_pref_dialog_title">Définir la couleur</string>
-  <string name="phone_profiles_pref_category_system">System</string>
+  <string name="phone_profiles_pref_category_system">Système</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Délier volumes et sonnerie de notification</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Décochez lorsque votre appareil a le volume de la sonnerie et des notifications séparé</string>
   <string name="profileicon_pref_dialog_info_about_status_bar_icon">Si vous modifiez la couleur de l\'icône, l\'icône dans la barre d\'état sera blanche. Si vous sélectionnez une icône personnalisée, l\'icône de la barre d\'état sera l\'icône de l\'application.</string>
@@ -275,10 +275,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Le mode silencieux est renommé en mode priorité.</string>
   <string name="info_notification_silent_mode_lollipop">Mode priorité : pour simuler le mode silencieux, modifier le volume de sonnerie et de notification à la valeur minimale (0) dans profil.</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Lorsque votre appareil met le mode vibration quand le volmue de sonnerie ou de notification est à (0), l\'application met le volume à 1. Vous pouvez mettre la sonnerie « PhoneProfiles silencieux » pour obtenir le silence complet.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
-  <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
+  <string name="important_info_profiles">Profils</string>
+  <string name="important_info_system">Système</string>
+  <string name="important_info_profile_root">Les préférences de ce type nécessitent des privilèges ROOT. Ces préférences sont marqués avec « (R) ».</string>
+  <string name="important_info_profile_pphelper">Les préférences de ce type nécessitent d\'installer PPHelper . Ces préférences sont marqués avec « (H) ».</string>
+  <string name="important_info_pphelper_installation">L\'installation de PPHelper nécessite des privilèges ROOT. Vous pouvez installer PPHelper via le menu « Installer PPHelper ».</string>
+  <string name="important_into_sony_stamina_mode">Sivous avez un appareil  Sony et que le mode « Endurance» est activé dans « Gestion de l\'alimentation », veuillez ajouter PhoneProfiles dans « Application active en mode veille ». Sans cela, l\'application ne fonctionnera pas correctement.</string>
 </resources>

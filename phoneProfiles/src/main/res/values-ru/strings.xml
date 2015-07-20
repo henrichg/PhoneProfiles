@@ -40,7 +40,7 @@
   <string name="phone_profiles_pref_category_start">Запуск приложения</string>
   <string name="phone_profiles_pref_category_notifications">Уведомления</string>
   <string name="phone_profiles_pref_applicationActivate">Активировать профиль после загрузки устройства</string>
-  <string name="phone_profiles_pref_applicationClose">Закрыть главный интерфейс после активации профиля</string>
+  <string name="phone_profiles_pref_applicationClose">Закрывать после активации профиля</string>
   <string name="phone_profiles_pref_applicationPrefIndicator">Показывать индикатор настроек</string>
   <string name="phone_profiles_pref_applicationHeader">Показывать активированный профиль</string>
   <string name="phone_profiles_pref_applicationAlert">Запрос на активацию профиля</string>
@@ -162,7 +162,7 @@
   <string name="phone_profiles_pref_applicationWidgetLightnessB">Светлость фона</string>
   <string name="phone_profiles_pref_applicationWidgetLightnessT">Светлость текста</string>
   <string name="phone_profiles_pref_applicationWidgetLightnessI">Светлость иконки</string>
-  <string name="dashclock_extension_description">Отображает активный профиль с кнопкой настроек. Открывает Активатор по прикосновению.</string>
+  <string name="dashclock_extension_description">Отображает активный профиль с индикатором настроек. Открывает Активатор по прикосновению.</string>
   <string name="phone_profiles_pref_category_widget_icon_shortcut">Виджет «Иконка»; Ярлык</string>
   <string name="array_pref_widgetColor_colorful">Цветной</string>
   <string name="array_pref_widgetColor_monochrome">Монохромный</string>
@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Профиль по умолчанию</string>
   <string name="profile_preference_profile_end_no_activate">Не активировать</string>
   <string name="profile_preference_profile_not_set">Профиль не выбран</string>
-  <string name="profile_preferences_duration">Продолжительность (минут)</string>
+  <string name="profile_preferences_duration">Продолжительность (сек)</string>
   <string name="profile_preferences_afterDurationDo">По окончанию действия профиля</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ничего</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Отменить данный профиль</string>
@@ -274,10 +274,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Режим \"Без звука\" переименован в режим \"Приоритет\".</string>
   <string name="info_notification_silent_mode_lollipop">Режим \"Приоритет\": для имитации режима \"Без звука\", установите минимальную громкость звонка и уведомлений в профиле (0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Когда ваше устройство настроено вибрировать при минимальной громкости звонков и уведомлений (0), приложение устанавливает громкость 1. Для настройки полностью беззвучного режима, используйте режим звонка и уведомлений «PhoneProfiles Silent».</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
-  <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 минут</string>
+  <string name="important_info_profiles">Профили</string>
+  <string name="important_info_system">Системные</string>
+  <string name="important_info_profile_root">Некоторые настройки профиля требует привилегий ROOT. Эти настройки  отмечены буквой \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Некоторые настройки профиля требует установленного PPHelper. Эти предпочтения отмечены буквой \"(H)\".</string>
+  <string name="important_info_pphelper_installation">Установка PPHelper\'а требует привилегий ROOT. Чтобы установить PPHelper - в меню Редактора нажмите \"Установить PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">Если вас устройство Sony и включён режим «Stamina» в «Управление питанием», пожалуйста, добавьте PhoneProfiles в список «приложения, активные в режиме ожидания». Без этого приложение не будет работать правильно.</string>
 </resources>

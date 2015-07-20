@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Perfil per defecte</string>
   <string name="profile_preference_profile_end_no_activate">Sense activar</string>
   <string name="profile_preference_profile_not_set">Perfil no definit</string>
-  <string name="profile_preferences_duration">Durada (min)</string>
+  <string name="profile_preferences_duration">Durada (sec)</string>
   <string name="profile_preferences_afterDurationDo">Després de durada fer</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Res</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Desfer el perfil</string>
@@ -275,10 +275,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Mode en silenci es re-nombrat al  mode prioritat.</string>
   <string name="info_notification_silent_mode_lollipop">Mode de prioritat: per simular mode silenciós, canviar el volum, del so i de les notificacions, en el perfil pel mínim (0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Quan el seu dispositiu estableix la vibració al mínim, volum (0), l\'aplicació defineix el volum a 1. Pot utilitzar so i notificació \"PhoneProfiles silenci\" per silenci absolut.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
-  <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minuts</string>
+  <string name="important_info_profiles">Perfils</string>
+  <string name="important_info_system">Sistema</string>
+  <string name="important_info_profile_root">Les preferències del mateix perfil requereixen permisos de ROOT. Aquestes preferències es marquen amb una \"R\".</string>
+  <string name="important_info_profile_pphelper">Les preferències del mateix perfil requereixen tenir instal·lat PPHelper. Aquestes preferències es marquen amb una \"(H)\".</string>
+  <string name="important_info_pphelper_installation">La instal·lació de PPHelper requereix permisos de ROOT. Pots executar-ho des de l\'Editor, en la opció de menú \"Instal·lar PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">Si vostè té un dispositiu de Sony i habilitat el modus \"Stamina\" a la opció Administració d\'energia, si us plau afegiu PhoneProfiles a \"Apps active in standby\". Sense això, l\'aplicació no funciona correctament.</string>
 </resources>

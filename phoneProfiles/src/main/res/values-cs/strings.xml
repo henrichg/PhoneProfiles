@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Předvolený profil</string>
   <string name="profile_preference_profile_end_no_activate">Neaktivovat</string>
   <string name="profile_preference_profile_not_set">Nevybrán žádný profil</string>
-  <string name="profile_preferences_duration">Trvání (min.)</string>
+  <string name="profile_preferences_duration">Trvání (sek.)</string>
   <string name="profile_preferences_afterDurationDo">Po uplynutí trvání udělej</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nic</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Vrať zpět profil</string>
@@ -274,10 +274,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Tichý režim zvonění je přejmenován na Prioritní režim.</string>
   <string name="info_notification_silent_mode_lollipop">Prioritní režim: Pro simulaci tichého režimu, změňte hlasitost vyzvánění a notifikací v profilu na minimální(0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">Když vaše zařízení nastaví vibrování při minimální hodnotě (0), hlasitosti vyzvánění nebo oznámení, aplikace nastaví hlasitost na 1. Můžete použít tón \"PhoneProfiles Silent\" pro vyzvánění a oznámení pro nastavení úplného ticha.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
-  <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minut</string>
+  <string name="important_info_profiles">Profily</string>
+  <string name="important_info_system">Systém</string>
+  <string name="important_info_profile_root">Některé parametry profilu vyžadují práva ROOT. Tyto parametry jsou označena jako \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Některé parametry profilu vyžadují nainstalovaný PPHelper. Tyto parametry jsou označeny jako \"(H)\".</string>
+  <string name="important_info_pphelper_installation">Instalace PPHelper vyžaduje práva ROOT. Instalaci vyvoláte v Editoru přes položku menu \"Nainstaluj PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">Když máte zařízení od Sony a zapnutý režim \"Výdrž\" v \"Řízení spotřeby\", prosím přidejte PhoneProfiles do \"Aplikace aktivní i v pohot. režimu\". Bez toho aplikace nebude pracovat správně.</string>
 </resources>

@@ -185,7 +185,7 @@
   <string name="profile_preferences_deviceAutoRotation">Rotazione display</string>
   <string name="title_activity_activator">Attivatore</string>
   <string name="title_activity_editor">Editor</string>
-  <string name="array_pref_value_0_percent" formatted="false">0 %</string>
+  <string name="array_pref_value_0_percent" formatted="false">0%</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
   <string name="array_pref_value_50_percent" formatted="false">50%</string>
   <string name="array_pref_value_75_percent" formatted="false">75%</string>
@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Profilo predefinito</string>
   <string name="profile_preference_profile_end_no_activate">Nessuna attivazione</string>
   <string name="profile_preference_profile_not_set">Profilo non impostato</string>
-  <string name="profile_preferences_duration">Durata (min)</string>
+  <string name="profile_preferences_duration">Durata (sec)</string>
   <string name="profile_preferences_afterDurationDo">Dopo una durata fai</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Niente</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Annulla il profilo</string>
@@ -274,11 +274,12 @@
   <string name="array_pref_ringerModeArray_silentL">Priority mode</string>
   <string name="info_notification_silent_mode_lollipop_rename">Silent ringer mode is renamed to Priority mode.</string>
   <string name="info_notification_silent_mode_lollipop">Priority mode: For simulating silent mode, change volume for ringer and notifications in profile to minimal (0).</string>
-  <string name="info_notification_minimal_ringer_and_notification_volumes">When your device sets vibrate for minimal ringer or notification volume (0), application sets volume to 1. You can use ringer and notification tone \"PhoneProfiles Silent\" for full silence.</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">When your device sets vibration for minimal ringer or notification volume (0), application sets volume to 1. You can use ringer and notification tone \"PhoneProfiles Silent\" for full silence.</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
   <string name="important_info_profiles">Profiles</string>
   <string name="important_info_system">System</string>
   <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
   <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
   <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
 </resources>

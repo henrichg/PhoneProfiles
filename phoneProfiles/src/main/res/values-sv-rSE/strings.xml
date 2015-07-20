@@ -185,7 +185,7 @@
   <string name="profile_preferences_deviceAutoRotation">Visa rotation</string>
   <string name="title_activity_activator">Väljare</string>
   <string name="title_activity_editor">Redigerare</string>
-  <string name="array_pref_value_0_percent" formatted="false">0 %</string>
+  <string name="array_pref_value_0_percent" formatted="false">0%</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
   <string name="array_pref_value_50_percent" formatted="false">50%</string>
   <string name="array_pref_value_75_percent" formatted="false">75%</string>
@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standardprofil</string>
   <string name="profile_preference_profile_end_no_activate">Aktivera inte</string>
   <string name="profile_preference_profile_not_set">Profil inte inställd</string>
-  <string name="profile_preferences_duration">Varaktighet (min)</string>
+  <string name="profile_preferences_duration">Varaktighet (sek)</string>
   <string name="profile_preferences_afterDurationDo">Efter varaktighet gör</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ingenting</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Ångra profilen</string>
@@ -275,10 +275,11 @@
   <string name="info_notification_silent_mode_lollipop_rename">Ljudlöst ringsignalläge är omdöpt till prioriterat läge.</string>
   <string name="info_notification_silent_mode_lollipop">Prioriterat läge: för att simulera tyst läge, ändrar volymen för ring- och meddelandesignaler i profil till minimal (0).</string>
   <string name="info_notification_minimal_ringer_and_notification_volumes">När din enhet sätter vibration till minimal volym (0), anges volym 1. Du kan använda \"PhoneProfiles Silent\" för fullständig tystnad.</string>
-  <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="important_info_profiles">Profiles</string>
+  <string name="array_pref_screenTimeoutArray_5minutes">5 minuter</string>
+  <string name="important_info_profiles">Profiler</string>
   <string name="important_info_system">System</string>
-  <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
-  <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
-  <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="important_info_profile_root">Vissa profilinställningar kräver ROOT-privilegier. Dessa inställningar är markerade med \"(R)\".</string>
+  <string name="important_info_profile_pphelper">Vissa profil inställningar kräver installerad PPHelper. Dessa inställningar är markerade med \"(H)\".</string>
+  <string name="important_info_pphelper_installation">PPHelper installation kräver ROOT-privilegier. Du kan anropa PPHelper installation i Redigeraren, via menyalternativet \"Installera PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
 </resources>

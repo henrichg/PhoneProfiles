@@ -185,7 +185,7 @@
   <string name="profile_preferences_deviceAutoRotation">Scherm rotatie</string>
   <string name="title_activity_activator">Activator</string>
   <string name="title_activity_editor">Editor</string>
-  <string name="array_pref_value_0_percent" formatted="false">0 %</string>
+  <string name="array_pref_value_0_percent" formatted="false">0%</string>
   <string name="array_pref_value_25_percent" formatted="false">25%</string>
   <string name="array_pref_value_50_percent" formatted="false">50%</string>
   <string name="array_pref_value_75_percent" formatted="false">75%</string>
@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standaardprofiel</string>
   <string name="profile_preference_profile_end_no_activate">Niet actief</string>
   <string name="profile_preference_profile_not_set">Profiel niet ingesteld</string>
-  <string name="profile_preferences_duration">Duur (min)</string>
+  <string name="profile_preferences_duration">Duur (sec)</string>
   <string name="profile_preferences_afterDurationDo">Bij einde duur doe</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Niets</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Profiel ongedaan maken</string>
@@ -258,27 +258,28 @@
   <string name="preference_profile_adaptiveBrightness">Optimaal</string>
   <string name="profile_preferences_deviceKeyguard">Schermvergrendeling</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Profielnaam verbergen (widget)</string>
-  <string name="profile_preferences_vibrationOnTouch">Vibration on touch</string>
-  <string name="phone_profiles_pref_notificationShowInStatusBar">Show in status bar</string>
-  <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Show in status bar and lockscreen</string>
-  <string name="profileicon_pref_dialog_customColor_button">Change color</string>
-  <string name="colorChooser_pref_dialog_title">Set color</string>
-  <string name="phone_profiles_pref_category_system">System</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Unlink ringer and notif. volumes</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Uncheck when your device has separated volume for ringer and notifications</string>
-  <string name="profileicon_pref_dialog_info_about_status_bar_icon">If you change the color of the icon, the icon in the status bar will be white. If you select custom icon, in status bar will be application icon.</string>
-  <string name="info_notification_title">Important info</string>
-  <string name="info_notification_unlink_ringer_notification_volumes">If your device has separated volume for ringer and notifications, click here for disabling volumes separation.</string>
-  <string name="info_notification_text">Click here for show important info</string>
-  <string name="profile_preferences_deviceWiFiAP">Wi-Fi hotspot</string>
-  <string name="array_pref_ringerModeArray_silentL">Priority mode</string>
-  <string name="info_notification_silent_mode_lollipop_rename">Silent ringer mode is renamed to Priority mode.</string>
-  <string name="info_notification_silent_mode_lollipop">Priority mode: For simulating silent mode, change volume for ringer and notifications in profile to minimal (0).</string>
-  <string name="info_notification_minimal_ringer_and_notification_volumes">When your device sets vibrate for minimal ringer or notification volume (0), application sets volume to 1. You can use ringer and notification tone \"PhoneProfiles Silent\" for full silence.</string>
+  <string name="profile_preferences_vibrationOnTouch">Trillingen bij aanraken</string>
+  <string name="phone_profiles_pref_notificationShowInStatusBar">In statusbalk weergeven</string>
+  <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">In de statusbalk en lockscreen weergeven</string>
+  <string name="profileicon_pref_dialog_customColor_button">Kleur veranderen</string>
+  <string name="colorChooser_pref_dialog_title">Kleur instellen</string>
+  <string name="phone_profiles_pref_category_system">Systeem</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes">Beltoon en meldingen ontkoppelen. volumes</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Uitschakelen wanneer uw apparaat gescheiden volume voor beltoon en meldingen heeft</string>
+  <string name="profileicon_pref_dialog_info_about_status_bar_icon">Als u de kleur van het pictogram veranderd zal het pictogram in de statusbalk wit worden. Als u de aangepaste pictogram inschakelt, zal het pictogram van de toepassing op de statusbalk worden gebruikt.</string>
+  <string name="info_notification_title">Belangrijke informatie</string>
+  <string name="info_notification_unlink_ringer_notification_volumes">Als uw apparaat gescheiden volume voor beltoon en meldingen heeft, kunt u hier volumes scheiding uitschakelen.</string>
+  <string name="info_notification_text">Klik hier om belangrijke informatie te tonen</string>
+  <string name="profile_preferences_deviceWiFiAP">Wifi-hotspot</string>
+  <string name="array_pref_ringerModeArray_silentL">Prioriteitsmodus</string>
+  <string name="info_notification_silent_mode_lollipop_rename">Stille beltoon modus is gewijzigd in Prioriteitsmodus.</string>
+  <string name="info_notification_silent_mode_lollipop">Prioriteitsmodus: voor het simuleren van stille modus, volume voor beltoon en meldingen in profiel wijzigen naar minimaal (0).</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">Wanneer uw Apparaat automatisch op trillen gaat bij de laagste bel en meldingen volume (0), wordt toepassing volume automatisch ingesteld op 1. U kunt beltoon en meldingen optie \"Stille Telefoon profiel\" gebruiken voor volledige stilte.</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
   <string name="important_info_profiles">Profiles</string>
   <string name="important_info_system">System</string>
   <string name="important_info_profile_root">Some profile preferences requires ROOT privileges. These preferences are marked with \"(R)\".</string>
   <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
   <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
+  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
 </resources>
