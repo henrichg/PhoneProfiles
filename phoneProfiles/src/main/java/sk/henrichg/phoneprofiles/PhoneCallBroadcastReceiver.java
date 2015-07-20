@@ -92,7 +92,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         speakerphoneSelected = false;
 
-        Log.e("PhoneCallBroadcastReceiver", "onIncomingCallStarted - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
+        //Log.e("PhoneCallBroadcastReceiver", "onIncomingCallStarted - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
 
         if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
             /// for linked ringer and notification volume:
@@ -118,7 +118,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     }
 
     private void setBackNotificationVolume() {
-        Log.e("PhoneCallBroadcastReceiver", "setBackNotificationVolume - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
+        //Log.e("PhoneCallBroadcastReceiver", "setBackNotificationVolume - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
 
         if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
             DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
