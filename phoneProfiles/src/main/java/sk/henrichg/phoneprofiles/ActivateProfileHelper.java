@@ -582,12 +582,24 @@ public class ActivateProfileHelper {
             switch (zenMode) {
                 case 1:
                     setZenMode(ZENMODE_ALL);
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 2:
                     setZenMode(ZENMODE_PRIORITY);
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 3:
                     setZenMode(ZENMODE_NONE);
+                    // no change ringer mode
+                    //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    break;
+                case 4:
+                    setZenMode(ZENMODE_ALL);
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                    break;
+                case 5:
+                    setZenMode(ZENMODE_PRIORITY);
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     break;
             }
             break;
