@@ -248,8 +248,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">Для удаления PPHelper требуется ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Удаление PPHelper</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Требуется перезапуск приложения. Выполнить?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Режимы оповещения</string>
-  <string name="profile_preferences_volumeZenMode">(R) Типы режима оповещения</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Режимы оповещения</string>
+  <string name="profile_preferences_volumeZenMode">(S) Типы режима оповещения</string>
   <string name="array_pref_zenModeArray_all">Все</string>
   <string name="array_pref_zenModeArray_priority">Важные</string>
   <string name="array_pref_zenModeArray_none">Не</string>

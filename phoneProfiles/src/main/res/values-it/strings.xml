@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">Disinstallazione di PPHelper richiede ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Disinstallazione di PPHelper</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">È richiesto un riavvio. Riavviare ora?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Interruzioni</string>
-  <string name="profile_preferences_volumeZenMode">(R) Tipo di interruzioni</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Interruzioni</string>
+  <string name="profile_preferences_volumeZenMode">(S) Tipo di interruzioni</string>
   <string name="array_pref_zenModeArray_all">Tutto</string>
   <string name="array_pref_zenModeArray_priority">Priorità</string>
   <string name="array_pref_zenModeArray_none">Nessuno</string>

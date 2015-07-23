@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper verwijdering vereist ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper verwijderen</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Opnieuw opstarten is vereist. Nu opnieuw opstarten?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Onderbrekingen</string>
-  <string name="profile_preferences_volumeZenMode">(R) Onderbrekingen type</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Onderbrekingen</string>
+  <string name="profile_preferences_volumeZenMode">(S) Onderbrekingen type</string>
   <string name="array_pref_zenModeArray_all">Alles</string>
   <string name="array_pref_zenModeArray_priority">Prioriteit</string>
   <string name="array_pref_zenModeArray_none">Geen</string>

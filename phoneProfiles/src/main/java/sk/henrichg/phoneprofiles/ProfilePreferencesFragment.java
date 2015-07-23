@@ -65,6 +65,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     static final int BUTTON_CANCEL = 1;
     static final int BUTTON_SAVE = 2;
 
+    static final String PREF_NOTIFICATION_ACCESS = "prf_pref_volumeNotificationsAccessSettings";
+    static final int RESULT_NOTIFICATION_ACCESS_SETTINGS = 1980;
+
     private OnShowActionMode onShowActionModeCallback = sDummyOnShowActionModeCallback;
     private OnHideActionMode onHideActionModeCallback = sDummyOnHideActionModeCallback;
     private OnRestartProfilePreferences onRestartProfilePreferencesCallback = sDummyOnRestartProfilePreferencesCallback;
@@ -299,6 +302,16 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             Preference zenModePreference = prefMng.findPreference(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
             zenModePreference.setEnabled((profile._volumeRingerMode == 5) && canEnableZenMode);
 
+            Preference notificationAccessPreference = prefMng.findPreference(PREF_NOTIFICATION_ACCESS);
+            notificationAccessPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                    startActivityForResult(intent, RESULT_NOTIFICATION_ACCESS_SETTINGS);
+                    return false;
+                }
+            });
+
             ringerModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -308,6 +321,11 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                         iNewValue = 0;
                     else
                         iNewValue = Integer.parseInt(sNewValue);
+
+                    final boolean canEnableZenMode =
+                            (PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext()) ||
+                                    (GlobalData.isRooted(false) && GlobalData.settingsBinaryExists())
+                            );
 
                     Preference zenModePreference = prefMng.findPreference(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
 
@@ -325,9 +343,15 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         }
         else
         {
-            // remove zen mode types from preferences screen
+            // remove zen mode preferences from preferences screen
             // for Android version < 5.0 this is not supported
             Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
+            if (preference != null)
+            {
+                PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("prf_pref_volumeCategory");
+                preferenceCategory.removePreference(preference);
+            }
+            preference = prefMng.findPreference(PREF_NOTIFICATION_ACCESS);
             if (preference != null)
             {
                 PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("prf_pref_volumeCategory");
@@ -419,6 +443,15 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             if (changedProfileIconPreference != null)
                 // nastavime image identifikatoru na ziskanu cestu ku obrazku
                 changedProfileIconPreference.setImageIdentifierAndType(picturePath, false, true);
+        }
+        if (requestCode == RESULT_NOTIFICATION_ACCESS_SETTINGS) {
+            final boolean canEnableZenMode =
+                    (PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext()) ||
+                            (GlobalData.isRooted(false) && GlobalData.settingsBinaryExists())
+                    );
+
+            final String sZenModeType = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, "");
+            setSummary(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, sZenModeType);
         }
     }
 
@@ -651,7 +684,17 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                     int index = listPreference.findIndexOfValue(sValue);
                     CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
                     listPreference.setSummary(summary);
-                    setTitleStyle(listPreference, index > 0, false);
+
+                    final String sRingerMode = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE, "");
+                    int iRingerMode;
+                    if (sRingerMode.isEmpty())
+                        iRingerMode = 0;
+                    else
+                        iRingerMode = Integer.parseInt(sRingerMode);
+
+                    if (iRingerMode == 5)
+                        setTitleStyle(listPreference, index > 0, false);
+                    listPreference.setEnabled(iRingerMode == 5);
                 }
             }
         }

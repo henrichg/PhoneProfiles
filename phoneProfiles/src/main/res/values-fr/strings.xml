@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">La désinstallation de PPHelper nécessite un accés ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Désinstallation de PPHelper</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Redémarrage nécessaire. Redémarrer maintenant ?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Interruptions</string>
-  <string name="profile_preferences_volumeZenMode">(R) type d\'interruptions</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Interruptions</string>
+  <string name="profile_preferences_volumeZenMode">(S) type d\'interruptions</string>
   <string name="array_pref_zenModeArray_all">Tous</string>
   <string name="array_pref_zenModeArray_priority">Priorité</string>
   <string name="array_pref_zenModeArray_none">Aucun</string>

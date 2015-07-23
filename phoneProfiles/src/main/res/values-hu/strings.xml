@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper eltávolításához ROOT jog kell</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper eltávolítás</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Újraindításra van szükség. Újraindítja most?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Megszakítások</string>
-  <string name="profile_preferences_volumeZenMode">(R) Megszakítások típusa</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Megszakítások</string>
+  <string name="profile_preferences_volumeZenMode">(S) Megszakítások típusa</string>
   <string name="array_pref_zenModeArray_all">Mindegyik</string>
   <string name="array_pref_zenModeArray_priority">Elsőbbség</string>
   <string name="array_pref_zenModeArray_none">None</string>

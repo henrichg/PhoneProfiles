@@ -248,8 +248,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelfer-Deinstallation benötigt root</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelfer-Deinstallation</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Neustart nötig. Jetzt neu starten?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Unterbrechungen</string>
-  <string name="profile_preferences_volumeZenMode">(R) Unterbrechungen-Typ</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Unterbrechungen</string>
+  <string name="profile_preferences_volumeZenMode">(S) Unterbrechungen-Typ</string>
   <string name="array_pref_zenModeArray_all">Alle</string>
   <string name="array_pref_zenModeArray_priority">Wichtig</string>
   <string name="array_pref_zenModeArray_none">Keine</string>

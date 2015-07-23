@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">Щоб деінсталювати PPHelper, необхідний ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Деінсталяція PPHelper</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Необхідно перезавантажити. Перезавантажити зараз?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Режими сповіщень</string>
-  <string name="profile_preferences_volumeZenMode">(R) Типи режиму сповіщень</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Режими сповіщень</string>
+  <string name="profile_preferences_volumeZenMode">(S) Типи режиму сповіщень</string>
   <string name="array_pref_zenModeArray_all">Усі</string>
   <string name="array_pref_zenModeArray_priority">Важливі</string>
   <string name="array_pref_zenModeArray_none">Ні</string>

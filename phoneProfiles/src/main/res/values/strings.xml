@@ -249,8 +249,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper uninstallation requires ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper uninstallation</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Restart is required. Restart now?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Interruptions</string>
-  <string name="profile_preferences_volumeZenMode">(R) Interruptions type</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Interruptions</string>
+  <string name="profile_preferences_volumeZenMode">(S) Interruptions type</string>
   <string name="array_pref_zenModeArray_all">All</string>
   <string name="array_pref_zenModeArray_priority">Priority</string>
   <string name="array_pref_zenModeArray_none">None</string>
@@ -282,4 +282,7 @@
   <string name="important_info_profile_pphelper">Some profile preferences requires installed PPHelper. These preferences are marked with \"(H)\".</string>
   <string name="important_info_pphelper_installation">PPHelper installation requires ROOT privileges. You can invoke PPHelper installation in Editor, via menu item \"Install PPHelper\".</string>
   <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
+  <string name="important_info_profile_settings">Some profile preferences requires changes in system Settings. These preferences are marked with \"(S)\".</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
 </resources>

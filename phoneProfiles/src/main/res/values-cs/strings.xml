@@ -248,8 +248,8 @@
   <string name="phoneprofilehepler_uninstall_error_no_root">Odinstalace PPHelperu vyžaduje ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Odinstalace PPHelperu</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Je nutný restart zařízení. Restartovat nyní?</string>
-  <string name="array_pref_ringerModeArray_ZenMode">Vyrušení</string>
-  <string name="profile_preferences_volumeZenMode">(R) Typy vyrušení</string>
+  <string name="array_pref_ringerModeArray_ZenMode">(S) Vyrušení</string>
+  <string name="profile_preferences_volumeZenMode">(S) Typy vyrušení</string>
   <string name="array_pref_zenModeArray_all">Vše</string>
   <string name="array_pref_zenModeArray_priority">Prioritní</string>
   <string name="array_pref_zenModeArray_none">Žádné</string>
