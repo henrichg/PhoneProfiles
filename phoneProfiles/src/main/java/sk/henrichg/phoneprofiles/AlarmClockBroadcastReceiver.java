@@ -29,8 +29,8 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
                 profile = GlobalData.getMappedProfile(profile, context);
 
                 if (profile != null) {
-                    PPNotificationListenerService.requestInterruptionFilter(context.getApplicationContext(),
-                            NotificationListenerService.INTERRUPTION_FILTER_ALL);
+                    /*PPNotificationListenerService.requestInterruptionFilter(context.getApplicationContext(),
+                            NotificationListenerService.INTERRUPTION_FILTER_ALL);*/
                 }
             }
         }

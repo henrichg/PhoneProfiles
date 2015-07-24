@@ -31,8 +31,6 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         profile = GlobalData.getMappedProfile(profile, context);
         if (profile != null)
         {
-            SettingsContentObserver.internalChange = true;
-
             AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
             // set ringer mode to Ring for proper change ringer mode to Silent
