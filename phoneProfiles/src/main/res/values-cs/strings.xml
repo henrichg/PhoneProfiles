@@ -281,4 +281,9 @@
   <string name="important_info_profile_pphelper">Některé parametry profilu vyžadují nainstalovaný PPHelper. Tyto parametry jsou označeny jako \"(H)\".</string>
   <string name="important_info_pphelper_installation">Instalace PPHelper vyžaduje práva ROOT. Instalaci vyvoláte v Editoru přes položku menu \"Nainstaluj PPHelper\".</string>
   <string name="important_into_sony_stamina_mode">Když máte zařízení od Sony a zapnutý režim \"Výdrž\" v \"Řízení spotřeby\", prosím přidejte PhoneProfiles do \"Aplikace aktivní i v pohot. režimu\". Bez toho aplikace nebude pracovat správně.</string>
+  <string name="important_info_profile_settings">Některé parametry profilu vyžadují změny nastavení v systémových Nastaveních. Tyto parametry jsou označena jako \"(S)\".</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_title">Přístup k upozorněním</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Povol PhoneProfilesPlus v systémovém nastavení \"Přístup k upozorněním\", pro povolení parametru profilu \"Typy vyrušení\".</string>
+  <string name="array_pref_zenModeArray_allWithVibration">Vše s vibrací</string>
+  <string name="array_pref_zenModeArray_priorityWithVibration">Prioritní s vibrací</string>
 </resources>

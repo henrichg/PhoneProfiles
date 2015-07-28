@@ -250,7 +250,7 @@
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper avinstallation</string>
   <string name="phoneprofilehepler_reboot_message_uninstall">Omstart krävs. Starta om nu?</string>
   <string name="array_pref_ringerModeArray_ZenMode">(S) Avbrott</string>
-  <string name="profile_preferences_volumeZenMode">(S) avbrottstyp</string>
+  <string name="profile_preferences_volumeZenMode">(S) Avbrottstyp</string>
   <string name="array_pref_zenModeArray_all">Alla</string>
   <string name="array_pref_zenModeArray_priority">Prioritet</string>
   <string name="array_pref_zenModeArray_none">inga</string>
@@ -281,5 +281,10 @@
   <string name="important_info_profile_root">Vissa profilinställningar kräver ROOT-privilegier. Dessa inställningar är markerade med \"(R)\".</string>
   <string name="important_info_profile_pphelper">Vissa profil inställningar kräver installerad PPHelper. Dessa inställningar är markerade med \"(H)\".</string>
   <string name="important_info_pphelper_installation">PPHelper installation kräver ROOT-privilegier. Du kan anropa PPHelper installation i Redigeraren, via menyalternativet \"Installera PPHelper\".</string>
-  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
+  <string name="important_into_sony_stamina_mode">När du har Sony enhet och aktiverat \"Stamina\" läge i \"Power management\", Lägg till PhoneProfiles till \"Apps aktiva i standby\". Utan detta fungerar programmet inte korrekt.</string>
+  <string name="important_info_profile_settings">Some profile preferences requires changes in system Settings. These preferences are marked with \"(S)\".</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
+  <string name="array_pref_zenModeArray_allWithVibration">All with vibration</string>
+  <string name="array_pref_zenModeArray_priorityWithVibration">Priority with vibration</string>
 </resources>

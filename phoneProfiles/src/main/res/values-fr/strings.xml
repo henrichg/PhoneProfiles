@@ -282,4 +282,9 @@
   <string name="important_info_profile_pphelper">Les préférences de ce type nécessitent d\'installer PPHelper . Ces préférences sont marqués avec « (H) ».</string>
   <string name="important_info_pphelper_installation">L\'installation de PPHelper nécessite des privilèges ROOT. Vous pouvez installer PPHelper via le menu « Installer PPHelper ».</string>
   <string name="important_into_sony_stamina_mode">Sivous avez un appareil  Sony et que le mode « Endurance» est activé dans « Gestion de l\'alimentation », veuillez ajouter PhoneProfiles dans « Application active en mode veille ». Sans cela, l\'application ne fonctionnera pas correctement.</string>
+  <string name="important_info_profile_settings">Some profile preferences requires changes in system Settings. These preferences are marked with \"(S)\".</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
+  <string name="array_pref_zenModeArray_allWithVibration">All with vibration</string>
+  <string name="array_pref_zenModeArray_priorityWithVibration">Priority with vibration</string>
 </resources>

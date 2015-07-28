@@ -281,5 +281,10 @@
   <string name="important_info_profile_root">Néhány profil ROOT-ot igényel. Ezeket a beállításokat \"(R)\" jelöli.</string>
   <string name="important_info_profile_pphelper">Néhány profilhoz PPHelper telepítésére van szükség. Ezeket a beállításokat \"(H)\" jelöli.</string>
   <string name="important_info_pphelper_installation">PPHelper telepítéséhez ROOT jog kell. PPHelper szerkesztő használatához \"PPHelper telepítése\"-re hivatkozhat.</string>
-  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
+  <string name="important_into_sony_stamina_mode">Ha SONY készülékeden a \"Stamina\" mód az \"Energia gazdálkodás\"-ban aktív, kérlek add a PhoneProfiles-t a \"Aktív alkalmazás készenléti módhoz\". Enélkül az alkalmazás nem működik megfelelően.</string>
+  <string name="important_info_profile_settings">Néhány profil tulajdonság érvényesítéséhez a rendszer beállításokon módosítani kell. Ezeket a \"(S)\" -sel jelöli.</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_title">Értesítési hozzáférés</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Lehetővé teszi a PhoneProfilesPlus számára a \"Értesítési hozzáférés\"-t a rendszer beállításokon belül, hogy engedélyezze a \"Megszakítások típusa\" profil előnybe helyezését.</string>
+  <string name="array_pref_zenModeArray_allWithVibration">Minden rezgéssel</string>
+  <string name="array_pref_zenModeArray_priorityWithVibration">Prioritás rezgéssel</string>
 </resources>
