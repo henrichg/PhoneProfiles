@@ -590,7 +590,7 @@ public class ActivateProfileHelper {
             //setZenMode(ZENMODE_PRIORITY);
             break;
         case 5: // Zen mode
-            if (profile._volumeZenMode != 0)
+            if ((profile._volumeRingerMode != 0) && (profile._volumeZenMode != 0))
                 GlobalData.setZenMode(context, profile._volumeZenMode);
             int zenMode = GlobalData.getZenMode(context);
 
