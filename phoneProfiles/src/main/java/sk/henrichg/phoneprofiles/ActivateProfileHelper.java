@@ -522,6 +522,7 @@ public class ActivateProfileHelper {
 
         switch (ringerMode) {
         case 1:  // Ring
+            RingerModeChangeReceiver.internalChange = true;
             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             try
             {
@@ -539,6 +540,7 @@ public class ActivateProfileHelper {
             //setZenMode(ZENMODE_ALL);
             break;
         case 2:  // Ring & Vibrate
+            RingerModeChangeReceiver.internalChange = true;
             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             try
             {
@@ -556,6 +558,7 @@ public class ActivateProfileHelper {
             //setZenMode(ZENMODE_ALL);
             break;
         case 3:  // Vibrate
+            RingerModeChangeReceiver.internalChange = true;
             audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
             try
             {
@@ -573,6 +576,7 @@ public class ActivateProfileHelper {
             //setZenMode(ZENMODE_ALL);
             break;
         case 4:  // Silent
+            RingerModeChangeReceiver.internalChange = true;
             audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             try
             {
@@ -590,6 +594,7 @@ public class ActivateProfileHelper {
             //setZenMode(ZENMODE_PRIORITY);
             break;
         case 5: // Zen mode
+            RingerModeChangeReceiver.internalChange = true;
             if ((profile._volumeRingerMode != 0) && (profile._volumeZenMode != 0))
                 GlobalData.setZenMode(context, profile._volumeZenMode);
             int zenMode = GlobalData.getZenMode(context);

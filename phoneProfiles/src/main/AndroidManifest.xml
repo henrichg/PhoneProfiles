@@ -331,6 +331,11 @@
                 <action android:name="com.splunchy.android.alarmclock.ALARM_ALERT" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".RingerModeChangeReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
 
     </application>
 
