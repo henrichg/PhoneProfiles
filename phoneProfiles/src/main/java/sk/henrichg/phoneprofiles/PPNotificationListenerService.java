@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
@@ -22,6 +23,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
     public static final String EXTRA_FILTER = "filter";
 
     public static final String TAG = PPNotificationListenerService.class.getSimpleName();
+
+    public static boolean internalChange = false;
 
     private NLServiceReceiver nlservicereceiver;
 
@@ -68,6 +71,35 @@ public class PPNotificationListenerService extends NotificationListenerService {
     @Override
     public void onInterruptionFilterChanged(int interruptionFilter) {
         //Log.e(TAG, "onInterruptionFilterChanged(" + interruptionFilter + ')');
+
+        if (!internalChange) {
+            final AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+            int ringerMode = audioManager.getRingerMode();
+
+            // convert to profile zenMode
+            int zenMode = 0;
+            switch (interruptionFilter) {
+                case NotificationListenerService.INTERRUPTION_FILTER_ALL:
+                    if (ringerMode == AudioManager.RINGER_MODE_VIBRATE)
+                        zenMode = 4;
+                    else
+                        zenMode = 1;
+                    break;
+                case NotificationListenerService.INTERRUPTION_FILTER_PRIORITY:
+                    if (ringerMode == AudioManager.RINGER_MODE_VIBRATE)
+                        zenMode = 5;
+                    else
+                        zenMode = 2;
+                    break;
+                case NotificationListenerService.INTERRUPTION_FILTER_NONE:
+                    zenMode = 3;
+                    break;
+            }
+            if (zenMode != 0)
+                GlobalData.setZenMode(getApplicationContext(), zenMode);
+        }
+
+        internalChange = false;
     }
 
     public static boolean isNotificationListenerServiceEnabled(Context context) {
