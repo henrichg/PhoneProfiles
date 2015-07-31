@@ -202,10 +202,8 @@ public class VolumeDialogPreference extends
 
         SettingsContentObserver.internalChange = true;
         RingerModeChangeReceiver.internalChange = true;
-        PPNotificationListenerService.internalChange = true;
 
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-            PPNotificationListenerService.requestInterruptionFilter(_context, NotificationListenerService.INTERRUPTION_FILTER_ALL);
+        ActivateProfileHelper.setZenMode(_context, ActivateProfileHelper.ZENMODE_ALL);
         audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 
         if (volumeType.equalsIgnoreCase("RINGTONE"))
@@ -356,12 +354,10 @@ public class VolumeDialogPreference extends
             audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
             //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
 
+            ActivateProfileHelper.setZenMode(_context, defaultZenMode);
+
             //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
             // set ringer mode after volume because volumes change silent/vibrate
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                PPNotificationListenerService.internalChange = true;
-                PPNotificationListenerService.requestInterruptionFilter(_context, defaultZenMode);
-            }
             audioManager.setRingerMode(defaultRingerMode);
 
         }

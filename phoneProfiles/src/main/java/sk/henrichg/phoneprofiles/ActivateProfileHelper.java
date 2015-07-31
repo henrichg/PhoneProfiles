@@ -460,11 +460,12 @@ public class ActivateProfileHelper {
 
     }
 
-    private void setZenMode(int mode)
+    public static void setZenMode(Context context, int mode)
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
             if (PPNotificationListenerService.isNotificationListenerServiceEnabled(context)) {
+                PPNotificationListenerService.internalChange = true;
                 int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
                 switch (mode) {
                     case ZENMODE_ALL:
@@ -601,29 +602,24 @@ public class ActivateProfileHelper {
 
             switch (zenMode) {
                 case 1:
-                    PPNotificationListenerService.internalChange = true;
-                    setZenMode(ZENMODE_ALL);
+                    setZenMode(context, ZENMODE_ALL);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 2:
-                    PPNotificationListenerService.internalChange = true;
-                    setZenMode(ZENMODE_PRIORITY);
+                    setZenMode(context, ZENMODE_PRIORITY);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 3:
-                    PPNotificationListenerService.internalChange = true;
-                    setZenMode(ZENMODE_NONE);
+                    setZenMode(context, ZENMODE_NONE);
                     // no change ringer mode
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 4:
-                    PPNotificationListenerService.internalChange = true;
-                    setZenMode(ZENMODE_ALL);
+                    setZenMode(context, ZENMODE_ALL);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     break;
                 case 5:
-                    PPNotificationListenerService.internalChange = true;
-                    setZenMode(ZENMODE_PRIORITY);
+                    setZenMode(context, ZENMODE_PRIORITY);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     break;
             }
@@ -1520,7 +1516,7 @@ public class ActivateProfileHelper {
         context.sendBroadcast(intent);
     }
 
-    private void commandWait(Command cmd) throws Exception {
+    private static void commandWait(Command cmd) throws Exception {
         int waitTill = 50;
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; //7 tries, 6350 msec
