@@ -4,8 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
-import android.util.Log;
 
 public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
     public AlarmClockBroadcastReceiver() {
