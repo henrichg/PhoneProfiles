@@ -34,6 +34,9 @@
         <item name="alertDialogTheme">@style/AlertDialogStyleDark</item>
         <item name="dialogTheme">@style/DialogStyleDark</item>
 
+        <item name="toolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Dark</item>
+
     </style>
     
 </resources>

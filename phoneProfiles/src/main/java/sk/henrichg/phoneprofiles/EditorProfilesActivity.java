@@ -110,6 +110,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
         }
 
+        // add profile list into list container
+        EditorProfileListFragment listFragment = new EditorProfileListFragment();
+        getFragmentManager().beginTransaction()
+            .replace(R.id.editor_profile_list, listFragment, "EditorProfileListFragment").commit();
+
         if (findViewById(R.id.editor_profile_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -1040,16 +1045,10 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     @Override
     public void onShowActionMode() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_list);
-        if (fragment != null)
-            ((EditorProfileListFragment)fragment).fabButton.hide();
     }
 
     @Override
     public void onHideActionMode() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_list);
-        if (fragment != null)
-            ((EditorProfileListFragment)fragment).fabButton.show();
     }
 
 

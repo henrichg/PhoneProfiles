@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +25,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
 import java.lang.ref.WeakReference;
@@ -39,7 +39,6 @@ public class EditorProfileListFragment extends Fragment {
     private DragSortListView listView;
     private TextView activeProfileName;
     private ImageView activeProfileIcon;
-    public FloatingActionButton fabButton;
     private DatabaseHandler databaseHandler;
 
     private WeakReference<LoadProfileListAsyncTask> asyncTaskContext;
@@ -175,18 +174,33 @@ public class EditorProfileListFragment extends Fragment {
         listView = (DragSortListView)view.findViewById(R.id.main_profiles_list);
         listView.setEmptyView(view.findViewById(R.id.editor_profiles_list_empty));
 
+        /*
         View footerView =  ((LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.editor_list_footer, null, false);
         listView.addFooterView(footerView, null, false);
-        
-        fabButton = (FloatingActionButton)view.findViewById(R.id.editor_profiles_list_fab);
-        fabButton.attachToListView(listView);
+        */
+
+        Toolbar bottomToolbar = (Toolbar)getActivity().findViewById(R.id.editor_list_bottom_bar);
+        Menu menu = bottomToolbar.getMenu();
+        if (menu != null) menu.clear();
+        bottomToolbar.inflateMenu(R.menu.editor_profiles_bottom_bar);
+        bottomToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_add_profile:
+                        startProfilePreferencesActivity(null);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         listView.setOnItemClickListener(new OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startProfilePreferencesActivity((Profile)profileListAdapter.getItem(position));
+                startProfilePreferencesActivity((Profile) profileListAdapter.getItem(position));
 
             }
 
@@ -196,7 +210,7 @@ public class EditorProfileListFragment extends Fragment {
 
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                activateProfile((Profile)profileListAdapter.getItem(position), true);
+                activateProfile((Profile) profileListAdapter.getItem(position), true);
 
                 return true;
             }
@@ -208,13 +222,6 @@ public class EditorProfileListFragment extends Fragment {
                 profileListAdapter.changeItemOrder(from, to); // swap profiles
                 databaseHandler.setPOrder(profileList);  // set profiles _porder and write it into db
                 activateProfileHelper.updateWidget();
-            }
-        });
-        
-        fabButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startProfilePreferencesActivity(null);
             }
         });
         
