@@ -191,6 +191,16 @@ public class EditorProfileListFragment extends Fragment {
                     case R.id.menu_add_profile:
                         startProfilePreferencesActivity(null);
                         return true;
+                    case R.id.menu_delete_all_profiles:
+                        deleteAllProfiles();
+                        return true;
+                    case R.id.menu_default_profile:
+                        // start preferences activity for default profile
+                        Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesFragmentActivity.class);
+                        intent.putExtra(GlobalData.EXTRA_PROFILE_ID, GlobalData.DEFAULT_PROFILE_ID);
+                        intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EDIT_MODE_EDIT);
+                        getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
+                        return true;
                 }
                 return false;
             }
@@ -350,18 +360,18 @@ public class EditorProfileListFragment extends Fragment {
             startProfilePreferencesActivity(null);
 
             return true;*/
-        case R.id.menu_delete_all_profiles:
+        /*case R.id.menu_delete_all_profiles:
             deleteAllProfiles();
 
-            return true;
-        case R.id.menu_default_profile:
+            return true;*/
+        /*case R.id.menu_default_profile:
             // start preferences activity for default profile
             Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesFragmentActivity.class);
             intent.putExtra(GlobalData.EXTRA_PROFILE_ID, GlobalData.DEFAULT_PROFILE_ID);
             intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EDIT_MODE_EDIT);
             getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
 
-            return true;
+            return true;*/
         default:
             return super.onOptionsItemSelected(item);
         }

@@ -35,6 +35,9 @@
         <item name="toolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Light</item>
 
+        <item name="actionSourceProfileIcon">@drawable/ic_action_source_profile</item>
+        <item name="actionHelpIcon">@drawable/ic_action_help</item>
+
     </style>
 
 </resources>

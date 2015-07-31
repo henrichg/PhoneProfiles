@@ -1,5 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:henrichg="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/important_info"
+          android:title="@string/info_notification_title"
+          android:orderInCategory="190"
+          henrichg:showAsAction="always"
+          android:icon="?attr/actionHelpIcon"/>
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="200"
@@ -20,14 +25,6 @@
         android:title="@string/menu_import"
         android:orderInCategory="220"
         henrichg:showAsAction="never" />
-    <item android:id="@+id/important_info"
-        android:title="@string/info_notification_title"
-        android:orderInCategory="230"
-        henrichg:showAsAction="never" />
-<!-- 	<item android:id="@+id/menu_help"
-        android:title="@string/menu_help"
-        android:orderInCategory="230"
-        henrichg:showAsAction="never" />  -->    
     <item android:id="@+id/menu_exit"
         android:title="@string/menu_exit"
         android:orderInCategory="240"

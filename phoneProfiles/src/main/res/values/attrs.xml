@@ -50,5 +50,7 @@
     <attr name="dialogDivider" format="reference" />
     <attr name="toolbarTheme" format="reference" />
     <attr name="toolbarPopupMenu" format="reference" />
+    <attr name="actionSourceProfileIcon" format="reference" />
+    <attr name="actionHelpIcon" format="reference" />
 
 </resources>
