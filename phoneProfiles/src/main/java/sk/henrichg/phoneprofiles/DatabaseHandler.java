@@ -581,50 +581,50 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getMyWritableDatabase();
 
         Cursor cursor = db.query(TABLE_PROFILES,
-                                 new String[] { KEY_ID,
-                                                KEY_NAME,
-                                                KEY_ICON,
-                                                KEY_CHECKED,
-                                                KEY_PORDER,
-                                                KEY_VOLUME_RINGER_MODE,
-                                                KEY_VOLUME_RINGTONE,
-                                                KEY_VOLUME_NOTIFICATION,
-                                                KEY_VOLUME_MEDIA,
-                                                KEY_VOLUME_ALARM,
-                                                KEY_VOLUME_SYSTEM,
-                                                KEY_VOLUME_VOICE,
-                                                KEY_SOUND_RINGTONE_CHANGE,
-                                                KEY_SOUND_RINGTONE,
-                                                KEY_SOUND_NOTIFICATION_CHANGE,
-                                                KEY_SOUND_NOTIFICATION,
-                                                KEY_SOUND_ALARM_CHANGE,
-                                                KEY_SOUND_ALARM,
-                                                KEY_DEVICE_AIRPLANE_MODE,
-                                                KEY_DEVICE_WIFI,
-                                                KEY_DEVICE_BLUETOOTH,
-                                                KEY_DEVICE_SCREEN_TIMEOUT,
-                                                KEY_DEVICE_BRIGHTNESS,
-                                                KEY_DEVICE_WALLPAPER_CHANGE,
-                                                KEY_DEVICE_WALLPAPER,
-                                                KEY_DEVICE_MOBILE_DATA,
-                                                KEY_DEVICE_MOBILE_DATA_PREFS,
-                                                KEY_DEVICE_GPS,
-                                                KEY_DEVICE_RUN_APPLICATION_CHANGE,
-                                                KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
-                                                KEY_DEVICE_AUTOSYNC,
-                                                KEY_DEVICE_AUTOROTATE,
-                                                KEY_DEVICE_LOCATION_SERVICE_PREFS,
-                                                KEY_VOLUME_SPEAKER_PHONE,
-                                                KEY_DEVICE_NFC,
-                                                KEY_DURATION,
-                                                KEY_AFTER_DURATION_DO,
-                                                KEY_VOLUME_ZEN_MODE,
-                                                KEY_DEVICE_KEYGUARD,
-                                                KEY_VIBRATE_ON_TOUCH,
-                                                KEY_DEVICE_WIFI_AP
-                                                },
-                                 KEY_ID + "=?",
-                                 new String[] { String.valueOf(profile_id) }, null, null, null, null);
+                new String[]{KEY_ID,
+                        KEY_NAME,
+                        KEY_ICON,
+                        KEY_CHECKED,
+                        KEY_PORDER,
+                        KEY_VOLUME_RINGER_MODE,
+                        KEY_VOLUME_RINGTONE,
+                        KEY_VOLUME_NOTIFICATION,
+                        KEY_VOLUME_MEDIA,
+                        KEY_VOLUME_ALARM,
+                        KEY_VOLUME_SYSTEM,
+                        KEY_VOLUME_VOICE,
+                        KEY_SOUND_RINGTONE_CHANGE,
+                        KEY_SOUND_RINGTONE,
+                        KEY_SOUND_NOTIFICATION_CHANGE,
+                        KEY_SOUND_NOTIFICATION,
+                        KEY_SOUND_ALARM_CHANGE,
+                        KEY_SOUND_ALARM,
+                        KEY_DEVICE_AIRPLANE_MODE,
+                        KEY_DEVICE_WIFI,
+                        KEY_DEVICE_BLUETOOTH,
+                        KEY_DEVICE_SCREEN_TIMEOUT,
+                        KEY_DEVICE_BRIGHTNESS,
+                        KEY_DEVICE_WALLPAPER_CHANGE,
+                        KEY_DEVICE_WALLPAPER,
+                        KEY_DEVICE_MOBILE_DATA,
+                        KEY_DEVICE_MOBILE_DATA_PREFS,
+                        KEY_DEVICE_GPS,
+                        KEY_DEVICE_RUN_APPLICATION_CHANGE,
+                        KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
+                        KEY_DEVICE_AUTOSYNC,
+                        KEY_DEVICE_AUTOROTATE,
+                        KEY_DEVICE_LOCATION_SERVICE_PREFS,
+                        KEY_VOLUME_SPEAKER_PHONE,
+                        KEY_DEVICE_NFC,
+                        KEY_DURATION,
+                        KEY_AFTER_DURATION_DO,
+                        KEY_VOLUME_ZEN_MODE,
+                        KEY_DEVICE_KEYGUARD,
+                        KEY_VIBRATE_ON_TOUCH,
+                        KEY_DEVICE_WIFI_AP
+                },
+                KEY_ID + "=?",
+                new String[]{String.valueOf(profile_id)}, null, null, null, null);
 
         Profile profile = null;
 
@@ -862,7 +862,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteAllProfiles() {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
-        db.delete(TABLE_PROFILES, null,	null);
+        db.delete(TABLE_PROFILES, null, null);
         //db.close();
     }
 
@@ -1411,15 +1411,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                     new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
                         }
 
-                        // remove ringer mode "Do not disturb"
-                        if ((Integer.parseInt(cursor.getString(9)) == 5) &&
-                            ((android.os.Build.VERSION.SDK_INT < 21) ||
-                             (!GlobalData.isRooted(false)) ||
-                             (!GlobalData.settingsBinaryExists())))
-                        {
-                            values.put(KEY_VOLUME_RINGER_MODE, 4);
-                            db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                        if (Integer.parseInt(cursor.getString(9)) == 5) {
+                            boolean notRemove = (android.os.Build.VERSION.SDK_INT >= 21) &&
+                                    (PPNotificationListenerService.isNotificationListenerServiceEnabled(context) ||
+                                     (GlobalData.isRooted(false) && GlobalData.settingsBinaryExists())
+                                    );
+                            if (!notRemove) {
+                                // remove ringer mode "Interruptions"
+                                values.put(KEY_VOLUME_RINGER_MODE, 4);
+                                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                                        new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                            }
                         }
 
                 } while (cursor.moveToNext());
@@ -1432,6 +1434,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             ret = 1;
        } catch (Exception e){
             //Error in between database transaction
+            Log.e("DatabaseHandler.updateForHardware", e.toString());
            ret = 0;
        } finally {
            db.endTransaction();
