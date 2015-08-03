@@ -124,10 +124,13 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
                 try {
-                    Thread.sleep(500); // Delay 0,5 seconds to wait for change audio mode
+                    Thread.sleep(500); // Delay 0.5 seconds to wait for link volumes
                 } catch (InterruptedException e) {
                 }
-                audioManager.setMode(AudioManager.MODE_NORMAL);
+                /*
+                if (audioManager == null )
+                    audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
+                audioManager.setMode(AudioManager.MODE_NORMAL);*/
                 Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_LINK);
