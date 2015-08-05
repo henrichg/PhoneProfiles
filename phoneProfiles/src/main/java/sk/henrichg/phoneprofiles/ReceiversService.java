@@ -11,7 +11,7 @@ public class ReceiversService extends Service {
 
     private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
 
-    private SettingsContentObserver settingsContentObserver;
+    private static SettingsContentObserver settingsContentObserver = null;
 
     @Override
     public void onCreate()
@@ -26,7 +26,9 @@ public class ReceiversService extends Service {
         intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
         getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
 
-        settingsContentObserver = new SettingsContentObserver(this, new Handler());
+        if (settingsContentObserver != null)
+            getContentResolver().unregisterContentObserver(settingsContentObserver);
+        settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
         getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
     }
@@ -36,7 +38,8 @@ public class ReceiversService extends Service {
     {
         getApplicationContext().unregisterReceiver(screenOnOffReceiver);
 
-        getContentResolver().unregisterContentObserver(settingsContentObserver);
+        if (settingsContentObserver != null)
+            getContentResolver().unregisterContentObserver(settingsContentObserver);
     }
 
     @Override
