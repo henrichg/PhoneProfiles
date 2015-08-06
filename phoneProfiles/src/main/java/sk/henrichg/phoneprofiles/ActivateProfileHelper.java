@@ -480,7 +480,7 @@ public class ActivateProfileHelper {
                         break;
                 }
                 PPNotificationListenerService.requestInterruptionFilter(context, interruptionFilter);
-            }
+            }/*
             else
             if (GlobalData.grantRoot(false) && (GlobalData.settingsBinaryExists()))
             {
@@ -495,7 +495,7 @@ public class ActivateProfileHelper {
                 } catch (Exception e) {
                     Log.e("ActivateProfileHelper.setZenMode", e.getMessage());
                 }
-            }
+            }*/
         }
     }
 
