@@ -2,6 +2,9 @@ package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.DialogPreference;
@@ -9,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -34,9 +38,50 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 
         _context = context;
 
+        setWidgetLayoutResource(R.layout.applications_preference); // resource na layout custom preference - TextView-ImageView
+
         if (EditorProfilesActivity.getApplicationsCache() == null)
             EditorProfilesActivity.createApplicationsCache();
 
+    }
+
+    //@Override
+    protected void onBindView(View view)
+    {
+        super.onBindView(view);
+
+        //preferenceTitleView = (TextView)view.findViewById(R.id.applications_pref_label);  // resource na title
+        //preferenceTitleView.setText(preferenceTitle);
+
+        ImageView packageIcon = (ImageView)view.findViewById(R.id.applications_pref_icon); // resource na ImageView v custom preference layoute
+
+        if (packageIcon != null)
+        {
+            PackageManager packageManager = _context.getPackageManager();
+            ApplicationInfo app;
+            try {
+
+                String[] splits = value.split("\\|");
+
+                if (splits.length > 0) {
+                    app = packageManager.getApplicationInfo(splits[0], 0);
+                    if (app != null) {
+                        Drawable icon = packageManager.getApplicationIcon(app);
+                        //CharSequence name = packageManager.getApplicationLabel(app);
+                        packageIcon.setImageDrawable(icon);
+                    } else {
+                        packageIcon.setImageDrawable(null);
+                    }
+                }
+                else {
+                    packageIcon.setImageDrawable(null);
+                }
+
+            } catch (PackageManager.NameNotFoundException e) {
+                //e.printStackTrace();
+                packageIcon.setImageDrawable(null);
+            }
+        }
     }
 
     protected void showDialog(Bundle state) {
@@ -102,7 +147,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                 if (!EditorProfilesActivity.getApplicationsCache().isCached())
                     EditorProfilesActivity.getApplicationsCache().getApplicationsList(_context);
 
-                getValueCMSDP();
+                getValueAMSDP();
 
                 return null;
             }
@@ -145,7 +190,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                 }
                 persistString(value);
 
-                setSummaryCMSDP();
+                setSummaryAMSDP();
             }
         }
     };
@@ -164,7 +209,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     {
         if (restoreValue) {
             // restore state
-            getValueCMSDP();
+            getValueAMSDP();
         }
         else {
             // set state
@@ -172,10 +217,10 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
             value = "";
             persistString("");
         }
-        setSummaryCMSDP();
+        setSummaryAMSDP();
     }
 
-    private void getValueCMSDP()
+    private void getValueAMSDP()
     {
         // Get the persistent value
         value = getPersistedString(value);
@@ -210,7 +255,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         }
     }
 
-    private void setSummaryCMSDP()
+    private void setSummaryAMSDP()
     {
         String prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_not_selected);
         if (!value.isEmpty())
