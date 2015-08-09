@@ -9,12 +9,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -30,6 +32,13 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     private ListView listView = null;
     private LinearLayout linlaProgress;
     private LinearLayout linlaListView;
+
+    ImageView packageIcon;
+    RelativeLayout packageIcons;
+    ImageView packageIcon1;
+    ImageView packageIcon2;
+    ImageView packageIcon3;
+    ImageView packageIcon4;
 
     private ApplicationsMultiselectPreferenceAdapter listAdapter;
 
@@ -50,45 +59,21 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     {
         super.onBindView(view);
 
-        //preferenceTitleView = (TextView)view.findViewById(R.id.applications_pref_label);  // resource na title
-        //preferenceTitleView.setText(preferenceTitle);
+        packageIcon = (ImageView)view.findViewById(R.id.applications_pref_icon);
+        packageIcons = (RelativeLayout)view.findViewById(R.id.applications_pref_icons);
+        packageIcon1 = (ImageView)view.findViewById(R.id.applications_pref_icon1);
+        packageIcon2 = (ImageView)view.findViewById(R.id.applications_pref_icon2);
+        packageIcon3 = (ImageView)view.findViewById(R.id.applications_pref_icon3);
+        packageIcon4 = (ImageView)view.findViewById(R.id.applications_pref_icon4);
 
-        ImageView packageIcon = (ImageView)view.findViewById(R.id.applications_pref_icon); // resource na ImageView v custom preference layoute
-
-        if (packageIcon != null)
-        {
-            PackageManager packageManager = _context.getPackageManager();
-            ApplicationInfo app;
-            try {
-
-                String[] splits = value.split("\\|");
-
-                if (splits.length > 0) {
-                    app = packageManager.getApplicationInfo(splits[0], 0);
-                    if (app != null) {
-                        Drawable icon = packageManager.getApplicationIcon(app);
-                        //CharSequence name = packageManager.getApplicationLabel(app);
-                        packageIcon.setImageDrawable(icon);
-                    } else {
-                        packageIcon.setImageDrawable(null);
-                    }
-                }
-                else {
-                    packageIcon.setImageDrawable(null);
-                }
-
-            } catch (PackageManager.NameNotFoundException e) {
-                //e.printStackTrace();
-                packageIcon.setImageDrawable(null);
-            }
-        }
+        setIcons();
     }
 
     protected void showDialog(Bundle state) {
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())
                 .icon(getDialogIcon())
-                //.disableDefaultFonts()
+                        //.disableDefaultFonts()
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
                 .callback(callback)
@@ -190,6 +175,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                 }
                 persistString(value);
 
+                setIcons();
                 setSummaryAMSDP();
             }
         }
@@ -258,9 +244,78 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     private void setSummaryAMSDP()
     {
         String prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_not_selected);
-        if (!value.isEmpty())
-            prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected);
+        if (!value.isEmpty()) {
+            String[] splits = value.split("\\|");
+            if (splits.length == 1) {
+                PackageManager packageManager = _context.getPackageManager();
+                ApplicationInfo app;
+                try {
+                    app = packageManager.getApplicationInfo(splits[0], 0);
+                    if (app != null)
+                        prefVolumeDataSummary = packageManager.getApplicationLabel(app).toString();
+                } catch (PackageManager.NameNotFoundException e) {
+                    //e.printStackTrace();
+                    prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected);
+                }
+            }
+            else
+                prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected);
+        }
         setSummary(prefVolumeDataSummary);
     }
 
+    private void setIcons() {
+        PackageManager packageManager = _context.getPackageManager();
+        ApplicationInfo app;
+        try {
+
+            String[] splits = value.split("\\|");
+
+            if (splits.length == 1) {
+                packageIcon.setVisibility(View.VISIBLE);
+                packageIcons.setVisibility(View.GONE);
+                app = packageManager.getApplicationInfo(splits[0], 0);
+                if (app != null) {
+                    Drawable icon = packageManager.getApplicationIcon(app);
+                    //CharSequence name = packageManager.getApplicationLabel(app);
+                    packageIcon.setImageDrawable(icon);
+                } else {
+                    packageIcon.setImageResource(R.drawable.ic_empty);
+                }
+            }
+            else {
+                packageIcon.setVisibility(View.GONE);
+                packageIcons.setVisibility(View.VISIBLE);
+                packageIcon.setImageResource(R.drawable.ic_empty);
+
+                ImageView packIcon = packageIcon1;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i == 0) packIcon = packageIcon1;
+                    if (i == 1) packIcon = packageIcon2;
+                    if (i == 2) packIcon = packageIcon3;
+                    if (i == 3) packIcon = packageIcon4;
+                    if (i < splits.length) {
+                        app = packageManager.getApplicationInfo(splits[i], 0);
+                        if (app != null) {
+                            Drawable icon = packageManager.getApplicationIcon(app);
+                            //CharSequence name = packageManager.getApplicationLabel(app);
+                            packIcon.setImageDrawable(icon);
+                        } else {
+                            packIcon.setImageResource(R.drawable.ic_empty);
+                        }
+                    }
+                    else
+                        packIcon.setImageResource(R.drawable.ic_empty);
+                }
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            //e.printStackTrace();
+            packageIcon.setVisibility(View.VISIBLE);
+            packageIcons.setVisibility(View.GONE);
+            packageIcon.setImageResource(R.drawable.ic_empty);
+        }
+
+    }
 }
