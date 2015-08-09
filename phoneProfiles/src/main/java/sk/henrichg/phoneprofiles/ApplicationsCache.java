@@ -15,7 +15,7 @@ public class ApplicationsCache {
     private class SortList implements Comparator<Application> {
 
         public int compare(Application lhs, Application rhs) {
-            return lhs.appLabel.compareToIgnoreCase(rhs.appLabel);
+            return GUIData.collator.compare(lhs.appLabel, rhs.appLabel);
         }
 
     }
@@ -56,10 +56,10 @@ public class ApplicationsCache {
                 newInfo.icon = packageInfo.applicationInfo.loadIcon(packageManager);
 
                 applicationsList.add(newInfo);
-
-                if (cancelled)
-                    return;
             }
+
+            if (cancelled)
+                return;
         }
 
         Collections.sort(applicationsList, new SortList());
@@ -73,6 +73,22 @@ public class ApplicationsCache {
             return applicationsList.size();
         else
             return 0;
+    }
+
+    public List<Application> getList()
+    {
+        if (cached)
+            return applicationsList;
+        else
+            return null;
+    }
+
+    public Application getApplication(int position)
+    {
+        if (cached)
+            return applicationsList.get(position);
+        else
+            return null;
     }
 
     public String getPackageName(int position)
