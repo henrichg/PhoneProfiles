@@ -258,8 +258,9 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                     prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected);
                 }
             }
-            else
-                prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected);
+            else {
+                prefVolumeDataSummary = _context.getString(R.string.applications_multiselect_summary_text_selected) + ": " + splits.length;
+            }
         }
         setSummary(prefVolumeDataSummary);
     }
