@@ -138,7 +138,7 @@
             android:summary="@string/array_pref_no_change"
             android:title="@string/profile_preferences_soundRingtone"
             android:ringtoneType="ringtone" 
-            android:showSilent="true"
+            android:showSilent="false"
             android:showDefault="true" />
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_soundNotificationChange"
@@ -152,7 +152,7 @@
             android:summary="@string/array_pref_no_change"
             android:title="@string/profile_preferences_soundNotification"
             android:ringtoneType="notification" 
-            android:showSilent="true"
+            android:showSilent="false"
             android:showDefault="true" />
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_soundAlarmChange"
@@ -166,7 +166,7 @@
             android:summary="@string/array_pref_no_change"
             android:title="@string/profile_preferences_soundAlarm"
             android:ringtoneType="alarm" 
-            android:showSilent="true"
+            android:showSilent="false"
             android:showDefault="true" />
     </PreferenceCategory>
     <PreferenceCategory
