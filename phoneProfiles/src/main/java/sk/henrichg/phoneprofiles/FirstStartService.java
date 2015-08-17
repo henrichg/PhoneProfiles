@@ -21,33 +21,33 @@ import java.io.InputStream;
 
 public class FirstStartService extends IntentService {
 
-	public FirstStartService()
-	{
-		super("FirstStartService");
-	}
+    public FirstStartService()
+    {
+        super("FirstStartService");
+    }
 
-	@Override
-	protected void onHandleIntent(Intent intent)
-	{
-		Context context = getApplicationContext();
-		
-		// grant root
-		//if (GlobalData.isRooted(false))
-		//{
-			if (GlobalData.grantRoot(true))
-			{
-				GlobalData.settingsBinaryExists();
-				//GlobalData.getSUVersion();
-			}
-		//}
-		
-		if (GlobalData.getApplicationStarted(context))
-			return;
-		
-		//int startType = intent.getStringExtra(GlobalData.EXTRA_FIRST_START_TYPE);
-		
-		GlobalData.loadPreferences(context);
-		GUIData.setLanguage(context);
+    @Override
+    protected void onHandleIntent(Intent intent)
+    {
+        Context context = getApplicationContext();
+
+        // grant root
+        //if (GlobalData.isRooted(false))
+        //{
+            if (GlobalData.grantRoot(true))
+            {
+                GlobalData.settingsBinaryExists();
+                //GlobalData.getSUVersion();
+            }
+        //}
+
+        if (GlobalData.getApplicationStarted(context))
+            return;
+
+        //int startType = intent.getStringExtra(GlobalData.EXTRA_FIRST_START_TYPE);
+
+        GlobalData.loadPreferences(context);
+        GUIData.setLanguage(context);
 
         // remove phoneprofiles_silent.mp3
         //removeTone("phoneprofiles_silent.mp3", context);
@@ -59,15 +59,18 @@ public class FirstStartService extends IntentService {
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         GlobalData.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
         GlobalData.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        RingerModeChangeReceiver.setRingerMode(context, audioManager);
+        if (android.os.Build.VERSION.SDK_INT >= 21)
+            PPNotificationListenerService.setZenMode(context, audioManager);
 
-		// start ReceiverService
-		context.startService(new Intent(context, ReceiversService.class));
+        // start ReceiverService
+        context.startService(new Intent(context, ReceiversService.class));
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);
 
-		DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
-		dataWrapper.getActivateProfileHelper().initialize(null, context);
+        DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
+        dataWrapper.getActivateProfileHelper().initialize(null, context);
 
         // create a handler to post messages to the main thread
         Handler toastHandler = new Handler(getMainLooper());
@@ -75,26 +78,26 @@ public class FirstStartService extends IntentService {
         Handler brightnessHandler = new Handler(getMainLooper());
         dataWrapper.getActivateProfileHelper().setBrightnessHandler(brightnessHandler);
 
-		// zrusenie notifikacie
-		dataWrapper.getActivateProfileHelper().removeNotification();
+        // zrusenie notifikacie
+        dataWrapper.getActivateProfileHelper().removeNotification();
 
         // show notification about upgrade PPHelper
         PhoneProfilesHelper.showPPHelperUpgradeNotification(context);
         // show info notification
         ImportantInfoNotification.showInfoNotification(context);
 
-		GlobalData.setApplicationStarted(context, true);
-			
-		dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);
-		dataWrapper.invalidateDataWrapper();
+        GlobalData.setApplicationStarted(context, true);
 
-		// start PPHelper
-		//PhoneProfilesHelper.startPPHelper(context);
+        dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);
+        dataWrapper.invalidateDataWrapper();
+
+        // start PPHelper
+        //PhoneProfilesHelper.startPPHelper(context);
 
         //  aplikacia uz je 1. krat spustena
         GlobalData.setApplicationStarted(context, true);
 
-	}
+    }
 
     private boolean installTone(int resID, String title, Context context) {
 
