@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -51,7 +52,9 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 }
 
                 ///  change mode to MODE_IN_CALL
-                audioManager.setMode(AudioManager.MODE_IN_CALL);
+                //audioManager.setMode(AudioManager.MODE_IN_CALL);
+                // audiomode is set to MODE_IN_CALL by system
+                Log.e("PhoneCallBroadcastReceiver", "callAnswered audioMode=" + audioManager.getMode());
 
                 savedSpeakerphone = audioManager.isSpeakerphoneOn();
                 boolean changeSpeakerphone = false;
@@ -75,11 +78,14 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         if (audioManager == null )
             audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
 
+        // audiomode is set to MODE_IN_CALL by system
+        Log.e("PhoneCallBroadcastReceiver", "callEnded audioMode="+audioManager.getMode());
+
         //if (audioManager.isSpeakerphoneOn())
         if (speakerphoneSelected)
         {
             audioManager.setSpeakerphoneOn(savedSpeakerphone);
-            audioManager.setMode(AudioManager.MODE_NORMAL);
+            //audioManager.setMode(AudioManager.MODE_NORMAL);
         }
 
         speakerphoneSelected = false;
