@@ -69,6 +69,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 }
             }
         }
+
+        dataWrapper.invalidateDataWrapper();
     }
 
     private void callEnded(boolean incoming)
@@ -111,6 +113,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_UNLINK);
                 savedContext.startService(volumeServiceIntent);
             }
+            dataWrapper.invalidateDataWrapper();
             ///
         }
     }
@@ -142,7 +145,12 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_LINK);
                 savedContext.startService(volumeServiceIntent);
             }
+            dataWrapper.invalidateDataWrapper();
         }
+
+        // audiomode is set to MODE_NORMAL by system
+        Log.e("PhoneCallBroadcastReceiver", "callEnded audioMode=" + audioManager.getMode());
+
     }
 
     protected void onIncomingCallAnswered(String number, Date start) {
