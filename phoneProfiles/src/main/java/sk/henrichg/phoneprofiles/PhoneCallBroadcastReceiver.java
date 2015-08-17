@@ -47,7 +47,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                     audioManager = (AudioManager) savedContext.getSystemService(Context.AUDIO_SERVICE);
 
                 try {
-                    Thread.sleep(500); // Delay 0,5 seconds to handle better turning on loudspeaker
+                    Thread.sleep(1000); // Delay 0,5 seconds to handle better turning on loudspeaker
                 } catch (InterruptedException e) {
                 }
 
@@ -133,7 +133,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
                 try {
-                    Thread.sleep(500); // Delay 0.5 seconds to wait for link volumes
+                    Thread.sleep(1000); // Delay 0.5 seconds to wait for link volumes
                 } catch (InterruptedException e) {
                 }
                 /*
