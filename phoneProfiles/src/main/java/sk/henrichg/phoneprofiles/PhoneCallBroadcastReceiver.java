@@ -9,14 +9,13 @@ import java.util.Date;
 
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
-    private static AudioManager audioManager = null;
+    public static final String EXTRA_SERVICE_PHONE_EVENT = "service_phone_event";
+    public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
+    public static final String EXTRA_SERVICE_PHONE_NUMBER = "service_phone_number";
 
-    private static boolean savedSpeakerphone = false;
-    private static boolean speakerphoneSelected = false;
-
-    public static final int LINKMODE_NONE = 0;
-    public static final int LINKMODE_LINK = 1;
-    public static final int LINKMODE_UNLINK = 2;
+    public static final int SERVICE_PHONE_EVENT_START = 1;
+    public static final int SERVICE_PHONE_EVENT_ANSWER = 2;
+    public static final int SERVICE_PHONE_EVENT_END = 3;
 
     protected boolean onStartReceive()
     {
@@ -32,147 +31,40 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     {
     }
 
-    private void callAnswered(boolean incoming)
-    {
-        DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-
-        Profile profile = dataWrapper.getActivatedProfile();
-        profile = GlobalData.getMappedProfile(profile, savedContext);
-
-        if (profile != null) {
-
-            if (profile._volumeSpeakerPhone != 0) {
-
-                if (audioManager == null)
-                    audioManager = (AudioManager) savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-                try {
-                    Thread.sleep(1000); // Delay 0,5 seconds to handle better turning on loudspeaker
-                } catch (InterruptedException e) {
-                }
-
-                ///  change mode to MODE_IN_CALL
-                //audioManager.setMode(AudioManager.MODE_IN_CALL);
-                // audiomode is set to MODE_IN_CALL by system
-                Log.e("PhoneCallBroadcastReceiver", "callAnswered audioMode=" + audioManager.getMode());
-
-                savedSpeakerphone = audioManager.isSpeakerphoneOn();
-                boolean changeSpeakerphone = false;
-                if (savedSpeakerphone && (profile._volumeSpeakerPhone == 2)) // 2=speakerphone off
-                    changeSpeakerphone = true;
-                if ((!savedSpeakerphone) && (profile._volumeSpeakerPhone == 1)) // 1=speakerphone on
-                    changeSpeakerphone = true;
-                if (changeSpeakerphone) {
-                    /// activate SpeakerPhone
-                    audioManager.setSpeakerphoneOn(profile._volumeSpeakerPhone == 1);
-                    speakerphoneSelected = true;
-                }
-            }
-        }
-
-        dataWrapper.invalidateDataWrapper();
-    }
-
-    private void callEnded(boolean incoming)
-    {
-        //Deactivate loudspeaker
-
-        if (audioManager == null )
-            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-        // audiomode is set to MODE_IN_CALL by system
-        Log.e("PhoneCallBroadcastReceiver", "callEnded audioMode="+audioManager.getMode());
-
-        //if (audioManager.isSpeakerphoneOn())
-        if (speakerphoneSelected)
-        {
-            audioManager.setSpeakerphoneOn(savedSpeakerphone);
-            //audioManager.setMode(AudioManager.MODE_NORMAL);
-        }
-
-        speakerphoneSelected = false;
+    private void startService(int phoneEvent, boolean incoming, String number) {
+        Intent intent = new Intent(savedContext, PhoneCallService.class);
+        intent.putExtra(EXTRA_SERVICE_PHONE_EVENT, phoneEvent);
+        intent.putExtra(EXTRA_SERVICE_PHONE_INCOMING, incoming);
+        intent.putExtra(EXTRA_SERVICE_PHONE_NUMBER, number);
+        savedContext.startService(intent);
     }
 
     protected void onIncomingCallStarted(String number, Date start) {
-        if (audioManager == null )
-            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-        speakerphoneSelected = false;
-
-        //Log.e("PhoneCallBroadcastReceiver", "onIncomingCallStarted - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
-
-        if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
-            /// for linked ringer and notification volume:
-            //    notification volume in profile activation is set after ringer volume
-            //    therefore reset ringer volume
-            DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-            Profile profile = dataWrapper.getActivatedProfile();
-            if (profile != null) {
-                Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_UNLINK);
-                savedContext.startService(volumeServiceIntent);
-            }
-            dataWrapper.invalidateDataWrapper();
-            ///
-        }
+        startService(SERVICE_PHONE_EVENT_START, true, number);
     }
     
     protected void onOutgoingCallStarted(String number, Date start) {
-        if (audioManager == null )
-            audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-
-        speakerphoneSelected = false;
-    }
-
-    private void setBackNotificationVolume() {
-        //Log.e("PhoneCallBroadcastReceiver", "setBackNotificationVolume - applicationUnlinkRingerNotificationVolumes="+GlobalData.applicationUnlinkRingerNotificationVolumes);
-
-        if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
-            DataWrapper dataWrapper = new DataWrapper(savedContext, false, false, 0);
-            Profile profile = dataWrapper.getActivatedProfile();
-            if (profile != null) {
-                try {
-                    Thread.sleep(1000); // Delay 0.5 seconds to wait for link volumes
-                } catch (InterruptedException e) {
-                }
-                /*
-                if (audioManager == null )
-                    audioManager = (AudioManager)savedContext.getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setMode(AudioManager.MODE_NORMAL);*/
-                Intent volumeServiceIntent = new Intent(savedContext, ExecuteVolumeProfilePrefsService.class);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_LINK);
-                savedContext.startService(volumeServiceIntent);
-            }
-            dataWrapper.invalidateDataWrapper();
-        }
-
-        // audiomode is set to MODE_NORMAL by system
-        Log.e("PhoneCallBroadcastReceiver", "callEnded audioMode=" + audioManager.getMode());
-
+        startService(SERVICE_PHONE_EVENT_START, false, number);
     }
 
     protected void onIncomingCallAnswered(String number, Date start) {
-        callAnswered(false);
+        startService(SERVICE_PHONE_EVENT_ANSWER, true, number);
     }
 
     protected void onOutgoingCallAnswered(String number, Date start) {
-        callAnswered(false);
+        startService(SERVICE_PHONE_EVENT_ANSWER, false, number);
     }
 
     protected void onIncomingCallEnded(String number, Date start, Date end) {
-        callEnded(true);
-        setBackNotificationVolume();
+        startService(SERVICE_PHONE_EVENT_END, true, number);
     }
 
     protected void onOutgoingCallEnded(String number, Date start, Date end) {
-        callEnded(false);
+        startService(SERVICE_PHONE_EVENT_END, false, number);
     }
 
     protected void onMissedCall(String number, Date start) {
-        callEnded(true);
-        setBackNotificationVolume();
+        startService(SERVICE_PHONE_EVENT_END, true, number);
     }
     
 }

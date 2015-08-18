@@ -370,7 +370,7 @@ public class ActivateProfileHelper {
             if (profile.getVolumeRingtoneChange())
                 GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
             if (((!GlobalData.applicationUnlinkRingerNotificationVolumes) || (callState != TelephonyManager.CALL_STATE_RINGING))
-                    && (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_NONE)) {
+                    && (linkUnlink == PhoneCallService.LINKMODE_NONE)) {
                 int volume = GlobalData.getRingerVolume(context);
                 if (volume != -999) {
                     SettingsContentObserver.internalChange = true;
@@ -384,7 +384,7 @@ public class ActivateProfileHelper {
             if (profile.getVolumeNotificationChange())
                 GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
             if (((!GlobalData.applicationUnlinkRingerNotificationVolumes) || (callState != TelephonyManager.CALL_STATE_RINGING))
-                    && (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_NONE)) {
+                    && (linkUnlink == PhoneCallService.LINKMODE_NONE)) {
                 int volume = GlobalData.getNotificationVolume(context);
                 if (volume != -999) {
                     SettingsContentObserver.internalChange = true;
@@ -404,7 +404,7 @@ public class ActivateProfileHelper {
             //Log.e("ActivateProfileHelper", "setVolumes zenMode=" + Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_NONE));
 
             if (doUnlink) {
-                if (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_UNLINK) {
+                if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
                     // for separating ringing and notification
                     // in ringing state ringer volumes must by set
                     // and notification volumes must not by set
@@ -420,7 +420,7 @@ public class ActivateProfileHelper {
                     }
                 }
                 else
-                if (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_LINK) {
+                if (linkUnlink == PhoneCallService.LINKMODE_LINK) {
                     // for separating ringing and notification
                     // in not ringing state ringer and notification volume must by change
                     //Log.e("ActivateProfileHelper","setVolumes get audio mode="+audioManager.getMode());
@@ -664,7 +664,7 @@ public class ActivateProfileHelper {
         // run service for execute volumes
         Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
         volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-        volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_NONE);
+        volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
         //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
         context.startService(volumeServiceIntent);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
