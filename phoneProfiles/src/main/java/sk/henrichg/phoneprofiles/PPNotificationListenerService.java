@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
+import android.util.Log;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class PPNotificationListenerService extends NotificationListenerService {
@@ -68,7 +69,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
     public void onInterruptionFilterChanged(int interruptionFilter) {
         //Log.e(TAG, "onInterruptionFilterChanged(" + interruptionFilter + ')');
 
-        if (!internalChange) {
+        //if (!internalChange) {
             final AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
             int ringerMode = audioManager.getRingerMode();
 
@@ -93,15 +94,20 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 case 4: // new filter - Alarm only - Android M
                     break;
             }
-            if (zenMode != 0)
+            if (zenMode != 0) {
+                //Log.e(TAG, "onInterruptionFilterChanged  zenMode=" + zenMode);
+                GlobalData.setRingerMode(getApplicationContext(), 5);
                 GlobalData.setZenMode(getApplicationContext(), zenMode);
-        }
+            }
+        //}
 
         internalChange = false;
     }
 
     public static void setZenMode(Context context, AudioManager audioManager) {
         int ringerMode = audioManager.getRingerMode();
+
+        //Log.e(TAG, "setZenMode(" + ringerMode + ')');
 
         // convert to profile zenMode
         int zenMode = 0;
@@ -125,8 +131,10 @@ public class PPNotificationListenerService extends NotificationListenerService {
             case 3: // new filter - Alarm only - Android M
                 break;
         }
-        if (zenMode != 0)
+        if (zenMode != 0) {
+            GlobalData.setRingerMode(context, 5);
             GlobalData.setZenMode(context, zenMode);
+        }
     }
 
     public static boolean isNotificationListenerServiceEnabled(Context context) {
