@@ -13,13 +13,13 @@
             android:defaultValue="ic_profile_default|1|0|0"
             android:key="prf_pref_profileIcon"
             android:title="@string/profile_preferences_profileIcon" />
-        <sk.henrichg.phoneprofiles.NumberPickerPreference
+        <sk.henrichg.phoneprofiles.DurationDialogPreference
             android:key="prf_pref_duration"
             android:summary="@string/profile_preferences_duration"
             android:title="@string/profile_preferences_duration" 
             android:defaultValue="0"
-            henrichg:min="0"
-            henrichg:max="68400" />
+            henrichg:dMin="0"
+            henrichg:dMax="86400" />
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_afterDurationDo"
             android:summary="@string/array_pref_afterProfileDurationDo_nothing"
