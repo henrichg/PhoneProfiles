@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Predvolený profil</string>
   <string name="profile_preference_profile_end_no_activate">Neaktivovať</string>
   <string name="profile_preference_profile_not_set">Nevybraný žiadny profil</string>
-  <string name="profile_preferences_duration">Trvanie (sek.)</string>
+  <string name="profile_preferences_duration">Trvanie</string>
   <string name="profile_preferences_afterDurationDo">Po uplynutí trvania urob</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nič</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Vráť späť profil</string>
@@ -243,7 +243,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Mriežkové rozloženie</string>
   <string name="menu_help">Pomoc</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Prebiehajúca notifikácia</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Zruš po (sek.)</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Zruš po</string>
   <string name="phoneprofilehepler_install_error_no_root">Inštalácia PPHelper-a vyžaduje ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Odinštalácia PPHelper-a vyžaduje ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Odinštalácia PPHelper-a</string>

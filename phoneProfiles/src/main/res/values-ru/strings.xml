@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Профиль по умолчанию</string>
   <string name="profile_preference_profile_end_no_activate">Не активировать</string>
   <string name="profile_preference_profile_not_set">Профиль не выбран</string>
-  <string name="profile_preferences_duration">Продолжительность (сек)</string>
+  <string name="profile_preferences_duration">Продолжительность</string>
   <string name="profile_preferences_afterDurationDo">По окончанию действия профиля</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ничего</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Отменить данный профиль</string>
@@ -243,7 +243,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">В виде сетки</string>
   <string name="menu_help">Помощь</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Показывать уведомление постоянно</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Убрать уведомление через (сек.)</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Убрать уведомление через</string>
   <string name="phoneprofilehepler_install_error_no_root">Для установки PPHelper требуется ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Для удаления PPHelper требуется ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Удаление PPHelper</string>

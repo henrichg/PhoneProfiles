@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standaardprofiel</string>
   <string name="profile_preference_profile_end_no_activate">Niet actief</string>
   <string name="profile_preference_profile_not_set">Profiel niet ingesteld</string>
-  <string name="profile_preferences_duration">Duur (sec)</string>
+  <string name="profile_preferences_duration">Duur</string>
   <string name="profile_preferences_afterDurationDo">Bij einde duur doe</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Niets</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Profiel ongedaan maken</string>
@@ -244,7 +244,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Grid lay-out</string>
   <string name="menu_help">Help</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Continue notificaties</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Annuleren na (sec)</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Annuleren na</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelper installatie vereist ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper verwijdering vereist ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper verwijderen</string>

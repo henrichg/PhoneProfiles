@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standard-Profil</string>
   <string name="profile_preference_profile_end_no_activate">Nicht aktivieren</string>
   <string name="profile_preference_profile_not_set">Profil nicht ausgewählt</string>
-  <string name="profile_preferences_duration">Dauer (sek)</string>
+  <string name="profile_preferences_duration">Dauer</string>
   <string name="profile_preferences_afterDurationDo">Nach Dauer tue</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nichts</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Profil rückgängig machen</string>
@@ -243,7 +243,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Gitter-Layout</string>
   <string name="menu_help">Hilfe</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Dauerhafte Benachrichtigung</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Beenden nach (sek)</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Beenden nach</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelfer-Installation benötigt root</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelfer-Deinstallation benötigt root</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelfer-Deinstallation</string>

@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standardprofil</string>
   <string name="profile_preference_profile_end_no_activate">Aktivera inte</string>
   <string name="profile_preference_profile_not_set">Profil inte inställd</string>
-  <string name="profile_preferences_duration">Varaktighet (sek)</string>
+  <string name="profile_preferences_duration">Varaktighet</string>
   <string name="profile_preferences_afterDurationDo">Efter varaktighet gör</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ingenting</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Ångra profilen</string>
@@ -244,7 +244,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Rutnätslayout</string>
   <string name="menu_help">Hjälp</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Pågående notifiering</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Avbryt efter (sek)</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Avbryt efter</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelper installation kräver ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper avinstallation kräver ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper avinstallation</string>
