@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Standard-Profil</string>
   <string name="profile_preference_profile_end_no_activate">Nicht aktivieren</string>
   <string name="profile_preference_profile_not_set">Profil nicht ausgewählt</string>
-  <string name="profile_preferences_duration">Dauer</string>
+  <string name="profile_preferences_duration">Dauer (sek)</string>
   <string name="profile_preferences_afterDurationDo">Nach Dauer tue</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nichts</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Profil rückgängig machen</string>
@@ -243,7 +243,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Gitter-Layout</string>
   <string name="menu_help">Hilfe</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Dauerhafte Benachrichtigung</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Beenden nach</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Beenden nach (sek)</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelfer-Installation benötigt root</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelfer-Deinstallation benötigt root</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelfer-Deinstallation</string>
@@ -280,8 +280,8 @@
   <string name="important_info_profile_root">Einige Profil-Einstellungen benötigt Root-Rechte. Diese Einstellungen sind mit \"(R)\" gekennzeichnet.</string>
   <string name="important_info_profile_pphelper">Einige Profil-Einstellungen erfordert installierten PPHelfer. Diese Einstellungen sind mit \"(H)\" gekennzeichnet.</string>
   <string name="important_info_pphelper_installation">Die PPHelfer-Installation benötigt Root-Rechte. Sie können die PPHelfer-Installation im Editor über den Menüpunkt \"PPHelfer installieren\" aufrufen.</string>
-  <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
-  <string name="important_info_profile_settings">Some profile preferences requires changes in system Settings. These preferences are marked with \"(S)\".</string>
+  <string name="important_into_sony_stamina_mode">Wenn du ein Sony-Gerät besitzt und den STAMINA-Modus in den Energieoptionen aktiviert hast, füge bitte PhoneProfiles unter \"Im Standbymodus aktive Apps\" hinzu, sonst wird diese Anwendung nicht richtig funktionieren.</string>
+  <string name="important_info_profile_settings">Einige Profil-Einstellungen benötigen Änderungen in den System-Einstellungen. Diese Einstellungen sind mit \"(S)\" gekennzeichnet.</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
   <string name="array_pref_zenModeArray_allWithVibration">All with vibration</string>
@@ -291,4 +291,6 @@
   <string name="profile_preferences_zenMode_none_summary">No interruptions. Not even alarms</string>
   <string name="profile_preferences_zenMode_priority_summary">Priority interruptions only</string>
   <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
+  <string name="applications_multiselect_summary_text_selected">Selected</string>
+  <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
 </resources>

@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Alapértelmezett profil</string>
   <string name="profile_preference_profile_end_no_activate">Nincs aktiválás</string>
   <string name="profile_preference_profile_not_set">Profil nincs beállítva</string>
-  <string name="profile_preferences_duration">Időtartam</string>
+  <string name="profile_preferences_duration">Időtartam (mp)</string>
   <string name="profile_preferences_afterDurationDo">Időtartam után csinálja</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Semmi</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">A profil visszavonása</string>
@@ -244,7 +244,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Rács elrendezés</string>
   <string name="menu_help">Segítség</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Folyamatos jelentés</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Mégse múlva</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Mégse (sec) múlva</string>
   <string name="phoneprofilehepler_install_error_no_root">PPHelper telepítéséhez ROOT jog kell</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">PPHelper eltávolításához ROOT jog kell</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">PPHelper eltávolítás</string>
@@ -292,4 +292,6 @@
   <string name="profile_preferences_zenMode_none_summary">No interruptions. Not even alarms</string>
   <string name="profile_preferences_zenMode_priority_summary">Priority interruptions only</string>
   <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
+  <string name="applications_multiselect_summary_text_selected">Selected</string>
+  <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
 </resources>

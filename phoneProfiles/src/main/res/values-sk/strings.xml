@@ -235,7 +235,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Predvolený profil</string>
   <string name="profile_preference_profile_end_no_activate">Neaktivovať</string>
   <string name="profile_preference_profile_not_set">Nevybraný žiadny profil</string>
-  <string name="profile_preferences_duration">Trvanie</string>
+  <string name="profile_preferences_duration">Trvanie (sek.)</string>
   <string name="profile_preferences_afterDurationDo">Po uplynutí trvania urob</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Nič</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Vráť späť profil</string>
@@ -243,7 +243,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Mriežkové rozloženie</string>
   <string name="menu_help">Pomoc</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Prebiehajúca notifikácia</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Zruš po</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Zruš po (sek.)</string>
   <string name="phoneprofilehepler_install_error_no_root">Inštalácia PPHelper-a vyžaduje ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Odinštalácia PPHelper-a vyžaduje ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Odinštalácia PPHelper-a</string>
@@ -291,4 +291,6 @@
   <string name="profile_preferences_zenMode_none_summary">Žiadne vyrušenia, ani budíky</string>
   <string name="profile_preferences_zenMode_priority_summary">Iba prioritné vyrušenia</string>
   <string name="profile_preferences_zenMode_all_summary">Všetky vyrušenia</string>
+  <string name="applications_multiselect_summary_text_selected">Vybraté</string>
+  <string name="applications_multiselect_summary_text_not_selected">Nevybraté</string>
 </resources>

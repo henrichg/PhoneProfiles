@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Профіль за замовчуванням</string>
   <string name="profile_preference_profile_end_no_activate">Не активуй</string>
   <string name="profile_preference_profile_not_set">Профіль не вибрано</string>
-  <string name="profile_preferences_duration">Тривалість</string>
+  <string name="profile_preferences_duration">Тривалість (сек.)</string>
   <string name="profile_preferences_afterDurationDo">Після тривалість зробити</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Нічого</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Анулювати профіль</string>
@@ -244,7 +244,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Сітка</string>
   <string name="menu_help">Допомога</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Триваючі сповіщення</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Скасувати</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Скасувати (сек.)</string>
   <string name="phoneprofilehepler_install_error_no_root">Щоб встановити PPHelper, необхідний ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">Щоб деінсталювати PPHelper, необхідний ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Деінсталяція PPHelper</string>
@@ -292,4 +292,6 @@
   <string name="profile_preferences_zenMode_none_summary">No interruptions. Not even alarms</string>
   <string name="profile_preferences_zenMode_priority_summary">Priority interruptions only</string>
   <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
+  <string name="applications_multiselect_summary_text_selected">Selected</string>
+  <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
 </resources>

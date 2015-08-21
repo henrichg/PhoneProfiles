@@ -236,7 +236,7 @@
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Perfil per defecte</string>
   <string name="profile_preference_profile_end_no_activate">Sense activar</string>
   <string name="profile_preference_profile_not_set">Perfil no definit</string>
-  <string name="profile_preferences_duration">Durada</string>
+  <string name="profile_preferences_duration">Durada (sec)</string>
   <string name="profile_preferences_afterDurationDo">Després de durada fer</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Res</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Desfer el perfil</string>
@@ -244,7 +244,7 @@
   <string name="phone_profiles_pref_applicationGridLayout">Disseny de quadrícula</string>
   <string name="menu_help">Ajuda</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Notificació en curs</string>
-  <string name="phone_profiles_pref_notificationStatusBarCancel">Cancel·lar després de</string>
+  <string name="phone_profiles_pref_notificationStatusBarCancel">Cancel·lar després de (sec)</string>
   <string name="phoneprofilehepler_install_error_no_root">La instal·lació de PPHelper requereix ROOT</string>
   <string name="phoneprofilehepler_uninstall_error_no_root">La desinstal·lació de PPHelper requereix ROOT</string>
   <string name="phoneprofilehepler_reboot_title_uninstall">Desinstal·lar PPHelper</string>
@@ -292,4 +292,6 @@
   <string name="profile_preferences_zenMode_none_summary">No interruptions. Not even alarms</string>
   <string name="profile_preferences_zenMode_priority_summary">Priority interruptions only</string>
   <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
+  <string name="applications_multiselect_summary_text_selected">Selected</string>
+  <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
 </resources>
