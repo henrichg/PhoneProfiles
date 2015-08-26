@@ -294,4 +294,6 @@
   <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
   <string name="applications_multiselect_summary_text_selected">Selected</string>
   <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
+  <string name="array_pref_zenModeArray_alarms">Only alarms</string>
+  <string name="profile_preferences_zenMode_alarms_summary">Only alarms interruptions</string>
 </resources>

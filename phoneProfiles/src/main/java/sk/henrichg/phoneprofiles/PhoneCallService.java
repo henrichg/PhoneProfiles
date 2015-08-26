@@ -52,7 +52,7 @@ public class PhoneCallService extends IntentService {
             DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
-                Log.e("PhoneCallService", "doCallEvent - unlink");
+                //Log.e("PhoneCallService", "doCallEvent - unlink");
                 Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, linkMode);
@@ -90,7 +90,7 @@ public class PhoneCallService extends IntentService {
         }
 
         // audiomode is set to MODE_IN_CALL by system
-        Log.e("PhoneCallService", "callAnswered audioMode=" + audioManager.getMode());
+        //Log.e("PhoneCallService", "callAnswered audioMode=" + audioManager.getMode());
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
@@ -125,7 +125,7 @@ public class PhoneCallService extends IntentService {
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
         // audiomode is set to MODE_IN_CALL by system
-        Log.e("PhoneCallService", "callEnded (before back speaker phone) audioMode="+audioManager.getMode());
+        //Log.e("PhoneCallService", "callEnded (before back speaker phone) audioMode="+audioManager.getMode());
 
         if (speakerphoneSelected)
         {
@@ -146,7 +146,7 @@ public class PhoneCallService extends IntentService {
         }
 
         // audiomode is set to MODE_NORMAL by system
-        Log.e("PhoneCallService", "callEnded (before unlink) audioMode="+audioManager.getMode());
+        //Log.e("PhoneCallService", "callEnded (before unlink) audioMode="+audioManager.getMode());
 
         if (incoming)
             setLinkUnlinkNotificationVolume(LINKMODE_LINK);
