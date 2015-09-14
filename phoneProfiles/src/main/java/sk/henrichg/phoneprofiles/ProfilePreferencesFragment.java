@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -776,8 +777,29 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             }
 
         }
-        if (key.equals(GlobalData.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT) ||
-            key.equals(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD))
+        if (key.equals(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD))
+        {
+            ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
+            boolean secureKeyguard;
+            KeyguardManager keyguardManager = (KeyguardManager)context.getSystemService(Activity.KEYGUARD_SERVICE);
+            if (android.os.Build.VERSION.SDK_INT >= 16)
+                secureKeyguard = keyguardManager.isKeyguardSecure();
+            else
+                secureKeyguard = keyguardManager.inKeyguardRestrictedInputMode();
+            listPreference.setEnabled(!secureKeyguard);
+            if (secureKeyguard) {
+                setTitleStyle(listPreference, false, false);
+                listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+            }
+            else {
+                String sValue = value.toString();
+                int index = listPreference.findIndexOfValue(sValue);
+                CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
+                listPreference.setSummary(summary);
+                setTitleStyle(listPreference, index > 0, false);
+            }
+        }
+        if (key.equals(GlobalData.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT))
         {
             String sValue = value.toString();
             ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
