@@ -54,7 +54,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint({"SimpleDateFormat", "NewApi"})
     static public void setAlarm(Profile profile, Context context)
     {
         removeAlarm(context);
@@ -82,7 +82,13 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
 
-            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+            if (GlobalData.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 23))
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+            else
+            if (GlobalData.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 19))
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+            else
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
             //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
             //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
 

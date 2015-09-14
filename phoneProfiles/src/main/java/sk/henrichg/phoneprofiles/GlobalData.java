@@ -35,6 +35,8 @@ public class GlobalData extends Application {
 
     static String PACKAGE_NAME;
 
+    public static final boolean exactAlarms = true;
+
     public static final String EXPORT_PATH = "/PhoneProfiles";
     public static final String LOG_FILENAME = "log.txt";
 
@@ -205,7 +207,8 @@ public class GlobalData extends Application {
     public static boolean applicationWidgetListGridLayout;
     public static boolean applicationWidgetIconHideProfileName;
     public static boolean applicationUnlinkRingerNotificationVolumes;
-    
+
+    @Override
     public void onCreate()
     {
     //	Debug.startMethodTracing("phoneprofiles");
@@ -227,9 +230,11 @@ public class GlobalData extends Application {
 
     }
 
+    @Override
     public void onTerminate ()
     {
         DatabaseHandler.getInstance(this).closeConnecion();
+        super.onTerminate();
     }
 
     //--------------------------------------------------------------
