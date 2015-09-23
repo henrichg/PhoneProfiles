@@ -549,7 +549,10 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
+                    if (android.os.Build.VERSION.SDK_INT >= 23)
+                        ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
+                    else
+                        Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
                     //setZenMode(ZENMODE_ALL);
                     break;
                 case 2:  // Ring & Vibrate
@@ -565,7 +568,10 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
+                    if (android.os.Build.VERSION.SDK_INT >= 23)
+                        ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 1);
+                    else
+                        Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
                     //setZenMode(ZENMODE_ALL);
                     break;
                 case 3:  // Vibrate
@@ -581,7 +587,10 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
+                    if (android.os.Build.VERSION.SDK_INT >= 23)
+                        ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 1);
+                    else
+                        Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
                     //setZenMode(ZENMODE_ALL);
                     break;
                 case 4:  // Silent
@@ -597,7 +606,10 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
+                    if (android.os.Build.VERSION.SDK_INT >= 23)
+                        ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
+                    else
+                        Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
                     //setZenMode(ZENMODE_PRIORITY);
                     break;
                 case 5: // Zen mode
@@ -610,10 +622,18 @@ public class ActivateProfileHelper {
                         case 1:
                             setZenMode(context, ZENMODE_ALL);
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                            if (android.os.Build.VERSION.SDK_INT >= 23)
+                                ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
+                            else
+                                Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
                             break;
                         case 2:
                             setZenMode(context, ZENMODE_PRIORITY);
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                            if (android.os.Build.VERSION.SDK_INT >= 23)
+                                ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
+                            else
+                                Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 0);
                             break;
                         case 3:
                             setZenMode(context, ZENMODE_NONE);
@@ -623,10 +643,18 @@ public class ActivateProfileHelper {
                         case 4:
                             setZenMode(context, ZENMODE_ALL);
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                            if (android.os.Build.VERSION.SDK_INT >= 23)
+                                ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 1);
+                            else
+                                Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
                             break;
                         case 5:
                             setZenMode(context, ZENMODE_PRIORITY);
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                            if (android.os.Build.VERSION.SDK_INT >= 23)
+                                ;//Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 1);
+                            else
+                                Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", 1);
                             break;
                         case 6:
                             setZenMode(context, ZENMODE_ALARMS);
