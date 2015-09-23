@@ -1,7 +1,11 @@
 package sk.henrichg.phoneprofiles;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
+
+import static android.Manifest.*;
 
 public class Privileges {
 
@@ -134,6 +138,13 @@ public class Privileges {
             else
                 return true;
         }
+        else
+            return true;
+    }
+
+    public static boolean checkInstallTone(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23)
+            return (context.checkSelfPermission(permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
             return true;
     }
