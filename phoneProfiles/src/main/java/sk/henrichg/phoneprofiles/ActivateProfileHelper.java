@@ -359,6 +359,7 @@ public class ActivateProfileHelper {
         if (profile.getVolumeSystemChange())
         {
             SettingsContentObserver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, profile.getVolumeSystemValue(), 0);
             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
             correctSilentMode(/*profile, */audioManager);
@@ -375,6 +376,7 @@ public class ActivateProfileHelper {
                 int volume = GlobalData.getRingerVolume(context);
                 if (volume != -999) {
                     SettingsContentObserver.internalChange = true;
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, profile.getVolumeRingtoneValue(), 0);
                     //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
                     correctSilentMode(/*profile, */audioManager);
@@ -389,6 +391,7 @@ public class ActivateProfileHelper {
                 int volume = GlobalData.getNotificationVolume(context);
                 if (volume != -999) {
                     SettingsContentObserver.internalChange = true;
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, profile.getVolumeNotificationValue(), 0);
                     //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
                     correctSilentMode(/*profile, */audioManager);
@@ -412,6 +415,7 @@ public class ActivateProfileHelper {
                     int volume = GlobalData.getRingerVolume(context);
                     if (volume != -999) {
                         SettingsContentObserver.internalChange = true;
+                        Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                         audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
                         //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
                         SettingsContentObserver.internalChange = true;
@@ -429,6 +433,7 @@ public class ActivateProfileHelper {
                     if (volume != -999) {
                         //Log.e("ActivateProfileHelper","setVolumes set ring volume="+volume);
                         SettingsContentObserver.internalChange = true;
+                        Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                         audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
                         //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
                     }
@@ -436,6 +441,7 @@ public class ActivateProfileHelper {
                     if (volume != -999) {
                         //Log.e("ActivateProfileHelper","setVolumes set notification volume="+volume);
                         SettingsContentObserver.internalChange = true;
+                        Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                         audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
                         //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
                     }
@@ -446,17 +452,20 @@ public class ActivateProfileHelper {
         if (profile.getVolumeMediaChange())
         {
             SettingsContentObserver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, profile.getVolumeMediaValue(), 0);
             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_MUSIC, profile.getVolumeMediaValue());
         }
         if (profile.getVolumeAlarmChange())
         {
             SettingsContentObserver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setStreamVolume(AudioManager.STREAM_ALARM, profile.getVolumeAlarmValue(), 0);
             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ALARM, profile.getVolumeAlarmValue());
         }
         if (profile.getVolumeVoiceChange()) {
             SettingsContentObserver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, profile.getVolumeVoiceValue(), 0);
             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_VOICE, profile.getVolumeVoiceValue());
         }
@@ -530,6 +539,7 @@ public class ActivateProfileHelper {
         switch (ringerMode) {
         case 1:  // Ring
             RingerModeChangeReceiver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             try
             {
@@ -548,6 +558,7 @@ public class ActivateProfileHelper {
             break;
         case 2:  // Ring & Vibrate
             RingerModeChangeReceiver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             try
             {
@@ -566,6 +577,7 @@ public class ActivateProfileHelper {
             break;
         case 3:  // Vibrate
             RingerModeChangeReceiver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
             try
             {
@@ -584,6 +596,7 @@ public class ActivateProfileHelper {
             break;
         case 4:  // Silent
             RingerModeChangeReceiver.internalChange = true;
+            Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
             audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             try
             {
@@ -608,27 +621,33 @@ public class ActivateProfileHelper {
 
             switch (zenMode) {
                 case 1:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_ALL);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 2:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_PRIORITY);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 3:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_NONE);
                     // no change ringer mode
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     break;
                 case 4:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_ALL);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     break;
                 case 5:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_PRIORITY);
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     break;
                 case 6:
+                    Settings.System.putInt(context.getContentResolver(), "notifications_use_ring_volume", 0);
                     setZenMode(context, ZENMODE_ALARMS);
                     // no change ringer mode
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
