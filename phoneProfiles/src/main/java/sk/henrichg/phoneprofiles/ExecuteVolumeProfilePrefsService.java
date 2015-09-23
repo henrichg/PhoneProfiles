@@ -31,7 +31,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         profile = GlobalData.getMappedProfile(profile, context);
         if (profile != null)
         {
-            if (Privileges.checkProfilePrivileges(profile)) {
+            if (Privileges.checkVolumePreferences(context, profile)) {
 
                 AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
