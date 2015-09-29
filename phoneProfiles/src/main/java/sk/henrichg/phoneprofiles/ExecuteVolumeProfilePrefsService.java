@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.provider.Settings;
 
 public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulIntentService 
 {
@@ -31,7 +30,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         profile = GlobalData.getMappedProfile(profile, context);
         if (profile != null)
         {
-            if (Privileges.checkProfileVolumePreferences(context, profile)) {
+            if (Permissions.checkProfileVolumePreferences(context, profile)) {
 
                 AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
