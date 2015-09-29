@@ -684,7 +684,7 @@ public class ActivateProfileHelper {
             display.getMetrics(displayMetrics);
             int height = displayMetrics.heightPixels;
             int width = displayMetrics.widthPixels << 1; // best wallpaper width is twice screen width
-            Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmap(profile.getDeviceWallpaperIdentifier(), width, height);
+            Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmap(profile.getDeviceWallpaperIdentifier(), width, height, context);
             if (decodedSampleBitmap != null)
             {
                 // set wallpaper
@@ -950,10 +950,12 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie pozadia
-        if (profile._deviceWallpaperChange == 1) {
-            Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
-            wallpaperServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            context.startService(wallpaperServiceIntent);
+        if (Permissions.checkWallpaper(context, profile)) {
+            if (profile._deviceWallpaperChange == 1) {
+                Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
+                wallpaperServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                context.startService(wallpaperServiceIntent);
+            }
         }
 
         if (interactive)
