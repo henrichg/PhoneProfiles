@@ -58,11 +58,13 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
                 ppHelperIntent.putExtra(PPHELPER_WIFI_AP_CHANGE, profile._deviceWiFiAP);
                 context.sendBroadcast(ppHelperIntent);
             } else {
-                // run execute radios from ActivateProfileHelper
-                ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-                aph.initialize(null, context);
-                aph.executeForRadios(profile);
-                aph = null;
+                if (Permissions.checkProfileRadioPreferences(context, profile)) {
+                    // run execute radios from ActivateProfileHelper
+                    ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
+                    aph.initialize(null, context);
+                    aph.executeForRadios(profile);
+                    aph = null;
+                }
             }
         }
 
