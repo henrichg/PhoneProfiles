@@ -3,10 +3,15 @@ package sk.henrichg.phoneprofiles;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+
+import java.util.List;
 
 public class GrantPermissionActivity extends Activity {
 
     private long profile_id;
+    private List<Permissions.PermissionType> permissions;
+
     private Intent intent;
 
     @Override
@@ -17,6 +22,7 @@ public class GrantPermissionActivity extends Activity {
 
         intent = getIntent();
         profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        permissions = intent.getParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES);
 
     }
 
@@ -24,7 +30,7 @@ public class GrantPermissionActivity extends Activity {
     protected void onStart()
     {
         super.onStart();
-        //if (getshouldShowRequestPermissionRationale)
+        //if (ActivityCompat.shouldShowRequestPermissionRationale(this, ))
 
         finish();
     }
