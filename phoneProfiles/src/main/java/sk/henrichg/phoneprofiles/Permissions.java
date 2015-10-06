@@ -380,6 +380,7 @@ public class Permissions {
                 context.startActivity(intent);
             }*/
             Intent intent = new Intent(context, GrantPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
             intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>)permissions);
             context.startActivity(intent);
