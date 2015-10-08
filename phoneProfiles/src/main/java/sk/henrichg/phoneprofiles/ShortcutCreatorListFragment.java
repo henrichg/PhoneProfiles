@@ -209,6 +209,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                 int iconResource = getResources().getIdentifier(iconIdentifier, "drawable", getActivity().getPackageName());
                 profileBitmap = BitmapFactory.decodeResource(getResources(), iconResource);
             }
+            shortcutOverlayBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_shortcut_overlay);
         }
         else
         {
@@ -220,6 +221,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                 int iconResource = R.drawable.ic_profile_default;
                 profileBitmap = BitmapFactory.decodeResource(getResources(), iconResource);
             }
+            shortcutOverlayBitmap = BitmapManipulator.resampleResource(resources, R.drawable.ic_shortcut_overlay, width, height);
         }
         
         if (GlobalData.applicationWidgetIconColor.equals("1"))
@@ -239,7 +241,6 @@ public class ShortcutCreatorListFragment extends Fragment {
                 profileBitmap = BitmapManipulator.grayscaleBitmap(profileBitmap);
         }
 
-        shortcutOverlayBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_shortcut_overlay);
         profileShortcutBitmap = combineImages(profileBitmap, shortcutOverlayBitmap);
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, profileShortcutBitmap);
 
