@@ -156,6 +156,7 @@ public class GlobalData extends Application {
     public static final String PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT= "applicationWidgetListGridLayout";
     public static final String PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME = "applicationWidgetIconHideProfileName";
     public static final String PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES = "applicationUnlinkRingerNotificationVolumes";
+    public static final String PREF_APPLICATION_SHORTCUT_EMBLEM = "applicationShortcutEmblem";
 
     public static final int HARDWARE_CHECK_NOT_ALLOWED = 0;
     public static final int HARDWARE_CHECK_ALLOWED = 1;
@@ -207,6 +208,7 @@ public class GlobalData extends Application {
     public static boolean applicationWidgetListGridLayout;
     public static boolean applicationWidgetIconHideProfileName;
     public static boolean applicationUnlinkRingerNotificationVolumes;
+    public static boolean applicationShortcutEmblem;
 
     @Override
     public void onCreate()
@@ -275,6 +277,7 @@ public class GlobalData extends Application {
         applicationWidgetListGridLayout = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT, false);
         applicationWidgetIconHideProfileName = preferences.getBoolean(PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME, false);
         applicationUnlinkRingerNotificationVolumes = preferences.getBoolean(PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES, false);
+        applicationShortcutEmblem = preferences.getBoolean(PREF_APPLICATION_SHORTCUT_EMBLEM, true);
 
         if (applicationTheme.equals("light"))
         {

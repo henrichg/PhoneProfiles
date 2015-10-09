@@ -296,4 +296,5 @@
   <string name="applications_multiselect_summary_text_not_selected">Not selected</string>
   <string name="array_pref_zenModeArray_alarms">Only alarms</string>
   <string name="profile_preferences_zenMode_alarms_summary">Only alarms interruptions</string>
+  <string name="phone_profiles_pref_applicationShortcutEmblem">Add emblem to shortcut</string>
 </resources>

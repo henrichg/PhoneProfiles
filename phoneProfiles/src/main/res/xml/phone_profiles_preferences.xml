@@ -140,6 +140,10 @@
                android:defaultValue="system"
                android:entries="@array/languageArray"
                android:entryValues="@array/languageValues" />
+        <CheckBoxPreference
+            android:key="applicationShortcutEmblem"
+            android:title="@string/phone_profiles_pref_applicationShortcutEmblem"
+            android:defaultValue="true" />
     </PreferenceCategory>
     
     <PreferenceCategory
