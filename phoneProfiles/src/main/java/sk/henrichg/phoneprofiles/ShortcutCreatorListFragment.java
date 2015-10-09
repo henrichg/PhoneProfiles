@@ -256,8 +256,8 @@ public class ShortcutCreatorListFragment extends Fragment {
         int width;
         int height;
 
-        width = bitmap1.getWidth();
-        height = bitmap1.getHeight();
+        width = bitmap2.getWidth();
+        height = bitmap2.getHeight();
 
         combined = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
