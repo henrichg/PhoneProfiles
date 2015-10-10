@@ -175,6 +175,7 @@ public class GlobalData extends Application {
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START = "show_info_notification_on_start";
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION = "show_info_notification_on_start_version";
     private static final String PREF_ZEN_MODE = "zen_mode";
+    private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -675,6 +676,20 @@ public class GlobalData extends Application {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
         editor.putInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, version);
+        editor.commit();
+    }
+
+    static public boolean getShowRequestWriteSettingsPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION, true);
+    }
+
+    static public void setShowRequestWriteSettingsPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION, value);
         editor.commit();
     }
 
