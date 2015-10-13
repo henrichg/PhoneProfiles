@@ -682,4 +682,10 @@ public class PhoneProfilesHelper {
         //}
     }
 
+    public static void removeNotification(Context context)
+    {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(GlobalData.PPHELPER_UPGRADE_NOTIFICATION_ID);
+    }
+
 }

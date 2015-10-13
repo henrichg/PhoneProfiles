@@ -503,8 +503,8 @@ public class DataWrapper {
             dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    if (Permissions.grantProfilePermissionsAndActivate(context, _profile, _startupSource, _interactive,
-                            forGUI, monochrome, monochromeValue))
+                    if (Permissions.grantProfilePermissionsAndActivateActivity(context, _profile, _startupSource, _interactive,
+                                            forGUI, monochrome, monochromeValue))
                         _activateProfile(_profile, _startupSource, _interactive, _activity);
                     else {
                         Intent returnIntent = new Intent();
@@ -539,8 +539,8 @@ public class DataWrapper {
         }
         else
         {
-            if (Permissions.grantProfilePermissionsAndActivate(context, profile, startupSource, interactive,
-                    forGUI, monochrome, monochromeValue))
+            if (Permissions.grantProfilePermissionsAndActivateNotification(context, profile, startupSource, interactive,
+                                            forGUI, monochrome, monochromeValue))
                 _activateProfile(profile, startupSource, interactive, activity);
         }
     }

@@ -349,7 +349,9 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             // zrusenie notifikacie
             getDataWrapper().getActivateProfileHelper().removeNotification();
-
+            PhoneProfilesHelper.removeNotification(getApplicationContext());
+            ImportantInfoNotification.removeNotification(getApplicationContext());
+            Permissions.removeNotification(getApplicationContext());
 
             stopService(new Intent(getApplicationContext(), ReceiversService.class));
             stopService(new Intent(getApplicationContext(), KeyguardService.class));
