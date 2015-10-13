@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
@@ -414,7 +415,7 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    private void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
+    public void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -502,8 +503,15 @@ public class DataWrapper {
             dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    if (Permissions.grantProfilePermissions(context, _profile, _interactive))
+                    if (Permissions.grantProfilePermissionsAndActivate(context, _profile, _startupSource, _interactive,
+                            forGUI, monochrome, monochromeValue))
                         _activateProfile(_profile, _startupSource, _interactive, _activity);
+                    else {
+                        Intent returnIntent = new Intent();
+                        _activity.setResult(Activity.RESULT_CANCELED,returnIntent);
+
+                        finishActivity(_startupSource, false, _activity);
+                    }
                 }
             });
             dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
@@ -531,7 +539,8 @@ public class DataWrapper {
         }
         else
         {
-            if (Permissions.grantProfilePermissions(context, profile, interactive))
+            if (Permissions.grantProfilePermissionsAndActivate(context, profile, startupSource, interactive,
+                    forGUI, monochrome, monochromeValue))
                 _activateProfile(profile, startupSource, interactive, activity);
         }
     }

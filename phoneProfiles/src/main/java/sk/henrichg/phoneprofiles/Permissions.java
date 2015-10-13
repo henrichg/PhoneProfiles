@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -107,9 +108,12 @@ public class Permissions {
     private static final int PERMISSION_PHONE_BROADCAST = 9;
     private static final int PERMISSION_CUSTOM_PROFILE_ICON = 10;
 
-    //public static final String EXTRA_PERMISSION_GROUP = "permission_group";
-    //public static final String EXTRA_PERMISSION_PERMISSION = "permission_permission";
     public static final String EXTRA_PERMISSION_TYPES = "permission_types";
+    public static final String EXTRA_STARTUP_SOURCE = "startup_source";
+    public static final String EXTRA_INTERACTIVE = "interactive";
+    public static final String EXTRA_FOR_GUI = "for_gui";
+    public static final String EXTRA_MONOCHROME = "monochrome";
+    public static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
 
     public static class PermissionType implements Parcelable {
         public int preference;
@@ -390,20 +394,20 @@ public class Permissions {
             return true;
     }
 
-    public static boolean grantProfilePermissions(Context context, Profile profile, boolean interactive) {
+    public static boolean grantProfilePermissionsAndActivate(Context context, Profile profile,
+                                                             int startupSource, boolean interactive,
+                                                             boolean forGUI, boolean monochrome, int monochromeValue) {
         List<PermissionType> permissions = checkProfilePermissions(context, profile);
         if (permissions.size() >= 0) {
-            /*for (PermissionType permissionType : permissions) {
-                Intent intent = new Intent(context, GrantPermissionActivity.class);
-                intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                intent.putExtra(EXTRA_PERMISSION_GROUP, permissionType.group);
-                intent.putExtra(EXTRA_PERMISSION_PERMISSION, permissionType.permission);
-                context.startActivity(intent);
-            }*/
             Intent intent = new Intent(context, GrantPermissionActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>)permissions);
+            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+            intent.putExtra(EXTRA_STARTUP_SOURCE, startupSource);
+            intent.putExtra(EXTRA_INTERACTIVE, interactive);
+            intent.putExtra(EXTRA_FOR_GUI, forGUI);
+            intent.putExtra(EXTRA_MONOCHROME, monochrome);
+            intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
             context.startActivity(intent);
         }
         return permissions.size() == 0;
