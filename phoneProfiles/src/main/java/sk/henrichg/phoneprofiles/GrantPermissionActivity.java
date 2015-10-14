@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 
@@ -28,8 +29,6 @@ public class GrantPermissionActivity extends Activity {
 
     private long profile_id;
     private List<Permissions.PermissionType> permissions;
-    private int startupSource;
-    private boolean interactive;
     private boolean forGUI;
     private boolean monochrome;
     private int monochromeValue;
@@ -49,8 +48,6 @@ public class GrantPermissionActivity extends Activity {
         Intent intent = getIntent();
         profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
         permissions = intent.getParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES);
-        startupSource = intent.getIntExtra(Permissions.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR);
-        interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         forGUI = intent.getBooleanExtra(Permissions.EXTRA_FOR_GUI, false);
         monochrome = intent.getBooleanExtra(Permissions.EXTRA_MONOCHROME, false);
         monochromeValue = intent.getIntExtra(Permissions.EXTRA_MONOCHROME_VALUE, 0xFF);
@@ -126,16 +123,10 @@ public class GrantPermissionActivity extends Activity {
                     requestPermissions(true);
                 }
             });
-            /*dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    _activity.finish();
-                }
-            });*/
             dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    activateProfile();
+                    finish();
                 }
             });
             dialogBuilder.show();
@@ -149,7 +140,6 @@ public class GrantPermissionActivity extends Activity {
     @Override
     protected void onDestroy()
     {
-        //dataWrapper = null;
         super.onDestroy();
     }
 
@@ -161,16 +151,11 @@ public class GrantPermissionActivity extends Activity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
+                    updateGUI();
 
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    finish();
                 }
-                activateProfile();
                 return;
             }
 
@@ -217,17 +202,19 @@ public class GrantPermissionActivity extends Activity {
                 ActivityCompat.requestPermissions(this, permArray, PERMISSIONS_REQUEST_CODE);
             }
             else
-                activateProfile();
+                finish();
         }
     }
 
-    private void activateProfile() {
-        List<Permissions.PermissionType> permissions = Permissions.checkProfilePermissions(getApplicationContext(), profile);
-
-        if (permissions.size() == 0) {
-            dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
-            dataWrapper._activateProfile(profile, startupSource, interactive, this);
+    private void updateGUI() {
+        finishAffinity();
+        ActivateProfileHelper activateProfileHelper = new ActivateProfileHelper();
+        activateProfileHelper.initialize(null, getApplicationContext());
+        Profile activatedProfile = dataWrapper.getActivatedProfile();
+        if (activatedProfile._id == profile_id) {
+            Profile profileFromDB = dataWrapper.getProfileById(profile_id);  // for regenerating icon bitmaps
+            activateProfileHelper.showNotification(profileFromDB);
         }
-        finish();
+        activateProfileHelper.updateWidget();
     }
 }
