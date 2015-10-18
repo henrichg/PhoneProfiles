@@ -351,7 +351,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             getDataWrapper().getActivateProfileHelper().removeNotification();
             PhoneProfilesHelper.removeNotification(getApplicationContext());
             ImportantInfoNotification.removeNotification(getApplicationContext());
-            Permissions.removeNotification(getApplicationContext());
+            Permissions.removeNotifications(getApplicationContext());
 
             stopService(new Intent(getApplicationContext(), ReceiversService.class));
             stopService(new Intent(getApplicationContext(), KeyguardService.class));
