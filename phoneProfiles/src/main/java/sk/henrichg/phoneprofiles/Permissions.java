@@ -453,6 +453,21 @@ public class Permissions {
         return permissions.size() == 0;
     }
 
+    public static boolean grantInstallTonePermissionsActivity(Context context) {
+        boolean granted = checkInstallTone(context);
+        if (!granted) {
+            List<PermissionType>  permissions = new ArrayList<PermissionType>();
+            permissions.add(new PermissionType(PERMISSION_INSTALL_TONE, permission.WRITE_EXTERNAL_STORAGE));
+
+            Intent intent = new Intent(context, GrantPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+            context.startActivity(intent);
+        }
+        return granted;
+    }
+
     public static boolean grantInstallTonePermissionsNotification(Context context) {
         boolean granted = checkInstallTone(context);
         if (!granted) {
@@ -491,11 +506,23 @@ public class Permissions {
 
 
 
+    public static void removeProfileNotification(Context context)
+    {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
+    }
+
+    public static void removeInstallToneNotification(Context context)
+    {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
+    }
 
     public static void removeNotifications(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
+        notificationManager.cancel(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
 
 }

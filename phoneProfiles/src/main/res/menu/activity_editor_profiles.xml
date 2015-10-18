@@ -9,6 +9,10 @@
         android:title="@string/menu_settings"
         android:orderInCategory="200"
         henrichg:showAsAction="never" />
+    <item android:id="@+id/menu_install_tone"
+          android:title="@string/menu_install_tone"
+          android:orderInCategory="202"
+          henrichg:showAsAction="never" />
     <item android:id="@+id/menu_pphelper_install"
         android:title="@string/menu_phoneprofilehepler_install"
         android:orderInCategory="205"

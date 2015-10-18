@@ -273,9 +273,17 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
+        boolean toneInstalled = FirstStartService.isToneInstalled(FirstStartService.TONE_ID, getApplicationContext());
+
+        MenuItem menuItem = menu.findItem(R.id.menu_install_tone);
+        if ((menuItem != null) && toneInstalled)
+        {
+            menuItem.setVisible(false);
+        }
+
         boolean isPPHInstalled = PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
 
-        MenuItem menuItem = menu.findItem(R.id.menu_pphelper_install);
+        menuItem = menu.findItem(R.id.menu_pphelper_install);
         if (menuItem != null)
         {
             //menuItem.setVisible(GlobalData.isRooted(true) && (!isPPHInstalled));
@@ -311,6 +319,9 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             startActivityForResult(intent, GlobalData.REQUEST_CODE_APPLICATION_PREFERENCES);
 
+            return true;
+        case R.id.menu_install_tone:
+            FirstStartService.installTone(FirstStartService.TONE_ID, FirstStartService.TONE_NAME, getApplicationContext(), true);
             return true;
         case R.id.menu_pphelper_install:
             PhoneProfilesHelper.installPPHelper(this, false);
