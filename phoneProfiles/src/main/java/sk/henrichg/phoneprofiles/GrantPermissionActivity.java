@@ -166,9 +166,13 @@ public class GrantPermissionActivity extends Activity {
             else {
                 String showRequestString = "";
 
-                if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
+                if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                     showRequestString = context.getString(R.string.permissions_for_install_tone_text1) + "<br><br>";
-                } else {
+                else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+                    showRequestString = context.getString(R.string.permissions_for_wallpaper_text1) + "<br><br>";
+                else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
+                    showRequestString = context.getString(R.string.permissions_for_custom_profile_icon_text1) + "<br><br>";
+                else {
                     showRequestString = context.getString(R.string.permissions_for_profile_text1) + " ";
                     if (profile != null)
                         showRequestString = showRequestString + "\"" + profile._name + "\" ";
@@ -200,8 +204,14 @@ public class GrantPermissionActivity extends Activity {
 
                 if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_install_tone_text2);
+                else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+                    showRequestString = showRequestString + context.getString(R.string.permissions_for_wallpaper_text2);
+                else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
+                    showRequestString = showRequestString + context.getString(R.string.permissions_for_custom_profile_icon_text2);
                 else
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text3);
+
+
 
                 // set theme and language for dialog alert ;-)
                 // not working on Android 2.3.x
@@ -312,14 +322,26 @@ public class GrantPermissionActivity extends Activity {
     }
 
     private void finishGrant() {
-        finishAffinity();
-
         if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
             Permissions.removeInstallToneNotification(getApplicationContext());
             FirstStartService.installTone(FirstStartService.TONE_ID, FirstStartService.TONE_NAME, getApplicationContext(), true);
+            finishAffinity();
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_WALLPAPER) {
+            if (Permissions.imageViewPreference != null)
+                Permissions.imageViewPreference.startGallery();
+            finish();
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON) {
+            if (Permissions.profileIconPreference != null)
+                Permissions.profileIconPreference.startGallery();
+            finish();
         }
         else {
             Permissions.removeProfileNotification(getApplicationContext());
+            finishAffinity();
         }
         ActivateProfileHelper activateProfileHelper = new ActivateProfileHelper();
         activateProfileHelper.initialize(null, getApplicationContext());
