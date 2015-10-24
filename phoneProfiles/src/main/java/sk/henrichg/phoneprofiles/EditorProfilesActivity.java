@@ -244,7 +244,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         if (instance == null)
         {
             instance = this;
-            refreshGUI();
+            refreshGUI(false);
         }
     }
 
@@ -1035,7 +1035,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             boolean newProfile = ((newProfileMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
                                   (newProfileMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE));
-            fragment.updateListView(profile, newProfile);
+            fragment.updateListView(profile, newProfile, false);
 
             Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
             fragment.updateHeader(activeProfile);
@@ -1090,11 +1090,11 @@ public class EditorProfilesActivity extends AppCompatActivity
             return null;
     }
 
-    public void refreshGUI()
+    public void refreshGUI(boolean refreshIcons)
     {
         EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
         if (fragment != null)
-            fragment.refreshGUI();
+            fragment.refreshGUI(refreshIcons);
     }
 
 }

@@ -617,7 +617,7 @@ public class EditorProfileListFragment extends Fragment {
         onFinishProfilePreferencesActionModeCallback.onFinishProfilePreferencesActionMode();
     }
 
-    public void updateListView(Profile profile, boolean newProfile)
+    public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons)
     {
         if (profileListAdapter != null)
         {
@@ -627,32 +627,40 @@ public class EditorProfileListFragment extends Fragment {
                 profileListAdapter.addItem(profile, false);
 
             }
-            profileListAdapter.notifyDataSetChanged();
+            profileListAdapter.notifyDataSetChanged(refreshIcons);
         }
     }
 
-    public void refreshGUI()
+    public void refreshGUI(boolean refreshIcons)
     {
         if ((dataWrapper == null) || (profileListAdapter == null))
             return;
 
         Profile profileFromAdapter = profileListAdapter.getActivatedProfile();
-        if (profileFromAdapter != null)
+        if (profileFromAdapter != null) {
             profileFromAdapter._checked = false;
+            if (refreshIcons) {
+                dataWrapper.refreshProfileIcon(profileFromAdapter, false, 0);
+            }
+        }
 
         Profile profileFromDB = dataWrapper.getDatabaseHandler().getActivatedProfile();
         if (profileFromDB != null)
         {
             Profile profileFromDataWrapper = dataWrapper.getProfileById(profileFromDB._id);
-            if (profileFromDataWrapper != null)
+            if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
+                if (refreshIcons) {
+                    dataWrapper.refreshProfileIcon(profileFromDataWrapper, false, 0);
+                }
+            }
             updateHeader(profileFromDataWrapper);
-            updateListView(profileFromDataWrapper, false);
+            updateListView(profileFromDataWrapper, false, refreshIcons);
         }
         else
         {
             updateHeader(null);
-            updateListView(null, false);
+            updateListView(null, false, refreshIcons);
         }
     }
 

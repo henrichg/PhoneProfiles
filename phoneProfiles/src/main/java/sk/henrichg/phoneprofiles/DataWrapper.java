@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DataWrapper {
 
-    private Context context = null;
+    public Context context = null;
     private boolean forGUI = false;
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
@@ -410,6 +410,16 @@ public class DataWrapper {
         if (activateProfileHelper != null)
             activateProfileHelper.deinitialize();
         activateProfileHelper = null;
+    }
+
+    public void refreshProfileIcon(Profile profile, boolean monochrome, int monochromeValue) {
+        boolean isIconResourceID = profile.getIsIconResourceID();
+        String iconIdentifier = profile.getIconIdentifier();
+        getDatabaseHandler().getProfileIcon(profile);
+        if (isIconResourceID && iconIdentifier.equals("ic_profile_default") && (!profile.getIsIconResourceID())) {
+            profile.generateIconBitmap(context, monochrome, monochromeValue);
+            profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+        }
     }
 
 //----- Activate profile ---------------------------------------------------------------------------------------------

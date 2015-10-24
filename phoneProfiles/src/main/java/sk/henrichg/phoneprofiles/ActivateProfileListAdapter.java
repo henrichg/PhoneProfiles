@@ -17,11 +17,13 @@ public class ActivateProfileListAdapter extends BaseAdapter
 
     private List<Profile> profileList;
     private Fragment fragment;
+    private DataWrapper dataWrapper;
 
-    public ActivateProfileListAdapter(Fragment f, List<Profile> pl)
+    public ActivateProfileListAdapter(Fragment f, List<Profile> pl, DataWrapper dataWrapper)
     {
         fragment = f;
         profileList = pl;
+        this.dataWrapper = dataWrapper;
     }
 
     public void release()
@@ -109,6 +111,15 @@ public class ActivateProfileListAdapter extends BaseAdapter
         }
 
         return null;
+    }
+
+    public void notifyDataSetChanged(boolean refreshIcons) {
+        if (refreshIcons) {
+            for (Profile profile : profileList) {
+                dataWrapper.refreshProfileIcon(profile, false, 0);
+            }
+        }
+        notifyDataSetChanged();
     }
 
     static class ViewHolder {
