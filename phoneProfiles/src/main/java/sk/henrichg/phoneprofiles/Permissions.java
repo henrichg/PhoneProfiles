@@ -259,7 +259,10 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._vibrationOnTouch != 0) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -274,7 +277,10 @@ public class Permissions {
             if ((profile._soundRingtoneChange != 0) ||
                 (profile._soundNotificationChange != 0) ||
                 (profile._soundAlarmChange != 0)) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -287,7 +293,10 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._deviceScreenTimeout != 0) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -298,7 +307,10 @@ public class Permissions {
 
     public static boolean checkScreenBrightness(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            return Settings.System.canWrite(context);
+            boolean granted = Settings.System.canWrite(context);
+            if (granted)
+                GlobalData.setShowRequestWriteSettingsPermission(context, true);
+            return granted;
         }
         else
             return true;
@@ -308,7 +320,10 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile.getDeviceBrightnessChange()) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -321,7 +336,10 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._deviceAutoRotate != 0) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -384,7 +402,10 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if ((profile._deviceWiFiAP != 0)) {
-                return Settings.System.canWrite(context);
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
             }
             else
                 return true;
