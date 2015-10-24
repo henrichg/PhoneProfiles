@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -1304,9 +1305,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getMyWritableDatabase();
 
         Cursor cursor = db.query(TABLE_PROFILES,
-                                 new String[] { KEY_VOLUME_SPEAKER_PHONE },
-                                 KEY_CHECKED + "=?",
-                                 new String[] { "1" }, null, null, null, null);
+                new String[]{KEY_VOLUME_SPEAKER_PHONE},
+                KEY_CHECKED + "=?",
+                new String[]{"1"}, null, null, null, null);
 
         int speakerPhone;
 
@@ -1330,6 +1331,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //db.close();
 
         return speakerPhone;
+    }
+
+    public void getProfileIcon(Profile profile)
+    {
+        //SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getMyWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_PROFILES,
+                new String[] { KEY_ICON },
+                KEY_ID + "=?",
+                new String[] { Long.toString(profile._id) }, null, null, null, null);
+
+        if (cursor != null)
+        {
+            if (cursor.moveToFirst())
+                profile._icon = cursor.getString(0);
+        }
+
+        cursor.close();
+        //db.close();
+
     }
 
     public int updateForHardware(Context context)

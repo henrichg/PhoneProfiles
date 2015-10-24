@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -120,7 +121,9 @@ public class Permissions {
     public static final String EXTRA_FOR_GUI = "for_gui";
     public static final String EXTRA_MONOCHROME = "monochrome";
     public static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
+    public static final String EXTRA_INTERACTIVE = "interactive";
 
+    public static Activity profileActivationActivity = null;
     public static ImageViewPreference imageViewPreference = null;
     public static ProfileIconPreference profileIconPreference = null;
 
@@ -404,7 +407,8 @@ public class Permissions {
     }
 
     public static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
-                                                  boolean forGUI, boolean monochrome, int monochromeValue) {
+                                                  boolean forGUI, boolean monochrome, int monochromeValue,
+                                                  int startupSource, boolean interactive, Activity activity) {
         List<PermissionType> permissions = checkProfilePermissions(context, profile);
         if (permissions.size() > 0) {
             Intent intent = new Intent(context, GrantPermissionActivity.class);
@@ -417,6 +421,9 @@ public class Permissions {
             intent.putExtra(EXTRA_FOR_GUI, forGUI);
             intent.putExtra(EXTRA_MONOCHROME, monochrome);
             intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
+            intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+            intent.putExtra(EXTRA_INTERACTIVE, interactive);
+            profileActivationActivity = activity;
             context.startActivity(intent);
         }
         return permissions.size() == 0;

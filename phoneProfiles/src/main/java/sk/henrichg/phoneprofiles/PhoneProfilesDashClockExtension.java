@@ -222,7 +222,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
 
         // intent
         Intent intent = new Intent(this, ActivateProfileActivity.class);
-        intent.putExtra(GlobalData.EXTRA_START_APP_SOURCE, GlobalData.STARTUP_SOURCE_WIDGET);
+        intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_WIDGET);
 
         // Publish the extension data update.
         publishUpdate(new ExtensionData()

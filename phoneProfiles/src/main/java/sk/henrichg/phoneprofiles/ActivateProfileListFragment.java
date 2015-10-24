@@ -54,7 +54,7 @@ public class ActivateProfileListFragment extends Fragment {
 		activateProfileHelper.initialize(getActivity(), getActivity().getApplicationContext());
 		
 		intent = getActivity().getIntent();
-		startupSource = intent.getIntExtra(GlobalData.EXTRA_START_APP_SOURCE, 0);
+		startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, 0);
 
 		
 	}
@@ -203,7 +203,7 @@ public class ActivateProfileListFragment extends Fragment {
 					fragment.doOnStart();
 					
 					Intent intent = new Intent(fragment.getActivity().getBaseContext(), EditorProfilesActivity.class);
-					intent.putExtra(GlobalData.EXTRA_START_APP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR_START);
+					intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR_START);
 					fragment.getActivity().startActivity(intent);
 					
 					fragment.getActivity().finish();

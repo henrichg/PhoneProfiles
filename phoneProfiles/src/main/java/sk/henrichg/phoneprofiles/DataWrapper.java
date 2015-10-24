@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
@@ -465,7 +464,7 @@ public class DataWrapper {
         {
             Intent returnIntent = new Intent();
             returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            returnIntent.getIntExtra(GlobalData.EXTRA_START_APP_SOURCE, startupSource);
+            returnIntent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
             activity.setResult(Activity.RESULT_OK,returnIntent);
         }
 
@@ -504,7 +503,8 @@ public class DataWrapper {
 
                 public void onClick(DialogInterface dialog, int which) {
                     if (Permissions.grantProfilePermissions(context, _profile, false,
-                            forGUI, monochrome, monochromeValue))
+                            forGUI, monochrome, monochromeValue,
+                            _startupSource, _interactive, _activity))
                         _activateProfile(_profile, _startupSource, _interactive, _activity);
                     else {
                         Intent returnIntent = new Intent();
@@ -542,10 +542,12 @@ public class DataWrapper {
             boolean granted;
             if (interactive)
                 granted = Permissions.grantProfilePermissions(context, profile, false,
-                        forGUI, monochrome, monochromeValue);
+                        forGUI, monochrome, monochromeValue,
+                        startupSource, interactive, activity);
             else
                 granted = Permissions.grantProfilePermissions(context, profile, true,
-                        forGUI, monochrome, monochromeValue);
+                        forGUI, monochrome, monochromeValue,
+                        startupSource, interactive, null);
             if (granted)
                 _activateProfile(profile, startupSource, interactive, activity);
         }
@@ -553,6 +555,9 @@ public class DataWrapper {
 
     private void finishActivity(int startupSource, boolean afterActivation, Activity _activity)
     {
+        if (_activity == null)
+            return;
+
         final Activity activity = _activity;
 
         boolean finish = true;
@@ -689,7 +694,7 @@ public class DataWrapper {
             {
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile_id);
-                returnIntent.getIntExtra(GlobalData.EXTRA_START_APP_SOURCE, startupSource);
+                returnIntent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
                 activity.setResult(Activity.RESULT_OK,returnIntent);
             }
 

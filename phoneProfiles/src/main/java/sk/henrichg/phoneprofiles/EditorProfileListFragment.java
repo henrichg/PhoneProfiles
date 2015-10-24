@@ -604,7 +604,7 @@ public class EditorProfileListFragment extends Fragment {
     {
         /*
         Intent intent = new Intent(getActivity().getBaseContext(), BackgroundActivateProfileActivity.class);
-        intent.putExtra(GlobalData.EXTRA_START_APP_SOURCE, GlobalData.STARTUP_SOURCE_EDITOR);
+        intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_EDITOR);
         intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
         getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_ACTIVATE_PROFILE);
         */
