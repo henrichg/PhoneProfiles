@@ -134,6 +134,7 @@ public class GrantPermissionActivity extends Activity {
                 showRequestWriteExternalStorage) {
 
             if (onlyNotification) {
+                int notificationID;
                 NotificationCompat.Builder mBuilder;
                 Intent intent = new Intent(context, GrantPermissionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -144,6 +145,7 @@ public class GrantPermissionActivity extends Activity {
                             .setContentTitle(context.getString(R.string.app_name)) // title for notification
                             .setContentText(context.getString(R.string.permissions_for_install_tone_text_notification))
                             .setAutoCancel(true); // clear notification after click
+                    notificationID = GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
                 }
                 else {
                     mBuilder =   new NotificationCompat.Builder(context)
@@ -157,6 +159,7 @@ public class GrantPermissionActivity extends Activity {
                     intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
                     intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
                     intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
+                    notificationID = GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
                 }
                 permissions.clear();
                 intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
@@ -172,7 +175,7 @@ public class GrantPermissionActivity extends Activity {
                     mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
                 }
                 NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID, mBuilder.build());
+                mNotificationManager.notify(notificationID, mBuilder.build());
 
                 finish();
                 return;
@@ -204,7 +207,7 @@ public class GrantPermissionActivity extends Activity {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_write_settings) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
-                if (showRequestReadExternalStorage) {
+                if (showRequestReadExternalStorage || showRequestWriteExternalStorage) {
                     Log.e("GrantPermissionActivity", "onStart - showRequestReadExternalStorage");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
                     showRequestString = showRequestString + "<br>";
@@ -212,11 +215,6 @@ public class GrantPermissionActivity extends Activity {
                 if (showRequestReadPhoneState || showRequestProcessOutgoingCalls) {
                     Log.e("GrantPermissionActivity", "onStart - showRequestReadPhoneState");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestWriteExternalStorage) {
-                    Log.e("GrantPermissionActivity", "onStart - showRequestWriteExternalStorage");
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
 
