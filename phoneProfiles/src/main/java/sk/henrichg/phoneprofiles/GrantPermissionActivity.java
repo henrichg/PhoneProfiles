@@ -162,6 +162,7 @@ public class GrantPermissionActivity extends Activity {
                     notificationID = GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
                 }
                 permissions.clear();
+                intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
                 intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
                 intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
 
