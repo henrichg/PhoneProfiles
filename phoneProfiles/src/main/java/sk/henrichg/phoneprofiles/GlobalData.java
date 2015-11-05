@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.stericson.RootShell.RootShell;
 import com.stericson.RootTools.RootTools;
 
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -178,6 +180,8 @@ public class GlobalData extends Application {
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION = "show_info_notification_on_start_version";
     private static final String PREF_ZEN_MODE = "zen_mode";
     private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
+    private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
+    private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -694,6 +698,49 @@ public class GlobalData extends Application {
         editor.putBoolean(PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION, value);
         editor.commit();
     }
+
+
+    static public List<Permissions.PermissionType> getMergedPermissions(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+
+        List<Permissions.PermissionType> permissions = new ArrayList<Permissions.PermissionType>();
+
+        int count = preferences.getInt(PREF_MERGED_PERRMISSIONS_COUNT, 0);
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < count; i++) {
+            String json = preferences.getString(PREF_MERGED_PERRMISSIONS + i, "");
+            if (!json.isEmpty()) {
+                Permissions.PermissionType permission = gson.fromJson(json, Permissions.PermissionType.class);
+                permissions.add(permission);
+            }
+        }
+
+        return permissions;
+    }
+
+    static public void setMergedPermission(Context context, List<Permissions.PermissionType> permissions)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.clear();
+
+        editor.putInt(PREF_MERGED_PERRMISSIONS_COUNT, permissions.size());
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < permissions.size(); i++)
+        {
+            String json = gson.toJson(permissions.get(i));
+            editor.putString(PREF_MERGED_PERRMISSIONS+i, json);
+        }
+
+        editor.commit();
+    }
+
 
     // ----- Hardware check -------------------------------------
 

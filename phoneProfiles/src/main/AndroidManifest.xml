@@ -408,6 +408,14 @@
                 <action android:name="android.media.RINGER_MODE_CHANGED" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".PermissionsNotificationDeletedReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

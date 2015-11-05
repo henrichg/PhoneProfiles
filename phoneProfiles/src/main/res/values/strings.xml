@@ -302,6 +302,7 @@
   <string name="permission_group_name_phone">Phone</string>
   <string name="permissions_alert_title">Permissions request</string>
   <string name="permissions_for_profile_text1">Activation of profile</string>
+  <string name="permissions_for_profile_text1m">Some profiles</string>
   <string name="permissions_for_profile_text2">requires these permissions:</string>
   <string name="permissions_for_profile_text3">Please grant them in next dialogs. Then profile will be activated.</string>
   <string name="permissions_for_profile_text_notification">Permissions request</string>
