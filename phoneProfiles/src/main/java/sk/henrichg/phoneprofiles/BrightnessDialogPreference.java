@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class BrightnessDialogPreference extends
@@ -86,8 +87,19 @@ public class BrightnessDialogPreference extends
                 //.disableDefaultFonts()
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
-                .callback(callback)
-                .content(getDialogMessage());
+                .content(getDialogMessage())
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+                        if (shouldPersist()) {
+                            persistString(Integer.toString(value + minimumValue)
+                                    + "|" + Integer.toString(noChange)
+                                    + "|" + Integer.toString(automatic)
+                                    + "|" + Integer.toString(defaultProfile));
+                            setSummaryBDP();
+                        }
+                    }
+                });
 
         View layout = LayoutInflater.from(getContext()).inflate(R.layout.activity_brightness_pref_dialog, null);
         onBindDialogView(layout);
@@ -124,13 +136,13 @@ public class BrightnessDialogPreference extends
         if (defaultProfile == 1)
             noChangeChBox.setChecked(false);
 
-		/*
-		boolean isAutomatic = (automatic == 1);
-		if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-			isAutomatic = false;
-		valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-		seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-		*/
+        /*
+        boolean isAutomatic = (automatic == 1);
+        if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+            isAutomatic = false;
+        valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+        seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+        */
         valueText.setEnabled((noChange == 0) && (defaultProfile == 0));
         seekBar.setEnabled((noChange == 0) && (defaultProfile == 0));
         automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
@@ -207,20 +219,20 @@ public class BrightnessDialogPreference extends
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-		/*
-		boolean isAutomatic = (automatic == 1);
-		if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-			isAutomatic = false;  // enable change value via seek bar
-		*/
+        /*
+        boolean isAutomatic = (automatic == 1);
+        if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+            isAutomatic = false;  // enable change value via seek bar
+        */
 
         if (buttonView.getId() == R.id.brightnessPrefDialogNoChange)
         {
             noChange = (isChecked)? 1 : 0;
 
-			/*
-			valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			*/
+            /*
+            valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            */
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0));
             automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
@@ -232,10 +244,10 @@ public class BrightnessDialogPreference extends
         {
             defaultProfile = (isChecked)? 1 : 0;
 
-			/*
-			valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			*/
+            /*
+            valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            */
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0));
             automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
@@ -247,14 +259,14 @@ public class BrightnessDialogPreference extends
         {
             automatic = (isChecked)? 1 : 0;
 
-			/*
-			isAutomatic = (automatic == 1);
-			if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-				isAutomatic = false;  // enable change value via seek bar
-			
-			valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
-			*/
+            /*
+            isAutomatic = (automatic == 1);
+            if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+                isAutomatic = false;  // enable change value via seek bar
+
+            valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
+            */
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0));
         }
@@ -269,11 +281,11 @@ public class BrightnessDialogPreference extends
             _noChange = (_defaultProfile.getDeviceBrightnessChange()) ? 0 : 1;
             _value = _defaultProfile.getDeviceBrightnessValue();
 
-			/*
-			isAutomatic = (_automatic == 1);
-			if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-				isAutomatic = false;  // enable change value via seek bar
-			*/
+            /*
+            isAutomatic = (_automatic == 1);
+            if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+                isAutomatic = false;  // enable change value via seek bar
+            */
         }
 
         if (/*(isAutomatic) || */(_noChange == 1))
@@ -329,19 +341,6 @@ public class BrightnessDialogPreference extends
 
     public void onStopTrackingTouch(SeekBar seek) {
     }
-
-    private final MaterialDialog.ButtonCallback callback = new MaterialDialog.ButtonCallback() {
-        @Override
-        public void onPositive(MaterialDialog dialog) {
-            if (shouldPersist()) {
-                persistString(Integer.toString(value + minimumValue)
-                        + "|" + Integer.toString(noChange)
-                        + "|" + Integer.toString(automatic)
-                        + "|" + Integer.toString(defaultProfile));
-                setSummaryBDP();
-            }
-        }
-    };
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue)
