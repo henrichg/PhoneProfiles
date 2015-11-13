@@ -282,6 +282,7 @@ public class GrantPermissionActivity extends Activity {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         finish();
+                        Permissions.releaseReferences();
                     }
                 });
                 dialogBuilder.show();
@@ -325,6 +326,7 @@ public class GrantPermissionActivity extends Activity {
                         msg.show();
                     }
                     finish();
+                    Permissions.releaseReferences();
                 }
                 return;
             }
@@ -464,6 +466,7 @@ public class GrantPermissionActivity extends Activity {
             Permissions.removeProfileNotification(context);
             dataWrapper._activateProfile(profile, startupSource, interactive, Permissions.profileActivationActivity);
         }
+        Permissions.releaseReferences();
 
         //if (grantType != Permissions.GRANT_TYPE_PROFILE) {
             Profile activatedProfile = dataWrapper.getActivatedProfile();

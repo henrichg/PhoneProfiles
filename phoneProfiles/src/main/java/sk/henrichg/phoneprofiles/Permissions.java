@@ -375,7 +375,10 @@ public class Permissions {
             intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
             intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
             intent.putExtra(EXTRA_INTERACTIVE, interactive);
-            profileActivationActivity = activity;
+            if (!onlyNotification)
+                profileActivationActivity = activity;
+            else
+                profileActivationActivity = null;
             context.startActivity(intent);
         }
         return permissions.size() == 0;
@@ -508,5 +511,14 @@ public class Permissions {
         notificationManager.cancel(GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
         notificationManager.cancel(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
+
+    public static  void releaseReferences() {
+        profileActivationActivity = null;
+        imageViewPreference = null;
+        profileIconPreference = null;
+        editorActivity = null;
+        ppHelperInstallActivity = null;
+    }
+
 
 }
