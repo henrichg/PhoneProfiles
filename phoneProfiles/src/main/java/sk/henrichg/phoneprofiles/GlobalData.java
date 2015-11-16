@@ -726,17 +726,17 @@ public class GlobalData extends Application {
     {
         List<Permissions.PermissionType> savedPermissions = getMergedPermissions(context);
 
-        for (Permissions.PermissionType _permission : permissions) {
+        for (Permissions.PermissionType permission : permissions) {
             boolean found = false;
-            for (Permissions.PermissionType _savedPermission : savedPermissions) {
+            for (Permissions.PermissionType savedPermission : savedPermissions) {
 
-                if (_savedPermission.permission.equals(_permission.permission)) {
+                if (savedPermission.permission.equals(permission.permission)) {
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                savedPermissions.add(new Permissions.PermissionType(_permission.preference, _permission.permission));
+                savedPermissions.add(new Permissions.PermissionType(permission.preference, permission.permission));
             }
         }
 
@@ -745,7 +745,7 @@ public class GlobalData extends Application {
 
         editor.clear();
 
-        editor.putInt(PREF_MERGED_PERRMISSIONS_COUNT, permissions.size());
+        editor.putInt(PREF_MERGED_PERRMISSIONS_COUNT, savedPermissions.size());
 
         Gson gson = new Gson();
 
