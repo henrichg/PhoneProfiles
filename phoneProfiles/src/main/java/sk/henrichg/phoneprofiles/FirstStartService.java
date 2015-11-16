@@ -48,6 +48,8 @@ public class FirstStartService extends IntentService {
         if (GlobalData.getApplicationStarted(context))
             return;
 
+        GlobalData.clearMergedPermissions(context);
+
         //int startType = intent.getStringExtra(GlobalData.EXTRA_FIRST_START_TYPE);
 
         GlobalData.loadPreferences(context);

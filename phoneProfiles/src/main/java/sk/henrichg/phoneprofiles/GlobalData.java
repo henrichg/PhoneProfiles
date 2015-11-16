@@ -127,6 +127,7 @@ public class GlobalData extends Application {
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     static final String DEFAULT_PROFILE_PREFS_NAME = "profile_preferences_default_profile"; //GlobalData.APPLICATION_PREFS_NAME;
+    static final String PERMISSIONS_PREFS_NAME = "permissions_list";
 
     public static final String PREF_APPLICATION_START_ON_BOOT = "applicationStartOnBoot";
     public static final String PREF_APPLICATION_ACTIVATE = "applicationActivate";
@@ -702,7 +703,7 @@ public class GlobalData extends Application {
 
     static public List<Permissions.PermissionType> getMergedPermissions(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
 
         List<Permissions.PermissionType> permissions = new ArrayList<Permissions.PermissionType>();
 
@@ -721,9 +722,25 @@ public class GlobalData extends Application {
         return permissions;
     }
 
-    static public void setMergedPermission(Context context, List<Permissions.PermissionType> permissions)
+    static public void addMergedPermissions(Context context, List<Permissions.PermissionType> permissions)
     {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        List<Permissions.PermissionType> savedPermissions = getMergedPermissions(context);
+
+        for (Permissions.PermissionType _permission : permissions) {
+            boolean found = false;
+            for (Permissions.PermissionType _savedPermission : savedPermissions) {
+
+                if (_savedPermission.permission.equals(_permission.permission)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                savedPermissions.add(new Permissions.PermissionType(_permission.preference, _permission.permission));
+            }
+        }
+
+        SharedPreferences preferences = context.getSharedPreferences(PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.clear();
@@ -732,15 +749,21 @@ public class GlobalData extends Application {
 
         Gson gson = new Gson();
 
-        for (int i = 0; i < permissions.size(); i++)
+        for (int i = 0; i < savedPermissions.size(); i++)
         {
-            String json = gson.toJson(permissions.get(i));
+            String json = gson.toJson(savedPermissions.get(i));
             editor.putString(PREF_MERGED_PERRMISSIONS+i, json);
         }
 
         editor.commit();
     }
 
+    static public void clearMergedPermissions(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 
     // ----- Hardware check -------------------------------------
 

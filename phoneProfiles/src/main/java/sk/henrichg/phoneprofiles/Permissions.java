@@ -45,7 +45,6 @@ public class Permissions {
     public static final String EXTRA_GRANT_TYPE = "grant_type";
     public static final String EXTRA_PERMISSION_TYPES = "permission_types";
     public static final String EXTRA_ONLY_NOTIFICATION = "only_notification";
-    public static final String EXTRA_MERGED_NOTIFICATION = "merged_notification";
     public static final String EXTRA_FOR_GUI = "for_gui";
     public static final String EXTRA_MONOCHROME = "monochrome";
     public static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
@@ -92,6 +91,22 @@ public class Permissions {
                 return new PermissionType[size];
             }
         };
+    }
+
+    public static List<PermissionType> recheckPermissions(Context context, List<PermissionType> _permissions) {
+        List<PermissionType>  permissions = new ArrayList<PermissionType>();
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            for (PermissionType _permission : _permissions) {
+                if (_permission.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
+                    if (!Settings.System.canWrite(context))
+                        permissions.add(new PermissionType(_permission.preference, _permission.permission));
+                } else {
+                    if (ContextCompat.checkSelfPermission(context, _permission.permission) != PackageManager.PERMISSION_GRANTED)
+                        permissions.add(new PermissionType(_permission.preference, _permission.permission));
+                }
+            }
+        }
+        return permissions;
     }
 
     public static List<PermissionType> checkProfilePermissions(Context context, Profile profile) {
@@ -368,7 +383,10 @@ public class Permissions {
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
             intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
             intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+            if (onlyNotification)
+                GlobalData.addMergedPermissions(context, permissions);
+            else
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
             intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
             intent.putExtra(EXTRA_FOR_GUI, forGUI);
             intent.putExtra(EXTRA_MONOCHROME, monochrome);
