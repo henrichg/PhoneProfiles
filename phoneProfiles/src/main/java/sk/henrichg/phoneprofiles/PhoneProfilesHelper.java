@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 public class PhoneProfilesHelper {
 
@@ -44,17 +45,19 @@ public class PhoneProfilesHelper {
 
     static public boolean isPPHelperInstalled(Context context, int minVersion)
     {
-        // get package version
         PPHelperVersion = -1;
 
         if (nowPPHelperUninstalled)
             return false;
 
+        // get package version
         PackageInfo pinfo = null;
         try {
             pinfo = context.getPackageManager().getPackageInfo("sk.henrichg.phoneprofileshelper", 0);
+            GlobalData.logE("PhoneProfilesHelper.isPPHelperInstalled", "found");
             PPHelperVersion = pinfo.versionCode;
         } catch (NameNotFoundException e) {
+            GlobalData.logE("PhoneProfilesHelper.isPPHelperInstalled", "not found");
             //e.printStackTrace();
         }
         return PPHelperVersion >= minVersion;
@@ -176,7 +179,9 @@ public class PhoneProfilesHelper {
             if (!OK)
                 Log.e("PhoneProfilesHelper.doInstallPPHelper", "remount RW ERROR");
             if (OK)
-                RootTools.deleteFileOrDirectory(destinationFile, false);
+                //OK =
+                //RootTools.deleteFileOrDirectory(destinationFile, false);
+                deleteFile_su(destinationFile);
             //if (!OK)
             //	Log.e("PhoneProfilesHelper.doInstallPPHelper", "delete file ERROR");
             if (OK)
@@ -201,7 +206,7 @@ public class PhoneProfilesHelper {
             if (!OK)
                 Log.e("PhoneProfilesHelper.doInstallPPHelper", "chmod ERROR");
             if (OK)
-                //OK =
+                //	OK =
                 RootTools.remount("/system", "RO");
             //if (!OK)
             //	Log.e("PhoneProfilesHelper.doInstallPPHelper", "remount RO ERROR");
@@ -274,13 +279,14 @@ public class PhoneProfilesHelper {
         dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 class InstallAsyncTask extends AsyncTask<Void, Integer, Boolean> {
                     private MaterialDialog dialog;
 
                     InstallAsyncTask() {
                         this.dialog = new MaterialDialog.Builder(_activity)
                                 .content(R.string.phoneprofilehepler_install_title)
-                                //.disableDefaultFonts()
+                                        //.disableDefaultFonts()
                                 .progress(true, 0)
                                 .build();
                     }
@@ -330,7 +336,6 @@ public class PhoneProfilesHelper {
                         _activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                     }
 
-
                 }
 
                 new InstallAsyncTask().execute();
@@ -358,7 +363,7 @@ public class PhoneProfilesHelper {
         byte[] buffer = new byte[1024];
         int read;
         while((read = in.read(buffer)) != -1){
-          out.write(buffer, 0, read);
+            out.write(buffer, 0, read);
         }
     }
 
@@ -389,18 +394,19 @@ public class PhoneProfilesHelper {
 
         if (GlobalData.isSELinuxEnforcing())
             Shell.defaultContext = Shell.ShellContext.RECOVERY;
-        //OK = RootTools.remount("/system", "RW");
+        OK = RootTools.remount("/system", "RW");
+        if (!OK)
+            Log.e("PhoneProfilesHelper.doUninstallPPHelper", "remount RW ERROR");
+        if (OK)
+            //OK = RootTools.deleteFileOrDirectory(destinationFile, true);
+            OK = deleteFile_su(destinationFile);
+        if (!OK)
+            Log.e("PhoneProfilesHelper.doUninstallPPHelper", "delete file ERROR");
+        if (OK)
+            //OK =
+            RootTools.remount("/system", "RO");
         //if (!OK)
-        //	Log.e("PhoneProfilesHelper.doUninstallPPHelper", "remount RW ERROR");
-        //if (OK)
-        RootTools.deleteFileOrDirectory(destinationFile, true);
-        OK = true;
-        //if (!OK)
-        //	Log.e("PhoneProfilesHelper.doUninstallPPHelper", "delete file ERROR");
-        //if (OK)
-        //	OK = RootTools.remount("/system", "RO");
-        //if (!OK)
-        //	Log.e("PhoneProfilesHelper.doUninstallPPHelper", "remount RO ERROR");
+        //    Log.e("PhoneProfilesHelper.doUninstallPPHelper", "remount RO ERROR");
         if (GlobalData.isSELinuxEnforcing())
             Shell.defaultContext = Shell.ShellContext.NORMAL;
 
@@ -452,10 +458,11 @@ public class PhoneProfilesHelper {
         final Activity _activity = activity;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-        dialogBuilder.setTitle(R.string.phoneprofilehepler_uninstall_title);
-        dialogBuilder.setMessage(R.string.phoneprofilehepler_uninstall_message);
+        dialogBuilder.setTitle(activity.getResources().getString(R.string.phoneprofilehepler_uninstall_title));
+        dialogBuilder.setMessage(activity.getResources().getString(R.string.phoneprofilehepler_uninstall_message));
         dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
                 class UninstallAsyncTask extends AsyncTask<Void, Integer, Boolean>
                 {
                     private MaterialDialog dialog;
@@ -464,7 +471,7 @@ public class PhoneProfilesHelper {
                     {
                         this.dialog = new MaterialDialog.Builder(_activity)
                                 .content(R.string.phoneprofilehepler_uninstall_title)
-                                //.disableDefaultFonts()
+                                        //.disableDefaultFonts()
                                 .progress(true, 0)
                                 .build();
                     }
@@ -518,8 +525,6 @@ public class PhoneProfilesHelper {
                         _activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                     }
 
-
-
                 }
 
                 new UninstallAsyncTask().execute();
@@ -568,6 +573,7 @@ public class PhoneProfilesHelper {
                     _activity.finish();
             }
         });
+
         dialogBuilder.show();
     }
 
@@ -580,7 +586,7 @@ public class PhoneProfilesHelper {
         //50+100+200+400+800+1600+3200+6400
 
         OK = true;
-        
+
         while (!cmd.isFinished() && waitTill<=waitTillLimit) {
             synchronized (cmd) {
                 try {
@@ -595,12 +601,12 @@ public class PhoneProfilesHelper {
             }
         }
         if (!cmd.isFinished()){
-            //Log.e("PhoneProfilesHelper.commandWaid", "Could not finish root command in " + (waitTill/waitTillMultiplier));
+            Log.e("PhoneProfilesHelper.commandWaid", "Could not finish root command in " + (waitTill/waitTillMultiplier));
             OK = false;
         }
-        
+
         return OK;
-    }	
+    }
 
     static private void installUnInstallPPhelperErrorDialog(Activity activity, int installUninstall, boolean finishActivity)
     {
@@ -630,6 +636,7 @@ public class PhoneProfilesHelper {
         }
         dialogBuilder.setMessage(resString);
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+
         dialogBuilder.setPositiveButton(android.R.string.ok, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -644,6 +651,7 @@ public class PhoneProfilesHelper {
                     _activity.finish();
             }
         });
+
         dialogBuilder.show();
     }
 
@@ -688,4 +696,27 @@ public class PhoneProfilesHelper {
         notificationManager.cancel(GlobalData.PPHELPER_UPGRADE_NOTIFICATION_ID);
     }
 
+    private static boolean deleteFile_su(String file) {
+        boolean OK;
+
+        List<String> settingsPaths = RootTools.findBinary("rm");
+        if (settingsPaths.size() > 0) {
+            String command1 = "rm " + file;
+            //if (GlobalData.isSELinuxEnforcing())
+            //	command1 = GlobalData.getSELinuxEnforceCommad(command1);
+            Command command = new Command(0, false, command1);
+            try {
+                RootTools.getShell(true, Shell.ShellContext.RECOVERY).add(command);
+                OK = commandWait(command);
+                OK = OK && command.getExitCode() == 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+                OK = false;
+            }
+        }
+        else {
+            OK = RootTools.deleteFileOrDirectory(file, false);
+        }
+        return OK;
+    }
 }
