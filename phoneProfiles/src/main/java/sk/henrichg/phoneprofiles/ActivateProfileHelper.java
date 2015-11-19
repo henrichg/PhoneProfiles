@@ -25,12 +25,14 @@ import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.NotificationListenerService;
 import android.support.v4.app.NotificationCompat;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -1325,28 +1327,34 @@ public class ActivateProfileHelper {
 
     private boolean isMobileData(Context context)
     {
-        final ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= 21)
+        {
+            return Settings.Global.getInt(context.getContentResolver(), "mobile_data", 0) == 1;
+        }
+        else {
+            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        try {
-            final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
-            final Method getMobileDataEnabledMethod = connectivityManagerClass.getDeclaredMethod("getMobileDataEnabled");
-            getMobileDataEnabledMethod.setAccessible(true);
-            return (Boolean)getMobileDataEnabledMethod.invoke(connectivityManager);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            return false;
+            try {
+                final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
+                final Method getMobileDataEnabledMethod = connectivityManagerClass.getDeclaredMethod("getMobileDataEnabled");
+                getMobileDataEnabledMethod.setAccessible(true);
+                return (Boolean) getMobileDataEnabledMethod.invoke(connectivityManager);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                return false;
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                return false;
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                return false;
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
 
         /*
@@ -1373,46 +1381,100 @@ public class ActivateProfileHelper {
         */
     }
 
+    private String getTransactionCode(Context context) throws Exception {
+        try {
+            final TelephonyManager mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            final Class<?> mTelephonyClass = Class.forName(mTelephonyManager.getClass().getName());
+            final Method mTelephonyMethod = mTelephonyClass.getDeclaredMethod("getITelephony");
+            mTelephonyMethod.setAccessible(true);
+            final Object mTelephonyStub = mTelephonyMethod.invoke(mTelephonyManager);
+            final Class<?> mTelephonyStubClass = Class.forName(mTelephonyStub.getClass().getName());
+            final Class<?> mClass = mTelephonyStubClass.getDeclaringClass();
+            final Field field = mClass.getDeclaredField("TRANSACTION_setDataEnabled");
+            field.setAccessible(true);
+            return String.valueOf(field.getInt(null));
+        } catch (Exception e) {
+            // The "TRANSACTION_setDataEnabled" field is not available,
+            // or named differently in the current API level, so we throw
+            // an exception and inform users that the method is not available.
+            throw e;
+        }
+    }
+
     private void setMobileData(Context context, boolean enable)
     {
-        final ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        boolean OK = false;
-        try {
-            final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
-            final Field iConnectivityManagerField = connectivityManagerClass.getDeclaredField("mService");
-            iConnectivityManagerField.setAccessible(true);
-            final Object iConnectivityManager = iConnectivityManagerField.get(connectivityManager);
-            final Class<?> iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
-            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-            setMobileDataEnabledMethod.setAccessible(true);
-
-            setMobileDataEnabledMethod.invoke(iConnectivityManager, enable);
-
-            OK = true;
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
-        if (!OK)
+        if (android.os.Build.VERSION.SDK_INT >= 21)
         {
+            if (GlobalData.grantRoot(false))
+            {
+                int state = 0;
+                try {
+                    // Get the current state of the mobile network.
+                    state = enable ? 1 : 0;
+                    // Get the value of the "TRANSACTION_setDataEnabled" field.
+                    String transactionCode = getTransactionCode(context);
+                    // Android 5.1+ (API 22) and later.
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                        SubscriptionManager mSubscriptionManager = (SubscriptionManager) context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+                        // Loop through the subscription list i.e. SIM list.
+                        for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
+                            if (transactionCode != null && transactionCode.length() > 0) {
+                                // Get the active subscription ID for a given SIM card.
+                                int subscriptionId = mSubscriptionManager.getActiveSubscriptionInfoList().get(i).getSubscriptionId();
+                                // Execute the command via `su` to turn off
+                                // mobile network for a subscription service.
+                                String command1 = "service call phone " + transactionCode + " i32 " + subscriptionId + " i32 " + state;
+                                Command command = new Command(0, false, command1);
+                                try {
+                                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                    commandWait(command);
+                                    //RootTools.closeAllShells();
+                                } catch (Exception e) {
+                                    Log.e("AirPlaneMode_SDK17.setAirplaneMode", "Error on run su");
+                                }
+                            }
+                        }
+                    } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
+                        // Android 5.0 (API 21) only.
+                        if (transactionCode != null && transactionCode.length() > 0) {
+                            // Execute the command via `su` to turn off mobile network.
+                            String command1 = "service call phone " + transactionCode + " i32 " + state;
+                            Command command = new Command(0, false, command1);
+                            try {
+                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                commandWait(command);
+                                //RootTools.closeAllShells();
+                            } catch (Exception e) {
+                                Log.e("AirPlaneMode_SDK17.setAirplaneMode", "Error on run su");
+                            }
+                        }
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            boolean OK = false;
             try {
-                Method setMobileDataEnabledMethod = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-
+                final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
+                final Field iConnectivityManagerField = connectivityManagerClass.getDeclaredField("mService");
+                iConnectivityManagerField.setAccessible(true);
+                final Object iConnectivityManager = iConnectivityManagerField.get(connectivityManager);
+                final Class<?> iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+                final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
                 setMobileDataEnabledMethod.setAccessible(true);
-                setMobileDataEnabledMethod.invoke(connectivityManager, enable);
 
+                setMobileDataEnabledMethod.invoke(iConnectivityManager, enable);
+
+                OK = true;
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -1421,6 +1483,24 @@ public class ActivateProfileHelper {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
+            }
+
+            if (!OK) {
+                try {
+                    Method setMobileDataEnabledMethod = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+
+                    setMobileDataEnabledMethod.setAccessible(true);
+                    setMobileDataEnabledMethod.invoke(connectivityManager, enable);
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

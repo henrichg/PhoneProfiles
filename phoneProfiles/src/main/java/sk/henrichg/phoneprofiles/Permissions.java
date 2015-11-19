@@ -121,7 +121,10 @@ public class Permissions {
             if (!checkProfileScreenBrightness(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
             if (!checkProfileAutoRotation(context, profile)) permissions.add(new PermissionType(PERMISSION_AUTOROTATION, permission.WRITE_SETTINGS));
             if (!checkProfileWallpaper(context, profile)) permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
-            if (!checkProfileRadioPreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
+            if (!checkProfileRadioPreferences(context, profile)) {
+                permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
+                permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.READ_PHONE_STATE));
+            }
             if (!checkProfilePhoneBroadcast(context, profile)) {
                 permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.READ_PHONE_STATE));
                 permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
@@ -338,14 +341,15 @@ public class Permissions {
     public static boolean checkProfileRadioPreferences(Context context, Profile profile) {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = true;
             if ((profile._deviceWiFiAP != 0)) {
-                boolean granted = Settings.System.canWrite(context);
+                granted = Settings.System.canWrite(context);
                 if (granted)
                     GlobalData.setShowRequestWriteSettingsPermission(context, true);
-                return granted;
             }
-            else
-                return true;
+            if (profile._deviceMobileData != 0)
+                granted = (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED);
+            return granted;
         }
         else
             return true;
