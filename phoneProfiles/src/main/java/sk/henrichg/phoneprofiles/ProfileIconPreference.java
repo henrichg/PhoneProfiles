@@ -32,6 +32,7 @@ public class ProfileIconPreference extends DialogPreference {
     private ImageView imageView;
     ProfileIconPreferenceAdapter adapter;
     ImageView dialogIcon;
+    private Button colorChooserButton;
 
     private Context prefContext;
 
@@ -129,19 +130,28 @@ public class ProfileIconPreference extends DialogPreference {
                 setImageIdentifierAndType(ImageViewPreferenceAdapter.ThumbsIds[position], true, false);
                 adapter.imageIdentifierAndTypeChanged(imageIdentifier, isImageResourceID);
                 updateIcon(true);
+                if (isImageResourceID)
+                    colorChooserButton.setVisibility(View.VISIBLE);
+                else
+                    colorChooserButton.setVisibility(View.GONE);
             }
         });
 
         dialogIcon = (ImageView)layout.findViewById(R.id.profileicon_pref_dlg_icon);
         updateIcon(true);
 
-        Button colorChooserButton = (Button)layout.findViewById(R.id.profileicon_pref_dlg_change_color);
+        colorChooserButton = (Button)layout.findViewById(R.id.profileicon_pref_dlg_change_color);
         colorChooserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showCustomColorChooser();
             }
         });
+        if (isImageResourceID)
+            colorChooserButton.setVisibility(View.VISIBLE);
+        else
+            colorChooserButton.setVisibility(View.GONE);
+
         mBuilder.customView(layout, false);
 
         final TextView helpText = (TextView)layout.findViewById(R.id.profileicon_pref_dlg_helpText);
