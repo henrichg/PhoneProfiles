@@ -822,24 +822,24 @@ public class GlobalData extends Application {
             {
                 if (android.os.Build.VERSION.SDK_INT >= 21)
                 {
-                    /*if (PhoneProfilesHelper.isPPHelperInstalled(context, 22))
+                    if (PhoneProfilesHelper.isPPHelperInstalled(context, 22))
                     {
                         // je nainstalovany PhonProfilesHelper
                         featurePresented = HARDWARE_CHECK_ALLOWED;
                     }
                     else
                     {
-                        if (isRooted(false))
+                        // zariadenie je rootnute
+                        if (serviceBinaryExists())
+                            featurePresented = HARDWARE_CHECK_ALLOWED;
+                        else
                         {
+                            // "service" binary not exists
                             if (PhoneProfilesHelper.PPHelperVersion == -1)
                                 featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
                             else
                                 featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
                         }
-                    }*/
-                    if (isRooted(false) /*&& settingsBinaryExists()*/)
-                    {
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
                     }
                 }
                 else
@@ -1112,6 +1112,8 @@ public class GlobalData extends Application {
     static private boolean isSELinuxEnforcing = false;
     //static private String suVersion = null;
     //static private boolean suVersionChecked = false;
+    static private boolean serviceBinaryExists = false;
+    static private boolean serviceBinaryChecked = false;
 
     static boolean isRooted(boolean onlyCheckFlags)
     {
@@ -1125,6 +1127,8 @@ public class GlobalData extends Application {
             isSELinuxEnforcing = false;
             //suVersionChecked = false;
             //suVersion = null;
+            serviceBinaryExists = false;
+            serviceBinaryChecked = false;
             if (!onlyCheckFlags)
             {
                 if (RootTools.isRootAvailable())
@@ -1162,6 +1166,8 @@ public class GlobalData extends Application {
             isSELinuxEnforcing = false;
             //suVersionChecked = false;
             //suVersion = null;
+            serviceBinaryExists = false;
+            serviceBinaryChecked = false;
             if (RootTools.isAccessGiven())
             {
                 // root grantnuty
@@ -1196,6 +1202,19 @@ public class GlobalData extends Application {
             settingsBinaryChecked = true;
         }
         return settingsBinaryExists;
+    }
+
+    static boolean serviceBinaryExists()
+    {
+        RootShell.debugMode = rootToolsDebug;
+
+        if (!serviceBinaryChecked)
+        {
+            List<String> servicePaths = RootTools.findBinary("service");
+            serviceBinaryExists = servicePaths.size() > 0;
+            serviceBinaryChecked = true;
+        }
+        return serviceBinaryExists;
     }
 
     /**
