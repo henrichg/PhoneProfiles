@@ -332,6 +332,6 @@
   <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Please search for \"PhoneProfiles\" application and enable it.</string>
   <string name="phone_profiles_pref_applicationPermissions">Application permissions</string>
   <string name="phone_profiles_pref_applicationPermissions_summary">Please enable permissions in option \"Permissions\".</string>
-  <string name="important_info_profile_ringerMode_root">In Android 6 (Marshmallow), is not possible to change system setting \"Vibrate when ringing\" in non-roted device.</string>
-  <string name="important_info_profile_adaptiveBrightness_root">In Android 6 (Marshmallow), is not possible to change level of \"Adaptive brightness\" in non-roted device.</string>
+  <string name="important_info_profile_ringerMode_root">In Android 6 (Marshmallow), is not possible to change system setting \"Vibrate when ringing\" in non-rooted device.</string>
+  <string name="important_info_profile_adaptiveBrightness_root">In Android 6 (Marshmallow), is not possible to change level of \"Adaptive brightness\" in non-rooted device.</string>
 </resources>
