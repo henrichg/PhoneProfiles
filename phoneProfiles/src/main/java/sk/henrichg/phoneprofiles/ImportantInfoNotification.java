@@ -11,8 +11,7 @@ import android.support.v4.app.NotificationCompat;
 
 public class ImportantInfoNotification {
 
-    public static final int VERSION_CODE_FOR_NEWS = 9999; // news off
-    public static final int API_LEVEL_FOR_NEWS = 14; //21;
+    public static final int VERSION_CODE_FOR_NEWS = 1622; // 9999 news off
 
     static public void showInfoNotification(Context context) {
 
@@ -22,8 +21,7 @@ public class ImportantInfoNotification {
             pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             versionCode = pinfo.versionCode;
             if (versionCode > GlobalData.getShowInfoNotificationOnStartVersion(context)) {
-                boolean show = (versionCode >= VERSION_CODE_FOR_NEWS) &&
-                        (android.os.Build.VERSION.SDK_INT >= API_LEVEL_FOR_NEWS);
+                boolean show = (versionCode >= VERSION_CODE_FOR_NEWS);
                 GlobalData.setShowInfoNotificationOnStart(context, show, versionCode);
             }
             else
@@ -34,7 +32,7 @@ public class ImportantInfoNotification {
 
         if (GlobalData.getShowInfoNotificationOnStart(context, versionCode)) {
 
-            showNotificationForUnlinkRingerNotificationVolumes(context,
+            showNotification(context,
                     context.getString(R.string.info_notification_title),
                     context.getString(R.string.info_notification_text));
 
@@ -42,7 +40,7 @@ public class ImportantInfoNotification {
         }
     }
 
-    static private void showNotificationForUnlinkRingerNotificationVolumes(Context context, String title, String text) {
+    static private void showNotification(Context context, String title, String text) {
         NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_pphelper_upgrade_notify) // notification icon
                 .setContentTitle(title) // title for notification
