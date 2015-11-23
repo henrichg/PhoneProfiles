@@ -659,7 +659,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if (ret == 1) {
                         // check for hardware capability and update data
-                        ret = dataWrapper.getDatabaseHandler().updateForHardware(activity.getApplicationContext());
+                        ret = dataWrapper.getDatabaseHandler().disableNotAllowedPreferences(activity.getApplicationContext());
                     }
                     if (ret == 1) {
                         File sd = Environment.getExternalStorageDirectory();

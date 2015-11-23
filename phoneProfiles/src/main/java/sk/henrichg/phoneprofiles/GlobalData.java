@@ -123,6 +123,9 @@ public class GlobalData extends Application {
     static final String PREF_PROFILE_VOLUME_UNLINK_VOLUMES_APP_SETTINGS = "prf_pref_volumeUnlinkVolumesAppSettings";
     static final String PREF_PROFILE_DEVICE_WIFI_AP = "prf_pref_deviceWiFiAP";
 
+    // not as separated preference, bud checked from isPreferenceAllowed
+    static final String PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS = "prf_pref_deviceAdaptiveBrightness";
+
     static final String PROFILE_ICON_DEFAULT = "ic_profile_default";
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
@@ -163,10 +166,10 @@ public class GlobalData extends Application {
     public static final String PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES = "applicationUnlinkRingerNotificationVolumes";
     public static final String PREF_APPLICATION_SHORTCUT_EMBLEM = "applicationShortcutEmblem";
 
-    public static final int HARDWARE_CHECK_NOT_ALLOWED = 0;
-    public static final int HARDWARE_CHECK_ALLOWED = 1;
-    public static final int HARDWARE_CHECK_INSTALL_PPHELPER = 2;
-    public static final int HARDWARE_CHECK_UPGRADE_PPHELPER = 3;
+    public static final int PREFERENCE_NOT_ALLOWED = 0;
+    public static final int PREFERENCE_ALLOWED = 1;
+    public static final int PREFERENCE_INSTALL_PPHELPER = 2;
+    public static final int PREFERENCE_UPGRADE_PPHELPER = 3;
     
     public static final long DEFAULT_PROFILE_ID = -999;  // source profile id
     public static final long PROFILE_NO_ACTIVATE = -999;
@@ -765,13 +768,13 @@ public class GlobalData extends Application {
         editor.commit();
     }
 
-    // ----- Hardware check -------------------------------------
+    // ----- Check if preference is allowed in device -------------------------------------
 
-    static int hardwareCheck(String preferenceKey, Context context)
+    static int isPreferenceAllowed(String preferenceKey, Context context)
     {
         //long nanoTimeStart = startMeasuringRunTime();
 
-        int featurePresented = HARDWARE_CHECK_NOT_ALLOWED;
+        int featurePresented = PREFERENCE_NOT_ALLOWED;
 
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_AIRPLANE_MODE))
         {
@@ -780,40 +783,40 @@ public class GlobalData extends Application {
                 if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
                 {
                     // je nainstalovany PhonProfilesHelper
-                    featurePresented = HARDWARE_CHECK_ALLOWED;
+                    featurePresented = PREFERENCE_ALLOWED;
                 }
                 else
                 if (isRooted(false))
                 {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
+                        featurePresented = PREFERENCE_ALLOWED;
                     else
                     {
                         // "settings" binnary not exists
                         if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
+                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
                         else
-                            featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
+                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
                     }
                 }
             }
             else
-                featurePresented = HARDWARE_CHECK_ALLOWED;
+                featurePresented = PREFERENCE_ALLOWED;
         }
         else
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_WIFI))
         {
             if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI))
                 // device ma Wifi
-                featurePresented = HARDWARE_CHECK_ALLOWED;
+                featurePresented = PREFERENCE_ALLOWED;
         }
         else
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_BLUETOOTH))
         {
             if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
                 // device ma bluetooth
-                featurePresented = HARDWARE_CHECK_ALLOWED;
+                featurePresented = PREFERENCE_ALLOWED;
         }
         else
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_MOBILE_DATA))
@@ -825,27 +828,27 @@ public class GlobalData extends Application {
                     if (PhoneProfilesHelper.isPPHelperInstalled(context, 22))
                     {
                         // je nainstalovany PhonProfilesHelper
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
+                        featurePresented = PREFERENCE_ALLOWED;
                     }
                     else
                     {
                         // zariadenie je rootnute
                         if (serviceBinaryExists())
-                            featurePresented = HARDWARE_CHECK_ALLOWED;
+                            featurePresented = PREFERENCE_ALLOWED;
                         else
                         {
                             // "service" binary not exists
                             if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
+                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
                             else
-                                featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
+                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
                         }
                     }
                 }
                 else
                 {
                     if (canSetMobileData(context))
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
+                        featurePresented = PREFERENCE_ALLOWED;
                 }
             }
         }
@@ -854,7 +857,7 @@ public class GlobalData extends Application {
         {
             if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY))
             {
-                featurePresented = HARDWARE_CHECK_ALLOWED;
+                featurePresented = PREFERENCE_ALLOWED;
             }
         }
         else
@@ -865,7 +868,7 @@ public class GlobalData extends Application {
                 // device ma gps
                 if (canExploitGPS(context))
                 {
-                    featurePresented = HARDWARE_CHECK_ALLOWED;
+                    featurePresented = PREFERENCE_ALLOWED;
                 }
                 else
                 if (android.os.Build.VERSION.SDK_INT < 17)
@@ -873,16 +876,16 @@ public class GlobalData extends Application {
                     if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
                     {
                         // je nainstalovany PhonProfilesHelper
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
+                        featurePresented = PREFERENCE_ALLOWED;
                     }
                     else
                     {
                         if (isRooted(false))
                         {
                             if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
+                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
                             else
-                                featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
+                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
                         }
                     }
                 }
@@ -891,14 +894,14 @@ public class GlobalData extends Application {
                 {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
-                        featurePresented = HARDWARE_CHECK_ALLOWED;
+                        featurePresented = PREFERENCE_ALLOWED;
                     else
                     {
                         // "settings" binnary not exists
                         if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
+                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
                         else
-                            featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
+                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
                     }
                 }
             }
@@ -912,30 +915,82 @@ public class GlobalData extends Application {
                 if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
                 {
                     // je nainstalovany PhonProfilesHelper
-                    featurePresented = HARDWARE_CHECK_ALLOWED;
+                    featurePresented = PREFERENCE_ALLOWED;
                 }
                 else
                 {
                     if (isRooted(false))
                     {
                         if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = HARDWARE_CHECK_INSTALL_PPHELPER;
+                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
                         else
-                            featurePresented = HARDWARE_CHECK_UPGRADE_PPHELPER;
+                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
                     }
                 }
             }
         }
         else
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
-            // device ma Wifi
-            if (WifiApManager.canExploitWifiAP(context))
-            {
-                featurePresented = HARDWARE_CHECK_ALLOWED;
+        if (preferenceKey.equals(PREF_PROFILE_DEVICE_WIFI_AP))
+        {
+            if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
+                // device ma Wifi
+                if (WifiApManager.canExploitWifiAP(context)) {
+                    featurePresented = PREFERENCE_ALLOWED;
+                }
             }
         }
         else
-            featurePresented = HARDWARE_CHECK_ALLOWED;
+        if (preferenceKey.equals(PREF_PROFILE_VOLUME_RINGER_MODE) ||
+            preferenceKey.equals(PREF_PROFILE_VOLUME_ZEN_MODE))
+        {
+            if (android.os.Build.VERSION.SDK_INT >= 23)
+            {
+                if (isRooted(false))
+                {
+                    // zariadenie je rootnute
+                    if (settingsBinaryExists())
+                        featurePresented = PREFERENCE_ALLOWED;
+                    /*else
+                    {
+                        // "settings" binnary not exists
+                        if (PhoneProfilesHelper.PPHelperVersion == -1)
+                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
+                        else
+                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
+                    }*/
+                }
+            }
+            else
+                featurePresented = PREFERENCE_ALLOWED;
+        }
+        else
+        if (preferenceKey.equals(PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS))
+        {
+            if (android.os.Build.VERSION.SDK_INT >= 21)
+            {
+                if (android.os.Build.VERSION.SDK_INT >= 23)
+                {
+                    if (isRooted(false))
+                    {
+                        // zariadenie je rootnute
+                        if (settingsBinaryExists())
+                            featurePresented = PREFERENCE_ALLOWED;
+                        /*else
+                        {
+                            // "settings" binnary not exists
+                            if (PhoneProfilesHelper.PPHelperVersion == -1)
+                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
+                            else
+                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
+                        }*/
+                    }
+                }
+                else
+                    featurePresented = PREFERENCE_ALLOWED;
+            }
+        }
+        else
+            featurePresented = PREFERENCE_ALLOWED;
 
         //getMeasuredRunTime(nanoTimeStart, "GlobalData.hardwareCheck for "+preferenceKey);
 
