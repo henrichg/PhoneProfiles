@@ -1,11 +1,15 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.util.Log;
+
+import java.util.Calendar;
 
 public class RingerModeChangeReceiver extends BroadcastReceiver {
 
@@ -16,12 +20,22 @@ public class RingerModeChangeReceiver extends BroadcastReceiver {
 
         //Log.e("### RingerModeChangeReceiver", "xxx");
 
-        //if (!internalChange) {
+        if (!internalChange) {
             final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             setRingerMode(context, audioManager);
-        //}
+        }
 
-        internalChange = false;
+        //Context context = getApplicationContext();
+        Intent _intent = new Intent(context, DisableInernalChangeBroadcastReceiver.class);
+        //intent.putExtra(EXTRA_ONESHOT, 1);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, _intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 5);
+        long alarmTime = calendar.getTimeInMillis();
+
+        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);
 
     }
 

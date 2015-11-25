@@ -1,6 +1,8 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -14,6 +16,8 @@ import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.Calendar;
+
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class PPNotificationListenerService extends NotificationListenerService {
 
@@ -22,8 +26,6 @@ public class PPNotificationListenerService extends NotificationListenerService {
     public static final String EXTRA_FILTER = "filter";
 
     public static final String TAG = PPNotificationListenerService.class.getSimpleName();
-
-    public static boolean internalChange = false;
 
     private NLServiceReceiver nlservicereceiver;
 
@@ -69,7 +71,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
     public void onInterruptionFilterChanged(int interruptionFilter) {
         //Log.e(TAG, "onInterruptionFilterChanged(" + interruptionFilter + ')');
 
-        //if (!internalChange) {
+        if (!RingerModeChangeReceiver.internalChange) {
             final AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
             int ringerMode = audioManager.getRingerMode();
 
@@ -100,9 +102,20 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 GlobalData.setRingerMode(getApplicationContext(), 5);
                 GlobalData.setZenMode(getApplicationContext(), zenMode);
             }
-        //}
+        }
 
-        internalChange = false;
+        Context context = getApplicationContext();
+        Intent intent = new Intent(context, DisableInernalChangeBroadcastReceiver.class);
+        //intent.putExtra(EXTRA_ONESHOT, 1);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 5);
+        long alarmTime = calendar.getTimeInMillis();
+
+        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);
+
     }
 
     public static void setZenMode(Context context, AudioManager audioManager) {
