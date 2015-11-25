@@ -256,7 +256,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                            origProfile._volumeZenMode,
                            origProfile._deviceKeyguard,
                            origProfile._vibrationOnTouch,
-                           origProfile._deviceWiFiAP);
+                           origProfile._deviceWiFiAP,
+                           origProfile._devicePowerSaveMode);
             profile_id = 0;
         }
         else
@@ -534,6 +535,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD, Integer.toString(profile._deviceKeyguard));
             editor.putString(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH, Integer.toString(profile._vibrationOnTouch));
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, Integer.toString(profile._deviceWiFiAP));
+            editor.putString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, Integer.toString(profile._devicePowerSaveMode));
             editor.commit();
         }
 
@@ -597,6 +599,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         profile._deviceKeyguard = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD, ""));
         profile._vibrationOnTouch = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH, ""));
         profile._deviceWiFiAP = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, ""));
+        profile._devicePowerSaveMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, ""));
 
         if (startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
@@ -749,7 +752,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             key.equals(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS) ||
             key.equals(GlobalData.PREF_PROFILE_DEVICE_GPS) ||
             key.equals(GlobalData.PREF_PROFILE_DEVICE_NFC) ||
-            key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP))
+            key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP) ||
+            key.equals(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
         {
             int canChange = GlobalData.isPreferenceAllowed(key, context);
             if (canChange != GlobalData.PREFERENCE_ALLOWED)
@@ -977,6 +981,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             setSummary(GlobalData.PREF_PROFILE_DEVICE_BRIGHTNESS, profile._deviceBrightness);
             setSummary(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH, profile._vibrationOnTouch);
             setSummary(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, profile._deviceWiFiAP);
+            setSummary(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
 
             // disable depended preferences
             disableDependedPref(GlobalData.PREF_PROFILE_SOUND_RINGTONE_CHANGE, profile._soundRingtoneChange);
