@@ -16,6 +16,11 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.CharacterStyle;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.widget.ListView;
 
 public class PhoneProfilesPreferencesFragment extends PreferenceFragment 
@@ -87,6 +92,29 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
         extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
     }
 
+    private void setTitleStyle(Preference preference, boolean bold, boolean underline)
+    {
+        CharSequence title = preference.getTitle();
+        Spannable sbt = new SpannableString(title);
+        Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
+        for(Object span: spansToRemove){
+            if(span instanceof CharacterStyle)
+                sbt.removeSpan(span);
+        }
+        if (bold || underline)
+        {
+            if (bold)
+                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (underline)
+                sbt.setSpan(new UnderlineSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            preference.setTitle(sbt);
+        }
+        else
+        {
+            preference.setTitle(sbt);
+        }
+    }
+
     private void setSummary(String key)
     {
         Preference preference = prefMng.findPreference(key);
@@ -134,6 +162,8 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
             else
                 preference.setSummary(summary);
 
+            if (key.equals(GlobalData.PREF_APPLICATION_LANGUAGE))
+                setTitleStyle(preference, true, false);
         }
         /*else if (preference instanceof RingtonePreference) {
             // For ringtone preferences, look up the correct display value
