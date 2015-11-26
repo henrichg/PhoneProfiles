@@ -209,7 +209,7 @@ public class VolumeDialogPreference extends
 
     public void onStopTrackingTouch(SeekBar seek) {
 
-        SettingsContentObserver.internalChange = true;
+        //SettingsContentObserver.internalChange = true;
         RingerModeChangeReceiver.internalChange = true;
 
         ActivateProfileHelper.setZenMode(_context, ActivateProfileHelper.ZENMODE_ALL);
@@ -327,7 +327,7 @@ public class VolumeDialogPreference extends
             _context.startService(volumeServiceIntent);
         } else {*/
 
-            SettingsContentObserver.internalChange = true;
+            //SettingsContentObserver.internalChange = true;
             RingerModeChangeReceiver.internalChange = true;
 
             if (android.os.Build.VERSION.SDK_INT >= 21) {

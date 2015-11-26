@@ -1,13 +1,18 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Handler;
 
+import java.util.Calendar;
+
 public class SettingsContentObserver  extends ContentObserver {
 
-    public static boolean internalChange = false;
+    //public static boolean internalChange = false;
 
     private static int previousVolumeRing = 0;
     private static int previousVolumeNotification = 0;
@@ -50,7 +55,7 @@ public class SettingsContentObserver  extends ContentObserver {
         if(delta>0)
         {
             //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Decreased");
-            if (!internalChange) {
+            if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
                     GlobalData.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
@@ -60,7 +65,7 @@ public class SettingsContentObserver  extends ContentObserver {
         else if(delta<0)
         {
             //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Increased");
-            if (!internalChange) {
+            if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
                     GlobalData.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
@@ -85,7 +90,20 @@ public class SettingsContentObserver  extends ContentObserver {
         previousVolumeSystem = volumeChangeDetect(AudioManager.STREAM_SYSTEM, previousVolumeSystem, audioManager);
         previousVolumeVoice = volumeChangeDetect(AudioManager.STREAM_VOICE_CALL, previousVolumeVoice, audioManager);
 
-        SettingsContentObserver.internalChange = false;
+        //SettingsContentObserver.internalChange = false;
+
+        //Context context = getApplicationContext();
+        Intent _intent = new Intent(context, DisableInernalChangeBroadcastReceiver.class);
+        //intent.putExtra(EXTRA_ONESHOT, 1);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, _intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 5);
+        long alarmTime = calendar.getTimeInMillis();
+
+        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);
+
 
     }
 
