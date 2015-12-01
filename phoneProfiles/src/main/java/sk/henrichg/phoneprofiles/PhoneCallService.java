@@ -1,11 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.IntentService;
-import android.content.Intent;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.media.AudioManager;
-import android.util.Log;
 
 public class PhoneCallService extends IntentService {
 
