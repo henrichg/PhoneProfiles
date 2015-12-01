@@ -123,7 +123,7 @@ public class GrantPermissionActivity extends Activity {
         boolean showRequestProcessOutgoingCalls = false;
         boolean showRequestWriteExternalStorage = false;
 
-        Log.e("GrantPermissionActivity", "onStart - permissions.size="+permissions.size());
+        //Log.e("GrantPermissionActivity", "onStart - permissions.size="+permissions.size());
 
         for (Permissions.PermissionType permissionType : permissions) {
             if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS))
@@ -236,17 +236,17 @@ public class GrantPermissionActivity extends Activity {
                 }
 
                 if (showRequestWriteSettings) {
-                    Log.e("GrantPermissionActivity", "onStart - showRequestWriteSettings");
+                    //Log.e("GrantPermissionActivity", "onStart - showRequestWriteSettings");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_write_settings) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestReadExternalStorage || showRequestWriteExternalStorage) {
-                    Log.e("GrantPermissionActivity", "onStart - showRequestReadExternalStorage");
+                    //Log.e("GrantPermissionActivity", "onStart - showRequestReadExternalStorage");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestReadPhoneState || showRequestProcessOutgoingCalls) {
-                    Log.e("GrantPermissionActivity", "onStart - showRequestReadPhoneState");
+                    //Log.e("GrantPermissionActivity", "onStart - showRequestReadPhoneState");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
@@ -404,12 +404,12 @@ public class GrantPermissionActivity extends Activity {
             for (Permissions.PermissionType permissionType : permissions) {
                 if ((!permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS)) &&
                         (!permList.contains(permissionType.permission))) {
-                    Log.e("GrantPermissionActivity", "requestPermissions - permission=" + permissionType.permission);
+                    //Log.e("GrantPermissionActivity", "requestPermissions - permission=" + permissionType.permission);
                     permList.add(permissionType.permission);
                 }
             }
 
-            Log.e("GrantPermissionActivity", "requestPermissions - permList.size=" + permList.size());
+            //Log.e("GrantPermissionActivity", "requestPermissions - permList.size=" + permList.size());
             if (permList.size() > 0) {
 
                 String[] permArray = new String[permList.size()];
