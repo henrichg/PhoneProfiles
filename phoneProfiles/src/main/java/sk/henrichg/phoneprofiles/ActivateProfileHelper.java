@@ -270,8 +270,13 @@ public class ActivateProfileHelper {
         // nahodenie GPS
         if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_GPS, context) == GlobalData.PREFERENCE_ALLOWED)
         {
-            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            boolean isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isEnabled;
+            if (android.os.Build.VERSION.SDK_INT < 21)
+                isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
+            else {
+                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            }
 
             switch (profile._deviceGPS) {
                 case 1 :
@@ -1555,8 +1560,13 @@ public class ActivateProfileHelper {
                         (locationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
         }*/
 
-        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        boolean isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isEnabled;
+        if (android.os.Build.VERSION.SDK_INT < 21)
+            isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
+        else {
+            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        }
 
 
         GlobalData.logE("ActivateProfileHelper.setGPS", "isEnabled="+isEnabled);
