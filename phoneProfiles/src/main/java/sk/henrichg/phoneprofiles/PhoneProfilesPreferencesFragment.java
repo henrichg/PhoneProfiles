@@ -23,7 +23,7 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.ListView;
 
-public class PhoneProfilesPreferencesFragment extends PreferenceFragment 
+public class PhoneProfilesPreferencesFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
 {
 
