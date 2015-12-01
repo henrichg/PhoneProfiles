@@ -284,7 +284,7 @@
   <string name="important_into_sony_stamina_mode">Ha SONY készülékeden a \"Stamina\" mód az \"Energia gazdálkodás\"-ban aktív, kérlek add a PhoneProfiles-t a \"Aktív alkalmazás készenléti módhoz\". Enélkül az alkalmazás nem működik megfelelően.</string>
   <string name="important_info_profile_settings">Néhány profil tulajdonság érvényesítéséhez a rendszer beállításokon módosítani kell. Ezeket a \"(S)\" -sel jelöli.</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_title">Értesítési hozzáférés</string>
-  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Lehetővé teszi a PhoneProfilesPlus számára a \"Értesítési hozzáférés\"-t a rendszer beállításokon belül, hogy engedélyezze a \"Megszakítások típusa\" profil előnybe helyezését.</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Lehetővé teszi a PhoneProfiles számára a \"Értesítési hozzáférés\"-t a rendszer beállításokon belül, hogy engedélyezze a \"Megszakítások típusa\" profil előnybe helyezését.</string>
   <string name="array_pref_zenModeArray_allWithVibration">Minden rezgéssel</string>
   <string name="array_pref_zenModeArray_priorityWithVibration">Prioritás rezgéssel</string>
   <string name="important_info_news">News</string>
