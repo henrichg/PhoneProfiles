@@ -42,20 +42,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnFinishProfilePreferencesActionMode;
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
-import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnHideActionMode;
-import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRedrawProfileListFragment;
-import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnRestartProfilePreferences;
-import sk.henrichg.phoneprofiles.ProfilePreferencesFragment.OnShowActionMode;
 
 public class EditorProfilesActivity extends AppCompatActivity
-                                    implements OnStartProfilePreferences,
-                                               OnRestartProfilePreferences,
-                                               OnRedrawProfileListFragment,
-                                               OnFinishProfilePreferencesActionMode,
-                                               OnShowActionMode,
-                                               OnHideActionMode
+                                    implements OnStartProfilePreferences
 {
 
     private static EditorProfilesActivity instance;
@@ -64,14 +54,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private static ApplicationsCache applicationsCache;
 
-    private int editMode;
-
-    private static final String SP_RESET_PREFERENCES_FRAGMENT = "editor_restet_preferences_fragment";
-    private static final String SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID = "editor_restet_preferences_fragment_profile_id";
-    private static final String SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE = "editor_restet_preferences_fragment_edit_mode";
-    private static final int RESET_PREFERENCE_FRAGMENT_RESET = 1;
-    private static final int RESET_PREFERENCE_FRAGMENT_REMOVE = 2;
-
+    private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
+    private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -123,57 +107,31 @@ public class EditorProfilesActivity extends AppCompatActivity
             // activity should be in two-pane mode.
             mTwoPane = true;
 
-            if (savedInstanceState == null)
-                onStartProfilePreferences(null, EditorProfileListFragment.EDIT_MODE_EDIT);
-            else
-            {
-                // for 7 inch tablets lauout changed:
-                //   - portrait - one pane
-                //   - landscape - two pane
-                // onRestartProfilePreferences is called, when user save/not save profile
-                // preference changes (Back button, or Cancel in ActionMode)
-                // In this method, editmode and profile_id is saved into shared preferences
-                // And when orientaion changed into lanscape mode, profile preferences fragment
-                // must by recreated due profile preference changes
-                SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
-                int resetMode = preferences.getInt(SP_RESET_PREFERENCES_FRAGMENT, 0);
-                if (resetMode == RESET_PREFERENCE_FRAGMENT_RESET)
-                {
-                    // restart profile preferences fragmentu
-                    long profile_id = preferences.getLong(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID, 0);
-                    int editMode =  preferences.getInt(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                    Bundle arguments = new Bundle();
-                    arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
-                    arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                    arguments.putInt(GlobalData.EXTRA_PREFERENCES_STARTUP_SOURCE, GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT);
-                    ProfilePreferencesFragment fragment = new ProfilePreferencesFragment();
-                    fragment.setArguments(arguments);
+            if (savedInstanceState == null) {
+                Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
+                if (fragment != null) {
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.editor_profile_detail_container, fragment, "ProfilePreferencesFragment").commit();
-                }
-                else
-                if (resetMode == RESET_PREFERENCE_FRAGMENT_REMOVE)
-                {
-                    ProfilePreferencesFragment fragment = (ProfilePreferencesFragment)getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
-                    if (fragment != null)
-                    {
-                        getFragmentManager().beginTransaction()
                             .remove(fragment).commit();
-                    }
                 }
-                // remove preferences
-                Editor editor = preferences.edit();
-                editor.remove(SP_RESET_PREFERENCES_FRAGMENT);
-                editor.remove(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID);
-                editor.remove(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE);
-                editor.commit();
+            }
+            else {
+                SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+                long profile_id = preferences.getLong(SP_PROFILE_DETAILS_PROFILE_ID, 0);
+                int editMode = preferences.getInt(SP_PROFILE_DETAILS_EDIT_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                Bundle arguments = new Bundle();
+                arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
+                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
+                ProfileDetailsFragment fragment = new ProfileDetailsFragment();
+                fragment.setArguments(arguments);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.editor_profile_detail_container, fragment, "ProfileDetailsFragment").commit();
             }
         }
         else
         {
             mTwoPane = false;
             FragmentManager fragmentManager = getFragmentManager();
-            Fragment fragment = fragmentManager.findFragmentByTag("ProfilePreferencesFragment");
+            Fragment fragment = fragmentManager.findFragmentByTag("ProfileDetailsFragment");
             if (fragment != null)
                 fragmentManager.beginTransaction()
                 .remove(fragment).commit();
@@ -390,7 +348,7 @@ public class EditorProfilesActivity extends AppCompatActivity
               (Build.VERSION.SDK_INT <= 16) &&
               (Build.MANUFACTURER.compareTo("LGE") == 0)) {
            return true;
-        }
+         }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -415,30 +373,16 @@ public class EditorProfilesActivity extends AppCompatActivity
         if (mTwoPane) {
             SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
 
-            if ((editMode != EditorProfileListFragment.EDIT_MODE_INSERT) &&
-                (editMode != EditorProfileListFragment.EDIT_MODE_DUPLICATE))
-            {
-                FragmentManager fragmentManager = getFragmentManager();
-                Fragment fragment = fragmentManager.findFragmentByTag("ProfilePreferencesFragment");
-                if (fragment != null)
-                {
-                    Editor editor = preferences.edit();
-                    editor.putInt(SP_RESET_PREFERENCES_FRAGMENT, RESET_PREFERENCE_FRAGMENT_RESET);
-                    editor.putLong(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID, ((ProfilePreferencesFragment)fragment).profile_id);
-                    editor.putInt(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE, editMode);
-                    editor.commit();
-                }
-            }
-            else
+            FragmentManager fragmentManager = getFragmentManager();
+            Fragment fragment = fragmentManager.findFragmentByTag("ProfileDetailsFragment");
+            if (fragment != null)
             {
                 Editor editor = preferences.edit();
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT, RESET_PREFERENCE_FRAGMENT_REMOVE);
-                editor.putLong(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID, 0);
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE, editMode);
+                editor.putLong(SP_PROFILE_DETAILS_PROFILE_ID, ((ProfileDetailsFragment) fragment).profile_id);
+                editor.putInt(SP_PROFILE_DETAILS_EDIT_MODE, ((ProfileDetailsFragment) fragment).editMode);
                 editor.commit();
             }
         }
-
     }
 
     @Override
@@ -475,7 +419,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
                     // redraw list fragment , notifications, widgets after finish ProfilePreferencesFragmentActivity
-                    onRedrawProfileListFragment(profile, newProfileMode);
+                    redrawProfileListFragment(profile, newProfileMode);
                 }
                 else
                 if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
@@ -507,33 +451,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                 doImportData(GUIData.REMOTE_EXPORT_PATH);
             }
         }
-        else
-        {
-            // send other activity results into preference fragment
-            ProfilePreferencesFragment fragment = (ProfilePreferencesFragment)getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
-            if (fragment != null)
-                fragment.doOnActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-            // handle your back button code here
-            if (mTwoPane) {
-                ProfilePreferencesFragment fragment = (ProfilePreferencesFragment)getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
-                if ((fragment != null) && (fragment.isActionModeActive()))
-                {
-                    fragment.finishActionMode(ProfilePreferencesFragment.BUTTON_CANCEL);
-                    return true; // consumes the back key event - ActionMode is not finished
-                }
-                else
-                    return super.dispatchKeyEvent(event);
-            }
-            else
-                return super.dispatchKeyEvent(event);
-        }
-        return super.dispatchKeyEvent(event);
     }
 
     private void importExportErrorDialog(int importExport)
@@ -923,10 +840,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     public void onStartProfilePreferences(Profile profile, int editMode) {
 
-        this.editMode = editMode;
-
-        onFinishProfilePreferencesActionMode();
-
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -937,20 +850,17 @@ public class EditorProfilesActivity extends AppCompatActivity
                 (editMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE))
             {
                 Bundle arguments = new Bundle();
-                if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
-                    arguments.putLong(GlobalData.EXTRA_PROFILE_ID, 0);
-                else
-                    arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(GlobalData.EXTRA_PREFERENCES_STARTUP_SOURCE, GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT);
-                ProfilePreferencesFragment fragment = new ProfilePreferencesFragment();
+                ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.editor_profile_detail_container, fragment, "ProfilePreferencesFragment").commit();
+                        .replace(R.id.editor_profile_detail_container, fragment, "ProfileDetailsFragment").commit();
+
             }
             else
             {
-                ProfilePreferencesFragment fragment = (ProfilePreferencesFragment)getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
+                Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
                 if (fragment != null)
                 {
                     getFragmentManager().beginTransaction()
@@ -977,7 +887,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
-    public void onRestartProfilePreferences(Profile profile, int newProfileMode) {
+    public void redrawProfilePreferences(Profile profile, int newProfileMode) {
         if (mTwoPane) {
             if ((newProfileMode != EditorProfileListFragment.EDIT_MODE_INSERT) &&
                 (newProfileMode != EditorProfileListFragment.EDIT_MODE_DUPLICATE))
@@ -985,16 +895,15 @@ public class EditorProfilesActivity extends AppCompatActivity
                 // restart profile preferences fragmentu
                 Bundle arguments = new Bundle();
                 arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(GlobalData.EXTRA_PREFERENCES_STARTUP_SOURCE, GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT);
-                ProfilePreferencesFragment fragment = new ProfilePreferencesFragment();
+                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, newProfileMode);
+                ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.editor_profile_detail_container, fragment, "ProfilePreferencesFragment").commit();
+                        .replace(R.id.editor_profile_detail_container, fragment, "ProfileDetailsFragment").commit();
             }
             else
             {
-                ProfilePreferencesFragment fragment = (ProfilePreferencesFragment)getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
+                Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
                 if (fragment != null)
                 {
                     getFragmentManager().beginTransaction()
@@ -1002,31 +911,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                 }
             }
         }
-        else
-        {
-            SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
-
-            if ((newProfileMode != EditorProfileListFragment.EDIT_MODE_INSERT) &&
-                (newProfileMode != EditorProfileListFragment.EDIT_MODE_DUPLICATE))
-            {
-                Editor editor = preferences.edit();
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT, RESET_PREFERENCE_FRAGMENT_RESET);
-                editor.putLong(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID, profile._id);
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE, editMode);
-                editor.commit();
-            }
-            else
-            {
-                Editor editor = preferences.edit();
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT, RESET_PREFERENCE_FRAGMENT_REMOVE);
-                editor.putLong(SP_RESET_PREFERENCES_FRAGMENT_PROFILE_ID, profile._id);
-                editor.putInt(SP_RESET_PREFERENCES_FRAGMENT_EDIT_MODE, editMode);
-                editor.commit();
-            }
-        }
     }
 
-    public void onRedrawProfileListFragment(Profile profile, int newProfileMode)
+    public void redrawProfileListFragment(Profile profile, int newProfileMode)
     {
         // redraw headeru list fragmentu, notifikacie a widgetov
         EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -1045,28 +932,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragment.dataWrapper.getActivateProfileHelper().showNotification(activeProfile);
             fragment.dataWrapper.getActivateProfileHelper().updateWidget();
         }
-        onRestartProfilePreferences(profile, newProfileMode);
-    }
-
-    public void onFinishProfilePreferencesActionMode() {
-        //if (mTwoPane) {
-            Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_detail_container);
-            if (fragment != null)
-                ((ProfilePreferencesFragment)fragment).finishActionMode(ProfilePreferencesFragment.BUTTON_CANCEL);
-        //}
-    }
-
-    @Override
-    public void onShowActionMode() {
-    }
-
-    @Override
-    public void onHideActionMode() {
-    }
-
-
-    public void onPreferenceAttached(PreferenceScreen root, int xmlId) {
-        return;
+        redrawProfilePreferences(profile, newProfileMode);
     }
 
     public static ApplicationsCache getApplicationsCache()

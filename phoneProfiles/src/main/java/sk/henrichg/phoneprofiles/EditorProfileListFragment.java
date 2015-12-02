@@ -52,7 +52,6 @@ public class EditorProfileListFragment extends Fragment {
      * The fragment's current callback objects
      */
     private OnStartProfilePreferences onStartProfilePreferencesCallback = sDummyOnStartProfilePreferencesCallback;
-    private OnFinishProfilePreferencesActionMode onFinishProfilePreferencesActionModeCallback = sDummyOnFinishProfilePreferencesActionModeCallback;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -75,16 +74,6 @@ public class EditorProfileListFragment extends Fragment {
         }
     };
 
-    // invoked when action mode finish needed (from profile list adapter)
-    public interface OnFinishProfilePreferencesActionMode {
-        public void onFinishProfilePreferencesActionMode();
-    }
-
-    private static OnFinishProfilePreferencesActionMode sDummyOnFinishProfilePreferencesActionModeCallback = new OnFinishProfilePreferencesActionMode() {
-        public void onFinishProfilePreferencesActionMode() {
-        }
-    };
-
     public EditorProfileListFragment() {
     }
 
@@ -98,10 +87,6 @@ public class EditorProfileListFragment extends Fragment {
                     "Activity must implement fragment's callbacks.");
         }
         onStartProfilePreferencesCallback = (OnStartProfilePreferences) activity;
-
-        if (activity instanceof OnFinishProfilePreferencesActionMode)
-            onFinishProfilePreferencesActionModeCallback = (OnFinishProfilePreferencesActionMode) activity;
-
     }
 
     @Override
@@ -110,7 +95,6 @@ public class EditorProfileListFragment extends Fragment {
 
         // Reset the active callbacks interface to the dummy implementation.
         onStartProfilePreferencesCallback = sDummyOnStartProfilePreferencesCallback;
-        onFinishProfilePreferencesActionModeCallback = sDummyOnFinishProfilePreferencesActionModeCallback;
     }
 
 
@@ -608,12 +592,6 @@ public class EditorProfileListFragment extends Fragment {
         getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_ACTIVATE_PROFILE);
         */
         dataWrapper.activateProfile(profile._id, GlobalData.STARTUP_SOURCE_EDITOR, getActivity());
-    }
-
-    // called from profile list adapter
-    public void finishProfilePreferencesActionMode()
-    {
-        onFinishProfilePreferencesActionModeCallback.onFinishProfilePreferencesActionMode();
     }
 
     public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons)

@@ -70,30 +70,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     static final int RESULT_NOTIFICATION_ACCESS_SETTINGS = 1980;
     static final String PREF_UNLINK_VOLUMES_APP_PREFERENCES = "prf_pref_volumeUnlinkVolumesAppSettings";
 
-    private OnShowActionMode onShowActionModeCallback = sDummyOnShowActionModeCallback;
-    private OnHideActionMode onHideActionModeCallback = sDummyOnHideActionModeCallback;
     private OnRestartProfilePreferences onRestartProfilePreferencesCallback = sDummyOnRestartProfilePreferencesCallback;
-    private OnRedrawProfileListFragment onRedrawProfileListFragmentCallback = sDummyOnRedrawProfileListFragmentCallback;
-
-    // invokes when action mode shows
-    public interface OnShowActionMode {
-        public void onShowActionMode();
-    }
-
-    private static OnShowActionMode sDummyOnShowActionModeCallback = new OnShowActionMode() {
-        public void onShowActionMode() {
-        }
-    };
-
-    // invokes when action mode hides
-    public interface OnHideActionMode {
-        public void onHideActionMode();
-    }
-
-    private static OnHideActionMode sDummyOnHideActionModeCallback = new OnHideActionMode() {
-        public void onHideActionMode() {
-        }
-    };
 
     // invokes when restart of profile preferences fragment needed (undo preference changes)
     public interface OnRestartProfilePreferences {
@@ -108,47 +85,15 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         }
     };
 
-    // invokes when profile list fragment redraw needed (preference changes accepted)
-    public interface OnRedrawProfileListFragment {
-        /**
-         * Callback for redraw profile list fragment.
-         */
-        public void onRedrawProfileListFragment(Profile profile, int newProfileMode);
-    }
-
-    private static OnRedrawProfileListFragment sDummyOnRedrawProfileListFragmentCallback = new OnRedrawProfileListFragment() {
-        public void onRedrawProfileListFragment(Profile profile, int newProfileMode) {
-        }
-    };
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        if (!(activity instanceof OnShowActionMode)) {
-            throw new IllegalStateException(
-                    "Activity must implement fragment's callbacks.");
-        }
-        onShowActionModeCallback = (OnShowActionMode) activity;
-
-        if (!(activity instanceof OnHideActionMode)) {
-            throw new IllegalStateException(
-                    "Activity must implement fragment's callbacks.");
-        }
-        onHideActionModeCallback = (OnHideActionMode) activity;
 
         if (!(activity instanceof OnRestartProfilePreferences)) {
             throw new IllegalStateException(
                     "Activity must implement fragment's callbacks.");
         }
         onRestartProfilePreferencesCallback = (OnRestartProfilePreferences) activity;
-
-        if (!(activity instanceof OnRedrawProfileListFragment)) {
-            throw new IllegalStateException(
-                    "Activity must implement fragment's callbacks.");
-        }
-        onRedrawProfileListFragmentCallback = (OnRedrawProfileListFragment) activity;
-
     }
 
     @Override
@@ -156,10 +101,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         super.onDetach();
 
         // Reset the active callbacks interface to the dummy implementation.
-        onShowActionModeCallback = sDummyOnShowActionModeCallback;
-        onHideActionModeCallback = sDummyOnHideActionModeCallback;
         onRestartProfilePreferencesCallback = sDummyOnRestartProfilePreferencesCallback;
-        onRedrawProfileListFragmentCallback = sDummyOnRedrawProfileListFragmentCallback;
     }
 
     @Override
@@ -625,8 +567,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                 dataWrapper.getDatabaseHandler().updateProfile(profile);
             }
         }
-
-        onRedrawProfileListFragmentCallback.onRedrawProfileListFragment(profile, new_profile_mode);
     }
 
     private void setTitleStyle(Preference preference, boolean bold, boolean underline)
@@ -1010,10 +950,10 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         // disable depended preferences
         disableDependedPref(key, sharedPreferences.getString(key, ""));
 
-        Activity activity = getActivity();
-        boolean canShow = (EditorProfilesActivity.mTwoPane) && (activity instanceof EditorProfilesActivity);
-        canShow = canShow || ((!EditorProfilesActivity.mTwoPane) && (activity instanceof ProfilePreferencesFragmentActivity));
-        if (canShow)
+        //Activity activity = getActivity();
+        //boolean canShow = (EditorProfilesActivity.mTwoPane) && (activity instanceof EditorProfilesActivity);
+        //canShow = canShow || ((!EditorProfilesActivity.mTwoPane) && (activity instanceof ProfilePreferencesFragmentActivity));
+        //if (canShow)
             showActionMode();
     }
 
@@ -1075,8 +1015,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         actionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(actionModeCallback);
         actionMode.setCustomView(actionView);
         
-        onShowActionModeCallback.onShowActionMode();        
-        
         actionMode.getCustomView().findViewById(R.id.profile_preferences_action_menu_cancel).setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -1110,8 +1048,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             actionModeButtonClicked = _button;
             actionMode.finish();
         }
-
-        onHideActionModeCallback.onHideActionMode();        
     }
 
     static public Activity getPreferencesActivity()
