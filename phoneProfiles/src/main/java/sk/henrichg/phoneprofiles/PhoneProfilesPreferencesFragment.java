@@ -77,6 +77,27 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
         preferences.registerOnSharedPreferenceChangeListener(this);
 
+        PreferenceScreen _preference = (PreferenceScreen) findPreference("applicationInterfaceCategory");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryAplicationStart");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categorySystem");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("prf_pref_permissionsCategory");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryNotifications");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("profileActivationCategory");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryActivator");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryEditor");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryWidgetList");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        _preference = (PreferenceScreen) findPreference("categoryWidgetIcon");
+        if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+
         if (Build.VERSION.SDK_INT >= 23) {
             Preference preference = prefMng.findPreference(PREF_APPLICATION_PERMISSIONS);
             if (preference != null) {
