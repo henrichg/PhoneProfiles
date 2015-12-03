@@ -298,12 +298,13 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
         updateSharedPreference();
 
-        PreferenceScreen scrollCategory = (PreferenceScreen) findPreference(extraScrollTo);
+        /*
+        PreferenceCategory scrollCategory = (PreferenceCategory) findPreference(extraScrollTo);
         if (scrollCategory != null) {
             // scroll to category
             for (int i = 0; i <  getPreferenceScreen().getRootAdapter().getCount(); i++){
                 Object o = getPreferenceScreen().getRootAdapter().getItem(i);
-                if (o instanceof PreferenceScreen ){
+                if (o instanceof PreferenceCategory ){
                     if (o.equals(scrollCategory)){
                         ListView listView = (ListView) getActivity().findViewById(android.R.id.list);
                         if (listView != null)
@@ -312,6 +313,15 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
                 }
             }
         }
+        */
+
+        if (extraScrollTo != null) {
+            PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("rootScreen");
+            int pos = findPreference(extraScrollTo).getOrder();
+            preferenceScreen.onItemClick(null, null, pos, 0);
+            extraScrollTo = null;
+        }
+
     }
 
     @Override
