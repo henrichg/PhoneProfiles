@@ -317,8 +317,11 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
         if (extraScrollTo != null) {
             PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("rootScreen");
-            int pos = findPreference(extraScrollTo).getOrder();
-            preferenceScreen.onItemClick(null, null, pos, 0);
+            Preference preference = findPreference(extraScrollTo);
+            if (preference != null) {
+                int pos = preference.getOrder();
+                preferenceScreen.onItemClick(null, null, pos, 0);
+            }
             extraScrollTo = null;
         }
 

@@ -6,16 +6,39 @@
     android:title="@string/title_activity_phone_profiles_preferences" >
 
     <PreferenceScreen
-        android:title="@string/phone_profiles_pref_category_activation"
-        android:key="profileActivationCategory" >
-        <sk.henrichg.phoneprofiles.ProfilePreference
-            android:defaultValue="-999"
-            android:key="applicationBackgroundProfile"
-            android:title="@string/phone_profiles_pref_applicationEventBackgroundProfile"
-            henrichg:addNoActivateItem="1" />
+        android:title="@string/phone_profiles_pref_category_gui"
+        android:key="applicationInterfaceCategory" >
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
+            android:title="@string/phone_profiles_pref_applicationLanguage"
+            android:summary="@string/phone_profiles_pref_applicationLanguage_system"
+            android:key="applicationLanguage"
+            android:icon="?attr/applicationSettingsLanguageIcon"
+            android:defaultValue="system"
+            android:entries="@array/languageArray"
+            android:entryValues="@array/languageValues" />
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
+            android:title="@string/phone_profiles_pref_applicationTheme"
+            android:summary="@string/phone_profiles_pref_applicationTheme_dlight"
+            android:key="applicationTheme"
+            android:defaultValue="material"
+            android:entries="@array/themeArray"
+            android:entryValues="@array/themeValues" />
         <CheckBoxPreference
-            android:key="applicationAlert"
-            android:title="@string/phone_profiles_pref_applicationAlert"
+            android:key="applicationShortcutEmblem"
+            android:title="@string/phone_profiles_pref_applicationShortcutEmblem"
+            android:defaultValue="true" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:title="@string/phone_profiles_pref_category_start"
+        android:key="categoryAplicationStart" >
+        <CheckBoxPreference
+            android:key="applicationStartOnBoot"
+            android:title="@string/phone_profiles_pref_applicationStartOnBoot"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="applicationActivate"
+            android:title="@string/phone_profiles_pref_applicationActivate"
             android:defaultValue="true" />
     </PreferenceScreen>
 
@@ -88,20 +111,21 @@
             android:defaultValue="true"
             android:dependency="notificationStatusBar" />
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/phone_profiles_pref_category_start"
-        android:key="categoryAplicationStart" >
+        android:title="@string/phone_profiles_pref_category_activation"
+        android:key="profileActivationCategory" >
+        <sk.henrichg.phoneprofiles.ProfilePreference
+            android:defaultValue="-999"
+            android:key="applicationBackgroundProfile"
+            android:title="@string/phone_profiles_pref_applicationEventBackgroundProfile"
+            henrichg:addNoActivateItem="1" />
         <CheckBoxPreference
-            android:key="applicationStartOnBoot"
-            android:title="@string/phone_profiles_pref_applicationStartOnBoot"
-            android:defaultValue="true" />
-        <CheckBoxPreference
-            android:key="applicationActivate"
-            android:title="@string/phone_profiles_pref_applicationActivate"
+            android:key="applicationAlert"
+            android:title="@string/phone_profiles_pref_applicationAlert"
             android:defaultValue="true" />
     </PreferenceScreen>
-    
+
     <PreferenceScreen
         android:title="@string/phone_profiles_pref_category_activator"
         android:key="categoryActivator" >
@@ -137,30 +161,6 @@
         <CheckBoxPreference
             android:key="applicationEditorHeader"
             android:title="@string/phone_profiles_pref_applicationHeader"
-            android:defaultValue="true" />
-    </PreferenceScreen>
-    
-    <PreferenceScreen
-        android:title="@string/phone_profiles_pref_category_gui"
-        android:key="applicationInterfaceCategory" >
-        <com.afollestad.materialdialogs.prefs.MaterialListPreference
-            android:title="@string/phone_profiles_pref_applicationLanguage"
-            android:summary="@string/phone_profiles_pref_applicationLanguage_system"
-            android:key="applicationLanguage"
-            android:icon="?attr/applicationSettingsLanguageIcon"
-            android:defaultValue="system"
-            android:entries="@array/languageArray"
-            android:entryValues="@array/languageValues" />
-        <com.afollestad.materialdialogs.prefs.MaterialListPreference
-            android:title="@string/phone_profiles_pref_applicationTheme"
-            android:summary="@string/phone_profiles_pref_applicationTheme_dlight"
-            android:key="applicationTheme"
-            android:defaultValue="material"
-            android:entries="@array/themeArray"
-            android:entryValues="@array/themeValues" />
-        <CheckBoxPreference
-            android:key="applicationShortcutEmblem"
-            android:title="@string/phone_profiles_pref_applicationShortcutEmblem"
             android:defaultValue="true" />
     </PreferenceScreen>
     
