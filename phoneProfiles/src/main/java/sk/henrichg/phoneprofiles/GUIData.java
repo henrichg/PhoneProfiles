@@ -82,34 +82,64 @@ public class GUIData {
         return Collator.getInstance(appLocale);
     }
 
-    public static void setTheme(Activity activity, boolean forPopup)
+    public static void setTheme(Activity activity, boolean forPopup, boolean withToolbar)
     {
-        activity.setTheme(getTheme(forPopup));
+        activity.setTheme(getTheme(forPopup, withToolbar));
     }
 
-    public static int getTheme(boolean forPopup) {
+    public static int getTheme(boolean forPopup, boolean withToolbar) {
         if (GlobalData.applicationTheme.equals("material"))
         {
             if (forPopup)
-                return R.style.PopupTheme_material;
+            {
+                //if (withToolbar)
+                //    return R.style.PopupTheme_withToolbar_material;
+                //else
+                    return R.style.PopupTheme_material;
+            }
             else
-                return R.style.Theme_Phoneprofilestheme_material;
+            {
+                if (withToolbar)
+                    return R.style.Theme_Phoneprofilestheme_withToolbar_material;
+                else
+                    return R.style.Theme_Phoneprofilestheme_material;
+            }
         }
         else
         if (GlobalData.applicationTheme.equals("dark"))
         {
             if (forPopup)
-                return R.style.PopupTheme_dark;
+            {
+                //if (withToolbar)
+                //    return R.style.PopupTheme_withToolbar_dark;
+                //else
+                    return R.style.PopupTheme_dark;
+            }
             else
-                return R.style.Theme_Phoneprofilestheme_dark;
+            {
+                if (withToolbar)
+                    return R.style.Theme_Phoneprofilestheme_withToolbar_dark;
+                else
+                    return R.style.Theme_Phoneprofilestheme_dark;
+            }
         }
         else
         if (GlobalData.applicationTheme.equals("dlight"))
         {
             if (forPopup)
-                return R.style.PopupTheme_dlight;
+            {
+                //if (withToolbar)
+                //    return R.style.PopupTheme_withToolbar_dlight;
+                //else
+                    return R.style.PopupTheme_dlight;
+            }
             else
-                return R.style.Theme_Phoneprofilestheme_dlight;
+            {
+                if (withToolbar)
+                    return R.style.Theme_Phoneprofilestheme_withToolbar_dlight;
+                else
+                    return R.style.Theme_Phoneprofilestheme_dlight;
+            }
         }
         return 0;
     }

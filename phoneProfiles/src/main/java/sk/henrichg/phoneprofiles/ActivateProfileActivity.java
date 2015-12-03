@@ -30,7 +30,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         instance = this;
 
-        GUIData.setTheme(this, true);
+        GUIData.setTheme(this, true, false);
         GUIData.setLanguage(getBaseContext());
 
     // set window dimensions ----------------------------------------------------------

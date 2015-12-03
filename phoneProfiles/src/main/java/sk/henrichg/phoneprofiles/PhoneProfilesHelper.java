@@ -270,7 +270,7 @@ public class PhoneProfilesHelper {
 
         // set theme and language for dialog alert ;-)
         // not working on Android 2.3.x
-        GUIData.setTheme(activity, true);
+        GUIData.setTheme(activity, true, false);
         GUIData.setLanguage(activity.getBaseContext());
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);

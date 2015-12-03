@@ -498,7 +498,7 @@ public class DataWrapper {
         {
             // set theme and language for dialog alert ;-)
             // not working on Android 2.3.x
-            GUIData.setTheme(activity, true);
+            GUIData.setTheme(activity, true, false);
             GUIData.setLanguage(activity.getBaseContext());
 
             final Profile _profile = profile;

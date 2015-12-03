@@ -66,7 +66,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        GUIData.setTheme(this, false);
+        GUIData.setTheme(this, false, false);
         GUIData.setLanguage(getBaseContext());
 
         super.onCreate(savedInstanceState);
