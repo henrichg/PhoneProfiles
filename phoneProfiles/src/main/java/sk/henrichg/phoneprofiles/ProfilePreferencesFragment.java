@@ -10,16 +10,19 @@ import android.content.SharedPreferences.Editor;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
-import android.support.v7.view.ActionMode.Callback;
+import android.util.Log;
+import android.view.ActionMode;
+import android.view.ActionMode.Callback;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.CharacterStyle;
@@ -31,7 +34,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
- 
+
+import com.fnp.materialpreferences.PreferenceActivity;
+import com.fnp.materialpreferences.PreferenceFragment;
+
 public class ProfilePreferencesFragment extends PreferenceFragment
                                         implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -41,7 +47,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     public long profile_id;
     //private boolean first_start_activity;
     private int new_profile_mode;
-    private int startupSource;
+    public static int startupSource;
     public boolean profileNonEdited = true;
     private PreferenceManager prefMng;
     private SharedPreferences preferences;
@@ -70,40 +76,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     static final int RESULT_NOTIFICATION_ACCESS_SETTINGS = 1980;
     static final String PREF_UNLINK_VOLUMES_APP_PREFERENCES = "prf_pref_volumeUnlinkVolumesAppSettings";
 
-    private OnRestartProfilePreferences onRestartProfilePreferencesCallback = sDummyOnRestartProfilePreferencesCallback;
-
-    // invokes when restart of profile preferences fragment needed (undo preference changes)
-    public interface OnRestartProfilePreferences {
-        /**
-         * Callback for restart fragment.
-         */
-        public void onRestartProfilePreferences(Profile profile, int newProfileMode);
-    }
-
-    private static OnRestartProfilePreferences sDummyOnRestartProfilePreferencesCallback = new OnRestartProfilePreferences() {
-        public void onRestartProfilePreferences(Profile profile, int newProfileMode) {
-        }
-    };
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        if (!(activity instanceof OnRestartProfilePreferences)) {
-            throw new IllegalStateException(
-                    "Activity must implement fragment's callbacks.");
-        }
-        onRestartProfilePreferencesCallback = (OnRestartProfilePreferences) activity;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        // Reset the active callbacks interface to the dummy implementation.
-        onRestartProfilePreferencesCallback = sDummyOnRestartProfilePreferencesCallback;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -118,27 +90,12 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
         dataWrapper = new DataWrapper(context.getApplicationContext(), true, false, 0);
         
-        startupSource = getArguments().getInt(GlobalData.EXTRA_PREFERENCES_STARTUP_SOURCE, GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT);
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
-            PREFS_NAME = PREFS_NAME_ACTIVITY;
-        else
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
-            PREFS_NAME = PREFS_NAME_FRAGMENT;
-        else
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
-            PREFS_NAME = PREFS_NAME_DEFAULT_PROFILE;
-        else
-            PREFS_NAME = PREFS_NAME_FRAGMENT;
-
-        prefMng = getPreferenceManager();
-        prefMng.setSharedPreferencesName(PREFS_NAME);
-        prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
-
         // getting attached fragment data
         if (getArguments().containsKey(GlobalData.EXTRA_NEW_PROFILE_MODE))
             new_profile_mode = getArguments().getInt(GlobalData.EXTRA_NEW_PROFILE_MODE);
         if (getArguments().containsKey(GlobalData.EXTRA_PROFILE_ID))
             profile_id = getArguments().getLong(GlobalData.EXTRA_PROFILE_ID);
+        Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
 
         if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
@@ -206,15 +163,63 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         else
             profile = dataWrapper.getProfileById(profile_id);
 
+        //prefMng = getPreferenceManager();
         preferences = prefMng.getSharedPreferences();
 
+        //Log.e("********  ProfilePreferenceFragment","startupSource="+startupSource);
+        //if (savedInstanceState == null)
+        //    loadPreferences();
+
+
+        createActionModeCallback();
+
         if (savedInstanceState == null)
-            loadPreferences();
+        {
+            SharedPreferences preferences = getActivity().getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+            Editor editor = preferences.edit();
+            editor.remove(SP_ACTION_MODE_SHOWED);
+            editor.commit();
+        }
+
+        updateSharedPreference();
+
+    }
+
+    @Override
+    public void addPreferencesFromResource(int preferenceResId) {
+        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
+            PREFS_NAME = PREFS_NAME_ACTIVITY;
+        else
+        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
+            PREFS_NAME = PREFS_NAME_FRAGMENT;
+        else
+        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+            PREFS_NAME = PREFS_NAME_DEFAULT_PROFILE;
+        else
+            PREFS_NAME = PREFS_NAME_FRAGMENT;
+
+        prefMng = getPreferenceManager();
+        prefMng.setSharedPreferencesName(PREFS_NAME);
+        prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
+
+        super.addPreferencesFromResource(preferenceResId);
+    }
+
+    @Override
+    public int addPreferencesFromResource() {
+        Log.e("******** ProfilePreferenceFragment", "startupSource=" + startupSource);
 
         if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
-            addPreferencesFromResource(R.xml.default_profile_preferences);
+            return R.xml.default_profile_preferences;
         else
-            addPreferencesFromResource(R.xml.profile_preferences);
+            return R.xml.profile_preferences;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        preferences.registerOnSharedPreferenceChangeListener(this);
 
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
@@ -316,20 +321,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData);
         }
 
-        preferences.registerOnSharedPreferenceChangeListener(this);  
-        
-        createActionModeCallback();
-
-        if (savedInstanceState == null)
-        {
-            SharedPreferences preferences = getActivity().getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
-            Editor editor = preferences.edit();
-            editor.remove(SP_ACTION_MODE_SHOWED);
-            editor.commit();
-        }
-
-        updateSharedPreference();
-
     }
 
     @Override
@@ -428,6 +419,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     }
 
+    /*
     private void loadPreferences()
     {
         if (profile != null)
@@ -437,12 +429,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             Editor editor = preferences.edit();
             if (startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
             {
-                /*
-                editor.remove(GlobalData.PREF_PROFILE_NAME).putString(GlobalData.PREF_PROFILE_NAME, profile._name);
-                editor.remove(GlobalData.PREF_PROFILE_ICON).putString(GlobalData.PREF_PROFILE_ICON, profile._icon);
-                editor.remove(GlobalData.PREF_PROFILE_DURATION).editor.putString(GlobalData.PREF_PROFILE_DURATION, Integer.toString(profile._duration));
-                editor.remove(GlobalData.PREF_PROFILE_AFTER_DURATION_DO).editor.putString(GlobalData.PREF_PROFILE_AFTER_DURATION_DO, Integer.toString(profile._afterDurationDo));
-                */
                 editor.putString(GlobalData.PREF_PROFILE_NAME, profile._name);
                 editor.putString(GlobalData.PREF_PROFILE_ICON, profile._icon);
                 editor.putString(GlobalData.PREF_PROFILE_DURATION, Integer.toString(profile._duration));
@@ -487,6 +473,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         }
 
     }
+    */
 
     private void savePreferences()
     {
@@ -970,9 +957,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
  
             /** Called when user exits action mode */
             public void onDestroyActionMode(ActionMode mode) {
+               finishActionMode(BUTTON_CANCEL);
                actionMode = null;
-               if (actionModeButtonClicked == BUTTON_CANCEL)
-                   onRestartProfilePreferencesCallback.onRestartProfilePreferences(profile, new_profile_mode);
             }
  
             /** This is called when the action mode is created. This is called by startActionMode() */
@@ -1011,8 +997,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View actionView = inflater.inflate(R.layout.profile_preferences_action_mode, null);
-        
-        actionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(actionModeCallback);
+
+        actionMode = ((PreferenceActivity)getActivity()).startActionMode(actionModeCallback);
         actionMode.setCustomView(actionView);
         
         actionMode.getCustomView().findViewById(R.id.profile_preferences_action_menu_cancel).setOnClickListener(new OnClickListener() {
