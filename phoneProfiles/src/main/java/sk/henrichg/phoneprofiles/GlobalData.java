@@ -32,6 +32,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class GlobalData extends Application {
 
@@ -1400,6 +1401,49 @@ public class GlobalData extends Application {
         }
     }
     */    
+
+    // Copy shared preferences -----------------------------------------------
+
+    public static void copySharedPreferences(SharedPreferences fromPreferences, SharedPreferences toPreferences) {
+        copySharedPreferences(fromPreferences, toPreferences, true);
+    }
+
+    public static void copySharedPreferences(SharedPreferences fromPreferences, SharedPreferences toPreferences, boolean clear) {
+
+        SharedPreferences.Editor editor = toPreferences.edit();
+        if (clear) {
+            editor.clear();
+        }
+        copySharedPreferences(fromPreferences, editor);
+        editor.commit();
+    }
+
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
+    public static void copySharedPreferences(SharedPreferences fromPreferences, SharedPreferences.Editor toEditor) {
+
+        for (Map.Entry<String, ?> entry : fromPreferences.getAll().entrySet()) {
+            Object value = entry.getValue();
+            String key = entry.getKey();
+            copyPreferenceKey(key, value, toEditor);
+        }
+    }
+
+    public static void copyPreferenceKey(String key, Object value, SharedPreferences.Editor toEditor) {
+        if (value instanceof String) {
+            toEditor.putString(key, ((String) value));
+        } else if (value instanceof Set) {
+            toEditor.putStringSet(key, (Set<String>) value); // EditorImpl.putStringSet already creates a copy of the set
+        } else if (value instanceof Integer) {
+            toEditor.putInt(key, (Integer) value);
+        } else if (value instanceof Long) {
+            toEditor.putLong(key, (Long) value);
+        } else if (value instanceof Float) {
+            toEditor.putFloat(key, (Float) value);
+        } else if (value instanceof Boolean) {
+            toEditor.putBoolean(key, (Boolean) value);
+        }
+    }
+
 
     // Debug -----------------------------------------------------------------
 

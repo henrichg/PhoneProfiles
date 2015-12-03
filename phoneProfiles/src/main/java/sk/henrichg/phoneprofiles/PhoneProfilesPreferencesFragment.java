@@ -11,7 +11,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
@@ -23,12 +22,15 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.ListView;
 
+import com.fnp.materialpreferences.PreferenceFragment;
+
 public class PhoneProfilesPreferencesFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
 {
 
     private PreferenceManager prefMng;
     private SharedPreferences preferences;
+    private SharedPreferences applicationPreferences;
     private static Activity preferencesActivity = null;
     String extraScrollTo;
 
@@ -49,49 +51,68 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
         preferencesActivity = getActivity();
         //context = getActivity().getBaseContext();
 
+        preferences = prefMng.getSharedPreferences();
+
+        //addPreferencesFromResource(R.xml.phone_profiles_preferences);
+
+        extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
+    }
+
+    @Override
+    public void addPreferencesFromResource(int preferenceResId) {
         prefMng = getPreferenceManager();
         prefMng.setSharedPreferencesName(GlobalData.APPLICATION_PREFS_NAME);
         prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
+        super.addPreferencesFromResource(preferenceResId);
+    }
 
-        preferences = prefMng.getSharedPreferences();
+    @Override
+    public int addPreferencesFromResource() {
+        return R.xml.phone_profiles_preferences;
+    }
 
-        addPreferencesFromResource(R.xml.phone_profiles_preferences);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         preferences.registerOnSharedPreferenceChangeListener(this);
 
         if (Build.VERSION.SDK_INT >= 23) {
             Preference preference = prefMng.findPreference(PREF_APPLICATION_PERMISSIONS);
-            preference.setWidgetLayoutResource(R.layout.start_activity_preference);
-            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
-                    startActivityForResult(intent, RESULT_APPLICATION_PERMISSIONS);
-                    return false;
-                }
-            });
+            if (preference != null) {
+                preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                        intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
+                        startActivityForResult(intent, RESULT_APPLICATION_PERMISSIONS);
+                        return false;
+                    }
+                });
+            }
             preference = prefMng.findPreference(PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
-            preference.setWidgetLayoutResource(R.layout.start_activity_preference);
-            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
-                    return false;
-                }
-            });
+            if (preference != null) {
+                preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                        startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
+                        return false;
+                    }
+                });
+            }
         }
         else {
             PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("rootScreen");
-            PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("prf_pref_permissionsCategory");
-            preferenceScreen.removePreference(preferenceCategory);
+            //PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("prf_pref_permissionsCategory");
+            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_permissionsCategory");
+            if (preferenceCategory != null)
+                preferenceScreen.removePreference(preferenceCategory);
         }
-
-
-        extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
     }
 
     private void setTitleStyle(Preference preference, boolean bold, boolean underline)
@@ -247,7 +268,8 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
             Preference preference = prefMng.findPreference(GlobalData.PREF_NOTIFICATION_STATUS_BAR_STYLE);
             if (preference != null)
             {
-                PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("categoryNotifications");
+                //PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("categoryNotifications");
+                PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categoryNotifications");
                 preferenceCategory.removePreference(preference);
             }
         }
@@ -276,12 +298,12 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
         updateSharedPreference();
 
-        PreferenceCategory scrollCategory = (PreferenceCategory) findPreference(extraScrollTo);
+        PreferenceScreen scrollCategory = (PreferenceScreen) findPreference(extraScrollTo);
         if (scrollCategory != null) {
             // scroll to category
             for (int i = 0; i <  getPreferenceScreen().getRootAdapter().getCount(); i++){
                 Object o = getPreferenceScreen().getRootAdapter().getItem(i);
-                if (o instanceof PreferenceCategory ){
+                if (o instanceof PreferenceScreen ){
                     if (o.equals(scrollCategory)){
                         ListView listView = (ListView) getActivity().findViewById(android.R.id.list);
                         if (listView != null)
@@ -295,7 +317,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
     @Override
     public void onDestroy()
     {
-        preferences.unregisterOnSharedPreferenceChangeListener(this); 
+        preferences.unregisterOnSharedPreferenceChangeListener(this);
         super.onDestroy();
     }
 

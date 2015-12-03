@@ -127,14 +127,15 @@ public class ProfilePreference extends Preference {
         // ulozime instance state - napriklad kvoli zmene orientacie
 
         final Parcelable superState = super.onSaveInstanceState();
-        if (isPersistent()) {
+        /*if (isPersistent()) {
             // netreba ukladat, je ulozene persistentne
             return superState;
-        }
+        }*/
 
         // ulozenie istance state
         final SavedState myState = new SavedState(superState);
         myState.profileId = profileId;
+        myState.addNoActivateItem = addNoActivateItem;
         return myState;
 
     }
@@ -142,17 +143,23 @@ public class ProfilePreference extends Preference {
     @Override
     protected void onRestoreInstanceState(Parcelable state)
     {
+        if (dataWrapper == null)
+            dataWrapper = new DataWrapper(prefContext, true, false, 0);
+
         if (!state.getClass().equals(SavedState.class)) {
             // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);
+            setSummary(Long.parseLong(profileId));
             return;
         }
 
         // restore instance state
         SavedState myState = (SavedState)state;
         super.onRestoreInstanceState(myState.getSuperState());
-        String value = (String) myState.profileId;
-        profileId = value;
+        profileId = myState.profileId;
+        addNoActivateItem = myState.addNoActivateItem;
+
+        setSummary(Long.parseLong(profileId));
         notifyChanged();
     }
 
@@ -181,7 +188,7 @@ public class ProfilePreference extends Preference {
         profileId = newValue;
 
         // set summary
-        setSummary(profileId);
+        setSummary(Long.parseLong(profileId));
 
         // zapis do preferences
         persistString(newValue);
@@ -211,13 +218,16 @@ public class ProfilePreference extends Preference {
     private static class SavedState extends BaseSavedState
     {
         String profileId;
+        int addNoActivateItem;
 
         public SavedState(Parcel source)
         {
             super(source);
 
-            // restore profileId
+            // restore data
             profileId = source.readString();
+            addNoActivateItem = source.readInt();
+
         }
 
         @Override
@@ -225,8 +235,9 @@ public class ProfilePreference extends Preference {
         {
             super.writeToParcel(dest, flags);
 
-            // save profileId
+            // save data
             dest.writeString(profileId);
+            dest.writeInt(addNoActivateItem);
         }
 
         public SavedState(Parcelable superState)

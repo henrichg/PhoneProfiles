@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,33 +14,34 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.fnp.materialpreferences.PreferenceActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-public class PhoneProfilesPreferencesActivity extends AppCompatActivity
+public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 {
 
-	private SharedPreferences preferences;
-	
-	private boolean showEditorPrefIndicator;
-	private boolean showEditorHeader;
-	private String activeLanguage;
-	private String activeTheme;
-	//private String activeBackgroundProfile;
+    private SharedPreferences preferences;
 
-	private boolean invalidateEditor = false;
-	 
-	public static final String EXTRA_SCROLL_TO = "extra_phone_profile_preferences_scroll_to";
+    private boolean showEditorPrefIndicator;
+    private boolean showEditorHeader;
+    private String activeLanguage;
+    private String activeTheme;
+    //private String activeBackgroundProfile;
 
-	@Override 
-	public void onCreate(Bundle savedInstanceState) {
+    private boolean invalidateEditor = false;
 
-		// must by called before super.onCreate() for PreferenceActivity
-		GUIData.setTheme(this, false);
-		GUIData.setLanguage(getBaseContext());
-		
-		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_phone_profiles_preferences);
+    public static final String EXTRA_SCROLL_TO = "extra_phone_profile_preferences_scroll_to";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        // must by called before super.onCreate() for PreferenceActivity
+        GUIData.setTheme(this, false);
+        GUIData.setLanguage(getBaseContext());
+
+        super.onCreate(savedInstanceState);
+
+        //setContentView(R.layout.activity_phone_profiles_preferences);
 
         String extraScrollTo = "";
 
@@ -48,7 +50,7 @@ public class PhoneProfilesPreferencesActivity extends AppCompatActivity
             // activity is started from lockscreen, scroll to notifications cattegory
             extraScrollTo = "categoryNotifications";
         else
-			extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
+            extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
 
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
             Window w = getWindow(); // in Activity's onCreate() for instance
@@ -66,147 +68,146 @@ public class PhoneProfilesPreferencesActivity extends AppCompatActivity
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
         }
 
-		invalidateEditor = false;
-		
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(R.string.title_activity_phone_profiles_preferences);
-		
-		
+        invalidateEditor = false;
+
+        //getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setTitle(R.string.title_activity_phone_profiles_preferences);
+
         preferences = getApplicationContext().getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, MODE_PRIVATE);
         activeLanguage = preferences.getString(GlobalData.PREF_APPLICATION_LANGUAGE, "system");
         activeTheme = preferences.getString(GlobalData.PREF_APPLICATION_THEME, "material");
         showEditorPrefIndicator = preferences.getBoolean(GlobalData.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
         showEditorHeader = preferences.getBoolean(GlobalData.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
-        
-		
-		if (savedInstanceState == null) {
-			PhoneProfilesPreferencesFragment fragment = new PhoneProfilesPreferencesFragment();
+
+        PhoneProfilesPreferencesFragment fragment = new PhoneProfilesPreferencesFragment();
+
+        if (savedInstanceState == null) {
             Bundle args = new Bundle();
             args.putString(EXTRA_SCROLL_TO, extraScrollTo);
             fragment.setArguments(args);
-            getFragmentManager().beginTransaction()
-					.replace(R.id.activity_phone_profiles_preferences_container, fragment, "PhoneProfilesPreferencesFragment").commit();
-		}
-		
-        
-	}
+            //getFragmentManager().beginTransaction()
+            //        .replace(R.id.activity_phone_profiles_preferences_container, fragment, "PhoneProfilesPreferencesFragment").commit();
+        }
 
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
-		
-		getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-		GUIData.reloadActivity(this, false);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		PhoneProfilesPreferencesFragment fragment = (PhoneProfilesPreferencesFragment)getFragmentManager().findFragmentById(R.id.activity_phone_profiles_preferences_container);
-		if (fragment != null)
-			fragment.doOnActivityResult(requestCode, resultCode, data);
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-	}
-	
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-	}
+        setPreferenceFragment(fragment);
+    }
 
-	@Override
-	protected void onStop()
-	{
-		super.onStop();
-		
-		DataWrapper dataWrapper =  new DataWrapper(getApplicationContext(), true, false, 0);
-		dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
-		dataWrapper.getActivateProfileHelper().showNotification(dataWrapper.getActivatedProfileFromDB());
-		dataWrapper.getActivateProfileHelper().updateWidget();
-		dataWrapper.invalidateDataWrapper();
-		
-	}
-	
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
-	}
+    /*
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
 
-	@Override
-	public void finish() {
-		
-		GlobalData.loadPreferences(getApplicationContext());
-		
-		if (activeLanguage != GlobalData.applicationLanguage)
-		{
-			GUIData.setLanguage(getBaseContext());
-			invalidateEditor = true;
-		}
-		else
-		if (activeTheme != GlobalData.applicationTheme)
-		{
-    		//EditorProfilesActivity.setTheme(this, false);
-			invalidateEditor = true;
-		}
-		else
-   		if (showEditorPrefIndicator != GlobalData.applicationEditorPrefIndicator)
-   		{
-   			invalidateEditor = true;
-   		}
-		else
-   		if (showEditorHeader != GlobalData.applicationEditorHeader)
-   		{
-   			invalidateEditor = true;
-   		}
+        getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        GUIData.reloadActivity(this, false);
+    }
+    */
 
-		/*
-		if (activeBackgroundProfile != GlobalData.applicationBackgroundProfile)
-   		{
-   			long lApplicationBackgroundProfile = Long.valueOf(GlobalData.applicationBackgroundProfile);
-   			if (lApplicationBackgroundProfile != GlobalData.PROFILE_NO_ACTIVATE)
-   			{
-   				DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
-   				if (dataWrapper.getActivatedProfile() == null)
-   				{
-   					dataWrapper.getActivateProfileHelper().initialize(null, getApplicationContext());
-   					dataWrapper.activateProfile(lApplicationBackgroundProfile, GlobalData.STARTUP_SOURCE_SERVICE, null);
-   				}
-   				//invalidateEditor = true;
-   			}
-   		}
-   		*/
-		
-		// for startActivityForResult
-		Intent returnIntent = new Intent();
-		returnIntent.putExtra(GlobalData.EXTRA_RESET_EDITOR, invalidateEditor);
-		setResult(RESULT_OK,returnIntent);
+    /*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-	    super.finish();
-	}
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            finish();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    */
 
-	public void onPreferenceAttached(PreferenceScreen root, int xmlId) {
-		
-	}
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        PhoneProfilesPreferencesFragment fragment = (PhoneProfilesPreferencesFragment)getFragmentManager().findFragmentById(R.id.activity_phone_profiles_preferences_container);
+        if (fragment != null)
+            fragment.doOnActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+        DataWrapper dataWrapper =  new DataWrapper(getApplicationContext(), true, false, 0);
+        dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
+        dataWrapper.getActivateProfileHelper().showNotification(dataWrapper.getActivatedProfileFromDB());
+        dataWrapper.getActivateProfileHelper().updateWidget();
+        dataWrapper.invalidateDataWrapper();
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
+
+    @Override
+    public void finish() {
+
+        GlobalData.loadPreferences(getApplicationContext());
+
+        if (activeLanguage != GlobalData.applicationLanguage)
+        {
+            GUIData.setLanguage(getBaseContext());
+            invalidateEditor = true;
+        }
+        else
+        if (activeTheme != GlobalData.applicationTheme)
+        {
+            //EditorProfilesActivity.setTheme(this, false);
+            invalidateEditor = true;
+        }
+        else
+        if (showEditorPrefIndicator != GlobalData.applicationEditorPrefIndicator)
+        {
+            invalidateEditor = true;
+        }
+        else
+        if (showEditorHeader != GlobalData.applicationEditorHeader)
+        {
+            invalidateEditor = true;
+        }
+
+        /*
+        if (activeBackgroundProfile != GlobalData.applicationBackgroundProfile)
+        {
+            long lApplicationBackgroundProfile = Long.valueOf(GlobalData.applicationBackgroundProfile);
+            if (lApplicationBackgroundProfile != GlobalData.PROFILE_NO_ACTIVATE)
+            {
+                DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
+                if (dataWrapper.getActivatedProfile() == null)
+                {
+                    dataWrapper.getActivateProfileHelper().initialize(null, getApplicationContext());
+                    dataWrapper.activateProfile(lApplicationBackgroundProfile, GlobalData.STARTUP_SOURCE_SERVICE, null);
+                }
+                //invalidateEditor = true;
+            }
+        }
+        */
+
+        // for startActivityForResult
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(GlobalData.EXTRA_RESET_EDITOR, invalidateEditor);
+        setResult(RESULT_OK,returnIntent);
+
+        super.finish();
+    }
 
 }
