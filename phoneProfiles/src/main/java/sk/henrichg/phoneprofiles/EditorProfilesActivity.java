@@ -838,6 +838,16 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
+    private void startProfilePreferenceActivity(Profile profile, int editMode) {
+        Intent intent = new Intent(getBaseContext(), ProfilePreferencesFragmentActivity.class);
+        if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
+            intent.putExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        else
+            intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+        intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
+        startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
+    }
+
     public void onStartProfilePreferences(Profile profile, int editMode) {
 
         if (mTwoPane) {
@@ -845,9 +855,12 @@ public class EditorProfilesActivity extends AppCompatActivity
             // adding or replacing the detail fragment using a
             // fragment transaction.
 
-            if ((profile != null) ||
-                (editMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
-                (editMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE))
+            if ((editMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
+                (editMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE)) {
+                startProfilePreferenceActivity(profile, editMode);
+            }
+            else
+            if (profile != null)
             {
                 Bundle arguments = new Bundle();
                 arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
@@ -875,22 +888,13 @@ public class EditorProfilesActivity extends AppCompatActivity
                  (editMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
                  (editMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE))
                 && (editMode != EditorProfileListFragment.EDIT_MODE_DELETE))
-            {
-                Intent intent = new Intent(getBaseContext(), ProfilePreferencesFragmentActivity.class);
-                if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
-                    intent.putExtra(GlobalData.EXTRA_PROFILE_ID, 0);
-                else
-                    intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
-            }
+                startProfilePreferenceActivity(profile, editMode);
         }
     }
 
     public void redrawProfilePreferences(Profile profile, int newProfileMode) {
         if (mTwoPane) {
-            if ((newProfileMode != EditorProfileListFragment.EDIT_MODE_INSERT) &&
-                (newProfileMode != EditorProfileListFragment.EDIT_MODE_DUPLICATE))
+            if (profile != null)
             {
                 // restart profile preferences fragmentu
                 Bundle arguments = new Bundle();
