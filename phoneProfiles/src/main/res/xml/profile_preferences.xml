@@ -32,7 +32,7 @@
             android:entries="@array/afterProfileDurationDoArray"
             android:entryValues="@array/afterProfileDurationDoValues" />        
     </PreferenceCategory>
-    <PreferenceCategory
+    <PreferenceScreen
         android:summary="@string/profile_preferences_category_volumes"
         android:title="@string/profile_preferences_category_volumes"
         android:key="prf_pref_volumeCategory" >
@@ -126,7 +126,7 @@
             android:defaultValue="0"
             android:entries="@array/volumeSpeakerPhoneArray"
             android:entryValues="@array/volumeSpeakerPhoneValues" />        
-    </PreferenceCategory>
+    </PreferenceScreen>
     <PreferenceCategory
         android:summary="@string/profile_preferences_category_sounds"
         android:title="@string/profile_preferences_category_sounds" >

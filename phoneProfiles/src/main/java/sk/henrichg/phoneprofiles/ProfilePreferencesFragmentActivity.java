@@ -11,6 +11,8 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,6 +23,8 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
     private long profile_id = 0;
     int newProfileMode = EditorProfileListFragment.EDIT_MODE_UNDEFINED;
+
+    public static boolean showSaveMenu = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
                 fragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
             fragment.setArguments(arguments);
 
-            loadPreferences(fragment, newProfileMode);
+            loadPreferences(newProfileMode);
 
             //getFragmentManager().beginTransaction()
             //        .replace(R.id.activity_profile_preferences_container, fragment, "ProfilePreferencesFragment").commit();
@@ -99,10 +103,12 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
     @Override
     public void finish() {
 
+        /*
         ProfilePreferencesFragment fragment = (ProfilePreferencesFragment) getFragmentManager().
                 findFragmentByTag(GUIData.MAIN_PREFERENCE_FRAGMENT_TAG);
         if (fragment != null)
             profile_id = fragment.profile_id;
+        */
 
         // for startActivityForResult
         Intent returnIntent = new Intent();
@@ -113,18 +119,28 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
         super.finish();
     }
 
-    /*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (showSaveMenu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.profile_preferences_action_mode, menu);
+        }
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case R.id.profile_preferences_action_mode_save:
+                savePreferences(newProfileMode);
                 finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
 
     /*
     @Override
@@ -145,26 +161,13 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             fragment.doOnActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-            // handle your back button code here
-            ProfilePreferencesFragment fragment = (ProfilePreferencesFragment) getFragmentManager().
-                    findFragmentByTag(GUIData.MAIN_PREFERENCE_FRAGMENT_TAG);
-            if ((fragment != null) && (fragment.isActionModeActive())) {
-                fragment.finishActionMode(ProfilePreferencesFragment.BUTTON_CANCEL);
-                return true; // consumes the back key event - ActionMode is not finished
-            } else
-                return super.dispatchKeyEvent(event);
-        }
-        return super.dispatchKeyEvent(event);
-    }
-
-    private void loadPreferences(ProfilePreferencesFragment fragment, int new_profile_mode) {
+    private Profile createProfile(int new_profile_mode) {
         Profile profile;
         DataWrapper dataWrapper = new DataWrapper(getApplicationContext().getApplicationContext(), true, false, 0);
 
-        if (fragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+        showSaveMenu = false;
+
+        if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
             profile = GlobalData.getDefaultProfile(getApplicationContext());
             profile_id = profile._id;
@@ -177,6 +180,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
                     getResources().getString(R.string.profile_name_default),
                     GlobalData.PROFILE_ICON_DEFAULT, 0);
             profile_id = 0;
+            showSaveMenu = true;
         }
         else
         if (new_profile_mode == EditorProfileListFragment.EDIT_MODE_DUPLICATE)
@@ -226,21 +230,27 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
                     origProfile._deviceWiFiAP,
                     origProfile._devicePowerSaveMode);
             profile_id = 0;
+            showSaveMenu = true;
         }
         else
             profile = dataWrapper.getProfileById(profile_id);
 
+        return profile;
+    }
+
+    private void loadPreferences(int new_profile_mode) {
+        Profile profile = createProfile(new_profile_mode);
 
         if (profile != null)
         {
             String PREFS_NAME;
-            if (fragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
+            if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
                 PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_ACTIVITY;
             else
-            if (fragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
+            if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
                 PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_FRAGMENT;
             else
-            if (fragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+            if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
                 PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_DEFAULT_PROFILE;
             else
                 PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_FRAGMENT;
@@ -248,7 +258,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
 
             SharedPreferences.Editor editor = preferences.edit();
-            if (fragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+            if (ProfilePreferencesFragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
             {
                 /*
                 editor.remove(GlobalData.PREF_PROFILE_NAME).putString(GlobalData.PREF_PROFILE_NAME, profile._name);
@@ -298,6 +308,100 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, Integer.toString(profile._devicePowerSaveMode));
             editor.commit();
         }
-
     }
- }
+
+    private void savePreferences(int new_profile_mode)
+    {
+        DataWrapper dataWrapper = new DataWrapper(getApplicationContext().getApplicationContext(), false, false, 0);
+        Profile profile = createProfile(new_profile_mode);
+
+        String PREFS_NAME;
+        if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
+            PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_ACTIVITY;
+        else
+        if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
+            PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_FRAGMENT;
+        else
+        if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+            PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_DEFAULT_PROFILE;
+        else
+            PREFS_NAME = ProfilePreferencesFragment.PREFS_NAME_FRAGMENT;
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
+
+        // save preferences into profile
+        if (ProfilePreferencesFragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+        {
+            profile._name = preferences.getString(GlobalData.PREF_PROFILE_NAME, "");
+            profile._icon = preferences.getString(GlobalData.PREF_PROFILE_ICON, "");
+
+            profile._duration = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DURATION, ""));
+            profile._afterDurationDo = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_AFTER_DURATION_DO, ""));
+
+            Profile activatedProfile = dataWrapper.getActivatedProfile();
+            if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
+                // remove alarm for profile duration
+                ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, getApplicationContext().getApplicationContext());
+                GlobalData.setActivatedProfileForDuration(getApplicationContext().getApplicationContext(), profile._id);
+            }
+        }
+        profile._volumeRingerMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE, ""));
+        profile._volumeZenMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, ""));
+        profile._volumeRingtone = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_RINGTONE, "");
+        profile._volumeNotification = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_NOTIFICATION, "");
+        profile._volumeMedia = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_MEDIA, "");
+        profile._volumeAlarm = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ALARM, "");
+        profile._volumeSystem = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_SYSTEM, "");
+        profile._volumeVoice = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_VOICE, "");
+        profile._soundRingtoneChange = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_SOUND_RINGTONE_CHANGE, ""));
+        profile._soundRingtone = preferences.getString(GlobalData.PREF_PROFILE_SOUND_RINGTONE, "");
+        profile._soundNotificationChange = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, ""));
+        profile._soundNotification = preferences.getString(GlobalData.PREF_PROFILE_SOUND_NOTIFICATION, "");
+        profile._soundAlarmChange = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_SOUND_ALARM_CHANGE, ""));
+        profile._soundAlarm = preferences.getString(GlobalData.PREF_PROFILE_SOUND_ALARM, "");
+        profile._deviceAirplaneMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_AIRPLANE_MODE, ""));
+        profile._deviceWiFi = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WIFI, ""));
+        profile._deviceBluetooth = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, ""));
+        profile._deviceScreenTimeout = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, ""));
+        profile._deviceBrightness = preferences.getString(GlobalData.PREF_PROFILE_DEVICE_BRIGHTNESS, "");
+        profile._deviceWallpaperChange = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, ""));
+        if (profile._deviceWallpaperChange == 1)
+            profile._deviceWallpaper = preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER, "");
+        else
+            profile._deviceWallpaper = "-|0";
+        profile._deviceMobileData = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA, ""));
+        profile._deviceMobileDataPrefs = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, ""));
+        profile._deviceGPS = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_GPS, ""));
+        profile._deviceRunApplicationChange = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, ""));
+        if (profile._deviceRunApplicationChange == 1)
+            profile._deviceRunApplicationPackageName = preferences.getString(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
+        else
+            profile._deviceRunApplicationPackageName = "-";
+        profile._deviceAutosync = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_AUTOSYNC, ""));
+        profile._deviceAutoRotate = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_AUTOROTATE, ""));
+        profile._deviceLocationServicePrefs = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, ""));
+        profile._volumeSpeakerPhone = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VOLUME_SPEAKER_PHONE, ""));
+        profile._deviceNFC = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_NFC, ""));
+        profile._deviceKeyguard = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD, ""));
+        profile._vibrationOnTouch = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH, ""));
+        profile._deviceWiFiAP = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, ""));
+        profile._devicePowerSaveMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, ""));
+
+        if (ProfilePreferencesFragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+        {
+            if ((new_profile_mode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
+                (new_profile_mode == EditorProfileListFragment.EDIT_MODE_DUPLICATE))
+            {
+                dataWrapper.getDatabaseHandler().addProfile(profile);
+                profile_id = profile._id;
+            }
+            else
+            if (profile_id > 0)
+            {
+                // udate profile
+                dataWrapper.getDatabaseHandler().updateProfile(profile);
+            }
+        }
+    }
+
+}
