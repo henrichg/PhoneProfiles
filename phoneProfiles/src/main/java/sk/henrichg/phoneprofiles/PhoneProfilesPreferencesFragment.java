@@ -77,6 +77,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
 
         preferences.registerOnSharedPreferenceChangeListener(this);
 
+        /*
         PreferenceScreen _preference = (PreferenceScreen) findPreference("applicationInterfaceCategory");
         if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
         _preference = (PreferenceScreen) findPreference("categoryAplicationStart");
@@ -97,11 +98,12 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
         if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
         _preference = (PreferenceScreen) findPreference("categoryWidgetIcon");
         if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+        */
 
         if (Build.VERSION.SDK_INT >= 23) {
             Preference preference = prefMng.findPreference(PREF_APPLICATION_PERMISSIONS);
             if (preference != null) {
-                preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+                //preference.setWidgetLayoutResource(R.layout.start_activity_preference);
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
@@ -115,7 +117,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
             }
             preference = prefMng.findPreference(PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
             if (preference != null) {
-                preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+                //preference.setWidgetLayoutResource(R.layout.start_activity_preference);
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {

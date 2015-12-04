@@ -168,7 +168,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             zenModePreference.setEnabled((profile._volumeRingerMode == 5) && canEnableZenMode);
 
             Preference notificationAccessPreference = prefMng.findPreference(PREF_NOTIFICATION_ACCESS);
-            notificationAccessPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
+            //notificationAccessPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
             notificationAccessPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -179,7 +179,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             });
 
             Preference volumeUnlinkPreference = prefMng.findPreference(PREF_UNLINK_VOLUMES_APP_PREFERENCES);
-            volumeUnlinkPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
+            //volumeUnlinkPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
 
             ringerModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
