@@ -42,11 +42,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     private DataWrapper dataWrapper;
     private Profile profile;
-    public long profile_id;
     //private boolean first_start_activity;
     private int new_profile_mode;
     public static int startupSource;
-    public boolean profileNonEdited = true;
     private PreferenceManager prefMng;
     private SharedPreferences preferences;
     private Context context;
@@ -59,10 +57,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
     static final String PREFS_NAME_DEFAULT_PROFILE = GlobalData.DEFAULT_PROFILE_PREFS_NAME;
     private String PREFS_NAME;
-
-    static final int BUTTON_UNDEFINED = 0;
-    static final int BUTTON_CANCEL = 1;
-    static final int BUTTON_SAVE = 2;
 
     static final String PREF_NOTIFICATION_ACCESS = "prf_pref_volumeNotificationsAccessSettings";
     static final int RESULT_NOTIFICATION_ACCESS_SETTINGS = 1980;
@@ -81,7 +75,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         context = getActivity().getBaseContext();
 
         dataWrapper = new DataWrapper(context.getApplicationContext(), true, false, 0);
-        
+
+        long profile_id = 0;
+
         // getting attached fragment data
         if (getArguments().containsKey(GlobalData.EXTRA_NEW_PROFILE_MODE))
             new_profile_mode = getArguments().getInt(GlobalData.EXTRA_NEW_PROFILE_MODE);
@@ -89,71 +85,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             profile_id = getArguments().getLong(GlobalData.EXTRA_PROFILE_ID);
         Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
 
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
-        {
-            profile = GlobalData.getDefaultProfile(context);
-            profile_id = profile._id;
-        }
-        else
-        if (new_profile_mode == EditorProfileListFragment.EDIT_MODE_INSERT)
-        {
-            // create new profile
-            profile = dataWrapper.getNoinitializedProfile(
-                        getResources().getString(R.string.profile_name_default),
-                        GlobalData.PROFILE_ICON_DEFAULT, 0);
-            profile_id = 0;
-        }
-        else
-        if (new_profile_mode == EditorProfileListFragment.EDIT_MODE_DUPLICATE)
-        {
-            // duplicate profile
-            Profile origProfile = dataWrapper.getProfileById(profile_id);
-            profile = new Profile(
-                           origProfile._name+"_d",
-                           origProfile._icon,
-                           false,
-                           origProfile._porder,
-                           origProfile._volumeRingerMode,
-                           origProfile._volumeRingtone,
-                           origProfile._volumeNotification,
-                           origProfile._volumeMedia,
-                           origProfile._volumeAlarm,
-                           origProfile._volumeSystem,
-                           origProfile._volumeVoice,
-                           origProfile._soundRingtoneChange,
-                           origProfile._soundRingtone,
-                           origProfile._soundNotificationChange,
-                           origProfile._soundNotification,
-                           origProfile._soundAlarmChange,
-                           origProfile._soundAlarm,
-                           origProfile._deviceAirplaneMode,
-                           origProfile._deviceWiFi,
-                           origProfile._deviceBluetooth,
-                           origProfile._deviceScreenTimeout,
-                           origProfile._deviceBrightness,
-                           origProfile._deviceWallpaperChange,
-                           origProfile._deviceWallpaper,
-                           origProfile._deviceMobileData,
-                           origProfile._deviceMobileDataPrefs,
-                           origProfile._deviceGPS,
-                           origProfile._deviceRunApplicationChange,
-                           origProfile._deviceRunApplicationPackageName,
-                           origProfile._deviceAutosync,
-                           origProfile._deviceAutoRotate,
-                           origProfile._deviceLocationServicePrefs,
-                           origProfile._volumeSpeakerPhone,
-                           origProfile._deviceNFC,
-                           origProfile._duration,
-                           origProfile._afterDurationDo,
-                           origProfile._volumeZenMode,
-                           origProfile._deviceKeyguard,
-                           origProfile._vibrationOnTouch,
-                           origProfile._deviceWiFiAP,
-                           origProfile._devicePowerSaveMode);
-            profile_id = 0;
-        }
-        else
-            profile = dataWrapper.getProfileById(profile_id);
+        profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, true);
 
         //prefMng = getPreferenceManager();
         preferences = prefMng.getSharedPreferences();
@@ -305,14 +237,12 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
 
     /*	if (actionMode != null)
@@ -369,8 +299,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         doOnActivityResult(requestCode, resultCode, data);
     }
 

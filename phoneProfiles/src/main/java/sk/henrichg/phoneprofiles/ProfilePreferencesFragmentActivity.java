@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -161,15 +162,16 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             fragment.doOnActivityResult(requestCode, resultCode, data);
     }
 
-    private Profile createProfile(int new_profile_mode) {
+    public static Profile createProfile(Context context, long profile_id, int new_profile_mode, boolean leaveSaveMenu) {
         Profile profile;
-        DataWrapper dataWrapper = new DataWrapper(getApplicationContext().getApplicationContext(), true, false, 0);
+        DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 
-        showSaveMenu = false;
+        if (!leaveSaveMenu)
+            showSaveMenu = false;
 
         if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
-            profile = GlobalData.getDefaultProfile(getApplicationContext());
+            profile = GlobalData.getDefaultProfile(context);
             profile_id = profile._id;
         }
         else
@@ -177,7 +179,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
         {
             // create new profile
             profile = dataWrapper.getNoinitializedProfile(
-                    getResources().getString(R.string.profile_name_default),
+                    context.getResources().getString(R.string.profile_name_default),
                     GlobalData.PROFILE_ICON_DEFAULT, 0);
             profile_id = 0;
             showSaveMenu = true;
@@ -239,7 +241,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
     }
 
     private void loadPreferences(int new_profile_mode) {
-        Profile profile = createProfile(new_profile_mode);
+        Profile profile = createProfile(getApplicationContext(), profile_id, new_profile_mode, false);
 
         if (profile != null)
         {
@@ -313,7 +315,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
     private void savePreferences(int new_profile_mode)
     {
         DataWrapper dataWrapper = new DataWrapper(getApplicationContext().getApplicationContext(), false, false, 0);
-        Profile profile = createProfile(new_profile_mode);
+        Profile profile = createProfile(getApplicationContext(), profile_id, new_profile_mode, true);
 
         String PREFS_NAME;
         if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
