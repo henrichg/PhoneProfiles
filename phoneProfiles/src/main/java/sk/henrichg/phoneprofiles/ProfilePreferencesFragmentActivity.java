@@ -81,9 +81,9 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
             arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, newProfileMode);
             if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
-                fragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE;
+                ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE;
             else
-                fragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
+                ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
             fragment.setArguments(arguments);
 
             loadPreferences(newProfileMode);
@@ -172,7 +172,6 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
         if (ProfilePreferencesFragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
             profile = GlobalData.getDefaultProfile(context);
-            profile_id = profile._id;
         }
         else
         if (new_profile_mode == EditorProfileListFragment.EDIT_MODE_INSERT)
@@ -181,7 +180,6 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             profile = dataWrapper.getNoinitializedProfile(
                     context.getResources().getString(R.string.profile_name_default),
                     GlobalData.PROFILE_ICON_DEFAULT, 0);
-            profile_id = 0;
             showSaveMenu = true;
         }
         else
@@ -231,7 +229,6 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
                     origProfile._vibrationOnTouch,
                     origProfile._deviceWiFiAP,
                     origProfile._devicePowerSaveMode);
-            profile_id = 0;
             showSaveMenu = true;
         }
         else

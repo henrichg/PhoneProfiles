@@ -695,7 +695,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         //if (canShow)
         //    showActionMode();
         ProfilePreferencesFragmentActivity activity = (ProfilePreferencesFragmentActivity)getActivity();
-        activity.showSaveMenu = true;
+        ProfilePreferencesFragmentActivity.showSaveMenu = true;
         activity.invalidateOptionsMenu();
     }
 
