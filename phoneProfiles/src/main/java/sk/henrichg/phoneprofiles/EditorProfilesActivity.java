@@ -43,9 +43,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
+import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
 
 public class EditorProfilesActivity extends AppCompatActivity
-                                    implements OnStartProfilePreferences
+                                    implements OnStartProfilePreferences,
+                                               OnStartProfilePreferencesFromDetail
 {
 
     private static EditorProfilesActivity instance;
@@ -890,6 +892,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                 && (editMode != EditorProfileListFragment.EDIT_MODE_DELETE))
                 startProfilePreferenceActivity(profile, editMode);
         }
+    }
+
+    @Override
+    public void onStartProfilePreferencesFromDetail(Profile profile) {
+        startProfilePreferenceActivity(profile, EditorProfileListFragment.EDIT_MODE_EDIT);
     }
 
     public void redrawProfilePreferences(Profile profile, int newProfileMode) {
