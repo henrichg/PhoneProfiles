@@ -95,10 +95,10 @@ public class ProfileDetailsFragment extends Fragment {
         profileName = (TextView)view.findViewById(R.id.profile_detail_profile_name);
         profileIcon = (ImageView)view.findViewById(R.id.profile_detail_profile_icon);
         profileItemEdit = (ImageView)view.findViewById(R.id.profile_detail_edit);
-        if (GlobalData.applicationEditorPrefIndicator)
+        //if (GlobalData.applicationEditorPrefIndicator)
             profileIndicator = (ImageView)view.findViewById(R.id.profile_detail_profile_pref_indicator);
-        else
-            profileIndicator = null;
+        //else
+        //    profileIndicator = null;
 
         DataWrapper dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
 
@@ -123,13 +123,13 @@ public class ProfileDetailsFragment extends Fragment {
                 profileIcon.setImageBitmap(profile._iconBitmap);
             }
 
-            if (GlobalData.applicationEditorPrefIndicator) {
+            //if (GlobalData.applicationEditorPrefIndicator) {
                 //profilePrefIndicatorImageView.setImageBitmap(null);
                 //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());
                 //profilePrefIndicatorImageView.setImageBitmap(bitmap);
                 if (profileIndicator != null)
                     profileIndicator.setImageBitmap(profile._preferencesIndicator);
-            }
+            //}
 
             profileItemEdit.setTag(profile);
             profileItemEdit.setOnClickListener(new View.OnClickListener() {
