@@ -33,7 +33,6 @@
             android:entryValues="@array/afterProfileDurationDoValues" />        
     </PreferenceCategory>
     <PreferenceScreen
-        android:summary="@string/profile_preferences_category_volumes"
         android:title="@string/profile_preferences_category_volumes"
         android:key="prf_pref_volumeCategory"
         android:widgetLayout="@layout/start_activity_preference" >
@@ -130,9 +129,10 @@
             android:entries="@array/volumeSpeakerPhoneArray"
             android:entryValues="@array/volumeSpeakerPhoneValues" />        
     </PreferenceScreen>
-    <PreferenceCategory
-        android:summary="@string/profile_preferences_category_sounds"
-        android:title="@string/profile_preferences_category_sounds" >
+    <PreferenceScreen
+        android:title="@string/profile_preferences_category_sounds"
+        android:key="prf_pref_soundsCategory"
+        android:widgetLayout="@layout/start_activity_preference" >
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_soundRingtoneChange"
             android:summary="@string/array_pref_no_change"
@@ -175,10 +175,11 @@
             android:ringtoneType="alarm" 
             android:showSilent="true"
             android:showDefault="true" />
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:summary="@string/profile_preferences_category_device"
-        android:title="@string/profile_preferences_category_device" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/profile_preferences_category_radios"
+        android:key="prf_pref_radiosCategory"
+        android:widgetLayout="@layout/start_activity_preference" >
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_deviceAirplaneMode"
             android:summary="@string/array_pref_no_change"
@@ -249,6 +250,11 @@
             android:defaultValue="0"
             android:entries="@array/hardwareModeArray"
             android:entryValues="@array/hardwareModeValues" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/profile_preferences_category_screen"
+        android:key="prf_pref_screenCategory"
+        android:widgetLayout="@layout/start_activity_preference" >
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_deviceScreenTimeout"
             android:summary="@string/array_pref_no_change"
@@ -278,6 +284,11 @@
             android:defaultValue="0"
             android:entries="@array/displayRotationArray11"
             android:entryValues="@array/displayRotationValues11" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/profile_preferences_category_others"
+        android:key="prf_pref_othersCategory"
+        android:widgetLayout="@layout/start_activity_preference" >
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/profile_preferences_devicePowerSaveMode"
             android:summary="@string/array_pref_no_change"
@@ -308,5 +319,5 @@
             android:key="prf_pref_deviceWallpaper"
             android:title="@string/profile_preferences_deviceWallpaper"
             henrichg:imageSource="file" />
-    </PreferenceCategory>
+    </PreferenceScreen>
 </PreferenceScreen>    
