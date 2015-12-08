@@ -335,6 +335,8 @@
     <string name="important_info_profile_ringerMode_root">In Android 6 (Marshmallow), is not possible to change system setting \"Vibrate when ringing\" in non-rooted device.</string>
     <string name="important_info_profile_adaptiveBrightness_root">In Android 6 (Marshmallow), is not possible to change level of \"Adaptive brightness\" in non-rooted device.</string>
     <string name="profile_preferences_devicePowerSaveMode">Power save mode</string>
+    <string name="profile_preferences_category_activation_duration">Activation duration</string>
+    <string name="profile_preferences_category_sound_profile">Sound profile</string>
     <string name="profile_preferences_category_radios">Radios</string>
     <string name="profile_preferences_category_screen">Screen</string>
     <string name="profile_preferences_category_others">Others</string>
