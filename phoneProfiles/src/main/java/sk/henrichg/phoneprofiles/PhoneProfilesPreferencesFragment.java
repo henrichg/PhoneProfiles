@@ -57,6 +57,9 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
         //addPreferencesFromResource(R.xml.phone_profiles_preferences);
 
         extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
+
+        updateSharedPreference();
+
     }
 
     @Override
@@ -317,8 +320,6 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
     public void onStart()
     {
         super.onStart();
-
-        updateSharedPreference();
 
         /*
         PreferenceCategory scrollCategory = (PreferenceCategory) findPreference(extraScrollTo);
