@@ -7,7 +7,7 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-    <item name="activity_editor_profile_list" type="layout">@layout/activity_editor_profiles_twopane</item>
+    <!-- <item name="activity_editor_profile_list" type="layout">@layout/activity_editor_profiles_twopane</item> -->
 
 </resources>
 
