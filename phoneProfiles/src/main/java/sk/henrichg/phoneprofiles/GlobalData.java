@@ -1444,7 +1444,6 @@ public class GlobalData extends Application {
         }
     }
 
-
     // Debug -----------------------------------------------------------------
 
     public static long startMeasuringRunTime()
@@ -1458,6 +1457,18 @@ public class GlobalData extends Application {
         long measuredTime = (nanoTimeEnd - nanoTimeStart) / 1000000;
 
         Log.d(log, "MEASURED TIME=" + measuredTime);
+    }
+
+    // others ------------------------------------------------------------------
+
+    public static int getResourceId(String pVariableName, String pResourcename, Context context)
+    {
+        try {
+            return context.getResources().getIdentifier(pVariableName, pResourcename, context.getPackageName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
 }
