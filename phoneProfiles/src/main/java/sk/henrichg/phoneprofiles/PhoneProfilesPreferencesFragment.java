@@ -52,6 +52,7 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
         //context = getActivity().getBaseContext();
 
         preferences = prefMng.getSharedPreferences();
+        preferences.registerOnSharedPreferenceChangeListener(this);
 
         //addPreferencesFromResource(R.xml.phone_profiles_preferences);
 
@@ -74,8 +75,6 @@ public class PhoneProfilesPreferencesFragment extends PreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        preferences.registerOnSharedPreferenceChangeListener(this);
 
         /*
         PreferenceScreen _preference = (PreferenceScreen) findPreference("applicationInterfaceCategory");

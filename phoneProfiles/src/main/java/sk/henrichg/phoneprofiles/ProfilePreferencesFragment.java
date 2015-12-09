@@ -89,6 +89,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
         //prefMng = getPreferenceManager();
         preferences = prefMng.getSharedPreferences();
+        preferences.registerOnSharedPreferenceChangeListener(this);
 
         //Log.e("********  ProfilePreferenceFragment","startupSource="+startupSource);
         //if (savedInstanceState == null)
@@ -131,8 +132,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        preferences.registerOnSharedPreferenceChangeListener(this);
 
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
