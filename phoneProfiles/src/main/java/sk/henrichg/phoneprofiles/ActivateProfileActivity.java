@@ -30,6 +30,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         instance = this;
 
+        GlobalData.loadPreferences(getApplicationContext());
         GUIData.setTheme(this, true, false);
         GUIData.setLanguage(getBaseContext());
 

@@ -197,60 +197,70 @@ public class FirstStartService extends IntentService {
                         // Means there was an error trying to close the streams, so do nothing
                     }
                 }
+
+                if (!outFile.exists()) {
+                    Log.e("FirstStartService", "installTone: Error writing " + filename);
+                    isError = true;
+                }
             }
 
             if (!isError) {
 
-                String mimeType = "audio/ogg";
+                try {
+                    String mimeType = "audio/ogg";
 
-                // Set the file metadata
-                String outAbsPath = outFile.getAbsolutePath();
+                    // Set the file metadata
+                    String outAbsPath = outFile.getAbsolutePath();
 
-                Uri contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
+                    Uri contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
 
-                Cursor cursor = context.getContentResolver().query(contentUri,
-                        new String[]{MediaStore.MediaColumns.DATA},
-                        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-                if (cursor != null) {
-                    if (!cursor.moveToFirst()) {
+                    Cursor cursor = context.getContentResolver().query(contentUri,
+                            new String[]{MediaStore.MediaColumns.DATA},
+                            MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
+                    if (cursor != null) {
+                        if (!cursor.moveToFirst()) {
 
-                        // not exists content
+                            // not exists content
 
-                        cursor.close();
+                            cursor.close();
 
-                        //// If the ringtone already exists in the database, delete it first
-                        //context.getContentResolver().delete(contentUri,
-                        //        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
+                            //// If the ringtone already exists in the database, delete it first
+                            //context.getContentResolver().delete(contentUri,
+                            //        MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null);
 
-                        // Add the metadata to the file in the database
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put(MediaStore.MediaColumns.DATA, outAbsPath);
-                        contentValues.put(MediaStore.MediaColumns.TITLE, title);
-                        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-                        contentValues.put(MediaStore.MediaColumns.SIZE, outFile.length());
-                        contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
-                        contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
-                        contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
-                        contentValues.put(MediaStore.Audio.Media.IS_MUSIC, false);
-                        Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
+                            // Add the metadata to the file in the database
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(MediaStore.MediaColumns.DATA, outAbsPath);
+                            contentValues.put(MediaStore.MediaColumns.TITLE, title);
+                            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+                            contentValues.put(MediaStore.MediaColumns.SIZE, outFile.length());
+                            contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
+                            contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
+                            contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
+                            contentValues.put(MediaStore.Audio.Media.IS_MUSIC, false);
+                            Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
-                        if (newUri != null) {
-                            // Tell the media scanner about the new ringtone
-                            MediaScannerConnection.scanFile(
-                                    context,
-                                    new String[]{newUri.toString()},
-                                    new String[]{mimeType},
-                                    null
-                            );
+                            if (newUri != null) {
+                                // Tell the media scanner about the new ringtone
+                                MediaScannerConnection.scanFile(
+                                        context,
+                                        new String[]{newUri.toString()},
+                                        new String[]{mimeType},
+                                        null
+                                );
 
-                            try {
-                                Thread.sleep(300);
-                            } catch (InterruptedException e) {
-                                System.out.println(e);
+                                try {
+                                    Thread.sleep(300);
+                                } catch (InterruptedException e) {
+                                    System.out.println(e);
+                                }
                             }
-                        }
-                    } else
-                        cursor.close();
+                        } else
+                            cursor.close();
+                    }
+                } catch (Exception e) {
+                    Log.e("FirstStartService", "installTone: Error installing tone " + filename);
+                    isError = true;
                 }
             }
 

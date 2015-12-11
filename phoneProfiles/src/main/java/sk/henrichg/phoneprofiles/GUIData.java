@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 
+import java.lang.reflect.Method;
 import java.text.Collator;
 import java.util.Locale;
 
@@ -197,6 +200,30 @@ public class GUIData {
         }
         else
             activity.recreate();
+    }
+
+    public static void registerOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+        try {
+            PreferenceManager pm = preference.getPreferenceManager();
+            Method method = pm.getClass().getDeclaredMethod(
+                    "registerOnActivityDestroyListener",
+                    PreferenceManager.OnActivityDestroyListener.class);
+            method.setAccessible(true);
+            method.invoke(pm, listener);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void unregisterOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+        try {
+            PreferenceManager pm = preference.getPreferenceManager();
+            Method method = pm.getClass().getDeclaredMethod(
+                    "unregisterOnActivityDestroyListener",
+                    PreferenceManager.OnActivityDestroyListener.class);
+            method.setAccessible(true);
+            method.invoke(pm, listener);
+        } catch (Exception ignored) {
+        }
     }
 
 }
