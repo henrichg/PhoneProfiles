@@ -651,18 +651,18 @@ public class EditorProfilesActivity extends AppCompatActivity
         final boolean _remoteExport = remoteExport;
 
         AlertDialog.Builder dialogBuilder2 = new AlertDialog.Builder(this);
-        if (remoteExport)
+        /*if (remoteExport)
         {
             dialogBuilder2.setTitle(getResources().getString(R.string.import_profiles_from_phoneprofilesplus_alert_title2));
             dialogBuilder2.setMessage(getResources().getString(R.string.import_profiles_alert_message));
             //dialogBuilder2.setIcon(android.R.drawable.ic_dialog_alert);
         }
         else
-        {
+        {*/
             dialogBuilder2.setTitle(getResources().getString(R.string.import_profiles_alert_title));
             dialogBuilder2.setMessage(getResources().getString(R.string.import_profiles_alert_message));
             //dialogBuilder2.setIcon(android.R.drawable.ic_dialog_alert);
-        }
+        //}
 
         dialogBuilder2.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
