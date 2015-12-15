@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 public class ImportantInfoNotification {
 
     // this version code must by <= version code in manifest
-    public static final int VERSION_CODE_FOR_NEWS = 1624; // 9999 news off
+    public static final int VERSION_CODE_FOR_NEWS = 1650;
 
     static public void showInfoNotification(Context context) {
 
@@ -45,9 +45,14 @@ public class ImportantInfoNotification {
     static private boolean canShowNotification(int versionCode) {
         boolean news = false;
         boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
+        boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
 
         if (newsLatest) {
+            news = false;
+        }
+
+        if (news1634) {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 news = true;
             }
