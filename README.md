@@ -11,4 +11,4 @@ Required external libs
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - Material Dialogs - https://github.com/afollestad/material-dialogs
-
+- Material Preferences - https://github.com/ferrannp/material-preferences
