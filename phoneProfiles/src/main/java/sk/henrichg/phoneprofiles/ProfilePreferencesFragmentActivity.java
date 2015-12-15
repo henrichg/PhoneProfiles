@@ -4,22 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.fnp.materialpreferences.PreferenceActivity;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
     private long profile_id = 0;

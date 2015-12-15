@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
@@ -20,7 +19,6 @@ import android.text.SpannableString;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.widget.ListView;
 
 import com.fnp.materialpreferences.PreferenceFragment;
 
