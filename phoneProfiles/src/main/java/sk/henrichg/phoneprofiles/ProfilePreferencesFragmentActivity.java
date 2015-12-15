@@ -67,7 +67,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
         profile_id = getIntent().getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
         newProfileMode = getIntent().getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
 
-        Log.e("******** ProfilePreferenceFragmentActivity", "profile_id=" + profile_id);
+        //Log.e("******** ProfilePreferenceFragmentActivity", "profile_id=" + profile_id);
 
         /*
         if (profile_id == GlobalData.DEFAULT_PROFILE_ID)

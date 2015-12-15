@@ -83,7 +83,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             new_profile_mode = getArguments().getInt(GlobalData.EXTRA_NEW_PROFILE_MODE);
         if (getArguments().containsKey(GlobalData.EXTRA_PROFILE_ID))
             profile_id = getArguments().getLong(GlobalData.EXTRA_PROFILE_ID);
-        Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
+        //Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
 
         profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, true);
 
@@ -121,7 +121,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     @Override
     public int addPreferencesFromResource() {
-        Log.e("******** ProfilePreferenceFragment", "startupSource=" + startupSource);
+        //Log.e("******** ProfilePreferenceFragment", "startupSource=" + startupSource);
 
         if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
             return R.xml.default_profile_preferences;
