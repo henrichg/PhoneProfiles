@@ -4,7 +4,7 @@
   <string name="app_name">PhoneProfiles</string>
   <string name="menu_edit_profiles">Редактор</string>
   <string name="menu_settings">Налаштування</string>
-  <string name="title_activity_phone_profiles">PhoneProfiles</string>
+  <string name="title_activity_phone_profiles">PhoneProfiles Plus</string>
   <string name="title_activity_profile_preferences">Налаштування профілю</string>
   <string name="title_activity_event_preferences">Налаштування подій</string>
   <string name="menu_new_profile">Новий профіль</string>
@@ -633,4 +633,5 @@
   <string name="profile_preferences_category_screen">Екран</string>
   <string name="profile_preferences_category_others">Інше</string>
   <string name="event_preferences_category_startofeventOthers">Інші параметри</string>
+  <string name="phone_profiles_pref_applicationLanguage_he">עִברִית</string>
 </resources>

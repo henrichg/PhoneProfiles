@@ -4,7 +4,7 @@
   <string name="app_name">PhoneProfiles</string>
   <string name="menu_edit_profiles">Editor</string>
   <string name="menu_settings">Nastavenia</string>
-  <string name="title_activity_phone_profiles">PhoneProfiles</string>
+  <string name="title_activity_phone_profiles">PhoneProfiles Plus</string>
   <string name="title_activity_profile_preferences">Parametre profilu</string>
   <string name="title_activity_event_preferences">Parametre udalosti</string>
   <string name="menu_new_profile">Nový profil</string>
@@ -633,4 +633,5 @@
   <string name="profile_preferences_category_screen">Obrazovka</string>
   <string name="profile_preferences_category_others">Ostatné</string>
   <string name="event_preferences_category_startofeventOthers">Ostatné parametre</string>
+  <string name="phone_profiles_pref_applicationLanguage_he">עִברִית</string>
 </resources>

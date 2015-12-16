@@ -4,7 +4,7 @@
   <string name="app_name">PhoneProfiles</string>
   <string name="menu_edit_profiles">Editor</string>
   <string name="menu_settings">Ajustes</string>
-  <string name="title_activity_phone_profiles">PhoneProfiles</string>
+  <string name="title_activity_phone_profiles">PhoneProfiles Plus</string>
   <string name="title_activity_profile_preferences">Preferencias de perfil</string>
   <string name="title_activity_event_preferences">Preferencias de evento</string>
   <string name="menu_new_profile">Nuevo perfil</string>
@@ -506,7 +506,7 @@
   <string name="array_pref_ringerModeArray_silentL">Modo prioritario</string>
   <string name="info_notification_silent_mode_lollipop_rename">El modo de silencio de llamadas ahora se llama modo Prioritario.</string>
   <string name="info_notification_silent_mode_lollipop">Modo de Prioridad: para simular el modo de silencio, pon al mínimo (0) el volumen de las llamadas y notificaciones en el perfil.</string>
-  <string name="info_notification_minimal_ringer_and_notification_volumes">Cuando tu dispositivo activa la vibración en el volumen mínimo (0) de llamada o notificación, la aplicación activa el volumen a 1. Puedes usar el tono de llamada y notificación \"PhoneProfiles Silencio\" para silencio total.</string>
+  <string name="info_notification_minimal_ringer_and_notification_volumes">Cuando tu dispositivo activa la vibración en el volumen mínimo (0) de llamada o notificación, la aplicación activa el volumen a 1. Puedes usar el tono de llamada y notificación \"PhoneProfiles Silent\" para silencio total.</string>
   <string name="menu_import_export">Importar/Exportar</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 minutos</string>
   <string name="info_notification_event_not_started">El evento no se inicia cuando:\n1. Has deshabilitado la ejecución global de eventos (\"semáforo\" en rojo) - actívalo desde el menú del Editor en la opción \"Activar ejecución de eventos\".\n2. Has activado manualmente el perfil (\"semáforo\" en ámbar) - debes reiniciar los eventos. Usa el icono de Reiniciar eventos en el título del Activador, Editor o en la notificación. Un perfil activado manualmente se indica también con \"[M]\" delante del nombre del perfil. Excepto cuando en el evento se ha activado la opción \"Ignorar activación automática\".\n3. Has deshabilitado la ejecución de eventos desde las preferencias de evento - la opción de evento \"Ejecutar eventos\" debe estar marcada.\n Nota: El \"Semáforo\" está en el título del Activador y en el Editor.</string>
@@ -525,14 +525,14 @@
   <string name="calendar_pref_dlg_info_about_wildcards">en la cadena de búsqueda,</string>
   <string name="pref_dlg_info_about_wildcards_3">añade \"\\" delante de estos caracteres.</string>
   <string name="important_info_manual_profile_activation_stops_events">La activación manual del perfil detiene todos los eventos. Las preferencias que tengan un evento establecido en la sección \"Fin de evento\", se ignoran.</string>
-  <string name="important_into_sony_stamina_mode">Cuando tienes un dispositivo Sony y activas el modo \"Stamina\" en \"Administración de energía\", por favor, añade a PhoneProfilesPlus en \"Apps activas en modo de espera\". Si no haces esto, la aplicación no funcionará correctamente.</string>
+  <string name="important_into_sony_stamina_mode">Cuando tienes un dispositivo Sony y activas el modo \"Stamina\" en \"Administración de energía\", por favor, añade a PhoneProfiles en \"Apps activas en modo de espera\". Si no haces esto, la aplicación no funcionará correctamente.</string>
   <string name="important_info_profile_settings">Algunas preferencias del perfil requieren cambios en los Ajustes del sistema. Estas preferencias están marcadas \"(S)\".</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_title">Acceso a la notificación</string>
-  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfiles in \"Notification access\" system settings, for enabling \"Interruptions type\" profile preference.</string>
   <string name="array_pref_zenModeArray_allWithVibration">Todas con vibración</string>
   <string name="array_pref_zenModeArray_priorityWithVibration">Prioritario con vibración</string>
   <string name="important_info_news">Noticias</string>
-  <string name="important_info_profile_zenMode">\"Interruptions\" in profile \"Ringer mode\" requires enabling PhoneProfilesPlus in \"Notification access\" system settings. Click here and enable PhoneProfilesPlus.</string>
+  <string name="important_info_profile_zenMode">\"Interruptions\" in profile \"Ringer mode\" requires enabling PhoneProfiles in \"Notification access\" system settings. Click here and enable PhoneProfiles.</string>
   <string name="profile_preferences_zenMode_none_summary">Sin interrupciones. Ni siquiera alarmas</string>
   <string name="profile_preferences_zenMode_priority_summary">Sólo interrupciones prioritarias</string>
   <string name="profile_preferences_zenMode_all_summary">Todas las interrupciones</string>
@@ -544,7 +544,7 @@
   <string name="event_preferences_category_eventNotificationsParameters">Parámetros de notificaciones</string>
   <string name="event_preferences_notifications_enabled">Activar notificaciones</string>
   <string name="event_preferences_notifications_applications">Aplicaciones</string>
-  <string name="event_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfilesPlus in \"Notification access\" system settings, for enabling Notification parameters.</string>
+  <string name="event_preferences_volumeNotificationsAccessSettings_summary">Allow PhoneProfiles in \"Notification access\" system settings, for enabling Notification parameters.</string>
   <string name="array_pref_zenModeArray_alarms">Sólo alarmas</string>
   <string name="profile_preferences_zenMode_alarms_summary">Sólo interrupciones de alarmas</string>
   <string name="phone_profiles_pref_applicationShortcutEmblem">Añadir emblema al acceso directo</string>
@@ -582,7 +582,7 @@
   <string name="permissions_write_settings_not_allowed_confirm">You have not enabled \"Modify system settings\". Never ask again for this?</string>
   <string name="phone_profiles_pref_category_permissions">Permisos</string>
   <string name="phone_profiles_pref_writeSystemSettingPermissions">Modificar ajustes del sistema</string>
-  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Please search for \"PhoneProfilesPlus\" application and enable it.</string>
+  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Please search for \"PhoneProfiles\" application and enable it.</string>
   <string name="phone_profiles_pref_applicationPermissions">Permisos de aplicación</string>
   <string name="phone_profiles_pref_applicationPermissions_summary">Please enable permissions in option \"Permissions\".</string>
   <string name="permissions_for_event_text1">Evento</string>
@@ -633,4 +633,5 @@
   <string name="profile_preferences_category_screen">Screen</string>
   <string name="profile_preferences_category_others">Others</string>
   <string name="event_preferences_category_startofeventOthers">Other parameters</string>
+  <string name="phone_profiles_pref_applicationLanguage_he">עִברִית</string>
 </resources>
