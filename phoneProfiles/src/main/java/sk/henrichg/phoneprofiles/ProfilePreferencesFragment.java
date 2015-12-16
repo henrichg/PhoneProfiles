@@ -175,7 +175,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             ringerModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String sNewValue = (String)newValue;
+                    String sNewValue = (String) newValue;
                     int iNewValue;
                     if (sNewValue.isEmpty())
                         iNewValue = 0;
@@ -197,11 +197,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                     return true;
                 }
             });
-
-            // set mobile data preference title
-            Preference mobileDataPreference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA);
-            mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData_21);
-
         }
         else
         {
@@ -219,10 +214,6 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                 preferenceCategory.removePreference(preference);
             }
-
-            // set mobile data preference title
-            Preference mobileDataPreference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA);
-            mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData);
         }
 
     }
@@ -727,6 +718,17 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP) ||
             key.equals(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
         {
+            if (key.equals(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA)) {
+                // set mobile data preference title
+                if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    Preference mobileDataPreference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA);
+                    mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData_21);
+                }
+                else {
+                    Preference mobileDataPreference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA);
+                    mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData);
+                }
+            }
             int canChange = GlobalData.isPreferenceAllowed(key, context);
             if (canChange != GlobalData.PREFERENCE_ALLOWED)
             {
