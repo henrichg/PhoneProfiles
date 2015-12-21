@@ -73,6 +73,8 @@
         <activity
             android:name=".ActivateProfileActivity"
             android:configChanges="locale|layoutDirection"
+            android:taskAffinity="sk.henrichg.phoneprofiles.popup"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_phone_profiles"
             android:theme="@style/PopupTheme_material">
             <intent-filter>
@@ -104,6 +106,7 @@
         <activity
             android:name=".ShortcutCreatorActivity"
             android:configChanges="locale|layoutDirection"
+            android:taskAffinity="sk.henrichg.phoneprofiles.popup"
             android:excludeFromRecents="true"
             android:icon="@drawable/ic_shortcut"
             android:label="@string/title_activity_shortcut_creator"
