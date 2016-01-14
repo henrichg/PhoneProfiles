@@ -32,7 +32,7 @@ public class RemoveBrightnessViewBroadcastReceiver extends BroadcastReceiver
             removeAlarm(context);
 
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.SECOND, 1);
+            calendar.add(Calendar.SECOND, 3);
             long alarmTime = calendar.getTimeInMillis();
 
             AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
