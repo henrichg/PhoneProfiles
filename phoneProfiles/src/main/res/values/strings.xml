@@ -648,4 +648,6 @@
     <string name="event_preferences_applications_AccessibilitySettings_summary">Allow PhoneProfiles in \"Accessibility\" system settings, for enabling Applications parameters.</string>
     <string name="event_preferences_notifications_end_when_removed">End when removed</string>
     <string name="brightness_pref_dialog_adaptive_level_root_required">For change adaptive level, ROOT is required.</string>
+    <string name="profile_preferences_volumeVibrateWhenRingingRootInfo_title">Vibrate when ringing</string>
+    <string name="profile_preferences_volumeVibrateWhenRingingRootInfo_summary">In Android 6 this system setting can by changed only on rooted devices. Affected are ringer modes and interruption types with vibration.</string>
 </resources>
