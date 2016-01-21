@@ -20,6 +20,8 @@
             android:paddingTop="@dimen/important_info_top_margin"
             android:paddingBottom="@dimen/important_info_bottom_margin" >
 
+            <!-- NEWS -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,6 +53,8 @@
                 android:id="@+id/activity_info_notification_dialog_info_text13"
                 android:textColor="?attr/colorAccent"/>
 
+            <!-- PROFILES -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,6 +63,21 @@
                 android:id="@+id/activity_info_notification_dialog_profiles"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_notification_source_profile"
+                android:id="@+id/activity_info_notification_dialog_info_text40" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="@string/info_notification_source_profile_icon"
+                android:id="@+id/activity_info_notification_dialog_info_text41"
+                android:drawableRight="?attr/actionSourceProfileIconInverse"
+                android:drawableEnd="?attr/actionSourceProfileIconInverse"
+                android:drawablePadding="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,6 +150,8 @@
                 android:paddingBottom="10dp"
                 android:text="@string/important_info_profile_adaptiveBrightness_root"
                 android:id="@+id/activity_info_notification_dialog_info_text18" />
+
+            <!-- SYSTEM -->
 
             <TextView
                 android:layout_width="wrap_content"
