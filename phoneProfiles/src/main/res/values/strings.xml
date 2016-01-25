@@ -652,4 +652,6 @@
     <string name="profile_preferences_volumeVibrateWhenRingingRootInfo_summary">In Android 6 this system setting can by changed only on rooted devices. Affected are ringer modes and interruption types with vibration.</string>
     <string name="info_notification_source_profile">For each profile parameter can be set that it is used Source profile. To set the Source profile parameters, use the icon in the bottom panel.</string>
     <string name="info_notification_source_profile_icon">Source profile icon:</string>
+    <string name="info_notification_unlink_ringer_notification_volumes2">If your device has not separated volume for ringer and notifications, keep enabled volumes separation.</string>
+    <string name="important_info_how_does_volume_separation_work">How \"volume separation\" works: Profile activation adjust the device volume by profile notifications volume level. When call ringing is detected, ringing volume level from profile is adjusted. After end of call, notification volume level from profile is back adjusted.</string>
 </resources>
