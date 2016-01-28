@@ -21,6 +21,8 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
     private boolean invalidateEditor = false;
 
+    PhoneProfilesPreferencesFragment fragment;
+
     public static final String EXTRA_SCROLL_TO = "extra_phone_profile_preferences_scroll_to";
 
     @Override
@@ -77,14 +79,12 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         showEditorHeader = preferences.getBoolean(GlobalData.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
 
-        PhoneProfilesPreferencesFragment fragment = new PhoneProfilesPreferencesFragment();
+        fragment = new PhoneProfilesPreferencesFragment();
 
         if (savedInstanceState == null) {
             Bundle args = new Bundle();
             args.putString(EXTRA_SCROLL_TO, extraScrollTo);
             fragment.setArguments(args);
-            //getFragmentManager().beginTransaction()
-            //        .replace(R.id.activity_phone_profiles_preferences_container, fragment, "PhoneProfilesPreferencesFragment").commit();
         }
 
         setPreferenceFragment(fragment);
@@ -118,8 +118,6 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        PhoneProfilesPreferencesFragment fragment = (PhoneProfilesPreferencesFragment)getFragmentManager().
-                findFragmentByTag(GUIData.MAIN_PREFERENCE_FRAGMENT_TAG);
         if (fragment != null)
             fragment.doOnActivityResult(requestCode, resultCode, data);
     }
