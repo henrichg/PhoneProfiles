@@ -31,6 +31,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     private Profile profile;
     //private boolean first_start_activity;
     private int new_profile_mode;
+    private int predefineProfileIndex;
     public static int startupSource;
     private PreferenceManager prefMng;
     private SharedPreferences preferences;
@@ -70,9 +71,10 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             new_profile_mode = getArguments().getInt(GlobalData.EXTRA_NEW_PROFILE_MODE);
         if (getArguments().containsKey(GlobalData.EXTRA_PROFILE_ID))
             profile_id = getArguments().getLong(GlobalData.EXTRA_PROFILE_ID);
+        predefineProfileIndex = getArguments().getInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX);
         //Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
 
-        profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, true);
+        profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, predefineProfileIndex, true);
 
         //prefMng = getPreferenceManager();
         preferences = prefMng.getSharedPreferences();

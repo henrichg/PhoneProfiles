@@ -481,5 +481,13 @@
     <item>#FF9800</item>
     <item>#FF5722</item>
 </array>
+<string-array name="addProfilePredefinedArray">
+    <item>@string/new_empty_profile</item>
+    <item>@string/default_profile_name_home</item>
+    <item>@string/default_profile_name_outdoor</item>
+    <item>@string/default_profile_name_work</item>
+    <item>@string/default_profile_name_meeting</item>
+    <item>@string/default_profile_name_sleep</item>
+</string-array>
 
 </resources>

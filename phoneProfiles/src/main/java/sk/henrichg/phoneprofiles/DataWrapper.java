@@ -158,11 +158,8 @@ public class DataWrapper {
         return String.valueOf(dValue.intValue());
     }
 
-    public List<Profile>  getDefaultProfileList()
+    public Profile  getDefaultProfile(int index, boolean saveToDB)
     {
-        clearProfileList();
-        getDatabaseHandler().deleteAllProfiles();
-
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         int	maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
         int	maximumValueNotification = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
@@ -171,56 +168,81 @@ public class DataWrapper {
         //int	maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
         //int	maximumValueVoicecall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
 
-
         Profile profile;
 
-        profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
-        profile._volumeRingerMode = 1;
-        profile._volumeRingtone = getVolumeLevelString(71, maximumValueRing)+"|0|0";
-        profile._volumeNotification = getVolumeLevelString(86, maximumValueNotification)+"|0|0";
-        profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm)+"|0|0";
-        profile._volumeMedia = getVolumeLevelString(80, maximumValueMusic)+"|0|0";
-        profile._deviceWiFi = 1;
-        //profile._deviceBrightness = "60|0|0|0";
-        getDatabaseHandler().addProfile(profile);
-        profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
-        profile._volumeRingerMode = 2;
-        profile._volumeRingtone = getVolumeLevelString(100, maximumValueRing)+"|0|0";
-        profile._volumeNotification = getVolumeLevelString(100, maximumValueNotification)+"|0|0";
-        profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm)+"|0|0";
-        profile._volumeMedia = getVolumeLevelString(93, maximumValueMusic)+"|0|0";
-        profile._deviceWiFi = 2;
-        //profile._deviceBrightness = "255|0|0|0";
-        getDatabaseHandler().addProfile(profile);
-        profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
-        profile._volumeRingerMode = 1;
-        profile._volumeRingtone = getVolumeLevelString(57, maximumValueRing)+"|0|0";
-        profile._volumeNotification = getVolumeLevelString(71, maximumValueNotification)+"|0|0";
-        profile._volumeAlarm = getVolumeLevelString(57, maximumValueAlarm)+"|0|0";
-        profile._volumeMedia = getVolumeLevelString(80, maximumValueMusic)+"|0|0";
-        profile._deviceWiFi = 2;
-        //profile._deviceBrightness = "60|0|0|0";
-        getDatabaseHandler().addProfile(profile);
-        profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
-        profile._volumeRingerMode = 4;
-        profile._volumeRingtone = getVolumeLevelString(0, maximumValueRing)+"|0|0";
-        profile._volumeNotification = getVolumeLevelString(0, maximumValueNotification)+"|0|0";
-        profile._volumeAlarm = getVolumeLevelString(0, maximumValueAlarm)+"|0|0";
-        profile._volumeMedia = getVolumeLevelString(0, maximumValueMusic)+"|0|0";
-        profile._deviceWiFi = 0;
-        //profile._deviceBrightness = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|1|1|0";
-        getDatabaseHandler().addProfile(profile);
-        profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
-        profile._volumeRingerMode = 4;
-        profile._volumeRingtone = getVolumeLevelString(0, maximumValueRing)+"|0|0";
-        profile._volumeNotification = getVolumeLevelString(0, maximumValueNotification)+"|0|0";
-        profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm)+"|0|0";
-        profile._volumeMedia = getVolumeLevelString(0, maximumValueMusic)+"|0|0";
-        profile._deviceWiFi = 0;
-        //profile._deviceBrightness = "10|0|0|0";
-        getDatabaseHandler().addProfile(profile);
+        switch (index) {
+            case 0:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
+                profile._volumeRingerMode = 1;
+                profile._volumeRingtone = getVolumeLevelString(71, maximumValueRing) + "|0|0";
+                profile._volumeNotification = getVolumeLevelString(86, maximumValueNotification) + "|0|0";
+                profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm) + "|0|0";
+                profile._volumeMedia = getVolumeLevelString(80, maximumValueMusic) + "|0|0";
+                profile._deviceWiFi = 1;
+                //profile._deviceBrightness = "60|0|0|0";
+                break;
+            case 1:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
+                profile._volumeRingerMode = 2;
+                profile._volumeRingtone = getVolumeLevelString(100, maximumValueRing) + "|0|0";
+                profile._volumeNotification = getVolumeLevelString(100, maximumValueNotification) + "|0|0";
+                profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm) + "|0|0";
+                profile._volumeMedia = getVolumeLevelString(93, maximumValueMusic) + "|0|0";
+                profile._deviceWiFi = 2;
+                //profile._deviceBrightness = "255|0|0|0";
+                break;
+            case 2:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
+                profile._volumeRingerMode = 1;
+                profile._volumeRingtone = getVolumeLevelString(57, maximumValueRing) + "|0|0";
+                profile._volumeNotification = getVolumeLevelString(71, maximumValueNotification) + "|0|0";
+                profile._volumeAlarm = getVolumeLevelString(57, maximumValueAlarm) + "|0|0";
+                profile._volumeMedia = getVolumeLevelString(80, maximumValueMusic) + "|0|0";
+                profile._deviceWiFi = 2;
+                //profile._deviceBrightness = "60|0|0|0";
+                break;
+            case 3:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
+                profile._volumeRingerMode = 4;
+                profile._volumeRingtone = getVolumeLevelString(0, maximumValueRing) + "|0|0";
+                profile._volumeNotification = getVolumeLevelString(0, maximumValueNotification) + "|0|0";
+                profile._volumeAlarm = getVolumeLevelString(0, maximumValueAlarm) + "|0|0";
+                profile._volumeMedia = getVolumeLevelString(0, maximumValueMusic) + "|0|0";
+                profile._deviceWiFi = 0;
+                //profile._deviceBrightness = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|1|1|0";
+                break;
+            case 4:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
+                profile._volumeRingerMode = 4;
+                profile._volumeRingtone = getVolumeLevelString(0, maximumValueRing) + "|0|0";
+                profile._volumeNotification = getVolumeLevelString(0, maximumValueNotification) + "|0|0";
+                profile._volumeAlarm = getVolumeLevelString(100, maximumValueAlarm) + "|0|0";
+                profile._volumeMedia = getVolumeLevelString(0, maximumValueMusic) + "|0|0";
+                profile._deviceWiFi = 0;
+                //profile._deviceBrightness = "10|0|0|0";
+                break;
+            default:
+                profile = null;
+        }
+
+        if (profile != null) {
+            if (saveToDB)
+                getDatabaseHandler().addProfile(profile);
+        }
+
+        return profile;
+    }
+
+    public List<Profile>  getDefaultProfileList()
+    {
+        clearProfileList();
+        getDatabaseHandler().deleteAllProfiles();
+
+        for (int index = 0; index < 6; index++)
+            getDefaultProfile(index, true);
 
         return getProfileList();
+
     }
 
     public void clearProfileList()

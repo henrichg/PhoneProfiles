@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mobeta.android.dslv.DragSortListView;
 
 import java.lang.ref.WeakReference;
@@ -62,7 +64,7 @@ public class EditorProfileListFragment extends Fragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onStartProfilePreferences(Profile profile, int editMode);
+        public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex);
     }
 
     /**
@@ -70,7 +72,7 @@ public class EditorProfileListFragment extends Fragment {
      * nothing. Used only when this fragment is not attached to an activity.
      */
     private static OnStartProfilePreferences sDummyOnStartProfilePreferencesCallback = new OnStartProfilePreferences() {
-        public void onStartProfilePreferences(Profile profile, int editMode) {
+        public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex) {
         }
     };
 
@@ -163,6 +165,8 @@ public class EditorProfileListFragment extends Fragment {
         listView.addFooterView(footerView, null, false);
         */
 
+        final Activity activity = getActivity();
+
         Toolbar bottomToolbar = (Toolbar)getActivity().findViewById(R.id.editor_list_bottom_bar);
         Menu menu = bottomToolbar.getMenu();
         if (menu != null) menu.clear();
@@ -172,7 +176,18 @@ public class EditorProfileListFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_add_profile:
-                        startProfilePreferencesActivity(null);
+                        new MaterialDialog.Builder(activity)
+                                .title(R.string.new_profile_predefined_profiles_dialog)
+                                .items(R.array.addProfilePredefinedArray)
+                                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+                                    @Override
+                                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                                        startProfilePreferencesActivity(null, which);
+                                        return true;
+                                    }
+                                })
+                                //.positiveText(R.string.choose)
+                                .show();
                         return true;
                     case R.id.menu_delete_all_profiles:
                         deleteAllProfiles();
@@ -182,6 +197,7 @@ public class EditorProfileListFragment extends Fragment {
                         Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesFragmentActivity.class);
                         intent.putExtra(GlobalData.EXTRA_PROFILE_ID, GlobalData.DEFAULT_PROFILE_ID);
                         intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EDIT_MODE_EDIT);
+                        intent.putExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
                         getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
                         return true;
                 }
@@ -193,7 +209,7 @@ public class EditorProfileListFragment extends Fragment {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startProfilePreferencesActivity((Profile) profileListAdapter.getItem(position));
+                startProfilePreferencesActivity((Profile) profileListAdapter.getItem(position), 0);
 
             }
 
@@ -360,7 +376,7 @@ public class EditorProfileListFragment extends Fragment {
         }
     }
 
-    private void startProfilePreferencesActivity(Profile profile)
+    private void startProfilePreferencesActivity(Profile profile, int predefinedProfileIndex)
     {
 
         Profile _profile = profile;
@@ -379,7 +395,7 @@ public class EditorProfileListFragment extends Fragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) one must start profile preferences
-        onStartProfilePreferencesCallback.onStartProfilePreferences(_profile, editMode);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(_profile, editMode, predefinedProfileIndex);
     }
 
     public void duplicateProfile(Profile origProfile)
@@ -391,7 +407,7 @@ public class EditorProfileListFragment extends Fragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) one must start profile preferences
-        onStartProfilePreferencesCallback.onStartProfilePreferences(origProfile, editMode);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(origProfile, editMode, 0);
 
     }
 
@@ -422,7 +438,7 @@ public class EditorProfileListFragment extends Fragment {
         activateProfileHelper.showNotification(_profile);
         activateProfileHelper.updateWidget();
 
-        onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 
     }
 
@@ -505,7 +521,7 @@ public class EditorProfileListFragment extends Fragment {
                 activateProfileHelper.removeNotification();
                 activateProfileHelper.updateWidget();
 
-                onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE);
+                onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 
             }
         });
