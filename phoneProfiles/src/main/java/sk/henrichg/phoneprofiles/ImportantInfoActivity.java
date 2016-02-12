@@ -96,7 +96,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
                         startActivity(intent);
-                        finish();
                     }
                 });
                 news = true;
@@ -111,7 +110,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
                     startActivity(intent);
-                    finish();
                 }
             });
         }
@@ -144,7 +142,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
                 startActivity(intent);
-                finish();
             }
         });
 
