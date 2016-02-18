@@ -49,9 +49,9 @@ public class RingerModeChangeReceiver extends BroadcastReceiver {
         else
             vibrateWhenRinging = Settings.System.getInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
 
-        GlobalData.logE("RingerModeChangeReceiver.setRingerMode", "ringerMode="+ringerMode);
-        GlobalData.logE("RingerModeChangeReceiver.setRingerMode", "vibrateType="+vibrateType);
-        GlobalData.logE("RingerModeChangeReceiver.setRingerMode", "vibrateWhenRinging=" + vibrateWhenRinging);
+        GlobalData.logE("RingerModeChangeReceiver.getRingerMode", "ringerMode="+ringerMode);
+        GlobalData.logE("RingerModeChangeReceiver.getRingerMode", "vibrateType="+vibrateType);
+        GlobalData.logE("RingerModeChangeReceiver.getRingerMode", "vibrateWhenRinging=" + vibrateWhenRinging);
 
         // convert to profile ringerMode
         int pRingerMode = 0;
