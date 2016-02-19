@@ -52,13 +52,11 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 // set ringer mode to Ring for proper change ringer mode to Silent
                 aph.setRingerMode(profile, audioManager, true, linkUnlink);
 
-                /*
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     //System.out.println(e);
                 }
-                */
 
                 // set ringer mode after volume because volumes change silent/vibrate
                 aph.setRingerMode(profile, audioManager, false, linkUnlink);
