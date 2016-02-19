@@ -702,4 +702,5 @@
     <string name="menu_activity_log_clear">Clear log</string>
     <string name="activity_log_clear_alert_title">Clear activity log</string>
     <string name="activity_log_clear_alert_message">Are you sure?</string>
+    <string name="array_pref_ringerModeArray_silentM">Only alarms</string>
 </resources>
