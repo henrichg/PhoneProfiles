@@ -702,5 +702,18 @@
     <string name="menu_activity_log_clear">Clear log</string>
     <string name="activity_log_clear_alert_title">Clear activity log</string>
     <string name="activity_log_clear_alert_message">Are you sure?</string>
+    <string name="phone_profiles_pref_category_location">Location</string>
+    <string name="phone_profiles_pref_eventLocationAppSettings">Location settings</string>
+    <string name="phone_profiles_pref_eventLocationAppSettings_summary">Setup location parameters in application settings.</string>
+    <string name="phone_profiles_pref_applicationEventLocationScanInterval">Location scan interval (min)</string>
+    <string name="phone_profiles_pref_applicationEventLocationScanInPowerSaveMode">Location scan in Power Save mode</string>
+    <string name="phone_profiles_pref_eventLocationSystemSettings">Location system settings</string>
+    <string name="phone_profiles_pref_eventLocationSystemSettings_summary">Please enable Location in System Settings. Without this, location scanning will not working.</string>
     <string name="array_pref_ringerModeArray_silentM">Only alarms</string>
+    <string name="phone_profiles_pref_applicationEventLocationsEditor">Locations editor</string>
+    <string name="phone_profiles_pref_applicationEventLocationsUseGPS">Use GPS when not in Power Save mode</string>
+    <string name="menu_activity_log_pause">Pause logging</string>
+    <string name="menu_activity_log_play">Start logging</string>
+    <string name="altype_pausedLogging">Logging paused</string>
+    <string name="altype_startedLogging">Logging started</string>
 </resources>
