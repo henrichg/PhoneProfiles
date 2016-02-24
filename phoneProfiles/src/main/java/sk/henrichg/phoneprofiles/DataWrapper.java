@@ -221,6 +221,14 @@ public class DataWrapper {
                 profile._deviceWiFi = 0;
                 //profile._deviceBrightness = "10|0|0|0";
                 break;
+            case 5:
+                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_battery_low), "ic_profile_battery_1", 6);
+                profile._deviceAutosync = 2;
+                profile._deviceMobileData = 2;
+                profile._deviceWiFi = 2;
+                profile._deviceBluetooth = 2;
+                profile._deviceGPS = 2;
+                break;
             default:
                 profile = null;
         }
