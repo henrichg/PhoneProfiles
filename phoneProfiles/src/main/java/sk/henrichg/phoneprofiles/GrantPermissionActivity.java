@@ -220,6 +220,8 @@ public class GrantPermissionActivity extends Activity {
                     showRequestString = context.getString(R.string.permissions_for_import_app_data_text1) + "<br><br>";
                 else if (grantType == Permissions.GRANT_TYPE_INSTALL_PPHELPER)
                     showRequestString = context.getString(R.string.permissions_for_install_pphelper_text1) + "<br><br>";
+                else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
+                    showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
                 else {
                     if (mergedNotification) {
                         showRequestString = context.getString(R.string.permissions_for_profile_text1m) + " ";
@@ -263,6 +265,8 @@ public class GrantPermissionActivity extends Activity {
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_import_app_data_text2);
                 else if (grantType == Permissions.GRANT_TYPE_INSTALL_PPHELPER)
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_install_pphelper_text2);
+                else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
+                    showRequestString = showRequestString + context.getString(R.string.permissions_for_brightness_dialog_text2);
                 else
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text3);
 
@@ -467,6 +471,12 @@ public class GrantPermissionActivity extends Activity {
             finish();
             if (Permissions.editorActivity != null)
                 PhoneProfilesHelper.doInstallPPHelper(Permissions.editorActivity);
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG) {
+            finish();
+            if (Permissions.brightnessDialogPreference != null)
+                ;
         }
         else {
             //finishAffinity();
