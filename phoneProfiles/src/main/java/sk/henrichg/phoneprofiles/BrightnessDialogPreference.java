@@ -156,11 +156,18 @@ public class BrightnessDialogPreference extends
         if (defaultProfile == 1)
             noChangeChBox.setChecked(false);
 
-        valueText.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
-        seekBar.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
+        valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
+        seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
         automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
 
         mBuilder.customView(layout, false);
+
+        mBuilder.showListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                BrightnessDialogPreference.this.onShow(dialog);
+            }
+        });
 
         mDialog = mBuilder.build();
         if (state != null)
@@ -180,6 +187,12 @@ public class BrightnessDialogPreference extends
     @Override
     public Dialog getDialog() {
         return mDialog;
+    }
+
+    public void onShow(DialogInterface dialog) {
+        if (Permissions.grantBrightnessDialogPermissions(_context, this))
+            //refreshListView();
+            ;
     }
 
     @Override
@@ -218,8 +231,8 @@ public class BrightnessDialogPreference extends
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             */
-            valueText.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
-            seekBar.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
+            valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
+            seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
             automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
             if (isChecked)
                 defaultProfileChBox.setChecked(false);
@@ -233,8 +246,8 @@ public class BrightnessDialogPreference extends
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             */
-            valueText.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
-            seekBar.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
+            valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
+            seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
             automaticChBox.setEnabled((noChange == 0) && (defaultProfile == 0));
             if (isChecked)
                 noChangeChBox.setChecked(false);
@@ -252,8 +265,8 @@ public class BrightnessDialogPreference extends
             valueText.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             seekBar.setEnabled((noChange == 0) && (defaultProfile == 0) && (!isAutomatic));
             */
-            valueText.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
-            seekBar.setEnabled(adaptiveAllowed && (noChange == 0) && (defaultProfile == 0));
+            valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
+            seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
         }
 
         // get values from defaultProfile when default profile checkbox is checked

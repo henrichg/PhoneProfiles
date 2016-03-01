@@ -40,6 +40,7 @@ public class Permissions {
     public static final int GRANT_TYPE_EXPORT = 5;
     public static final int GRANT_TYPE_IMPORT = 6;
     public static final int GRANT_TYPE_INSTALL_PPHELPER = 7;
+    public static final int GRANT_TYPE_BRIGHTNESS_DIALOG = 8;
 
     public static final String EXTRA_GRANT_TYPE = "grant_type";
     public static final String EXTRA_PERMISSION_TYPES = "permission_types";
@@ -55,6 +56,7 @@ public class Permissions {
     public static ProfileIconPreference profileIconPreference = null;
     public static EditorProfilesActivity editorActivity = null;
     public static Activity ppHelperInstallActivity = null;
+    public static BrightnessDialogPreference brightnessDialogPreference = null;
 
     public static class PermissionType implements Parcelable {
         public int preference;
@@ -453,6 +455,24 @@ public class Permissions {
             intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
             intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
             profileIconPreference = preference;
+            context.startActivity(intent);
+        }
+        return granted;
+    }
+
+    public static boolean grantBrightnessDialogPermissions(Context context, BrightnessDialogPreference preference) {
+        boolean granted = checkScreenBrightness(context);
+        if (!granted) {
+            List<PermissionType>  permissions = new ArrayList<PermissionType>();
+            permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+
+            Intent intent = new Intent(context, GrantPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_BRIGHTNESS_DIALOG);
+            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+            brightnessDialogPreference = preference;
             context.startActivity(intent);
         }
         return granted;
