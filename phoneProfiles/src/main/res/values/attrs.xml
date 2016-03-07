@@ -57,5 +57,6 @@
     <attr name="actionSourceProfileIcon" format="reference" />
     <attr name="actionSourceProfileIconInverse" format="reference" />
     <attr name="actionHelpIcon" format="reference" />
+    <attr name="actionProfileActivtionDuration" format="reference" />
 
 </resources>
