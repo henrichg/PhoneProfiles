@@ -71,19 +71,7 @@
                 android:text="@string/profile_name_default"
                 android:textSize="15sp"
                 android:singleLine="true" />
-<!--
-            <ImageView
-                android:id="@+id/profile_detail_show_in_activator"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:layout_below="@+id/profile_detail_profile_name"
-                android:layout_toRightOf="@+id/profile_detail_profile_icon"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/empty_string"
-                android:scaleType="@integer/profilePrefIndicatorScaleType"
-                android:src="@drawable/ic_profile_activated"
-                android:paddingLeft="10dp" />
--->
+
             <ImageView
                 android:id="@+id/profile_detail_profile_pref_indicator"
                 android:layout_width="200dp"

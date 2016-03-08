@@ -140,7 +140,8 @@
 
     <PreferenceScreen
         android:title="@string/phone_profiles_pref_category_activator"
-        android:key="categoryActivator" >
+        android:key="categoryActivator"
+        android:widgetLayout="@layout/start_activity_preference" >
         <CheckBoxPreference
             android:key="applicationActivatorPrefIndicator"
             android:title="@string/phone_profiles_pref_applicationPrefIndicator"
