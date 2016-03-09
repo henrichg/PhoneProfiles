@@ -10,6 +10,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -324,24 +325,30 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         Preference preference = prefMng.findPreference(key);
         String title = "";
         if ((preference != null) && (preference.isEnabled())) {
-            String defaultValue =
-                    getResources().getString(
-                            GlobalData.getResourceId(preference.getKey(), "string", context));
-            //Log.e("------ ProfilePreferencesFragment","preferenceChanged  key="+key);
-            //Log.e("------ ProfilePreferencesFragment","preferenceChanged  defaultValue="+defaultValue);
-            //Log.e("------ ProfilePreferencesFragment","preferenceChanged  value="+preferences.getString(preference.getKey(), defaultValue));
-            if (preference instanceof VolumeDialogPreference) {
-                if (VolumeDialogPreference.changeEnabled(preferences.getString(preference.getKey(), defaultValue)))
-                    title = preference.getTitle().toString();
-            }
-            else
-            if (preference instanceof BrightnessDialogPreference) {
-                if (BrightnessDialogPreference.changeEnabled(preferences.getString(preference.getKey(), defaultValue)))
+            if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+                boolean defaultValue =
+                        getResources().getBoolean(
+                                GlobalData.getResourceId(preference.getKey(), "bool", context));
+                if (preferences.getBoolean(key, defaultValue) != defaultValue)
                     title = preference.getTitle().toString();
             }
             else {
-                if (!preferences.getString(preference.getKey(), defaultValue).equals(defaultValue))
-                    title = preference.getTitle().toString();
+                String defaultValue =
+                        getResources().getString(
+                                GlobalData.getResourceId(preference.getKey(), "string", context));
+                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  key="+key);
+                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  defaultValue="+defaultValue);
+                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  value="+preferences.getString(preference.getKey(), defaultValue));
+                if (preference instanceof VolumeDialogPreference) {
+                    if (VolumeDialogPreference.changeEnabled(preferences.getString(preference.getKey(), defaultValue)))
+                        title = preference.getTitle().toString();
+                } else if (preference instanceof BrightnessDialogPreference) {
+                    if (BrightnessDialogPreference.changeEnabled(preferences.getString(preference.getKey(), defaultValue)))
+                        title = preference.getTitle().toString();
+                } else {
+                    if (!preferences.getString(preference.getKey(), defaultValue).equals(defaultValue))
+                        title = preference.getTitle().toString();
+                }
             }
             return title;
         }
@@ -356,13 +363,20 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         String summary = "";
 
         if (key.equals(GlobalData.PREF_PROFILE_DURATION) ||
-                key.equals(GlobalData.PREF_PROFILE_AFTER_DURATION_DO)) {
+            key.equals(GlobalData.PREF_PROFILE_AFTER_DURATION_DO) ||
+            key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
             String title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_DURATION);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_AFTER_DURATION_DO);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -844,6 +858,14 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             setTitleStyle(listPreference, index > 0, false);
             setCategorySummary(listPreference, index > 0);
         }
+        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON))
+        {
+            String sValue = value.toString();
+            CheckBoxPreference checkBoxPreference = (CheckBoxPreference)prefMng.findPreference(key);
+            boolean show = sValue.equals("true");
+            setTitleStyle(checkBoxPreference, show, false);
+            setCategorySummary(checkBoxPreference, show);
+        }
         if (key.equals(GlobalData.PREF_PROFILE_VOLUME_RINGTONE) ||
             key.equals(GlobalData.PREF_PROFILE_VOLUME_NOTIFICATION) ||
             key.equals(GlobalData.PREF_PROFILE_VOLUME_MEDIA) ||
@@ -869,7 +891,13 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     }
 
     private void setSummary(String key) {
-        String value = preferences.getString(key, "");
+        String value;
+        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+            boolean b = preferences.getBoolean(key, false);
+            value = Boolean.toString(b);
+        }
+        else
+            value = preferences.getString(key, "");
         setSummary(key, value);
     }
 
@@ -938,6 +966,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                 setSummary(GlobalData.PREF_PROFILE_NAME);
                 setSummary(GlobalData.PREF_PROFILE_DURATION);
                 setSummary(GlobalData.PREF_PROFILE_AFTER_DURATION_DO);
+                setSummary(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON);
             }
             setSummary(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE);
             setSummary(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
@@ -986,14 +1015,16 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
     {
-        /*if (!(key.equals(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE) ||
-                key.equals(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS) ||
-                key.equals(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE)
-                ))*/
-                setSummary(key, sharedPreferences.getString(key, ""));
-
+        String value;
+        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+            boolean bValue = sharedPreferences.getBoolean(key, false);
+            value = Boolean.toString(bValue);
+        }
+        else
+            value = sharedPreferences.getString(key, "");
+        setSummary(key, value);
         // disable depended preferences
-        disableDependedPref(key, sharedPreferences.getString(key, ""));
+        disableDependedPref(key, value);
 
         //Activity activity = getActivity();
         //boolean canShow = (EditorProfilesActivity.mTwoPane) && (activity instanceof EditorProfilesActivity);

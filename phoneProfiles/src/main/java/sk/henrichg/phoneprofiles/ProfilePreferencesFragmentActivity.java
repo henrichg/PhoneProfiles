@@ -263,6 +263,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
                 editor.putString(GlobalData.PREF_PROFILE_ICON, profile._icon);
                 editor.putString(GlobalData.PREF_PROFILE_DURATION, Integer.toString(profile._duration));
                 editor.putString(GlobalData.PREF_PROFILE_AFTER_DURATION_DO, Integer.toString(profile._afterDurationDo));
+                editor.putBoolean(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON, profile._showDurationButton);
             }
             editor.putString(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE, Integer.toString(profile._volumeRingerMode));
             editor.putString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, Integer.toString(profile._volumeZenMode));
@@ -330,6 +331,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
 
             profile._duration = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DURATION, ""));
             profile._afterDurationDo = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_AFTER_DURATION_DO, ""));
+            profile._showDurationButton = preferences.getBoolean(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON, false);
 
             Profile activatedProfile = dataWrapper.getActivatedProfile();
             if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
