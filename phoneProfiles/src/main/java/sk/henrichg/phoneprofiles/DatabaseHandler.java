@@ -26,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Context context;
     
     // Database Version
-    private static final int DATABASE_VERSION = 1220;
+    private static final int DATABASE_VERSION = 1230;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -81,6 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_VIBRATE_ON_TOUCH = "vibrateOnTouch";
     private static final String KEY_DEVICE_WIFI_AP = "deviceWiFiAP";
     private static final String KEY_DEVICE_POWER_SAVE_MODE = "devicePowerSaveMode";
+    private static final String KEY_SHOW_DURATION_BUTTON = "showDurationButton";
 
     /**
      * Constructor takes and keeps a reference of the passed context in order to
@@ -185,7 +186,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_DEVICE_KEYGUARD + " INTEGER,"
                 + KEY_VIBRATE_ON_TOUCH + " INTEGER,"
                 + KEY_DEVICE_WIFI_AP + " INTEGER,"
-                + KEY_DEVICE_POWER_SAVE_MODE + " INTEGER"
+                + KEY_DEVICE_POWER_SAVE_MODE + " INTEGER,"
+                + KEY_SHOW_DURATION_BUTTON + " INTEGER"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -538,6 +540,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_POWER_SAVE_MODE + "=0");
         }
+
+        if (oldVersion < 1230)
+        {
+            // pridame nove stlpce
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_SHOW_DURATION_BUTTON + " INTEGER");
+
+            // updatneme zaznamy
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_SHOW_DURATION_BUTTON + "=0");
+        }
+
     }
 
     @Override
@@ -600,6 +612,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
         values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
         values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
+        values.put(KEY_SHOW_DURATION_BUTTON, (profile._showDurationButton) ? 1 : 0);
 
         // Inserting Row
         long id = db.insert(TABLE_PROFILES, null, values);
@@ -656,7 +669,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_DEVICE_KEYGUARD,
                         KEY_VIBRATE_ON_TOUCH,
                         KEY_DEVICE_WIFI_AP,
-                        KEY_DEVICE_POWER_SAVE_MODE
+                        KEY_DEVICE_POWER_SAVE_MODE,
+                        KEY_SHOW_DURATION_BUTTON
                 },
                 KEY_ID + "=?",
                 new String[]{String.valueOf(profile_id)}, null, null, null, null);
@@ -710,7 +724,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(38)),
                                               Integer.parseInt(cursor.getString(39)),
                                               Integer.parseInt(cursor.getString(40)),
-                                              Integer.parseInt(cursor.getString(41))
+                                              Integer.parseInt(cursor.getString(41)),
+                                              (Integer.parseInt(cursor.getString(42)) == 1) ? true : false
                                               );
             }
             cursor.close();
@@ -766,7 +781,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                          KEY_DEVICE_KEYGUARD + "," +
                                          KEY_VIBRATE_ON_TOUCH + "," +
                                          KEY_DEVICE_WIFI_AP + "," +
-                                         KEY_DEVICE_POWER_SAVE_MODE +
+                                         KEY_DEVICE_POWER_SAVE_MODE + "," +
+                                         KEY_SHOW_DURATION_BUTTON +
                              " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -820,6 +836,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
                 profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
                 profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
+                profile._showDurationButton = ((Integer.parseInt(cursor.getString(42)) == 1) ? true : false);
                 // Adding contact to list
                 profileList.add(profile);
             } while (cursor.moveToNext());
@@ -879,6 +896,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
         values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
         values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
+        values.put(KEY_SHOW_DURATION_BUTTON, (profile._showDurationButton) ? 1 : 0);
 
         // updating row
         int r = db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -1052,7 +1070,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                                 KEY_DEVICE_KEYGUARD,
                                                 KEY_VIBRATE_ON_TOUCH,
                                                 KEY_DEVICE_WIFI_AP,
-                                                KEY_DEVICE_POWER_SAVE_MODE
+                                                KEY_DEVICE_POWER_SAVE_MODE,
+                                                KEY_SHOW_DURATION_BUTTON
                                                 },
                                  KEY_CHECKED + "=?",
                                  new String[] { "1" }, null, null, null, null);
@@ -1106,7 +1125,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(38)),
                                               Integer.parseInt(cursor.getString(39)),
                                               Integer.parseInt(cursor.getString(40)),
-                                              Integer.parseInt(cursor.getString(41))
+                                              Integer.parseInt(cursor.getString(41)),
+                                              (Integer.parseInt(cursor.getString(42)) == 1) ? true : false
                                               );
             }
             else
@@ -1167,7 +1187,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                          KEY_DEVICE_KEYGUARD + "," +
                                          KEY_VIBRATE_ON_TOUCH + "," +
                                          KEY_DEVICE_WIFI_AP + "," +
-                                         KEY_DEVICE_POWER_SAVE_MODE +
+                                         KEY_DEVICE_POWER_SAVE_MODE + "," +
+                                         KEY_SHOW_DURATION_BUTTON +
                             " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -1222,6 +1243,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
             profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
             profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
+            profile._showDurationButton = ((Integer.parseInt(cursor.getString(42)) == 1) ? true : false);
         }
 
         cursor.close();
@@ -1784,6 +1806,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                     if (exportedDBObj.getVersion() < 1220)
                                     {
                                         values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1230)
+                                    {
+                                        values.put(KEY_SHOW_DURATION_BUTTON, 0);
                                     }
 
                                     // Inserting Row do db z SQLiteOpenHelper
