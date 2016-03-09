@@ -55,6 +55,8 @@ public class GUIData {
         Locale.setDefault(appLocale);
         Configuration appConfig = new Configuration();
         appConfig.locale = appLocale;
+        //if (android.os.Build.VERSION.SDK_INT <= 17)
+        //    appConfig.screenLayout = Configuration.SCREENLAYOUT_LAYOUTDIR_LTR;
         context.getResources().updateConfiguration(appConfig, context.getResources().getDisplayMetrics());
 
         // collator for application locale sorting
