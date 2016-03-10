@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/MaskedEditText/MaskedEditText.iml" filepath="$PROJECT_DIR$/MaskedEditText/MaskedEditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/dragSortListView/dragSortListView.iml" filepath="$PROJECT_DIR$/dragSortListView/dragSortListView.iml" />
       <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" />
