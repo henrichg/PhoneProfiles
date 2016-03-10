@@ -211,7 +211,7 @@ public class ActivateProfileListFragment extends Fragment {
                     return;
                 }
 
-                fragment.profileListAdapter = new ActivateProfileListAdapter(fragment, fragment.profileList, dataWrapper);
+                fragment.profileListAdapter = new ActivateProfileListAdapter(fragment, fragment.profileList, fragment.dataWrapper);
 
                 AbsListView absListView;
                 if (!GlobalData.applicationActivatorGridLayout)
