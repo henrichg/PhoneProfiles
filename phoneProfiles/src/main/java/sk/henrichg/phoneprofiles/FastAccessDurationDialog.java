@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.text.Editable;
@@ -9,7 +10,9 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -18,15 +21,19 @@ import com.afollestad.materialdialogs.internal.MDButton;
 import com.afollestad.materialdialogs.util.DialogUtils;
 import com.github.pinball83.maskededittext.MaskedEditText;
 
+import java.util.Arrays;
+
 public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
     private int mMin, mMax;
     private Profile mProfile;
+    private int mAfterDo;
 
     DataWrapper mDataWrapper;
     int mStartupSource;
     Activity mActivity;
     boolean mInteractive;
+    String[] afterDoValues;
 
     //Context mContext;
 
@@ -35,6 +42,7 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
     private SeekBar mSeekBarHours;
     private SeekBar mSeekBarMinutes;
     private SeekBar mSeekBarSeconds;
+    Spinner afterDoSpinner;
 
     //private int mColor = 0;
 
@@ -42,6 +50,7 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
 
         mMax = 86400;
         mMin = 0;
+        mAfterDo = -1;
 
         mActivity = activity;
         //mContext = activity.getBaseContext();
@@ -60,7 +69,7 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
                 .title(mActivity.getString(R.string.profile_preferences_duration))
                 .positiveText(android.R.string.ok)
                 .negativeText(android.R.string.cancel)
-                .customView(R.layout.activity_duration_pref_dialog2, false)
+                .customView(R.layout.activity_fast_access_duration_dialog, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
@@ -73,8 +82,22 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
                         if (iValue > mMax) iValue = mMax;
 
                         mProfile._duration = iValue;
+                        if (mAfterDo != -1)
+                            mProfile._afterDurationDo = mAfterDo;
                         mDataWrapper.getDatabaseHandler().updateProfile(mProfile);
                         mDataWrapper._activateProfile(mProfile, mStartupSource, mInteractive, mActivity);
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+                        mDataWrapper.finishActivity(mStartupSource, false, mActivity);
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        mDataWrapper.finishActivity(mStartupSource, false, mActivity);
                     }
                 });
 
@@ -187,6 +210,18 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
 
         mTextViewRange.setText(sMin + " - " + sMax);
 
+        afterDoSpinner = (Spinner) layout.findViewById(R.id.fast_access_duration_dlg_after_do_spinner);
+        afterDoValues = mActivity.getResources().getStringArray(R.array.afterProfileDurationDoValues);
+        afterDoSpinner.setSelection(Arrays.asList(afterDoValues).indexOf(String.valueOf(mProfile._afterDurationDo)));
+        afterDoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mAfterDo = Integer.valueOf(afterDoValues[position]);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
 

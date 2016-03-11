@@ -549,9 +549,13 @@ public class DataWrapper {
                 public void onClick(DialogInterface dialog, int which) {
                     if (Permissions.grantProfilePermissions(context, _profile, false,
                             forGUI, monochrome, monochromeValue,
-                            _startupSource, _interactive, _activity) && _profile._askForDuration) {
-                        FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, _interactive);
-                        dlg.show();
+                            _startupSource, _interactive, _activity)) {
+                        if (_profile._askForDuration) {
+                            FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, _interactive);
+                            dlg.show();
+                        }
+                        else
+                            _activateProfile(_profile, _startupSource, _interactive, _activity);
                     }
                     else {
                         Intent returnIntent = new Intent();
@@ -606,7 +610,7 @@ public class DataWrapper {
         }
     }
 
-    private void finishActivity(int startupSource, boolean afterActivation, Activity _activity)
+    public void finishActivity(int startupSource, boolean afterActivation, Activity _activity)
     {
         if (_activity == null)
             return;
