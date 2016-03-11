@@ -538,6 +538,7 @@ public class DataWrapper {
             final boolean _interactive = interactive;
             final int _startupSource = startupSource;
             final Activity _activity = activity;
+            final DataWrapper _dataWrapper = this;
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
             dialogBuilder.setTitle(activity.getResources().getString(R.string.profile_string_0) + ": " + profile._name);
@@ -548,8 +549,10 @@ public class DataWrapper {
                 public void onClick(DialogInterface dialog, int which) {
                     if (Permissions.grantProfilePermissions(context, _profile, false,
                             forGUI, monochrome, monochromeValue,
-                            _startupSource, _interactive, _activity))
-                        _activateProfile(_profile, _startupSource, _interactive, _activity);
+                            _startupSource, _interactive, _activity) && _profile._askForDuration) {
+                        FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, _interactive);
+                        dlg.show();
+                    }
                     else {
                         Intent returnIntent = new Intent();
                         _activity.setResult(Activity.RESULT_CANCELED,returnIntent);
@@ -592,8 +595,14 @@ public class DataWrapper {
                 granted = Permissions.grantProfilePermissions(context, profile, true,
                         forGUI, monochrome, monochromeValue,
                         startupSource, interactive, null);
-            if (granted)
-                _activateProfile(profile, startupSource, interactive, activity);
+            if (granted) {
+                if (profile._askForDuration && interactive) {
+                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this, startupSource, interactive);
+                    dlg.show();
+                }
+                else
+                    _activateProfile(profile, startupSource, interactive, activity);
+            }
         }
     }
 

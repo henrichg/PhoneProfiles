@@ -325,7 +325,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         Preference preference = prefMng.findPreference(key);
         String title = "";
         if ((preference != null) && (preference.isEnabled())) {
-            if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+            if (key.equals(GlobalData.PREF_PROFILE_ASK_FOR_DURATION)) {
                 boolean defaultValue =
                         getResources().getBoolean(
                                 GlobalData.getResourceId(preference.getKey(), "bool", context));
@@ -364,7 +364,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
         if (key.equals(GlobalData.PREF_PROFILE_DURATION) ||
             key.equals(GlobalData.PREF_PROFILE_AFTER_DURATION_DO) ||
-            key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+            key.equals(GlobalData.PREF_PROFILE_ASK_FOR_DURATION)) {
             String title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_DURATION);
             String afterDurationDoTitle = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_AFTER_DURATION_DO);
             if ((!afterDurationDoTitle.isEmpty()) && (!title.isEmpty())) {
@@ -372,7 +372,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                 summary = summary + title + " • ";
                 summary = summary + afterDurationDoTitle;
             }
-            title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON);
+            title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_ASK_FOR_DURATION);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -854,7 +854,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             setTitleStyle(listPreference, index > 0, false);
             setCategorySummary(listPreference, index > 0);
         }
-        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON))
+        if (key.equals(GlobalData.PREF_PROFILE_ASK_FOR_DURATION))
         {
             String sValue = value.toString();
             CheckBoxPreference checkBoxPreference = (CheckBoxPreference)prefMng.findPreference(key);
@@ -888,7 +888,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     private void setSummary(String key) {
         String value;
-        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+        if (key.equals(GlobalData.PREF_PROFILE_ASK_FOR_DURATION)) {
             boolean b = preferences.getBoolean(key, false);
             value = Boolean.toString(b);
         }
@@ -962,7 +962,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                 setSummary(GlobalData.PREF_PROFILE_NAME);
                 setSummary(GlobalData.PREF_PROFILE_DURATION);
                 setSummary(GlobalData.PREF_PROFILE_AFTER_DURATION_DO);
-                setSummary(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON);
+                setSummary(GlobalData.PREF_PROFILE_ASK_FOR_DURATION);
             }
             setSummary(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE);
             setSummary(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
@@ -1012,7 +1012,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
     {
         String value;
-        if (key.equals(GlobalData.PREF_PROFILE_SHOW_DURATION_BUTTON)) {
+        if (key.equals(GlobalData.PREF_PROFILE_ASK_FOR_DURATION)) {
             boolean bValue = sharedPreferences.getBoolean(key, false);
             value = Boolean.toString(bValue);
         }

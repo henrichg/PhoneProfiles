@@ -345,7 +345,7 @@ public class ActivateProfileListFragment extends Fragment {
         }
     }
 
-    private void activateProfile(Profile profile, int startupSource)
+    public void activateProfile(Profile profile, int startupSource)
     {
         dataWrapper.activateProfile(profile._id, startupSource, getActivity());
     }

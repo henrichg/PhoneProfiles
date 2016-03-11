@@ -18,10 +18,10 @@ public class ActivateProfileListAdapter extends BaseAdapter
 {
 
     private List<Profile> profileList;
-    private Fragment fragment;
+    private ActivateProfileListFragment fragment;
     private DataWrapper dataWrapper;
 
-    public ActivateProfileListAdapter(Fragment f, List<Profile> pl, DataWrapper dataWrapper)
+    public ActivateProfileListAdapter(ActivateProfileListFragment f, List<Profile> pl, DataWrapper dataWrapper)
     {
         fragment = f;
         profileList = pl;
@@ -224,7 +224,7 @@ public class ActivateProfileListAdapter extends BaseAdapter
             holder.profileIndicator.setImageBitmap(profile._preferencesIndicator);
         }
 
-        if (profile._showDurationButton) {
+        /*if (profile._askForDuration) {
             holder.durationButton.setVisibility(View.VISIBLE);
             if (GlobalData.applicationActivatorGridLayout) {
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.profileIcon.getLayoutParams();
@@ -236,20 +236,32 @@ public class ActivateProfileListAdapter extends BaseAdapter
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag();
-                    final Profile profile = (Profile) getItem(position);
-                    FastAccessDurationDialog dialog = new FastAccessDurationDialog(fragment.getActivity(), profile, dataWrapper, GlobalData.STARTUP_SOURCE_ACTIVATOR);
-                    dialog.show();
+                    if (!GlobalData.applicationLongClickActivation)
+                        fragment.activateProfile((Profile) getItem(position), GlobalData.STARTUP_SOURCE_ACTIVATOR);
+
+                }
+            });
+            holder.durationButton.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = (int) v.getTag();
+                    if (GlobalData.applicationLongClickActivation)
+                        //activateProfileWithAlert(position);
+                        fragment.activateProfile((Profile) getItem(position), GlobalData.STARTUP_SOURCE_ACTIVATOR);
+
+                    return false;
+
                 }
             });
         }
-        else {
+        else {*/
             holder.durationButton.setVisibility(View.GONE);
             if (GlobalData.applicationActivatorGridLayout) {
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.profileIcon.getLayoutParams();
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 holder.profileIcon.setLayoutParams(params);
             }
-        }
+        //}
 
         return vi;
     }
