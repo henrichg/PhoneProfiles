@@ -1129,7 +1129,7 @@ public class GlobalData extends Application {
             }
             else
             if (preference.equals(PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
-                String s = getTransactionCode(context, "TRANSACTION_getPreferredNetworkType");
+                String s = getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
             }
             return true;
         } catch(Exception e) {
