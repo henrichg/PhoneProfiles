@@ -161,7 +161,7 @@
         <CheckBoxPreference
             android:key="applicationActivatorGridLayout"
             android:title="@string/phone_profiles_pref_applicationGridLayout"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
     </PreferenceScreen>
     
     <PreferenceScreen
@@ -193,7 +193,7 @@
         <CheckBoxPreference
             android:key="applicationWidgetListGridLayout"
             android:title="@string/phone_profiles_pref_applicationGridLayout"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetBackground"
             android:summary="25"
