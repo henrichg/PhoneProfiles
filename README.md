@@ -12,3 +12,4 @@ Required external libs
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - Material Dialogs - https://github.com/afollestad/material-dialogs
 - Material Preferences - https://github.com/ferrannp/material-preferences
+- Masked-Edittext - https://github.com/pinball83/Masked-Edittext
