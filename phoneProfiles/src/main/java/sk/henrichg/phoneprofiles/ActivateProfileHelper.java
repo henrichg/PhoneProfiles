@@ -572,7 +572,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressWarnings("deprecation")
-    public void setRingerMode(Profile profile, AudioManager audioManager, boolean forSilent, int linkUnlink)
+    public boolean setRingerMode(Profile profile, AudioManager audioManager, boolean forSilent, int linkUnlink)
     {
 
         int ringerMode, oldRingerMode;
@@ -623,9 +623,9 @@ public class ActivateProfileHelper {
                     GlobalData.logE("ActivateProfileHelper.setRingerMode", "set for reset priority");
                 }
                 else
-                    return;
+                    return false;
             } else
-                return;
+                return false;
         }
 
         if (Permissions.checkSavedProfileRingerMode(context)) {
@@ -729,6 +729,7 @@ public class ActivateProfileHelper {
                     break;
             }
         }
+        return true;
     }
 
     public void executeForWallpaper(Profile profile) {
