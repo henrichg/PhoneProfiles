@@ -34,17 +34,9 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
                 RingerModeChangeReceiver.internalChange = true;
 
-                AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-                aph.setVolumes(profile, audioManager, linkUnlink);
-
-                /*
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    //System.out.println(e);
-                }
-                */
+                GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode=" + audioManager.getMode());
 
                 // set ringer mode to Ring for proper change ringer mode to Silent
                 if (aph.setRingerMode(profile, audioManager, true, linkUnlink)) {
@@ -55,6 +47,18 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                     }
                 }
 
+                GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode="+audioManager.getMode());
+
+                aph.setVolumes(profile, audioManager, linkUnlink);
+
+                /*try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    //System.out.println(e);
+                }*/
+
+                GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode="+audioManager.getMode());
+
                 // set ringer mode after volume because volumes change silent/vibrate
                 aph.setRingerMode(profile, audioManager, false, linkUnlink);
 
@@ -63,6 +67,8 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 } catch (InterruptedException e) {
                     //System.out.println(e);
                 }
+
+                GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode="+audioManager.getMode());
 
                 RingerModeChangeReceiver.internalChange = false;
 

@@ -328,8 +328,18 @@ public class VolumeDialogPreference extends
             _context.startService(volumeServiceIntent);
         } else {*/
 
-        //SettingsContentObserver.internalChange = true;
-        RingerModeChangeReceiver.internalChange = true;
+            //SettingsContentObserver.internalChange = true;
+            RingerModeChangeReceiver.internalChange = true;
+
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                // set ringer mode to Ring for proper change ringer mode to Priority
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    //System.out.println(e);
+                }
+            }
 
             /*
             Log.e("#### VolumeDialogPreference", "defaultValueSystem=" + defaultValueSystem);
@@ -339,34 +349,23 @@ public class VolumeDialogPreference extends
             Log.e("#### VolumeDialogPreference", "defaultValueAlarm=" + defaultValueAlarm);
             Log.e("#### VolumeDialogPreference", "defaultValueVoice=" + defaultValueVoice);
             */
-        // set default volumes
-        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
-        //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
+            // set default volumes
+            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
+            //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
 
 
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            // set ringer mode to Ring for proper change ringer mode to Priority
-            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-        }
+            //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
+            // set ringer mode after volume because volumes change silent/vibrate
+            audioManager.setRingerMode(defaultRingerMode);
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            //System.out.println(e);
-        }
-
-        //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
-        // set ringer mode after volume because volumes change silent/vibrate
-        audioManager.setRingerMode(defaultRingerMode);
-
-        ActivateProfileHelper.setZenMode(_context, defaultZenMode, audioManager, defaultRingerMode);
+            ActivateProfileHelper.setZenMode(_context, defaultZenMode, audioManager, defaultRingerMode);
 
 
-        RingerModeChangeReceiver.setAlarmForDisableInternalChange(_context);
+            RingerModeChangeReceiver.setAlarmForDisableInternalChange(_context);
 
         //}
 
