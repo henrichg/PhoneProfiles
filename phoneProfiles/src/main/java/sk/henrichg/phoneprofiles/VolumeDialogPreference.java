@@ -214,8 +214,7 @@ public class VolumeDialogPreference extends
         //SettingsContentObserver.internalChange = true;
         RingerModeChangeReceiver.internalChange = true;
 
-        ActivateProfileHelper.setZenMode(_context, ActivateProfileHelper.ZENMODE_ALL);
-        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        ActivateProfileHelper.setZenMode(_context, ActivateProfileHelper.ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
 
         if (volumeType.equalsIgnoreCase("RINGTONE"))
             audioManager.setStreamVolume(AudioManager.STREAM_RING, value, AudioManager.FLAG_PLAY_SOUND);
@@ -329,13 +328,8 @@ public class VolumeDialogPreference extends
             _context.startService(volumeServiceIntent);
         } else {*/
 
-            //SettingsContentObserver.internalChange = true;
-            RingerModeChangeReceiver.internalChange = true;
-
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                // set ringer mode to Ring for proper change ringer mode to Priority
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            }
+        //SettingsContentObserver.internalChange = true;
+        RingerModeChangeReceiver.internalChange = true;
 
             /*
             Log.e("#### VolumeDialogPreference", "defaultValueSystem=" + defaultValueSystem);
@@ -345,27 +339,34 @@ public class VolumeDialogPreference extends
             Log.e("#### VolumeDialogPreference", "defaultValueAlarm=" + defaultValueAlarm);
             Log.e("#### VolumeDialogPreference", "defaultValueVoice=" + defaultValueVoice);
             */
-            // set default volumes
-            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
-            //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
+        // set default volumes
+        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
+        //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                //System.out.println(e);
-            }
 
-            ActivateProfileHelper.setZenMode(_context, defaultZenMode);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            // set ringer mode to Ring for proper change ringer mode to Priority
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        }
 
-            //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
-            // set ringer mode after volume because volumes change silent/vibrate
-            audioManager.setRingerMode(defaultRingerMode);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            //System.out.println(e);
+        }
 
-            RingerModeChangeReceiver.setAlarmForDisableInternalChange(_context);
+        //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
+        // set ringer mode after volume because volumes change silent/vibrate
+        audioManager.setRingerMode(defaultRingerMode);
+
+        ActivateProfileHelper.setZenMode(_context, defaultZenMode, audioManager, defaultRingerMode);
+
+
+        RingerModeChangeReceiver.setAlarmForDisableInternalChange(_context);
 
         //}
 
