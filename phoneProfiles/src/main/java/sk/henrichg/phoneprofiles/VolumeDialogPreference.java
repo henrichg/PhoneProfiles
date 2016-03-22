@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -319,14 +320,14 @@ public class VolumeDialogPreference extends
     @Override
     public void onDismiss(DialogInterface dialog)
     {
-        /*DataWrapper dataWrapper = new DataWrapper(_context, false, false, 0);
+        DataWrapper dataWrapper = new DataWrapper(_context, false, false, 0);
         Profile profile = dataWrapper.getActivatedProfile();
         if (profile != null) {
             Intent volumeServiceIntent = new Intent(_context, ExecuteVolumeProfilePrefsService.class);
             volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallBroadcastReceiver.LINKMODE_NONE);
+            volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
             _context.startService(volumeServiceIntent);
-        } else {*/
+        } else {
 
             //SettingsContentObserver.internalChange = true;
             RingerModeChangeReceiver.internalChange = true;
@@ -350,24 +351,23 @@ public class VolumeDialogPreference extends
             Log.e("#### VolumeDialogPreference", "defaultValueVoice=" + defaultValueVoice);
             */
             // set default volumes
-            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
-            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
+            if (!((defaultZenMode == ActivateProfileHelper.ZENMODE_NONE) || (defaultZenMode == ActivateProfileHelper.ZENMODE_ALARMS))) {
+                audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, defaultValueSystem, 0);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, defaultValueRing, 0);
+                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, defaultValueNotification, 0);
+            }
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
             audioManager.setStreamVolume(AudioManager.STREAM_ALARM, defaultValueAlarm, 0);
-            //audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, defaultValueVoice, 0);
 
-
+            ActivateProfileHelper.setZenMode(_context, defaultZenMode, audioManager, defaultRingerMode);
             //Log.e("#### VolumeDialogPreference", "defaultRingerMode=" + defaultRingerMode);
             // set ringer mode after volume because volumes change silent/vibrate
             audioManager.setRingerMode(defaultRingerMode);
 
-            ActivateProfileHelper.setZenMode(_context, defaultZenMode, audioManager, defaultRingerMode);
-
-
             RingerModeChangeReceiver.setAlarmForDisableInternalChange(_context);
 
-        //}
+        }
 
     }
 
