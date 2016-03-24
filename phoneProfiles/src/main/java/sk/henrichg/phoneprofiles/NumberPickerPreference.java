@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -90,6 +91,10 @@ public class NumberPickerPreference extends DialogPreference {
         mNumberPicker.setMinValue(mMin);
         mNumberPicker.setValue(Integer.valueOf(value));
         mNumberPicker.setWrapSelectorWheel(false);
+        TypedValue tv = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
+        GUIData.setSeparatorColorForNumberPicker(mNumberPicker, tv.data);
+        GUIData.updateTextAttributesForNumberPicker(mNumberPicker, 18);
 
         mBuilder.customView(layout, false);
 
