@@ -57,7 +57,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
     @SuppressLint({"SimpleDateFormat", "NewApi"})
     static public void setAlarm(Profile profile, Context context)
     {
-        removeAlarm(profile, context);
+        removeAlarm(context);
 
         if (profile == null)
             return;
@@ -102,13 +102,13 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
         return;
     }
 
-    static public void removeAlarm(Profile profile, Context context)
+    static public void removeAlarm(Context context)
     {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
 
         Intent intent = new Intent(context, ProfileDurationAlarmBroadcastReceiver.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), (int) profile._id, intent, PendingIntent.FLAG_NO_CREATE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
         if (pendingIntent != null)
         {
             alarmManager.cancel(pendingIntent);
