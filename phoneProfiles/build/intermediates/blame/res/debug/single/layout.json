@@ -48,12 +48,12 @@
         "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/layout/applications_multiselect_preference_list_item.xml"
     },
     {
-        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
-        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_alert_dialog_material.xml"
-    },
-    {
         "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
         "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_alert_dialog_material.xml"
     },
     {
         "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/layout/notification_template_media.xml",

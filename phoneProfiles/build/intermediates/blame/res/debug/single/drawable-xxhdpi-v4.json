@@ -316,12 +316,12 @@
         "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-xxhdpi/ic_profile_item_edit_menu_dark.png"
     },
     {
-        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
-        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-xxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/header_card.9.png",
         "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-xxhdpi/header_card.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_profile_volume_2.png",

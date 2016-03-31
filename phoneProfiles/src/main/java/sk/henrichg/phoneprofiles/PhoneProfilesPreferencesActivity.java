@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.fnp.materialpreferences.NestedPreferenceFragment;
 import com.fnp.materialpreferences.PreferenceActivity;
+import com.fnp.materialpreferences.PreferenceFragment;
 
 public class PhoneProfilesPreferencesActivity extends PreferenceActivity
+                            implements PreferenceFragment.OnCreateNestedPreferenceFragment
 {
 
     private SharedPreferences preferences;
@@ -203,4 +206,8 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         super.finish();
     }
 
+    @Override
+    public PreferenceFragment onCreateNestedPreferenceFragment() {
+        return new NestedPreferenceFragment();
+    }
 }

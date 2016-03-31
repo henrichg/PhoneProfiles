@@ -11,13 +11,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.fnp.materialpreferences.PreferenceActivity;
+import com.fnp.materialpreferences.PreferenceFragment;
 
-public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
+public class ProfilePreferencesFragmentActivity extends PreferenceActivity
+                            implements PreferenceFragment.OnCreateNestedPreferenceFragment
+{
     private long profile_id = 0;
     private int newProfileMode = EditorProfileListFragment.EDIT_MODE_UNDEFINED;
     private int predefinedProfileIndex = 0;
 
-    ProfilePreferencesFragment fragment;
+    ProfilePreferencesNestedFragment fragment;
 
     private int resultCode = RESULT_CANCELED;
 
@@ -72,7 +75,21 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             getSupportActionBar().setTitle(R.string.title_activity_profile_preferences);
         */
 
-        fragment = new ProfilePreferencesFragment();
+        fragment = createFragment(false);
+
+        if (savedInstanceState == null) {
+            loadPreferences(newProfileMode, predefinedProfileIndex);
+        }
+
+        setPreferenceFragment(fragment);
+    }
+
+    private ProfilePreferencesNestedFragment createFragment(boolean nested) {
+        ProfilePreferencesNestedFragment fragment;
+        if (nested)
+            fragment = new ProfilePreferencesNestedFragment();
+        else
+            fragment = new ProfilePreferencesFragment();
 
         Bundle arguments = new Bundle();
         arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
@@ -84,11 +101,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
             ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
         fragment.setArguments(arguments);
 
-        if (savedInstanceState == null) {
-            loadPreferences(newProfileMode, predefinedProfileIndex);
-        }
-
-        setPreferenceFragment(fragment);
+        return fragment;
     }
 
     @Override
@@ -401,4 +414,8 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
         }
     }
 
+    @Override
+    public PreferenceFragment onCreateNestedPreferenceFragment() {
+        return createFragment(true);
+    }
 }
