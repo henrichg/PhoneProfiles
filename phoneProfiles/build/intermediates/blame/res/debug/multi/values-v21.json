@@ -1,0 +1,1986 @@
+[
+    {
+        "outputFile": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/values-v21/values-v21.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 10,
+                    "endColumn": 19,
+                    "endOffset": 544
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/array.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 136,
+                        "endLine": 10,
+                        "endColumn": 19,
+                        "endOffset": 625
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 549,
+                    "endLine": 18,
+                    "endColumn": 19,
+                    "endOffset": 984
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/array.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 855,
+                        "endLine": 27,
+                        "endColumn": 19,
+                        "endOffset": 1290
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 989,
+                    "endLine": 26,
+                    "endColumn": 19,
+                    "endOffset": 1187
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/array.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 1295,
+                        "endLine": 35,
+                        "endColumn": 19,
+                        "endOffset": 1493
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1192,
+                    "endLine": 35,
+                    "endColumn": 19,
+                    "endOffset": 1412
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/array.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 630,
+                        "endLine": 19,
+                        "endColumn": 19,
+                        "endOffset": 850
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 1417,
+                    "endColumn": 59,
+                    "endOffset": 1472
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/dimens.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 229,
+                        "endColumn": 59,
+                        "endOffset": 284
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 1477,
+                    "endColumn": 57,
+                    "endOffset": 1530
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 112,
+                        "endColumn": 57,
+                        "endOffset": 165
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 1535,
+                    "endColumn": 58,
+                    "endOffset": 1589
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 170,
+                        "endColumn": 58,
+                        "endOffset": 224
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 1594,
+                    "endColumn": 56,
+                    "endOffset": 1646
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 56,
+                        "endOffset": 107
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 1651,
+                    "endColumn": 90,
+                    "endOffset": 1737
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 90,
+                        "endOffset": 141
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 1742,
+                    "endColumn": 102,
+                    "endOffset": 1840
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 146,
+                        "endColumn": 102,
+                        "endOffset": 244
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 1845,
+                    "endColumn": 102,
+                    "endOffset": 1943
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 249,
+                        "endColumn": 102,
+                        "endOffset": 347
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 1948,
+                    "endColumn": 104,
+                    "endOffset": 2048
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 352,
+                        "endColumn": 104,
+                        "endOffset": 452
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 2053,
+                    "endColumn": 106,
+                    "endOffset": 2155
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 457,
+                        "endColumn": 106,
+                        "endOffset": 559
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 2160,
+                    "endColumn": 108,
+                    "endOffset": 2264
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 564,
+                        "endColumn": 108,
+                        "endOffset": 668
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 2269,
+                    "endColumn": 108,
+                    "endOffset": 2373
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 673,
+                        "endColumn": 108,
+                        "endOffset": 777
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 2378,
+                    "endColumn": 108,
+                    "endOffset": 2482
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 782,
+                        "endColumn": 108,
+                        "endOffset": 886
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 2487,
+                    "endColumn": 108,
+                    "endOffset": 2591
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 891,
+                        "endColumn": 108,
+                        "endOffset": 995
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 2596,
+                    "endColumn": 108,
+                    "endOffset": 2700
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1000,
+                        "endColumn": 108,
+                        "endOffset": 1104
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 2705,
+                    "endColumn": 106,
+                    "endOffset": 2807
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1109,
+                        "endColumn": 106,
+                        "endOffset": 1211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 2812,
+                    "endColumn": 102,
+                    "endOffset": 2910
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1216,
+                        "endColumn": 102,
+                        "endOffset": 1314
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 2915,
+                    "endColumn": 118,
+                    "endOffset": 3029
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1319,
+                        "endColumn": 118,
+                        "endOffset": 1433
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 3034,
+                    "endLine": 54,
+                    "endColumn": 12,
+                    "endOffset": 3184
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1438,
+                        "endLine": 16,
+                        "endColumn": 12,
+                        "endOffset": 1588
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3189,
+                    "endLine": 56,
+                    "endColumn": 12,
+                    "endOffset": 3339
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1593,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "endOffset": 1743
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 3344,
+                    "endColumn": 104,
+                    "endOffset": 3444
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1748,
+                        "endColumn": 104,
+                        "endOffset": 1848
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 3449,
+                    "endColumn": 120,
+                    "endOffset": 3565
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1853,
+                        "endColumn": 120,
+                        "endOffset": 1969
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 3570,
+                    "endColumn": 100,
+                    "endOffset": 3666
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1974,
+                        "endColumn": 100,
+                        "endOffset": 2070
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 3671,
+                    "endLine": 61,
+                    "endColumn": 12,
+                    "endOffset": 3813
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 2075,
+                        "endLine": 23,
+                        "endColumn": 12,
+                        "endOffset": 2217
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 3818,
+                    "endLine": 63,
+                    "endColumn": 12,
+                    "endOffset": 3954
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 2222,
+                        "endLine": 25,
+                        "endColumn": 12,
+                        "endOffset": 2358
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 3959,
+                    "endColumn": 102,
+                    "endOffset": 4057
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 2363,
+                        "endColumn": 102,
+                        "endOffset": 2461
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 4062,
+                    "endColumn": 118,
+                    "endOffset": 4176
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 2466,
+                        "endColumn": 118,
+                        "endOffset": 2580
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 4181,
+                    "endColumn": 106,
+                    "endOffset": 4283
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 2585,
+                        "endColumn": 106,
+                        "endOffset": 2687
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 4288,
+                    "endColumn": 102,
+                    "endOffset": 4386
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 2692,
+                        "endColumn": 102,
+                        "endOffset": 2790
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 4391,
+                    "endLine": 69,
+                    "endColumn": 12,
+                    "endOffset": 4541
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 4,
+                        "startOffset": 2795,
+                        "endLine": 31,
+                        "endColumn": 12,
+                        "endOffset": 2945
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 4546,
+                    "endLine": 71,
+                    "endColumn": 12,
+                    "endOffset": 4712
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 4,
+                        "startOffset": 2950,
+                        "endLine": 33,
+                        "endColumn": 12,
+                        "endOffset": 3116
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 4717,
+                    "endLine": 73,
+                    "endColumn": 12,
+                    "endOffset": 4861
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 4,
+                        "startOffset": 3121,
+                        "endLine": 35,
+                        "endColumn": 12,
+                        "endOffset": 3265
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 4866,
+                    "endLine": 75,
+                    "endColumn": 12,
+                    "endOffset": 5026
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 4,
+                        "startOffset": 3270,
+                        "endLine": 37,
+                        "endColumn": 12,
+                        "endOffset": 3430
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 5031,
+                    "endLine": 77,
+                    "endColumn": 12,
+                    "endOffset": 5183
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 4,
+                        "startOffset": 3435,
+                        "endLine": 39,
+                        "endColumn": 12,
+                        "endOffset": 3587
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 5188,
+                    "endLine": 79,
+                    "endColumn": 12,
+                    "endOffset": 5334
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 3592,
+                        "endLine": 41,
+                        "endColumn": 12,
+                        "endOffset": 3738
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 80,
+                    "startColumn": 4,
+                    "startOffset": 5339,
+                    "endColumn": 118,
+                    "endOffset": 5453
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 4,
+                        "startOffset": 3743,
+                        "endColumn": 118,
+                        "endOffset": 3857
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 81,
+                    "startColumn": 4,
+                    "startOffset": 5458,
+                    "endLine": 82,
+                    "endColumn": 12,
+                    "endOffset": 5602
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 4,
+                        "startOffset": 3862,
+                        "endLine": 44,
+                        "endColumn": 12,
+                        "endOffset": 4006
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 5607,
+                    "endLine": 84,
+                    "endColumn": 12,
+                    "endOffset": 5751
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 4011,
+                        "endLine": 46,
+                        "endColumn": 12,
+                        "endOffset": 4155
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 5756,
+                    "endColumn": 111,
+                    "endOffset": 5863
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 4160,
+                        "endColumn": 111,
+                        "endOffset": 4267
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 5868,
+                    "endColumn": 146,
+                    "endOffset": 6010
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 4272,
+                        "endColumn": 146,
+                        "endOffset": 4414
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 6015,
+                    "endLine": 88,
+                    "endColumn": 12,
+                    "endOffset": 6163
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 4419,
+                        "endLine": 50,
+                        "endColumn": 12,
+                        "endOffset": 4567
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 6168,
+                    "endLine": 90,
+                    "endColumn": 12,
+                    "endOffset": 6310
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 4572,
+                        "endLine": 52,
+                        "endColumn": 12,
+                        "endOffset": 4714
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 6315,
+                    "endColumn": 74,
+                    "endOffset": 6385
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 4719,
+                        "endColumn": 74,
+                        "endOffset": 4789
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 6390,
+                    "endColumn": 88,
+                    "endOffset": 6474
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 4794,
+                        "endColumn": 88,
+                        "endOffset": 4878
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 6479,
+                    "endColumn": 86,
+                    "endOffset": 6561
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 4883,
+                        "endColumn": 86,
+                        "endOffset": 4965
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 6566,
+                    "endColumn": 100,
+                    "endOffset": 6662
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 4970,
+                        "endColumn": 100,
+                        "endOffset": 5066
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 6667,
+                    "endLine": 138,
+                    "endColumn": 12,
+                    "endOffset": 9730
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 5071,
+                        "endLine": 100,
+                        "endColumn": 12,
+                        "endOffset": 8134
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 139,
+                    "startColumn": 4,
+                    "startOffset": 9735,
+                    "endLine": 141,
+                    "endColumn": 12,
+                    "endOffset": 9916
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 4,
+                        "startOffset": 8139,
+                        "endLine": 103,
+                        "endColumn": 12,
+                        "endOffset": 8320
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 142,
+                    "startColumn": 4,
+                    "startOffset": 9921,
+                    "endLine": 185,
+                    "endColumn": 12,
+                    "endOffset": 12996
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 4,
+                        "startOffset": 8325,
+                        "endLine": 147,
+                        "endColumn": 12,
+                        "endOffset": 11400
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 186,
+                    "startColumn": 4,
+                    "startOffset": 13001,
+                    "endLine": 188,
+                    "endColumn": 12,
+                    "endOffset": 13194
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 148,
+                        "startColumn": 4,
+                        "startOffset": 11405,
+                        "endLine": 150,
+                        "endColumn": 12,
+                        "endOffset": 11598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 189,
+                    "startColumn": 4,
+                    "startOffset": 13199,
+                    "endLine": 190,
+                    "endColumn": 12,
+                    "endOffset": 13317
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 151,
+                        "startColumn": 4,
+                        "startOffset": 11603,
+                        "endLine": 152,
+                        "endColumn": 12,
+                        "endOffset": 11721
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 191,
+                    "startColumn": 4,
+                    "startOffset": 13322,
+                    "endLine": 192,
+                    "endColumn": 12,
+                    "endOffset": 13440
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 153,
+                        "startColumn": 4,
+                        "startOffset": 11726,
+                        "endLine": 154,
+                        "endColumn": 12,
+                        "endOffset": 11844
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 193,
+                    "startColumn": 4,
+                    "startOffset": 13445,
+                    "endLine": 194,
+                    "endColumn": 12,
+                    "endOffset": 13553
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 155,
+                        "startColumn": 4,
+                        "startOffset": 11849,
+                        "endLine": 156,
+                        "endColumn": 12,
+                        "endOffset": 11957
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 195,
+                    "startColumn": 4,
+                    "startOffset": 13558,
+                    "endLine": 197,
+                    "endColumn": 12,
+                    "endOffset": 13736
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 157,
+                        "startColumn": 4,
+                        "startOffset": 11962,
+                        "endLine": 159,
+                        "endColumn": 12,
+                        "endOffset": 12140
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 198,
+                    "startColumn": 4,
+                    "startOffset": 13741,
+                    "endLine": 199,
+                    "endColumn": 12,
+                    "endOffset": 13867
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 160,
+                        "startColumn": 4,
+                        "startOffset": 12145,
+                        "endLine": 161,
+                        "endColumn": 12,
+                        "endOffset": 12271
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 200,
+                    "startColumn": 4,
+                    "startOffset": 13872,
+                    "endLine": 202,
+                    "endColumn": 12,
+                    "endOffset": 14068
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 162,
+                        "startColumn": 4,
+                        "startOffset": 12276,
+                        "endLine": 164,
+                        "endColumn": 12,
+                        "endOffset": 12472
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 203,
+                    "startColumn": 4,
+                    "startOffset": 14073,
+                    "endColumn": 88,
+                    "endOffset": 14157
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 165,
+                        "startColumn": 4,
+                        "startOffset": 12477,
+                        "endColumn": 88,
+                        "endOffset": 12561
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 204,
+                    "startColumn": 4,
+                    "startOffset": 14162,
+                    "endColumn": 110,
+                    "endOffset": 14268
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 166,
+                        "startColumn": 4,
+                        "startOffset": 12566,
+                        "endColumn": 110,
+                        "endOffset": 12672
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 205,
+                    "startColumn": 4,
+                    "startOffset": 14273,
+                    "endColumn": 126,
+                    "endOffset": 14395
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 167,
+                        "startColumn": 4,
+                        "startOffset": 12677,
+                        "endColumn": 126,
+                        "endOffset": 12799
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 206,
+                    "startColumn": 4,
+                    "startOffset": 14400,
+                    "endColumn": 100,
+                    "endOffset": 14496
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 168,
+                        "startColumn": 4,
+                        "startOffset": 12804,
+                        "endColumn": 100,
+                        "endOffset": 12900
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 207,
+                    "startColumn": 4,
+                    "startOffset": 14501,
+                    "endColumn": 94,
+                    "endOffset": 14591
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 169,
+                        "startColumn": 4,
+                        "startOffset": 12905,
+                        "endColumn": 94,
+                        "endOffset": 12995
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 208,
+                    "startColumn": 4,
+                    "startOffset": 14596,
+                    "endColumn": 122,
+                    "endOffset": 14714
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 170,
+                        "startColumn": 4,
+                        "startOffset": 13000,
+                        "endColumn": 122,
+                        "endOffset": 13118
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 209,
+                    "startColumn": 4,
+                    "startOffset": 14719,
+                    "endColumn": 128,
+                    "endOffset": 14843
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 171,
+                        "startColumn": 4,
+                        "startOffset": 13123,
+                        "endColumn": 128,
+                        "endOffset": 13247
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 210,
+                    "startColumn": 4,
+                    "startOffset": 14848,
+                    "endColumn": 116,
+                    "endOffset": 14960
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 172,
+                        "startColumn": 4,
+                        "startOffset": 13252,
+                        "endColumn": 116,
+                        "endOffset": 13364
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 211,
+                    "startColumn": 4,
+                    "startOffset": 14965,
+                    "endLine": 213,
+                    "endColumn": 12,
+                    "endOffset": 15137
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 173,
+                        "startColumn": 4,
+                        "startOffset": 13369,
+                        "endLine": 175,
+                        "endColumn": 12,
+                        "endOffset": 13541
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 214,
+                    "startColumn": 4,
+                    "startOffset": 15142,
+                    "endColumn": 98,
+                    "endOffset": 15236
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 176,
+                        "startColumn": 4,
+                        "startOffset": 13546,
+                        "endColumn": 98,
+                        "endOffset": 13640
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 215,
+                    "startColumn": 4,
+                    "startOffset": 15241,
+                    "endLine": 216,
+                    "endColumn": 12,
+                    "endOffset": 15371
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 177,
+                        "startColumn": 4,
+                        "startOffset": 13645,
+                        "endLine": 178,
+                        "endColumn": 12,
+                        "endOffset": 13775
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 217,
+                    "startColumn": 4,
+                    "startOffset": 15376,
+                    "endLine": 218,
+                    "endColumn": 12,
+                    "endOffset": 15514
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 179,
+                        "startColumn": 4,
+                        "startOffset": 13780,
+                        "endLine": 180,
+                        "endColumn": 12,
+                        "endOffset": 13918
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 219,
+                    "startColumn": 4,
+                    "startOffset": 15519,
+                    "endLine": 220,
+                    "endColumn": 12,
+                    "endOffset": 15649
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 181,
+                        "startColumn": 4,
+                        "startOffset": 13923,
+                        "endLine": 182,
+                        "endColumn": 12,
+                        "endOffset": 14053
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 221,
+                    "startColumn": 4,
+                    "startOffset": 15654,
+                    "endLine": 222,
+                    "endColumn": 12,
+                    "endOffset": 15768
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 183,
+                        "startColumn": 4,
+                        "startOffset": 14058,
+                        "endLine": 184,
+                        "endColumn": 12,
+                        "endOffset": 14172
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 223,
+                    "startColumn": 4,
+                    "startOffset": 15773,
+                    "endLine": 226,
+                    "endColumn": 12,
+                    "endOffset": 15969
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 185,
+                        "startColumn": 4,
+                        "startOffset": 14177,
+                        "endLine": 188,
+                        "endColumn": 12,
+                        "endOffset": 14373
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 227,
+                    "startColumn": 4,
+                    "startOffset": 15974,
+                    "endLine": 228,
+                    "endColumn": 12,
+                    "endOffset": 16088
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 189,
+                        "startColumn": 4,
+                        "startOffset": 14378,
+                        "endLine": 190,
+                        "endColumn": 12,
+                        "endOffset": 14492
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 229,
+                    "startColumn": 4,
+                    "startOffset": 16093,
+                    "endColumn": 92,
+                    "endOffset": 16181
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 191,
+                        "startColumn": 4,
+                        "startOffset": 14497,
+                        "endColumn": 92,
+                        "endOffset": 14585
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 230,
+                    "startColumn": 4,
+                    "startOffset": 16186,
+                    "endColumn": 110,
+                    "endOffset": 16292
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 192,
+                        "startColumn": 4,
+                        "startOffset": 14590,
+                        "endColumn": 110,
+                        "endOffset": 14696
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 231,
+                    "startColumn": 4,
+                    "startOffset": 16297,
+                    "endColumn": 55,
+                    "endOffset": 16348
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 193,
+                        "startColumn": 4,
+                        "startOffset": 14701,
+                        "endColumn": 55,
+                        "endOffset": 14752
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 232,
+                    "startColumn": 4,
+                    "startOffset": 16353,
+                    "endLine": 233,
+                    "endColumn": 12,
+                    "endOffset": 16455
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 194,
+                        "startColumn": 4,
+                        "startOffset": 14757,
+                        "endLine": 195,
+                        "endColumn": 12,
+                        "endOffset": 14859
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 234,
+                    "startColumn": 4,
+                    "startOffset": 16460,
+                    "endLine": 237,
+                    "endColumn": 12,
+                    "endOffset": 16650
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 196,
+                        "startColumn": 4,
+                        "startOffset": 14864,
+                        "endLine": 199,
+                        "endColumn": 12,
+                        "endOffset": 15054
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 238,
+                    "startColumn": 4,
+                    "startOffset": 16655,
+                    "endLine": 239,
+                    "endColumn": 12,
+                    "endOffset": 16761
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 200,
+                        "startColumn": 4,
+                        "startOffset": 15059,
+                        "endLine": 201,
+                        "endColumn": 12,
+                        "endOffset": 15165
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 240,
+                    "startColumn": 4,
+                    "startOffset": 16766,
+                    "endLine": 241,
+                    "endColumn": 12,
+                    "endOffset": 16894
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 202,
+                        "startColumn": 4,
+                        "startOffset": 15170,
+                        "endLine": 203,
+                        "endColumn": 12,
+                        "endOffset": 15298
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 242,
+                    "startColumn": 4,
+                    "startOffset": 16899,
+                    "endColumn": 94,
+                    "endOffset": 16989
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 204,
+                        "startColumn": 4,
+                        "startOffset": 15303,
+                        "endColumn": 94,
+                        "endOffset": 15393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 243,
+                    "startColumn": 4,
+                    "startOffset": 16994,
+                    "endColumn": 90,
+                    "endOffset": 17080
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 205,
+                        "startColumn": 4,
+                        "startOffset": 15398,
+                        "endColumn": 90,
+                        "endOffset": 15484
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 244,
+                    "startColumn": 4,
+                    "startOffset": 17085,
+                    "endColumn": 90,
+                    "endOffset": 17171
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 206,
+                        "startColumn": 4,
+                        "startOffset": 15489,
+                        "endColumn": 90,
+                        "endOffset": 15575
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 245,
+                    "startColumn": 4,
+                    "startOffset": 17176,
+                    "endColumn": 116,
+                    "endOffset": 17288
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 207,
+                        "startColumn": 4,
+                        "startOffset": 15580,
+                        "endColumn": 116,
+                        "endOffset": 15692
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 246,
+                    "startColumn": 4,
+                    "startOffset": 17293,
+                    "endLine": 247,
+                    "endColumn": 12,
+                    "endOffset": 17427
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 208,
+                        "startColumn": 4,
+                        "startOffset": 15697,
+                        "endLine": 209,
+                        "endColumn": 12,
+                        "endOffset": 15831
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 248,
+                    "startColumn": 4,
+                    "startOffset": 17432,
+                    "endLine": 258,
+                    "endColumn": 12,
+                    "endOffset": 18186
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 809
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 259,
+                    "startColumn": 4,
+                    "startOffset": 18191,
+                    "endLine": 269,
+                    "endColumn": 12,
+                    "endOffset": 18937
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 814,
+                        "endLine": 23,
+                        "endColumn": 12,
+                        "endOffset": 1560
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 270,
+                    "startColumn": 4,
+                    "startOffset": 18942,
+                    "endColumn": 90,
+                    "endOffset": 19028
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/styles_notification.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 76,
+                        "endColumn": 91,
+                        "endOffset": 163
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 271,
+                    "startColumn": 4,
+                    "startOffset": 19033,
+                    "endLine": 272,
+                    "endColumn": 12,
+                    "endOffset": 19138
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/styles_notification.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 168,
+                        "endLine": 4,
+                        "endColumn": 12,
+                        "endOffset": 274
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 273,
+                    "startColumn": 4,
+                    "startOffset": 19143,
+                    "endLine": 282,
+                    "endColumn": 12,
+                    "endOffset": 19651
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 210,
+                        "startColumn": 4,
+                        "startOffset": 15836,
+                        "endLine": 219,
+                        "endColumn": 12,
+                        "endOffset": 16344
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 283,
+                    "startColumn": 4,
+                    "startOffset": 19656,
+                    "endLine": 292,
+                    "endColumn": 12,
+                    "endOffset": 20176
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 220,
+                        "startColumn": 4,
+                        "startOffset": 16349,
+                        "endLine": 229,
+                        "endColumn": 12,
+                        "endOffset": 16869
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 293,
+                    "startColumn": 4,
+                    "startOffset": 20181,
+                    "endLine": 302,
+                    "endColumn": 12,
+                    "endOffset": 20856
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 230,
+                        "startColumn": 4,
+                        "startOffset": 16874,
+                        "endLine": 239,
+                        "endColumn": 12,
+                        "endOffset": 17549
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 303,
+                    "startColumn": 4,
+                    "startOffset": 20861,
+                    "endColumn": 56,
+                    "endOffset": 20913
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 240,
+                        "startColumn": 4,
+                        "startOffset": 17554,
+                        "endColumn": 56,
+                        "endOffset": 17606
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 304,
+                    "startColumn": 4,
+                    "startOffset": 20918,
+                    "endColumn": 57,
+                    "endOffset": 20971
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/values-v21/values-v21.xml",
+                    "position": {
+                        "startLine": 241,
+                        "startColumn": 4,
+                        "startOffset": 17611,
+                        "endColumn": 57,
+                        "endOffset": 17664
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 305,
+                    "startColumn": 4,
+                    "startOffset": 20976,
+                    "endLine": 307,
+                    "endColumn": 12,
+                    "endOffset": 21157
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/styles_phoneprofilestheme_dark.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 237
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 308,
+                    "startColumn": 4,
+                    "startOffset": 21162,
+                    "endLine": 310,
+                    "endColumn": 12,
+                    "endOffset": 21349
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/styles_phoneprofilestheme_dlight.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 243
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 311,
+                    "startColumn": 4,
+                    "startOffset": 21354,
+                    "endLine": 313,
+                    "endColumn": 12,
+                    "endOffset": 21547
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-v21/styles_phoneprofilestheme_material.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 249
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,45 @@
+[
+    {
+        "outputFile": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/values-sw720dp-v13/values-sw720dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 41,
+                    "endOffset": 92
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/values-sw720dp-v13/values-sw720dp-v13.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 41,
+                        "endOffset": 92
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 97,
+                    "endColumn": 75,
+                    "endOffset": 168
+                },
+                "from": {
+                    "file": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/values-sw720dp/device.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 1,
+                        "startOffset": 52,
+                        "endColumn": 72,
+                        "endOffset": 123
+                    }
+                }
+            }
+        ]
+    }
+]

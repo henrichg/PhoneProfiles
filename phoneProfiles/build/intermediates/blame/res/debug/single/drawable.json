@@ -1,0 +1,170 @@
+[
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/transparent.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable/transparent.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_btn_selector.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_btn_selector.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_item_selected_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_item_selected_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_btn_check_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_selector.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_selector.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/gray_circle.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/commons/0.8.5.6/res/drawable/gray_circle.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_btn_selected.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_btn_selected.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_item_selected.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_item_selected.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_btn_selected_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_btn_selected_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_ratingbar_full_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/toolbar_shadow.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/PhoneProfiles/materialPreferences/unspecified/res/drawable/toolbar_shadow.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_dialog_material_background_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/ic_empty.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable/ic_empty.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/card_selector.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable/card_selector.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_selector_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_selector_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_transparent.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_transparent.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/bottombar_dropshadow.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable/bottombar_dropshadow.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/card_selector_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable/card_selector_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/md_btn_selector_dark.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable/md_btn_selector_dark.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_textfield_search_material.xml"
+    }
+]

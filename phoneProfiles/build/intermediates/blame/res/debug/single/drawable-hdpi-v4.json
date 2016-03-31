@@ -1,0 +1,1102 @@
+[
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_4_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_4_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_clear_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_black_36dp.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_8_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_8_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_4.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_4.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_6_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_6_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_wifi.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_wifi.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_call_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_call_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_edit_profiles_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_edit_profiles_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_12_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_12_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_call_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_call_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_source_profile.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_source_profile.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_wifi_ap.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_wifi_ap.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_black_16dp.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_source_profile_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_source_profile_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_zenmode_none.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_zenmode_none.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_item_edit_menu.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_item_edit_menu.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_call_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_call_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_help.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_help.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/header_card_dark.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/header_card_dark.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_nfc.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_nfc.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_5_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_5_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_profile_pref_cancel_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_profile_pref_cancel_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_dashclock.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_dashclock.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_new_profile_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_new_profile_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_11_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_11_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_5.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_5.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_profileicon_help.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_profileicon_help.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_4.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_4.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_4_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_4_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_airplane_mode.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_airplane_mode.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_info_preference_icon.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_info_preference_icon.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_launcher_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_profile_activation_duration.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_profile_activation_duration.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_9_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_9_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_10_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_10_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/md_nav_back.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res/drawable-hdpi-v4/md_nav_back.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_longpressed_holo.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_check.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_check.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_7.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_7.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_pphelper_upgrade_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_pphelper_upgrade_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_delete_all_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_delete_all_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_8.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_8.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_4_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_4_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_4_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_4_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_9_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_9_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_7_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_7_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_autosync_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_autosync_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_search_api_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_check_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_check_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_default_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_default_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_5_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_5_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_rating_star_off_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_rating_star_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_locationsettings_pref.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_locationsettings_pref.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_6.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_6.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_start_activity_preference_icon.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_start_activity_preference_icon.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_wifi_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_wifi_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_5_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_5_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_8_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_8_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_settings_language_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_settings_language_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_airplane_mode_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_airplane_mode_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_mobiledata_pref.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_mobiledata_pref.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_lockscreen.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_lockscreen.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/card_dark.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/card_dark.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_night.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_night.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_mobiledata.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_mobiledata.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_11.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_11.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_7.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_7.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_night_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_night_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_sound.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_sound.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_5.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_5.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_speakerphone_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_speakerphone_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_rating_star_on_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_rating_star_on_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/header_card.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/header_card.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_drag_handle.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_drag_handle.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_detail_profile_preferences_edit.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_detail_profile_preferences_edit.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_volume_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_volume_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_autosync.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_autosync.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_volume_on.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_volume_on.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_screen_timeout.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_screen_timeout.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_power_save_mode.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_power_save_mode.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_autobrightness.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_autobrightness.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_night_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_night_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_8_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_8_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_default.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_default.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_zenmode_alarms.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_zenmode_alarms.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_shortcut_overlay.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_shortcut_overlay.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/header_card_dlight.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/header_card_dlight.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_run_application.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_run_application.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_nfc_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_nfc_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_settings_language.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_settings_language.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_mobiledata_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_mobiledata_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_lockscreen_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_lockscreen_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_brightness.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_brightness.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_5_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_5_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_9_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_9_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_10_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_10_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_5.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_5.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_6_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_6_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_5_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_5_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_autorotate_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_autorotate_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_gps_on.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_gps_on.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_12_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_12_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_go_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_gps_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_gps_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_10.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_10.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_5_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_5_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_volume_level.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_volume_level.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_6.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_6.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_culture_4_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_culture_4_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_bluetooth.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_bluetooth.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_power_save_mode_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_power_save_mode_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_4_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_4_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_8_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_8_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_6_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_6_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_drag_handle_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_drag_handle_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_speakerphone.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_speakerphone.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_4_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_4_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_profile_pref_save_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_action_profile_pref_save_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_default_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_default_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_meeting_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_meeting_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_activated.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_activated.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_9_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_9_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_3.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_3.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_1_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_1_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_4.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_4.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_battery_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_battery_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_2_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_2_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_network_type.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_network_type.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_vibration.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_vibration.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_11_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_11_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_7_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_7_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_4_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_4_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_3_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_3_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_4.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_4.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_7_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_7_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_6_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_6_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_shortcut.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_shortcut.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_zenmode_priority.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_zenmode_priority.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_focused_holo.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_wifi_ap_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_wifi_ap_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_zen_mode.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_zen_mode.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_autorotate.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_autorotate.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_8.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_8.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_2.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_2.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_bluetooth_off.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_bluetooth_off.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_1.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_1.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_item_edit_menu_dark.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_item_edit_menu_dark.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_home.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_home.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_volume_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_volume_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_7_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_7_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_airplane_1_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_airplane_1_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/card.9.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/card.9.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_car_2_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_car_2_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_mute_notify_color.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_mute_notify_color.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_pref_wallpaper.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_pref_wallpaper.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_work_12.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_work_12.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_outdoors_3_notify.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_outdoors_3_notify.png"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_profile_sleep.png",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/drawable-hdpi/ic_profile_sleep.png"
+    }
+]

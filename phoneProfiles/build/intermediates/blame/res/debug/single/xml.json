@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/one_row_widget_info.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/one_row_widget_info.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/phone_profiles_preferences.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/phone_profiles_preferences.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/profile_list_widget_info.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/profile_list_widget_info.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/default_profile_preferences.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/default_profile_preferences.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/icon_widget_info.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/icon_widget_info.xml"
+    },
+    {
+        "merged": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/build/intermediates/res/merged/debug/xml/profile_preferences.xml",
+        "source": "/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/src/main/res/xml/profile_preferences.xml"
+    }
+]
