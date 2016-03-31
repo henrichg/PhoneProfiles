@@ -74,22 +74,21 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity {
 
         fragment = new ProfilePreferencesFragment();
 
-        if (savedInstanceState == null) {
-            Bundle arguments = new Bundle();
-            arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
-            arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, newProfileMode);
-            arguments.putInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-            if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
-                ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE;
-            else
-                ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
-            fragment.setArguments(arguments);
+        Bundle arguments = new Bundle();
+        arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
+        arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, newProfileMode);
+        arguments.putInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+        if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
+            ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE;
+        else
+            ProfilePreferencesFragment.startupSource = GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY;
+        fragment.setArguments(arguments);
 
+        if (savedInstanceState == null) {
             loadPreferences(newProfileMode, predefinedProfileIndex);
         }
 
         setPreferenceFragment(fragment);
-
     }
 
     @Override

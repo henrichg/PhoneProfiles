@@ -81,11 +81,9 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
         fragment = new PhoneProfilesPreferencesFragment();
 
-        if (savedInstanceState == null) {
-            Bundle args = new Bundle();
-            args.putString(EXTRA_SCROLL_TO, extraScrollTo);
-            fragment.setArguments(args);
-        }
+        Bundle args = new Bundle();
+        args.putString(EXTRA_SCROLL_TO, extraScrollTo);
+        fragment.setArguments(args);
 
         setPreferenceFragment(fragment);
     }

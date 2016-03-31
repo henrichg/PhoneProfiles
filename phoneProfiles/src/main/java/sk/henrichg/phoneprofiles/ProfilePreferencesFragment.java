@@ -31,7 +31,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 {
 
     private DataWrapper dataWrapper;
-    private Profile profile;
+    //private Profile profile;
     //private boolean first_start_activity;
     private int new_profile_mode;
     private int predefineProfileIndex;
@@ -77,7 +77,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
         predefineProfileIndex = getArguments().getInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX);
         //Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
 
-        profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, predefineProfileIndex, true);
+        //profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, predefineProfileIndex, true);
 
         //prefMng = getPreferenceManager();
         preferences = prefMng.getSharedPreferences();
@@ -161,7 +161,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                     PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext());
 
             Preference zenModePreference = prefMng.findPreference(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
-            zenModePreference.setEnabled((profile._volumeRingerMode == 5) && canEnableZenMode);
+            String value = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE, "");
+            zenModePreference.setEnabled((value.equals("5")) && canEnableZenMode);
 
             Preference notificationAccessPreference = prefMng.findPreference(PREF_NOTIFICATION_ACCESS);
             //notificationAccessPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
@@ -242,8 +243,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                     networkTypePreference.setEntries(context.getResources().getStringArray(R.array.networkTypeGSMArray));
                     networkTypePreference.setEntryValues(context.getResources().getStringArray(R.array.networkTypeGSMValues));
                 }
-                networkTypePreference.setValue(Integer.toString(profile._deviceNetworkType));
-                setSummary(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
+                String value = preferences.getString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, "");
+                networkTypePreference.setValue(value);
+                setSummary(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, value);
             }
 
             if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
@@ -255,8 +257,9 @@ public class ProfilePreferencesFragment extends PreferenceFragment
                     networkTypePreference.setEntries(context.getResources().getStringArray(R.array.networkTypeCDMAArray));
                     networkTypePreference.setEntryValues(context.getResources().getStringArray(R.array.networkTypeCDMAValues));
                 }
-                networkTypePreference.setValue(Integer.toString(profile._deviceNetworkType));
-                setSummary(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
+                String value = preferences.getString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, "");
+                networkTypePreference.setValue(value);
+                setSummary(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, value);
             }
         }
     }
@@ -281,7 +284,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
     public void onDestroy()
     {
         preferences.unregisterOnSharedPreferenceChangeListener(this); 
-        profile = null;
+        //profile = null;
         
         if (dataWrapper != null)
             dataWrapper.invalidateDataWrapper();
@@ -992,8 +995,8 @@ public class ProfilePreferencesFragment extends PreferenceFragment
 
     private void updateSharedPreference()
     {
-        if (profile != null) 
-        {	
+        //if (profile != null)
+        //{
 
             // updating activity with selected profile preferences
 
@@ -1049,7 +1052,7 @@ public class ProfilePreferencesFragment extends PreferenceFragment
             disableDependedPref(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE);
             disableDependedPref(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP);
 
-        }
+        //}
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
