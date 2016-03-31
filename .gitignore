@@ -5,7 +5,6 @@
 .DS_Store
 /build
 
-dragSortListView/build
-/MaskedEditText/build
-MaskedEditText/build
-phoneProfiles/build
+/dragSortListView/build
+/materialPreferences/build
+/phoneProfilesPlus/build
