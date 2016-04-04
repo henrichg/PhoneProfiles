@@ -1,30 +1,8 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.telephony.TelephonyManager;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.CharacterStyle;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
-
-import com.fnp.materialpreferences.PreferenceFragment;
 
 public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
                                         implements SharedPreferences.OnSharedPreferenceChangeListener

@@ -1,14 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.TypedArray;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SeekBar;
@@ -18,7 +13,6 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.MDButton;
-import com.afollestad.materialdialogs.util.DialogUtils;
 import com.github.pinball83.maskededittext.MaskedEditText;
 
 import java.util.Arrays;

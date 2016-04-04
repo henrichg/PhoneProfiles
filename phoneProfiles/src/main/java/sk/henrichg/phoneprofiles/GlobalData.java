@@ -45,10 +45,11 @@ public class GlobalData extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     public static final String LOG_FILENAME = "log.txt";
 
-    private static boolean logIntoLogCat = false;
-    private static boolean logIntoFile = false;
+    private static boolean logIntoLogCat = true;
+    private static boolean logIntoFile = true;
     private static boolean rootToolsDebug = false;
-    public static String logFilterTags = "ActivateProfileListFragment"
+    public static String logFilterTags =  "PhoneProfilesHelper.doInstallPPHelper"
+                                         +"|PhoneProfilesHelper.doUninstallPPHelper"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
