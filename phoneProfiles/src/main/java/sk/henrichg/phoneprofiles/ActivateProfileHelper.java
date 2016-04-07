@@ -899,35 +899,39 @@ public class ActivateProfileHelper {
         if (Permissions.checkProfileScreenTimeout(context, profile)) {
             switch (profile._deviceScreenTimeout) {
                 case 1:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
                     break;
                 case 2:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 30000);
                     break;
                 case 3:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
                     break;
                 case 4:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 120000);
                     break;
                 case 5:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 600000);
                     break;
                 case 6:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     //if (android.os.Build.VERSION.SDK_INT < 19)
                     //    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, -1);
                     //else
-                        screenTimeoutLock(context);
-                    //Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 18000000);
+                    //    screenTimeoutLock(context);
+                    //2147483647 = Integer.MAX_VALUE
+                    //18000000   = 5 hours
+                    //86400000   = 24 hounrs
+                    //43200000   = 12 hours
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000);
                     break;
                 case 7:
-                    screenTimeoutUnlock(context);
+                    //screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
                     break;
             }
