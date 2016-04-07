@@ -33,7 +33,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/notification_activated_profile_icon"
             android:text="@string/profile_name_default"
-            style="@style/NotificationTitle"
+            android:textAppearance="@style/NotificationTitle"
             android:singleLine="true" />
 
         <ImageView

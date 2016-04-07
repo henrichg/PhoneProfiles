@@ -18,6 +18,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.location.LocationManager;
 import android.media.AudioManager;
@@ -1324,6 +1325,11 @@ public class ActivateProfileHelper {
 
                 Notification notification = notificationBuilder.build();
 
+                if (GlobalData.notificationTextColor.equals("1"))
+                    contentView.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
+                else
+                if (GlobalData.notificationTextColor.equals("2"))
+                    contentView.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
                 contentView.setTextViewText(R.id.notification_activated_profile_name, profileName);
 
                 //contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator,
