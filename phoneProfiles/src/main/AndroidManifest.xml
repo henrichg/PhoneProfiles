@@ -419,6 +419,11 @@
             android:enabled="true"
             android:exported="false">
         </receiver>
+        <receiver
+            android:name=".RecreateNotificationBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>

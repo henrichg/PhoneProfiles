@@ -121,7 +121,7 @@
             android:title="@string/phone_profiles_pref_notificationPrefIndicator"
             android:defaultValue="true"
             android:dependency="notificationStatusBar" />
-        <sk.henrichg.phoneprofilesplus.MaterialListPreference
+        <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_notificationTextColor"
             android:summary="@string/array_pref_no_change"
             android:key="notificationTextColor"
