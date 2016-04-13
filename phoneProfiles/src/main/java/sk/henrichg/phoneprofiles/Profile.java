@@ -53,6 +53,7 @@ public class Profile {
     public int _devicePowerSaveMode;
     public boolean _askForDuration;
     public int _deviceNetworkType;
+    public int _notificationLed;
 
     public Bitmap _iconBitmap;
     public Bitmap _preferencesIndicator;
@@ -112,7 +113,8 @@ public class Profile {
                    int deviceWiFiAP,
                    int devicePowerSaveMode,
                    boolean askForDuration,
-                   int deviceNetworkType)
+                   int deviceNetworkType,
+                   int notificationLed)
     {
         this._id = id;
         this._name = name;
@@ -158,6 +160,7 @@ public class Profile {
         this._devicePowerSaveMode = devicePowerSaveMode;
         this._askForDuration = askForDuration;
         this._deviceNetworkType = deviceNetworkType;
+        this._notificationLed = notificationLed;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -206,7 +209,8 @@ public class Profile {
                    int deviceWiFiAP,
                    int devicePowerSaveMode,
                    boolean askForDuration,
-                   int deviceNetworkType)
+                   int deviceNetworkType,
+                   int notificationLed)
     {
         this._name = name;
         this._icon = icon;
@@ -251,6 +255,7 @@ public class Profile {
         this._devicePowerSaveMode = devicePowerSaveMode;
         this._askForDuration = askForDuration;
         this._deviceNetworkType = deviceNetworkType;
+        this._notificationLed = notificationLed;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -302,6 +307,7 @@ public class Profile {
         this._devicePowerSaveMode = profile._devicePowerSaveMode;
         this._askForDuration = profile._askForDuration;
         this._deviceNetworkType = profile._deviceNetworkType;
+        this._notificationLed = profile._notificationLed;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;

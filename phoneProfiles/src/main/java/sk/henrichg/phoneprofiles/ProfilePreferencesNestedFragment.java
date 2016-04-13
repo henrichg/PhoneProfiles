@@ -538,7 +538,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (key.equals(GlobalData.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT) ||
                 key.equals(GlobalData.PREF_PROFILE_DEVICE_KEYGUARD) ||
                 key.equals(GlobalData.PREF_PROFILE_DEVICE_BRIGHTNESS) ||
-                key.equals(GlobalData.PREF_PROFILE_DEVICE_AUTOROTATE)) {
+                key.equals(GlobalData.PREF_PROFILE_DEVICE_AUTOROTATE) ||
+                key.equals(GlobalData.PREF_PROFILE_NOTIFICATION_LED)) {
             String title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT);
             if (!title.isEmpty()) {
                 _bold = true;
@@ -557,6 +558,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_DEVICE_AUTOROTATE);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_NOTIFICATION_LED);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -836,6 +843,35 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 listPreference.setSummary(summary);
                 setTitleStyle(listPreference, index > 0, false);
                 setCategorySummary(listPreference, index > 0);
+            }
+        }
+        if (key.equals(GlobalData.PREF_PROFILE_NOTIFICATION_LED)) {
+            ListPreference listPreference = (ListPreference) prefMng.findPreference(key);
+            if (listPreference != null) {
+                if (android.os.Build.VERSION.SDK_INT >= 23) {
+                    listPreference.setTitle(R.string.profile_preferences_notificationLed_23);
+                } else {
+                    listPreference.setTitle(R.string.profile_preferences_notificationLed);
+                }
+                int canChange = GlobalData.isPreferenceAllowed(key, context);
+                if (canChange != GlobalData.PREFERENCE_ALLOWED) {
+                    listPreference.setEnabled(false);
+                    if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
+                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+                    //else if (canChange == GlobalData.PREFERENCE_INSTALL_PPHELPER)
+                    //    listPreference.setSummary(getResources().getString(R.string.profile_preferences_install_pphelper));
+                    //else if (canChange == GlobalData.PREFERENCE_UPGRADE_PPHELPER)
+                    //    listPreference.setSummary(getResources().getString(R.string.profile_preferences_upgrade_pphelper));
+                    setTitleStyle(listPreference, false, false);
+                    setCategorySummary(listPreference, false);
+                } else {
+                    String sValue = value.toString();
+                    int index = listPreference.findIndexOfValue(sValue);
+                    CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
+                    listPreference.setSummary(summary);
+                    setTitleStyle(listPreference, index > 0, false);
+                    setCategorySummary(listPreference, index > 0);
+                }
             }
         }
         if (key.equals(GlobalData.PREF_PROFILE_DURATION))

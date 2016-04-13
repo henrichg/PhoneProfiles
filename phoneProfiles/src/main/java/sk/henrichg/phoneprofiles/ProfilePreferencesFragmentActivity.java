@@ -237,7 +237,8 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
                     origProfile._deviceWiFiAP,
                     origProfile._devicePowerSaveMode,
                     origProfile._askForDuration,
-                    origProfile._deviceNetworkType);
+                    origProfile._deviceNetworkType,
+                    origProfile._notificationLed);
             showSaveMenu = true;
         }
         else
@@ -316,6 +317,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, Integer.toString(profile._deviceWiFiAP));
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, Integer.toString(profile._devicePowerSaveMode));
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, Integer.toString(profile._deviceNetworkType));
+            editor.putString(GlobalData.PREF_PROFILE_NOTIFICATION_LED, Integer.toString(profile._notificationLed));
             editor.commit();
         }
     }
@@ -398,6 +400,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
         profile._deviceWiFiAP = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, ""));
         profile._devicePowerSaveMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, ""));
         profile._deviceNetworkType = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, ""));
+        profile._notificationLed = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_NOTIFICATION_LED, ""));
 
         if (ProfilePreferencesFragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {

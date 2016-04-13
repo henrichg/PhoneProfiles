@@ -32,6 +32,7 @@ public class Permissions {
     public static final int PERMISSION_EXPORT = 12;
     public static final int PERMISSION_IMPORT = 13;
     public static final int PERMISSION_INSTALL_PPHELPER = 14;
+    public static final int PERMISSION_NOTIFICATION_LED = 15;
 
     public static final int GRANT_TYPE_PROFILE = 1;
     public static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -121,6 +122,7 @@ public class Permissions {
             if (!checkProfileScreenTimeout(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
             if (!checkProfileScreenBrightness(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
             if (!checkProfileAutoRotation(context, profile)) permissions.add(new PermissionType(PERMISSION_AUTOROTATION, permission.WRITE_SETTINGS));
+            if (!checkProfileNotificationLed(context, profile)) permissions.add(new PermissionType(PERMISSION_NOTIFICATION_LED, permission.WRITE_SETTINGS));
             if (!checkProfileWallpaper(context, profile)) permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
             if (!checkProfileRadioPreferences(context, profile)) {
                 permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
@@ -200,6 +202,22 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._vibrationOnTouch != 0) {
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
+            }
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+
+    public static boolean checkProfileNotificationLed(Context context, Profile profile) {
+        if (profile == null) return true;
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (profile._notificationLed != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
                     GlobalData.setShowRequestWriteSettingsPermission(context, true);
