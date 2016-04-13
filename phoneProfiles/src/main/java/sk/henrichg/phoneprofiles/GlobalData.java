@@ -1064,7 +1064,8 @@ public class GlobalData extends Application {
         else
         if (preferenceKey.equals(PREF_PROFILE_NOTIFICATION_LED))
         {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
+            int value = Settings.System.getInt(context.getContentResolver(), "notification_light_pulse", -10);
+            if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 23)) {
                 if (isRooted(false)) {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
@@ -1080,6 +1081,7 @@ public class GlobalData extends Application {
                 }
             }
             else
+            if (value != -10)
                 featurePresented = PREFERENCE_ALLOWED;
         }
         else
