@@ -18,7 +18,7 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
     {
         // Cache the LayoutInflate to avoid asking for a new one each time.
         inflater = LayoutInflater.from(context);
-        //this.context = context; 
+        //this.context = context;
     }
 
     public int getCount() {
@@ -32,7 +32,7 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
     public long getItemId(int position) {
         return position;
     }
-    
+
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ApplicationsCache applicationsCahce = EditorProfilesActivity.getApplicationsCache();
@@ -45,6 +45,7 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
         ImageView imageViewIcon;
         TextView textViewAppName;
         CheckBox checkBox;
+        TextView textViewAppType;
 
         // Create a new row view
         if (convertView == null)
@@ -55,11 +56,12 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
             imageViewIcon = (ImageView) convertView.findViewById(R.id.applications_multiselect_pref_dlg_item_icon);
             textViewAppName = (TextView) convertView.findViewById(R.id.applications_multiselect_pref_dlg_item_app_name);
             checkBox = (CheckBox) convertView.findViewById(R.id.applications_multiselect_pref_dlg_item_checkbox);
+            textViewAppType = (TextView) convertView.findViewById(R.id.applications_multiselect_pref_dlg_item_app_type);
 
             // Optimization: Tag the row with it's child views, so we don't
             // have to
             // call findViewById() later when we reuse the row.
-            convertView.setTag(new ApplicationViewHolder(imageViewIcon, textViewAppName, checkBox));
+            convertView.setTag(new ApplicationViewHolder(imageViewIcon, textViewAppName, textViewAppType, checkBox));
 
             // If CheckBox is toggled, update the Application it is tagged with.
             checkBox.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +81,7 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
             imageViewIcon = viewHolder.imageViewIcon;
             textViewAppName = viewHolder.textViewAppName;
             checkBox = viewHolder.checkBox;
+            textViewAppType = viewHolder.textViewAppType;
         }
 
         // Tag the CheckBox with the Application it is displaying, so that we
@@ -89,6 +92,10 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
         // Display Application data
         imageViewIcon.setImageDrawable(application.icon);
         textViewAppName.setText(application.appLabel);
+        if (application.shortcut)
+            textViewAppType.setText(R.string.applications_preference_applicationType_shortcut);
+        else
+            textViewAppType.setText(R.string.applications_preference_applicationType_application);
 
         checkBox.setChecked(application.checked);
 
