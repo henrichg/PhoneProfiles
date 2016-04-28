@@ -140,7 +140,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
             }
         });
 
-        listAdapter = new ApplicationsMultiselectPreferenceAdapter(_context);
+        listAdapter = new ApplicationsMultiselectPreferenceAdapter(_context, addShortcuts);
 
         mBuilder.customView(layout, false);
 
