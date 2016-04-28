@@ -98,7 +98,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                         {
                             // sem narvi stringy kontatkov oddelenych |
                             value = "";
-                            List<Application> applicationList = EditorProfilesActivity.getApplicationsCache().getList();
+                            List<Application> applicationList = EditorProfilesActivity.getApplicationsCache().getList(addShortcuts == 0);
                             if (applicationList != null)
                             {
                                 for (Application application : applicationList)
@@ -227,7 +227,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         value = getPersistedString(value);
 
         // change checked state by value
-        List<Application> applicationList = EditorProfilesActivity.getApplicationsCache().getList();
+        List<Application> applicationList = EditorProfilesActivity.getApplicationsCache().getList(addShortcuts == 0);
         if (applicationList != null)
         {
             String[] splits = value.split("\\|");
