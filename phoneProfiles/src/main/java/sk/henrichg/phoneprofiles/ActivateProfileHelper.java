@@ -450,8 +450,10 @@ public class ActivateProfileHelper {
                 if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
 
                     boolean doUnlink = audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
-                    if (android.os.Build.VERSION.SDK_INT >= 21)
-                        doUnlink = doUnlink && (Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_ALL) != ZENMODE_NONE);
+                    if (android.os.Build.VERSION.SDK_INT >= 21) {
+                        int zm = Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_ALL);
+                        doUnlink = (zm != ZENMODE_NONE) && (zm != ZENMODE_ALARMS);
+                    }
                     //Log.e("ActivateProfileHelper", "setVolumes doUnlink=" + doUnlink);
                     //Log.e("ActivateProfileHelper", "setVolumes ringerMode=" + audioManager.getRingerMode());
                     //Log.e("ActivateProfileHelper", "setVolumes zenMode=" + Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_NONE));
