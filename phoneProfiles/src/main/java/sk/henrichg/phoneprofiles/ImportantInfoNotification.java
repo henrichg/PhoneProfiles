@@ -17,36 +17,38 @@ public class ImportantInfoNotification {
     static public void showInfoNotification(Context context) {
 
         PackageInfo pinfo = null;
-        int versionCode = 0;
+        int packageVersionCode = 0;
         try {
             pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            versionCode = pinfo.versionCode;
-            if (versionCode > GlobalData.getShowInfoNotificationOnStartVersion(context)) {
+            packageVersionCode = pinfo.versionCode;
+            int savedVersionCode = GlobalData.getShowInfoNotificationOnStartVersion(context);
+            if (packageVersionCode > savedVersionCode) {
                 //boolean show = (versionCode >= VERSION_CODE_FOR_NEWS);
-                boolean show = canShowNotification(versionCode);
-                GlobalData.setShowInfoNotificationOnStart(context, show, versionCode);
+                boolean show = canShowNotification(packageVersionCode, savedVersionCode);
+                GlobalData.setShowInfoNotificationOnStart(context, show, packageVersionCode);
             }
             else
-                GlobalData.setShowInfoNotificationOnStartVersion(context, versionCode);
+                GlobalData.setShowInfoNotificationOnStartVersion(context, packageVersionCode);
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
         }
 
-        if (GlobalData.getShowInfoNotificationOnStart(context, versionCode)) {
+        if (GlobalData.getShowInfoNotificationOnStart(context, packageVersionCode)) {
 
             showNotification(context,
                     context.getString(R.string.info_notification_title),
                     context.getString(R.string.info_notification_text));
 
-            GlobalData.setShowInfoNotificationOnStart(context, false, versionCode);
+            GlobalData.setShowInfoNotificationOnStart(context, false, packageVersionCode);
         }
     }
 
-    static private boolean canShowNotification(int versionCode) {
+    static private boolean canShowNotification(int packageVersionCode, int savedVersionCode) {
         boolean news = false;
-        boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
-        boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
-        boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean newsLatest = (packageVersionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
+        boolean news1634 = ((packageVersionCode >= 1634) && (packageVersionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean news1622 = ((packageVersionCode >= 1622) && (packageVersionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean afterInstall = savedVersionCode == 0;
 
         if (newsLatest) {
             news = false;
@@ -63,6 +65,10 @@ public class ImportantInfoNotification {
                 news = true;
             }
         }
+
+        if (afterInstall)
+            news = true;
+
         return news;
     }
 
