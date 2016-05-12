@@ -952,40 +952,43 @@ public class ActivateProfileHelper {
         if (Permissions.checkProfileScreenTimeout(context, profile)) {
             switch (profile._deviceScreenTimeout) {
                 case 1:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
                     break;
                 case 2:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 30000);
                     break;
                 case 3:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
                     break;
                 case 4:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 120000);
                     break;
                 case 5:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 600000);
                     break;
                 case 6:
-                    //screenTimeoutUnlock(context);
-                    //if (android.os.Build.VERSION.SDK_INT < 19)
-                    //    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, -1);
-                    //else
-                    //    screenTimeoutLock(context);
                     //2147483647 = Integer.MAX_VALUE
                     //18000000   = 5 hours
                     //86400000   = 24 hounrs
                     //43200000   = 12 hours
-                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000);
+                    screenTimeoutUnlock(context);
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000); //18000000);
                     break;
                 case 7:
-                    //screenTimeoutUnlock(context);
+                    screenTimeoutUnlock(context);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
+                    break;
+                case 8:
+                    screenTimeoutUnlock(context);
+                    if (android.os.Build.VERSION.SDK_INT < 19)
+                        Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, -1);
+                    else
+                        screenTimeoutLock(context);
                     break;
             }
         }
@@ -1213,11 +1216,9 @@ public class ActivateProfileHelper {
     private static void screenTimeoutLock(Context context)
     {
         WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        if (GUIData.keepScreenOnView != null)
-        {
-            windowManager.removeView(GUIData.keepScreenOnView);
-            GUIData.keepScreenOnView = null;
-        }
+
+        screenTimeoutUnlock(context);
+
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 1, 1,
                 WindowManager.LayoutParams.TYPE_TOAST,
@@ -1225,7 +1226,10 @@ public class ActivateProfileHelper {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 PixelFormat.TRANSLUCENT
         );
-        params.gravity = Gravity.RIGHT | Gravity.TOP;
+        if (android.os.Build.VERSION.SDK_INT < 17)
+            params.gravity = Gravity.RIGHT | Gravity.TOP;
+        else
+            params.gravity = Gravity.END | Gravity.TOP;
         GUIData.keepScreenOnView = new BrightnessView(context);
         windowManager.addView(GUIData.keepScreenOnView, params);
     }
@@ -1241,7 +1245,6 @@ public class ActivateProfileHelper {
 
         GlobalData.logE("@@@ screenTimeoutLock.unlock", "xxx");
     }
-
 
     @SuppressLint("RtlHardcoded")
     private void createBrightnessView(Profile profile, Context context)
@@ -1263,7 +1266,10 @@ public class ActivateProfileHelper {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         PixelFormat.TRANSLUCENT
                     );
+        if (android.os.Build.VERSION.SDK_INT < 17)
             params.gravity = Gravity.RIGHT | Gravity.TOP;
+        else
+            params.gravity = Gravity.END | Gravity.TOP;
             if (profile.getDeviceBrightnessAutomatic())
                 params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             else
