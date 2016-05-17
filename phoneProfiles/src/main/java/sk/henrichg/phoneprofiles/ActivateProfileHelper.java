@@ -429,8 +429,8 @@ public class ActivateProfileHelper {
                         int volume = GlobalData.getRingerVolume(context);
                         if (volume != -999) {
                             //RingerModeChangeReceiver.internalChange = true;
-                            audioManager.setStreamVolume(AudioManager.STREAM_RING, profile.getVolumeRingtoneValue(), 0);
-                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
+                            audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
+                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, volume);
                             correctVolume0(/*profile, */audioManager, linkUnlink);
                         }
                     }
@@ -441,8 +441,8 @@ public class ActivateProfileHelper {
                         int volume = GlobalData.getNotificationVolume(context);
                         if (volume != -999) {
                             //RingerModeChangeReceiver.internalChange = true;
-                            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, profile.getVolumeNotificationValue(), 0);
-                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, profile.getVolumeNotificationValue());
+                            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
+                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, volume);
                             correctVolume0(/*profile, */audioManager, linkUnlink);
                         }
                     }
@@ -614,13 +614,10 @@ public class ActivateProfileHelper {
     public boolean setRingerMode(Profile profile, AudioManager audioManager, boolean forSilent, int linkUnlink)
     {
 
-        int ringerMode, oldRingerMode;
-        int zenMode, oldZenMode;
+        int ringerMode;
+        int zenMode;
 
-        oldRingerMode = GlobalData.getRingerMode(context);
-        oldZenMode = GlobalData.getZenMode(context);
-
-        //if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+        if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
             if (profile._volumeRingerMode != 0) {
                 GlobalData.setRingerMode(context, profile._volumeRingerMode);
                 if ((profile._volumeRingerMode == 5) && (profile._volumeZenMode != 0))
@@ -628,13 +625,11 @@ public class ActivateProfileHelper {
             }
             ringerMode = GlobalData.getRingerMode(context);
             zenMode = GlobalData.getZenMode(context);
-        /*}
+        }
         else {
-            //ringerMode = RingerModeChangeReceiver.getRingerMode(context, audioManager);
-            //zenMode = PPNotificationListenerService.getZenMode(context, audioManager);
             ringerMode = GlobalData.getRingerMode(context);
             zenMode = GlobalData.getZenMode(context);
-        }*/
+        }
 
         // for Lollipop 4=priority mode, for pre-lillipop 4=silent ringer mode
         // priority mode must by invoked be 2 calls of setRingerMode:

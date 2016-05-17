@@ -59,7 +59,7 @@ public class SettingsContentObserver  extends ContentObserver {
                 if (volumeStream == AudioManager.STREAM_RING)
                     GlobalData.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
-                    GlobalData.setRingerVolume(context, currentVolume);
+                    GlobalData.setNotificationVolume(context, currentVolume);
             }
         }
         else if(delta<0)
@@ -69,7 +69,7 @@ public class SettingsContentObserver  extends ContentObserver {
                 if (volumeStream == AudioManager.STREAM_RING)
                     GlobalData.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
-                    GlobalData.setRingerVolume(context, currentVolume);
+                    GlobalData.setNotificationVolume(context, currentVolume);
             }
         }
         return currentVolume;
