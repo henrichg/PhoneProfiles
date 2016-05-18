@@ -359,9 +359,7 @@ public class ActivateProfileHelper {
 
     }
 
-    private void correctVolume0(/*Profile profile, */AudioManager audioManager, int linkUnlink) {
-        //Log.e("ActivateProfileHelper","correctVolume0 profile ringer mode="+GlobalData.getRingerMode(context));
-        //Log.e("ActivateProfileHelper","correctVolume0 profile ringer mode="+profile._volumeRingerMode);
+    private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
         if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
             ringerMode = GlobalData.getRingerMode(context);
@@ -372,11 +370,9 @@ public class ActivateProfileHelper {
             zenMode = GlobalData.getZenMode(context);
             //ringerMode = RingerModeChangeReceiver.getRingerMode(context, audioManager);
         }
-        if ((ringerMode == 1) || (ringerMode == 4) ||
-                ((ringerMode == 5) && ((zenMode == 1) || (zenMode == 2)))) {
-        //if (profile._volumeRingerMode == 4) {
-            // last profile ringer mode = Silent
-            //Log.e("ActivateProfileHelper", "correctVolume0 audiomanager ringer mode=" + audioManager.getRingerMode());
+        if ((ringerMode == 1) || (ringerMode == 2) || (ringerMode == 4) ||
+            ((ringerMode == 5) && ((zenMode == 1) || (zenMode == 2)))) {
+            // any "nonVIBRATE" ringer mode is selected
             if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
                 //Log.e("ActivateProfileHelper","correctVolume0 set ring volume=1");
                 // actual system ringer mode = vibrate
