@@ -38,12 +38,14 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
                 GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode=" + audioManager.getMode());
 
-                // set ringer mode to Ring for proper change ringer mode to Silent
-                if (aph.setRingerMode(profile, audioManager, true, linkUnlink)) {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        //System.out.println(e);
+                if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+                    // set ringer mode to Ring for proper change ringer mode to Silent
+                    if (aph.setRingerMode(profile, audioManager, true, linkUnlink)) {
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            //System.out.println(e);
+                        }
                     }
                 }
 
@@ -51,21 +53,24 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
                 aph.setVolumes(profile, audioManager, linkUnlink);
 
-                /*try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    //System.out.println(e);
-                }*/
+                if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
 
-                GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode="+audioManager.getMode());
+                    /*try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        //System.out.println(e);
+                    }*/
 
-                // set ringer mode after volume because volumes change silent/vibrate
-                aph.setRingerMode(profile, audioManager, false, linkUnlink);
+                    GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode=" + audioManager.getMode());
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    //System.out.println(e);
+                    // set ringer mode after volume because volumes change silent/vibrate
+                    aph.setRingerMode(profile, audioManager, false, linkUnlink);
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        //System.out.println(e);
+                    }
                 }
 
                 GlobalData.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "audioMode="+audioManager.getMode());
