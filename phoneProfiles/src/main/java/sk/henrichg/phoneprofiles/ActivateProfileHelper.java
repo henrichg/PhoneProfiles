@@ -536,6 +536,10 @@ public class ActivateProfileHelper {
             if (PPNotificationListenerService.isNotificationListenerServiceEnabled(context)) {
                 int _zenMode = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
                 GlobalData.logE("ActivateProfileHelper.setZenMode","_zenMode="+_zenMode);
+
+                if (ringerMode > -1)
+                    audioManager.setRingerMode(ringerMode);
+
                 if (zenMode != _zenMode) {
                     int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
                     switch (zenMode) {
@@ -553,8 +557,6 @@ public class ActivateProfileHelper {
                             break;
                     }
                     PPNotificationListenerService.requestInterruptionFilter(context, interruptionFilter);
-                    if (ringerMode > -1)
-                        audioManager.setRingerMode(ringerMode);
                     return true;
                 }
             }
@@ -1061,17 +1063,23 @@ public class ActivateProfileHelper {
                                     ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                     profile.getDeviceBrightnessAdaptiveValue(context));
                         else {
-                            String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
-                                    Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
-                            //if (GlobalData.isSELinuxEnforcing())
-                            //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                            Command command = new Command(0, false, command1); //, command2);
                             try {
-                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                                commandWait(command);
-                                //RootTools.closeAllShells();
-                            } catch (Exception e) {
-                                Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
+                                Settings.System.putFloat(context.getContentResolver(),
+                                        ADAPTIVE_BRIGHTNESS_SETTING_NAME,
+                                        profile.getDeviceBrightnessAdaptiveValue(context));
+                            } catch (Exception ee) {
+                                String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
+                                        Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
+                                //if (GlobalData.isSELinuxEnforcing())
+                                //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                                Command command = new Command(0, false, command1); //, command2);
+                                try {
+                                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                    commandWait(command);
+                                    //RootTools.closeAllShells();
+                                } catch (Exception e) {
+                                    Log.e("ActivateProfileHelper.execute", "Error on run su: " + e.toString());
+                                }
                             }
                         }
                     }
