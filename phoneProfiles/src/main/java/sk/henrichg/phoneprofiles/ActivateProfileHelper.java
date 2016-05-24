@@ -422,7 +422,7 @@ public class ActivateProfileHelper {
         if (!(  (vibrationIsOn(audioManager) && (linkUnlink != PhoneCallService.LINKMODE_NONE)) ||
                 ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21) && (linkUnlink != PhoneCallService.LINKMODE_NONE)) ||
                 ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT >= 23)) ||
-                ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 6)))
+                ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 5) || (zenMode == 6)))
         )) {
 
             if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
@@ -536,6 +536,8 @@ public class ActivateProfileHelper {
             if (PPNotificationListenerService.isNotificationListenerServiceEnabled(context)) {
                 int _zenMode = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
                 GlobalData.logE("ActivateProfileHelper.setZenMode","_zenMode="+_zenMode);
+                int _ringerMode = audioManager.getRingerMode();
+                GlobalData.logE("ActivateProfileHelper.setZenMode","_ringerMode="+_ringerMode);
 
                 if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
                     int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
@@ -544,7 +546,7 @@ public class ActivateProfileHelper {
                             interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
                             break;
                         case ZENMODE_PRIORITY:
-                            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                             /*try {
                                 Thread.sleep(500);
                             } catch (InterruptedException e) {
@@ -561,7 +563,7 @@ public class ActivateProfileHelper {
                     }
                     PPNotificationListenerService.requestInterruptionFilter(context, interruptionFilter);
                 }
-
+                //if (ringerMode != _ringerMode)
                 audioManager.setRingerMode(ringerMode);
             }
 
@@ -633,7 +635,7 @@ public class ActivateProfileHelper {
 
 
     @SuppressWarnings("deprecation")
-    public boolean setRingerMode(Profile profile, AudioManager audioManager, boolean forSilent, int linkUnlink)
+    public boolean setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
     {
 
         int ringerMode;
@@ -649,28 +651,26 @@ public class ActivateProfileHelper {
         ringerMode = GlobalData.getRingerMode(context);
         zenMode = GlobalData.getZenMode(context);
 
+        /*
         // for Lollipop 4=priority mode, for pre-lillipop 4=silent ringer mode
         // priority mode must by invoked be 2 calls of setRingerMode:
         // first call of setRingerMode must set ringer mode to normal (1) (not called for pre-lollipop)
         // second call is normal change ringer mode (4)
         // this call sequence sets Lollipop priority mode (check ExecuteVolumeProfilePrefsService, how is called setRingerMode)
-        if (forSilent) {
+        if (firstCall) {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
-                //boolean isPrioritySet = (Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1)  == ZENMODE_PRIORITY);
-                //boolean isPrioritySet = true;
                 GlobalData.logE("ActivateProfileHelper.setRingerMode", "zen_mode=" + Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1));
-                //GlobalData.logE("ActivateProfileHelper.setRingerMode", "isPrioritySet=" + isPrioritySet);
-                if ((ringerMode == 4) /*&& isPrioritySet*/) { // 4 = silent ringer mode
+                if ((ringerMode == 4) ) { // 4 = silent ringer mode
                     ringerMode = 1;
                     GlobalData.logE("ActivateProfileHelper.setRingerMode", "set for reset priority");
                 }
                 else
-                if ((ringerMode == 5) && (zenMode == 2) /*&& isPrioritySet && (linkUnlink == PhoneCallService.LINKMODE_NONE)*/) {
+                if ((ringerMode == 5) && (zenMode == 2)) {
                     zenMode = 1;
                     GlobalData.logE("ActivateProfileHelper.setRingerMode", "set for reset priority");
                 }
                 else
-                if ((ringerMode == 5) && (zenMode == 5) /*&&  isPrioritySet && (linkUnlink == PhoneCallService.LINKMODE_NONE)*/) {
+                if ((ringerMode == 5) && (zenMode == 5)) {
                     zenMode = 4;
                     GlobalData.logE("ActivateProfileHelper.setRingerMode", "set for reset priority");
                 }
@@ -678,6 +678,25 @@ public class ActivateProfileHelper {
                     return false;
             } else
                 return false;
+        }
+        */
+        if (firstCall) {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                if ((ringerMode != 4) && (ringerMode != 5))
+                    // first call only for Android 5+ and ringer mode 4,5
+                    return false;
+            }
+            else
+                // no first call for Android < 5
+                return false;
+        }
+        else {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                if ((ringerMode == 4) && (ringerMode == 5))
+                    // no second call for Android 5+ and ringer mode 4,5
+                    return false;
+            }
+            // always second call for Android < 5
         }
 
         if (Permissions.checkSavedProfileRingerMode(context)) {
@@ -748,7 +767,7 @@ public class ActivateProfileHelper {
                     if (android.os.Build.VERSION.SDK_INT >= 23)
                         setZenMode(context, ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
                     else
-                        setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_SILENT);
+                        setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     setVibrateWhenRinging(0);
                     break;
                 case 5: // Zen mode
@@ -760,7 +779,7 @@ public class ActivateProfileHelper {
                             break;
                         case 2:
                             //RingerModeChangeReceiver.internalChange = true;
-                            setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_SILENT);
+                            setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
                             setVibrateWhenRinging(0);
                             break;
                         case 3:
