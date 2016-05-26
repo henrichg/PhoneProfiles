@@ -359,22 +359,6 @@ public class ActivateProfileHelper {
 
     }
 
-    @SuppressWarnings("deprecation")
-    private boolean vibrationIsOn(AudioManager audioManager) {
-        int ringerMode = GlobalData.getRingerMode(context);
-        int vibrateType = -999;
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
-            vibrateType = audioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
-
-        GlobalData.logE("ActivateProfileHelper.vibrationIsOn", "ringerMode="+ringerMode);
-        GlobalData.logE("ActivateProfileHelper.vibrationIsOn", "vibrateType="+vibrateType);
-
-        return (ringerMode == 3) ||
-                (vibrateType == AudioManager.VIBRATE_SETTING_ON) ||
-                (vibrateType == AudioManager.VIBRATE_SETTING_ONLY_SILENT)/* ||
-                (vibrateWhenRinging == 1)*/;
-    }
-
     private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
         if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
@@ -419,8 +403,8 @@ public class ActivateProfileHelper {
         // for interruption types NONE and ONLY_ALARMS
         // not set system, ringer, npotification volume
         // (Android 6 - priority mode = ONLY_ALARMS)
-        if (!(  (vibrationIsOn(audioManager)/* && (linkUnlink != PhoneCallService.LINKMODE_NONE)*/) ||
-                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21)/* && (linkUnlink != PhoneCallService.LINKMODE_NONE)*/) ||
+        if (!(  (ringerMode == 3) ||
+                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21)) ||
                 ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT >= 23)) ||
                 ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 4) || (zenMode == 5) || (zenMode == 6)))
         )) {
@@ -436,9 +420,9 @@ public class ActivateProfileHelper {
             TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             int callState = telephony.getCallState();
 
-            if (((!GlobalData.applicationUnlinkRingerNotificationVolumes) || (callState != TelephonyManager.CALL_STATE_RINGING))
-                    && (linkUnlink == PhoneCallService.LINKMODE_NONE)) {
-
+            //if (((!GlobalData.applicationUnlinkRingerNotificationVolumes) || (callState != TelephonyManager.CALL_STATE_RINGING))
+            //        && (linkUnlink == PhoneCallService.LINKMODE_NONE)) {
+            if (!GlobalData.applicationUnlinkRingerNotificationVolumes) {
                 if (profile.getVolumeRingtoneChange() || profile.getVolumeSystemChange()) {
                     int volume = GlobalData.getRingerVolume(context);
                     if (volume != -999) {
