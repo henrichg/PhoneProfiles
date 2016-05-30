@@ -252,34 +252,33 @@ public class ActivateProfileHelper {
         if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED)
         {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
-            boolean setBluetoothState = false;
-            switch (profile._deviceBluetooth) {
-                case 1 :
-                    if (!isBluetoothEnabled)
-                    {
-                        isBluetoothEnabled = true;
+            if (bluetoothAdapter != null) {
+                boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
+                boolean setBluetoothState = false;
+                switch (profile._deviceBluetooth) {
+                    case 1:
+                        if (!isBluetoothEnabled) {
+                            isBluetoothEnabled = true;
+                            setBluetoothState = true;
+                        }
+                        break;
+                    case 2:
+                        if (isBluetoothEnabled) {
+                            isBluetoothEnabled = false;
+                            setBluetoothState = true;
+                        }
+                        break;
+                    case 3:
+                        isBluetoothEnabled = !isBluetoothEnabled;
                         setBluetoothState = true;
-                    }
-                    break;
-                case 2 :
+                        break;
+                }
+                if (setBluetoothState) {
                     if (isBluetoothEnabled)
-                    {
-                        isBluetoothEnabled = false;
-                        setBluetoothState = true;
-                    }
-                    break;
-                case 3 :
-                    isBluetoothEnabled = ! isBluetoothEnabled;
-                    setBluetoothState = true;
-                    break;
-            }
-            if (setBluetoothState)
-            {
-                if (isBluetoothEnabled)
-                    bluetoothAdapter.enable();
-                else
-                    bluetoothAdapter.disable();
+                        bluetoothAdapter.enable();
+                    else
+                        bluetoothAdapter.disable();
+                }
             }
         }
 
@@ -700,10 +699,14 @@ public class ActivateProfileHelper {
                     setVibrateWhenRinging(1);
                     break;
                 case 4:  // Silent
-                    if (android.os.Build.VERSION.SDK_INT >= 23)
+                    /*if (android.os.Build.VERSION.SDK_INT >= 23)
                         setZenMode(context, ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
                     else if (android.os.Build.VERSION.SDK_INT >= 21)
-                        setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                        setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);*/
+                    if (android.os.Build.VERSION.SDK_INT >= 21) {
+                        setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                        setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
+                    }
                     else {
                         setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
                         try {
