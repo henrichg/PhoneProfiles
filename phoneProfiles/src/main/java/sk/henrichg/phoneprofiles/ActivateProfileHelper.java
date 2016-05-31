@@ -1594,7 +1594,7 @@ public class ActivateProfileHelper {
                     String transactionCode = GlobalData.getTransactionCode(context, "TRANSACTION_setDataEnabled");
                     // Android 5.1+ (API 22) and later.
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                        SubscriptionManager mSubscriptionManager = (SubscriptionManager) context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+                        SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
                         // Loop through the subscription list i.e. SIM list.
                         for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
                             if (transactionCode != null && transactionCode.length() > 0) {
@@ -1738,7 +1738,7 @@ public class ActivateProfileHelper {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
                 String transactionCode = GlobalData.getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
                 if (Build.VERSION.SDK_INT >= 23) {
-                    SubscriptionManager mSubscriptionManager = (SubscriptionManager) context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+                    SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
                     // Loop through the subscription list i.e. SIM list.
                     for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
                         if (transactionCode != null && transactionCode.length() > 0) {

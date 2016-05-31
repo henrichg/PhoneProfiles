@@ -984,12 +984,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP))
         {
             boolean enabled = !sValue.equals(ON);
-            if (!enabled) {
-                Editor editor = preferences.edit();
-                editor.putString(GlobalData.PREF_PROFILE_DEVICE_WIFI, NO_CHANGE);
-                editor.commit();
+            ListPreference preference = (ListPreference) prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_WIFI);
+            if (preference != null) {
+                if (!enabled)
+                    preference.setValue(NO_CHANGE);
+                preference.setEnabled(enabled);
             }
-            prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_WIFI).setEnabled(enabled);
         }
 
     }
