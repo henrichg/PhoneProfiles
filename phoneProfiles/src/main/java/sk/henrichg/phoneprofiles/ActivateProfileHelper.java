@@ -466,19 +466,35 @@ public class ActivateProfileHelper {
                         correctVolume0(/*profile, */audioManager, linkUnlink);
                         volumesSet = true;
                     }
+                    else {
+                        int volume = GlobalData.getRingerVolume(context);
+                        if (volume != -999) {
+                            audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
+                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, volume);
+                            correctVolume0(/*profile, */audioManager, linkUnlink);
+                        }
+                        volume = GlobalData.getNotificationVolume(context);
+                        if (volume != -999) {
+                            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
+                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, volume);
+                            correctVolume0(/*profile, */audioManager, linkUnlink);
+                        }
+                        volumesSet = true;
+                    }
                 //}
             }
             if (!volumesSet) {
-                int volume = GlobalData.getRingerVolume(context);
-                if (volume != -999) {
-                    audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
-                    //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, volume);
-                    correctVolume0(/*profile, */audioManager, linkUnlink);
-                }
-                volume = GlobalData.getNotificationVolume(context);
+                // reverted order for disabled unlink
+                int volume = GlobalData.getNotificationVolume(context);
                 if (volume != -999) {
                     audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
                     //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_NOTIFICATION, volume);
+                    correctVolume0(/*profile, */audioManager, linkUnlink);
+                }
+                volume = GlobalData.getRingerVolume(context);
+                if (volume != -999) {
+                    audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
+                    //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, volume);
                     correctVolume0(/*profile, */audioManager, linkUnlink);
                 }
             }
