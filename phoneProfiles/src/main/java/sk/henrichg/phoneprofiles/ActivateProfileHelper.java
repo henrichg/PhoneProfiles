@@ -610,25 +610,40 @@ public class ActivateProfileHelper {
             audioManager.setRingerMode(ringerMode);
     }
 
-    private void setVibrateWhenRinging(int value) {
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_VIBRATE_WHEN_RINGING, context)
+    private void setVibrateWhenRinging(Profile profile, int value) {
+        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
                 == GlobalData.PREFERENCE_ALLOWED) {
-            if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
-                Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", value);
-            else {
-                try {
-                    Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, value);
-                } catch (Exception ee) {
-                    String command1 = "settings put system " + Settings.System.VIBRATE_WHEN_RINGING + " " + value;
-                    //if (GlobalData.isSELinuxEnforcing())
-                    //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                    Command command = new Command(0, false, command1); //, command2);
+            if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
+
+                int lValue = value;
+                if (profile != null) {
+                    switch (profile._vibrateWhenRinging) {
+                        case 1:
+                            lValue = 1;
+                            break;
+                        case 2:
+                            lValue = 0;
+                            break;
+                    }
+                }
+
+                if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
+                    Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", lValue);
+                else {
                     try {
-                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                        commandWait(command);
-                        //RootTools.closeAllShells();
-                    } catch (Exception e) {
-                        Log.e("ActivateProfileHelper.setVibrateWhenRinging", "Error on run su: " + e.toString());
+                        Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, lValue);
+                    } catch (Exception ee) {
+                        String command1 = "settings put system " + Settings.System.VIBRATE_WHEN_RINGING + " " + lValue;
+                        //if (GlobalData.isSELinuxEnforcing())
+                        //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                        Command command = new Command(0, false, command1); //, command2);
+                        try {
+                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                            commandWait(command);
+                            //RootTools.closeAllShells();
+                        } catch (Exception e) {
+                            Log.e("ActivateProfileHelper.setVibrateWhenRinging", "Error on run su: " + e.toString());
+                        }
                     }
                 }
             }
@@ -693,7 +708,7 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    setVibrateWhenRinging(0);
+                    setVibrateWhenRinging(null, 0);
                     break;
                 case 2:  // Ring & Vibrate
                     setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
@@ -708,7 +723,7 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    setVibrateWhenRinging(1);
+                    setVibrateWhenRinging(null, 1);
                     break;
                 case 3:  // Vibrate
                     setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
@@ -723,7 +738,7 @@ public class ActivateProfileHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    setVibrateWhenRinging(1);
+                    setVibrateWhenRinging(null, 1);
                     break;
                 case 4:  // Silent
                     /*if (android.os.Build.VERSION.SDK_INT >= 23)
@@ -746,28 +761,28 @@ public class ActivateProfileHelper {
                             e.printStackTrace();
                         }
                     }
-                    setVibrateWhenRinging(0);
+                    setVibrateWhenRinging(null, 0);
                     break;
                 case 5: // Zen mode
                     switch (zenMode) {
                         case 1:
                             setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
-                            setVibrateWhenRinging(0);
+                            setVibrateWhenRinging(profile, -1);
                             break;
                         case 2:
                             setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
-                            setVibrateWhenRinging(0);
+                            setVibrateWhenRinging(profile, -1);
                             break;
                         case 3:
                             setZenMode(context, ZENMODE_NONE, audioManager, AudioManager.RINGER_MODE_SILENT);
                             break;
                         case 4:
                             setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
-                            setVibrateWhenRinging(1);
+                            setVibrateWhenRinging(null, 1);
                             break;
                         case 5:
                             setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_VIBRATE);
-                            setVibrateWhenRinging(1);
+                            setVibrateWhenRinging(null, 1);
                             break;
                         case 6:
                             setZenMode(context, ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);

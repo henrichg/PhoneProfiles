@@ -182,12 +182,26 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                 preferenceCategory.removePreference(preference);
             }
+            preference = prefMng.findPreference(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING);
+            if (preference != null)
+            {
+                PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
+                preferenceCategory.removePreference(preference);
+            }
         }
         if (android.os.Build.VERSION.SDK_INT < 23) {
             Preference preference = (Preference) prefMng.findPreference("prf_pref_volumeVibrateWhenRingingRootInfo");
             if (preference != null) {
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                 preferenceCategory.removePreference(preference);
+            }
+        }
+        else {
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING);
+            if (preference != null) {
+                preference.setTitle("(R) " + getString(R.string.profile_preferences_vibrateWhenRinging));
+                String value = preferences.getString(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, "");
+                setSummary(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, value);
             }
         }
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY))
@@ -355,13 +369,20 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
         if (key.equals(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE) ||
                 key.equals(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE) ||
-                key.equals(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH)) {
+                key.equals(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH) ||
+                key.equals(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING)) {
             String title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -833,7 +854,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE) ||
             key.equals(GlobalData.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS) ||
             key.equals(GlobalData.PREF_PROFILE_VOLUME_SPEAKER_PHONE) ||
-            key.equals(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH))
+            key.equals(GlobalData.PREF_PROFILE_VIBRATION_ON_TOUCH) ||
+            key.equals(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING))
         {
             String sValue = value.toString();
             ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
@@ -989,6 +1011,24 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 if (!enabled)
                     preference.setValue(NO_CHANGE);
                 preference.setEnabled(enabled);
+            }
+        }
+        if (key.equals(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE) ||
+                key.equals(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE)) {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                String ringerMode = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_RINGER_MODE, "0");
+                String zenMode = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, "0");
+                boolean enabled = false;
+                if (ringerMode.equals("5")) {
+                    if (zenMode.equals("1") || zenMode.equals("2"))
+                        enabled = true;
+                }
+                ListPreference preference = (ListPreference) prefMng.findPreference(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING);
+                if (preference != null) {
+                    if (!enabled)
+                        preference.setValue(NO_CHANGE);
+                    preference.setEnabled(enabled);
+                }
             }
         }
 

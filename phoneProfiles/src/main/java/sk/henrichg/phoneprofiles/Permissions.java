@@ -33,6 +33,7 @@ public class Permissions {
     public static final int PERMISSION_IMPORT = 13;
     public static final int PERMISSION_INSTALL_PPHELPER = 14;
     public static final int PERMISSION_NOTIFICATION_LED = 15;
+    public static final int PERMISSION_PROFILE_VIBRATE_WHEN_RINGING = 16;
 
     public static final int GRANT_TYPE_PROFILE = 1;
     public static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -117,6 +118,7 @@ public class Permissions {
         if (profile == null) return permissions;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));
+            if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
             if (!checkProfileVibrationOnTouch(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
             if (!checkProfileRingtones(context, profile)) permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
             if (!checkProfileScreenTimeout(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
@@ -171,6 +173,22 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._vibrationOnTouch != 0) {
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                return granted;
+            }
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+
+    public static boolean checkProfileVibrateWhenRinging(Context context, Profile profile) {
+        if (profile == null) return true;
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (profile._vibrateWhenRinging != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
                     GlobalData.setShowRequestWriteSettingsPermission(context, true);

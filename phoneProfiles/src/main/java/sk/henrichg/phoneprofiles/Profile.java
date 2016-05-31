@@ -54,6 +54,7 @@ public class Profile {
     public boolean _askForDuration;
     public int _deviceNetworkType;
     public int _notificationLed;
+    public int _vibrateWhenRinging;
 
     public Bitmap _iconBitmap;
     public Bitmap _preferencesIndicator;
@@ -114,7 +115,8 @@ public class Profile {
                    int devicePowerSaveMode,
                    boolean askForDuration,
                    int deviceNetworkType,
-                   int notificationLed)
+                   int notificationLed,
+                   int vibrateWhenRinging)
     {
         this._id = id;
         this._name = name;
@@ -161,6 +163,7 @@ public class Profile {
         this._askForDuration = askForDuration;
         this._deviceNetworkType = deviceNetworkType;
         this._notificationLed = notificationLed;
+        this._vibrateWhenRinging = vibrateWhenRinging;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -210,7 +213,8 @@ public class Profile {
                    int devicePowerSaveMode,
                    boolean askForDuration,
                    int deviceNetworkType,
-                   int notificationLed)
+                   int notificationLed,
+                   int vibrateWhenRinging)
     {
         this._name = name;
         this._icon = icon;
@@ -256,6 +260,7 @@ public class Profile {
         this._askForDuration = askForDuration;
         this._deviceNetworkType = deviceNetworkType;
         this._notificationLed = notificationLed;
+        this._vibrateWhenRinging = vibrateWhenRinging;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -308,6 +313,7 @@ public class Profile {
         this._askForDuration = profile._askForDuration;
         this._deviceNetworkType = profile._deviceNetworkType;
         this._notificationLed = profile._notificationLed;
+        this._vibrateWhenRinging = profile._vibrateWhenRinging;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;

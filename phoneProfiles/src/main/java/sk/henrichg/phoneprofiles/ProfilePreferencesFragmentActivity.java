@@ -238,7 +238,8 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
                     origProfile._devicePowerSaveMode,
                     origProfile._askForDuration,
                     origProfile._deviceNetworkType,
-                    origProfile._notificationLed);
+                    origProfile._notificationLed,
+                    origProfile._vibrateWhenRinging);
             showSaveMenu = true;
         }
         else
@@ -318,6 +319,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, Integer.toString(profile._devicePowerSaveMode));
             editor.putString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, Integer.toString(profile._deviceNetworkType));
             editor.putString(GlobalData.PREF_PROFILE_NOTIFICATION_LED, Integer.toString(profile._notificationLed));
+            editor.putString(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, Integer.toString(profile._vibrateWhenRinging));
             editor.commit();
         }
     }
@@ -401,6 +403,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
         profile._devicePowerSaveMode = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, ""));
         profile._deviceNetworkType = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, ""));
         profile._notificationLed = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_NOTIFICATION_LED, ""));
+        profile._vibrateWhenRinging = Integer.parseInt(preferences.getString(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, ""));
 
         if (ProfilePreferencesFragment.startupSource != GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {
