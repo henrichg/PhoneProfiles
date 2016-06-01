@@ -46,7 +46,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                     //System.out.println(e);
                 }
 
-                RingerModeChangeReceiver.internalChange = false;
+                RingerModeChangeReceiver.setAlarmForDisableInternalChange(context);
 
             }
         }
