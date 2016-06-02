@@ -10,6 +10,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
@@ -249,11 +250,9 @@ public class FirstStartService extends IntentService {
                                         null
                                 );
 
-                                try {
-                                    Thread.sleep(300);
-                                } catch (InterruptedException e) {
-                                    System.out.println(e);
-                                }
+                                //try { Thread.sleep(300); } catch (InterruptedException e) { }
+                                //SystemClock.sleep(300);
+                                GlobalData.sleep(300);
                             }
                         } else
                             cursor.close();
