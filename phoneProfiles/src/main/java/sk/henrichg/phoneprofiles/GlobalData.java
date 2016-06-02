@@ -11,9 +11,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -1163,6 +1165,15 @@ public class GlobalData extends Application {
 
     static boolean telephonyServiceExists(Context context, String preference) {
         try {
+            /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
+                Log.e("GlobalData.telephonyServiceExists","getActiveSubscriptionInfoCount="+mSubscriptionManager.getActiveSubscriptionInfoCount());
+                Log.e("GlobalData.telephonyServiceExists", "subscriptionInfo="+mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0));
+                if (mSubscriptionManager.getActiveSubscriptionInfoCount() > 1)
+                    // dual sim is not supported
+                    return false;
+            }*/
+
             if (preference.equals(PREF_PROFILE_DEVICE_MOBILE_DATA)) {
                 String s = getTransactionCode(context, "TRANSACTION_setDataEnabled");
             }
