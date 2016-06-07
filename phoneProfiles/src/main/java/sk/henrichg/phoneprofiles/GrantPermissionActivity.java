@@ -150,7 +150,7 @@ public class GrantPermissionActivity extends Activity {
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
                 if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
                     mBuilder =   new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_pphelper_upgrade_notify) // notification icon
+                            .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
                             .setContentTitle(context.getString(R.string.app_name)) // title for notification
                             .setContentText(context.getString(R.string.permissions_for_install_tone_text_notification))
                             .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.permissions_for_install_tone_big_text_notification)))
@@ -159,7 +159,7 @@ public class GrantPermissionActivity extends Activity {
                 }
                 else {
                     mBuilder =   new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_pphelper_upgrade_notify) // notification icon
+                            .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
                             .setContentTitle(context.getString(R.string.app_name)) // title for notification
                             .setContentText(context.getString(R.string.permissions_for_profile_text_notification)) // message for notification
                             .setAutoCancel(true); // clear notification after click
@@ -218,8 +218,6 @@ public class GrantPermissionActivity extends Activity {
                     showRequestString = context.getString(R.string.permissions_for_export_app_data_text1) + "<br><br>";
                 else if (grantType == Permissions.GRANT_TYPE_IMPORT)
                     showRequestString = context.getString(R.string.permissions_for_import_app_data_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_INSTALL_PPHELPER)
-                    showRequestString = context.getString(R.string.permissions_for_install_pphelper_text1) + "<br><br>";
                 else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
                     showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
                 else {
@@ -263,8 +261,6 @@ public class GrantPermissionActivity extends Activity {
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_export_app_data_text2);
                 else if (grantType == Permissions.GRANT_TYPE_IMPORT)
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_import_app_data_text2);
-                else if (grantType == Permissions.GRANT_TYPE_INSTALL_PPHELPER)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_install_pphelper_text2);
                 else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_brightness_dialog_text2);
                 else
@@ -465,12 +461,6 @@ public class GrantPermissionActivity extends Activity {
             finish();
             if (Permissions.editorActivity != null)
                 Permissions.editorActivity.doImportData(applicationDataPath);
-        }
-        else
-        if (grantType == Permissions.GRANT_TYPE_INSTALL_PPHELPER) {
-            finish();
-            if (Permissions.editorActivity != null)
-                PhoneProfilesHelper.doInstallPPHelper(Permissions.editorActivity);
         }
         else
         if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG) {

@@ -26,6 +26,7 @@ import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -306,7 +307,30 @@ public class ActivateProfileHelper {
             }
         }
 
-        // nahodenie NFC - len v PPHelper
+        // nahodenie NFC
+        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NFC, context) == GlobalData.PREFERENCE_ALLOWED) {
+            Log.e("ActivateProfileHelper.doExecuteForRadios", "allowed");
+            NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+            if (nfcAdapter != null) {
+                switch (profile._deviceNFC) {
+                    case 1:
+                        setNFC(context, true);
+                        break;
+                    case 2:
+                        setNFC(context, false);
+                        break;
+                    case 3:
+                        if (!nfcAdapter.isEnabled()) {
+                            setNFC(context, true);
+                        } else if (nfcAdapter.isEnabled()) {
+                            setNFC(context, false);
+                        }
+                        break;
+                }
+            }
+        }
+        else
+            Log.e("ActivateProfileHelper.doExecuteForRadios", "not allowed");
     }
 
     public void executeForRadios(Profile profile)
@@ -1794,6 +1818,28 @@ public class ActivateProfileHelper {
                 }
             } catch(Exception e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void setNFC(Context context, boolean enable)
+    {
+        Log.e("ActivateProfileHelper.setNFC", "xxx");
+        /*if (Permissions.checkNFC(context)) {
+            Log.e("ActivateProfileHelper.setNFC", "permission granted!!");
+            CmdNfc.run(enable);
+        }
+        else */
+        if (GlobalData.grantRoot(false)) {
+            String command1 = GlobalData.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
+            Log.e("ActivateProfileHelper.setNFC", "command1="+command1);
+            Command command = new Command(0, false, command1);
+            try {
+                RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                commandWait(command);
+                //RootTools.closeAllShells();
+            } catch (Exception e) {
+                Log.e("ActivateProfileHelper.setNFC", "Error on run su");
             }
         }
     }

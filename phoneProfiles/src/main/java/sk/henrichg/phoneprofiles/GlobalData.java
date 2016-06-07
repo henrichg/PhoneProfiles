@@ -26,6 +26,7 @@ import com.stericson.RootTools.RootTools;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,8 +52,7 @@ public class GlobalData extends Application {
     private static boolean logIntoLogCat = true;
     private static boolean logIntoFile = true;
     private static boolean rootToolsDebug = false;
-    public static String logFilterTags =  "PhoneProfilesHelper.doInstallPPHelper"
-                                         +"|PhoneProfilesHelper.doUninstallPPHelper"
+    public static String logFilterTags =  "PhoneProfilesHelper.doUninstallPPHelper"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -86,7 +86,6 @@ public class GlobalData extends Application {
     static final int REQUEST_CODE_REMOTE_EXPORT = 6250;
 
     static final int PROFILE_NOTIFICATION_ID = 700420;
-    static final int PPHELPER_UPGRADE_NOTIFICATION_ID = 700421;
     static final int IMPORTANT_INFO_NOTIFICATION_ID = 700422;
     static final int GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID = 700423;
     static final int GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID = 700424;
@@ -183,9 +182,7 @@ public class GlobalData extends Application {
 
     public static final int PREFERENCE_NOT_ALLOWED = 0;
     public static final int PREFERENCE_ALLOWED = 1;
-    public static final int PREFERENCE_INSTALL_PPHELPER = 2;
-    public static final int PREFERENCE_UPGRADE_PPHELPER = 3;
-    
+
     public static final long DEFAULT_PROFILE_ID = -999L;  // source profile id
     public static final long PROFILE_NO_ACTIVATE = -999;
 
@@ -818,25 +815,11 @@ public class GlobalData extends Application {
         {
             if (android.os.Build.VERSION.SDK_INT >= 17)
             {
-                if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
-                {
-                    // je nainstalovany PhonProfilesHelper
-                    featurePresented = PREFERENCE_ALLOWED;
-                }
-                else
                 if (isRooted(false))
                 {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
-                    else
-                    {
-                        // "settings" binnary not exists
-                        if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                        else
-                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                    }
                 }
             }
             else
@@ -863,25 +846,10 @@ public class GlobalData extends Application {
             {
                 if (android.os.Build.VERSION.SDK_INT >= 21)
                 {
-                    if (PhoneProfilesHelper.isPPHelperInstalled(context, 22))
-                    {
-                        // je nainstalovany PhonProfilesHelper
-                        featurePresented = PREFERENCE_ALLOWED;
-                    }
-                    else
-                    {
-                        if (isRooted(false)) {
-                            // zariadenie je rootnute
-                            if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
-                                featurePresented = PREFERENCE_ALLOWED;
-                            else {
-                                // "service" binary not exists
-                                if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                    featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                                else
-                                    featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                            }
-                        }
+                    if (isRooted(false)) {
+                        // zariadenie je rootnute
+                        if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
+                            featurePresented = PREFERENCE_ALLOWED;
                     }
                 }
                 else
@@ -912,21 +880,8 @@ public class GlobalData extends Application {
                 else
                 if (android.os.Build.VERSION.SDK_INT < 17)
                 {
-                    if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
-                    {
-                        // je nainstalovany PhonProfilesHelper
+                    if (isRooted(false))
                         featurePresented = PREFERENCE_ALLOWED;
-                    }
-                    else
-                    {
-                        if (isRooted(false))
-                        {
-                            if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                            else
-                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                        }
-                    }
                 }
                 else
                 if (isRooted(false))
@@ -934,14 +889,6 @@ public class GlobalData extends Application {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
-                    else
-                    {
-                        // "settings" binnary not exists
-                        if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                        else
-                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                    }
                 }
             }
         }
@@ -950,22 +897,15 @@ public class GlobalData extends Application {
         {
             if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC))
             {
+                logE("GlobalData.hardwareCheck","NFC=presented");
+
                 // device ma nfc
-                if (PhoneProfilesHelper.isPPHelperInstalled(context, 7))
-                {
-                    // je nainstalovany PhonProfilesHelper
+                if (isRooted(false))
                     featurePresented = PREFERENCE_ALLOWED;
-                }
-                else
-                {
-                    if (isRooted(false))
-                    {
-                        if (PhoneProfilesHelper.PPHelperVersion == -1)
-                            featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                        else
-                            featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                    }
-                }
+            }
+            else
+            {
+                logE("GlobalData.hardwareCheck","NFC=not presented");
             }
         }
         else
@@ -986,14 +926,6 @@ public class GlobalData extends Application {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
-                /*else
-                {
-                    // "settings" binnary not exists
-                    if (PhoneProfilesHelper.PPHelperVersion == -1)
-                        featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                    else
-                        featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                }*/
                 }
             }
             else
@@ -1008,14 +940,6 @@ public class GlobalData extends Application {
                         // zariadenie je rootnute
                         if (settingsBinaryExists())
                             featurePresented = PREFERENCE_ALLOWED;
-                        /*else
-                        {
-                            // "settings" binnary not exists
-                            if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                            else
-                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                        }*/
                     }
                 }
                 else
@@ -1030,14 +954,6 @@ public class GlobalData extends Application {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
-                /*else
-                {
-                    // "settings" binnary not exists
-                    if (PhoneProfilesHelper.PPHelperVersion == -1)
-                        featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                    else
-                        featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                }*/
                 }
             }
         }
@@ -1049,22 +965,10 @@ public class GlobalData extends Application {
                 final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 final int phoneType = telephonyManager.getPhoneType();
                 if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
-                    if (PhoneProfilesHelper.isPPHelperInstalled(context, 56)) {
-                        // je nainstalovany PhonProfilesHelper
-                        featurePresented = PREFERENCE_ALLOWED;
-                    } else {
-                        if (isRooted(false)) {
-                            // zariadenie je rootnute
-                            if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_NETWORK_TYPE))
-                                featurePresented = PREFERENCE_ALLOWED;
-                        /*else {
-                            // "service" binary not exists
-                            if (PhoneProfilesHelper.PPHelperVersion == -1)
-                                featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                            else
-                                featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                        }*/
-                        }
+                    if (isRooted(false)) {
+                        // zariadenie je rootnute
+                        if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_NETWORK_TYPE))
+                            featurePresented = PREFERENCE_ALLOWED;
                     }
                 }
             }
@@ -1078,14 +982,6 @@ public class GlobalData extends Application {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
-                /*else
-                {
-                    // "settings" binnary not exists
-                    if (PhoneProfilesHelper.PPHelperVersion == -1)
-                        featurePresented = PREFERENCE_INSTALL_PPHELPER;
-                    else
-                        featurePresented = PREFERENCE_UPGRADE_PPHELPER;
-                }*/
                 }
             }
             else
@@ -1417,6 +1313,43 @@ public class GlobalData extends Application {
             serviceBinaryChecked = true;
         }
         return serviceBinaryExists;
+    }
+
+    public static String getJavaCommandFile(Class<?> mainClass, String name, Context context, Object cmdParam) {
+        try {
+            String cmd =
+                    "#!/system/bin/sh\n" +
+                            "base=/system\n" +
+                            "export CLASSPATH=" + context.getPackageManager().getPackageInfo(context.getPackageName(), 0).applicationInfo.sourceDir + "\n" +
+                            "exec app_process $base/bin " + mainClass.getName() + " " + cmdParam + " \"$@\"\n";
+
+            FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
+            fos.write(cmd.getBytes());
+            fos.close();
+
+            File file = context.getFileStreamPath(name);
+            file.setExecutable(true);
+
+            /*
+            File sd = Environment.getExternalStorageDirectory();
+            File exportDir = new File(sd, GlobalData.EXPORT_PATH);
+            if (!(exportDir.exists() && exportDir.isDirectory()))
+                exportDir.mkdirs();
+
+            File outFile = new File(sd, GlobalData.EXPORT_PATH + "/" + name);
+            OutputStream out = new FileOutputStream(outFile);
+            out.write(cmd.getBytes());
+            out.close();
+
+            outFile.setExecutable(true);
+            */
+
+            return file.getAbsolutePath();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

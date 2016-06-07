@@ -88,8 +88,6 @@ public class FirstStartService extends IntentService {
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
 
-        // show notification about upgrade PPHelper
-        PhoneProfilesHelper.showPPHelperUpgradeNotification(context);
         // show info notification
         ImportantInfoNotification.showInfoNotification(context);
 
@@ -97,9 +95,6 @@ public class FirstStartService extends IntentService {
 
         dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);
         dataWrapper.invalidateDataWrapper();
-
-        // start PPHelper
-        //PhoneProfilesHelper.startPPHelper(context);
 
         //  aplikacia uz je 1. krat spustena
         GlobalData.setApplicationStarted(context, true);

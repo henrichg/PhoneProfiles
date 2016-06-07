@@ -132,18 +132,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UpgradePPHelperActivity"
-            android:excludeFromRecents="true"
-            android:label="@string/empty_string"
-            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
-            android:theme="@style/EmptyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ImportantInfoActivity"
             android:configChanges="locale|layoutDirection"
             android:label="@string/info_notification_title">

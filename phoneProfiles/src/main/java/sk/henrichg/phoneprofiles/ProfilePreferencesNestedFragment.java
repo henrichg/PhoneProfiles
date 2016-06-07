@@ -778,10 +778,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
-                    else if (canChange == GlobalData.PREFERENCE_INSTALL_PPHELPER)
-                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_install_pphelper));
-                    else if (canChange == GlobalData.PREFERENCE_UPGRADE_PPHELPER)
-                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_upgrade_pphelper));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 }
@@ -880,10 +876,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
-                    //else if (canChange == GlobalData.PREFERENCE_INSTALL_PPHELPER)
-                    //    listPreference.setSummary(getResources().getString(R.string.profile_preferences_install_pphelper));
-                    //else if (canChange == GlobalData.PREFERENCE_UPGRADE_PPHELPER)
-                    //    listPreference.setSummary(getResources().getString(R.string.profile_preferences_upgrade_pphelper));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 } else {
