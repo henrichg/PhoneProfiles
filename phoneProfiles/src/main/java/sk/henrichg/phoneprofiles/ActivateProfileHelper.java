@@ -1479,7 +1479,8 @@ public class ActivateProfileHelper {
 
     public void removeNotification()
     {
-        notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
+        if (notificationManager != null)
+            notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
     }
 
     private void setAlarmForNotificationCancel()

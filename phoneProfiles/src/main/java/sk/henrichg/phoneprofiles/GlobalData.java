@@ -52,7 +52,8 @@ public class GlobalData extends Application {
     private static boolean logIntoLogCat = true;
     private static boolean logIntoFile = true;
     private static boolean rootToolsDebug = false;
-    public static String logFilterTags =  "PhoneProfilesHelper.doUninstallPPHelper"
+    public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"
+                                            +"|PhoneProfilesBackupAgent"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
