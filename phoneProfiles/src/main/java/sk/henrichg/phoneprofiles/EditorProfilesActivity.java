@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -254,6 +255,25 @@ public class EditorProfilesActivity extends AppCompatActivity
         return super.onPrepareOptionsMenu(menu);
     }
 
+    public static void exitApp(Context context, DataWrapper dataWrapper) {
+        GlobalData.setApplicationStarted(context, false);
+
+        // remove alarm for profile duration
+        ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
+        GlobalData.setActivatedProfileForDuration(context, 0);
+
+        // zrusenie notifikacie
+        dataWrapper.getActivateProfileHelper().removeNotification();
+        ImportantInfoNotification.removeNotification(context);
+        Permissions.removeNotifications(context);
+
+        context.stopService(new Intent(context, ReceiversService.class));
+        context.stopService(new Intent(context, KeyguardService.class));
+
+        ActivateProfileHelper.screenTimeoutUnlock(context);
+        ActivateProfileHelper.removeBrightnessView(context);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -293,22 +313,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
             return true;*/
         case R.id.menu_exit:
-            GlobalData.setApplicationStarted(getApplicationContext(), false);
-
-            // remove alarm for profile duration
-            ProfileDurationAlarmBroadcastReceiver.removeAlarm(getApplicationContext());
-            GlobalData.setActivatedProfileForDuration(getApplicationContext(), 0);
-
-            // zrusenie notifikacie
-            getDataWrapper().getActivateProfileHelper().removeNotification();
-            ImportantInfoNotification.removeNotification(getApplicationContext());
-            Permissions.removeNotifications(getApplicationContext());
-
-            stopService(new Intent(getApplicationContext(), ReceiversService.class));
-            stopService(new Intent(getApplicationContext(), KeyguardService.class));
-
-            ActivateProfileHelper.screenTimeoutUnlock(getApplicationContext());
-            ActivateProfileHelper.removeBrightnessView(getApplicationContext());
+            exitApp(getApplicationContext(), getDataWrapper());
 
             Handler handler=new Handler();
             Runnable r=new Runnable() {

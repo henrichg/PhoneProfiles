@@ -68,10 +68,19 @@
     <application
         android:name=".GlobalData"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/phoneprofiles_backup_scheme"
+        android:backupAgent="PhoneProfilesBackupAgent"
+        android:fullBackupOnly="true"
         android:supportsRtl="true"
         android:configChanges="locale|layoutDirection"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
+
+        <!-- Google Backup key -->
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIPDE5lCqC-YETPSAegqVaD-swljLtPFibz6JOtg" />
+
         <activity
             android:name=".ActivateProfileActivity"
             android:configChanges="locale|layoutDirection"
