@@ -105,7 +105,7 @@ public class DataWrapper {
         this.profileList = profileList;
     }
 
-    public Profile getNoinitializedProfile(String name, String icon, int order)
+    public static Profile getNoinitializedProfile(String name, String icon, int order)
     {
         return new Profile(
                   name,
