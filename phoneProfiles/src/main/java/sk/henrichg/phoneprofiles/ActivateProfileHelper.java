@@ -1883,7 +1883,7 @@ public class ActivateProfileHelper {
                 context.sendBroadcast(poke);
             }
             else
-            if ((android.os.Build.VERSION.SDK_INT >= 17) && GlobalData.grantRoot(false))
+            if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.grantRoot(false))
             {
                 // zariadenie je rootnute
                 GlobalData.logE("ActivateProfileHelper.setGPS", "rooted");
@@ -1959,7 +1959,7 @@ public class ActivateProfileHelper {
                     context.sendBroadcast(poke);
                 }
                 else
-                if ((android.os.Build.VERSION.SDK_INT >= 17) && GlobalData.grantRoot(false))
+                if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.grantRoot(false))
                 {
                     // zariadenie je rootnute
                     GlobalData.logE("ActivateProfileHelper.setGPS", "rooted");
