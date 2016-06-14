@@ -1884,7 +1884,7 @@ public class ActivateProfileHelper {
                     String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 
                     String newSet;
-                    if (provider == "")
+                    if (provider.isEmpty())
                         newSet = LocationManager.GPS_PROVIDER;
                     else
                         newSet = String.format("%s,%s", provider, LocationManager.GPS_PROVIDER);
