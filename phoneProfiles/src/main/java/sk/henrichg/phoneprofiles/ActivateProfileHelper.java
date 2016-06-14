@@ -1872,17 +1872,6 @@ public class ActivateProfileHelper {
         //if(!provider.contains(LocationManager.GPS_PROVIDER) && enable)
         if ((!isEnabled)  && enable)
         {
-            if (GlobalData.canExploitGPS(context))
-            {
-                GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
-
-                final Intent poke = new Intent();
-                poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
-                poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
-                poke.setData(Uri.parse("3"));
-                context.sendBroadcast(poke);
-            }
-            else
             if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.grantRoot(false))
             {
                 // zariadenie je rootnute
@@ -1927,6 +1916,17 @@ public class ActivateProfileHelper {
                 }
             }
             else
+            if (GlobalData.canExploitGPS(context))
+            {
+                GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
+
+                final Intent poke = new Intent();
+                poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+                poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+                poke.setData(Uri.parse("3"));
+                context.sendBroadcast(poke);
+            }
+            else
             {
                 /*GlobalData.logE("ActivateProfileHelper.setGPS", "old method");
 
@@ -1948,17 +1948,6 @@ public class ActivateProfileHelper {
             //if(provider.contains(LocationManager.GPS_PROVIDER) && (!enable))
             if (isEnabled && (!enable))
             {
-                if (GlobalData.canExploitGPS(context))
-                {
-                    GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
-
-                    final Intent poke = new Intent();
-                    poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
-                    poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
-                    poke.setData(Uri.parse("3"));
-                    context.sendBroadcast(poke);
-                }
-                else
                 if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.grantRoot(false))
                 {
                     // zariadenie je rootnute
@@ -2008,6 +1997,17 @@ public class ActivateProfileHelper {
                             Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
                         }
                     }
+                }
+                else
+                if (GlobalData.canExploitGPS(context))
+                {
+                    GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
+
+                    final Intent poke = new Intent();
+                    poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+                    poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+                    poke.setData(Uri.parse("3"));
+                    context.sendBroadcast(poke);
                 }
                 else
                 {
