@@ -1,10 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.Activity;
 import android.app.backup.BackupAgentHelper;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.widget.Toast;
 
 public class PhoneProfilesBackupAgent extends BackupAgentHelper {
 

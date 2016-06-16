@@ -30,7 +30,6 @@ import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.NotificationListenerService;

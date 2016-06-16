@@ -2,7 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 import android.nfc.INfcAdapter;
 import android.os.ServiceManager;
-import android.util.Log;
 
 /**
  * A shell executable for NTC toggle.

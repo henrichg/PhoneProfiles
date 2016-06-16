@@ -11,11 +11,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
