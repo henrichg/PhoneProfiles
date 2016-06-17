@@ -112,9 +112,9 @@ public class ActivateProfileHelper {
         GlobalData.sleep(300);
 
         // nahodenie network type
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            if (profile._deviceNetworkType >= 100) {
+        if (profile._deviceNetworkType >= 100) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == GlobalData.PREFERENCE_ALLOWED)
+            {
                 setPreferredNetworkType(context, profile._deviceNetworkType - 100);
                 //try { Thread.sleep(200); } catch (InterruptedException e) { }
                 //SystemClock.sleep(200);
@@ -123,75 +123,30 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie mobilnych dat
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            boolean _isMobileData = isMobileData(context);
-            boolean _setMobileData = false;
-            switch (profile._deviceMobileData) {
-                case 1:
-                    if (!_isMobileData)
-                    {
-                        _isMobileData = true;
-                        _setMobileData = true;
-                    }
-                    break;
-                case 2:
-                    if (_isMobileData)
-                    {
-                        _isMobileData = false;
-                        _setMobileData = true;
-                    }
-                    break;
-                case 3:
-                    _isMobileData = !_isMobileData;
-                    _setMobileData = true;
-                    break;
-            }
-            if (_setMobileData)
-            {
-                setMobileData(context, _isMobileData);
-                //try { Thread.sleep(200); } catch (InterruptedException e) { }
-                //SystemClock.sleep(200);
-                GlobalData.sleep(200);
-            }
-        }
-
-        // nahodenie WiFi AP
-        boolean canChangeWifi = true;
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            WifiApManager wifiApManager = null;
-            try {
-                wifiApManager = new WifiApManager(context);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-            if (wifiApManager != null) {
-                boolean setWifiAPState = false;
-                boolean isWifiAPEnabled = wifiApManager.isWifiAPEnabled();
-                switch (profile._deviceWiFiAP) {
+        if (profile._deviceMobileData != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == GlobalData.PREFERENCE_ALLOWED) {
+                boolean _isMobileData = isMobileData(context);
+                boolean _setMobileData = false;
+                switch (profile._deviceMobileData) {
                     case 1:
-                        if (!isWifiAPEnabled) {
-                            isWifiAPEnabled = true;
-                            setWifiAPState = true;
-                            canChangeWifi = false;
+                        if (!_isMobileData) {
+                            _isMobileData = true;
+                            _setMobileData = true;
                         }
                         break;
                     case 2:
-                        if (isWifiAPEnabled) {
-                            isWifiAPEnabled = false;
-                            setWifiAPState = true;
-                            canChangeWifi = true;
+                        if (_isMobileData) {
+                            _isMobileData = false;
+                            _setMobileData = true;
                         }
                         break;
                     case 3:
-                        isWifiAPEnabled = !isWifiAPEnabled;
-                        setWifiAPState = true;
-                        canChangeWifi = !isWifiAPEnabled;
+                        _isMobileData = !_isMobileData;
+                        _setMobileData = true;
                         break;
                 }
-                if (setWifiAPState) {
-                    wifiApManager.setWifiApState(isWifiAPEnabled);
+                if (_setMobileData) {
+                    setMobileData(context, _isMobileData);
                     //try { Thread.sleep(200); } catch (InterruptedException e) { }
                     //SystemClock.sleep(200);
                     GlobalData.sleep(200);
@@ -199,39 +154,42 @@ public class ActivateProfileHelper {
             }
         }
 
-        if (canChangeWifi) {
-            // nahodenie WiFi
-            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.PREFERENCE_ALLOWED) {
-                if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
-                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                    int wifiState = wifiManager.getWifiState();
-                    boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
-                    boolean setWifiState = false;
-                    switch (profile._deviceWiFi) {
+        // nahodenie WiFi AP
+        boolean canChangeWifi = true;
+        if (profile._deviceWiFiAP != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.PREFERENCE_ALLOWED) {
+                WifiApManager wifiApManager = null;
+                try {
+                    wifiApManager = new WifiApManager(context);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                if (wifiApManager != null) {
+                    boolean setWifiAPState = false;
+                    boolean isWifiAPEnabled = wifiApManager.isWifiAPEnabled();
+                    switch (profile._deviceWiFiAP) {
                         case 1:
-                            if (!isWifiEnabled) {
-                                isWifiEnabled = true;
-                                setWifiState = true;
+                            if (!isWifiAPEnabled) {
+                                isWifiAPEnabled = true;
+                                setWifiAPState = true;
+                                canChangeWifi = false;
                             }
                             break;
                         case 2:
-                            if (isWifiEnabled) {
-                                isWifiEnabled = false;
-                                setWifiState = true;
+                            if (isWifiAPEnabled) {
+                                isWifiAPEnabled = false;
+                                setWifiAPState = true;
+                                canChangeWifi = true;
                             }
                             break;
                         case 3:
-                            isWifiEnabled = !isWifiEnabled;
-                            setWifiState = true;
+                            isWifiAPEnabled = !isWifiAPEnabled;
+                            setWifiAPState = true;
+                            canChangeWifi = !isWifiAPEnabled;
                             break;
                     }
-                    if (setWifiState) {
-                        try {
-                            wifiManager.setWifiEnabled(isWifiEnabled);
-                        } catch (Exception e) {
-                            // barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
-                            wifiManager.setWifiEnabled(isWifiEnabled);
-                        }
+                    if (setWifiAPState) {
+                        wifiApManager.setWifiApState(isWifiAPEnabled);
                         //try { Thread.sleep(200); } catch (InterruptedException e) { }
                         //SystemClock.sleep(200);
                         GlobalData.sleep(200);
@@ -240,124 +198,166 @@ public class ActivateProfileHelper {
             }
         }
 
-        // nahodenie bluetooth
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (bluetoothAdapter != null) {
-                boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
-                boolean setBluetoothState = false;
-                switch (profile._deviceBluetooth) {
-                    case 1:
-                        if (!isBluetoothEnabled) {
-                            isBluetoothEnabled = true;
-                            setBluetoothState = true;
+        if (canChangeWifi) {
+            // nahodenie WiFi
+            if (profile._deviceWiFi != 0) {
+                if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.PREFERENCE_ALLOWED) {
+                    if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
+                        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                        int wifiState = wifiManager.getWifiState();
+                        boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
+                        boolean setWifiState = false;
+                        switch (profile._deviceWiFi) {
+                            case 1:
+                                if (!isWifiEnabled) {
+                                    isWifiEnabled = true;
+                                    setWifiState = true;
+                                }
+                                break;
+                            case 2:
+                                if (isWifiEnabled) {
+                                    isWifiEnabled = false;
+                                    setWifiState = true;
+                                }
+                                break;
+                            case 3:
+                                isWifiEnabled = !isWifiEnabled;
+                                setWifiState = true;
+                                break;
                         }
-                        break;
-                    case 2:
-                        if (isBluetoothEnabled) {
-                            isBluetoothEnabled = false;
-                            setBluetoothState = true;
+                        if (setWifiState) {
+                            try {
+                                wifiManager.setWifiEnabled(isWifiEnabled);
+                            } catch (Exception e) {
+                                // barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
+                                wifiManager.setWifiEnabled(isWifiEnabled);
+                            }
+                            //try { Thread.sleep(200); } catch (InterruptedException e) { }
+                            //SystemClock.sleep(200);
+                            GlobalData.sleep(200);
                         }
-                        break;
-                    case 3:
-                        isBluetoothEnabled = !isBluetoothEnabled;
-                        setBluetoothState = true;
-                        break;
+                    }
                 }
-                if (setBluetoothState) {
-                    if (isBluetoothEnabled)
-                        bluetoothAdapter.enable();
-                    else
-                        bluetoothAdapter.disable();
+            }
+        }
+
+        // nahodenie bluetooth
+        if (profile._deviceBluetooth != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED) {
+                BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                if (bluetoothAdapter != null) {
+                    boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
+                    boolean setBluetoothState = false;
+                    switch (profile._deviceBluetooth) {
+                        case 1:
+                            if (!isBluetoothEnabled) {
+                                isBluetoothEnabled = true;
+                                setBluetoothState = true;
+                            }
+                            break;
+                        case 2:
+                            if (isBluetoothEnabled) {
+                                isBluetoothEnabled = false;
+                                setBluetoothState = true;
+                            }
+                            break;
+                        case 3:
+                            isBluetoothEnabled = !isBluetoothEnabled;
+                            setBluetoothState = true;
+                            break;
+                    }
+                    if (setBluetoothState) {
+                        if (isBluetoothEnabled)
+                            bluetoothAdapter.enable();
+                        else
+                            bluetoothAdapter.disable();
+                    }
                 }
             }
         }
 
         // nahodenie GPS
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_GPS, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            boolean isEnabled;
-            if (android.os.Build.VERSION.SDK_INT < 21)
-                isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
-            else {
-                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            }
+        if (profile._deviceGPS != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_GPS, context) == GlobalData.PREFERENCE_ALLOWED) {
+                boolean isEnabled;
+                if (android.os.Build.VERSION.SDK_INT < 21)
+                    isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
+                else {
+                    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                    isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                }
 
-            switch (profile._deviceGPS) {
-                case 1 :
-                    setGPS(context, true);
-                    break;
-                case 2 :
-                    setGPS(context, false);
-                    break;
-                case 3 :
-                    if (!isEnabled)
-                    {
-                        setGPS(context, true);
-                    }
-                    else
-                    if (isEnabled)
-                    {
-                        setGPS(context, false);
-                    }
-                    break;
-            }
-        }
-
-        // nahodenie NFC
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NFC, context) == GlobalData.PREFERENCE_ALLOWED) {
-            //Log.e("ActivateProfileHelper.doExecuteForRadios", "allowed");
-            NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
-            if (nfcAdapter != null) {
-                switch (profile._deviceNFC) {
+                switch (profile._deviceGPS) {
                     case 1:
-                        setNFC(context, true);
+                        setGPS(context, true);
                         break;
                     case 2:
-                        setNFC(context, false);
+                        setGPS(context, false);
                         break;
                     case 3:
-                        if (!nfcAdapter.isEnabled()) {
-                            setNFC(context, true);
-                        } else if (nfcAdapter.isEnabled()) {
-                            setNFC(context, false);
+                        if (!isEnabled) {
+                            setGPS(context, true);
+                        } else if (isEnabled) {
+                            setGPS(context, false);
                         }
                         break;
                 }
             }
         }
-        //else
-        //    Log.e("ActivateProfileHelper.doExecuteForRadios", "not allowed");
+
+        // nahodenie NFC
+        if (profile._deviceNFC != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NFC, context) == GlobalData.PREFERENCE_ALLOWED) {
+                //Log.e("ActivateProfileHelper.doExecuteForRadios", "allowed");
+                NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+                if (nfcAdapter != null) {
+                    switch (profile._deviceNFC) {
+                        case 1:
+                            setNFC(context, true);
+                            break;
+                        case 2:
+                            setNFC(context, false);
+                            break;
+                        case 3:
+                            if (!nfcAdapter.isEnabled()) {
+                                setNFC(context, true);
+                            } else if (nfcAdapter.isEnabled()) {
+                                setNFC(context, false);
+                            }
+                            break;
+                    }
+                }
+            }
+            //else
+            //    Log.e("ActivateProfileHelper.doExecuteForRadios", "not allowed");
+        }
     }
 
     public void executeForRadios(Profile profile)
     {
         boolean _isAirplaneMode = false;
         boolean _setAirplaneMode = false;
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == GlobalData.PREFERENCE_ALLOWED)
-        {
-            _isAirplaneMode = isAirplaneMode(context);
-            switch (profile._deviceAirplaneMode) {
-                case 1:
-                    if (!_isAirplaneMode)
-                    {
-                        _isAirplaneMode = true;
+        if (profile._deviceAirplaneMode != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == GlobalData.PREFERENCE_ALLOWED) {
+                _isAirplaneMode = isAirplaneMode(context);
+                switch (profile._deviceAirplaneMode) {
+                    case 1:
+                        if (!_isAirplaneMode) {
+                            _isAirplaneMode = true;
+                            _setAirplaneMode = true;
+                        }
+                        break;
+                    case 2:
+                        if (_isAirplaneMode) {
+                            _isAirplaneMode = false;
+                            _setAirplaneMode = true;
+                        }
+                        break;
+                    case 3:
+                        _isAirplaneMode = !_isAirplaneMode;
                         _setAirplaneMode = true;
-                    }
-                    break;
-                case 2:
-                    if (_isAirplaneMode)
-                    {
-                        _isAirplaneMode = false;
-                        _setAirplaneMode = true;
-                    }
-                    break;
-                case 3:
-                    _isAirplaneMode = !_isAirplaneMode;
-                    _setAirplaneMode = true;
-                    break;
+                        break;
+                }
             }
         }
 
@@ -617,23 +617,22 @@ public class ActivateProfileHelper {
     }
 
     private void setVibrateWhenRinging(Profile profile, int value) {
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
-                == GlobalData.PREFERENCE_ALLOWED) {
-            if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
+        int lValue = value;
+        if (profile != null) {
+            switch (profile._vibrateWhenRinging) {
+                case 1:
+                    lValue = 1;
+                    break;
+                case 2:
+                    lValue = 0;
+                    break;
+            }
+        }
 
-                int lValue = value;
-                if (profile != null) {
-                    switch (profile._vibrateWhenRinging) {
-                        case 1:
-                            lValue = 1;
-                            break;
-                        case 2:
-                            lValue = 0;
-                            break;
-                    }
-                }
-
-                if (lValue != -1) {
+        if (lValue != -1) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
+                    == GlobalData.PREFERENCE_ALLOWED) {
+                if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
                     if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                         Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", lValue);
                     else {
@@ -645,9 +644,9 @@ public class ActivateProfileHelper {
                             //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                             Command command = new Command(0, false, command1); //, command2);
                             try {
+                                RootTools.closeAllShells();
                                 RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                                 commandWait(command);
-                                //RootTools.closeAllShells();
                             } catch (Exception e) {
                                 Log.e("ActivateProfileHelper.setVibrateWhenRinging", "Error on run su: " + e.toString());
                             }
@@ -1162,7 +1161,8 @@ public class ActivateProfileHelper {
         }
 
         // set notification led
-        //if (Permissions.checkProfileNotificationLed(context, profile)) { not needed for Android 6+, because root is required
+        if (profile._notificationLed != 0) {
+            //if (Permissions.checkProfileNotificationLed(context, profile)) { not needed for Android 6+, because root is required
             switch (profile._notificationLed) {
                 case 1:
                     setNotificationLed(1);
@@ -1171,7 +1171,8 @@ public class ActivateProfileHelper {
                     setNotificationLed(0);
                     break;
             }
-        //}
+            //}
+        }
 
         // nahodenie pozadia
         if (Permissions.checkProfileWallpaper(context, profile)) {
@@ -1183,32 +1184,34 @@ public class ActivateProfileHelper {
         }
 
         // set power save mode
-        if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == GlobalData.PREFERENCE_ALLOWED) {
-            PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            boolean _isPowerSaveMode = false;
-            if (Build.VERSION.SDK_INT >= 21)
-                _isPowerSaveMode = powerManager.isPowerSaveMode();
-            boolean _setPowerSaveMode = false;
-            switch (profile._devicePowerSaveMode) {
-                case 1:
-                    if (!_isPowerSaveMode) {
-                        _isPowerSaveMode = true;
+        if (profile._devicePowerSaveMode != 0) {
+            if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == GlobalData.PREFERENCE_ALLOWED) {
+                PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+                boolean _isPowerSaveMode = false;
+                if (Build.VERSION.SDK_INT >= 21)
+                    _isPowerSaveMode = powerManager.isPowerSaveMode();
+                boolean _setPowerSaveMode = false;
+                switch (profile._devicePowerSaveMode) {
+                    case 1:
+                        if (!_isPowerSaveMode) {
+                            _isPowerSaveMode = true;
+                            _setPowerSaveMode = true;
+                        }
+                        break;
+                    case 2:
+                        if (_isPowerSaveMode) {
+                            _isPowerSaveMode = false;
+                            _setPowerSaveMode = true;
+                        }
+                        break;
+                    case 3:
+                        _isPowerSaveMode = !_isPowerSaveMode;
                         _setPowerSaveMode = true;
-                    }
-                    break;
-                case 2:
-                    if (_isPowerSaveMode) {
-                        _isPowerSaveMode = false;
-                        _setPowerSaveMode = true;
-                    }
-                    break;
-                case 3:
-                    _isPowerSaveMode = !_isPowerSaveMode;
-                    _setPowerSaveMode = true;
-                    break;
-            }
-            if (_setPowerSaveMode) {
-                setPowerSaveMode(_isPowerSaveMode);
+                        break;
+                }
+                if (_setPowerSaveMode) {
+                    setPowerSaveMode(_isPowerSaveMode);
+                }
             }
         }
 
@@ -1635,7 +1638,7 @@ public class ActivateProfileHelper {
                 String command1 = "svc data " + (enable ? "enable" : "disable");
                 Command command = new Command(0, false, command1);
                 try {
-                    RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                    RootTools.getShell(true, Shell.ShellContext.SHELL).add(command);
                     commandWait(command);
                     //RootTools.closeAllShells();
                 } catch (Exception e) {
