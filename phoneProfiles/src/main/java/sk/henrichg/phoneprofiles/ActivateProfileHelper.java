@@ -668,9 +668,9 @@ public class ActivateProfileHelper {
                 //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                 Command command = new Command(0, false, command1); //, command2);
                 try {
+                    RootTools.closeAllShells();
                     RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                     commandWait(command);
-                    //RootTools.closeAllShells();
                 } catch (Exception e) {
                     Log.e("ActivateProfileHelper.setNotificationLed", "Error on run su: " + e.toString());
                 }
@@ -1094,9 +1094,9 @@ public class ActivateProfileHelper {
                                 //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                                 Command command = new Command(0, false, command1); //, command2);
                                 try {
+                                    RootTools.closeAllShells();
                                     RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                                     commandWait(command);
-                                    //RootTools.closeAllShells();
                                 } catch (Exception e) {
                                     Log.e("ActivateProfileHelper.execute", "Error on run su: " + e.toString());
                                 }
@@ -1720,9 +1720,9 @@ public class ActivateProfileHelper {
                 String command1 = "svc data " + (enable ? "enable" : "disable");
                 Command command = new Command(0, false, command1);
                 try {
+                    RootTools.closeAllShells();
                     RootTools.getShell(true, Shell.ShellContext.SHELL).add(command);
                     commandWait(command);
-                    //RootTools.closeAllShells();
                 } catch (Exception e) {
                     Log.e("ActivateProfileHelper.setMobileData", "Error on run su");
                 }
@@ -1858,9 +1858,9 @@ public class ActivateProfileHelper {
                         }
                     };
                     try {
+                        RootTools.closeAllShells();
                         RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                         commandWait(command);
-                        //RootTools.closeAllShells();
                     } catch (Exception e) {
                         Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
                     }
@@ -1891,9 +1891,9 @@ public class ActivateProfileHelper {
                             String command1 = "service call phone " + transactionCode + " i32 " + subscriptionId + " i32 " + networkType;
                             Command command = new Command(0, false, command1);
                             try {
+                                RootTools.closeAllShells();
                                 RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                                 commandWait(command);
-                                //RootTools.closeAllShells();
                             } catch (Exception e) {
                                 Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
                             }
@@ -1904,9 +1904,9 @@ public class ActivateProfileHelper {
                         String command1 = "service call phone " + transactionCode + " i32 " + networkType;
                         Command command = new Command(0, false, command1);
                         try {
+                            RootTools.closeAllShells();
                             RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                             commandWait(command);
-                            //RootTools.closeAllShells();
                         } catch (Exception e) {
                             Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
                         }
@@ -1931,9 +1931,9 @@ public class ActivateProfileHelper {
             //Log.e("ActivateProfileHelper.setNFC", "command1="+command1);
             Command command = new Command(0, false, command1);
             try {
+                RootTools.closeAllShells();
                 RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
                 commandWait(command);
-                //RootTools.closeAllShells();
             } catch (Exception e) {
                 Log.e("ActivateProfileHelper.setNFC", "Error on run su");
             }
@@ -1991,9 +1991,9 @@ public class ActivateProfileHelper {
                     //command2 = "am broadcast -a android.location.GPS_ENABLED_CHANGE --ez state true";
                     Command command = new Command(0, false, command1); //, command2);
                     try {
+                        RootTools.closeAllShells();
                         RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                         commandWait(command);
-                        //RootTools.closeAllShells();
                     } catch (Exception e) {
                         Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
                     }
@@ -2002,9 +2002,9 @@ public class ActivateProfileHelper {
                     command1 = "settings put secure location_providers_allowed +gps";
                     Command command = new Command(0, false, command1);
                     try {
+                        RootTools.closeAllShells();
                         RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                         commandWait(command);
-                        //RootTools.closeAllShells();
                     } catch (Exception e) {
                         Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
                     }
@@ -2074,9 +2074,9 @@ public class ActivateProfileHelper {
                         //command2 = "am broadcast -a android.location.GPS_ENABLED_CHANGE --ez state false";
                         Command command = new Command(0, false, command1);//, command2);
                         try {
+                            RootTools.closeAllShells();
                             RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                             commandWait(command);
-                            //RootTools.closeAllShells();
                         } catch (Exception e) {
                             Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
                         }
@@ -2085,9 +2085,9 @@ public class ActivateProfileHelper {
                         command1 = "settings put secure location_providers_allowed -gps";
                         Command command = new Command(0, false, command1);
                         try {
+                            RootTools.closeAllShells();
                             RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                             commandWait(command);
-                            //RootTools.closeAllShells();
                         } catch (Exception e) {
                             Log.e("ActivateProfileHelper.setGPS", "Error on run su: " + e.toString());
                         }
@@ -2149,9 +2149,9 @@ public class ActivateProfileHelper {
             //}
             Command command = new Command(0, false, command1, command2);
             try {
+                RootTools.closeAllShells();
                 RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                 commandWait(command);
-                //RootTools.closeAllShells();
             } catch (Exception e) {
                 Log.e("AirPlaneMode_SDK17.setAirplaneMode", "Error on run su");
             }
@@ -2179,9 +2179,9 @@ public class ActivateProfileHelper {
         String command1 = "settings put global low_power " + ((enable) ? 1 : 0);
         Command command = new Command(0, false, command1);
         try {
+            RootTools.closeAllShells();
             RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
             commandWait(command);
-            //RootTools.closeAllShells();
         } catch (Exception e) {
             Log.e("ActivateProfileHelper.setPowerSaveMode", "Error on run su: " + e.toString());
         }
