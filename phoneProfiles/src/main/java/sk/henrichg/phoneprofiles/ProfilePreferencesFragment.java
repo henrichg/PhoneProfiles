@@ -21,6 +21,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
     public static ImageViewPreference changedImageViewPreference;
     public static ProfileIconPreference changedProfileIconPreference;
     public static Activity preferencesActivity = null;
+    public static ApplicationsDialogPreference applicationsDialogPreference;
 
     static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
     static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
@@ -179,6 +180,11 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
     static public void setChangedProfileIconPreference(ProfileIconPreference changedProfileIconPref)
     {
         changedProfileIconPreference = changedProfileIconPref;
+    }
+
+    static public void setApplicationsDialogPreference(ApplicationsDialogPreference applicationsDialogPref)
+    {
+        applicationsDialogPreference = applicationsDialogPref;
     }
 
 }
