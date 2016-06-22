@@ -34,7 +34,7 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
             if (Permissions.checkProfileRadioPreferences(context, profile)) {
                 // run execute radios from ActivateProfileHelper
                 ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-                aph.initialize(null, context);
+                aph.initialize(dataWrapper, null, context);
                 aph.executeForRadios(profile);
                 aph = null;
             }

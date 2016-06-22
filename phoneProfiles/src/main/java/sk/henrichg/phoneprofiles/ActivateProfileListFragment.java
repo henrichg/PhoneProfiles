@@ -51,7 +51,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
         activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(getActivity(), getActivity().getApplicationContext());
+        activateProfileHelper.initialize(dataWrapper, getActivity(), getActivity().getApplicationContext());
 
         intent = getActivity().getIntent();
         startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, 0);

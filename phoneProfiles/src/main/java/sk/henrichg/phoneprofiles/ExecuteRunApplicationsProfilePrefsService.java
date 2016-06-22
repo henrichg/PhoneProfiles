@@ -29,7 +29,7 @@ public class ExecuteRunApplicationsProfilePrefsService extends IntentService
         if (profile != null)
         {
             ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-            aph.initialize(null, context);
+            aph.initialize(dataWrapper, null, context);
             aph.executeForRunApplications(profile);
         }
 

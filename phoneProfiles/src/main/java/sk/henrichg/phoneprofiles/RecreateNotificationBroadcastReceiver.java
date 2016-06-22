@@ -12,7 +12,7 @@ public class RecreateNotificationBroadcastReceiver extends BroadcastReceiver {
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 
         ActivateProfileHelper activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(null, context);
+        activateProfileHelper.initialize(dataWrapper, null, context);
 
         Profile activatedProfile = dataWrapper.getActivatedProfile();
         activateProfileHelper.showNotification(activatedProfile);

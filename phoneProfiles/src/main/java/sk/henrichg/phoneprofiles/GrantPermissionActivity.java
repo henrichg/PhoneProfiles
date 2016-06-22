@@ -424,7 +424,7 @@ public class GrantPermissionActivity extends Activity {
         Context context = getApplicationContext();
 
         ActivateProfileHelper activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(Permissions.profileActivationActivity, context);
+        activateProfileHelper.initialize(dataWrapper, Permissions.profileActivationActivity, context);
 
         if (forGUI && (profile != null))
         {

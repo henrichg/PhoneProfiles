@@ -22,7 +22,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
         ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-        aph.initialize(null, context);
+        aph.initialize(dataWrapper, null, context);
 
         int linkUnlink = intent.getIntExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
         long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);

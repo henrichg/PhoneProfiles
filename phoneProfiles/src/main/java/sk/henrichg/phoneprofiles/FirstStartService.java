@@ -76,7 +76,7 @@ public class FirstStartService extends IntentService {
         GlobalData.setActivatedProfileForDuration(context, 0);
 
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(null, context);
+        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
 
         // create a handler to post messages to the main thread
         Handler toastHandler = new Handler(getMainLooper());
