@@ -26,13 +26,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Context context;
     
     // Database Version
-    private static final int DATABASE_VERSION = 1270;
+    private static final int DATABASE_VERSION = 1280;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
 
-    // Profiles table name
+    // Table names
     private static final String TABLE_PROFILES = "profiles";
+    private static final String TABLE_SHORTCUTS = "shortcuts";
 
     // import/export
     private final String EXPORT_DBFILENAME = DATABASE_NAME + ".backup";
@@ -86,6 +87,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEVICE_NETWORK_TYPE = "deviceNetworkType";
     private static final String KEY_NOTIFICATION_LED = "notificationLed";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrateWhenRinging";
+
+    // Shortcuts Colums names
+    public static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
+    public static final String KEY_S_INTENT = "intent";
+    public static final String KEY_S_NAME = "name";
 
     /**
      * Constructor takes and keeps a reference of the passed context in order to
@@ -200,6 +206,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROFILES_TABLE);
 
         db.execSQL("CREATE INDEX IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
+
+        final String CREATE_SHORTCUTS_TABLE = "CREATE TABLE " + TABLE_SHORTCUTS + "("
+                + KEY_S_ID + " INTEGER PRIMARY KEY,"
+                + KEY_S_INTENT + " TEXT,"
+                + KEY_S_NAME + " TEXT"
+                + ")";
+        db.execSQL(CREATE_SHORTCUTS_TABLE);
 
     }
 
@@ -592,6 +605,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VIBRATE_WHEN_RINGING + "=0");
+        }
+
+        if (oldVersion < 1280) {
+            final String CREATE_SHORTCUTS_TABLE = "CREATE TABLE " + TABLE_SHORTCUTS + "("
+                    + KEY_S_ID + " INTEGER PRIMARY KEY,"
+                    + KEY_S_INTENT + " TEXT,"
+                    + KEY_S_NAME + " TEXT"
+                    + ")";
+            db.execSQL(CREATE_SHORTCUTS_TABLE);
         }
 
     }
@@ -1689,6 +1711,151 @@ public class DatabaseHandler extends SQLiteOpenHelper {
        return ret;
     }
 
+// SHORTCUTS ----------------------------------------------------------------------
+
+    // Adding new shortcut
+    void addShortcut(Shortcut shortcut) {
+
+        //SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getMyWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_S_INTENT, shortcut._intent);
+        values.put(KEY_S_NAME, shortcut._name);
+
+        db.beginTransaction();
+
+        try {
+            // Inserting Row
+            shortcut._id = db.insert(TABLE_SHORTCUTS, null, values);
+
+            db.setTransactionSuccessful();
+
+        } catch (Exception e){
+            //Error in between database transaction
+        } finally {
+            db.endTransaction();
+        }
+
+        //db.close(); // Closing database connection
+    }
+
+    // Getting single shortcut
+    Shortcut getShortcut(long shortcutId) {
+        //SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getMyWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_SHORTCUTS,
+                new String[]{KEY_S_ID,
+                        KEY_S_INTENT,
+                        KEY_S_NAME
+                },
+                KEY_S_ID + "=?",
+                new String[]{String.valueOf(shortcutId)}, null, null, null, null);
+
+        Shortcut shortcut = null;
+
+        if (cursor != null)
+        {
+            cursor.moveToFirst();
+
+            if (cursor.getCount() > 0)
+            {
+                shortcut = new Shortcut();
+                shortcut._id = Long.parseLong(cursor.getString(0));
+                shortcut._intent = cursor.getString(1);
+                shortcut._name = cursor.getString(2);
+            }
+
+            cursor.close();
+        }
+
+        //db.close();
+
+        return shortcut;
+    }
+
+    // Updating single shortcut
+    public int updateShortcut(Shortcut shortcut) {
+        //SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getMyWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_S_INTENT, shortcut._intent);
+        values.put(KEY_S_NAME, shortcut._name);
+
+        int r = 0;
+
+        db.beginTransaction();
+
+        try {
+            // updating row
+            r = db.update(TABLE_SHORTCUTS, values, KEY_S_ID + " = ?",
+                    new String[] { String.valueOf(shortcut._id) });
+
+            db.setTransactionSuccessful();
+
+        } catch (Exception e){
+            //Error in between database transaction
+            Log.e("DatabaseHandler.updateEvent", e.toString());
+            r = 0;
+        } finally {
+            db.endTransaction();
+        }
+
+        //db.close();
+
+        return r;
+    }
+
+    // Deleting single shortcut
+    public void deleteShortcut(long shortcutId) {
+        //SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getMyWritableDatabase();
+
+        db.beginTransaction();
+
+        try {
+
+            // delete geofence
+            db.delete(TABLE_SHORTCUTS, KEY_S_ID + " = ?",
+                    new String[]{String.valueOf(shortcutId)});
+
+            db.setTransactionSuccessful();
+
+        } catch (Exception e){
+            //Error in between database transaction
+            Log.e("DatabaseHandler.deleteGeofence", e.toString());
+        } finally {
+            db.endTransaction();
+        }
+
+        //db.close();
+    }
+
+// OTHERS -----------------------------------------------------------------
+
+    public boolean tableExists(String tableName, SQLiteDatabase db)
+    {
+        @SuppressWarnings("unused")
+        Cursor c = null;
+
+        boolean tableExists = false;
+
+        /* get cursor on it */
+        try
+        {
+            c = db.query(tableName, null,
+                    null, null, null, null, null);
+            tableExists = true;
+        }
+        catch (Exception e) {
+            /* not exists ? */
+        }
+
+        return tableExists;
+    }
+
     //@SuppressWarnings("resource")
     public int importDB(String applicationDataPath)
     {
@@ -1948,13 +2115,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         } while (cursorExportedDB.moveToNext());
                     }
 
+                    cursorExportedDB.close();
+                    cursorImportDB.close();
+
+                    db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
+
+                    if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
+                        // cusor for events exportedDB
+                        cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                        columnNamesExportedDB = cursorExportedDB.getColumnNames();
+
+                        // cursor for profiles of destination db
+                        cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+
+                        if (cursorExportedDB.moveToFirst()) {
+                            do {
+                                values.clear();
+                                for (int i = 0; i < columnNamesExportedDB.length; i++) {
+                                    // put only when columnNamesExportedDB[i] exists in cursorImportDB
+                                    if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
+                                        values.put(columnNamesExportedDB[i], cursorExportedDB.getString(i));
+                                    }
+                                }
+
+                                // for non existent fields set default value
+                                /*if (exportedDBObj.getVersion() < 1480) {
+                                    values.put(KEY_G_CHECKED, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1510) {
+                                    values.put(KEY_G_TRANSITION, 0);
+                                }*/
+
+                                // Inserting Row do db z SQLiteOpenHelper
+                                db.insert(TABLE_SHORTCUTS, null, values);
+
+                            } while (cursorExportedDB.moveToNext());
+                        }
+
+                        cursorExportedDB.close();
+                        cursorImportDB.close();
+                    }
+
                     db.setTransactionSuccessful();
 
                     ret = 1;
                 }
                 finally {
                     db.endTransaction();
-                    cursorExportedDB.close();
+                    if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
+                        cursorExportedDB.close();
+                    if ((cursorImportDB != null) && (!cursorImportDB.isClosed()))
+                        cursorImportDB.close();
                     //db.close();
                 }
             }

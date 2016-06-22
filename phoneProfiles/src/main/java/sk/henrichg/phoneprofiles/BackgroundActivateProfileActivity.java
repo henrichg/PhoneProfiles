@@ -6,42 +6,44 @@ import android.os.Bundle;
 
 public class BackgroundActivateProfileActivity extends Activity {
 
-	private DataWrapper dataWrapper;
-	
-	private int startupSource = 0;
-	private long profile_id;
-	private Intent intent;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    private DataWrapper dataWrapper;
 
-		GlobalData.loadPreferences(getApplicationContext());
-		
-		dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
-		
-		intent = getIntent();
-		startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, 0);
-		profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+    private int startupSource = 0;
+    private long profile_id;
+    private Intent intent;
 
-		dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
-		
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
+        GlobalData.loadPreferences(getApplicationContext());
 
-		dataWrapper.activateProfile(profile_id, startupSource, this);
-	}
-	
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
-		dataWrapper.invalidateDataWrapper();
-		dataWrapper = null;
-	}	
+        dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
+
+        intent = getIntent();
+        startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, 0);
+        profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+
+        dataWrapper.getActivateProfileHelper().initialize(this, getApplicationContext());
+
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        if ((startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
+            (startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT))
+            dataWrapper.activateProfile(profile_id, startupSource, this);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        dataWrapper.invalidateDataWrapper();
+        dataWrapper = null;
+    }
 
 }
