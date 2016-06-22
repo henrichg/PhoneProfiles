@@ -382,7 +382,7 @@
             android:entries="@array/runApplicationArray"
             android:entryValues="@array/runApplicationValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.ApplicationsMultiSelectDialogPreference
+        <sk.henrichg.phoneprofiles.ApplicationsDialogPreference
             android:defaultValue="@string/prf_pref_deviceRunApplicationPackageName"
             android:key="prf_pref_deviceRunApplicationPackageName"
             android:title="@string/profile_preferences_deviceRunApplicationPackageName"
