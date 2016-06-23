@@ -836,7 +836,7 @@ public class ActivateProfileHelper {
 
             for (int i = 0; i < splits.length; i++) {
                 if (!ApplicationsCache.isShortcut(splits[i])) {
-                    intent = packageManager.getLaunchIntentForPackage(splits[i]);
+                    intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(splits[i]));
                     if (intent != null) {
                         intent.addCategory(Intent.CATEGORY_LAUNCHER);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -857,6 +857,7 @@ public class ActivateProfileHelper {
                         if (shortcut != null) {
                             try {
                                 intent = Intent.parseUri(shortcut._intent, 0);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     context.startActivity(intent);
                                 } catch (Exception e) {
