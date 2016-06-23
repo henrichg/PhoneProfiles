@@ -546,11 +546,9 @@ public class ActivateProfileHelper {
 
             if ((zenMode != ZENMODE_SILENT) && (PPNotificationListenerService.isNotificationListenerServiceEnabled(context))) {
                 audioManager.setRingerMode(ringerMode);
-                if (android.os.Build.VERSION.SDK_INT < 23) {
-                    //try { Thread.sleep(500); } catch (InterruptedException e) { }
-                    //SystemClock.sleep(500);
-                    GlobalData.sleep(500);
-                }
+                //try { Thread.sleep(500); } catch (InterruptedException e) { }
+                //SystemClock.sleep(500);
+                GlobalData.sleep(500);
 
                 if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
                     int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
