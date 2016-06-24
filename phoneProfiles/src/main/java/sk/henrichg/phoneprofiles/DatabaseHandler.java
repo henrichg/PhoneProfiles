@@ -998,8 +998,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteProfile(Profile profile) {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
-        db.delete(TABLE_PROFILES, KEY_ID + " = ?",
-                new String[] { String.valueOf(profile._id) });
+
+        db.beginTransaction();
+        try {
+
+            // unlink shortcuts from profile
+            String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
+            for (int i = 0; i < splits.length; i++)
+            {
+                boolean shortcut = ApplicationsCache.isShortcut(splits[i]);
+                if (shortcut) {
+                    long shortcutId = ApplicationsCache.getShortcutId(splits[i]);
+                    deleteShortcut(shortcutId);
+                }
+            }
+
+            db.delete(TABLE_PROFILES, KEY_ID + " = ?",
+                    new String[] { String.valueOf(profile._id) });
+
+            db.setTransactionSuccessful();
+        } catch (Exception e){
+            //Error in between database transaction
+        } finally {
+            db.endTransaction();
+        }
+
         //db.close();
     }
 
@@ -1007,7 +1030,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteAllProfiles() {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
-        db.delete(TABLE_PROFILES, null, null);
+
+        db.beginTransaction();
+
+        try {
+
+            db.delete(TABLE_PROFILES, null, null);
+
+            db.delete(TABLE_SHORTCUTS, null, null);
+
+            db.setTransactionSuccessful();
+        } catch (Exception e){
+            //Error in between database transaction
+        } finally {
+            db.endTransaction();
+        }
+
         //db.close();
     }
 
