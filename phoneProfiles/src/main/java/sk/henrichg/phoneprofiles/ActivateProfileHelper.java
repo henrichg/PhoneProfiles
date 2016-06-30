@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -248,7 +249,13 @@ public class ActivateProfileHelper {
         // nahodenie bluetooth
         if (profile._deviceBluetooth != 0) {
             if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED) {
-                BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                BluetoothAdapter bluetoothAdapter = null;
+                if (android.os.Build.VERSION.SDK_INT < 18)
+                    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                else {
+                    BluetoothManager bluetoothManager = (BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE);
+                    bluetoothAdapter = bluetoothManager.getAdapter();
+                }
                 if (bluetoothAdapter != null) {
                     boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
                     boolean setBluetoothState = false;
