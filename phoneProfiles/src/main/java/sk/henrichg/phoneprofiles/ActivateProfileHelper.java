@@ -1268,12 +1268,17 @@ public class ActivateProfileHelper {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 PixelFormat.TRANSLUCENT
         );
-        if (android.os.Build.VERSION.SDK_INT < 17)
+        /*if (android.os.Build.VERSION.SDK_INT < 17)
             params.gravity = Gravity.RIGHT | Gravity.TOP;
         else
-            params.gravity = Gravity.END | Gravity.TOP;
+            params.gravity = Gravity.END | Gravity.TOP;*/
         GUIData.keepScreenOnView = new BrightnessView(context);
-        windowManager.addView(GUIData.keepScreenOnView, params);
+        try {
+            windowManager.addView(GUIData.keepScreenOnView, params);
+        } catch (Exception e) {
+            GUIData.keepScreenOnView = null;
+            e.printStackTrace();
+        }
     }
 
     public static void screenTimeoutUnlock(Context context)
@@ -1311,16 +1316,21 @@ public class ActivateProfileHelper {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         PixelFormat.TRANSLUCENT
                     );
-        if (android.os.Build.VERSION.SDK_INT < 17)
-            params.gravity = Gravity.RIGHT | Gravity.TOP;
-        else
-            params.gravity = Gravity.END | Gravity.TOP;
+            /*if (android.os.Build.VERSION.SDK_INT < 17)
+                params.gravity = Gravity.RIGHT | Gravity.TOP;
+            else
+                params.gravity = Gravity.END | Gravity.TOP;*/
             if (profile.getDeviceBrightnessAutomatic())
                 params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             else
                 params.screenBrightness = profile.getDeviceBrightnessManualValue(context) / (float) 255;
             GUIData.brightneesView = new BrightnessView(context);
-            windowManager.addView(GUIData.brightneesView, params);
+            try {
+                windowManager.addView(GUIData.brightneesView, params);
+            } catch (Exception e) {
+                GUIData.brightneesView = null;
+                e.printStackTrace();
+            }
         //}
     }
 
