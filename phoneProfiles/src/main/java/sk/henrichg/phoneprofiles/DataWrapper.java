@@ -528,6 +528,8 @@ public class DataWrapper {
 
     public void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
     {
+        GlobalData.grantRoot(true);
+
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);

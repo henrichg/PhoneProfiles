@@ -78,6 +78,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         savedInstanceStateChanged = (savedInstanceState != null);
 
+        GlobalData.grantRoot(true);
+
         createApplicationsCache();
 
         setContentView(R.layout.activity_editor_profile_list);
@@ -557,7 +559,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         ((EditorProfileListFragment) fragment).removeAdapter();
 
                     // check root, this set GlobalData.rooted for doInBackgroud()
-                    GlobalData.isRooted(false);
+                    GlobalData.isRooted();
                 }
 
                 @Override

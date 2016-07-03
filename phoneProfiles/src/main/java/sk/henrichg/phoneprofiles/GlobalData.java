@@ -820,7 +820,7 @@ public class GlobalData extends Application {
         {
             if (android.os.Build.VERSION.SDK_INT >= 17)
             {
-                if (isRooted(false))
+                if (isRooted())
                 {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
@@ -851,7 +851,7 @@ public class GlobalData extends Application {
             {
                 if (android.os.Build.VERSION.SDK_INT >= 21)
                 {
-                    if (isRooted(false)) {
+                    if (isRooted()) {
                         // zariadenie je rootnute
                         //if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
                             featurePresented = PREFERENCE_ALLOWED;
@@ -884,7 +884,7 @@ public class GlobalData extends Application {
                         featurePresented = PREFERENCE_ALLOWED;
                 }
                 else*/
-                if (isRooted(false))
+                if (isRooted())
                 {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
@@ -905,7 +905,7 @@ public class GlobalData extends Application {
                 logE("GlobalData.hardwareCheck","NFC=presented");
 
                 // device ma nfc
-                if (isRooted(false))
+                if (isRooted())
                     featurePresented = PREFERENCE_ALLOWED;
             }
             else
@@ -927,7 +927,7 @@ public class GlobalData extends Application {
         if (preferenceKey.equals(PREF_PROFILE_VIBRATE_WHEN_RINGING))
         {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                if (isRooted(false)) {
+                if (isRooted()) {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
@@ -941,7 +941,7 @@ public class GlobalData extends Application {
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 if (android.os.Build.VERSION.SDK_INT >= 23) {
-                    if (isRooted(false)) {
+                    if (isRooted()) {
                         // zariadenie je rootnute
                         if (settingsBinaryExists())
                             featurePresented = PREFERENCE_ALLOWED;
@@ -955,7 +955,7 @@ public class GlobalData extends Application {
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
-                if (isRooted(false)) {
+                if (isRooted()) {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
@@ -970,7 +970,7 @@ public class GlobalData extends Application {
                 final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 final int phoneType = telephonyManager.getPhoneType();
                 if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
-                    if (isRooted(false)) {
+                    if (isRooted()) {
                         // zariadenie je rootnute
                         if (serviceBinaryExists() && GlobalData.telephonyServiceExists(context, PREF_PROFILE_DEVICE_NETWORK_TYPE))
                             featurePresented = PREFERENCE_ALLOWED;
@@ -983,7 +983,7 @@ public class GlobalData extends Application {
         {
             int value = Settings.System.getInt(context.getContentResolver(), "notification_light_pulse", -10);
             if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 23)) {
-                if (isRooted(false)) {
+                if (isRooted()) {
                     // zariadenie je rootnute
                     if (settingsBinaryExists())
                         featurePresented = PREFERENCE_ALLOWED;
@@ -1205,52 +1205,55 @@ public class GlobalData extends Application {
 
     //--------------------------------------------------------------
 
+    static private boolean rootChecking = false;
     static private boolean rootChecked = false;
     static private boolean rooted = false;
+    static private boolean grantChecking = false;
     static private boolean grantChecked = false;
     static private boolean rootGranted = false;
-    static private boolean settingsBinaryExists = false;
+    static private boolean settingsBinaryChecking = false;
     static private boolean settingsBinaryChecked = false;
+    static private boolean settingsBinaryExists = false;
     static private boolean isSELinuxEnforcingChecked = false;
     static private boolean isSELinuxEnforcing = false;
     //static private String suVersion = null;
     //static private boolean suVersionChecked = false;
-    static private boolean serviceBinaryExists = false;
+    static private boolean serviceBinaryChecking = false;
     static private boolean serviceBinaryChecked = false;
+    static private boolean serviceBinaryExists = false;
 
-    static boolean isRooted(boolean onlyCheckFlags)
+    static boolean isRooted()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        if (!rootChecked)
+        if ((!rootChecked) && (!rootChecking))
         {
-            settingsBinaryExists = false;
-            settingsBinaryChecked = false;
-            isSELinuxEnforcingChecked = false;
-            isSELinuxEnforcing = false;
-            //suVersionChecked = false;
-            //suVersion = null;
-            serviceBinaryExists = false;
-            serviceBinaryChecked = false;
-            if (!onlyCheckFlags)
+            rootChecking = true;
+            try {
+                RootTools.closeAllShells();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (RootTools.isRootAvailable())
             {
-                if (RootTools.isRootAvailable())
-                {
-                    // zariadenie je rootnute
-                    rootChecked = true;
-                    rooted = true;
-                }
-                else
-                {
-                    rootChecked = true;
-                    rooted = false;
-                }
+                // zariadenie je rootnute
+                rootChecked = true;
+                rooted = true;
             }
             else
             {
-                rootChecked = false;
+                rootChecked = true;
                 rooted = false;
+                settingsBinaryExists = false;
+                settingsBinaryChecked = false;
+                isSELinuxEnforcingChecked = false;
+                isSELinuxEnforcing = false;
+                //suVersionChecked = false;
+                //suVersion = null;
+                serviceBinaryExists = false;
+                serviceBinaryChecked = false;
             }
+            rootChecking = false;
         }
         //if (rooted)
         //	getSUVersion();
@@ -1261,19 +1264,23 @@ public class GlobalData extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        if ((!grantChecked) || force)
+        GlobalData.logE("GlobalData.grantRoot", "grantChecked="+grantChecked);
+        GlobalData.logE("GlobalData.grantRoot", "force="+force);
+
+
+        if (((!grantChecked) || force) && (!grantChecking))
         {
-            settingsBinaryExists = false;
-            settingsBinaryChecked = false;
-            isSELinuxEnforcingChecked = false;
-            isSELinuxEnforcing = false;
-            //suVersionChecked = false;
-            //suVersion = null;
-            serviceBinaryExists = false;
-            serviceBinaryChecked = false;
+            GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
+            grantChecking = true;
+            try {
+                RootTools.closeAllShells();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (RootTools.isAccessGiven())
             {
                 // root grantnuty
+                GlobalData.logE("GlobalData.grantRoot", "root granted");
                 rootChecked = true;
                 rooted = true;
                 grantChecked = true;
@@ -1282,13 +1289,22 @@ public class GlobalData extends Application {
             else
             {
                 // grant odmietnuty
+                GlobalData.logE("GlobalData.grantRoot", "root NOT granted");
                 rootChecked = true;
                 rooted = false;
                 grantChecked = true;
                 rootGranted = false;
+                settingsBinaryExists = false;
+                settingsBinaryChecked = false;
+                isSELinuxEnforcingChecked = false;
+                isSELinuxEnforcing = false;
+                //suVersionChecked = false;
+                //suVersion = null;
+                serviceBinaryExists = false;
+                serviceBinaryChecked = false;
             }
+            grantChecking = false;
         }
-
         //if (rooted)
         //	getSUVersion();
         return rootGranted;
