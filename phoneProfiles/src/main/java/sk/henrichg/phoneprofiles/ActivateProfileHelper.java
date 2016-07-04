@@ -40,7 +40,6 @@ import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
