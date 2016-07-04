@@ -27,7 +27,6 @@
     <string name="toast_profile_activated_0">Profile</string>
     <string name="toast_profile_activated_1">activated</string>
     <string name="title_activity_image_view_preference_dialog">Change icon</string>
-    <string name="title_activity_applications_preference_dialog">Set application</string>
     <string name="preference_profile_no_change">Don\'t change</string>
     <string name="preference_profile_autobrightness">Automatic</string>
     <string name="active_profile_notification_label">Active profile</string>
@@ -40,7 +39,6 @@
     <string name="imageview_resource_file_pref_dialog_gallery_btn">Custom&#8230;</string>
     <string name="volume_pref_dialog_no_change_chb">Don\'t change</string>
     <string name="imageview_preference_profile_icon_label">Profile icon</string>
-    <string name="applications_preference_profile_icon_label">Run application</string>
     <string name="phone_profiles_pref_category_activator">Activator</string>
     <string name="phone_profiles_pref_category_editor">Editor</string>
     <string name="phone_profiles_pref_category_gui">Application interface</string>
