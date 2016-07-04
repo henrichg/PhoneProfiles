@@ -542,7 +542,7 @@ public class ActivateProfileHelper {
 
     }
 
-    public static void setZenMode(Context context, int zenMode, AudioManager audioManager, int ringerMode)
+    private void setZenMode(int zenMode, AudioManager audioManager, int ringerMode)
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
@@ -663,6 +663,41 @@ public class ActivateProfileHelper {
         }
     }
 
+    public void setTones(Profile profile) {
+        if (Permissions.checkProfileRingtones(context, profile)) {
+            if (profile._soundRingtoneChange == 1) {
+                if (!profile._soundRingtone.isEmpty()) {
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, profile._soundRingtone);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, Uri.parse(profile._soundRingtone));
+                } else {
+                    // selected is None tone
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, null);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, null);
+                }
+            }
+            if (profile._soundNotificationChange == 1) {
+                if (!profile._soundNotification.isEmpty()) {
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, profile._soundNotification);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, Uri.parse(profile._soundNotification));
+                } else {
+                    // selected is None tone
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, null);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, null);
+                }
+            }
+            if (profile._soundAlarmChange == 1) {
+                if (!profile._soundAlarm.isEmpty()) {
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, profile._soundAlarm);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, Uri.parse(profile._soundAlarm));
+                } else {
+                    // selected is None tone
+                    //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, null);
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, null);
+                }
+            }
+        }
+    }
+
     private void setNotificationLed(int value) {
         if (GlobalData.isPreferenceAllowed(GlobalData.PREF_PROFILE_NOTIFICATION_LED, context)
                 == GlobalData.PREFERENCE_ALLOWED) {
@@ -709,7 +744,7 @@ public class ActivateProfileHelper {
         if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
             switch (ringerMode) {
                 case 1:  // Ring
-                    setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                    setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
@@ -724,7 +759,7 @@ public class ActivateProfileHelper {
                     setVibrateWhenRinging(null, 0);
                     break;
                 case 2:  // Ring & Vibrate
-                    setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                    setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
@@ -739,7 +774,7 @@ public class ActivateProfileHelper {
                     setVibrateWhenRinging(null, 1);
                     break;
                 case 3:  // Vibrate
-                    setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
+                    setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
@@ -759,10 +794,10 @@ public class ActivateProfileHelper {
                     else if (android.os.Build.VERSION.SDK_INT >= 21)
                         setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);*/
                     if (android.os.Build.VERSION.SDK_INT >= 21) {
-                        setZenMode(context, ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_SILENT);
+                        setZenMode(ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_SILENT);
                     }
                     else {
-                        setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
+                        setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
                         try {
                             audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
                         } catch (Exception e) {
@@ -779,26 +814,26 @@ public class ActivateProfileHelper {
                 case 5: // Zen mode
                     switch (zenMode) {
                         case 1:
-                            setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                            setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
                             setVibrateWhenRinging(profile, -1);
                             break;
                         case 2:
-                            setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
+                            setZenMode(ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);
                             setVibrateWhenRinging(profile, -1);
                             break;
                         case 3:
-                            setZenMode(context, ZENMODE_NONE, audioManager, AudioManager.RINGER_MODE_SILENT);
+                            setZenMode(ZENMODE_NONE, audioManager, AudioManager.RINGER_MODE_SILENT);
                             break;
                         case 4:
-                            setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
+                            setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
                             setVibrateWhenRinging(null, 1);
                             break;
                         case 5:
-                            setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_VIBRATE);
+                            setZenMode(ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_VIBRATE);
                             setVibrateWhenRinging(null, 1);
                             break;
                         case 6:
-                            setZenMode(context, ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
+                            setZenMode(ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
                             break;
                     }
                     break;
@@ -913,38 +948,8 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie tonov
-        if (Permissions.checkProfileRingtones(context, profile)) {
-            if (profile._soundRingtoneChange == 1) {
-                if (!profile._soundRingtone.isEmpty()) {
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, profile._soundRingtone);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, Uri.parse(profile._soundRingtone));
-                } else {
-                    // selected is None tone
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, null);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, null);
-                }
-            }
-            if (profile._soundNotificationChange == 1) {
-                if (!profile._soundNotification.isEmpty()) {
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, profile._soundNotification);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, Uri.parse(profile._soundNotification));
-                } else {
-                    // selected is None tone
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, null);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, null);
-                }
-            }
-            if (profile._soundAlarmChange == 1) {
-                if (!profile._soundAlarm.isEmpty()) {
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, profile._soundAlarm);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, Uri.parse(profile._soundAlarm));
-                } else {
-                    // selected is None tone
-                    //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, null);
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, null);
-                }
-            }
-        }
+        // moved to ExecuteVolumeProfilePrefsService
+        //setTones(profile);
 
         // nahodenie radio preferences
         // run service for execute radios

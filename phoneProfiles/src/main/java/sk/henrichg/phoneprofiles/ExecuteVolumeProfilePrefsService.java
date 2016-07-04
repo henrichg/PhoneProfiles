@@ -30,6 +30,8 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         profile = GlobalData.getMappedProfile(profile, context);
         if (profile != null)
         {
+            aph.setTones(profile);
+
             if (Permissions.checkProfileVolumePreferences(context, profile)) {
 
                 RingerModeChangeReceiver.removeAlarm(this);
@@ -48,10 +50,10 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 RingerModeChangeReceiver.setAlarmForDisableInternalChange(context);
 
             }
+
+            aph.setTones(profile);
         }
         dataWrapper.invalidateDataWrapper();
-        aph = null;
-        dataWrapper = null;
     }
 
 
