@@ -823,10 +823,18 @@ public class Profile {
         }
     }
 
-    public String getProfileNameWithDuration() {
+    public String getProfileNameWithDuration(boolean multyline) {
         String profileName = _name;
-        if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
-            profileName = "[" + _duration + "] " + profileName;
+        if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
+            //profileName = "[" + _duration + "] " + profileName;
+            final int hours = _duration / 3600;
+            final int minutes = (_duration % 3600) / 60;
+            final int seconds = _duration % 60;
+            if (multyline)
+                profileName = "[" + String.format("%02d:%02d:%02d", hours, minutes, seconds) + "]\n" + profileName;
+            else
+                profileName = "[" + String.format("%02d:%02d:%02d", hours, minutes, seconds) + "] " + profileName;
+        }
         return profileName;
     }
 
