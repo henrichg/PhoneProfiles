@@ -35,6 +35,7 @@ public class FirstStartService extends IntentService {
     {
         Context context = getApplicationContext();
 
+        GlobalData.initRoot();
         // grant root
         //if (GlobalData.isRooted(false))
         //{
