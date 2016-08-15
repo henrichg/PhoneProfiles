@@ -1229,11 +1229,11 @@ public class GlobalData extends Application {
         if ((!rootChecked)/* && (!rootChecking)*/)
         {
             //rootChecking = true;
-            try {
+            /*try {
                 RootTools.closeAllShells();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             if (RootTools.isRootAvailable())
             {
                 // zariadenie je rootnute
@@ -1272,11 +1272,11 @@ public class GlobalData extends Application {
         {
             GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
             //grantChecking = true;
-            try {
+            /*try {
                 RootTools.closeAllShells();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             if (RootTools.isAccessGiven())
             {
                 // root grantnuty
@@ -1312,11 +1312,11 @@ public class GlobalData extends Application {
         if ((!settingsBinaryChecked) /*&& (!settingsBinaryChecking)*/)
         {
             //settingsBinaryChecking = true;
-            try {
+            /*try {
                 RootTools.closeAllShells();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             List<String> settingsPaths = RootTools.findBinary("settings");
             settingsBinaryExists = settingsPaths.size() > 0;
             //settingsBinaryChecking = false;
@@ -1333,11 +1333,11 @@ public class GlobalData extends Application {
         if ((!serviceBinaryChecked) /*&& (!serviceBinaryChecking)*/)
         {
             //serviceBinaryChecking = true;
-            try {
+            /*try {
                 RootTools.closeAllShells();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             List<String> servicePaths = RootTools.findBinary("service");
             serviceBinaryExists = servicePaths.size() > 0;
             //serviceBinaryChecking = false;
