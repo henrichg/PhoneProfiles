@@ -371,15 +371,22 @@ public class ActivateProfileHelper {
             }
         }
 
-        if (_setAirplaneMode && _isAirplaneMode)
+        if (_setAirplaneMode /*&& _isAirplaneMode*/) {
             // switch ON airplane mode, set it before executeForRadios
             setAirplaneMode(context, _isAirplaneMode);
 
+            GlobalData.sleep(2000);
+        }
+
         doExecuteForRadios(profile);
 
-        if (_setAirplaneMode && !(_isAirplaneMode))
+        /*if (_setAirplaneMode && (!_isAirplaneMode)) {
+            // 200 miliseconds is in doExecuteForRadios
+            GlobalData.sleep(1800);
+
             // switch OFF airplane mode, set if after executeForRadios
             setAirplaneMode(context, _isAirplaneMode);
+        }*/
 
     }
 
