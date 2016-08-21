@@ -11,7 +11,10 @@ import android.os.Build;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
+
+import java.util.Set;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class PPNotificationListenerService extends NotificationListenerService {
@@ -161,15 +164,14 @@ public class PPNotificationListenerService extends NotificationListenerService {
     }
 
     public static boolean isNotificationListenerServiceEnabled(Context context) {
+        /*
         ContentResolver contentResolver = context.getContentResolver();
         String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
-        String packageName = PPNotificationListenerService.class.getName();
-
+        String className = PPNotificationListenerService.class.getName();
         //Log.e(TAG, "enabledNotificationListeners(" + enabledNotificationListeners + ')');
-        //Log.e(TAG, "packageName=" + packageName);
-
+        //Log.e(TAG, "className=" + className);
         // check to see if the enabledNotificationListeners String contains our package name
-        if ((enabledNotificationListeners == null) || (!enabledNotificationListeners.contains(packageName)))
+        if ((enabledNotificationListeners == null) || (!enabledNotificationListeners.contains(className)))
         {
             // in this situation we know that the user has not granted the app the Notification access permission
             //Log.e(TAG, "isNotificationListenerServiceEnabled=false");
@@ -180,6 +182,25 @@ public class PPNotificationListenerService extends NotificationListenerService {
             //Log.e(TAG, "isNotificationListenerServiceEnabled=true");
             return true;
         }
+        */
+
+        Set<String> packageNames = NotificationManagerCompat.getEnabledListenerPackages (context);
+        //Log.e(TAG, "enabledNotificationListeners(" + packageNames + ')');
+        String className = PPNotificationListenerService.class.getName();
+        //Log.e(TAG, "enabledNotificationListeners(" + className + ')');
+
+        if (packageNames != null) {
+            for (String pkgName : packageNames) {
+                //Log.e(TAG, "enabledNotificationListeners(" + pkgName + ')');
+                if (className.contains(pkgName)) {
+                    //Log.e(TAG, "enabledNotificationListeners(" + "true" + ')');
+                    return true;
+                }
+            }
+            return false;
+        }
+        else
+            return false;
     }
 
     public static Intent getInterruptionFilterRequestIntent(Context context, final int filter) {
