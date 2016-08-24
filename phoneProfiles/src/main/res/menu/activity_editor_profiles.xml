@@ -25,6 +25,10 @@
         android:title="@string/menu_import"
         android:orderInCategory="220"
         henrichg:showAsAction="never" />
+    <item android:id="@+id/menu_about"
+          android:title="@string/menu_about_application"
+          android:orderInCategory="235"
+          henrichg:showAsAction="never" />
     <item android:id="@+id/menu_exit"
         android:title="@string/menu_exit"
         android:orderInCategory="240"
