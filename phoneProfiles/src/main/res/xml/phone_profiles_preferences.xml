@@ -14,11 +14,16 @@
             android:title="@string/phone_profiles_pref_applicationLanguage"
             android:summary="@string/phone_profiles_pref_applicationLanguage_system"
             android:key="applicationLanguage"
-            android:icon="?attr/applicationSettingsLanguageIcon"
             android:defaultValue="system"
             android:entries="@array/languageArray"
             android:entryValues="@array/languageValues"
             app:useStockLayout="true" />
+        <Preference
+            android:key="applicationLanguage24"
+            android:title="@string/phone_profiles_pref_applicationLanguage"
+            android:summary="@string/phone_profiles_pref_systemLanguage_summary"
+            android:widgetLayout="@layout/start_activity_preference">
+        </Preference>
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationTheme"
             android:summary="@string/phone_profiles_pref_applicationTheme_dlight"

@@ -33,6 +33,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     static final int RESULT_APPLICATION_PERMISSIONS = 1990;
     static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "prf_pref_writeSystemSettingsPermissions";
     static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
+    static final String PREF_APPLICATION_LANGUAGE_24 = "applicationLanguage24";
+    static final int RESULT_LOCALE_SETTINGS = 1992;
 
     @Override
     public int addPreferencesFromResource() {
@@ -83,6 +85,29 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         if (_preference != null) _preference.setWidgetLayoutResource(R.layout.start_activity_preference);
         */
 
+        if (Build.VERSION.SDK_INT >= 24) {
+            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("applicationInterfaceCategory");
+            Preference preference = findPreference(GlobalData.PREF_APPLICATION_LANGUAGE);
+            if (preference != null)
+                preferenceCategory.removePreference(preference);
+            preference = findPreference(PREF_APPLICATION_LANGUAGE_24);
+            if (preference != null) {
+                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                        startActivityForResult(intent, RESULT_LOCALE_SETTINGS);
+                        return false;
+                    }
+                });
+            }
+        }
+        else {
+            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("applicationInterfaceCategory");
+            Preference preference = findPreference(PREF_APPLICATION_LANGUAGE_24);
+            if (preference != null)
+                preferenceCategory.removePreference(preference);
+        }
         if (Build.VERSION.SDK_INT >= 23) {
             Preference preference = prefMng.findPreference(PREF_APPLICATION_PERMISSIONS);
             if (preference != null) {
@@ -191,8 +216,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             else
                 preference.setSummary(summary);
 
-            if (key.equals(GlobalData.PREF_APPLICATION_LANGUAGE))
-                setTitleStyle(preference, true, false);
+            //if (key.equals(GlobalData.PREF_APPLICATION_LANGUAGE))
+            //    setTitleStyle(preference, true, false);
         }
         /*else if (preference instanceof RingtonePreference) {
             // For ringtone preferences, look up the correct display value
