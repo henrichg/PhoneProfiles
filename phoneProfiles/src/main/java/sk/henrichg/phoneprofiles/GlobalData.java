@@ -197,6 +197,7 @@ public class GlobalData extends Application {
     private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
     private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
     private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
+    private static final String PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION = "show_request_access_notification_policy_permission";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -743,6 +744,19 @@ public class GlobalData extends Application {
         editor.commit();
     }
 
+    static public boolean getShowRequestAccessNotificationPolicyPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION, true);
+    }
+
+    static public void setShowRequestAccessNotificationPolicyPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION, value);
+        editor.commit();
+    }
 
     static public List<Permissions.PermissionType> getMergedPermissions(Context context)
     {

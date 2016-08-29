@@ -15,12 +15,6 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
     public static Activity preferencesActivity = null;
     String extraScrollTo;
 
-    //static final String PREF_APPLICATION_PERMISSIONS = "prf_pref_applicationPermissions";
-    //static final int RESULT_APPLICATION_PERMISSIONS = 1990;
-    //static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "prf_pref_writeSystemSettingsPermissions";
-    //static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 

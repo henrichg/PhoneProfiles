@@ -32,7 +32,8 @@ public class Permissions {
     public static final int PERMISSION_EXPORT = 12;
     public static final int PERMISSION_IMPORT = 13;
     public static final int PERMISSION_NOTIFICATION_LED = 15;
-    public static final int PERMISSION_PROFILE_VIBRATE_WHEN_RINGING = 16;
+    public static final int PERMISSION_VIBRATE_WHEN_RINGING = 16;
+    public static final int PERMISSION_ACCESS_NOTIFICATION_POLICY = 17;
 
     public static final int GRANT_TYPE_PROFILE = 1;
     public static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -100,6 +101,10 @@ public class Permissions {
                 if (_permission.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
                     if (!Settings.System.canWrite(context))
                         permissions.add(new PermissionType(_permission.preference, _permission.permission));
+                } else if (_permission.permission.equals(permission.ACCESS_NOTIFICATION_POLICY)) {
+                    NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    if (!mNotificationManager.isNotificationPolicyAccessGranted())
+                        permissions.add(new PermissionType(_permission.preference, _permission.permission));
                 } else {
                     if (ContextCompat.checkSelfPermission(context, _permission.permission) != PackageManager.PERMISSION_GRANTED)
                         permissions.add(new PermissionType(_permission.preference, _permission.permission));
@@ -115,7 +120,7 @@ public class Permissions {
         if (profile == null) return permissions;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));
-            if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
+            if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
             if (!checkProfileVibrationOnTouch(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
             if (!checkProfileRingtones(context, profile)) permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
             if (!checkProfileScreenTimeout(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
@@ -132,6 +137,7 @@ public class Permissions {
                 permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
             }
             if (!checkCustomProfileIcon(context, profile)) permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
+            if (!checkProfileAccessNotificationPolicy(context, profile)) permissions.add(new PermissionType(PERMISSION_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
             return permissions;
         }
         else
@@ -368,6 +374,32 @@ public class Permissions {
             }
             else
                 return true;
+        }
+        else
+            return true;
+    }
+
+    public static boolean checkProfileAccessNotificationPolicy(Context context, Profile profile) {
+        if (profile == null) return true;
+        if (android.os.Build.VERSION.SDK_INT >= 24) {
+            if ((profile._volumeRingerMode != 0) ||
+                    profile.getVolumeRingtoneChange() ||
+                    profile.getVolumeNotificationChange() ||
+                    profile.getVolumeSystemChange()) {
+                NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                return mNotificationManager.isNotificationPolicyAccessGranted();
+            }
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+
+    public static boolean checkAccessNotificationPolicy(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 24) {
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            return mNotificationManager.isNotificationPolicyAccessGranted();
         }
         else
             return true;
