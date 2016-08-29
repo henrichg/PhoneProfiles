@@ -85,7 +85,6 @@
 
         <activity
             android:name=".ActivateProfileActivity"
-            android:taskAffinity="sk.henrichg.phoneprofiles.popup"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_phone_profiles"
             android:theme="@style/PopupTheme_material">
@@ -114,7 +113,6 @@
         </activity>
         <activity
             android:name=".ShortcutCreatorActivity"
-            android:taskAffinity="sk.henrichg.phoneprofiles.popup"
             android:excludeFromRecents="true"
             android:icon="@drawable/ic_shortcut"
             android:label="@string/title_activity_shortcut_creator"
@@ -129,7 +127,6 @@
             android:name=".BackgroundActivateProfileActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
-            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:theme="@style/EmptyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -145,14 +142,12 @@
             android:name=".GrantPermissionActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
-            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:theme="@style/EmptyActivity">
         </activity>
         <activity
             android:name=".LaunchShortcutActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
-            android:taskAffinity="sk.henrichg.phoneprofilesplus.empty"
             android:theme="@style/EmptyActivity">
         </activity>
         <activity
