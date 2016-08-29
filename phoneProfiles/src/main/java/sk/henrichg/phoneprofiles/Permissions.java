@@ -387,7 +387,10 @@ public class Permissions {
                     profile.getVolumeNotificationChange() ||
                     profile.getVolumeSystemChange()) {
                 NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                return mNotificationManager.isNotificationPolicyAccessGranted();
+                boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
+                if (granted)
+                    GlobalData.setShowRequestAccessNotificationPolicyPermission(context, true);
+                return granted;
             }
             else
                 return true;
@@ -399,7 +402,10 @@ public class Permissions {
     public static boolean checkAccessNotificationPolicy(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 24) {
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            return mNotificationManager.isNotificationPolicyAccessGranted();
+            boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
+            if (granted)
+                GlobalData.setShowRequestAccessNotificationPolicyPermission(context, true);
+            return granted;
         }
         else
             return true;
