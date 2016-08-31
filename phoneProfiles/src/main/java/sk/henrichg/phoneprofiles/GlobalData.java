@@ -1,7 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Application;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.Settings;
@@ -1601,6 +1604,46 @@ public class GlobalData extends Application {
         do {
             SystemClock.sleep(100);
         } while (SystemClock.uptimeMillis() - start < ms);
+    }
+
+    public static boolean canChangeZenMode(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 24)
+            return Permissions.checkAccessNotificationPolicy(context);
+        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT <= 23))
+            return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
+        return false;
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static int getSystemZenMode(Context context, int defaultValue) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            NotificationManager mNotificationManager = (NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            int interuptionFilter = mNotificationManager.getCurrentInterruptionFilter();
+            switch (interuptionFilter) {
+                case NotificationManager.INTERRUPTION_FILTER_ALL:
+                    return ActivateProfileHelper.ZENMODE_ALL;
+                case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
+                    return ActivateProfileHelper.ZENMODE_PRIORITY;
+                case NotificationManager.INTERRUPTION_FILTER_NONE:
+                    return ActivateProfileHelper.ZENMODE_NONE;
+                case NotificationManager.INTERRUPTION_FILTER_ALARMS:
+                    return ActivateProfileHelper.ZENMODE_ALARMS;
+            }
+        }
+        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
+            int interuptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);;
+            switch (interuptionFilter) {
+                case 0:
+                    return ActivateProfileHelper.ZENMODE_ALL;
+                case 1:
+                    return ActivateProfileHelper.ZENMODE_PRIORITY;
+                case 2:
+                    return ActivateProfileHelper.ZENMODE_NONE;
+                case 3:
+                    return ActivateProfileHelper.ZENMODE_ALARMS;
+            }
+        }
+        return defaultValue;
     }
 
 }

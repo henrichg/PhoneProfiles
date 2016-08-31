@@ -455,21 +455,11 @@ public class ActivateProfileHelper {
                 TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 int callState = telephony.getCallState();
 
-                /*
-                boolean doUnlink = audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
-                if (android.os.Build.VERSION.SDK_INT >= 21) {
-                    int zm = Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_ALL);
-                    doUnlink = (zm != ZENMODE_NONE) && (zm != ZENMODE_ALARMS);
-                }
-                //Log.e("ActivateProfileHelper", "setVolumes doUnlink=" + doUnlink);
-                //Log.e("ActivateProfileHelper", "setVolumes ringerMode=" + audioManager.getRingerMode());
-                //Log.e("ActivateProfileHelper", "setVolumes zenMode=" + Settings.Global.getInt(context.getContentResolver(), "zen_mode", ZENMODE_NONE));
-                */
-
                 boolean volumesSet = false;
                 if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
                     //if (doUnlink) {
-                    if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
+                    //if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
+                    if (callState == TelephonyManager.CALL_STATE_RINGING) {
                         // for separating ringing and notification
                         // in ringing state ringer volumes must by set
                         // and notification volumes must not by set
@@ -556,54 +546,37 @@ public class ActivateProfileHelper {
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
-            int _zenMode = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
+            int _zenMode = GlobalData.getSystemZenMode(context, -1);
             GlobalData.logE("ActivateProfileHelper.setZenMode", "_zenMode=" + _zenMode);
             int _ringerMode = audioManager.getRingerMode();
             GlobalData.logE("ActivateProfileHelper.setZenMode", "_ringerMode=" + _ringerMode);
 
-            boolean notificationListenerServiceEnabled = PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
-            boolean accessNotificationPolicyGranted = Permissions.checkAccessNotificationPolicy(context);
+            if ((zenMode != ZENMODE_SILENT) && GlobalData.canChangeZenMode(context)) {
+                audioManager.setRingerMode(ringerMode);
+                //try { Thread.sleep(500); } catch (InterruptedException e) { }
+                //SystemClock.sleep(500);
+                GlobalData.sleep(500);
 
-            if (accessNotificationPolicyGranted) {
-                if ((zenMode != ZENMODE_SILENT) && notificationListenerServiceEnabled) {
-                    audioManager.setRingerMode(ringerMode);
-                    //try { Thread.sleep(500); } catch (InterruptedException e) { }
-                    //SystemClock.sleep(500);
-                    GlobalData.sleep(500);
-
-                    if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
-                        int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
-                        switch (zenMode) {
-                            case ZENMODE_ALL:
-                                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
-                                break;
-                            case ZENMODE_PRIORITY:
-                                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_PRIORITY;
-                                break;
-                            case ZENMODE_NONE:
-                                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_NONE;
-                                break;
-                            case ZENMODE_ALARMS:
-                                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALARMS;
-                                break;
-                        }
-                        PPNotificationListenerService.requestInterruptionFilter(context, interruptionFilter);
-                    /* if (GlobalData.grantRoot(false) && (GlobalData.settingsBinaryExists()))
-                    {
-                        String command1 = "settings put global zen_mode " + mode;
-                        //if (GlobalData.isSELinuxEnforcing())
-                        //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                        Command command = new Command(0, false, command1);
-                        try {
-                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                            commandWait(command);
-                            //RootTools.closeAllShells();
-                        } catch (Exception e) {
-                            Log.e("ActivateProfileHelper.setZenMode", e.getMessage());
-                        }
-                    }*/
+                if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
+                    PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
+                    InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
+                /* if (GlobalData.grantRoot(false) && (GlobalData.settingsBinaryExists()))
+                {
+                    String command1 = "settings put global zen_mode " + mode;
+                    //if (GlobalData.isSELinuxEnforcing())
+                    //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                    Command command = new Command(0, false, command1);
+                    try {
+                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                        commandWait(command);
+                        //RootTools.closeAllShells();
+                    } catch (Exception e) {
+                        Log.e("ActivateProfileHelper.setZenMode", e.getMessage());
                     }
-                } else {
+                }*/
+                }
+            } else {
+                if (Permissions.checkAccessNotificationPolicy(context)) {
                     switch (zenMode) {
                         /*case ZENMODE_PRIORITY:
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);

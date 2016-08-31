@@ -18,7 +18,7 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
 
-            if (Settings.Global.getInt(context.getContentResolver(), "zen_mode", ActivateProfileHelper.ZENMODE_ALL)
+            if (GlobalData.getSystemZenMode(context, ActivateProfileHelper.ZENMODE_ALL)
                     != ActivateProfileHelper.ZENMODE_ALL) {
 
                 DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);

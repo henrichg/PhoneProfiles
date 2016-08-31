@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,6 +11,7 @@ import android.os.IBinder;
 public class ReceiversService extends Service {
 
     private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
+    private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
 
     private static SettingsContentObserver settingsContentObserver = null;
 
@@ -26,6 +28,13 @@ public class ReceiversService extends Service {
         intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
         getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
 
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
+            IntentFilter intentFilter11 = new IntentFilter();
+            intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
+            getApplicationContext().registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+        }
+
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
         settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
@@ -37,6 +46,8 @@ public class ReceiversService extends Service {
     public void onDestroy()
     {
         getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+        if (android.os.Build.VERSION.SDK_INT >= 23)
+            getApplicationContext().unregisterReceiver(interruptionFilterChangedReceiver);
 
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
