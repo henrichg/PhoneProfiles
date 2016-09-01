@@ -196,6 +196,8 @@ public class GrantPermissionActivity extends Activity {
                 intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
                 intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
                 intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+                intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+                intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
 
                 PendingIntent pi = PendingIntent.getActivity(context, grantType, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 mBuilder.setContentIntent(pi);
