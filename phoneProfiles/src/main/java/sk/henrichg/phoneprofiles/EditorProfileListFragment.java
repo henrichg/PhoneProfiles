@@ -258,7 +258,7 @@ public class EditorProfileListFragment extends Fragment {
             if (profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
-                profileList = dataWrapper.getDefaultProfileList();
+                profileList = dataWrapper.getPredefinedProfileList();
                 defaultProfilesGenerated = true;
             }
             return null;

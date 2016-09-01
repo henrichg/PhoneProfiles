@@ -35,6 +35,7 @@ public class GrantPermissionActivity extends Activity {
     private int startupSource;
     private boolean interactive;
     private String applicationDataPath;
+    private boolean onlyGrant;
 
     private Profile profile;
     private DataWrapper dataWrapper;
@@ -70,6 +71,7 @@ public class GrantPermissionActivity extends Activity {
         startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR);
         interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
+        onlyGrant = intent.getBooleanExtra(Permissions.EXTRA_ONLY_GRANT, false);
 
         dataWrapper = new DataWrapper(getApplicationContext(), forGUI, monochrome, monochromeValue);
         profile = dataWrapper.getProfileById(profile_id);
@@ -535,13 +537,14 @@ public class GrantPermissionActivity extends Activity {
             //finishAffinity();
             finish();
             Permissions.removeProfileNotification(context);
-            if ((Permissions.profileActivationActivity != null) && (profile._askForDuration)) {
-                FastAccessDurationDialog dlg = new FastAccessDurationDialog(Permissions.profileActivationActivity,
-                                                            profile, dataWrapper, startupSource, interactive);
-                dlg.show();
+            if (!onlyGrant) {
+                if ((Permissions.profileActivationActivity != null) && (profile._askForDuration)) {
+                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(Permissions.profileActivationActivity,
+                            profile, dataWrapper, startupSource, interactive);
+                    dlg.show();
+                } else
+                    dataWrapper._activateProfile(profile, startupSource, interactive, Permissions.profileActivationActivity);
             }
-            else
-                dataWrapper._activateProfile(profile, startupSource, interactive, Permissions.profileActivationActivity);
         }
         Permissions.releaseReferences();
         if (mergedNotification)

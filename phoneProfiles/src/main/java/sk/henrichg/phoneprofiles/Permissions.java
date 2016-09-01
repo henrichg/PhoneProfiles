@@ -51,6 +51,7 @@ public class Permissions {
     public static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
     public static final String EXTRA_INTERACTIVE = "interactive";
     public static final String EXTRA_APPLICATION_DATA_PATH = "application_data_path";
+    public static final String EXTRA_ONLY_GRANT = "only_grant";
 
     public static Activity profileActivationActivity = null;
     public static ImageViewPreference imageViewPreference = null;
@@ -413,139 +414,169 @@ public class Permissions {
 
     public static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
                                                   boolean forGUI, boolean monochrome, int monochromeValue,
-                                                  int startupSource, boolean interactive, Activity activity) {
-        List<PermissionType> permissions = checkProfilePermissions(context, profile);
-        if (permissions.size() > 0) {
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
-            intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-            if (onlyNotification)
-                GlobalData.addMergedPermissions(context, permissions);
-            else
-                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
-            intent.putExtra(EXTRA_FOR_GUI, forGUI);
-            intent.putExtra(EXTRA_MONOCHROME, monochrome);
-            intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
-            intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
-            intent.putExtra(EXTRA_INTERACTIVE, interactive);
-            if (!onlyNotification)
-                profileActivationActivity = activity;
-            else
-                profileActivationActivity = null;
-            context.startActivity(intent);
+                                                  int startupSource, boolean interactive, Activity activity,
+                                                  boolean onlyGrant) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            List<PermissionType> permissions = checkProfilePermissions(context, profile);
+            if (permissions.size() > 0) {
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
+                intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                if (onlyNotification)
+                    GlobalData.addMergedPermissions(context, permissions);
+                else
+                    intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
+                intent.putExtra(EXTRA_FOR_GUI, forGUI);
+                intent.putExtra(EXTRA_MONOCHROME, monochrome);
+                intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
+                intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+                intent.putExtra(EXTRA_INTERACTIVE, interactive);
+                intent.putExtra(EXTRA_ONLY_GRANT, onlyGrant);
+                if (!onlyNotification)
+                    profileActivationActivity = activity;
+                else
+                    profileActivationActivity = null;
+                context.startActivity(intent);
+            }
+            return permissions.size() == 0;
         }
-        return permissions.size() == 0;
+        else
+            return true;
     }
 
     public static boolean grantInstallTonePermissions(Context context, boolean onlyNotification) {
-        boolean granted = checkInstallTone(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_INSTALL_TONE, permission.WRITE_EXTERNAL_STORAGE));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkInstallTone(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_INSTALL_TONE, permission.WRITE_EXTERNAL_STORAGE));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_INSTALL_TONE);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_INSTALL_TONE);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static boolean grantWallpaperPermissions(Context context, ImageViewPreference preference) {
-        boolean granted = checkGallery(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkGallery(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_WALLPAPER);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
-            imageViewPreference = preference;
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_WALLPAPER);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                imageViewPreference = preference;
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static boolean grantCustomProfileIconPermissions(Context context, ProfileIconPreference preference) {
-        boolean granted = checkGallery(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkGallery(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_CUSTOM_PROFILE_ICON);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
-            profileIconPreference = preference;
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_CUSTOM_PROFILE_ICON);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                profileIconPreference = preference;
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static boolean grantBrightnessDialogPermissions(Context context, BrightnessDialogPreference preference) {
-        boolean granted = checkScreenBrightness(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkScreenBrightness(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_BRIGHTNESS_DIALOG);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
-            brightnessDialogPreference = preference;
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_BRIGHTNESS_DIALOG);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                brightnessDialogPreference = preference;
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static boolean grantExportPermissions(Context context, EditorProfilesActivity editor) {
-        boolean granted = checkExport(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_EXPORT, permission.WRITE_EXTERNAL_STORAGE));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkExport(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_EXPORT, permission.WRITE_EXTERNAL_STORAGE));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_EXPORT);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
-            editorActivity = editor;
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_EXPORT);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                editorActivity = editor;
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static boolean grantImportPermissions(Context context, EditorProfilesActivity editor, String applicationDataPath) {
-        boolean granted = checkImport(context);
-        if (!granted) {
-            List<PermissionType>  permissions = new ArrayList<PermissionType>();
-            permissions.add(new PermissionType(PERMISSION_IMPORT, permission.READ_EXTERNAL_STORAGE));
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkImport(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<PermissionType>();
+                permissions.add(new PermissionType(PERMISSION_IMPORT, permission.READ_EXTERNAL_STORAGE));
 
-            Intent intent = new Intent(context, GrantPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
-            intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_IMPORT);
-            intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
-            intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
-            intent.putExtra(EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
-            editorActivity = editor;
-            context.startActivity(intent);
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_IMPORT);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                intent.putExtra(EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
+                editorActivity = editor;
+                context.startActivity(intent);
+            }
+            return granted;
         }
-        return granted;
+        else
+            return true;
     }
 
     public static void removeProfileNotification(Context context)
