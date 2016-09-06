@@ -237,6 +237,8 @@ public class GlobalData extends Application {
     public static boolean applicationUnlinkRingerNotificationVolumes;
     public static boolean applicationShortcutEmblem;
 
+    public static final RootMutex rootMutex = new RootMutex();
+
     @Override
     public void onCreate()
     {
@@ -1240,47 +1242,49 @@ public class GlobalData extends Application {
     static private boolean serviceBinaryExists;
 
     static synchronized void initRoot() {
-        //rootChecking = false;
-        rootChecked = false;
-        rooted = false;
-        //grantChecking = false;
-        grantChecked = false;
-        rootGranted = false;
-        //settingsBinaryChecking = false;
-        settingsBinaryChecked = false;
-        settingsBinaryExists = false;
-        isSELinuxEnforcingChecked = false;
-        isSELinuxEnforcing = false;
-        //suVersion = null;
-        //suVersionChecked = false;
-        //serviceBinaryChecking = false;
-        serviceBinaryChecked = false;
-        serviceBinaryExists = false;
+        synchronized (GlobalData.rootMutex) {
+            //rootChecking = false;
+            rootChecked = false;
+            rooted = false;
+            //grantChecking = false;
+            grantChecked = false;
+            rootGranted = false;
+            //settingsBinaryChecking = false;
+            settingsBinaryChecked = false;
+            settingsBinaryExists = false;
+            isSELinuxEnforcingChecked = false;
+            isSELinuxEnforcing = false;
+            //suVersion = null;
+            //suVersionChecked = false;
+            //serviceBinaryChecking = false;
+            serviceBinaryChecked = false;
+            serviceBinaryExists = false;
+        }
     }
 
-    static synchronized boolean isRooted()
+    static boolean _isRooted()
     {
         RootShell.debugMode = rootToolsDebug;
 
         if ((!rootChecked)/* && (!rootChecking)*/)
         {
+            GlobalData.logE("GlobalData._isRooted", "start isRootAvailable");
             //rootChecking = true;
             /*try {
                 RootTools.closeAllShells();
             } catch (IOException e) {
                 e.printStackTrace();
             }*/
-            if (RootTools.isRootAvailable())
-            {
+            if (RootTools.isRootAvailable()) {
                 // zariadenie je rootnute
+                GlobalData.logE("GlobalData._isRooted", "root available");
                 rootChecked = true;
                 rooted = true;
-            }
-            else
-            {
+            } else {
+                GlobalData.logE("GlobalData.isRooted", "root NOT available");
                 rootChecked = true;
                 rooted = false;
-                grantChecked = true;
+                grantChecked = false;
                 rootGranted = false;
                 settingsBinaryExists = false;
                 settingsBinaryChecked = false;
@@ -1298,7 +1302,14 @@ public class GlobalData extends Application {
         return rooted;
     }
 
-    static synchronized boolean grantRoot(boolean force)
+    static boolean isRooted() {
+        synchronized (GlobalData.rootMutex) {
+            _isRooted();
+        }
+        return rooted;
+    }
+
+    static boolean grantRoot(boolean force)
     {
         RootShell.debugMode = rootToolsDebug;
 
@@ -1308,118 +1319,85 @@ public class GlobalData extends Application {
 
         if (((!grantChecked) || force) /*&& (!grantChecking)*/)
         {
-            GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
-            //grantChecking = true;
-            /*try {
-                RootTools.closeAllShells();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            if (RootTools.isAccessGiven())
-            {
-                // root grantnuty
-                GlobalData.logE("GlobalData.grantRoot", "root granted");
-                rootChecked = true;
-                rooted = true;
-                grantChecked = true;
-                rootGranted = true;
-            }
-            else
-            {
-                // grant odmietnuty
-                GlobalData.logE("GlobalData.grantRoot", "root NOT granted");
-                grantChecked = true;
-                rootGranted = false;
+            synchronized (GlobalData.rootMutex) {
 
-                // check if root is available
-                rootChecked = false;
-                rooted = false;
-                isRooted();
+                GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
+                //grantChecking = true;
+                /*try {
+                    RootTools.closeAllShells();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                if (RootTools.isAccessGiven()) {
+                    // root grantnuty
+                    GlobalData.logE("GlobalData.grantRoot", "root granted");
+                    rootChecked = true;
+                    rooted = true;
+                    grantChecked = true;
+                    rootGranted = true;
+                } else {
+                    // grant odmietnuty
+                    GlobalData.logE("GlobalData.grantRoot", "root NOT granted");
+                    grantChecked = true;
+                    rootGranted = false;
+
+                    // check if root is available
+                    rootChecked = false;
+                    rooted = false;
+                    _isRooted();
+                }
+                //grantChecking = false;
             }
-            //grantChecking = false;
         }
-        //if (rooted)
-        //	getSUVersion();
         return rootGranted;
     }
 
-    static synchronized boolean settingsBinaryExists()
+    static boolean settingsBinaryExists()
     {
         RootShell.debugMode = rootToolsDebug;
 
         if ((!settingsBinaryChecked) /*&& (!settingsBinaryChecking)*/)
         {
-            //settingsBinaryChecking = true;
-            /*try {
-                RootTools.closeAllShells();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            List<String> settingsPaths = RootTools.findBinary("settings");
-            settingsBinaryExists = settingsPaths.size() > 0;
-            //settingsBinaryChecking = false;
-            settingsBinaryChecked = true;
+            synchronized (GlobalData.rootMutex) {
+                GlobalData.logE("GlobalData.settingsBinaryExists", "start");
+                //settingsBinaryChecking = true;
+                /*try {
+                    RootTools.closeAllShells();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                List<String> settingsPaths = RootTools.findBinary("settings");
+                settingsBinaryExists = settingsPaths.size() > 0;
+                //settingsBinaryChecking = false;
+                settingsBinaryChecked = true;
+            }
         }
         GlobalData.logE("GlobalData.settingsBinaryExists", "settingsBinaryExists="+settingsBinaryExists);
         return settingsBinaryExists;
     }
 
-    static synchronized boolean serviceBinaryExists()
+    static boolean serviceBinaryExists()
     {
         RootShell.debugMode = rootToolsDebug;
 
         if ((!serviceBinaryChecked) /*&& (!serviceBinaryChecking)*/)
         {
-            //serviceBinaryChecking = true;
-            /*try {
-                RootTools.closeAllShells();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            List<String> servicePaths = RootTools.findBinary("service");
-            serviceBinaryExists = servicePaths.size() > 0;
-            //serviceBinaryChecking = false;
-            serviceBinaryChecked = true;
+            synchronized (GlobalData.rootMutex) {
+                GlobalData.logE("GlobalData.serviceBinaryExists", "start");
+                //serviceBinaryChecking = true;
+                /*try {
+                    RootTools.closeAllShells();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                List<String> servicePaths = RootTools.findBinary("service");
+                serviceBinaryExists = servicePaths.size() > 0;
+                //serviceBinaryChecking = false;
+                serviceBinaryChecked = true;
+            }
         }
         GlobalData.logE("GlobalData.serviceBinaryExists", "serviceBinaryExists="+serviceBinaryExists);
         return serviceBinaryExists;
-    }
-
-    public static String getJavaCommandFile(Class<?> mainClass, String name, Context context, Object cmdParam) {
-        try {
-            String cmd =
-                    "#!/system/bin/sh\n" +
-                            "base=/system\n" +
-                            "export CLASSPATH=" + context.getPackageManager().getPackageInfo(context.getPackageName(), 0).applicationInfo.sourceDir + "\n" +
-                            "exec app_process $base/bin " + mainClass.getName() + " " + cmdParam + " \"$@\"\n";
-
-            FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
-            fos.write(cmd.getBytes());
-            fos.close();
-
-            File file = context.getFileStreamPath(name);
-            file.setExecutable(true);
-
-            /*
-            File sd = Environment.getExternalStorageDirectory();
-            File exportDir = new File(sd, GlobalData.EXPORT_PATH);
-            if (!(exportDir.exists() && exportDir.isDirectory()))
-                exportDir.mkdirs();
-
-            File outFile = new File(sd, GlobalData.EXPORT_PATH + "/" + name);
-            OutputStream out = new FileOutputStream(outFile);
-            out.write(cmd.getBytes());
-            out.close();
-
-            outFile.setExecutable(true);
-            */
-
-            return file.getAbsolutePath();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**
@@ -1434,26 +1412,25 @@ public class GlobalData extends Application {
 
         if (!isSELinuxEnforcingChecked)
         {
-            boolean enforcing = false;
+            synchronized (GlobalData.rootMutex) {
+                boolean enforcing = false;
 
-            // First known firmware with SELinux built-in was a 4.2 (17)
-            // leak
-            if (android.os.Build.VERSION.SDK_INT >= 17)
-            {
-                // Detect enforcing through sysfs, not always present
-                File f = new File("/sys/fs/selinux/enforce");
-                if (f.exists())
-                {
-                    try {
-                        InputStream is = new FileInputStream("/sys/fs/selinux/enforce");
+                // First known firmware with SELinux built-in was a 4.2 (17)
+                // leak
+                if (android.os.Build.VERSION.SDK_INT >= 17) {
+                    // Detect enforcing through sysfs, not always present
+                    File f = new File("/sys/fs/selinux/enforce");
+                    if (f.exists()) {
                         try {
-                            enforcing = (is.read() == '1');
-                        } finally {
-                            is.close();
+                            InputStream is = new FileInputStream("/sys/fs/selinux/enforce");
+                            try {
+                                enforcing = (is.read() == '1');
+                            } finally {
+                                is.close();
+                            }
+                        } catch (Exception e) {
                         }
-                    } catch (Exception e) {
                     }
-                }
 
                 /*
                 // 4.4+ builds are enforcing by default, take the gamble
@@ -1462,13 +1439,15 @@ public class GlobalData extends Application {
                     enforcing = (android.os.Build.VERSION.SDK_INT >= 19);
                 }
                 */
-            }
+                }
 
-            isSELinuxEnforcing = enforcing;
-            isSELinuxEnforcingChecked = true; 
-            
+                isSELinuxEnforcing = enforcing;
+                isSELinuxEnforcingChecked = true;
+            }
         }
-        
+
+        GlobalData.logE("GlobalData.isSELinuxEnforcing", "isSELinuxEnforcing="+isSELinuxEnforcing);
+
         return isSELinuxEnforcing;
     }
 
@@ -1528,7 +1507,44 @@ public class GlobalData extends Application {
             Log.e("GlobaData.commandWait", "Could not finish root command in " + (waitTill/waitTillMultiplier));
         }
     }
-    */    
+    */
+
+    public static String getJavaCommandFile(Class<?> mainClass, String name, Context context, Object cmdParam) {
+        try {
+            String cmd =
+                    "#!/system/bin/sh\n" +
+                            "base=/system\n" +
+                            "export CLASSPATH=" + context.getPackageManager().getPackageInfo(context.getPackageName(), 0).applicationInfo.sourceDir + "\n" +
+                            "exec app_process $base/bin " + mainClass.getName() + " " + cmdParam + " \"$@\"\n";
+
+            FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
+            fos.write(cmd.getBytes());
+            fos.close();
+
+            File file = context.getFileStreamPath(name);
+            file.setExecutable(true);
+
+            /*
+            File sd = Environment.getExternalStorageDirectory();
+            File exportDir = new File(sd, GlobalData.EXPORT_PATH);
+            if (!(exportDir.exists() && exportDir.isDirectory()))
+                exportDir.mkdirs();
+
+            File outFile = new File(sd, GlobalData.EXPORT_PATH + "/" + name);
+            OutputStream out = new FileOutputStream(outFile);
+            out.write(cmd.getBytes());
+            out.close();
+
+            outFile.setExecutable(true);
+            */
+
+            return file.getAbsolutePath();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // Copy shared preferences -----------------------------------------------
 
