@@ -1321,32 +1321,29 @@ public class GlobalData extends Application {
         {
             synchronized (GlobalData.rootMutex) {
 
-                GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
-                //grantChecking = true;
-                /*try {
-                    RootTools.closeAllShells();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-                if (RootTools.isAccessGiven()) {
-                    // root grantnuty
-                    GlobalData.logE("GlobalData.grantRoot", "root granted");
-                    rootChecked = true;
-                    rooted = true;
-                    grantChecked = true;
-                    rootGranted = true;
-                } else {
-                    // grant odmietnuty
-                    GlobalData.logE("GlobalData.grantRoot", "root NOT granted");
-                    grantChecked = true;
-                    rootGranted = false;
-
-                    // check if root is available
-                    rootChecked = false;
-                    rooted = false;
-                    _isRooted();
+                if (_isRooted()) {
+                    GlobalData.logE("GlobalData.grantRoot", "start isAccessGiven");
+                    //grantChecking = true;
+                    /*try {
+                        RootTools.closeAllShells();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+                    if (RootTools.isAccessGiven()) {
+                        // root grantnuty
+                        GlobalData.logE("GlobalData.grantRoot", "root granted");
+                        rootChecked = true;
+                        rooted = true;
+                        grantChecked = true;
+                        rootGranted = true;
+                    } else {
+                        // grant odmietnuty
+                        GlobalData.logE("GlobalData.grantRoot", "root NOT granted");
+                        grantChecked = true;
+                        rootGranted = false;
+                    }
+                    //grantChecking = false;
                 }
-                //grantChecking = false;
             }
         }
         return rootGranted;
