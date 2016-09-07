@@ -1262,7 +1262,7 @@ public class GlobalData extends Application {
         }
     }
 
-    static boolean _isRooted()
+    private static boolean _isRooted()
     {
         RootShell.debugMode = rootToolsDebug;
 
