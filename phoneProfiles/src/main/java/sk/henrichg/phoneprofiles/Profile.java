@@ -55,6 +55,7 @@ public class Profile {
     public int _deviceNetworkType;
     public int _notificationLed;
     public int _vibrateWhenRinging;
+    public int _deviceWallpaperFor;
 
     public Bitmap _iconBitmap;
     public Bitmap _preferencesIndicator;
@@ -116,7 +117,8 @@ public class Profile {
                    boolean askForDuration,
                    int deviceNetworkType,
                    int notificationLed,
-                   int vibrateWhenRinging)
+                   int vibrateWhenRinging,
+                   int deviceWallpaperFor)
     {
         this._id = id;
         this._name = name;
@@ -164,6 +166,7 @@ public class Profile {
         this._deviceNetworkType = deviceNetworkType;
         this._notificationLed = notificationLed;
         this._vibrateWhenRinging = vibrateWhenRinging;
+        this._deviceWallpaperFor = deviceWallpaperFor;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -214,7 +217,8 @@ public class Profile {
                    boolean askForDuration,
                    int deviceNetworkType,
                    int notificationLed,
-                   int vibrateWhenRinging)
+                   int vibrateWhenRinging,
+                   int deviceWallpaperFor)
     {
         this._name = name;
         this._icon = icon;
@@ -261,6 +265,7 @@ public class Profile {
         this._deviceNetworkType = deviceNetworkType;
         this._notificationLed = notificationLed;
         this._vibrateWhenRinging = vibrateWhenRinging;
+        this._deviceWallpaperFor = deviceWallpaperFor;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -314,6 +319,7 @@ public class Profile {
         this._deviceNetworkType = profile._deviceNetworkType;
         this._notificationLed = profile._notificationLed;
         this._vibrateWhenRinging = profile._vibrateWhenRinging;
+        this._deviceWallpaperFor = profile._deviceWallpaperFor;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
