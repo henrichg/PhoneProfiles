@@ -50,7 +50,7 @@
             android:src="@drawable/ic_profile_pref_volume_on"
             android:paddingStart="10dp" />
 
-
+        <!--
         <ImageView
             android:id="@+id/notification_activated_profile_activated"
             android:layout_width="wrap_content"
@@ -63,6 +63,7 @@
             android:maxWidth="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher" />
+        -->
 
     </RelativeLayout>
 
