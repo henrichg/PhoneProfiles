@@ -78,8 +78,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         savedInstanceStateChanged = (savedInstanceState != null);
 
-        GlobalData.grantRoot(false);
-
         createApplicationsCache();
 
         setContentView(R.layout.activity_editor_profile_list);

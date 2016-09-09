@@ -29,13 +29,13 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     protected PreferenceManager prefMng;
     protected SharedPreferences preferences;
 
-    static final String PREF_APPLICATION_PERMISSIONS = "prf_pref_applicationPermissions";
+    static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
     static final int RESULT_APPLICATION_PERMISSIONS = 1990;
-    static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "prf_pref_writeSystemSettingsPermissions";
+    static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "permissionsWriteSystemSettingsPermissions";
     static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
     static final String PREF_APPLICATION_LANGUAGE_24 = "applicationLanguage24";
     static final int RESULT_LOCALE_SETTINGS = 1992;
-    static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "prf_pref_accessNotificationPolicyPermissions";
+    static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "permissionsAccessNotificationPolicyPermissions";
     static final int RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = 1993;
 
     @Override

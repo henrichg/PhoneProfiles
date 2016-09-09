@@ -39,7 +39,7 @@ public class FirstStartService extends IntentService {
         // grant root
         //if (GlobalData.isRooted(false))
         //{
-            if (GlobalData.grantRoot(true))
+            if (GlobalData.isRootGranted())
             {
                 GlobalData.settingsBinaryExists();
                 GlobalData.serviceBinaryExists();
