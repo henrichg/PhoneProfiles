@@ -779,4 +779,9 @@
     <string name="array_pref_device_wallpaper_homescreen">Home screen</string>
     <string name="array_pref_device_wallpaper_lockscreen">Lock screen</string>
     <string name="array_pref_device_wallpaper_all">Home and lock screen</string>
+    <string name="preference_not_allowed_reason_no_hardware">no hardware</string>
+    <string name="preference_not_allowed_reason_not_rooted">not rooted</string>
+    <string name="preference_not_allowed_reason_settings_not_found">settings utility not found</string>
+    <string name="preference_not_allowed_reason_service_not_found">service utility not found</string>
+    <string name="preference_not_allowed_reason_not_supported">not supported by system</string>
 </resources>

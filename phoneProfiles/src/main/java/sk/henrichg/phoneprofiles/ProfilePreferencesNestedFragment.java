@@ -17,7 +17,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -694,7 +693,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
                     if (listPreference != null) {
                         listPreference.setEnabled(false);
-                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
+                                "-"+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
                         setTitleStyle(listPreference, false, false);
                         setCategorySummary(listPreference, false);
                     }
@@ -790,14 +790,15 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     }
                 }
             }
-            int canChange = GlobalData.isPreferenceAllowed(key, context);
+            int canChange = GlobalData.isProfilePreferenceAllowed(key, context);
             if (canChange != GlobalData.PREFERENCE_ALLOWED)
             {
                 ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
                 if (listPreference != null) {
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
-                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
+                                "-"+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 }
@@ -830,7 +831,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 if (secureKeyguard) {
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
-                    listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+                    listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
+                            "-"+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
                 } else {
                     String sValue = value.toString();
                     int index = listPreference.findIndexOfValue(sValue);
@@ -892,11 +894,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 } else {
                     listPreference.setTitle(R.string.profile_preferences_notificationLed);
                 }
-                int canChange = GlobalData.isPreferenceAllowed(key, context);
+                int canChange = GlobalData.isProfilePreferenceAllowed(key, context);
                 if (canChange != GlobalData.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
-                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed));
+                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
+                                "-"+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 } else {
