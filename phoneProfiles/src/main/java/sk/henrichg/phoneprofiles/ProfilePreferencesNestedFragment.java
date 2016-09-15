@@ -694,7 +694,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     if (listPreference != null) {
                         listPreference.setEnabled(false);
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
-                                "-"+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
+                                ": "+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
                         setTitleStyle(listPreference, false, false);
                         setCategorySummary(listPreference, false);
                     }
@@ -798,7 +798,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
-                                "-"+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
+                                ": "+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 }
@@ -832,7 +832,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                     listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
-                            "-"+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
+                            ": "+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
                 } else {
                     String sValue = value.toString();
                     int index = listPreference.findIndexOfValue(sValue);
@@ -899,7 +899,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     listPreference.setEnabled(false);
                     if (canChange == GlobalData.PREFERENCE_NOT_ALLOWED)
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
-                                "-"+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
+                                ": "+getResources().getString(GlobalData.getNotAllowedPreferenceReasonString()));
                     setTitleStyle(listPreference, false, false);
                     setCategorySummary(listPreference, false);
                 } else {
