@@ -72,7 +72,7 @@ public class FirstStartService extends IntentService {
         InterruptionFilterChangedBroadcastReceiver.setZenMode(context,audioManager);
 
         // start ReceiverService
-        context.startService(new Intent(context, ReceiversService.class));
+        context.startService(new Intent(context, PhoneProfilesService.class));
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);

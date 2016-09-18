@@ -244,7 +244,7 @@ public class ActivateProfileListFragment extends Fragment {
             GlobalData.logE("ActivateProfileListFragment.doOnStart", "xxx");
 
             // start ReceiverService
-            getActivity().startService(new Intent(getActivity().getApplicationContext(), ReceiversService.class));
+            getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
 
             Profile profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);

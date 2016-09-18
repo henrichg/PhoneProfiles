@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.os.IBinder;
 
 
-public class ReceiversService extends Service {
+public class PhoneProfilesService extends Service {
 
     private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
@@ -18,10 +18,6 @@ public class ReceiversService extends Service {
     @Override
     public void onCreate()
     {
-        // start service for first start
-        Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
-        getApplicationContext().startService(eventsServiceIntent);
-        
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
@@ -56,6 +52,12 @@ public class ReceiversService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        if (!GlobalData.getApplicationStarted(getApplicationContext())) {
+            // start service for first start
+            Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
+            getApplicationContext().startService(eventsServiceIntent);
+        }
+
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
         return START_STICKY;
@@ -64,7 +66,7 @@ public class ReceiversService extends Service {
     @Override
     public void onTaskRemoved(Intent rootIntent)
     {
-        GlobalData.logE("$$$ ReceiversService.onTaskRemoved", "xxxxx");
+        GlobalData.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxxxx");
 
         ActivateProfileHelper.screenTimeoutUnlock(getApplicationContext());
         super.onTaskRemoved(rootIntent);

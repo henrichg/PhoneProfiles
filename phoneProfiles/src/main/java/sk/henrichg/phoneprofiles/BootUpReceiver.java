@@ -16,7 +16,7 @@ public class BootUpReceiver extends BroadcastReceiver {
         if (GlobalData.applicationStartOnBoot)
         {
             // start ReceiverService
-            context.startService(new Intent(context.getApplicationContext(), ReceiversService.class));
+            context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
         }
 
     }

@@ -267,7 +267,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         ImportantInfoNotification.removeNotification(context);
         Permissions.removeNotifications(context);
 
-        context.stopService(new Intent(context, ReceiversService.class));
+        context.stopService(new Intent(context, PhoneProfilesService.class));
         context.stopService(new Intent(context, KeyguardService.class));
 
         ActivateProfileHelper.screenTimeoutUnlock(context);
