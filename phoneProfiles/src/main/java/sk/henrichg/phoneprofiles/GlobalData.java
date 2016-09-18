@@ -245,7 +245,7 @@ public class GlobalData extends Application {
 
     public static int notAllowedReason;
 
-    public static final RootMutex rootMutex = new RootMutex();
+    //public static final RootMutex rootMutex = new RootMutex();
 
     @Override
     public void onCreate()
@@ -1318,7 +1318,7 @@ public class GlobalData extends Application {
     static private boolean serviceBinaryExists;
 
     static synchronized void initRoot() {
-        synchronized (GlobalData.rootMutex) {
+        //synchronized (GlobalData.rootMutex) {
             rootChecked = false;
             rooted = false;
             settingsBinaryChecked = false;
@@ -1329,7 +1329,7 @@ public class GlobalData extends Application {
             //suVersionChecked = false;
             serviceBinaryChecked = false;
             serviceBinaryExists = false;
-        }
+        //}
     }
 
     private static boolean _isRooted()
@@ -1370,9 +1370,9 @@ public class GlobalData extends Application {
     }
 
     static boolean isRooted() {
-        synchronized (GlobalData.rootMutex) {
+        //synchronized (GlobalData.rootMutex) {
             _isRooted();
-        }
+        //}
         return rooted;
     }
 
@@ -1380,7 +1380,7 @@ public class GlobalData extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        synchronized (GlobalData.rootMutex) {
+        //synchronized (GlobalData.rootMutex) {
 
             if (_isRooted()) {
                 GlobalData.logE("GlobalData.isRootGranted", "start isAccessGiven");
@@ -1404,7 +1404,7 @@ public class GlobalData extends Application {
                 GlobalData.logE("GlobalData.isRootGranted", "not rooted");
                 return false;
             }
-        }
+        //}
     }
 
     static boolean settingsBinaryExists()
@@ -1413,7 +1413,7 @@ public class GlobalData extends Application {
 
         if (!settingsBinaryChecked)
         {
-            synchronized (GlobalData.rootMutex) {
+            //synchronized (GlobalData.rootMutex) {
                 GlobalData.logE("GlobalData.settingsBinaryExists", "start");
                 //settingsBinaryChecking = true;
                 /*try {
@@ -1424,7 +1424,7 @@ public class GlobalData extends Application {
                 List<String> settingsPaths = RootTools.findBinary("settings");
                 settingsBinaryExists = settingsPaths.size() > 0;
                 settingsBinaryChecked = true;
-            }
+            //}
         }
         GlobalData.logE("GlobalData.settingsBinaryExists", "settingsBinaryExists="+settingsBinaryExists);
         return settingsBinaryExists;
@@ -1436,7 +1436,7 @@ public class GlobalData extends Application {
 
         if (!serviceBinaryChecked)
         {
-            synchronized (GlobalData.rootMutex) {
+            //synchronized (GlobalData.rootMutex) {
                 GlobalData.logE("GlobalData.serviceBinaryExists", "start");
                 //serviceBinaryChecking = true;
                 /*try {
@@ -1447,7 +1447,7 @@ public class GlobalData extends Application {
                 List<String> servicePaths = RootTools.findBinary("service");
                 serviceBinaryExists = servicePaths.size() > 0;
                 serviceBinaryChecked = true;
-            }
+            //}
         }
         GlobalData.logE("GlobalData.serviceBinaryExists", "serviceBinaryExists="+serviceBinaryExists);
         return serviceBinaryExists;
@@ -1465,7 +1465,7 @@ public class GlobalData extends Application {
 
         if (!isSELinuxEnforcingChecked)
         {
-            synchronized (GlobalData.rootMutex) {
+            //synchronized (GlobalData.rootMutex) {
                 boolean enforcing = false;
 
                 // First known firmware with SELinux built-in was a 4.2 (17)
@@ -1496,7 +1496,7 @@ public class GlobalData extends Application {
 
                 isSELinuxEnforcing = enforcing;
                 isSELinuxEnforcingChecked = true;
-            }
+            //}
         }
 
         GlobalData.logE("GlobalData.isSELinuxEnforcing", "isSELinuxEnforcing="+isSELinuxEnforcing);
