@@ -572,14 +572,10 @@ public class EditorProfilesActivity extends AppCompatActivity
                     EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
                     if (fragment != null)
                         ((EditorProfileListFragment) fragment).removeAdapter();
-
-                    // check root, this set GlobalData.rooted for doInBackgroud()
-                    GlobalData.isRooted();
                 }
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-
                     int ret = dataWrapper.getDatabaseHandler().importDB(_applicationDataPath);
 
                     if (ret == 1) {
