@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
