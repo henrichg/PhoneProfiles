@@ -646,6 +646,11 @@ public class Profile {
         int maximumValue = ActivateProfileHelper.getMaximumScreenBrightnessSetting(context);
         int minimumValue = ActivateProfileHelper.getMinimumScreenBrightnessSetting(context);
 
+        if (maximumValue-minimumValue > 65535) {
+            minimumValue = 0;
+            maximumValue = 65535;
+        }
+
         int value;
 
         if (perc == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)
@@ -700,6 +705,11 @@ public class Profile {
     {
         int maxValue = ActivateProfileHelper.getMaximumScreenBrightnessSetting(context);
         int minValue = ActivateProfileHelper.getMinimumScreenBrightnessSetting(context);
+
+        if (maxValue-minValue > 65535) {
+            minValue = 0;
+            maxValue = 65535;
+        }
 
         long perc = convertBrightnessToPercents(value, maxValue, minValue, context);
 
