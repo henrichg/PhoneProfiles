@@ -48,6 +48,8 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
                 dataWrapper._activateProfile(profile, GlobalData.STARTUP_SOURCE_EXTERNAL_APP, true, this);
             }
         }
+        else
+            dataWrapper.finishActivity(GlobalData.STARTUP_SOURCE_EXTERNAL_APP, false, this);
     }
 
     @Override
