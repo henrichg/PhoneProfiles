@@ -135,6 +135,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ActivateProfileFromExternalApplicationActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/empty_string"
+            android:theme="@style/EmptyActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ImportantInfoActivity"
             android:label="@string/info_notification_title">
         </activity>

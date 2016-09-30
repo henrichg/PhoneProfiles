@@ -64,6 +64,7 @@ public class GlobalData extends Application {
     static final String EXTRA_PREDEFINED_PROFILE_INDEX = "predefined_profile_index";
     //static final String EXTRA_PREFERENCES_STARTUP_SOURCE = "preferences_startup_source";
     static final String EXTRA_LINKUNLINK_VOLUMES = "link_unlink_volumes";
+    static final String EXTRA_PROFILE_NAME = "profile_name";
 
     static final int STARTUP_SOURCE_NOTIFICATION = 1;
     static final int STARTUP_SOURCE_WIDGET = 2;
@@ -73,6 +74,7 @@ public class GlobalData extends Application {
     static final int STARTUP_SOURCE_SERVICE = 6;
     static final int STARTUP_SOURCE_EDITOR = 8;
     static final int STARTUP_SOURCE_ACTIVATOR_START = 9;
+    static final int STARTUP_SOURCE_EXTERNAL_APP = 10;
 
     static final int PREFERENCES_STARTUP_SOURCE_ACTIVITY = 1;
     static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
