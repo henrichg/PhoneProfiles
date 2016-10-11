@@ -156,7 +156,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 " Extra:\n" +
                 " Package:sk.henrichg.phoneprofiles\n" +
                 " Class:sk.henrichg.phoneprofiles.ActivateProfileFromExternalApplicationActivity\n" +
-                " Target:\n" +
+                " Target:Activity\n" +
                 "]");
 
         if (!news) {
