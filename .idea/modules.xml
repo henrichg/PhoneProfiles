@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/dragSortListView/dragSortListView.iml" filepath="$PROJECT_DIR$/dragSortListView/dragSortListView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/masked-edittext/masked-edittext.iml" filepath="$PROJECT_DIR$/masked-edittext/masked-edittext.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialPreferences/materialPreferences.iml" filepath="$PROJECT_DIR$/materialPreferences/materialPreferences.iml" />
       <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" />
     </modules>
