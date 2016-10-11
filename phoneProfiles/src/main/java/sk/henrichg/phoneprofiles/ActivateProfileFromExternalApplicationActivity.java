@@ -19,6 +19,7 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
         Intent intent = getIntent();
         profileName = intent.getStringExtra(GlobalData.EXTRA_PROFILE_NAME);
+        profileName.trim();
 
         if (!profileName.isEmpty()) {
             GlobalData.loadPreferences(getApplicationContext());
@@ -28,7 +29,7 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
             List<Profile> profileList = dataWrapper.getProfileList();
             for (Profile profile : profileList) {
-                if (profile._name.equals(profileName)) {
+                if (profile._name.trim().equals(profileName.trim())) {
                     profile_id = profile._id;
                     break;
                 }
