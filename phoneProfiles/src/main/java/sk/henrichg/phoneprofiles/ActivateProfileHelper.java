@@ -899,7 +899,7 @@ public class ActivateProfileHelper {
                     }
                 }
                 else {
-                    long shortcutId = ApplicationsCache.getShortcutId(splits[0]);
+                    long shortcutId = ApplicationsCache.getShortcutId(splits[i]);
                     if (shortcutId > 0) {
                         Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
                         if (shortcut != null) {
