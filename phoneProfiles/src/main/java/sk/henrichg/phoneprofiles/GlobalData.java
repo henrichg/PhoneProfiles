@@ -21,8 +21,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.stericson.RootShell.RootShell;
-import com.stericson.RootTools.RootTools;
+import com.stericson.rootshell.RootShell;
+import com.stericson.roottools.RootTools;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -262,6 +262,8 @@ public class GlobalData extends Application {
 
         // initialization
         loadPreferences(this);
+
+        GlobalData.initRoot();
 
         //Log.d("GlobalData.onCreate", "memory usage (after create activateProfileHelper)=" + Debug.getNativeHeapAllocatedSize());
 
