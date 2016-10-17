@@ -89,8 +89,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
     @Override
     public void onInterruptionFilterChanged(int interruptionFilter) {
         //Log.e(TAG, "onInterruptionFilterChanged(" + interruptionFilter + ')');
-
-        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
+        boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
+        if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
             if (!RingerModeChangeReceiver.internalChange) {
                 final AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
 
@@ -157,7 +157,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
     }
 
     public static void setZenMode(Context context, AudioManager audioManager) {
-        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
+        boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
+        if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
             int zenMode = getZenMode(context, audioManager);
             if (zenMode != 0) {
                 GlobalData.setRingerMode(context, 5);
@@ -218,24 +219,27 @@ public class PPNotificationListenerService extends NotificationListenerService {
 
     /** Convenience method for sending an {@link android.content.Intent} with {@link #ACTION_REQUEST_INTERRUPTION_FILTER}. */
     public static void requestInterruptionFilter(Context context, final int zenMode) {
-        int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
-        switch (zenMode) {
-            case ActivateProfileHelper.ZENMODE_ALL:
-                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
-                break;
-            case ActivateProfileHelper.ZENMODE_PRIORITY:
-                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_PRIORITY;
-                break;
-            case ActivateProfileHelper.ZENMODE_NONE:
-                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_NONE;
-                break;
-            case ActivateProfileHelper.ZENMODE_ALARMS:
-                interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALARMS;
-                break;
+        boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
+        if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
+            int interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
+            switch (zenMode) {
+                case ActivateProfileHelper.ZENMODE_ALL:
+                    interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALL;
+                    break;
+                case ActivateProfileHelper.ZENMODE_PRIORITY:
+                    interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_PRIORITY;
+                    break;
+                case ActivateProfileHelper.ZENMODE_NONE:
+                    interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_NONE;
+                    break;
+                case ActivateProfileHelper.ZENMODE_ALARMS:
+                    interruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_ALARMS;
+                    break;
+            }
+            //Log.e(TAG, "requestInterruptionFilter(" + interruptionFilter + ')');
+            Intent request = getInterruptionFilterRequestIntent(context, interruptionFilter);
+            context.sendBroadcast(request);
         }
-        //Log.e(TAG, "requestInterruptionFilter(" + interruptionFilter + ')');
-        Intent request = getInterruptionFilterRequestIntent(context, interruptionFilter);
-        context.sendBroadcast(request);
     }
 
     /*
@@ -279,7 +283,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
         public void onReceive(Context context, Intent intent) {
             //Log.e(TAG, "NLServiceReceiver.onReceive(" + intent.getAction()  + ')');
 
-            if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
+            boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
+            if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
                 // Handle being told to change the interruption filter (zen mode).
                 if (!TextUtils.isEmpty(intent.getAction())) {
                     if (ACTION_REQUEST_INTERRUPTION_FILTER.equals(intent.getAction())) {

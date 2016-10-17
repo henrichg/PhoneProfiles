@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 
@@ -25,10 +26,13 @@ public class PhoneProfilesService extends Service {
         getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
-            IntentFilter intentFilter11 = new IntentFilter();
-            intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
-            getApplicationContext().registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+            boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
+            if (no60) {
+                interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
+                IntentFilter intentFilter11 = new IntentFilter();
+                intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
+                getApplicationContext().registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+            }
         }
 
         if (settingsContentObserver != null)
