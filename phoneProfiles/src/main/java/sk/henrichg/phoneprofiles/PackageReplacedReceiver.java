@@ -13,7 +13,10 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
         //int myUid = android.os.Process.myUid();
         //if (intentUid == myUid)
         //{
-            GlobalData.loadPreferences(context);
+            //GlobalData.loadPreferences(context);
+
+            GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+            GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
 
             if (GlobalData.getApplicationStarted(context))
             {
