@@ -52,7 +52,6 @@ public class Permissions {
     public static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
     public static final String EXTRA_INTERACTIVE = "interactive";
     public static final String EXTRA_APPLICATION_DATA_PATH = "application_data_path";
-    public static final String EXTRA_ONLY_GRANT = "only_grant";
     public static final String EXTRA_ACTIVATE_PROFILE = "activate_profile";
 
     public static Activity profileActivationActivity = null;
@@ -426,7 +425,7 @@ public class Permissions {
     public static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
                                                   boolean forGUI, boolean monochrome, int monochromeValue,
                                                   int startupSource, boolean interactive, Activity activity,
-                                                  boolean onlyGrant, boolean activateProfile) {
+                                                  boolean activateProfile) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = checkProfilePermissions(context, profile);
             if (permissions.size() > 0) {
@@ -445,7 +444,6 @@ public class Permissions {
                 intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
                 intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
                 intent.putExtra(EXTRA_INTERACTIVE, interactive);
-                intent.putExtra(EXTRA_ONLY_GRANT, onlyGrant);
                 intent.putExtra(EXTRA_ACTIVATE_PROFILE, activateProfile);
                 if (!onlyNotification)
                     profileActivationActivity = activity;

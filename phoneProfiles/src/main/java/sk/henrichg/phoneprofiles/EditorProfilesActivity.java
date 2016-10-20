@@ -425,7 +425,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile mappedProfile = GlobalData.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false, false);
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false);
                 }
                 else
                 if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
@@ -435,7 +435,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile defaultProfile = GlobalData.getDefaultProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), defaultProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, true, false);
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false);
 
                 }
             }
