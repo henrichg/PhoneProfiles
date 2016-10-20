@@ -618,7 +618,7 @@ public class DataWrapper {
                 public void onClick(DialogInterface dialog, int which) {
                     if (Permissions.grantProfilePermissions(context, _profile, false,
                             forGUI, monochrome, monochromeValue,
-                            _startupSource, _interactive, _activity, false)) {
+                            _startupSource, _interactive, _activity, false, true)) {
                         if (_profile._askForDuration) {
                             FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, _interactive);
                             dlg.show();
@@ -663,11 +663,11 @@ public class DataWrapper {
             if (interactive)
                 granted = Permissions.grantProfilePermissions(context, profile, false,
                         forGUI, monochrome, monochromeValue,
-                        startupSource, interactive, activity, false);
+                        startupSource, interactive, activity, false, true);
             else
                 granted = Permissions.grantProfilePermissions(context, profile, true,
                         forGUI, monochrome, monochromeValue,
-                        startupSource, interactive, null, false);
+                        startupSource, interactive, null, false, true);
             if (granted) {
                 if (profile._askForDuration && interactive) {
                     FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this, startupSource, interactive);

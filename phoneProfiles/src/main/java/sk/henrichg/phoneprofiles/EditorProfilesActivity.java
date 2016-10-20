@@ -422,7 +422,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile mappedProfile = GlobalData.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false);
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false, false);
                 }
                 else
                 if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
@@ -432,7 +432,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile defaultProfile = GlobalData.getDefaultProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), defaultProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, true);
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, true, false);
 
                 }
             }
@@ -612,6 +612,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                         dataWrapper.getDatabaseHandler().deactivateProfile();
                         dataWrapper.getActivateProfileHelper().showNotification(null);
                         dataWrapper.getActivateProfileHelper().updateWidget();
+
+                        GlobalData.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
+                        GlobalData.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
