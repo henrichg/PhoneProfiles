@@ -274,6 +274,9 @@ public class EditorProfilesActivity extends AppCompatActivity
         ActivateProfileHelper.removeBrightnessView(context);
 
         GlobalData.initRoot();
+
+        GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+        GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
     }
 
     @Override
