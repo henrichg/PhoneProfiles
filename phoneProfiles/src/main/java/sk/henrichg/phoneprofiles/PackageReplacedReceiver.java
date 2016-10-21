@@ -17,6 +17,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
             GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
             GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+            GlobalData.setScreenUnlocked(context.getApplicationContext(), true);
 
             if (GlobalData.getApplicationStarted(context))
             {

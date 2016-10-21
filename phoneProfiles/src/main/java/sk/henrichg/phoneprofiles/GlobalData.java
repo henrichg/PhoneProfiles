@@ -184,6 +184,7 @@ public class GlobalData extends Application {
     public static final String PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME = "applicationWidgetIconHideProfileName";
     public static final String PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES = "applicationUnlinkRingerNotificationVolumes";
     public static final String PREF_APPLICATION_SHORTCUT_EMBLEM = "applicationShortcutEmblem";
+    public static final String PREF_NOTIFICATION_HIDE_IN_LOCKSCREEN = "notificationHideInLockscreen";
 
     public static final int PREFERENCE_NOT_ALLOWED = 0;
     public static final int PREFERENCE_ALLOWED = 1;
@@ -209,6 +210,7 @@ public class GlobalData extends Application {
     private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
     private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
     private static final String PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION = "show_request_access_notification_policy_permission";
+    private static final String PREF_SCREEN_UNLOCKED = "screen_unlocked";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -227,6 +229,7 @@ public class GlobalData extends Application {
     public static boolean notificationStatusBarPermanent;
     public static String notificationStatusBarCancel;
     public static boolean notificationShowInStatusBar;
+    public static boolean notificationHideInLockscreen;
     public static String notificationTextColor;
     public static boolean applicationWidgetListPrefIndicator;
     public static boolean applicationWidgetListHeader;
@@ -304,6 +307,7 @@ public class GlobalData extends Application {
         notificationStatusBarCancel = preferences.getString(PREF_NOTIFICATION_STATUS_BAR_CANCEL, "10");
         notificationShowInStatusBar = preferences.getBoolean(PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
         notificationTextColor = preferences.getString(PREF_NOTIFICATION_TEXT_COLOR, "0");
+        notificationHideInLockscreen = preferences.getBoolean(PREF_NOTIFICATION_HIDE_IN_LOCKSCREEN, false);
         applicationWidgetListPrefIndicator = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_PREF_INDICATOR, true);
         applicationWidgetListHeader = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_HEADER, true);
         applicationWidgetListBackground = preferences.getString(PREF_APPLICATION_WIDGET_LIST_BACKGROUND, "25");
@@ -689,6 +693,20 @@ public class GlobalData extends Application {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
         editor.putInt(PREF_NOTIFICATION_VOLUME, volume);
+        editor.commit();
+    }
+
+    static public boolean getScreenUnlocked(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SCREEN_UNLOCKED, true);
+    }
+
+    static public void setScreenUnlocked(Context context, boolean unlocked)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SCREEN_UNLOCKED, unlocked);
         editor.commit();
     }
 

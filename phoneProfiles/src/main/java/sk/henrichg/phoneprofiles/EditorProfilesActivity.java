@@ -277,6 +277,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
         GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+        GlobalData.setScreenUnlocked(context.getApplicationContext(), true);
     }
 
     @Override
@@ -618,6 +619,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                         GlobalData.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
                         GlobalData.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
+                        GlobalData.setScreenUnlocked(getApplicationContext(), true);
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
