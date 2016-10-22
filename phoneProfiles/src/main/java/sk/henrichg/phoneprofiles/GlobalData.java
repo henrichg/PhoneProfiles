@@ -185,6 +185,9 @@ public class GlobalData extends Application {
     public static final String PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES = "applicationUnlinkRingerNotificationVolumes";
     public static final String PREF_APPLICATION_SHORTCUT_EMBLEM = "applicationShortcutEmblem";
     public static final String PREF_NOTIFICATION_HIDE_IN_LOCKSCREEN = "notificationHideInLockscreen";
+    public static final String PREF_APPLICATION_WIDGET_ICON_BACKGROUND = "applicationWidgetIconBackground";
+    public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B = "applicationWidgetIconLightnessB";
+    public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T = "applicationWidgetIconLightnessT";
 
     public static final int PREFERENCE_NOT_ALLOWED = 0;
     public static final int PREFERENCE_ALLOWED = 1;
@@ -247,6 +250,9 @@ public class GlobalData extends Application {
     public static boolean applicationWidgetIconHideProfileName;
     public static boolean applicationUnlinkRingerNotificationVolumes;
     public static boolean applicationShortcutEmblem;
+    public static String applicationWidgetIconBackground;
+    public static String applicationWidgetIconLightnessB;
+    public static String applicationWidgetIconLightnessT;
 
     public static int notAllowedReason;
 
@@ -324,6 +330,9 @@ public class GlobalData extends Application {
         applicationWidgetIconHideProfileName = preferences.getBoolean(PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME, false);
         applicationUnlinkRingerNotificationVolumes = preferences.getBoolean(PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES, false);
         applicationShortcutEmblem = preferences.getBoolean(PREF_APPLICATION_SHORTCUT_EMBLEM, true);
+        applicationWidgetIconBackground = preferences.getString(PREF_APPLICATION_WIDGET_ICON_BACKGROUND, "0");
+        applicationWidgetIconLightnessB = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B, "0");
+        applicationWidgetIconLightnessT = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T, "100");
 
         if (applicationTheme.equals("light"))
         {

@@ -113,6 +113,9 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
         setSummary(GlobalData.PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT);
         setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT);
         setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME);
+        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_BACKGROUND);
+        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B);
+        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T);
     }
 
     @Override
