@@ -19,7 +19,7 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
         Intent intent = getIntent();
         profileName = intent.getStringExtra(GlobalData.EXTRA_PROFILE_NAME);
-        profileName.trim();
+        profileName = profileName.trim();
 
         if (!profileName.isEmpty()) {
             GlobalData.loadPreferences(getApplicationContext());
