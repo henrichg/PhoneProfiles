@@ -240,7 +240,7 @@ public class EditorProfileListAdapter extends BaseAdapter
             holder.profileName.setTypeface(null, Typeface.NORMAL);
         }
 
-        String profileName = profile.getProfileNameWithDuration(false);
+        String profileName = profile.getProfileNameWithDuration(false, dataWrapper.context);
         holder.profileName.setText(profileName);
 
         if (profile.getIsIconResourceID())

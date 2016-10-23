@@ -194,7 +194,7 @@ public class ActivateProfileListAdapter extends BaseAdapter
             holder.profileName.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
         }
 
-        String profileName = profile.getProfileNameWithDuration(GlobalData.applicationActivatorGridLayout);
+        String profileName = profile.getProfileNameWithDuration(GlobalData.applicationActivatorGridLayout, dataWrapper.context);
         holder.profileName.setText(profileName);
 
         if (profile.getIsIconResourceID())
