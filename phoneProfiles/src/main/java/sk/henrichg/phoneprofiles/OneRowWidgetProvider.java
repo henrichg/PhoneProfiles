@@ -46,7 +46,7 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
             {
                 isIconResourceID = profile.getIsIconResourceID();
                 iconIdentifier = profile.getIconIdentifier();
-                profileName = profile._name;
+                profileName = profile.getProfileNameWithDuration(false, context);
             }
             else
             {

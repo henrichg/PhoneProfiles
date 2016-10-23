@@ -533,7 +533,7 @@ public class EditorProfileListFragment extends Fragment {
         }
         else
         {
-            activeProfileName.setText(profile._name);
+            activeProfileName.setText(profile.getProfileNameWithDuration(false, dataWrapper.context));
             if (profile.getIsIconResourceID())
             {
                 if (profile._iconBitmap != null)

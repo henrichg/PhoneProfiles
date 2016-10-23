@@ -123,7 +123,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                         monochromeValue);
                 isIconResourceID = profile.getIsIconResourceID();
                 iconIdentifier = profile.getIconIdentifier();
-                profileName = profile._name;
+                profileName = profile.getProfileNameWithDuration(false, dataWrapper.context);
             }
             else
             {
