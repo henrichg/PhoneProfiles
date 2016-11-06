@@ -14,7 +14,6 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.media.ExifInterface;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
