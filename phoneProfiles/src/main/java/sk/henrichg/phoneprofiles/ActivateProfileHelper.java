@@ -1418,8 +1418,13 @@ public class ActivateProfileHelper {
                     .setContentIntent(pIntent);
 
             if (android.os.Build.VERSION.SDK_INT >= 16) {
-                if (GlobalData.notificationShowInStatusBar)
-                    notificationBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                if (GlobalData.notificationShowInStatusBar) {
+                    boolean screenUnlocked = GlobalData.getScreenUnlocked(context);
+                    if (GlobalData.notificationHideInLockscreen && (!screenUnlocked))
+                        notificationBuilder.setPriority(Notification.PRIORITY_MIN);
+                    else
+                        notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
+                }
                 else
                     notificationBuilder.setPriority(NotificationCompat.PRIORITY_MIN);
                 //notificationBuilder.setPriority(Notification.PRIORITY_HIGH); // for heads-up in Android 5.0

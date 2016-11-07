@@ -18,19 +18,8 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         GlobalData.loadPreferences(context);
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON))
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
-            if (GlobalData.getApplicationStarted(context)) {
-                if (GlobalData.notificationShowInStatusBar &&
-                        GlobalData.notificationHideInLockscreen) {
-                    DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
-                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
-                    dataWrapper.getActivateProfileHelper().removeNotification();
-                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                    dataWrapper.invalidateDataWrapper();
-                }
-            }
-        }
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
             GlobalData.setScreenUnlocked(context, false);
@@ -55,6 +44,21 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
             context.startService(keyguardService);
         }
+
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+            GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+            if (GlobalData.getApplicationStarted(context)) {
+                if (GlobalData.notificationShowInStatusBar &&
+                        GlobalData.notificationHideInLockscreen) {
+                    DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
+                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
+                    dataWrapper.getActivateProfileHelper().removeNotification();
+                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    dataWrapper.invalidateDataWrapper();
+                }
+            }
+        }
+
     }
 
 }
