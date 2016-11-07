@@ -23,6 +23,17 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
             GlobalData.setScreenUnlocked(context, false);
+
+            if (GlobalData.getApplicationStarted(context)) {
+                if (GlobalData.notificationShowInStatusBar &&
+                        GlobalData.notificationHideInLockscreen) {
+                    DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
+                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
+                    dataWrapper.getActivateProfileHelper().removeNotification();
+                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    dataWrapper.invalidateDataWrapper();
+                }
+            }
         }
         if (intent.getAction().equals(Intent.ACTION_USER_PRESENT))
         {
