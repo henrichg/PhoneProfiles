@@ -29,8 +29,10 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
-                    dataWrapper.getActivateProfileHelper().removeNotification();
-                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    //dataWrapper.getActivateProfileHelper().removeNotification();
+                    //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    Profile activatedProfile = dataWrapper.getActivatedProfile();
+                    dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
@@ -45,8 +47,10 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
-                    dataWrapper.getActivateProfileHelper().removeNotification();
-                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    //dataWrapper.getActivateProfileHelper().removeNotification();
+                    //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    Profile activatedProfile = dataWrapper.getActivatedProfile();
+                    dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
@@ -63,8 +67,10 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
-                    dataWrapper.getActivateProfileHelper().removeNotification();
-                    dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    //dataWrapper.getActivateProfileHelper().removeNotification();
+                    //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
+                    Profile activatedProfile = dataWrapper.getActivatedProfile();
+                    dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
