@@ -1244,15 +1244,20 @@ public class ActivateProfileHelper {
             {
                 if (profile._deviceMobileDataPrefs == 1)
                 {
-                    final Intent intent = new Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     try {
-                        activity.startActivity(intent);
-                    } catch (Exception e) {
+                        final Intent intent = new Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         final ComponentName componentName = new ComponentName("com.android.phone", "com.android.phone.Settings");
-                        //intent.addCategory(Intent.ACTION_MAIN);
                         intent.setComponent(componentName);
-                        activity.startActivity(intent);
+                        context.startActivity(intent);
+                    } catch (Exception e) {
+                        try {
+                            final Intent intent = new Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        }
                     }
                 }
             }
@@ -1261,9 +1266,13 @@ public class ActivateProfileHelper {
             //{  No check only GPS
                 if (profile._deviceLocationServicePrefs == 1)
                 {
-                    final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    activity.startActivity(intent);
+                    try {
+                        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             //}
 
