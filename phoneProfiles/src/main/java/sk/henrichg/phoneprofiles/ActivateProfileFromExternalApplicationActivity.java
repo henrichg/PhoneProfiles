@@ -42,8 +42,10 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
     {
         super.onStart();
 
-        if (!GlobalData.getApplicationStarted(getApplicationContext()))
+        if (!GlobalData.getApplicationStarted(getApplicationContext())) {
+            GlobalData.firstStartServiceStarted = false;
             startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+        }
 
         if (profile_id != 0) {
             Profile profile = dataWrapper.getProfileById(profile_id);

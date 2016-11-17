@@ -236,14 +236,19 @@ public class ActivateProfileListFragment extends Fragment {
         if (!GlobalData.getApplicationStarted(getActivity().getApplicationContext()))
         {
             // start service for first start
-            Intent firstStartServiceIntent = new Intent(getActivity().getApplicationContext(), FirstStartService.class);
-            getActivity().startService(firstStartServiceIntent);
+            //Intent firstStartServiceIntent = new Intent(getActivity().getApplicationContext(), FirstStartService.class);
+            //getActivity().startService(firstStartServiceIntent);
+
+            // start PhoneProfilesService
+            GlobalData.firstStartServiceStarted = false;
+            getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
         }
         else
         {
             GlobalData.logE("ActivateProfileListFragment.doOnStart", "xxx");
 
             // start ReceiverService
+            GlobalData.firstStartServiceStarted = false;
             getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
 
             Profile profile = dataWrapper.getActivatedProfile();

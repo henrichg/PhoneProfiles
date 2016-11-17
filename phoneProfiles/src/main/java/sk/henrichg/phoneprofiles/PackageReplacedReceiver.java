@@ -19,7 +19,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
             GlobalData.setScreenUnlocked(context.getApplicationContext(), true);
 
-            if (GlobalData.getApplicationStarted(context))
+            if (GlobalData.getApplicationStartedIgnoreFirstStartService(context))
             {
                 // must by false for avoiding starts/pause events before restart events
                 GlobalData.setApplicationStarted(context, false);

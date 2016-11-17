@@ -48,7 +48,7 @@ public class FirstStartService extends IntentService {
             }
         //}
 
-        if (GlobalData.getApplicationStarted(context))
+        if (GlobalData.firstStartServiceStarted)
             return;
 
         GlobalData.clearMergedPermissions(context);
@@ -74,7 +74,7 @@ public class FirstStartService extends IntentService {
         InterruptionFilterChangedBroadcastReceiver.setZenMode(context,audioManager);
 
         // start ReceiverService
-        context.startService(new Intent(context, PhoneProfilesService.class));
+        //context.startService(new Intent(context, PhoneProfilesService.class));
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);
@@ -94,6 +94,7 @@ public class FirstStartService extends IntentService {
         // show info notification
         ImportantInfoNotification.showInfoNotification(context);
 
+        GlobalData.firstStartServiceStarted = true;
         GlobalData.setApplicationStarted(context, true);
 
         dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);

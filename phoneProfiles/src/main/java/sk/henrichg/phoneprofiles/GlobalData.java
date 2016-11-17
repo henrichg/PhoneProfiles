@@ -45,6 +45,8 @@ public class GlobalData extends Application {
 
     static String PACKAGE_NAME;
 
+    public static boolean firstStartServiceStarted = false;
+
     public static final boolean exactAlarms = true;
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
@@ -269,6 +271,8 @@ public class GlobalData extends Application {
         super.onCreate();
 
         PACKAGE_NAME = getPackageName();
+
+        firstStartServiceStarted = false;
 
         // initialization
         loadPreferences(this);
@@ -637,6 +641,12 @@ public class GlobalData extends Application {
     }
 
     static public boolean getApplicationStarted(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_APPLICATION_STARTED, false) && firstStartServiceStarted;
+    }
+
+    static public boolean getApplicationStartedIgnoreFirstStartService(Context context)
     {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
