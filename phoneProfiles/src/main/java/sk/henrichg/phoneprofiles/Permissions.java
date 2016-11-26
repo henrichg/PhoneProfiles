@@ -125,8 +125,14 @@ public class Permissions {
             if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
             if (!checkProfileVibrationOnTouch(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
             if (!checkProfileRingtones(context, profile)) permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
-            if (!checkProfileScreenTimeout(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
-            if (!checkProfileScreenBrightness(context, profile)) permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+            if (!checkProfileScreenTimeout(context, profile)) {
+                permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
+                permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
+            }
+            if (!checkProfileScreenBrightness(context, profile)) {
+                permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+                permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
+            }
             if (!checkProfileAutoRotation(context, profile)) permissions.add(new PermissionType(PERMISSION_AUTOROTATION, permission.WRITE_SETTINGS));
             if (!checkProfileNotificationLed(context, profile)) permissions.add(new PermissionType(PERMISSION_NOTIFICATION_LED, permission.WRITE_SETTINGS));
             if (!checkProfileWallpaper(context, profile)) permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
@@ -244,10 +250,16 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile._deviceScreenTimeout != 0) {
-                boolean granted = Settings.System.canWrite(context);
-                if (granted)
+                boolean grantedWriteSettings = Settings.System.canWrite(context);
+                if (grantedWriteSettings)
                     GlobalData.setShowRequestWriteSettingsPermission(context, true);
-                return granted;
+                boolean grantedDrawOverlays = true;
+                if (android.os.Build.VERSION.SDK_INT >= 25) {
+                    grantedDrawOverlays = Settings.canDrawOverlays(context);
+                    if (grantedDrawOverlays)
+                        GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+                }
+                return grantedWriteSettings && grantedDrawOverlays;
             }
             else
                 return true;
@@ -258,10 +270,16 @@ public class Permissions {
 
     public static boolean checkScreenBrightness(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            boolean granted = Settings.System.canWrite(context);
-            if (granted)
+            boolean grantedWriteSettings = Settings.System.canWrite(context);
+            if (grantedWriteSettings)
                 GlobalData.setShowRequestWriteSettingsPermission(context, true);
-            return granted;
+            boolean grantedDrawOverlays = true;
+            if (android.os.Build.VERSION.SDK_INT >= 25) {
+                grantedDrawOverlays = Settings.canDrawOverlays(context);
+                if (grantedDrawOverlays)
+                    GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+            }
+            return grantedWriteSettings && grantedDrawOverlays;
         }
         else
             return true;
@@ -271,10 +289,16 @@ public class Permissions {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (profile.getDeviceBrightnessChange()) {
-                boolean granted = Settings.System.canWrite(context);
-                if (granted)
+                boolean grantedWriteSettings = Settings.System.canWrite(context);
+                if (grantedWriteSettings)
                     GlobalData.setShowRequestWriteSettingsPermission(context, true);
-                return granted;
+                boolean grantedDrawOverlays = true;
+                if (android.os.Build.VERSION.SDK_INT >= 25) {
+                    grantedDrawOverlays = Settings.canDrawOverlays(context);
+                    if (grantedDrawOverlays)
+                        GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+                }
+                return grantedWriteSettings && grantedDrawOverlays;
             }
             else
                 return true;

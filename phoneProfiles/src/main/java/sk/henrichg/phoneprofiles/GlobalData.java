@@ -217,6 +217,7 @@ public class GlobalData extends Application {
     private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
     private static final String PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION = "show_request_access_notification_policy_permission";
     private static final String PREF_SCREEN_UNLOCKED = "screen_unlocked";
+    private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -828,6 +829,20 @@ public class GlobalData extends Application {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
         editor.putBoolean(PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION, value);
+        editor.commit();
+    }
+
+    static public boolean getShowRequestDrawOverlaysPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION, true);
+    }
+
+    static public void setShowRequestDrawOverlaysPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION, value);
         editor.commit();
     }
 
