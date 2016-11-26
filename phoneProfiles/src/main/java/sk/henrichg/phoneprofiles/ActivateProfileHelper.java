@@ -1301,10 +1301,14 @@ public class ActivateProfileHelper {
 
         screenTimeoutUnlock(context);
 
+        int type;
+        if (android.os.Build.VERSION.SDK_INT < 25)
+            type = WindowManager.LayoutParams.TYPE_TOAST;
+        else
+            type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 1, 1,
-                WindowManager.LayoutParams.TYPE_TOAST,
-                //TYPE_SYSTEM_ALERT,
+                type,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE*/ | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 PixelFormat.TRANSLUCENT
         );
@@ -1349,10 +1353,14 @@ public class ActivateProfileHelper {
                 windowManager.removeView(GUIData.brightneesView);
                 GUIData.brightneesView = null;
             }
+            int type;
+            if (android.os.Build.VERSION.SDK_INT < 25)
+                type = WindowManager.LayoutParams.TYPE_TOAST;
+            else
+                type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings
             WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         1, 1,
-                        WindowManager.LayoutParams.TYPE_TOAST,
-                        //TYPE_SYSTEM_ALERT,
+                        type,
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE*/,
                         PixelFormat.TRANSLUCENT
                     );
