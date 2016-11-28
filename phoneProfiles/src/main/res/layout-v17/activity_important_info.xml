@@ -1,209 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true" >
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true" >
+        android:orientation="vertical"
+        android:paddingStart="@dimen/important_info_left_margin"
+        android:paddingEnd="@dimen/important_info_right_margin"
+        android:paddingTop="@dimen/important_info_top_margin"
+        android:paddingBottom="@dimen/important_info_bottom_margin" >
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/important_info_left_margin"
-            android:paddingEnd="@dimen/important_info_right_margin"
-            android:paddingTop="@dimen/important_info_top_margin"
-            android:paddingBottom="@dimen/important_info_bottom_margin" >
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_how_to_show"
+            android:id="@+id/activity_info_notification_dialog_info_text0"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_how_to_show"
-                android:id="@+id/activity_info_notification_dialog_info_text0"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_orange_text"
+            android:id="@+id/activity_info_notification_dialog_info_text00" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_orange_text"
-                android:id="@+id/activity_info_notification_dialog_info_text00" />
+        <!-- NEWS -->
 
-            <!-- NEWS -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_news"
+            android:id="@+id/activity_info_notification_dialog_news"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_news"
-                android:id="@+id/activity_info_notification_dialog_news"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_ringerMode_root"
+            android:id="@+id/activity_info_notification_dialog_info_text15" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_ringerMode_root"
-                android:id="@+id/activity_info_notification_dialog_info_text15" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_adaptiveBrightness_root"
+            android:id="@+id/activity_info_notification_dialog_info_text17" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_adaptiveBrightness_root"
-                android:id="@+id/activity_info_notification_dialog_info_text17" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_zenMode"
+            android:id="@+id/activity_info_notification_dialog_info_text13"
+            android:textColor="?attr/colorAccent"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_zenMode"
-                android:id="@+id/activity_info_notification_dialog_info_text13"
-                android:textColor="?attr/colorAccent"/>
+        <!-- SYSTEM -->
 
-            <!-- PROFILES -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_system"
+            android:id="@+id/activity_info_notification_dialog_system"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profiles"
-                android:id="@+id/activity_info_notification_dialog_profiles"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_android_doze_mode"
+            android:id="@+id/activity_info_notification_dialog_info_text10a"
+            android:textStyle="bold"
+            android:textColor="?attr/colorAccent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/info_notification_source_profile"
-                android:id="@+id/activity_info_notification_dialog_info_text40" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/info_notification_source_profile_icon"
-                android:id="@+id/activity_info_notification_dialog_info_text41"
-                android:drawableEnd="?attr/actionSourceProfileIconInverse"
-                android:drawablePadding="4dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/important_into_sony_stamina_mode"
+            android:id="@+id/activity_info_notification_dialog_info_text10b"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/important_into_huawei_protected_apps"
+            android:id="@+id/activity_info_notification_dialog_info_text10c"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_into_xiaomi_no_restrictions"
+            android:id="@+id/activity_info_notification_dialog_info_text10d"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_root"
-                android:id="@+id/activity_info_notification_dialog_info_text5" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_settings"
-                android:id="@+id/activity_info_notification_dialog_info_text12" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_interactive"
-                android:id="@+id/activity_info_notification_dialog_info_text47" />
+        <!-- PROFILES -->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/info_notification_minimal_ringer_and_notification_volumes"
-                android:id="@+id/activity_info_notification_dialog_info_text2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profiles"
+            android:id="@+id/activity_info_notification_dialog_profiles"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/info_notification_unlink_ringer_notification_volumes"
-                android:id="@+id/activity_info_notification_dialog_info_text3"
-                android:textColor="?attr/colorAccent"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/info_notification_unlink_ringer_notification_volumes2"
-                android:id="@+id/activity_info_notification_dialog_info_text46"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_how_does_volume_separation_work"
-                android:id="@+id/activity_info_notification_dialog_info_text45"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_notification_source_profile"
+            android:id="@+id/activity_info_notification_dialog_info_text40" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/info_notification_source_profile_icon"
+            android:id="@+id/activity_info_notification_dialog_info_text41"
+            android:drawableEnd="?attr/actionSourceProfileIconInverse"
+            android:drawablePadding="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/info_notification_silent_mode_lollipop"
-                android:id="@+id/activity_info_notification_dialog_info_text11" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_root"
+            android:id="@+id/activity_info_notification_dialog_info_text5" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_settings"
+            android:id="@+id/activity_info_notification_dialog_info_text12" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_interactive"
+            android:id="@+id/activity_info_notification_dialog_info_text47" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_ringerMode_root"
-                android:id="@+id/activity_info_notification_dialog_info_text16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/info_notification_minimal_ringer_and_notification_volumes"
+            android:id="@+id/activity_info_notification_dialog_info_text2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_zenMode"
-                android:id="@+id/activity_info_notification_dialog_info_text14"
-                android:textColor="?attr/colorAccent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_notification_unlink_ringer_notification_volumes"
+            android:id="@+id/activity_info_notification_dialog_info_text3"
+            android:textColor="?attr/colorAccent"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/info_notification_unlink_ringer_notification_volumes2"
+            android:id="@+id/activity_info_notification_dialog_info_text46"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_how_does_volume_separation_work"
+            android:id="@+id/activity_info_notification_dialog_info_text45"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_profile_adaptiveBrightness_root"
-                android:id="@+id/activity_info_notification_dialog_info_text18" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/info_notification_silent_mode_lollipop"
+            android:id="@+id/activity_info_notification_dialog_info_text11" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/info_notification_activate_profile_from_tasker"
-                android:id="@+id/activity_info_activate_profile_from_tasker" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/empty_string"
-                android:id="@+id/activity_info_activate_profile_from_tasker_params"
-                android:textIsSelectable="true"
-                android:focusable="true"
-                android:longClickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_ringerMode_root"
+            android:id="@+id/activity_info_notification_dialog_info_text16" />
 
-            <!-- SYSTEM -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_zenMode"
+            android:id="@+id/activity_info_notification_dialog_info_text14"
+            android:textColor="?attr/colorAccent"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_info_system"
-                android:id="@+id/activity_info_notification_dialog_system"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/important_info_profile_adaptiveBrightness_root"
+            android:id="@+id/activity_info_notification_dialog_info_text18" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/important_into_sony_stamina_mode"
-                android:id="@+id/activity_info_notification_dialog_info_text10"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_notification_activate_profile_from_tasker"
+            android:id="@+id/activity_info_activate_profile_from_tasker" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/empty_string"
+            android:id="@+id/activity_info_activate_profile_from_tasker_params"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>
