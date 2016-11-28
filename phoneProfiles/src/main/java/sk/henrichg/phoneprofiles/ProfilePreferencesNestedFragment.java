@@ -129,16 +129,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                     preferenceCategory.removePreference(notificationAccessPreference);
                 } else {
-                    ListPreference listPreference = (ListPreference) prefMng.findPreference("prf_pref_volumeRingerMode");
-                    if (listPreference != null) {
-                        CharSequence[] entries = listPreference.getEntries();
-                        entries[6] = "(S) "+getString(R.string.array_pref_ringerModeArray_ZenMode);
-                        ringerModePreference.setEntries(entries);
-                    }
-                    Preference preference = prefMng.findPreference("prf_pref_volumeZenMode");
-                    if (preference != null) {
-                        preference.setTitle("(S) "+getString(R.string.profile_preferences_volumeZenMode));
-                    }
                     //notificationAccessPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
                     notificationAccessPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
@@ -706,7 +696,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     if (listPreference != null) {
                         listPreference.setEnabled(false);
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
-                                ": "+getResources().getString(R.string.preference_not_allowed_reason_not_supported));
+                                ": "+getResources().getString(R.string.preference_not_allowed_reason_no_configured_in_system_settings));
                         setTitleStyle(listPreference, false, false);
                         setCategorySummary(listPreference, false);
                     }
