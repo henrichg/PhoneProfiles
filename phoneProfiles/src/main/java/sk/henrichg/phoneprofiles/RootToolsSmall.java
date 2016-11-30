@@ -65,16 +65,16 @@ public class RootToolsSmall {
             osw.write(command);
             osw.flush();
             osw.close();
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
             //Debug.log(ex);
-            ex.printStackTrace();
+            //ex.printStackTrace();
         } finally {
             if (osw != null) {
                 try {
                     osw.close();
-                } catch (IOException e) {
+                } catch (IOException ignored) {
                     //Debug.log(e);
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
@@ -85,9 +85,9 @@ public class RootToolsSmall {
             } else {
                 return false;
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
             //Debug.log(e);
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
         return proc.exitValue() == 0;
@@ -106,9 +106,9 @@ public class RootToolsSmall {
       File file = context.getFileStreamPath(name);
       file.setExecutable(true);
       return RootToolsSmall.runSuCommand(file.getAbsolutePath());
-    } catch (Exception e) {
+    } catch (Exception ignored) {
       //Debug.log(e);
-        e.printStackTrace();
+      //  e.printStackTrace();
     }
       return false;
     }

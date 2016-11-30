@@ -492,8 +492,7 @@ public class BrightnessDialogPreference extends
                         cmd.wait(waitTill);
                         waitTill *= waitTillMultiplier;
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
             }
         }

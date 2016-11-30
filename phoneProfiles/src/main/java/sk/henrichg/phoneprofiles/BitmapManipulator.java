@@ -32,8 +32,7 @@ public class BitmapManipulator {
         try {
             ExifInterface exif = new ExifInterface(bitmapFile);
             orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
 
         File f = new File(bitmapFile);
@@ -122,7 +121,7 @@ public class BitmapManipulator {
             return bmRotated;
         }
         catch (OutOfMemoryError e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }

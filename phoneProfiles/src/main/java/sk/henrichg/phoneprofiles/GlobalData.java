@@ -1209,7 +1209,7 @@ public class GlobalData extends Application {
             getMobileDataEnabledMethod.setAccessible(true);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
@@ -1304,9 +1304,7 @@ public class GlobalData extends Application {
             buf.flush();
             buf.close();
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+        catch (IOException ignored) {
         }
     }
 
@@ -1670,7 +1668,7 @@ public class GlobalData extends Application {
             return file.getAbsolutePath();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }
@@ -1739,7 +1737,7 @@ public class GlobalData extends Application {
         try {
             return context.getResources().getIdentifier(pVariableName, pResourcename, context.getPackageName());
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return -1;
         }
     }

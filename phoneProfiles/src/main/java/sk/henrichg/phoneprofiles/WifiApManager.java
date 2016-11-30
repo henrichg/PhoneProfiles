@@ -87,7 +87,7 @@ public final class WifiApManager {
                     canScan = wifiApState == 11;*/
             return wifiApManager.isWifiAPEnabled();
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
@@ -97,7 +97,7 @@ public final class WifiApManager {
             WifiApManager wifiApManager = new WifiApManager(context);
             return true;
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }

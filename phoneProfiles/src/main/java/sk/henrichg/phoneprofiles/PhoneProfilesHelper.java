@@ -272,7 +272,7 @@ public class PhoneProfilesHelper {
                         waitTill *= waitTillMultiplier;
                     }
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     OK = false;
                 }
             }
@@ -338,7 +338,7 @@ public class PhoneProfilesHelper {
                 OK = commandWait(command);
                 OK = OK && command.getExitCode() == 0;
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 OK = false;
             }
         }

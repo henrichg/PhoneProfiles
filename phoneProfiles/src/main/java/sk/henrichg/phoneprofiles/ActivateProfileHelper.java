@@ -169,8 +169,7 @@ public class ActivateProfileHelper {
                 WifiApManager wifiApManager = null;
                 try {
                     wifiApManager = new WifiApManager(context);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
+                } catch (NoSuchMethodException ignored) {
                 }
                 if (wifiApManager != null) {
                     boolean setWifiAPState = false;
@@ -737,13 +736,11 @@ public class ActivateProfileHelper {
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     setVibrateWhenRinging(null, 0);
                     break;
@@ -752,13 +749,11 @@ public class ActivateProfileHelper {
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_ON);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     setVibrateWhenRinging(null, 1);
                     break;
@@ -767,13 +762,11 @@ public class ActivateProfileHelper {
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE); not needed, called from setZenMode
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     try {
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_ON);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     setVibrateWhenRinging(null, 1);
                     break;
@@ -789,13 +782,11 @@ public class ActivateProfileHelper {
                         setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
                         try {
                             audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception ignored) {
                         }
                         try {
                             audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception ignored) {
                         }
                     }
                     setVibrateWhenRinging(null, 0);
@@ -922,8 +913,7 @@ public class ActivateProfileHelper {
                                 //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                                 //SystemClock.sleep(1000);
                                 GlobalData.sleep(1000);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            } catch (Exception ignored) {
                             }
                         }
                     }
@@ -1265,8 +1255,7 @@ public class ActivateProfileHelper {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
                         context.startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                 }
             }
@@ -1279,8 +1268,7 @@ public class ActivateProfileHelper {
                         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                 }
             //}
@@ -1322,7 +1310,7 @@ public class ActivateProfileHelper {
             windowManager.addView(GUIData.keepScreenOnView, params);
         } catch (Exception e) {
             GUIData.keepScreenOnView = null;
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -1378,7 +1366,7 @@ public class ActivateProfileHelper {
                 windowManager.addView(GUIData.brightneesView, params);
             } catch (Exception e) {
                 GUIData.brightneesView = null;
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         //}
     }
@@ -1720,7 +1708,7 @@ public class ActivateProfileHelper {
                 getMobileDataEnabledMethod.setAccessible(true);
                 return (Boolean)getMobileDataEnabledMethod.invoke(connectivityManager);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 return false;
             }
         }
@@ -1748,20 +1736,8 @@ public class ActivateProfileHelper {
 
                 return (Boolean)getDataEnabledMethod.invoke(ITelephonyStub);
 
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                return false;
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-                return false;
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-                return false;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                //e.printStackTrace();
                 return false;
             }
         }
@@ -1780,20 +1756,8 @@ public class ActivateProfileHelper {
 
                 return (Boolean)getDataEnabledMethod.invoke(telephonyManager);
 
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                return false;
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-                return false;
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-                return false;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                //e.printStackTrace();
                 return false;
             }
         }
@@ -1882,8 +1846,7 @@ public class ActivateProfileHelper {
 
                 OK = true;
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
 
             if (!OK) {
@@ -1893,8 +1856,7 @@ public class ActivateProfileHelper {
                     setMobileDataEnabledMethod.setAccessible(true);
                     setMobileDataEnabledMethod.invoke(connectivityManager, enable);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ignored) {
                 }
             }
         }
@@ -1939,8 +1901,7 @@ public class ActivateProfileHelper {
                     }
                 }
 
-            } catch(Exception e) {
-                e.printStackTrace();
+            } catch(Exception ignored) {
             }
         }
         else
@@ -1993,8 +1954,7 @@ public class ActivateProfileHelper {
                         }
                     }
                 }
-            } catch(Exception e) {
-                e.printStackTrace();
+            } catch(Exception ignored) {
             }
         }
     }
@@ -2280,8 +2240,7 @@ public class ActivateProfileHelper {
                         cmd.wait(waitTill);
                         waitTill *= waitTillMultiplier;
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
             }
         }
