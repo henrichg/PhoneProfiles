@@ -871,6 +871,7 @@ public class ActivateProfileHelper {
                             }
                             visibleCropHint = new Rect(left, 0, right, decodedSampleBitmap.getHeight());
                         }
+                        //noinspection WrongConstant
                         int ret = wallpaperManager.setBitmap(decodedSampleBitmap, visibleCropHint, true, flags);
                     }
                     else
@@ -1718,19 +1719,7 @@ public class ActivateProfileHelper {
                 final Method getMobileDataEnabledMethod = connectivityManagerClass.getDeclaredMethod("getMobileDataEnabled");
                 getMobileDataEnabledMethod.setAccessible(true);
                 return (Boolean)getMobileDataEnabledMethod.invoke(connectivityManager);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return false;
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                return false;
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                return false;
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
@@ -1893,17 +1882,7 @@ public class ActivateProfileHelper {
 
                 OK = true;
 
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -1914,13 +1893,7 @@ public class ActivateProfileHelper {
                     setMobileDataEnabledMethod.setAccessible(true);
                     setMobileDataEnabledMethod.invoke(connectivityManager, enable);
 
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
