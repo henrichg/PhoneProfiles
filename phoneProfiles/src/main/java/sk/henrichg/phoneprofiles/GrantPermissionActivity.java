@@ -72,10 +72,13 @@ public class GrantPermissionActivity extends Activity {
         startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR);
         interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
-        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true);
+        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != GlobalData.DEFAULT_PROFILE_ID);
 
         dataWrapper = new DataWrapper(getApplicationContext(), forGUI, monochrome, monochromeValue);
-        profile = dataWrapper.getProfileById(profile_id);
+        if (profile_id != GlobalData.DEFAULT_PROFILE_ID)
+            profile = dataWrapper.getProfileById(profile_id);
+        else
+            profile = GlobalData.getDefaultProfile(getApplicationContext());
     }
 
     @Override

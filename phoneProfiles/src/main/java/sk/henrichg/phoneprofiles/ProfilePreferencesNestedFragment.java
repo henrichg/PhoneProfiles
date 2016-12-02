@@ -263,6 +263,21 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 }
             }
         }
+        Preference preference = prefMng.findPreference("prf_pref_sourceProfileInfo");
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    // start preferences activity for default profile
+                    Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesFragmentActivity.class);
+                    intent.putExtra(GlobalData.EXTRA_PROFILE_ID, GlobalData.DEFAULT_PROFILE_ID);
+                    intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_EDIT);
+                    intent.putExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+                    getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -274,6 +289,22 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     public void doOnActivityResult(int requestCode, int resultCode, Intent data)
     {
+        if (requestCode == GlobalData.REQUEST_CODE_PROFILE_PREFERENCES)
+        {
+            if ((resultCode == Activity.RESULT_OK) && (data != null))
+            {
+                long profile_id = data.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+                //int newProfileMode = data.getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                //int predefinedProfileIndex = data.getIntExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+
+                if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
+                {
+                    Profile defaultProfile = GlobalData.getDefaultProfile(context.getApplicationContext());
+                    Permissions.grantProfilePermissions(context.getApplicationContext(), defaultProfile, true,
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, null, false);
+                }
+            }
+        }
         if (requestCode == ImageViewPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
         {
             Uri selectedImage = data.getData();

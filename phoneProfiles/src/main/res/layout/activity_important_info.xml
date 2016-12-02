@@ -123,6 +123,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
 
+        <!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -137,6 +138,7 @@
             android:drawableRight="?attr/actionSourceProfileIconInverse"
             android:drawableEnd="?attr/actionSourceProfileIconInverse"
             android:drawablePadding="4dp" />
+        -->
 
         <TextView
             android:layout_width="wrap_content"
