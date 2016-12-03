@@ -896,4 +896,6 @@
     <string name="preference_not_allowed_reason_detail_cant_be_change">can\'t be change</string>
     <string name="phone_profiles_pref_notificationStatusBarStyleInfo_title">Colorful icon</string>
     <string name="phone_profiles_pref_notificationStatusBarStyleInfo_summary">Some devices do not supports colorful icons in status bar.</string>
+    <string name="profile_preferences_category_profileActivationParameters">Activation parameters</string>
+    <string name="profile_preferences_category_profileDeviceParameters">Device parameters</string>
 </resources>
