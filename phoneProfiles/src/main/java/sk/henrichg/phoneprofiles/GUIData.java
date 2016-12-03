@@ -7,9 +7,12 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -278,6 +281,15 @@ public class GUIData {
                 catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException ignored) {
                 }
             }
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(source);
         }
     }
 
