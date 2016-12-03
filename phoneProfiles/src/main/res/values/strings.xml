@@ -889,4 +889,9 @@
     <string name="important_into_xiaomi_no_restrictions">When you have Xiaomi device, please set \"No restrictions\" for PhoneProfilesPlus in \"Settings\"→\"Battery &amp; performance\"→\"Manager apps battery usage\"→\"Choose apps\". Without this, application will not work correctly.</string>
     <string name="important_into_samsung_no_save_power">When you have Samsung device, please turn off \"App power saving\" for PhoneProfilesPlus in \"Settings\"→\"Battery\"→\"App power saving\"→\"Detail\". Without this, application will not work correctly.</string>
     <string name="profile_preferences_sourceProfileInfo_summary">For each profile parameter can be set that it is used Source profile. Click here to configure the Source profile parameters.</string>
+    <string name="preference_not_allowed_reason_not_supported_by_application">not supported by application</string>
+    <string name="preference_not_allowed_reason_detail_old_android">old Android version</string>
+    <string name="preference_not_allowed_reason_detail_network_type">unsupported network type or can\'t be change</string>
+    <string name="preference_not_allowed_reason_detail_secure_lock">unsupported secure lock</string>
+    <string name="preference_not_allowed_reason_detail_cant_be_change">can\'t be change</string>
 </resources>

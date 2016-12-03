@@ -2,7 +2,9 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Application;
+import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -197,8 +199,9 @@ public class GlobalData extends Application {
     public static final int PREFERENCE_NOT_ALLOWED_NOT_ROOTED = 1;
     public static final int PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND = 2;
     public static final int PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND = 3;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED = 4;
+    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM = 4;
     public static final int PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS = 5;
+    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION = 6;
 
     public static final long DEFAULT_PROFILE_ID = -999L;  // source profile id
     public static final long PROFILE_NO_ACTIVATE = -999;
@@ -260,6 +263,7 @@ public class GlobalData extends Application {
     public static String applicationWidgetIconLightnessT;
 
     public static int notAllowedReason;
+    public static  String notAllowedReasonDetail;
 
     //public static final RootMutex rootMutex = new RootMutex();
 
@@ -972,8 +976,10 @@ public class GlobalData extends Application {
                 {
                     if (canSetMobileData(context))
                         featurePresented = PREFERENCE_ALLOWED;
-                    else
-                        notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+                    else {
+                        notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                    }
                 }
             }
             else
@@ -1048,8 +1054,10 @@ public class GlobalData extends Application {
                 {
                     featurePresented = PREFERENCE_ALLOWED;
                 }
-                else
-                    notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+                else {
+                    notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                    notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                }
             }
             else
                 notAllowedReason = PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
@@ -1091,8 +1099,10 @@ public class GlobalData extends Application {
                 else
                     featurePresented = PREFERENCE_ALLOWED;
             }
-            else
-                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+            else {
+                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+            }
         }
         else
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
@@ -1108,8 +1118,10 @@ public class GlobalData extends Application {
                 else
                     notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
-            else
-                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+            else {
+                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+            }
         }
         else
         if (preferenceKey.equals(PREF_PROFILE_DEVICE_NETWORK_TYPE))
@@ -1127,14 +1139,18 @@ public class GlobalData extends Application {
                             else
                                 notAllowedReason = PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
                         }
-                        else
-                            notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+                        else {
+                            notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                            notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                        }
                     }
                     else
                         notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                 }
-                else
-                    notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+                else {
+                    notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                    notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                }
             }
             else
                 notAllowedReason = PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
@@ -1157,8 +1173,26 @@ public class GlobalData extends Application {
             else
             if (value != -10)
                 featurePresented = PREFERENCE_ALLOWED;
+            else {
+                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+            }
+        }
+        else
+        if (preferenceKey.equals(PREF_PROFILE_DEVICE_KEYGUARD))
+        {
+            boolean secureKeyguard;
+            KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Activity.KEYGUARD_SERVICE);
+            if (android.os.Build.VERSION.SDK_INT >= 16)
+                secureKeyguard = keyguardManager.isKeyguardSecure();
             else
-                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED;
+                secureKeyguard = keyguardManager.inKeyguardRestrictedInputMode();
+            if (secureKeyguard) {
+                notAllowedReason = PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION;
+                notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_secure_lock);
+            }
+            else
+                featurePresented = PREFERENCE_ALLOWED;
         }
         else
             featurePresented = PREFERENCE_ALLOWED;
@@ -1166,14 +1200,18 @@ public class GlobalData extends Application {
         return featurePresented;
     }
 
-    public static int getNotAllowedPreferenceReasonString() {
+    public static String getNotAllowedPreferenceReasonString(Context context) {
         switch (notAllowedReason) {
-            case PREFERENCE_NOT_ALLOWED_NO_HARDWARE: return R.string.preference_not_allowed_reason_no_hardware;
-            case PREFERENCE_NOT_ALLOWED_NOT_ROOTED: return R.string.preference_not_allowed_reason_not_rooted;
-            case PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND: return R.string.preference_not_allowed_reason_settings_not_found;
-            case PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND: return R.string.preference_not_allowed_reason_service_not_found;
-            case PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS: return R.string.preference_not_allowed_reason_not_configured_in_system_settings;
-            default: return R.string.preference_not_allowed_reason_not_supported;
+            case PREFERENCE_NOT_ALLOWED_NO_HARDWARE: return context.getString(R.string.preference_not_allowed_reason_no_hardware);
+            case PREFERENCE_NOT_ALLOWED_NOT_ROOTED: return context.getString(R.string.preference_not_allowed_reason_not_rooted);
+            case PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND: return context.getString(R.string.preference_not_allowed_reason_settings_not_found);
+            case PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND: return context.getString(R.string.preference_not_allowed_reason_service_not_found);
+            case PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS: return context.getString(R.string.preference_not_allowed_reason_not_configured_in_system_settings);
+            case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM:
+                return context.getString(R.string.preference_not_allowed_reason_not_supported) + " (" + notAllowedReasonDetail + ")";
+            case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION:
+                return context.getString(R.string.preference_not_allowed_reason_not_supported_by_application) + " (" + notAllowedReasonDetail + ")";
+            default: return context.getString(R.string.empty_string);
         }
     }
 
