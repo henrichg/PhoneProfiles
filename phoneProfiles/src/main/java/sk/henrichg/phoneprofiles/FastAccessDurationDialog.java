@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.text.Editable;
@@ -40,6 +41,7 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
 
     //private int mColor = 0;
 
+    @SuppressLint("DefaultLocale")
     public FastAccessDurationDialog(Activity activity, Profile profile, DataWrapper dataWrapper, int startupSource, boolean interactive) {
 
         mMax = 86400;
@@ -219,6 +221,7 @@ public class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener
     }
 
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser) {

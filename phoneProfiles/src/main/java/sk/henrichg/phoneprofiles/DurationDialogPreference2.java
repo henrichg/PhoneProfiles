@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -48,6 +49,7 @@ public class DurationDialogPreference2 extends DialogPreference
             mColor = DialogUtils.resolveColor(context, R.attr.colorAccent);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void showDialog(Bundle state) {
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
@@ -218,6 +220,7 @@ public class DurationDialogPreference2 extends DialogPreference
         setSummaryDDP();
     }
 
+    @SuppressLint("DefaultLocale")
     private void setSummaryDDP()
     {
         int iValue = Integer.parseInt(value);
@@ -227,6 +230,7 @@ public class DurationDialogPreference2 extends DialogPreference
         setSummary(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser) {
