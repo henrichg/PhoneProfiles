@@ -4,13 +4,7 @@
     <color name="primaryDark">#1d6681</color> <!-- 700 -->
     <color name="accent">#DC8160</color>       <!-- A200 -->
 
-    <color name="fabPrimary">#DC8160</color>
-    <color name="fabPressed">#dca38e</color>
-    <color name="fabRipple">#dcbcb0</color>
-
     <color name="activityPopupBackground_phoneprofilestheme">#FFd0d0d0</color>
-    <color name="activityCardBackground_phoneprofilestheme">@android:color/white</color>
-    <color name="activityCardSelected_phoneprofilestheme">#4033b5e5</color>
     <color name="dialog_divider">#10000000</color>
 
 </resources>
