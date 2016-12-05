@@ -35,6 +35,8 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
             if (Permissions.checkProfileVolumePreferences(context, profile)) {
 
+                aph.changeRingerModeForVolumeEqual0(profile);
+
                 RingerModeChangeReceiver.removeAlarm(this);
                 RingerModeChangeReceiver.internalChange = true;
 

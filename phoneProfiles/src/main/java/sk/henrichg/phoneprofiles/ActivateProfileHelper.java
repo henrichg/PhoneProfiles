@@ -389,6 +389,14 @@ public class ActivateProfileHelper {
 
     }
 
+    static boolean isAudibleRinging(int ringerMode, int zenMode) {
+        return (!((ringerMode == 3) ||
+                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21)) ||
+                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT >= 23)) ||
+                ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 4) || (zenMode == 5) || (zenMode == 6)))
+        ));
+    }
+
     private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
         if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
@@ -433,11 +441,7 @@ public class ActivateProfileHelper {
         // for interruption types NONE and ONLY_ALARMS
         // not set system, ringer, npotification volume
         // (Android 6 - priority mode = ONLY_ALARMS)
-        if (!(  (ringerMode == 3) ||
-                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21)) ||
-                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT >= 23)) ||
-                ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 4) || (zenMode == 5) || (zenMode == 6)))
-        )) {
+        if (isAudibleRinging(ringerMode, zenMode)) {
 
             if (Permissions.checkAccessNotificationPolicy(context)) {
 
@@ -703,6 +707,24 @@ public class ActivateProfileHelper {
         }
     }
 
+    void changeRingerModeForVolumeEqual0(Profile profile) {
+        if (profile.getVolumeRingtoneChange()) {
+            int ringerMode = GlobalData.getRingerMode(context);
+            int zenMode = GlobalData.getZenMode(context);
+
+            GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "ringerMode=" + ringerMode);
+            GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "zenMode=" + zenMode);
+
+            // for ringer mode VIBRATE or SILENT or
+            // for interruption types NONE and ONLY_ALARMS
+            // not change ringer mode
+            // (Android 6 - priority mode = ONLY_ALARMS)
+            if (isAudibleRinging(ringerMode, zenMode) && (profile.getVolumeRingtoneValue() == 0)) {
+                // change ringer mode to Silent
+                profile._volumeRingerMode = 4;
+            }
+        }
+    }
 
     @SuppressWarnings("deprecation")
     void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
