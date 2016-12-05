@@ -11,6 +11,7 @@ public class RefreshGUIBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         boolean refreshIcons = intent.getBooleanExtra(EXTRA_REFRESH_ICONS, false);
 

@@ -19,6 +19,8 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onCreate()
     {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
@@ -56,6 +58,8 @@ public class PhoneProfilesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         if (!GlobalData.getApplicationStarted(getApplicationContext())) {
             // start service for first start
             Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);

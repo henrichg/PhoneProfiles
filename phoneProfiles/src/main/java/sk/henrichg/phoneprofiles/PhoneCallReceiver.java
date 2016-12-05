@@ -19,6 +19,7 @@ public abstract class PhoneCallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         savedContext = context.getApplicationContext();
 

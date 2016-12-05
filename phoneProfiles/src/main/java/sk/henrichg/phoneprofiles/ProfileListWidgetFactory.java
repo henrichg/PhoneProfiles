@@ -54,6 +54,7 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
     }
 
     public void onCreate() {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
     }
   
     public void onDestroy() {
@@ -179,6 +180,8 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
     }
 
     public void onDataSetChanged() {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         createProfilesDataWrapper();
 
         profileList = null;

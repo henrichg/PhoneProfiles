@@ -24,6 +24,8 @@ public class PhoneCallService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         if (intent != null) {
 
             context = getApplicationContext();

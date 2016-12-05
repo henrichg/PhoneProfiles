@@ -53,6 +53,7 @@ public class GlobalData extends Application {
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
     public static final String LOG_FILENAME = "log.txt";
+    public static final String CRASH_FILENAME = "crash.txt";
 
     private static boolean logIntoLogCat = false;
     private static boolean logIntoFile = false;

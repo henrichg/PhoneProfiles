@@ -16,6 +16,8 @@ public class RemoveBrightnessViewBroadcastReceiver extends BroadcastReceiver
 
     public void onReceive(Context context, Intent intent)
     {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         if (GUIData.brightneesView != null)
         {

@@ -34,6 +34,8 @@ public class FirstStartService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent)
     {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
         Context context = getApplicationContext();
 
         GlobalData.initRoot();

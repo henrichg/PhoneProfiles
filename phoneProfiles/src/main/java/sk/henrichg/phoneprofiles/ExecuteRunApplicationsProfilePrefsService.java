@@ -12,6 +12,7 @@ public class ExecuteRunApplicationsProfilePrefsService extends IntentService
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GlobalData.logE("$$$ ExecuteRunApplicationsProfilePrefsService.onHandleIntent", "-- START ----------");
 
