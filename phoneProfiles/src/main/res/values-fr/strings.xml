@@ -221,7 +221,7 @@
   <string name="volume_pref_dialog_default_profile_chb">Source du profil</string>
   <string name="array_pref_default_profile">Source du profil</string>
   <string name="array_pref_change">Changer</string>
-  <string name="array_pref_no_show">Ne  afficher</string>
+  <string name="array_pref_no_show">Ne plus afficher</string>
   <string name="array_pref_show">Afficher</string>
   <string name="array_pref_no_run">Ne fonctionne pas</string>
   <string name="array_pref_run">Exécutez</string>
@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Activer le profil</string>
   <string name="menu_restart_events">Redémarrez les événements</string>
   <string name="event_preferences_ForceRun">Ignorer l\'activation manuelle</string>
-  <string name="manual_profile_activation_forceRun_message">Un événement avec l\'option « Ignorer l\'activation manuelle » est en cours d\'exécution. Activer quand même ?</string>
   <string name="restart_events_alert_title">Redémarrez l\'événement</string>
   <string name="restart_events_alert_message">Etes-vous sûr?</string>
   <string name="event_preferences_ForceRun_summary">Début de l\'événement malgré le fait que le profil était activé manuellement</string>
@@ -315,12 +314,12 @@
   <string name="array_event_pref_calendarSearchField_description">Description</string>
   <string name="event_preferences_calendar_search_string">Chaîne de recherche</string>
   <string name="event_preferences_calendar_no_event">Aucun événement</string>
-  <string name="array_event_pref_priorityLowest">[P:0] Le  bas</string>
+  <string name="array_event_pref_priorityLowest">[P:0] Le plus bas</string>
   <string name="array_event_pref_priorityLower">[P:2] Bas</string>
   <string name="array_event_pref_priorityLowerMedium">[P:4] Moyennement bas</string>
   <string name="array_event_pref_priorityUpperMedium">[P:6] Moyennement haut</string>
   <string name="array_event_pref_priorityHigher">[P:8] Haut</string>
-  <string name="array_event_pref_priorityHighest">[P:10] Le  haut</string>
+  <string name="array_event_pref_priorityHighest">[P:10] Le plus haut</string>
   <string name="event_type_wifi">Wi-Fi</string>
   <string name="event_preferences_category_eventWifiParameters">Paramètres Wi-Fi</string>
   <string name="event_preferences_wifi_ssid">SSID</string>
@@ -512,7 +511,7 @@
   <string name="permissions_for_export_app_data_text2">S\'il vous plaît valides les boîtes de dialogue suivantes. Les données pourront être exportées.</string>
   <string name="permissions_for_import_app_data_text1">Importer les données d\'application requiert des autorisations.</string>
   <string name="permissions_for_import_app_data_text2">S\'il vous plaît validez les boîtes de dialogue suivantes. Puis les données pourront être importées.</string>
-  <string name="permissions_write_settings_not_allowed_confirm">Vous n\'avez pas activé « Modifier les paramètres système ». Ne  demander pour cela ?</string>
+  <string name="permissions_write_settings_not_allowed_confirm">Vous n\'avez pas activé « Modifier les paramètres système ». Ne plus demander pour cela ?</string>
   <string name="phone_profiles_pref_category_permissions">Autorisations</string>
   <string name="phone_profiles_pref_writeSystemSettingPermissions">Changer les réglages système</string>
   <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">S\'il vous plaît chercher l\' application « PhoneProfiles » et lui donner l\'autorisation.</string>
@@ -571,7 +570,7 @@
   <string name="phone_profiles_pref_applicationLanguage_tr">Türk</string>
   <string name="array_pref_value_tr">tr</string>
   <string name="accessibility_service_name">PhoneProfiles</string>
-  <string name="accessibility_service_description">Laisse phoneprofiles détecter quelle application est au premier plan. Cela est nécessaire pour les événements avec validation des paramètres des Applications.</string>
+  <string name="accessibility_service_description">Laisse PhoneProfiles détecter quelle application est au premier plan. Cela est nécessaire pour les événements avec validation des paramètres des Applications.</string>
   <string name="event_type_applications">Applications</string>
   <string name="event_preferences_category_eventApplicationsParameters">Paramètres des applications</string>
   <string name="event_preferences_applications_applications">Applications</string>
@@ -645,7 +644,7 @@
   <string name="permissions_for_brightness_dialog_text2">S\'il vous plaît accordez les dans les boîtes de dialogue suivantes.</string>
   <string name="event_preferences_category_sensors">Paramètres des capteurs</string>
   <string name="altype_eventEndDelay">fin de l\'événement retardé</string>
-  <string name="info_notification_event_states_running_delay">Lancement retardé : événement est en cours d\'exécution, mais les paramètres ne sont  remplies. L\'événement est en attente.</string>
+  <string name="info_notification_event_states_running_delay">Lancement retardé : événement est en cours d\'exécution, mais les paramètres ne sont plus remplies. L\'événement est en attente.</string>
   <string name="profile_preferences_askForDuration">Demandez pour la durée</string>
   <string name="phone_profiles_pref_applicationBatteryOptimization">Optimisation de la batterie</string>
   <string name="phone_profiles_pref_applicationEventLocationRescan">Rescan emplacement</string>
@@ -713,7 +712,7 @@
   <string name="about_application_rate_in_gplay">Merci d\'évaluer cette application dans Google Play</string>
   <string name="phone_profiles_pref_systemLanguage_summary">L\'application utilise la langue configurée dans le système.</string>
   <string name="permission_group_name_access_notification_policy">Ne pas perturber les accès</string>
-  <string name="permissions_access_notification_policy_not_allowed_confirm">Vous n’avez pas activé « Ne pas perturber les accès ». Ne  demander à pour cela ?</string>
+  <string name="permissions_access_notification_policy_not_allowed_confirm">Vous n’avez pas activé « Ne pas perturber les accès ». Ne plus demander à pour cela ?</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Ne pas perturber les accès</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions_summary">Cercher application « PhoneProfiles » et validez-la.</string>
   <string name="phone_profiles_pref_applicationBatteryOptimization_summary">Ajouter PhoneProfiles à « n\'est pas optimisé », quand vous avez rencontré des problèmes avec l’activation du profil des événements, si vous laisse un appareil débranché et fixes pour une période de temps, avec l’écran éteint.</string>
@@ -758,7 +757,7 @@
   <string name="bluetooth_name_pref_dlg_all_bt_names_chb">Tous les noms de Bluetooth</string>
   <string name="editor_drawer_list_item_events_start_order">Ordre de départ</string>
   <string name="editor_drawer_order_start_order">Ordre de départ</string>
-  <string name="info_notification_event_priority_new">4. chaque événement a une « Priorité ». Un événement ne démarrera pas, si un autre événement s\'exécute avec une priorité  élevée.</string>
+  <string name="info_notification_event_priority_new">4. chaque événement a une « Priorité ». Un événement ne démarrera pas, si un autre événement s\'exécute avec une priorité plus élevée.</string>
   <string name="info_notification_event_start_order">Événements s\'exécutent dans \"ordre de démarrage\". Vous pouvez définir l\'ordre de démarrage des événements dans l’éditeur dans la vue « Ordre de démarrage » de l\'éditeur. Dans cette vue, vous pouvez faire glisser l’événement vers le haut ou vers le bas.</string>
   <string name="info_notification_event_start_order_handler_icon">Gestionnaire d\'ordre:</string>
   <string name="info_notification_activate_profile_from_tasker">Vous pouvez activer le profil depuis le gestionnaire de tache. Configurer la tâche « Système » / « Envoyer » avec des paramètres :</string>
@@ -819,7 +818,7 @@
   <string name="array_pref_value_pt_PT">pt-PT</string>
   <string name="about_application_releases">Publications</string>
   <string name="permission_group_name_draw_overalys">Dessiner sur les applications</string>
-  <string name="permissions_draw_overlays_not_allowed_confirm">Vous n’avez pas activé « Dessiner sur les applications ». Ne  demander à pour cela ?</string>
+  <string name="permissions_draw_overlays_not_allowed_confirm">Vous n’avez pas activé « Dessiner sur les applications ». Ne plus demander à pour cela ?</string>
   <string name="phone_profiles_pref_drawOverlaysPermissions">Dessiner sur les applications</string>
   <string name="phone_profiles_pref_drawOverlaysPermissions_summary">S\'il vous plaît chercher l\' application « PhoneProfiles » et lui donner l\'autorisation.</string>
   <string name="preference_not_allowed_reason_not_configured_in_system_settings">non configuré dans les paramètres système</string>
@@ -841,7 +840,7 @@
   <string name="editor_event_list_item_profile_end_icon">Icône de fin d’événements</string>
   <string name="profile_preferences_sourceProfileInfo_summary">Chaque paramètre peut être défini à partir du profil Source. Cliquez ici pour configurer les paramètres du profil Source.</string>
   <string name="run_stop_events_indicator">Activer/arrêter l\'indicateur d’événement en cours</string>
-  <string name="run_stop_indicator_popup_window_important_infos">Pour  d’informations regardez les « Informations importantes » (icône point d’interrogation dans la barre d’outils du bas de l\' éditeur).</string>
+  <string name="run_stop_indicator_popup_window_important_infos">Pour plus d’informations regardez les « Informations importantes » (icône point d’interrogation dans la barre d’outils du bas de l\' éditeur).</string>
   <string name="important_info_how_to_show_ppp">Cette information importante peut être vu dans l’éditeur en cliquant sur l’icône point d’interrogation dans la barre d’outils.</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">non pris en charge par l’application</string>
   <string name="preference_not_allowed_reason_detail_old_android">ancienne version Android</string>

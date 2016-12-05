@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Attiva il profilo</string>
   <string name="menu_restart_events">Riavvia gli eventi</string>
   <string name="event_preferences_ForceRun">Ignora l\'attivazione manuale</string>
-  <string name="manual_profile_activation_forceRun_message">Esegue qualsiasi evento con opzione \"Ignora attivazione manuale\". Attivare comunque?</string>
   <string name="restart_events_alert_title">Riavvia gli eventi</string>
   <string name="restart_events_alert_message">Sei sicuro?</string>
   <string name="event_preferences_ForceRun_summary">Inizia l\'evento nonostate il profilo fosse attivato manualmente</string>
@@ -461,10 +460,10 @@
   <string name="bluetooth_name_pref_dlg_info_about_wildcards">nel nome bluetooth,</string>
   <string name="calendar_pref_dlg_info_about_wildcards">nella stringa di ricerca,</string>
   <string name="pref_dlg_info_about_wildcards_3">aggiungere \"\\" davanti a questi caratteri.</string>
-  <string name="important_into_sony_stamina_mode">Con dispositivi Sony e modalità \"Stamina\" attiva in \"Risparmio energia\", si prega di aggiungere PhoneProfile nella lista delle \"Applicazioni attive in standby\". Senza questo, l\'applicazione non funzionerà correttamente.</string>
+  <string name="important_into_sony_stamina_mode">Con dispositivi Sony e modalità \"Stamina\" attiva in \"Risparmio energia\", si prega di aggiungere PhoneProfilePlus nella lista delle \"Applicazioni attive in standby\". Senza questo, l\'applicazione non funzionerà correttamente.</string>
   <string name="important_info_profile_settings">Alcune preferenze del profilo richiedono modifiche alle impostazioni di sistema. Queste preferenze sono indicate da \"(S)\".</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_title">Accesso alle notifiche</string>
-  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Autorizzare PhoneProfile nelle impostazioni di sistema \"Accessibilità\", per abilitare la preferenza del profilo \"Tipo di interruzioni\".</string>
+  <string name="profile_preferences_volumeNotificationsAccessSettings_summary">Autorizzare PhoneProfilePlus nelle impostazioni di sistema \"Accessibilità\", per abilitare la preferenza del profilo \"Tipo di interruzioni\".</string>
   <string name="array_pref_zenModeArray_allWithVibration">Tutte con vibrazione</string>
   <string name="array_pref_zenModeArray_priorityWithVibration">Priorità con vibrazione</string>
   <string name="important_info_news">Novità</string>
@@ -479,7 +478,7 @@
   <string name="event_type_notifications">Notifiche</string>
   <string name="event_preferences_category_eventNotificationsParameters">Parametri delle notifiche</string>
   <string name="event_preferences_notifications_applications">Applicazioni</string>
-  <string name="event_preferences_volumeNotificationsAccessSettings_summary">Autorizzare PhoneProfile nelle impostazioni di sistema \"Accessibilità\", per abilitare i Parametri delle notifiche.</string>
+  <string name="event_preferences_volumeNotificationsAccessSettings_summary">Autorizzare PhoneProfilePlus nelle impostazioni di sistema \"Accessibilità\", per abilitare i Parametri delle notifiche.</string>
   <string name="array_pref_zenModeArray_alarms">Solo allarmi</string>
   <string name="profile_preferences_zenMode_alarms_summary">Solo interruzioni di allarmi</string>
   <string name="phone_profiles_pref_applicationShortcutEmblem">Aggiunge un simbolo al collegamento</string>
@@ -571,12 +570,12 @@
   <string name="phone_profiles_pref_applicationLanguage_tr">Türk</string>
   <string name="array_pref_value_tr">tr</string>
   <string name="accessibility_service_name">PhoneProfiles</string>
-  <string name="accessibility_service_description">Autorizzare PhoneProfile a rilevare l\'applicazione in primo piano. Serve per gli eventi con \"Parametri delle applicazioni\" attivi.</string>
+  <string name="accessibility_service_description">Autorizzare PhoneProfilePlus a rilevare l\'applicazione in primo piano. Serve per gli eventi con \"Parametri delle applicazioni\" attivi.</string>
   <string name="event_type_applications">Applicazioni</string>
   <string name="event_preferences_category_eventApplicationsParameters">Parametri delle applicazioni</string>
   <string name="event_preferences_applications_applications">Applicazioni</string>
   <string name="event_preferences_applications_AccessibilitySettings_title">Impostazioni di accessibilità</string>
-  <string name="event_preferences_applications_AccessibilitySettings_summary">Autorizzare PhoneProfile in \"Accessibilità\" nelle impostazioni di sistema, per abilitare i Parametri delle applicazioni.</string>
+  <string name="event_preferences_applications_AccessibilitySettings_summary">Autorizzare PhoneProfilePlus in \"Accessibilità\" nelle impostazioni di sistema, per abilitare i Parametri delle applicazioni.</string>
   <string name="event_preferences_notifications_end_when_removed">Termina quando rimosso</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Per modificare il livello adattivo, servono i privilegi di ROOT.</string>
   <string name="important_info_profile_activation_text1">Il profilo può essere attivato in due modi:</string>
@@ -675,7 +674,7 @@
   <string name="array_event_pref_orientationDistanceType_near">Vicino</string>
   <string name="array_event_pref_orientationDistanceType_far">Lontano</string>
   <string name="event_preferences_orientation_ignoreForApplications">Ignora per applicazioni</string>
-  <string name="event_preferences_orientation_AccessibilitySettings_summary">Autorizzare PhoneProfile in \"Accessibilità\" nelle impostazioni di sistema, per abilitare i parametri di \"Ignora per applicazioni\".</string>
+  <string name="event_preferences_orientation_AccessibilitySettings_summary">Autorizzare PhoneProfilePlus in \"Accessibilità\" nelle impostazioni di sistema, per abilitare i parametri di \"Ignora per applicazioni\".</string>
   <string name="applications_preference_applicationType_application">applicazione</string>
   <string name="applications_preference_applicationType_shortcut">collegamento</string>
   <string name="phone_profiles_pref_eventWifiAppSettings">Impostazioni Wi-Fi</string>

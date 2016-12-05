@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Activar perfil</string>
   <string name="menu_restart_events">Reiniciar eventos</string>
   <string name="event_preferences_ForceRun">Ignorar la activación manual</string>
-  <string name="manual_profile_activation_forceRun_message">Se está ejecutando algún evento con la opción \"Ignorar activación manual\". ¿Activar pese a ello?</string>
   <string name="restart_events_alert_title">Reiniciar eventos</string>
   <string name="restart_events_alert_message">¿Estás seguro?</string>
   <string name="event_preferences_ForceRun_summary">Iniciar el evento a pesar de que ha activado manualmente el perfil</string>
@@ -515,7 +514,7 @@
   <string name="permissions_write_settings_not_allowed_confirm">No ha activado \"Modificar ajustes de sistema\". ¿No preguntarlo de nuevo?</string>
   <string name="phone_profiles_pref_category_permissions">Permisos</string>
   <string name="phone_profiles_pref_writeSystemSettingPermissions">Modificar ajustes del sistema</string>
-  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Por favor, busque la aplicación \"PhoneProfile\" y actívela.</string>
+  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Por favor, busque la aplicación \"PhoneProfilePlus\" y actívela.</string>
   <string name="phone_profiles_pref_applicationPermissions">Permisos de aplicación</string>
   <string name="phone_profiles_pref_applicationPermissions_summary">Por favor, active los permisos en la opción \"Permisos\".</string>
   <string name="permissions_for_event_text1">Evento</string>

@@ -275,8 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Profiel activeren</string>
   <string name="menu_restart_events">Events herstarten</string>
   <string name="event_preferences_ForceRun">Handmatige activering negeren</string>
-  <string name="manual_profile_activation_forceRun_message">Een event met de optie \"Handmatige activering negeren\" is actief. 
-Toch activeren?</string>
   <string name="restart_events_alert_title">Events herstarten</string>
   <string name="restart_events_alert_message">Weet je het zeker?</string>
   <string name="event_preferences_ForceRun_summary">Start event ook wanneer er handmatig een profiel geselecteerd is</string>

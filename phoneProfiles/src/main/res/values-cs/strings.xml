@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Aktivovat profil</string>
   <string name="menu_restart_events">Restart událostí</string>
   <string name="event_preferences_ForceRun">Ignoruj ​​manuální aktivaci</string>
-  <string name="manual_profile_activation_forceRun_message">Nějaká událost s parametrem \"Ignoruj ​​manuální aktivaci\" běží. I tak aktivovat?</string>
   <string name="restart_events_alert_title">Restartovat události</string>
   <string name="restart_events_alert_message">Jste si jistý?</string>
   <string name="event_preferences_ForceRun_summary">Spustit událost přesto, že byl manuálně aktivovaný profil</string>
@@ -515,7 +514,7 @@
   <string name="permissions_write_settings_not_allowed_confirm">Nepovolily jste \"Změna nastavení systému\". Už se nikdy na toto neptat?</string>
   <string name="phone_profiles_pref_category_permissions">Povolení</string>
   <string name="phone_profiles_pref_writeSystemSettingPermissions">Změna nastavení systému</string>
-  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Prosím najděte aplikaci \"Phone Profile \" a povolte ji.</string>
+  <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Prosím najděte aplikaci \"Phone Profile Plus\" a povolte ji.</string>
   <string name="phone_profiles_pref_applicationPermissions">Povolení pro aplikaci</string>
   <string name="phone_profiles_pref_applicationPermissions_summary">Prosím povolte povolení v části \"Povolení\".</string>
   <string name="permissions_for_event_text1">Událost</string>
@@ -571,12 +570,12 @@
   <string name="phone_profiles_pref_applicationLanguage_tr">Türk</string>
   <string name="array_pref_value_tr">tr</string>
   <string name="accessibility_service_name">PhoneProfiles</string>
-  <string name="accessibility_service_description">Umožní PhoneProfile zjišťovat, která aplikace je v popředí. Toto je nezbytné pro události, které mají povoleno \"Parametry aplikací\"</string>
+  <string name="accessibility_service_description">Umožní PhoneProfilePlus zjišťovat, která aplikace je v popředí. Toto je nezbytné pro události, které mají povoleno \"Parametry aplikací\"</string>
   <string name="event_type_applications">Aplikace</string>
   <string name="event_preferences_category_eventApplicationsParameters">Parametry aplikace</string>
   <string name="event_preferences_applications_applications">Aplikace</string>
   <string name="event_preferences_applications_AccessibilitySettings_title">Nastavení dostupnosti</string>
-  <string name="event_preferences_applications_AccessibilitySettings_summary">Povol PhoneProfile v systémovém nastavení \"Dostupnost\", pro povolení parametrů aplikací.</string>
+  <string name="event_preferences_applications_AccessibilitySettings_summary">Povol PhoneProfilePlus v systémovém nastavení \"Dostupnost\", pro povolení parametrů aplikací.</string>
   <string name="event_preferences_notifications_end_when_removed">Konec, pokud odstraněna</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Pro změnu adaptívní úrovně je vyžadován ROOT.</string>
   <string name="important_info_profile_activation_text1">Profil může být aktivován ve dvou režimech:</string>
@@ -675,7 +674,7 @@
   <string name="array_event_pref_orientationDistanceType_near">Poblíž</string>
   <string name="array_event_pref_orientationDistanceType_far">Daleko</string>
   <string name="event_preferences_orientation_ignoreForApplications">Ignorovat pro aplikace</string>
-  <string name="event_preferences_orientation_AccessibilitySettings_summary">Povol Phone Profiles  v systémovém nastavení \"Dostupnost\", pro povolení parametru \"Ignorovat pro aplikace\".</string>
+  <string name="event_preferences_orientation_AccessibilitySettings_summary">Povol Phone Profiles Plus v systémovém nastavení \"Dostupnost\", pro povolení parametru \"Ignorovat pro aplikace\".</string>
   <string name="applications_preference_applicationType_application">aplikace</string>
   <string name="applications_preference_applicationType_shortcut">odkaz</string>
   <string name="phone_profiles_pref_eventWifiAppSettings">Nastavení Wi-Fi</string>
@@ -715,7 +714,7 @@
   <string name="permission_group_name_access_notification_policy">Přístup k nastavení Nerušit</string>
   <string name="permissions_access_notification_policy_not_allowed_confirm">Nedovolili jste \"Přístup k nastavení Nerušit\". Už se nikdy na toto neptat?</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Přístup k nastavení Nerušit</string>
-  <string name="phone_profiles_pref_accessNotificationPolicyPermissions_summary">Prosím najděte aplikaci \"Phone Profile \" a povolte ji.</string>
+  <string name="phone_profiles_pref_accessNotificationPolicyPermissions_summary">Prosím najděte aplikaci \"Phone Profile Plus\" a povolte ji.</string>
   <string name="phone_profiles_pref_applicationBatteryOptimization_summary">Přidejte PhoneProfiles do \"Neoptimalizované\", v případě problémů s aktivací profilu z událostí, pokud nemáte zařízení připojeno, bez pohybu určitou dobu s vypnutou obrazovkou.</string>
   <string name="profile_preferences_deviceWallpaperFor">Nastavit tapetu pro</string>
   <string name="array_pref_device_wallpaper_homescreen">Domovská obrazovka</string>
@@ -821,7 +820,7 @@
   <string name="permission_group_name_draw_overalys">Vykreslit přes další aplikace</string>
   <string name="permissions_draw_overlays_not_allowed_confirm">Nepovolily jste \"Vykreslit přes další aplikace\". Už se nikdy na toto neptat?</string>
   <string name="phone_profiles_pref_drawOverlaysPermissions">Vykreslit přes další aplikace</string>
-  <string name="phone_profiles_pref_drawOverlaysPermissions_summary">Prosím najděte aplikaci \"Phone Profile \" a povolte ji.</string>
+  <string name="phone_profiles_pref_drawOverlaysPermissions_summary">Prosím najděte aplikaci \"Phone Profile Plus\" a povolte ji.</string>
   <string name="preference_not_allowed_reason_not_configured_in_system_settings">ne nakonfigurované v Systémových Nastaveních</string>
   <string name="important_into_huawei_protected_apps">Když máte zařízení Huawei, povolte prosím ochranu PhoneProfiles v \"Rozšířené nastavení\" → \"správce baterie\" → \"Chráněné aplikace\". Bez tohoto, aplikace nebude pracovat správně.</string>
   <string name="important_into_xiaomi_no_restrictions">Když máte Xiaomi zařízení, nastavte prosím \"Bez omezení\" pro PhoneProfiles v \"Nastavení\"→\"Baterie &amp; výkon\" → \"Správce využití baterie aplikacemi\"→\"Vybrat aplikace\". Bez tohoto, aplikace nebude pracovat správně.</string>
@@ -839,7 +838,7 @@
   <string name="editor_event_list_item_event_status">Indikátor stavu události</string>
   <string name="editor_event_list_item_profile_start_icon">Ikona profilu začátku události</string>
   <string name="editor_event_list_item_profile_end_icon">Ikona profilu konce události</string>
-  <string name="profile_preferences_sourceProfileInfo_summary">Pro každý profil je možné nastavit, že se má použít Zdrojový profil. Klikněte sem pro nakonfigurování parametrů Zdrojového profilu.</string>
+  <string name="profile_preferences_sourceProfileInfo_summary">Pro každý profil je možné nastavit, že se má použít Zdrojový profil. Klikněte zde pro nakonfigurování parametrů Zdrojového profilu.</string>
   <string name="run_stop_events_indicator">Povol/zastav běh událostí</string>
   <string name="run_stop_indicator_popup_window_important_infos">Pro více informací se podívejte \"Důležité informace\" (ikona otazníku na spodní nástrojové liště editoru).</string>
   <string name="important_info_how_to_show_ppp">Tyto důležité informace lze zobrazit v Editoru přes ikonu otazníku ve spodní nástrojové liště.</string>
@@ -861,7 +860,7 @@
   <string name="array_pref_change_selection_bluetooth_name_select_by_name">Vybrat podle názvu bluetooth</string>
   <string name="array_pref_change_selection_nfc_tags_select_by_name">Vybrat podle názvu NFC tagu</string>
   <string name="event_preferences_enable_sensor">Povolte senzor</string>
-  <string name="info_preference_click_here">Click here for show infomations</string>
-  <string name="profile_preferences_category_profileActivationParameters">Activation parameters</string>
-  <string name="profile_preferences_category_profileDeviceParameters">Device parameters</string>
+  <string name="info_preference_click_here">Klikněte zde pro zobrazení informací</string>
+  <string name="profile_preferences_category_profileActivationParameters">Parametry aktivace</string>
+  <string name="profile_preferences_category_profileDeviceParameters">Parametry zařízení</string>
 </resources>

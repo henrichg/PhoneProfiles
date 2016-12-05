@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Activar perfil</string>
   <string name="menu_restart_events">Reiniciar esdeveniments</string>
   <string name="event_preferences_ForceRun">Ignorar activació manual</string>
-  <string name="manual_profile_activation_forceRun_message">Qualsevol esdeveniment amb l\'opció \"Ignorar activació manual\" s\'està executant. Activar igualment?</string>
   <string name="restart_events_alert_title">Reiniciar esdeveniments</string>
   <string name="restart_events_alert_message">Esteu segur?</string>
   <string name="event_preferences_ForceRun_summary">Inici de l\'esdeveniment malgrat que va ser activat manualment el seu perfil</string>

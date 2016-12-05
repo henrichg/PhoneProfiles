@@ -275,7 +275,6 @@
   <string name="event_preferences_eventProfileEnd">Aktivovať profil</string>
   <string name="menu_restart_events">Reštart udalostí</string>
   <string name="event_preferences_ForceRun">Ignoruj manuálnu aktiváciu</string>
-  <string name="manual_profile_activation_forceRun_message">Dáka udalosť s parametrom \"Ignoruj manuálnu aktiváciu\" beží. Aj tak aktivovať?</string>
   <string name="restart_events_alert_title">Reštartovať udalosti</string>
   <string name="restart_events_alert_message">Ste si istý?</string>
   <string name="event_preferences_ForceRun_summary">Spustiť udalosť napriek tomu, že bol manuálne aktivovaný profil</string>
