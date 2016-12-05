@@ -21,7 +21,7 @@ public class RemoveBrightnessViewBroadcastReceiver extends BroadcastReceiver
         {
             try {
                 windowManager.removeView(GUIData.brightneesView);
-            } catch (Exception e) {
+            } catch (Exception ignore) {
             }
             GUIData.brightneesView = null;
         }

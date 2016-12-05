@@ -16,21 +16,18 @@ import android.widget.FrameLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-public class ProfileIconColorChooserDialog implements View.OnClickListener {
+class ProfileIconColorChooserDialog implements View.OnClickListener {
 
     int selectedColor;
 
     private ProfileIconPreference profileIconPreference;
-    private Context _context;
     private MaterialDialog mDialog;
 
     private int[] mColors;
 
-    public ProfileIconColorChooserDialog(Context context, ProfileIconPreference preference, boolean useCustomColor, int selectedColor, int defaultColor)
+    ProfileIconColorChooserDialog(Context context, ProfileIconPreference preference, boolean useCustomColor, int selectedColor, int defaultColor)
     {
         profileIconPreference = preference;
-
-        _context = context;
 
         MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(context)
                 .title(R.string.colorChooser_pref_dialog_title)
@@ -71,6 +68,8 @@ public class ProfileIconColorChooserDialog implements View.OnClickListener {
             }
         }
         ta.recycle();
+
+        //noinspection ConstantConditions
         final GridLayout list = (GridLayout) mDialog.getCustomView().findViewById(R.id.dialog_color_chooser_grid);
 
         for (int i = 0; i < list.getChildCount(); i++) {

@@ -18,9 +18,9 @@ import android.media.ExifInterface;
 import java.io.File;
 import java.io.IOException;
 
-public class BitmapManipulator {
+class BitmapManipulator {
 
-    public static Bitmap resampleBitmap(String bitmapFile, int width, int height, Context context)
+    static Bitmap resampleBitmap(String bitmapFile, int width, int height, Context context)
     {
         if (bitmapFile == null)
             return null;
@@ -61,7 +61,9 @@ public class BitmapManipulator {
 
             int rotatedWidth, rotatedHeight;
             if (rotate == 90 || rotate == 270) {
+                //noinspection SuspiciousNameCombination
                 rotatedWidth = height;
+                //noinspection SuspiciousNameCombination
                 rotatedHeight = width;
             } else {
                 rotatedWidth = width;
@@ -82,7 +84,7 @@ public class BitmapManipulator {
             return null;
     }
 
-    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+    private static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
 
         Matrix matrix = new Matrix();
         switch (orientation) {
@@ -126,7 +128,7 @@ public class BitmapManipulator {
         }
     }
 
-    public static Bitmap resampleResource(Resources resources, int bitmapResource, int width, int height)
+    static Bitmap resampleResource(Resources resources, int bitmapResource, int width, int height)
     {
         // first decode with inJustDecodeDpunds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -136,12 +138,10 @@ public class BitmapManipulator {
         options.inSampleSize = calculateInSampleSize(options, width, height);
         // decode bitmap with inSampleSize
         options.inJustDecodeBounds = false;
-        Bitmap decodedSampleBitmap = BitmapFactory.decodeResource(resources, bitmapResource, options);
-
-        return decodedSampleBitmap;
+        return BitmapFactory.decodeResource(resources, bitmapResource, options);
     }
 
-    public static Bitmap recolorBitmap(Bitmap bitmap, int color, Context context)
+    static Bitmap recolorBitmap(Bitmap bitmap, int color)
     {
         if (bitmap == null)
             return null;
@@ -162,12 +162,12 @@ public class BitmapManipulator {
         return colorBitmap;
     }
 
-    public static Bitmap monochromeBitmap(Bitmap bitmap, int value, Context context) {
+    static Bitmap monochromeBitmap(Bitmap bitmap, int value) {
         int color = Color.argb(0xFF, value, value, value);
-        return recolorBitmap(bitmap, color, context);
+        return recolorBitmap(bitmap, color);
     }
 
-    public static Bitmap grayscaleBitmap(Bitmap bitmap)
+    static Bitmap grayscaleBitmap(Bitmap bitmap)
     {
         if (bitmap == null)
             return null;

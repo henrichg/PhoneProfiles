@@ -9,6 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.DialogPreference;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ import com.stericson.roottools.RootTools;
 public class BrightnessDialogPreference extends
         DialogPreference implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    Context _context = null;
+    private Context _context = null;
     MaterialDialog mDialog;
 
     // Layout widgets.
@@ -54,7 +55,7 @@ public class BrightnessDialogPreference extends
     private int value = 0;
 
     private boolean adaptiveAllowed = true;
-    Profile _defaultProfile;
+    private Profile _defaultProfile;
 
     private int savedBrightness;
     private float savedAdaptiveBrightness;
@@ -103,7 +104,7 @@ public class BrightnessDialogPreference extends
                 .content(getDialogMessage())
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (shouldPersist()) {
                             persistString(Integer.toString(value + minimumValue)
                                     + "|" + Integer.toString(noChange)
@@ -186,7 +187,7 @@ public class BrightnessDialogPreference extends
         return mDialog;
     }
 
-    public void enableViews() {
+    void enableViews() {
         if (Permissions.checkScreenBrightness(_context)) {
             valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
             seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (defaultProfile == 0));
@@ -480,28 +481,7 @@ public class BrightnessDialogPreference extends
         }
     }
 
-    private static void commandWait(Command cmd) throws Exception {
-        int waitTill = 50;
-        int waitTillMultiplier = 2;
-        int waitTillLimit = 3200; //7 tries, 6350 msec
-
-        while (!cmd.isFinished() && waitTill<=waitTillLimit) {
-            synchronized (cmd) {
-                try {
-                    if (!cmd.isFinished()) {
-                        cmd.wait(waitTill);
-                        waitTill *= waitTillMultiplier;
-                    }
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }
-        if (!cmd.isFinished()){
-            Log.e("ActivateProfileHelper", "Could not finish root command in " + (waitTill/waitTillMultiplier));
-        }
-    }
-
-    public static boolean changeEnabled(String value) {
+    static boolean changeEnabled(String value) {
         String[] splits = value.split("\\|");
         if (splits.length > 1) {
             try {
@@ -581,13 +561,13 @@ public class BrightnessDialogPreference extends
     {
         boolean isDialogShowing;
         Bundle dialogBundle;
-        public int value = 0;
-        public int noChange = 0;
-        public int automatic = 0;
-        public int defaultProfile = 0;
-        public int disableDefaultProfile = 0;
+        int value = 0;
+        int noChange = 0;
+        int automatic = 0;
+        int defaultProfile = 0;
+        int disableDefaultProfile = 0;
 
-        public SavedState(Parcel source)
+        SavedState(Parcel source)
         {
             super(source);
 
@@ -616,7 +596,7 @@ public class BrightnessDialogPreference extends
             dest.writeInt(disableDefaultProfile);
         }
 
-        public SavedState(Parcelable superState)
+        SavedState(Parcelable superState)
         {
             super(superState);
         }

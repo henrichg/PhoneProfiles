@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.DialogPreference;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
 
     String value = "";
 
-    public List<Application> applicationsList = null;
+    List<Application> applicationsList = null;
 
     private MaterialDialog mDialog;
 
@@ -46,16 +47,16 @@ public class ApplicationsDialogPreference  extends DialogPreference {
 
     private ApplicationsPreferenceAdapter listAdapter;
 
-    ImageView packageIcon;
-    RelativeLayout packageIcons;
-    ImageView packageIcon1;
-    ImageView packageIcon2;
-    ImageView packageIcon3;
-    ImageView packageIcon4;
+    private ImageView packageIcon;
+    private RelativeLayout packageIcons;
+    private ImageView packageIcon1;
+    private ImageView packageIcon2;
+    private ImageView packageIcon3;
+    private ImageView packageIcon4;
 
     private DataWrapper dataWrapper;
 
-    public static final int RESULT_APPLICATIONS_EDITOR = 2100;
+    static final int RESULT_APPLICATIONS_EDITOR = 2100;
 
     public ApplicationsDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,7 +73,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
         this.context = context;
         dataWrapper = new DataWrapper(context, false, false, 0);
 
-        applicationsList = new ArrayList<Application>();
+        applicationsList = new ArrayList<>();
 
         setWidgetLayoutResource(R.layout.applications_preference); // resource na layout custom preference - TextView-ImageView
 
@@ -110,7 +111,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
                 .negativeText(getNegativeButtonText());
         mBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                 if (shouldPersist())
                 {
                     // sem narvi stringy aplikacii oddelenych |
@@ -138,7 +139,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
         });
         mBuilder.onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                 mDialog.dismiss();
             }
         });
@@ -493,7 +494,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
         }
     }
 
-    public void showEditMenu(View view)
+    void showEditMenu(View view)
     {
         //Context context = ((AppCompatActivity)getActivity()).getSupportActionBar().getThemedContext();
         Context context = view.getContext();
@@ -540,7 +541,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
         listAdapter.notifyDataSetChanged();
     }
 
-    public void updateApplication(Application application, int position, int positionInCache) {
+    void updateApplication(Application application, int position, int positionInCache) {
         List<Application> cachedApplicationList = EditorProfilesActivity.getApplicationsCache().getList(false);
         if (cachedApplicationList != null) {
             int _position = position;
@@ -574,8 +575,7 @@ public class ApplicationsDialogPreference  extends DialogPreference {
         }
     }
 
-    public void updateShortcut(Intent shortcutIntent, String shortcutName,
-                               Bitmap shortcutIcon, int position) {
+    void updateShortcut(Intent shortcutIntent, String shortcutName, int position) {
         /* Storing Intent to SQLite ;-)
         You can simply store the intent in a String way:
 

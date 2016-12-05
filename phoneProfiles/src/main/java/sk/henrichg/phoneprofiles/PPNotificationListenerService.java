@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -209,7 +210,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
             return false;
     }
 
-    private static Intent getInterruptionFilterRequestIntent(Context context, final int filter) {
+    private static Intent getInterruptionFilterRequestIntent(/*Context context, */final int filter) {
         Intent request = new Intent(ACTION_REQUEST_INTERRUPTION_FILTER);
         //request.setComponent(new ComponentName(context, PPNotificationListenerService.class));
         //request.setPackage(context.getPackageName());
@@ -218,6 +219,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
     }
 
     /** Convenience method for sending an {@link android.content.Intent} with {@link #ACTION_REQUEST_INTERRUPTION_FILTER}. */
+    @SuppressLint("InlinedApi")
     public static void requestInterruptionFilter(Context context, final int zenMode) {
         boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
         if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
@@ -237,7 +239,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
                     break;
             }
             //Log.e(TAG, "requestInterruptionFilter(" + interruptionFilter + ')');
-            Intent request = getInterruptionFilterRequestIntent(context, interruptionFilter);
+            Intent request = getInterruptionFilterRequestIntent(interruptionFilter);
             context.sendBroadcast(request);
         }
     }
@@ -289,6 +291,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 if (!TextUtils.isEmpty(intent.getAction())) {
                     if (ACTION_REQUEST_INTERRUPTION_FILTER.equals(intent.getAction())) {
                         if (intent.hasExtra(EXTRA_FILTER)) {
+                            @SuppressLint("InlinedApi")
                             final int filter = intent.getIntExtra(EXTRA_FILTER, INTERRUPTION_FILTER_ALL);
                             //Log.e(TAG, "filter= " + filter);
                             switch (filter) {

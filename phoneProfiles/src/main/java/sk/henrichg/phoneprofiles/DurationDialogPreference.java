@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.DialogPreference;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -27,8 +28,6 @@ public class DurationDialogPreference extends DialogPreference {
     private NumberPicker mNumberPickerMinutes;
     private NumberPicker mNumberPickerSeconds;
 
-    private int mColor = 0;
-
     public DurationDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray numberPickerType = context.obtainStyledAttributes(attrs,
@@ -39,8 +38,8 @@ public class DurationDialogPreference extends DialogPreference {
 
         numberPickerType.recycle();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            mColor = DialogUtils.resolveColor(context, R.attr.colorAccent);
+        //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        //    mColor = DialogUtils.resolveColor(context, R.attr.colorAccent);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class DurationDialogPreference extends DialogPreference {
                 .content(getDialogMessage())
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         mNumberPickerHours.clearFocus();
                         mNumberPickerMinutes.clearFocus();
                         mNumberPickerSeconds.clearFocus();

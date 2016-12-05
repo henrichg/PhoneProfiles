@@ -40,7 +40,7 @@ public class DataWrapper {
         //GlobalData.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.constructor");
     }
 
-    public void setParameters(
+    void setParameters(
             boolean fgui,
             boolean mono,
             int monoVal)
@@ -50,7 +50,7 @@ public class DataWrapper {
         monochromeValue = monoVal;
     }
 
-    public void setToastHandler(Handler handler)
+    void setToastHandler(Handler handler)
     {
         toastHandler = handler;
     }
@@ -95,7 +95,7 @@ public class DataWrapper {
         return profileList;
     }
 
-    public void setProfileList(List<Profile> profileList, boolean recycleBitmaps)
+    void setProfileList(List<Profile> profileList, boolean recycleBitmaps)
     {
         if (recycleBitmaps)
             clearProfileList();
@@ -105,7 +105,7 @@ public class DataWrapper {
         this.profileList = profileList;
     }
 
-    public static Profile getNoinitializedProfile(String name, String icon, int order)
+    static Profile getNoinitializedProfile(String name, String icon, int order)
     {
         return new Profile(
                   name,
@@ -163,7 +163,7 @@ public class DataWrapper {
         return String.valueOf(dValue.intValue());
     }
 
-    public Profile  getPredefinedProfile(int index, boolean saveToDB)
+    Profile  getPredefinedProfile(int index, boolean saveToDB)
     {
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         int	maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
@@ -311,7 +311,7 @@ public class DataWrapper {
         return profile;
     }
 
-    public List<Profile>  getPredefinedProfileList()
+    List<Profile>  getPredefinedProfileList()
     {
         clearProfileList();
         getDatabaseHandler().deleteAllProfiles();
@@ -323,7 +323,7 @@ public class DataWrapper {
 
     }
 
-    public void clearProfileList()
+    void clearProfileList()
     {
         if (profileList != null)
         {
@@ -337,7 +337,7 @@ public class DataWrapper {
         profileList = null;
     }
 
-    public Profile getActivatedProfileFromDB()
+    private Profile getActivatedProfileFromDB()
     {
         Profile profile = getDatabaseHandler().getActivatedProfile();
         if (forGUI && (profile != null))
@@ -368,6 +368,7 @@ public class DataWrapper {
         return null;
     }
 
+    /*
     public Profile getFirstProfile()
     {
         if (profileList == null)
@@ -391,8 +392,9 @@ public class DataWrapper {
             return profile;
         }
     }
+    */
 
-    public int getItemPosition(Profile profile)
+    private int getItemPosition(Profile profile)
     {
         if (profile == null)
             return -1;
@@ -401,19 +403,16 @@ public class DataWrapper {
             return getDatabaseHandler().getProfilePosition(profile);
         else
         {
-            if (profile != null)
+            for (int i = 0; i < profileList.size(); i++)
             {
-                for (int i = 0; i < profileList.size(); i++)
-                {
-                    if (profileList.get(i)._id == profile._id)
-                        return i;
-                }
+                if (profileList.get(i)._id == profile._id)
+                    return i;
             }
             return -1;
         }
     }
 
-    public void setProfileActive(Profile profile)
+    private void setProfileActive(Profile profile)
     {
         if ((profileList == null) || (profile == null))
             return;
@@ -460,7 +459,7 @@ public class DataWrapper {
         }
     }
 
-    public void updateProfile(Profile profile)
+    void updateProfile(Profile profile)
     {
         if (profile != null)
         {
@@ -470,13 +469,15 @@ public class DataWrapper {
         }
     }
 
+    /*
     public void reloadProfilesData()
     {
         clearProfileList();
         getProfileList();
     }
+    */
 
-    public void deleteProfile(Profile profile)
+    void deleteProfile(Profile profile)
     {
         if (profile == null)
             return;
@@ -493,7 +494,7 @@ public class DataWrapper {
         }
     }
 
-    public void deleteAllProfiles()
+    void deleteAllProfiles()
     {
         profileList.clear();
 
@@ -513,7 +514,7 @@ public class DataWrapper {
         activateProfileHelper = null;
     }
 
-    public void refreshProfileIcon(Profile profile, boolean monochrome, int monochromeValue) {
+    void refreshProfileIcon(Profile profile, boolean monochrome, int monochromeValue) {
         if (profile != null) {
             boolean isIconResourceID = profile.getIsIconResourceID();
             String iconIdentifier = profile.getIconIdentifier();
@@ -527,24 +528,22 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    public void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
+    void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);
 
-        final Profile profile = _profile;
-        final boolean interactive = _interactive;
-        final Activity activity = _activity;
+        Profile profile = GlobalData.getMappedProfile(_profile, context);
 
         Profile activatedProfile = getActivatedProfile();
 
         databaseHandler.activateProfile(profile);
         setProfileActive(profile);
 
-        activateProfileHelper.execute(profile, interactive);
+        activateProfileHelper.execute(profile, _interactive);
 
-        if (interactive)
+        if (_interactive)
         {
             long profileId = 0;
             if (activatedProfile != null)
@@ -556,12 +555,12 @@ public class DataWrapper {
         activateProfileHelper.showNotification(profile);
         activateProfileHelper.updateWidget();
 
-        if (GlobalData.notificationsToast)
+        if (GlobalData.notificationsToast && (!ActivateProfileHelper.lockRefresh))
         {
             // toast notification
             if (toastHandler != null)
             {
-                final Profile __profile = profile;
+                final Profile __profile = _profile;
                 toastHandler.post(new Runnable() {
                     public void run() {
                         showToastAfterActivation(__profile);
@@ -569,19 +568,19 @@ public class DataWrapper {
                 });
             }
             else
-                showToastAfterActivation(profile);
+                showToastAfterActivation(_profile);
         }
 
         // for startActivityForResult
-        if (activity != null)
+        if (_activity != null)
         {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+            returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, _profile._id);
             returnIntent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
-            activity.setResult(Activity.RESULT_OK,returnIntent);
+            _activity.setResult(Activity.RESULT_OK,returnIntent);
         }
 
-        finishActivity(startupSource, true, activity);
+        finishActivity(startupSource, true, _activity);
     }
 
     private void showToastAfterActivation(Profile profile)
@@ -595,8 +594,8 @@ public class DataWrapper {
 
     private void activateProfileWithAlert(Profile profile, int startupSource, boolean interactive, Activity activity)
     {
-        if ((GlobalData.applicationActivateWithAlert && interactive) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_EDITOR))
+        if (interactive && (GlobalData.applicationActivateWithAlert ||
+                            (startupSource == GlobalData.STARTUP_SOURCE_EDITOR)))
         {
             // set theme and language for dialog alert ;-)
             // not working on Android 2.3.x
@@ -604,7 +603,6 @@ public class DataWrapper {
             GUIData.setLanguage(activity.getBaseContext());
 
             final Profile _profile = profile;
-            final boolean _interactive = interactive;
             final int _startupSource = startupSource;
             final Activity _activity = activity;
             final DataWrapper _dataWrapper = this;
@@ -618,13 +616,13 @@ public class DataWrapper {
                 public void onClick(DialogInterface dialog, int which) {
                     if (Permissions.grantProfilePermissions(context, _profile, false,
                             forGUI, monochrome, monochromeValue,
-                            _startupSource, _interactive, _activity, true)) {
+                            _startupSource, true, _activity, true)) {
                         if (_profile._askForDuration) {
-                            FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, _interactive);
+                            FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, true);
                             dlg.show();
                         }
                         else
-                            _activateProfile(_profile, _startupSource, _interactive, _activity);
+                            _activateProfile(_profile, _startupSource, true, _activity);
                     }
                     else {
                         Intent returnIntent = new Intent();
@@ -663,14 +661,14 @@ public class DataWrapper {
             if (interactive)
                 granted = Permissions.grantProfilePermissions(context, profile, false,
                         forGUI, monochrome, monochromeValue,
-                        startupSource, interactive, activity, true);
+                        startupSource, true, activity, true);
             else
                 granted = Permissions.grantProfilePermissions(context, profile, true,
                         forGUI, monochrome, monochromeValue,
-                        startupSource, interactive, null, true);
+                        startupSource, false, null, true);
             if (granted) {
                 if (profile._askForDuration && interactive) {
-                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this, startupSource, interactive);
+                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this, startupSource, true);
                     dlg.show();
                 }
                 else
@@ -679,12 +677,10 @@ public class DataWrapper {
         }
     }
 
-    public void finishActivity(int startupSource, boolean afterActivation, Activity _activity)
+    void finishActivity(int startupSource, boolean afterActivation, Activity activity)
     {
-        if (_activity == null)
+        if (activity == null)
             return;
-
-        final Activity activity = _activity;
 
         boolean finish = true;
 
@@ -713,10 +709,7 @@ public class DataWrapper {
         }
 
         if (finish)
-        {
-            if (activity != null)
-                activity.finish();
-        }
+            activity.finish();
     }
 
     public void activateProfile(long profile_id, int startupSource, Activity activity)

@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -111,6 +112,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
+                        @SuppressLint("InlinedApi")
                         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
                         intent.addCategory(Intent.CATEGORY_DEFAULT);
                         startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
@@ -126,6 +128,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
+                            @SuppressLint("InlinedApi")
                             Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
                             intent.addCategory(Intent.CATEGORY_DEFAULT);
                             startActivityForResult(intent, RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS);
@@ -144,6 +147,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
+                            @SuppressLint("InlinedApi")
                             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                             intent.addCategory(Intent.CATEGORY_DEFAULT);
                             startActivityForResult(intent, RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS);
@@ -170,6 +174,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
     }
 
+    /*
     private void setTitleStyle(Preference preference, boolean bold, boolean underline)
     {
         CharSequence title = preference.getTitle();
@@ -192,6 +197,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             preference.setTitle(sbt);
         }
     }
+    */
 
     public void setSummary(String key)
     {
@@ -219,10 +225,9 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
 
         if (key.equals(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE))
         {
-            String sProfileId = stringValue;
             long lProfileId;
             try {
-                lProfileId = Long.parseLong(sProfileId);
+                lProfileId = Long.parseLong(stringValue);
             } catch (Exception e) {
                 lProfileId = 0;
             }
@@ -246,7 +251,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setSummary(sSummary);
             }
             else
-                preference.setSummary(summary);
+                preference.setSummary(null);
 
             //if (key.equals(GlobalData.PREF_APPLICATION_LANGUAGE))
             //    setTitleStyle(preference, true, false);
@@ -322,7 +327,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 
             ActivateProfileHelper activateProfileHelper = dataWrapper.getActivateProfileHelper();
-            activateProfileHelper.initialize(dataWrapper, null, context);
+            activateProfileHelper.initialize(dataWrapper, context);
 
             Profile activatedProfile = dataWrapper.getActivatedProfile();
             dataWrapper.refreshProfileIcon(activatedProfile, false, 0);

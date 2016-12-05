@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,14 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
+class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
 {
     private LayoutInflater inflater;
     private Context context;
 
-    boolean noShortcuts;
+    private boolean noShortcuts;
 
-    public ApplicationsMultiselectPreferenceAdapter(Context context, int addShortcuts)
+    ApplicationsMultiselectPreferenceAdapter(Context context, int addShortcuts)
     {
         // Cache the LayoutInflate to avoid asking for a new one each time.
         inflater = LayoutInflater.from(context);
@@ -37,6 +38,7 @@ public class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ApplicationsCache applicationsCahce = EditorProfilesActivity.getApplicationsCache();

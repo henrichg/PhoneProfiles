@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
     public static final String EXTRA_SCROLL_TO = "extra_phone_profile_preferences_scroll_to";
 
+    @SuppressLint("InlinedApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -84,7 +86,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         else
             fragment = new PhoneProfilesPreferencesFragment();
 
-        String extraScrollTo = "";
+        String extraScrollTo;
         Intent intent = getIntent();
         if (intent.hasCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES))
             // activity is started from lockscreen, scroll to notifications cattegory
@@ -124,7 +126,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         super.onStop();
 
         DataWrapper dataWrapper =  new DataWrapper(getApplicationContext(), true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, this, getApplicationContext());
+        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
         dataWrapper.getActivateProfileHelper().removeNotification();
         dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
         dataWrapper.getActivateProfileHelper().updateWidget();
@@ -143,13 +145,13 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
         GlobalData.loadPreferences(getApplicationContext());
 
-        if (activeLanguage != GlobalData.applicationLanguage)
+        if (!activeLanguage.equals(GlobalData.applicationLanguage))
         {
             GUIData.setLanguage(getBaseContext());
             invalidateEditor = true;
         }
         else
-        if (activeTheme != GlobalData.applicationTheme)
+        if (!activeTheme.equals(GlobalData.applicationTheme))
         {
             //EditorProfilesActivity.setTheme(this, false);
             invalidateEditor = true;

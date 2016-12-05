@@ -153,9 +153,11 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
 
     }
 
+    /*
     static public Activity getPreferencesActivity()
     {
         return preferencesActivity;
     }
+    */
 
 }

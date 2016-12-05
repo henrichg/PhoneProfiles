@@ -4,18 +4,15 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ApplicationViewHolder {
+class ApplicationViewHolder {
 
-    public ImageView imageViewIcon;
-    public TextView textViewAppName;
-    public CheckBox checkBox;
-    public TextView textViewAppType;
-    public ImageView imageViewMenu;
+    ImageView imageViewIcon;
+    TextView textViewAppName;
+    CheckBox checkBox;
+    TextView textViewAppType;
+    ImageView imageViewMenu;
 
-    public ApplicationViewHolder() {
-    }
-
-    public ApplicationViewHolder(ImageView imageViewIcon, TextView textViewAppName,
+    ApplicationViewHolder(ImageView imageViewIcon, TextView textViewAppName,
                                  TextView textViewAppType, CheckBox checkBox,
                                  ImageView imageViewMenu)
     {

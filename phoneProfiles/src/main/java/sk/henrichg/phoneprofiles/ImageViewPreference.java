@@ -27,12 +27,9 @@ public class ImageViewPreference extends Preference {
 
     private String imageSource;
 
-    private ImageView imageView;
     private Context prefContext;
 
-    CharSequence preferenceTitle;
-
-    public static int RESULT_LOAD_IMAGE = 1970;
+    static int RESULT_LOAD_IMAGE = 1970;
 
     public ImageViewPreference(Context context, AttributeSet attrs)
     {
@@ -46,6 +43,7 @@ public class ImageViewPreference extends Preference {
             R.styleable.ImageViewPreference_imageSource);
 
 
+        //noinspection ConstantConditions
         if (imageSource.equals("file"))
         {
             imageIdentifier = "-";
@@ -58,8 +56,6 @@ public class ImageViewPreference extends Preference {
         }
 
         prefContext = context;
-
-        preferenceTitle = getTitle();
 
         setWidgetLayoutResource(R.layout.imageview_preference); // resource na layout custom preference - TextView-ImageView
 
@@ -75,7 +71,7 @@ public class ImageViewPreference extends Preference {
         //imageTitle = (TextView)view.findViewById(R.id.imageview_pref_label);  // resource na image title
         //imageTitle.setText(preferenceTitle);
 
-        imageView = (ImageView)view.findViewById(R.id.imageview_pref_imageview); // resource na Textview v custom preference layoute
+        ImageView imageView = (ImageView)view.findViewById(R.id.imageview_pref_imageview); // resource na Textview v custom preference layoute
 
         if (imageView != null)
         {
@@ -143,7 +139,7 @@ public class ImageViewPreference extends Preference {
                 imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
             }
             try {
-                isImageResourceID = (splits[1].equals("1")) ? true : false;
+                isImageResourceID = splits[1].equals("1");
             } catch (Exception e) {
                 isImageResourceID = true;
             }
@@ -158,7 +154,7 @@ public class ImageViewPreference extends Preference {
                 imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
             }
             try {
-                isImageResourceID = (splits[1].equals("1")) ? true : false;
+                isImageResourceID = splits[1].equals("1");
             } catch (Exception e) {
                 isImageResourceID = true;
             }
@@ -196,7 +192,7 @@ public class ImageViewPreference extends Preference {
         // restore instance state
         SavedState myState = (SavedState)state;
         super.onRestoreInstanceState(myState.getSuperState());
-        String value = (String) myState.imageIdentifierAndType;
+        String value = myState.imageIdentifierAndType;
         String[] splits = value.split("\\|");
         try {
             imageIdentifier = splits[0];
@@ -204,13 +200,14 @@ public class ImageViewPreference extends Preference {
             imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
         }
         try {
-            isImageResourceID = (splits[1].equals("1")) ? true : false;
+            isImageResourceID = splits[1].equals("1");
         } catch (Exception e) {
             isImageResourceID = true;
         }
         notifyChanged();
     }
 
+    /*
     public String getImageIdentifier()
     {
         return imageIdentifier;
@@ -220,8 +217,9 @@ public class ImageViewPreference extends Preference {
     {
         return isImageResourceID;
     }
+    */
 
-    public void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID)
+    void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID)
     {
         String newValue = newImageIdentifier+"|"+((newIsImageResourceID) ? "1" : "0");
 
@@ -237,7 +235,7 @@ public class ImageViewPreference extends Preference {
             imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
         }
         try {
-            isImageResourceID = (splits[1].equals("1")) ? true : false;
+            isImageResourceID = splits[1].equals("1");
         } catch (Exception e) {
             isImageResourceID = true;
         }
@@ -250,7 +248,7 @@ public class ImageViewPreference extends Preference {
 
     }
 
-    public void startGallery()
+    void startGallery()
     {
         //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
@@ -268,7 +266,7 @@ public class ImageViewPreference extends Preference {
     {
         String imageIdentifierAndType;
 
-        public SavedState(Parcel source)
+        SavedState(Parcel source)
         {
             super(source);
 
@@ -285,7 +283,7 @@ public class ImageViewPreference extends Preference {
             dest.writeString(imageIdentifierAndType);
         }
 
-        public SavedState(Parcelable superState)
+        SavedState(Parcelable superState)
         {
             super(superState);
         }
@@ -317,10 +315,10 @@ public class ImageViewPreference extends Preference {
      *
      * @param context The context.
      * @param uri The Uri to query.
-     * @author paulburke
+     * author paulburke
      */
     @SuppressLint("NewApi")
-    public static String getPath(final Context context, final Uri uri) {
+    static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
@@ -397,7 +395,7 @@ public class ImageViewPreference extends Preference {
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    public static String getDataColumn(Context context, Uri uri, String selection,
+    private static String getDataColumn(Context context, Uri uri, String selection,
                                        String[] selectionArgs) {
 
         Cursor cursor = null;
@@ -425,7 +423,7 @@ public class ImageViewPreference extends Preference {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
+    private static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
@@ -433,7 +431,7 @@ public class ImageViewPreference extends Preference {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
+    private static boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
@@ -441,7 +439,7 @@ public class ImageViewPreference extends Preference {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
+    private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
@@ -449,7 +447,7 @@ public class ImageViewPreference extends Preference {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is Google Photos.
      */
-    public static boolean isGooglePhotosUri(Uri uri) {
+    private static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 

@@ -10,7 +10,6 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
     private DataWrapper dataWrapper;
 
-    private String profileName;
     private long profile_id = 0;
 
     @Override
@@ -18,14 +17,14 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        profileName = intent.getStringExtra(GlobalData.EXTRA_PROFILE_NAME);
+        String profileName = intent.getStringExtra(GlobalData.EXTRA_PROFILE_NAME);
         profileName = profileName.trim();
 
         if (!profileName.isEmpty()) {
             GlobalData.loadPreferences(getApplicationContext());
 
             dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
-            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, this, getApplicationContext());
+            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
 
             List<Profile> profileList = dataWrapper.getProfileList();
             for (Profile profile : profileList) {

@@ -11,39 +11,31 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddProfileDialog
+class AddProfileDialog
 {
-    private AddProfileAdapter addProfileAdapter;
-
     public List<Profile> profileList;
 
-    private Context _context;
     private EditorProfileListFragment profileListFragment;
 
     private MaterialDialog mDialog;
-    private ListView listView;
 
-    public AddProfileDialog(Context context, EditorProfileListFragment profileListFragment)
+    AddProfileDialog(Context context, EditorProfileListFragment profileListFragment)
     {
-        _context = context;
         this.profileListFragment = profileListFragment;
 
-        profileList = new ArrayList<Profile>();
-
-        boolean monochrome = false;
-        int monochromeValue = 0xFF;
+        profileList = new ArrayList<>();
 
         Profile profile;
         profile = DataWrapper.getNoinitializedProfile(
                                         context.getResources().getString(R.string.profile_name_default),
                                         GlobalData.PROFILE_ICON_DEFAULT, 0);
-        profile.generateIconBitmap(context, monochrome, monochromeValue);
-        profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+        profile.generateIconBitmap(context, false, 0xFF);
+        profile.generatePreferencesIndicator(context, false, 0xFF);
         profileList.add(profile);
         for (int index = 0; index < 6; index++) {
             profile = profileListFragment.dataWrapper.getPredefinedProfile(index, false);
-            profile.generateIconBitmap(context, monochrome, monochromeValue);
-            profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+            profile.generateIconBitmap(context, false, 0xFF);
+            profile.generatePreferencesIndicator(context, false, 0xFF);
             profileList.add(profile);
         }
 
@@ -55,9 +47,9 @@ public class AddProfileDialog
 
         mDialog = dialogBuilder.build();
 
-        listView = (ListView)mDialog.getCustomView().findViewById(R.id.profile_pref_dlg_listview);
+        ListView listView = (ListView)mDialog.getCustomView().findViewById(R.id.profile_pref_dlg_listview);
 
-        addProfileAdapter = new AddProfileAdapter(this, _context, profileList);
+        AddProfileAdapter addProfileAdapter = new AddProfileAdapter(this, context, profileList);
         listView.setAdapter(addProfileAdapter);
 
         listView.setOnItemClickListener(new OnItemClickListener() {
@@ -69,7 +61,7 @@ public class AddProfileDialog
 
     }
 
-    public void doOnItemSelected(int position)
+    void doOnItemSelected(int position)
     {
         profileListFragment.startProfilePreferencesActivity(null, position);
         mDialog.dismiss();

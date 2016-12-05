@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class ApplicationEditorDialogAdapter extends BaseAdapter
+class ApplicationEditorDialogAdapter extends BaseAdapter
 {
     private LayoutInflater inflater;
     private Context context;
 
     ApplicationEditorDialog dialog;
     Application application;
-    int selectedPosition;
+    private int selectedPosition;
 
-    public ApplicationEditorDialogAdapter(ApplicationEditorDialog dialog, Context context,
+    ApplicationEditorDialogAdapter(ApplicationEditorDialog dialog, Context context,
                                                 Application application, int selectedPosition)
     {
         // Cache the LayoutInflate to avoid asking for a new one each time.
@@ -50,6 +51,7 @@ public class ApplicationEditorDialogAdapter extends BaseAdapter
         int position;
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ViewHolder holder;

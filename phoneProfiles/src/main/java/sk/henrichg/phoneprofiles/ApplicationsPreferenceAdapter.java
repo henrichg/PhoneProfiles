@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spannable;
@@ -13,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ApplicationsPreferenceAdapter extends BaseAdapter
+class ApplicationsPreferenceAdapter extends BaseAdapter
 {
     private LayoutInflater inflater;
     private Context context;
@@ -21,7 +22,7 @@ public class ApplicationsPreferenceAdapter extends BaseAdapter
 
     private ApplicationsDialogPreference preference;
 
-    public ApplicationsPreferenceAdapter(Context context, ApplicationsDialogPreference preference)
+    ApplicationsPreferenceAdapter(Context context, ApplicationsDialogPreference preference)
     {
         // Cache the LayoutInflate to avoid asking for a new one each time.
         inflater = LayoutInflater.from(context);
@@ -43,7 +44,7 @@ public class ApplicationsPreferenceAdapter extends BaseAdapter
         return position;
     }
 
-    public static void setTextStyle(TextView textView, boolean errorColor)
+    private void setTextStyle(TextView textView, boolean errorColor)
     {
         if (textView != null) {
             CharSequence title = textView.getText();
@@ -67,7 +68,9 @@ public class ApplicationsPreferenceAdapter extends BaseAdapter
         if (preference.applicationsList == null)
             return;
 
+        //noinspection SuspiciousMethodCalls
         int plFrom = preference.applicationsList.indexOf(getItem(from));
+        //noinspection SuspiciousMethodCalls
         int plTo = preference.applicationsList.indexOf(getItem(to));
 
         Application application = preference.applicationsList.get(plFrom);
@@ -76,6 +79,7 @@ public class ApplicationsPreferenceAdapter extends BaseAdapter
         notifyDataSetChanged();
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(int position, View convertView, ViewGroup parent)
     {
         // Application to display

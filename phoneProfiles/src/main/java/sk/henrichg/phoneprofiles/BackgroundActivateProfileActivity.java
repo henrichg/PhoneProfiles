@@ -10,7 +10,6 @@ public class BackgroundActivateProfileActivity extends Activity {
 
     private int startupSource = 0;
     private long profile_id;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class BackgroundActivateProfileActivity extends Activity {
 
             dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
 
-            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, this, getApplicationContext());
+            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
         }
     }
 

@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -19,6 +20,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class ImportantInfoActivity extends AppCompatActivity {
 
+    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,15 +50,16 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
         }
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.info_notification_title);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.info_notification_title);
+        }
 
-        PackageInfo pinfo = null;
         int versionCode = 0;
         Context context = getApplicationContext();
         try {
-            pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             versionCode = pinfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
@@ -68,7 +71,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
 
         if (newsLatest) {
-            ;    // no news
+                // no news
         }
 
         if (news1634) {

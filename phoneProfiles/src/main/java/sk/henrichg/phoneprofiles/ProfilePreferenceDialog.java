@@ -12,33 +12,28 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProfilePreferenceDialog
+class ProfilePreferenceDialog
 {
 
-    public ProfilePreference profilePreference;
-    public int addNoActivateItem;
+    private ProfilePreference profilePreference;
+    int addNoActivateItem;
     private ProfilePreferenceAdapter profilePreferenceAdapter;
 
     public List<Profile> profileList;
-    String profileId;
-
-    private Context _context;
+    //String profileId;
 
     private MaterialDialog mDialog;
-    private ListView listView;
 
-    public ProfilePreferenceDialog(Context context, ProfilePreference preference, String profileId)
+    ProfilePreferenceDialog(Context context, ProfilePreference preference, String profileId)
     {
         profilePreference = preference;
 
-        this.profileId = profileId;
+        //this.profileId = profileId;
         profileList = ProfilePreference.dataWrapper.getProfileList();
         Collections.sort(profileList, new AlphabeticallyComparator());
 
         addNoActivateItem = profilePreference.addNoActivateItem;
 
-
-        _context = context;
 
         MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(context)
                 .title(R.string.title_activity_profile_preference_dialog)
@@ -48,9 +43,10 @@ public class ProfilePreferenceDialog
 
         mDialog = dialogBuilder.build();
 
-        listView = (ListView)mDialog.getCustomView().findViewById(R.id.profile_pref_dlg_listview);
+        //noinspection ConstantConditions
+        ListView listView = (ListView)mDialog.getCustomView().findViewById(R.id.profile_pref_dlg_listview);
 
-        profilePreferenceAdapter = new ProfilePreferenceAdapter(this, _context, profileId, profileList);
+        profilePreferenceAdapter = new ProfilePreferenceAdapter(this, context, profileId, profileList);
         listView.setAdapter(profilePreferenceAdapter);
 
         int position;
@@ -95,7 +91,7 @@ public class ProfilePreferenceDialog
 
     }
 
-    public void doOnItemSelected(int position)
+    void doOnItemSelected(int position)
     {
         if (addNoActivateItem == 1)
         {
@@ -114,9 +110,7 @@ public class ProfilePreferenceDialog
     private class AlphabeticallyComparator implements Comparator<Profile> {
 
         public int compare(Profile lhs, Profile rhs) {
-
-            int res = GUIData.collator.compare(lhs._name, rhs._name);
-            return res;
+            return GUIData.collator.compare(lhs._name, rhs._name);
         }
     }
 

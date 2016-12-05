@@ -34,13 +34,13 @@ public class PhoneCallService extends IntentService {
 
             switch (phoneEvent) {
                 case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_START:
-                    callStarted(incoming, number);
+                    callStarted(incoming);
                     break;
                 case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_ANSWER:
-                    callAnswered(incoming, number);
+                    callAnswered();
                     break;
                 case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_END:
-                    callEnded(incoming, number);
+                    callEnded(incoming);
                     break;
             }
         }
@@ -61,7 +61,7 @@ public class PhoneCallService extends IntentService {
         }
     }
 
-    private void callStarted(boolean incoming, String phoneNumber)
+    private void callStarted(boolean incoming)
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -72,7 +72,7 @@ public class PhoneCallService extends IntentService {
             setLinkUnlinkNotificationVolume(LINKMODE_UNLINK);
     }
 
-    private void callAnswered(boolean incoming, String phoneNumber)
+    private void callAnswered()
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -114,7 +114,7 @@ public class PhoneCallService extends IntentService {
         dataWrapper.invalidateDataWrapper();
     }
 
-    private void callEnded(boolean incoming, String phoneNumber)
+    private void callEnded(boolean incoming)
     {
         //Deactivate loudspeaker
 

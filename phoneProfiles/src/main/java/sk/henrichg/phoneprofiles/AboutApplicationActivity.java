@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -25,6 +26,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class AboutApplicationActivity extends AppCompatActivity {
 
+    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,14 +56,15 @@ public class AboutApplicationActivity extends AppCompatActivity {
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
         }
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.about_application_title);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.about_application_title);
+        }
 
         TextView text = (TextView) findViewById(R.id.about_application_application_version);
         try {
-            PackageInfo pinfo = null;
-            pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String packageVersion = pinfo.versionName;
             text.setText(getString(R.string.about_application_version) + " " + packageVersion);
         } catch (PackageManager.NameNotFoundException e) {
@@ -89,10 +92,9 @@ public class AboutApplicationActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_EMAIL, email);
                 String packageVersion = "";
                 try {
-                    PackageInfo pinfo = null;
-                    pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                     packageVersion = " - v" + pinfo.versionName;
-                } catch (PackageManager.NameNotFoundException e) {
+                } catch (Exception ignored) {
                 }
                 intent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion);
                 //if (intent.resolveActivity(getPackageManager()) != null) {
@@ -177,6 +179,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
                             Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                             Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 else
+                    //noinspection deprecation
                     goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                             Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
                             Intent.FLAG_ACTIVITY_MULTIPLE_TASK);

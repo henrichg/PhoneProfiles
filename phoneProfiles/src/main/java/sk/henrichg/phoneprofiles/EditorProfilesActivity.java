@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -66,6 +67,7 @@ public class EditorProfilesActivity extends AppCompatActivity
      */
     public static boolean mTwoPane;
 
+    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -143,9 +145,11 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragmentManager.executePendingTransactions();
         }
 
-        //getSupportActionBar().setHomeButtonEnabled(true);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.title_activity_editor);
+        if (getSupportActionBar() != null) {
+            //getSupportActionBar().setHomeButtonEnabled(true);
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.title_activity_editor);
+        }
 
     /*	getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -244,7 +248,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             menuItem.setVisible(false);
         }
 
-        boolean isPPHInstalled = PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
+        PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
 
         menuItem = menu.findItem(R.id.menu_pphelper_uninstall);
         if (menuItem != null)
@@ -416,6 +420,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 if (profile_id > 0)
                 {
+                    //noinspection ConstantConditions
                     Profile profile = getDataWrapper().getDatabaseHandler().getProfile(profile_id);
                     // generate bitmaps
                     profile.generateIconBitmap(getBaseContext(), false, 0);
@@ -502,13 +507,13 @@ public class EditorProfilesActivity extends AppCompatActivity
                     String key = entry.getKey();
 
                     if (v instanceof Boolean)
-                        prefEdit.putBoolean(key, ((Boolean) v).booleanValue());
+                        prefEdit.putBoolean(key, (Boolean) v);
                     else if (v instanceof Float)
-                        prefEdit.putFloat(key, ((Float) v).floatValue());
+                        prefEdit.putFloat(key, (Float) v);
                     else if (v instanceof Integer)
-                        prefEdit.putInt(key, ((Integer) v).intValue());
+                        prefEdit.putInt(key, (Integer) v);
                     else if (v instanceof Long)
-                        prefEdit.putLong(key, ((Long) v).longValue());
+                        prefEdit.putLong(key, (Long) v);
                     else if (v instanceof String)
                         prefEdit.putString(key, ((String) v));
 
@@ -516,7 +521,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     {
                         if (key.equals(GlobalData.PREF_APPLICATION_THEME))
                         {
-                            if (((String)v).equals("light"))
+                            if (v.equals("light"))
                                 prefEdit.putString(key, "material");
                         }
                     }
@@ -550,7 +555,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 private MaterialDialog dialog;
                 private DataWrapper dataWrapper;
 
-                ImportAsyncTask() {
+                private ImportAsyncTask() {
                     this.dialog = new MaterialDialog.Builder(activity)
                             .content(R.string.import_profiles_alert_title)
                                     //.disableDefaultFonts()
@@ -571,7 +576,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
                     if (fragment != null)
-                        ((EditorProfileListFragment) fragment).removeAdapter();
+                        fragment.removeAdapter();
                 }
 
                 @Override
@@ -753,8 +758,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private void exportData()
     {
-        final Activity activity = this;
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle(R.string.export_profiles_alert_title);
         dialogBuilder.setMessage(R.string.export_profiles_alert_message);
@@ -780,7 +783,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 private MaterialDialog dialog;
                 private DataWrapper dataWrapper;
 
-                ExportAsyncTask() {
+                private ExportAsyncTask() {
                     this.dialog = new MaterialDialog.Builder(activity)
                             .content(R.string.export_profiles_alert_title)
                                     //.disableDefaultFonts()
@@ -972,7 +975,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     {
         EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
         if (fragment != null)
-            return ((EditorProfileListFragment)fragment).dataWrapper;
+            return fragment.dataWrapper;
         else
             return null;
     }

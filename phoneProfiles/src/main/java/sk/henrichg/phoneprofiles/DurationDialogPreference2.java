@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.DialogPreference;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -33,8 +34,6 @@ public class DurationDialogPreference2 extends DialogPreference
     private SeekBar mSeekBarMinutes;
     private SeekBar mSeekBarSeconds;
 
-    private int mColor = 0;
-
     public DurationDialogPreference2(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray durationDialogType = context.obtainStyledAttributes(attrs,
@@ -45,8 +44,8 @@ public class DurationDialogPreference2 extends DialogPreference
 
         durationDialogType.recycle();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            mColor = DialogUtils.resolveColor(context, R.attr.colorAccent);
+        //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        //    mColor = DialogUtils.resolveColor(context, R.attr.colorAccent);
     }
 
     @SuppressLint("DefaultLocale")
@@ -61,7 +60,7 @@ public class DurationDialogPreference2 extends DialogPreference
                 .content(getDialogMessage())
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         int hours = mSeekBarHours.getProgress();
                         int minutes = mSeekBarMinutes.getProgress();
                         int seconds = mSeekBarSeconds.getProgress();
@@ -109,15 +108,15 @@ public class DurationDialogPreference2 extends DialogPreference
                 String[] splits = value.split(":");
                 try {
                     hours = Integer.parseInt(splits[0].replaceFirst("\\s+$", ""));
-                } catch (Exception e) {
+                } catch (Exception ignore) {
                 }
                 try {
                     minutes = Integer.parseInt(splits[1].replaceFirst("\\s+$", ""));
-                } catch (Exception e) {
+                } catch (Exception ignore) {
                 }
                 try {
                     seconds = Integer.parseInt(splits[2].replaceFirst("\\s+$", ""));
-                } catch (Exception e) {
+                } catch (Exception ignore) {
                 }
 
                 int iValue = (hours * 3600 + minutes * 60 + seconds);

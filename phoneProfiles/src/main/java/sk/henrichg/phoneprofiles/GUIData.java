@@ -24,21 +24,22 @@ import java.util.Locale;
 
 public class GUIData {
 
-    public static BrightnessView brightneesView = null;
-    public static BrightnessView keepScreenOnView = null;
+    static BrightnessView brightneesView = null;
+    static BrightnessView keepScreenOnView = null;
 
-    public static Collator collator = null;
+    static Collator collator = null;
 
     // import/export
-    public static final String DB_FILEPATH = "/data/" + GlobalData.PACKAGE_NAME + "/databases";
-    public static final String REMOTE_EXPORT_PATH = "/PhoneProfilesPlus";
-    public static final String EXPORT_APP_PREF_FILENAME = "ApplicationPreferences.backup";
-    public static final String EXPORT_DEF_PROFILE_PREF_FILENAME = "DefaultProfilePreferences.backup";
+    static final String DB_FILEPATH = "/data/" + GlobalData.PACKAGE_NAME + "/databases";
+    static final String REMOTE_EXPORT_PATH = "/PhoneProfilesPlus";
+    static final String EXPORT_APP_PREF_FILENAME = "ApplicationPreferences.backup";
+    static final String EXPORT_DEF_PROFILE_PREF_FILENAME = "DefaultProfilePreferences.backup";
 
     // this string is from material-preferences linrary (https://github.com/ferrannp/material-preferences)
-    public static final String MAIN_PREFERENCE_FRAGMENT_TAG = "com.fnp.materialpreferences.MainFragment";
+    //public static final String MAIN_PREFERENCE_FRAGMENT_TAG = "com.fnp.materialpreferences.MainFragment";
 
 
+    @SuppressWarnings("deprecation")
     public static void setLanguage(Context context)//, boolean restart)
     {
         if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -55,13 +56,22 @@ public class GUIData {
                 else
                     appLocale = new Locale(langSplit[0], langSplit[1]);
             } else {
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                //    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+                //else
                 appLocale = Resources.getSystem().getConfiguration().locale;
             }
 
             Locale.setDefault(appLocale);
             Configuration appConfig = new Configuration();
+            //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            //    appConfig.setLocale(appLocale);
+            //else
             appConfig.locale = appLocale;
 
+            //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            //    Context context  = context.createConfigurationContext(appConfig);
+            //else
             context.getResources().updateConfiguration(appConfig, context.getResources().getDisplayMetrics());
         }
 
@@ -71,7 +81,7 @@ public class GUIData {
         //languageChanged = restart;
     }
 
-    public static Collator getCollator()
+    private static Collator getCollator()
     {
         if (android.os.Build.VERSION.SDK_INT < 24) {
             // get application Locale
@@ -84,7 +94,12 @@ public class GUIData {
                 else
                     appLocale = new Locale(langSplit[0], langSplit[1]);
             } else {
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                //    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+                //} else {
+                //noinspection deprecation
                 appLocale = Resources.getSystem().getConfiguration().locale;
+                //}
             }
             // get collator for application locale
             return Collator.getInstance(appLocale);
@@ -100,7 +115,7 @@ public class GUIData {
         activity.setTheme(getTheme(forPopup, withToolbar));
     }
 
-    public static int getTheme(boolean forPopup, boolean withToolbar) {
+    private static int getTheme(boolean forPopup, boolean withToolbar) {
         if (GlobalData.applicationTheme.equals("material"))
         {
             if (forPopup)
@@ -157,6 +172,7 @@ public class GUIData {
         return 0;
     }
 
+    /*
     public static int getDialogTheme(boolean forAlert) {
         if (GlobalData.applicationTheme.equals("material"))
         {
@@ -183,8 +199,9 @@ public class GUIData {
         }
         return 0;
     }
+    */
 
-    public static void reloadActivity(Activity activity, boolean newIntent)
+    static void reloadActivity(Activity activity, boolean newIntent)
     {
         if (newIntent)
         {
@@ -209,7 +226,7 @@ public class GUIData {
             activity.recreate();
     }
 
-    public static void registerOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+    static void registerOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
         try {
             PreferenceManager pm = preference.getPreferenceManager();
             Method method = pm.getClass().getDeclaredMethod(
@@ -221,7 +238,7 @@ public class GUIData {
         }
     }
 
-    public static void unregisterOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+    static void unregisterOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
         try {
             PreferenceManager pm = preference.getPreferenceManager();
             Method method = pm.getClass().getDeclaredMethod(
@@ -233,11 +250,13 @@ public class GUIData {
         }
     }
 
-    public static float pixelsToSp(Context context, float px) {
+    /*
+    private static float pixelsToSp(Context context, float px) {
         return px / context.getResources().getDisplayMetrics().scaledDensity;
     }
+    */
 
-    public static float spToPixels(Context context, float sp) {
+    private static float spToPixels(Context context, float sp) {
         return sp * context.getResources().getDisplayMetrics().scaledDensity;
     }
 
@@ -245,7 +264,7 @@ public class GUIData {
      * Uses reflection to access divider private attribute and override its color
      * Use Color.Transparent if you wish to hide them
      */
-    public static void setSeparatorColorForNumberPicker(NumberPicker picker, int separatorColor) {
+    static void setSeparatorColorForNumberPicker(NumberPicker picker, int separatorColor) {
         Field[] pickerFields = NumberPicker.class.getDeclaredFields();
         for (Field pf : pickerFields) {
             if (pf.getName().equals("mSelectionDivider")) {
@@ -259,7 +278,7 @@ public class GUIData {
         }
     }
 
-    public static void updateTextAttributesForNumberPicker(NumberPicker picker, /*int textColor,*/ int textSizeSP) {
+    static void updateTextAttributesForNumberPicker(NumberPicker picker, /*int textColor,*/ int textSizeSP) {
         for (int i = 0; i < picker.getChildCount(); i++){
             View child = picker.getChildAt(i);
             if (child instanceof EditText) {
@@ -285,7 +304,7 @@ public class GUIData {
     }
 
     @SuppressWarnings("deprecation")
-    public static Spanned fromHtml(String source) {
+    static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {

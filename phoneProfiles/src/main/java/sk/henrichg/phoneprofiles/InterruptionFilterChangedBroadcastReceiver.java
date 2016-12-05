@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -45,6 +46,9 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
                         case NotificationManager.INTERRUPTION_FILTER_ALARMS:
                             zenMode = 6;
                             break;
+                        case NotificationManager.INTERRUPTION_FILTER_UNKNOWN:
+                            zenMode = 1;
+                            break;
                     }
                     GlobalData.logE(TAG, "onReceive(zenMode=" + zenMode + ')');
                     if (zenMode != 0) {
@@ -59,6 +63,7 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private static boolean vibrationIsOn(Context context, AudioManager audioManager) {
         int ringerMode = audioManager.getRingerMode();
         int vibrateType = -999;
@@ -72,8 +77,8 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
         GlobalData.logE(TAG, "vibrationIsOn(vibrateWhenRinging="+vibrateWhenRinging+")");
 
         return (ringerMode == AudioManager.RINGER_MODE_VIBRATE) ||
-                (vibrateType == AudioManager.VIBRATE_SETTING_ON) ||
-                (vibrateType == AudioManager.VIBRATE_SETTING_ONLY_SILENT) ||
+                //(vibrateType == AudioManager.VIBRATE_SETTING_ON) ||
+                //(vibrateType == AudioManager.VIBRATE_SETTING_ONLY_SILENT) ||
                 (vibrateWhenRinging == 1);
     }
 
@@ -104,6 +109,9 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
                         break;
                     case NotificationManager.INTERRUPTION_FILTER_ALARMS:
                         zenMode = 6;
+                        break;
+                    case NotificationManager.INTERRUPTION_FILTER_UNKNOWN:
+                        zenMode = 1;
                         break;
                 }
                 GlobalData.logE(TAG, "getZenMode(zenMode=" + zenMode + ')');

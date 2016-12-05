@@ -15,7 +15,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
 
@@ -90,9 +90,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEVICE_WALLPAPER_FOR = "deviceWallpaperFor";
 
     // Shortcuts Colums names
-    public static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
-    public static final String KEY_S_INTENT = "intent";
-    public static final String KEY_S_NAME = "name";
+    private static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
+    private static final String KEY_S_INTENT = "intent";
+    private static final String KEY_S_NAME = "name";
 
     /**
      * Constructor takes and keeps a reference of the passed context in order to
@@ -125,7 +125,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      *
      * @return a writable instance to SQLiteDatabase
      */
-    public SQLiteDatabase getMyWritableDatabase() {
+    private SQLiteDatabase getMyWritableDatabase() {
         if ((writableDb == null) || (!writableDb.isOpen())) {
             writableDb = this.getWritableDatabase();
         }
@@ -145,7 +145,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // be sure to call this method by: DatabaseHandler.getInstance().closeConnecion() 
     // when application is closed by somemeans most likely
     // onDestroy method of application
-    public synchronized void closeConnecion() {
+    synchronized void closeConnecion() {
         if (instance != null)
         {
             instance.close();
@@ -407,6 +407,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                     } while (cursor.moveToNext());
                 }
+
+                cursor.close();
             }
         }
 
@@ -438,7 +440,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     String[] splits = brightness.split("\\|");
 
                     int perc = Integer.parseInt(splits[0]);
-                    perc = (int)Profile.convertBrightnessToPercents(perc, 255, 1, context);
+                    perc = (int)Profile.convertBrightnessToPercents(perc, 255, 1);
 
                     // hm, found brightness values without default profile :-/
                     if (splits.length == 4)
@@ -452,6 +454,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                 } while (cursor.moveToNext());
             }
+
+            cursor.close();
         }
 
         if (oldVersion < 1175)
@@ -491,6 +495,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                     } while (cursor.moveToNext());
                 }
+
+                cursor.close();
             }
         }
 
@@ -531,6 +537,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                 } while (cursor.moveToNext());
             }
+
+            cursor.close();
         }
 
         if (oldVersion < 1210)
@@ -553,6 +561,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                 } while (cursor.moveToNext());
             }
+
+            cursor.close();
         }
 
         if (oldVersion < 1220)
@@ -696,10 +706,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
 
         // Inserting Row
-        long id = db.insert(TABLE_PROFILES, null, values);
+        profile._id = db.insert(TABLE_PROFILES, null, values);
         //db.close(); // Closing database connection
 
-        profile._id = id;
         //profile.setPOrder(porder);
     }
 
@@ -772,7 +781,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile = new Profile(Long.parseLong(cursor.getString(0)),
                                               cursor.getString(1),
                                               cursor.getString(2),
-                                              (Integer.parseInt(cursor.getString(3)) == 1) ? true : false,
+                                              Integer.parseInt(cursor.getString(3)) == 1,
                                               Integer.parseInt(cursor.getString(4)),
                                               Integer.parseInt(cursor.getString(5)),
                                               cursor.getString(6),
@@ -811,7 +820,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(39)),
                                               Integer.parseInt(cursor.getString(40)),
                                               Integer.parseInt(cursor.getString(41)),
-                                              (Integer.parseInt(cursor.getString(43)) == 1) ? true : false,
+                                              Integer.parseInt(cursor.getString(43)) == 1,
                                               Integer.parseInt(cursor.getString(44)),
                                               Integer.parseInt(cursor.getString(45)),
                                               Integer.parseInt(cursor.getString(46)),
@@ -827,8 +836,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Profiles
-    public List<Profile> getAllProfiles() {
-        List<Profile> profileList = new ArrayList<Profile>();
+    List<Profile> getAllProfiles() {
+        List<Profile> profileList = new ArrayList<>();
         // Select All Query
         final String selectQuery = "SELECT " + KEY_ID + "," +
                                          KEY_NAME + "," +
@@ -892,7 +901,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile._id = Long.parseLong(cursor.getString(0));
                 profile._name = cursor.getString(1);
                 profile._icon = (cursor.getString(2));
-                profile._checked = ((Integer.parseInt(cursor.getString(3)) == 1) ? true : false);
+                profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
                 profile._porder = (Integer.parseInt(cursor.getString(4)));
                 profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
                 profile._volumeRingtone = cursor.getString(6);
@@ -931,7 +940,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
                 profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
                 profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
-                profile._askForDuration = ((Integer.parseInt(cursor.getString(43)) == 1) ? true : false);
+                profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
                 profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
                 profile._notificationLed = Integer.parseInt(cursor.getString(45));
                 profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(46));
@@ -949,7 +958,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Updating single profile
-    public int updateProfile(Profile profile) {
+    int updateProfile(Profile profile) {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
 
@@ -1003,15 +1012,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
 
         // updating row
-        int r = db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+        return db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
                         new String[] { String.valueOf(profile._id) });
         //db.close();
         
-        return r;
+        //return r;
     }
 
     // Deleting single profile
-    public void deleteProfile(Profile profile) {
+    void deleteProfile(Profile profile) {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
 
@@ -1020,11 +1029,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             // unlink shortcuts from profile
             String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
-            for (int i = 0; i < splits.length; i++)
-            {
-                boolean shortcut = ApplicationsCache.isShortcut(splits[i]);
+            for (String split : splits) {
+                boolean shortcut = ApplicationsCache.isShortcut(split);
                 if (shortcut) {
-                    long shortcutId = ApplicationsCache.getShortcutId(splits[i]);
+                    long shortcutId = ApplicationsCache.getShortcutId(split);
                     deleteShortcut(shortcutId);
                 }
             }
@@ -1043,7 +1051,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting all profile2
-    public void deleteAllProfiles() {
+    void deleteAllProfiles() {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
 
@@ -1066,7 +1074,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting profiles Count
-    public int getProfilesCount() {
+    int getProfilesCount() {
         final String countQuery = "SELECT  count(*) FROM " + TABLE_PROFILES;
 
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -1080,18 +1088,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         {
             cursor.moveToFirst();
             r = Integer.parseInt(cursor.getString(0));
+            cursor.close();
         }
         else
             r = 0;
 
-        cursor.close();
         //db.close();
 
         return r;
     }
 
     // Getting max(porder)
-    public int getMaxPOrder() {
+    private int getMaxPOrder() {
         String countQuery = "SELECT MAX(PORDER) FROM " + TABLE_PROFILES;
         //SQLiteDatabase db = this.getReadableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
@@ -1118,7 +1126,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public void doActivateProfile(Profile profile, boolean activate)
+    private void doActivateProfile(Profile profile, boolean activate)
     {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
@@ -1158,7 +1166,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         doActivateProfile(profile, true);
     }
 
-    public void deactivateProfile()
+    void deactivateProfile()
     {
         doActivateProfile(null, false);
     }
@@ -1234,7 +1242,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 profile = new Profile(Long.parseLong(cursor.getString(0)),
                                               cursor.getString(1),
                                               cursor.getString(2),
-                                              (Integer.parseInt(cursor.getString(3)) == 1) ? true : false,
+                                              Integer.parseInt(cursor.getString(3)) == 1,
                                               Integer.parseInt(cursor.getString(4)),
                                               Integer.parseInt(cursor.getString(5)),
                                               cursor.getString(6),
@@ -1273,7 +1281,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(39)),
                                               Integer.parseInt(cursor.getString(40)),
                                               Integer.parseInt(cursor.getString(41)),
-                                              (Integer.parseInt(cursor.getString(43)) == 1) ? true : false,
+                                              Integer.parseInt(cursor.getString(43)) == 1,
                                               Integer.parseInt(cursor.getString(44)),
                                               Integer.parseInt(cursor.getString(45)),
                                               Integer.parseInt(cursor.getString(46)),
@@ -1295,7 +1303,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public Profile getFirstProfile()
+    Profile getFirstProfile()
     {
         final String selectQuery = "SELECT " + KEY_ID + "," +
                                          KEY_NAME + "," +
@@ -1360,7 +1368,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             profile._id = Long.parseLong(cursor.getString(0));
             profile._name = cursor.getString(1);
             profile._icon = (cursor.getString(2));
-            profile._checked = ((Integer.parseInt(cursor.getString(3)) == 1) ? true : false);
+            profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
             profile._porder = (Integer.parseInt(cursor.getString(4)));
             profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
             profile._volumeRingtone = cursor.getString(6);
@@ -1399,7 +1407,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
             profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
             profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
-            profile._askForDuration = ((Integer.parseInt(cursor.getString(43)) == 1) ? true : false);
+            profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
             profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
             profile._notificationLed = Integer.parseInt(cursor.getString(45));
             profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(46));
@@ -1414,7 +1422,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public int getProfilePosition(Profile profile)
+    int getProfilePosition(Profile profile)
     {
         final String selectQuery = "SELECT " + KEY_ID +
                                " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
@@ -1445,7 +1453,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public void setPOrder(List<Profile> list)
+    void setPOrder(List<Profile> list)
     {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
@@ -1501,6 +1509,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //db.close();
     }
 
+    /*
     public int getActiveProfileSpeakerphone()
     {
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -1525,17 +1534,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             else
                 speakerPhone = 0;
+
+            cursor.close();
         }
         else
             speakerPhone = 0;
 
-        cursor.close();
         //db.close();
 
         return speakerPhone;
     }
+    */
 
-    public void getProfileIcon(Profile profile)
+    void getProfileIcon(Profile profile)
     {
         //SQLiteDatabase db = this.getReadableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
@@ -1549,14 +1560,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         {
             if (cursor.moveToFirst())
                 profile._icon = cursor.getString(0);
+            cursor.close();
         }
 
-        cursor.close();
         //db.close();
 
     }
 
-    public int disableNotAllowedPreferences(Context context)
+    int disableNotAllowedPreferences(Context context)
     {
         int ret = 0;
 
@@ -1828,6 +1839,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return shortcut;
     }
 
+    /*
     // Updating single shortcut
     public int updateShortcut(Shortcut shortcut) {
         //SQLiteDatabase db = this.getWritableDatabase();
@@ -1860,9 +1872,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return r;
     }
+    */
 
     // Deleting single shortcut
-    public void deleteShortcut(long shortcutId) {
+    void deleteShortcut(long shortcutId) {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
 
@@ -1888,19 +1901,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 // OTHERS -----------------------------------------------------------------
 
-    public boolean tableExists(String tableName, SQLiteDatabase db)
+    private boolean tableExists(String tableName, SQLiteDatabase db)
     {
         @SuppressWarnings("unused")
-        Cursor c = null;
 
         boolean tableExists = false;
 
         /* get cursor on it */
         try
         {
-            c = db.query(tableName, null,
+            Cursor c = db.query(tableName, null,
                     null, null, null, null, null);
             tableExists = true;
+            c.close();
         }
         catch (Exception e) {
             /* not exists ? */
@@ -1910,7 +1923,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     //@SuppressWarnings("resource")
-    public int importDB(String applicationDataPath)
+    int importDB(String applicationDataPath)
     {
         int ret = 0;
 
@@ -2009,7 +2022,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                             String[] splits = value.split("\\|");
 
                                             int perc = Integer.parseInt(splits[0]);
-                                            perc = (int)Profile.convertBrightnessToPercents(perc, 255, 1, context);
+                                            perc = (int)Profile.convertBrightnessToPercents(perc, 255, 1);
 
                                             // hm, found brightness values without default profile :-/
                                             if (splits.length == 4)
@@ -2235,7 +2248,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     @SuppressWarnings("resource")
-    public int exportDB()
+    int exportDB()
     {
         int ret = 0;
 
@@ -2255,6 +2268,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 File exportDir = new File(sd, GlobalData.EXPORT_PATH);
                 if (!(exportDir.exists() && exportDir.isDirectory()))
                 {
+                    //noinspection ResultOfMethodCallIgnored
                     exportDir.mkdirs();
                 }
 

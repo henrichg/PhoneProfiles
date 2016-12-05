@@ -63,51 +63,49 @@ public class ActivateProfileHelper {
 
     private DataWrapper dataWrapper;
 
-    private Activity activity;
     private Context context;
     private NotificationManager notificationManager;
     private Handler brightnessHandler;
 
     private int networkType = -1;
 
-    public static boolean lockRefresh = false;
+    static boolean lockRefresh = false;
 
-    public static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
+    static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
 
     // Setting.Global "zen_mode"
-    public static final int ZENMODE_ALL = 0;
-    public static final int ZENMODE_PRIORITY = 1;
-    public static final int ZENMODE_NONE = 2;
-    public static final int ZENMODE_ALARMS = 3;
-    public static final int ZENMODE_SILENT = 99;
+    static final int ZENMODE_ALL = 0;
+    static final int ZENMODE_PRIORITY = 1;
+    static final int ZENMODE_NONE = 2;
+    static final int ZENMODE_ALARMS = 3;
+    @SuppressWarnings("WeakerAccess")
+    static final int ZENMODE_SILENT = 99;
 
     public ActivateProfileHelper()
     {
 
     }
 
-    public void initialize(DataWrapper dataWrapper, Activity a, Context c)
+    public void initialize(DataWrapper dataWrapper, Context c)
     {
         this.dataWrapper = dataWrapper;
-        initializeNoNotificationManager(a, c);
+        initializeNoNotificationManager(c);
         notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
-    public void initializeNoNotificationManager(Activity a, Context c)
+    private void initializeNoNotificationManager(Context c)
     {
-        activity = a;
         context = c;
     }
 
-    public void setBrightnessHandler(Handler handler)
+    void setBrightnessHandler(Handler handler)
     {
         brightnessHandler = handler;
     }
 
-    public void deinitialize()
+    void deinitialize()
     {
         dataWrapper = null;
-        activity = null;
         context = null;
         notificationManager = null;
     }
@@ -251,7 +249,7 @@ public class ActivateProfileHelper {
         // nahodenie bluetooth
         if (profile._deviceBluetooth != 0) {
             if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED) {
-                BluetoothAdapter bluetoothAdapter = null;
+                BluetoothAdapter bluetoothAdapter;
                 if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                 else {
@@ -310,7 +308,7 @@ public class ActivateProfileHelper {
                     case 3:
                         if (!isEnabled) {
                             setGPS(context, true);
-                        } else if (isEnabled) {
+                        } else {
                             setGPS(context, false);
                         }
                         break;
@@ -346,7 +344,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public void executeForRadios(Profile profile)
+    void executeForRadios(Profile profile)
     {
         boolean _isAirplaneMode = false;
         boolean _setAirplaneMode = false;
@@ -419,7 +417,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressLint("NewApi")
-    public void setVolumes(Profile profile, AudioManager audioManager, int linkUnlink)
+    void setVolumes(Profile profile, AudioManager audioManager, int linkUnlink)
     {
         if (profile.getVolumeRingtoneChange()) {
             if (linkUnlink == PhoneCallService.LINKMODE_NONE)
@@ -651,7 +649,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public void setTones(Profile profile) {
+    void setTones(Profile profile) {
         if (Permissions.checkProfileRingtones(context, profile)) {
             if (profile._soundRingtoneChange == 1) {
                 if (!profile._soundRingtone.isEmpty()) {
@@ -709,7 +707,7 @@ public class ActivateProfileHelper {
 
 
     @SuppressWarnings("deprecation")
-    public void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
+    void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
     {
 
         int ringerMode;
@@ -821,7 +819,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public void executeForWallpaper(Profile profile) {
+    void executeForWallpaper(Profile profile) {
         if (profile._deviceWallpaperChange == 1)
         {
             DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -834,7 +832,9 @@ public class ActivateProfileHelper {
             int height = displayMetrics.heightPixels;
             int width = displayMetrics.widthPixels;
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                //noinspection SuspiciousNameCombination
                 height = displayMetrics.widthPixels;
+                //noinspection SuspiciousNameCombination
                 width = displayMetrics.heightPixels;
             }
             // for lock screen no double width
@@ -863,7 +863,7 @@ public class ActivateProfileHelper {
                             visibleCropHint = new Rect(left, 0, right, decodedSampleBitmap.getHeight());
                         }
                         //noinspection WrongConstant
-                        int ret = wallpaperManager.setBitmap(decodedSampleBitmap, visibleCropHint, true, flags);
+                        wallpaperManager.setBitmap(decodedSampleBitmap, visibleCropHint, true, flags);
                     }
                     else
                         wallpaperManager.setBitmap(decodedSampleBitmap);
@@ -874,7 +874,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public void executeForRunApplications(Profile profile) {
+    void executeForRunApplications(Profile profile) {
         if (profile._deviceRunApplicationChange == 1)
         {
             String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
@@ -889,8 +889,7 @@ public class ActivateProfileHelper {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         try {
                             context.startActivity(intent);
-                        } catch (Exception e) {
-                            System.out.println(e);
+                        } catch (Exception ignore) {
                         }
                         //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                         //SystemClock.sleep(1000);
@@ -907,8 +906,7 @@ public class ActivateProfileHelper {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     context.startActivity(intent);
-                                } catch (Exception e) {
-                                    System.out.println(e);
+                                } catch (Exception ignore) {
                                 }
                                 //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                                 //SystemClock.sleep(1000);
@@ -928,7 +926,6 @@ public class ActivateProfileHelper {
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
 
         final Profile profile = GlobalData.getMappedProfile(_profile, context);
-        final boolean interactive = _interactive;
 
         // nahodenie volume a ringer modu
         // run service for execute volumes
@@ -1061,10 +1058,11 @@ public class ActivateProfileHelper {
             //else
             //{
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            //noinspection deprecation
             isScreenOn = pm.isScreenOn();
             //}
             //GlobalData.logE("$$$ ActivateProfileHelper.execute","isScreenOn="+isScreenOn);
-            boolean keyguardShowing = false;
+            boolean keyguardShowing;
             KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
             if (android.os.Build.VERSION.SDK_INT >= 16)
                 keyguardShowing = kgMgr.isKeyguardLocked();
@@ -1125,11 +1123,10 @@ public class ActivateProfileHelper {
                 }
 
                 if (brightnessHandler != null) {
-                    final Profile __profile = profile;
                     final Context __context = context;
                     brightnessHandler.post(new Runnable() {
                         public void run() {
-                            createBrightnessView(__profile, __context);
+                            createBrightnessView(profile, __context);
                         }
                     });
                 } else
@@ -1227,7 +1224,7 @@ public class ActivateProfileHelper {
             }
         }
 
-        if (interactive)
+        if (_interactive)
         {
             // preferences, ktore vyzaduju interakciu uzivatela
 
@@ -1267,7 +1264,7 @@ public class ActivateProfileHelper {
                     try {
                         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        activity.startActivity(intent);
+                        context.startActivity(intent);
                     } catch (Exception ignored) {
                     }
                 }
@@ -1314,14 +1311,14 @@ public class ActivateProfileHelper {
         }
     }
 
-    public static void screenTimeoutUnlock(Context context)
+    static void screenTimeoutUnlock(Context context)
     {
         if (GUIData.keepScreenOnView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
                 windowManager.removeView(GUIData.keepScreenOnView);
-            } catch (Exception e) {
+            } catch (Exception ignore) {
             }
             GUIData.keepScreenOnView = null;
         }
@@ -1371,13 +1368,13 @@ public class ActivateProfileHelper {
         //}
     }
 
-    public static void removeBrightnessView(Context context) {
+    static void removeBrightnessView(Context context) {
         if (GUIData.brightneesView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
                 windowManager.removeView(GUIData.brightneesView);
-            } catch (Exception e) {
+            } catch (Exception ignore) {
             }
             GUIData.brightneesView = null;
         }
@@ -1553,7 +1550,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public void removeNotification()
+    void removeNotification()
     {
         removeAlarmForRecreateNotification();
         if (notificationManager != null)
@@ -1577,7 +1574,7 @@ public class ActivateProfileHelper {
         alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }
 
-    public void setAlarmForRecreateNotification()
+    void setAlarmForRecreateNotification()
     {
         Intent intent = new Intent(context, RecreateNotificationBroadcastReceiver.class);
 
@@ -1605,7 +1602,7 @@ public class ActivateProfileHelper {
 
     }
 
-    public void updateWidget()
+    void updateWidget()
     {
         if (lockRefresh)
             // no refres widgets
@@ -1658,7 +1655,7 @@ public class ActivateProfileHelper {
     private void setAirplaneMode(Context context, boolean mode)
     {
         if (android.os.Build.VERSION.SDK_INT >= 17)
-            setAirplaneMode_SDK17(context, mode);
+            setAirplaneMode_SDK17(/*context, */mode);
         else
             setAirplaneMode_SDK8(context, mode);
     }
@@ -1863,8 +1860,9 @@ public class ActivateProfileHelper {
         }
     }
 
+    /*
     private int getPreferredNetworkType(Context context) {
-        if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+        if (GlobalData.isRooted())
         {
             try {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
@@ -1909,6 +1907,7 @@ public class ActivateProfileHelper {
             networkType = -1;
         return networkType;
     }
+    */
 
     private void setPreferredNetworkType(Context context, int networkType)
     {
@@ -1924,7 +1923,7 @@ public class ActivateProfileHelper {
                     List<SubscriptionInfo> subscriptionList = mSubscriptionManager.getActiveSubscriptionInfoList();
                     if (subscriptionList != null) {
                         for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
-                            if (transactionCode != null && transactionCode.length() > 0) {
+                            if (transactionCode.length() > 0) {
                                 // Get the active subscription ID for a given SIM card.
                                 SubscriptionInfo subscriptionInfo = subscriptionList.get(i);
                                 if (subscriptionInfo != null) {
@@ -1943,7 +1942,7 @@ public class ActivateProfileHelper {
                         }
                     }
                 } else  {
-                    if (transactionCode != null && transactionCode.length() > 0) {
+                    if (transactionCode.length() > 0) {
                         String command1 = "service call phone " + transactionCode + " i32 " + networkType;
                         Command command = new Command(0, false, command1);
                         try {
@@ -2063,8 +2062,8 @@ public class ActivateProfileHelper {
                 poke.setData(Uri.parse("3"));
                 context.sendBroadcast(poke);
             }
-            else
-            {
+            //else
+            //{
                 /*GlobalData.logE("ActivateProfileHelper.setGPS", "old method");
 
                 try {
@@ -2079,7 +2078,7 @@ public class ActivateProfileHelper {
             /*	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent); */
-            }
+            //}
         }
         else
             //if(provider.contains(LocationManager.GPS_PROVIDER) && (!enable))
@@ -2146,8 +2145,8 @@ public class ActivateProfileHelper {
                     poke.setData(Uri.parse("3"));
                     context.sendBroadcast(poke);
                 }
-                else
-                {
+                //else
+                //{
                     //GlobalData.logE("ActivateProfileHelper.setGPS", "old method");
 
                 /*try {
@@ -2162,11 +2161,11 @@ public class ActivateProfileHelper {
             /*	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent); */
-                }
+                //}
             }
     }
 
-    private void setAirplaneMode_SDK17(Context context, boolean mode)
+    private void setAirplaneMode_SDK17(/*Context context, */boolean mode)
     {
         if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
         {
@@ -2198,14 +2197,14 @@ public class ActivateProfileHelper {
                 Log.e("AirPlaneMode_SDK17.setAirplaneMode", "Error on run su");
             }
         }
-        else
-        {
+        //else
+        //{
             //Log.e("ActivateProfileHelper.setAirplaneMode_SDK17","root NOT granted");
             // for normal apps it is only possible to open the system settings dialog
         /*	Intent intent = new Intent(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent); */
-        }
+        //}
     }
 
     @SuppressWarnings("deprecation")
@@ -2248,40 +2247,6 @@ public class ActivateProfileHelper {
         if (!cmd.isFinished()){
             Log.e("ActivateProfileHelper", "Could not finish root command in " + (waitTill/waitTillMultiplier));
         }
-    }
-
-    public static int getMinimumScreenBrightnessSetting (Context context)
-    {
-        final Resources res = Resources.getSystem();
-        int id = res.getIdentifier("config_screenBrightnessSettingMinimum", "integer", "android"); // API17+
-        if (id == 0)
-            id = res.getIdentifier("config_screenBrightnessDim", "integer", "android"); // lower API levels
-        if (id != 0)
-        {
-            try {
-              return res.getInteger(id);
-            }
-            catch (Resources.NotFoundException e) {
-              // ignore
-            }
-        }
-        return 0;
-    }
-
-    public static int getMaximumScreenBrightnessSetting (Context context)
-    {
-        final Resources res = Resources.getSystem();
-        final int id = res.getIdentifier("config_screenBrightnessSettingMaximum", "integer", "android");  // API17+
-        if (id != 0)
-        {
-            try {
-              return res.getInteger(id);
-            }
-            catch (Resources.NotFoundException e) {
-              // ignore
-            }
-        }
-        return 255;
     }
 
 }

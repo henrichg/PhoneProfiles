@@ -40,11 +40,11 @@ public class RootToolsSmall {
         return hasBinary("/su");
     }
 
-    public static boolean hasSettingBin() {
+    static boolean hasSettingBin() {
         return hasBinary("/settings");
     }
 
-    public static boolean hasServiceBin() {
+    static boolean hasServiceBin() {
         return hasBinary("/service");
     }
 

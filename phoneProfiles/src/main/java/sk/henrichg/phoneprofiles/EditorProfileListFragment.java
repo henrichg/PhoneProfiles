@@ -62,7 +62,7 @@ public class EditorProfileListFragment extends Fragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex);
+        void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex);
     }
 
     /**
@@ -113,7 +113,7 @@ public class EditorProfileListFragment extends Fragment {
         databaseHandler = dataWrapper.getDatabaseHandler();
 
         activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(dataWrapper, getActivity(), getActivity().getApplicationContext());
+        activateProfileHelper.initialize(dataWrapper, getActivity().getApplicationContext());
 
         setHasOptionsMenu(true);
 
@@ -209,7 +209,7 @@ public class EditorProfileListFragment extends Fragment {
 
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                activateProfile((Profile) profileListAdapter.getItem(position), true);
+                activateProfile((Profile) profileListAdapter.getItem(position));
 
                 return true;
             }
@@ -227,7 +227,7 @@ public class EditorProfileListFragment extends Fragment {
         if (profileList == null)
         {
             LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
-            this.asyncTaskContext = new WeakReference<LoadProfileListAsyncTask >(asyncTask );
+            this.asyncTaskContext = new WeakReference< >(asyncTask );
             asyncTask.execute();
         }
         else
@@ -249,7 +249,7 @@ public class EditorProfileListFragment extends Fragment {
         boolean defaultProfilesGenerated = false;
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
-            this.fragmentWeakRef = new WeakReference<EditorProfileListFragment>(fragment);
+            this.fragmentWeakRef = new WeakReference<>(fragment);
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
         }
 
@@ -259,7 +259,7 @@ public class EditorProfileListFragment extends Fragment {
             if (profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
-                profileList = dataWrapper.getPredefinedProfileList();
+                dataWrapper.getPredefinedProfileList();
                 defaultProfilesGenerated = true;
             }
             return null;
@@ -369,10 +369,9 @@ public class EditorProfileListFragment extends Fragment {
     public void startProfilePreferencesActivity(Profile profile, int predefinedProfileIndex)
     {
 
-        Profile _profile = profile;
         int editMode;
 
-        if (_profile != null)
+        if (profile != null)
         {
             // editacia profilu
             editMode = EDIT_MODE_EDIT;
@@ -385,7 +384,7 @@ public class EditorProfileListFragment extends Fragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) one must start profile preferences
-        onStartProfilePreferencesCallback.onStartProfilePreferences(_profile, editMode, predefinedProfileIndex);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(profile, editMode, predefinedProfileIndex);
     }
 
     public void duplicateProfile(Profile origProfile)
@@ -465,7 +464,7 @@ public class EditorProfileListFragment extends Fragment {
             public boolean onMenuItemClick(android.view.MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.profile_list_item_menu_activate:
-                        activateProfile(profile, true);
+                        activateProfile(profile);
                         return true;
                     case R.id.profile_list_item_menu_duplicate:
                         duplicateProfile(profile);
@@ -582,21 +581,15 @@ public class EditorProfileListFragment extends Fragment {
                     profileListAdapter.activateProfile(profile);
                 updateHeader(profile);
              }
-             if (resultCode == Activity.RESULT_CANCELED)
-             {
+             //if (resultCode == Activity.RESULT_CANCELED)
+             //{
                  //Write your code if there's no result
-             }
+             //}
         }
     }
 
-    public void activateProfile(Profile profile, boolean interactive)
+    public void activateProfile(Profile profile)
     {
-        /*
-        Intent intent = new Intent(getActivity().getBaseContext(), BackgroundActivateProfileActivity.class);
-        intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_EDITOR);
-        intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-        getActivity().startActivityForResult(intent, GlobalData.REQUEST_CODE_ACTIVATE_PROFILE);
-        */
         dataWrapper.activateProfile(profile._id, GlobalData.STARTUP_SOURCE_EDITOR, getActivity());
     }
 

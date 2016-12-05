@@ -79,7 +79,7 @@ public class ShortcutCreatorListFragment extends Fragment {
         if (profileList == null)
         {
             LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
-            this.asyncTaskContext = new WeakReference<LoadProfileListAsyncTask >(asyncTask );
+            this.asyncTaskContext = new WeakReference<>(asyncTask );
             asyncTask.execute();
         }
         else
@@ -96,13 +96,12 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {
-                int res = GUIData.collator.compare(lhs._name, rhs._name);
-                return res;
+                return GUIData.collator.compare(lhs._name, rhs._name);
             }
         }
 
         private LoadProfileListAsyncTask (ShortcutCreatorListFragment fragment) {
-            this.fragmentWeakRef = new WeakReference<ShortcutCreatorListFragment>(fragment);
+            this.fragmentWeakRef = new WeakReference<>(fragment);
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
         }
 
@@ -195,6 +194,7 @@ public class ShortcutCreatorListFragment extends Fragment {
         Intent shortcutIntent = new Intent(getActivity().getApplicationContext(), BackgroundActivateProfileActivity.class);
         // BackgroundActivateProfileActivity musi toto testovat, a len spravit aktivaciu profilu
         shortcutIntent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_SHORTCUT);
+        //noinspection ConstantConditions
         shortcutIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
 
         Intent intent = new Intent();
@@ -235,7 +235,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
             if (isIconResourceID || useCustomColor) {
                 // icon is from resource or colored by custom color
-                profileBitmap = BitmapManipulator.monochromeBitmap(profileBitmap, monochromeValue, getActivity().getBaseContext());
+                profileBitmap = BitmapManipulator.monochromeBitmap(profileBitmap, monochromeValue);
             }
             else
                 profileBitmap = BitmapManipulator.grayscaleBitmap(profileBitmap);

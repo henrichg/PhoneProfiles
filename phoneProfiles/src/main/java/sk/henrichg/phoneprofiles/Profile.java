@@ -15,62 +15,62 @@ import java.util.Date;
 public class Profile {
 
     //private variables
-    public long _id;
-    public String _name;
-    public String _icon;
-    public boolean _checked;
-    public int _porder;
-    public int _duration;
-    public int _afterDurationDo;
-    public int _volumeRingerMode;
-    public int _volumeZenMode;
-    public String _volumeRingtone;
-    public String _volumeNotification;
-    public String _volumeMedia;
-    public String _volumeAlarm;
-    public String _volumeSystem;
-    public String _volumeVoice;
-    public int _soundRingtoneChange;
-    public String _soundRingtone;
-    public int _soundNotificationChange;
-    public String _soundNotification;
-    public int _soundAlarmChange;
-    public String _soundAlarm;
-    public int _deviceAirplaneMode;
-    public int _deviceMobileData;
-    public int _deviceMobileDataPrefs;
-    public int _deviceWiFi;
-    public int _deviceBluetooth;
-    public int _deviceGPS;
-    public int _deviceLocationServicePrefs;
-    public int _deviceScreenTimeout;
-    public String _deviceBrightness;
-    public int _deviceWallpaperChange;
-    public String _deviceWallpaper;
-    public int _deviceRunApplicationChange;
-    public String _deviceRunApplicationPackageName;
-    public int _deviceAutosync;
-    public int _deviceAutoRotate;
-    public int _volumeSpeakerPhone;
-    public int _deviceNFC;
-    public int _deviceKeyguard;
-    public int _vibrationOnTouch;
-    public int _deviceWiFiAP;
-    public int _devicePowerSaveMode;
-    public boolean _askForDuration;
-    public int _deviceNetworkType;
-    public int _notificationLed;
-    public int _vibrateWhenRinging;
-    public int _deviceWallpaperFor;
+    long _id;
+    String _name;
+    String _icon;
+    boolean _checked;
+    int _porder;
+    int _duration;
+    int _afterDurationDo;
+    int _volumeRingerMode;
+    int _volumeZenMode;
+    String _volumeRingtone;
+    String _volumeNotification;
+    String _volumeMedia;
+    String _volumeAlarm;
+    String _volumeSystem;
+    String _volumeVoice;
+    int _soundRingtoneChange;
+    String _soundRingtone;
+    int _soundNotificationChange;
+    String _soundNotification;
+    int _soundAlarmChange;
+    String _soundAlarm;
+    int _deviceAirplaneMode;
+    int _deviceMobileData;
+    int _deviceMobileDataPrefs;
+    int _deviceWiFi;
+    int _deviceBluetooth;
+    int _deviceGPS;
+    int _deviceLocationServicePrefs;
+    int _deviceScreenTimeout;
+    String _deviceBrightness;
+    int _deviceWallpaperChange;
+    String _deviceWallpaper;
+    int _deviceRunApplicationChange;
+    String _deviceRunApplicationPackageName;
+    int _deviceAutosync;
+    int _deviceAutoRotate;
+    int _volumeSpeakerPhone;
+    int _deviceNFC;
+    int _deviceKeyguard;
+    int _vibrationOnTouch;
+    int _deviceWiFiAP;
+    int _devicePowerSaveMode;
+    boolean _askForDuration;
+    int _deviceNetworkType;
+    int _notificationLed;
+    int _vibrateWhenRinging;
+    int _deviceWallpaperFor;
 
-    public Bitmap _iconBitmap;
-    public Bitmap _preferencesIndicator;
+    Bitmap _iconBitmap;
+    Bitmap _preferencesIndicator;
 
-    public static final int AFTERDURATIONDO_NOTHING = 0;
-    public static final int AFTERDURATIONDO_UNDOPROFILE = 1;
-    public static final int AFTERDURATIONDO_BACKGROUNPROFILE = 2;
+    static final int AFTERDURATIONDO_NOTHING = 0;
+    static final int AFTERDURATIONDO_UNDOPROFILE = 1;
+    static final int AFTERDURATIONDO_BACKGROUNPROFILE = 2;
 
-    public static final int BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET = -99;
+    static final int BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET = -99;
 
 
     static final String[] profileIconId = {
@@ -332,7 +332,7 @@ public class Profile {
         this._preferencesIndicator = null;
     }
 
-    public void copyProfile(Profile profile)
+    void copyProfile(Profile profile)
     {
         this._id = profile._id;
         this._name = profile._name;
@@ -414,7 +414,7 @@ public class Profile {
     }
 
     //gettig where icon has custom color
-    public boolean getUseCustomColorForIcon() {
+    boolean getUseCustomColorForIcon() {
         boolean value;
         try {
             String[] splits = _icon.split("\\|");
@@ -427,7 +427,7 @@ public class Profile {
     }
 
     // geting icon custom color
-    public int getIconCustomColor() {
+    private int getIconCustomColor() {
         int value;
         try {
             String[] splits = _icon.split("\\|");
@@ -438,7 +438,7 @@ public class Profile {
         return value;
     }
 
-    public int getVolumeRingtoneValue()
+    int getVolumeRingtoneValue()
     {
         int value;
         try {
@@ -450,7 +450,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeRingtoneChange()
+    boolean getVolumeRingtoneChange()
     {
         int value;
         try {
@@ -462,7 +462,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeRingtoneDefaultProfile()
+    boolean getVolumeRingtoneDefaultProfile()
     {
         int value;
         try {
@@ -474,7 +474,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getVolumeNotificationValue()
+    int getVolumeNotificationValue()
     {
         int value;
         try {
@@ -486,7 +486,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeNotificationChange()
+    boolean getVolumeNotificationChange()
     {
         int value;
         try {
@@ -498,7 +498,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeNotificationDefaultProfile()
+    boolean getVolumeNotificationDefaultProfile()
     {
         int value;
         try {
@@ -510,7 +510,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getVolumeMediaValue()
+    int getVolumeMediaValue()
     {
         int value;
         try {
@@ -522,7 +522,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeMediaChange()
+    boolean getVolumeMediaChange()
     {
         int value;
         try {
@@ -534,7 +534,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeMediaDefaultProfile()
+    boolean getVolumeMediaDefaultProfile()
     {
         int value;
         try {
@@ -546,7 +546,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getVolumeAlarmValue()
+    int getVolumeAlarmValue()
     {
         int value;
         try {
@@ -558,7 +558,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeAlarmChange()
+    boolean getVolumeAlarmChange()
     {
         int value;
         try {
@@ -570,7 +570,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeAlarmDefaultProfile()
+    boolean getVolumeAlarmDefaultProfile()
     {
         int value;
         try {
@@ -582,7 +582,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getVolumeSystemValue()
+    int getVolumeSystemValue()
     {
         int value;
         try {
@@ -594,7 +594,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeSystemChange()
+    boolean getVolumeSystemChange()
     {
         int value;
         try {
@@ -606,7 +606,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeSystemDefaultProfile()
+    boolean getVolumeSystemDefaultProfile()
     {
         int value;
         try {
@@ -618,7 +618,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getVolumeVoiceValue()
+    int getVolumeVoiceValue()
     {
         int value;
         try {
@@ -630,7 +630,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getVolumeVoiceChange()
+    boolean getVolumeVoiceChange()
     {
         int value;
         try {
@@ -642,7 +642,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getVolumeVoiceDefaultProfile()
+    boolean getVolumeVoiceDefaultProfile()
     {
         int value;
         try {
@@ -654,7 +654,7 @@ public class Profile {
         return value == 1;
     }
 
-    public int getDeviceBrightnessValue()
+    int getDeviceBrightnessValue()
     {
         int value;
         try {
@@ -666,7 +666,7 @@ public class Profile {
         return value;
     }
 
-    public boolean getDeviceBrightnessChange()
+    boolean getDeviceBrightnessChange()
     {
         int value;
         try {
@@ -678,7 +678,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    public boolean getDeviceBrightnessDefaultProfile()
+    boolean getDeviceBrightnessDefaultProfile()
     {
         int value;
         try {
@@ -690,7 +690,7 @@ public class Profile {
         return value == 1;
     }
 
-    public boolean getDeviceBrightnessAutomatic()
+    boolean getDeviceBrightnessAutomatic()
     {
         int value;
         try {
@@ -702,10 +702,44 @@ public class Profile {
         return value == 1;
     }
 
-    public static int convertPercentsToBrightnessManualValue(int perc, Context context)
+    private static int getMinimumScreenBrightnessSetting ()
     {
-        int maximumValue = ActivateProfileHelper.getMaximumScreenBrightnessSetting(context);
-        int minimumValue = ActivateProfileHelper.getMinimumScreenBrightnessSetting(context);
+        final Resources res = Resources.getSystem();
+        int id = res.getIdentifier("config_screenBrightnessSettingMinimum", "integer", "android"); // API17+
+        if (id == 0)
+            id = res.getIdentifier("config_screenBrightnessDim", "integer", "android"); // lower API levels
+        if (id != 0)
+        {
+            try {
+                return res.getInteger(id);
+            }
+            catch (Resources.NotFoundException e) {
+                // ignore
+            }
+        }
+        return 0;
+    }
+
+    private static int getMaximumScreenBrightnessSetting ()
+    {
+        final Resources res = Resources.getSystem();
+        final int id = res.getIdentifier("config_screenBrightnessSettingMaximum", "integer", "android");  // API17+
+        if (id != 0)
+        {
+            try {
+                return res.getInteger(id);
+            }
+            catch (Resources.NotFoundException e) {
+                // ignore
+            }
+        }
+        return 255;
+    }
+
+    static int convertPercentsToBrightnessManualValue(int perc, Context context)
+    {
+        int maximumValue = getMaximumScreenBrightnessSetting();
+        int minimumValue = getMinimumScreenBrightnessSetting();
 
         if (maximumValue-minimumValue > 65535) {
             minimumValue = 0;
@@ -724,13 +758,13 @@ public class Profile {
         return value;
     }
 
-    public int getDeviceBrightnessManualValue(Context context)
+    int getDeviceBrightnessManualValue(Context context)
     {
         int perc = getDeviceBrightnessValue();
         return convertPercentsToBrightnessManualValue(perc, context);
     }
 
-    public static float convertPercentsToBrightnessAdaptiveValue(int perc, Context context)
+    static float convertPercentsToBrightnessAdaptiveValue(int perc, Context context)
     {
         float value;
 
@@ -744,14 +778,14 @@ public class Profile {
         return value;
     }
 
-    public float getDeviceBrightnessAdaptiveValue(Context context)
+    float getDeviceBrightnessAdaptiveValue(Context context)
     {
         int perc = getDeviceBrightnessValue();
         return convertPercentsToBrightnessAdaptiveValue(perc, context);
     }
 
-    public static long convertBrightnessToPercents(int value,
-                                int maxValue, int minValue, Context context)
+    static long convertBrightnessToPercents(int value,
+                                int maxValue, int minValue)
     {
         long perc;
         if (value == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)
@@ -762,10 +796,11 @@ public class Profile {
         return perc;
     }
 
+    /*
     public void setDeviceBrightnessManualValue(int value, Context context)
     {
-        int maxValue = ActivateProfileHelper.getMaximumScreenBrightnessSetting(context);
-        int minValue = ActivateProfileHelper.getMinimumScreenBrightnessSetting(context);
+        int maxValue = getMaximumScreenBrightnessSetting();
+        int minValue = getMinimumScreenBrightnessSetting();
 
         if (maxValue-minValue > 65535) {
             minValue = 0;
@@ -782,7 +817,8 @@ public class Profile {
         else
             _deviceBrightness = String.valueOf(perc)+"|"+splits[1]+"|"+splits[2]+"|0";
     }
-
+    */
+    /*
     public void setDeviceBrightnessAdaptiveValue(float value)
     {
         long perc;
@@ -799,9 +835,9 @@ public class Profile {
         else
             _deviceBrightness = String.valueOf(perc)+"|"+splits[1]+"|"+splits[2]+"|0";
     }
-
+    */
     // getting wallpaper identifikator
-    public String getDeviceWallpaperIdentifier()
+    String getDeviceWallpaperIdentifier()
     {
         String value;
         try {
@@ -815,7 +851,7 @@ public class Profile {
 
     //----------------------------------
 
-    public void generateIconBitmap(Context context, boolean monochrome, int monochromeValue)
+    void generateIconBitmap(Context context, boolean monochrome, int monochromeValue)
     {
         if (!getIsIconResourceID())
         {
@@ -834,7 +870,7 @@ public class Profile {
                 {
                     int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-                    _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
+                    _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue);
                     // getIsIconResourceID must return false
                     //_icon = getIconIdentifier() + "|0";
                 }
@@ -848,7 +884,7 @@ public class Profile {
         {
             int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-            _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue, context);
+            _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue);
             // getIsIconResourceID must return false
             //_icon = getIconIdentifier() + "|0";
             /*Drawable drawable;
@@ -864,7 +900,7 @@ public class Profile {
         if (getUseCustomColorForIcon()) {
             int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
-            _iconBitmap = BitmapManipulator.recolorBitmap(bitmap, getIconCustomColor(), context);
+            _iconBitmap = BitmapManipulator.recolorBitmap(bitmap, getIconCustomColor());
             // getIsIconResourceID must return false
             //_icon = getIconIdentifier() + "|0";
         }
@@ -872,17 +908,17 @@ public class Profile {
             _iconBitmap = null;
     }
 
-    public void generatePreferencesIndicator(Context context, boolean monochrome, int monochromeValue)
+    void generatePreferencesIndicator(Context context, boolean monochrome, int monochromeValue)
     {
         releasePreferencesIndicator();
 
         _preferencesIndicator = ProfilePreferencesIndicator.paint(this, context);
 
         if (monochrome)
-            _preferencesIndicator = BitmapManipulator.monochromeBitmap(_preferencesIndicator, monochromeValue, context);
+            _preferencesIndicator = BitmapManipulator.monochromeBitmap(_preferencesIndicator, monochromeValue);
     }
 
-    public void releaseIconBitmap()
+    void releaseIconBitmap()
     {
         if (_iconBitmap != null)
         {
@@ -891,7 +927,7 @@ public class Profile {
         }
     }
 
-    public void releasePreferencesIndicator()
+    void releasePreferencesIndicator()
     {
         if (_preferencesIndicator != null)
         {

@@ -9,17 +9,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v4.app.NotificationCompat;
 
-public class ImportantInfoNotification {
+class ImportantInfoNotification {
 
     // this version code must by <= version code in manifest
-    public static final int VERSION_CODE_FOR_NEWS = 1800;
+    static final int VERSION_CODE_FOR_NEWS = 1800;
 
-    static public void showInfoNotification(Context context) {
-        PackageInfo pinfo = null;
+    static void showInfoNotification(Context context) {
         int packageVersionCode = 0;
         int savedVersionCode = 0;
         try {
-            pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             packageVersionCode = pinfo.versionCode;
             savedVersionCode = GlobalData.getShowInfoNotificationOnStartVersion(context);
             if (packageVersionCode > savedVersionCode) {
@@ -100,7 +99,7 @@ public class ImportantInfoNotification {
         mNotificationManager.notify(GlobalData.IMPORTANT_INFO_NOTIFICATION_ID, mBuilder.build());
     }
 
-    public static void removeNotification(Context context)
+    static void removeNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(GlobalData.IMPORTANT_INFO_NOTIFICATION_ID);

@@ -17,11 +17,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     private static ActivateProfileActivity instance;
 
-    private float popupWidth;
-    private float popupMaxHeight;
-    private float popupHeight;
-    private float actionBarHeight;
-
     @SuppressWarnings({ "deprecation" })
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +40,10 @@ public class ActivateProfileActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         // display dimensions
-        popupWidth = display.getWidth();
-        popupMaxHeight = display.getHeight();
-        popupHeight = 0;
-        actionBarHeight = 0;
+        float popupWidth = display.getWidth();
+        float popupMaxHeight = display.getHeight();
+        float popupHeight = 0;
+        float actionBarHeight = 0;
 
         // action bar height
         TypedValue tv = new TypedValue();
@@ -122,9 +117,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         //GlobalData.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContnetView");
 
-        //getSupportActionBar().setHomeButtonEnabled(true);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.title_activity_activator);
+        if (getSupportActionBar() != null) {
+            //getSupportActionBar().setHomeButtonEnabled(true);
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.title_activity_activator);
+        }
 
     //-----------------------------------------------------------------------------------------		
 

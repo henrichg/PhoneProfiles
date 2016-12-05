@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class ImageViewPreferenceAdapter extends BaseAdapter {
+class ImageViewPreferenceAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater = null;
-    String imageIdentifier;
-    boolean isImageResourceID;
+    private String imageIdentifier;
+    private boolean isImageResourceID;
 
-    public ImageViewPreferenceAdapter(Context c, String imageIdentifier, boolean isImageResourceID)
+    ImageViewPreferenceAdapter(Context c, String imageIdentifier, boolean isImageResourceID)
     {
         context = c;
 

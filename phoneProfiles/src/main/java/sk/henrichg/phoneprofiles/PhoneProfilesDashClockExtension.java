@@ -51,7 +51,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             maxLength += 25;
         }
         else
-            if (ind != "") ind = ind + "-";
+            if (!ind.isEmpty()) ind = ind + "-";
         ind = ind + preference;
         return ind;
     }

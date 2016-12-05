@@ -44,7 +44,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                         activateProfileId = GlobalData.getActivatedProfileForDuration(context);
                     }
 
-                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, null, context);
+                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                     dataWrapper.activateProfile(activateProfileId, GlobalData.STARTUP_SOURCE_SERVICE, null);
                 }
 
@@ -100,8 +100,6 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
         //	this._isInDelay = false;
 
         //dataWrapper.getDatabaseHandler().updateEventInDelay(this);
-
-        return;
     }
 
     static public void removeAlarm(Context context)

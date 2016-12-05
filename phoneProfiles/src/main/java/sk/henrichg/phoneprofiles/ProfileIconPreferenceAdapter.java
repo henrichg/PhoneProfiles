@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class ProfileIconPreferenceAdapter extends BaseAdapter {
+class ProfileIconPreferenceAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater = null;
-    String imageIdentifier;
-    boolean isImageResourceID;
+    private String imageIdentifier;
+    private boolean isImageResourceID;
     private boolean useCustomColor;
     private int customColor;
 
-    public ProfileIconPreferenceAdapter(Context c, String imageIdentifier, boolean isImageResourceID, boolean useCustomColor, int customColor)
+    ProfileIconPreferenceAdapter(Context c, String imageIdentifier, boolean isImageResourceID, boolean useCustomColor, int customColor)
     {
         context = c;
 
@@ -76,7 +76,7 @@ public class ProfileIconPreferenceAdapter extends BaseAdapter {
         int res = context.getResources().getIdentifier(Profile.profileIconId[position], "drawable", context.getPackageName());
         if (Profile.profileIconId[position].equals(imageIdentifier) && isImageResourceID && useCustomColor) {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), res);
-            bitmap = BitmapManipulator.recolorBitmap(bitmap, customColor, context);
+            bitmap = BitmapManipulator.recolorBitmap(bitmap, customColor);
             holder.icon.setImageBitmap(bitmap);
         }
         else
@@ -85,7 +85,7 @@ public class ProfileIconPreferenceAdapter extends BaseAdapter {
         return vi;
     }
 
-    public void imageIdentifierAndTypeChanged(String imageIdentifier, boolean isImageResourceID) {
+    void imageIdentifierAndTypeChanged(String imageIdentifier, boolean isImageResourceID) {
         if (!this.imageIdentifier.equals(imageIdentifier)) {
             this.useCustomColor = false;
             this.customColor = 0;
@@ -95,7 +95,7 @@ public class ProfileIconPreferenceAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public static int getImageResourcePosition(String imageIdentifier) {
+    static int getImageResourcePosition(String imageIdentifier) {
         for (int pos = 0; pos < Profile.profileIconId.length; pos++) {
             if (Profile.profileIconId[pos].equals(imageIdentifier))
                 return pos;
@@ -103,13 +103,13 @@ public class ProfileIconPreferenceAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void setCustomColor(boolean newUseCustomColor, int newCustomColor) {
+    void setCustomColor(boolean newUseCustomColor, int newCustomColor) {
         useCustomColor = newUseCustomColor;
         customColor = newCustomColor;
         notifyDataSetChanged();
     }
 
-    public static int getIconColor(String imageIdentifier) {
+    static int getIconColor(String imageIdentifier) {
         return Profile.profileIconColor[getImageResourcePosition(imageIdentifier)];
     }
 

@@ -12,14 +12,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ActivateProfileListAdapter extends BaseAdapter
+class ActivateProfileListAdapter extends BaseAdapter
 {
 
     private List<Profile> profileList;
     private ActivateProfileListFragment fragment;
     private DataWrapper dataWrapper;
 
-    public ActivateProfileListAdapter(ActivateProfileListFragment f, List<Profile> pl, DataWrapper dataWrapper)
+    ActivateProfileListAdapter(ActivateProfileListFragment f, List<Profile> pl, DataWrapper dataWrapper)
     {
         fragment = f;
         profileList = pl;
@@ -63,43 +63,6 @@ public class ActivateProfileListAdapter extends BaseAdapter
         notifyDataSetChanged();
     }
 
-    public void addItem(Profile profile)
-    {
-        int maxPOrder = 0;
-        int pOrder;
-        for (Profile p : profileList)
-        {
-            pOrder = p._porder;
-            if (pOrder > maxPOrder) maxPOrder = pOrder;
-        }
-        profile._porder = maxPOrder+1;
-        profileList.add(profile);
-        notifyDataSetChanged();
-    }
-
-    public void updateItem(Profile profile)
-    {
-        notifyDataSetChanged();
-    }
-
-    public void deleteItem(Profile profile)
-    {
-        profileList.remove(profile);
-        notifyDataSetChanged();
-    }
-
-    public void changeItemOrder(int from, int to)
-    {
-        Profile profile = profileList.get(from);
-        profileList.remove(from);
-        profileList.add(to, profile);
-        for (int i = 0; i < profileList.size(); i++)
-        {
-            profileList.get(i)._porder = i+1;
-        }
-        notifyDataSetChanged();
-    }
-
     public Profile getActivatedProfile()
     {
         for (Profile p : profileList)
@@ -113,7 +76,7 @@ public class ActivateProfileListAdapter extends BaseAdapter
         return null;
     }
 
-    public void notifyDataSetChanged(boolean refreshIcons) {
+    void notifyDataSetChanged(boolean refreshIcons) {
         if (refreshIcons) {
             for (Profile profile : profileList) {
                 dataWrapper.refreshProfileIcon(profile, false, 0);

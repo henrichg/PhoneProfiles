@@ -40,7 +40,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     static final String PREF_NOTIFICATION_ACCESS = "prf_pref_volumeNotificationsAccessSettings";
     static final int RESULT_NOTIFICATION_ACCESS_SETTINGS = 1980;
-    static final String PREF_UNLINK_VOLUMES_APP_PREFERENCES = "prf_pref_volumeUnlinkVolumesAppSettings";
+    //static final String PREF_UNLINK_VOLUMES_APP_PREFERENCES = "prf_pref_volumeUnlinkVolumesAppSettings";
 
     @Override
     public int addPreferencesFromResource() {
@@ -154,7 +154,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 }
             }
 
-            Preference volumeUnlinkPreference = prefMng.findPreference(PREF_UNLINK_VOLUMES_APP_PREFERENCES);
+            //Preference volumeUnlinkPreference = prefMng.findPreference(PREF_UNLINK_VOLUMES_APP_PREFERENCES);
             //volumeUnlinkPreference.setWidgetLayoutResource(R.layout.start_activity_preference);
 
             if (ringerModePreference != null) {
@@ -211,7 +211,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
         }
         if (android.os.Build.VERSION.SDK_INT < 23) {
-            Preference preference = (Preference) prefMng.findPreference("prf_pref_volumeVibrateWhenRingingRootInfo");
+            Preference preference = prefMng.findPreference("prf_pref_volumeVibrateWhenRingingRootInfo");
             if (preference != null) {
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                 preferenceCategory.removePreference(preference);
@@ -226,7 +226,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
         }
         if (android.os.Build.VERSION.SDK_INT < 24) {
-            Preference preference = (Preference) prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_FOR);
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_FOR);
             if (preference != null) {
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_othersCategory");
                 preferenceCategory.removePreference(preference);
@@ -341,7 +341,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 ProfilePreferencesFragment.applicationsDialogPreference.updateShortcut(
                         (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
                         data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
-                        (Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON),
+                        /*(Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON),*/
                         data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_POSITION, -1));
             }
         }

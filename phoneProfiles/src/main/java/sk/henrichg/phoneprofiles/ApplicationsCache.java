@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ApplicationsCache {
+class ApplicationsCache {
 
     private class SortList implements Comparator<Application> {
 
@@ -25,14 +25,14 @@ public class ApplicationsCache {
     private boolean cached;
     private boolean cancelled;
 
-    public ApplicationsCache()
+    ApplicationsCache()
     {
-        applicationsList = new ArrayList<Application>();
-        applicationsNoShortcutsList = new ArrayList<Application>();
+        applicationsList = new ArrayList<>();
+        applicationsNoShortcutsList = new ArrayList<>();
         cached = false;
     }
 
-    public void getApplicationsList(Context context)
+    void getApplicationsList(Context context)
     {
         if (cached) return;
 
@@ -104,7 +104,7 @@ public class ApplicationsCache {
         cached = true;
     }
 
-    public int getLength(boolean noShortcuts)
+    int getLength(boolean noShortcuts)
     {
         if (cached) {
             if (noShortcuts)
@@ -116,7 +116,7 @@ public class ApplicationsCache {
             return 0;
     }
 
-    public List<Application> getList(boolean noShorcuts)
+    List<Application> getList(boolean noShorcuts)
     {
         if (cached) {
             if (noShorcuts)
@@ -128,7 +128,7 @@ public class ApplicationsCache {
             return null;
     }
 
-    public Application getApplication(int position, boolean noShortcuts)
+    Application getApplication(int position, boolean noShortcuts)
     {
         if (cached) {
             if (noShortcuts)
@@ -152,7 +152,7 @@ public class ApplicationsCache {
             return "";
     }
 
-    public void clearCache(boolean nullList)
+    void clearCache(boolean nullList)
     {
         applicationsList.clear();
         applicationsNoShortcutsList.clear();
@@ -163,17 +163,17 @@ public class ApplicationsCache {
         cached = false;
     }
 
-    public boolean isCached()
+    boolean isCached()
     {
         return cached;
     }
 
-    public void cancelCaching()
+    void cancelCaching()
     {
         cancelled = true;
     }
 
-    public static boolean isShortcut(String value) {
+    static boolean isShortcut(String value) {
         if (value.length() > 2) {
             String shortcut = value.substring(0, 3);
             if (shortcut.equals("(s)"))
@@ -204,7 +204,7 @@ public class ApplicationsCache {
             return "";
     }
 
-    public static String getActivityName(String value) {
+    static String getActivityName(String value) {
         if (value.length() > 2) {
             String activityName;
             String[] splits2 = value.split("/");
@@ -220,10 +220,9 @@ public class ApplicationsCache {
             return "";
     }
 
-    public static long getShortcutId(String value) {
-        long shortcutId = 0;
+    static long getShortcutId(String value) {
         if (value.length() > 2) {
-            String activityName;
+            long shortcutId;
             String[] splits2 = value.split("/");
             if (splits2.length == 2) {
                 String[] splits3 = splits2[1].split("#");
