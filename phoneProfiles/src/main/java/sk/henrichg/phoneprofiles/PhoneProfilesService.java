@@ -60,6 +60,8 @@ public class PhoneProfilesService extends Service {
     {
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
+        GlobalData.setMergedRingNotificationVolumes(getApplicationContext());
+
         if (!GlobalData.getApplicationStarted(getApplicationContext())) {
             // start service for first start
             Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);

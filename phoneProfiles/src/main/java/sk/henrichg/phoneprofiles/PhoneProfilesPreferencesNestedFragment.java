@@ -167,6 +167,19 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             if (preference != null)
                 preferenceCategory.removePreference(preference);
         }
+        if (!GlobalData.getMergedRingNotificationVolumes(getActivity().getApplicationContext())) {
+            // remove System category. in this category is only applicationUnlinkRingerNotificationVolumes
+            PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("rootScreen");
+            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categorySystem");
+            if (preferenceCategory != null)
+                preferenceScreen.removePreference(preferenceCategory);
+
+            /*Preference preference = prefMng.findPreference("applicationUnlinkRingerNotificationVolumes");
+            if (preference != null) {
+                PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categorySystem");
+                preferenceCategory.removePreference(preference);
+            }*/
+        }
     }
 
     /*
