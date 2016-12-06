@@ -25,7 +25,11 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
         aph.initialize(dataWrapper, context);
 
-        int linkUnlink = intent.getIntExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        int linkUnlink;
+        if (GlobalData.getMergedRingNotificationVolumes(context) && GlobalData.applicationUnlinkRingerNotificationVolumes)
+            linkUnlink = intent.getIntExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        else
+            linkUnlink = PhoneCallService.LINKMODE_NONE;
         long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
         profile = GlobalData.getMappedProfile(profile, context);

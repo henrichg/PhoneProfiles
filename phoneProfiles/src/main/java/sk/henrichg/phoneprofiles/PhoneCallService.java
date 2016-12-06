@@ -49,7 +49,7 @@ public class PhoneCallService extends IntentService {
     }
 
     private void setLinkUnlinkNotificationVolume(int linkMode) {
-        if (GlobalData.applicationUnlinkRingerNotificationVolumes) {
+        if (GlobalData.getMergedRingNotificationVolumes(context) && GlobalData.applicationUnlinkRingerNotificationVolumes) {
             DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
