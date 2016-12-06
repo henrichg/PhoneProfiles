@@ -438,11 +438,11 @@ public class Profile {
         return value;
     }
 
-    int getVolumeRingtoneValue()
+    static int getVolumeRingtoneValue(String volumeRingtone)
     {
         int value;
         try {
-            String[] splits = _volumeRingtone.split("\\|");
+            String[] splits = volumeRingtone.split("\\|");
             value = Integer.parseInt(splits[0]);
         } catch (Exception e) {
             value = 0;
@@ -450,16 +450,25 @@ public class Profile {
         return value;
     }
 
-    boolean getVolumeRingtoneChange()
+    int getVolumeRingtoneValue() {
+        return getVolumeRingtoneValue(_volumeRingtone);
+    }
+
+    static boolean getVolumeRingtoneChange(String volumeRingtone)
     {
         int value;
         try {
-            String[] splits = _volumeRingtone.split("\\|");
+            String[] splits = volumeRingtone.split("\\|");
             value = Integer.parseInt(splits[1]);
         } catch (Exception e) {
             value = 1;
         }
         return value == 0; // in preference dialog is checked=No change
+    }
+
+    boolean getVolumeRingtoneChange()
+    {
+        return getVolumeRingtoneChange(_volumeRingtone);
     }
 
     boolean getVolumeRingtoneDefaultProfile()
