@@ -132,7 +132,7 @@
             <sk.henrichg.phoneprofiles.NotificationVolume0DialogPreference
                 android:key="prf_pref_volumeNotificationVolume0"
                 android:title="@string/profile_preferences_volumeNotificationVolume0_title"
-                android:summary="@string/profile_preferences_volumeNotificationVolume0_summary" />
+                android:summary="@string/profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0" />
             <sk.henrichg.phoneprofiles.VolumeDialogPreference
                 android:key="prf_pref_volumeMedia"
                 henrichg:volumeType="media"

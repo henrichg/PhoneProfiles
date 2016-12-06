@@ -150,16 +150,22 @@ public class ImportantInfoActivity extends AppCompatActivity {
             infoText14.setVisibility(View.GONE);
         }
 
-        TextView infoText3 = (TextView)findViewById(R.id.activity_info_notification_dialog_info_text3);
-        infoText3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
-                startActivity(intent);
-            }
-        });
+        if (GlobalData.getMergedRingNotificationVolumes(context)) {
+            TextView infoText3 = (TextView) findViewById(R.id.activity_info_notification_dialog_info_text3);
+            infoText3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            TextView infoText3 = (TextView) findViewById(R.id.activity_info_notification_dialog_info_text3);
+            infoText3.setVisibility(View.GONE);
+        }
 
         TextView infoText41 = (TextView)findViewById(R.id.activity_info_activate_profile_from_tasker_params);
         infoText41.setText("Send Intent [ \n" +

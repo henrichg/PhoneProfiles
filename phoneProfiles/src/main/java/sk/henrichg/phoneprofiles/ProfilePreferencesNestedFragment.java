@@ -1147,17 +1147,23 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (key.equals(GlobalData.PREF_PROFILE_SOUND_RINGTONE_CHANGE))
         {
             boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
-            prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_RINGTONE).setEnabled(enabled);
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_RINGTONE);
+            if (preference != null)
+                preference.setEnabled(enabled);
         }
         if (key.equals(GlobalData.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE))
         {
             boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
-            prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_NOTIFICATION).setEnabled(enabled);
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_NOTIFICATION);
+            if (preference != null)
+                preference.setEnabled(enabled);
         }
         if (key.equals(GlobalData.PREF_PROFILE_SOUND_ALARM_CHANGE))
         {
             boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
-            prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_ALARM).setEnabled(enabled);
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_SOUND_ALARM);
+            if (preference != null)
+                preference.setEnabled(enabled);
         }
         if (key.equals(GlobalData.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE))
         {
@@ -1172,7 +1178,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (key.equals(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE))
         {
             boolean enabled = !(sValue.equals(DEFAULT_PROFILE) || sValue.equals(NO_CHANGE));
-            prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_PACKAGE_NAME).setEnabled(enabled);
+            Preference preference = prefMng.findPreference(GlobalData.PREF_PROFILE_DEVICE_RUN_APPLICATION_PACKAGE_NAME);
+            if (preference != null)
+                preference.setEnabled(enabled);
         }
         if (key.equals(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP))
         {

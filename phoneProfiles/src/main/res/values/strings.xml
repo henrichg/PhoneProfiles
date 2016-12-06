@@ -440,7 +440,6 @@
     <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Uncheck when your device has separated volume for ringer and notifications</string>
     <string name="profileicon_pref_dialog_info_about_status_bar_icon">If you change the color of the icon, the icon in the status bar will be white. If you select custom icon, in status bar will be application icon.</string>
     <string name="info_notification_title">Important info</string>
-    <string name="info_notification_unlink_ringer_notification_volumes">If your device has separated volume for ringer and notifications, click here for disabling volumes separation.</string>
     <string name="info_notification_text">Click here for show important info</string>
     <string name="profile_preferences_deviceWiFiAP">Wi-Fi hotspot</string>
     <string name="array_pref_ringerModeArray_silentL">Priority mode</string>
@@ -601,7 +600,6 @@
     <string name="info_notification_event_states_paused_delay">Paused with delay: event is started, but is waiting in the delay. Event parameters are satisfied.</string>
     <string name="event_preferences_calendar_ignore_all_day_events">Ignore \"All day\" events</string>
     <string name="important_info_default_profile">When not any event is running, activated is \"Default profile\", when is configured. You can configure default profile in application settings in \"Profile activation\". Click here, to configure it.</string>
-    <string name="info_notification_unlink_ringer_notification_volumes2">If your device has not separated volume for ringer and notifications, keep enabled volumes separation.</string>
     <string name="important_info_how_does_volume_separation_work">How \"volume separation\" works: Profile activation adjust the device volume by profile notifications volume level. When call ringing is detected, ringing volume level from profile is adjusted. After end of call, notification volume level from profile is back adjusted.</string>
     <string name="event_type_locations">Location</string>
     <string name="event_preferences_category_eventLocationsParameters">Location parameters</string>
@@ -869,4 +867,5 @@
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For notification volume = 0 configure notification tone to \"PhoneProfiles Silent\" for properly silent notifications.</string>
     <string name="profile_preferences_volumeNotificationVolume0_question">Configure notification tone to \"PhoneProfiles Silent\"?</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it from Editor menu a try again.</string>
+    <string name="info_notification_unlink_ringer_notification_volumes">Your device has merged volume for call ringing and notifications. You can use \"Unlink ringer and notif. volumes\". Click here to configure it.</string>
 </resources>
