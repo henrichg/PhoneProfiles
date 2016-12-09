@@ -54,11 +54,17 @@ public class GlobalData extends Application {
     public static final String LOG_FILENAME = "log.txt";
     public static final String CRASH_FILENAME = "crash.txt";
 
-    private static boolean logIntoLogCat = false;
-    private static boolean logIntoFile = false;
+    private static boolean logIntoLogCat = true;
+    private static boolean logIntoFile = true;
     private static boolean rootToolsDebug = false;
     public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
+
+                                            +"|PhoneProfilesService"
+                                            +"|FirstStartService.onHandleIntent"
+                                            +"|ActivateProfileFromExternalApplicationActivity.onStart"
+                                            +"|ActivateProfileListFragment.doOnStart"
+                                            +"|BackgroundActivateProfileActivity.onStart"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -659,11 +665,11 @@ public class GlobalData extends Application {
         return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
     }
 
-    static public void setApplicationStarted(Context context, boolean globalEventsStarted)
+    static public void setApplicationStarted(Context context, boolean appStarted)
     {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
-        editor.putBoolean(PREF_APPLICATION_STARTED, globalEventsStarted);
+        editor.putBoolean(PREF_APPLICATION_STARTED, appStarted);
         editor.commit();
     }
 

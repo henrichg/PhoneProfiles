@@ -11,6 +11,8 @@ import android.os.IBinder;
 
 public class PhoneProfilesService extends Service {
 
+    public static PhoneProfilesService instance = null;
+
     private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
 
@@ -19,7 +21,11 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onCreate()
     {
+        GlobalData.logE("PhoneProfilesService.onCreate", "xxx");
+
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+
+        instance = this;
 
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
@@ -53,11 +59,15 @@ public class PhoneProfilesService extends Service {
 
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
+
+        instance = null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        GlobalData.logE("PhoneProfilesService.onStartCommand", "xxx");
+
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GlobalData.setMergedRingNotificationVolumes(getApplicationContext());

@@ -35,6 +35,8 @@ public class FirstStartService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent)
     {
+        GlobalData.logE("FirstStartService.onHandleIntent", "xxx");
+
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         Context context = getApplicationContext();
@@ -53,6 +55,8 @@ public class FirstStartService extends IntentService {
 
         if (GlobalData.firstStartServiceStarted)
             return;
+
+        GlobalData.logE("FirstStartService.onHandleIntent", " application not started");
 
         GlobalData.clearMergedPermissions(context);
 
@@ -102,9 +106,6 @@ public class FirstStartService extends IntentService {
 
         dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);
         dataWrapper.invalidateDataWrapper();
-
-        //  aplikacia uz je 1. krat spustena
-        GlobalData.setApplicationStarted(context, true);
 
     }
 
