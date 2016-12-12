@@ -242,7 +242,6 @@ public class ActivateProfileListFragment extends Fragment {
             //getActivity().startService(firstStartServiceIntent);
 
             // start PhoneProfilesService
-            GlobalData.firstStartServiceStarted = false;
             getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
         }
         else
@@ -251,7 +250,6 @@ public class ActivateProfileListFragment extends Fragment {
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
-                GlobalData.firstStartServiceStarted = false;
                 getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 

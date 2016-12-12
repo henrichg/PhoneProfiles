@@ -53,7 +53,7 @@ public class FirstStartService extends IntentService {
             }
         //}
 
-        if (GlobalData.firstStartServiceStarted)
+        if (GlobalData.getApplicationStarted(getApplicationContext()))
             return;
 
         GlobalData.logE("FirstStartService.onHandleIntent", " application not started");
@@ -101,7 +101,6 @@ public class FirstStartService extends IntentService {
         // show info notification
         ImportantInfoNotification.showInfoNotification(context);
 
-        GlobalData.firstStartServiceStarted = true;
         GlobalData.setApplicationStarted(context, true);
 
         dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);

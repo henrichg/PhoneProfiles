@@ -10,6 +10,8 @@ public class BootUpReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
+        GlobalData.logE("BootUpReceiver.onReceive", "xxx");
+
         GlobalData.loadPreferences(context);
 
         GlobalData.setApplicationStarted(context, false);
