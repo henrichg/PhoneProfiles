@@ -13,7 +13,7 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
         //Log.e("AlarmClockBroadcastReceiver", "ALARM");
 
-        if (!GlobalData.getApplicationStarted(context))
+        if (!GlobalData.getApplicationStarted(context, true))
             return;
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {

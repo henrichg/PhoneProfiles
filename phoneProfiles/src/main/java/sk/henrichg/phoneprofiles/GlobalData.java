@@ -52,8 +52,8 @@ public class GlobalData extends Application {
     public static final String LOG_FILENAME = "log.txt";
     public static final String CRASH_FILENAME = "crash.txt";
 
-    private static boolean logIntoLogCat = false;
-    private static boolean logIntoFile = false;
+    private static boolean logIntoLogCat = true;
+    private static boolean logIntoFile = true;
     private static boolean rootToolsDebug = false;
     public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
@@ -650,16 +650,13 @@ public class GlobalData extends Application {
             return null;
     }
 
-    static public boolean getApplicationStarted(Context context)
+    static public boolean getApplicationStarted(Context context, boolean testService)
     {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
-    }
-
-    static public boolean getApplicationStartedIgnoreFirstStartService(Context context)
-    {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
+        if (testService)
+            return preferences.getBoolean(PREF_APPLICATION_STARTED, false) && (PhoneProfilesService.instance != null);
+        else
+            return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
     }
 
     static public void setApplicationStarted(Context context, boolean appStarted)

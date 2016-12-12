@@ -72,7 +72,7 @@ public class PhoneProfilesService extends Service {
 
         GlobalData.setMergedRingNotificationVolumes(getApplicationContext());
 
-        if (!GlobalData.getApplicationStarted(getApplicationContext())) {
+        if (!GlobalData.getApplicationStarted(getApplicationContext(), false)) {
             // start service for first start
             Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
             getApplicationContext().startService(eventsServiceIntent);

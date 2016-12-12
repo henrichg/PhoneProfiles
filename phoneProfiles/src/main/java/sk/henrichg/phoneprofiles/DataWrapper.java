@@ -695,7 +695,7 @@ public class DataWrapper {
             if (GlobalData.applicationClose)
             {
                 // ma sa zatvarat aktivita po aktivacii
-                if (GlobalData.getApplicationStarted(activity.getApplicationContext()))
+                if (GlobalData.getApplicationStarted(activity.getApplicationContext(), false))
                     // aplikacia je uz spustena, mozeme aktivitu zavriet
                     // tymto je vyriesene, ze pri spusteni aplikacie z launchera
                     // sa hned nezavrie

@@ -42,7 +42,7 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
     {
         super.onStart();
 
-        if (!GlobalData.getApplicationStarted(getApplicationContext())) {
+        if (!GlobalData.getApplicationStarted(getApplicationContext(), true)) {
             GlobalData.logE("ActivateProfileFromExternalApplicationActivity.onStart","application not started");
             startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
         }

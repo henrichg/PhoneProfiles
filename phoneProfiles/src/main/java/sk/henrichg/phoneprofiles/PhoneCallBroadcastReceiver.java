@@ -16,7 +16,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     protected boolean onStartReceive()
     {
-        if (!GlobalData.getApplicationStarted(super.savedContext))
+        if (!GlobalData.getApplicationStarted(super.savedContext, true))
             return false;
 
         GlobalData.loadPreferences(savedContext);

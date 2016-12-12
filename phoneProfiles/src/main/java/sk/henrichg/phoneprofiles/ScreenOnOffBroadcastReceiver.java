@@ -11,7 +11,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         GlobalData.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
 
-        if (!GlobalData.getApplicationStarted(context))
+        if (!GlobalData.getApplicationStarted(context, true))
             // application is not started
             return;
 
@@ -25,7 +25,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
             GlobalData.setScreenUnlocked(context, false);
 
-            if (GlobalData.getApplicationStarted(context)) {
+            if (GlobalData.getApplicationStarted(context, true)) {
                 if (GlobalData.notificationShowInStatusBar &&
                         GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
@@ -43,7 +43,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
             GlobalData.setScreenUnlocked(context, true);
 
-            if (GlobalData.getApplicationStarted(context)) {
+            if (GlobalData.getApplicationStarted(context, true)) {
                 if (GlobalData.notificationShowInStatusBar &&
                     GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
@@ -63,7 +63,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
-            if (GlobalData.getApplicationStarted(context)) {
+            if (GlobalData.getApplicationStarted(context, true)) {
                 if (GlobalData.notificationShowInStatusBar &&
                         GlobalData.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);

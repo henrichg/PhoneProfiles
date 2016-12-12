@@ -36,7 +36,7 @@ public class BackgroundActivateProfileActivity extends Activity {
     {
         super.onStart();
 
-        if (!GlobalData.getApplicationStarted(getApplicationContext())) {
+        if (!GlobalData.getApplicationStarted(getApplicationContext(), true)) {
             GlobalData.logE("BackgroundActivateProfileActivity.onStart","application not started");
             startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
         }

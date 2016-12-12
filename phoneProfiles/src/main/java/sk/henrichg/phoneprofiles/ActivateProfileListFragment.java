@@ -233,7 +233,7 @@ public class ActivateProfileListFragment extends Fragment {
 
     private void doOnStart()
     {
-        if (!GlobalData.getApplicationStarted(getActivity().getApplicationContext()))
+        if (!GlobalData.getApplicationStarted(getActivity().getApplicationContext(), false))
         {
             GlobalData.logE("ActivateProfileListFragment.doOnStart","application not started");
 
