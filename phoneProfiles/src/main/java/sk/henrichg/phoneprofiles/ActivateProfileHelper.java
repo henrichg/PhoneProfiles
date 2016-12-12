@@ -734,6 +734,7 @@ public class ActivateProfileHelper {
                 if (isAudibleRinging(profile._volumeRingerMode, profile._volumeZenMode) && (profile.getVolumeRingtoneValue() == 0)) {
                     // change ringer mode to Silent
                     profile._volumeRingerMode = 4;
+                    profile.setVolumeRingtoneValue(1);
                 }
             }
         }
