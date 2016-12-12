@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -17,6 +18,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class PhoneProfilesPreferencesActivity extends PreferenceActivity
                             implements PreferenceFragment.OnCreateNestedPreferenceFragment
 {
+    String extraScrollTo;
 
     private boolean showEditorPrefIndicator;
     private boolean showEditorHeader;
@@ -88,7 +90,6 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         else
             fragment = new PhoneProfilesPreferencesFragment();
 
-        String extraScrollTo;
         Intent intent = getIntent();
         if (intent.hasCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES))
             // activity is started from lockscreen, scroll to notifications cattegory
@@ -192,6 +193,29 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         setResult(RESULT_OK,returnIntent);
 
         super.finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (extraScrollTo == null)
+                    return super.onOptionsItemSelected(item);
+                else {
+                    finish();
+                    return true;
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (extraScrollTo != null)
+            finish();
+        else
+            super.onBackPressed();
     }
 
     @Override
