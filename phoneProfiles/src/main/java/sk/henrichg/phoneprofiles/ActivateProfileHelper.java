@@ -743,6 +743,8 @@ public class ActivateProfileHelper {
     @SuppressWarnings("deprecation")
     void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
     {
+        // linkUnlink == LINKMODE_NONE: not do link and unlink volumes for phone call - called from ActivateProfileHelper.execute()
+        // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallService
 
         int ringerMode;
         int zenMode;
