@@ -390,9 +390,7 @@ public class ActivateProfileHelper {
     }
 
     private static boolean isAudibleRinging(int ringerMode, int zenMode) {
-        return (!((ringerMode == 3) ||
-                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT < 21)) ||
-                ((ringerMode == 4) && (android.os.Build.VERSION.SDK_INT >= 23)) ||
+        return (!((ringerMode == 3) || (ringerMode == 4) ||
                 ((ringerMode == 5) && ((zenMode == 3) || (zenMode == 4) || (zenMode == 5) || (zenMode == 6)))
         ));
     }
@@ -719,11 +717,11 @@ public class ActivateProfileHelper {
 
     void changeRingerModeForVolumeEqual0(Profile profile) {
         if (profile.getVolumeRingtoneChange()) {
-            int ringerMode = GlobalData.getRingerMode(context);
-            int zenMode = GlobalData.getZenMode(context);
+            //int ringerMode = GlobalData.getRingerMode(context);
+            //int zenMode = GlobalData.getZenMode(context);
 
-            GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "ringerMode=" + ringerMode);
-            GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "zenMode=" + zenMode);
+            //GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "ringerMode=" + ringerMode);
+            //GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "zenMode=" + zenMode);
 
             // for profile ringer/zen mode = "only vibrate" do not change ringer mode to Silent
             if (!isVibratedRinging(profile._volumeRingerMode, profile._volumeZenMode)) {
@@ -736,6 +734,15 @@ public class ActivateProfileHelper {
                     profile._volumeRingerMode = 4;
                     profile.setVolumeRingtoneValue(1);
                 }
+            }
+        }
+    }
+
+    void changeNotificationVolumeForVolumeEqual0(Profile profile) {
+        if (profile.getVolumeNotificationChange() && GlobalData.getMergedRingNotificationVolumes(context)) {
+            if (isAudibleRinging(profile._volumeRingerMode, profile._volumeZenMode) && (profile.getVolumeNotificationValue() == 0)) {
+                GlobalData.logE("ActivateProfileHelper.changeNotificationVolumeForVolumeEqual0", "changed notification value to 1");
+                profile.setVolumeNotificationValue(1);
             }
         }
     }
@@ -805,10 +812,6 @@ public class ActivateProfileHelper {
                     setVibrateWhenRinging(null, 1);
                     break;
                 case 4:  // Silent
-                    /*if (android.os.Build.VERSION.SDK_INT >= 23)
-                        setZenMode(context, ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
-                    else if (android.os.Build.VERSION.SDK_INT >= 21)
-                        setZenMode(context, ZENMODE_PRIORITY, audioManager, AudioManager.RINGER_MODE_NORMAL);*/
                     if (android.os.Build.VERSION.SDK_INT >= 21) {
                         setZenMode(ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_SILENT);
                     }
