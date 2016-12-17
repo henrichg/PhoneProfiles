@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
 
+//noinspection GroovyMissingReturnStatement
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         minSdkVersion 16
@@ -21,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
 
