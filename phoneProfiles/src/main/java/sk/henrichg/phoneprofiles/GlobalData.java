@@ -74,6 +74,7 @@ public class GlobalData extends Application {
     //static final String EXTRA_PREFERENCES_STARTUP_SOURCE = "preferences_startup_source";
     static final String EXTRA_LINKUNLINK_VOLUMES = "link_unlink_volumes";
     static final String EXTRA_PROFILE_NAME = "profile_name";
+    static final String EXTRA_FOR_PROFILE_ACTIVATION = "for_profile_activation";
 
     static final int STARTUP_SOURCE_NOTIFICATION = 1;
     static final int STARTUP_SOURCE_WIDGET = 2;
@@ -1852,6 +1853,30 @@ public class GlobalData extends Application {
         Editor editor = preferences.edit();
         editor.putBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, merged);
         editor.commit();
+    }
+
+    @SuppressWarnings("deprecation")
+    public static boolean vibrationIsOn(Context context, AudioManager audioManager, boolean testRingerMode) {
+        int ringerMode = -999;
+        if (testRingerMode)
+            ringerMode = audioManager.getRingerMode();
+        int vibrateType = -999;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
+            vibrateType = audioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
+        //int vibrateWhenRinging;
+        //if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
+        //    vibrateWhenRinging = Settings.System.getInt(context.getContentResolver(), "vibrate_when_ringing", 0);
+        //else
+        //    vibrateWhenRinging = Settings.System.getInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0);
+
+        GlobalData.logE("GlobalData.vibrationIsOn", "ringerMode="+ringerMode);
+        GlobalData.logE("GlobalData.vibrationIsOn", "vibrateType="+vibrateType);
+        //GlobalData.logE("GlobalData.vibrationIsOn", "vibrateWhenRinging="+vibrateWhenRinging);
+
+        return (ringerMode == AudioManager.RINGER_MODE_VIBRATE) ||
+                (vibrateType == AudioManager.VIBRATE_SETTING_ON) ||
+                (vibrateType == AudioManager.VIBRATE_SETTING_ONLY_SILENT);// ||
+                //(vibrateWhenRinging == 1);
     }
 
 }

@@ -428,14 +428,14 @@ public class ActivateProfileHelper {
     */
 
     @SuppressLint("NewApi")
-    void setVolumes(Profile profile, AudioManager audioManager, int linkUnlink)
+    void setVolumes(Profile profile, AudioManager audioManager, int linkUnlink, boolean forProfileActivation)
     {
         if (profile.getVolumeRingtoneChange()) {
-            if (linkUnlink == PhoneCallService.LINKMODE_NONE)
+            if (forProfileActivation)
                 GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
         }
         if (profile.getVolumeNotificationChange()) {
-            if (linkUnlink == PhoneCallService.LINKMODE_NONE)
+            if (forProfileActivation)
                 GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
         }
 
@@ -450,7 +450,7 @@ public class ActivateProfileHelper {
 
             //if (Permissions.checkAccessNotificationPolicy(context)) {
 
-                if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+                if (forProfileActivation) {
                     if (profile.getVolumeSystemChange()) {
                         audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, profile.getVolumeSystemValue(), 0);
                         //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
@@ -534,7 +534,7 @@ public class ActivateProfileHelper {
             //}
         }
 
-        if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+        if (forProfileActivation) {
             if (profile.getVolumeMediaChange()) {
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, profile.getVolumeMediaValue(), 0);
                 //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_MUSIC, profile.getVolumeMediaValue());
@@ -748,7 +748,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressWarnings("deprecation")
-    void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, int linkUnlink)
+    void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, boolean forProfileActivation)
     {
         // linkUnlink == LINKMODE_NONE: not do link and unlink volumes for phone call - called from ActivateProfileHelper.execute()
         // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallService
@@ -756,7 +756,7 @@ public class ActivateProfileHelper {
         int ringerMode;
         int zenMode;
 
-        if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+        if (forProfileActivation) {
             if (profile._volumeRingerMode != 0) {
                 GlobalData.setRingerMode(context, profile._volumeRingerMode);
                 if ((profile._volumeRingerMode == 5) && (profile._volumeZenMode != 0))
@@ -770,7 +770,7 @@ public class ActivateProfileHelper {
         ringerMode = GlobalData.getRingerMode(context);
         zenMode = GlobalData.getZenMode(context);
 
-        if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+        if (forProfileActivation) {
             switch (ringerMode) {
                 case 1:  // Ring
                     setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
@@ -971,6 +971,7 @@ public class ActivateProfileHelper {
         Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
         volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
         volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        volumeServiceIntent.putExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, true);
         //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
         context.startService(volumeServiceIntent);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);

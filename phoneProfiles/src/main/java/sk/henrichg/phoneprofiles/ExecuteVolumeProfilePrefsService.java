@@ -33,6 +33,9 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
         profile = GlobalData.getMappedProfile(profile, context);
+
+        boolean forProfileActivation = intent.getBooleanExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, false);
+
         if (profile != null)
         {
             aph.setTones(profile);
@@ -47,9 +50,9 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
                 final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-                aph.setRingerMode(profile, audioManager, true, linkUnlink);
-                aph.setVolumes(profile, audioManager, linkUnlink);
-                aph.setRingerMode(profile, audioManager, false, linkUnlink);
+                aph.setRingerMode(profile, audioManager, true, forProfileActivation);
+                aph.setVolumes(profile, audioManager, linkUnlink, forProfileActivation);
+                aph.setRingerMode(profile, audioManager, false, forProfileActivation);
 
                 //try { Thread.sleep(500); } catch (InterruptedException e) { }
                 //SystemClock.sleep(500);

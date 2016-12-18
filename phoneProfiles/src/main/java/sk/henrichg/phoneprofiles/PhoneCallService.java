@@ -57,6 +57,7 @@ public class PhoneCallService extends IntentService {
                 Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
                 volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, linkMode);
+                volumeServiceIntent.putExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, false);
                 context.startService(volumeServiceIntent);
             }
             dataWrapper.invalidateDataWrapper();
