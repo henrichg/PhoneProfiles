@@ -389,6 +389,7 @@ public class GrantPermissionActivity extends Activity {
                         GlobalData.clearMergedPermissions(getApplicationContext());
                 }
                 //return;
+                break;
             }
 
             // other 'case' lines to check for other
