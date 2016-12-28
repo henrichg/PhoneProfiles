@@ -202,6 +202,7 @@
             android:paddingBottom="10dp"
             android:text="@string/empty_string"
             android:id="@+id/activity_info_activate_profile_from_tasker_params"
+            android:fontFamily="monospace"
             android:textIsSelectable="true"
             android:focusable="true"
             android:longClickable="true" />
