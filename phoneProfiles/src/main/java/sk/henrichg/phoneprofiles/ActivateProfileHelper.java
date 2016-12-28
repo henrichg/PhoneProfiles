@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Icon;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -1424,6 +1425,7 @@ public class ActivateProfileHelper {
         }
     }
 
+    @SuppressLint("NewApi")
     public void showNotification(Profile profile)
     {
         if (lockRefresh)
@@ -1500,15 +1502,20 @@ public class ActivateProfileHelper {
                         // colorful icon
 
                         // FC in Note 4, 6.0.1 :-/
-                        //if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        //    notificationBuilder.setSmallIcon(Icon.createWithBitmap(iconBitmap));
-                        //}
-                        //else {
+                        String manufacturer = GlobalData.getROMManufacturer();
+                        boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
+                                Build.MODEL.startsWith("SM-N910") &&
+                                (android.os.Build.VERSION.SDK_INT == 23);
+                        Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
+                        if ((android.os.Build.VERSION.SDK_INT >= 23) && (!isNote4)) {
+                            notificationBuilder.setSmallIcon(Icon.createWithBitmap(iconBitmap));
+                        }
+                        else {
                             iconSmallResource = context.getResources().getIdentifier(iconIdentifier + "_notify_color", "drawable", context.getPackageName());
                             if (iconSmallResource == 0)
                                 iconSmallResource = R.drawable.ic_profile_default;
                             notificationBuilder.setSmallIcon(iconSmallResource);
-                        //}
+                        }
                     }
                     else {
                         // native icon
@@ -1550,13 +1557,24 @@ public class ActivateProfileHelper {
             }
             else
             {
-                int iconSmallResource;
-                if (GlobalData.notificationStatusBarStyle.equals("0"))
-                    iconSmallResource = R.drawable.ic_profile_default;
-                else
-                    iconSmallResource = R.drawable.ic_profile_default_notify;
-                //notificationBuilder.setSmallIcon(0);
-                notificationBuilder.setSmallIcon(iconSmallResource);
+                // FC in Note 4, 6.0.1 :-/
+                String manufacturer = GlobalData.getROMManufacturer();
+                boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
+                        Build.MODEL.startsWith("SM-N910") &&
+                        (android.os.Build.VERSION.SDK_INT == 23);
+                Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
+                if ((Build.VERSION.SDK_INT >= 23) && (!isNote4) && (iconBitmap != null)) {
+                    notificationBuilder.setSmallIcon(Icon.createWithBitmap(iconBitmap));
+                }
+                else {
+                    int iconSmallResource;
+                    if (GlobalData.notificationStatusBarStyle.equals("0"))
+                        iconSmallResource = R.drawable.ic_profile_default;
+                    else
+                        iconSmallResource = R.drawable.ic_profile_default_notify;
+                    notificationBuilder.setSmallIcon(iconSmallResource);
+                }
+
                 if (iconBitmap != null)
                     contentView.setImageViewBitmap(R.id.notification_activated_profile_icon, iconBitmap);
                 else
