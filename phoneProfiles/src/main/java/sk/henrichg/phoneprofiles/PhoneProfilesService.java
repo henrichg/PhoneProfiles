@@ -45,7 +45,8 @@ public class PhoneProfilesService extends Service {
 
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
-        settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
+        //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
+        settingsContentObserver = new SettingsContentObserver(this, new Handler());
         getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
         // start service for first start
@@ -59,7 +60,8 @@ public class PhoneProfilesService extends Service {
     {
         getApplicationContext().unregisterReceiver(screenOnOffReceiver);
         if (android.os.Build.VERSION.SDK_INT >= 23)
-            getApplicationContext().unregisterReceiver(interruptionFilterChangedReceiver);
+            if (interruptionFilterChangedReceiver != null)
+                getApplicationContext().unregisterReceiver(interruptionFilterChangedReceiver);
 
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
