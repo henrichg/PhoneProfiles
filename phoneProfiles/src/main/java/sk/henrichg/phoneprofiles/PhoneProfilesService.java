@@ -48,6 +48,10 @@ public class PhoneProfilesService extends Service {
         settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
         getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
+        // start service for first start
+        Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
+        getApplicationContext().startService(eventsServiceIntent);
+
     }
 
     @Override
@@ -71,12 +75,6 @@ public class PhoneProfilesService extends Service {
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GlobalData.setMergedRingNotificationVolumes(getApplicationContext());
-
-        if (!GlobalData.getApplicationStarted(getApplicationContext(), false)) {
-            // start service for first start
-            Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
-            getApplicationContext().startService(eventsServiceIntent);
-        }
 
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.

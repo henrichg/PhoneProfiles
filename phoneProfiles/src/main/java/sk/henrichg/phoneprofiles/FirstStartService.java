@@ -80,8 +80,8 @@ public class FirstStartService extends IntentService {
             PPNotificationListenerService.setZenMode(context, audioManager);
         InterruptionFilterChangedBroadcastReceiver.setZenMode(context,audioManager);
 
-        // start ReceiverService
-        //context.startService(new Intent(context, PhoneProfilesService.class));
+        // show info notification
+        ImportantInfoNotification.showInfoNotification(context);
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         GlobalData.setActivatedProfileForDuration(context, 0);
@@ -97,9 +97,6 @@ public class FirstStartService extends IntentService {
 
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
-
-        // show info notification
-        ImportantInfoNotification.showInfoNotification(context);
 
         GlobalData.setApplicationStarted(context, true);
 
