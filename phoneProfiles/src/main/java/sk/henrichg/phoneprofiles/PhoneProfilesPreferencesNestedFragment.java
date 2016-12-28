@@ -19,6 +19,8 @@ import android.provider.Settings;
 
 import com.fnp.materialpreferences.PreferenceFragment;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -347,6 +349,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             intent5.putExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ICONS, true);
             context.sendBroadcast(intent5);*/
 
+            PhoneProfilesPreferencesFragment.preferencesActivity.setResult(RESULT_CANCELED);
             PhoneProfilesPreferencesFragment.preferencesActivity.finishAffinity();
         }
 
