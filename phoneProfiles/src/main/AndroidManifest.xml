@@ -173,7 +173,9 @@
         </activity>
 
         <receiver android:name=".PhoneProfilesInstall">
-            <intent-filter android:priority="100">
+            <intent-filter android:priority="100"
+                           android:enabled="true"
+                           android:exported="true">
                 <action android:name="android.intent.action.PACKAGE_INSTALL"/>
                 <action android:name="android.intent.action.PACKAGE_ADDED"/>
                 <data android:scheme="package"/>
@@ -182,7 +184,9 @@
         <receiver
             android:name=".IconWidgetProvider"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_icon">
+            android:label="@string/widget_label_icon"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -194,7 +198,9 @@
         <receiver
             android:name=".OneRowWidgetProvider"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_one_row">
+            android:label="@string/widget_label_one_row"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -206,7 +212,9 @@
         <receiver
             android:name=".ProfileListWidgetProvider"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_list">
+            android:label="@string/widget_label_list"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -222,7 +230,8 @@
 
         <receiver
             android:name=".LocaleChangedReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED"/>
 
@@ -232,8 +241,7 @@
         <receiver
             android:name=".BootUpReceiver"
             android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -250,7 +258,9 @@
             </intent-filter>
         </receiver>
         -->
-        <receiver android:name=".PackageReplacedReceiver">
+        <receiver android:name=".PackageReplacedReceiver"
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
             </intent-filter>
@@ -341,7 +351,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".PhoneCallBroadcastReceiver">
+        <receiver android:name=".PhoneCallBroadcastReceiver"
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
             </intent-filter>
@@ -367,7 +379,7 @@
         <receiver
             android:name=".AlarmClockBroadcastReceiver"
             android:enabled="false"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
 
                 <!--
