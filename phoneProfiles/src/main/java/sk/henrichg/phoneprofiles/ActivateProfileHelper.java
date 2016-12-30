@@ -1506,7 +1506,7 @@ public class ActivateProfileHelper {
                         boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
                                 Build.MODEL.startsWith("SM-N910") &&
                                 (android.os.Build.VERSION.SDK_INT == 23);
-                        Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
+                        //Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
                         if ((android.os.Build.VERSION.SDK_INT >= 23) && (!isNote4)) {
                             notificationBuilder.setSmallIcon(Icon.createWithBitmap(iconBitmap));
                         }
@@ -1562,7 +1562,7 @@ public class ActivateProfileHelper {
                 boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
                         Build.MODEL.startsWith("SM-N910") &&
                         (android.os.Build.VERSION.SDK_INT == 23);
-                Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
+                //Log.d("ActivateProfileHelper.showNotification","isNote4="+isNote4);
                 if ((Build.VERSION.SDK_INT >= 23) && (!isNote4) && (iconBitmap != null)) {
                     notificationBuilder.setSmallIcon(Icon.createWithBitmap(iconBitmap));
                 }

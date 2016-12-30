@@ -117,8 +117,8 @@ public class FirstStartService extends IntentService {
 
             String uriId = uri + "/" + id;
 
-            Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "title="+title);
-            Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
+            //Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "title="+title);
+            //Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
 
             if (title.equals("PhoneProfiles Silent") || title.equals("phoneprofiles_silent"))
                 return uriId;
@@ -138,8 +138,8 @@ public class FirstStartService extends IntentService {
 
             String uriId = uri + "/" + id;
 
-            Log.d("FirstStartService.getToneName", "title="+title);
-            Log.d("FirstStartService.getToneName", "uriId="+uriId);
+            //Log.d("FirstStartService.getToneName", "title="+title);
+            //Log.d("FirstStartService.getToneName", "uriId="+uriId);
 
             if (uriId.equals(_uri))
                 return title;
@@ -150,7 +150,7 @@ public class FirstStartService extends IntentService {
     private static boolean  isToneInstalled(int resID, String directory, Context context) {
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            Log.d("FirstStartService.isToneInstalled","not writable shared storage");
+            //Log.d("FirstStartService.isToneInstalled","not writable shared storage");
             return false;
         }
 
@@ -163,7 +163,7 @@ public class FirstStartService extends IntentService {
         File outFile = new File(path, filename);
 
         if (!outFile.exists()) {
-            Log.d("FirstStartService.isToneInstalled","file not exists");
+            //Log.d("FirstStartService.isToneInstalled","file not exists");
             return false;
         }
 
@@ -174,15 +174,15 @@ public class FirstStartService extends IntentService {
         Cursor cursor = context.getContentResolver().query(contentUri,
                 new String[]{MediaStore.MediaColumns.DATA},
                 MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-        Log.d("FirstStartService.isToneInstalled","cursor="+cursor);
+        //Log.d("FirstStartService.isToneInstalled","cursor="+cursor);
         if ((cursor == null) || (!cursor.moveToFirst())) {
             if (cursor != null)
                 cursor.close();
-            Log.d("FirstStartService.isToneInstalled","empty cursor");
+            //Log.d("FirstStartService.isToneInstalled","empty cursor");
             return false;
         }
         else {
-            Log.d("FirstStartService.isToneInstalled","DATA="+cursor.getString(0));
+            //Log.d("FirstStartService.isToneInstalled","DATA="+cursor.getString(0));
             cursor.close();
         }
 
@@ -191,7 +191,7 @@ public class FirstStartService extends IntentService {
                 return false;
             }*/
 
-        Log.d("FirstStartService.isToneInstalled","tone installed");
+        //Log.d("FirstStartService.isToneInstalled","tone installed");
 
         return true;
     }
@@ -204,7 +204,7 @@ public class FirstStartService extends IntentService {
             return ringtone && notification && alarm;
         }
         else {
-            Log.d("FirstStartService.isToneInstalled","not granted permission");
+            //Log.d("FirstStartService.isToneInstalled","not granted permission");
             return false;
         }
     }
@@ -324,7 +324,7 @@ public class FirstStartService extends IntentService {
                         Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
                         if (newUri != null) {
-                            Log.d("FirstStartService","inserted to resolver");
+                            //Log.d("FirstStartService","inserted to resolver");
 
                             // Tell the media scanner about the new ringtone
                             MediaScannerConnection.scanFile(
@@ -344,7 +344,7 @@ public class FirstStartService extends IntentService {
                             isError = true;
                         }
                     } else {
-                        Log.d("FirstStartService","exists in resolver");
+                        //Log.d("FirstStartService","exists in resolver");
                         cursor.close();
                     }
                 }
