@@ -441,8 +441,6 @@
   <string name="info_notification_text">Kattints ide ha látni akarod a fontos információt</string>
   <string name="profile_preferences_deviceWiFiAP">Wi-Fi hotspot</string>
   <string name="array_pref_ringerModeArray_silentL">Prioritás mód</string>
-  <string name="info_notification_silent_mode_lollipop">Elsőbbségi mód: néma üzemmód szimulálása, csengő- és értesítések hangereje a profilban minimális (0).</string>
-  <string name="info_notification_minimal_ringer_and_notification_volumes">Amikor az eszközön a beállítás rezegés, minimális csengő-, vagy értesítési hangerő (0), az alkalmazás beállítja a hangerőt 1. Segítségével csengő- és értesítési hang \"PhoneProfiles Silent\" teljes csend.</string>
   <string name="menu_import_export">Importálás/exportálás</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 perc</string>
   <string name="info_notification_event_not_started">Esemény nem indul el akkor:\n1. Az összes esemény futtatását kikapcsoltad (piros \"lámpa\") - Ezt a Szerkesztő menüben \"Esemény indítás engedélyezés\".\n2. Kézi aktiválás esetén az aktív profil mellett (\"Sárga lámpa\") - az esemény újra indítása szükséges. Használt az esemény újra indítás ikont a Profilokban, Szerkesztőben vagy az eseményekben. Kézzel aktivált profil jelzése \"[M]\" a profil neve előtt. Exception from this is, when event has checked preference \"Ignore manual activation\".\n3. You have disabled event run in event preferences - event preference \"Enable run\" must by checked.\nNote: \"Traffic light\" is in title of Activator and Editor.</string>
@@ -836,7 +834,7 @@
   <string name="editor_event_list_item_event_status">Esemény állapot visszajelző</string>
   <string name="editor_event_list_item_profile_start_icon">Esemény kezdés ikon</string>
   <string name="editor_event_list_item_profile_end_icon">Esemény végződés ikon</string>
-  <string name="profile_preferences_sourceProfileInfo_summary">For each profile parameter can be set that it is used Source profile. Click here to configure the Source profile parameters.</string>
+  <string name="profile_preferences_sourceProfileInfo_summary">Minden profil paraméter beállítható, a Forrás profil használatával. Kattints ide a Forrás profil paramétereinek beállításához.</string>
   <string name="run_stop_events_indicator">Endegélyezet/álló esemény futási visszajelzését</string>
   <string name="run_stop_indicator_popup_window_important_infos">További információért tekintse meg \"Fontos információk\" (kérdőjel ikon szerkesztő alsó eszköztár).</string>
   <string name="important_info_how_to_show_ppp">Fontos információ megtekinthető a szerkesztőn keresztül, ha a kérdőjel ikonra kattintasz az eszköztáron.</string>
@@ -846,7 +844,7 @@
   <string name="preference_not_allowed_reason_detail_secure_lock">nem támogatott biztonsági zár</string>
   <string name="preference_not_allowed_reason_detail_cant_be_change">nem módosítható</string>
   <string name="event_preferences_sensorsInfo_title">Érzékelők működnek</string>
-  <string name="event_preferences_sensorsInfo_summary">Event will be started, if parameters of all sensors with \"Enable sensor\" parameter checked, are fulfilled. Running event will be ended, if any sensor parameter is not fulfilled. Check \"Enable sensor\" only for needed sensors for this event. Sensor name with \"Enable sensor\" checked is marked with bold text.\nSome sensor parameters are required. Required parameter name is marked with underline text. If any required parameter is not configured, event will not be started and parameter \"Enable sensor\" is unchecked.</string>
+  <string name="event_preferences_sensorsInfo_summary">Esemény el fog kezdődni, ha minden érzékelő \"Engedélyezett érzékelő\" paraméter be van jelölve. Futó esemény véget ér, ha bármely érzékelő paraméter nem teljesül. Ellenőrizze a \"Engedélyezett érzékelő\" csak a szükséges érzékelőket erre az eseményre. Érzékelő névvel \"Engedélyezett érzékelő\"-vel félkövér szöveggel jelöli.\nNéhány érzékelő paraméter szükséges. A szükséges paraméterek szövege aláhúzással van jelölve. Ha szükséges paraméterek nincsenek beállítva, akkor az esemény nem indítható, és \"Engedélyezett érzékelő\" paraméter nincs bejelölve.</string>
   <string name="phone_profiles_pref_notificationStatusBarStyleInfo_title">Színes ikon</string>
   <string name="phone_profiles_pref_notificationStatusBarStyleInfo_summary">Néhány eszköz nem támogatja a színes ikonokat az állapotsorban.</string>
   <string name="pref_dlg_change_selection_title">Kijelölés változtatás</string>
@@ -861,11 +859,17 @@
   <string name="info_preference_click_here">Kattintson ide az információkhoz</string>
   <string name="profile_preferences_category_profileActivationParameters">Aktiválási paraméterek</string>
   <string name="profile_preferences_category_profileDeviceParameters">Készülék paraméterek</string>
-  <string name="profile_preferences_volumeNotificationVolume0_title">Change notification tone</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Notification tone \"PhoneProfiles Silent\" is configured.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For notification volume = 0 configure notification tone to \"PhoneProfiles Silent\" for true silent notifications.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_question">Configure notification tone to \"PhoneProfiles Silent\"?</string>
-  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it from Editor menu a try again.</string>
-  <string name="info_notification_unlink_ringer_notification_volumes">Your device has merged volume for call ringing and notifications. You can use \"Unlink ringer and notif. volumes\". Click here to configure it.</string>
-  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Your device has merged volume for call ringing and notifications. If you want unlink volumes, check this parameter.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_title">Értesítési hang módosítása</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">\"Csendes PhoneProfiles\" értesítési hang van konfigurálva.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Értesítés hangerő = 0-t beállításával, \"Csendes PhoneProfiles\" lesz az igazi csendes értesítés.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_question">Értesítési hangot \"Csendes PhoneProfiles\" beállítja?</string>
+  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Értesítési hang \"Csendes PhoneProfiles\" nincs telepítve. Kérlek telepítsd a Szerkesztés menüből és próbáld újra.</string>
+  <string name="info_notification_unlink_ringer_notification_volumes">A készülék egyesíti a csengetési és értesítési hangerőket. Akarod a \"Csengetési és értesítési hangerők szétválasztását\". Kattintson ide a változtatáshoz.</string>
+  <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">A készülék összevonta a csengetési és értesítési hangerőket. Ha akarja szétválaszthatja a hangerő paramétereket.</string>
+  <string name="phone_profiles_pref_eventUsePriorityAppSettings">Prioritás használata</string>
+  <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Az alkalmazás beállításaiba a \"Prioritás\" paraméter használata engedélyezve.</string>
+  <string name="phone_profiles_pref_notificationStatusBarNew">Állapotsáv-értesítések megjelenítése</string>
+  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Jelenleg konfigurálva:</string>
+  <string name="profile_preferences_volumeRingtone0Info_title">Csengőhang hangereje = 0</string>
+  <string name="profile_preferences_volumeRingtone0Info_summary">Csengetési hangerő = 0 beállítása a készüléken a csendes módhoz. Értesítési hangerő kihagyva.</string>
 </resources>
