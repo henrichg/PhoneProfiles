@@ -132,7 +132,7 @@
                 henrichg:dMax="300"
                 android:dependency="notificationStatusBarPermanent" />
             <Preference
-                android:key="eventSensorsInfo"
+                android:key="notificationStatusBarStyleInfo"
                 android:title="@string/phone_profiles_pref_notificationStatusBarStyleInfo_title"
                 android:summary="@string/phone_profiles_pref_notificationStatusBarStyleInfo_summary"
                 android:widgetLayout="@layout/info_preference" />
