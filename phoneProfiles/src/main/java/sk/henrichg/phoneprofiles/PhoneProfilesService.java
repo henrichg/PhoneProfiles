@@ -76,7 +76,7 @@ public class PhoneProfilesService extends Service {
 
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.setMergedRingNotificationVolumes(getApplicationContext());
+        GlobalData.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
