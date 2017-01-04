@@ -817,7 +817,7 @@ public class ActivateProfileHelper {
                     break;
                 case 4:  // Silent
                     if (android.os.Build.VERSION.SDK_INT >= 21) {
-                        setZenMode(ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_SILENT);
+                        setZenMode(ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     }
                     else {
                         setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
@@ -843,7 +843,7 @@ public class ActivateProfileHelper {
                             setVibrateWhenRinging(profile, -1);
                             break;
                         case 3:
-                            setZenMode(ZENMODE_NONE, audioManager, AudioManager.RINGER_MODE_SILENT);
+                            setZenMode(ZENMODE_NONE, audioManager, AudioManager.RINGER_MODE_NORMAL);
                             break;
                         case 4:
                             setZenMode(ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
@@ -854,7 +854,7 @@ public class ActivateProfileHelper {
                             setVibrateWhenRinging(null, 1);
                             break;
                         case 6:
-                            setZenMode(ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_SILENT);
+                            setZenMode(ZENMODE_ALARMS, audioManager, AudioManager.RINGER_MODE_NORMAL);
                             break;
                     }
                     break;
