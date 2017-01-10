@@ -3,7 +3,7 @@
           package="sk.henrichg.phoneprofiles"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="1895"
-          android:versionName="4.4.3.4"
+          android:versionName="4.4.3.5"
           android:installLocation="internalOnly" >
     <!-- android:installLocation="internalOnly" is needed for working BOOT_COMPLETED broadcast -->
 
