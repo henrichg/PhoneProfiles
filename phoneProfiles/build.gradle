@@ -48,7 +48,7 @@ dependencies {
     compile 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.2.2'
 }
 
 
