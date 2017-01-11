@@ -23,7 +23,7 @@ public class PhoneProfilesService extends Service {
     {
         GlobalData.logE("PhoneProfilesService.onCreate", "xxx");
 
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         instance = this;
 
@@ -74,7 +74,7 @@ public class PhoneProfilesService extends Service {
     {
         GlobalData.logE("PhoneProfilesService.onStartCommand", "xxx");
 
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GlobalData.setMergedRingNotificationVolumes(getApplicationContext(), false);
 

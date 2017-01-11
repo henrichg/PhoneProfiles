@@ -70,7 +70,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GUIData.setTheme(this, false, false);
         GUIData.setLanguage(getBaseContext());

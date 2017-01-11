@@ -8,7 +8,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         //int intentUid = intent.getExtras().getInt("android.intent.extra.UID");
         //int myUid = android.os.Process.myUid();

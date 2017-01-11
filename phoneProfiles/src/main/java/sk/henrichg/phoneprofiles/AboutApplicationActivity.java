@@ -29,7 +29,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         GlobalData.loadPreferences(getApplicationContext());
 

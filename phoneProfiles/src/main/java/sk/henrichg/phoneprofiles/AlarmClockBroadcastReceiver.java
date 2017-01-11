@@ -10,7 +10,7 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
         //Log.e("AlarmClockBroadcastReceiver", "ALARM");
 
         if (!GlobalData.getApplicationStarted(context, true))

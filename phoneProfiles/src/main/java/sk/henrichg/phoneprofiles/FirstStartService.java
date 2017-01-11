@@ -37,7 +37,7 @@ public class FirstStartService extends IntentService {
     {
         GlobalData.logE("FirstStartService.onHandleIntent", "xxx");
 
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         Context context = getApplicationContext();
 
