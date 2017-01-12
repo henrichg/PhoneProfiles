@@ -121,7 +121,7 @@ public class Permissions {
         //Log.e("Permissions", "checkProfilePermissions - profile.icon="+profile._icon);
         if (profile == null) return permissions;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));
+            //if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));
             if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
             if (!checkProfileVibrationOnTouch(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
             if (!checkProfileRingtones(context, profile)) permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
@@ -152,8 +152,9 @@ public class Permissions {
             return permissions;
     }
 
+    /*
     static boolean checkProfileVolumePreferences(Context context, Profile profile) {
-        /*if (profile == null) return true;
+        if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             //Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, 0); -- NOT WORKING
             if ((profile._volumeRingerMode != 0) ||
@@ -169,9 +170,10 @@ public class Permissions {
             else
                 return true;
         }
-        else*/
+        else
             return true;
     }
+    */
 
     static boolean checkInstallTone(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
@@ -405,7 +407,7 @@ public class Permissions {
             return true;
     }
 
-    private static boolean checkProfileAccessNotificationPolicy(Context context, Profile profile) {
+    static boolean checkProfileAccessNotificationPolicy(Context context, Profile profile) {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
