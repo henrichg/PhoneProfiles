@@ -11,7 +11,6 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 {
     public static ImageViewPreference changedImageViewPreference;
     public static ProfileIconPreference changedProfileIconPreference;
-    private static Activity preferencesActivity = null;
     public static ApplicationsDialogPreference applicationsDialogPreference;
 
     static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
@@ -27,7 +26,6 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
         // configuration changes for example
         setRetainInstance(false);
 
-        preferencesActivity = getActivity();
         //context = getActivity().getBaseContext();
 
         //dataWrapper = new DataWrapper(context.getApplicationContext(), true, false, 0);
@@ -137,11 +135,6 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
             disableDependedPref(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE);
 
         //}
-    }
-
-    static public Activity getPreferencesActivity()
-    {
-        return preferencesActivity;
     }
 
     static public void setChangedImageViewPreference(ImageViewPreference changedImageViewPref)

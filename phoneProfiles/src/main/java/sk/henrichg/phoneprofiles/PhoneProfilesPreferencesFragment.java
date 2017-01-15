@@ -12,7 +12,6 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
 
     //private PreferenceManager prefMng;
     //private SharedPreferences preferences;
-    public static Activity preferencesActivity = null;
     String extraScrollTo;
 
     @Override
@@ -22,8 +21,6 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
 
         // must by false to avoid FC when rotation changes and preference dialogs are shown
         setRetainInstance(false);
-
-        preferencesActivity = getActivity();
 
         preferences = prefMng.getSharedPreferences();
         preferences.registerOnSharedPreferenceChangeListener(this);
@@ -152,12 +149,5 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
         }
 
     }
-
-    /*
-    static public Activity getPreferencesActivity()
-    {
-        return preferencesActivity;
-    }
-    */
 
 }
