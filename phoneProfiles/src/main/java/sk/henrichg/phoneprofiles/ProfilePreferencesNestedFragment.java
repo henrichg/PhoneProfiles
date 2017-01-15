@@ -32,7 +32,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     protected PreferenceManager prefMng;
     protected SharedPreferences preferences;
-    private Context context;
+    protected Context context;
 
     static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
     static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
@@ -58,12 +58,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         setRetainInstance(false);
 
         context = getActivity().getBaseContext();
+
+        prefMng = getPreferenceManager();
+        preferences = prefMng.getSharedPreferences();
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    protected void setPreferencesManager() {
         String PREFS_NAME;
         if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
             PREFS_NAME = PREFS_NAME_ACTIVITY;
@@ -79,7 +79,13 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         prefMng = getPreferenceManager();
         prefMng.setSharedPreferencesName(PREFS_NAME);
         prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setPreferencesManager();
         preferences = prefMng.getSharedPreferences();
         preferences.registerOnSharedPreferenceChangeListener(this);
 
@@ -312,73 +318,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     {
         preferences.unregisterOnSharedPreferenceChangeListener(this); 
         super.onDestroy();
-    }
-
-    public void doOnActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == GlobalData.REQUEST_CODE_PROFILE_PREFERENCES)
-        {
-            if ((resultCode == Activity.RESULT_OK) && (data != null))
-            {
-                long profile_id = data.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
-                //int newProfileMode = data.getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                //int predefinedProfileIndex = data.getIntExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
-
-                if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
-                {
-                    Profile defaultProfile = GlobalData.getDefaultProfile(context.getApplicationContext());
-                    Permissions.grantProfilePermissions(context.getApplicationContext(), defaultProfile, true,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, null, false);
-                }
-            }
-        }
-        if (requestCode == ImageViewPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
-        {
-            Uri selectedImage = data.getData();
-            String picturePath = ImageViewPreference.getPath(context, selectedImage);
-
-            if (ProfilePreferencesFragment.changedImageViewPreference != null)
-                // nastavime image identifikatoru na ziskanu cestu ku obrazku
-                ProfilePreferencesFragment.changedImageViewPreference.setImageIdentifierAndType(picturePath, false);
-        }
-        if (requestCode == ProfileIconPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
-        {
-            Uri selectedImage = data.getData();
-            String picturePath = ImageViewPreference.getPath(context, selectedImage);
-
-            if (ProfilePreferencesFragment.changedProfileIconPreference != null)
-                // nastavime image identifikatoru na ziskanu cestu ku obrazku
-                ProfilePreferencesFragment.changedProfileIconPreference.setImageIdentifierAndType(picturePath, false, true);
-        }
-        if (requestCode == RESULT_NOTIFICATION_ACCESS_SETTINGS) {
-            /*final boolean canEnableZenMode =
-                    (PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext()) ||
-                            (GlobalData.isRooted(false) && GlobalData.settingsBinaryExists())
-                    );*/
-
-            final String sZenModeType = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, "");
-            setSummary(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, sZenModeType);
-        }
-        if (requestCode == ApplicationsDialogPreference.RESULT_APPLICATIONS_EDITOR && resultCode == Activity.RESULT_OK && data != null)
-        {
-            if (ProfilePreferencesFragment.applicationsDialogPreference != null) {
-                ProfilePreferencesFragment.applicationsDialogPreference.updateShortcut(
-                        (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
-                        data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
-                        /*(Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON),*/
-                        data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_POSITION, -1));
-            }
-        }
-        if (requestCode == RESULT_UNLINK_VOLUMES_APP_PREFERENCES) {
-            disableDependedPref(GlobalData.PREF_PROFILE_VOLUME_RINGTONE);
-            disableDependedPref(GlobalData.PREF_PROFILE_VOLUME_NOTIFICATION);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        doOnActivityResult(requestCode, resultCode, data);
     }
 
     private void setTitleStyle(Preference preference, boolean bold, boolean underline, boolean systemSettings)
@@ -1225,7 +1164,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     }
 
-    public void disableDependedPref(String key) {
+    protected void disableDependedPref(String key) {
         String value = preferences.getString(key, "");
         disableDependedPref(key, value);
     }
@@ -1252,5 +1191,73 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         ProfilePreferencesFragmentActivity.showSaveMenu = true;
         activity.invalidateOptionsMenu();
     }
+
+    public void doOnActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == GlobalData.REQUEST_CODE_PROFILE_PREFERENCES)
+        {
+            if ((resultCode == Activity.RESULT_OK) && (data != null))
+            {
+                long profile_id = data.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+                //int newProfileMode = data.getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                //int predefinedProfileIndex = data.getIntExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+
+                if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
+                {
+                    Profile defaultProfile = GlobalData.getDefaultProfile(context.getApplicationContext());
+                    Permissions.grantProfilePermissions(context.getApplicationContext(), defaultProfile, true,
+                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, null, false);
+                }
+            }
+        }
+        if (requestCode == ImageViewPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
+        {
+            Uri selectedImage = data.getData();
+            String picturePath = ImageViewPreference.getPath(context, selectedImage);
+
+            if (ProfilePreferencesFragment.changedImageViewPreference != null)
+                // nastavime image identifikatoru na ziskanu cestu ku obrazku
+                ProfilePreferencesFragment.changedImageViewPreference.setImageIdentifierAndType(picturePath, false);
+        }
+        if (requestCode == ProfileIconPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
+        {
+            Uri selectedImage = data.getData();
+            String picturePath = ImageViewPreference.getPath(context, selectedImage);
+
+            if (ProfilePreferencesFragment.changedProfileIconPreference != null)
+                // nastavime image identifikatoru na ziskanu cestu ku obrazku
+                ProfilePreferencesFragment.changedProfileIconPreference.setImageIdentifierAndType(picturePath, false, true);
+        }
+        if (requestCode == RESULT_NOTIFICATION_ACCESS_SETTINGS) {
+            /*final boolean canEnableZenMode =
+                    (PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext()) ||
+                            (GlobalData.isRooted(false) && GlobalData.settingsBinaryExists())
+                    );*/
+
+            final String sZenModeType = preferences.getString(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, "");
+            setSummary(GlobalData.PREF_PROFILE_VOLUME_ZEN_MODE, sZenModeType);
+        }
+        if (requestCode == ApplicationsDialogPreference.RESULT_APPLICATIONS_EDITOR && resultCode == Activity.RESULT_OK && data != null)
+        {
+            if (ProfilePreferencesFragment.applicationsDialogPreference != null) {
+                ProfilePreferencesFragment.applicationsDialogPreference.updateShortcut(
+                        (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
+                        data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
+                        /*(Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON),*/
+                        data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_POSITION, -1));
+            }
+        }
+        if (requestCode == RESULT_UNLINK_VOLUMES_APP_PREFERENCES) {
+            disableDependedPref(GlobalData.PREF_PROFILE_VOLUME_RINGTONE);
+            disableDependedPref(GlobalData.PREF_PROFILE_VOLUME_NOTIFICATION);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        doOnActivityResult(requestCode, resultCode, data);
+    }
+
 
 }

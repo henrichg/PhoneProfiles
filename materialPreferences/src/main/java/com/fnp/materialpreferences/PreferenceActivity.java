@@ -61,4 +61,15 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public PreferenceFragment getFragment() {
+        int id;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            id = R.id.content;
+        } else {
+            id = android.R.id.content;
+        }
+
+        return (PreferenceFragment) getFragmentManager().findFragmentById(id);
+    }
+
 }

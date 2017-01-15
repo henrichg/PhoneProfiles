@@ -1,7 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
@@ -9,7 +11,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 {
     public static ImageViewPreference changedImageViewPreference;
     public static ProfileIconPreference changedProfileIconPreference;
-    public static Activity preferencesActivity = null;
+    private static Activity preferencesActivity = null;
     public static ApplicationsDialogPreference applicationsDialogPreference;
 
     static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
@@ -44,9 +46,6 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
         profile = ProfilePreferencesFragmentActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, predefineProfileIndex, true);
         */
 
-        prefMng = getPreferenceManager();
-        preferences = prefMng.getSharedPreferences();
-
         //Log.e("********  ProfilePreferenceFragment","startupSource="+startupSource);
         //if (savedInstanceState == null)
         //    loadPreferences();
@@ -57,22 +56,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 
     @Override
     public void addPreferencesFromResource(int preferenceResId) {
-        String PREFS_NAME;
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
-            PREFS_NAME = PREFS_NAME_ACTIVITY;
-        else
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_FRAGMENT)
-            PREFS_NAME = PREFS_NAME_FRAGMENT;
-        else
-        if (startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
-            PREFS_NAME = PREFS_NAME_DEFAULT_PROFILE;
-        else
-            PREFS_NAME = PREFS_NAME_FRAGMENT;
-
-        prefMng = getPreferenceManager();
-        prefMng.setSharedPreferencesName(PREFS_NAME);
-        prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
-
+        setPreferencesManager();
         super.addPreferencesFromResource(preferenceResId);
     }
 

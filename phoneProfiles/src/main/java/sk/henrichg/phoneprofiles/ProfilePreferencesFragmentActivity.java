@@ -152,11 +152,13 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        PreferenceFragment fragment = getFragment();
         if (fragment != null)
-            fragment.doOnActivityResult(requestCode, resultCode, data);
+            ((ProfilePreferencesNestedFragment)fragment).doOnActivityResult(requestCode, resultCode, data);
     }
 
-    private Profile createProfile(Context context, long profile_id, int new_profile_mode, int predefinedProfileIndex, boolean leaveSaveMenu) {
+    private Profile createProfile(ProfilePreferencesNestedFragment fragment, Context context,
+                                  long profile_id, int new_profile_mode, int predefinedProfileIndex, boolean leaveSaveMenu) {
         Profile profile;
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 
@@ -242,7 +244,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
     }
 
     private void loadPreferences(int new_profile_mode, int predefinedProfileIndex) {
-        Profile profile = createProfile(getApplicationContext(), profile_id, new_profile_mode, predefinedProfileIndex, false);
+        Profile profile = createProfile(fragment, getApplicationContext(), profile_id, new_profile_mode, predefinedProfileIndex, false);
 
         if (profile != null)
         {
@@ -321,7 +323,7 @@ public class ProfilePreferencesFragmentActivity extends PreferenceActivity
     private void savePreferences(int new_profile_mode, int predefinedProfileIndex)
     {
         DataWrapper dataWrapper = new DataWrapper(getApplicationContext().getApplicationContext(), false, false, 0);
-        Profile profile = createProfile(getApplicationContext(), profile_id, new_profile_mode, predefinedProfileIndex, true);
+        Profile profile = createProfile(fragment, getApplicationContext(), profile_id, new_profile_mode, predefinedProfileIndex, true);
 
         String PREFS_NAME;
         if (fragment.startupSource == GlobalData.PREFERENCES_STARTUP_SOURCE_ACTIVITY)
