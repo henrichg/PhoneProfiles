@@ -316,7 +316,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             (requestCode == RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS) ||
             (requestCode == RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS)) {
 
-            Context context = PhoneProfilesPreferencesFragment.preferencesActivity.getApplicationContext();
+            Context context = getActivity().getApplicationContext();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (requestCode == RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS) {
@@ -349,8 +349,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             intent5.putExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ICONS, true);
             context.sendBroadcast(intent5);*/
 
-            PhoneProfilesPreferencesFragment.preferencesActivity.setResult(RESULT_CANCELED);
-            PhoneProfilesPreferencesFragment.preferencesActivity.finishAffinity();
+            getActivity().setResult(RESULT_CANCELED);
+            getActivity().finishAffinity();
         }
 
     }
