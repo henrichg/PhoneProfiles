@@ -63,7 +63,7 @@ public class FirstStartService extends IntentService {
         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
         PPApplication.loadPreferences(context);
-        GUIData.setLanguage(context);
+        GlobalGUIRoutines.setLanguage(context);
 
         // remove phoneprofiles_silent.mp3
         //removeTone("phoneprofiles_silent.mp3", context);

@@ -1365,25 +1365,25 @@ public class ActivateProfileHelper {
             params.gravity = Gravity.RIGHT | Gravity.TOP;
         else
             params.gravity = Gravity.END | Gravity.TOP;*/
-        GUIData.keepScreenOnView = new BrightnessView(context);
+        GlobalGUIRoutines.keepScreenOnView = new BrightnessView(context);
         try {
-            windowManager.addView(GUIData.keepScreenOnView, params);
+            windowManager.addView(GlobalGUIRoutines.keepScreenOnView, params);
         } catch (Exception e) {
-            GUIData.keepScreenOnView = null;
+            GlobalGUIRoutines.keepScreenOnView = null;
             //e.printStackTrace();
         }
     }
 
     static void screenTimeoutUnlock(Context context)
     {
-        if (GUIData.keepScreenOnView != null)
+        if (GlobalGUIRoutines.keepScreenOnView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
-                windowManager.removeView(GUIData.keepScreenOnView);
+                windowManager.removeView(GlobalGUIRoutines.keepScreenOnView);
             } catch (Exception ignore) {
             }
-            GUIData.keepScreenOnView = null;
+            GlobalGUIRoutines.keepScreenOnView = null;
         }
 
         PPApplication.logE("@@@ screenTimeoutLock.unlock", "xxx");
@@ -1397,10 +1397,10 @@ public class ActivateProfileHelper {
             RemoveBrightnessViewBroadcastReceiver.setAlarm(context);
 
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-            if (GUIData.brightneesView != null)
+            if (GlobalGUIRoutines.brightneesView != null)
             {
-                windowManager.removeView(GUIData.brightneesView);
-                GUIData.brightneesView = null;
+                windowManager.removeView(GlobalGUIRoutines.brightneesView);
+                GlobalGUIRoutines.brightneesView = null;
             }
             int type;
             if (android.os.Build.VERSION.SDK_INT < 25)
@@ -1421,25 +1421,25 @@ public class ActivateProfileHelper {
                 params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             else
                 params.screenBrightness = profile.getDeviceBrightnessManualValue(context) / (float) 255;
-            GUIData.brightneesView = new BrightnessView(context);
+            GlobalGUIRoutines.brightneesView = new BrightnessView(context);
             try {
-                windowManager.addView(GUIData.brightneesView, params);
+                windowManager.addView(GlobalGUIRoutines.brightneesView, params);
             } catch (Exception e) {
-                GUIData.brightneesView = null;
+                GlobalGUIRoutines.brightneesView = null;
                 //e.printStackTrace();
             }
         //}
     }
 
     static void removeBrightnessView(Context context) {
-        if (GUIData.brightneesView != null)
+        if (GlobalGUIRoutines.brightneesView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
-                windowManager.removeView(GUIData.brightneesView);
+                windowManager.removeView(GlobalGUIRoutines.brightneesView);
             } catch (Exception ignore) {
             }
-            GUIData.brightneesView = null;
+            GlobalGUIRoutines.brightneesView = null;
         }
     }
 

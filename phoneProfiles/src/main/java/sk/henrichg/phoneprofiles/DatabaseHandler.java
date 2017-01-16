@@ -1981,7 +1981,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     // update values
                                     if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
                                         ||
-                                        ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GUIData.REMOTE_EXPORT_PATH))))
+                                        ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))))
                                     {
                                         if (columnNamesExportedDB[i].equals(KEY_DEVICE_AUTOROTATE))
                                         {
@@ -2053,7 +2053,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             }
                                         }
                                     }
-                                    if (applicationDataPath.equals(GUIData.REMOTE_EXPORT_PATH))
+                                    if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))
                                     {
                                         if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO))
                                         {
@@ -2100,7 +2100,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             }
                             if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
                                 ||
-                                ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GUIData.REMOTE_EXPORT_PATH))))
+                                ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))))
                             {
                                 values.put(KEY_DEVICE_AUTOROTATE, 0);
                             }
@@ -2257,7 +2257,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();
 
-            File dataDB = new File(data, GUIData.DB_FILEPATH + "/" + DATABASE_NAME);
+            File dataDB = new File(data, GlobalGUIRoutines.DB_FILEPATH + "/" + DATABASE_NAME);
             File exportedDB = new File(sd, PPApplication.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
 
             if (dataDB.exists())

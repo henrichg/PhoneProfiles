@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 import java.text.Collator;
 import java.util.Locale;
 
-public class GUIData {
+public class GlobalGUIRoutines {
 
     static BrightnessView brightneesView = null;
     static BrightnessView keepScreenOnView = null;
@@ -105,7 +105,7 @@ public class GUIData {
             return Collator.getInstance(appLocale);
         }
         else {
-            //Log.d("GUIData.getCollator", java.util.Locale.getDefault().toString());
+            //Log.d("GlobalGUIRoutines.getCollator", java.util.Locale.getDefault().toString());
             return Collator.getInstance();
         }
     }
