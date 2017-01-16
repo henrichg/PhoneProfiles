@@ -19,24 +19,24 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
         Context context = getApplicationContext();
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
-        GlobalData.setMergedRingNotificationVolumes(getApplicationContext(), false);
+        PPApplication.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
         ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
         aph.initialize(dataWrapper, context);
 
         int linkUnlink;
-        if (GlobalData.getMergedRingNotificationVolumes(context) && GlobalData.applicationUnlinkRingerNotificationVolumes)
-            linkUnlink = intent.getIntExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        if (PPApplication.getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes)
+            linkUnlink = intent.getIntExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
         else
             linkUnlink = PhoneCallService.LINKMODE_NONE;
-        long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
-        profile = GlobalData.getMappedProfile(profile, context);
+        profile = PPApplication.getMappedProfile(profile, context);
 
-        boolean forProfileActivation = intent.getBooleanExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, false);
+        boolean forProfileActivation = intent.getBooleanExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, false);
 
         if (profile != null)
         {
@@ -59,7 +59,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
                 //try { Thread.sleep(500); } catch (InterruptedException e) { }
                 //SystemClock.sleep(500);
-                GlobalData.sleep(500);
+                PPApplication.sleep(500);
 
                 RingerModeChangeReceiver.setAlarmForDisableInternalChange(context);
 

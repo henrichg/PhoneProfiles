@@ -13,18 +13,18 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
         //Log.e("AlarmClockBroadcastReceiver", "ALARM");
 
-        if (!GlobalData.getApplicationStarted(context, true))
+        if (!PPApplication.getApplicationStarted(context, true))
             return;
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
 
-            if (GlobalData.getSystemZenMode(context, ActivateProfileHelper.ZENMODE_ALL)
+            if (PPApplication.getSystemZenMode(context, ActivateProfileHelper.ZENMODE_ALL)
                     != ActivateProfileHelper.ZENMODE_ALL) {
 
                 DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
                 Profile profile = dataWrapper.getActivatedProfile();
-                profile = GlobalData.getMappedProfile(profile, context);
+                profile = PPApplication.getMappedProfile(profile, context);
 
                 if (profile != null) {
                     /*PPNotificationListenerService.requestInterruptionFilter(context.getApplicationContext(),

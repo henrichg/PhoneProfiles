@@ -14,16 +14,16 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
         //int myUid = android.os.Process.myUid();
         //if (intentUid == myUid)
         //{
-            //GlobalData.loadPreferences(context);
+            //PPApplication.loadPreferences(context);
 
-            GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-            GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-            GlobalData.setScreenUnlocked(context.getApplicationContext(), true);
+            PPApplication.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+            PPApplication.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+            PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
 
-            if (GlobalData.getApplicationStarted(context, false))
+            if (PPApplication.getApplicationStarted(context, false))
             {
                 // must by false for avoiding starts/pause events before restart events
-                GlobalData.setApplicationStarted(context, false);
+                PPApplication.setApplicationStarted(context, false);
 
                 // start ReceiverService
                 context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));

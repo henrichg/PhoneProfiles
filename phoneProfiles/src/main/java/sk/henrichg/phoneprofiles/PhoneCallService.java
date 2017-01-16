@@ -49,15 +49,15 @@ public class PhoneCallService extends IntentService {
     }
 
     private void setLinkUnlinkNotificationVolume(int linkMode) {
-        if (GlobalData.getMergedRingNotificationVolumes(context) && GlobalData.applicationUnlinkRingerNotificationVolumes) {
+        if (PPApplication.getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes) {
             DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
                 //Log.e("PhoneCallService", "doCallEvent - unlink");
                 Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, linkMode);
-                volumeServiceIntent.putExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, false);
+                volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                volumeServiceIntent.putExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, linkMode);
+                volumeServiceIntent.putExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, false);
                 context.startService(volumeServiceIntent);
             }
             dataWrapper.invalidateDataWrapper();
@@ -95,7 +95,7 @@ public class PhoneCallService extends IntentService {
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
         Profile profile = dataWrapper.getActivatedProfile();
-        profile = GlobalData.getMappedProfile(profile, context);
+        profile = PPApplication.getMappedProfile(profile, context);
 
         if (profile != null) {
 

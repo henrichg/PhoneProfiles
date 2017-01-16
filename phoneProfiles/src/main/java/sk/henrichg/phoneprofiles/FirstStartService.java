@@ -35,34 +35,34 @@ public class FirstStartService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent)
     {
-        GlobalData.logE("FirstStartService.onHandleIntent", "xxx");
+        PPApplication.logE("FirstStartService.onHandleIntent", "xxx");
 
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         Context context = getApplicationContext();
 
-        GlobalData.initRoot();
+        PPApplication.initRoot();
         // grant root
-        //if (GlobalData.isRooted(false))
+        //if (PPApplication.isRooted(false))
         //{
-            if (GlobalData.isRootGranted())
+            if (PPApplication.isRootGranted())
             {
-                GlobalData.settingsBinaryExists();
-                GlobalData.serviceBinaryExists();
-                //GlobalData.getSUVersion();
+                PPApplication.settingsBinaryExists();
+                PPApplication.serviceBinaryExists();
+                //PPApplication.getSUVersion();
             }
         //}
 
-        if (GlobalData.getApplicationStarted(getApplicationContext(), false))
+        if (PPApplication.getApplicationStarted(getApplicationContext(), false))
             return;
 
-        GlobalData.logE("FirstStartService.onHandleIntent", " application not started");
+        PPApplication.logE("FirstStartService.onHandleIntent", " application not started");
 
-        GlobalData.clearMergedPermissions(context);
+        PPApplication.clearMergedPermissions(context);
 
-        //int startType = intent.getStringExtra(GlobalData.EXTRA_FIRST_START_TYPE);
+        //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
         GUIData.setLanguage(context);
 
         // remove phoneprofiles_silent.mp3
@@ -70,11 +70,11 @@ public class FirstStartService extends IntentService {
         // install phoneprofiles_silent.ogg
         installTone(TONE_ID, TONE_NAME, context, false);
 
-        GlobalData.setLockscreenDisabled(context, false);
+        PPApplication.setLockscreenDisabled(context, false);
 
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        GlobalData.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-        GlobalData.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        PPApplication.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+        PPApplication.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
         RingerModeChangeReceiver.setRingerMode(context, audioManager);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
             PPNotificationListenerService.setZenMode(context, audioManager);
@@ -84,7 +84,7 @@ public class FirstStartService extends IntentService {
         ImportantInfoNotification.showInfoNotification(context);
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        GlobalData.setActivatedProfileForDuration(context, 0);
+        PPApplication.setActivatedProfileForDuration(context, 0);
 
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
         dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
@@ -98,9 +98,9 @@ public class FirstStartService extends IntentService {
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
 
-        GlobalData.setApplicationStarted(context, true);
+        PPApplication.setApplicationStarted(context, true);
 
-        dataWrapper.activateProfile(0, GlobalData.STARTUP_SOURCE_BOOT, null);
+        dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
         dataWrapper.invalidateDataWrapper();
 
     }
@@ -336,7 +336,7 @@ public class FirstStartService extends IntentService {
 
                             //try { Thread.sleep(300); } catch (InterruptedException e) { }
                             //SystemClock.sleep(300);
-                            GlobalData.sleep(300);
+                            PPApplication.sleep(300);
                         }
                         else {
                             Log.e("FirstStartService","newUri is emty");

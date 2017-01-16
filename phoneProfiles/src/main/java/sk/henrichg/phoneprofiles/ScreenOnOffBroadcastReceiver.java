@@ -9,25 +9,25 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
+        PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
 
-        if (!GlobalData.getApplicationStarted(context, true))
+        if (!PPApplication.getApplicationStarted(context, true))
             // application is not started
             return;
 
-        GlobalData.logE("ScreenOnOffBroadcastReceiver.onReceive","application started");
+        PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","application started");
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON))
-            GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+            PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
-            GlobalData.setScreenUnlocked(context, false);
+            PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
+            PPApplication.setScreenUnlocked(context, false);
 
-            if (GlobalData.getApplicationStarted(context, true)) {
-                if (GlobalData.notificationShowInStatusBar &&
-                        GlobalData.notificationHideInLockscreen) {
+            if (PPApplication.getApplicationStarted(context, true)) {
+                if (PPApplication.notificationShowInStatusBar &&
+                        PPApplication.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                     //dataWrapper.getActivateProfileHelper().removeNotification();
@@ -40,12 +40,12 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
         }
         if (intent.getAction().equals(Intent.ACTION_USER_PRESENT))
         {
-            GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
-            GlobalData.setScreenUnlocked(context, true);
+            PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
+            PPApplication.setScreenUnlocked(context, true);
 
-            if (GlobalData.getApplicationStarted(context, true)) {
-                if (GlobalData.notificationShowInStatusBar &&
-                    GlobalData.notificationHideInLockscreen) {
+            if (PPApplication.getApplicationStarted(context, true)) {
+                if (PPApplication.notificationShowInStatusBar &&
+                    PPApplication.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                     //dataWrapper.getActivateProfileHelper().removeNotification();
@@ -62,10 +62,10 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            GlobalData.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
-            if (GlobalData.getApplicationStarted(context, true)) {
-                if (GlobalData.notificationShowInStatusBar &&
-                        GlobalData.notificationHideInLockscreen) {
+            PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+            if (PPApplication.getApplicationStarted(context, true)) {
+                if (PPApplication.notificationShowInStatusBar &&
+                        PPApplication.notificationHideInLockscreen) {
                     DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                     dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                     //dataWrapper.getActivateProfileHelper().removeNotification();

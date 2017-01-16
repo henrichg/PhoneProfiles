@@ -16,7 +16,7 @@ public class DashClockBroadcastReceiver extends BroadcastReceiver {
                 PhoneProfilesDashClockExtension.getInstance();
         if (dashClockExtension != null)
         {
-            GlobalData.loadPreferences(context);
+            PPApplication.loadPreferences(context);
             dashClockExtension.updateExtension();
         }
 

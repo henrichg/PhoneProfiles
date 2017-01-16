@@ -188,7 +188,7 @@ public class Permissions {
             if (profile._vibrationOnTouch != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -204,7 +204,7 @@ public class Permissions {
             if (profile._vibrateWhenRinging != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -220,7 +220,7 @@ public class Permissions {
             if (profile._notificationLed != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -238,7 +238,7 @@ public class Permissions {
                 (profile._soundAlarmChange != 0)) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -254,12 +254,12 @@ public class Permissions {
             if (profile._deviceScreenTimeout != 0) {
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 boolean grantedDrawOverlays = true;
                 if (android.os.Build.VERSION.SDK_INT >= 25) {
                     grantedDrawOverlays = Settings.canDrawOverlays(context);
                     if (grantedDrawOverlays)
-                        GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             }
@@ -274,12 +274,12 @@ public class Permissions {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean grantedWriteSettings = Settings.System.canWrite(context);
             if (grantedWriteSettings)
-                GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                PPApplication.setShowRequestWriteSettingsPermission(context, true);
             boolean grantedDrawOverlays = true;
             if (android.os.Build.VERSION.SDK_INT >= 25) {
                 grantedDrawOverlays = Settings.canDrawOverlays(context);
                 if (grantedDrawOverlays)
-                    GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+                    PPApplication.setShowRequestDrawOverlaysPermission(context, true);
             }
             return grantedWriteSettings && grantedDrawOverlays;
         }
@@ -293,12 +293,12 @@ public class Permissions {
             if (profile.getDeviceBrightnessChange()) {
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 boolean grantedDrawOverlays = true;
                 if (android.os.Build.VERSION.SDK_INT >= 25) {
                     grantedDrawOverlays = Settings.canDrawOverlays(context);
                     if (grantedDrawOverlays)
-                        GlobalData.setShowRequestDrawOverlaysPermission(context, true);
+                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             }
@@ -315,7 +315,7 @@ public class Permissions {
             if (profile._deviceAutoRotate != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -382,7 +382,7 @@ public class Permissions {
             if ((profile._deviceWiFiAP != 0)) {
                 granted = Settings.System.canWrite(context);
                 if (granted)
-                    GlobalData.setShowRequestWriteSettingsPermission(context, true);
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
             }
             if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
                 granted = (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED);
@@ -419,7 +419,7 @@ public class Permissions {
                     NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
                     if (granted)
-                        GlobalData.setShowRequestAccessNotificationPolicyPermission(context, true);
+                        PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
                     return granted;
                 } else
                     return true;
@@ -438,7 +438,7 @@ public class Permissions {
                 NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
                 if (granted)
-                    GlobalData.setShowRequestAccessNotificationPolicyPermission(context, true);
+                    PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
                 return granted;
             }
             else
@@ -459,16 +459,16 @@ public class Permissions {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                 intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
-                intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 if (onlyNotification)
-                    GlobalData.addMergedPermissions(context, permissions);
+                    PPApplication.addMergedPermissions(context, permissions);
                 else
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                 intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
                 intent.putExtra(EXTRA_FOR_GUI, forGUI);
                 intent.putExtra(EXTRA_MONOCHROME, monochrome);
                 intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
-                intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+                intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                 intent.putExtra(EXTRA_INTERACTIVE, interactive);
                 intent.putExtra(EXTRA_ACTIVATE_PROFILE, activateProfile);
                 if (!onlyNotification)
@@ -618,20 +618,20 @@ public class Permissions {
     static void removeProfileNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
     }
 
     static void removeInstallToneNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
 
     static void removeNotifications(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(GlobalData.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
-        notificationManager.cancel(GlobalData.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
 
     static  void releaseReferences() {

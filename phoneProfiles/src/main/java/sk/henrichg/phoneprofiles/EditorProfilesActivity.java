@@ -95,7 +95,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            if (GlobalData.applicationTheme.equals("material"))
+            if (PPApplication.applicationTheme.equals("material"))
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff237e9f"));
             else
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
@@ -121,14 +121,14 @@ public class EditorProfilesActivity extends AppCompatActivity
                 }
             }
             else {
-                SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+                SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
                 long profile_id = preferences.getLong(SP_PROFILE_DETAILS_PROFILE_ID, 0);
                 int editMode = preferences.getInt(SP_PROFILE_DETAILS_EDIT_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
                 int predefinedProfileIndex = preferences.getInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, 0);
                 Bundle arguments = new Bundle();
-                arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile_id);
-                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile_id);
+                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
+                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
@@ -261,11 +261,11 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     public static void exitApp(Context context, DataWrapper dataWrapper) {
-        GlobalData.setApplicationStarted(context, false);
+        PPApplication.setApplicationStarted(context, false);
 
         // remove alarm for profile duration
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        GlobalData.setActivatedProfileForDuration(context, 0);
+        PPApplication.setActivatedProfileForDuration(context, 0);
 
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
@@ -278,11 +278,11 @@ public class EditorProfilesActivity extends AppCompatActivity
         ActivateProfileHelper.screenTimeoutUnlock(context);
         ActivateProfileHelper.removeBrightnessView(context);
 
-        GlobalData.initRoot();
+        PPApplication.initRoot();
 
-        GlobalData.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-        GlobalData.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-        GlobalData.setScreenUnlocked(context.getApplicationContext(), true);
+        PPApplication.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+        PPApplication.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+        PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
     }
 
     @Override
@@ -294,7 +294,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         case R.id.menu_settings:
             intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
 
-            startActivityForResult(intent, GlobalData.REQUEST_CODE_APPLICATION_PREFERENCES);
+            startActivityForResult(intent, PPApplication.REQUEST_CODE_APPLICATION_PREFERENCES);
 
             return true;
         case R.id.menu_install_tone:
@@ -348,7 +348,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     // https://code.google.com/p/android/issues/detail?id=78154
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        String manufacturer = GlobalData.getROMManufacturer();
+        String manufacturer = PPApplication.getROMManufacturer();
         if ((keyCode == KeyEvent.KEYCODE_MENU) &&
             (Build.VERSION.SDK_INT <= 16) &&
             (manufacturer != null) && (manufacturer.compareTo("lge") == 0)) {
@@ -359,7 +359,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        String manufacturer = GlobalData.getROMManufacturer();
+        String manufacturer = PPApplication.getROMManufacturer();
         if ((keyCode == KeyEvent.KEYCODE_MENU) &&
             (Build.VERSION.SDK_INT <= 16) &&
             (manufacturer != null) && (manufacturer.compareTo("lge") == 0)) {
@@ -377,7 +377,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         savedInstanceStateChanged = true;
 
         if (mTwoPane) {
-            SharedPreferences preferences = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
 
             FragmentManager fragmentManager = getFragmentManager();
             Fragment fragment = fragmentManager.findFragmentByTag("ProfileDetailsFragment");
@@ -406,20 +406,20 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == GlobalData.REQUEST_CODE_ACTIVATE_PROFILE)
+        if (requestCode == PPApplication.REQUEST_CODE_ACTIVATE_PROFILE)
         {
             EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
             if (fragment != null)
                 fragment.doOnActivityResult(requestCode, resultCode, data);
         }
         else
-        if (requestCode == GlobalData.REQUEST_CODE_PROFILE_PREFERENCES)
+        if (requestCode == PPApplication.REQUEST_CODE_PROFILE_PREFERENCES)
         {
             if ((resultCode == RESULT_OK) && (data != null))
             {
-                long profile_id = data.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
-                int newProfileMode = data.getIntExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                int predefinedProfileIndex = data.getIntExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+                long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+                int newProfileMode = data.getIntExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                int predefinedProfileIndex = data.getIntExtra(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
 
                 if (profile_id > 0)
                 {
@@ -432,29 +432,29 @@ public class EditorProfilesActivity extends AppCompatActivity
                     // redraw list fragment , notifications, widgets after finish ProfilePreferencesFragmentActivity
                     redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex);
 
-                    Profile mappedProfile = GlobalData.getMappedProfile(profile, getApplicationContext());
+                    Profile mappedProfile = PPApplication.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false);
+                            true, false, 0, PPApplication.STARTUP_SOURCE_EDITOR, true, this, false);
                 }
                 else
-                if (profile_id == GlobalData.DEFAULT_PROFILE_ID)
+                if (profile_id == PPApplication.DEFAULT_PROFILE_ID)
                 {
                     // refresh activity for changes of default profile
                     GUIData.reloadActivity(this, false);
 
-                    Profile defaultProfile = GlobalData.getDefaultProfile(getApplicationContext());
+                    Profile defaultProfile = PPApplication.getDefaultProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), defaultProfile, false,
-                            true, false, 0, GlobalData.STARTUP_SOURCE_EDITOR, true, this, false);
+                            true, false, 0, PPApplication.STARTUP_SOURCE_EDITOR, true, this, false);
 
                 }
             }
         }
         else
-        if (requestCode == GlobalData.REQUEST_CODE_APPLICATION_PREFERENCES)
+        if (requestCode == PPApplication.REQUEST_CODE_APPLICATION_PREFERENCES)
         {
             if ((resultCode == RESULT_OK) && (data != null))
             {
-                boolean restart = data.getBooleanExtra(GlobalData.EXTRA_RESET_EDITOR, false);
+                boolean restart = data.getBooleanExtra(PPApplication.EXTRA_RESET_EDITOR, false);
 
                 if (restart)
                 {
@@ -464,7 +464,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         }
         else
-        if (requestCode == GlobalData.REQUEST_CODE_REMOTE_EXPORT)
+        if (requestCode == PPApplication.REQUEST_CODE_REMOTE_EXPORT)
         {
             if (resultCode == RESULT_OK)
             {
@@ -500,9 +500,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                 input = new ObjectInputStream(new FileInputStream(src));
                 Editor prefEdit;
                 if (what == 1)
-                    prefEdit = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE).edit();
+                    prefEdit = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE).edit();
                 else
-                    prefEdit = getSharedPreferences(GlobalData.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE).edit();
+                    prefEdit = getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE).edit();
                 prefEdit.clear();
                 Map<String, ?> entries = (Map<String, ?>) input.readObject();
                 for (Entry<String, ?> entry : entries.entrySet()) {
@@ -522,7 +522,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if (what == 1)
                     {
-                        if (key.equals(GlobalData.PREF_APPLICATION_THEME))
+                        if (key.equals(PPApplication.PREF_APPLICATION_THEME))
                         {
                             if (v.equals("light"))
                                 prefEdit.putString(key, "material");
@@ -614,16 +614,16 @@ public class EditorProfilesActivity extends AppCompatActivity
                     unlockScreenOrientation();
 
                     if (result == 1) {
-                        GlobalData.loadPreferences(getApplicationContext());
+                        PPApplication.loadPreferences(getApplicationContext());
 
                         dataWrapper.clearProfileList();
                         dataWrapper.getDatabaseHandler().deactivateProfile();
                         dataWrapper.getActivateProfileHelper().showNotification(null);
                         dataWrapper.getActivateProfileHelper().updateWidget();
 
-                        GlobalData.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-                        GlobalData.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-                        GlobalData.setScreenUnlocked(getApplicationContext(), true);
+                        PPApplication.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
+                        PPApplication.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
+                        PPApplication.setScreenUnlocked(getApplicationContext(), true);
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
@@ -687,11 +687,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                     final PackageManager packageManager = getPackageManager();
                     List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
                     if (list.size() > 0)
-                        startActivityForResult(intent, GlobalData.REQUEST_CODE_REMOTE_EXPORT);
+                        startActivityForResult(intent, PPApplication.REQUEST_CODE_REMOTE_EXPORT);
                     else
                         importExportErrorDialog(1);
                 } else
-                    doImportData(GlobalData.EXPORT_PATH);
+                    doImportData(PPApplication.EXPORT_PATH);
             }
         });
         dialogBuilder2.setNegativeButton(R.string.alert_button_no, null);
@@ -736,9 +736,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             output = new ObjectOutputStream(new FileOutputStream(dst));
             SharedPreferences pref;
             if (what == 1)
-                pref = getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+                pref = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
             else
-                pref = getSharedPreferences(GlobalData.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE);
+                pref = getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE);
             output.writeObject(pref.getAll());
 
             res = true;
@@ -810,11 +810,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                     int ret = dataWrapper.getDatabaseHandler().exportDB();
                     if (ret == 1) {
                         File sd = Environment.getExternalStorageDirectory();
-                        File exportFile = new File(sd, GlobalData.EXPORT_PATH + "/" + GUIData.EXPORT_APP_PREF_FILENAME);
+                        File exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GUIData.EXPORT_APP_PREF_FILENAME);
                         if (!exportApplicationPreferences(exportFile, 1))
                             ret = 0;
                         else {
-                            exportFile = new File(sd, GlobalData.EXPORT_PATH + "/" + GUIData.EXPORT_DEF_PROFILE_PREF_FILENAME);
+                            exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GUIData.EXPORT_DEF_PROFILE_PREF_FILENAME);
                             if (!exportApplicationPreferences(exportFile, 2))
                                 ret = 0;
                         }
@@ -853,12 +853,12 @@ public class EditorProfilesActivity extends AppCompatActivity
     private void startProfilePreferenceActivity(Profile profile, int editMode, int predefinedProfileIndex) {
         Intent intent = new Intent(getBaseContext(), ProfilePreferencesFragmentActivity.class);
         if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
-            intent.putExtra(GlobalData.EXTRA_PROFILE_ID, 0L);
+            intent.putExtra(PPApplication.EXTRA_PROFILE_ID, 0L);
         else
-            intent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-        intent.putExtra(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-        intent.putExtra(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-        startActivityForResult(intent, GlobalData.REQUEST_CODE_PROFILE_PREFERENCES);
+            intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+        intent.putExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
+        intent.putExtra(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+        startActivityForResult(intent, PPApplication.REQUEST_CODE_PROFILE_PREFERENCES);
     }
 
     public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex) {
@@ -876,9 +876,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             if (profile != null)
             {
                 Bundle arguments = new Bundle();
-                arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
+                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
@@ -917,9 +917,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             {
                 // restart profile preferences fragmentu
                 Bundle arguments = new Bundle();
-                arguments.putLong(GlobalData.EXTRA_PROFILE_ID, profile._id);
-                arguments.putInt(GlobalData.EXTRA_NEW_PROFILE_MODE, newProfileMode);
-                arguments.putInt(GlobalData.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, newProfileMode);
+                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()

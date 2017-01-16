@@ -28,7 +28,7 @@ public class DataWrapper {
 
     DataWrapper(Context c, boolean fgui, boolean mono, int monoVal)
     {
-        //long nanoTimeStart = GlobalData.startMeasuringRunTime();
+        //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
         context = c;
 
@@ -37,7 +37,7 @@ public class DataWrapper {
         databaseHandler = getDatabaseHandler();
         //activateProfileHelper = getActivateProfileHelper();
 
-        //GlobalData.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.constructor");
+        //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.constructor");
     }
 
     void setParameters(
@@ -74,7 +74,7 @@ public class DataWrapper {
 
     public List<Profile> getProfileList()
     {
-        //long nanoTimeStart = GlobalData.startMeasuringRunTime();
+        //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
         if (profileList == null)
         {
@@ -90,7 +90,7 @@ public class DataWrapper {
             }
         }
 
-        //GlobalData.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
+        //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
 
         return profileList;
     }
@@ -179,7 +179,7 @@ public class DataWrapper {
             case 0:
                 profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
-                    if (GlobalData.canChangeZenMode(context, true)) {
+                    if (PPApplication.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
                             profile._volumeRingerMode = 5;
                             profile._volumeZenMode = 1; // ALL
@@ -202,7 +202,7 @@ public class DataWrapper {
             case 1:
                 profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
-                    if (GlobalData.canChangeZenMode(context, true)) {
+                    if (PPApplication.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
                             profile._volumeRingerMode = 5;
                             profile._volumeZenMode = 4; // ALL with vibration
@@ -225,7 +225,7 @@ public class DataWrapper {
             case 2:
                 profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
-                    if (GlobalData.canChangeZenMode(context, true)) {
+                    if (PPApplication.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
                             profile._volumeRingerMode = 5;
                             profile._volumeZenMode = 1; // ALL
@@ -248,7 +248,7 @@ public class DataWrapper {
             case 3:
                 profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
-                    if (GlobalData.canChangeZenMode(context, true)) {
+                    if (PPApplication.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
                             profile._volumeRingerMode = 5;
                             profile._volumeZenMode = 3; // NONE
@@ -271,7 +271,7 @@ public class DataWrapper {
             case 4:
                 profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
-                    if (GlobalData.canChangeZenMode(context, true)) {
+                    if (PPApplication.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
                             profile._volumeRingerMode = 5;
                             profile._volumeZenMode = 6; // ALARMS
@@ -485,11 +485,11 @@ public class DataWrapper {
         profileList.remove(profile);
 
         // unlink profile from Background profile
-        if (Long.valueOf(GlobalData.applicationBackgroundProfile) == profile._id)
+        if (Long.valueOf(PPApplication.applicationBackgroundProfile) == profile._id)
         {
-            SharedPreferences preferences = context.getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+            SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
             Editor editor = preferences.edit();
-            editor.putString(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(GlobalData.PROFILE_NO_ACTIVATE));
+            editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(PPApplication.PROFILE_NO_ACTIVATE));
             editor.commit();
         }
     }
@@ -499,9 +499,9 @@ public class DataWrapper {
         profileList.clear();
 
         // unlink profiles from Background profile
-        SharedPreferences preferences = context.getSharedPreferences(GlobalData.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
-        editor.putString(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(GlobalData.PROFILE_NO_ACTIVATE));
+        editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(PPApplication.PROFILE_NO_ACTIVATE));
         editor.commit();
     }
 
@@ -532,9 +532,9 @@ public class DataWrapper {
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        GlobalData.setActivatedProfileForDuration(context, 0);
+        PPApplication.setActivatedProfileForDuration(context, 0);
 
-        Profile profile = GlobalData.getMappedProfile(_profile, context);
+        Profile profile = PPApplication.getMappedProfile(_profile, context);
 
         Profile activatedProfile = getActivatedProfile();
 
@@ -548,14 +548,14 @@ public class DataWrapper {
             long profileId = 0;
             if (activatedProfile != null)
                 profileId = activatedProfile._id;
-            GlobalData.setActivatedProfileForDuration(context, profileId);
+            PPApplication.setActivatedProfileForDuration(context, profileId);
             ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
         }
 
         activateProfileHelper.showNotification(profile);
         activateProfileHelper.updateWidget();
 
-        if (GlobalData.notificationsToast && (!ActivateProfileHelper.lockRefresh))
+        if (PPApplication.notificationsToast && (!ActivateProfileHelper.lockRefresh))
         {
             // toast notification
             if (toastHandler != null)
@@ -575,8 +575,8 @@ public class DataWrapper {
         if (_activity != null)
         {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, _profile._id);
-            returnIntent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+            returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);
+            returnIntent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
             _activity.setResult(Activity.RESULT_OK,returnIntent);
         }
 
@@ -594,8 +594,8 @@ public class DataWrapper {
 
     private void activateProfileWithAlert(Profile profile, int startupSource, boolean interactive, Activity activity)
     {
-        if (interactive && (GlobalData.applicationActivateWithAlert ||
-                            (startupSource == GlobalData.STARTUP_SOURCE_EDITOR)))
+        if (interactive && (PPApplication.applicationActivateWithAlert ||
+                            (startupSource == PPApplication.STARTUP_SOURCE_EDITOR)))
         {
             // set theme and language for dialog alert ;-)
             // not working on Android 2.3.x
@@ -684,18 +684,18 @@ public class DataWrapper {
 
         boolean finish = true;
 
-        if (startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR_START)
+        if (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR_START)
         {
             finish = false;
         }
         else
-        if (startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR)
+        if (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR)
         {
             finish = false;
-            if (GlobalData.applicationClose)
+            if (PPApplication.applicationClose)
             {
                 // ma sa zatvarat aktivita po aktivacii
-                if (GlobalData.getApplicationStarted(activity.getApplicationContext(), false))
+                if (PPApplication.getApplicationStarted(activity.getApplicationContext(), false))
                     // aplikacia je uz spustena, mozeme aktivitu zavriet
                     // tymto je vyriesene, ze pri spusteni aplikacie z launchera
                     // sa hned nezavrie
@@ -703,7 +703,7 @@ public class DataWrapper {
             }
         }
         else
-        if (startupSource == GlobalData.STARTUP_SOURCE_EDITOR)
+        if (startupSource == PPApplication.STARTUP_SOURCE_EDITOR)
         {
             finish = false;
         }
@@ -719,34 +719,34 @@ public class DataWrapper {
         // pre profil, ktory je prave aktivny, treba aktualizovat aktivitu
         profile = getActivatedProfile();
 
-        long backgroundProfileId = Long.valueOf(GlobalData.applicationBackgroundProfile);
+        long backgroundProfileId = Long.valueOf(PPApplication.applicationBackgroundProfile);
         if ((profile == null) &&
-            (backgroundProfileId != GlobalData.PROFILE_NO_ACTIVATE))
+            (backgroundProfileId != PPApplication.PROFILE_NO_ACTIVATE))
         {
             profile = getProfileById(backgroundProfileId);
         }
 
         boolean actProfile = false;
         boolean interactive = false;
-        if ((startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_EDITOR) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_SERVICE))
+        if ((startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_EDITOR) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_SERVICE))
         {
             // aktivita spustena z shortcutu alebo zo service, profil aktivujeme
             actProfile = true;
-            interactive = ((startupSource != GlobalData.STARTUP_SOURCE_SERVICE));
+            interactive = ((startupSource != PPApplication.STARTUP_SOURCE_SERVICE));
         }
         else
-        if (startupSource == GlobalData.STARTUP_SOURCE_BOOT)
+        if (startupSource == PPApplication.STARTUP_SOURCE_BOOT)
         {
             // boot telefonu
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-            GlobalData.setActivatedProfileForDuration(context, 0);
+            PPApplication.setActivatedProfileForDuration(context, 0);
 
-            if (GlobalData.applicationActivate)
+            if (PPApplication.applicationActivate)
             {
                 // je nastavene, ze pri starte sa ma aktivita aktivovat
                 actProfile = true;
@@ -762,14 +762,14 @@ public class DataWrapper {
             }
         }
         else
-        if (startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR_START)
+        if (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR_START)
         {
             // aktivita bola spustena po boote telefonu
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-            GlobalData.setActivatedProfileForDuration(context, 0);
+            PPApplication.setActivatedProfileForDuration(context, 0);
 
-            if (GlobalData.applicationActivate)
+            if (PPApplication.applicationActivate)
             {
                 // je nastavene, ze pri starte sa ma aktivita aktivovat
                 actProfile = true;
@@ -785,11 +785,11 @@ public class DataWrapper {
             }
         }
 
-        if ((startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_ACTIVATOR) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_EDITOR) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_SERVICE))
+        if ((startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_EDITOR) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_SERVICE))
         {
             if (profile_id == 0)
                 profile = null;
@@ -812,8 +812,8 @@ public class DataWrapper {
             if (activity != null)
             {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile_id);
-                returnIntent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, startupSource);
+                returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile_id);
+                returnIntent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                 activity.setResult(Activity.RESULT_OK,returnIntent);
             }
 

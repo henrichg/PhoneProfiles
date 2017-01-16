@@ -45,10 +45,10 @@ public class RemoveBrightnessViewBroadcastReceiver extends BroadcastReceiver
 
             PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             // not needed exact for removing notification
-            /*if (GlobalData.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 23))
+            /*if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 23))
                 alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);
             else
-            if (GlobalData.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 19))
+            if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 19))
                 alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);
             else*/
                 alarmMgr.set(AlarmManager.RTC_WAKEUP, alarmTime, alarmIntent);

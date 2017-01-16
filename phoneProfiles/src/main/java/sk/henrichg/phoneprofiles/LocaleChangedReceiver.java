@@ -11,12 +11,12 @@ public class LocaleChangedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
-        if (GlobalData.applicationLanguage.equals("system"))
+        if (PPApplication.applicationLanguage.equals("system"))
         {
             NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
+            notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
         }
 
     }

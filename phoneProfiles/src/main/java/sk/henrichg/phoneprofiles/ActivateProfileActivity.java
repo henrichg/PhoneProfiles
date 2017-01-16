@@ -26,7 +26,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         instance = this;
 
-        GlobalData.loadPreferences(getApplicationContext());
+        PPApplication.loadPreferences(getApplicationContext());
         GUIData.setTheme(this, true, false);
         GUIData.setLanguage(getBaseContext());
 
@@ -73,7 +73,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         final float scale = getResources().getDisplayMetrics().density;
 
         // add header height
-        if (GlobalData.applicationActivatorHeader)
+        if (PPApplication.applicationActivatorHeader)
             popupHeight = popupHeight + 64f * scale;
 
         // add list items height
@@ -81,7 +81,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         int profileCount = dataWrapper.getDatabaseHandler().getProfilesCount();
         dataWrapper.invalidateDataWrapper();
 
-        if (!GlobalData.applicationActivatorGridLayout)
+        if (!PPApplication.applicationActivatorGridLayout)
         {
             // add list items height
             popupHeight = popupHeight + (50f * scale * profileCount); // item
@@ -112,11 +112,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     // Layout ---------------------------------------------------------------------------------
 
-        //long nanoTimeStart = GlobalData.startMeasuringRunTime();
+        //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
         setContentView(R.layout.activity_activate_profile);
 
-        //GlobalData.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContnetView");
+        //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContnetView");
 
         if (getSupportActionBar() != null) {
             //getSupportActionBar().setHomeButtonEnabled(true);
@@ -187,7 +187,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         case R.id.menu_edit_profiles:
             Intent intent = new Intent(getApplicationContext(), EditorProfilesActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR);
+            intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
             getApplicationContext().startActivity(intent);
 
             finish();

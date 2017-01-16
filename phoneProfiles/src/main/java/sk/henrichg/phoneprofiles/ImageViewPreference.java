@@ -52,7 +52,7 @@ public class ImageViewPreference extends Preference {
         }
         else
         {
-            imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+            imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
             isImageResourceID = true;
         }
 
@@ -137,7 +137,7 @@ public class ImageViewPreference extends Preference {
             try {
                 imageIdentifier = splits[0];
             } catch (Exception e) {
-                imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+                imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
             }
             try {
                 isImageResourceID = splits[1].equals("1");
@@ -152,7 +152,7 @@ public class ImageViewPreference extends Preference {
             try {
                 imageIdentifier = splits[0];
             } catch (Exception e) {
-                imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+                imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
             }
             try {
                 isImageResourceID = splits[1].equals("1");
@@ -198,7 +198,7 @@ public class ImageViewPreference extends Preference {
         try {
             imageIdentifier = splits[0];
         } catch (Exception e) {
-            imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+            imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
         }
         try {
             isImageResourceID = splits[1].equals("1");
@@ -233,7 +233,7 @@ public class ImageViewPreference extends Preference {
         try {
             imageIdentifier = splits[0];
         } catch (Exception e) {
-            imageIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+            imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
         }
         try {
             isImageResourceID = splits[1].equals("1");

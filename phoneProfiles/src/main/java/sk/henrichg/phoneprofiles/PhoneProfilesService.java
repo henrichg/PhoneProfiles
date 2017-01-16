@@ -21,7 +21,7 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onCreate()
     {
-        GlobalData.logE("PhoneProfilesService.onCreate", "xxx");
+        PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
@@ -72,11 +72,11 @@ public class PhoneProfilesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        GlobalData.logE("PhoneProfilesService.onStartCommand", "xxx");
+        PPApplication.logE("PhoneProfilesService.onStartCommand", "xxx");
 
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.setMergedRingNotificationVolumes(getApplicationContext(), false);
+        PPApplication.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
@@ -86,7 +86,7 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onTaskRemoved(Intent rootIntent)
     {
-        GlobalData.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxxxx");
+        PPApplication.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxxxx");
 
         ActivateProfileHelper.screenTimeoutUnlock(getApplicationContext());
         super.onTaskRemoved(rootIntent);

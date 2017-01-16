@@ -55,9 +55,9 @@ class SettingsContentObserver  extends ContentObserver {
             //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Decreased");
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
-                    GlobalData.setRingerVolume(context, currentVolume);
+                    PPApplication.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
-                    GlobalData.setNotificationVolume(context, currentVolume);
+                    PPApplication.setNotificationVolume(context, currentVolume);
             }
         }
         else if(delta<0)
@@ -65,9 +65,9 @@ class SettingsContentObserver  extends ContentObserver {
             //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Increased");
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
-                    GlobalData.setRingerVolume(context, currentVolume);
+                    PPApplication.setRingerVolume(context, currentVolume);
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION)
-                    GlobalData.setNotificationVolume(context, currentVolume);
+                    PPApplication.setNotificationVolume(context, currentVolume);
             }
         }
         return currentVolume;

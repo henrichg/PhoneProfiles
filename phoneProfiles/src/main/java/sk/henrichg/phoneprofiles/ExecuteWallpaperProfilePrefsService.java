@@ -14,19 +14,19 @@ public class ExecuteWallpaperProfilePrefsService extends IntentService
     protected void onHandleIntent(Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.logE("ExecuteWallpaperProfilePrefsService.onHandleIntent","-- START ----------");
+        PPApplication.logE("ExecuteWallpaperProfilePrefsService.onHandleIntent","-- START ----------");
 
         Context context = getApplicationContext();
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
-        long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
 
         // run execute radios from ActivateProfileHelper
-        profile = GlobalData.getMappedProfile(profile, context);
+        profile = PPApplication.getMappedProfile(profile, context);
         if (profile != null)
         {
             ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
@@ -36,7 +36,7 @@ public class ExecuteWallpaperProfilePrefsService extends IntentService
 
         dataWrapper.invalidateDataWrapper();
 
-        GlobalData.logE("ExecuteWallpaperProfilePrefsService.onHandleIntent","-- END ----------");
+        PPApplication.logE("ExecuteWallpaperProfilePrefsService.onHandleIntent","-- END ----------");
 
     }
 }

@@ -78,13 +78,13 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 int zenMode = 0;
                 switch (interruptionFilter) {
                     case NotificationListenerService.INTERRUPTION_FILTER_ALL:
-                        if (GlobalData.vibrationIsOn(getApplicationContext(), audioManager, true))
+                        if (PPApplication.vibrationIsOn(getApplicationContext(), audioManager, true))
                             zenMode = 4;
                         else
                             zenMode = 1;
                         break;
                     case NotificationListenerService.INTERRUPTION_FILTER_PRIORITY:
-                        if (GlobalData.vibrationIsOn(getApplicationContext(), audioManager, true))
+                        if (PPApplication.vibrationIsOn(getApplicationContext(), audioManager, true))
                             zenMode = 5;
                         else
                             zenMode = 2;
@@ -98,8 +98,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 }
                 if (zenMode != 0) {
                     //Log.e(TAG, "onInterruptionFilterChanged  zenMode=" + zenMode);
-                    GlobalData.setRingerMode(getApplicationContext(), 5);
-                    GlobalData.setZenMode(getApplicationContext(), zenMode);
+                    PPApplication.setRingerMode(getApplicationContext(), 5);
+                    PPApplication.setZenMode(getApplicationContext(), zenMode);
                 }
             }
 
@@ -111,17 +111,17 @@ public class PPNotificationListenerService extends NotificationListenerService {
     private static int getZenMode(Context context, AudioManager audioManager) {
         // convert to profile zenMode
         int zenMode = 0;
-        int systemZenMode = GlobalData.getSystemZenMode(context, -1);
-        GlobalData.logE(TAG, "getZenMode(" + systemZenMode + ')');
+        int systemZenMode = PPApplication.getSystemZenMode(context, -1);
+        PPApplication.logE(TAG, "getZenMode(" + systemZenMode + ')');
         switch (systemZenMode) {
             case ActivateProfileHelper.ZENMODE_ALL:
-                if (GlobalData.vibrationIsOn(context, audioManager, true))
+                if (PPApplication.vibrationIsOn(context, audioManager, true))
                     zenMode = 4;
                 else
                     zenMode = 1;
                 break;
             case ActivateProfileHelper.ZENMODE_PRIORITY:
-                if (GlobalData.vibrationIsOn(context, audioManager, true))
+                if (PPApplication.vibrationIsOn(context, audioManager, true))
                     zenMode = 5;
                 else
                     zenMode = 2;
@@ -141,8 +141,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
         if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
             int zenMode = getZenMode(context, audioManager);
             if (zenMode != 0) {
-                GlobalData.setRingerMode(context, 5);
-                GlobalData.setZenMode(context, zenMode);
+                PPApplication.setRingerMode(context, 5);
+                PPApplication.setZenMode(context, zenMode);
             }
         }
     }

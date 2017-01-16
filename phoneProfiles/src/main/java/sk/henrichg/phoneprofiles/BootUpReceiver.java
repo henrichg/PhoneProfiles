@@ -10,13 +10,13 @@ public class BootUpReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.logE("BootUpReceiver.onReceive", "xxx");
+        PPApplication.logE("BootUpReceiver.onReceive", "xxx");
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
-        GlobalData.setApplicationStarted(context, false);
+        PPApplication.setApplicationStarted(context, false);
 
-        if (GlobalData.applicationStartOnBoot)
+        if (PPApplication.applicationStartOnBoot)
         {
             // start ReceiverService
             context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));

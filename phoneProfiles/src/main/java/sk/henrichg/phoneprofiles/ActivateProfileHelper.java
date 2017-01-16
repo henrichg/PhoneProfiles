@@ -113,22 +113,22 @@ public class ActivateProfileHelper {
     {
         //try { Thread.sleep(300); } catch (InterruptedException e) { }
         //SystemClock.sleep(300);
-        GlobalData.sleep(300);
+        PPApplication.sleep(300);
 
         // nahodenie network type
         if (profile._deviceNetworkType >= 100) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == GlobalData.PREFERENCE_ALLOWED)
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == PPApplication.PREFERENCE_ALLOWED)
             {
                 setPreferredNetworkType(context, profile._deviceNetworkType - 100);
                 //try { Thread.sleep(200); } catch (InterruptedException e) { }
                 //SystemClock.sleep(200);
-                GlobalData.sleep(200);
+                PPApplication.sleep(200);
             }
         }
 
         // nahodenie mobilnych dat
         if (profile._deviceMobileData != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean _isMobileData = isMobileData(context);
                 boolean _setMobileData = false;
                 switch (profile._deviceMobileData) {
@@ -153,7 +153,7 @@ public class ActivateProfileHelper {
                     setMobileData(context, _isMobileData);
                     //try { Thread.sleep(200); } catch (InterruptedException e) { }
                     //SystemClock.sleep(200);
-                    GlobalData.sleep(200);
+                    PPApplication.sleep(200);
                 }
             }
         }
@@ -161,7 +161,7 @@ public class ActivateProfileHelper {
         // nahodenie WiFi AP
         boolean canChangeWifi = true;
         if (profile._deviceWiFiAP != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_ALLOWED) {
                 WifiApManager wifiApManager = null;
                 try {
                     wifiApManager = new WifiApManager(context);
@@ -195,7 +195,7 @@ public class ActivateProfileHelper {
                         wifiApManager.setWifiApState(isWifiAPEnabled);
                         //try { Thread.sleep(200); } catch (InterruptedException e) { }
                         //SystemClock.sleep(200);
-                        GlobalData.sleep(200);
+                        PPApplication.sleep(200);
                     }
                 }
             }
@@ -204,7 +204,7 @@ public class ActivateProfileHelper {
         if (canChangeWifi) {
             // nahodenie WiFi
             if (profile._deviceWiFi != 0) {
-                if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.PREFERENCE_ALLOWED) {
+                if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_ALLOWED) {
                     if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
                         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                         int wifiState = wifiManager.getWifiState();
@@ -237,7 +237,7 @@ public class ActivateProfileHelper {
                             }
                             //try { Thread.sleep(200); } catch (InterruptedException e) { }
                             //SystemClock.sleep(200);
-                            GlobalData.sleep(200);
+                            PPApplication.sleep(200);
                         }
                     }
                 }
@@ -246,7 +246,7 @@ public class ActivateProfileHelper {
 
         // nahodenie bluetooth
         if (profile._deviceBluetooth != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_ALLOWED) {
                 BluetoothAdapter bluetoothAdapter;
                 if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -287,7 +287,7 @@ public class ActivateProfileHelper {
 
         // nahodenie GPS
         if (profile._deviceGPS != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_GPS, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean isEnabled;
                 if (android.os.Build.VERSION.SDK_INT < 21)
                     isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
@@ -316,7 +316,7 @@ public class ActivateProfileHelper {
 
         // nahodenie NFC
         if (profile._deviceNFC != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NFC, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_ALLOWED) {
                 //Log.e("ActivateProfileHelper.doExecuteForRadios", "allowed");
                 NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
                 if (nfcAdapter != null) {
@@ -347,7 +347,7 @@ public class ActivateProfileHelper {
         boolean _isAirplaneMode = false;
         boolean _setAirplaneMode = false;
         if (profile._deviceAirplaneMode != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
                 _isAirplaneMode = isAirplaneMode(context);
                 switch (profile._deviceAirplaneMode) {
                     case 1:
@@ -374,14 +374,14 @@ public class ActivateProfileHelper {
             // switch ON airplane mode, set it before executeForRadios
             setAirplaneMode(context, _isAirplaneMode);
 
-            GlobalData.sleep(2000);
+            PPApplication.sleep(2000);
         }
 
         doExecuteForRadios(profile);
 
         /*if (_setAirplaneMode && (!_isAirplaneMode)) {
             // 200 miliseconds is in doExecuteForRadios
-            GlobalData.sleep(1800);
+            PPApplication.sleep(1800);
 
             // switch OFF airplane mode, set if after executeForRadios
             setAirplaneMode(context, _isAirplaneMode);
@@ -404,12 +404,12 @@ public class ActivateProfileHelper {
     private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
         if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
-            ringerMode = GlobalData.getRingerMode(context);
-            zenMode = GlobalData.getZenMode(context);
+            ringerMode = PPApplication.getRingerMode(context);
+            zenMode = PPApplication.getZenMode(context);
         }
         else {
-            ringerMode = GlobalData.getRingerMode(context);
-            zenMode = GlobalData.getZenMode(context);
+            ringerMode = PPApplication.getRingerMode(context);
+            zenMode = PPApplication.getZenMode(context);
             //ringerMode = RingerModeChangeReceiver.getRingerMode(context, audioManager);
         }
         if ((ringerMode == 1) || (ringerMode == 2) || (ringerMode == 4) ||
@@ -432,15 +432,15 @@ public class ActivateProfileHelper {
     {
         if (profile.getVolumeRingtoneChange()) {
             if (forProfileActivation)
-                GlobalData.setRingerVolume(context, profile.getVolumeRingtoneValue());
+                PPApplication.setRingerVolume(context, profile.getVolumeRingtoneValue());
         }
         if (profile.getVolumeNotificationChange()) {
             if (forProfileActivation)
-                GlobalData.setNotificationVolume(context, profile.getVolumeNotificationValue());
+                PPApplication.setNotificationVolume(context, profile.getVolumeNotificationValue());
         }
 
-        int ringerMode = GlobalData.getRingerMode(context);
-        int zenMode = GlobalData.getZenMode(context);
+        int ringerMode = PPApplication.getRingerMode(context);
+        int zenMode = PPApplication.getZenMode(context);
 
         // for ringer mode VIBRATE or SILENT (and not for link/unlink volumes) or
         // for interruption types NONE and ONLY_ALARMS
@@ -464,14 +464,14 @@ public class ActivateProfileHelper {
                 int callState = telephony.getCallState();
 
                 boolean volumesSet = false;
-                if (GlobalData.getMergedRingNotificationVolumes(context) && GlobalData.applicationUnlinkRingerNotificationVolumes) {
+                if (PPApplication.getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes) {
                     //if (doUnlink) {
                     //if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
                     if (callState == TelephonyManager.CALL_STATE_RINGING) {
                         // for separating ringing and notification
                         // in ringing state ringer volumes must by set
                         // and notification volumes must not by set
-                        int volume = GlobalData.getRingerVolume(context);
+                        int volume = PPApplication.getRingerVolume(context);
                         if (volume != -999) {
                             try {
                                 audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
@@ -486,7 +486,7 @@ public class ActivateProfileHelper {
                         // for separating ringing and notification
                         // in not ringing state ringer and notification volume must by change
                         //Log.e("ActivateProfileHelper","setVolumes get audio mode="+audioManager.getMode());
-                        int volume = GlobalData.getRingerVolume(context);
+                        int volume = PPApplication.getRingerVolume(context);
                         if (volume != -999) {
                             //Log.e("ActivateProfileHelper","setVolumes set ring volume="+volume);
                             try {
@@ -494,7 +494,7 @@ public class ActivateProfileHelper {
                                 //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_RING, profile.getVolumeRingtoneValue());
                             } catch (Exception ignored) { }
                         }
-                        volume = GlobalData.getNotificationVolume(context);
+                        volume = PPApplication.getNotificationVolume(context);
                         if (volume != -999) {
                             //Log.e("ActivateProfileHelper","setVolumes set notification volume="+volume);
                             try {
@@ -505,7 +505,7 @@ public class ActivateProfileHelper {
                         //correctVolume0(/*profile, */audioManager, linkUnlink);
                         volumesSet = true;
                     } else {
-                        int volume = GlobalData.getRingerVolume(context);
+                        int volume = PPApplication.getRingerVolume(context);
                         if (volume != -999) {
                             try {
                                 audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
@@ -513,7 +513,7 @@ public class ActivateProfileHelper {
                                 //correctVolume0(/*profile, */audioManager, linkUnlink);
                             } catch (Exception ignored) { }
                         }
-                        volume = GlobalData.getNotificationVolume(context);
+                        volume = PPApplication.getNotificationVolume(context);
                         if (volume != -999) {
                             try {
                                 audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
@@ -528,8 +528,8 @@ public class ActivateProfileHelper {
                 if (!volumesSet) {
                     // reverted order for disabled unlink
                     int volume;
-                    if (!GlobalData.getMergedRingNotificationVolumes(context)) {
-                        volume = GlobalData.getNotificationVolume(context);
+                    if (!PPApplication.getMergedRingNotificationVolumes(context)) {
+                        volume = PPApplication.getNotificationVolume(context);
                         if (volume != -999) {
                             try {
                                 audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
@@ -538,7 +538,7 @@ public class ActivateProfileHelper {
                             } catch (Exception ignored) { }
                         }
                     }
-                    volume = GlobalData.getRingerVolume(context);
+                    volume = PPApplication.getRingerVolume(context);
                     if (volume != -999) {
                         try {
                             audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, 0);
@@ -571,25 +571,25 @@ public class ActivateProfileHelper {
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
-            int _zenMode = GlobalData.getSystemZenMode(context, -1);
-            GlobalData.logE("ActivateProfileHelper.setZenMode", "_zenMode=" + _zenMode);
+            int _zenMode = PPApplication.getSystemZenMode(context, -1);
+            PPApplication.logE("ActivateProfileHelper.setZenMode", "_zenMode=" + _zenMode);
             int _ringerMode = audioManager.getRingerMode();
-            GlobalData.logE("ActivateProfileHelper.setZenMode", "_ringerMode=" + _ringerMode);
+            PPApplication.logE("ActivateProfileHelper.setZenMode", "_ringerMode=" + _ringerMode);
 
-            if ((zenMode != ZENMODE_SILENT) && GlobalData.canChangeZenMode(context, false)) {
+            if ((zenMode != ZENMODE_SILENT) && PPApplication.canChangeZenMode(context, false)) {
                 audioManager.setRingerMode(ringerMode);
                 //try { Thread.sleep(500); } catch (InterruptedException e) { }
                 //SystemClock.sleep(500);
-                GlobalData.sleep(500);
+                PPApplication.sleep(500);
 
                 if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
                     PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
                     InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
-                /* if (GlobalData.isRootGranted(false) && (GlobalData.settingsBinaryExists()))
+                /* if (PPApplication.isRootGranted(false) && (PPApplication.settingsBinaryExists()))
                 {
                     String command1 = "settings put global zen_mode " + mode;
-                    //if (GlobalData.isSELinuxEnforcing())
-                    //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                    //if (PPApplication.isSELinuxEnforcing())
+                    //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                     Command command = new Command(0, false, command1);
                     try {
                         RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
@@ -606,7 +606,7 @@ public class ActivateProfileHelper {
                         audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                         //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                         //SystemClock.sleep(1000);
-                        GlobalData.sleep(1000);
+                        PPApplication.sleep(1000);
                         audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                         break;
                     default:
@@ -632,8 +632,8 @@ public class ActivateProfileHelper {
         }
 
         if (lValue != -1) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
-                    == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
+                    == PPApplication.PREFERENCE_ALLOWED) {
                 if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
                     if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                         Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", lValue);
@@ -642,8 +642,8 @@ public class ActivateProfileHelper {
                             Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, lValue);
                         } catch (Exception ee) {
                             String command1 = "settings put system " + Settings.System.VIBRATE_WHEN_RINGING + " " + lValue;
-                            //if (GlobalData.isSELinuxEnforcing())
-                            //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                            //if (PPApplication.isSELinuxEnforcing())
+                            //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                             Command command = new Command(0, false, command1); //, command2);
                             try {
                                 //RootTools.closeAllShells();
@@ -713,14 +713,14 @@ public class ActivateProfileHelper {
     }
 
     private void setNotificationLed(int value) {
-        if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_NOTIFICATION_LED, context)
-                == GlobalData.PREFERENCE_ALLOWED) {
+        if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_NOTIFICATION_LED, context)
+                == PPApplication.PREFERENCE_ALLOWED) {
             if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                 Settings.System.putInt(context.getContentResolver(), "notification_light_pulse", value);
             else {
                 String command1 = "settings put system " + "notification_light_pulse" + " " + value;
-                //if (GlobalData.isSELinuxEnforcing())
-                //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                //if (PPApplication.isSELinuxEnforcing())
+                //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                 Command command = new Command(0, false, command1); //, command2);
                 try {
                     //RootTools.closeAllShells();
@@ -735,11 +735,11 @@ public class ActivateProfileHelper {
 
     void changeRingerModeForVolumeEqual0(Profile profile) {
         if (profile.getVolumeRingtoneChange()) {
-            //int ringerMode = GlobalData.getRingerMode(context);
-            //int zenMode = GlobalData.getZenMode(context);
+            //int ringerMode = PPApplication.getRingerMode(context);
+            //int zenMode = PPApplication.getZenMode(context);
 
-            //GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "ringerMode=" + ringerMode);
-            //GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "zenMode=" + zenMode);
+            //PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "ringerMode=" + ringerMode);
+            //PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "zenMode=" + zenMode);
 
             if (profile.getVolumeRingtoneValue() == 0) {
                 profile.setVolumeRingtoneValue(1);
@@ -752,7 +752,7 @@ public class ActivateProfileHelper {
                     // (Android 6 - priority mode = ONLY_ALARMS)
                     if (isAudibleRinging(profile._volumeRingerMode, profile._volumeZenMode)) {
                         // change ringer mode to Silent
-                        GlobalData.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "changed to silent");
+                        PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "changed to silent");
                         profile._volumeRingerMode = 4;
                     }
                 }
@@ -761,9 +761,9 @@ public class ActivateProfileHelper {
     }
 
     void changeNotificationVolumeForVolumeEqual0(Profile profile) {
-        if (profile.getVolumeNotificationChange() && GlobalData.getMergedRingNotificationVolumes(context)) {
+        if (profile.getVolumeNotificationChange() && PPApplication.getMergedRingNotificationVolumes(context)) {
             if (profile.getVolumeNotificationValue() == 0) {
-                GlobalData.logE("ActivateProfileHelper.changeNotificationVolumeForVolumeEqual0", "changed notification value to 1");
+                PPApplication.logE("ActivateProfileHelper.changeNotificationVolumeForVolumeEqual0", "changed notification value to 1");
                 profile.setVolumeNotificationValue(1);
             }
         }
@@ -780,17 +780,17 @@ public class ActivateProfileHelper {
 
         if (forProfileActivation) {
             if (profile._volumeRingerMode != 0) {
-                GlobalData.setRingerMode(context, profile._volumeRingerMode);
+                PPApplication.setRingerMode(context, profile._volumeRingerMode);
                 if ((profile._volumeRingerMode == 5) && (profile._volumeZenMode != 0))
-                    GlobalData.setZenMode(context, profile._volumeZenMode);
+                    PPApplication.setZenMode(context, profile._volumeZenMode);
             }
         }
 
         if (firstCall)
             return;
 
-        ringerMode = GlobalData.getRingerMode(context);
-        zenMode = GlobalData.getZenMode(context);
+        ringerMode = PPApplication.getRingerMode(context);
+        zenMode = PPApplication.getZenMode(context);
 
         if (forProfileActivation) {
             switch (ringerMode) {
@@ -955,7 +955,7 @@ public class ActivateProfileHelper {
                         }
                         //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                         //SystemClock.sleep(1000);
-                        GlobalData.sleep(1000);
+                        PPApplication.sleep(1000);
                     }
                 }
                 else {
@@ -972,7 +972,7 @@ public class ActivateProfileHelper {
                                 }
                                 //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                                 //SystemClock.sleep(1000);
-                                GlobalData.sleep(1000);
+                                PPApplication.sleep(1000);
                             } catch (Exception ignored) {
                             }
                         }
@@ -987,14 +987,14 @@ public class ActivateProfileHelper {
         // rozdelit zvonenie a notifikacie - zial je to oznacene ako @Hide :-(
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
 
-        final Profile profile = GlobalData.getMappedProfile(_profile, context);
+        final Profile profile = PPApplication.getMappedProfile(_profile, context);
 
         // nahodenie volume a ringer modu
         // run service for execute volumes
         Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-        volumeServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
-        volumeServiceIntent.putExtra(GlobalData.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
-        volumeServiceIntent.putExtra(GlobalData.EXTRA_FOR_PROFILE_ACTIVATION, true);
+        volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+        volumeServiceIntent.putExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        volumeServiceIntent.putExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, true);
         //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
         context.startService(volumeServiceIntent);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -1023,7 +1023,7 @@ public class ActivateProfileHelper {
         // nahodenie radio preferences
         // run service for execute radios
         Intent radioServiceIntent = new Intent(context, ExecuteRadioProfilePrefsService.class);
-        radioServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+        radioServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
         context.startService(radioServiceIntent);
 
         // nahodenie auto-sync
@@ -1102,12 +1102,12 @@ public class ActivateProfileHelper {
         switch (profile._deviceKeyguard) {
             case 1:
                 // enable lockscreen
-                GlobalData.setLockscreenDisabled(context, false);
+                PPApplication.setLockscreenDisabled(context, false);
                 setLockscreen = true;
                 break;
             case 2:
                 // disable lockscreen
-                GlobalData.setLockscreenDisabled(context, true);
+                PPApplication.setLockscreenDisabled(context, true);
                 setLockscreen = true;
                 break;
         }
@@ -1124,14 +1124,14 @@ public class ActivateProfileHelper {
             //noinspection deprecation
             isScreenOn = pm.isScreenOn();
             //}
-            //GlobalData.logE("$$$ ActivateProfileHelper.execute","isScreenOn="+isScreenOn);
+            //PPApplication.logE("$$$ ActivateProfileHelper.execute","isScreenOn="+isScreenOn);
             boolean keyguardShowing;
             KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
             if (android.os.Build.VERSION.SDK_INT >= 16)
                 keyguardShowing = kgMgr.isKeyguardLocked();
             else
                 keyguardShowing = kgMgr.inKeyguardRestrictedInputMode();
-            //GlobalData.logE("$$$ ActivateProfileHelper.execute","keyguardShowing="+keyguardShowing);
+            //PPApplication.logE("$$$ ActivateProfileHelper.execute","keyguardShowing="+keyguardShowing);
 
             if (isScreenOn && !keyguardShowing) {
                 Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
@@ -1146,8 +1146,8 @@ public class ActivateProfileHelper {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS,
                             profile.getDeviceBrightnessManualValue(context));
-                    if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
-                            == GlobalData.PREFERENCE_ALLOWED) {
+                    if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
+                            == PPApplication.PREFERENCE_ALLOWED) {
                         if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                             Settings.System.putFloat(context.getContentResolver(),
                                     ADAPTIVE_BRIGHTNESS_SETTING_NAME,
@@ -1160,8 +1160,8 @@ public class ActivateProfileHelper {
                             } catch (Exception ee) {
                                 String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
                                         Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
-                                //if (GlobalData.isSELinuxEnforcing())
-                                //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                                //if (PPApplication.isSELinuxEnforcing())
+                                //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                                 Command command = new Command(0, false, command1); //, command2);
                                 try {
                                     //RootTools.closeAllShells();
@@ -1250,14 +1250,14 @@ public class ActivateProfileHelper {
         if (Permissions.checkProfileWallpaper(context, profile)) {
             if (profile._deviceWallpaperChange == 1) {
                 Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
-                wallpaperServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                wallpaperServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 context.startService(wallpaperServiceIntent);
             }
         }
 
         // set power save mode
         if (profile._devicePowerSaveMode != 0) {
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == GlobalData.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
                 PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
                 boolean _isPowerSaveMode = false;
                 if (Build.VERSION.SDK_INT >= 21)
@@ -1291,7 +1291,7 @@ public class ActivateProfileHelper {
         {
             // preferences, ktore vyzaduju interakciu uzivatela
 
-            if (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == GlobalData.PREFERENCE_ALLOWED)
+            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_ALLOWED)
             {
                 if (profile._deviceMobileDataPrefs == 1)
                 {
@@ -1320,7 +1320,7 @@ public class ActivateProfileHelper {
                 }
             }
 
-            //if (GlobalData.hardwareCheck(GlobalData.PREF_PROFILE_DEVICE_GPS, context))
+            //if (PPApplication.hardwareCheck(PPApplication.PREF_PROFILE_DEVICE_GPS, context))
             //{  No check only GPS
                 if (profile._deviceLocationServicePrefs == 1)
                 {
@@ -1336,7 +1336,7 @@ public class ActivateProfileHelper {
             if (profile._deviceRunApplicationChange == 1)
             {
                 Intent runApplicationsServiceIntent = new Intent(context, ExecuteRunApplicationsProfilePrefsService.class);
-                runApplicationsServiceIntent.putExtra(GlobalData.EXTRA_PROFILE_ID, profile._id);
+                runApplicationsServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 context.startService(runApplicationsServiceIntent);
             }
 
@@ -1386,7 +1386,7 @@ public class ActivateProfileHelper {
             GUIData.keepScreenOnView = null;
         }
 
-        GlobalData.logE("@@@ screenTimeoutLock.unlock", "xxx");
+        PPApplication.logE("@@@ screenTimeoutLock.unlock", "xxx");
     }
 
     @SuppressLint("RtlHardcoded")
@@ -1450,16 +1450,16 @@ public class ActivateProfileHelper {
             // no refres notification
             return;
 
-        if (GlobalData.notificationStatusBar)
+        if (PPApplication.notificationStatusBar)
         {
             // close showed notification
-            //notificationManager.cancel(GlobalData.NOTIFICATION_ID);
+            //notificationManager.cancel(PPApplication.NOTIFICATION_ID);
             // vytvorenie intentu na aktivitu, ktora sa otvori na kliknutie na notifikaciu
             Intent intent = new Intent(context, ActivateProfileActivity.class);
             // clear all opened activities
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             // nastavime, ze aktivita sa spusti z notifikacnej listy
-            intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_NOTIFICATION);
+            intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_NOTIFICATION);
             PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             // vytvorenie samotnej notifikacie
@@ -1483,7 +1483,7 @@ public class ActivateProfileHelper {
             else
             {
                 isIconResourceID = true;
-                iconIdentifier = GlobalData.PROFILE_ICON_DEFAULT;
+                iconIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
                 profileName = context.getResources().getString(R.string.profiles_header_profile_name_no_activated);
                 iconBitmap = null;
                 preferencesIndicator = null;
@@ -1493,9 +1493,9 @@ public class ActivateProfileHelper {
                     .setContentIntent(pIntent);
 
             if (android.os.Build.VERSION.SDK_INT >= 16) {
-                if (GlobalData.notificationShowInStatusBar) {
-                    boolean screenUnlocked = GlobalData.getScreenUnlocked(context);
-                    if (GlobalData.notificationHideInLockscreen && (!screenUnlocked))
+                if (PPApplication.notificationShowInStatusBar) {
+                    boolean screenUnlocked = PPApplication.getScreenUnlocked(context);
+                    if (PPApplication.notificationHideInLockscreen && (!screenUnlocked))
                         notificationBuilder.setPriority(Notification.PRIORITY_MIN);
                     else
                         notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
@@ -1516,11 +1516,11 @@ public class ActivateProfileHelper {
             {
                 int iconSmallResource;
                 if (iconBitmap != null) {
-                    if (GlobalData.notificationStatusBarStyle.equals("0")) {
+                    if (PPApplication.notificationStatusBarStyle.equals("0")) {
                         // colorful icon
 
                         // FC in Note 4, 6.0.1 :-/
-                        String manufacturer = GlobalData.getROMManufacturer();
+                        String manufacturer = PPApplication.getROMManufacturer();
                         boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
                                 Build.MODEL.startsWith("SM-N910") &&
                                 (android.os.Build.VERSION.SDK_INT == 23);
@@ -1546,7 +1546,7 @@ public class ActivateProfileHelper {
                     contentView.setImageViewBitmap(R.id.notification_activated_profile_icon, iconBitmap);
                 }
                 else {
-                    if (GlobalData.notificationStatusBarStyle.equals("0")) {
+                    if (PPApplication.notificationStatusBarStyle.equals("0")) {
                         // colorful icon
                         iconSmallResource = context.getResources().getIdentifier(iconIdentifier + "_notify_color", "drawable", context.getPackageName());
                         if (iconSmallResource == 0)
@@ -1576,7 +1576,7 @@ public class ActivateProfileHelper {
             else
             {
                 // FC in Note 4, 6.0.1 :-/
-                String manufacturer = GlobalData.getROMManufacturer();
+                String manufacturer = PPApplication.getROMManufacturer();
                 boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
                         Build.MODEL.startsWith("SM-N910") &&
                         (android.os.Build.VERSION.SDK_INT == 23);
@@ -1586,7 +1586,7 @@ public class ActivateProfileHelper {
                 }
                 else {
                     int iconSmallResource;
-                    if (GlobalData.notificationStatusBarStyle.equals("0"))
+                    if (PPApplication.notificationStatusBarStyle.equals("0"))
                         iconSmallResource = R.drawable.ic_profile_default;
                     else
                         iconSmallResource = R.drawable.ic_profile_default_notify;
@@ -1603,13 +1603,13 @@ public class ActivateProfileHelper {
             if (android.os.Build.VERSION.SDK_INT < 24)
                 contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
 
-            if (GlobalData.notificationTextColor.equals("1")) {
+            if (PPApplication.notificationTextColor.equals("1")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
                 if (android.os.Build.VERSION.SDK_INT >= 24)
                     contentView.setTextColor(R.id.notification_activated_app_name, Color.BLACK);
             }
             else
-            if (GlobalData.notificationTextColor.equals("2")) {
+            if (PPApplication.notificationTextColor.equals("2")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
                 if (android.os.Build.VERSION.SDK_INT >= 24)
                     contentView.setTextColor(R.id.notification_activated_app_name, Color.WHITE);
@@ -1618,7 +1618,7 @@ public class ActivateProfileHelper {
 
             //contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator,
             //		ProfilePreferencesIndicator.paint(profile, context));
-            if ((preferencesIndicator != null) && (GlobalData.notificationPrefIndicator))
+            if ((preferencesIndicator != null) && (PPApplication.notificationPrefIndicator))
                 contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator, preferencesIndicator);
             else
                 contentView.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
@@ -1628,7 +1628,7 @@ public class ActivateProfileHelper {
             Notification notification = notificationBuilder.build();
 
 
-            if (GlobalData.notificationStatusBarPermanent)
+            if (PPApplication.notificationStatusBarPermanent)
                 {
                     //notification.flags |= Notification.FLAG_NO_CLEAR;
                     notification.flags |= Notification.FLAG_ONGOING_EVENT;
@@ -1638,11 +1638,11 @@ public class ActivateProfileHelper {
                     setAlarmForNotificationCancel();
                 }
 
-                notificationManager.notify(GlobalData.PROFILE_NOTIFICATION_ID, notification);
+                notificationManager.notify(PPApplication.PROFILE_NOTIFICATION_ID, notification);
         }
         else
         {
-            notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
+            notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
         }
     }
 
@@ -1650,12 +1650,12 @@ public class ActivateProfileHelper {
     {
         removeAlarmForRecreateNotification();
         if (notificationManager != null)
-            notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
+            notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
     }
 
     private void setAlarmForNotificationCancel()
     {
-        if (GlobalData.notificationStatusBarCancel.isEmpty() || GlobalData.notificationStatusBarCancel.equals("0"))
+        if (PPApplication.notificationStatusBarCancel.isEmpty() || PPApplication.notificationStatusBarCancel.equals("0"))
             return;
 
         Intent intent = new Intent(context, NotificationCancelAlarmBroadcastReceiver.class);
@@ -1665,7 +1665,7 @@ public class ActivateProfileHelper {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
 
         Calendar now = Calendar.getInstance();
-        long time = now.getTimeInMillis() + Integer.valueOf(GlobalData.notificationStatusBarCancel) * 1000;
+        long time = now.getTimeInMillis() + Integer.valueOf(PPApplication.notificationStatusBarCancel) * 1000;
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }
@@ -1862,7 +1862,7 @@ public class ActivateProfileHelper {
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
-            if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+            if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/)
             {
                 String command1 = "svc data " + (enable ? "enable" : "disable");
                 Command command = new Command(0, false, command1);
@@ -1879,7 +1879,7 @@ public class ActivateProfileHelper {
                     // Get the current state of the mobile network.
                     state = enable ? 1 : 0;
                     // Get the value of the "TRANSACTION_setDataEnabled" field.
-                    String transactionCode = GlobalData.getTransactionCode(context, "TRANSACTION_setDataEnabled");
+                    String transactionCode = PPApplication.getTransactionCode(context, "TRANSACTION_setDataEnabled");
                     //Log.e("ActivateProfileHelper.setMobileData", "transactionCode="+transactionCode);
                     // Android 5.1+ (API 22) and later.
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -1958,11 +1958,11 @@ public class ActivateProfileHelper {
 
     /*
     private int getPreferredNetworkType(Context context) {
-        if (GlobalData.isRooted())
+        if (PPApplication.isRooted())
         {
             try {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
-                String transactionCode = GlobalData.getTransactionCode(context, "TRANSACTION_getPreferredNetworkType");
+                String transactionCode = PPApplication.getTransactionCode(context, "TRANSACTION_getPreferredNetworkType");
                 if (transactionCode != null && transactionCode.length() > 0) {
                     String command1 = "service call phone " + transactionCode + " i32";
                     Command command = new Command(0, false, command1) {
@@ -2007,11 +2007,11 @@ public class ActivateProfileHelper {
 
     private void setPreferredNetworkType(Context context, int networkType)
     {
-        if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+        if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/)
         {
             try {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
-                String transactionCode = GlobalData.getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
+                String transactionCode = PPApplication.getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
                 // Android 6?
                 if (Build.VERSION.SDK_INT >= 23) {
                     SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
@@ -2063,8 +2063,8 @@ public class ActivateProfileHelper {
             CmdNfc.run(enable);
         }
         else */
-        if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/) {
-            String command1 = GlobalData.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
+        if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/) {
+            String command1 = PPApplication.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
             //Log.e("ActivateProfileHelper.setNFC", "command1="+command1);
             Command command = new Command(0, false, command1);
             try {
@@ -2099,15 +2099,15 @@ public class ActivateProfileHelper {
         }
 
 
-        GlobalData.logE("ActivateProfileHelper.setGPS", "isEnabled="+isEnabled);
+        PPApplication.logE("ActivateProfileHelper.setGPS", "isEnabled="+isEnabled);
 
         //if(!provider.contains(LocationManager.GPS_PROVIDER) && enable)
         if ((!isEnabled)  && enable)
         {
-            if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+            if ((android.os.Build.VERSION.SDK_INT >= 16) && PPApplication.isRooted()/*PPApplication.isRootGranted()*/)
             {
                 // zariadenie je rootnute
-                GlobalData.logE("ActivateProfileHelper.setGPS", "rooted");
+                PPApplication.logE("ActivateProfileHelper.setGPS", "rooted");
 
                 String command1;
                 //String command2;
@@ -2122,8 +2122,8 @@ public class ActivateProfileHelper {
                         newSet = String.format("%s,%s", provider, LocationManager.GPS_PROVIDER);
 
                     command1 = "settings put secure location_providers_allowed \"" + newSet + "\"";
-                    //if (GlobalData.isSELinuxEnforcing())
-                    //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                    //if (PPApplication.isSELinuxEnforcing())
+                    //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
 
                     //command2 = "am broadcast -a android.location.GPS_ENABLED_CHANGE --ez state true";
                     Command command = new Command(0, false, command1); //, command2);
@@ -2148,9 +2148,9 @@ public class ActivateProfileHelper {
                 }
             }
             else
-            if (GlobalData.canExploitGPS(context))
+            if (PPApplication.canExploitGPS(context))
             {
-                GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
+                PPApplication.logE("ActivateProfileHelper.setGPS", "exploit");
 
                 final Intent poke = new Intent();
                 poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
@@ -2160,7 +2160,7 @@ public class ActivateProfileHelper {
             }
             //else
             //{
-                /*GlobalData.logE("ActivateProfileHelper.setGPS", "old method");
+                /*PPApplication.logE("ActivateProfileHelper.setGPS", "old method");
 
                 try {
                     Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
@@ -2180,10 +2180,10 @@ public class ActivateProfileHelper {
             //if(provider.contains(LocationManager.GPS_PROVIDER) && (!enable))
             if (isEnabled && (!enable))
             {
-                if ((android.os.Build.VERSION.SDK_INT >= 16) && GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+                if ((android.os.Build.VERSION.SDK_INT >= 16) && PPApplication.isRooted()/*PPApplication.isRootGranted()*/)
                 {
                     // zariadenie je rootnute
-                    GlobalData.logE("ActivateProfileHelper.setGPS", "rooted");
+                    PPApplication.logE("ActivateProfileHelper.setGPS", "rooted");
 
                     String command1;
                     //String command2;
@@ -2206,8 +2206,8 @@ public class ActivateProfileHelper {
                         }
 
                         command1 = "settings put secure location_providers_allowed \"" + newSet + "\"";
-                        //if (GlobalData.isSELinuxEnforcing())
-                        //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                        //if (PPApplication.isSELinuxEnforcing())
+                        //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                         //command2 = "am broadcast -a android.location.GPS_ENABLED_CHANGE --ez state false";
                         Command command = new Command(0, false, command1);//, command2);
                         try {
@@ -2231,9 +2231,9 @@ public class ActivateProfileHelper {
                     }
                 }
                 else
-                if (GlobalData.canExploitGPS(context))
+                if (PPApplication.canExploitGPS(context))
                 {
-                    GlobalData.logE("ActivateProfileHelper.setGPS", "exploit");
+                    PPApplication.logE("ActivateProfileHelper.setGPS", "exploit");
 
                     final Intent poke = new Intent();
                     poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
@@ -2243,7 +2243,7 @@ public class ActivateProfileHelper {
                 }
                 //else
                 //{
-                    //GlobalData.logE("ActivateProfileHelper.setGPS", "old method");
+                    //PPApplication.logE("ActivateProfileHelper.setGPS", "old method");
 
                 /*try {
                     Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
@@ -2263,7 +2263,7 @@ public class ActivateProfileHelper {
 
     private void setAirplaneMode_SDK17(/*Context context, */boolean mode)
     {
-        if (GlobalData.isRooted()/*GlobalData.isRootGranted()*/)
+        if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/)
         {
             // zariadenie je rootnute
 
@@ -2279,10 +2279,10 @@ public class ActivateProfileHelper {
                 command1 = "settings put global airplane_mode_on 0";
                 command2 = "am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false";
             }
-            //if (GlobalData.isSELinuxEnforcing())
+            //if (PPApplication.isSELinuxEnforcing())
             //{
-            //	command1 = GlobalData.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-            //	command2 = GlobalData.getSELinuxEnforceCommand(command2, Shell.ShellContext.SYSTEM_APP);
+            //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+            //	command2 = PPApplication.getSELinuxEnforceCommand(command2, Shell.ShellContext.SYSTEM_APP);
             //}
             Command command = new Command(0, false, command1, command2);
             try {

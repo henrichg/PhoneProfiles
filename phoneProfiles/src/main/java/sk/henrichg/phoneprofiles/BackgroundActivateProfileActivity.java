@@ -17,13 +17,13 @@ public class BackgroundActivateProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_SHORTCUT);
-        profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_SHORTCUT);
+        profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
 
-        if ((startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT)) {
+        if ((startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT)) {
 
-            GlobalData.loadPreferences(getApplicationContext());
+            PPApplication.loadPreferences(getApplicationContext());
 
             dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
 
@@ -36,13 +36,13 @@ public class BackgroundActivateProfileActivity extends Activity {
     {
         super.onStart();
 
-        if (!GlobalData.getApplicationStarted(getApplicationContext(), true)) {
-            GlobalData.logE("BackgroundActivateProfileActivity.onStart","application not started");
+        if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
+            PPApplication.logE("BackgroundActivateProfileActivity.onStart","application not started");
             startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
         }
 
-        if ((startupSource == GlobalData.STARTUP_SOURCE_WIDGET) ||
-            (startupSource == GlobalData.STARTUP_SOURCE_SHORTCUT))
+        if ((startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT))
             dataWrapper.activateProfile(profile_id, startupSource, this);
     }
 

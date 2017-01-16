@@ -194,7 +194,7 @@ class EditorProfileListAdapter extends BaseAdapter
         if (convertView == null)
         {
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
-            if (GlobalData.applicationEditorPrefIndicator)
+            if (PPApplication.applicationEditorPrefIndicator)
                 vi = inflater.inflate(R.layout.editor_profile_list_item, parent, false);
             else
                 vi = inflater.inflate(R.layout.editor_profile_list_item_no_indicator, parent, false);
@@ -203,7 +203,7 @@ class EditorProfileListAdapter extends BaseAdapter
             holder.profileName = (TextView)vi.findViewById(R.id.main_list_item_profile_name);
             holder.profileIcon = (ImageView)vi.findViewById(R.id.main_list_item_profile_icon);
             holder.profileItemEditMenu = (ImageView)vi.findViewById(R.id.main_list_item_edit_menu);
-            if (GlobalData.applicationEditorPrefIndicator)
+            if (PPApplication.applicationEditorPrefIndicator)
                 holder.profileIndicator = (ImageView)vi.findViewById(R.id.main_list_profile_pref_indicator);
             vi.setTag(holder);        
         }
@@ -214,27 +214,27 @@ class EditorProfileListAdapter extends BaseAdapter
 
         final Profile profile = profileList.get(position);
 
-        if (profile._checked && (!GlobalData.applicationEditorHeader))
+        if (profile._checked && (!PPApplication.applicationEditorHeader))
         {
-            if (GlobalData.applicationTheme.equals("material"))
+            if (PPApplication.applicationTheme.equals("material"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
             else
-            if (GlobalData.applicationTheme.equals("dark"))
+            if (PPApplication.applicationTheme.equals("dark"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dark);
             else
-            if (GlobalData.applicationTheme.equals("dlight"))
+            if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
             holder.profileName.setTypeface(null, Typeface.BOLD);
         }
         else
         {
-            if (GlobalData.applicationTheme.equals("material"))
+            if (PPApplication.applicationTheme.equals("material"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card);
             else
-            if (GlobalData.applicationTheme.equals("dark"))
+            if (PPApplication.applicationTheme.equals("dark"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card_dark);
             else
-            if (GlobalData.applicationTheme.equals("dlight"))
+            if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card);
             holder.profileName.setTypeface(null, Typeface.NORMAL);
         }
@@ -258,7 +258,7 @@ class EditorProfileListAdapter extends BaseAdapter
             holder.profileIcon.setImageBitmap(profile._iconBitmap);
         }
         
-        if (GlobalData.applicationEditorPrefIndicator)
+        if (PPApplication.applicationEditorPrefIndicator)
         {
             //profilePrefIndicatorImageView.setImageBitmap(null);
             //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());

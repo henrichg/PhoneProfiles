@@ -34,7 +34,7 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
     @Override
     public void addPreferencesFromResource(int preferenceResId) {
         prefMng = getPreferenceManager();
-        prefMng.setSharedPreferencesName(GlobalData.APPLICATION_PREFS_NAME);
+        prefMng.setSharedPreferencesName(PPApplication.APPLICATION_PREFS_NAME);
         prefMng.setSharedPreferencesMode(Activity.MODE_PRIVATE);
         super.addPreferencesFromResource(preferenceResId);
     }
@@ -46,48 +46,48 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
 
     private void updateSharedPreference()
     {
-        setSummary(GlobalData.PREF_APPLICATION_START_ON_BOOT);
-        setSummary(GlobalData.PREF_APPLICATION_ACTIVATE);
-        setSummary(GlobalData.PREF_APPLICATION_ALERT);
-        setSummary(GlobalData.PREF_APPLICATION_CLOSE);
-        setSummary(GlobalData.PREF_APPLICATION_LONG_PRESS_ACTIVATION);
-        setSummary(GlobalData.PREF_APPLICATION_LANGUAGE);
-        setSummary(GlobalData.PREF_APPLICATION_THEME);
-        setSummary(GlobalData.PREF_APPLICATION_ACTIVATOR_PREF_INDICATOR);
-        setSummary(GlobalData.PREF_APPLICATION_EDITOR_PREF_INDICATOR);
-        setSummary(GlobalData.PREF_APPLICATION_ACTIVATOR_HEADER);
-        setSummary(GlobalData.PREF_APPLICATION_EDITOR_HEADER);
-        setSummary(GlobalData.PREF_NOTIFICATION_TOAST);
-        setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR);
-        setSummary(GlobalData.PREF_NOTIFICATION_TEXT_COLOR);
+        setSummary(PPApplication.PREF_APPLICATION_START_ON_BOOT);
+        setSummary(PPApplication.PREF_APPLICATION_ACTIVATE);
+        setSummary(PPApplication.PREF_APPLICATION_ALERT);
+        setSummary(PPApplication.PREF_APPLICATION_CLOSE);
+        setSummary(PPApplication.PREF_APPLICATION_LONG_PRESS_ACTIVATION);
+        setSummary(PPApplication.PREF_APPLICATION_LANGUAGE);
+        setSummary(PPApplication.PREF_APPLICATION_THEME);
+        setSummary(PPApplication.PREF_APPLICATION_ACTIVATOR_PREF_INDICATOR);
+        setSummary(PPApplication.PREF_APPLICATION_EDITOR_PREF_INDICATOR);
+        setSummary(PPApplication.PREF_APPLICATION_ACTIVATOR_HEADER);
+        setSummary(PPApplication.PREF_APPLICATION_EDITOR_HEADER);
+        setSummary(PPApplication.PREF_NOTIFICATION_TOAST);
+        setSummary(PPApplication.PREF_NOTIFICATION_STATUS_BAR);
+        setSummary(PPApplication.PREF_NOTIFICATION_TEXT_COLOR);
 
         if (android.os.Build.VERSION.SDK_INT >= 16) {
-            setSummary(GlobalData.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
+            setSummary(PPApplication.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
             if (android.os.Build.VERSION.SDK_INT >= 21) {
-                Preference preference = prefMng.findPreference(GlobalData.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
+                Preference preference = prefMng.findPreference(PPApplication.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
                 if (preference != null) {
                     preference.setTitle(R.string.phone_profiles_pref_notificationShowInStatusBarAndLockscreen);
                 }
             }
         }
         else {
-            Preference preference = prefMng.findPreference(GlobalData.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
+            Preference preference = prefMng.findPreference(PPApplication.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR);
             if (preference != null) {
                 preference.setEnabled(false);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean(GlobalData.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
+                editor.putBoolean(PPApplication.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
                 editor.commit();
             }
         }
 
-        setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR_PERMANENT);
-        //setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR_CANCEL);
+        setSummary(PPApplication.PREF_NOTIFICATION_STATUS_BAR_PERMANENT);
+        //setSummary(PPApplication.PREF_NOTIFICATION_STATUS_BAR_CANCEL);
 
         // some devices supports color icons
         /*if (android.os.Build.VERSION.SDK_INT >= 21)
         {
             // for Android 5.0, color notification icon is not supported
-            Preference preference = prefMng.findPreference(GlobalData.PREF_NOTIFICATION_STATUS_BAR_STYLE);
+            Preference preference = prefMng.findPreference(PPApplication.PREF_NOTIFICATION_STATUS_BAR_STYLE);
             if (preference != null)
             {
                 //PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("categoryNotifications");
@@ -96,24 +96,24 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
             }
         }
         else*/
-            setSummary(GlobalData.PREF_NOTIFICATION_STATUS_BAR_STYLE);
+            setSummary(PPApplication.PREF_NOTIFICATION_STATUS_BAR_STYLE);
 
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_PREF_INDICATOR);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_HEADER);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_BACKGROUND);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_B);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_T);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_COLOR);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_ICON_COLOR);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_ICON_LIGHTNESS);
-        setSummary(GlobalData.PREF_APPLICATION_BACKGROUND_PROFILE);
-        setSummary(GlobalData.PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_BACKGROUND);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B);
-        setSummary(GlobalData.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_PREF_INDICATOR);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_HEADER);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_BACKGROUND);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_B);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_T);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_COLOR);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_ICON_COLOR);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_ICON_LIGHTNESS);
+        setSummary(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE);
+        setSummary(PPApplication.PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_BACKGROUND);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B);
+        setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T);
     }
 
     @Override

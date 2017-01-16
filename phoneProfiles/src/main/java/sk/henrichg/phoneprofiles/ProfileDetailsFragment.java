@@ -74,7 +74,7 @@ public class ProfileDetailsFragment extends Fragment {
         // configuration changes for example
         setRetainInstance(true);
 
-        profile_id = getArguments().getLong(GlobalData.EXTRA_PROFILE_ID, 0);
+        profile_id = getArguments().getLong(PPApplication.EXTRA_PROFILE_ID, 0);
 
     }
 
@@ -97,7 +97,7 @@ public class ProfileDetailsFragment extends Fragment {
         profileName = (TextView)view.findViewById(R.id.profile_detail_profile_name);
         profileIcon = (ImageView)view.findViewById(R.id.profile_detail_profile_icon);
         profileItemEdit = (ImageView)view.findViewById(R.id.profile_detail_edit);
-        //if (GlobalData.applicationEditorPrefIndicator)
+        //if (PPApplication.applicationEditorPrefIndicator)
             profileIndicator = (ImageView)view.findViewById(R.id.profile_detail_profile_pref_indicator);
         //else
         //    profileIndicator = null;
@@ -125,7 +125,7 @@ public class ProfileDetailsFragment extends Fragment {
                 profileIcon.setImageBitmap(profile._iconBitmap);
             }
 
-            //if (GlobalData.applicationEditorPrefIndicator) {
+            //if (PPApplication.applicationEditorPrefIndicator) {
                 //profilePrefIndicatorImageView.setImageBitmap(null);
                 //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());
                 //profilePrefIndicatorImageView.setImageBitmap(bitmap);

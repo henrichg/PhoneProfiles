@@ -11,10 +11,10 @@ public class NotificationCancelAlarmBroadcastReceiver extends BroadcastReceiver 
     public void onReceive(Context context, Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalData.logE("### NotificationCancelAlarmBroadcastReceiver","xxx");
+        PPApplication.logE("### NotificationCancelAlarmBroadcastReceiver","xxx");
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(GlobalData.PROFILE_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
 
     }
 

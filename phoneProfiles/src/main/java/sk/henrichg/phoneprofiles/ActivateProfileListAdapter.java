@@ -102,16 +102,16 @@ class ActivateProfileListAdapter extends BaseAdapter
         {
             holder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
-            if (!GlobalData.applicationActivatorGridLayout)
+            if (!PPApplication.applicationActivatorGridLayout)
             {
-                if (GlobalData.applicationActivatorPrefIndicator)
+                if (PPApplication.applicationActivatorPrefIndicator)
                     vi = inflater.inflate(R.layout.activate_profile_list_item, parent, false);
                 else
                     vi = inflater.inflate(R.layout.activate_profile_list_item_no_indicator, parent, false);
                 holder.listItemRoot = (RelativeLayout)vi.findViewById(R.id.act_prof_list_item_root);
                 holder.profileName = (TextView)vi.findViewById(R.id.act_prof_list_item_profile_name);
                 holder.profileIcon = (ImageView)vi.findViewById(R.id.act_prof_list_item_profile_icon);
-                if (GlobalData.applicationActivatorPrefIndicator)
+                if (PPApplication.applicationActivatorPrefIndicator)
                     holder.profileIndicator = (ImageView)vi.findViewById(R.id.act_prof_list_profile_pref_indicator);
             }
             else
@@ -130,34 +130,34 @@ class ActivateProfileListAdapter extends BaseAdapter
 
         final Profile profile = profileList.get(position);
 
-        if (profile._checked && (!GlobalData.applicationActivatorHeader))
+        if (profile._checked && (!PPApplication.applicationActivatorHeader))
         {
-            if (GlobalData.applicationTheme.equals("material"))
+            if (PPApplication.applicationTheme.equals("material"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
             else
-            if (GlobalData.applicationTheme.equals("dark"))
+            if (PPApplication.applicationTheme.equals("dark"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dark);
             else
-            if (GlobalData.applicationTheme.equals("dlight"))
+            if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);
             //holder.profileName.setTypeface(null, Typeface.BOLD);
             holder.profileName.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
         }
         else
         {
-            if (GlobalData.applicationTheme.equals("material"))
+            if (PPApplication.applicationTheme.equals("material"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card);
             else
-            if (GlobalData.applicationTheme.equals("dark"))
+            if (PPApplication.applicationTheme.equals("dark"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card_dark);
             else
-            if (GlobalData.applicationTheme.equals("dlight"))
+            if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card);
             //holder.profileName.setTypeface(null, Typeface.NORMAL);
             holder.profileName.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
         }
 
-        String profileName = profile.getProfileNameWithDuration(GlobalData.applicationActivatorGridLayout, dataWrapper.context);
+        String profileName = profile.getProfileNameWithDuration(PPApplication.applicationActivatorGridLayout, dataWrapper.context);
         holder.profileName.setText(profileName);
 
         if (profile.getIsIconResourceID())
@@ -176,7 +176,7 @@ class ActivateProfileListAdapter extends BaseAdapter
             holder.profileIcon.setImageBitmap(profile._iconBitmap);
         }
 
-        if ((GlobalData.applicationActivatorPrefIndicator) && (!GlobalData.applicationActivatorGridLayout))
+        if ((PPApplication.applicationActivatorPrefIndicator) && (!PPApplication.applicationActivatorGridLayout))
         {
             //profilePrefIndicatorImageView.setImageBitmap(null);
             //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());

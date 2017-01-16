@@ -23,14 +23,14 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
 
         Context context = getApplicationContext();
 
-        GlobalData.loadPreferences(context);
+        PPApplication.loadPreferences(context);
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
-        long profile_id = intent.getLongExtra(GlobalData.EXTRA_PROFILE_ID, 0);
+        long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
 
-        profile = GlobalData.getMappedProfile(profile, context);
+        profile = PPApplication.getMappedProfile(profile, context);
         if (profile != null) {
             if (Permissions.checkProfileRadioPreferences(context, profile)) {
                 // run execute radios from ActivateProfileHelper

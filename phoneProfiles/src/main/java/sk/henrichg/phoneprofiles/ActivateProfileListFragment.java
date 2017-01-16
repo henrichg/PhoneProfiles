@@ -54,7 +54,7 @@ public class ActivateProfileListFragment extends Fragment {
         activateProfileHelper.initialize(dataWrapper, getActivity().getApplicationContext());
 
         intent = getActivity().getIntent();
-        startupSource = intent.getIntExtra(GlobalData.EXTRA_STARTUP_SOURCE, 0);
+        startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
 
 
     }
@@ -64,22 +64,22 @@ public class ActivateProfileListFragment extends Fragment {
 
         View rootView;
 
-        if (!GlobalData.applicationActivatorGridLayout)
+        if (!PPApplication.applicationActivatorGridLayout)
         {
-            if (GlobalData.applicationActivatorPrefIndicator && GlobalData.applicationActivatorHeader)
+            if (PPApplication.applicationActivatorPrefIndicator && PPApplication.applicationActivatorHeader)
                 rootView = inflater.inflate(R.layout.activate_profile_list, container, false);
             else
-            if (GlobalData.applicationActivatorHeader)
+            if (PPApplication.applicationActivatorHeader)
                 rootView = inflater.inflate(R.layout.activate_profile_list_no_indicator, container, false);
             else
                 rootView = inflater.inflate(R.layout.activate_profile_list_no_header, container, false);
         }
         else
         {
-            if (GlobalData.applicationActivatorPrefIndicator && GlobalData.applicationActivatorHeader)
+            if (PPApplication.applicationActivatorPrefIndicator && PPApplication.applicationActivatorHeader)
                 rootView = inflater.inflate(R.layout.activate_profile_grid, container, false);
             else
-            if (GlobalData.applicationActivatorHeader)
+            if (PPApplication.applicationActivatorHeader)
                 rootView = inflater.inflate(R.layout.activate_profile_grid_no_indicator, container, false);
             else
                 rootView = inflater.inflate(R.layout.activate_profile_grid_no_header, container, false);
@@ -100,13 +100,13 @@ public class ActivateProfileListFragment extends Fragment {
     {
         activeProfileName = (TextView)view.findViewById(R.id.act_prof_activated_profile_name);
         activeProfileIcon = (ImageView)view.findViewById(R.id.act_prof_activated_profile_icon);
-        if (!GlobalData.applicationActivatorGridLayout)
+        if (!PPApplication.applicationActivatorGridLayout)
             listView = (ListView)view.findViewById(R.id.act_prof_profiles_list);
         else
             gridView = (GridView)view.findViewById(R.id.act_prof_profiles_grid);
 
         AbsListView absListView;
-        if (!GlobalData.applicationActivatorGridLayout)
+        if (!PPApplication.applicationActivatorGridLayout)
             absListView = listView;
         else
             absListView = gridView;
@@ -117,9 +117,9 @@ public class ActivateProfileListFragment extends Fragment {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (!GlobalData.applicationLongClickActivation)
+                if (!PPApplication.applicationLongClickActivation)
                     //activateProfileWithAlert(position);
-                    activateProfile(position, GlobalData.STARTUP_SOURCE_ACTIVATOR);
+                    activateProfile(position, PPApplication.STARTUP_SOURCE_ACTIVATOR);
 
             }
 
@@ -129,9 +129,9 @@ public class ActivateProfileListFragment extends Fragment {
 
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (GlobalData.applicationLongClickActivation)
+                if (PPApplication.applicationLongClickActivation)
                     //activateProfileWithAlert(position);
-                    activateProfile(position, GlobalData.STARTUP_SOURCE_ACTIVATOR);
+                    activateProfile(position, PPApplication.STARTUP_SOURCE_ACTIVATOR);
 
                 return false;
             }
@@ -203,7 +203,7 @@ public class ActivateProfileListFragment extends Fragment {
                     fragment.doOnStart();
 
                     Intent intent = new Intent(fragment.getActivity().getBaseContext(), EditorProfilesActivity.class);
-                    intent.putExtra(GlobalData.EXTRA_STARTUP_SOURCE, GlobalData.STARTUP_SOURCE_ACTIVATOR_START);
+                    intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR_START);
                     fragment.getActivity().startActivity(intent);
 
                     fragment.getActivity().finish();
@@ -214,7 +214,7 @@ public class ActivateProfileListFragment extends Fragment {
                 fragment.profileListAdapter = new ActivateProfileListAdapter(fragment, fragment.profileList, fragment.dataWrapper);
 
                 AbsListView absListView;
-                if (!GlobalData.applicationActivatorGridLayout)
+                if (!PPApplication.applicationActivatorGridLayout)
                     absListView = fragment.listView;
                 else
                     absListView = fragment.gridView;
@@ -233,9 +233,9 @@ public class ActivateProfileListFragment extends Fragment {
 
     private void doOnStart()
     {
-        if (!GlobalData.getApplicationStarted(getActivity().getApplicationContext(), false))
+        if (!PPApplication.getApplicationStarted(getActivity().getApplicationContext(), false))
         {
-            GlobalData.logE("ActivateProfileListFragment.doOnStart","application not started");
+            PPApplication.logE("ActivateProfileListFragment.doOnStart","application not started");
 
             // start service for first start
             //Intent firstStartServiceIntent = new Intent(getActivity().getApplicationContext(), FirstStartService.class);
@@ -246,7 +246,7 @@ public class ActivateProfileListFragment extends Fragment {
         }
         else
         {
-            GlobalData.logE("ActivateProfileListFragment.doOnStart", "xxx");
+            PPApplication.logE("ActivateProfileListFragment.doOnStart", "xxx");
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
@@ -265,7 +265,7 @@ public class ActivateProfileListFragment extends Fragment {
         }
         endOnStart();
 
-        //GlobalData.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onStart");
+        //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onStart");
 
     }
 
@@ -275,7 +275,7 @@ public class ActivateProfileListFragment extends Fragment {
         startupSource = 0;
 
         //  aplikacia uz je 1. krat spustena - moved to FirstStartService
-        //GlobalData.setApplicationStarted(getActivity().getApplicationContext(), true);
+        //PPApplication.setApplicationStarted(getActivity().getApplicationContext(), true);
     }
 
 
@@ -291,7 +291,7 @@ public class ActivateProfileListFragment extends Fragment {
         if (!isAsyncTaskPendingOrRunning())
         {
             AbsListView absListView;
-            if (!GlobalData.applicationActivatorGridLayout)
+            if (!PPApplication.applicationActivatorGridLayout)
                 absListView = listView;
             else
                 absListView = gridView;
@@ -313,7 +313,7 @@ public class ActivateProfileListFragment extends Fragment {
 
     private void updateHeader(Profile profile)
     {
-        if (!GlobalData.applicationActivatorHeader)
+        if (!PPApplication.applicationActivatorHeader)
             return;
 
         if (profile == null)
@@ -339,7 +339,7 @@ public class ActivateProfileListFragment extends Fragment {
             }
         }
 
-        if (GlobalData.applicationActivatorPrefIndicator)
+        if (PPApplication.applicationActivatorPrefIndicator)
         {
             ImageView profilePrefIndicatorImageView = (ImageView)getActivity().findViewById(R.id.act_prof_activated_profile_pref_indicator);
             if (profilePrefIndicatorImageView != null)

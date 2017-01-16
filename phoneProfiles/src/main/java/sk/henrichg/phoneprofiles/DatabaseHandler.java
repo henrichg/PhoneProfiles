@@ -1602,7 +1602,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                         if ((Integer.parseInt(cursor.getString(1)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_AIRPLANE_MODE, 0);
@@ -1611,7 +1611,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(2)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI, 0);
@@ -1620,7 +1620,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(3)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_BLUETOOTH, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_BLUETOOTH, 0);
@@ -1629,7 +1629,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(4)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA, 0);
@@ -1638,7 +1638,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(5)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
@@ -1647,7 +1647,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(6)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_GPS, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_GPS, 0);
@@ -1656,7 +1656,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(7)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
@@ -1665,7 +1665,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(8)) != 0) &&
-                            (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NFC, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                            (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_NFC, 0);
@@ -1674,7 +1674,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(10)) != 0) &&
-                                (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_WIFI_AP, context) == GlobalData.PREFERENCE_NOT_ALLOWED))
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI_AP, 0);
@@ -1683,7 +1683,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if (Integer.parseInt(cursor.getString(9)) == 5) {
-                            boolean notRemove = GlobalData.canChangeZenMode(context, true);
+                            boolean notRemove = PPApplication.canChangeZenMode(context, true);
                             if (!notRemove) {
                                 int zenMode = cursor.getInt(12);
                                 int ringerMode = 0;
@@ -1715,8 +1715,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(11)) != 0) &&
-                                (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context)
-                                        == GlobalData.PREFERENCE_NOT_ALLOWED))
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context)
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
@@ -1725,8 +1725,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(13)) != 0) &&
-                                (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_DEVICE_NETWORK_TYPE, context)
-                                        == GlobalData.PREFERENCE_NOT_ALLOWED))
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE, context)
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_DEVICE_NETWORK_TYPE, 0);
@@ -1735,8 +1735,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(14)) != 0) &&
-                                (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_NOTIFICATION_LED, context)
-                                        == GlobalData.PREFERENCE_NOT_ALLOWED))
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_NOTIFICATION_LED, context)
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_NOTIFICATION_LED, 0);
@@ -1745,8 +1745,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
 
                         if ((Integer.parseInt(cursor.getString(15)) != 0) &&
-                                (GlobalData.isProfilePreferenceAllowed(GlobalData.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
-                                        == GlobalData.PREFERENCE_NOT_ALLOWED))
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
                         {
                             values.clear();
                             values.put(KEY_VIBRATE_WHEN_RINGING, 0);
@@ -1979,7 +1979,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     String value = cursorExportedDB.getString(i);
 
                                     // update values
-                                    if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(GlobalData.EXPORT_PATH)))
+                                    if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
                                         ||
                                         ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GUIData.REMOTE_EXPORT_PATH))))
                                     {
@@ -2098,7 +2098,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             {
                                 values.put(KEY_DEVICE_AUTOSYNC, 0);
                             }
-                            if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(GlobalData.EXPORT_PATH)))
+                            if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
                                 ||
                                 ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GUIData.REMOTE_EXPORT_PATH))))
                             {
@@ -2258,14 +2258,14 @@ class DatabaseHandler extends SQLiteOpenHelper {
             File data = Environment.getDataDirectory();
 
             File dataDB = new File(data, GUIData.DB_FILEPATH + "/" + DATABASE_NAME);
-            File exportedDB = new File(sd, GlobalData.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
+            File exportedDB = new File(sd, PPApplication.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
 
             if (dataDB.exists())
             {
                 // close db
                 close();
 
-                File exportDir = new File(sd, GlobalData.EXPORT_PATH);
+                File exportDir = new File(sd, PPApplication.EXPORT_PATH);
                 if (!(exportDir.exists() && exportDir.isDirectory()))
                 {
                     //noinspection ResultOfMethodCallIgnored

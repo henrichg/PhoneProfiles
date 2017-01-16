@@ -20,25 +20,25 @@ class ImportantInfoNotification {
         try {
             PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             packageVersionCode = pinfo.versionCode;
-            savedVersionCode = GlobalData.getShowInfoNotificationOnStartVersion(context);
+            savedVersionCode = PPApplication.getShowInfoNotificationOnStartVersion(context);
             if (packageVersionCode > savedVersionCode) {
                 //boolean show = (versionCode >= VERSION_CODE_FOR_NEWS);
                 boolean show = canShowNotification(packageVersionCode, savedVersionCode);
-                GlobalData.setShowInfoNotificationOnStart(context, show, packageVersionCode);
+                PPApplication.setShowInfoNotificationOnStart(context, show, packageVersionCode);
             }
             else
-                GlobalData.setShowInfoNotificationOnStartVersion(context, packageVersionCode);
+                PPApplication.setShowInfoNotificationOnStartVersion(context, packageVersionCode);
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
         }
 
-        if ((savedVersionCode == 0) || GlobalData.getShowInfoNotificationOnStart(context, packageVersionCode)) {
+        if ((savedVersionCode == 0) || PPApplication.getShowInfoNotificationOnStart(context, packageVersionCode)) {
 
             showNotification(context,
                     context.getString(R.string.info_notification_title),
                     context.getString(R.string.info_notification_text));
 
-            GlobalData.setShowInfoNotificationOnStart(context, false, packageVersionCode);
+            PPApplication.setShowInfoNotificationOnStart(context, false, packageVersionCode);
         }
     }
 
@@ -96,13 +96,13 @@ class ImportantInfoNotification {
             mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
         NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(GlobalData.IMPORTANT_INFO_NOTIFICATION_ID, mBuilder.build());
+        mNotificationManager.notify(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID, mBuilder.build());
     }
 
     static void removeNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(GlobalData.IMPORTANT_INFO_NOTIFICATION_ID);
+        notificationManager.cancel(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID);
     }
 
 }
