@@ -43,11 +43,12 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
             PPApplication.setScreenUnlocked(context, true);
 
+            DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
+            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
+
             if (PPApplication.getApplicationStarted(context, true)) {
                 if (PPApplication.notificationShowInStatusBar &&
                     PPApplication.notificationHideInLockscreen) {
-                    DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
-                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                     //dataWrapper.getActivateProfileHelper().removeNotification();
                     //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                     Profile activatedProfile = dataWrapper.getActivatedProfile();
@@ -55,6 +56,13 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     dataWrapper.invalidateDataWrapper();
                 }
             }
+
+            // change screen timeout
+            int screenTimeout = PPApplication.getActivatedProfileScreenTimeout(context);
+            if (screenTimeout > 0)
+                dataWrapper.getActivateProfileHelper().setScreenTimeout(screenTimeout);
+
+            dataWrapper.invalidateDataWrapper();
 
             // enable/disable keyguard
             Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);

@@ -441,12 +441,17 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".DisableInernalChangeBroadcastReceiver"
+            android:name=".DisableRingerModeInernalChangeBroadcastReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
         <receiver
             android:name=".RecreateNotificationBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".DisableScreenTimeoutInternalChangeReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>

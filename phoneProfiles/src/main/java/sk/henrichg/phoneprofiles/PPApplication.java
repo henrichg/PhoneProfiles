@@ -231,6 +231,7 @@ public class PPApplication extends Application {
     private static final String PREF_SCREEN_UNLOCKED = "screen_unlocked";
     private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
     private static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
+    private static final String PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT = "activated_profile_screen_timeout";
 
     public static boolean applicationStartOnBoot;
     public static boolean applicationActivate;
@@ -918,6 +919,20 @@ public class PPApplication extends Application {
         SharedPreferences preferences = context.getSharedPreferences(PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
+        editor.commit();
+    }
+
+    static public int getActivatedProfileScreenTimeout(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT, 0);
+    }
+
+    static public void setActivatedProfileScreenTimeout(Context context, int timeout)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putInt(PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT, timeout);
         editor.commit();
     }
 
