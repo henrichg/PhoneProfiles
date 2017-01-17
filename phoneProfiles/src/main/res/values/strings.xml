@@ -875,4 +875,5 @@
     <string name="phone_profiles_pref_notificationStatusBarInfo_title">Important information!</string>
     <string name="phone_profiles_pref_notificationStatusBarInfo_summary">Ongoing status bar notification is required for service PhoneProfilesService. With notification, PhoneProfilesService is changed to \"foreground service\". And this type of service is not killed by Android. PhoneProfilesService must permanent running.</string>
     <string name="phone_profiles_pref_notificationStatusBarRequired">Required for background service PhoneProfilesService</string>
+    <string name="profile_preferences_preferenceTypesInfo_title">Type of preferences</string>
 </resources>
