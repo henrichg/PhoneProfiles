@@ -2,7 +2,7 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
           package="sk.henrichg.phoneprofiles"
           xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1930"
+          android:versionCode="1957"
           android:versionName="4.4.4b"
           android:installLocation="internalOnly" >
     <!--

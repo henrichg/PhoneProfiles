@@ -13,6 +13,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -1026,7 +1027,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                 editor.commit();
 
                 TypedValue tv = new TypedValue();
-                //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
 
                 final Display display = getWindowManager().getDefaultDisplay();
 
@@ -1035,7 +1035,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 int iconWidth = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
                 final Rect editItemMenuTarget = new Rect(0, 0, editItemMenuIcon.getIntrinsicWidth(), editItemMenuIcon.getIntrinsicHeight());
                 editItemMenuTarget.offset(display.getWidth() - iconWidth - GlobalGUIRoutines.dpToPx(10), GlobalGUIRoutines.dpToPx(35));
-                editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(25), GlobalGUIRoutines.dpToPx(25));
+                editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(27), GlobalGUIRoutines.dpToPx(27));
 
                 getTheme().resolveAttribute(R.attr.actionHelpIcon, tv, true);
                 final Drawable importantInfoIcon = ContextCompat.getDrawable(this, tv.resourceId);
@@ -1044,13 +1044,23 @@ public class EditorProfilesActivity extends AppCompatActivity
                 importantInfoTarget.offset(display.getWidth() - (iconWidth2 + GlobalGUIRoutines.dpToPx(25)) - GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
                 importantInfoIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
 
+                int circleColor = 0xFFFFFF;
+                if (PPApplication.applicationTheme.equals("dark"))
+                    circleColor = 0x7F7F7F;
+
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 sequence.targets(
                         TapTarget.forBounds(editItemMenuTarget, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
                                 .icon(editItemMenuIcon, true)
+                                .targetCircleColorInt(circleColor)
+                                .textColorInt(0xFFFFFF)
+                                .drawShadow(true)
                                 .id(1),
                         TapTarget.forBounds(importantInfoTarget, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
                                 .icon(importantInfoIcon, true)
+                                .targetCircleColorInt(circleColor)
+                                .textColorInt(0xFFFFFF)
+                                .drawShadow(true)
                                 .id(2)
                 );
                 sequence.listener(new TapTargetSequence.Listener() {

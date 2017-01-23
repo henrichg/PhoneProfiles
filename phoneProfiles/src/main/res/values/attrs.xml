@@ -58,5 +58,8 @@
     <attr name="actionSourceProfileIconInverse" format="reference" />
     <attr name="actionHelpIcon" format="reference" />
     <attr name="actionProfileActivtionDuration" format="reference" />
+    <attr name="targetHelpsOuterCircle" format="reference" />
+    <attr name="targetHelpsTargetCircle" format="reference" />
+    <attr name="targetHelpsText" format="reference" />
 
 </resources>
