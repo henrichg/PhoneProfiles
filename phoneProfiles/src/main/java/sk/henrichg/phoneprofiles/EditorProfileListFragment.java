@@ -6,10 +6,13 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +27,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.mobeta.android.dslv.DragSortListView;
 
 import java.lang.ref.WeakReference;
@@ -39,6 +44,7 @@ public class EditorProfileListFragment extends Fragment {
     private TextView activeProfileName;
     private ImageView activeProfileIcon;
     private DatabaseHandler databaseHandler;
+    private Toolbar bottomToolbar;
 
     private WeakReference<LoadProfileListAsyncTask> asyncTaskContext;
 
@@ -47,6 +53,10 @@ public class EditorProfileListFragment extends Fragment {
     public static final int EDIT_MODE_DUPLICATE = 2;
     public static final int EDIT_MODE_EDIT = 3;
     public static final int EDIT_MODE_DELETE = 4;
+
+    public static final String START_TARGET_HELPS_ARGUMENT = "start_target_helps";
+
+    public static final String PREF_START_TARGET_HELPS = "editor_profile_list_fragment_start_target_helps";
 
     /**
      * The fragment's current callback objects
@@ -62,7 +72,7 @@ public class EditorProfileListFragment extends Fragment {
         /**
          * Callback for when an item has been selected.
          */
-        void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex);
+        void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex, boolean startTargetHelps);
     }
 
     /**
@@ -70,7 +80,7 @@ public class EditorProfileListFragment extends Fragment {
      * nothing. Used only when this fragment is not attached to an activity.
      */
     private static OnStartProfilePreferences sDummyOnStartProfilePreferencesCallback = new OnStartProfilePreferences() {
-        public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex) {
+        public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex, boolean startTargetHelps) {
         }
     };
 
@@ -138,6 +148,10 @@ public class EditorProfileListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         doOnViewCreated(view, savedInstanceState);
+
+        boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
+        if (startTargetHelps)
+            showTargetHelps();
     }
 
     //@Override
@@ -167,7 +181,7 @@ public class EditorProfileListFragment extends Fragment {
         final Activity activity = getActivity();
         final EditorProfileListFragment fragment = this;
 
-        Toolbar bottomToolbar = (Toolbar)getActivity().findViewById(R.id.editor_list_bottom_bar);
+        bottomToolbar = (Toolbar)getActivity().findViewById(R.id.editor_list_bottom_bar);
         Menu menu = bottomToolbar.getMenu();
         if (menu != null) menu.clear();
         bottomToolbar.inflateMenu(R.menu.editor_profiles_bottom_bar);
@@ -238,6 +252,11 @@ public class EditorProfileListFragment extends Fragment {
             Profile profile;
             profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);
+
+            boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
+            if (startTargetHelps)
+                showAdapterTargetHelps();
+
         }
 
     }
@@ -373,6 +392,10 @@ public class EditorProfileListFragment extends Fragment {
 
         if (profile != null)
         {
+            boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
+            if (startTargetHelps)
+                showAdapterTargetHelps();
+
             // editacia profilu
             editMode = EDIT_MODE_EDIT;
         }
@@ -384,7 +407,7 @@ public class EditorProfileListFragment extends Fragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) one must start profile preferences
-        onStartProfilePreferencesCallback.onStartProfilePreferences(profile, editMode, predefinedProfileIndex);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(profile, editMode, predefinedProfileIndex, true);
     }
 
     public void duplicateProfile(Profile origProfile)
@@ -396,7 +419,7 @@ public class EditorProfileListFragment extends Fragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) one must start profile preferences
-        onStartProfilePreferencesCallback.onStartProfilePreferences(origProfile, editMode, 0);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(origProfile, editMode, 0, true);
 
     }
 
@@ -427,7 +450,7 @@ public class EditorProfileListFragment extends Fragment {
         activateProfileHelper.showNotification(_profile);
         activateProfileHelper.updateWidget();
 
-        onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
+        onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0, true);
 
     }
 
@@ -510,7 +533,7 @@ public class EditorProfileListFragment extends Fragment {
                 activateProfileHelper.removeNotification();
                 activateProfileHelper.updateWidget();
 
-                onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
+                onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0, true);
 
             }
         });
@@ -604,6 +627,11 @@ public class EditorProfileListFragment extends Fragment {
 
             }
             profileListAdapter.notifyDataSetChanged(refreshIcons);
+
+            boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
+            if (startTargetHelps)
+                showAdapterTargetHelps();
+
         }
     }
 
@@ -643,6 +671,77 @@ public class EditorProfileListFragment extends Fragment {
     public void removeAdapter() {
         if (listView != null)
             listView.setAdapter(null);
+    }
+
+    void showTargetHelps() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, true)) {
+
+            Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
+
+            if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+
+                Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS=true");
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(PREF_START_TARGET_HELPS, false);
+                editor.commit();
+
+                //TypedValue tv = new TypedValue();
+                //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
+
+                final TapTargetSequence sequence = new TapTargetSequence(getActivity())
+                        .targets(
+                                TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_add_profile, getString(R.string.editor_activity_targetHelps_newProfileButton_title), getString(R.string.editor_activity_targetHelps_newProfileButton_description))
+                                        .id(1),
+                                TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_delete_all_profiles, getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_title), getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_description))
+                                        .id(2)
+                        )
+                        .listener(new TapTargetSequence.Listener() {
+                            // This listener will tell us when interesting(tm) events happen in regards
+                            // to the sequence
+                            @Override
+                            public void onSequenceFinish() {
+                                showAdapterTargetHelps();
+                            }
+
+                            @Override
+                            public void onSequenceStep(TapTarget lastTarget) {
+                                //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                            }
+
+                            @Override
+                            public void onSequenceCanceled(TapTarget lastTarget) {
+                            }
+                        });
+                sequence.start();
+            }
+            else {
+                Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS=false");
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showAdapterTargetHelps();
+                    }
+                }, 500);
+            }
+        }
+    }
+
+    private void showAdapterTargetHelps() {
+        View itemView;
+        if (listView.getChildCount() > 1)
+            itemView = listView.getChildAt(1);
+        else
+            itemView = listView.getChildAt(0);
+        Log.d("EditorProfileListFragment.showAdapterTargetHelps", "profileListAdapter="+profileListAdapter);
+        Log.d("EditorProfileListFragment.showAdapterTargetHelps", "itemView="+itemView);
+        if ((profileListAdapter != null) && (itemView != null))
+            profileListAdapter.showTargetHelps(getActivity(), itemView);
     }
 
 }

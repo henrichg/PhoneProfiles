@@ -1,6 +1,11 @@
 package sk.henrichg.phoneprofiles;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+
 import java.util.List;
 
 class EditorProfileListAdapter extends BaseAdapter
@@ -18,6 +26,9 @@ class EditorProfileListAdapter extends BaseAdapter
     private EditorProfileListFragment fragment;
     private DataWrapper dataWrapper;
     private List<Profile> profileList;
+
+    static final String PREF_START_TARGET_HELPS = "editor_profile_list_adapter_start_target_helps";
+    static final String PREF_START_TARGET_HELPS_ORDER = "editor_profile_list_adapter_start_target_helps_order";
 
     EditorProfileListAdapter(EditorProfileListFragment f, DataWrapper pdw)
     {
@@ -277,6 +288,90 @@ class EditorProfileListAdapter extends BaseAdapter
             });
 
         return vi;
+    }
+
+    void showTargetHelps(final Activity activity, final View listItemView) {
+        SharedPreferences preferences = activity.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) || preferences.getBoolean(PREF_START_TARGET_HELPS_ORDER, true)) {
+
+            Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
+
+            if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+                Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=true");
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(PREF_START_TARGET_HELPS, false);
+                editor.commit();
+
+                Rect profileItemTarget = new Rect(0, 0, listItemView.getHeight(), listItemView.getHeight());
+                int[] screenLocation = new int[2];
+                listItemView.getLocationOnScreen(screenLocation);
+                profileItemTarget.offset(screenLocation[0] + listItemView.getWidth() / 2 - listItemView.getHeight() / 2, screenLocation[1]);
+
+                final TapTargetSequence sequence = new TapTargetSequence(activity);
+
+                editor.putBoolean(PREF_START_TARGET_HELPS_ORDER, false);
+                editor.commit();
+
+                sequence.targets(
+                        TapTarget.forBounds(profileItemTarget, activity.getString(R.string.editor_activity_targetHelps_profilePreferences_title), activity.getString(R.string.editor_activity_targetHelps_profilePreferences_description))
+                                .transparentTarget(true)
+                                .id(1),
+                        TapTarget.forView(listItemView.findViewById(R.id.main_list_item_edit_menu), activity.getString(R.string.editor_activity_targetHelps_profileMenu_title), activity.getString(R.string.editor_activity_targetHelps_profileMenu_description))
+                                .id(2),
+                        TapTarget.forView(listItemView.findViewById(R.id.main_list_drag_handle), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_title), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_description))
+                                .id(3)
+                );
+                sequence.listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget) {
+                        //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                    }
+                });
+                sequence.start();
+            }
+            if (preferences.getBoolean(PREF_START_TARGET_HELPS_ORDER, true)) {
+                Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=false");
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(PREF_START_TARGET_HELPS_ORDER, false);
+                editor.commit();
+
+                final TapTargetSequence sequence = new TapTargetSequence(activity);
+                sequence.targets(
+                        TapTarget.forView(listItemView.findViewById(R.id.main_list_drag_handle), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_title), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_description))
+                                .id(1)
+                );
+                sequence.listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget) {
+                        //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                    }
+                });
+                sequence.start();
+            }
+        }
+
     }
 
 }

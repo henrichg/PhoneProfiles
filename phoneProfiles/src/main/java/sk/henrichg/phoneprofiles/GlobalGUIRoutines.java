@@ -260,6 +260,16 @@ public class GlobalGUIRoutines {
         return sp * context.getResources().getDisplayMetrics().scaledDensity;
     }
 
+    static int dpToPx(int dp)
+    {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    /*static int pxToDp(int px)
+    {
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+    } */
+
     /**
      * Uses reflection to access divider private attribute and override its color
      * Use Color.Transparent if you wish to hide them

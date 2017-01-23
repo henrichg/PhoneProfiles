@@ -5,6 +5,10 @@
           android:versionCode="1920"
           android:versionName="4.4.3.8"
           android:installLocation="internalOnly" >
+    <!--
+        Release versions (look at PackageReplacedReceiver)
+        2100 = not show Activator and Editor target helps
+    -->
     <!-- android:installLocation="internalOnly" is needed for working BOOT_COMPLETED broadcast -->
 
     <!--

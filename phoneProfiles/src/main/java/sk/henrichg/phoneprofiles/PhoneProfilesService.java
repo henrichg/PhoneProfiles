@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -26,6 +28,15 @@ public class PhoneProfilesService extends Service {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         instance = this;
+
+        // save version code (is used in PackageReplacedReceiver)
+        try {
+            PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            int actualVersionCode = pinfo.versionCode;
+            PPApplication.setSavedVersionCode(getApplicationContext(), actualVersionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            //e.printStackTrace();
+        }
 
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);

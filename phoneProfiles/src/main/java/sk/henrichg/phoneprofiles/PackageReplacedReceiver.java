@@ -3,6 +3,9 @@ package sk.henrichg.phoneprofiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
@@ -19,6 +22,29 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             PPApplication.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
             PPApplication.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
             PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
+
+            int oldVersionCode = PPApplication.getSavedVersionCode(context.getApplicationContext());
+            PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "oldVersionCode="+oldVersionCode);
+            int actualVersionCode;
+            try {
+                PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+                actualVersionCode = pinfo.versionCode;
+                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "actualVersionCode=" + actualVersionCode);
+
+                if (oldVersionCode < actualVersionCode) {
+                    if (actualVersionCode <= 2100) {
+                        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, false);
+                        editor.commit();
+                    }
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                //e.printStackTrace();
+            }
 
             if (PPApplication.getApplicationStarted(context, false))
             {
