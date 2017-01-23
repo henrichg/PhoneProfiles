@@ -35,10 +35,10 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                     if (actualVersionCode <= 2100) {
                         SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, false);
+                        editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, true);
+                        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true);
+                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true);
+                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, true);
                         editor.commit();
                     }
                 }
@@ -48,6 +48,12 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
             if (PPApplication.getApplicationStarted(context, false))
             {
+                if (PhoneProfilesService.instance != null) {
+                    // stop PhoneProfilesService
+                    context.stopService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+                    PPApplication.sleep(2000);
+                }
+
                 // must by false for avoiding starts/pause events before restart events
                 PPApplication.setApplicationStarted(context, false);
 

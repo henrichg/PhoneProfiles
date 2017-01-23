@@ -61,11 +61,10 @@ public class PPApplication extends Application {
                                             +"|PhoneProfilesBackupAgent"
 
                                             +"|BootUpReceiver.onReceive"
+                                            +"|PackageReplacedReceiver.onReceive"
                                             +"|PhoneProfilesService"
                                             +"|FirstStartService.onHandleIntent"
                                             +"|ActivateProfileFromExternalApplicationActivity.onStart"
-                                            +"|ActivateProfileListFragment.doOnStart"
-                                            +"|BackgroundActivateProfileActivity.onStart"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";

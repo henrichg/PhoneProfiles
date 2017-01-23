@@ -61,8 +61,8 @@ public class PhoneProfilesService extends Service {
         getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
         // start service for first start
-        Intent eventsServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
-        getApplicationContext().startService(eventsServiceIntent);
+        Intent firstStartServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
+        getApplicationContext().startService(firstStartServiceIntent);
 
     }
 

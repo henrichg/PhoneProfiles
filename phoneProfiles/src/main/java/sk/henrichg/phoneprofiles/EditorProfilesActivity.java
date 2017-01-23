@@ -1034,8 +1034,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 final Drawable editItemMenuIcon = ContextCompat.getDrawable(this, tv.resourceId);
                 int iconWidth = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
                 final Rect editItemMenuTarget = new Rect(0, 0, editItemMenuIcon.getIntrinsicWidth(), editItemMenuIcon.getIntrinsicHeight());
-                editItemMenuTarget.offset(display.getWidth() - iconWidth, GlobalGUIRoutines.dpToPx(35));
-                //editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
+                editItemMenuTarget.offset(display.getWidth() - iconWidth - GlobalGUIRoutines.dpToPx(10), GlobalGUIRoutines.dpToPx(35));
+                editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(25), GlobalGUIRoutines.dpToPx(25));
 
                 getTheme().resolveAttribute(R.attr.actionHelpIcon, tv, true);
                 final Drawable importantInfoIcon = ContextCompat.getDrawable(this, tv.resourceId);
