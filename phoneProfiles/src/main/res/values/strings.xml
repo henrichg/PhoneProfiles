@@ -877,7 +877,7 @@
     <string name="phone_profiles_pref_notificationStatusBarRequired">Required for background service PhoneProfilesService</string>
     <string name="profile_preferences_preferenceTypesInfo_title">Type of preferences</string>
     <string name="editor_activity_targetHelps_navigationIcon_title">\"Views\" side panel</string>
-    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or drag left display side to right, for opening \"Views\" side panel. In this panel you can switch between Profiles and Events views.</string>
+    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe left display side to right, for opening \"Views\" side panel. In this panel you can switch between Profiles and Events views.</string>
     <string name="editor_activity_targetHelps_applicationMenu_title">Application menu</string>
     <string name="editor_activity_targetHelps_applicationMenu_description">Click this for opening Application menu. In this menu are application Settings.</string>
     <string name="editor_activity_targetHelps_restartEvents_title">Restart events</string>

@@ -28,7 +28,6 @@ class EditorProfileListAdapter extends BaseAdapter
     private List<Profile> profileList;
 
     static final String PREF_START_TARGET_HELPS = "editor_profile_list_adapter_start_target_helps";
-    static final String PREF_START_TARGET_HELPS_ORDER = "editor_profile_list_adapter_start_target_helps_order";
 
     EditorProfileListAdapter(EditorProfileListFragment f, DataWrapper pdw)
     {
@@ -293,7 +292,7 @@ class EditorProfileListAdapter extends BaseAdapter
     void showTargetHelps(final Activity activity, final View listItemView) {
         SharedPreferences preferences = activity.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
-        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) || preferences.getBoolean(PREF_START_TARGET_HELPS_ORDER, true)) {
+        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
 
             Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
@@ -315,9 +314,6 @@ class EditorProfileListAdapter extends BaseAdapter
 
                 final TapTargetSequence sequence = new TapTargetSequence(activity);
 
-                editor.putBoolean(PREF_START_TARGET_HELPS_ORDER, false);
-                editor.commit();
-
                 sequence.targets(
                         TapTarget.forBounds(profileItemTarget, activity.getString(R.string.editor_activity_targetHelps_profilePreferences_title), activity.getString(R.string.editor_activity_targetHelps_profilePreferences_description))
                                 .transparentTarget(true)
@@ -334,38 +330,6 @@ class EditorProfileListAdapter extends BaseAdapter
                                 .textColorInt(0xFFFFFF)
                                 .drawShadow(true)
                                 .id(3)
-                );
-                sequence.listener(new TapTargetSequence.Listener() {
-                    // This listener will tell us when interesting(tm) events happen in regards
-                    // to the sequence
-                    @Override
-                    public void onSequenceFinish() {
-                    }
-
-                    @Override
-                    public void onSequenceStep(TapTarget lastTarget) {
-                        //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
-                    }
-
-                    @Override
-                    public void onSequenceCanceled(TapTarget lastTarget) {
-                    }
-                });
-                sequence.start();
-            }
-            if (preferences.getBoolean(PREF_START_TARGET_HELPS_ORDER, true)) {
-                Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=false");
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean(PREF_START_TARGET_HELPS_ORDER, false);
-                editor.commit();
-
-                final TapTargetSequence sequence = new TapTargetSequence(activity);
-                sequence.targets(
-                        TapTarget.forView(listItemView.findViewById(R.id.main_list_drag_handle), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_title), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_description))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
-                                .drawShadow(true)
-                                .id(1)
                 );
                 sequence.listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards

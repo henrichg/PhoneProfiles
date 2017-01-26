@@ -1010,7 +1010,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     private void showTargetHelps() {
-        SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        final SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
         if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true) ||
@@ -1081,6 +1081,11 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
+                        Editor editor = preferences.edit();
+                        editor.putBoolean(PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
+                        editor.commit();
                     }
                 });
                 sequence.start();
