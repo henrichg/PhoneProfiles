@@ -1014,8 +1014,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true) ||
-                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true) ||
-                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, true)) {
+                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
             Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 

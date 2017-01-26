@@ -41,7 +41,6 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS_ORDER, false);
                         editor.commit();
                     }
                 }
