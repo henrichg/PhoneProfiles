@@ -2,7 +2,7 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
           package="sk.henrichg.phoneprofiles"
           xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1957"
+          android:versionCode="1965"
           android:versionName="4.4.4b"
           android:installLocation="internalOnly" >
     <!--
@@ -176,6 +176,12 @@
         <activity
             android:name=".AboutApplicationActivity"
             android:label="@string/about_application_title">
+        </activity>
+        <activity
+            android:name=".ActivatorTargetHelpsActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity="sk.henrichg.phoneprofilesplus.popup"
+            android:theme="@style/EmptyTargetHelpsActivity">
         </activity>
 
         <receiver android:name=".PhoneProfilesInstall">

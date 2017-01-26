@@ -1,10 +1,17 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
@@ -13,9 +20,17 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+
 public class ActivateProfileActivity extends AppCompatActivity {
 
     private static ActivateProfileActivity instance;
+
+    float popupWidth;
+    float popupHeight;
+
+    public static final String PREF_START_TARGET_HELPS = "activate_profiles_activity_start_target_helps";
 
     @SuppressWarnings({ "deprecation" })
     @Override
@@ -41,9 +56,9 @@ public class ActivateProfileActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         // display dimensions
-        float popupWidth = display.getWidth();
+        popupWidth = display.getWidth();
         float popupMaxHeight = display.getHeight();
-        float popupHeight = 0;
+        popupHeight = 0;
         float actionBarHeight = 0;
 
         // action bar height
@@ -163,6 +178,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
             instance = this;
             refreshGUI(false);
         }
+
+        startTargetHelpsActivity();
     }
 
     @Override
@@ -217,6 +234,110 @@ public class ActivateProfileActivity extends AppCompatActivity {
         if (fragment != null)
         {
             ((ActivateProfileListFragment)fragment).refreshGUI(refreshIcons);
+        }
+    }
+
+    private void startTargetHelpsActivity() {
+        SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
+
+            ActivatorTargetHelpsActivity.activatorActivity = this;
+            Intent intent = new Intent(this, ActivatorTargetHelpsActivity.class);
+            startActivity(intent);
+
+        }
+    }
+
+    public void showTargetHelps() {
+        SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true) ||
+                preferences.getBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
+
+            Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
+
+            if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+                Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(PREF_START_TARGET_HELPS, false);
+                editor.commit();
+
+                TypedValue tv = new TypedValue();
+                //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
+
+                final Display display = getWindowManager().getDefaultDisplay();
+                int popupLeft = (int) (display.getWidth() - popupWidth) / 2;
+                int popupTop = (int) (display.getHeight() - popupHeight) / 2;
+
+                getTheme().resolveAttribute(R.attr.actionEditProfilesIcon, tv, true);
+                final Drawable actionEditProfilesIcon = ContextCompat.getDrawable(this, tv.resourceId);
+                final Rect actionEditProfilesTarget = new Rect(0, 0, actionEditProfilesIcon.getIntrinsicWidth(), actionEditProfilesIcon.getIntrinsicHeight());
+                actionEditProfilesTarget.offset((popupLeft+(int)popupWidth) - (/*iconWidth + */GlobalGUIRoutines.dpToPx(50))/* - GlobalGUIRoutines.dpToPx(30)*/, popupTop+GlobalGUIRoutines.dpToPx(35));
+                actionEditProfilesIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
+
+                int circleColor = 0xFFFFFF;
+                if (PPApplication.applicationTheme.equals("dark"))
+                    circleColor = 0x7F7F7F;
+
+                final TapTargetSequence sequence = new TapTargetSequence(ActivatorTargetHelpsActivity.activity);
+                sequence.targets(
+                        TapTarget.forBounds(actionEditProfilesTarget, getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
+                                .icon(actionEditProfilesIcon, true)
+                                .targetCircleColorInt(circleColor)
+                                .textColorInt(0xFFFFFF)
+                                .drawShadow(true)
+                                .id(1)
+                );
+
+                sequence.listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        Fragment fragment = getFragmentManager().findFragmentById(R.id.activate_profile_list);
+                        if (fragment != null)
+                        {
+                            ((ActivateProfileListFragment)fragment).showTargetHelps();
+                        }
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget) {
+                        //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                    }
+                });
+                sequence.start();
+            }
+            else {
+                Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Fragment fragment = getFragmentManager().findFragmentById(R.id.activate_profile_list);
+                        if (fragment != null)
+                        {
+                            ((ActivateProfileListFragment)fragment).showTargetHelps();
+                        }
+                    }
+                }, 500);
+            }
+        }
+        else {
+            if (ActivatorTargetHelpsActivity.activity != null) {
+                Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
+                ActivatorTargetHelpsActivity.activity.finish();
+                ActivatorTargetHelpsActivity.activity = null;
+            }
         }
     }
 

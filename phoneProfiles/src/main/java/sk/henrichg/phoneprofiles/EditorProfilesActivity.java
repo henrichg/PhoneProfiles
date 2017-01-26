@@ -1034,14 +1034,14 @@ public class EditorProfilesActivity extends AppCompatActivity
                 final Drawable editItemMenuIcon = ContextCompat.getDrawable(this, tv.resourceId);
                 int iconWidth = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
                 final Rect editItemMenuTarget = new Rect(0, 0, editItemMenuIcon.getIntrinsicWidth(), editItemMenuIcon.getIntrinsicHeight());
-                editItemMenuTarget.offset(display.getWidth() - iconWidth - GlobalGUIRoutines.dpToPx(10), GlobalGUIRoutines.dpToPx(35));
+                editItemMenuTarget.offset(display.getWidth() - /*iconWidth - */GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
                 editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(27), GlobalGUIRoutines.dpToPx(27));
 
                 getTheme().resolveAttribute(R.attr.actionHelpIcon, tv, true);
                 final Drawable importantInfoIcon = ContextCompat.getDrawable(this, tv.resourceId);
                 int iconWidth2 = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
                 final Rect importantInfoTarget = new Rect(0, 0, importantInfoIcon.getIntrinsicWidth(), importantInfoIcon.getIntrinsicHeight());
-                importantInfoTarget.offset(display.getWidth() - (iconWidth2 + GlobalGUIRoutines.dpToPx(25)) - GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
+                importantInfoTarget.offset(display.getWidth() - (/*iconWidth2 + */GlobalGUIRoutines.dpToPx(50)) - GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
                 importantInfoIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
 
                 int circleColor = 0xFFFFFF;
