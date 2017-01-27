@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -78,12 +79,14 @@ public class EditorProfilesActivity extends AppCompatActivity
      */
     public static boolean mTwoPane;
 
+    Toolbar editorToolbar;
+
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        GlobalGUIRoutines.setTheme(this, false, false);
+        GlobalGUIRoutines.setTheme(this, false, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 
         super.onCreate(savedInstanceState);
@@ -161,43 +164,14 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragmentManager.executePendingTransactions();
         }
 
+        editorToolbar = (Toolbar)findViewById(R.id.editor_tollbar);
+        setSupportActionBar(editorToolbar);
+
         if (getSupportActionBar() != null) {
             //getSupportActionBar().setHomeButtonEnabled(true);
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.title_activity_editor);
         }
-
-    /*	getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // Create an array adapter to populate dropdownlist
-        ArrayAdapter<CharSequence> navigationAdapter =
-                ArrayAdapter.createFromResource(getBaseContext(), R.array.phoneProfilesNavigator, R.layout.sherlock_spinner_item);
-
-        // Enabling dropdown list navigation for the action bar
-        getSupportActionBar().setNavigationMode(com.actionbarsherlock.app.ActionBar.NAVIGATION_MODE_LIST);
-    */
-
-    /*    // Defining Navigation listener
-        ActionBar.OnNavigationListener navigationListener = new ActionBar.OnNavigationListener() {
-
-            public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                switch(itemPosition) {
-                case 0:
-                    //
-                    break;
-                case 1:
-                    //...
-                    break;
-                }
-                return false;
-            }
-        };
-
-        // Setting dropdown items and item navigation listener for the actionbar
-        getSupportActionBar().setListNavigationCallbacks(navigationAdapter, navigationListener);
-        navigationAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-    */
-
 
     }
 
@@ -230,7 +204,13 @@ public class EditorProfilesActivity extends AppCompatActivity
             refreshGUI(false);
         }
 
-        showTargetHelps();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showTargetHelps();
+            }
+        }, 1000);
     }
 
     @Override
@@ -1029,34 +1009,18 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 final Display display = getWindowManager().getDefaultDisplay();
 
-                getTheme().resolveAttribute(R.attr.editItemMenuIcon, tv, true);
-                final Drawable editItemMenuIcon = ContextCompat.getDrawable(this, tv.resourceId);
-                int iconWidth = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
-                final Rect editItemMenuTarget = new Rect(0, 0, editItemMenuIcon.getIntrinsicWidth(), editItemMenuIcon.getIntrinsicHeight());
-                editItemMenuTarget.offset(display.getWidth() - /*iconWidth - */GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
-                editItemMenuIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(27), GlobalGUIRoutines.dpToPx(27));
-
-                getTheme().resolveAttribute(R.attr.actionHelpIcon, tv, true);
-                final Drawable importantInfoIcon = ContextCompat.getDrawable(this, tv.resourceId);
-                int iconWidth2 = editItemMenuIcon.getIntrinsicWidth(); //GlobalGUIRoutines.dpToPx(30);
-                final Rect importantInfoTarget = new Rect(0, 0, importantInfoIcon.getIntrinsicWidth(), importantInfoIcon.getIntrinsicHeight());
-                importantInfoTarget.offset(display.getWidth() - (/*iconWidth2 + */GlobalGUIRoutines.dpToPx(50)) - GlobalGUIRoutines.dpToPx(30), GlobalGUIRoutines.dpToPx(35));
-                importantInfoIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
-
                 int circleColor = 0xFFFFFF;
                 if (PPApplication.applicationTheme.equals("dark"))
                     circleColor = 0x7F7F7F;
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 sequence.targets(
-                        TapTarget.forBounds(editItemMenuTarget, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
-                                .icon(editItemMenuIcon, true)
+                        TapTarget.forToolbarOverflow(editorToolbar, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
                                 .targetCircleColorInt(circleColor)
                                 .textColorInt(0xFFFFFF)
                                 .drawShadow(true)
                                 .id(1),
-                        TapTarget.forBounds(importantInfoTarget, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
-                                .icon(importantInfoIcon, true)
+                        TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
                                 .targetCircleColorInt(circleColor)
                                 .textColorInt(0xFFFFFF)
                                 .drawShadow(true)

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -30,6 +31,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
     float popupWidth;
     float popupHeight;
 
+    private Toolbar toolbar;
+
     public static final String PREF_START_TARGET_HELPS = "activate_profiles_activity_start_target_helps";
 
     @SuppressWarnings({ "deprecation" })
@@ -42,7 +45,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         instance = this;
 
         PPApplication.loadPreferences(getApplicationContext());
-        GlobalGUIRoutines.setTheme(this, true, false);
+        GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 
     // set window dimensions ----------------------------------------------------------
@@ -133,6 +136,9 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContnetView");
 
+        toolbar = (Toolbar)findViewById(R.id.act_prof_tollbar);
+        setSupportActionBar(toolbar);
+
         if (getSupportActionBar() != null) {
             //getSupportActionBar().setHomeButtonEnabled(true);
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -173,13 +179,12 @@ public class ActivateProfileActivity extends AppCompatActivity {
     {
         //Debug.stopMethodTracing();
         super.onResume();
+
         if (instance == null)
         {
             instance = this;
             refreshGUI(false);
         }
-
-        startTargetHelpsActivity();
     }
 
     @Override
@@ -237,12 +242,16 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void startTargetHelpsActivity() {
+    public void startTargetHelpsActivity() {
+        Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(1)");
+
         SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
         if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
+
+            Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(2)");
 
             ActivatorTargetHelpsActivity.activatorActivity = this;
             Intent intent = new Intent(this, ActivatorTargetHelpsActivity.class);
@@ -286,14 +295,13 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
                 final TapTargetSequence sequence = new TapTargetSequence(ActivatorTargetHelpsActivity.activity);
                 sequence.targets(
-                        TapTarget.forBounds(actionEditProfilesTarget, getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
+                        TapTarget.forView(toolbar.findViewById(R.id.menu_edit_profiles), getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
                                 .icon(actionEditProfilesIcon, true)
                                 .targetCircleColorInt(circleColor)
                                 .textColorInt(0xFFFFFF)
                                 .drawShadow(true)
                                 .id(1)
                 );
-
                 sequence.listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence
@@ -313,6 +321,18 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (ActivatorTargetHelpsActivity.activity != null) {
+                                    Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
+                                    ActivatorTargetHelpsActivity.activity.finish();
+                                    ActivatorTargetHelpsActivity.activity = null;
+                                }
+                            }
+                        }, 500);
+
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);

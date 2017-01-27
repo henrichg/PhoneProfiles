@@ -12,6 +12,18 @@
         android:layout_height="match_parent" >
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/editor_tollbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="3dp"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/toolbarTheme"
+            app:popupTheme="?attr/toolbarPopupMenu"
+            android:elevation="8dp"
+            tools:ignore="UnusedAttribute" />
+
+        <android.support.v7.widget.Toolbar
             android:id="@+id/editor_list_bottom_bar"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
@@ -23,6 +35,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/editor_tollbar"
             android:layout_above="@+id/editor_list_bottom_bar"
             android:foreground="?android:windowContentOverlay" >
 

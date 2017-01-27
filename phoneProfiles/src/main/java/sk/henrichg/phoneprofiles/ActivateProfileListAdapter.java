@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -227,11 +228,17 @@ class ActivateProfileListAdapter extends BaseAdapter
                 // to the sequence
                 @Override
                 public void onSequenceFinish() {
-                    if (ActivatorTargetHelpsActivity.activity != null) {
-                        Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
-                        ActivatorTargetHelpsActivity.activity.finish();
-                        ActivatorTargetHelpsActivity.activity = null;
-                    }
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (ActivatorTargetHelpsActivity.activity != null) {
+                                Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
+                                ActivatorTargetHelpsActivity.activity.finish();
+                                ActivatorTargetHelpsActivity.activity = null;
+                            }
+                        }
+                    }, 500);
                 }
 
                 @Override
@@ -241,16 +248,33 @@ class ActivateProfileListAdapter extends BaseAdapter
 
                 @Override
                 public void onSequenceCanceled(TapTarget lastTarget) {
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (ActivatorTargetHelpsActivity.activity != null) {
+                                Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
+                                ActivatorTargetHelpsActivity.activity.finish();
+                                ActivatorTargetHelpsActivity.activity = null;
+                            }
+                        }
+                    }, 500);
                 }
             });
             sequence.start();
         }
         else {
-            if (ActivatorTargetHelpsActivity.activity != null) {
-                Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
-                ActivatorTargetHelpsActivity.activity.finish();
-                ActivatorTargetHelpsActivity.activity = null;
-            }
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (ActivatorTargetHelpsActivity.activity != null) {
+                        Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
+                        ActivatorTargetHelpsActivity.activity.finish();
+                        ActivatorTargetHelpsActivity.activity = null;
+                    }
+                }
+            }, 500);
         }
     }
 

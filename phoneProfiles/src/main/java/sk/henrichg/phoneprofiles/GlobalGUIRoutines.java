@@ -120,9 +120,9 @@ public class GlobalGUIRoutines {
         {
             if (forPopup)
             {
-                //if (withToolbar)
-                //    return R.style.PopupTheme_withToolbar_material;
-                //else
+                if (withToolbar)
+                    return R.style.PopupTheme_withToolbar_material;
+                else
                     return R.style.PopupTheme_material;
             }
             else
@@ -138,9 +138,9 @@ public class GlobalGUIRoutines {
         {
             if (forPopup)
             {
-                //if (withToolbar)
-                //    return R.style.PopupTheme_withToolbar_dark;
-                //else
+                if (withToolbar)
+                    return R.style.PopupTheme_withToolbar_dark;
+                else
                     return R.style.PopupTheme_dark;
             }
             else
@@ -156,9 +156,9 @@ public class GlobalGUIRoutines {
         {
             if (forPopup)
             {
-                //if (withToolbar)
-                //    return R.style.PopupTheme_withToolbar_dlight;
-                //else
+                if (withToolbar)
+                    return R.style.PopupTheme_withToolbar_dlight;
+                else
                     return R.style.PopupTheme_dlight;
             }
             else
