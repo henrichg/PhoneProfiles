@@ -71,6 +71,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
     private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detali_predefined_profile_index";
 
+    public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "editor_profiles_activity_start_target_helps";
 
     /**
@@ -1031,6 +1032,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     // to the sequence
                     @Override
                     public void onSequenceFinish() {
+                        targetHelpsSequenceStarted = false;
                         Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_list);
                         if (fragment != null) {
                             ((EditorProfileListFragment) fragment).showTargetHelps();
@@ -1044,6 +1046,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
+                        targetHelpsSequenceStarted = false;
                         Editor editor = preferences.edit();
                         editor.putBoolean(PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
@@ -1051,6 +1054,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         editor.commit();
                     }
                 });
+                targetHelpsSequenceStarted = true;
                 sequence.start();
             }
             else {

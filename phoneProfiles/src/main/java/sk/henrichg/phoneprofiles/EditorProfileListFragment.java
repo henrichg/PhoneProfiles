@@ -56,6 +56,7 @@ public class EditorProfileListFragment extends Fragment {
 
     public static final String START_TARGET_HELPS_ARGUMENT = "start_target_helps";
 
+    public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "editor_profile_list_fragment_start_target_helps";
 
     /**
@@ -674,6 +675,9 @@ public class EditorProfileListFragment extends Fragment {
     }
 
     void showTargetHelps() {
+        if (((EditorProfilesActivity)getActivity()).targetHelpsSequenceStarted)
+            return;
+
         final SharedPreferences preferences = getActivity().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
         if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
@@ -711,6 +715,7 @@ public class EditorProfileListFragment extends Fragment {
                             // to the sequence
                             @Override
                             public void onSequenceFinish() {
+                                targetHelpsSequenceStarted = false;
                                 showAdapterTargetHelps();
                             }
 
@@ -721,12 +726,14 @@ public class EditorProfileListFragment extends Fragment {
 
                             @Override
                             public void onSequenceCanceled(TapTarget lastTarget) {
+                                targetHelpsSequenceStarted = false;
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
                                 editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
                                 editor.commit();
                             }
                         });
+                targetHelpsSequenceStarted = true;
                 sequence.start();
             }
             else {
@@ -751,7 +758,7 @@ public class EditorProfileListFragment extends Fragment {
         Log.d("EditorProfileListFragment.showAdapterTargetHelps", "profileListAdapter="+profileListAdapter);
         Log.d("EditorProfileListFragment.showAdapterTargetHelps", "itemView="+itemView);
         if ((profileListAdapter != null) && (itemView != null))
-            profileListAdapter.showTargetHelps(getActivity(), itemView);
+            profileListAdapter.showTargetHelps(getActivity(), this, itemView);
     }
 
 }

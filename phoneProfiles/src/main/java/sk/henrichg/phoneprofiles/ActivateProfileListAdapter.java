@@ -28,6 +28,7 @@ class ActivateProfileListAdapter extends BaseAdapter
     private ActivateProfileListFragment fragment;
     private DataWrapper dataWrapper;
 
+    public boolean targetHelpsSequenceStarted;
     static final String PREF_START_TARGET_HELPS = "activate_profile_list_adapter_start_target_helps";
 
     ActivateProfileListAdapter(ActivateProfileListFragment f, List<Profile> pl, DataWrapper dataWrapper)
@@ -198,7 +199,10 @@ class ActivateProfileListAdapter extends BaseAdapter
         return vi;
     }
 
-    void showTargetHelps(final Activity activity, final View listItemView) {
+    void showTargetHelps(final Activity activity, ActivateProfileListFragment fragment, final View listItemView) {
+        if (fragment.targetHelpsSequenceStarted)
+            return;
+
         SharedPreferences preferences = activity.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
         if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
@@ -228,6 +232,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                 // to the sequence
                 @Override
                 public void onSequenceFinish() {
+                    targetHelpsSequenceStarted = false;
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -248,6 +253,7 @@ class ActivateProfileListAdapter extends BaseAdapter
 
                 @Override
                 public void onSequenceCanceled(TapTarget lastTarget) {
+                    targetHelpsSequenceStarted = false;
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -261,6 +267,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                     }, 500);
                 }
             });
+            targetHelpsSequenceStarted = true;
             sequence.start();
         }
         else {
