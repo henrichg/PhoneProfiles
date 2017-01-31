@@ -818,7 +818,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(37)),
                                               Integer.parseInt(cursor.getString(38)),
                                               Integer.parseInt(cursor.getString(39)),
-                                              Integer.parseInt(cursor.getString(40)),
+                                              cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
                                               Integer.parseInt(cursor.getString(41)),
                                               Integer.parseInt(cursor.getString(43)) == 1,
                                               Integer.parseInt(cursor.getString(44)),
@@ -900,9 +900,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 Profile profile = new Profile();
                 profile._id = Long.parseLong(cursor.getString(0));
                 profile._name = cursor.getString(1);
-                profile._icon = (cursor.getString(2));
+                profile._icon = cursor.getString(2);
                 profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
-                profile._porder = (Integer.parseInt(cursor.getString(4)));
+                profile._porder = Integer.parseInt(cursor.getString(4));
                 profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
                 profile._volumeRingtone = cursor.getString(6);
                 profile._volumeNotification = cursor.getString(7);
@@ -938,7 +938,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
                 profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
                 profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
-                profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
+                profile._deviceWiFiAP = cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40));
                 profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
                 profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
                 profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
@@ -1279,7 +1279,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(37)),
                                               Integer.parseInt(cursor.getString(38)),
                                               Integer.parseInt(cursor.getString(39)),
-                                              Integer.parseInt(cursor.getString(40)),
+                                              cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
                                               Integer.parseInt(cursor.getString(41)),
                                               Integer.parseInt(cursor.getString(43)) == 1,
                                               Integer.parseInt(cursor.getString(44)),
@@ -1405,7 +1405,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
             profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
             profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
-            profile._deviceWiFiAP = Integer.parseInt(cursor.getString(40));
+            profile._deviceWiFiAP = cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40));
             profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
             profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
             profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
