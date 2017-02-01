@@ -10,40 +10,17 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
     public static ProfileIconPreference changedProfileIconPreference;
     public static ApplicationsDialogPreference applicationsDialogPreference;
 
-    static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
-    static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
-    static final String PREFS_NAME_DEFAULT_PROFILE = PPApplication.DEFAULT_PROFILE_PREFS_NAME;
+    //static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
+    //static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
+    //static final String PREFS_NAME_DEFAULT_PROFILE = PPApplication.DEFAULT_PROFILE_PREFS_NAME;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        // this is really important in order to save the state across screen
-        // configuration changes for example
+        // must by false to avoid FC when rotation changes and preference dialogs are shown
         setRetainInstance(false);
-
-        //context = getActivity().getBaseContext();
-
-        //dataWrapper = new DataWrapper(context.getApplicationContext(), true, false, 0);
-
-        /*
-        long profile_id = 0;
-
-        // getting attached fragment data
-        if (getArguments().containsKey(PPApplication.EXTRA_NEW_PROFILE_MODE))
-            new_profile_mode = getArguments().getInt(PPApplication.EXTRA_NEW_PROFILE_MODE);
-        if (getArguments().containsKey(PPApplication.EXTRA_PROFILE_ID))
-            profile_id = getArguments().getLong(PPApplication.EXTRA_PROFILE_ID);
-        predefineProfileIndex = getArguments().getInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX);
-        //Log.e("******** ProfilePreferenceFragment", "profile_id=" + profile_id);
-
-        profile = ProfilePreferencesActivity.createProfile(context.getApplicationContext(), profile_id, new_profile_mode, predefineProfileIndex, true);
-        */
-
-        //Log.e("********  ProfilePreferenceFragment","startupSource="+startupSource);
-        //if (savedInstanceState == null)
-        //    loadPreferences();
 
         updateSharedPreference();
 
@@ -57,7 +34,9 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 
     @Override
     public int addPreferencesFromResource() {
-        //Log.e("******** ProfilePreferenceFragment", "startupSource=" + startupSource);
+        Bundle bundle = this.getArguments();
+        if (bundle != null)
+            startupSource = bundle.getInt(PPApplication.EXTRA_STARTUP_SOURCE, 0);
 
         if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
             return R.xml.default_profile_preferences;
