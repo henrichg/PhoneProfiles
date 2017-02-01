@@ -2,7 +2,7 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
           package="sk.henrichg.phoneprofiles"
           xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1982"
+          android:versionCode="1983"
           android:versionName="4.4.4b"
           android:installLocation="internalOnly" >
     <!--
@@ -110,7 +110,7 @@
             android:label="@string/title_activity_editor">
         </activity>
         <activity
-            android:name=".ProfilePreferencesFragmentActivity"
+            android:name=".ProfilePreferencesActivity"
             android:label="@string/title_activity_profile_preferences">
         </activity>
         <activity

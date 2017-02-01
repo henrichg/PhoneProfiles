@@ -13,16 +13,12 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -427,7 +423,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     profile.generateIconBitmap(getBaseContext(), false, 0);
                     profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
-                    // redraw list fragment , notifications, widgets after finish ProfilePreferencesFragmentActivity
+                    // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
                     redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex, true);
 
                     Profile mappedProfile = PPApplication.getMappedProfile(profile, getApplicationContext());
@@ -849,7 +845,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     private void startProfilePreferenceActivity(Profile profile, int editMode, int predefinedProfileIndex) {
-        Intent intent = new Intent(getBaseContext(), ProfilePreferencesFragmentActivity.class);
+        Intent intent = new Intent(getBaseContext(), ProfilePreferencesActivity.class);
         if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
             intent.putExtra(PPApplication.EXTRA_PROFILE_ID, 0L);
         else
