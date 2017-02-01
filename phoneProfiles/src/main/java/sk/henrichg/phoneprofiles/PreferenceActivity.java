@@ -1,4 +1,4 @@
-package com.fnp.materialpreferences;
+package sk.henrichg.phoneprofiles;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
@@ -12,7 +12,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
 {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void setPreferenceFragment(PreferenceFragment preferenceFragment) {
+    public void setPreferenceFragment(sk.henrichg.phoneprofiles.PreferenceFragment preferenceFragment) {
 
         //First check if it's already loaded (configuration change) so we don't overlap fragments
         if(getFragmentManager()

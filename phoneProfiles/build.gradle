@@ -36,7 +36,6 @@ android {
 
 dependencies {
     compile project(':dragSortListView')
-    compile project(':materialPreferences')
     compile project(':masked-edittext')
     compile project(':RootShell')
     compile project(':RootTools')

@@ -1,4 +1,4 @@
-package com.fnp.materialpreferences;
+package sk.henrichg.phoneprofiles;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
