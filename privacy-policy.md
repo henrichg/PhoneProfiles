@@ -5,7 +5,7 @@ This privacy policy has been compiled to better serve those who are concerned wi
 
 What personal information do we collect from the people that using or app?
 --------------------------------------------------------------------------
-Phone contacts.
+Phone numbers.
 
 When do we collect information?
 -------------------------------
