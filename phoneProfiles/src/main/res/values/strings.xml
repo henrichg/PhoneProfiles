@@ -913,4 +913,5 @@
     <string name="activator_activity_targetHelps_activateProfile_description">Click this for activating profile.</string>
     <string name="profile_preference_activity_targetHelps_save_title">Save profile</string>
     <string name="profile_preference_activity_targetHelps_save_description">Click this for saving profile preferences changes.</string>
+    <string name="about_application_privacy_policy">Privacy Policy:</string>
 </resources>
