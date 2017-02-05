@@ -16,5 +16,5 @@ Required external libs
 - GSon - https://code.google.com/p/google-gson/
 - Material Dialogs - https://github.com/afollestad/material-dialogs
 - MaterialPreferences - https://github.com/ferrannp/material-preferences 
-- Masked-EditText - https://github.com/pinball83/Masked-Edittext
+- input-mask-android - https://github.com/RedMadRobot/input-mask-android
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
