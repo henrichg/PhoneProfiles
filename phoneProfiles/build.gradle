@@ -4,6 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
+    //noinspection GroovyMissingReturnStatement
     defaultConfig {
         applicationId "sk.henrichg.phoneprofiles"
         minSdkVersion 16
@@ -12,6 +13,10 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_7
             targetCompatibility JavaVersion.VERSION_1_7
         }
+
+        resConfigs "en", "ca", "cs", "es", "fa", "fr", "he", "hu", "it", "iw", "ja", "ko", "nl",
+                "pl", "pt", "ro", "ru", "sk", "sv", "te", "tr", "uk", "zh-rTW"
+
     }
 
     buildTypes {
@@ -40,13 +45,13 @@ dependencies {
     compile project(':RootTools')
     provided files('libs/hidden-apis.jar')
     provided files('libs/hidden-apis_2.jar')
-    compile 'com.android.support:support-core-ui:25.1.0'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:gridlayout-v7:25.1.0'
+    compile 'com.android.support:support-core-ui:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:gridlayout-v7:25.1.1'
     compile 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'com.afollestad.material-dialogs:core:0.9.2.3'
+    compile 'com.afollestad.material-dialogs:core:0.9.3.0'
     compile 'com.getkeepsafe.taptargetview:taptargetview:1.7.0'
     compile 'com.redmadrobot:inputmask:2.2.1'
 }

@@ -19,10 +19,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 /**
  * @author Aidan Follestad (afollestad)
  */
-class MaterialDialogPreference extends DialogPreference {
+public class MaterialDialogPreference extends DialogPreference {
 
     private Context context;
-    private MaterialDialog mDialog;
+    private MaterialDialog dialog;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MaterialDialogPreference(Context context) {
@@ -54,7 +54,7 @@ class MaterialDialogPreference extends DialogPreference {
 
     @Override
     public Dialog getDialog() {
-        return mDialog;
+        return dialog;
     }
 
     @Override
@@ -93,10 +93,10 @@ class MaterialDialogPreference extends DialogPreference {
 
         MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
 
-        mDialog = builder.build();
+        dialog = builder.build();
         if (state != null)
-            mDialog.onRestoreInstanceState(state);
-        mDialog.show();
+            dialog.onRestoreInstanceState(state);
+        dialog.show();
     }
 
     @Override
@@ -108,8 +108,8 @@ class MaterialDialogPreference extends DialogPreference {
     @Override
     public void onActivityDestroy() {
         super.onActivityDestroy();
-        if (mDialog != null && mDialog.isShowing())
-            mDialog.dismiss();
+        if (dialog != null && dialog.isShowing())
+            dialog.dismiss();
     }
 
     @Override
