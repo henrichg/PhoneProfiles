@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/empty_string"
+                android:contentDescription="@string/profile_preferences_profileIcon"
                 android:maxHeight="40dp"
                 android:maxWidth="40dp"
                 android:scaleType="centerCrop"
@@ -44,11 +44,11 @@
                 android:layout_toRightOf="@+id/activated_profile_icon"
                 android:layout_toEndOf="@+id/activated_profile_icon"
                 android:paddingLeft="10dp"
-                android:paddingStart="10dp"
+                android:paddingRight="10dp"
                 android:text="@string/profile_name_default"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:singleLine="true" />
+                android:maxLines="1"/>
 
             <!--
             <ImageView
@@ -78,7 +78,7 @@
                 android:scaleType="@integer/profilePrefIndicatorScaleType"
                 android:src="@drawable/ic_profile_pref_volume_on"
                 android:paddingLeft="10dp"
-                android:paddingStart="10dp" />
+                android:paddingRight="10dp" />
 
         </RelativeLayout>
 

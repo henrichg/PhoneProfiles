@@ -24,7 +24,7 @@
             android:scaleType="center"
             android:clickable="true"
             android:background="?attr/actionProfileToolBackground"
-            android:contentDescription="@string/empty_string"
+            android:contentDescription="@string/preference_item_edit_menu"
             android:src="?attr/editItemMenuIcon" />
 
     </LinearLayout>
@@ -42,7 +42,7 @@
             android:layout_height="45dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:contentDescription="@string/empty_string"
+            android:contentDescription="@string/preference_item_drag_handle"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:layout_marginStart="8dp"
@@ -57,7 +57,7 @@
             android:layout_toEndOf="@+id/main_list_drag_handle"
             android:layout_marginStart="3dp"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/empty_string"
+            android:contentDescription="@string/profile_preferences_profileIcon"
             android:maxHeight="40dp"
             android:maxWidth="40dp"
             android:scaleType="centerCrop"
@@ -70,9 +70,10 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/main_list_item_profile_icon"
             android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="@string/profile_name_default"
             android:textSize="15sp"
-            android:singleLine="true" />
+            android:maxLines="1"/>
 
     </RelativeLayout>
     

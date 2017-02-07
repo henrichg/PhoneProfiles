@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,52 +7,46 @@
     android:background="?attr/activityPopupBackground"
     android:fitsSystemWindows="true" >
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/editor_tollbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="3dp"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/toolbarTheme"
+        app:popupTheme="?attr/toolbarPopupMenu"
+        android:elevation="4dp"
+        tools:ignore="UnusedAttribute" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/editor_tollbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentTop="true"
-            android:paddingBottom="3dp"
-            android:background="?attr/colorPrimary"
-            android:theme="?attr/toolbarTheme"
-            app:popupTheme="?attr/toolbarPopupMenu"
-            android:elevation="4dp"
-            tools:ignore="UnusedAttribute" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/editor_list_bottom_bar"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/toolbarTheme"
+        app:popupTheme="?attr/toolbarPopupMenu" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/editor_list_bottom_bar"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:background="?attr/colorPrimary"
-            android:theme="?attr/toolbarTheme"
-            app:popupTheme="?attr/toolbarPopupMenu" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editor_tollbar"
+        android:layout_above="@+id/editor_list_bottom_bar"
+        android:foreground="?android:windowContentOverlay" >
 
         <FrameLayout
+            android:id="@+id/editor_profile_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/editor_tollbar"
-            android:layout_above="@+id/editor_list_bottom_bar"
-            android:foreground="?android:windowContentOverlay" >
+            tools:context=".EditorProfileListActivity" />
 
-            <FrameLayout
-                android:id="@+id/editor_profile_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".EditorProfileListActivity" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/bottombar_dropshadow"
+            android:layout_gravity="bottom" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@drawable/bottombar_dropshadow"
-                android:layout_gravity="bottom" />
+    </FrameLayout>
 
-        </FrameLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -15,7 +15,7 @@
         android:maxWidth="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile_default"
-        android:contentDescription="@string/empty_string"/>
+        android:contentDescription="@string/profile_preferences_profileIcon"/>
 
     <TextView
         android:id="@+id/widget_profile_list_item_profile_name"
@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:singleLine="false"
         android:shadowColor="#ff000000"
         android:shadowDx="1"
         android:shadowDy="1"
