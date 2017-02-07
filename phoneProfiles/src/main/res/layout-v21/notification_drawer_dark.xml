@@ -3,7 +3,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="6dp" >
+                android:padding="6dp"
+                android:background="@color/notificationBackground_dark" >
 
     <ImageView
         android:id="@+id/notification_activated_profile_icon"
@@ -28,6 +29,7 @@
         android:layout_toEndOf="@+id/notification_activated_profile_icon"
         android:text="@string/profile_name_default"
         android:textAppearance="@style/NotificationTitle"
+        android:textColor="@color/notificationTextColor_dark"
         android:maxLines="1"/>
 
     <ImageView

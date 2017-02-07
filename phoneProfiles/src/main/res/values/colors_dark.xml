@@ -7,4 +7,7 @@
     <color name="activityPopupBackground_phoneprofilestheme_dark">#FF303030</color>
     <color name="dialog_divider_dark">#10FFFFFF</color>
 
+    <color name="notificationBackground_dark">#FF263238</color>
+    <color name="notificationTextColor_dark">#FFFFFFFF</color>
+
 </resources>

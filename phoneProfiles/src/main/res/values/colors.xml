@@ -7,4 +7,7 @@
     <color name="activityPopupBackground_phoneprofilestheme">#FFd0d0d0</color>
     <color name="dialog_divider">#10000000</color>
 
+    <color name="notificationBackground_light">#FFFFFFFF</color>
+    <color name="notificationTextColor_light">#FF000000</color>
+
 </resources>
