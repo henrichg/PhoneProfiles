@@ -327,7 +327,7 @@
     <string name="pref_event_wifi_ssid">SSID</string>
     <string name="pref_event_wifi_connectionType">Connection</string>
     <string name="array_event_pref_wifiConnectionType_connected">Connected</string>
-    <string name="array_event_pref_wifiConnectionType_inFront">In front</string>
+    <string name="array_event_pref_wifiConnectionType_inFront">Around</string>
     <string name="event_preferences_wifi_connection_type">Connection type</string>
     <string name="phone_profiles_pref_applicationEventWifiScanInterval">Wi-Fi scan interval (min)</string>
     <string name="phone_profiles_pref_applicationEventWifiEnableWifi">Enable Wi-Fi scanning</string>
@@ -357,7 +357,7 @@
     <string name="pref_event_bluetooth_adapterName">BT name</string>
     <string name="pref_event_bluetooth_connectionType">Connection</string>
     <string name="array_event_pref_bluetoothConnectionType_connected">Connected</string>
-    <string name="array_event_pref_bluetoothConnectionType_inFront">In front</string>
+    <string name="array_event_pref_bluetoothConnectionType_inFront">Around</string>
     <string name="event_preferences_bluetooth_connection_type">Connection type</string>
     <string name="phone_profiles_pref_applicationEventBluetoothScanInterval">Bluetooth scan interval (min)</string>
     <string name="phone_profiles_pref_applicationEventBluetoothEnableBluetooth">Enable Bluetooth scan</string>
@@ -391,9 +391,9 @@
     <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Hide profile name (widget)</string>
     <string name="array_pref_afterProfileDurationDo_restartEvents">Restart events</string>
     <string name="array_event_pref_wifiConnectionType_notConnected">Not connected</string>
-    <string name="array_event_pref_wifiConnectionType_notInFront">Not in front</string>
+    <string name="array_event_pref_wifiConnectionType_notInFront">Not around</string>
     <string name="array_event_pref_bluetoothConnectionType_notConnected">Not connected</string>
-    <string name="array_event_pref_bluetoothConnectionType_notInFront">Not in front</string>
+    <string name="array_event_pref_bluetoothConnectionType_notInFront">Not around</string>
     <string name="event_preferences_call_contact_groups">Contact groups</string>
     <string name="event_preferences_sms_contact_groups">Contact groups</string>
     <string name="event_preferences_error">Not all underlined parameters are set!</string>
@@ -456,7 +456,7 @@
     <string name="wifi_ssid_pref_dlg_info_about_wildcards">in SSID name,</string>
     <string name="bluetooth_name_pref_dlg_info_about_wildcards">in bluetooth name,</string>
     <string name="calendar_pref_dlg_info_about_wildcards">in search string,</string>
-    <string name="pref_dlg_info_about_wildcards_3">add \"\\\" in front of these characters.</string>
+    <string name="pref_dlg_info_about_wildcards_3">add \"\\\" around of these characters.</string>
     <string name="important_into_sony_stamina_mode">When you have Sony device and enabled \"Stamina\" mode in \"Power management\", please add PhoneProfiles into \"Apps active in standby\". Without this, application will not work correctly.</string>
     <string name="important_info_profile_settings">Some profile preferences requires changes in system Settings. These preferences are marked with \"(S)\".</string>
     <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
@@ -753,7 +753,7 @@
     <string name="bluetooth_name_pref_dlg_all_bt_names_chb">All Bluetooth names</string>
     <string name="editor_drawer_list_item_events_start_order">Start order</string>
     <string name="editor_drawer_order_start_order">Start order</string>
-    <string name="info_notification_event_priority_new">4. Each event has \"Priority\". Event will not start, if is running event with higher priority.</string>
+    <string name="info_notification_event_priority_new">4. Each event has \"Priority\". Event will not be started, if is running event with higher priority.</string>
     <string name="info_notification_event_start_order">Events are running in \"Start order\". You can set start order of events in Editor in events view \"Start order\". In this view, you can drag event up/down by \"order handler\".</string>
     <string name="info_notification_event_start_order_handler_icon">Order handler:</string>
     <string name="info_notification_activate_profile_from_tasker">You can activate profile from Tasker. Configure task \"System\"/\"Send Intent\" with parameters:</string>
@@ -812,7 +812,7 @@
     <string name="array_pref_value_te">te</string>
     <string name="array_pref_value_ro">ro</string>
     <string name="array_pref_value_pt">pt</string>
-    <string name="about_application_releases">Releases</string>
+    <string name="about_application_releases">Releases:</string>
     <string name="permission_group_name_draw_overalys">Draw over the apps</string>
     <string name="permissions_draw_overlays_not_allowed_confirm">You have not enabled \"Draw over the apps\". Never ask again for this?</string>
     <string name="phone_profiles_pref_drawOverlaysPermissions">Draw over the apps</string>
@@ -844,7 +844,7 @@
     <string name="preference_not_allowed_reason_detail_secure_lock">unsupported secure lock</string>
     <string name="preference_not_allowed_reason_detail_cant_be_change">can\'t be change</string>
     <string name="event_preferences_sensorsInfo_title">Sensors functionality</string>
-    <string name="event_preferences_sensorsInfo_summary">Event will be started, if parameters of all sensors with \"Enable sensor\" parameter checked, are fulfilled. Running event will be ended, if any sensor parameter is not fulfilled. Check \"Enable sensor\" only for needed sensors for this event. Sensor name with \"Enable sensor\" checked is marked with bold text.\nSome sensor parameters are required. Required parameter name is marked with underline text. If any required parameter is not configured, event will not be started and parameter \"Enable sensor\" is unchecked.</string>
+    <string name="event_preferences_sensorsInfo_summary">Event will be started, if parameters of all sensors with \"Enable sensor\" parameter checked, are fulfilled. Running event will be ended, if any sensor parameter is not fulfilled. Check \"Enable sensor\" only for needed sensors for this event. Sensor name with \"Enable sensor\" checked is marked with bold text.\n\nSome sensor parameters are required. Required parameter name is marked with underline text. If any required parameter is not configured, event will not be started and parameter \"Enable sensor\" is unchecked.</string>
     <string name="phone_profiles_pref_notificationStatusBarStyleInfo_title">Colorful icon</string>
     <string name="phone_profiles_pref_notificationStatusBarStyleInfo_summary">Some devices do not supports colorful icons in status bar.</string>
     <string name="pref_dlg_change_selection_title">Change selection</string>
@@ -875,7 +875,24 @@
     <string name="phone_profiles_pref_notificationStatusBarInfo_title">Important information!</string>
     <string name="phone_profiles_pref_notificationStatusBarInfo_summary">Ongoing status bar notification is required for service PhoneProfilesService. With notification, PhoneProfilesService is changed to \"foreground service\". And this type of service is not killed by Android. PhoneProfilesService must permanent running.</string>
     <string name="phone_profiles_pref_notificationStatusBarRequired">Required for background service PhoneProfilesService</string>
+    <string name="event_preferences_event_priorityInfo_summary">Priority functionality: Event will not be started, if is running event with higher priority.</string>
     <string name="profile_preferences_preferenceTypesInfo_title">Type of preferences</string>
+    <string name="event_preference_bluetooth_bt_types">Bluetooth types: [CL] classic, [LE] low energy, [DU] dual.</string>
+    <string name="event_preference_sensor_time_summary">This sensor is for start of event by time. Parameters: Start time, End time, Days of week.</string>
+    <string name="event_preference_sensor_calendar_summary">This sensor is for start of event by calendar event. Parameters: Calendars, Search field (Event name, Description, …), Search string, Ignore \"All day\" events, Availability (Busy, Free, …).</string>
+    <string name="event_preference_sensor_battery_summary">This sensor is for start of event by battery level. Parameters: Lower level, Upper level, Charging, Power save mode.</string>
+    <string name="event_preference_sensor_call_summary">This sensor is for start of event by calling contacts. Parameters: Call event (Ringing, Outgoing call started, …), Contact groups, Contacts, Contact list type (white/black list).</string>
+    <string name="event_preference_sensor_sms_summary">This sensor is for start of event by received sms from contacts. Parameters: Contact groups, Contacts, Contact list type (white/black list), Permanent run, Duration (event running duration).</string>
+    <string name="event_preference_sensor_location_summary">This sensor is for start of event by device location. Parameters: Location, Start when outside location.</string>
+    <string name="event_preference_sensor_wifi_summary">This sensor is for start of event by Wi-Fi SSID. Parameters: Connection Type (Around, Connected, …), SSID.</string>
+    <string name="event_preference_sensor_bluetooth_summary">This sensor is for start of event by Bluetooth name. Parameters: Connection Type (Around, Connected, …), Scanned device type (Classic, Low energy, …), Bluetooth name.</string>
+    <string name="event_preference_sensor_mobile_cells_summary">This sensor is for start of event by connected mobile cells (towers). Parameters: Cells, Start when outside cells.</string>
+    <string name="event_preference_sensor_accessories_summary">This sensor is for start of event by connected accessory (car dock, wired handsfree, headphones, …). Parameters: Accessories type.</string>
+    <string name="event_preference_sensor_screen_summary">This sensor is for start of event by screen on/off. Parameters: Event type (screen on, screen off, …), End when unlocked (end of event at unlock the device).</string>
+    <string name="event_preference_sensor_notification_summary">This sensor is for start of event by notification from applications. Parameters: Applications, End when removed (end of event at notification remove), Permanent run, Duration (event running duration).</string>
+    <string name="event_preference_sensor_application_summary">This sensor is for start of event by application in foreground. Parameters: Applications.</string>
+    <string name="event_preference_sensor_orientation_summary">This sensor is for start of event by device orientation. Parameters: Display (Up, down), Sides (Horizontal, side up), Distance (Near, far; used is proximity sensor), Ignore for applications (in foreground).</string>
+    <string name="event_preference_sensor_nfc_summary">This sensor is for start of event by NFC tags. Parameters: NFC tags, Permanent run, Duration (event running duration).</string>
     <string name="editor_activity_targetHelps_navigationIcon_title">\"Views\" side panel</string>
     <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe left display side to right, for opening \"Views\" side panel. In this panel you can switch between Profiles and Events views.</string>
     <string name="editor_activity_targetHelps_applicationMenu_title">Application menu</string>
@@ -883,7 +900,7 @@
     <string name="editor_activity_targetHelps_restartEvents_title">Restart events</string>
     <string name="editor_activity_targetHelps_restartEvents_description">Click this for restarting events. You must restart events, for start of events, if you have manually activated profile.</string>
     <string name="editor_activity_targetHelps_activityLog_title">Activity log</string>
-    <string name="editor_activity_targetHelps_activityLog_description">Click this for opening activity log. Logged are activities about start/pause/stop events, profile activation, start application, …</string>
+    <string name="editor_activity_targetHelps_activityLog_description">Click this for opening activity log. Logged are activities about start/pause/stop events, profiles activation, start application, …</string>
     <string name="editor_activity_targetHelps_newProfileButton_title">New profile</string>
     <string name="editor_activity_targetHelps_newProfileButton_description">Click this for adding new profile.</string>
     <string name="editor_activity_targetHelps_deleteAllProfilesButton_title">Delete all profiles</string>
@@ -913,5 +930,9 @@
     <string name="activator_activity_targetHelps_activateProfile_description">Click this for activating profile.</string>
     <string name="profile_preference_activity_targetHelps_save_title">Save profile</string>
     <string name="profile_preference_activity_targetHelps_save_description">Click this for saving profile preferences changes.</string>
+    <string name="event_preference_activity_targetHelps_save_title">Save event</string>
+    <string name="event_preference_activity_targetHelps_save_description">Click this for saving event preferences changes.</string>
     <string name="about_application_privacy_policy">Privacy Policy:</string>
+    <string name="phone_profiles_pref_applicationBackgroundProfileInfo_summary">This profile will be activated if no any event is running.</string>
+    <string name="phone_profiles_pref_applicationAlertSummary">This is used only for manual profile activation.</string>
 </resources>
