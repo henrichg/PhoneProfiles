@@ -1525,7 +1525,8 @@ public class ActivateProfileHelper {
             if (android.os.Build.VERSION.SDK_INT >= 16) {
                 if (PPApplication.notificationShowInStatusBar) {
                     boolean screenUnlocked = PPApplication.getScreenUnlocked(context);
-                    if (PPApplication.notificationHideInLockscreen && (!screenUnlocked))
+                    if ((PPApplication.notificationHideInLockscreen && (!screenUnlocked)) ||
+                            ((profile != null) && profile._hideStatusBarIcon))
                         notificationBuilder.setPriority(Notification.PRIORITY_MIN);
                     else
                         notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);

@@ -1019,6 +1019,16 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 setCategorySummary(checkBoxPreference, show);
             }
         }
+        if (key.equals(PPApplication.PREF_PROFILE_HIDE_STATUS_BAR_ICON))
+        {
+            String sValue = value.toString();
+            CheckBoxPreference checkBoxPreference = (CheckBoxPreference)prefMng.findPreference(key);
+            if (checkBoxPreference != null) {
+                boolean show = sValue.equals("true");
+                setTitleStyle(checkBoxPreference, show, false, false);
+                setCategorySummary(checkBoxPreference, show);
+            }
+        }
         if (key.equals(PPApplication.PREF_PROFILE_VOLUME_RINGTONE) ||
             key.equals(PPApplication.PREF_PROFILE_VOLUME_NOTIFICATION) ||
             key.equals(PPApplication.PREF_PROFILE_VOLUME_MEDIA) ||
@@ -1052,7 +1062,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     public void setSummary(String key) {
         String value;
-        if (key.equals(PPApplication.PREF_PROFILE_ASK_FOR_DURATION)) {
+        if (key.equals(PPApplication.PREF_PROFILE_ASK_FOR_DURATION) ||
+            key.equals(PPApplication.PREF_PROFILE_HIDE_STATUS_BAR_ICON)) {
             boolean b = preferences.getBoolean(key, false);
             value = Boolean.toString(b);
         }
@@ -1186,7 +1197,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
     {
         String value;
-        if (key.equals(PPApplication.PREF_PROFILE_ASK_FOR_DURATION)) {
+        if (key.equals(PPApplication.PREF_PROFILE_ASK_FOR_DURATION) ||
+            key.equals(PPApplication.PREF_PROFILE_HIDE_STATUS_BAR_ICON)) {
             boolean bValue = sharedPreferences.getBoolean(key, false);
             value = Boolean.toString(bValue);
         }

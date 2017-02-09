@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress CheckTagEmptyBody -->
 <resources>
     <string name="prf_pref_profileName"></string>
     <string name="prf_pref_profileIcon">ic_profile_default|1|0|0</string>
@@ -44,4 +45,5 @@
     <string name="prf_pref_notificationLed">0</string>
     <string name="prf_pref_vibrateWhenRinging">0</string>
     <string name="prf_pref_deviceWallpaperFor">0</string>
+    <bool name="prf_pref_hideStatusBarIcon">false</bool>
 </resources>

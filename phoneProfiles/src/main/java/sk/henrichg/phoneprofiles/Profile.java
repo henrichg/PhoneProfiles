@@ -62,6 +62,7 @@ public class Profile {
     int _notificationLed;
     int _vibrateWhenRinging;
     int _deviceWallpaperFor;
+    boolean _hideStatusBarIcon;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -179,7 +180,8 @@ public class Profile {
                    int deviceNetworkType,
                    int notificationLed,
                    int vibrateWhenRinging,
-                   int deviceWallpaperFor)
+                   int deviceWallpaperFor,
+                   boolean hideStatusBarIcon)
     {
         this._id = id;
         this._name = name;
@@ -228,6 +230,7 @@ public class Profile {
         this._notificationLed = notificationLed;
         this._vibrateWhenRinging = vibrateWhenRinging;
         this._deviceWallpaperFor = deviceWallpaperFor;
+        this._hideStatusBarIcon = hideStatusBarIcon;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -279,7 +282,8 @@ public class Profile {
                    int deviceNetworkType,
                    int notificationLed,
                    int vibrateWhenRinging,
-                   int deviceWallpaperFor)
+                   int deviceWallpaperFor,
+                   boolean hideStatusBarIcon)
     {
         this._name = name;
         this._icon = icon;
@@ -327,6 +331,7 @@ public class Profile {
         this._notificationLed = notificationLed;
         this._vibrateWhenRinging = vibrateWhenRinging;
         this._deviceWallpaperFor = deviceWallpaperFor;
+        this._hideStatusBarIcon = hideStatusBarIcon;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -381,6 +386,7 @@ public class Profile {
         this._notificationLed = profile._notificationLed;
         this._vibrateWhenRinging = profile._vibrateWhenRinging;
         this._deviceWallpaperFor = profile._deviceWallpaperFor;
+        this._hideStatusBarIcon = profile._hideStatusBarIcon;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
