@@ -234,11 +234,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/profile_list_widget_info"/>
         </receiver>
-
-        <service
-            android:name=".ProfileListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
-
         <receiver
             android:name=".LocaleChangedReceiver"
             android:enabled="true"
@@ -277,27 +272,6 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
             </intent-filter>
         </receiver>
-
-        <service
-            android:name=".PhoneProfilesDashClockExtension"
-            android:icon="@drawable/ic_dashclock"
-            android:label="@string/app_name"
-            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
-            <intent-filter>
-                <action android:name="com.google.android.apps.dashclock.Extension"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="protocolVersion"
-                android:value="2"/>
-            <meta-data
-                android:name="worldReadable"
-                android:value="true"/>
-            <meta-data
-                android:name="description"
-                android:value="@string/dashclock_extension_description"/>
-        </service>
-
         <receiver
             android:name=".DashClockBroadcastReceiver"
             android:enabled="true"
@@ -308,51 +282,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
-
-        <service
-            android:name=".ExecuteRadioProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ExecuteVolumeProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ExecuteWallpaperProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".FirstStartService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".PhoneProfilesService"
-            android:exported="false"
-            android:stopWithTask="false">
-        </service>
-        <service
-            android:name=".KeyguardService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".PPNotificationListenerService"
-            android:enabled="@bool/api_v18"
-            android:exported="@bool/api_v18"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name=".PhoneCallService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ExecuteRunApplicationsProfilePrefsService"
-            android:exported="false">
-        </service>
-
         <receiver
             android:name=".RefreshGUIBroadcastReceiver"
             android:enabled="true"
@@ -471,6 +400,83 @@
             android:exported="true">
         </receiver>
         -->
+        <receiver android:name=".PPDeviceAdminReceiver"
+                  android:label="@string/device_admin_label"
+                  android:description="@string/device_admin_description"
+                  android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data android:name="android.app.device_admin"
+                       android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".ProfileListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service
+            android:name=".PhoneProfilesDashClockExtension"
+            android:icon="@drawable/ic_dashclock"
+            android:label="@string/app_name"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="protocolVersion"
+                android:value="2"/>
+            <meta-data
+                android:name="worldReadable"
+                android:value="true"/>
+            <meta-data
+                android:name="description"
+                android:value="@string/dashclock_extension_description"/>
+        </service>
+        <service
+            android:name=".ExecuteRadioProfilePrefsService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".ExecuteVolumeProfilePrefsService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".ExecuteWallpaperProfilePrefsService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".FirstStartService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".PhoneProfilesService"
+            android:exported="false"
+            android:stopWithTask="false">
+        </service>
+        <service
+            android:name=".KeyguardService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".PPNotificationListenerService"
+            android:enabled="@bool/api_v18"
+            android:exported="@bool/api_v18"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".PhoneCallService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".ExecuteRunApplicationsProfilePrefsService"
+            android:exported="false">
+        </service>
+
     </application>
 
 </manifest>
