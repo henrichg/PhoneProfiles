@@ -152,9 +152,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                     preferenceCategory.removePreference(notificationAccessPreference);
                 } else {
-                    ListPreference listPreference = (ListPreference) prefMng.findPreference("prf_pref_volumeRingerMode");
-                    if (listPreference != null) {
-                        CharSequence[] entries = listPreference.getEntries();
+                    if (ringerModePreference != null) {
+                        CharSequence[] entries = ringerModePreference.getEntries();
                         if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
                             entries[5] = "(S) "+getString(R.string.array_pref_ringerModeArray_ZenMode);
                         else
@@ -1220,9 +1219,33 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 }
             }
         }
+
+        DevicePolicyManager manager = (DevicePolicyManager) getActivity().getSystemService(DEVICE_POLICY_SERVICE);
+        final ComponentName component = new ComponentName(getActivity(), PPDeviceAdminReceiver.class);
+        /* THIS NOT WORKING - after enabling device admin, entries are not refreshed in dialog :-/
+        if (key.equals(PPApplication.PREF_PROFILE_LOCK_DEVICE)) {
+            ListPreference lockDevicePreference = (ListPreference) prefMng.findPreference(PPApplication.PREF_PROFILE_LOCK_DEVICE);
+            if (lockDevicePreference != null) {
+                CharSequence[] entries = lockDevicePreference.getEntries();
+                if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE) {
+                    if (!manager.isAdminActive(component))
+                        entries[1] = getString(R.string.array_pref_lockDevice_deviceAdmin) + " (" +
+                                getString(R.string.array_pref_lockDevice_not_enabled) + ")";
+                    if (!PPApplication.isRooted())
+                        entries[2] = getString(R.string.array_pref_lockDevice_deviceAdmin) + " (" +
+                                getString(R.string.array_pref_lockDevice_not_rooted) + ")";
+                } else {
+                    if (!manager.isAdminActive(component))
+                        entries[2] = getString(R.string.array_pref_lockDevice_deviceAdmin) + " (" +
+                                getString(R.string.array_pref_lockDevice_not_enabled) + ")";
+                    if (!PPApplication.isRooted())
+                        entries[3] = getString(R.string.array_pref_lockDevice_deviceAdmin) + " (" +
+                                getString(R.string.array_pref_lockDevice_not_rooted) + ")";
+                }
+                lockDevicePreference.setEntries(entries);
+            }
+        }*/
         if (key.equals(PREF_DEVICE_ADMINISTRATOR_SETTINGS)) {
-            DevicePolicyManager manager = (DevicePolicyManager)getActivity().getSystemService(DEVICE_POLICY_SERVICE);
-            final ComponentName component = new ComponentName(getActivity(), PPDeviceAdminReceiver.class);
             if (manager.isAdminActive(component)) {
                 Preference preference = prefMng.findPreference(PREF_DEVICE_ADMINISTRATOR_SETTINGS);
                 if (preference != null) {
