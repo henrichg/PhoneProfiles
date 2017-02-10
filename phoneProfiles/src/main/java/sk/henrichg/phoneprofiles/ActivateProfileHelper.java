@@ -2367,8 +2367,12 @@ public class ActivateProfileHelper {
     }
 
     private void lockDevice(Profile profile) {
+        if (PPApplication.startedOnBoot)
+            // not lock device after boot
+            return;
+
         switch (profile._lockDevice) {
-            case 1:
+            case 3:
                 DevicePolicyManager manager = (DevicePolicyManager)context.getSystemService(DEVICE_POLICY_SERVICE);
                 final ComponentName component = new ComponentName(context, PPDeviceAdminReceiver.class);
                 if (manager.isAdminActive(component))
@@ -2385,7 +2389,7 @@ public class ActivateProfileHelper {
                     Log.e("ActivateProfileHelper.lockDevice", "Error on run su: " + e.toString());
                 }
                 break;
-            case 3: break;
+            case 1: break;
         }
     }
 

@@ -279,6 +279,8 @@ public class PPApplication extends Application {
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
 
+    public static boolean startedOnBoot = false;
+
     //public static final RootMutex rootMutex = new RootMutex();
 
     @Override
