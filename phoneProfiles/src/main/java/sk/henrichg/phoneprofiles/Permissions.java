@@ -35,6 +35,7 @@ public class Permissions {
     private static final int PERMISSION_NOTIFICATION_LED = 15;
     private static final int PERMISSION_VIBRATE_WHEN_RINGING = 16;
     private static final int PERMISSION_ACCESS_NOTIFICATION_POLICY = 17;
+    private static final int PERMISSION_PROFILE_LOCK_DEVICE = 18;
 
     private static final int GRANT_TYPE_PROFILE = 1;
     static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -146,6 +147,7 @@ public class Permissions {
             }
             if (!checkCustomProfileIcon(context, profile)) permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
             if (!checkProfileAccessNotificationPolicy(context, profile)) permissions.add(new PermissionType(PERMISSION_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
+            if (!checkProfileLockDevice(context, profile)) permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.WRITE_SETTINGS));
             return permissions;
         }
         else
@@ -457,6 +459,34 @@ public class Permissions {
                 if (granted)
                     PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
                 return granted;
+            }
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+
+    static boolean checkLockDevice(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean grantedWriteSettings = Settings.System.canWrite(context);
+            if (grantedWriteSettings)
+                PPApplication.setShowRequestWriteSettingsPermission(context, true);
+            return grantedWriteSettings;
+        }
+        else
+            return true;
+    }
+
+    static boolean checkProfileLockDevice(Context context, Profile profile) {
+        if (profile == null) return true;
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (profile._lockDevice == 1) {
+                // only for lockDevice = Screen off
+                boolean grantedWriteSettings = Settings.System.canWrite(context);
+                if (grantedWriteSettings)
+                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                return grantedWriteSettings;
             }
             else
                 return true;

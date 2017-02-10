@@ -186,6 +186,10 @@
             android:excludeFromRecents="true"
             android:theme="@style/EmptyTargetHelpsActivity">
         </activity>
+        <activity android:name=".LockDeviceActivity"
+                  android:excludeFromRecents="true"
+                  android:theme="@style/LockDeviceActivity" >
+        </activity>
 
         <receiver android:name=".PhoneProfilesInstall">
             <intent-filter

@@ -281,6 +281,9 @@ public class PPApplication extends Application {
 
     public static boolean startedOnBoot = false;
 
+    public static LockDeviceActivity lockDeviceActivity = null;
+    public static int screenTimeoutBeforeDeviceLock = 0;
+
     //public static final RootMutex rootMutex = new RootMutex();
 
     @Override
