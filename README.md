@@ -15,6 +15,5 @@ Required external libs
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - GSon - https://code.google.com/p/google-gson/
 - Material Dialogs - https://github.com/afollestad/material-dialogs
-- MaterialPreferences - https://github.com/ferrannp/material-preferences 
 - input-mask-android - https://github.com/RedMadRobot/input-mask-android
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
