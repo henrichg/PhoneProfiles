@@ -18,9 +18,9 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","application started");
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            if (PPApplication.lockDeviceActivity != null)
-                PPApplication.lockDeviceActivity.finish();
+        if (PPApplication.lockDeviceActivity != null) {
+            PPApplication.lockDeviceActivity.finish();
+            PPApplication.lockDeviceActivity.overridePendingTransition(0, 0);
         }
 
         PPApplication.loadPreferences(context);

@@ -137,7 +137,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             }
             preference = prefMng.findPreference(PREF_DRAW_OVERLAYS_PERMISSIONS);
             if (preference != null) {
-                if (android.os.Build.VERSION.SDK_INT >= 25) {
+                //if (android.os.Build.VERSION.SDK_INT >= 25) {
                     //preference.setWidgetLayoutResource(R.layout.start_activity_preference);
                     preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
@@ -149,10 +149,10 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                             return false;
                         }
                     });
-                } else {
+                /*} else {
                     PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categoryPermissions");
                     preferenceCategory.removePreference(preference);
-                }
+                }*/
             }
         }
         else {

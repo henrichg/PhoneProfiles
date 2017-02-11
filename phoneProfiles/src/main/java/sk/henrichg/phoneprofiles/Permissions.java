@@ -147,7 +147,10 @@ public class Permissions {
             }
             if (!checkCustomProfileIcon(context, profile)) permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
             if (!checkProfileAccessNotificationPolicy(context, profile)) permissions.add(new PermissionType(PERMISSION_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
-            if (!checkProfileLockDevice(context, profile)) permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.WRITE_SETTINGS));
+            if (!checkProfileLockDevice(context, profile)) {
+                permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.WRITE_SETTINGS));
+                permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.SYSTEM_ALERT_WINDOW));
+            }
             return permissions;
         }
         else
@@ -472,7 +475,13 @@ public class Permissions {
             boolean grantedWriteSettings = Settings.System.canWrite(context);
             if (grantedWriteSettings)
                 PPApplication.setShowRequestWriteSettingsPermission(context, true);
-            return grantedWriteSettings;
+            boolean grantedDrawOverlays = true;
+            if (android.os.Build.VERSION.SDK_INT >= 23) {
+                grantedDrawOverlays = Settings.canDrawOverlays(context);
+                if (grantedDrawOverlays)
+                    PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+            }
+            return grantedWriteSettings && grantedDrawOverlays;
         }
         else
             return true;
@@ -486,7 +495,13 @@ public class Permissions {
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
                     PPApplication.setShowRequestWriteSettingsPermission(context, true);
-                return grantedWriteSettings;
+                boolean grantedDrawOverlays = true;
+                if (android.os.Build.VERSION.SDK_INT >= 23) {
+                    grantedDrawOverlays = Settings.canDrawOverlays(context);
+                    if (grantedDrawOverlays)
+                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                }
+                return grantedWriteSettings && grantedDrawOverlays;
             }
             else
                 return true;
