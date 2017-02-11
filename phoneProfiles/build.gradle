@@ -52,7 +52,7 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.afollestad.material-dialogs:core:0.9.3.0'
-    compile 'com.getkeepsafe.taptargetview:taptargetview:1.7.0'
+    compile 'com.getkeepsafe.taptargetview:taptargetview:1.8.0'
     compile 'com.redmadrobot:inputmask:2.2.1'
 }
 
