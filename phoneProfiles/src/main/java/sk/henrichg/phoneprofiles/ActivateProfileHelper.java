@@ -2381,14 +2381,28 @@ public class ActivateProfileHelper {
                     manager.lockNow();
                 break;
             case 2:
-                String command1 = "input keyevent 26";
-                Command command = new Command(0, false, command1);
-                try {
-                    //RootTools.closeAllShells();
-                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                    commandWait(command);
-                } catch (Exception e) {
-                    Log.e("ActivateProfileHelper.lockDevice", "Error on run su: " + e.toString());
+                /*if (PPApplication.isRooted()) {
+                    //String command1 = "input keyevent 26";
+                    Command command = new Command(0, false, command1);
+                    try {
+                        //RootTools.closeAllShells();
+                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                        commandWait(command);
+                    } catch (Exception e) {
+                        Log.e("ActivateProfileHelper.lockDevice", "Error on run su: " + e.toString());
+                    }
+                }*/
+                if (PPApplication.isRooted() && PPApplication.serviceBinaryExists())
+                {
+                    String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", context, 0);
+                    Command command = new Command(0, false, command1);
+                    try {
+                        //RootTools.closeAllShells();
+                        RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                        commandWait(command);
+                    } catch (Exception e) {
+                        Log.e("ActivateProfileHelper.lockDevice", "Error on run su");
+                    }
                 }
                 break;
             case 1:
