@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -316,6 +317,14 @@ public class GlobalGUIRoutines {
         } else {
             return Html.fromHtml(source);
         }
+    }
+
+    @SuppressLint("DefaultLocale")
+    static String getDurationString(int duration) {
+        int hours = duration / 3600;
+        int minutes = (duration % 3600) / 60;
+        int seconds = duration % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
 }
