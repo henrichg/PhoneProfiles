@@ -1,9 +1,13 @@
 PhoneProfiles
 =============
 
+[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[![License](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/henrichg/PhoneProfiles/blob/master/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=henrich%2egron%40gmail%2ecom&lc=SK&item_name=Henrich%20Gron&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 Android application - manually change device settings like ringer mode, sounds, Wi-Fi, Bluetooth, launcher wallpaper, ...
+
+[Privacy Policy](https://sites.google.com/site/phoneprofilesplus/home/privacy-policy)
 
 Required external libs
 ----------------------
