@@ -7,7 +7,7 @@ PhoneProfiles
 
 Android application - manually change device settings like ringer mode, sounds, Wi-Fi, Bluetooth, launcher wallpaper, ...
 
-[Privacy Policy](https://sites.google.com/site/phoneprofilesplus/home/privacy-policy)
+[Privacy Policy](https://sites.google.com/site/phoneprofiles/home/privacy-policy)
 
 Required external libs
 ----------------------
