@@ -26,7 +26,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     Context context;
     
     // Database Version
-    private static final int DATABASE_VERSION = 1310;
+    private static final int DATABASE_VERSION = 1320;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -90,6 +90,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEVICE_WALLPAPER_FOR = "deviceWallpaperFor";
     private static final String KEY_HIDE_STATUS_BAR_ICON = "hideStatusBarIcon";
     private static final String KEY_LOCK_DEVICE = "lockDevice";
+    private static final String KEY_DEVICE_CONNECT_TO_SSID = "deviceConnectToSSID";
 
     // Shortcuts Colums names
     private static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
@@ -207,7 +208,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_VIBRATE_WHEN_RINGING + " INTEGER,"
                 + KEY_DEVICE_WALLPAPER_FOR + " INTEGER,"
                 + KEY_HIDE_STATUS_BAR_ICON + " INTEGER,"
-                + KEY_LOCK_DEVICE + " INTEGER"
+                + KEY_LOCK_DEVICE + " INTEGER,"
+                + KEY_DEVICE_CONNECT_TO_SSID + " TEXT"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -658,6 +660,16 @@ class DatabaseHandler extends SQLiteOpenHelper {
             // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_LOCK_DEVICE + "=0");
         }
+
+        if (oldVersion < 1320)
+        {
+            // pridame nove stlpce
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_CONNECT_TO_SSID + " TEXT");
+
+            // updatneme zaznamy
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_CONNECT_TO_SSID + "=\""+Profile.CONNECTTOSSID_JUSTANY+"\"");
+        }
+
     }
 
     @Override
@@ -728,6 +740,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
         values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
         values.put(KEY_LOCK_DEVICE, profile._lockDevice);
+        values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
 
         // Inserting Row
         profile._id = db.insert(TABLE_PROFILES, null, values);
@@ -791,7 +804,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_VIBRATE_WHEN_RINGING,
                         KEY_DEVICE_WALLPAPER_FOR,
                         KEY_HIDE_STATUS_BAR_ICON,
-                        KEY_LOCK_DEVICE
+                        KEY_LOCK_DEVICE,
+                        KEY_DEVICE_CONNECT_TO_SSID
                 },
                 KEY_ID + "=?",
                 new String[]{String.valueOf(profile_id)}, null, null, null, null);
@@ -852,7 +866,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(46)),
                                               Integer.parseInt(cursor.getString(47)),
                                               Integer.parseInt(cursor.getString(48)) == 1,
-                                              Integer.parseInt(cursor.getString(49))
+                                              Integer.parseInt(cursor.getString(49)),
+                                              cursor.getString(50)
                                               );
             }
             cursor.close();
@@ -916,7 +931,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                          KEY_VIBRATE_WHEN_RINGING + "," +
                                          KEY_DEVICE_WALLPAPER_FOR + "," +
                                          KEY_HIDE_STATUS_BAR_ICON + "," +
-                                         KEY_LOCK_DEVICE +
+                                         KEY_LOCK_DEVICE +"," +
+                                         KEY_DEVICE_CONNECT_TO_SSID +
                              " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -977,6 +993,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(47));
                 profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(48)) == 1;
                 profile._lockDevice = Integer.parseInt(cursor.getString(49));
+                profile._deviceConnectToSSID = cursor.getString(50);
                 // Adding contact to list
                 profileList.add(profile);
             } while (cursor.moveToNext());
@@ -1044,6 +1061,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
         values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
         values.put(KEY_LOCK_DEVICE, profile._lockDevice);
+        values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
 
         // updating row
         return db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -1262,7 +1280,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                 KEY_VIBRATE_WHEN_RINGING,
                                                 KEY_DEVICE_WALLPAPER_FOR,
                                                 KEY_HIDE_STATUS_BAR_ICON,
-                                                KEY_LOCK_DEVICE
+                                                KEY_LOCK_DEVICE,
+                                                KEY_DEVICE_CONNECT_TO_SSID
                                                 },
                                  KEY_CHECKED + "=?",
                                  new String[] { "1" }, null, null, null, null);
@@ -1323,7 +1342,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                               Integer.parseInt(cursor.getString(46)),
                                               Integer.parseInt(cursor.getString(47)),
                                               Integer.parseInt(cursor.getString(48)) == 1,
-                                              Integer.parseInt(cursor.getString(49))
+                                              Integer.parseInt(cursor.getString(49)),
+                                              cursor.getString(50)
                                               );
             }
             else
@@ -1392,7 +1412,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                          KEY_VIBRATE_WHEN_RINGING + "," +
                                          KEY_DEVICE_WALLPAPER_FOR + "," +
                                          KEY_HIDE_STATUS_BAR_ICON + "," +
-                                         KEY_LOCK_DEVICE +
+                                         KEY_LOCK_DEVICE + "," +
+                                         KEY_DEVICE_CONNECT_TO_SSID +
                             " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
         //SQLiteDatabase db = this.getReadableDatabase();
@@ -1454,6 +1475,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(47));
             profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(48)) == 1;
             profile._lockDevice = Integer.parseInt(cursor.getString(49));
+            profile._deviceConnectToSSID = cursor.getString(50);
         }
 
         cursor.close();
@@ -1628,7 +1650,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                         KEY_VOLUME_ZEN_MODE + "," +
                                         KEY_DEVICE_NETWORK_TYPE + "," +
                                         KEY_NOTIFICATION_LED + "," +
-                                        KEY_VIBRATE_WHEN_RINGING +
+                                        KEY_VIBRATE_WHEN_RINGING + "," +
+                                        KEY_DEVICE_CONNECT_TO_SSID +
                             " FROM " + TABLE_PROFILES;
 
         //SQLiteDatabase db = this.getWritableDatabase();
@@ -1792,6 +1815,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         {
                             values.clear();
                             values.put(KEY_VIBRATE_WHEN_RINGING, 0);
+                            db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                        }
+
+                        if ((Integer.parseInt(cursor.getString(16)) != 0) &&
+                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
+                        {
+                            values.clear();
+                            values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
                                     new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
                         }
@@ -2231,6 +2263,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             if (exportedDBObj.getVersion() < 1310)
                             {
                                 values.put(KEY_LOCK_DEVICE, 0);
+                            }
+
+                            if (exportedDBObj.getVersion() < 1320) {
+                                values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
                             }
 
                             // Inserting Row do db z SQLiteOpenHelper

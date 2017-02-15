@@ -578,7 +578,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 key.equals(PPApplication.PREF_PROFILE_DEVICE_GPS) ||
                 key.equals(PPApplication.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS) ||
                 key.equals(PPApplication.PREF_PROFILE_DEVICE_NFC) ||
-                key.equals(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
+                key.equals(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE) ||
+                key.equals(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID)) {
             String title = getTitleWhenPreferenceChanged(PPApplication.PREF_PROFILE_DEVICE_AIRPLANE_MODE, false);
             if (!title.isEmpty()) {
                 _bold = true;
@@ -609,6 +610,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(PPApplication.PREF_PROFILE_DEVICE_WIFI, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, false);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -867,7 +874,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(PPApplication.PREF_PROFILE_DEVICE_NFC) ||
             key.equals(PPApplication.PREF_PROFILE_DEVICE_WIFI_AP) ||
             key.equals(PPApplication.PREF_PROFILE_DEVICE_POWER_SAVE_MODE) ||
-            key.equals(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE))
+            key.equals(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE) ||
+            key.equals(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID))
         {
             if (key.equals(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA)) {
                 // set mobile data preference title
@@ -892,6 +900,14 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     setTitleStyle(listPreference, false, false, false);
                     setCategorySummary(listPreference, false);
                 }
+            }
+            else
+            if (key.equals(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID)) {
+                Preference preference = prefMng.findPreference(key);
+                String sValue = value.toString();
+                boolean bold = !sValue.equals(Profile.CONNECTTOSSID_JUSTANY);
+                setTitleStyle(preference, bold, false, false);
+                setCategorySummary(preference, bold);
             }
             else
             {

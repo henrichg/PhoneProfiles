@@ -293,6 +293,12 @@
                 android:entries="@array/hardwareModeArray"
                 android:entryValues="@array/hardwareModeValues"
                 app:useStockLayout="true" />
+            <sk.henrichg.phoneprofiles.ConnectToSSIDDialogPreference
+                android:key="prf_pref_deviceConnectToSSID"
+                android:defaultValue="@string/prf_pref_deviceConnectToSSID"
+                henrichg:ctsdpDisableDefaultProfile="0"
+                android:title="@string/profile_preferences_deviceConnectToSSID"
+                android:summary="@string/connect_to_ssid_pref_dlg_summary_text_just_any" />
             <sk.henrichg.phoneprofiles.MaterialListPreference
                 android:title="@string/profile_preferences_deviceWiFiAP"
                 android:summary="@string/array_pref_no_change"

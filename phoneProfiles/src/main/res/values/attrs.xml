@@ -35,6 +35,9 @@
     <declare-styleable name="InfoDialogPreference">
         <attr name="infoText" format="string" />
     </declare-styleable>
+    <declare-styleable name="ConnectToSSIDDialogPreference">
+        <attr name="ctsdpDisableDefaultProfile" format="integer" />
+    </declare-styleable>
 
     <!-- theme dependent drawables -->
     <attr name="actionNewProfileIcon" format="reference" />

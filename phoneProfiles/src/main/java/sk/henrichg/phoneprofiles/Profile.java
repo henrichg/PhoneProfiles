@@ -64,6 +64,7 @@ public class Profile {
     int _deviceWallpaperFor;
     boolean _hideStatusBarIcon;
     int _lockDevice;
+    String _deviceConnectToSSID;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -74,6 +75,8 @@ public class Profile {
 
     static final int BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET = -99;
 
+    static final String CONNECTTOSSID_JUSTANY = "^just_any^";
+    static final String CONNECTTOSSID_DEFAULTPROFILE = "^default_profile^";
 
     static final String[] profileIconId = {
             "ic_profile_default",
@@ -183,7 +186,8 @@ public class Profile {
                    int vibrateWhenRinging,
                    int deviceWallpaperFor,
                    boolean hideStatusBarIcon,
-                   int lockDevice)
+                   int lockDevice,
+                   String deviceConnectToSSID)
     {
         this._id = id;
         this._name = name;
@@ -234,6 +238,7 @@ public class Profile {
         this._deviceWallpaperFor = deviceWallpaperFor;
         this._hideStatusBarIcon = hideStatusBarIcon;
         this._lockDevice = lockDevice;
+        this._deviceConnectToSSID = deviceConnectToSSID;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -287,7 +292,8 @@ public class Profile {
                    int vibrateWhenRinging,
                    int deviceWallpaperFor,
                    boolean hideStatusBarIcon,
-                   int lockDevice)
+                   int lockDevice,
+                   String deviceConnectToSSID)
     {
         this._name = name;
         this._icon = icon;
@@ -337,6 +343,7 @@ public class Profile {
         this._deviceWallpaperFor = deviceWallpaperFor;
         this._hideStatusBarIcon = hideStatusBarIcon;
         this._lockDevice = lockDevice;
+        this._deviceConnectToSSID = deviceConnectToSSID;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -393,6 +400,7 @@ public class Profile {
         this._deviceWallpaperFor = profile._deviceWallpaperFor;
         this._hideStatusBarIcon = profile._hideStatusBarIcon;
         this._lockDevice = profile._lockDevice;
+        this._deviceConnectToSSID = profile._deviceConnectToSSID;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
