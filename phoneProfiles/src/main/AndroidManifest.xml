@@ -430,6 +430,14 @@
             android:enabled="true"
             android:exported="false">
         </receiver>
+        <receiver
+            android:name=".WifiStateChangedBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
 
         <service
             android:name=".ProfileListWidgetService"

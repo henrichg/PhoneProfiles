@@ -20,6 +20,8 @@ public class PhoneProfilesService extends Service {
 
     private static SettingsContentObserver settingsContentObserver = null;
 
+    public static String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
+
     @Override
     public void onCreate()
     {
