@@ -143,7 +143,7 @@ public class DataWrapper {
                   0,
                   0,
                   0,
-                  Profile.AFTERDURATIONDO_NOTHING,
+                  Profile.AFTERDURATIONDO_UNDOPROFILE,
                   0,
                   0,
                   0,

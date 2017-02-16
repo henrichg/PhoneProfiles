@@ -365,8 +365,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_AFTER_DURATION_DO + " INTEGER");
 
             // updatneme zaznamy
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION + "=0");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_AFTER_DURATION_DO + "=0");
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION + "=" + Profile.AFTERDURATIONDO_UNDOPROFILE);
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_AFTER_DURATION_DO + "=" +  + Profile.AFTERDURATIONDO_UNDOPROFILE);
         }
 
         if (oldVersion < 1150)
@@ -2133,7 +2133,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                         {
                                             // in PhoneProfilesPlus value=3 is restart events
                                             if (value.equals("3"))
-                                                value = "0";
+                                                value = "1";
                                         }
                                     }
 
@@ -2193,7 +2193,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             if (exportedDBObj.getVersion() < 1120)
                             {
                                 values.put(KEY_DURATION, 0);
-                                values.put(KEY_AFTER_DURATION_DO, 0);
+                                values.put(KEY_AFTER_DURATION_DO, Profile.AFTERDURATIONDO_UNDOPROFILE);
                             }
                             if (exportedDBObj.getVersion() < 1150)
                             {
