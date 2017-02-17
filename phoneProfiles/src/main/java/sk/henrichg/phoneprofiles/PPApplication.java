@@ -200,6 +200,7 @@ public class PPApplication extends Application {
     public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B = "applicationWidgetIconLightnessB";
     public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T = "applicationWidgetIconLightnessT";
     public static final String PREF_NOTIFICATION_THEME = "notificationTheme";
+    public static final String PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES = "applicationForceSetMergeRingNotificationVolumes";
 
     public static final int PREFERENCE_NOT_ALLOWED = 0;
     public static final int PREFERENCE_ALLOWED = 1;
@@ -273,6 +274,7 @@ public class PPApplication extends Application {
     public static String applicationWidgetIconLightnessB;
     public static String applicationWidgetIconLightnessT;
     public static String notificationTheme;
+    public static int applicationForceSetMergeRingNotificationVolumes;
 
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
@@ -371,6 +373,7 @@ public class PPApplication extends Application {
         applicationWidgetIconBackground = preferences.getString(PREF_APPLICATION_WIDGET_ICON_BACKGROUND, "0");
         applicationWidgetIconLightnessB = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B, "0");
         applicationWidgetIconLightnessT = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T, "100");
+        applicationForceSetMergeRingNotificationVolumes = Integer.valueOf(preferences.getString(PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES, "0"));
 
         if (applicationTheme.equals("light"))
         {
@@ -1891,7 +1894,8 @@ public class PPApplication extends Application {
 
     public static boolean getMergedRingNotificationVolumes(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, true);
+        return preferences.getBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, true) ||
+                         (applicationForceSetMergeRingNotificationVolumes == 1);
     }
 
     // test if ring and notification volumes are merged

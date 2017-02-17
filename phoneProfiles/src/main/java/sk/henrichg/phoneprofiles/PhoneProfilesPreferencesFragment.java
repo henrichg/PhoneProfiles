@@ -115,6 +115,7 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
         setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_BACKGROUND);
         setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B);
         setSummary(PPApplication.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T);
+        setSummary(PPApplication.PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES);
     }
 
     @Override

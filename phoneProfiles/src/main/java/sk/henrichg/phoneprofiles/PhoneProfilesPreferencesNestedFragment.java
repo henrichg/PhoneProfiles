@@ -167,19 +167,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             if (preference != null)
                 preferenceCategory.removePreference(preference);
         }
-        if (!PPApplication.getMergedRingNotificationVolumes(getActivity().getApplicationContext())) {
-            // remove System category. in this category is only applicationUnlinkRingerNotificationVolumes
-            PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("rootScreen");
-            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categorySystem");
-            if (preferenceCategory != null)
-                preferenceScreen.removePreference(preferenceCategory);
-
-            /*Preference preference = prefMng.findPreference("applicationUnlinkRingerNotificationVolumes");
-            if (preference != null) {
-                PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categorySystem");
-                preferenceCategory.removePreference(preference);
-            }*/
-        }
     }
 
     /*
@@ -292,6 +279,12 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             // simple string representation.
             //preference.setSummary(preference.toString());
             preference.setSummary(stringValue);
+        }
+        if (key.equals(PPApplication.PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES)) {
+            Preference _preference = prefMng.findPreference(PPApplication.PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES);
+            boolean enabled = PPApplication.getMergedRingNotificationVolumes(getActivity().getApplicationContext());
+            enabled = enabled || (preferences.getString(key, "0").equals("1"));
+            _preference.setEnabled(enabled);
         }
     }
 
