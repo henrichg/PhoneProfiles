@@ -14,6 +14,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -325,6 +326,12 @@ public class GlobalGUIRoutines {
         int minutes = (duration % 3600) / 60;
         int seconds = duration % 60;
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    static int getThemeAccentColor (final Context context) {
+        final TypedValue value = new TypedValue ();
+        context.getTheme ().resolveAttribute (R.attr.colorAccent, value, true);
+        return value.data;
     }
 
 }
