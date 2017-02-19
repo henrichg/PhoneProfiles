@@ -4,6 +4,8 @@
     <color name="primaryDark">#1d6681</color> <!-- 700 -->
     <color name="accent">#DC8160</color>       <!-- A200 -->
 
+    <color name="activityTextColor">#FF000000</color>
+
     <color name="activityPopupBackground_phoneprofilestheme">#FFd0d0d0</color>
     <color name="dialog_divider">#10000000</color>
 

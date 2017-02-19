@@ -6,7 +6,9 @@
         <item name="colorPrimary">@color/primary_dark</item>
         <item name="colorPrimaryDark">@color/primaryDark_dark</item>
         <item name="colorAccent">@color/accent_dark</item>
-        
+
+        <item name="activityTextColor">@color/activityTextColor</item>
+
         <item name="actionNewProfileIcon">@drawable/ic_action_new_profile_dark</item>
         <item name="actionDeleteAllIcon">@drawable/ic_action_delete_all_dark</item>
         <item name="actionEditProfilesIcon">@drawable/ic_action_edit_profiles_dark</item>

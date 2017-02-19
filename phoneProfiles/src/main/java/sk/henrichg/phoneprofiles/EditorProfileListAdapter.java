@@ -192,7 +192,7 @@ class EditorProfileListAdapter extends BaseAdapter
     static class ViewHolder {
           RelativeLayout listItemRoot;
           ImageView profileIcon;
-          UnderlinedTextView profileName;
+          TextView profileName;
           ImageView profileIndicator;
           ImageView profileItemEditMenu;
           int position;
@@ -212,7 +212,7 @@ class EditorProfileListAdapter extends BaseAdapter
                 vi = inflater.inflate(R.layout.editor_profile_list_item_no_indicator, parent, false);
             holder = new ViewHolder();
             holder.listItemRoot = (RelativeLayout)vi.findViewById(R.id.main_list_item_root);
-            holder.profileName = (UnderlinedTextView) vi.findViewById(R.id.main_list_item_profile_name);
+            holder.profileName = (TextView) vi.findViewById(R.id.main_list_item_profile_name);
             holder.profileIcon = (ImageView)vi.findViewById(R.id.main_list_item_profile_icon);
             holder.profileItemEditMenu = (ImageView)vi.findViewById(R.id.main_list_item_edit_menu);
             if (PPApplication.applicationEditorPrefIndicator)
@@ -237,7 +237,7 @@ class EditorProfileListAdapter extends BaseAdapter
             if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.header_card_dlight);*/
             holder.profileName.setTypeface(null, Typeface.BOLD);
-            holder.profileName.setUnderLineColor(GlobalGUIRoutines.getThemeAccentColor(fragment.getActivity()));
+            holder.profileName.setTextColor(GlobalGUIRoutines.getThemeAccentColor(fragment.getActivity()));
         }
         else
         {
@@ -250,7 +250,7 @@ class EditorProfileListAdapter extends BaseAdapter
             if (PPApplication.applicationTheme.equals("dlight"))
                 holder.listItemRoot.setBackgroundResource(R.drawable.card);*/
             holder.profileName.setTypeface(null, Typeface.NORMAL);
-            holder.profileName.setUnderLineColor(Color.argb(0, 0, 0, 0));
+            holder.profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(fragment.getActivity()));
         }
 
         String profileName = profile.getProfileNameWithDuration(false, dataWrapper.context);
