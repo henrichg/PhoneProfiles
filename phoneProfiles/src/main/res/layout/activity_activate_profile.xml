@@ -14,7 +14,7 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/toolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu"
-        android:elevation="4dp"
+        android:elevation="3dp"
         tools:ignore="UnusedAttribute" />
 
     <fragment
