@@ -15,7 +15,7 @@ public class PhoneProfilesService extends Service {
 
     public static PhoneProfilesService instance = null;
 
-    private final ScreenOnOffBroadcastReceiver screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
+    private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
 
     private static SettingsContentObserver settingsContentObserver = null;
@@ -25,6 +25,8 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onCreate()
     {
+        super.onCreate();
+
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
@@ -40,6 +42,9 @@ public class PhoneProfilesService extends Service {
             //e.printStackTrace();
         }
 
+        if (screenOnOffReceiver != null)
+            getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+        screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
@@ -80,11 +85,15 @@ public class PhoneProfilesService extends Service {
             getContentResolver().unregisterContentObserver(settingsContentObserver);
 
         instance = null;
+
+        super.onDestroy();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        super.onStartCommand(intent, flags, startId);
+
         PPApplication.logE("PhoneProfilesService.onStartCommand", "xxx");
 
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
