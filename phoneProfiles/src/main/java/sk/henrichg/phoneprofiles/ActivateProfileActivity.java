@@ -93,7 +93,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         // add header height
         if (PPApplication.applicationActivatorHeader)
-            popupHeight = popupHeight + 64f * scale;
+            popupHeight = popupHeight + 74f * scale;
 
         // add list items height
         DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), false, false, 0);
