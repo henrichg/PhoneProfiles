@@ -76,7 +76,9 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onDestroy()
     {
-        getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+        if (screenOnOffReceiver != null)
+            getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+
         if (android.os.Build.VERSION.SDK_INT >= 23)
             if (interruptionFilterChangedReceiver != null)
                 getApplicationContext().unregisterReceiver(interruptionFilterChangedReceiver);
