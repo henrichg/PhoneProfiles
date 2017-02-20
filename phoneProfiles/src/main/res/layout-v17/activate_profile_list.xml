@@ -87,7 +87,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dip"
-        android:listSelector="?attr/cardSelector"
         android:drawSelectorOnTop="true"
         android:clipToPadding="false"
         android:scrollbarStyle="outsideOverlay" />
