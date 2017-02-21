@@ -1819,8 +1819,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
                         }
 
-                        if ((Integer.parseInt(cursor.getString(16)) != 0) &&
-                                (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
+                        if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED)
                         {
                             values.clear();
                             values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
