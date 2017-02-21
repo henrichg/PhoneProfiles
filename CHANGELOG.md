@@ -1,8 +1,8 @@
 PhoneProfiles Change Log
 ========================
 
-Version: 4.4.4
---------------
+Version: 4.5
+------------
 - Added: "Tap target views". Helps you for using GUI elements.
 - Added: "Privacy Policy" to "About application".
 - Added: "Hide status bar icon" to profile preferences. You can hide application status bar icon for activated profile. Overrides parameter in application settings. 

@@ -1,8 +1,8 @@
 PhoneProfiles Zoznam zmien 
 ==========================
 
-Verzia: 4.4.4
---------------
+Verzia: 4.5
+-----------
 - Pridané: "Pohľady na cieľ kliknutia". Pomôžu vam s používaním GUI komponentov.
 - Pridané: "Zásady ochrany osobných údajov" to "O aplikácii".
 - Pridané: "Skryť ikonu v stavovom riadku" do parametrov profilu. Môžete skryť aplikačnú ikonu v stavovom riadku pre aktivovaný profil. Prepíše parameter v nastaveniach aplikácie. 
