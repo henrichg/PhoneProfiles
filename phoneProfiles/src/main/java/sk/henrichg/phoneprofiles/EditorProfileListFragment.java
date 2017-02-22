@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -478,7 +479,11 @@ public class EditorProfileListFragment extends Fragment {
     {
         //Context context = ((AppCompatActivity)getActivity()).getSupportActionBar().getThemedContext();
         Context context = view.getContext();
-        PopupMenu popup = new PopupMenu(context, view);
+        PopupMenu popup;
+        if (android.os.Build.VERSION.SDK_INT >= 19)
+            popup = new PopupMenu(context, view, Gravity.END);
+        else
+            popup = new PopupMenu(context, view);
         getActivity().getMenuInflater().inflate(R.menu.profile_list_item_edit, popup.getMenu());
 
         final Profile profile = (Profile)view.getTag();
