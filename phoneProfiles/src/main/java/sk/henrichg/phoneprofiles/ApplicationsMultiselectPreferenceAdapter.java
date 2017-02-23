@@ -121,7 +121,10 @@ class ApplicationsMultiselectPreferenceAdapter extends BaseAdapter implements Sc
     @Override
     public String getIndicatorForPosition(int childposition, int groupposition) {
         Application application = (Application) getItem(childposition);
-        return application.appLabel.substring(0, 1);
+        if (application.checked)
+            return "*";
+        else
+            return application.appLabel.substring(0, 1);
     }
 
     @Override
