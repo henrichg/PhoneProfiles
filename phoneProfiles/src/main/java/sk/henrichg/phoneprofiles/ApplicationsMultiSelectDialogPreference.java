@@ -153,7 +153,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarStroke, tv, true);
         int colorQSHandlebarStroke = tv.data;
 
-        final QuickScroll quickscroll = (QuickScroll)layout.findViewById(R.id.applications_editor_dialog_quickscroll);
+        final QuickScroll quickscroll = (QuickScroll)layout.findViewById(R.id.applications_pref_dlg_quickscroll);
         quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, listView, listAdapter, QuickScroll.STYLE_HOLO, colorQSScrollbar);
         quickscroll.setHandlebarColor(colorQSHandlebarInactive, colorQSHandlebarActive, colorQSHandlebarStroke);
         quickscroll.setIndicatorColor(colorQSHandlebarActive, colorQSHandlebarActive, Color.WHITE);
