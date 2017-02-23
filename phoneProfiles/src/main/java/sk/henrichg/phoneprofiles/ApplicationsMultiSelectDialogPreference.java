@@ -7,12 +7,14 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +25,7 @@ import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.andraskindler.quickscroll.QuickScroll;
 
 import java.util.List;
 
@@ -139,6 +142,22 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         });
 
         listAdapter = new ApplicationsMultiselectPreferenceAdapter(_context, addShortcuts);
+
+        TypedValue tv = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.colorQSScrollbar, tv, true);
+        int colorQSScrollbar = tv.data;
+        getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarInactive, tv, true);
+        int colorQSHandlebarInactive = tv.data;
+        getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarActive, tv, true);
+        int colorQSHandlebarActive = tv.data;
+        getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarStroke, tv, true);
+        int colorQSHandlebarStroke = tv.data;
+
+        final QuickScroll quickscroll = (QuickScroll)layout.findViewById(R.id.applications_editor_dialog_quickscroll);
+        quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, listView, listAdapter, QuickScroll.STYLE_HOLO, colorQSScrollbar);
+        quickscroll.setHandlebarColor(colorQSHandlebarInactive, colorQSHandlebarActive, colorQSHandlebarStroke);
+        quickscroll.setIndicatorColor(colorQSHandlebarActive, colorQSHandlebarActive, Color.WHITE);
+        quickscroll.setFixedSize(1);
 
         mBuilder.customView(layout, false);
 

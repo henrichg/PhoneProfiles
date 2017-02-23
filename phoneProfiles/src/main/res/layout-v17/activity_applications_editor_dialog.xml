@@ -21,14 +21,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"/>
 
-
         <ListView
             android:id="@+id/applications_editor_dialog_listview"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/applications_editor_dialog_quickscroll"
-            android:clipToPadding="false"
             android:overScrollMode="never"
             android:scrollbars="none"
             android:divider="@android:color/transparent" />
