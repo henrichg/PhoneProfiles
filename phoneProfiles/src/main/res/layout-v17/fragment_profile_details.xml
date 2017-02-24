@@ -62,13 +62,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/profile_detail_profile_icon"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:text="@string/profile_name_default"
                 android:textSize="15sp"
-                android:singleLine="true" />
+                android:maxLines="1"/>
 
             <ImageView
                 android:id="@+id/profile_detail_profile_pref_indicator"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_below="@+id/profile_detail_profile_name"
                 android:layout_toEndOf="@+id/profile_detail_profile_icon"
@@ -76,7 +77,8 @@
                 android:contentDescription="@string/empty_string"
                 android:scaleType="@integer/profilePrefIndicatorScaleType"
                 android:src="@drawable/ic_profile_pref_volume_on"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp" />
 
         </RelativeLayout>
 
