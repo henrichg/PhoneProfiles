@@ -340,7 +340,7 @@ public class ActivateProfileHelper {
         if (profile._deviceGPS != 0) {
             if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean isEnabled;
-                if (android.os.Build.VERSION.SDK_INT < 21)
+                if (android.os.Build.VERSION.SDK_INT < 19)
                     isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
                 else {
                     LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -2172,18 +2172,8 @@ public class ActivateProfileHelper {
     @SuppressWarnings("deprecation")
     private void setGPS(Context context, boolean enable)
     {
-        //boolean isEnabled;
-        //int locationMode = -1;
-        //if (android.os.Build.VERSION.SDK_INT < 19)
-        //    isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
-        /*else {
-            locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE, -1);
-            isEnabled = (locationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY) ||
-                        (locationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
-        }*/
-
         boolean isEnabled;
-        if (android.os.Build.VERSION.SDK_INT < 21)
+        if (android.os.Build.VERSION.SDK_INT < 19)
             isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
         else {
             LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
