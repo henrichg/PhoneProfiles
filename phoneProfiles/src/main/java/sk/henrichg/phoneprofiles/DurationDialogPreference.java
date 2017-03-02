@@ -1,6 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;

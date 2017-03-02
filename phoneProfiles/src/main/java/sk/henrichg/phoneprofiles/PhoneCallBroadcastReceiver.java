@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.Date;
 
