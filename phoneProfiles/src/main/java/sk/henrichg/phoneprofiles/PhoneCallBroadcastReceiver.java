@@ -31,7 +31,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private void startService(int phoneEvent, boolean incoming, String number) {
 
-        Log.d("PhoneCallBroadcastReceiver","startService phoneEvent="+phoneEvent);
+        //Log.d("PhoneCallBroadcastReceiver","startService phoneEvent="+phoneEvent);
 
         Intent intent = new Intent(savedContext, PhoneCallService.class);
         intent.putExtra(EXTRA_SERVICE_PHONE_EVENT, phoneEvent);

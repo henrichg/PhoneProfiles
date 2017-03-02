@@ -54,7 +54,7 @@ public class PPApplication extends Application {
     public static final String LOG_FILENAME = "log.txt";
     public static final String CRASH_FILENAME = "crash.txt";
 
-    private static boolean logIntoLogCat = true;
+    private static boolean logIntoLogCat = false;
     private static boolean logIntoFile = false;
     private static boolean rootToolsDebug = false;
     public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"

@@ -250,7 +250,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     public void startTargetHelpsActivity() {
-        Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(1)");
+        //Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(1)");
 
         SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -258,7 +258,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 preferences.getBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
-            Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(2)");
+            //Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(2)");
 
             ActivatorTargetHelpsActivity.activatorActivity = this;
             Intent intent = new Intent(this, ActivatorTargetHelpsActivity.class);
@@ -274,10 +274,10 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 preferences.getBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
-            Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
+            //Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
             if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
-                Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
+                //Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
@@ -335,7 +335,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (ActivatorTargetHelpsActivity.activity != null) {
-                                    Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
+                                    //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                                     ActivatorTargetHelpsActivity.activity.finish();
                                     ActivatorTargetHelpsActivity.activity = null;
                                 }
@@ -352,7 +352,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 sequence.start();
             }
             else {
-                Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
+                //Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -368,7 +368,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
         else {
             if (ActivatorTargetHelpsActivity.activity != null) {
-                Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
+                //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                 ActivatorTargetHelpsActivity.activity.finish();
                 ActivatorTargetHelpsActivity.activity = null;
             }

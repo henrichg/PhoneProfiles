@@ -148,8 +148,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
                 new MaskedTextChangedListener.ValueListener() {
                     @Override
                     public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue) {
-                        Log.d(FastAccessDurationDialog.class.getSimpleName(), extractedValue);
-                        Log.d(FastAccessDurationDialog.class.getSimpleName(), String.valueOf(maskFilled));
+                        //Log.d(FastAccessDurationDialog.class.getSimpleName(), extractedValue);
+                        //Log.d(FastAccessDurationDialog.class.getSimpleName(), String.valueOf(maskFilled));
 
                         int hours = 0;
                         int minutes = 0;

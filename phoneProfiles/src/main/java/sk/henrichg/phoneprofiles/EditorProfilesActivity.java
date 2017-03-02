@@ -993,10 +993,10 @@ public class EditorProfilesActivity extends AppCompatActivity
                 preferences.getBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true) ||
                 preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
-            Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
+            //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
             if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
-                Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
+                //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 
                 Editor editor = preferences.edit();
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
@@ -1054,7 +1054,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 sequence.start();
             }
             else {
-                Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
+                //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
