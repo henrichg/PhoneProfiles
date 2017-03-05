@@ -287,6 +287,7 @@ public class ActivateProfileListFragment extends Fragment {
 
             Profile profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);
+            setProfileSelection(profile, false);
             if (startupSource == 0)
             {
                 // aktivita nebola spustena z notifikacie, ani z widgetu
@@ -399,6 +400,32 @@ public class ActivateProfileListFragment extends Fragment {
         activateProfile(profile, startupSource);
     }
 
+    private void setProfileSelection(Profile profile, boolean refreshIcons) {
+        if (profileListAdapter != null)
+        {
+            int profilePos;
+
+            if (profile != null)
+                profilePos = profileListAdapter.getItemPosition(profile);
+            else
+                profilePos = listView.getCheckedItemPosition();
+
+            profileListAdapter.notifyDataSetChanged(refreshIcons);
+
+            if ((!PPApplication.applicationEditorHeader) && (profilePos != ListView.INVALID_POSITION))
+            {
+                // set profile visible in list
+                listView.setItemChecked(profilePos, true);
+                int last = listView.getLastVisiblePosition();
+                int first = listView.getFirstVisiblePosition();
+                if ((profilePos <= first) || (profilePos >= last)) {
+                    listView.setSelection(profilePos);
+                    //listView.smoothScrollToPosition(profilePos);
+                }
+            }
+        }
+    }
+
     public void refreshGUI(boolean refreshIcons)
     {
         if ((dataWrapper == null) || (profileListAdapter == null))
@@ -424,9 +451,12 @@ public class ActivateProfileListFragment extends Fragment {
                 }
             }
             updateHeader(profileFromDataWrapper);
+            setProfileSelection(profileFromDataWrapper, refreshIcons);
         }
-        else
+        else {
             updateHeader(null);
+            setProfileSelection(null, refreshIcons);
+        }
 
         profileListAdapter.notifyDataSetChanged(refreshIcons);
 
