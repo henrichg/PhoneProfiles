@@ -21,7 +21,7 @@ public class RefreshGUIBroadcastReceiver extends BroadcastReceiver {
 
         EditorProfilesActivity editorProfilesActivity = EditorProfilesActivity.getInstance();
         if (editorProfilesActivity != null)
-            editorProfilesActivity.refreshGUI(refreshIcons);
+            editorProfilesActivity.refreshGUI(refreshIcons, true);
     }
 
 }

@@ -79,6 +79,25 @@ class EditorProfileListAdapter extends BaseAdapter
         return -1;
     }
 
+    int getItemPosition(Profile profile)
+    {
+        if (profile == null)
+            return -1;
+
+        if (profileList == null)
+            return -1;
+
+        int pos = -1;
+
+        for (int i = 0; i < profileList.size(); i++)
+        {
+            ++pos;
+            if (profileList.get(i)._id == profile._id)
+                return pos;
+        }
+        return -1;
+    }
+
     public void setList(List<Profile> pl)
     {
         profileList = pl;

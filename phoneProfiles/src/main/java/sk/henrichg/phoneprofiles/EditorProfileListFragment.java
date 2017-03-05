@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -253,11 +254,7 @@ public class EditorProfileListFragment extends Fragment {
             Profile profile;
             profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);
-
-            boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
-            if (startTargetHelps)
-                showAdapterTargetHelps();
-
+            setProfileSelection(profile, false);
         }
 
     }
@@ -307,6 +304,7 @@ public class EditorProfileListFragment extends Fragment {
                 Profile profile;
                 profile = fragment.dataWrapper.getActivatedProfile();
                 fragment.updateHeader(profile);
+                fragment.setProfileSelection(profile, false);
 
                 if (defaultProfilesGenerated)
                 {
@@ -621,7 +619,37 @@ public class EditorProfileListFragment extends Fragment {
         dataWrapper.activateProfile(profile._id, PPApplication.STARTUP_SOURCE_EDITOR, getActivity());
     }
 
-    public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons)
+    private void setProfileSelection(Profile profile, boolean refreshIcons) {
+        if (profileListAdapter != null)
+        {
+            int profilePos;
+
+            if (profile != null)
+                profilePos = profileListAdapter.getItemPosition(profile);
+            else
+                profilePos = listView.getCheckedItemPosition();
+
+            profileListAdapter.notifyDataSetChanged(refreshIcons);
+
+            if ((!PPApplication.applicationEditorHeader) && (profilePos != ListView.INVALID_POSITION))
+            {
+                // set profile visible in list
+                listView.setItemChecked(profilePos, true);
+                int last = listView.getLastVisiblePosition();
+                int first = listView.getFirstVisiblePosition();
+                if ((profilePos <= first) || (profilePos >= last)) {
+                    listView.setSelection(profilePos);
+                    //listView.smoothScrollToPosition(profilePos);
+                }
+            }
+        }
+
+        boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
+        if (startTargetHelps)
+            showAdapterTargetHelps();
+    }
+
+    public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons, boolean setPosition)
     {
         if (profileListAdapter != null)
         {
@@ -633,14 +661,12 @@ public class EditorProfileListFragment extends Fragment {
             }
             profileListAdapter.notifyDataSetChanged(refreshIcons);
 
-            boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
-            if (startTargetHelps)
-                showAdapterTargetHelps();
-
+            if (setPosition || newProfile)
+                setProfileSelection(profile, refreshIcons);
         }
     }
 
-    public void refreshGUI(boolean refreshIcons)
+    public void refreshGUI(boolean refreshIcons, boolean setPosition)
     {
         if ((dataWrapper == null) || (profileListAdapter == null))
             return;
@@ -664,12 +690,12 @@ public class EditorProfileListFragment extends Fragment {
                 }
             }
             updateHeader(profileFromDataWrapper);
-            updateListView(profileFromDataWrapper, false, refreshIcons);
+            updateListView(profileFromDataWrapper, false, refreshIcons, setPosition);
         }
         else
         {
             updateHeader(null);
-            updateListView(null, false, refreshIcons);
+            updateListView(null, false, refreshIcons, setPosition);
         }
     }
 
