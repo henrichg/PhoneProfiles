@@ -142,6 +142,7 @@
         <activity
             android:name=".BackgroundActivateProfileActivity"
             android:excludeFromRecents="true"
+            android:taskAffinity="sk.henrichg.phoneprofiles.shortcut"
             android:label="@string/empty_string"
             android:theme="@style/EmptyActivity">
             <intent-filter>
@@ -153,6 +154,7 @@
         <activity
             android:name=".ActivateProfileFromExternalApplicationActivity"
             android:excludeFromRecents="true"
+            android:taskAffinity="sk.henrichg.phoneprofiles.externalApp"
             android:label="@string/empty_string"
             android:theme="@style/EmptyActivity">
             <intent-filter>
