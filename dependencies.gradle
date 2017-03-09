@@ -1,0 +1,14 @@
+// Release versions (look at PackageReplacedReceiver)
+// 2100 = not show Activator and Editor target helps
+
+
+ext.versions = [
+        minSdk: 16,
+        targetSdk: 25,
+        compileSdk: 25,
+        buildTools: '25.0.2',
+        publishVersion: '4.5b',
+        publishVersionCode: 1985,
+        gradlePlugin: '2.3.0',
+        supportLib: '25.2.0'
+]
