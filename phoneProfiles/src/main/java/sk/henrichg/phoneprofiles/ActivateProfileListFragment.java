@@ -478,6 +478,9 @@ public class ActivateProfileListFragment extends Fragment {
     }
 
     void showTargetHelps() {
+        if (getActivity() == null)
+            return;
+
         if (((ActivateProfileActivity)getActivity()).targetHelpsSequenceStarted)
             return;
 
@@ -525,6 +528,9 @@ public class ActivateProfileListFragment extends Fragment {
     }
 
     private void showAdapterTargetHelps() {
+        if (getActivity() == null)
+            return;
+
         View itemView;
         if (!PPApplication.applicationActivatorGridLayout) {
             if (listView.getChildCount() > 1)
