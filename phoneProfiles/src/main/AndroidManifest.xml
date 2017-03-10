@@ -158,12 +158,14 @@
         <activity
             android:name=".GrantPermissionActivity"
             android:excludeFromRecents="true"
+            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:label="@string/empty_string"
             android:theme="@style/EmptyActivity">
         </activity>
         <activity
             android:name=".LaunchShortcutActivity"
             android:excludeFromRecents="true"
+            android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:label="@string/empty_string"
             android:theme="@style/EmptyActivity">
         </activity>
