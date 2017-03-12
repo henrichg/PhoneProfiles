@@ -132,7 +132,7 @@
             android:excludeFromRecents="true"
             android:taskAffinity="sk.henrichg.phoneprofiles.shortcut"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyActivity">
+            android:theme="@style/EmptyAppCompatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -144,7 +144,7 @@
             android:excludeFromRecents="true"
             android:taskAffinity="sk.henrichg.phoneprofiles.externalApp"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyActivity">
+            android:theme="@style/EmptyAppCompatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -160,14 +160,14 @@
             android:excludeFromRecents="true"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyActivity">
+            android:theme="@style/EmptyAppCompatActivity">
         </activity>
         <activity
             android:name=".LaunchShortcutActivity"
             android:excludeFromRecents="true"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyActivity">
+            android:theme="@style/EmptyAppCompatActivity">
         </activity>
         <activity
             android:name=".AboutApplicationActivity"
