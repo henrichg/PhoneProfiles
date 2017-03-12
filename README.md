@@ -1,4 +1,4 @@
-[PhoneProfiles![PhoneProfiles icon](/art/ic_launcher_README.png)]
+![PhoneProfiles icon](/art/ic_launcher_README.png)
 PhoneProfiles
 =============
 
