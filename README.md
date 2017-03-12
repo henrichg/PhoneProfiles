@@ -1,4 +1,4 @@
-![PhoneProfiles icon](ic_launcher-web.png)
+![PhoneProfiles icon](/phoneProfiles/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 PhoneProfiles
 =============
 
