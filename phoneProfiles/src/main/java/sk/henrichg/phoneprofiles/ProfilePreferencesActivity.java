@@ -379,7 +379,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
                 // reset alarm for profile duration
                 ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, getApplicationContext().getApplicationContext());
-                PPApplication.setActivatedProfileForDuration(getApplicationContext().getApplicationContext(), profile._id);
+                Profile.setActivatedProfileForDuration(getApplicationContext().getApplicationContext(), profile._id);
             }
         }
         profile._volumeRingerMode = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, ""));

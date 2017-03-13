@@ -271,7 +271,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         // remove alarm for profile duration
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        PPApplication.setActivatedProfileForDuration(context, 0);
+        Profile.setActivatedProfileForDuration(context, 0);
 
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
@@ -286,8 +286,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         PPApplication.initRoot();
 
-        PPApplication.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-        PPApplication.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+        Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+        Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
         PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
     }
 
@@ -627,8 +627,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                         dataWrapper.getActivateProfileHelper().showNotification(null);
                         dataWrapper.getActivateProfileHelper().updateWidget();
 
-                        PPApplication.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-                        PPApplication.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
+                        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
+                        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
                         PPApplication.setScreenUnlocked(getApplicationContext(), true);
 
                         // toast notification

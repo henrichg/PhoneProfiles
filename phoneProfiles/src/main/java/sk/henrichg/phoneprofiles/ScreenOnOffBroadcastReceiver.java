@@ -64,7 +64,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             // change screen timeout
             if (lockDeviceEnabled && Permissions.checkLockDevice(context))
                 Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, PPApplication.screenTimeoutBeforeDeviceLock);
-            int screenTimeout = PPApplication.getActivatedProfileScreenTimeout(context);
+            int screenTimeout = ActivateProfileHelper.getActivatedProfileScreenTimeout(context);
             if (screenTimeout > 0)
                 dataWrapper.getActivateProfileHelper().setScreenTimeout(screenTimeout);
 

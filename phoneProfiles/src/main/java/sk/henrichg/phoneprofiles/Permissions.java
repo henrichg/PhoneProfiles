@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,12 @@ public class Permissions {
     static ProfileIconPreference profileIconPreference = null;
     static EditorProfilesActivity editorActivity = null;
     static BrightnessDialogPreference brightnessDialogPreference = null;
+
+    private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
+    private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
+    private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
+    private static final String PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION = "show_request_access_notification_policy_permission";
+    private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
 
     static class PermissionType implements Parcelable {
         int preference;
@@ -193,7 +202,7 @@ public class Permissions {
             if (profile._vibrationOnTouch != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -209,7 +218,7 @@ public class Permissions {
             if (profile._vibrateWhenRinging != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -225,7 +234,7 @@ public class Permissions {
             if (profile._notificationLed != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -243,7 +252,7 @@ public class Permissions {
                 (profile._soundAlarmChange != 0)) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -257,12 +266,12 @@ public class Permissions {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean grantedWriteSettings = Settings.System.canWrite(context);
             if (grantedWriteSettings)
-                PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                setShowRequestWriteSettingsPermission(context, true);
             boolean grantedDrawOverlays = true;
             if (android.os.Build.VERSION.SDK_INT >= 25) {
                 grantedDrawOverlays = Settings.canDrawOverlays(context);
                 if (grantedDrawOverlays)
-                    PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                    setShowRequestDrawOverlaysPermission(context, true);
             }
             return grantedWriteSettings && grantedDrawOverlays;
         }
@@ -276,12 +285,12 @@ public class Permissions {
             if (profile._deviceScreenTimeout != 0) {
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 boolean grantedDrawOverlays = true;
                 if (android.os.Build.VERSION.SDK_INT >= 25) {
                     grantedDrawOverlays = Settings.canDrawOverlays(context);
                     if (grantedDrawOverlays)
-                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                        setShowRequestDrawOverlaysPermission(context, true);
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             }
@@ -296,12 +305,12 @@ public class Permissions {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean grantedWriteSettings = Settings.System.canWrite(context);
             if (grantedWriteSettings)
-                PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                setShowRequestWriteSettingsPermission(context, true);
             boolean grantedDrawOverlays = true;
             if (android.os.Build.VERSION.SDK_INT >= 25) {
                 grantedDrawOverlays = Settings.canDrawOverlays(context);
                 if (grantedDrawOverlays)
-                    PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                    setShowRequestDrawOverlaysPermission(context, true);
             }
             return grantedWriteSettings && grantedDrawOverlays;
         }
@@ -315,12 +324,12 @@ public class Permissions {
             if (profile.getDeviceBrightnessChange()) {
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 boolean grantedDrawOverlays = true;
                 if (android.os.Build.VERSION.SDK_INT >= 25) {
                     grantedDrawOverlays = Settings.canDrawOverlays(context);
                     if (grantedDrawOverlays)
-                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                        setShowRequestDrawOverlaysPermission(context, true);
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             }
@@ -337,7 +346,7 @@ public class Permissions {
             if (profile._deviceAutoRotate != 0) {
                 boolean granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 return granted;
             }
             else
@@ -404,7 +413,7 @@ public class Permissions {
             if ((profile._deviceWiFiAP != 0)) {
                 granted = Settings.System.canWrite(context);
                 if (granted)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
             }
             if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
                 granted = (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED);
@@ -441,7 +450,7 @@ public class Permissions {
                     NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
                     if (granted)
-                        PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
+                        setShowRequestAccessNotificationPolicyPermission(context, true);
                     return granted;
                 } else
                     return true;
@@ -460,7 +469,7 @@ public class Permissions {
                 NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 boolean granted = mNotificationManager.isNotificationPolicyAccessGranted();
                 if (granted)
-                    PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
+                    setShowRequestAccessNotificationPolicyPermission(context, true);
                 return granted;
             }
             else
@@ -474,12 +483,12 @@ public class Permissions {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean grantedWriteSettings = Settings.System.canWrite(context);
             if (grantedWriteSettings)
-                PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                setShowRequestWriteSettingsPermission(context, true);
             boolean grantedDrawOverlays = true;
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 grantedDrawOverlays = Settings.canDrawOverlays(context);
                 if (grantedDrawOverlays)
-                    PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                    setShowRequestDrawOverlaysPermission(context, true);
             }
             return grantedWriteSettings && grantedDrawOverlays;
         }
@@ -494,12 +503,12 @@ public class Permissions {
                 // only for lockDevice = Screen off
                 boolean grantedWriteSettings = Settings.System.canWrite(context);
                 if (grantedWriteSettings)
-                    PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                    setShowRequestWriteSettingsPermission(context, true);
                 boolean grantedDrawOverlays = true;
                 if (android.os.Build.VERSION.SDK_INT >= 23) {
                     grantedDrawOverlays = Settings.canDrawOverlays(context);
                     if (grantedDrawOverlays)
-                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                        setShowRequestDrawOverlaysPermission(context, true);
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             }
@@ -523,7 +532,7 @@ public class Permissions {
                 intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
                 intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 if (onlyNotification)
-                    PPApplication.addMergedPermissions(context, permissions);
+                    addMergedPermissions(context, permissions);
                 else
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                 intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
@@ -703,5 +712,111 @@ public class Permissions {
         editorActivity = null;
     }
 
+
+    static public boolean getShowRequestWriteSettingsPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION, true);
+    }
+
+    static public void setShowRequestWriteSettingsPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION, value);
+        editor.commit();
+    }
+
+    static public boolean getShowRequestAccessNotificationPolicyPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION, true);
+    }
+
+    static public void setShowRequestAccessNotificationPolicyPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION, value);
+        editor.commit();
+    }
+
+    static public boolean getShowRequestDrawOverlaysPermission(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION, true);
+    }
+
+    static public void setShowRequestDrawOverlaysPermission(Context context, boolean value)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION, value);
+        editor.commit();
+    }
+
+    static public List<Permissions.PermissionType> getMergedPermissions(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
+
+        List<Permissions.PermissionType> permissions = new ArrayList<>();
+
+        int count = preferences.getInt(PREF_MERGED_PERRMISSIONS_COUNT, 0);
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < count; i++) {
+            String json = preferences.getString(PREF_MERGED_PERRMISSIONS + i, "");
+            if (!json.isEmpty()) {
+                Permissions.PermissionType permission = gson.fromJson(json, Permissions.PermissionType.class);
+                permissions.add(permission);
+            }
+        }
+
+        return permissions;
+    }
+
+    static public void addMergedPermissions(Context context, List<Permissions.PermissionType> permissions)
+    {
+        List<Permissions.PermissionType> savedPermissions = getMergedPermissions(context);
+
+        for (Permissions.PermissionType permission : permissions) {
+            boolean found = false;
+            for (Permissions.PermissionType savedPermission : savedPermissions) {
+
+                if (savedPermission.permission.equals(permission.permission)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                savedPermissions.add(new Permissions.PermissionType(permission.preference, permission.permission));
+            }
+        }
+
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.clear();
+
+        editor.putInt(PREF_MERGED_PERRMISSIONS_COUNT, savedPermissions.size());
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < savedPermissions.size(); i++)
+        {
+            String json = gson.toJson(savedPermissions.get(i));
+            editor.putString(PREF_MERGED_PERRMISSIONS+i, json);
+        }
+
+        editor.commit();
+    }
+
+    static public void clearMergedPermissions(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 
 }

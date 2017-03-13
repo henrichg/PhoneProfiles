@@ -63,7 +63,7 @@ public class GrantPermissionActivity extends Activity {
         permissions = intent.getParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES);
         mergedNotification = false;
         if (permissions == null) {
-            permissions = PPApplication.getMergedPermissions(getApplicationContext());
+            permissions = Permissions.getMergedPermissions(getApplicationContext());
             mergedNotification = true;
         }
 
@@ -111,7 +111,7 @@ public class GrantPermissionActivity extends Activity {
             }
             else {
                 // get permissions from shared preferences and recheck it
-                permissions = Permissions.recheckPermissions(context, PPApplication.getMergedPermissions(context));
+                permissions = Permissions.recheckPermissions(context, Permissions.getMergedPermissions(context));
                 mergedNotification = true;
                 if (permissions.size() == 0) {
                     Toast msg = Toast.makeText(context,
@@ -136,11 +136,11 @@ public class GrantPermissionActivity extends Activity {
 
         for (Permissions.PermissionType permissionType : permissions) {
             if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS))
-                showRequestWriteSettings = PPApplication.getShowRequestWriteSettingsPermission(context);
+                showRequestWriteSettings = Permissions.getShowRequestWriteSettingsPermission(context);
             if (permissionType.permission.equals(Manifest.permission.ACCESS_NOTIFICATION_POLICY))
-                showRequestAccessNotificationPolicy = PPApplication.getShowRequestAccessNotificationPolicyPermission(context);
+                showRequestAccessNotificationPolicy = Permissions.getShowRequestAccessNotificationPolicyPermission(context);
             if (permissionType.permission.equals(Manifest.permission.SYSTEM_ALERT_WINDOW))
-                showRequestDrawOverlays = PPApplication.getShowRequestDrawOverlaysPermission(context);
+                showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context);
             if (permissionType.permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE))
                 showRequestReadExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE);
             if (permissionType.permission.equals(Manifest.permission.READ_PHONE_STATE))
@@ -339,7 +339,7 @@ public class GrantPermissionActivity extends Activity {
                         finish();
                         Permissions.releaseReferences();
                         if (mergedNotification)
-                            PPApplication.clearMergedPermissions(context);
+                            Permissions.clearMergedPermissions(context);
                     }
                 });
                 dialogBuilder.show();
@@ -386,7 +386,7 @@ public class GrantPermissionActivity extends Activity {
                     finish();
                     Permissions.releaseReferences();
                     if (mergedNotification)
-                        PPApplication.clearMergedPermissions(getApplicationContext());
+                        Permissions.clearMergedPermissions(getApplicationContext());
                 }
                 //return;
                 break;
@@ -408,14 +408,14 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestWriteSettingsPermission(context, false);
+                        Permissions.setShowRequestWriteSettingsPermission(context, false);
                         requestPermissions(2);
                     }
                 });
                 dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                        Permissions.setShowRequestWriteSettingsPermission(context, true);
                         requestPermissions(2);
                     }
                 });
@@ -428,7 +428,7 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.show();
             }
             else {
-                PPApplication.setShowRequestWriteSettingsPermission(context, true);
+                Permissions.setShowRequestWriteSettingsPermission(context, true);
                 requestPermissions(2);
             }
         }
@@ -441,14 +441,14 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestAccessNotificationPolicyPermission(context, false);
+                        Permissions.setShowRequestAccessNotificationPolicyPermission(context, false);
                         requestPermissions(3);
                     }
                 });
                 dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
+                        Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
                         requestPermissions(3);
                     }
                 });
@@ -461,7 +461,7 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.show();
             }
             else {
-                PPApplication.setShowRequestAccessNotificationPolicyPermission(context, true);
+                Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
                 requestPermissions(3);
             }
         }
@@ -473,14 +473,14 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestDrawOverlaysPermission(context, false);
+                        Permissions.setShowRequestDrawOverlaysPermission(context, false);
                         requestPermissions(4);
                     }
                 });
                 dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                        Permissions.setShowRequestDrawOverlaysPermission(context, true);
                         requestPermissions(4);
                     }
                 });
@@ -493,7 +493,7 @@ public class GrantPermissionActivity extends Activity {
                 dialogBuilder.show();
             }
             else {
-                PPApplication.setShowRequestDrawOverlaysPermission(context, true);
+                Permissions.setShowRequestDrawOverlaysPermission(context, true);
                 requestPermissions(4);
             }
         }
@@ -633,7 +633,7 @@ public class GrantPermissionActivity extends Activity {
         }
         Permissions.releaseReferences();
         if (mergedNotification)
-            PPApplication.clearMergedPermissions(context);
+            Permissions.clearMergedPermissions(context);
 
         //if (grantType != Permissions.GRANT_TYPE_PROFILE) {
             Profile activatedProfile = dataWrapper.getActivatedProfile();

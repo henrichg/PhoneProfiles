@@ -535,7 +535,7 @@ public class DataWrapper {
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        PPApplication.setActivatedProfileForDuration(context, 0);
+        Profile.setActivatedProfileForDuration(context, 0);
 
         Profile profile = Profile.getMappedProfile(_profile, context);
 
@@ -551,7 +551,7 @@ public class DataWrapper {
             long profileId = 0;
             if (activatedProfile != null)
                 profileId = activatedProfile._id;
-            PPApplication.setActivatedProfileForDuration(context, profileId);
+            Profile.setActivatedProfileForDuration(context, profileId);
             ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
         }
 
@@ -747,7 +747,7 @@ public class DataWrapper {
             // boot telefonu
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-            PPApplication.setActivatedProfileForDuration(context, 0);
+            Profile.setActivatedProfileForDuration(context, 0);
 
             if (PPApplication.applicationActivate)
             {
@@ -770,7 +770,7 @@ public class DataWrapper {
             // aktivita bola spustena po boote telefonu
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-            PPApplication.setActivatedProfileForDuration(context, 0);
+            Profile.setActivatedProfileForDuration(context, 0);
 
             if (PPApplication.applicationActivate)
             {

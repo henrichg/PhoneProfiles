@@ -37,8 +37,8 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
             editorProfilesActivity.finish();
         }
 
-        PPApplication.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-        PPApplication.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
+        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
+        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
         PPApplication.setScreenUnlocked(getApplicationContext(), true);
         PPApplication.setMergedRingNotificationVolumes(getApplicationContext(), true);
     }

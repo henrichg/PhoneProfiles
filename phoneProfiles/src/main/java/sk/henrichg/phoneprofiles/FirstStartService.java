@@ -58,7 +58,7 @@ public class FirstStartService extends IntentService {
 
         PPApplication.logE("FirstStartService.onHandleIntent", " application not started");
 
-        PPApplication.clearMergedPermissions(context);
+        Permissions.clearMergedPermissions(context);
 
         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
@@ -70,11 +70,11 @@ public class FirstStartService extends IntentService {
         // install phoneprofiles_silent.ogg
         installTone(TONE_ID, TONE_NAME, context, false);
 
-        PPApplication.setLockscreenDisabled(context, false);
+        ActivateProfileHelper.setLockscreenDisabled(context, false);
 
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        PPApplication.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-        PPApplication.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        ActivateProfileHelper.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+        ActivateProfileHelper.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
         RingerModeChangeReceiver.setRingerMode(context, audioManager);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
             PPNotificationListenerService.setZenMode(context, audioManager);
@@ -84,7 +84,7 @@ public class FirstStartService extends IntentService {
         ImportantInfoNotification.showInfoNotification(context);
 
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        PPApplication.setActivatedProfileForDuration(context, 0);
+        Profile.setActivatedProfileForDuration(context, 0);
 
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
         dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);

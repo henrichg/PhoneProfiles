@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v4.app.NotificationCompat;
@@ -14,31 +15,34 @@ class ImportantInfoNotification {
     // this version code must by <= version code in manifest
     static final int VERSION_CODE_FOR_NEWS = 1800;
 
+    private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START = "show_info_notification_on_start";
+    private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION = "show_info_notification_on_start_version";
+
     static void showInfoNotification(Context context) {
         int packageVersionCode = 0;
         int savedVersionCode = 0;
         try {
             PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             packageVersionCode = pinfo.versionCode;
-            savedVersionCode = PPApplication.getShowInfoNotificationOnStartVersion(context);
+            savedVersionCode = getShowInfoNotificationOnStartVersion(context);
             if (packageVersionCode > savedVersionCode) {
                 //boolean show = (versionCode >= VERSION_CODE_FOR_NEWS);
                 boolean show = canShowNotification(packageVersionCode, savedVersionCode);
-                PPApplication.setShowInfoNotificationOnStart(context, show, packageVersionCode);
+                setShowInfoNotificationOnStart(context, show, packageVersionCode);
             }
             else
-                PPApplication.setShowInfoNotificationOnStartVersion(context, packageVersionCode);
+                setShowInfoNotificationOnStartVersion(context, packageVersionCode);
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
         }
 
-        if ((savedVersionCode == 0) || PPApplication.getShowInfoNotificationOnStart(context, packageVersionCode)) {
+        if ((savedVersionCode == 0) || getShowInfoNotificationOnStart(context, packageVersionCode)) {
 
             showNotification(context,
                     context.getString(R.string.info_notification_title),
                     context.getString(R.string.info_notification_text));
 
-            PPApplication.setShowInfoNotificationOnStart(context, false, packageVersionCode);
+            setShowInfoNotificationOnStart(context, false, packageVersionCode);
         }
     }
 
@@ -103,6 +107,38 @@ class ImportantInfoNotification {
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID);
+    }
+
+
+    static public boolean getShowInfoNotificationOnStart(Context context, int version)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        boolean show = preferences.getBoolean(PREF_SHOW_INFO_NOTIFICATION_ON_START, true);
+        int _version = preferences.getInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, version);
+        return ((_version >= version) && show);
+    }
+
+    static public void setShowInfoNotificationOnStart(Context context, boolean show, int version)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(PREF_SHOW_INFO_NOTIFICATION_ON_START, show);
+        editor.putInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, version);
+        editor.commit();
+    }
+
+    static public int getShowInfoNotificationOnStartVersion(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, 0);
+    }
+
+    static public void setShowInfoNotificationOnStartVersion(Context context, int version)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, version);
+        editor.commit();
     }
 
 }

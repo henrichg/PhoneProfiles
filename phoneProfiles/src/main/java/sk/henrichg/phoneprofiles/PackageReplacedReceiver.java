@@ -32,8 +32,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             calendar.add(Calendar.SECOND, 10);
             alarmMgr.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
 
-            PPApplication.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-            PPApplication.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
             PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
 
             int oldVersionCode = PPApplication.getSavedVersionCode(context.getApplicationContext());
