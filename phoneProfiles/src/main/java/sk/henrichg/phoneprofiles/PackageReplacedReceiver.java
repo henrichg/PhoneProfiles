@@ -34,7 +34,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
             Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
             Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-            PPApplication.setScreenUnlocked(context.getApplicationContext(), true);
+            ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
 
             int oldVersionCode = PPApplication.getSavedVersionCode(context.getApplicationContext());
             PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "oldVersionCode="+oldVersionCode);

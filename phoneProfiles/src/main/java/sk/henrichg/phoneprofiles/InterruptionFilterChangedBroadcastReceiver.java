@@ -30,13 +30,13 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
                     int zenMode = 0;
                     switch (interruptionFilter) {
                         case NotificationManager.INTERRUPTION_FILTER_ALL:
-                            if (PPApplication.vibrationIsOn(context.getApplicationContext(), audioManager, true))
+                            if (ActivateProfileHelper.vibrationIsOn(context.getApplicationContext(), audioManager, true))
                                 zenMode = 4;
                             else
                                 zenMode = 1;
                             break;
                         case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
-                            if (PPApplication.vibrationIsOn(context.getApplicationContext(), audioManager, true))
+                            if (ActivateProfileHelper.vibrationIsOn(context.getApplicationContext(), audioManager, true))
                                 zenMode = 5;
                             else
                                 zenMode = 2;
@@ -73,13 +73,13 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
         PPApplication.logE(TAG, "getZenMode(interruptionFilter=" + interruptionFilter + ')');
         switch (interruptionFilter) {
             case NotificationManager.INTERRUPTION_FILTER_ALL:
-                if (PPApplication.vibrationIsOn(context, audioManager, true))
+                if (ActivateProfileHelper.vibrationIsOn(context, audioManager, true))
                     zenMode = 4;
                 else
                     zenMode = 1;
                 break;
             case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
-                if (PPApplication.vibrationIsOn(context, audioManager, true))
+                if (ActivateProfileHelper.vibrationIsOn(context, audioManager, true))
                     zenMode = 5;
                 else
                     zenMode = 2;
