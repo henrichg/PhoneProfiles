@@ -12,13 +12,15 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
     private long profile_id = 0;
 
+    private static final String EXTRA_PROFILE_NAME = "profile_name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String profileName = intent.getStringExtra(PPApplication.EXTRA_PROFILE_NAME);
+        String profileName = intent.getStringExtra(EXTRA_PROFILE_NAME);
         profileName = profileName.trim();
 
         if (!profileName.isEmpty()) {

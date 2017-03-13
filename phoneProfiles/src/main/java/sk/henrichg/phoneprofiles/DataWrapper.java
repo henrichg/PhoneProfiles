@@ -492,7 +492,7 @@ public class DataWrapper {
         {
             SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
             Editor editor = preferences.edit();
-            editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(PPApplication.PROFILE_NO_ACTIVATE));
+            editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
             editor.commit();
         }
     }
@@ -504,7 +504,7 @@ public class DataWrapper {
         // unlink profiles from Background profile
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
-        editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(PPApplication.PROFILE_NO_ACTIVATE));
+        editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
         editor.commit();
     }
 
@@ -537,7 +537,7 @@ public class DataWrapper {
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         PPApplication.setActivatedProfileForDuration(context, 0);
 
-        Profile profile = PPApplication.getMappedProfile(_profile, context);
+        Profile profile = Profile.getMappedProfile(_profile, context);
 
         Profile activatedProfile = getActivatedProfile();
 
@@ -724,7 +724,7 @@ public class DataWrapper {
 
         long backgroundProfileId = Long.valueOf(PPApplication.applicationBackgroundProfile);
         if ((profile == null) &&
-            (backgroundProfileId != PPApplication.PROFILE_NO_ACTIVATE))
+            (backgroundProfileId != Profile.PROFILE_NO_ACTIVATE))
         {
             profile = getProfileById(backgroundProfileId);
         }

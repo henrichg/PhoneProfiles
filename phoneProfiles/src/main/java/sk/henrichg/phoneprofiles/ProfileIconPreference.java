@@ -54,7 +54,7 @@ public class ProfileIconPreference extends DialogPreference {
         */
 
 
-        imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
+        imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
         isImageResourceID = true;
         useCustomColor = false;
         customColor = 0;
@@ -189,7 +189,7 @@ public class ProfileIconPreference extends DialogPreference {
         try {
             imageIdentifier = splits[0];
         } catch (Exception e) {
-            imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
+            imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
         }
         try {
             isImageResourceID = splits[1].equals("1");
@@ -222,7 +222,7 @@ public class ProfileIconPreference extends DialogPreference {
             try {
                 imageIdentifier = splits[0];
             } catch (Exception e) {
-                imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
+                imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
             }
             try {
                 isImageResourceID = splits[1].equals("1");
@@ -315,7 +315,7 @@ public class ProfileIconPreference extends DialogPreference {
             try {
                 imageIdentifier = splits[0];
             } catch (Exception e) {
-                imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
+                imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
             }
             try {
                 isImageResourceID = splits[1].equals("1");

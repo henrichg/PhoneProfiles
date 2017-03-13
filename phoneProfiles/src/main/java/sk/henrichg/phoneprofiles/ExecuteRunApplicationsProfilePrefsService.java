@@ -26,7 +26,7 @@ public class ExecuteRunApplicationsProfilePrefsService extends IntentService
         Profile profile = dataWrapper.getProfileById(profile_id);
 
         // run execute radios from ActivateProfileHelper
-        profile = PPApplication.getMappedProfile(profile, context);
+        profile = Profile.getMappedProfile(profile, context);
         if (profile != null)
         {
             ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();

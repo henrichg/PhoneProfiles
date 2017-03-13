@@ -56,8 +56,8 @@ public class PhoneCallService extends IntentService {
                 //Log.e("PhoneCallService", "doCallEvent - unlink");
                 Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
                 volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, linkMode);
-                volumeServiceIntent.putExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, false);
+                volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, linkMode);
+                volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_FOR_PROFILE_ACTIVATION, false);
                 context.startService(volumeServiceIntent);
             }
             dataWrapper.invalidateDataWrapper();
@@ -95,7 +95,7 @@ public class PhoneCallService extends IntentService {
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
         Profile profile = dataWrapper.getActivatedProfile();
-        profile = PPApplication.getMappedProfile(profile, context);
+        profile = Profile.getMappedProfile(profile, context);
 
         if (profile != null) {
 

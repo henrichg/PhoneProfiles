@@ -29,14 +29,14 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
         int linkUnlink;
         if (PPApplication.getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes)
-            linkUnlink = intent.getIntExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+            linkUnlink = intent.getIntExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
         else
             linkUnlink = PhoneCallService.LINKMODE_NONE;
         long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
-        profile = PPApplication.getMappedProfile(profile, context);
+        profile = Profile.getMappedProfile(profile, context);
 
-        boolean forProfileActivation = intent.getBooleanExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, false);
+        boolean forProfileActivation = intent.getBooleanExtra(ActivateProfileHelper.EXTRA_FOR_PROFILE_ACTIVATION, false);
 
         if (profile != null)
         {

@@ -69,6 +69,18 @@ public class EditorProfilesActivity extends AppCompatActivity
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "editor_profiles_activity_start_target_helps";
 
+    static final String EXTRA_NEW_PROFILE_MODE = "new_profile_mode";
+    static final String EXTRA_PREDEFINED_PROFILE_INDEX = "predefined_profile_index";
+
+    // request code for startActivityForResult with intent BackgroundActivateProfileActivity
+    static final int REQUEST_CODE_ACTIVATE_PROFILE = 6220;
+    // request code for startActivityForResult with intent ProfilePreferencesActivity
+    static final int REQUEST_CODE_PROFILE_PREFERENCES = 6221;
+    // request code for startActivityForResult with intent PhoneProfilesActivity
+    static final int REQUEST_CODE_APPLICATION_PREFERENCES = 6229;
+    // request code for startActivityForResult with intent "phoneprofiles.intent.action.EXPORTDATA"
+    static final int REQUEST_CODE_REMOTE_EXPORT = 6250;
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -140,8 +152,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 int predefinedProfileIndex = preferences.getInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, 0);
                 arguments = new Bundle();
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile_id);
-                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
+                arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, false);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
@@ -288,7 +300,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         case R.id.menu_settings:
             intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
 
-            startActivityForResult(intent, PPApplication.REQUEST_CODE_APPLICATION_PREFERENCES);
+            startActivityForResult(intent, REQUEST_CODE_APPLICATION_PREFERENCES);
 
             return true;
         case R.id.menu_install_tone:
@@ -400,20 +412,20 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == PPApplication.REQUEST_CODE_ACTIVATE_PROFILE)
+        if (requestCode == REQUEST_CODE_ACTIVATE_PROFILE)
         {
             EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
             if (fragment != null)
                 fragment.doOnActivityResult(requestCode, resultCode, data);
         }
         else
-        if (requestCode == PPApplication.REQUEST_CODE_PROFILE_PREFERENCES)
+        if (requestCode == REQUEST_CODE_PROFILE_PREFERENCES)
         {
             if ((resultCode == RESULT_OK) && (data != null))
             {
                 long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
-                int newProfileMode = data.getIntExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                int predefinedProfileIndex = data.getIntExtra(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+                int newProfileMode = data.getIntExtra(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                int predefinedProfileIndex = data.getIntExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
 
                 if (profile_id > 0)
                 {
@@ -426,17 +438,17 @@ public class EditorProfilesActivity extends AppCompatActivity
                     // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
                     redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex, true);
 
-                    Profile mappedProfile = PPApplication.getMappedProfile(profile, getApplicationContext());
+                    Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
                             true, false, 0, PPApplication.STARTUP_SOURCE_EDITOR, true, this, false);
                 }
                 else
-                if (profile_id == PPApplication.DEFAULT_PROFILE_ID)
+                if (profile_id == Profile.DEFAULT_PROFILE_ID)
                 {
                     // refresh activity for changes of default profile
                     GlobalGUIRoutines.reloadActivity(this, false);
 
-                    Profile defaultProfile = PPApplication.getDefaultProfile(getApplicationContext());
+                    Profile defaultProfile = Profile.getDefaultProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), defaultProfile, false,
                             true, false, 0, PPApplication.STARTUP_SOURCE_EDITOR, true, this, false);
 
@@ -444,11 +456,11 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         }
         else
-        if (requestCode == PPApplication.REQUEST_CODE_APPLICATION_PREFERENCES)
+        if (requestCode == REQUEST_CODE_APPLICATION_PREFERENCES)
         {
             if ((resultCode == RESULT_OK) && (data != null))
             {
-                boolean restart = data.getBooleanExtra(PPApplication.EXTRA_RESET_EDITOR, false);
+                boolean restart = data.getBooleanExtra(PhoneProfilesPreferencesActivity.EXTRA_RESET_EDITOR, false);
 
                 if (restart)
                 {
@@ -458,7 +470,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         }
         else
-        if (requestCode == PPApplication.REQUEST_CODE_REMOTE_EXPORT)
+        if (requestCode == REQUEST_CODE_REMOTE_EXPORT)
         {
             if (resultCode == RESULT_OK)
             {
@@ -681,7 +693,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     final PackageManager packageManager = getPackageManager();
                     List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
                     if (list.size() > 0)
-                        startActivityForResult(intent, PPApplication.REQUEST_CODE_REMOTE_EXPORT);
+                        startActivityForResult(intent, REQUEST_CODE_REMOTE_EXPORT);
                     else
                         importExportErrorDialog(1);
                 } else
@@ -850,9 +862,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             intent.putExtra(PPApplication.EXTRA_PROFILE_ID, 0L);
         else
             intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-        intent.putExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
-        intent.putExtra(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-        startActivityForResult(intent, PPApplication.REQUEST_CODE_PROFILE_PREFERENCES);
+        intent.putExtra(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
+        intent.putExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+        startActivityForResult(intent, REQUEST_CODE_PROFILE_PREFERENCES);
     }
 
     public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex, boolean startTargetHelps) {
@@ -871,8 +883,8 @@ public class EditorProfilesActivity extends AppCompatActivity
             {
                 Bundle arguments = new Bundle();
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, editMode);
-                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
+                arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, startTargetHelps);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
@@ -913,8 +925,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 // restart profile preferences fragmentu
                 Bundle arguments = new Bundle();
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                arguments.putInt(PPApplication.EXTRA_NEW_PROFILE_MODE, newProfileMode);
-                arguments.putInt(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+                arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, newProfileMode);
+                arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
                 arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, startTargetHelps);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);

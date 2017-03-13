@@ -141,7 +141,7 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         {
             if ((dialog.addNoActivateItem == 1) && (position == 0))
             {
-                holder.radioBtn.setChecked((profileId == PPApplication.PROFILE_NO_ACTIVATE));
+                holder.radioBtn.setChecked((profileId == Profile.PROFILE_NO_ACTIVATE));
                 holder.profileLabel.setText(vi.getResources().getString(R.string.profile_preference_profile_end_no_activate));
                 //holder.profileIcon.setImageResource(R.drawable.ic_empty);
                 holder.profileIcon.setVisibility(View.GONE);

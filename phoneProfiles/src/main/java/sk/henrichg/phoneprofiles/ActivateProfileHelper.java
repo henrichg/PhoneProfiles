@@ -85,6 +85,9 @@ public class ActivateProfileHelper {
     @SuppressWarnings("WeakerAccess")
     static final int ZENMODE_SILENT = 99;
 
+    static final String EXTRA_LINKUNLINK_VOLUMES = "link_unlink_volumes";
+    static final String EXTRA_FOR_PROFILE_ACTIVATION = "for_profile_activation";
+
     public ActivateProfileHelper()
     {
 
@@ -123,7 +126,7 @@ public class ActivateProfileHelper {
 
         // nahodenie network type
         if (profile._deviceNetworkType >= 100) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == PPApplication.PREFERENCE_ALLOWED)
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, context) == PPApplication.PREFERENCE_ALLOWED)
             {
                 setPreferredNetworkType(context, profile._deviceNetworkType - 100);
                 //try { Thread.sleep(200); } catch (InterruptedException e) { }
@@ -134,7 +137,7 @@ public class ActivateProfileHelper {
 
         // nahodenie mobilnych dat
         if (profile._deviceMobileData != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean _isMobileData = isMobileData(context);
                 boolean _setMobileData = false;
                 switch (profile._deviceMobileData) {
@@ -167,7 +170,7 @@ public class ActivateProfileHelper {
         // nahodenie WiFi AP
         boolean canChangeWifi = true;
         if (profile._deviceWiFiAP != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_ALLOWED) {
                 WifiApManager wifiApManager = null;
                 try {
                     wifiApManager = new WifiApManager(context);
@@ -210,7 +213,7 @@ public class ActivateProfileHelper {
         if (canChangeWifi) {
             // nahodenie WiFi
             if (profile._deviceWiFi != 0) {
-                if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_ALLOWED) {
+                if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_ALLOWED) {
                     if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
                         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                         int wifiState = wifiManager.getWifiState();
@@ -250,7 +253,7 @@ public class ActivateProfileHelper {
             }
 
             // connect to SSID
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_ALLOWED) {
                 if (!profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
                     WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                     int wifiState = wifiManager.getWifiState();
@@ -297,7 +300,7 @@ public class ActivateProfileHelper {
 
         // nahodenie bluetooth
         if (profile._deviceBluetooth != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_ALLOWED) {
                 BluetoothAdapter bluetoothAdapter;
                 if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -338,7 +341,7 @@ public class ActivateProfileHelper {
 
         // nahodenie GPS
         if (profile._deviceGPS != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean isEnabled;
                 if (android.os.Build.VERSION.SDK_INT < 19)
                     isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
@@ -367,7 +370,7 @@ public class ActivateProfileHelper {
 
         // nahodenie NFC
         if (profile._deviceNFC != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_ALLOWED) {
                 //Log.e("ActivateProfileHelper.doExecuteForRadios", "allowed");
                 NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
                 if (nfcAdapter != null) {
@@ -398,7 +401,7 @@ public class ActivateProfileHelper {
         boolean _isAirplaneMode = false;
         boolean _setAirplaneMode = false;
         if (profile._deviceAirplaneMode != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
                 _isAirplaneMode = isAirplaneMode(context);
                 switch (profile._deviceAirplaneMode) {
                     case 1:
@@ -683,7 +686,7 @@ public class ActivateProfileHelper {
         }
 
         if (lValue != -1) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
                     == PPApplication.PREFERENCE_ALLOWED) {
                 if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
                     if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
@@ -764,7 +767,7 @@ public class ActivateProfileHelper {
     }
 
     private void setNotificationLed(int value) {
-        if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_NOTIFICATION_LED, context)
+        if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, context)
                 == PPApplication.PREFERENCE_ALLOWED) {
             if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                 Settings.System.putInt(context.getContentResolver(), "notification_light_pulse", value);
@@ -1042,14 +1045,14 @@ public class ActivateProfileHelper {
         // rozdelit zvonenie a notifikacie - zial je to oznacene ako @Hide :-(
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
 
-        final Profile profile = PPApplication.getMappedProfile(_profile, context);
+        final Profile profile = Profile.getMappedProfile(_profile, context);
 
         // nahodenie volume a ringer modu
         // run service for execute volumes
         Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
         volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-        volumeServiceIntent.putExtra(PPApplication.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
-        volumeServiceIntent.putExtra(PPApplication.EXTRA_FOR_PROFILE_ACTIVATION, true);
+        volumeServiceIntent.putExtra(EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+        volumeServiceIntent.putExtra(EXTRA_FOR_PROFILE_ACTIVATION, true);
         //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
         context.startService(volumeServiceIntent);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -1172,7 +1175,7 @@ public class ActivateProfileHelper {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS,
                             profile.getDeviceBrightnessManualValue(context));
-                    if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
+                    if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
                             == PPApplication.PREFERENCE_ALLOWED) {
                         if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                             Settings.System.putFloat(context.getContentResolver(),
@@ -1283,7 +1286,7 @@ public class ActivateProfileHelper {
 
         // set power save mode
         if (profile._devicePowerSaveMode != 0) {
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
                 PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
                 boolean _isPowerSaveMode = false;
                 if (Build.VERSION.SDK_INT >= 21)
@@ -1323,7 +1326,7 @@ public class ActivateProfileHelper {
         {
             // preferences, ktore vyzaduju interakciu uzivatela
 
-            if (PPApplication.isProfilePreferenceAllowed(PPApplication.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_ALLOWED)
+            if (PPApplication.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_ALLOWED)
             {
                 if (profile._deviceMobileDataPrefs == 1)
                 {
@@ -1352,7 +1355,7 @@ public class ActivateProfileHelper {
                 }
             }
 
-            //if (PPApplication.hardwareCheck(PPApplication.PREF_PROFILE_DEVICE_GPS, context))
+            //if (PPApplication.hardwareCheck(Profile.PREF_PROFILE_DEVICE_GPS, context))
             //{  No check only GPS
                 if (profile._deviceLocationServicePrefs == 1)
                 {
@@ -1570,7 +1573,7 @@ public class ActivateProfileHelper {
             else
             {
                 isIconResourceID = true;
-                iconIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
+                iconIdentifier = Profile.PROFILE_ICON_DEFAULT;
                 profileName = context.getResources().getString(R.string.profiles_header_profile_name_no_activated);
                 iconBitmap = null;
                 preferencesIndicator = null;

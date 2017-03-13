@@ -30,7 +30,7 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
         long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         Profile profile = dataWrapper.getProfileById(profile_id);
 
-        profile = PPApplication.getMappedProfile(profile, context);
+        profile = Profile.getMappedProfile(profile, context);
         if (profile != null) {
             if (Permissions.checkProfileRadioPreferences(context, profile)) {
                 // run execute radios from ActivateProfileHelper

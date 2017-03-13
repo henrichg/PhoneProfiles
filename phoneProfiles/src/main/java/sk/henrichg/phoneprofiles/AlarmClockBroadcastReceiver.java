@@ -24,7 +24,7 @@ public class AlarmClockBroadcastReceiver extends BroadcastReceiver {
                 DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
                 Profile profile = dataWrapper.getActivatedProfile();
-                profile = PPApplication.getMappedProfile(profile, context);
+                profile = Profile.getMappedProfile(profile, context);
 
                 if (profile != null) {
                     /*PPNotificationListenerService.requestInterruptionFilter(context.getApplicationContext(),

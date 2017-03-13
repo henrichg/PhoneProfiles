@@ -196,7 +196,7 @@ public class ActivateProfileListFragment extends Fragment {
                     for (int i = 0; i < 3 - modulo; i++)
                         profileList.add(DataWrapper.getNoinitializedProfile(
                                 dataWrapper.context.getResources().getString(R.string.profile_name_default),
-                                PPApplication.PROFILE_ICON_DEFAULT, PORDER_FOR_IGNORED_PROFILE));
+                                Profile.PROFILE_ICON_DEFAULT, PORDER_FOR_IGNORED_PROFILE));
                 }
             }
             Collections.sort(profileList, new ProfileComparator());
