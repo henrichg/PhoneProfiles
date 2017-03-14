@@ -89,6 +89,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     Toolbar editorToolbar;
 
+    AddProfileDialog addProfileDialog;
+
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +201,10 @@ public class EditorProfilesActivity extends AppCompatActivity
     protected void onStop()
     {
         super.onStop();
+
+        if (addProfileDialog != null && addProfileDialog.mDialog != null && addProfileDialog.mDialog.isShowing())
+            addProfileDialog.mDialog.dismiss();
+
         if (instance == this)
             instance = null;
     }
