@@ -223,7 +223,7 @@ class EditorProfileListAdapter extends BaseAdapter
         if (convertView == null)
         {
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
-            if (PPApplication.applicationEditorPrefIndicator)
+            if (ApplicationPreferences.applicationEditorPrefIndicator(fragment.getActivity()))
                 vi = inflater.inflate(R.layout.editor_profile_list_item, parent, false);
             else
                 vi = inflater.inflate(R.layout.editor_profile_list_item_no_indicator, parent, false);
@@ -232,7 +232,7 @@ class EditorProfileListAdapter extends BaseAdapter
             holder.profileName = (TextView) vi.findViewById(R.id.main_list_item_profile_name);
             holder.profileIcon = (ImageView)vi.findViewById(R.id.main_list_item_profile_icon);
             holder.profileItemEditMenu = (ImageView)vi.findViewById(R.id.main_list_item_edit_menu);
-            if (PPApplication.applicationEditorPrefIndicator)
+            if (ApplicationPreferences.applicationEditorPrefIndicator(fragment.getActivity()))
                 holder.profileIndicator = (ImageView)vi.findViewById(R.id.main_list_profile_pref_indicator);
             vi.setTag(holder);        
         }
@@ -243,7 +243,7 @@ class EditorProfileListAdapter extends BaseAdapter
 
         final Profile profile = profileList.get(position);
 
-        if (profile._checked && (!PPApplication.applicationEditorHeader))
+        if (profile._checked && (!ApplicationPreferences.applicationEditorHeader(fragment.getActivity())))
         {
             holder.profileName.setTypeface(null, Typeface.BOLD);
             holder.profileName.setTextSize(16);
@@ -275,7 +275,7 @@ class EditorProfileListAdapter extends BaseAdapter
             holder.profileIcon.setImageBitmap(profile._iconBitmap);
         }
         
-        if (PPApplication.applicationEditorPrefIndicator)
+        if (ApplicationPreferences.applicationEditorPrefIndicator(fragment.getActivity()))
         {
             //profilePrefIndicatorImageView.setImageBitmap(null);
             //Bitmap bitmap = ProfilePreferencesIndicator.paint(profile, vi.getContext());
@@ -307,7 +307,7 @@ class EditorProfileListAdapter extends BaseAdapter
             //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
             int circleColor = 0xFFFFFF;
-            if (PPApplication.applicationTheme.equals("dark"))
+            if (ApplicationPreferences.applicationTheme(fragment.getActivity()).equals("dark"))
                 circleColor = 0x7F7F7F;
 
             if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {

@@ -55,14 +55,14 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            if (PPApplication.applicationTheme.equals("material"))
+            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("material"))
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff237e9f"));
             else
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
         }
         else
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (PPApplication.applicationTheme.equals("material"))
+            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("material"))
                 getWindow().setStatusBarColor(Color.parseColor("#1d6681"));
             else
                 getWindow().setStatusBarColor(Color.parseColor("#141414"));
@@ -75,10 +75,10 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         //getSupportActionBar().setTitle(R.string.title_activity_phone_profiles_preferences);
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, MODE_PRIVATE);
-        activeLanguage = preferences.getString(PPApplication.PREF_APPLICATION_LANGUAGE, "system");
-        activeTheme = preferences.getString(PPApplication.PREF_APPLICATION_THEME, "material");
-        showEditorPrefIndicator = preferences.getBoolean(PPApplication.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
-        showEditorHeader = preferences.getBoolean(PPApplication.PREF_APPLICATION_EDITOR_HEADER, true);
+        activeLanguage = preferences.getString(ApplicationPreferences.PREF_APPLICATION_LANGUAGE, "system");
+        activeTheme = preferences.getString(ApplicationPreferences.PREF_APPLICATION_THEME, "material");
+        showEditorPrefIndicator = preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
+        showEditorHeader = preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
 
         fragment = createFragment(false);
@@ -149,26 +149,26 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
     @Override
     public void finish() {
 
-        PPApplication.loadPreferences(getApplicationContext());
+        //PPApplication.loadPreferences(getApplicationContext());
 
-        if (!activeLanguage.equals(PPApplication.applicationLanguage))
+        if (!activeLanguage.equals(ApplicationPreferences.applicationLanguage(getApplicationContext())))
         {
             GlobalGUIRoutines.setLanguage(getBaseContext());
             invalidateEditor = true;
         }
         else
-        if (!activeTheme.equals(PPApplication.applicationTheme))
+        if (!activeTheme.equals(ApplicationPreferences.applicationTheme(getApplicationContext())))
         {
             //EditorProfilesActivity.setTheme(this, false);
             invalidateEditor = true;
         }
         else
-        if (showEditorPrefIndicator != PPApplication.applicationEditorPrefIndicator)
+        if (showEditorPrefIndicator != ApplicationPreferences.applicationEditorPrefIndicator(getApplicationContext()))
         {
             invalidateEditor = true;
         }
         else
-        if (showEditorHeader != PPApplication.applicationEditorHeader)
+        if (showEditorHeader != ApplicationPreferences.applicationEditorHeader(getApplicationContext()))
         {
             invalidateEditor = true;
         }

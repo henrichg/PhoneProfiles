@@ -15,7 +15,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
-        PPApplication.loadPreferences(context);
+        //PPApplication.loadPreferences(context);
 
         if (PPApplication.getApplicationStarted(context, false))
         {
@@ -36,7 +36,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                     long activateProfileId = 0;
                     if (profile._afterDurationDo == Profile.AFTERDURATIONDO_BACKGROUNPROFILE)
                     {
-                        activateProfileId = Long.valueOf(PPApplication.applicationBackgroundProfile);
+                        activateProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
                         if (activateProfileId == Profile.PROFILE_NO_ACTIVATE)
                             activateProfileId = 0;
                     }

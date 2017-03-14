@@ -496,8 +496,8 @@ public class ActivateProfileHelper {
 
     public static boolean getMergedRingNotificationVolumes(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        if (PPApplication.applicationForceSetMergeRingNotificationVolumes > 0)
-            return PPApplication.applicationForceSetMergeRingNotificationVolumes == 1;
+        if (ApplicationPreferences.applicationForceSetMergeRingNotificationVolumes(context) > 0)
+            return ApplicationPreferences.applicationForceSetMergeRingNotificationVolumes(context) == 1;
         else
             return preferences.getBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, true);
     }
@@ -577,7 +577,7 @@ public class ActivateProfileHelper {
                 int callState = telephony.getCallState();
 
                 boolean volumesSet = false;
-                if (getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes) {
+                if (getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
                     //if (doUnlink) {
                     //if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
                     if (callState == TelephonyManager.CALL_STATE_RINGING) {
@@ -1683,7 +1683,7 @@ public class ActivateProfileHelper {
             // no refres notification
             return;
 
-        if (PPApplication.notificationStatusBar)
+        if (ApplicationPreferences.notificationStatusBar(context))
         {
             // close showed notification
             //notificationManager.cancel(PPApplication.NOTIFICATION_ID);
@@ -1698,10 +1698,10 @@ public class ActivateProfileHelper {
             // vytvorenie samotnej notifikacie
             Notification.Builder notificationBuilder;
             RemoteViews contentView;
-            if (PPApplication.notificationTheme.equals("1"))
+            if (ApplicationPreferences.notificationTheme(context).equals("1"))
                 contentView = new RemoteViews(context.getPackageName(), R.layout.notification_drawer_dark);
             else
-            if (PPApplication.notificationTheme.equals("2"))
+            if (ApplicationPreferences.notificationTheme(context).equals("2"))
                 contentView = new RemoteViews(context.getPackageName(), R.layout.notification_drawer_light);
             else
                 contentView = new RemoteViews(context.getPackageName(), R.layout.notification_drawer);
@@ -1733,9 +1733,9 @@ public class ActivateProfileHelper {
                     .setContentIntent(pIntent);
 
             if (android.os.Build.VERSION.SDK_INT >= 16) {
-                if (PPApplication.notificationShowInStatusBar) {
+                if (ApplicationPreferences.notificationShowInStatusBar(context)) {
                     boolean screenUnlocked = getScreenUnlocked(context);
-                    if ((PPApplication.notificationHideInLockscreen && (!screenUnlocked)) ||
+                    if ((ApplicationPreferences.notificationHideInLockscreen(context) && (!screenUnlocked)) ||
                             ((profile != null) && profile._hideStatusBarIcon))
                         notificationBuilder.setPriority(Notification.PRIORITY_MIN);
                     else
@@ -1757,7 +1757,7 @@ public class ActivateProfileHelper {
             {
                 int iconSmallResource;
                 if (iconBitmap != null) {
-                    if (PPApplication.notificationStatusBarStyle.equals("0")) {
+                    if (ApplicationPreferences.notificationStatusBarStyle(context).equals("0")) {
                         // colorful icon
 
                         // FC in Note 4, 6.0.1 :-/
@@ -1789,7 +1789,7 @@ public class ActivateProfileHelper {
                     contentView.setImageViewBitmap(R.id.notification_activated_profile_icon, iconBitmap);
                 }
                 else {
-                    if (PPApplication.notificationStatusBarStyle.equals("0")) {
+                    if (ApplicationPreferences.notificationStatusBarStyle(context).equals("0")) {
                         // colorful icon
                         iconSmallResource = context.getResources().getIdentifier(iconIdentifier + "_notify_color", "drawable", context.getPackageName());
                         if (iconSmallResource == 0)
@@ -1831,7 +1831,7 @@ public class ActivateProfileHelper {
                 }
                 else {
                     int iconSmallResource;
-                    if (PPApplication.notificationStatusBarStyle.equals("0"))
+                    if (ApplicationPreferences.notificationStatusBarStyle(context).equals("0"))
                         iconSmallResource = R.drawable.ic_profile_default;
                     else
                         iconSmallResource = R.drawable.ic_profile_default_notify;
@@ -1848,13 +1848,13 @@ public class ActivateProfileHelper {
             if (android.os.Build.VERSION.SDK_INT < 24)
                 contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
 
-            if (PPApplication.notificationTextColor.equals("1")) {
+            if (ApplicationPreferences.notificationTextColor(context).equals("1")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
                 if (android.os.Build.VERSION.SDK_INT >= 24)
                     contentView.setTextColor(R.id.notification_activated_app_name, Color.BLACK);
             }
             else
-            if (PPApplication.notificationTextColor.equals("2")) {
+            if (ApplicationPreferences.notificationTextColor(context).equals("2")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
                 if (android.os.Build.VERSION.SDK_INT >= 24)
                     contentView.setTextColor(R.id.notification_activated_app_name, Color.WHITE);
@@ -1863,7 +1863,7 @@ public class ActivateProfileHelper {
 
             //contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator,
             //		ProfilePreferencesIndicator.paint(profile, context));
-            if ((preferencesIndicator != null) && (PPApplication.notificationPrefIndicator))
+            if ((preferencesIndicator != null) && (ApplicationPreferences.notificationPrefIndicator(context)))
                 contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator, preferencesIndicator);
             else
                 contentView.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
@@ -1873,7 +1873,7 @@ public class ActivateProfileHelper {
             Notification notification = notificationBuilder.build();
 
 
-            if (PPApplication.notificationStatusBarPermanent)
+            if (ApplicationPreferences.notificationStatusBarPermanent(context))
                 {
                     //notification.flags |= Notification.FLAG_NO_CLEAR;
                     notification.flags |= Notification.FLAG_ONGOING_EVENT;
@@ -1900,7 +1900,7 @@ public class ActivateProfileHelper {
 
     private void setAlarmForNotificationCancel()
     {
-        if (PPApplication.notificationStatusBarCancel.isEmpty() || PPApplication.notificationStatusBarCancel.equals("0"))
+        if (ApplicationPreferences.notificationStatusBarCancel(context).isEmpty() || ApplicationPreferences.notificationStatusBarCancel(context).equals("0"))
             return;
 
         Intent intent = new Intent(context, NotificationCancelAlarmBroadcastReceiver.class);
@@ -1910,7 +1910,7 @@ public class ActivateProfileHelper {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
 
         Calendar now = Calendar.getInstance();
-        long time = now.getTimeInMillis() + Integer.valueOf(PPApplication.notificationStatusBarCancel) * 1000;
+        long time = now.getTimeInMillis() + Integer.valueOf(ApplicationPreferences.notificationStatusBarCancel(context)) * 1000;
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }

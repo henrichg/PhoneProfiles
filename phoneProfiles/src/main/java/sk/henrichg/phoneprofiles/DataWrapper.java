@@ -488,11 +488,11 @@ public class DataWrapper {
         profileList.remove(profile);
 
         // unlink profile from Background profile
-        if (Long.valueOf(PPApplication.applicationBackgroundProfile) == profile._id)
+        if (Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context)) == profile._id)
         {
             SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
             Editor editor = preferences.edit();
-            editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
+            editor.putString(ApplicationPreferences.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
             editor.commit();
         }
     }
@@ -504,7 +504,7 @@ public class DataWrapper {
         // unlink profiles from Background profile
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
         Editor editor = preferences.edit();
-        editor.putString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
+        editor.putString(ApplicationPreferences.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
         editor.commit();
     }
 
@@ -558,7 +558,7 @@ public class DataWrapper {
         activateProfileHelper.showNotification(profile);
         activateProfileHelper.updateWidget();
 
-        if (PPApplication.notificationsToast && (!ActivateProfileHelper.lockRefresh))
+        if (ApplicationPreferences.notificationsToast(context) && (!ActivateProfileHelper.lockRefresh))
         {
             // toast notification
             if (toastHandler != null)
@@ -597,7 +597,7 @@ public class DataWrapper {
 
     private void activateProfileWithAlert(Profile profile, int startupSource, boolean interactive, Activity activity)
     {
-        if (interactive && (PPApplication.applicationActivateWithAlert ||
+        if (interactive && (ApplicationPreferences.applicationActivateWithAlert(context) ||
                             (startupSource == PPApplication.STARTUP_SOURCE_EDITOR)))
         {
             // set theme and language for dialog alert ;-)
@@ -695,7 +695,7 @@ public class DataWrapper {
         if (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR)
         {
             finish = false;
-            if (PPApplication.applicationClose)
+            if (ApplicationPreferences.applicationClose(context))
             {
                 // ma sa zatvarat aktivita po aktivacii
                 if (PPApplication.getApplicationStarted(activity.getApplicationContext(), false))
@@ -722,7 +722,7 @@ public class DataWrapper {
         // pre profil, ktory je prave aktivny, treba aktualizovat aktivitu
         profile = getActivatedProfile();
 
-        long backgroundProfileId = Long.valueOf(PPApplication.applicationBackgroundProfile);
+        long backgroundProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
         if ((profile == null) &&
             (backgroundProfileId != Profile.PROFILE_NO_ACTIVATE))
         {
@@ -749,7 +749,7 @@ public class DataWrapper {
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
 
-            if (PPApplication.applicationActivate)
+            if (ApplicationPreferences.applicationActivate(context))
             {
                 // je nastavene, ze pri starte sa ma aktivita aktivovat
                 actProfile = true;
@@ -772,7 +772,7 @@ public class DataWrapper {
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
 
-            if (PPApplication.applicationActivate)
+            if (ApplicationPreferences.applicationActivate(context))
             {
                 // je nastavene, ze pri starte sa ma aktivita aktivovat
                 actProfile = true;

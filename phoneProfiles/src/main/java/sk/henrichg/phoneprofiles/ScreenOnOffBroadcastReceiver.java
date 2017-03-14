@@ -25,7 +25,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             PPApplication.lockDeviceActivity.overridePendingTransition(0, 0);
         }
 
-        PPApplication.loadPreferences(context);
+        //PPApplication.loadPreferences(context);
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON))
             PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
@@ -33,8 +33,8 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
             ActivateProfileHelper.setScreenUnlocked(context, false);
 
-            if (PPApplication.notificationShowInStatusBar &&
-                    PPApplication.notificationHideInLockscreen) {
+            if (ApplicationPreferences.notificationShowInStatusBar(context) &&
+                    ApplicationPreferences.notificationHideInLockscreen(context)) {
                 DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                 dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                 //dataWrapper.getActivateProfileHelper().removeNotification();
@@ -52,8 +52,8 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
             dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
 
-            if (PPApplication.notificationShowInStatusBar &&
-                PPApplication.notificationHideInLockscreen) {
+            if (ApplicationPreferences.notificationShowInStatusBar(context) &&
+                    ApplicationPreferences.notificationHideInLockscreen(context)) {
                 //dataWrapper.getActivateProfileHelper().removeNotification();
                 //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                 Profile activatedProfile = dataWrapper.getActivatedProfile();
@@ -77,8 +77,8 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
-            if (PPApplication.notificationShowInStatusBar &&
-                    PPApplication.notificationHideInLockscreen) {
+            if (ApplicationPreferences.notificationShowInStatusBar(context) &&
+                    ApplicationPreferences.notificationHideInLockscreen(context)) {
                 DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
                 dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
                 //dataWrapper.getActivateProfileHelper().removeNotification();

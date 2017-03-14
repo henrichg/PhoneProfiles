@@ -44,7 +44,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         instance = this;
 
-        PPApplication.loadPreferences(getApplicationContext());
+        //PPApplication.loadPreferences(getApplicationContext());
         GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 
@@ -91,8 +91,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
         final float scale = getResources().getDisplayMetrics().density;
 
         // add header height
-        if (PPApplication.applicationActivatorHeader) {
-            if (!PPApplication.applicationActivatorGridLayout)
+        if (ApplicationPreferences.applicationActivatorHeader(getApplicationContext())) {
+            if (!ApplicationPreferences.applicationActivatorGridLayout(getApplicationContext()))
                 popupHeight = popupHeight + 62f * scale;
             else
                 popupHeight = popupHeight + 74f * scale;
@@ -103,7 +103,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         int profileCount = dataWrapper.getDatabaseHandler().getProfilesCount();
         dataWrapper.invalidateDataWrapper();
 
-        if (!PPApplication.applicationActivatorGridLayout)
+        if (!ApplicationPreferences.applicationActivatorGridLayout(getApplicationContext()))
         {
             // add list items height
             popupHeight = popupHeight + (60f * scale * profileCount); // item
@@ -296,7 +296,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 actionEditProfilesIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
 
                 int circleColor = 0xFFFFFF;
-                if (PPApplication.applicationTheme.equals("dark"))
+                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
                     circleColor = 0x7F7F7F;
 
                 final TapTargetSequence sequence = new TapTargetSequence(ActivatorTargetHelpsActivity.activity);

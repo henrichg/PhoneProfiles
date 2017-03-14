@@ -19,7 +19,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
         Context context = getApplicationContext();
 
-        PPApplication.loadPreferences(context);
+        //PPApplication.loadPreferences(context);
 
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
@@ -28,7 +28,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
         aph.initialize(dataWrapper, context);
 
         int linkUnlink;
-        if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && PPApplication.applicationUnlinkRingerNotificationVolumes)
+        if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context))
             linkUnlink = intent.getIntExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
         else
             linkUnlink = PhoneCallService.LINKMODE_NONE;

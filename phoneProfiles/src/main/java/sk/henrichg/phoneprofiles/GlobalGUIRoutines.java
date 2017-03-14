@@ -43,7 +43,7 @@ public class GlobalGUIRoutines {
         if (android.os.Build.VERSION.SDK_INT < 24) {
 
             // jazyk na aky zmenit
-            String lang = PPApplication.applicationLanguage;
+            String lang = ApplicationPreferences.applicationLanguage(context);
 
             Locale appLocale;
 
@@ -74,16 +74,16 @@ public class GlobalGUIRoutines {
         }
 
         // collator for application locale sorting
-        collator = getCollator();
+        collator = getCollator(context);
 
         //languageChanged = restart;
     }
 
-    private static Collator getCollator()
+    private static Collator getCollator(Context context)
     {
         if (android.os.Build.VERSION.SDK_INT < 24) {
             // get application Locale
-            String lang = PPApplication.applicationLanguage;
+            String lang = ApplicationPreferences.applicationLanguage(context);
             Locale appLocale;
             if (!lang.equals("system")) {
                 String[] langSplit = lang.split("-");
@@ -110,11 +110,11 @@ public class GlobalGUIRoutines {
 
     public static void setTheme(Activity activity, boolean forPopup, boolean withToolbar)
     {
-        activity.setTheme(getTheme(forPopup, withToolbar));
+        activity.setTheme(getTheme(forPopup, withToolbar, activity));
     }
 
-    private static int getTheme(boolean forPopup, boolean withToolbar) {
-        if (PPApplication.applicationTheme.equals("material"))
+    private static int getTheme(boolean forPopup, boolean withToolbar, Context context) {
+        if (ApplicationPreferences.applicationTheme(context).equals("material"))
         {
             if (forPopup)
             {
@@ -132,7 +132,7 @@ public class GlobalGUIRoutines {
             }
         }
         else
-        if (PPApplication.applicationTheme.equals("dark"))
+        if (ApplicationPreferences.applicationTheme(context).equals("dark"))
         {
             if (forPopup)
             {
@@ -150,7 +150,7 @@ public class GlobalGUIRoutines {
             }
         }
         else
-        if (PPApplication.applicationTheme.equals("dlight"))
+        if (ApplicationPreferences.applicationTheme(context).equals("dlight"))
         {
             if (forPopup)
             {

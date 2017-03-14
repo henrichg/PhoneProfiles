@@ -117,7 +117,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            if (PPApplication.applicationTheme.equals("material"))
+            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("material"))
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff237e9f"));
             else
                 tintManager.setStatusBarTintColor(Color.parseColor("#ff202020"));
@@ -528,7 +528,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if (what == 1)
                     {
-                        if (key.equals(PPApplication.PREF_APPLICATION_THEME))
+                        if (key.equals(ApplicationPreferences.PREF_APPLICATION_THEME))
                         {
                             if (v.equals("light"))
                                 prefEdit.putString(key, "material");
@@ -620,7 +620,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     unlockScreenOrientation();
 
                     if (result == 1) {
-                        PPApplication.loadPreferences(getApplicationContext());
+                        //PPApplication.loadPreferences(getApplicationContext());
 
                         dataWrapper.clearProfileList();
                         dataWrapper.getDatabaseHandler().deactivateProfile();
@@ -1019,7 +1019,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 final Display display = getWindowManager().getDefaultDisplay();
 
                 int circleColor = 0xFFFFFF;
-                if (PPApplication.applicationTheme.equals("dark"))
+                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
                     circleColor = 0x7F7F7F;
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);

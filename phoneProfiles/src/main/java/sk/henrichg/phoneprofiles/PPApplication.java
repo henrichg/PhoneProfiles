@@ -89,47 +89,6 @@ public class PPApplication extends Application {
     static final String PERMISSIONS_PREFS_NAME = "permissions_list";
     static final String WIFI_CONFIGURATION_LIST_PREFS_NAME = "wifi_configuration_list";
 
-    public static final String PREF_APPLICATION_START_ON_BOOT = "applicationStartOnBoot";
-    public static final String PREF_APPLICATION_ACTIVATE = "applicationActivate";
-    public static final String PREF_APPLICATION_ALERT = "applicationAlert";
-    public static final String PREF_APPLICATION_CLOSE = "applicationClose";
-    public static final String PREF_APPLICATION_LONG_PRESS_ACTIVATION = "applicationLongClickActivation";
-    public static final String PREF_APPLICATION_LANGUAGE = "applicationLanguage";
-    public static final String PREF_APPLICATION_THEME = "applicationTheme";
-    public static final String PREF_APPLICATION_ACTIVATOR_PREF_INDICATOR = "applicationActivatorPrefIndicator";
-    public static final String PREF_APPLICATION_EDITOR_PREF_INDICATOR = "applicationEditorPrefIndicator";
-    public static final String PREF_APPLICATION_ACTIVATOR_HEADER = "applicationActivatorHeader";
-    public static final String PREF_APPLICATION_EDITOR_HEADER = "applicationEditorHeader";
-    public static final String PREF_NOTIFICATION_TOAST = "notificationsToast";
-    public static final String PREF_NOTIFICATION_STATUS_BAR  = "notificationStatusBar";
-    public static final String PREF_NOTIFICATION_STATUS_BAR_STYLE  = "notificationStatusBarStyle";
-    public static final String PREF_NOTIFICATION_STATUS_BAR_PERMANENT  = "notificationStatusBarPermanent";
-    public static final String PREF_NOTIFICATION_STATUS_BAR_CANCEL  = "notificationStatusBarCancel";
-    public static final String PREF_NOTIFICATION_SHOW_IN_STATUS_BAR  = "notificationShowInStatusBar";
-    public static final String PREF_NOTIFICATION_TEXT_COLOR = "notificationTextColor";
-    public static final String PREF_APPLICATION_WIDGET_LIST_PREF_INDICATOR = "applicationWidgetListPrefIndicator";
-    public static final String PREF_APPLICATION_WIDGET_LIST_HEADER = "applicationWidgetListHeader";
-    public static final String PREF_APPLICATION_WIDGET_LIST_BACKGROUND = "applicationWidgetListBackground";
-    public static final String PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_B = "applicationWidgetListLightnessB";
-    public static final String PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_T = "applicationWidgetListLightnessT";
-    public static final String PREF_APPLICATION_WIDGET_ICON_COLOR = "applicationWidgetIconColor";
-    public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS = "applicationWidgetIconLightness";
-    public static final String PREF_APPLICATION_WIDGET_LIST_ICON_COLOR = "applicationWidgetListIconColor";
-    public static final String PREF_APPLICATION_WIDGET_LIST_ICON_LIGHTNESS = "applicationWidgetListIconLightness";
-    public static final String PREF_NOTIFICATION_PREF_INDICATOR = "notificationPrefIndicator";
-    public static final String PREF_APPLICATION_BACKGROUND_PROFILE = "applicationBackgroundProfile";
-    public static final String PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT= "applicationActivatorGridLayout";
-    public static final String PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT= "applicationWidgetListGridLayout";
-    public static final String PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME = "applicationWidgetIconHideProfileName";
-    public static final String PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES = "applicationUnlinkRingerNotificationVolumes";
-    public static final String PREF_APPLICATION_SHORTCUT_EMBLEM = "applicationShortcutEmblem";
-    public static final String PREF_NOTIFICATION_HIDE_IN_LOCKSCREEN = "notificationHideInLockscreen";
-    public static final String PREF_APPLICATION_WIDGET_ICON_BACKGROUND = "applicationWidgetIconBackground";
-    public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B = "applicationWidgetIconLightnessB";
-    public static final String PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T = "applicationWidgetIconLightnessT";
-    public static final String PREF_NOTIFICATION_THEME = "notificationTheme";
-    public static final String PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES = "applicationForceSetMergeRingNotificationVolumes";
-
     public static final int PREFERENCE_NOT_ALLOWED = 0;
     public static final int PREFERENCE_ALLOWED = 1;
     public static final int PREFERENCE_NOT_ALLOWED_NO_HARDWARE = 0;
@@ -142,47 +101,6 @@ public class PPApplication extends Application {
 
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
-
-    public static boolean applicationStartOnBoot;
-    public static boolean applicationActivate;
-    public static boolean applicationActivateWithAlert;
-    public static boolean applicationClose;
-    public static boolean applicationLongClickActivation;
-    public static String applicationLanguage;
-    public static String applicationTheme;
-    public static boolean applicationActivatorPrefIndicator;
-    public static boolean applicationEditorPrefIndicator;
-    public static boolean applicationActivatorHeader;
-    public static boolean applicationEditorHeader;
-    public static boolean notificationsToast;
-    public static boolean notificationStatusBar;
-    public static String notificationStatusBarStyle;
-    public static boolean notificationStatusBarPermanent;
-    public static String notificationStatusBarCancel;
-    public static boolean notificationShowInStatusBar;
-    public static boolean notificationHideInLockscreen;
-    public static String notificationTextColor;
-    public static boolean applicationWidgetListPrefIndicator;
-    public static boolean applicationWidgetListHeader;
-    public static String applicationWidgetListBackground;
-    public static String applicationWidgetListLightnessB;
-    public static String applicationWidgetListLightnessT;
-    public static String applicationWidgetIconColor;
-    public static String applicationWidgetIconLightness;
-    public static String applicationWidgetListIconColor;
-    public static String applicationWidgetListIconLightness;
-    public static boolean notificationPrefIndicator;
-    public static String applicationBackgroundProfile;
-    public static boolean applicationActivatorGridLayout;
-    public static boolean applicationWidgetListGridLayout;
-    public static boolean applicationWidgetIconHideProfileName;
-    public static boolean applicationUnlinkRingerNotificationVolumes;
-    public static boolean applicationShortcutEmblem;
-    public static String applicationWidgetIconBackground;
-    public static String applicationWidgetIconLightnessB;
-    public static String applicationWidgetIconLightnessT;
-    public static String notificationTheme;
-    public static int applicationForceSetMergeRingNotificationVolumes;
 
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
@@ -217,7 +135,7 @@ public class PPApplication extends Application {
         PACKAGE_NAME = getPackageName();
 
         // initialization
-        loadPreferences(this);
+        //loadPreferences(this);
 
         PPApplication.initRoot();
 
@@ -237,60 +155,6 @@ public class PPApplication extends Application {
     }
 
     //--------------------------------------------------------------
-
-    static public void loadPreferences(Context context)
-    {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-
-        applicationStartOnBoot = preferences.getBoolean(PREF_APPLICATION_START_ON_BOOT, true);
-        applicationActivate = preferences.getBoolean(PREF_APPLICATION_ACTIVATE, true);
-        applicationActivateWithAlert = preferences.getBoolean(PREF_APPLICATION_ALERT, true);
-        applicationClose = preferences.getBoolean(PREF_APPLICATION_CLOSE, true);
-        applicationLongClickActivation = preferences.getBoolean(PREF_APPLICATION_LONG_PRESS_ACTIVATION, false);
-        applicationLanguage = preferences.getString(PREF_APPLICATION_LANGUAGE, "system");
-        applicationTheme = preferences.getString(PREF_APPLICATION_THEME, "material");
-        applicationActivatorPrefIndicator = preferences.getBoolean(PREF_APPLICATION_ACTIVATOR_PREF_INDICATOR, true);
-        applicationEditorPrefIndicator = preferences.getBoolean(PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
-        applicationActivatorHeader = preferences.getBoolean(PREF_APPLICATION_ACTIVATOR_HEADER, true);
-        applicationEditorHeader = preferences.getBoolean(PREF_APPLICATION_EDITOR_HEADER, true);
-        notificationsToast = preferences.getBoolean(PREF_NOTIFICATION_TOAST, true);
-        notificationStatusBar = preferences.getBoolean(PREF_NOTIFICATION_STATUS_BAR, true);
-        notificationStatusBarStyle = preferences.getString(PREF_NOTIFICATION_STATUS_BAR_STYLE, "1");
-        notificationStatusBarPermanent = preferences.getBoolean(PREF_NOTIFICATION_STATUS_BAR_PERMANENT, true);
-        notificationStatusBarCancel = preferences.getString(PREF_NOTIFICATION_STATUS_BAR_CANCEL, "10");
-        notificationShowInStatusBar = preferences.getBoolean(PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
-        notificationTextColor = preferences.getString(PREF_NOTIFICATION_TEXT_COLOR, "0");
-        notificationHideInLockscreen = preferences.getBoolean(PREF_NOTIFICATION_HIDE_IN_LOCKSCREEN, false);
-        notificationTheme = preferences.getString(PREF_NOTIFICATION_THEME, "0");
-        applicationWidgetListPrefIndicator = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_PREF_INDICATOR, true);
-        applicationWidgetListHeader = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_HEADER, true);
-        applicationWidgetListBackground = preferences.getString(PREF_APPLICATION_WIDGET_LIST_BACKGROUND, "25");
-        applicationWidgetListLightnessB = preferences.getString(PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_B, "0");
-        applicationWidgetListLightnessT = preferences.getString(PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_T, "100");
-        applicationWidgetIconColor = preferences.getString(PREF_APPLICATION_WIDGET_ICON_COLOR, "0");
-        applicationWidgetIconLightness = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS, "100");
-        applicationWidgetListIconColor = preferences.getString(PREF_APPLICATION_WIDGET_LIST_ICON_COLOR, "0");
-        applicationWidgetListIconLightness = preferences.getString(PREF_APPLICATION_WIDGET_LIST_ICON_LIGHTNESS, "100");
-        notificationPrefIndicator = preferences.getBoolean(PREF_NOTIFICATION_PREF_INDICATOR, true);
-        applicationBackgroundProfile = preferences.getString(PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
-        applicationActivatorGridLayout = preferences.getBoolean(PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT, true);
-        applicationWidgetListGridLayout = preferences.getBoolean(PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT, true);
-        applicationWidgetIconHideProfileName = preferences.getBoolean(PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME, false);
-        applicationUnlinkRingerNotificationVolumes = preferences.getBoolean(PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES, false);
-        applicationShortcutEmblem = preferences.getBoolean(PREF_APPLICATION_SHORTCUT_EMBLEM, true);
-        applicationWidgetIconBackground = preferences.getString(PREF_APPLICATION_WIDGET_ICON_BACKGROUND, "0");
-        applicationWidgetIconLightnessB = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_B, "0");
-        applicationWidgetIconLightnessT = preferences.getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T, "100");
-        applicationForceSetMergeRingNotificationVolumes = Integer.valueOf(preferences.getString(PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES, "0"));
-
-        if (applicationTheme.equals("light"))
-        {
-            applicationTheme = "material";
-            Editor editor = preferences.edit();
-            editor.putString(PREF_APPLICATION_THEME, applicationTheme);
-            editor.commit();
-        }
-    }
 
     static public boolean getApplicationStarted(Context context, boolean testService)
     {

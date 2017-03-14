@@ -16,7 +16,7 @@ public class BootUpReceiver extends BroadcastReceiver {
 
         PPApplication.logE("BootUpReceiver.onReceive", "xxx");
 
-        PPApplication.loadPreferences(context);
+        //PPApplication.loadPreferences(context);
 
         // start delayed bootup broadcast
         PPApplication.startedOnBoot = true;
@@ -29,7 +29,7 @@ public class BootUpReceiver extends BroadcastReceiver {
 
         PPApplication.setApplicationStarted(context, false);
 
-        if (PPApplication.applicationStartOnBoot)
+        if (ApplicationPreferences.applicationStartOnBoot(context))
         {
             // start ReceiverService
             context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));

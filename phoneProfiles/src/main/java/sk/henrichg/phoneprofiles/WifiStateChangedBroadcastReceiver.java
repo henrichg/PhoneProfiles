@@ -22,7 +22,7 @@ public class WifiStateChangedBroadcastReceiver extends WakefulBroadcastReceiver 
             // application is not started
             return;
 
-        PPApplication.loadPreferences(context);
+        //loadPreferences(context);
 
         int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
         PPApplication.logE("$$$ WifiStateChangedBroadcastReceiver.onReceive","state="+wifiState);
