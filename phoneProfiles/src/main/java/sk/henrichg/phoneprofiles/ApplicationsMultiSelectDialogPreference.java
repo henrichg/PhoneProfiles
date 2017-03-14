@@ -38,6 +38,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     private int addShortcuts;
 
     // Layout widgets.
+    MaterialDialog mDialog;
     private ListView listView = null;
     private LinearLayout linlaProgress;
     private LinearLayout linlaListView;
@@ -168,7 +169,9 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
             }
         });
 
-        MaterialDialog mDialog = mBuilder.build();
+        MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
+
+        mDialog = mBuilder.build();
         if (state != null)
             mDialog.onRestoreInstanceState(state);
 
@@ -216,10 +219,18 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 
     public void onDismiss (DialogInterface dialog)
     {
+        super.onDismiss(dialog);
         EditorProfilesActivity.getApplicationsCache().cancelCaching();
-
         if (!EditorProfilesActivity.getApplicationsCache().isCached())
             EditorProfilesActivity.getApplicationsCache().clearCache(false);
+        MaterialDialogsPrefUtil.unregisterOnActivityDestroyListener(this, this);
+    }
+
+    @Override
+    public void onActivityDestroy() {
+        super.onActivityDestroy();
+        if (mDialog != null && mDialog.isShowing())
+            mDialog.dismiss();
     }
 
     @Override

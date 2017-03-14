@@ -224,6 +224,7 @@ public class GlobalGUIRoutines {
             activity.recreate();
     }
 
+    /* using is MaterialDialogsPrefUtil version
     static void registerOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
         try {
             PreferenceManager pm = preference.getPreferenceManager();
@@ -247,6 +248,7 @@ public class GlobalGUIRoutines {
         } catch (Exception ignored) {
         }
     }
+    */
 
     /*
     private static float pixelsToSp(Context context, float px) {
