@@ -50,6 +50,7 @@ public class DurationDialogPreference extends DialogPreference {
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
                 .content(getDialogMessage())
+                .customView(R.layout.activity_duration_pref_dialog, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
@@ -76,8 +77,8 @@ public class DurationDialogPreference extends DialogPreference {
                     }
                 });
 
-        View layout = LayoutInflater.from(getContext()).inflate(R.layout.activity_duration_pref_dialog, null);
-        onBindDialogView(layout);
+        mDialog = mBuilder.build();
+        View layout = mDialog.getCustomView();
 
         TextView mTextViewRange = (TextView) layout.findViewById(R.id.duration_pref_dlg_range);
         mNumberPickerHours = (NumberPicker) layout.findViewById(R.id.duration_pref_dlg_hours);
@@ -127,11 +128,8 @@ public class DurationDialogPreference extends DialogPreference {
 
         mTextViewRange.setText(sMin+" - "+sMax);
 
-        mBuilder.customView(layout, false);
-
         MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
 
-        mDialog = mBuilder.build();
         if (state != null)
             mDialog.onRestoreInstanceState(state);
 

@@ -123,10 +123,11 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                         }
                     }
                 })
-                .content(getDialogMessage());
+                .content(getDialogMessage())
+                .customView(R.layout.activity_applications_multiselect_pref_dialog, false);
 
-        View layout = LayoutInflater.from(getContext()).inflate(R.layout.activity_applications_multiselect_pref_dialog, null);
-        onBindDialogView(layout);
+        mDialog = mBuilder.build();
+        View layout = mDialog.getCustomView();
 
         linlaProgress = (LinearLayout)layout.findViewById(R.id.applications_multiselect_pref_dlg_linla_progress);
         linlaListView = (LinearLayout)layout.findViewById(R.id.applications_multiselect_pref_dlg_linla_listview);
@@ -160,8 +161,6 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         quickscroll.setIndicatorColor(colorQSHandlebarActive, colorQSHandlebarActive, Color.WHITE);
         quickscroll.setFixedSize(1);
 
-        mBuilder.customView(layout, false);
-
         mBuilder.showListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -171,7 +170,6 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 
         MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
 
-        mDialog = mBuilder.build();
         if (state != null)
             mDialog.onRestoreInstanceState(state);
 
