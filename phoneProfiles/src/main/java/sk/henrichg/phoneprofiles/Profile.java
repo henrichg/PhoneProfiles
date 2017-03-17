@@ -5,19 +5,14 @@ import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
-import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -563,7 +558,7 @@ public class Profile {
         return getVolumeRingtoneChange(_volumeRingtone);
     }
 
-    boolean getVolumeRingtoneDefaultProfile()
+    private boolean getVolumeRingtoneDefaultProfile()
     {
         int value;
         try {
@@ -614,7 +609,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getVolumeNotificationDefaultProfile()
+    private boolean getVolumeNotificationDefaultProfile()
     {
         int value;
         try {
@@ -665,7 +660,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getVolumeMediaDefaultProfile()
+    private boolean getVolumeMediaDefaultProfile()
     {
         int value;
         try {
@@ -701,7 +696,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getVolumeAlarmDefaultProfile()
+    private boolean getVolumeAlarmDefaultProfile()
     {
         int value;
         try {
@@ -737,7 +732,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getVolumeSystemDefaultProfile()
+    private boolean getVolumeSystemDefaultProfile()
     {
         int value;
         try {
@@ -773,7 +768,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getVolumeVoiceDefaultProfile()
+    private boolean getVolumeVoiceDefaultProfile()
     {
         int value;
         try {
@@ -809,7 +804,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    boolean getDeviceBrightnessDefaultProfile()
+    private boolean getDeviceBrightnessDefaultProfile()
     {
         int value;
         try {
@@ -1132,7 +1127,7 @@ public class Profile {
         return String.valueOf(dValue.intValue());
     }
 
-    static public Profile getDefaultProfile(Context context)
+    static Profile getDefaultProfile(Context context)
     {
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         int	maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
@@ -1668,7 +1663,7 @@ public class Profile {
         editor.apply();
     }
 
-    static long getActivatedProfileEndDurationTime(Context context)
+    private static long getActivatedProfileEndDurationTime(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getLong(PREF_ACTIVATED_PROFILE_END_DURATION_TIME, 0);

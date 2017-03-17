@@ -75,8 +75,6 @@ public class ActivateProfileHelper {
     private NotificationManager notificationManager;
     private Handler brightnessHandler;
 
-    private int networkType = -1;
-
     static boolean lockRefresh = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
@@ -228,7 +226,7 @@ public class ActivateProfileHelper {
             if (profile._deviceWiFi != 0) {
                 if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_ALLOWED) {
                     if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
-                        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                         int wifiState = wifiManager.getWifiState();
                         boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
                         boolean setWifiState = false;
@@ -268,7 +266,7 @@ public class ActivateProfileHelper {
             // connect to SSID
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_ALLOWED) {
                 if (!profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
-                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                    WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                     int wifiState = wifiManager.getWifiState();
                     if  (wifiState == WifiManager.WIFI_STATE_ENABLED) {
 
@@ -462,7 +460,7 @@ public class ActivateProfileHelper {
         ));
     }
 
-    private boolean isVibrateRingerMode(int ringerMode, int zenMode) {
+    private boolean isVibrateRingerMode(int ringerMode) {
         return (ringerMode == 3);
 
     }
@@ -858,7 +856,7 @@ public class ActivateProfileHelper {
                 profile.setVolumeRingtoneValue(1);
 
                 // for profile ringer/zen mode = "only vibrate" do not change ringer mode to Silent
-                if (!isVibrateRingerMode(profile._volumeRingerMode, profile._volumeZenMode)) {
+                if (!isVibrateRingerMode(profile._volumeRingerMode)) {
                     // for ringer mode VIBRATE or SILENT or
                     // for interruption types NONE and ONLY_ALARMS
                     // not change ringer mode
@@ -882,7 +880,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    public static boolean canChangeZenMode(Context context, boolean notCheckAccess) {
+    static boolean canChangeZenMode(Context context, boolean notCheckAccess) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60) {
@@ -900,7 +898,7 @@ public class ActivateProfileHelper {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static int getSystemZenMode(Context context, int defaultValue) {
+    static int getSystemZenMode(Context context, int defaultValue) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60) {
@@ -920,7 +918,7 @@ public class ActivateProfileHelper {
                 }
             }
             else {
-                int interuptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);;
+                int interuptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
                 switch (interuptionFilter) {
                     case 0:
                         return ActivateProfileHelper.ZENMODE_ALL;
@@ -950,7 +948,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressWarnings("deprecation")
-    public static boolean vibrationIsOn(Context context, AudioManager audioManager, boolean testRingerMode) {
+    static boolean vibrationIsOn(AudioManager audioManager, boolean testRingerMode) {
         int ringerMode = -999;
         if (testRingerMode)
             ringerMode = audioManager.getRingerMode();
@@ -1151,9 +1149,9 @@ public class ActivateProfileHelper {
             Intent intent;
             PackageManager packageManager = context.getPackageManager();
 
-            for (int i = 0; i < splits.length; i++) {
-                if (!ApplicationsCache.isShortcut(splits[i])) {
-                    intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(splits[i]));
+            for (String split : splits) {
+                if (!ApplicationsCache.isShortcut(split)) {
+                    intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
                     if (intent != null) {
                         intent.addCategory(Intent.CATEGORY_LAUNCHER);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1165,9 +1163,8 @@ public class ActivateProfileHelper {
                         //SystemClock.sleep(1000);
                         PPApplication.sleep(1000);
                     }
-                }
-                else {
-                    long shortcutId = ApplicationsCache.getShortcutId(splits[i]);
+                } else {
+                    long shortcutId = ApplicationsCache.getShortcutId(split);
                     if (shortcutId > 0) {
                         Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
                         if (shortcut != null) {
@@ -1868,6 +1865,7 @@ public class ActivateProfileHelper {
             else
                 contentView.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
 
+            //noinspection deprecation
             notificationBuilder.setContent(contentView);
 
             Notification notification = notificationBuilder.build();
@@ -2265,7 +2263,7 @@ public class ActivateProfileHelper {
     }
     */
 
-    static public String getTransactionCode(Context context, String fieldName) throws Exception {
+    private static String getTransactionCode(Context context, String fieldName) throws Exception {
         //try {
         final TelephonyManager mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         final Class<?> mTelephonyClass = Class.forName(mTelephonyManager.getClass().getName());
@@ -2510,12 +2508,12 @@ public class ActivateProfileHelper {
 
                         String newSet = "";
                         int j = 0;
-                        for (int i = 0; i < list.length; i++) {
+                        for (String aList : list) {
 
-                            if (!list[i].equals(LocationManager.GPS_PROVIDER)) {
+                            if (!aList.equals(LocationManager.GPS_PROVIDER)) {
                                 if (j > 0)
                                     newSet += ",";
-                                newSet += list[i];
+                                newSet += aList;
                                 j++;
                             }
                         }
@@ -2722,7 +2720,7 @@ public class ActivateProfileHelper {
         editor.apply();
     }
 
-    static boolean getScreenUnlocked(Context context)
+    private static boolean getScreenUnlocked(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getBoolean(PREF_SCREEN_UNLOCKED, true);
@@ -2736,7 +2734,7 @@ public class ActivateProfileHelper {
         editor.apply();
     }
 
-    static int getRingerVolume(Context context)
+    private static int getRingerVolume(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getInt(PREF_RINGER_VOLUME, -999);
@@ -2750,7 +2748,7 @@ public class ActivateProfileHelper {
         editor.apply();
     }
 
-    static int getNotificationVolume(Context context)
+    private static int getNotificationVolume(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getInt(PREF_NOTIFICATION_VOLUME, -999);
@@ -2764,7 +2762,7 @@ public class ActivateProfileHelper {
         editor.apply();
     }
 
-    static int getRingerMode(Context context)
+    private static int getRingerMode(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getInt(PREF_RINGER_MODE, 0);
@@ -2778,7 +2776,7 @@ public class ActivateProfileHelper {
         editor.apply();
     }
 
-    static int getZenMode(Context context)
+    private static int getZenMode(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getInt(PREF_ZEN_MODE, 0);

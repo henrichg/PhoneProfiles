@@ -28,7 +28,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-/**
+/*
  * A {@link PreferenceActivity} which implements and proxies the necessary calls
  * to be used with AppCompat.
  *

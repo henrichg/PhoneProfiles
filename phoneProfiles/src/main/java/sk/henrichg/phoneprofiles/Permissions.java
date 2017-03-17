@@ -22,7 +22,7 @@ import static android.Manifest.permission;
 
 public class Permissions {
 
-    private static final int PERMISSION_VOLUME_PREFERENCES = 1;
+    //private static final int PERMISSION_VOLUME_PREFERENCES = 1;
     private static final int PERMISSION_VIBRATION_ON_TOUCH = 2;
     private static final int PERMISSION_RINGTONES = 3;
     private static final int PERMISSION_SCREEN_TIMEOUT = 4;

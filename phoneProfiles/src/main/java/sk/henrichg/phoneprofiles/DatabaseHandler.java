@@ -1361,6 +1361,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    /*
     Profile getFirstProfile()
     {
         final String selectQuery = "SELECT " + KEY_ID + "," +
@@ -1485,6 +1486,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         return profile;
 
     }
+    */
 
     int getProfilePosition(Profile profile)
     {

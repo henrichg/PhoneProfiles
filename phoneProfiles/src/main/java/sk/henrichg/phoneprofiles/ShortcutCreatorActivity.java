@@ -83,6 +83,7 @@ public class ShortcutCreatorActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_shortcut_creator);
 
+        if (getSupportActionBar() != null)
         getSupportActionBar().setTitle(R.string.title_activity_shortcut_creator);
 
         //databaseHandler = new DatabaseHandler(this);

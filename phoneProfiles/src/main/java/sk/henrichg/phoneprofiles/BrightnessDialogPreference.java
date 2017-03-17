@@ -204,7 +204,7 @@ public class BrightnessDialogPreference extends
     public void onShow(DialogInterface dialog) {
         if (Permissions.grantBrightnessDialogPermissions(_context, this))
             enableViews();
-        ;
+
     }
 
     @Override

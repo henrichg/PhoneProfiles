@@ -110,7 +110,7 @@ class ImportantInfoNotification {
     }
 
 
-    static boolean getShowInfoNotificationOnStart(Context context, int version)
+    private static boolean getShowInfoNotificationOnStart(Context context, int version)
     {
         ApplicationPreferences.getSharedPreferences(context);
         boolean show = ApplicationPreferences.preferences.getBoolean(PREF_SHOW_INFO_NOTIFICATION_ON_START, true);
@@ -118,7 +118,7 @@ class ImportantInfoNotification {
         return ((_version >= version) && show);
     }
 
-    static void setShowInfoNotificationOnStart(Context context, boolean show, int version)
+    private static void setShowInfoNotificationOnStart(Context context, boolean show, int version)
     {
         ApplicationPreferences.getSharedPreferences(context);
         SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
@@ -127,13 +127,13 @@ class ImportantInfoNotification {
         editor.apply();
     }
 
-    static int getShowInfoNotificationOnStartVersion(Context context)
+    private static int getShowInfoNotificationOnStartVersion(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getInt(PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION, 0);
     }
 
-    static void setShowInfoNotificationOnStartVersion(Context context, int version)
+    private static void setShowInfoNotificationOnStartVersion(Context context, int version)
     {
         ApplicationPreferences.getSharedPreferences(context);
         SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();

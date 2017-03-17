@@ -1024,9 +1024,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
                 editor.apply();
 
-                TypedValue tv = new TypedValue();
+                //TypedValue tv = new TypedValue();
 
-                final Display display = getWindowManager().getDefaultDisplay();
+                //final Display display = getWindowManager().getDefaultDisplay();
 
                 int circleColor = 0xFFFFFF;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))

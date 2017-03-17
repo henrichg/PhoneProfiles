@@ -70,7 +70,7 @@ public class EditorProfileListFragment extends Fragment {
      * implement. This mechanism allows activities to be notified.
      */
     // invoked when start profile preference fragment/activity needed
-    public interface OnStartProfilePreferences {
+    interface OnStartProfilePreferences {
         /**
          * Callback for when an item has been selected.
          */

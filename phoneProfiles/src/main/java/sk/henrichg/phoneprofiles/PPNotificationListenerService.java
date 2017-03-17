@@ -78,13 +78,13 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 int zenMode = 0;
                 switch (interruptionFilter) {
                     case NotificationListenerService.INTERRUPTION_FILTER_ALL:
-                        if (ActivateProfileHelper.vibrationIsOn(getApplicationContext(), audioManager, true))
+                        if (ActivateProfileHelper.vibrationIsOn(audioManager, true))
                             zenMode = 4;
                         else
                             zenMode = 1;
                         break;
                     case NotificationListenerService.INTERRUPTION_FILTER_PRIORITY:
-                        if (ActivateProfileHelper.vibrationIsOn(getApplicationContext(), audioManager, true))
+                        if (ActivateProfileHelper.vibrationIsOn(audioManager, true))
                             zenMode = 5;
                         else
                             zenMode = 2;
@@ -115,13 +115,13 @@ public class PPNotificationListenerService extends NotificationListenerService {
         PPApplication.logE(TAG, "getZenMode(" + systemZenMode + ')');
         switch (systemZenMode) {
             case ActivateProfileHelper.ZENMODE_ALL:
-                if (ActivateProfileHelper.vibrationIsOn(context, audioManager, true))
+                if (ActivateProfileHelper.vibrationIsOn(audioManager, true))
                     zenMode = 4;
                 else
                     zenMode = 1;
                 break;
             case ActivateProfileHelper.ZENMODE_PRIORITY:
-                if (ActivateProfileHelper.vibrationIsOn(context, audioManager, true))
+                if (ActivateProfileHelper.vibrationIsOn(audioManager, true))
                     zenMode = 5;
                 else
                     zenMode = 2;

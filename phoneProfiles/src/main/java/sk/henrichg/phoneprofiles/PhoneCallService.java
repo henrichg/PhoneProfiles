@@ -32,7 +32,7 @@ public class PhoneCallService extends IntentService {
 
             int phoneEvent = intent.getIntExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_EVENT, 0);
             boolean incoming = intent.getBooleanExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_INCOMING, true);
-            String number = intent.getStringExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_NUMBER);
+            //String number = intent.getStringExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_NUMBER);
 
             switch (phoneEvent) {
                 case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_START:

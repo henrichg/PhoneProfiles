@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -26,7 +25,7 @@ class EditorProfileListAdapter extends BaseAdapter
     private DataWrapper dataWrapper;
     private List<Profile> profileList;
 
-    public boolean targetHelpsSequenceStarted;
+    //private boolean targetHelpsSequenceStarted;
     static final String PREF_START_TARGET_HELPS = "editor_profile_list_adapter_start_target_helps";
 
     EditorProfileListAdapter(EditorProfileListFragment f, DataWrapper pdw)
@@ -346,7 +345,7 @@ class EditorProfileListAdapter extends BaseAdapter
                     // to the sequence
                     @Override
                     public void onSequenceFinish() {
-                        targetHelpsSequenceStarted = false;
+                        //targetHelpsSequenceStarted = false;
                     }
 
                     @Override
@@ -356,10 +355,10 @@ class EditorProfileListAdapter extends BaseAdapter
 
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
-                        targetHelpsSequenceStarted = false;
+                        //targetHelpsSequenceStarted = false;
                     }
                 });
-                targetHelpsSequenceStarted = true;
+                //targetHelpsSequenceStarted = true;
                 sequence.start();
             }
         }

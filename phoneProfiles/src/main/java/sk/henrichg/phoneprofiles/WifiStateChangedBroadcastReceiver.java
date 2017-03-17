@@ -16,7 +16,7 @@ public class WifiStateChangedBroadcastReceiver extends WakefulBroadcastReceiver 
 
         PPApplication.logE("##### WifiStateChangedBroadcastReceiver.onReceive", "xxx");
 
-         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        //WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         if (!PPApplication.getApplicationStarted(context, true))
             // application is not started
@@ -34,7 +34,7 @@ public class WifiStateChangedBroadcastReceiver extends WakefulBroadcastReceiver 
                 WifiSSIDData.fillWifiConfigurationList(context);
 
                 if (!PhoneProfilesService.connectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
-                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                    WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                     List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
                     for (WifiConfiguration i : list) {
                         if (i.SSID != null && i.SSID.equals(PhoneProfilesService.connectToSSID)) {

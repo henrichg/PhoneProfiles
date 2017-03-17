@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -286,8 +285,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
 
                 final Display display = getWindowManager().getDefaultDisplay();
-                int popupLeft = (int) (display.getWidth() - popupWidth) / 2;
-                int popupTop = (int) (display.getHeight() - popupHeight) / 2;
+                @SuppressWarnings("deprecation") int popupLeft = (int) (display.getWidth() - popupWidth) / 2;
+                @SuppressWarnings("deprecation") int popupTop = (int) (display.getHeight() - popupHeight) / 2;
 
                 getTheme().resolveAttribute(R.attr.actionEditProfilesIcon, tv, true);
                 final Drawable actionEditProfilesIcon = ContextCompat.getDrawable(this, tv.resourceId);

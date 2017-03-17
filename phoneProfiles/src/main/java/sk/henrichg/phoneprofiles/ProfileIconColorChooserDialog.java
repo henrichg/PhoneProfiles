@@ -1,7 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -34,24 +33,6 @@ class ProfileIconColorChooserDialog implements View.OnClickListener {
                         //.disableDefaultFonts()
                 .autoDismiss(false)
                 .customView(R.layout.dialog_color_chooser, false);
-
-        dialogBuilder.showListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                ProfileIconColorChooserDialog.this.onShow(dialog);
-            }
-        })
-            /*.cancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                }
-            })*/
-                .dismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        ProfileIconColorChooserDialog.this.onDismiss(dialog);
-                    }
-                });
 
         mDialog = dialogBuilder.build();
 
@@ -94,10 +75,6 @@ class ProfileIconColorChooserDialog implements View.OnClickListener {
                 setBackgroundCompat(child, selector);
             }
         }
-
-    }
-
-    public void onShow(DialogInterface dialog) {
 
     }
 
@@ -160,9 +137,6 @@ class ProfileIconColorChooserDialog implements View.OnClickListener {
         stateListDrawable.addState(new int[]{-android.R.attr.state_pressed}, coloredCircle);
         stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, darkerCircle);
         return stateListDrawable;
-    }
-
-    public void onDismiss(DialogInterface dialog) {
     }
 
     public void show() {

@@ -54,9 +54,9 @@ class ShortcutProfileListAdapter extends BaseAdapter {
         {
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
             if (ApplicationPreferences.applicationActivatorPrefIndicator(fragment.getActivity()))
-                vi = inflater.inflate(R.layout.shortcut_list_item, null);
+                vi = inflater.inflate(R.layout.shortcut_list_item, parent, false);
             else
-                vi = inflater.inflate(R.layout.shortcut_list_item_no_indicator, null);
+                vi = inflater.inflate(R.layout.shortcut_list_item_no_indicator, parent, false);
             holder = new ViewHolder();
             holder.profileName = (TextView)vi.findViewById(R.id.shortcut_list_item_profile_name);
             holder.profileIcon = (ImageView)vi.findViewById(R.id.shortcut_list_item_profile_icon);

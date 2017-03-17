@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
-public class RootToolsSmall {
+class RootToolsSmall {
 
-    private static final HashMap<String, Boolean> BIN_MAP = new HashMap<String, Boolean>();
+    private static final HashMap<String, Boolean> BIN_MAP = new HashMap<>();
 
-    private static final boolean hasBinary(String binaryName) {
+    private static boolean hasBinary(String binaryName) {
         Boolean exists = BIN_MAP.get(binaryName);
         if (exists != null) {
             return exists;
@@ -48,10 +48,7 @@ public class RootToolsSmall {
         return hasBinary("/service");
     }
 
-    /**
-     * Runs a command using su binary.
-     */
-    public static boolean runSuCommand(String command) {
+    /*private static boolean runSuCommand(String command) {
         if (!isRooted()) {
             return false;
         }
@@ -91,9 +88,9 @@ public class RootToolsSmall {
             return false;
         }
         return proc.exitValue() == 0;
-    }
+    }*/
 
-    public static boolean runJavaCommand(Class<?> mainClass, String name, Context context, Object cmdParam) {
+    /*public static boolean runJavaCommand(Class<?> mainClass, String name, Context context, Object cmdParam) {
     try {
       String cmd = "export CLASSPATH=" +
               context.getPackageManager().getPackageInfo(context.getPackageName(), 0).applicationInfo.sourceDir +
@@ -111,5 +108,5 @@ public class RootToolsSmall {
       //  e.printStackTrace();
     }
       return false;
-    }
+    }*/
 }

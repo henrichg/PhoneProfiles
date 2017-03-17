@@ -470,10 +470,10 @@ public class ProfilePreferencesActivity extends PreferenceActivity
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.mp_toolbar);
 
-            TypedValue tv = new TypedValue();
+            //TypedValue tv = new TypedValue();
             //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
 
-            final Display display = getWindowManager().getDefaultDisplay();
+            //final Display display = getWindowManager().getDefaultDisplay();
 
             int circleColor = 0xFFFFFF;
             if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
