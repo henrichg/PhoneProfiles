@@ -148,10 +148,10 @@ public class EditorProfilesActivity extends AppCompatActivity
                 }
             }
             else {
-                SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
-                long profile_id = preferences.getLong(SP_PROFILE_DETAILS_PROFILE_ID, 0);
-                int editMode = preferences.getInt(SP_PROFILE_DETAILS_EDIT_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                int predefinedProfileIndex = preferences.getInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, 0);
+                ApplicationPreferences.getSharedPreferences(this);
+                long profile_id = ApplicationPreferences.preferences.getLong(SP_PROFILE_DETAILS_PROFILE_ID, 0);
+                int editMode = ApplicationPreferences.preferences.getInt(SP_PROFILE_DETAILS_EDIT_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
+                int predefinedProfileIndex = ApplicationPreferences.preferences.getInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, 0);
                 arguments = new Bundle();
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile_id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
@@ -389,17 +389,17 @@ public class EditorProfilesActivity extends AppCompatActivity
         savedInstanceStateChanged = true;
 
         if (mTwoPane) {
-            SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+            ApplicationPreferences.getSharedPreferences(this);
 
             FragmentManager fragmentManager = getFragmentManager();
             Fragment fragment = fragmentManager.findFragmentByTag("ProfileDetailsFragment");
             if (fragment != null)
             {
-                Editor editor = preferences.edit();
+                Editor editor = ApplicationPreferences.preferences.edit();
                 editor.putLong(SP_PROFILE_DETAILS_PROFILE_ID, ((ProfileDetailsFragment) fragment).profile_id);
                 editor.putInt(SP_PROFILE_DETAILS_EDIT_MODE, ((ProfileDetailsFragment) fragment).editMode);
                 editor.putInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, ((ProfileDetailsFragment) fragment).predefinedProfileIndex);
-                editor.commit();
+                editor.apply();
             }
         }
     }
@@ -504,6 +504,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         dialogBuilder.show();
     }
 
+    @SuppressLint("ApplySharedPref")
     @SuppressWarnings({ "unchecked" })
     private boolean importApplicationPreferences(File src, int what) {
         boolean res = false;
@@ -741,6 +742,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             importDataAlert(false);
     }
 
+    @SuppressLint("ApplySharedPref")
     private boolean exportApplicationPreferences(File dst, int what) {
         boolean res = false;
         ObjectOutputStream output = null;
@@ -751,6 +753,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 pref = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
             else
                 pref = getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.commit();
             output.writeObject(pref.getAll());
 
             res = true;
@@ -1005,20 +1009,20 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     private void showTargetHelps() {
-        final SharedPreferences preferences = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        ApplicationPreferences.getSharedPreferences(this);
 
-        if (preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
-                preferences.getBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true) ||
-                preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
+        if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
+                ApplicationPreferences.preferences.getBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true) ||
+                ApplicationPreferences.preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
             //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
-            if (preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+            if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
                 //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 
-                Editor editor = preferences.edit();
+                Editor editor = ApplicationPreferences.preferences.edit();
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
-                editor.commit();
+                editor.apply();
 
                 TypedValue tv = new TypedValue();
 
@@ -1061,11 +1065,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
                         targetHelpsSequenceStarted = false;
-                        Editor editor = preferences.edit();
+                        Editor editor = ApplicationPreferences.preferences.edit();
                         editor.putBoolean(PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                        editor.commit();
+                        editor.apply();
                     }
                 });
                 targetHelpsSequenceStarted = true;

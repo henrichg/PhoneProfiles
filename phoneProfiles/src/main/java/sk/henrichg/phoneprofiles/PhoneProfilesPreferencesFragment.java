@@ -77,7 +77,7 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
                 preference.setEnabled(false);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
-                editor.commit();
+                editor.apply();
             }
         }
 

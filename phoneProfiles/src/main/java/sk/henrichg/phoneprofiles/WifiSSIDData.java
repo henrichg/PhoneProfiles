@@ -26,7 +26,7 @@ class WifiSSIDData {
     private static final String SCAN_RESULT_COUNT_PREF = "count";
     private static final String SCAN_RESULT_DEVICE_PREF = "device";
 
-    static public void fillWifiConfigurationList(Context context)
+    static void fillWifiConfigurationList(Context context)
     {
         //if (wifiConfigurationList == null)
         //    wifiConfigurationList = new ArrayList<WifiSSIDData>();
@@ -76,10 +76,10 @@ class WifiSSIDData {
             editor.putString(SCAN_RESULT_DEVICE_PREF + i, json);
         }
 
-        editor.commit();
+        editor.apply();
     }
 
-    public static List<WifiSSIDData> getWifiConfigurationList(Context context)
+    static List<WifiSSIDData> getWifiConfigurationList(Context context)
     {
         synchronized (PPApplication.scanResultsMutex) {
             //if (wifiConfigurationList == null)

@@ -328,7 +328,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             int appWidgetId, Bundle newOptions)
     {
         String preferenceKey = "isLargeLayout_"+appWidgetId;
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        ApplicationPreferences.getSharedPreferences(context);
 
         AppWidgetProviderInfo appWidgetProviderInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
 
@@ -372,13 +372,13 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             isLargeLayout = minHeight >= 110;
         }
         
-        if (preferences.contains(preferenceKey))
-            isLargeLayout = preferences.getBoolean(preferenceKey, true);
+        if (ApplicationPreferences.preferences.contains(preferenceKey))
+            isLargeLayout = ApplicationPreferences.preferences.getBoolean(preferenceKey, true);
         else
         {
-            Editor editor = preferences.edit();
+            Editor editor = ApplicationPreferences.preferences.edit();
             editor.putBoolean(preferenceKey, isLargeLayout);
-            editor.commit();
+            editor.apply();
         }
         
     }
@@ -389,11 +389,11 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         isLargeLayout = spanY != 1;
         
         String preferenceKey = "isLargeLayout_"+appWidgetId;
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        ApplicationPreferences.getSharedPreferences(context);
 
-        Editor editor = preferences.edit();
+        Editor editor = ApplicationPreferences.preferences.edit();
         editor.putBoolean(preferenceKey, isLargeLayout);
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -406,12 +406,12 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         createProfilesDataWrapper(context);
 
         String preferenceKey = "isLargeLayout_"+appWidgetId;
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        ApplicationPreferences.getSharedPreferences(context);
 
         // remove preference, will by reseted in setLayoutParams
-        Editor editor = preferences.edit();
+        Editor editor = ApplicationPreferences.preferences.edit();
         editor.remove(preferenceKey);
-        editor.commit();
+        editor.apply();
 
         updateWidget(context, appWidgetId);
 

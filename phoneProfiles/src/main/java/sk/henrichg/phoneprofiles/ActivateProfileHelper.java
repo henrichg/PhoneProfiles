@@ -494,19 +494,19 @@ public class ActivateProfileHelper {
     }
     */
 
-    public static boolean getMergedRingNotificationVolumes(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+    static boolean getMergedRingNotificationVolumes(Context context) {
+        ApplicationPreferences.getSharedPreferences(context);
         if (ApplicationPreferences.applicationForceSetMergeRingNotificationVolumes(context) > 0)
             return ApplicationPreferences.applicationForceSetMergeRingNotificationVolumes(context) == 1;
         else
-            return preferences.getBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, true);
+            return ApplicationPreferences.preferences.getBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, true);
     }
 
     // test if ring and notification volumes are merged
-    public static void setMergedRingNotificationVolumes(Context context, boolean force) {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+    static void setMergedRingNotificationVolumes(Context context, boolean force) {
+        ApplicationPreferences.getSharedPreferences(context);
 
-        if (!preferences.contains(PREF_MERGED_RING_NOTIFICATION_VOLUMES) || force) {
+        if (!ApplicationPreferences.preferences.contains(PREF_MERGED_RING_NOTIFICATION_VOLUMES) || force) {
             try {
                 boolean merged;
                 AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -533,9 +533,9 @@ public class ActivateProfileHelper {
 
                 //Log.d("PPApplication.setMergedRingNotificationVolumes", "merged="+merged);
 
-                SharedPreferences.Editor editor = preferences.edit();
+                SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
                 editor.putBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, merged);
-                editor.commit();
+                editor.apply();
             } catch (Exception ignored) { }
         }
     }
@@ -2708,102 +2708,102 @@ public class ActivateProfileHelper {
     }
 
 
-    static public boolean getLockscreenDisabled(Context context)
+    static boolean getLockscreenDisabled(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(PREF_LOCKSCREEN_DISABLED, false);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getBoolean(PREF_LOCKSCREEN_DISABLED, false);
     }
 
-    static public void setLockscreenDisabled(Context context, boolean disabled)
+    static void setLockscreenDisabled(Context context, boolean disabled)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putBoolean(PREF_LOCKSCREEN_DISABLED, disabled);
-        editor.commit();
+        editor.apply();
     }
 
-    static public boolean getScreenUnlocked(Context context)
+    static boolean getScreenUnlocked(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(PREF_SCREEN_UNLOCKED, true);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getBoolean(PREF_SCREEN_UNLOCKED, true);
     }
 
-    static public void setScreenUnlocked(Context context, boolean unlocked)
+    static void setScreenUnlocked(Context context, boolean unlocked)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putBoolean(PREF_SCREEN_UNLOCKED, unlocked);
-        editor.commit();
+        editor.apply();
     }
 
-    static public int getRingerVolume(Context context)
+    static int getRingerVolume(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_RINGER_VOLUME, -999);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_RINGER_VOLUME, -999);
     }
 
-    static public void setRingerVolume(Context context, int volume)
+    static void setRingerVolume(Context context, int volume)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_RINGER_VOLUME, volume);
-        editor.commit();
+        editor.apply();
     }
 
-    static public int getNotificationVolume(Context context)
+    static int getNotificationVolume(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_NOTIFICATION_VOLUME, -999);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_NOTIFICATION_VOLUME, -999);
     }
 
-    static public void setNotificationVolume(Context context, int volume)
+    static void setNotificationVolume(Context context, int volume)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_NOTIFICATION_VOLUME, volume);
-        editor.commit();
+        editor.apply();
     }
 
-    static public int getRingerMode(Context context)
+    static int getRingerMode(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_RINGER_MODE, 0);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_RINGER_MODE, 0);
     }
 
-    static public void setRingerMode(Context context, int mode)
+    static void setRingerMode(Context context, int mode)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_RINGER_MODE, mode);
-        editor.commit();
+        editor.apply();
     }
 
-    static public int getZenMode(Context context)
+    static int getZenMode(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_ZEN_MODE, 0);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_ZEN_MODE, 0);
     }
 
-    static public void setZenMode(Context context, int mode)
+    static void setZenMode(Context context, int mode)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_ZEN_MODE, mode);
-        editor.commit();
+        editor.apply();
     }
 
-    static public int getActivatedProfileScreenTimeout(Context context)
+    static int getActivatedProfileScreenTimeout(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT, 0);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT, 0);
     }
 
-    static public void setActivatedProfileScreenTimeout(Context context, int timeout)
+    static void setActivatedProfileScreenTimeout(Context context, int timeout)
     {
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT, timeout);
-        editor.commit();
+        editor.apply();
     }
 
 }

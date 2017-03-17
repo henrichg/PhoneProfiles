@@ -46,8 +46,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                 if (oldVersionCode < actualVersionCode) {
                     if (actualVersionCode <= 2100) {
-                        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
+                        ApplicationPreferences.getSharedPreferences(context);
+                        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
                         editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);
@@ -55,7 +55,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
-                        editor.commit();
+                        editor.apply();
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {

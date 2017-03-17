@@ -490,10 +490,10 @@ public class DataWrapper {
         // unlink profile from Background profile
         if (Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context)) == profile._id)
         {
-            SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-            Editor editor = preferences.edit();
+            ApplicationPreferences.getSharedPreferences(context);
+            Editor editor = ApplicationPreferences.preferences.edit();
             editor.putString(ApplicationPreferences.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
-            editor.commit();
+            editor.apply();
         }
     }
 
@@ -502,10 +502,10 @@ public class DataWrapper {
         profileList.clear();
 
         // unlink profiles from Background profile
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
         editor.putString(ApplicationPreferences.PREF_APPLICATION_BACKGROUND_PROFILE, String.valueOf(Profile.PROFILE_NO_ACTIVATE));
-        editor.commit();
+        editor.apply();
     }
 
     public void invalidateDataWrapper()

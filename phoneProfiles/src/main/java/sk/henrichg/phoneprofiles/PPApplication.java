@@ -76,7 +76,7 @@ public class PPApplication extends Application {
     static final int STARTUP_SOURCE_EXTERNAL_APP = 10;
 
     static final int PREFERENCES_STARTUP_SOURCE_ACTIVITY = 1;
-    static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
+    //static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
     static final int PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE = 3;
 
     static final int PROFILE_NOTIFICATION_ID = 700420;
@@ -158,32 +158,32 @@ public class PPApplication extends Application {
 
     static public boolean getApplicationStarted(Context context, boolean testService)
     {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
+        ApplicationPreferences.getSharedPreferences(context);
         if (testService)
-            return preferences.getBoolean(PREF_APPLICATION_STARTED, false) && (PhoneProfilesService.instance != null);
+            return ApplicationPreferences.preferences.getBoolean(PREF_APPLICATION_STARTED, false) && (PhoneProfilesService.instance != null);
         else
-            return preferences.getBoolean(PREF_APPLICATION_STARTED, false);
+            return ApplicationPreferences.preferences.getBoolean(PREF_APPLICATION_STARTED, false);
     }
 
     static public void setApplicationStarted(Context context, boolean appStarted)
     {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
         editor.putBoolean(PREF_APPLICATION_STARTED, appStarted);
-        editor.commit();
+        editor.apply();
     }
 
     static public int getSavedVersionCode(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        return preferences.getInt(PREF_SAVED_VERSION_CODE, 0);
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_SAVED_VERSION_CODE, 0);
     }
 
     static public void setSavedVersionCode(Context context, int version)
     {
-        SharedPreferences preferences = context.getSharedPreferences(APPLICATION_PREFS_NAME, Context.MODE_PRIVATE);
-        Editor editor = preferences.edit();
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
         editor.putInt(PREF_SAVED_VERSION_CODE, version);
-        editor.commit();
+        editor.apply();
     }
 
 

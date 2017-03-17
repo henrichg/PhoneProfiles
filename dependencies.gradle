@@ -10,5 +10,5 @@ ext.versions = [
         publishVersion: '4.5.0.2b',
         publishVersionCode: 2114,
         gradlePlugin: '2.3.0',
-        supportLib: '25.2.0'
+        supportLib: '25.3.0'
 ]

@@ -74,11 +74,11 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setTitle(R.string.title_activity_phone_profiles_preferences);
 
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, MODE_PRIVATE);
-        activeLanguage = preferences.getString(ApplicationPreferences.PREF_APPLICATION_LANGUAGE, "system");
-        activeTheme = preferences.getString(ApplicationPreferences.PREF_APPLICATION_THEME, "material");
-        showEditorPrefIndicator = preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
-        showEditorHeader = preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
+        ApplicationPreferences.getSharedPreferences(this);
+        activeLanguage = ApplicationPreferences.preferences.getString(ApplicationPreferences.PREF_APPLICATION_LANGUAGE, "system");
+        activeTheme = ApplicationPreferences.preferences.getString(ApplicationPreferences.PREF_APPLICATION_THEME, "material");
+        showEditorPrefIndicator = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
+        showEditorHeader = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
 
         fragment = createFragment(false);
