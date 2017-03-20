@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.provider.Settings;
 
 class SettingsContentObserver  extends ContentObserver {
 
@@ -16,6 +17,7 @@ class SettingsContentObserver  extends ContentObserver {
     //private static int previousVolumeSystem = 0;
     //private static int previousVolumeVoice = 0;
     //private int defaultRingerMode = 0;
+    private static int previousScreenTimeout = 0;
 
     Context context;
 
@@ -96,12 +98,16 @@ class SettingsContentObserver  extends ContentObserver {
         //////////////
 
         ////// screen timeout change
+        int screenTimeout = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
         if (!DisableScreenTimeoutInternalChangeReceiver.internalChange) {
-            if (Permissions.checkScreenTimeout(context)) {
-                ActivateProfileHelper.setActivatedProfileScreenTimeout(context, 0);
-                ActivateProfileHelper.screenTimeoutUnlock(context);
+            if (previousScreenTimeout != screenTimeout) {
+                if (Permissions.checkScreenTimeout(context)) {
+                    ActivateProfileHelper.setActivatedProfileScreenTimeout(context, 0);
+                    ActivateProfileHelper.screenTimeoutUnlock(context);
+                }
             }
         }
+        previousScreenTimeout = screenTimeout;
         /////////////
     }
 
