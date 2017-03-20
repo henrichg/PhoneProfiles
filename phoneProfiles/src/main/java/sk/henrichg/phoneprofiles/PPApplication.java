@@ -128,13 +128,6 @@ public class PPApplication extends Application {
 
     }
 
-    @Override
-    public void onTerminate ()
-    {
-        DatabaseHandler.getInstance(this).closeConnecion();
-        super.onTerminate();
-    }
-
     //--------------------------------------------------------------
 
     static public boolean getApplicationStarted(Context context, boolean testService)
