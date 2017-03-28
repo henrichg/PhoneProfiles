@@ -256,7 +256,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                 }
 
                 @Override
-                public void onSequenceStep(TapTarget lastTarget) {
+                public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
                     //Log.d("TapTargetView", "Clicked on " + lastTarget.id());
                 }
 
