@@ -479,7 +479,7 @@
             android:exported="false">
         </service>
         <service
-            android:name=".PPNotificationListenerService"
+            android:name="sk.henrichg.phoneprofiles.PPNotificationListenerService"
             android:enabled="@bool/api_v18"
             android:exported="@bool/api_v18"
             android:label="@string/app_name"
