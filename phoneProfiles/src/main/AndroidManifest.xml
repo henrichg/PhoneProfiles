@@ -80,6 +80,9 @@
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
 
+        <!-- support for 18.5:9 display (Samsung Galaxy S8, LG G6) -->
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+
         <!-- Google Backup key -->
         <meta-data
             android:name="com.google.android.backup.api_key"
