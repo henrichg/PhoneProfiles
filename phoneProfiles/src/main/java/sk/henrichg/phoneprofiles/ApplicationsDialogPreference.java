@@ -145,6 +145,13 @@ public class ApplicationsDialogPreference  extends DialogPreference {
             }
         });
 
+        mBuilder.showListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                ApplicationsDialogPreference.this.onShow(dialog);
+            }
+        });
+
         mDialog = mBuilder.build();
         View layout = mDialog.getCustomView();
 
@@ -156,12 +163,6 @@ public class ApplicationsDialogPreference  extends DialogPreference {
 
         listAdapter = new ApplicationsPreferenceAdapter(context, this);
 
-        mBuilder.showListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                ApplicationsDialogPreference.this.onShow(dialog);
-            }
-        });
         applicationsListView.setDropListener(new DragSortListView.DropListener() {
             public void drop(int from, int to) {
                 listAdapter.changeItemOrder(from, to); // swap profiles
