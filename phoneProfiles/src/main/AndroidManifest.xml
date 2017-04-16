@@ -186,6 +186,20 @@
                   android:theme="@style/LockDeviceActivity" >
         </activity>
 
+        <!-- implicit broadcast receivers, in Android O exception group -->
+        <!-- https://developer.android.com/preview/features/background-broadcasts.html -->
+        <receiver
+            android:name=".BootUpReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- implicit broadcast receivers, register it in PhoneProfilesService -->
         <receiver android:name=".PhoneProfilesInstall">
             <intent-filter
                 android:enabled="true"
@@ -198,102 +212,11 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".IconWidgetProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_icon">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/icon_widget_info"/>
-        </receiver>
-        <receiver
-            android:name=".OneRowWidgetProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_one_row">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/one_row_widget_info"/>
-        </receiver>
-        <receiver
-            android:name=".ProfileListWidgetProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_list">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/profile_list_widget_info"/>
-        </receiver>
-        <receiver
             android:name=".LocaleChangedReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".BootUpReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-            </intent-filter>
-        </receiver>
-        <!--
-        <receiver android:name=".PackageReplacedReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-
-                <data
-                    android:path="sk.henrichg.phoneprofilesplus"
-                    android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        -->
-        <receiver
-            android:name=".PackageReplacedReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".DashClockBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="sk.henrichg.phoneprofiles.REFRESH_DASHCLOCK"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".RefreshGUIBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="sk.henrichg.phoneprofiles.REFRESH_GUI"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -308,21 +231,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".ProfileDurationAlarmBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".NotificationCancelAlarmBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".RemoveBrightnessViewBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
         </receiver>
         <receiver
             android:name=".AlarmClockBroadcastReceiver"
@@ -378,35 +286,69 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".PermissionsNotificationDeletedReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".DisableRingerModeInernalChangeBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".RecreateNotificationBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".DisableScreenTimeoutInternalChangeReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <!--
-        <receiver
-            android:name=".InterruptionFilterChangedBroadcastReceiver"
+            android:name=".WifiStateChangedBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
         </receiver>
-        -->
+
+        <!-- widget providers -->
+        <receiver
+            android:name=".IconWidgetProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/widget_label_icon">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/icon_widget_info"/>
+        </receiver>
+        <receiver
+            android:name=".OneRowWidgetProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/widget_label_one_row">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/one_row_widget_info"/>
+        </receiver>
+        <receiver
+            android:name=".ProfileListWidgetProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/widget_label_list">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/profile_list_widget_info"/>
+        </receiver>
+
+        <!-- no implicit broadcast receivers -->
+        <receiver
+            android:name=".PackageReplacedReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Device administrator receiver -->
         <receiver
             android:name=".PPDeviceAdminReceiver"
             android:description="@string/device_admin_description"
@@ -420,19 +362,78 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
             </intent-filter>
         </receiver>
+
+        <!-- alarms -->
+        <receiver
+            android:name=".ProfileDurationAlarmBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".NotificationCancelAlarmBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".RemoveBrightnessViewBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".DisableRingerModeInernalChangeBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".RecreateNotificationBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
         <receiver
             android:name=".DelayedBootUpReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
+
+        <!-- pending intents -->
         <receiver
-            android:name=".WifiStateChangedBroadcastReceiver"
+            android:name=".PermissionsNotificationDeletedReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED"/>
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".DisableScreenTimeoutInternalChangeReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+
+        <!-- use LocalBroadcastManager -->
+        <receiver
+            android:name=".DashClockBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="sk.henrichg.phoneprofiles.REFRESH_DASHCLOCK"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".RefreshGUIBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="sk.henrichg.phoneprofiles.REFRESH_GUI"/>
+            </intent-filter>
+        </receiver>
+        <!--
+        <receiver
+            android:name=".InterruptionFilterChangedBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+        -->
 
         <service
             android:name=".ProfileListWidgetService"
