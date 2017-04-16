@@ -21,6 +21,7 @@ import android.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -364,24 +365,24 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     private void setTitleStyle(Preference preference, boolean bold, boolean underline, boolean systemSettings)
     {
         CharSequence title = preference.getTitle();
+        if (systemSettings) {
+            String s = title.toString();
+            if (!s.contains("(S)"))
+                title = TextUtils.concat("(S) ", title);
+        }
         Spannable sbt = new SpannableString(title);
         Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
         for(Object span: spansToRemove){
             if(span instanceof CharacterStyle)
                 sbt.removeSpan(span);
         }
-        if (systemSettings) {
-            String s = title.toString();
-            if (!s.contains("(S)"))
-                title = "(S) " + title;
-        }
         sbt = new SpannableString(title);
         if (bold || underline)
         {
             if (bold)
-                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             if (underline)
-                sbt.setSpan(new UnderlineSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             preference.setTitle(sbt);
         }
         else
