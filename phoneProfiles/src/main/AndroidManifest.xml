@@ -411,6 +411,7 @@
         </receiver>
 
         <!-- use LocalBroadcastManager -->
+        <!--
         <receiver
             android:name=".DashClockBroadcastReceiver"
             android:enabled="true"
@@ -427,6 +428,7 @@
                 <action android:name="sk.henrichg.phoneprofiles.REFRESH_GUI"/>
             </intent-filter>
         </receiver>
+        -->
         <!--
         <receiver
             android:name=".InterruptionFilterChangedBroadcastReceiver"
