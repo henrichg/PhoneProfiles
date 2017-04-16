@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,13 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.CharacterStyle;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 
 import static android.app.Activity.RESULT_CANCELED;
 
@@ -169,30 +177,29 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    /*
-    private void setTitleStyle(Preference preference, boolean bold, boolean underline)
+    public static void setPreferenceTitleStyle(Preference preference, boolean bold, boolean underline, boolean errorColor)
     {
-        CharSequence title = preference.getTitle();
-        Spannable sbt = new SpannableString(title);
-        Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
-        for(Object span: spansToRemove){
-            if(span instanceof CharacterStyle)
-                sbt.removeSpan(span);
-        }
-        if (bold || underline)
-        {
-            if (bold)
-                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            if (underline)
-                sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            preference.setTitle(sbt);
-        }
-        else
-        {
-            preference.setTitle(sbt);
+        if (preference != null) {
+            CharSequence title = preference.getTitle();
+            Spannable sbt = new SpannableString(title);
+            Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
+            for (Object span : spansToRemove) {
+                if (span instanceof CharacterStyle)
+                    sbt.removeSpan(span);
+            }
+            if (bold || underline) {
+                if (bold)
+                    sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (underline)
+                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (errorColor)
+                    sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                preference.setTitle(sbt);
+            } else {
+                preference.setTitle(sbt);
+            }
         }
     }
-    */
 
     public void setSummary(String key)
     {
@@ -200,6 +207,25 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
 
         if (preference == null)
             return;
+
+        PreferenceScreen preferenceCategoryNotifications = (PreferenceScreen) findPreference("categoryNotifications");
+        boolean notificationStatusBar = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, true);
+        boolean notificationStatusBarPermanent = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, true);
+        if (!(notificationStatusBar && notificationStatusBarPermanent)) {
+            setPreferenceTitleStyle(preferenceCategoryNotifications, true, false, true);
+            preferenceCategoryNotifications.setSummary(getString(R.string.phone_profiles_pref_notificationStatusBarNotEnabled_summary) + " " +
+                    getString(R.string.phone_profiles_pref_notificationStatusBarRequired));
+        }
+        else {
+            setPreferenceTitleStyle(preferenceCategoryNotifications, false, false, false);
+            preferenceCategoryNotifications.setSummary(R.string.empty_string);
+        }
+        if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR)) {
+            setPreferenceTitleStyle(preference, !notificationStatusBar, false, !notificationStatusBar);
+        }
+        if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT)) {
+            setPreferenceTitleStyle(preference, !notificationStatusBarPermanent, false, !notificationStatusBarPermanent);
+        }
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR)) {
@@ -245,9 +271,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             }
             else
                 preference.setSummary(null);
-
-            //if (key.equals(PPApplication.PREF_APPLICATION_LANGUAGE))
-            //    setTitleStyle(preference, true, false);
         }
         /*else if (preference instanceof RingtonePreference) {
             // For ringtone preferences, look up the correct display value
