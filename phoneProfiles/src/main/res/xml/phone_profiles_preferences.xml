@@ -121,26 +121,21 @@
             android:widgetLayout="@layout/mp_preference_switch" />
         <PreferenceCategory
             android:title="@string/phone_profiles_pref_notificationStatusBarNew" >
+            <Preference
+                android:key="notificationStatusBarInfo"
+                android:title="@string/phone_profiles_pref_notificationStatusBarInfo_title"
+                android:summary="@string/phone_profiles_pref_notificationStatusBarInfo_summary"
+                android:widgetLayout="@layout/info_preference" />
             <CheckBoxPreference
                 android:key="notificationStatusBar"
                 android:title="@string/phone_profiles_pref_notificationStatusBar"
+                android:summary="@string/phone_profiles_pref_notificationStatusBarRequired"
                 android:defaultValue="true"
-                android:widgetLayout="@layout/mp_preference_switch" />
-            <CheckBoxPreference
-                android:key="notificationShowInStatusBar"
-                android:title="@string/phone_profiles_pref_notificationShowInStatusBar"
-                android:defaultValue="true"
-                android:dependency="notificationStatusBar"
-                android:widgetLayout="@layout/mp_preference_switch" />
-            <CheckBoxPreference
-                android:key="notificationHideInLockscreen"
-                android:title="@string/phone_profiles_pref_notificationHideInLockscreen"
-                android:defaultValue="false"
-                android:dependency="notificationStatusBar"
                 android:widgetLayout="@layout/mp_preference_switch" />
             <CheckBoxPreference
                 android:key="notificationStatusBarPermanent"
                 android:title="@string/phone_profiles_pref_notificationStatusBarPermanent"
+                android:summary="@string/phone_profiles_pref_notificationStatusBarRequired"
                 android:defaultValue="true"
                 android:disableDependentsState="true"
                 android:dependency="notificationStatusBar"
@@ -153,6 +148,18 @@
                 henrichg:dMin="0"
                 henrichg:dMax="300"
                 android:dependency="notificationStatusBarPermanent" />
+            <CheckBoxPreference
+                android:key="notificationShowInStatusBar"
+                android:title="@string/phone_profiles_pref_notificationShowInStatusBar"
+                android:defaultValue="true"
+                android:dependency="notificationStatusBar"
+                android:widgetLayout="@layout/mp_preference_switch" />
+            <CheckBoxPreference
+                android:key="notificationHideInLockscreen"
+                android:title="@string/phone_profiles_pref_notificationHideInLockscreen"
+                android:defaultValue="false"
+                android:dependency="notificationStatusBar"
+                android:widgetLayout="@layout/mp_preference_switch" />
             <Preference
                 android:key="notificationStatusBarStyleInfo"
                 android:title="@string/phone_profiles_pref_notificationStatusBarStyleInfo_title"
