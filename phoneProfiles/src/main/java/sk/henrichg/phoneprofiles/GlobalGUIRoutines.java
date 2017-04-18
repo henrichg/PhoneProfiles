@@ -28,6 +28,7 @@ import android.widget.NumberPicker;
 
 import java.lang.reflect.Field;
 import java.text.Collator;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class GlobalGUIRoutines {
@@ -333,6 +334,20 @@ public class GlobalGUIRoutines {
         int hours = duration / 3600;
         int minutes = (duration % 3600) / 60;
         int seconds = duration % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    @SuppressLint("DefaultLocale")
+    static String getEndsAtString(int duration) {
+        if(duration == 0) {
+            return "--";
+        }
+
+        Calendar ends = Calendar.getInstance();
+        ends.add(Calendar.SECOND, duration);
+        int hours = ends.get(Calendar.HOUR_OF_DAY);
+        int minutes = ends.get(Calendar.MINUTE);
+        int seconds = ends.get(Calendar.SECOND);
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
