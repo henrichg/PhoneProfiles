@@ -1,13 +1,11 @@
 PhoneProfiles Seznam změn
 =========================
 
-Verze: 4.5
-----------
-- Přidáno: "Pohledy na cíl kliknutí". Pomohou vám s používáním GUI komponentů.
-- Přidáno: "Zásady ochrany osobních údajů" do "O aplikaci".
-- Přidáno: "Skrýt ikonu ve stavovém řádku" do parametrů profilu. Můžete skrýt aplikační ikonu ve stavovém řádku pro aktivován profil. Přepíše parametr v nastavení aplikace.
-- Přidáno: "Zamknutí zařízení" do parametrů profilu. Můžete zamknout zařízení aktivací profilu.
-- Přidáno: "Připojit k SSID" do parametrů profilu. Můžete připojit zařízení do nakonfigurovaný Wi-Fi SSID aktivací profilu.
-- Přidáno: "Nastavení sloučení hlasitosti" do nastavení aplikace. Pokud detekce sloučení hlasitosti vyzvánění a notifikací je nesprávná, můžete ji opravit tímto parametrem.
-- Změněno: GUI - odstraněny "karty" z Aktivátoru, Editoru.
+Verze: 4.5.1
+------------
+- Přidáno: Trvání aktivace pro widget Ikona.
+- Přidáno: Podpora pro grant povolení WRITE_SECURE_SETTINGS prostřednictvím adb: "adb shell pm grant sk.henrichg.phoneprofilesplus android.permission.WRITE_SECURE_SETTINGS".
+- Přidáno: změna velikosti widgetu Ikona.
+- Změněné: "vyrušení" na "Nerušit" pro systém Android 6+.
+- Změněné: Vibrace při zvonění: pro Android 7+, root není nutný (opravené společností Google).
 - Opravy chyb.
