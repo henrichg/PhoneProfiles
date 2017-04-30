@@ -40,7 +40,7 @@ public class PPApplication extends Application {
     public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
 
-                                            +"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
+                                            //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
