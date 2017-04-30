@@ -19,7 +19,6 @@ import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
