@@ -39,6 +39,7 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -87,6 +88,11 @@
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIPDE5lCqC-YETPSAegqVaD-swljLtPFibz6JOtg"/>
+
+        <!-- Fabric key -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="795384c10c1c3eec6489c1d2fcf5e444d013da7d" />
 
         <activity
             android:name=".ActivateProfileActivity"

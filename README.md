@@ -22,3 +22,4 @@ Required external libs
 - Material Dialogs - https://github.com/afollestad/material-dialogs
 - input-mask-android - https://github.com/RedMadRobot/input-mask-android
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
+- Crashlytics - https://fabric.io/kits/android/crashlytics

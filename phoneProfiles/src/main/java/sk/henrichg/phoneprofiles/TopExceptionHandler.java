@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.BufferedWriter;
@@ -10,21 +11,26 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     private Thread.UncaughtExceptionHandler defaultUEH;
-    private int actualVersionCode;
+    //private int actualVersionCode;
 
     private static final String CRASH_FILENAME = "crash.txt";
 
-    TopExceptionHandler(int actualVersionCode) {
+    public TopExceptionHandler(Context applicationContext/*, int actualVersionCode*/) {
         this.defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
-        this.actualVersionCode = actualVersionCode;
+        //this.actualVersionCode = actualVersionCode;
+
+        Fabric.with(applicationContext, new Crashlytics());
     }
 
     public void uncaughtException(Thread t, Throwable e)
     {
-        StackTraceElement[] arr = e.getStackTrace();
+        /*StackTraceElement[] arr = e.getStackTrace();
         String report = e.toString()+"\n\n";
 
         report += "----- App version code: " + actualVersionCode + "\n\n";
@@ -53,7 +59,7 @@ class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
         }
         report += "-------------------------------\n\n";
 
-        logIntoFile("E","TopExceptionHandler", report);
+        logIntoFile("E","TopExceptionHandler", report);*/
 
         if (defaultUEH != null)
             //Delegates to Android's error handling
@@ -63,6 +69,7 @@ class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
             System.exit(2);
     }
 
+    /*
     @SuppressLint("SimpleDateFormat")
     private void logIntoFile(String type, String tag, String text)
     {
@@ -112,5 +119,5 @@ class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
         //noinspection ResultOfMethodCallIgnored
         logFile.delete();
     }
-
+    */
 }

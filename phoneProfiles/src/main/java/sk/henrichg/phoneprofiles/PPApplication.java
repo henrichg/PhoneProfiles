@@ -105,7 +105,7 @@ public class PPApplication extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
         }
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(actualVersionCode));
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(getApplicationContext()/*, actualVersionCode*/));
 
     //	Debug.startMethodTracing("phoneprofiles");
 
