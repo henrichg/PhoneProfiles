@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -266,6 +267,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     public void showTargetHelps() {
+        if (Build.VERSION.SDK_INT <= 19)
+            // TapTarget.forToolbarMenuItem FC :-(
+            // Toolbar.findViewById() returns null
+            return;
+
         ApplicationPreferences.getSharedPreferences(this);
 
         if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||

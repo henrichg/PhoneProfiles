@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -209,6 +210,11 @@ class ActivateProfileListAdapter extends BaseAdapter
     }
 
     void showTargetHelps(final Activity activity, ActivateProfileListFragment fragment, final View listItemView) {
+        if (Build.VERSION.SDK_INT <= 19)
+            // TapTarget.forToolbarMenuItem FC :-(
+            // Toolbar.findViewById() returns null
+            return;
+
         if (fragment.targetHelpsSequenceStarted)
             return;
 
