@@ -7,7 +7,7 @@ ext.versions = [
         targetSdk: 25,
         compileSdk: 25,
         buildTools: '25.0.3',
-        publishVersion: '4.5.1.2',
-        publishVersionCode: 2200,
+        publishVersion: '4.5.1.3',
+        publishVersionCode: 2210,
         supportLib: '25.3.1'
 ]
