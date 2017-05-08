@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -23,6 +24,8 @@ import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 
@@ -125,7 +128,9 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             preference = prefMng.findPreference(PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS);
             if (preference != null) {
                 boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
-                if ((android.os.Build.VERSION.SDK_INT >= 23) && (!a60)) {
+                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                List<ResolveInfo> activities = getActivity().getApplicationContext().getPackageManager().queryIntentActivities(intent, 0);
+                if ((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) && (activities.size() > 0)) {
                     //preference.setWidgetLayoutResource(R.layout.start_activity_preference);
                     preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
