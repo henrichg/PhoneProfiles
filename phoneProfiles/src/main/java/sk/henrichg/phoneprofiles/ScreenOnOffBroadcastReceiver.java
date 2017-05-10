@@ -59,7 +59,6 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                 //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                 Profile activatedProfile = dataWrapper.getActivatedProfile();
                 dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
-                dataWrapper.invalidateDataWrapper();
             }
 
             // change screen timeout
