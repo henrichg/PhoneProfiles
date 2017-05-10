@@ -2466,13 +2466,15 @@ public class ActivateProfileHelper {
         if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/) {
             String command1 = PPApplication.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
             //Log.e("ActivateProfileHelper.setNFC", "command1="+command1);
-            Command command = new Command(0, false, command1);
-            try {
-                //RootTools.closeAllShells();
-                RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
-                commandWait(command);
-            } catch (Exception e) {
-                Log.e("ActivateProfileHelper.setNFC", "Error on run su");
+            if (command1 != null) {
+                Command command = new Command(0, false, command1);
+                try {
+                    //RootTools.closeAllShells();
+                    RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                    commandWait(command);
+                } catch (Exception e) {
+                    Log.e("ActivateProfileHelper.setNFC", "Error on run su");
+                }
             }
         }
     }
@@ -2796,13 +2798,15 @@ public class ActivateProfileHelper {
                 if (PPApplication.isRooted() && PPApplication.serviceBinaryExists())
                 {
                     String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", context, 0);
-                    Command command = new Command(0, false, command1);
-                    try {
-                        //RootTools.closeAllShells();
-                        RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
-                        commandWait(command);
-                    } catch (Exception e) {
-                        Log.e("ActivateProfileHelper.lockDevice", "Error on run su");
+                    if (command1 != null) {
+                        Command command = new Command(0, false, command1);
+                        try {
+                            //RootTools.closeAllShells();
+                            RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                            commandWait(command);
+                        } catch (Exception e) {
+                            Log.e("ActivateProfileHelper.lockDevice", "Error on run su");
+                        }
                     }
                 }
                 break;
