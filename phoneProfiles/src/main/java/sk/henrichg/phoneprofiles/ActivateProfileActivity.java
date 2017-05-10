@@ -249,6 +249,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     public void startTargetHelpsActivity() {
+        if (Build.VERSION.SDK_INT <= 19)
+            // TapTarget.forToolbarMenuItem FC :-(
+            // Toolbar.findViewById() returns null
+            return;
+
         //Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(1)");
 
         ApplicationPreferences.getSharedPreferences(this);
