@@ -10,6 +10,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.Preference;
@@ -23,6 +24,7 @@ import java.io.File;
 public class ImageViewPreference extends Preference {
 
     private String imageIdentifier;
+    private Bitmap bitmap;
 
     private Context prefContext;
 
@@ -55,11 +57,6 @@ public class ImageViewPreference extends Preference {
 
         if (imageView != null)
         {
-            Resources resources = prefContext.getResources();
-            int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
-            int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-            Bitmap bitmap = BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, prefContext);
-
             if (bitmap != null)
                 imageView.setImageBitmap(bitmap);
             else
@@ -88,10 +85,12 @@ public class ImageViewPreference extends Preference {
         if (restoreValue) {
             // restore state
             imageIdentifier = getPersistedString(imageIdentifier);
+            getBitmap();
         }
         else {
             // set state
             imageIdentifier = (String) defaultValue;
+            getBitmap();
             persistString(imageIdentifier);
         }
     }
@@ -130,6 +129,15 @@ public class ImageViewPreference extends Preference {
         notifyChanged();
     }
 
+    private void getBitmap() {
+        if (!imageIdentifier.startsWith("-")) {
+            Resources resources = prefContext.getResources();
+            int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
+            int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
+            bitmap = BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, prefContext);
+        }
+    }
+
     void setImageIdentifier(String newImageIdentifier)
     {
         String newValue = newImageIdentifier;
@@ -140,6 +148,7 @@ public class ImageViewPreference extends Preference {
         }
 
         imageIdentifier = newImageIdentifier;
+        getBitmap();
 
         // zapis do preferences
         persistString(newValue);
@@ -151,11 +160,17 @@ public class ImageViewPreference extends Preference {
 
     void startGallery()
     {
-        //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+            intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        }else{
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+        }
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
 
         // hm, neda sa ziskat aktivita z preference, tak vyuzivam static metodu
         ProfilePreferencesFragment.setChangedImageViewPreference(this);
