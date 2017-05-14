@@ -1,13 +1,13 @@
 // Release versions (look at PackageReplacedReceiver)
 // 2100 = not show Activator and Editor target helps
-
+// 2300 = changed picture file path to Uri
 
 ext.versions = [
         minSdk: 16,
         targetSdk: 25,
         compileSdk: 25,
         buildTools: '25.0.3',
-        publishVersion: '4.5.1.6',
-        publishVersionCode: 2250,
+        publishVersion: '4.5.1.7',
+        publishVersionCode: 2300,
         supportLib: '25.3.1'
 ]

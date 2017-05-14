@@ -378,8 +378,7 @@
             <sk.henrichg.phoneprofiles.ImageViewPreference
                 android:defaultValue="@string/prf_pref_deviceWallpaper"
                 android:key="prf_pref_deviceWallpaper"
-                android:title="@string/profile_preferences_deviceWallpaper"
-                henrichg:imageSource="file" />
+                android:title="@string/profile_preferences_deviceWallpaper" />
             <sk.henrichg.phoneprofiles.MaterialListPreference
                 android:title="@string/profile_preferences_deviceWallpaperFor"
                 android:summary="@string/array_pref_device_wallpaper_homescreen"

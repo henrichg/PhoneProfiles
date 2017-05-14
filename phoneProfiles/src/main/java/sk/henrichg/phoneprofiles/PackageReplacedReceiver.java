@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
@@ -56,6 +57,14 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
                         editor.apply();
+                    }
+
+                    if (actualVersionCode <= 2300) {
+                        DatabaseHandler databaseHandler = DatabaseHandler.getInstance(context);
+                        if (databaseHandler != null) {
+                            List<Profile> profileList = databaseHandler.getAllProfiles();
+                            databaseHandler.changePictureFilePathToUri(profileList);
+                        }
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {

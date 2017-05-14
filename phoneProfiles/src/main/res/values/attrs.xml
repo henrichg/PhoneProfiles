@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <declare-styleable name="ImageViewPreference">
-        <attr name="imageSource" format="string" />
-    </declare-styleable>
-        <declare-styleable name="SeekBarDialogPreference">
+    <declare-styleable name="SeekBarDialogPreference">
         <attr name="maximumValue" format="integer" />
         <attr name="minimumValue" format="integer" />
         <attr name="stepSize" format="integer" />
