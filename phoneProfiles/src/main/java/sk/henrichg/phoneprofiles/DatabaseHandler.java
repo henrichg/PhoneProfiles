@@ -1891,8 +1891,12 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         String[] splits = icon.split("\\|");
                         String iconIdentifier = splits[0];
                         String isIconResourceId = splits[1];
-                        String useCustomColorForIcon = splits[2];
-                        String iconCustomColor = splits[3];
+                        String useCustomColorForIcon = "0";
+                        String iconCustomColor = "0";
+                        if (splits.length == 4) {
+                            useCustomColorForIcon = splits[2];
+                            iconCustomColor = splits[3];
+                        }
 
                         if (!isIconResourceId.equals("1")) {
                             Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
@@ -1922,6 +1926,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             values.put(KEY_DEVICE_WALLPAPER, "-");
                         }
                     }
+                    else
+                        values.put(KEY_DEVICE_WALLPAPER, "-");
 
                     if (values.size() > 0)
                         db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[] { String.valueOf(id) });
