@@ -42,7 +42,7 @@ public class Permissions {
     private static final int PERMISSION_ACCESS_NOTIFICATION_POLICY = 17;
     private static final int PERMISSION_PROFILE_LOCK_DEVICE = 18;
 
-    private static final int GRANT_TYPE_PROFILE = 1;
+    static final int GRANT_TYPE_PROFILE = 1;
     static final int GRANT_TYPE_INSTALL_TONE = 2;
     static final int GRANT_TYPE_WALLPAPER = 3;
     static final int GRANT_TYPE_CUSTOM_PROFILE_ICON = 4;
