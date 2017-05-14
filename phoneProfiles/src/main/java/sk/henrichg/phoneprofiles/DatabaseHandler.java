@@ -674,7 +674,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         if (oldVersion < 1330) {
-            changePictureFilePathToUri();
+            changePictureFilePathToUri(db);
         }
 
     }
@@ -1856,21 +1856,25 @@ class DatabaseHandler extends SQLiteOpenHelper {
        return ret;
     }
 
-    void changePictureFilePathToUri() {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+    private void changePictureFilePathToUri(SQLiteDatabase database) {
+        SQLiteDatabase db;
+        if (database == null) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            db = getMyWritableDatabase();
+        }
+        else
+            db = database;
 
-        final String selectQuery = "SELECT " + KEY_ID +
-                                               KEY_ICON + "," +
-                                               KEY_DEVICE_WALLPAPER_CHANGE + "," +
-                                               KEY_DEVICE_WALLPAPER +
-                                    " FROM " + TABLE_PROFILES;
-
-        ContentValues values = new ContentValues();
+        final String selectQuery = "SELECT " + KEY_ID + "," +
+                KEY_ICON + "," +
+                KEY_DEVICE_WALLPAPER_CHANGE + "," +
+                KEY_DEVICE_WALLPAPER +
+                " FROM " + TABLE_PROFILES;
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        db.beginTransaction();
+        if (database == null)
+            db.beginTransaction();
         try {
 
             if (cursor.moveToFirst()) {
@@ -1881,6 +1885,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     int wallpaperChange = cursor.getInt(2);
                     String wallpaper = cursor.getString(3);
 
+                    ContentValues values = new ContentValues();
+
                     try {
                         String[] splits = icon.split("\\|");
                         String iconIdentifier = splits[0];
@@ -1888,7 +1894,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         String useCustomColorForIcon = splits[2];
                         String iconCustomColor = splits[3];
 
-                        if (isIconResourceId.equals("1")) {
+                        if (!isIconResourceId.equals("1")) {
                             Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
                             if (imageUri != null)
                                 values.put(KEY_ICON, imageUri.toString()+"|"+
@@ -1898,30 +1904,39 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             else
                                 values.put(KEY_ICON, "ic_profile_default|1|0|0");
                         }
-                    } catch (Exception ignored) {}
+                    } catch (Exception e) {
+                        values.put(KEY_ICON, "ic_profile_default|1|0|0");
+                    }
                     if (wallpaperChange == 1) {
                         try {
                             String[] splits = wallpaper.split("\\|");
                             Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
                             if (imageUri != null)
                                 values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
+                            else {
+                                values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
+                                values.put(KEY_DEVICE_WALLPAPER, "-");
+                            }
                         } catch (Exception e) {
                             values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
                             values.put(KEY_DEVICE_WALLPAPER, "-");
                         }
                     }
 
-                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[] { String.valueOf(id) });
+                    if (values.size() > 0)
+                        db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[] { String.valueOf(id) });
 
                 } while (cursor.moveToNext());
             }
 
-            db.setTransactionSuccessful();
+            if (database == null)
+                db.setTransactionSuccessful();
 
         } catch (Exception e){
             //Error in between database transaction
         } finally {
-            db.endTransaction();
+            if (database == null)
+                db.endTransaction();
             cursor.close();
         }
 
@@ -2354,7 +2369,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     }
 
                     if (exportedDBObj.getVersion() < 1330) {
-                        changePictureFilePathToUri();
+                        changePictureFilePathToUri(null);
                     }
 
                     cursorExportedDB.close();
