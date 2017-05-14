@@ -27,7 +27,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     Context context;
     
     // Database Version
-    private static final int DATABASE_VERSION = 1320;
+    private static final int DATABASE_VERSION = 1330;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -671,6 +671,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_CONNECT_TO_SSID + "=\""+Profile.CONNECTTOSSID_JUSTANY+"\"");
+        }
+
+        if (oldVersion < 1330) {
+            changePictureFilePathToUri();
         }
 
     }
@@ -1835,66 +1839,90 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 } while (cursor.moveToNext());
             }
 
-            cursor.close();
-
             db.setTransactionSuccessful();
 
             ret = 1;
        } catch (Exception e){
-            //Error in between database transaction
-            Log.e("DatabaseHandler.updateForHardware", e.toString());
+           //Error in between database transaction
+           Log.e("DatabaseHandler.updateForHardware", e.toString());
            ret = 0;
        } finally {
            db.endTransaction();
-       }	
+           cursor.close();
+       }
 
        //db.close();
 
        return ret;
     }
 
-    void changePictureFilePathToUri(List<Profile> list) {
+    void changePictureFilePathToUri() {
         //SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db = getMyWritableDatabase();
 
+        final String selectQuery = "SELECT " + KEY_ID +
+                                               KEY_ICON + "," +
+                                               KEY_DEVICE_WALLPAPER_CHANGE + "," +
+                                               KEY_DEVICE_WALLPAPER +
+                                    " FROM " + TABLE_PROFILES;
+
         ContentValues values = new ContentValues();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
         db.beginTransaction();
         try {
 
-            for (Profile profile : list)
-            {
-                if (!profile.getIsIconResourceID()) {
-                    Uri imageUri = ImageViewPreference.getImageContentUri(context, profile.getIconIdentifier());
-                    if (imageUri != null)
-                        values.put(KEY_ICON, imageUri.toString()+"|"+
-                                ((profile.getIsIconResourceID()) ? "1" : "0")+"|"+
-                                ((profile.getUseCustomColorForIcon()) ? "1" : "0")+"|"+
-                                Integer.toString(profile.getIconCustomColor()));
-                    else
-                        values.put(KEY_ICON, "ic_profile_default|1|0|0");
-                }
-                if (profile._deviceWallpaperChange == 1) {
-                    try {
-                        String[] splits = profile._deviceWallpaper.split("\\|");
-                        Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
-                        if (imageUri != null)
-                            values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
-                    } catch (Exception e) {
-                        values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
-                        values.put(KEY_DEVICE_WALLPAPER, "-");
-                    }
-                }
+            if (cursor.moveToFirst()) {
+                do {
+                    long id = cursor.getLong(0);
+                    String icon = cursor.getString(1);
 
-                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                        new String[] { String.valueOf(profile._id) });
+                    int wallpaperChange = cursor.getInt(2);
+                    String wallpaper = cursor.getString(3);
+
+                    try {
+                        String[] splits = icon.split("\\|");
+                        String iconIdentifier = splits[0];
+                        String isIconResourceId = splits[1];
+                        String useCustomColorForIcon = splits[2];
+                        String iconCustomColor = splits[3];
+
+                        if (isIconResourceId.equals("1")) {
+                            Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
+                            if (imageUri != null)
+                                values.put(KEY_ICON, imageUri.toString()+"|"+
+                                        isIconResourceId+"|"+
+                                        useCustomColorForIcon+"|"+
+                                        iconCustomColor);
+                            else
+                                values.put(KEY_ICON, "ic_profile_default|1|0|0");
+                        }
+                    } catch (Exception ignored) {}
+                    if (wallpaperChange == 1) {
+                        try {
+                            String[] splits = wallpaper.split("\\|");
+                            Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
+                            if (imageUri != null)
+                                values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
+                        } catch (Exception e) {
+                            values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
+                            values.put(KEY_DEVICE_WALLPAPER, "-");
+                        }
+                    }
+
+                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[] { String.valueOf(id) });
+
+                } while (cursor.moveToNext());
             }
 
             db.setTransactionSuccessful();
+
         } catch (Exception e){
             //Error in between database transaction
         } finally {
             db.endTransaction();
+            cursor.close();
         }
 
         //db.close();
@@ -2323,6 +2351,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             // Inserting Row do db z SQLiteOpenHelper
                             db.insert(TABLE_PROFILES, null, values);
                         } while (cursorExportedDB.moveToNext());
+                    }
+
+                    if (exportedDBObj.getVersion() < 1330) {
+                        changePictureFilePathToUri();
                     }
 
                     cursorExportedDB.close();
