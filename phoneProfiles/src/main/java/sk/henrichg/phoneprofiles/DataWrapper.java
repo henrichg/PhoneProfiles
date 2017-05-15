@@ -11,6 +11,7 @@ import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class DataWrapper {
@@ -77,22 +78,31 @@ public class DataWrapper {
 
         if (profileList == null)
         {
-            profileList = getDatabaseHandler().getAllProfiles();
-
-            if (forGUI)
-            {
-                for (Profile profile : profileList)
-                {
-                    profile.generateIconBitmap(context, monochrome, monochromeValue);
-                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
-                }
-            }
+            profileList = getNewProfileList();
         }
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
 
         return profileList;
     }
+
+    List<Profile> getNewProfileList() {
+        List<Profile> newProfileList = getDatabaseHandler().getAllProfiles();
+
+        if (forGUI)
+        {
+            profileList.addAll(newProfileList);
+
+            for (Iterator<Profile> it = profileList.iterator(); it.hasNext();) {
+                Profile profile = it.next();
+                profile.generateIconBitmap(context, monochrome, monochromeValue);
+                //if (generateIndicators)
+                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+            }
+        }
+        return profileList;
+    }
+
 
     void setProfileList(List<Profile> profileList, boolean recycleBitmaps)
     {
@@ -329,12 +339,12 @@ public class DataWrapper {
     {
         if (profileList != null)
         {
-            for (Profile profile : profileList)
-            {
+            for(Iterator<Profile> it = profileList.iterator(); it.hasNext();) {
+                Profile profile = it.next();
                 profile.releaseIconBitmap();
                 profile.releasePreferencesIndicator();
+                it.remove();
             }
-            profileList.clear();
         }
         profileList = null;
     }
