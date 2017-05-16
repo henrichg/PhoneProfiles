@@ -10,7 +10,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
 

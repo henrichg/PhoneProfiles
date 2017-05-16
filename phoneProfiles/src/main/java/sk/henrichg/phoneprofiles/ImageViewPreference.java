@@ -2,7 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
