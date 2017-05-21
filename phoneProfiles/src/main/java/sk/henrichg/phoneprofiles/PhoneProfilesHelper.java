@@ -263,8 +263,8 @@ class PhoneProfilesHelper {
 
         OK = true;
 
-        while (!cmd.isFinished() && waitTill<=waitTillLimit) {
-            synchronized (cmd) {
+        synchronized (cmd) {
+            while (!cmd.isFinished() && waitTill<=waitTillLimit) {
                 try {
                     if (!cmd.isFinished()) {
                         cmd.wait(waitTill);

@@ -2848,8 +2848,8 @@ public class ActivateProfileHelper {
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; //7 tries, 6350 msec
 
-        while (!cmd.isFinished() && waitTill<=waitTillLimit) {
-            synchronized (cmd) {
+        synchronized (cmd) {
+            while (!cmd.isFinished() && waitTill<=waitTillLimit) {
                 try {
                     if (!cmd.isFinished()) {
                         cmd.wait(waitTill);
