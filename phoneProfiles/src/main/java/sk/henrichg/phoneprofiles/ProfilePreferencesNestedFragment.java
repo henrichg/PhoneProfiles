@@ -1344,10 +1344,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             String  d = data.getDataString();
             Uri selectedImage = Uri.parse(d);
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
-                ContentResolver resolver = getActivity().getContentResolver();
-                //noinspection WrongConstant
-                resolver.takePersistableUriPermission(selectedImage, takeFlags);
+                try {
+                    final int takeFlags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
+                    ContentResolver resolver = getActivity().getContentResolver();
+                    //noinspection WrongConstant
+                    resolver.takePersistableUriPermission(selectedImage, takeFlags);
+                } catch (Exception ignored) {}
             }
 
             if (ProfilePreferencesFragment.changedImageViewPreference != null)
@@ -1360,10 +1362,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             String  d = data.getDataString();
             Uri selectedImage = Uri.parse(d);
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
-                ContentResolver resolver = getActivity().getContentResolver();
-                //noinspection WrongConstant
-                resolver.takePersistableUriPermission(selectedImage, takeFlags);
+                try {
+                    final int takeFlags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
+                    ContentResolver resolver = getActivity().getContentResolver();
+                    //noinspection WrongConstant
+                    resolver.takePersistableUriPermission(selectedImage, takeFlags);
+                } catch (Exception ignored) {}
             }
 
             if (ProfilePreferencesFragment.changedProfileIconPreference != null)
