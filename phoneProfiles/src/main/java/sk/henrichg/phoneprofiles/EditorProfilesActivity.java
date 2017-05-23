@@ -1001,9 +1001,17 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     public void refreshGUI(boolean refreshIcons, boolean setPosition)
     {
-        EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
-        if (fragment != null)
-            fragment.refreshGUI(refreshIcons, setPosition);
+        final EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
+        final boolean _refreshIcons = refreshIcons;
+        final boolean _setPosition = setPosition;
+        if (fragment != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    fragment.refreshGUI(_refreshIcons, _setPosition);
+                }
+            });
+        }
     }
 
     private void showTargetHelps() {
