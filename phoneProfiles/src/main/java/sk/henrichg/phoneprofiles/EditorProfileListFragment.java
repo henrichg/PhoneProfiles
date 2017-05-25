@@ -660,18 +660,18 @@ public class EditorProfileListFragment extends Fragment {
 
     public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons, boolean setPosition)
     {
-        if (profileListAdapter != null)
-        {
-            if (newProfile)
-            {
-                // add profile into listview
-                profileListAdapter.addItem(profile, false);
+        synchronized (PPApplication.refreshEditorProfilesListMutex) {
+            if (profileListAdapter != null) {
+                if (newProfile) {
+                    // add profile into listview
+                    profileListAdapter.addItem(profile, false);
 
+                }
+                profileListAdapter.notifyDataSetChanged(refreshIcons);
+
+                if (setPosition || newProfile)
+                    setProfileSelection(profile, refreshIcons);
             }
-            profileListAdapter.notifyDataSetChanged(refreshIcons);
-
-            if (setPosition || newProfile)
-                setProfileSelection(profile, refreshIcons);
         }
     }
 

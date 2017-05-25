@@ -447,38 +447,37 @@ public class ActivateProfileListFragment extends Fragment {
 
     public void refreshGUI(boolean refreshIcons)
     {
-        if ((dataWrapper == null) || (profileListAdapter == null))
-            return;
+        synchronized (PPApplication.refreshActivatorListMutex) {
+            if ((dataWrapper == null) || (profileListAdapter == null))
+                return;
 
-        Profile profileFromAdapter = profileListAdapter.getActivatedProfile();
+            Profile profileFromAdapter = profileListAdapter.getActivatedProfile();
 
-        if (profileFromAdapter != null) {
-            profileFromAdapter._checked = false;
-            if (refreshIcons) {
-                dataWrapper.refreshProfileIcon(profileFromAdapter, false, 0);
-            }
-        }
-
-        Profile profileFromDB = dataWrapper.getDatabaseHandler().getActivatedProfile();
-        if (profileFromDB != null)
-        {
-            Profile profileFromDataWrapper = dataWrapper.getProfileById(profileFromDB._id);
-            if (profileFromDataWrapper != null) {
-                profileFromDataWrapper._checked = true;
+            if (profileFromAdapter != null) {
+                profileFromAdapter._checked = false;
                 if (refreshIcons) {
-                    dataWrapper.refreshProfileIcon(profileFromDataWrapper, false, 0);
+                    dataWrapper.refreshProfileIcon(profileFromAdapter, false, 0);
                 }
             }
-            updateHeader(profileFromDataWrapper);
-            setProfileSelection(profileFromDataWrapper, refreshIcons);
-        }
-        else {
-            updateHeader(null);
-            setProfileSelection(null, refreshIcons);
-        }
 
-        profileListAdapter.notifyDataSetChanged(refreshIcons);
+            Profile profileFromDB = dataWrapper.getDatabaseHandler().getActivatedProfile();
+            if (profileFromDB != null) {
+                Profile profileFromDataWrapper = dataWrapper.getProfileById(profileFromDB._id);
+                if (profileFromDataWrapper != null) {
+                    profileFromDataWrapper._checked = true;
+                    if (refreshIcons) {
+                        dataWrapper.refreshProfileIcon(profileFromDataWrapper, false, 0);
+                    }
+                }
+                updateHeader(profileFromDataWrapper);
+                setProfileSelection(profileFromDataWrapper, refreshIcons);
+            } else {
+                updateHeader(null);
+                setProfileSelection(null, refreshIcons);
+            }
 
+            profileListAdapter.notifyDataSetChanged(refreshIcons);
+        }
     }
 
     void showTargetHelps() {
