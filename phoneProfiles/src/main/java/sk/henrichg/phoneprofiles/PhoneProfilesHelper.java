@@ -330,15 +330,17 @@ class PhoneProfilesHelper {
             String command1 = "rm " + file;
             //if (PPApplication.isSELinuxEnforcing())
             //	command1 = PPApplication.getSELinuxEnforceCommad(command1);
-            Command command = new Command(0, false, command1);
-            try {
-                //RootTools.closeAllShells();
-                RootTools.getShell(true, Shell.ShellContext.RECOVERY).add(command);
-                OK = commandWait(command);
-                OK = OK && command.getExitCode() == 0;
-            } catch (Exception e) {
-                //e.printStackTrace();
-                OK = false;
+            synchronized (PPApplication.startRootCommandMutex) {
+                Command command = new Command(0, false, command1);
+                try {
+                    //RootTools.closeAllShells();
+                    RootTools.getShell(true, Shell.ShellContext.RECOVERY).add(command);
+                    OK = commandWait(command);
+                    OK = OK && command.getExitCode() == 0;
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    OK = false;
+                }
             }
         }
         else {
