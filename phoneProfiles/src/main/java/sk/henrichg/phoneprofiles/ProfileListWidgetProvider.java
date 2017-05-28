@@ -270,7 +270,9 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             myOptions = null;
         setLayoutParams(context, appWidgetManager, appWidgetId, myOptions);
         RemoteViews widget = buildLayout(context, appWidgetManager, appWidgetId, isLargeLayout);
-        appWidgetManager.updateAppWidget(appWidgetId, widget);
+        try {
+            appWidgetManager.updateAppWidget(appWidgetId, widget);
+        } catch (Exception ignored) {}
     }
 
     @Override
@@ -314,7 +316,9 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             setLayoutParamsMotorola(context, spanX, spanY, appWidgetId);
             RemoteViews layout;
             layout = buildLayout(context, appWidgetManager, appWidgetId, isLargeLayout);
-            appWidgetManager.updateAppWidget(appWidgetId, layout);
+            try {
+                appWidgetManager.updateAppWidget(appWidgetId, layout);
+            } catch (Exception ignored) {}
         }
         else
         if ((action != null) &&
