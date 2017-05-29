@@ -72,7 +72,6 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
             return 0;
     }
 
-    /*
     private Profile getItem(int position)
     {
         if (getCount() == 0)
@@ -80,7 +79,6 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
         else
             return profileList.get(position);
     }
-    */
 
     public RemoteViews getViewAt(int position) {
 
@@ -89,8 +87,8 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
             row=new RemoteViews(context.getPackageName(), R.layout.profile_list_widget_item);
         else
             row=new RemoteViews(context.getPackageName(), R.layout.profile_grid_widget_item);
-    
-        Profile profile = profileList.get(position);
+
+        Profile profile = getItem(position);
 
         if (profile != null) {
 
@@ -152,8 +150,7 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
                         row.setImageViewBitmap(R.id.widget_profile_list_profile_pref_indicator, profile._preferencesIndicator);
                     else
                         row.setImageViewResource(R.id.widget_profile_list_header_profile_pref_indicator, R.drawable.ic_empty);
-                }
-                else
+                } else
                     row.setImageViewResource(R.id.widget_profile_list_profile_pref_indicator, R.drawable.ic_empty);
             }
 
