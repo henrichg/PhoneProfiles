@@ -173,6 +173,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
 
         editorToolbar = (Toolbar)findViewById(R.id.editor_tollbar);
+        editorToolbar.inflateMenu(R.menu.activity_editor_profiles);
         setSupportActionBar(editorToolbar);
 
         if (getSupportActionBar() != null) {
@@ -1015,10 +1016,10 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     private void showTargetHelps() {
-        if (Build.VERSION.SDK_INT <= 19)
+        /*if (Build.VERSION.SDK_INT <= 19)
             // TapTarget.forToolbarMenuItem FC :-(
             // Toolbar.findViewById() returns null
-            return;
+            return;*/
 
         ApplicationPreferences.getSharedPreferences(this);
 

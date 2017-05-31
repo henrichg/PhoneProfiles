@@ -143,6 +143,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContnetView");
 
         toolbar = (Toolbar)findViewById(R.id.act_prof_tollbar);
+        toolbar.inflateMenu(R.menu.activity_activate_profile);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -254,10 +255,10 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     public void startTargetHelpsActivity() {
-        if (Build.VERSION.SDK_INT <= 19)
+        /*if (Build.VERSION.SDK_INT <= 19)
             // TapTarget.forToolbarMenuItem FC :-(
             // Toolbar.findViewById() returns null
-            return;
+            return;*/
 
         //Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(1)");
 
@@ -277,10 +278,10 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     public void showTargetHelps() {
-        if (Build.VERSION.SDK_INT <= 19)
+        /*if (Build.VERSION.SDK_INT <= 19)
             // TapTarget.forToolbarMenuItem FC :-(
             // Toolbar.findViewById() returns null
-            return;
+            return;*/
 
         ApplicationPreferences.getSharedPreferences(this);
 
