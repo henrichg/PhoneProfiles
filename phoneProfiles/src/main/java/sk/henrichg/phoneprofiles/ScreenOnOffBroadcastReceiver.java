@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 
 public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
