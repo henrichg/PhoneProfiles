@@ -254,8 +254,7 @@ public class ActivateProfileHelper {
                             try {
                                 wifiManager.setWifiEnabled(isWifiEnabled);
                             } catch (Exception e) {
-                                // barla pre security exception INTERACT_ACROSS_USERS - chyba ROM
-                                wifiManager.setWifiEnabled(isWifiEnabled);
+                                Log.e("ActivateProfileHelper.doExecuteForRadios", e.toString());
                             }
                             //try { Thread.sleep(200); } catch (InterruptedException e) { }
                             //SystemClock.sleep(200);
