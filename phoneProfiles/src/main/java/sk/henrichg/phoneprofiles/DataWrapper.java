@@ -20,7 +20,6 @@ public class DataWrapper {
     private boolean forGUI = false;
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
-    private Handler toastHandler;
 
     private DatabaseHandler databaseHandler = null;
     private ActivateProfileHelper activateProfileHelper = null;
@@ -48,11 +47,6 @@ public class DataWrapper {
         forGUI = fgui;
         monochrome = mono;
         monochromeValue = monoVal;
-    }
-
-    void setToastHandler(Handler handler)
-    {
-        toastHandler = handler;
     }
 
     public DatabaseHandler getDatabaseHandler()
@@ -568,10 +562,10 @@ public class DataWrapper {
         if (ApplicationPreferences.notificationsToast(context) && (!ActivateProfileHelper.lockRefresh))
         {
             // toast notification
-            if (toastHandler != null)
+            if (PPApplication.toastHandler != null)
             {
                 final Profile __profile = _profile;
-                toastHandler.post(new Runnable() {
+                PPApplication.toastHandler.post(new Runnable() {
                     public void run() {
                         showToastAfterActivation(__profile);
                     }

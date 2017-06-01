@@ -89,12 +89,6 @@ public class FirstStartService extends IntentService {
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
         dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
 
-        // create a handler to post messages to the main thread
-        Handler toastHandler = new Handler(getMainLooper());
-        dataWrapper.setToastHandler(toastHandler);
-        Handler brightnessHandler = new Handler(getMainLooper());
-        dataWrapper.getActivateProfileHelper().setBrightnessHandler(brightnessHandler);
-
         // zrusenie notifikacie
         dataWrapper.getActivateProfileHelper().removeNotification();
 

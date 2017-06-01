@@ -75,7 +75,6 @@ public class ActivateProfileHelper {
 
     private Context context;
     private NotificationManager notificationManager;
-    private Handler brightnessHandler;
 
     static boolean lockRefresh = false;
 
@@ -116,11 +115,6 @@ public class ActivateProfileHelper {
     private void initializeNoNotificationManager(Context c)
     {
         context = c;
-    }
-
-    void setBrightnessHandler(Handler handler)
-    {
-        brightnessHandler = handler;
     }
 
     void deinitialize()
@@ -1312,7 +1306,14 @@ public class ActivateProfileHelper {
             //noinspection deprecation
             if (pm.isScreenOn()) {
                 //Log.d("ActivateProfileHelper.execute","screen on");
-                setScreenTimeout(profile._deviceScreenTimeout);
+                if (PPApplication.screenTimeoutHandler != null) {
+                    PPApplication.screenTimeoutHandler.post(new Runnable() {
+                        public void run() {
+                            setScreenTimeout(profile._deviceScreenTimeout);
+                        }
+                    });
+                } else
+                    setScreenTimeout(profile._deviceScreenTimeout);
             }
             else {
                 //Log.d("ActivateProfileHelper.execute","screen off");
@@ -1402,9 +1403,9 @@ public class ActivateProfileHelper {
                             Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                 }
 
-                if (brightnessHandler != null) {
+                if (PPApplication.brightnessHandler != null) {
                     final Context __context = context;
-                    brightnessHandler.post(new Runnable() {
+                    PPApplication.brightnessHandler.post(new Runnable() {
                         public void run() {
                             createBrightnessView(profile, __context);
                         }
