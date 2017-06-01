@@ -93,9 +93,11 @@ public class ImportantInfoActivity extends AppCompatActivity {
             infoText10a.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivity(intent);
+                    if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS, getApplicationContext())) {
+                        Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                        //intent.addCategory(Intent.CATEGORY_DEFAULT);
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -118,8 +120,10 @@ public class ImportantInfoActivity extends AppCompatActivity {
                     infoText13.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                            startActivity(intent);
+                            if (GlobalGUIRoutines.activityActionExists("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS", getApplicationContext())) {
+                                Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                                startActivity(intent);
+                            }
                         }
                     });
                     news = true;
@@ -143,8 +147,10 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 infoText14.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                        startActivity(intent);
+                        if (GlobalGUIRoutines.activityActionExists("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS", getApplicationContext())) {
+                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                            startActivity(intent);
+                        }
                     }
                 });
             }

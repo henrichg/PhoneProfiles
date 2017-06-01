@@ -80,8 +80,10 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-                        startActivityForResult(intent, RESULT_LOCALE_SETTINGS);
+                        if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_LOCALE_SETTINGS, getActivity().getApplicationContext())) {
+                            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                            startActivityForResult(intent, RESULT_LOCALE_SETTINGS);
+                        }
                         return false;
                     }
                 });
@@ -101,9 +103,11 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                        //intent.addCategory(Intent.CATEGORY_DEFAULT);
                         intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
-                        startActivityForResult(intent, RESULT_APPLICATION_PERMISSIONS);
+                        if (GlobalGUIRoutines.activityIntentExists(intent, getActivity().getApplicationContext())) {
+                            startActivityForResult(intent, RESULT_APPLICATION_PERMISSIONS);
+                        }
                         return false;
                     }
                 });
@@ -114,10 +118,12 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        @SuppressLint("InlinedApi")
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                        startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
+                        if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_MANAGE_WRITE_SETTINGS, getActivity().getApplicationContext())) {
+                            @SuppressLint("InlinedApi")
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                            //intent.addCategory(Intent.CATEGORY_DEFAULT);
+                            startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
+                        }
                         return false;
                     }
                 });
@@ -133,7 +139,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                         public boolean onPreferenceClick(Preference preference) {
                             @SuppressLint("InlinedApi")
                             Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                            intent.addCategory(Intent.CATEGORY_DEFAULT);
+                            //intent.addCategory(Intent.CATEGORY_DEFAULT);
                             startActivityForResult(intent, RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS);
                             return false;
                         }
@@ -150,10 +156,12 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
-                            @SuppressLint("InlinedApi")
-                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                            intent.addCategory(Intent.CATEGORY_DEFAULT);
-                            startActivityForResult(intent, RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS);
+                            if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, getActivity().getApplicationContext())) {
+                                @SuppressLint("InlinedApi")
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                                //intent.addCategory(Intent.CATEGORY_DEFAULT);
+                                startActivityForResult(intent, RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS);
+                            }
                             return false;
                         }
                     });

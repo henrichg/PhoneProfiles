@@ -19,6 +19,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -173,8 +174,10 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     notificationAccessPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
-                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                            startActivityForResult(intent, RESULT_NOTIFICATION_ACCESS_SETTINGS);
+                            if (GlobalGUIRoutines.activityActionExists("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS", context)) {
+                                Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                                startActivityForResult(intent, RESULT_NOTIFICATION_ACCESS_SETTINGS);
+                            }
                             return false;
                         }
                     });
