@@ -68,6 +68,7 @@ public class PPApplication extends Application {
     static final int IMPORTANT_INFO_NOTIFICATION_ID = 700422;
     static final int GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID = 700423;
     static final int GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID = 700424;
+    static final int ACTION_FOR_EXTERNAL_APPLICATION_NOTIFICATION_ID = 700425;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     static final String DEFAULT_PROFILE_PREFS_NAME = "profile_preferences_default_profile"; //PPApplication.APPLICATION_PREFS_NAME;
