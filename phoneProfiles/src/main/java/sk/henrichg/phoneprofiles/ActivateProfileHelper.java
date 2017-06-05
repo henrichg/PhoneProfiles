@@ -221,13 +221,15 @@ public class ActivateProfileHelper {
             // nahodenie WiFi
             if (profile._deviceWiFi != 0) {
                 if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_ALLOWED) {
-                    if (!WifiApManager.isWifiAPEnabled(context)) { // only when wifi AP is not enabled, change wifi
+                    boolean isWifiAPEnabled = WifiApManager.isWifiAPEnabled(context);
+                    if ((!isWifiAPEnabled) || (profile._deviceWiFi == 4)) { // only when wifi AP is not enabled, change wifi
                         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                         int wifiState = wifiManager.getWifiState();
                         boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
                         boolean setWifiState = false;
                         switch (profile._deviceWiFi) {
                             case 1:
+                            case 4:
                                 if (!isWifiEnabled) {
                                     isWifiEnabled = true;
                                     setWifiState = true;
@@ -240,6 +242,7 @@ public class ActivateProfileHelper {
                                 }
                                 break;
                             case 3:
+                            case 5:
                                 isWifiEnabled = !isWifiEnabled;
                                 setWifiState = true;
                                 break;
