@@ -23,7 +23,7 @@ public class PhoneProfilesInstall extends BroadcastReceiver {
                 if (packageName.equals(pinfo.packageName)) {
                     Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
                     Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-                    ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
+                    //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 //e.printStackTrace();

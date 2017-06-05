@@ -293,7 +293,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
         Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-        ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
+        //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
     }
 
     @Override
@@ -635,7 +635,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
                         Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-                        ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
+                        //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
