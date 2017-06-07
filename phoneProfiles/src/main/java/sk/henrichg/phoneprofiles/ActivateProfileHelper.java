@@ -98,7 +98,7 @@ public class ActivateProfileHelper {
     private static final String PREF_RINGER_MODE = "ringer_mode";
     private static final String PREF_ZEN_MODE = "zen_mode";
     private static final String PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT = "activated_profile_screen_timeout";
-    private static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
+    static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
 
     public ActivateProfileHelper()
     {
@@ -504,6 +504,18 @@ public class ActivateProfileHelper {
     static void setMergedRingNotificationVolumes(Context context, boolean force) {
         ApplicationPreferences.getSharedPreferences(context);
 
+        PPApplication.logE("ActivateProfileHelper.setMergedRingNotificationVolumes", "xxx");
+
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
+        setMergedRingNotificationVolumes(context, force, editor);
+        editor.apply();
+    }
+
+    static void setMergedRingNotificationVolumes(Context context, boolean force, SharedPreferences.Editor editor) {
+        ApplicationPreferences.getSharedPreferences(context);
+
+        PPApplication.logE("ActivateProfileHelper.setMergedRingNotificationVolumes", "xxx");
+
         if (!ApplicationPreferences.preferences.contains(PREF_MERGED_RING_NOTIFICATION_VOLUMES) || force) {
             try {
                 boolean merged;
@@ -519,7 +531,7 @@ public class ActivateProfileHelper {
                     else
                         newNotificationVolume = oldNotificationVolume + 1;
                     audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, newNotificationVolume, 0);
-                    PPApplication.sleep(500);
+                    PPApplication.sleep(1000);
                     if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == newNotificationVolume)
                         merged = true;
                     else
@@ -529,12 +541,10 @@ public class ActivateProfileHelper {
                 audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, oldNotificationVolume, 0);
                 audioManager.setRingerMode(ringerMode);
 
-                //Log.d("PPApplication.setMergedRingNotificationVolumes", "merged="+merged);
+                PPApplication.logE("ActivateProfileHelper.setMergedRingNotificationVolumes", "merged="+merged);
 
-                SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
                 editor.putBoolean(PREF_MERGED_RING_NOTIFICATION_VOLUMES, merged);
-                editor.apply();
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {}
         }
     }
 
