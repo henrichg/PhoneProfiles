@@ -86,27 +86,9 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PPApplication.logE("PreferenceFragment.onCreate","xxx");
         if ((!nested) && (addPreferencesFromResource() != -1)) {
             addPreferencesFromResource(addPreferencesFromResource());
-        }
-
-        //If we need to restore the state after a configuration change
-        if (savedInstanceState != null) {
-            if (getPreferenceScreen() != null) { //Main fragment will fill the HashMap
-                ArrayList<Preference> preferences =  getAllPreferenceScreen(getPreferenceScreen(),
-                        new ArrayList<Preference>());
-                for(Preference preference: preferences){
-                    preferenceScreenHashMap.put(preference.getKey(), (PreferenceScreen)preference);
-                }
-
-            } else { //Nested fragments will use the HashMap to set their PreferenceScreen
-                PreferenceScreen preferenceScreen = preferenceScreenHashMap
-                        .get(savedInstanceState
-                                .getString("sk.henrichg.phoneprofiles.nestedFragment"));
-                if (preferenceScreen != null) {
-                    this.setPreferenceScreen(preferenceScreen);
-                }
-            }
         }
     }
 
@@ -126,8 +108,8 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
-        savedInstanceState.putString("sk.henrichg.phoneprofiles.nestedFragment",
-                getPreferenceScreen().getKey());
+        PPApplication.logE("PreferenceFragment.onSaveInstanceState", getSavedInstanceStateKeyName());
+        savedInstanceState.putString(getSavedInstanceStateKeyName(), getPreferenceScreen().getKey());
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -136,8 +118,45 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
                              Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
         if (v != null) {
+            //If we need to restore the state after a configuration change
+            PPApplication.logE("PreferenceFragment.onCreateView","savedInstanceState="+savedInstanceState);
+            PPApplication.logE("PreferenceFragment.onCreateView","getPreferenceScreen()="+getPreferenceScreen());
+            if (savedInstanceState != null) {
+                /*if (getPreferenceScreen() != null) { //Main fragment will fill the HashMap
+                    PPApplication.logE("PreferenceFragment.onCreateView", "put preferenceScreenHashMap");
+                    ArrayList<Preference> preferences = getAllPreferenceScreen(getPreferenceScreen(),
+                            new ArrayList<Preference>());
+                    for (Preference preference : preferences) {
+                        preferenceScreenHashMap.put(preference.getKey(), (PreferenceScreen) preference);
+                    }
+                }*/
+                if (getPreferenceScreen() == null) { //Nested fragments will use the HashMap to set their PreferenceScreen
+                    PPApplication.logE("PreferenceFragment.onCreateView", "get screen from preferenceScreenHashMap="+getSavedInstanceStateKeyName());
+                    PreferenceScreen preferenceScreen = preferenceScreenHashMap
+                            .get(savedInstanceState.getString(getSavedInstanceStateKeyName()));
+                    PPApplication.logE("PreferenceFragment.onCreateView","preferenceScreenHashMap.preferenceScreen="+preferenceScreen);
+                    if (preferenceScreen != null) {
+                        this.setPreferenceScreen(preferenceScreen);
+                    }
+                }
+            }
+            else {
+                if (getPreferenceScreen() != null) { //Main fragment will fill the HashMap
+                    PPApplication.logE("PreferenceFragment.onCreateView", "put preferenceScreenHashMap");
+                    ArrayList<Preference> preferences = getAllPreferenceScreen(getPreferenceScreen(),
+                            new ArrayList<Preference>());
+                    for (Preference preference : preferences) {
+                        preferenceScreenHashMap.put(preference.getKey(), (PreferenceScreen) preference);
+                    }
+                }
+            }
+
+            PPApplication.logE("PreferenceFragment.onCreateView","mPreferenceScreen="+mPreferenceScreen);
+            PPApplication.logE("PreferenceFragment.onCreateView","getPreferenceScreen()="+getPreferenceScreen());
+
             if (mPreferenceScreen != null && getPreferenceScreen() == null) {
                 super.setPreferenceScreen(mPreferenceScreen);
+                PPApplication.logE("PreferenceFragment.onCreateView","setPreferenceScreen");
             }
             ListView lv = (ListView) v.findViewById(android.R.id.list);
             lv.setPadding(0, 0, 0, 0);
@@ -201,9 +220,10 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (preferenceScreenHashMap.size() > 0) {
+        PPApplication.logE("PreferenceFragment.onDestroy","xxx");
+        /*if (preferenceScreenHashMap.size() > 0) {
             preferenceScreenHashMap.clear();
-        }
+        }*/
     }
 
     @Override
@@ -220,6 +240,8 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
         final Dialog dialog = preference.getDialog();
         if (dialog != null) { //It might be null if PreferenceScreen contains an intent
+            PPApplication.logE("PreferenceFragment.onPreferenceScreenClick","dialog != null");
+
             //Close the default view without mp_toolbar and create our own Fragment version
             dialog.dismiss();
 
@@ -231,7 +253,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                transaction.replace(R.id.content, fragment);
+            transaction.replace(R.id.content, fragment);
             //} else {
             //    transaction.replace(android.R.id.content, fragment);
             //}
@@ -240,13 +262,23 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(preference.getKey());
             transaction.commitAllowingStateLoss();
+            //transaction.commit();
 
             return true;
         }else if(preference.getIntent() != null) {
+            PPApplication.logE("PreferenceFragment.onPreferenceScreenClick","preference.getIntent() != null");
+
             startActivity(preference.getIntent());
             return true;
         }
+        else
+            PPApplication.logE("PreferenceFragment.onPreferenceScreenClick","????");
 
         return false;
     }
+
+    protected String getSavedInstanceStateKeyName() {
+        return getClass().getName();
+    }
+
 }
