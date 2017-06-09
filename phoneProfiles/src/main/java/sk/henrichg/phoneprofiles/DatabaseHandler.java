@@ -23,6 +23,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     // singleton fields
     private static DatabaseHandler instance;
     private static SQLiteDatabase writableDb;
+    private static final DatabaseHandlerMutex databaseHandlerMutex = new DatabaseHandlerMutex();
 
     Context context;
     
@@ -691,533 +692,543 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Adding new profile
     void addProfile(Profile profile) {
+        synchronized (databaseHandlerMutex) {
+            int porder = getMaxPOrder() + 1;
 
-        int porder = getMaxPOrder() + 1;
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(KEY_NAME, profile._name); // Profile Name
+            values.put(KEY_ICON, profile._icon); // Icon
+            values.put(KEY_CHECKED, (profile._checked) ? 1 : 0); // Checked
+            values.put(KEY_PORDER, porder); // POrder
+            values.put(KEY_VOLUME_RINGER_MODE, profile._volumeRingerMode);
+            values.put(KEY_VOLUME_ZEN_MODE, profile._volumeZenMode);
+            values.put(KEY_VOLUME_RINGTONE, profile._volumeRingtone);
+            values.put(KEY_VOLUME_NOTIFICATION, profile._volumeNotification);
+            values.put(KEY_VOLUME_MEDIA, profile._volumeMedia);
+            values.put(KEY_VOLUME_ALARM, profile._volumeAlarm);
+            values.put(KEY_VOLUME_SYSTEM, profile._volumeSystem);
+            values.put(KEY_VOLUME_VOICE, profile._volumeVoice);
+            values.put(KEY_SOUND_RINGTONE_CHANGE, profile._soundRingtoneChange);
+            values.put(KEY_SOUND_RINGTONE, profile._soundRingtone);
+            values.put(KEY_SOUND_NOTIFICATION_CHANGE, profile._soundNotificationChange);
+            values.put(KEY_SOUND_NOTIFICATION, profile._soundNotification);
+            values.put(KEY_SOUND_ALARM_CHANGE, profile._soundAlarmChange);
+            values.put(KEY_SOUND_ALARM, profile._soundAlarm);
+            values.put(KEY_DEVICE_AIRPLANE_MODE, profile._deviceAirplaneMode);
+            values.put(KEY_DEVICE_WIFI, profile._deviceWiFi);
+            values.put(KEY_DEVICE_BLUETOOTH, profile._deviceBluetooth);
+            values.put(KEY_DEVICE_SCREEN_TIMEOUT, profile._deviceScreenTimeout);
+            values.put(KEY_DEVICE_BRIGHTNESS, profile._deviceBrightness);
+            values.put(KEY_DEVICE_WALLPAPER_CHANGE, profile._deviceWallpaperChange);
+            values.put(KEY_DEVICE_WALLPAPER, profile._deviceWallpaper);
+            values.put(KEY_DEVICE_MOBILE_DATA, profile._deviceMobileData);
+            values.put(KEY_DEVICE_MOBILE_DATA_PREFS, profile._deviceMobileDataPrefs);
+            values.put(KEY_DEVICE_GPS, profile._deviceGPS);
+            values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
+            values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
+            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
+            values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
+            values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
+            values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);
+            values.put(KEY_DEVICE_NFC, profile._deviceNFC);
+            values.put(KEY_DURATION, profile._duration);
+            values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
+            values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
+            values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
+            values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
+            values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
+            values.put(KEY_SHOW_DURATION_BUTTON, 0);
+            values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
+            values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
+            values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
+            values.put(KEY_VIBRATE_WHEN_RINGING, profile._vibrateWhenRinging);
+            values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
+            values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
+            values.put(KEY_LOCK_DEVICE, profile._lockDevice);
+            values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, profile._name); // Profile Name
-        values.put(KEY_ICON, profile._icon); // Icon
-        values.put(KEY_CHECKED, (profile._checked) ? 1 : 0); // Checked
-        values.put(KEY_PORDER, porder); // POrder
-        values.put(KEY_VOLUME_RINGER_MODE, profile._volumeRingerMode);
-        values.put(KEY_VOLUME_ZEN_MODE, profile._volumeZenMode);
-        values.put(KEY_VOLUME_RINGTONE, profile._volumeRingtone);
-        values.put(KEY_VOLUME_NOTIFICATION, profile._volumeNotification);
-        values.put(KEY_VOLUME_MEDIA, profile._volumeMedia);
-        values.put(KEY_VOLUME_ALARM, profile._volumeAlarm);
-        values.put(KEY_VOLUME_SYSTEM, profile._volumeSystem);
-        values.put(KEY_VOLUME_VOICE, profile._volumeVoice);
-        values.put(KEY_SOUND_RINGTONE_CHANGE, profile._soundRingtoneChange);
-        values.put(KEY_SOUND_RINGTONE, profile._soundRingtone);
-        values.put(KEY_SOUND_NOTIFICATION_CHANGE, profile._soundNotificationChange);
-        values.put(KEY_SOUND_NOTIFICATION, profile._soundNotification);
-        values.put(KEY_SOUND_ALARM_CHANGE, profile._soundAlarmChange);
-        values.put(KEY_SOUND_ALARM, profile._soundAlarm);
-        values.put(KEY_DEVICE_AIRPLANE_MODE, profile._deviceAirplaneMode);
-        values.put(KEY_DEVICE_WIFI, profile._deviceWiFi);
-        values.put(KEY_DEVICE_BLUETOOTH, profile._deviceBluetooth);
-        values.put(KEY_DEVICE_SCREEN_TIMEOUT, profile._deviceScreenTimeout);
-        values.put(KEY_DEVICE_BRIGHTNESS, profile._deviceBrightness);
-        values.put(KEY_DEVICE_WALLPAPER_CHANGE, profile._deviceWallpaperChange);
-        values.put(KEY_DEVICE_WALLPAPER, profile._deviceWallpaper);
-        values.put(KEY_DEVICE_MOBILE_DATA, profile._deviceMobileData);
-        values.put(KEY_DEVICE_MOBILE_DATA_PREFS, profile._deviceMobileDataPrefs);
-        values.put(KEY_DEVICE_GPS, profile._deviceGPS);
-        values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
-        values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
-        values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
-        values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
-        values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
-        values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);
-        values.put(KEY_DEVICE_NFC, profile._deviceNFC);
-        values.put(KEY_DURATION, profile._duration);
-        values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
-        values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
-        values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
-        values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
-        values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
-        values.put(KEY_SHOW_DURATION_BUTTON, 0);
-        values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
-        values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
-        values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
-        values.put(KEY_VIBRATE_WHEN_RINGING, profile._vibrateWhenRinging);
-        values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
-        values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
-        values.put(KEY_LOCK_DEVICE, profile._lockDevice);
-        values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
+            // Inserting Row
+            profile._id = db.insert(TABLE_PROFILES, null, values);
+            //db.close(); // Closing database connection
 
-        // Inserting Row
-        profile._id = db.insert(TABLE_PROFILES, null, values);
-        //db.close(); // Closing database connection
-
-        //profile.setPOrder(porder);
+            //profile.setPOrder(porder);
+        }
     }
 
     // Getting single profile
     Profile getProfile(long profile_id) {
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.query(TABLE_PROFILES,
-                new String[]{KEY_ID,
-                        KEY_NAME,
-                        KEY_ICON,
-                        KEY_CHECKED,
-                        KEY_PORDER,
-                        KEY_VOLUME_RINGER_MODE,
-                        KEY_VOLUME_RINGTONE,
-                        KEY_VOLUME_NOTIFICATION,
-                        KEY_VOLUME_MEDIA,
-                        KEY_VOLUME_ALARM,
-                        KEY_VOLUME_SYSTEM,
-                        KEY_VOLUME_VOICE,
-                        KEY_SOUND_RINGTONE_CHANGE,
-                        KEY_SOUND_RINGTONE,
-                        KEY_SOUND_NOTIFICATION_CHANGE,
-                        KEY_SOUND_NOTIFICATION,
-                        KEY_SOUND_ALARM_CHANGE,
-                        KEY_SOUND_ALARM,
-                        KEY_DEVICE_AIRPLANE_MODE,
-                        KEY_DEVICE_WIFI,
-                        KEY_DEVICE_BLUETOOTH,
-                        KEY_DEVICE_SCREEN_TIMEOUT,
-                        KEY_DEVICE_BRIGHTNESS,
-                        KEY_DEVICE_WALLPAPER_CHANGE,
-                        KEY_DEVICE_WALLPAPER,
-                        KEY_DEVICE_MOBILE_DATA,
-                        KEY_DEVICE_MOBILE_DATA_PREFS,
-                        KEY_DEVICE_GPS,
-                        KEY_DEVICE_RUN_APPLICATION_CHANGE,
-                        KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
-                        KEY_DEVICE_AUTOSYNC,
-                        KEY_DEVICE_AUTOROTATE,
-                        KEY_DEVICE_LOCATION_SERVICE_PREFS,
-                        KEY_VOLUME_SPEAKER_PHONE,
-                        KEY_DEVICE_NFC,
-                        KEY_DURATION,
-                        KEY_AFTER_DURATION_DO,
-                        KEY_VOLUME_ZEN_MODE,
-                        KEY_DEVICE_KEYGUARD,
-                        KEY_VIBRATE_ON_TOUCH,
-                        KEY_DEVICE_WIFI_AP,
-                        KEY_DEVICE_POWER_SAVE_MODE,
-                        KEY_SHOW_DURATION_BUTTON,
-                        KEY_ASK_FOR_DURATION,
-                        KEY_DEVICE_NETWORK_TYPE,
-                        KEY_NOTIFICATION_LED,
-                        KEY_VIBRATE_WHEN_RINGING,
-                        KEY_DEVICE_WALLPAPER_FOR,
-                        KEY_HIDE_STATUS_BAR_ICON,
-                        KEY_LOCK_DEVICE,
-                        KEY_DEVICE_CONNECT_TO_SSID
-                },
-                KEY_ID + "=?",
-                new String[]{String.valueOf(profile_id)}, null, null, null, null);
+            Cursor cursor = db.query(TABLE_PROFILES,
+                    new String[]{KEY_ID,
+                            KEY_NAME,
+                            KEY_ICON,
+                            KEY_CHECKED,
+                            KEY_PORDER,
+                            KEY_VOLUME_RINGER_MODE,
+                            KEY_VOLUME_RINGTONE,
+                            KEY_VOLUME_NOTIFICATION,
+                            KEY_VOLUME_MEDIA,
+                            KEY_VOLUME_ALARM,
+                            KEY_VOLUME_SYSTEM,
+                            KEY_VOLUME_VOICE,
+                            KEY_SOUND_RINGTONE_CHANGE,
+                            KEY_SOUND_RINGTONE,
+                            KEY_SOUND_NOTIFICATION_CHANGE,
+                            KEY_SOUND_NOTIFICATION,
+                            KEY_SOUND_ALARM_CHANGE,
+                            KEY_SOUND_ALARM,
+                            KEY_DEVICE_AIRPLANE_MODE,
+                            KEY_DEVICE_WIFI,
+                            KEY_DEVICE_BLUETOOTH,
+                            KEY_DEVICE_SCREEN_TIMEOUT,
+                            KEY_DEVICE_BRIGHTNESS,
+                            KEY_DEVICE_WALLPAPER_CHANGE,
+                            KEY_DEVICE_WALLPAPER,
+                            KEY_DEVICE_MOBILE_DATA,
+                            KEY_DEVICE_MOBILE_DATA_PREFS,
+                            KEY_DEVICE_GPS,
+                            KEY_DEVICE_RUN_APPLICATION_CHANGE,
+                            KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
+                            KEY_DEVICE_AUTOSYNC,
+                            KEY_DEVICE_AUTOROTATE,
+                            KEY_DEVICE_LOCATION_SERVICE_PREFS,
+                            KEY_VOLUME_SPEAKER_PHONE,
+                            KEY_DEVICE_NFC,
+                            KEY_DURATION,
+                            KEY_AFTER_DURATION_DO,
+                            KEY_VOLUME_ZEN_MODE,
+                            KEY_DEVICE_KEYGUARD,
+                            KEY_VIBRATE_ON_TOUCH,
+                            KEY_DEVICE_WIFI_AP,
+                            KEY_DEVICE_POWER_SAVE_MODE,
+                            KEY_SHOW_DURATION_BUTTON,
+                            KEY_ASK_FOR_DURATION,
+                            KEY_DEVICE_NETWORK_TYPE,
+                            KEY_NOTIFICATION_LED,
+                            KEY_VIBRATE_WHEN_RINGING,
+                            KEY_DEVICE_WALLPAPER_FOR,
+                            KEY_HIDE_STATUS_BAR_ICON,
+                            KEY_LOCK_DEVICE,
+                            KEY_DEVICE_CONNECT_TO_SSID
+                    },
+                    KEY_ID + "=?",
+                    new String[]{String.valueOf(profile_id)}, null, null, null, null);
 
-        Profile profile = null;
+            Profile profile = null;
 
-        if (cursor != null)
-        {
-            cursor.moveToFirst();
+            if (cursor != null) {
+                cursor.moveToFirst();
 
-            if (cursor.getCount() > 0)
-            {
-                profile = new Profile(Long.parseLong(cursor.getString(0)),
-                                              cursor.getString(1),
-                                              cursor.getString(2),
-                                              Integer.parseInt(cursor.getString(3)) == 1,
-                                              Integer.parseInt(cursor.getString(4)),
-                                              Integer.parseInt(cursor.getString(5)),
-                                              cursor.getString(6),
-                                              cursor.getString(7),
-                                              cursor.getString(8),
-                                              cursor.getString(9),
-                                              cursor.getString(10),
-                                              cursor.getString(11),
-                                              Integer.parseInt(cursor.getString(12)),
-                                              cursor.getString(13),
-                                              Integer.parseInt(cursor.getString(14)),
-                                              cursor.getString(15),
-                                              Integer.parseInt(cursor.getString(16)),
-                                              cursor.getString(17),
-                                              Integer.parseInt(cursor.getString(18)),
-                                              Integer.parseInt(cursor.getString(19)),
-                                              Integer.parseInt(cursor.getString(20)),
-                                              Integer.parseInt(cursor.getString(21)),
-                                              cursor.getString(22),
-                                              Integer.parseInt(cursor.getString(23)),
-                                              cursor.getString(24),
-                                              Integer.parseInt(cursor.getString(25)),
-                                              Integer.parseInt(cursor.getString(26)),
-                                              Integer.parseInt(cursor.getString(27)),
-                                              Integer.parseInt(cursor.getString(28)),
-                                              cursor.getString(29),
-                                              Integer.parseInt(cursor.getString(30)),
-                                              Integer.parseInt(cursor.getString(31)),
-                                              Integer.parseInt(cursor.getString(32)),
-                                              Integer.parseInt(cursor.getString(33)),
-                                              Integer.parseInt(cursor.getString(34)),
-                                              Integer.parseInt(cursor.getString(35)),
-                                              Integer.parseInt(cursor.getString(36)),
-                                              Integer.parseInt(cursor.getString(37)),
-                                              Integer.parseInt(cursor.getString(38)),
-                                              Integer.parseInt(cursor.getString(39)),
-                                              cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
-                                              Integer.parseInt(cursor.getString(41)),
-                                              Integer.parseInt(cursor.getString(43)) == 1,
-                                              Integer.parseInt(cursor.getString(44)),
-                                              Integer.parseInt(cursor.getString(45)),
-                                              Integer.parseInt(cursor.getString(46)),
-                                              Integer.parseInt(cursor.getString(47)),
-                                              Integer.parseInt(cursor.getString(48)) == 1,
-                                              Integer.parseInt(cursor.getString(49)),
-                                              cursor.getString(50)
-                                              );
+                if (cursor.getCount() > 0) {
+                    profile = new Profile(Long.parseLong(cursor.getString(0)),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            Integer.parseInt(cursor.getString(3)) == 1,
+                            Integer.parseInt(cursor.getString(4)),
+                            Integer.parseInt(cursor.getString(5)),
+                            cursor.getString(6),
+                            cursor.getString(7),
+                            cursor.getString(8),
+                            cursor.getString(9),
+                            cursor.getString(10),
+                            cursor.getString(11),
+                            Integer.parseInt(cursor.getString(12)),
+                            cursor.getString(13),
+                            Integer.parseInt(cursor.getString(14)),
+                            cursor.getString(15),
+                            Integer.parseInt(cursor.getString(16)),
+                            cursor.getString(17),
+                            Integer.parseInt(cursor.getString(18)),
+                            Integer.parseInt(cursor.getString(19)),
+                            Integer.parseInt(cursor.getString(20)),
+                            Integer.parseInt(cursor.getString(21)),
+                            cursor.getString(22),
+                            Integer.parseInt(cursor.getString(23)),
+                            cursor.getString(24),
+                            Integer.parseInt(cursor.getString(25)),
+                            Integer.parseInt(cursor.getString(26)),
+                            Integer.parseInt(cursor.getString(27)),
+                            Integer.parseInt(cursor.getString(28)),
+                            cursor.getString(29),
+                            Integer.parseInt(cursor.getString(30)),
+                            Integer.parseInt(cursor.getString(31)),
+                            Integer.parseInt(cursor.getString(32)),
+                            Integer.parseInt(cursor.getString(33)),
+                            Integer.parseInt(cursor.getString(34)),
+                            Integer.parseInt(cursor.getString(35)),
+                            Integer.parseInt(cursor.getString(36)),
+                            Integer.parseInt(cursor.getString(37)),
+                            Integer.parseInt(cursor.getString(38)),
+                            Integer.parseInt(cursor.getString(39)),
+                            cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
+                            Integer.parseInt(cursor.getString(41)),
+                            Integer.parseInt(cursor.getString(43)) == 1,
+                            Integer.parseInt(cursor.getString(44)),
+                            Integer.parseInt(cursor.getString(45)),
+                            Integer.parseInt(cursor.getString(46)),
+                            Integer.parseInt(cursor.getString(47)),
+                            Integer.parseInt(cursor.getString(48)) == 1,
+                            Integer.parseInt(cursor.getString(49)),
+                            cursor.getString(50)
+                    );
+                }
+                cursor.close();
             }
-            cursor.close();
-        }
-        //db.close();
+            //db.close();
 
-        // return profile
-        return profile;
+            // return profile
+            return profile;
+        }
     }
 
     // Getting All Profiles
     List<Profile> getAllProfiles() {
-        List<Profile> profileList = new ArrayList<>();
-        // Select All Query
-        final String selectQuery = "SELECT " + KEY_ID + "," +
-                                         KEY_NAME + "," +
-                                         KEY_ICON + "," +
-                                         KEY_CHECKED + "," +
-                                         KEY_PORDER + "," +
-                                         KEY_VOLUME_RINGER_MODE + "," +
-                                         KEY_VOLUME_RINGTONE + "," +
-                                         KEY_VOLUME_NOTIFICATION + "," +
-                                         KEY_VOLUME_MEDIA + "," +
-                                         KEY_VOLUME_ALARM + "," +
-                                         KEY_VOLUME_SYSTEM + "," +
-                                         KEY_VOLUME_VOICE + "," +
-                                         KEY_SOUND_RINGTONE_CHANGE + "," +
-                                         KEY_SOUND_RINGTONE + "," +
-                                         KEY_SOUND_NOTIFICATION_CHANGE + "," +
-                                         KEY_SOUND_NOTIFICATION + "," +
-                                         KEY_SOUND_ALARM_CHANGE + "," +
-                                         KEY_SOUND_ALARM + "," +
-                                         KEY_DEVICE_AIRPLANE_MODE + "," +
-                                         KEY_DEVICE_WIFI + "," +
-                                         KEY_DEVICE_BLUETOOTH + "," +
-                                         KEY_DEVICE_SCREEN_TIMEOUT + "," +
-                                         KEY_DEVICE_BRIGHTNESS + "," +
-                                         KEY_DEVICE_WALLPAPER_CHANGE + "," +
-                                         KEY_DEVICE_WALLPAPER + "," +
-                                         KEY_DEVICE_MOBILE_DATA + "," +
-                                         KEY_DEVICE_MOBILE_DATA_PREFS + "," +
-                                         KEY_DEVICE_GPS + "," +
-                                         KEY_DEVICE_RUN_APPLICATION_CHANGE + "," +
-                                         KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME + ","+
-                                         KEY_DEVICE_AUTOSYNC + "," +
-                                         KEY_DEVICE_AUTOROTATE + "," +
-                                         KEY_DEVICE_LOCATION_SERVICE_PREFS + "," +
-                                         KEY_VOLUME_SPEAKER_PHONE + "," +
-                                         KEY_DEVICE_NFC + "," +
-                                         KEY_DURATION + "," +
-                                         KEY_AFTER_DURATION_DO + "," +
-                                         KEY_VOLUME_ZEN_MODE + "," +
-                                         KEY_DEVICE_KEYGUARD + "," +
-                                         KEY_VIBRATE_ON_TOUCH + "," +
-                                         KEY_DEVICE_WIFI_AP + "," +
-                                         KEY_DEVICE_POWER_SAVE_MODE + "," +
-                                         KEY_SHOW_DURATION_BUTTON + "," +
-                                         KEY_ASK_FOR_DURATION + "," +
-                                         KEY_DEVICE_NETWORK_TYPE + "," +
-                                         KEY_NOTIFICATION_LED + "," +
-                                         KEY_VIBRATE_WHEN_RINGING + "," +
-                                         KEY_DEVICE_WALLPAPER_FOR + "," +
-                                         KEY_HIDE_STATUS_BAR_ICON + "," +
-                                         KEY_LOCK_DEVICE +"," +
-                                         KEY_DEVICE_CONNECT_TO_SSID +
-                             " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
+        synchronized (databaseHandlerMutex) {
+            List<Profile> profileList = new ArrayList<>();
+            // Select All Query
+            final String selectQuery = "SELECT " + KEY_ID + "," +
+                    KEY_NAME + "," +
+                    KEY_ICON + "," +
+                    KEY_CHECKED + "," +
+                    KEY_PORDER + "," +
+                    KEY_VOLUME_RINGER_MODE + "," +
+                    KEY_VOLUME_RINGTONE + "," +
+                    KEY_VOLUME_NOTIFICATION + "," +
+                    KEY_VOLUME_MEDIA + "," +
+                    KEY_VOLUME_ALARM + "," +
+                    KEY_VOLUME_SYSTEM + "," +
+                    KEY_VOLUME_VOICE + "," +
+                    KEY_SOUND_RINGTONE_CHANGE + "," +
+                    KEY_SOUND_RINGTONE + "," +
+                    KEY_SOUND_NOTIFICATION_CHANGE + "," +
+                    KEY_SOUND_NOTIFICATION + "," +
+                    KEY_SOUND_ALARM_CHANGE + "," +
+                    KEY_SOUND_ALARM + "," +
+                    KEY_DEVICE_AIRPLANE_MODE + "," +
+                    KEY_DEVICE_WIFI + "," +
+                    KEY_DEVICE_BLUETOOTH + "," +
+                    KEY_DEVICE_SCREEN_TIMEOUT + "," +
+                    KEY_DEVICE_BRIGHTNESS + "," +
+                    KEY_DEVICE_WALLPAPER_CHANGE + "," +
+                    KEY_DEVICE_WALLPAPER + "," +
+                    KEY_DEVICE_MOBILE_DATA + "," +
+                    KEY_DEVICE_MOBILE_DATA_PREFS + "," +
+                    KEY_DEVICE_GPS + "," +
+                    KEY_DEVICE_RUN_APPLICATION_CHANGE + "," +
+                    KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME + "," +
+                    KEY_DEVICE_AUTOSYNC + "," +
+                    KEY_DEVICE_AUTOROTATE + "," +
+                    KEY_DEVICE_LOCATION_SERVICE_PREFS + "," +
+                    KEY_VOLUME_SPEAKER_PHONE + "," +
+                    KEY_DEVICE_NFC + "," +
+                    KEY_DURATION + "," +
+                    KEY_AFTER_DURATION_DO + "," +
+                    KEY_VOLUME_ZEN_MODE + "," +
+                    KEY_DEVICE_KEYGUARD + "," +
+                    KEY_VIBRATE_ON_TOUCH + "," +
+                    KEY_DEVICE_WIFI_AP + "," +
+                    KEY_DEVICE_POWER_SAVE_MODE + "," +
+                    KEY_SHOW_DURATION_BUTTON + "," +
+                    KEY_ASK_FOR_DURATION + "," +
+                    KEY_DEVICE_NETWORK_TYPE + "," +
+                    KEY_NOTIFICATION_LED + "," +
+                    KEY_VIBRATE_WHEN_RINGING + "," +
+                    KEY_DEVICE_WALLPAPER_FOR + "," +
+                    KEY_HIDE_STATUS_BAR_ICON + "," +
+                    KEY_LOCK_DEVICE + "," +
+                    KEY_DEVICE_CONNECT_TO_SSID +
+                    " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Profile profile = new Profile();
-                profile._id = Long.parseLong(cursor.getString(0));
-                profile._name = cursor.getString(1);
-                profile._icon = cursor.getString(2);
-                profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
-                profile._porder = Integer.parseInt(cursor.getString(4));
-                profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
-                profile._volumeRingtone = cursor.getString(6);
-                profile._volumeNotification = cursor.getString(7);
-                profile._volumeMedia = cursor.getString(8);
-                profile._volumeAlarm = cursor.getString(9);
-                profile._volumeSystem = cursor.getString(10);
-                profile._volumeVoice = cursor.getString(11);
-                profile._soundRingtoneChange = Integer.parseInt(cursor.getString(12));
-                profile._soundRingtone = cursor.getString(13);
-                profile._soundNotificationChange = Integer.parseInt(cursor.getString(14));
-                profile._soundNotification = cursor.getString(15);
-                profile._soundAlarmChange = Integer.parseInt(cursor.getString(16));
-                profile._soundAlarm = cursor.getString(17);
-                profile._deviceAirplaneMode = Integer.parseInt(cursor.getString(18));
-                profile._deviceWiFi = Integer.parseInt(cursor.getString(19));
-                profile._deviceBluetooth = Integer.parseInt(cursor.getString(20));
-                profile._deviceScreenTimeout = Integer.parseInt(cursor.getString(21));
-                profile._deviceBrightness = cursor.getString(22);
-                profile._deviceWallpaperChange = Integer.parseInt(cursor.getString(23));
-                profile._deviceWallpaper = cursor.getString(24);
-                profile._deviceMobileData = Integer.parseInt(cursor.getString(25));
-                profile._deviceMobileDataPrefs = Integer.parseInt(cursor.getString(26));
-                profile._deviceGPS = Integer.parseInt(cursor.getString(27));
-                profile._deviceRunApplicationChange = Integer.parseInt(cursor.getString(28));
-                profile._deviceRunApplicationPackageName = cursor.getString(29);
-                profile._deviceAutosync = Integer.parseInt(cursor.getString(30));
-                profile._deviceAutoRotate = Integer.parseInt(cursor.getString(31));
-                profile._deviceLocationServicePrefs = Integer.parseInt(cursor.getString(32));
-                profile._volumeSpeakerPhone = Integer.parseInt(cursor.getString(33));
-                profile._deviceNFC = Integer.parseInt(cursor.getString(34));
-                profile._duration = Integer.parseInt(cursor.getString(35));
-                profile._afterDurationDo = Integer.parseInt(cursor.getString(36));
-                profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
-                profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
-                profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
-                profile._deviceWiFiAP = cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40));
-                profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
-                profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
-                profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
-                profile._notificationLed = Integer.parseInt(cursor.getString(45));
-                profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(46));
-                profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(47));
-                profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(48)) == 1;
-                profile._lockDevice = Integer.parseInt(cursor.getString(49));
-                profile._deviceConnectToSSID = cursor.getString(50);
-                // Adding contact to list
-                profileList.add(profile);
-            } while (cursor.moveToNext());
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Profile profile = new Profile();
+                    profile._id = Long.parseLong(cursor.getString(0));
+                    profile._name = cursor.getString(1);
+                    profile._icon = cursor.getString(2);
+                    profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
+                    profile._porder = Integer.parseInt(cursor.getString(4));
+                    profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
+                    profile._volumeRingtone = cursor.getString(6);
+                    profile._volumeNotification = cursor.getString(7);
+                    profile._volumeMedia = cursor.getString(8);
+                    profile._volumeAlarm = cursor.getString(9);
+                    profile._volumeSystem = cursor.getString(10);
+                    profile._volumeVoice = cursor.getString(11);
+                    profile._soundRingtoneChange = Integer.parseInt(cursor.getString(12));
+                    profile._soundRingtone = cursor.getString(13);
+                    profile._soundNotificationChange = Integer.parseInt(cursor.getString(14));
+                    profile._soundNotification = cursor.getString(15);
+                    profile._soundAlarmChange = Integer.parseInt(cursor.getString(16));
+                    profile._soundAlarm = cursor.getString(17);
+                    profile._deviceAirplaneMode = Integer.parseInt(cursor.getString(18));
+                    profile._deviceWiFi = Integer.parseInt(cursor.getString(19));
+                    profile._deviceBluetooth = Integer.parseInt(cursor.getString(20));
+                    profile._deviceScreenTimeout = Integer.parseInt(cursor.getString(21));
+                    profile._deviceBrightness = cursor.getString(22);
+                    profile._deviceWallpaperChange = Integer.parseInt(cursor.getString(23));
+                    profile._deviceWallpaper = cursor.getString(24);
+                    profile._deviceMobileData = Integer.parseInt(cursor.getString(25));
+                    profile._deviceMobileDataPrefs = Integer.parseInt(cursor.getString(26));
+                    profile._deviceGPS = Integer.parseInt(cursor.getString(27));
+                    profile._deviceRunApplicationChange = Integer.parseInt(cursor.getString(28));
+                    profile._deviceRunApplicationPackageName = cursor.getString(29);
+                    profile._deviceAutosync = Integer.parseInt(cursor.getString(30));
+                    profile._deviceAutoRotate = Integer.parseInt(cursor.getString(31));
+                    profile._deviceLocationServicePrefs = Integer.parseInt(cursor.getString(32));
+                    profile._volumeSpeakerPhone = Integer.parseInt(cursor.getString(33));
+                    profile._deviceNFC = Integer.parseInt(cursor.getString(34));
+                    profile._duration = Integer.parseInt(cursor.getString(35));
+                    profile._afterDurationDo = Integer.parseInt(cursor.getString(36));
+                    profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
+                    profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
+                    profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
+                    profile._deviceWiFiAP = cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40));
+                    profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
+                    profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
+                    profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
+                    profile._notificationLed = Integer.parseInt(cursor.getString(45));
+                    profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(46));
+                    profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(47));
+                    profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(48)) == 1;
+                    profile._lockDevice = Integer.parseInt(cursor.getString(49));
+                    profile._deviceConnectToSSID = cursor.getString(50);
+                    // Adding contact to list
+                    profileList.add(profile);
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+            //db.close();
+
+            // return profile list
+            return profileList;
         }
-
-        cursor.close();
-        //db.close();
-
-        // return profile list
-        return profileList;
     }
 
     // Updating single profile
     int updateProfile(Profile profile) {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, profile._name);
-        values.put(KEY_ICON, profile._icon);
-        values.put(KEY_CHECKED, (profile._checked) ? 1 : 0);
-        values.put(KEY_PORDER, profile._porder);
-        values.put(KEY_VOLUME_RINGER_MODE, profile._volumeRingerMode);
-        values.put(KEY_VOLUME_ZEN_MODE, profile._volumeZenMode);
-        values.put(KEY_VOLUME_RINGTONE, profile._volumeRingtone);
-        values.put(KEY_VOLUME_NOTIFICATION, profile._volumeNotification);
-        values.put(KEY_VOLUME_MEDIA, profile._volumeMedia);
-        values.put(KEY_VOLUME_ALARM, profile._volumeAlarm);
-        values.put(KEY_VOLUME_SYSTEM, profile._volumeSystem);
-        values.put(KEY_VOLUME_VOICE, profile._volumeVoice);
-        values.put(KEY_SOUND_RINGTONE_CHANGE, profile._soundRingtoneChange);
-        values.put(KEY_SOUND_RINGTONE, profile._soundRingtone);
-        values.put(KEY_SOUND_NOTIFICATION_CHANGE, profile._soundNotificationChange);
-        values.put(KEY_SOUND_NOTIFICATION, profile._soundNotification);
-        values.put(KEY_SOUND_ALARM_CHANGE, profile._soundAlarmChange);
-        values.put(KEY_SOUND_ALARM, profile._soundAlarm);
-        values.put(KEY_DEVICE_AIRPLANE_MODE, profile._deviceAirplaneMode);
-        values.put(KEY_DEVICE_WIFI, profile._deviceWiFi);
-        values.put(KEY_DEVICE_BLUETOOTH, profile._deviceBluetooth);
-        values.put(KEY_DEVICE_SCREEN_TIMEOUT, profile._deviceScreenTimeout);
-        values.put(KEY_DEVICE_BRIGHTNESS, profile._deviceBrightness);
-        values.put(KEY_DEVICE_WALLPAPER_CHANGE, profile._deviceWallpaperChange);
-        values.put(KEY_DEVICE_WALLPAPER, profile._deviceWallpaper);
-        values.put(KEY_DEVICE_MOBILE_DATA, profile._deviceMobileData);
-        values.put(KEY_DEVICE_MOBILE_DATA_PREFS, profile._deviceMobileDataPrefs);
-        values.put(KEY_DEVICE_GPS, profile._deviceGPS);
-        values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
-        values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
-        values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
-        values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
-        values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
-        values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);
-        values.put(KEY_DEVICE_NFC, profile._deviceNFC);
-        values.put(KEY_DURATION, profile._duration);
-        values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
-        values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
-        values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
-        values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
-        values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
-        values.put(KEY_SHOW_DURATION_BUTTON, 0);
-        values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
-        values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
-        values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
-        values.put(KEY_VIBRATE_WHEN_RINGING, profile._vibrateWhenRinging);
-        values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
-        values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
-        values.put(KEY_LOCK_DEVICE, profile._lockDevice);
-        values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
+            ContentValues values = new ContentValues();
+            values.put(KEY_NAME, profile._name);
+            values.put(KEY_ICON, profile._icon);
+            values.put(KEY_CHECKED, (profile._checked) ? 1 : 0);
+            values.put(KEY_PORDER, profile._porder);
+            values.put(KEY_VOLUME_RINGER_MODE, profile._volumeRingerMode);
+            values.put(KEY_VOLUME_ZEN_MODE, profile._volumeZenMode);
+            values.put(KEY_VOLUME_RINGTONE, profile._volumeRingtone);
+            values.put(KEY_VOLUME_NOTIFICATION, profile._volumeNotification);
+            values.put(KEY_VOLUME_MEDIA, profile._volumeMedia);
+            values.put(KEY_VOLUME_ALARM, profile._volumeAlarm);
+            values.put(KEY_VOLUME_SYSTEM, profile._volumeSystem);
+            values.put(KEY_VOLUME_VOICE, profile._volumeVoice);
+            values.put(KEY_SOUND_RINGTONE_CHANGE, profile._soundRingtoneChange);
+            values.put(KEY_SOUND_RINGTONE, profile._soundRingtone);
+            values.put(KEY_SOUND_NOTIFICATION_CHANGE, profile._soundNotificationChange);
+            values.put(KEY_SOUND_NOTIFICATION, profile._soundNotification);
+            values.put(KEY_SOUND_ALARM_CHANGE, profile._soundAlarmChange);
+            values.put(KEY_SOUND_ALARM, profile._soundAlarm);
+            values.put(KEY_DEVICE_AIRPLANE_MODE, profile._deviceAirplaneMode);
+            values.put(KEY_DEVICE_WIFI, profile._deviceWiFi);
+            values.put(KEY_DEVICE_BLUETOOTH, profile._deviceBluetooth);
+            values.put(KEY_DEVICE_SCREEN_TIMEOUT, profile._deviceScreenTimeout);
+            values.put(KEY_DEVICE_BRIGHTNESS, profile._deviceBrightness);
+            values.put(KEY_DEVICE_WALLPAPER_CHANGE, profile._deviceWallpaperChange);
+            values.put(KEY_DEVICE_WALLPAPER, profile._deviceWallpaper);
+            values.put(KEY_DEVICE_MOBILE_DATA, profile._deviceMobileData);
+            values.put(KEY_DEVICE_MOBILE_DATA_PREFS, profile._deviceMobileDataPrefs);
+            values.put(KEY_DEVICE_GPS, profile._deviceGPS);
+            values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
+            values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
+            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
+            values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
+            values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
+            values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);
+            values.put(KEY_DEVICE_NFC, profile._deviceNFC);
+            values.put(KEY_DURATION, profile._duration);
+            values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
+            values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
+            values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
+            values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
+            values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
+            values.put(KEY_SHOW_DURATION_BUTTON, 0);
+            values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
+            values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
+            values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
+            values.put(KEY_VIBRATE_WHEN_RINGING, profile._vibrateWhenRinging);
+            values.put(KEY_DEVICE_WALLPAPER_FOR, profile._deviceWallpaperFor);
+            values.put(KEY_HIDE_STATUS_BAR_ICON, (profile._hideStatusBarIcon) ? 1 : 0);
+            values.put(KEY_LOCK_DEVICE, profile._lockDevice);
+            values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
 
-        // updating row
-        return db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                        new String[] { String.valueOf(profile._id) });
-        //db.close();
-        
-        //return r;
+            // updating row
+            return db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                    new String[]{String.valueOf(profile._id)});
+            //db.close();
+
+            //return r;
+        }
     }
 
     // Deleting single profile
     void deleteProfile(Profile profile) {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        db.beginTransaction();
-        try {
+            db.beginTransaction();
+            try {
 
-            // unlink shortcuts from profile
-            String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
-            for (String split : splits) {
-                boolean shortcut = ApplicationsCache.isShortcut(split);
-                if (shortcut) {
-                    long shortcutId = ApplicationsCache.getShortcutId(split);
-                    deleteShortcut(shortcutId);
+                // unlink shortcuts from profile
+                String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
+                for (String split : splits) {
+                    boolean shortcut = ApplicationsCache.isShortcut(split);
+                    if (shortcut) {
+                        long shortcutId = ApplicationsCache.getShortcutId(split);
+                        deleteShortcut(shortcutId);
+                    }
                 }
+
+                db.delete(TABLE_PROFILES, KEY_ID + " = ?",
+                        new String[]{String.valueOf(profile._id)});
+
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
             }
 
-            db.delete(TABLE_PROFILES, KEY_ID + " = ?",
-                    new String[] { String.valueOf(profile._id) });
-
-            db.setTransactionSuccessful();
-        } catch (Exception e){
-            //Error in between database transaction
-        } finally {
-            db.endTransaction();
+            //db.close();
         }
-
-        //db.close();
     }
 
     // Deleting all profile2
     void deleteAllProfiles() {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        db.beginTransaction();
+            db.beginTransaction();
 
-        try {
+            try {
 
-            db.delete(TABLE_PROFILES, null, null);
+                db.delete(TABLE_PROFILES, null, null);
 
-            db.delete(TABLE_SHORTCUTS, null, null);
+                db.delete(TABLE_SHORTCUTS, null, null);
 
-            db.setTransactionSuccessful();
-        } catch (Exception e){
-            //Error in between database transaction
-        } finally {
-            db.endTransaction();
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
+            }
+
+            //db.close();
         }
-
-        //db.close();
     }
 
     // Getting profiles Count
     int getProfilesCount() {
-        final String countQuery = "SELECT  count(*) FROM " + TABLE_PROFILES;
+        synchronized (databaseHandlerMutex) {
+            final String countQuery = "SELECT  count(*) FROM " + TABLE_PROFILES;
 
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.rawQuery(countQuery, null);
+            Cursor cursor = db.rawQuery(countQuery, null);
 
-        int r;
+            int r;
 
-        if (cursor != null)
-        {
-            cursor.moveToFirst();
-            r = Integer.parseInt(cursor.getString(0));
-            cursor.close();
+            if (cursor != null) {
+                cursor.moveToFirst();
+                r = Integer.parseInt(cursor.getString(0));
+                cursor.close();
+            } else
+                r = 0;
+
+            //db.close();
+
+            return r;
         }
-        else
-            r = 0;
-
-        //db.close();
-
-        return r;
     }
 
     // Getting max(porder)
     private int getMaxPOrder() {
-        String countQuery = "SELECT MAX(PORDER) FROM " + TABLE_PROFILES;
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            String countQuery = "SELECT MAX(PORDER) FROM " + TABLE_PROFILES;
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.rawQuery(countQuery, null);
+            Cursor cursor = db.rawQuery(countQuery, null);
 
-        int r;
+            int r;
 
-        if (cursor.getCount() == 0)
-            r = 0;
-        else
-        {
-            if (cursor.moveToFirst())
-                // return max(porder)
-                r = cursor.getInt(0);
-            else
+            if (cursor.getCount() == 0)
                 r = 0;
+            else {
+                if (cursor.moveToFirst())
+                    // return max(porder)
+                    r = cursor.getInt(0);
+                else
+                    r = 0;
+            }
+
+            cursor.close();
+            //db.close();
+
+            return r;
         }
-
-        cursor.close();
-        //db.close();
-
-        return r;
-
     }
 
     private void doActivateProfile(Profile profile, boolean activate)
     {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        db.beginTransaction();
-        try {
-            // update all profiles checked to false
-            ContentValues valuesAll = new ContentValues();
-            valuesAll.put(KEY_CHECKED, 0);
-            db.update(TABLE_PROFILES, valuesAll, null, null);
+            db.beginTransaction();
+            try {
+                // update all profiles checked to false
+                ContentValues valuesAll = new ContentValues();
+                valuesAll.put(KEY_CHECKED, 0);
+                db.update(TABLE_PROFILES, valuesAll, null, null);
 
-            // updating checked = true for profile
-            //profile.setChecked(true);
+                // updating checked = true for profile
+                //profile.setChecked(true);
 
-            if (activate && (profile != null))
-            {
-                ContentValues values = new ContentValues();
-                //values.put(KEY_CHECKED, (profile.getChecked()) ? 1 : 0);
-                values.put(KEY_CHECKED, 1);
+                if (activate && (profile != null)) {
+                    ContentValues values = new ContentValues();
+                    //values.put(KEY_CHECKED, (profile.getChecked()) ? 1 : 0);
+                    values.put(KEY_CHECKED, 1);
 
-                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                new String[] { String.valueOf(profile._id) });
+                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                            new String[]{String.valueOf(profile._id)});
+                }
+
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
             }
 
-            db.setTransactionSuccessful();
-         } catch (Exception e){
-             //Error in between database transaction
-         } finally {
-            db.endTransaction();
-         }	
-
-         //db.close();
+            //db.close();
+        }
     }
 
     public void activateProfile(Profile profile)
@@ -1232,140 +1243,137 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     public Profile getActivatedProfile()
     {
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Profile profile;
+            Profile profile;
 
-        Cursor cursor = db.query(TABLE_PROFILES,
-                                 new String[] { KEY_ID,
-                                                KEY_NAME,
-                                                KEY_ICON,
-                                                KEY_CHECKED,
-                                                KEY_PORDER,
-                                                KEY_VOLUME_RINGER_MODE,
-                                                KEY_VOLUME_RINGTONE,
-                                                KEY_VOLUME_NOTIFICATION,
-                                                KEY_VOLUME_MEDIA,
-                                                KEY_VOLUME_ALARM,
-                                                KEY_VOLUME_SYSTEM,
-                                                KEY_VOLUME_VOICE,
-                                                KEY_SOUND_RINGTONE_CHANGE,
-                                                KEY_SOUND_RINGTONE,
-                                                KEY_SOUND_NOTIFICATION_CHANGE,
-                                                KEY_SOUND_NOTIFICATION,
-                                                KEY_SOUND_ALARM_CHANGE,
-                                                KEY_SOUND_ALARM,
-                                                KEY_DEVICE_AIRPLANE_MODE,
-                                                KEY_DEVICE_WIFI,
-                                                KEY_DEVICE_BLUETOOTH,
-                                                KEY_DEVICE_SCREEN_TIMEOUT,
-                                                KEY_DEVICE_BRIGHTNESS,
-                                                KEY_DEVICE_WALLPAPER_CHANGE,
-                                                KEY_DEVICE_WALLPAPER,
-                                                KEY_DEVICE_MOBILE_DATA,
-                                                KEY_DEVICE_MOBILE_DATA_PREFS,
-                                                KEY_DEVICE_GPS,
-                                                KEY_DEVICE_RUN_APPLICATION_CHANGE,
-                                                KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
-                                                KEY_DEVICE_AUTOSYNC,
-                                                KEY_DEVICE_AUTOROTATE,
-                                                KEY_DEVICE_LOCATION_SERVICE_PREFS,
-                                                KEY_VOLUME_SPEAKER_PHONE,
-                                                KEY_DEVICE_NFC,
-                                                KEY_DURATION,
-                                                KEY_AFTER_DURATION_DO,
-                                                KEY_VOLUME_ZEN_MODE,
-                                                KEY_DEVICE_KEYGUARD,
-                                                KEY_VIBRATE_ON_TOUCH,
-                                                KEY_DEVICE_WIFI_AP,
-                                                KEY_DEVICE_POWER_SAVE_MODE,
-                                                KEY_SHOW_DURATION_BUTTON,
-                                                KEY_ASK_FOR_DURATION,
-                                                KEY_DEVICE_NETWORK_TYPE,
-                                                KEY_NOTIFICATION_LED,
-                                                KEY_VIBRATE_WHEN_RINGING,
-                                                KEY_DEVICE_WALLPAPER_FOR,
-                                                KEY_HIDE_STATUS_BAR_ICON,
-                                                KEY_LOCK_DEVICE,
-                                                KEY_DEVICE_CONNECT_TO_SSID
-                                                },
-                                 KEY_CHECKED + "=?",
-                                 new String[] { "1" }, null, null, null, null);
-        if (cursor != null)
-        {
-            cursor.moveToFirst();
+            Cursor cursor = db.query(TABLE_PROFILES,
+                    new String[]{KEY_ID,
+                            KEY_NAME,
+                            KEY_ICON,
+                            KEY_CHECKED,
+                            KEY_PORDER,
+                            KEY_VOLUME_RINGER_MODE,
+                            KEY_VOLUME_RINGTONE,
+                            KEY_VOLUME_NOTIFICATION,
+                            KEY_VOLUME_MEDIA,
+                            KEY_VOLUME_ALARM,
+                            KEY_VOLUME_SYSTEM,
+                            KEY_VOLUME_VOICE,
+                            KEY_SOUND_RINGTONE_CHANGE,
+                            KEY_SOUND_RINGTONE,
+                            KEY_SOUND_NOTIFICATION_CHANGE,
+                            KEY_SOUND_NOTIFICATION,
+                            KEY_SOUND_ALARM_CHANGE,
+                            KEY_SOUND_ALARM,
+                            KEY_DEVICE_AIRPLANE_MODE,
+                            KEY_DEVICE_WIFI,
+                            KEY_DEVICE_BLUETOOTH,
+                            KEY_DEVICE_SCREEN_TIMEOUT,
+                            KEY_DEVICE_BRIGHTNESS,
+                            KEY_DEVICE_WALLPAPER_CHANGE,
+                            KEY_DEVICE_WALLPAPER,
+                            KEY_DEVICE_MOBILE_DATA,
+                            KEY_DEVICE_MOBILE_DATA_PREFS,
+                            KEY_DEVICE_GPS,
+                            KEY_DEVICE_RUN_APPLICATION_CHANGE,
+                            KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME,
+                            KEY_DEVICE_AUTOSYNC,
+                            KEY_DEVICE_AUTOROTATE,
+                            KEY_DEVICE_LOCATION_SERVICE_PREFS,
+                            KEY_VOLUME_SPEAKER_PHONE,
+                            KEY_DEVICE_NFC,
+                            KEY_DURATION,
+                            KEY_AFTER_DURATION_DO,
+                            KEY_VOLUME_ZEN_MODE,
+                            KEY_DEVICE_KEYGUARD,
+                            KEY_VIBRATE_ON_TOUCH,
+                            KEY_DEVICE_WIFI_AP,
+                            KEY_DEVICE_POWER_SAVE_MODE,
+                            KEY_SHOW_DURATION_BUTTON,
+                            KEY_ASK_FOR_DURATION,
+                            KEY_DEVICE_NETWORK_TYPE,
+                            KEY_NOTIFICATION_LED,
+                            KEY_VIBRATE_WHEN_RINGING,
+                            KEY_DEVICE_WALLPAPER_FOR,
+                            KEY_HIDE_STATUS_BAR_ICON,
+                            KEY_LOCK_DEVICE,
+                            KEY_DEVICE_CONNECT_TO_SSID
+                    },
+                    KEY_CHECKED + "=?",
+                    new String[]{"1"}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
 
-            int rc = cursor.getCount();
+                int rc = cursor.getCount();
 
-            if (rc == 1)
-            {
+                if (rc == 1) {
 
-                profile = new Profile(Long.parseLong(cursor.getString(0)),
-                                              cursor.getString(1),
-                                              cursor.getString(2),
-                                              Integer.parseInt(cursor.getString(3)) == 1,
-                                              Integer.parseInt(cursor.getString(4)),
-                                              Integer.parseInt(cursor.getString(5)),
-                                              cursor.getString(6),
-                                              cursor.getString(7),
-                                              cursor.getString(8),
-                                              cursor.getString(9),
-                                              cursor.getString(10),
-                                              cursor.getString(11),
-                                              Integer.parseInt(cursor.getString(12)),
-                                              cursor.getString(13),
-                                              Integer.parseInt(cursor.getString(14)),
-                                              cursor.getString(15),
-                                              Integer.parseInt(cursor.getString(16)),
-                                              cursor.getString(17),
-                                              Integer.parseInt(cursor.getString(18)),
-                                              Integer.parseInt(cursor.getString(19)),
-                                              Integer.parseInt(cursor.getString(20)),
-                                              Integer.parseInt(cursor.getString(21)),
-                                              cursor.getString(22),
-                                              Integer.parseInt(cursor.getString(23)),
-                                              cursor.getString(24),
-                                              Integer.parseInt(cursor.getString(25)),
-                                              Integer.parseInt(cursor.getString(26)),
-                                              Integer.parseInt(cursor.getString(27)),
-                                              Integer.parseInt(cursor.getString(28)),
-                                              cursor.getString(29),
-                                              Integer.parseInt(cursor.getString(30)),
-                                              Integer.parseInt(cursor.getString(31)),
-                                              Integer.parseInt(cursor.getString(32)),
-                                              Integer.parseInt(cursor.getString(33)),
-                                              Integer.parseInt(cursor.getString(34)),
-                                              Integer.parseInt(cursor.getString(35)),
-                                              Integer.parseInt(cursor.getString(36)),
-                                              Integer.parseInt(cursor.getString(37)),
-                                              Integer.parseInt(cursor.getString(38)),
-                                              Integer.parseInt(cursor.getString(39)),
-                                              cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
-                                              Integer.parseInt(cursor.getString(41)),
-                                              Integer.parseInt(cursor.getString(43)) == 1,
-                                              Integer.parseInt(cursor.getString(44)),
-                                              Integer.parseInt(cursor.getString(45)),
-                                              Integer.parseInt(cursor.getString(46)),
-                                              Integer.parseInt(cursor.getString(47)),
-                                              Integer.parseInt(cursor.getString(48)) == 1,
-                                              Integer.parseInt(cursor.getString(49)),
-                                              cursor.getString(50)
-                                              );
-            }
-            else
+                    profile = new Profile(Long.parseLong(cursor.getString(0)),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            Integer.parseInt(cursor.getString(3)) == 1,
+                            Integer.parseInt(cursor.getString(4)),
+                            Integer.parseInt(cursor.getString(5)),
+                            cursor.getString(6),
+                            cursor.getString(7),
+                            cursor.getString(8),
+                            cursor.getString(9),
+                            cursor.getString(10),
+                            cursor.getString(11),
+                            Integer.parseInt(cursor.getString(12)),
+                            cursor.getString(13),
+                            Integer.parseInt(cursor.getString(14)),
+                            cursor.getString(15),
+                            Integer.parseInt(cursor.getString(16)),
+                            cursor.getString(17),
+                            Integer.parseInt(cursor.getString(18)),
+                            Integer.parseInt(cursor.getString(19)),
+                            Integer.parseInt(cursor.getString(20)),
+                            Integer.parseInt(cursor.getString(21)),
+                            cursor.getString(22),
+                            Integer.parseInt(cursor.getString(23)),
+                            cursor.getString(24),
+                            Integer.parseInt(cursor.getString(25)),
+                            Integer.parseInt(cursor.getString(26)),
+                            Integer.parseInt(cursor.getString(27)),
+                            Integer.parseInt(cursor.getString(28)),
+                            cursor.getString(29),
+                            Integer.parseInt(cursor.getString(30)),
+                            Integer.parseInt(cursor.getString(31)),
+                            Integer.parseInt(cursor.getString(32)),
+                            Integer.parseInt(cursor.getString(33)),
+                            Integer.parseInt(cursor.getString(34)),
+                            Integer.parseInt(cursor.getString(35)),
+                            Integer.parseInt(cursor.getString(36)),
+                            Integer.parseInt(cursor.getString(37)),
+                            Integer.parseInt(cursor.getString(38)),
+                            Integer.parseInt(cursor.getString(39)),
+                            cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
+                            Integer.parseInt(cursor.getString(41)),
+                            Integer.parseInt(cursor.getString(43)) == 1,
+                            Integer.parseInt(cursor.getString(44)),
+                            Integer.parseInt(cursor.getString(45)),
+                            Integer.parseInt(cursor.getString(46)),
+                            Integer.parseInt(cursor.getString(47)),
+                            Integer.parseInt(cursor.getString(48)) == 1,
+                            Integer.parseInt(cursor.getString(49)),
+                            cursor.getString(50)
+                    );
+                } else
+                    profile = null;
+                cursor.close();
+            } else
                 profile = null;
-            cursor.close();
+
+
+            //db.close();
+
+            // return profile
+            return profile;
         }
-        else
-            profile = null;
-
-
-        //db.close();
-
-        // return profile
-        return profile;
-
     }
 
     /*
@@ -1497,89 +1505,91 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     int getProfilePosition(Profile profile)
     {
-        final String selectQuery = "SELECT " + KEY_ID +
-                               " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
+        synchronized (databaseHandlerMutex) {
+            final String selectQuery = "SELECT " + KEY_ID +
+                    " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        long lid;
-        int position = 0;
-        if (cursor.moveToFirst()) {
-            do {
-                lid = Long.parseLong(cursor.getString(0));
-                if (lid == profile._id)
-                    return position;
-                position++;
-            } while (cursor.moveToNext());
+            // looping through all rows and adding to list
+            long lid;
+            int position = 0;
+            if (cursor.moveToFirst()) {
+                do {
+                    lid = Long.parseLong(cursor.getString(0));
+                    if (lid == profile._id)
+                        return position;
+                    position++;
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+            //db.close();
+
+            // return profile list
+            return -1;
         }
-
-        cursor.close();
-        //db.close();
-
-        // return profile list
-        return -1;
-
-
     }
 
     void setPOrder(List<Profile> list)
     {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        ContentValues values = new ContentValues();
+            ContentValues values = new ContentValues();
 
-        db.beginTransaction();
-        try {
+            db.beginTransaction();
+            try {
 
-            for (Profile profile : list)
-            {
-                values.put(KEY_PORDER, profile._porder);
+                for (Profile profile : list) {
+                    values.put(KEY_PORDER, profile._porder);
 
-                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                            new String[] { String.valueOf(profile._id) });
+                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                            new String[]{String.valueOf(profile._id)});
+                }
+
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
             }
 
-            db.setTransactionSuccessful();
-         } catch (Exception e){
-             //Error in between database transaction
-         } finally {
-            db.endTransaction();
-         }	
-
-        //db.close();
+            //db.close();
+        }
     }
 
     public void setChecked(List<Profile> list)
     {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        ContentValues values = new ContentValues();
+            ContentValues values = new ContentValues();
 
-        db.beginTransaction();
-        try {
+            db.beginTransaction();
+            try {
 
-            for (Profile profile : list)
-            {
-                values.put(KEY_CHECKED, profile._checked);
+                for (Profile profile : list) {
+                    values.put(KEY_CHECKED, profile._checked);
 
-                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                            new String[] { String.valueOf(profile._id) });
+                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                            new String[]{String.valueOf(profile._id)});
+                }
+
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
             }
 
-            db.setTransactionSuccessful();
-         } catch (Exception e){
-             //Error in between database transaction
-         } finally {
-            db.endTransaction();
-         }	
-
-        //db.close();
+            //db.close();
+        }
     }
 
     /*
@@ -1621,139 +1631,131 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     void getProfileIcon(Profile profile)
     {
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.query(TABLE_PROFILES,
-                new String[] { KEY_ICON },
-                KEY_ID + "=?",
-                new String[] { Long.toString(profile._id) }, null, null, null, null);
+            Cursor cursor = db.query(TABLE_PROFILES,
+                    new String[]{KEY_ICON},
+                    KEY_ID + "=?",
+                    new String[]{Long.toString(profile._id)}, null, null, null, null);
 
-        if (cursor != null)
-        {
-            if (cursor.moveToFirst())
-                profile._icon = cursor.getString(0);
-            cursor.close();
+            if (cursor != null) {
+                if (cursor.moveToFirst())
+                    profile._icon = cursor.getString(0);
+                cursor.close();
+            }
+
+            //db.close();
         }
-
-        //db.close();
-
     }
 
     int disableNotAllowedPreferences(Context context)
     {
-        int ret = 0;
+        synchronized (databaseHandlerMutex) {
+            int ret = 0;
 
-        final String selectQuery = "SELECT " + KEY_ID + "," +
-                                        KEY_DEVICE_AIRPLANE_MODE + "," +
-                                        KEY_DEVICE_WIFI + "," +
-                                        KEY_DEVICE_BLUETOOTH + "," +
-                                        KEY_DEVICE_MOBILE_DATA + "," +
-                                        KEY_DEVICE_MOBILE_DATA_PREFS + "," +
-                                        KEY_DEVICE_GPS + "," +
-                                        KEY_DEVICE_LOCATION_SERVICE_PREFS + "," +
-                                        KEY_DEVICE_NFC + "," +
-                                        KEY_VOLUME_RINGER_MODE + "," +
-                                        KEY_DEVICE_WIFI_AP + "," +
-                                        KEY_DEVICE_POWER_SAVE_MODE + "," +
-                                        KEY_VOLUME_ZEN_MODE + "," +
-                                        KEY_DEVICE_NETWORK_TYPE + "," +
-                                        KEY_NOTIFICATION_LED + "," +
-                                        KEY_VIBRATE_WHEN_RINGING + "," +
-                                        KEY_DEVICE_CONNECT_TO_SSID +
-                            " FROM " + TABLE_PROFILES;
+            final String selectQuery = "SELECT " + KEY_ID + "," +
+                    KEY_DEVICE_AIRPLANE_MODE + "," +
+                    KEY_DEVICE_WIFI + "," +
+                    KEY_DEVICE_BLUETOOTH + "," +
+                    KEY_DEVICE_MOBILE_DATA + "," +
+                    KEY_DEVICE_MOBILE_DATA_PREFS + "," +
+                    KEY_DEVICE_GPS + "," +
+                    KEY_DEVICE_LOCATION_SERVICE_PREFS + "," +
+                    KEY_DEVICE_NFC + "," +
+                    KEY_VOLUME_RINGER_MODE + "," +
+                    KEY_DEVICE_WIFI_AP + "," +
+                    KEY_DEVICE_POWER_SAVE_MODE + "," +
+                    KEY_VOLUME_ZEN_MODE + "," +
+                    KEY_DEVICE_NETWORK_TYPE + "," +
+                    KEY_NOTIFICATION_LED + "," +
+                    KEY_VIBRATE_WHEN_RINGING + "," +
+                    KEY_DEVICE_CONNECT_TO_SSID +
+                    " FROM " + TABLE_PROFILES;
 
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        ContentValues values = new ContentValues();
+            ContentValues values = new ContentValues();
 
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        db.beginTransaction();
-        try {
+            db.beginTransaction();
+            try {
 
-            if (cursor.moveToFirst()) {
-                do {
+                if (cursor.moveToFirst()) {
+                    do {
                         if ((Integer.parseInt(cursor.getString(1)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_AIRPLANE_MODE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(2)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(3)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_BLUETOOTH, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(4)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(5)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(6)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_GPS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(7)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(8)) != 0) &&
-                            (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_NFC, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                               new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(10)) != 0) &&
-                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI_AP, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if (Integer.parseInt(cursor.getString(9)) == 5) {
@@ -1784,233 +1786,230 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 values.clear();
                                 values.put(KEY_VOLUME_RINGER_MODE, ringerMode);
                                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                        new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                        new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                             }
                         }
 
                         if ((Integer.parseInt(cursor.getString(11)) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context)
-                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(13)) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, context)
-                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_NETWORK_TYPE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(14)) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, context)
-                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_NOTIFICATION_LED, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
                         if ((Integer.parseInt(cursor.getString(15)) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
-                                        == PPApplication.PREFERENCE_NOT_ALLOWED))
-                        {
+                                        == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_VIBRATE_WHEN_RINGING, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
-                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED)
-                        {
+                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED) {
                             values.clear();
                             values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[] { String.valueOf(Integer.parseInt(cursor.getString(0))) });
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
                         }
 
-                } while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
+                }
+
+                db.setTransactionSuccessful();
+
+                ret = 1;
+            } catch (Exception e) {
+                //Error in between database transaction
+                Log.e("DatabaseHandler.updateForHardware", e.toString());
+                ret = 0;
+            } finally {
+                db.endTransaction();
+                cursor.close();
             }
 
-            db.setTransactionSuccessful();
+            //db.close();
 
-            ret = 1;
-       } catch (Exception e){
-           //Error in between database transaction
-           Log.e("DatabaseHandler.updateForHardware", e.toString());
-           ret = 0;
-       } finally {
-           db.endTransaction();
-           cursor.close();
-       }
-
-       //db.close();
-
-       return ret;
+            return ret;
+        }
     }
 
     private void changePictureFilePathToUri(SQLiteDatabase database) {
-        SQLiteDatabase db;
-        if (database == null) {
-            //SQLiteDatabase db = this.getWritableDatabase();
-            db = getMyWritableDatabase();
-        }
-        else
-            db = database;
+        synchronized (databaseHandlerMutex) {
+            SQLiteDatabase db;
+            if (database == null) {
+                //SQLiteDatabase db = this.getWritableDatabase();
+                db = getMyWritableDatabase();
+            } else
+                db = database;
 
-        final String selectQuery = "SELECT " + KEY_ID + "," +
-                KEY_ICON + "," +
-                KEY_DEVICE_WALLPAPER_CHANGE + "," +
-                KEY_DEVICE_WALLPAPER +
-                " FROM " + TABLE_PROFILES;
+            final String selectQuery = "SELECT " + KEY_ID + "," +
+                    KEY_ICON + "," +
+                    KEY_DEVICE_WALLPAPER_CHANGE + "," +
+                    KEY_DEVICE_WALLPAPER +
+                    " FROM " + TABLE_PROFILES;
 
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (database == null)
-            db.beginTransaction();
-        try {
+            if (database == null)
+                db.beginTransaction();
+            try {
 
-            if (cursor.moveToFirst()) {
-                do {
-                    long id = cursor.getLong(0);
-                    String icon = cursor.getString(1);
+                if (cursor.moveToFirst()) {
+                    do {
+                        long id = cursor.getLong(0);
+                        String icon = cursor.getString(1);
 
-                    int wallpaperChange = cursor.getInt(2);
-                    String wallpaper = cursor.getString(3);
+                        int wallpaperChange = cursor.getInt(2);
+                        String wallpaper = cursor.getString(3);
 
-                    ContentValues values = new ContentValues();
+                        ContentValues values = new ContentValues();
 
-                    try {
-                        String[] splits = icon.split("\\|");
-                        String iconIdentifier = splits[0];
-                        String isIconResourceId = splits[1];
-                        String useCustomColorForIcon = "0";
-                        String iconCustomColor = "0";
-                        if (splits.length == 4) {
-                            useCustomColorForIcon = splits[2];
-                            iconCustomColor = splits[3];
-                        }
-
-                        if (!isIconResourceId.equals("1")) {
-                            Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
-                            if (imageUri != null)
-                                values.put(KEY_ICON, imageUri.toString()+"|"+
-                                        isIconResourceId+"|"+
-                                        useCustomColorForIcon+"|"+
-                                        iconCustomColor);
-                            else
-                                values.put(KEY_ICON, "ic_profile_default|1|0|0");
-                        }
-                    } catch (Exception e) {
-                        values.put(KEY_ICON, "ic_profile_default|1|0|0");
-                    }
-                    if (wallpaperChange == 1) {
                         try {
-                            String[] splits = wallpaper.split("\\|");
-                            Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
-                            if (imageUri != null)
-                                values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
-                            else {
+                            String[] splits = icon.split("\\|");
+                            String iconIdentifier = splits[0];
+                            String isIconResourceId = splits[1];
+                            String useCustomColorForIcon = "0";
+                            String iconCustomColor = "0";
+                            if (splits.length == 4) {
+                                useCustomColorForIcon = splits[2];
+                                iconCustomColor = splits[3];
+                            }
+
+                            if (!isIconResourceId.equals("1")) {
+                                Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
+                                if (imageUri != null)
+                                    values.put(KEY_ICON, imageUri.toString() + "|" +
+                                            isIconResourceId + "|" +
+                                            useCustomColorForIcon + "|" +
+                                            iconCustomColor);
+                                else
+                                    values.put(KEY_ICON, "ic_profile_default|1|0|0");
+                            }
+                        } catch (Exception e) {
+                            values.put(KEY_ICON, "ic_profile_default|1|0|0");
+                        }
+                        if (wallpaperChange == 1) {
+                            try {
+                                String[] splits = wallpaper.split("\\|");
+                                Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
+                                if (imageUri != null)
+                                    values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
+                                else {
+                                    values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
+                                    values.put(KEY_DEVICE_WALLPAPER, "-");
+                                }
+                            } catch (Exception e) {
                                 values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
                                 values.put(KEY_DEVICE_WALLPAPER, "-");
                             }
-                        } catch (Exception e) {
-                            values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
+                        } else
                             values.put(KEY_DEVICE_WALLPAPER, "-");
-                        }
-                    }
-                    else
-                        values.put(KEY_DEVICE_WALLPAPER, "-");
 
-                    if (values.size() > 0)
-                        db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[] { String.valueOf(id) });
+                        if (values.size() > 0)
+                            db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
 
-                } while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
+                }
+
+                if (database == null)
+                    db.setTransactionSuccessful();
+
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                if (database == null)
+                    db.endTransaction();
+                cursor.close();
             }
 
-            if (database == null)
-                db.setTransactionSuccessful();
-
-        } catch (Exception e){
-            //Error in between database transaction
-        } finally {
-            if (database == null)
-                db.endTransaction();
-            cursor.close();
+            //db.close();
         }
-
-        //db.close();
     }
 
 // SHORTCUTS ----------------------------------------------------------------------
 
     // Adding new shortcut
     void addShortcut(Shortcut shortcut) {
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(KEY_S_INTENT, shortcut._intent);
+            values.put(KEY_S_NAME, shortcut._name);
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_S_INTENT, shortcut._intent);
-        values.put(KEY_S_NAME, shortcut._name);
+            db.beginTransaction();
 
-        db.beginTransaction();
+            try {
+                // Inserting Row
+                shortcut._id = db.insert(TABLE_SHORTCUTS, null, values);
 
-        try {
-            // Inserting Row
-            shortcut._id = db.insert(TABLE_SHORTCUTS, null, values);
+                db.setTransactionSuccessful();
 
-            db.setTransactionSuccessful();
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                db.endTransaction();
+            }
 
-        } catch (Exception e){
-            //Error in between database transaction
-        } finally {
-            db.endTransaction();
+            //db.close(); // Closing database connection
         }
-
-        //db.close(); // Closing database connection
     }
 
     // Getting single shortcut
     Shortcut getShortcut(long shortcutId) {
-        //SQLiteDatabase db = this.getReadableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        Cursor cursor = db.query(TABLE_SHORTCUTS,
-                new String[]{KEY_S_ID,
-                        KEY_S_INTENT,
-                        KEY_S_NAME
-                },
-                KEY_S_ID + "=?",
-                new String[]{String.valueOf(shortcutId)}, null, null, null, null);
+            Cursor cursor = db.query(TABLE_SHORTCUTS,
+                    new String[]{KEY_S_ID,
+                            KEY_S_INTENT,
+                            KEY_S_NAME
+                    },
+                    KEY_S_ID + "=?",
+                    new String[]{String.valueOf(shortcutId)}, null, null, null, null);
 
-        Shortcut shortcut = null;
+            Shortcut shortcut = null;
 
-        if (cursor != null)
-        {
-            cursor.moveToFirst();
+            if (cursor != null) {
+                cursor.moveToFirst();
 
-            if (cursor.getCount() > 0)
-            {
-                shortcut = new Shortcut();
-                shortcut._id = Long.parseLong(cursor.getString(0));
-                shortcut._intent = cursor.getString(1);
-                shortcut._name = cursor.getString(2);
+                if (cursor.getCount() > 0) {
+                    shortcut = new Shortcut();
+                    shortcut._id = Long.parseLong(cursor.getString(0));
+                    shortcut._intent = cursor.getString(1);
+                    shortcut._name = cursor.getString(2);
+                }
+
+                cursor.close();
             }
 
-            cursor.close();
+            //db.close();
+
+            return shortcut;
         }
-
-        //db.close();
-
-        return shortcut;
     }
 
     /*
@@ -2050,27 +2049,29 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Deleting single shortcut
     void deleteShortcut(long shortcutId) {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase db = getMyWritableDatabase();
+        synchronized (databaseHandlerMutex) {
+            //SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = getMyWritableDatabase();
 
-        db.beginTransaction();
+            db.beginTransaction();
 
-        try {
+            try {
 
-            // delete geofence
-            db.delete(TABLE_SHORTCUTS, KEY_S_ID + " = ?",
-                    new String[]{String.valueOf(shortcutId)});
+                // delete geofence
+                db.delete(TABLE_SHORTCUTS, KEY_S_ID + " = ?",
+                        new String[]{String.valueOf(shortcutId)});
 
-            db.setTransactionSuccessful();
+                db.setTransactionSuccessful();
 
-        } catch (Exception e){
-            //Error in between database transaction
-            Log.e("DatabaseHandler.deleteGeofence", e.toString());
-        } finally {
-            db.endTransaction();
+            } catch (Exception e) {
+                //Error in between database transaction
+                Log.e("DatabaseHandler.deleteGeofence", e.toString());
+            } finally {
+                db.endTransaction();
+            }
+
+            //db.close();
         }
-
-        //db.close();
     }
 
 // OTHERS -----------------------------------------------------------------
@@ -2099,297 +2100,48 @@ class DatabaseHandler extends SQLiteOpenHelper {
     //@SuppressWarnings("resource")
     int importDB(String applicationDataPath)
     {
-        int ret = 0;
+        synchronized (databaseHandlerMutex) {
+            int ret = 0;
 
-        // Close SQLiteOpenHelper so it will commit the created empty
-        // database to internal storage
-        //close();
+            // Close SQLiteOpenHelper so it will commit the created empty
+            // database to internal storage
+            //close();
 
-        try {
+            try {
 
-            File sd = Environment.getExternalStorageDirectory();
-            //File data = Environment.getDataDirectory();
+                File sd = Environment.getExternalStorageDirectory();
+                //File data = Environment.getDataDirectory();
 
-            //File dataDB = new File(data, DB_FILEPATH + "/" + DATABASE_NAME);
-            File exportedDB = new File(sd, applicationDataPath + "/" + EXPORT_DBFILENAME);
+                //File dataDB = new File(data, DB_FILEPATH + "/" + DATABASE_NAME);
+                File exportedDB = new File(sd, applicationDataPath + "/" + EXPORT_DBFILENAME);
 
-            if (exportedDB.exists())
-            {
-                // zistenie verzie zalohy
-                SQLiteDatabase exportedDBObj = SQLiteDatabase.openDatabase(exportedDB.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
+                if (exportedDB.exists()) {
+                    // zistenie verzie zalohy
+                    SQLiteDatabase exportedDBObj = SQLiteDatabase.openDatabase(exportedDB.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
 
-                // db z SQLiteOpenHelper
-                //SQLiteDatabase db = this.getWritableDatabase();
-                SQLiteDatabase db = getMyWritableDatabase();
+                    // db z SQLiteOpenHelper
+                    //SQLiteDatabase db = this.getWritableDatabase();
+                    SQLiteDatabase db = getMyWritableDatabase();
 
-                Cursor cursorExportedDB = null;
-                String[] columnNamesExportedDB;
-                Cursor cursorImportDB = null;
-                ContentValues values = new ContentValues();
+                    Cursor cursorExportedDB = null;
+                    String[] columnNamesExportedDB;
+                    Cursor cursorImportDB = null;
+                    ContentValues values = new ContentValues();
 
-                try {
-                    db.beginTransaction();
+                    try {
+                        db.beginTransaction();
 
-                    db.execSQL("DELETE FROM " + TABLE_PROFILES);
+                        db.execSQL("DELETE FROM " + TABLE_PROFILES);
 
-                    // cursor for profiles exportedDB
-                    cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM "+TABLE_PROFILES, null);
-                    columnNamesExportedDB = cursorExportedDB.getColumnNames();
-
-                    // cursor for profiles of destination db
-                    cursorImportDB = db.rawQuery("SELECT * FROM "+TABLE_PROFILES, null);
-
-                    int duration = 0;
-                    int zenMode = 0;
-
-                    if (cursorExportedDB.moveToFirst()) {
-                        do {
-                            values.clear();
-                            for (int i = 0; i < columnNamesExportedDB.length; i++)
-                            {
-                                // put only when columnNamesExportedDB[i] exists in cursorImportDB
-                                if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1)
-                                {
-                                    String value = cursorExportedDB.getString(i);
-
-                                    // update values
-                                    if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
-                                        ||
-                                        ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))))
-                                    {
-                                        if (columnNamesExportedDB[i].equals(KEY_DEVICE_AUTOROTATE))
-                                        {
-                                            // change values:
-                                            // autorotate off -> rotation 0
-                                            // autorotate on -> autorotate
-                                            if (value.equals("1") || value.equals("3"))
-                                                value = "1";
-                                            if (value.equals("2"))
-                                                value = "2";
-                                        }
-                                    }
-                                    if (exportedDBObj.getVersion() < 1156)
-                                    {
-                                        if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS))
-                                        {
-                                            if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-                                            {
-                                                //value|noChange|automatic|defaultProfile
-                                                String[] splits = value.split("\\|");
-
-                                                if (splits[2].equals("1")) // automatic is set
-                                                {
-                                                    // hm, found brightness values without default profile :-/
-                                                    if (splits.length == 4)
-                                                        value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|"+splits[1]+"|"+splits[2]+"|"+splits[3];
-                                                    else
-                                                        value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|"+splits[1]+"|"+splits[2]+"|0";
-                                                }
-                                            }
-                                        }
-                                    }
-                                    if (exportedDBObj.getVersion() < 1165)
-                                    {
-                                        if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS))
-                                        {
-                                            //value|noChange|automatic|defaultProfile
-                                            String[] splits = value.split("\\|");
-
-                                            int perc = Integer.parseInt(splits[0]);
-                                            perc = (int)Profile.convertBrightnessToPercents(perc, 255, 1);
-
-                                            // hm, found brightness values without default profile :-/
-                                            if (splits.length == 4)
-                                                value = perc+"|"+splits[1]+"|"+splits[2]+"|"+splits[3];
-                                            else
-                                                value = perc+"|"+splits[1]+"|"+splits[2]+"|0";
-                                        }
-                                    }
-                                    if (exportedDBObj.getVersion() < 1175)
-                                    {
-                                        if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS))
-                                        {
-                                            if (android.os.Build.VERSION.SDK_INT < 21)
-                                            {
-                                                //value|noChange|automatic|defaultProfile
-                                                String[] splits = value.split("\\|");
-
-                                                if (splits[2].equals("1")) // automatic is set
-                                                {
-                                                    int perc = 50;
-
-                                                    // hm, found brightness values without default profile :-/
-                                                    if (splits.length == 4)
-                                                        value = perc+"|"+splits[1]+"|"+splits[2]+"|"+splits[3];
-                                                    else
-                                                        value = perc+"|"+splits[1]+"|"+splits[2]+"|0";
-                                                }
-                                            }
-                                        }
-                                    }
-                                    if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))
-                                    {
-                                        if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO))
-                                        {
-                                            // in PhoneProfilesPlus value=3 is restart events
-                                            if (value.equals("3"))
-                                                value = "1";
-                                        }
-                                    }
-
-                                    values.put(columnNamesExportedDB[i], value);
-                                }
-                                if (columnNamesExportedDB[i].equals(KEY_DURATION))
-                                    duration = cursorExportedDB.getInt(i);
-                                if (columnNamesExportedDB[i].equals(KEY_VOLUME_ZEN_MODE))
-                                    zenMode = cursorExportedDB.getInt(i);
-
-                            }
-
-                            // for non existent fields set default value
-                            if (exportedDBObj.getVersion() < 19)
-                            {
-                                values.put(KEY_DEVICE_MOBILE_DATA, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 20)
-                            {
-                                values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 21)
-                            {
-                                values.put(KEY_DEVICE_GPS, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 22)
-                            {
-                                values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, 0);
-                                values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
-                            }
-                            if (exportedDBObj.getVersion() < 24)
-                            {
-                                values.put(KEY_DEVICE_AUTOSYNC, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 31)
-                            {
-                                values.put(KEY_DEVICE_AUTOSYNC, 0);
-                            }
-                            if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
-                                ||
-                                ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH))))
-                            {
-                                values.put(KEY_DEVICE_AUTOROTATE, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1015)
-                            {
-                                values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1020)
-                            {
-                                values.put(KEY_VOLUME_SPEAKER_PHONE, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1035)
-                            {
-                                values.put(KEY_DEVICE_NFC, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1120)
-                            {
-                                values.put(KEY_DURATION, 0);
-                                values.put(KEY_AFTER_DURATION_DO, Profile.AFTERDURATIONDO_UNDOPROFILE);
-                            }
-                            if (exportedDBObj.getVersion() < 1150)
-                            {
-                                values.put(KEY_VOLUME_ZEN_MODE, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1160)
-                            {
-                                values.put(KEY_DEVICE_KEYGUARD, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1180)
-                            {
-                                values.put(KEY_VIBRATE_ON_TOUCH, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1190)
-                            {
-                                values.put(KEY_DEVICE_WIFI_AP, 0);
-                            }
-                            if (exportedDBObj.getVersion() < 1200)
-                            {
-                                values.put(KEY_DURATION, duration * 60); // conversion to seconds
-                            }
-                            if (exportedDBObj.getVersion() < 1210)
-                            {
-                                if ((zenMode == 6) && (android.os.Build.VERSION.SDK_INT < 23))
-                                    values.put(KEY_VOLUME_ZEN_MODE, 3); // Alarms only zen mode is supported from Android 6.0
-                            }
-                            if (exportedDBObj.getVersion() < 1220)
-                            {
-                                values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1230)
-                            {
-                                values.put(KEY_SHOW_DURATION_BUTTON, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1240)
-                            {
-                                values.put(KEY_ASK_FOR_DURATION, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1250)
-                            {
-                                values.put(KEY_DEVICE_NETWORK_TYPE, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1260)
-                            {
-                                values.put(KEY_NOTIFICATION_LED, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1270)
-                            {
-                                values.put(KEY_VIBRATE_WHEN_RINGING, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1290)
-                            {
-                                values.put(KEY_DEVICE_WALLPAPER_FOR, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1300)
-                            {
-                                values.put(KEY_HIDE_STATUS_BAR_ICON, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1310)
-                            {
-                                values.put(KEY_LOCK_DEVICE, 0);
-                            }
-
-                            if (exportedDBObj.getVersion() < 1320) {
-                                values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
-                            }
-
-                            // Inserting Row do db z SQLiteOpenHelper
-                            db.insert(TABLE_PROFILES, null, values);
-                        } while (cursorExportedDB.moveToNext());
-                    }
-
-                    if (exportedDBObj.getVersion() < 1330) {
-                        changePictureFilePathToUri(null);
-                    }
-
-                    cursorExportedDB.close();
-                    cursorImportDB.close();
-
-                    db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
-
-                    if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
-                        // cusor for events exportedDB
-                        cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                        // cursor for profiles exportedDB
+                        cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
                         columnNamesExportedDB = cursorExportedDB.getColumnNames();
 
                         // cursor for profiles of destination db
-                        cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                        cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
+
+                        int duration = 0;
+                        int zenMode = 0;
 
                         if (cursorExportedDB.moveToFirst()) {
                             do {
@@ -2397,11 +2149,221 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 for (int i = 0; i < columnNamesExportedDB.length; i++) {
                                     // put only when columnNamesExportedDB[i] exists in cursorImportDB
                                     if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
-                                        values.put(columnNamesExportedDB[i], cursorExportedDB.getString(i));
+                                        String value = cursorExportedDB.getString(i);
+
+                                        // update values
+                                        if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
+                                                ||
+                                                ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
+                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_AUTOROTATE)) {
+                                                // change values:
+                                                // autorotate off -> rotation 0
+                                                // autorotate on -> autorotate
+                                                if (value.equals("1") || value.equals("3"))
+                                                    value = "1";
+                                                if (value.equals("2"))
+                                                    value = "2";
+                                            }
+                                        }
+                                        if (exportedDBObj.getVersion() < 1156) {
+                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+                                                {
+                                                    //value|noChange|automatic|defaultProfile
+                                                    String[] splits = value.split("\\|");
+
+                                                    if (splits[2].equals("1")) // automatic is set
+                                                    {
+                                                        // hm, found brightness values without default profile :-/
+                                                        if (splits.length == 4)
+                                                            value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                        else
+                                                            value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|0";
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (exportedDBObj.getVersion() < 1165) {
+                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                //value|noChange|automatic|defaultProfile
+                                                String[] splits = value.split("\\|");
+
+                                                int perc = Integer.parseInt(splits[0]);
+                                                perc = (int) Profile.convertBrightnessToPercents(perc, 255, 1);
+
+                                                // hm, found brightness values without default profile :-/
+                                                if (splits.length == 4)
+                                                    value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                else
+                                                    value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
+                                            }
+                                        }
+                                        if (exportedDBObj.getVersion() < 1175) {
+                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                if (android.os.Build.VERSION.SDK_INT < 21) {
+                                                    //value|noChange|automatic|defaultProfile
+                                                    String[] splits = value.split("\\|");
+
+                                                    if (splits[2].equals("1")) // automatic is set
+                                                    {
+                                                        int perc = 50;
+
+                                                        // hm, found brightness values without default profile :-/
+                                                        if (splits.length == 4)
+                                                            value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                        else
+                                                            value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)) {
+                                            if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO)) {
+                                                // in PhoneProfilesPlus value=3 is restart events
+                                                if (value.equals("3"))
+                                                    value = "1";
+                                            }
+                                        }
+
+                                        values.put(columnNamesExportedDB[i], value);
                                     }
+                                    if (columnNamesExportedDB[i].equals(KEY_DURATION))
+                                        duration = cursorExportedDB.getInt(i);
+                                    if (columnNamesExportedDB[i].equals(KEY_VOLUME_ZEN_MODE))
+                                        zenMode = cursorExportedDB.getInt(i);
+
                                 }
 
                                 // for non existent fields set default value
+                                if (exportedDBObj.getVersion() < 19) {
+                                    values.put(KEY_DEVICE_MOBILE_DATA, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 20) {
+                                    values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 21) {
+                                    values.put(KEY_DEVICE_GPS, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 22) {
+                                    values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, 0);
+                                    values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
+                                }
+                                if (exportedDBObj.getVersion() < 24) {
+                                    values.put(KEY_DEVICE_AUTOSYNC, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 31) {
+                                    values.put(KEY_DEVICE_AUTOSYNC, 0);
+                                }
+                                if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
+                                        ||
+                                        ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
+                                    values.put(KEY_DEVICE_AUTOROTATE, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1015) {
+                                    values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1020) {
+                                    values.put(KEY_VOLUME_SPEAKER_PHONE, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1035) {
+                                    values.put(KEY_DEVICE_NFC, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1120) {
+                                    values.put(KEY_DURATION, 0);
+                                    values.put(KEY_AFTER_DURATION_DO, Profile.AFTERDURATIONDO_UNDOPROFILE);
+                                }
+                                if (exportedDBObj.getVersion() < 1150) {
+                                    values.put(KEY_VOLUME_ZEN_MODE, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1160) {
+                                    values.put(KEY_DEVICE_KEYGUARD, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1180) {
+                                    values.put(KEY_VIBRATE_ON_TOUCH, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1190) {
+                                    values.put(KEY_DEVICE_WIFI_AP, 0);
+                                }
+                                if (exportedDBObj.getVersion() < 1200) {
+                                    values.put(KEY_DURATION, duration * 60); // conversion to seconds
+                                }
+                                if (exportedDBObj.getVersion() < 1210) {
+                                    if ((zenMode == 6) && (android.os.Build.VERSION.SDK_INT < 23))
+                                        values.put(KEY_VOLUME_ZEN_MODE, 3); // Alarms only zen mode is supported from Android 6.0
+                                }
+                                if (exportedDBObj.getVersion() < 1220) {
+                                    values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1230) {
+                                    values.put(KEY_SHOW_DURATION_BUTTON, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1240) {
+                                    values.put(KEY_ASK_FOR_DURATION, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1250) {
+                                    values.put(KEY_DEVICE_NETWORK_TYPE, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1260) {
+                                    values.put(KEY_NOTIFICATION_LED, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1270) {
+                                    values.put(KEY_VIBRATE_WHEN_RINGING, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1290) {
+                                    values.put(KEY_DEVICE_WALLPAPER_FOR, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1300) {
+                                    values.put(KEY_HIDE_STATUS_BAR_ICON, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1310) {
+                                    values.put(KEY_LOCK_DEVICE, 0);
+                                }
+
+                                if (exportedDBObj.getVersion() < 1320) {
+                                    values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
+                                }
+
+                                // Inserting Row do db z SQLiteOpenHelper
+                                db.insert(TABLE_PROFILES, null, values);
+                            } while (cursorExportedDB.moveToNext());
+                        }
+
+                        if (exportedDBObj.getVersion() < 1330) {
+                            changePictureFilePathToUri(null);
+                        }
+
+                        cursorExportedDB.close();
+                        cursorImportDB.close();
+
+                        db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
+
+                        if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
+                            // cusor for events exportedDB
+                            cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                            columnNamesExportedDB = cursorExportedDB.getColumnNames();
+
+                            // cursor for profiles of destination db
+                            cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+
+                            if (cursorExportedDB.moveToFirst()) {
+                                do {
+                                    values.clear();
+                                    for (int i = 0; i < columnNamesExportedDB.length; i++) {
+                                        // put only when columnNamesExportedDB[i] exists in cursorImportDB
+                                        if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
+                                            values.put(columnNamesExportedDB[i], cursorExportedDB.getString(i));
+                                        }
+                                    }
+
+                                    // for non existent fields set default value
                                 /*if (exportedDBObj.getVersion() < 1480) {
                                     values.put(KEY_G_CHECKED, 0);
                                 }
@@ -2409,74 +2371,74 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     values.put(KEY_G_TRANSITION, 0);
                                 }*/
 
-                                // Inserting Row do db z SQLiteOpenHelper
-                                db.insert(TABLE_SHORTCUTS, null, values);
+                                    // Inserting Row do db z SQLiteOpenHelper
+                                    db.insert(TABLE_SHORTCUTS, null, values);
 
-                            } while (cursorExportedDB.moveToNext());
+                                } while (cursorExportedDB.moveToNext());
+                            }
+
+                            cursorExportedDB.close();
+                            cursorImportDB.close();
                         }
 
-                        cursorExportedDB.close();
-                        cursorImportDB.close();
+                        db.setTransactionSuccessful();
+
+                        ret = 1;
+                    } finally {
+                        db.endTransaction();
+                        if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
+                            cursorExportedDB.close();
+                        if ((cursorImportDB != null) && (!cursorImportDB.isClosed()))
+                            cursorImportDB.close();
+                        //db.close();
                     }
-
-                    db.setTransactionSuccessful();
-
-                    ret = 1;
                 }
-                finally {
-                    db.endTransaction();
-                    if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
-                        cursorExportedDB.close();
-                    if ((cursorImportDB != null) && (!cursorImportDB.isClosed()))
-                        cursorImportDB.close();
-                    //db.close();
-                }
+            } catch (Exception e) {
+                Log.e("DatabaseHandler.importDB", e.toString());
             }
-        } catch (Exception e) {
-            Log.e("DatabaseHandler.importDB", e.toString());
-        }
 
-        return ret;
+            return ret;
+        }
     }
 
     @SuppressWarnings("resource")
     int exportDB()
     {
-        int ret = 0;
+        synchronized (databaseHandlerMutex) {
+            int ret = 0;
 
-        try {
+            try {
 
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
+                File sd = Environment.getExternalStorageDirectory();
+                File data = Environment.getDataDirectory();
 
-            File dataDB = new File(data, GlobalGUIRoutines.DB_FILEPATH + "/" + DATABASE_NAME);
-            File exportedDB = new File(sd, PPApplication.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
+                File dataDB = new File(data, GlobalGUIRoutines.DB_FILEPATH + "/" + DATABASE_NAME);
+                File exportedDB = new File(sd, PPApplication.EXPORT_PATH + "/" + EXPORT_DBFILENAME);
 
-            if (dataDB.exists())
-            {
-                // close db
-                close();
+                if (dataDB.exists()) {
+                    // close db
+                    close();
 
-                File exportDir = new File(sd, PPApplication.EXPORT_PATH);
-                if (!(exportDir.exists() && exportDir.isDirectory()))
-                {
-                    //noinspection ResultOfMethodCallIgnored
-                    exportDir.mkdirs();
+                    File exportDir = new File(sd, PPApplication.EXPORT_PATH);
+                    if (!(exportDir.exists() && exportDir.isDirectory())) {
+                        //noinspection ResultOfMethodCallIgnored
+                        exportDir.mkdirs();
+                    }
+
+                    FileChannel src = new FileInputStream(dataDB).getChannel();
+                    FileChannel dst = new FileOutputStream(exportedDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+
+                    ret = 1;
                 }
-
-                FileChannel src = new FileInputStream(dataDB).getChannel();
-                FileChannel dst = new FileOutputStream(exportedDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-
-                ret = 1;
+            } catch (Exception e) {
+                Log.e("DatabaseHandler.exportDB", e.toString());
             }
-        } catch (Exception e) {
-            Log.e("DatabaseHandler.exportDB", e.toString());
-        }
 
-        return ret;
+            return ret;
+        }
     }
 
 }
