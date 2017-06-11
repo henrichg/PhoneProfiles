@@ -271,7 +271,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         return super.onPrepareOptionsMenu(menu);
     }
 
-    public static void exitApp(Context context, DataWrapper dataWrapper) {
+    public static void exitApp(final Context context, DataWrapper dataWrapper) {
         PPApplication.setApplicationStarted(context, false);
 
         // remove alarm for profile duration
@@ -286,8 +286,23 @@ public class EditorProfilesActivity extends AppCompatActivity
         context.stopService(new Intent(context, PhoneProfilesService.class));
         context.stopService(new Intent(context, KeyguardService.class));
 
-        ActivateProfileHelper.screenTimeoutUnlock(context);
-        ActivateProfileHelper.removeBrightnessView(context);
+        if (PPApplication.brightnessHandler != null) {
+            PPApplication.brightnessHandler.post(new Runnable() {
+                public void run() {
+                    ActivateProfileHelper.removeBrightnessView(context);
+
+                }
+            });
+        }
+        if (PPApplication.screenTimeoutHandler != null) {
+            PPApplication.screenTimeoutHandler.post(new Runnable() {
+                public void run() {
+                    ActivateProfileHelper.screenTimeoutUnlock(context);
+                    ActivateProfileHelper.removeBrightnessView(context);
+
+                }
+            });
+        }
 
         PPApplication.initRoot();
 

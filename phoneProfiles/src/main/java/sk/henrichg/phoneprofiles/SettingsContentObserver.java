@@ -109,8 +109,8 @@ class SettingsContentObserver  extends ContentObserver {
                                 ActivateProfileHelper.screenTimeoutUnlock(context);
                             }
                         });
-                    } else
-                        ActivateProfileHelper.screenTimeoutUnlock(context);
+                    }// else
+                    //    ActivateProfileHelper.screenTimeoutUnlock(context);
                 }
             }
         }

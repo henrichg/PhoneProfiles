@@ -1325,8 +1325,8 @@ public class ActivateProfileHelper {
                             setScreenTimeout(profile._deviceScreenTimeout);
                         }
                     });
-                } else
-                    setScreenTimeout(profile._deviceScreenTimeout);
+                }// else
+                //    setScreenTimeout(profile._deviceScreenTimeout);
             }
             else {
                 //Log.d("ActivateProfileHelper.execute","screen off");
@@ -1423,8 +1423,8 @@ public class ActivateProfileHelper {
                             createBrightnessView(profile, __context);
                         }
                     });
-                } else
-                    createBrightnessView(profile, context);
+                }// else
+                //    createBrightnessView(profile, context);
             }
         }
 

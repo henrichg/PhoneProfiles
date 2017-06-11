@@ -571,8 +571,8 @@ public class DataWrapper {
                     }
                 });
             }
-            else
-                showToastAfterActivation(_profile);
+            //else
+            //    showToastAfterActivation(_profile);
         }
 
         // for startActivityForResult
