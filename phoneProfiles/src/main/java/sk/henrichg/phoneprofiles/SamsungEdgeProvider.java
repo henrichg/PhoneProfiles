@@ -17,6 +17,8 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     public static final String INTENT_REFRESH_EDGEPANEL = "sk.henrichg.phoneprofiles.REFRESH_EDGEPANEL";
 
+    public static boolean isVisible = false;
+
     @SuppressWarnings("deprecation")
     private RemoteViews buildLayout(Context context, SlookCocktailManager cocktailBarManager, int appWidgetId)
     {
@@ -35,11 +37,11 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
                     widget=new RemoteViews(context.getPackageName(), R.layout.profile_list_widget_no_indicator);
             }
             else
-            {*/
+            {
                 if (ApplicationPreferences.applicationWidgetListPrefIndicator(context))
                     widget=new RemoteViews(context.getPackageName(), R.layout.profile_grid_widget);
-                else
-                    widget=new RemoteViews(context.getPackageName(), R.layout.profile_grid_widget_no_indicator);
+                else*/
+                    widget=new RemoteViews(context.getPackageName(), R.layout.samsung_edge);
             //}
         }
         else
@@ -145,13 +147,13 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
             //	widget.setTextColor(R.id.widget_profile_list_header_profile_name, Color.parseColor("#33b5e5"));
             //}
             widget.setTextViewText(R.id.widget_profile_list_header_profile_name, profileName);
-            if (ApplicationPreferences.applicationWidgetListPrefIndicator(context))
+            /*if (ApplicationPreferences.applicationWidgetListPrefIndicator(context))
             {
                 if (profile._preferencesIndicator != null)
                     widget.setImageViewBitmap(R.id.widget_profile_list_header_profile_pref_indicator, profile._preferencesIndicator);
                 else
                     widget.setImageViewResource(R.id.widget_profile_list_header_profile_pref_indicator, R.drawable.ic_empty);
-            }
+            }*/
             red = 0xFF;
             if (applicationWidgetListLightnessT.equals("0")) red = 0x00;
             if (applicationWidgetListLightnessT.equals("25")) red = 0x40;
@@ -269,7 +271,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     private void updateWidgets(Context context) {
         SlookCocktailManager cocktailManager = SlookCocktailManager.getInstance(context);
-        int cocktailIds[] = cocktailManager.getCocktailIds(new ComponentName(context, ProfileListWidgetProvider.class));
+        int cocktailIds[] = cocktailManager.getCocktailIds(new ComponentName(context, SamsungEdgeProvider.class));
 
         for (int cocktailId : cocktailIds) {
             updateWidget(context, cocktailId);
@@ -278,7 +280,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     @Override
     public void onVisibilityChanged(Context context, int cocktailId, int visibility) {
-
+        isVisible = (visibility == SlookCocktailManager.COCKTAIL_VISIBILITY_SHOW);
     }
 
 }
