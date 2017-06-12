@@ -6,5 +6,5 @@
     previewImage="@drawable/ic_empty"
     updatePeriodMills="0"
     configure="sk.henrichg.phoneprofiles.EditorProfilesActivity"
-    permitVisibilityChanged="true" >
+    cocktailWidth="550" >
 </cocktail-provider>
