@@ -408,9 +408,9 @@
         -->
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetBackground"
-            android:summary="0%"
+            android:summary="25%"
             android:key="applicationSamsungEdgeBackground"
-            android:defaultValue="0"
+            android:defaultValue="25"
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
             app:useStockLayout="true" />

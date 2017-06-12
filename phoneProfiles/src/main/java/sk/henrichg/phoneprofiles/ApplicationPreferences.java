@@ -239,7 +239,7 @@ class ApplicationPreferences {
     }
 
     static String applicationSamsungEdgeBackground(Context context) {
-        return getSharedPreferences(context).getString(PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND, "0");
+        return getSharedPreferences(context).getString(PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND, "25");
     }
 
     static String applicationSamsungEdgeLightnessB(Context context) {
