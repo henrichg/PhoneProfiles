@@ -9,30 +9,26 @@
     <LinearLayout
         android:id="@+id/widget_profile_list_header"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="55dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="10dp"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/widget_profile_list_header_profile_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:contentDescription="@string/profile_preferences_profileIcon"
-            android:maxHeight="40dp"
-            android:maxWidth="40dp"
-            android:scaleType="centerCrop"
+            android:scaleType="@integer/profilePrefIndicatorScaleType"
             android:src="@drawable/ic_profile_default" />
 
         <TextView
             android:id="@+id/widget_profile_list_header_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:shadowColor="#ffffffff"
             android:shadowDx="1"
             android:shadowDy="1"
