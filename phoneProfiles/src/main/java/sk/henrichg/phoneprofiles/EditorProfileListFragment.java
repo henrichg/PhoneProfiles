@@ -355,37 +355,6 @@ public class EditorProfileListFragment extends Fragment {
         super.onDestroy();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.fragment_editor_profile_list, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-        /*case R.id.menu_new_profile:
-            startProfilePreferencesActivity(null);
-
-            return true;*/
-        /*case R.id.menu_delete_all_profiles:
-            deleteAllProfiles();
-
-            return true;*/
-        /*case R.id.menu_default_profile:
-            // start preferences activity for default profile
-            Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesActivity.class);
-            intent.putExtra(PPApplication.EXTRA_PROFILE_ID, PPApplication.DEFAULT_PROFILE_ID);
-            intent.putExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, EDIT_MODE_EDIT);
-            getActivity().startActivityForResult(intent, PPApplication.REQUEST_CODE_PROFILE_PREFERENCES);
-
-            return true;*/
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void startProfilePreferencesActivity(Profile profile, int predefinedProfileIndex)
     {
 
