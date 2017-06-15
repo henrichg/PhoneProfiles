@@ -2219,7 +2219,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                         }
                                         if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)) {
                                             if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO)) {
-                                                // in PhoneProfilesPlus value=3 is restart events
+                                                // in PhoneProfiles value=3 is restart events
                                                 if (value.equals("3"))
                                                     value = "1";
                                             }

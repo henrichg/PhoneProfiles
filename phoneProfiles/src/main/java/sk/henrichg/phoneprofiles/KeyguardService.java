@@ -13,7 +13,7 @@ import android.os.PowerManager;
 
 public class KeyguardService extends Service {
 
-    static final String KEYGUARD_LOCK = "phoneProfilesPlus.keyguardLock";
+    static final String KEYGUARD_LOCK = "phoneProfiles.keyguardLock";
 
     private KeyguardManager keyguardManager;
     @SuppressWarnings("deprecation")
