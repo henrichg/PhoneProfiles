@@ -738,7 +738,7 @@ public class ActivateProfileHelper {
                 }*/
                 }
             } else {
-                if (canChangeZenMode(context, false)) {
+                //if (canChangeZenMode(context, false)) {
                     switch (zenMode) {
                         case ZENMODE_SILENT:
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
@@ -750,7 +750,7 @@ public class ActivateProfileHelper {
                         default:
                             audioManager.setRingerMode(ringerMode);
                     }
-                }
+                //}
             }
         }
         else
