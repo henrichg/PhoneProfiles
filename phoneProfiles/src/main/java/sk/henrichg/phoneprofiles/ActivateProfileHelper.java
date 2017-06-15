@@ -1319,9 +1319,10 @@ public class ActivateProfileHelper {
             if (pm.isScreenOn()) {
                 //Log.d("ActivateProfileHelper.execute","screen on");
                 if (PPApplication.screenTimeoutHandler != null) {
+                    final Context _context = context;
                     PPApplication.screenTimeoutHandler.post(new Runnable() {
                         public void run() {
-                            setScreenTimeout(profile._deviceScreenTimeout);
+                            setScreenTimeout(profile._deviceScreenTimeout, _context);
                         }
                     });
                 }// else
@@ -1557,7 +1558,7 @@ public class ActivateProfileHelper {
 
     }
 
-    void setScreenTimeout(int screenTimeout) {
+    void setScreenTimeout(int screenTimeout, Context context) {
         DisableScreenTimeoutInternalChangeReceiver.internalChange = true;
         //Log.d("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
         switch (screenTimeout) {

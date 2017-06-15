@@ -90,9 +90,9 @@ public class PPApplication extends Application {
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
 
-    public static Handler brightnessHandler;
-    public static Handler toastHandler;
-    public static Handler screenTimeoutHandler;
+    public static HandlerWithContext brightnessHandler;
+    public static HandlerWithContext toastHandler;
+    public static HandlerWithContext screenTimeoutHandler;
 
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
@@ -155,9 +155,9 @@ public class PPApplication extends Application {
 
         //getMeasuredRunTime(nanoTimeStart, "PPApplication.onCreate");
 
-        toastHandler = new Handler(getMainLooper());
-        brightnessHandler = new Handler(getMainLooper());
-        screenTimeoutHandler = new Handler(getMainLooper());
+        toastHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
+        brightnessHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
+        screenTimeoutHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
 
         // Samsung Look initialization
         sLook = new Slook();
