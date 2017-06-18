@@ -2116,242 +2116,31 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 File exportedDB = new File(sd, applicationDataPath + "/" + EXPORT_DBFILENAME);
 
                 if (exportedDB.exists()) {
-                    // zistenie verzie zalohy
                     SQLiteDatabase exportedDBObj = SQLiteDatabase.openDatabase(exportedDB.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
 
-                    // db z SQLiteOpenHelper
-                    //SQLiteDatabase db = this.getWritableDatabase();
                     SQLiteDatabase db = getMyWritableDatabase();
 
-                    Cursor cursorExportedDB = null;
-                    String[] columnNamesExportedDB;
-                    Cursor cursorImportDB = null;
-                    ContentValues values = new ContentValues();
+                    if (db.getVersion() >= DATABASE_VERSION) {
 
-                    try {
-                        db.beginTransaction();
+                        Cursor cursorExportedDB = null;
+                        String[] columnNamesExportedDB;
+                        Cursor cursorImportDB = null;
+                        ContentValues values = new ContentValues();
 
-                        db.execSQL("DELETE FROM " + TABLE_PROFILES);
+                        try {
+                            db.beginTransaction();
 
-                        // cursor for profiles exportedDB
-                        cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
-                        columnNamesExportedDB = cursorExportedDB.getColumnNames();
+                            db.execSQL("DELETE FROM " + TABLE_PROFILES);
 
-                        // cursor for profiles of destination db
-                        cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
-
-                        int duration = 0;
-                        int zenMode = 0;
-
-                        if (cursorExportedDB.moveToFirst()) {
-                            do {
-                                values.clear();
-                                for (int i = 0; i < columnNamesExportedDB.length; i++) {
-                                    // put only when columnNamesExportedDB[i] exists in cursorImportDB
-                                    if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
-                                        String value = cursorExportedDB.getString(i);
-
-                                        // update values
-                                        if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
-                                                ||
-                                                ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
-                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_AUTOROTATE)) {
-                                                // change values:
-                                                // autorotate off -> rotation 0
-                                                // autorotate on -> autorotate
-                                                if (value.equals("1") || value.equals("3"))
-                                                    value = "1";
-                                                if (value.equals("2"))
-                                                    value = "2";
-                                            }
-                                        }
-                                        if (exportedDBObj.getVersion() < 1156) {
-                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
-                                                if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-                                                {
-                                                    //value|noChange|automatic|defaultProfile
-                                                    String[] splits = value.split("\\|");
-
-                                                    if (splits[2].equals("1")) // automatic is set
-                                                    {
-                                                        // hm, found brightness values without default profile :-/
-                                                        if (splits.length == 4)
-                                                            value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
-                                                        else
-                                                            value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|0";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if (exportedDBObj.getVersion() < 1165) {
-                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
-                                                //value|noChange|automatic|defaultProfile
-                                                String[] splits = value.split("\\|");
-
-                                                int perc = Integer.parseInt(splits[0]);
-                                                perc = (int) Profile.convertBrightnessToPercents(perc, 255, 1);
-
-                                                // hm, found brightness values without default profile :-/
-                                                if (splits.length == 4)
-                                                    value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
-                                                else
-                                                    value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
-                                            }
-                                        }
-                                        if (exportedDBObj.getVersion() < 1175) {
-                                            if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
-                                                if (android.os.Build.VERSION.SDK_INT < 21) {
-                                                    //value|noChange|automatic|defaultProfile
-                                                    String[] splits = value.split("\\|");
-
-                                                    if (splits[2].equals("1")) // automatic is set
-                                                    {
-                                                        int perc = 50;
-
-                                                        // hm, found brightness values without default profile :-/
-                                                        if (splits.length == 4)
-                                                            value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
-                                                        else
-                                                            value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)) {
-                                            if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO)) {
-                                                // in PhoneProfiles value=3 is restart events
-                                                if (value.equals("3"))
-                                                    value = "1";
-                                            }
-                                        }
-
-                                        values.put(columnNamesExportedDB[i], value);
-                                    }
-                                    if (columnNamesExportedDB[i].equals(KEY_DURATION))
-                                        duration = cursorExportedDB.getInt(i);
-                                    if (columnNamesExportedDB[i].equals(KEY_VOLUME_ZEN_MODE))
-                                        zenMode = cursorExportedDB.getInt(i);
-
-                                }
-
-                                // for non existent fields set default value
-                                if (exportedDBObj.getVersion() < 19) {
-                                    values.put(KEY_DEVICE_MOBILE_DATA, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 20) {
-                                    values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 21) {
-                                    values.put(KEY_DEVICE_GPS, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 22) {
-                                    values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, 0);
-                                    values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
-                                }
-                                if (exportedDBObj.getVersion() < 24) {
-                                    values.put(KEY_DEVICE_AUTOSYNC, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 31) {
-                                    values.put(KEY_DEVICE_AUTOSYNC, 0);
-                                }
-                                if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
-                                        ||
-                                        ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
-                                    values.put(KEY_DEVICE_AUTOROTATE, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1015) {
-                                    values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1020) {
-                                    values.put(KEY_VOLUME_SPEAKER_PHONE, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1035) {
-                                    values.put(KEY_DEVICE_NFC, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1120) {
-                                    values.put(KEY_DURATION, 0);
-                                    values.put(KEY_AFTER_DURATION_DO, Profile.AFTERDURATIONDO_UNDOPROFILE);
-                                }
-                                if (exportedDBObj.getVersion() < 1150) {
-                                    values.put(KEY_VOLUME_ZEN_MODE, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1160) {
-                                    values.put(KEY_DEVICE_KEYGUARD, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1180) {
-                                    values.put(KEY_VIBRATE_ON_TOUCH, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1190) {
-                                    values.put(KEY_DEVICE_WIFI_AP, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1200) {
-                                    values.put(KEY_DURATION, duration * 60); // conversion to seconds
-                                }
-                                if (exportedDBObj.getVersion() < 1210) {
-                                    if ((zenMode == 6) && (android.os.Build.VERSION.SDK_INT < 23))
-                                        values.put(KEY_VOLUME_ZEN_MODE, 3); // Alarms only zen mode is supported from Android 6.0
-                                }
-                                if (exportedDBObj.getVersion() < 1220) {
-                                    values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1230) {
-                                    values.put(KEY_SHOW_DURATION_BUTTON, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1240) {
-                                    values.put(KEY_ASK_FOR_DURATION, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1250) {
-                                    values.put(KEY_DEVICE_NETWORK_TYPE, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1260) {
-                                    values.put(KEY_NOTIFICATION_LED, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1270) {
-                                    values.put(KEY_VIBRATE_WHEN_RINGING, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1290) {
-                                    values.put(KEY_DEVICE_WALLPAPER_FOR, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1300) {
-                                    values.put(KEY_HIDE_STATUS_BAR_ICON, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1310) {
-                                    values.put(KEY_LOCK_DEVICE, 0);
-                                }
-
-                                if (exportedDBObj.getVersion() < 1320) {
-                                    values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
-                                }
-
-                                // Inserting Row do db z SQLiteOpenHelper
-                                db.insert(TABLE_PROFILES, null, values);
-                            } while (cursorExportedDB.moveToNext());
-                        }
-
-                        if (exportedDBObj.getVersion() < 1330) {
-                            changePictureFilePathToUri(null);
-                        }
-
-                        cursorExportedDB.close();
-                        cursorImportDB.close();
-
-                        db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
-
-                        if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
-                            // cusor for events exportedDB
-                            cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                            // cursor for profiles exportedDB
+                            cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
                             columnNamesExportedDB = cursorExportedDB.getColumnNames();
 
                             // cursor for profiles of destination db
-                            cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                            cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
+
+                            int duration = 0;
+                            int zenMode = 0;
 
                             if (cursorExportedDB.moveToFirst()) {
                                 do {
@@ -2359,11 +2148,221 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     for (int i = 0; i < columnNamesExportedDB.length; i++) {
                                         // put only when columnNamesExportedDB[i] exists in cursorImportDB
                                         if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
-                                            values.put(columnNamesExportedDB[i], cursorExportedDB.getString(i));
+                                            String value = cursorExportedDB.getString(i);
+
+                                            // update values
+                                            if (((exportedDBObj.getVersion() < 52) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
+                                                    ||
+                                                    ((exportedDBObj.getVersion() < 1002) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
+                                                if (columnNamesExportedDB[i].equals(KEY_DEVICE_AUTOROTATE)) {
+                                                    // change values:
+                                                    // autorotate off -> rotation 0
+                                                    // autorotate on -> autorotate
+                                                    if (value.equals("1") || value.equals("3"))
+                                                        value = "1";
+                                                    if (value.equals("2"))
+                                                        value = "2";
+                                                }
+                                            }
+                                            if (exportedDBObj.getVersion() < 1156) {
+                                                if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                    if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+                                                    {
+                                                        //value|noChange|automatic|defaultProfile
+                                                        String[] splits = value.split("\\|");
+
+                                                        if (splits[2].equals("1")) // automatic is set
+                                                        {
+                                                            // hm, found brightness values without default profile :-/
+                                                            if (splits.length == 4)
+                                                                value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                            else
+                                                                value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|0";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (exportedDBObj.getVersion() < 1165) {
+                                                if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                    //value|noChange|automatic|defaultProfile
+                                                    String[] splits = value.split("\\|");
+
+                                                    int perc = Integer.parseInt(splits[0]);
+                                                    perc = (int) Profile.convertBrightnessToPercents(perc, 255, 1);
+
+                                                    // hm, found brightness values without default profile :-/
+                                                    if (splits.length == 4)
+                                                        value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                    else
+                                                        value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
+                                                }
+                                            }
+                                            if (exportedDBObj.getVersion() < 1175) {
+                                                if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
+                                                    if (android.os.Build.VERSION.SDK_INT < 21) {
+                                                        //value|noChange|automatic|defaultProfile
+                                                        String[] splits = value.split("\\|");
+
+                                                        if (splits[2].equals("1")) // automatic is set
+                                                        {
+                                                            int perc = 50;
+
+                                                            // hm, found brightness values without default profile :-/
+                                                            if (splits.length == 4)
+                                                                value = perc + "|" + splits[1] + "|" + splits[2] + "|" + splits[3];
+                                                            else
+                                                                value = perc + "|" + splits[1] + "|" + splits[2] + "|0";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)) {
+                                                if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO)) {
+                                                    // in PhoneProfiles value=3 is restart events
+                                                    if (value.equals("3"))
+                                                        value = "1";
+                                                }
+                                            }
+
+                                            values.put(columnNamesExportedDB[i], value);
                                         }
+                                        if (columnNamesExportedDB[i].equals(KEY_DURATION))
+                                            duration = cursorExportedDB.getInt(i);
+                                        if (columnNamesExportedDB[i].equals(KEY_VOLUME_ZEN_MODE))
+                                            zenMode = cursorExportedDB.getInt(i);
+
                                     }
 
                                     // for non existent fields set default value
+                                    if (exportedDBObj.getVersion() < 19) {
+                                        values.put(KEY_DEVICE_MOBILE_DATA, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 20) {
+                                        values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 21) {
+                                        values.put(KEY_DEVICE_GPS, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 22) {
+                                        values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, 0);
+                                        values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
+                                    }
+                                    if (exportedDBObj.getVersion() < 24) {
+                                        values.put(KEY_DEVICE_AUTOSYNC, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 31) {
+                                        values.put(KEY_DEVICE_AUTOSYNC, 0);
+                                    }
+                                    if (((exportedDBObj.getVersion() < 51) && (applicationDataPath.equals(PPApplication.EXPORT_PATH)))
+                                            ||
+                                            ((exportedDBObj.getVersion() < 1001) && (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)))) {
+                                        values.put(KEY_DEVICE_AUTOROTATE, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1015) {
+                                        values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1020) {
+                                        values.put(KEY_VOLUME_SPEAKER_PHONE, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1035) {
+                                        values.put(KEY_DEVICE_NFC, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1120) {
+                                        values.put(KEY_DURATION, 0);
+                                        values.put(KEY_AFTER_DURATION_DO, Profile.AFTERDURATIONDO_UNDOPROFILE);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1150) {
+                                        values.put(KEY_VOLUME_ZEN_MODE, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1160) {
+                                        values.put(KEY_DEVICE_KEYGUARD, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1180) {
+                                        values.put(KEY_VIBRATE_ON_TOUCH, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1190) {
+                                        values.put(KEY_DEVICE_WIFI_AP, 0);
+                                    }
+                                    if (exportedDBObj.getVersion() < 1200) {
+                                        values.put(KEY_DURATION, duration * 60); // conversion to seconds
+                                    }
+                                    if (exportedDBObj.getVersion() < 1210) {
+                                        if ((zenMode == 6) && (android.os.Build.VERSION.SDK_INT < 23))
+                                            values.put(KEY_VOLUME_ZEN_MODE, 3); // Alarms only zen mode is supported from Android 6.0
+                                    }
+                                    if (exportedDBObj.getVersion() < 1220) {
+                                        values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1230) {
+                                        values.put(KEY_SHOW_DURATION_BUTTON, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1240) {
+                                        values.put(KEY_ASK_FOR_DURATION, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1250) {
+                                        values.put(KEY_DEVICE_NETWORK_TYPE, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1260) {
+                                        values.put(KEY_NOTIFICATION_LED, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1270) {
+                                        values.put(KEY_VIBRATE_WHEN_RINGING, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1290) {
+                                        values.put(KEY_DEVICE_WALLPAPER_FOR, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1300) {
+                                        values.put(KEY_HIDE_STATUS_BAR_ICON, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1310) {
+                                        values.put(KEY_LOCK_DEVICE, 0);
+                                    }
+
+                                    if (exportedDBObj.getVersion() < 1320) {
+                                        values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
+                                    }
+
+                                    // Inserting Row do db z SQLiteOpenHelper
+                                    db.insert(TABLE_PROFILES, null, values);
+                                } while (cursorExportedDB.moveToNext());
+                            }
+
+                            if (exportedDBObj.getVersion() < 1330) {
+                                changePictureFilePathToUri(null);
+                            }
+
+                            cursorExportedDB.close();
+                            cursorImportDB.close();
+
+                            db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
+
+                            if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
+                                // cusor for events exportedDB
+                                cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+                                columnNamesExportedDB = cursorExportedDB.getColumnNames();
+
+                                // cursor for profiles of destination db
+                                cursorImportDB = db.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
+
+                                if (cursorExportedDB.moveToFirst()) {
+                                    do {
+                                        values.clear();
+                                        for (int i = 0; i < columnNamesExportedDB.length; i++) {
+                                            // put only when columnNamesExportedDB[i] exists in cursorImportDB
+                                            if (cursorImportDB.getColumnIndex(columnNamesExportedDB[i]) != -1) {
+                                                values.put(columnNamesExportedDB[i], cursorExportedDB.getString(i));
+                                            }
+                                        }
+
+                                        // for non existent fields set default value
                                 /*if (exportedDBObj.getVersion() < 1480) {
                                     values.put(KEY_G_CHECKED, 0);
                                 }
@@ -2371,30 +2370,35 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     values.put(KEY_G_TRANSITION, 0);
                                 }*/
 
-                                    // Inserting Row do db z SQLiteOpenHelper
-                                    db.insert(TABLE_SHORTCUTS, null, values);
+                                        // Inserting Row do db z SQLiteOpenHelper
+                                        db.insert(TABLE_SHORTCUTS, null, values);
 
-                                } while (cursorExportedDB.moveToNext());
+                                    } while (cursorExportedDB.moveToNext());
+                                }
+
+                                cursorExportedDB.close();
+                                cursorImportDB.close();
                             }
 
-                            cursorExportedDB.close();
-                            cursorImportDB.close();
+                            db.setTransactionSuccessful();
+
+                            ret = 1;
+                        } finally {
+                            db.endTransaction();
+                            if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
+                                cursorExportedDB.close();
+                            if ((cursorImportDB != null) && (!cursorImportDB.isClosed()))
+                                cursorImportDB.close();
+                            //db.close();
                         }
-
-                        db.setTransactionSuccessful();
-
-                        ret = 1;
-                    } finally {
-                        db.endTransaction();
-                        if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
-                            cursorExportedDB.close();
-                        if ((cursorImportDB != null) && (!cursorImportDB.isClosed()))
-                            cursorImportDB.close();
-                        //db.close();
+                    }
+                    else {
+                        ret = 0;
                     }
                 }
             } catch (Exception e) {
                 Log.e("DatabaseHandler.importDB", e.toString());
+                ret = 0;
             }
 
             return ret;
