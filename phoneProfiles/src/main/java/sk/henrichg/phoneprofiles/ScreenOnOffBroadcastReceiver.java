@@ -17,7 +17,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             // application is not started
             return;
 
-        Intent serviceIntent = new Intent(context, ScreenOnOffService.class);
+        Intent serviceIntent = new Intent(appContext, ScreenOnOffService.class);
         serviceIntent.setAction(intent.getAction());
         context.startService(serviceIntent);
     }
