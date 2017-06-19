@@ -737,7 +737,7 @@ public class ActivateProfileHelper {
                 }*/
                 }
             } else {
-                //if (canChangeZenMode(context, false)) {
+                try {
                     switch (zenMode) {
                         case ZENMODE_SILENT:
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
@@ -749,7 +749,13 @@ public class ActivateProfileHelper {
                         default:
                             audioManager.setRingerMode(ringerMode);
                     }
-                //}
+                } catch (Exception ignored) {
+                    // may be produced this exception:
+                    //
+                    // java.lang.SecurityException: Not allowed to change Do Not Disturb state
+                    //
+                    // when changed is ringer mode in activated Do not disturb
+                }
             }
         }
         else
