@@ -754,7 +754,8 @@ public class ActivateProfileHelper {
                     //
                     // java.lang.SecurityException: Not allowed to change Do Not Disturb state
                     //
-                    // when changed is ringer mode in activated Do not disturb
+                    // when changed is ringer mode in activated Do not disturband
+                    // GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context) returns false.
                 }
             }
         }
