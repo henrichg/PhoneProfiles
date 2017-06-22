@@ -1101,6 +1101,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                         editor.apply();
                     }
                 });
+                sequence.continueOnCancel(true)
+                        .considerOuterCircleCanceled(true);
                 targetHelpsSequenceStarted = true;
                 sequence.start();
             }
