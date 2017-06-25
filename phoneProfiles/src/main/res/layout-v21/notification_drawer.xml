@@ -12,10 +12,10 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:contentDescription="@string/profile_preferences_profileIcon"
-        android:maxHeight="48dp"
-        android:maxWidth="48dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
+        android:maxHeight="40dp"
+        android:maxWidth="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile_default" />
 
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/notification_activated_profile_icon"
         android:text="@string/profile_name_default"
         android:textAppearance="@style/NotificationTitle"
@@ -41,21 +42,5 @@
         android:contentDescription="@string/empty_string"
         android:scaleType="@integer/profilePrefIndicatorScaleType"
         android:src="@drawable/ic_profile_pref_volume_on" />
-
-
-    <!--
-    <ImageView
-        android:id="@+id/notification_activated_profile_activated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/empty_string"
-        android:maxHeight="20dp"
-        android:maxWidth="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher" />
-    -->
 
 </RelativeLayout>
