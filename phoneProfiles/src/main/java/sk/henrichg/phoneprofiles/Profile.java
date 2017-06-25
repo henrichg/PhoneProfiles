@@ -1574,6 +1574,10 @@ public class Profile {
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
+                if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                }
+                else
                 if (PPApplication.isRooted()) {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())

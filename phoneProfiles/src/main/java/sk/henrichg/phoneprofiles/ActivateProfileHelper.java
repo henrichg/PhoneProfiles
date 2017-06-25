@@ -2862,6 +2862,11 @@ public class ActivateProfileHelper {
                         break;
                 }
                 if (_setPowerSaveMode) {
+                    if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                        if (android.os.Build.VERSION.SDK_INT >= 21)
+                            Settings.Global.putInt(context.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
+                    }
+                    else
                     if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
                         synchronized (PPApplication.startRootCommandMutex) {
                             String command1 = "settings put global low_power " + ((_isPowerSaveMode) ? 1 : 0);
