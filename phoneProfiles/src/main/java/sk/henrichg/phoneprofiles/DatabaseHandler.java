@@ -396,8 +396,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 // looping through all rows and adding to list
                 if (cursor.moveToFirst()) {
                     do {
-                        long id = Long.parseLong(cursor.getString(0));
-                        String brightness = cursor.getString(1);
+                        long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                        String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
                         //value|noChange|automatic|defaultProfile
                         String[] splits = brightness.split("\\|");
@@ -443,8 +443,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
                 do {
-                    long id = Long.parseLong(cursor.getString(0));
-                    String brightness = cursor.getString(1);
+                    long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                    String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
                     //value|noChange|automatic|defaultProfile
                     String[] splits = brightness.split("\\|");
@@ -482,8 +482,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 // looping through all rows and adding to list
                 if (cursor.moveToFirst()) {
                     do {
-                        long id = Long.parseLong(cursor.getString(0));
-                        String brightness = cursor.getString(1);
+                        long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                        String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
                         //value|noChange|automatic|defaultProfile
                         String[] splits = brightness.split("\\|");
@@ -538,8 +538,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             if (cursor.moveToFirst()) {
                 do {
-                    long id = Long.parseLong(cursor.getString(0));
-                    int delayStart = cursor.getInt(1) * 60;  // conversiont to seconds
+                    long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                    int delayStart = cursor.getInt(cursor.getColumnIndex(KEY_DURATION)) * 60;  // conversiont to seconds
 
                     db.execSQL("UPDATE " + TABLE_PROFILES +
                             " SET " + KEY_DURATION + "=" + delayStart + " " +
@@ -561,8 +561,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             if (cursor.moveToFirst()) {
                 do {
-                    long id = Long.parseLong(cursor.getString(0));
-                    int zenMode = cursor.getInt(1);
+                    long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                    int zenMode = cursor.getInt(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE));
 
                     if ((zenMode == 6) && (android.os.Build.VERSION.SDK_INT < 23)) // Alarms only zen mode is supported from Android 6.0
                         db.execSQL("UPDATE " + TABLE_PROFILES +
@@ -826,56 +826,56 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.moveToFirst();
 
                 if (cursor.getCount() > 0) {
-                    profile = new Profile(Long.parseLong(cursor.getString(0)),
-                            cursor.getString(1),
-                            cursor.getString(2),
-                            Integer.parseInt(cursor.getString(3)) == 1,
-                            Integer.parseInt(cursor.getString(4)),
-                            Integer.parseInt(cursor.getString(5)),
-                            cursor.getString(6),
-                            cursor.getString(7),
-                            cursor.getString(8),
-                            cursor.getString(9),
-                            cursor.getString(10),
-                            cursor.getString(11),
-                            Integer.parseInt(cursor.getString(12)),
-                            cursor.getString(13),
-                            Integer.parseInt(cursor.getString(14)),
-                            cursor.getString(15),
-                            Integer.parseInt(cursor.getString(16)),
-                            cursor.getString(17),
-                            Integer.parseInt(cursor.getString(18)),
-                            Integer.parseInt(cursor.getString(19)),
-                            Integer.parseInt(cursor.getString(20)),
-                            Integer.parseInt(cursor.getString(21)),
-                            cursor.getString(22),
-                            Integer.parseInt(cursor.getString(23)),
-                            cursor.getString(24),
-                            Integer.parseInt(cursor.getString(25)),
-                            Integer.parseInt(cursor.getString(26)),
-                            Integer.parseInt(cursor.getString(27)),
-                            Integer.parseInt(cursor.getString(28)),
-                            cursor.getString(29),
-                            Integer.parseInt(cursor.getString(30)),
-                            Integer.parseInt(cursor.getString(31)),
-                            Integer.parseInt(cursor.getString(32)),
-                            Integer.parseInt(cursor.getString(33)),
-                            Integer.parseInt(cursor.getString(34)),
-                            Integer.parseInt(cursor.getString(35)),
-                            Integer.parseInt(cursor.getString(36)),
-                            Integer.parseInt(cursor.getString(37)),
-                            Integer.parseInt(cursor.getString(38)),
-                            Integer.parseInt(cursor.getString(39)),
-                            cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
-                            Integer.parseInt(cursor.getString(41)),
-                            Integer.parseInt(cursor.getString(43)) == 1,
-                            Integer.parseInt(cursor.getString(44)),
-                            Integer.parseInt(cursor.getString(45)),
-                            Integer.parseInt(cursor.getString(46)),
-                            Integer.parseInt(cursor.getString(47)),
-                            Integer.parseInt(cursor.getString(48)) == 1,
-                            Integer.parseInt(cursor.getString(49)),
-                            cursor.getString(50)
+                    profile = new Profile(Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID))),
+                            cursor.getString(cursor.getColumnIndex(KEY_NAME)),
+                            cursor.getString(cursor.getColumnIndex(KEY_ICON)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CHECKED))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_PORDER))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGER_MODE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGTONE)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_NOTIFICATION)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_MEDIA)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ALARM)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SYSTEM)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_VOICE)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AIRPLANE_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BLUETOOTH))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_SCREEN_TIMEOUT))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA_PREFS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_GPS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOSYNC))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOROTATE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_LOCATION_SERVICE_PREFS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SPEAKER_PHONE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NFC))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_AFTER_DURATION_DO))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_KEYGUARD))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_ON_TOUCH))),
+                            cursor.isNull(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP)) ? 0 : Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_POWER_SAVE_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ASK_FOR_DURATION))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_NOTIFICATION_LED))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_WHEN_RINGING))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_FOR))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HIDE_STATUS_BAR_ICON))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID))
                     );
                 }
                 cursor.close();
@@ -954,56 +954,56 @@ class DatabaseHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     Profile profile = new Profile();
-                    profile._id = Long.parseLong(cursor.getString(0));
-                    profile._name = cursor.getString(1);
-                    profile._icon = cursor.getString(2);
-                    profile._checked = Integer.parseInt(cursor.getString(3)) == 1;
-                    profile._porder = Integer.parseInt(cursor.getString(4));
-                    profile._volumeRingerMode = Integer.parseInt(cursor.getString(5));
-                    profile._volumeRingtone = cursor.getString(6);
-                    profile._volumeNotification = cursor.getString(7);
-                    profile._volumeMedia = cursor.getString(8);
-                    profile._volumeAlarm = cursor.getString(9);
-                    profile._volumeSystem = cursor.getString(10);
-                    profile._volumeVoice = cursor.getString(11);
-                    profile._soundRingtoneChange = Integer.parseInt(cursor.getString(12));
-                    profile._soundRingtone = cursor.getString(13);
-                    profile._soundNotificationChange = Integer.parseInt(cursor.getString(14));
-                    profile._soundNotification = cursor.getString(15);
-                    profile._soundAlarmChange = Integer.parseInt(cursor.getString(16));
-                    profile._soundAlarm = cursor.getString(17);
-                    profile._deviceAirplaneMode = Integer.parseInt(cursor.getString(18));
-                    profile._deviceWiFi = Integer.parseInt(cursor.getString(19));
-                    profile._deviceBluetooth = Integer.parseInt(cursor.getString(20));
-                    profile._deviceScreenTimeout = Integer.parseInt(cursor.getString(21));
-                    profile._deviceBrightness = cursor.getString(22);
-                    profile._deviceWallpaperChange = Integer.parseInt(cursor.getString(23));
-                    profile._deviceWallpaper = cursor.getString(24);
-                    profile._deviceMobileData = Integer.parseInt(cursor.getString(25));
-                    profile._deviceMobileDataPrefs = Integer.parseInt(cursor.getString(26));
-                    profile._deviceGPS = Integer.parseInt(cursor.getString(27));
-                    profile._deviceRunApplicationChange = Integer.parseInt(cursor.getString(28));
-                    profile._deviceRunApplicationPackageName = cursor.getString(29);
-                    profile._deviceAutosync = Integer.parseInt(cursor.getString(30));
-                    profile._deviceAutoRotate = Integer.parseInt(cursor.getString(31));
-                    profile._deviceLocationServicePrefs = Integer.parseInt(cursor.getString(32));
-                    profile._volumeSpeakerPhone = Integer.parseInt(cursor.getString(33));
-                    profile._deviceNFC = Integer.parseInt(cursor.getString(34));
-                    profile._duration = Integer.parseInt(cursor.getString(35));
-                    profile._afterDurationDo = Integer.parseInt(cursor.getString(36));
-                    profile._volumeZenMode = Integer.parseInt(cursor.getString(37));
-                    profile._deviceKeyguard = Integer.parseInt(cursor.getString(38));
-                    profile._vibrationOnTouch = Integer.parseInt(cursor.getString(39));
-                    profile._deviceWiFiAP = cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40));
-                    profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(41));
-                    profile._askForDuration = Integer.parseInt(cursor.getString(43)) == 1;
-                    profile._deviceNetworkType = Integer.parseInt(cursor.getString(44));
-                    profile._notificationLed = Integer.parseInt(cursor.getString(45));
-                    profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(46));
-                    profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(47));
-                    profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(48)) == 1;
-                    profile._lockDevice = Integer.parseInt(cursor.getString(49));
-                    profile._deviceConnectToSSID = cursor.getString(50);
+                    profile._id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                    profile._name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                    profile._icon = cursor.getString(cursor.getColumnIndex(KEY_ICON));
+                    profile._checked = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CHECKED))) == 1;
+                    profile._porder = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_PORDER)));
+                    profile._volumeRingerMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGER_MODE)));
+                    profile._volumeRingtone = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGTONE));
+                    profile._volumeNotification = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_NOTIFICATION));
+                    profile._volumeMedia = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_MEDIA));
+                    profile._volumeAlarm = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ALARM));
+                    profile._volumeSystem = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SYSTEM));
+                    profile._volumeVoice = cursor.getString(cursor.getColumnIndex(KEY_VOLUME_VOICE));
+                    profile._soundRingtoneChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE_CHANGE)));
+                    profile._soundRingtone = cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE));
+                    profile._soundNotificationChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION_CHANGE)));
+                    profile._soundNotification = cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION));
+                    profile._soundAlarmChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM_CHANGE)));
+                    profile._soundAlarm = cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM));
+                    profile._deviceAirplaneMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AIRPLANE_MODE)));
+                    profile._deviceWiFi = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI)));
+                    profile._deviceBluetooth = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BLUETOOTH)));
+                    profile._deviceScreenTimeout = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_SCREEN_TIMEOUT)));
+                    profile._deviceBrightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
+                    profile._deviceWallpaperChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE)));
+                    profile._deviceWallpaper = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER));
+                    profile._deviceMobileData = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA)));
+                    profile._deviceMobileDataPrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA_PREFS)));
+                    profile._deviceGPS = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_GPS)));
+                    profile._deviceRunApplicationChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_CHANGE)));
+                    profile._deviceRunApplicationPackageName = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME));
+                    profile._deviceAutosync = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOSYNC)));
+                    profile._deviceAutoRotate = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOROTATE)));
+                    profile._deviceLocationServicePrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_LOCATION_SERVICE_PREFS)));
+                    profile._volumeSpeakerPhone = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SPEAKER_PHONE)));
+                    profile._deviceNFC = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NFC)));
+                    profile._duration = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION)));
+                    profile._afterDurationDo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_AFTER_DURATION_DO)));
+                    profile._volumeZenMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE)));
+                    profile._deviceKeyguard = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_KEYGUARD)));
+                    profile._vibrationOnTouch = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_ON_TOUCH)));
+                    profile._deviceWiFiAP = cursor.isNull(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP)) ? 0 : Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP)));
+                    profile._devicePowerSaveMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_POWER_SAVE_MODE)));
+                    profile._askForDuration = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ASK_FOR_DURATION))) == 1;
+                    profile._deviceNetworkType = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE)));
+                    profile._notificationLed = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_NOTIFICATION_LED)));
+                    profile._vibrateWhenRinging = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_WHEN_RINGING)));
+                    profile._deviceWallpaperFor = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_FOR)));
+                    profile._hideStatusBarIcon = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HIDE_STATUS_BAR_ICON))) == 1;
+                    profile._lockDevice = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE)));
+                    profile._deviceConnectToSSID = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID));
                     // Adding contact to list
                     profileList.add(profile);
                 } while (cursor.moveToNext());
@@ -1311,56 +1311,56 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 if (rc == 1) {
 
-                    profile = new Profile(Long.parseLong(cursor.getString(0)),
-                            cursor.getString(1),
-                            cursor.getString(2),
-                            Integer.parseInt(cursor.getString(3)) == 1,
-                            Integer.parseInt(cursor.getString(4)),
-                            Integer.parseInt(cursor.getString(5)),
-                            cursor.getString(6),
-                            cursor.getString(7),
-                            cursor.getString(8),
-                            cursor.getString(9),
-                            cursor.getString(10),
-                            cursor.getString(11),
-                            Integer.parseInt(cursor.getString(12)),
-                            cursor.getString(13),
-                            Integer.parseInt(cursor.getString(14)),
-                            cursor.getString(15),
-                            Integer.parseInt(cursor.getString(16)),
-                            cursor.getString(17),
-                            Integer.parseInt(cursor.getString(18)),
-                            Integer.parseInt(cursor.getString(19)),
-                            Integer.parseInt(cursor.getString(20)),
-                            Integer.parseInt(cursor.getString(21)),
-                            cursor.getString(22),
-                            Integer.parseInt(cursor.getString(23)),
-                            cursor.getString(24),
-                            Integer.parseInt(cursor.getString(25)),
-                            Integer.parseInt(cursor.getString(26)),
-                            Integer.parseInt(cursor.getString(27)),
-                            Integer.parseInt(cursor.getString(28)),
-                            cursor.getString(29),
-                            Integer.parseInt(cursor.getString(30)),
-                            Integer.parseInt(cursor.getString(31)),
-                            Integer.parseInt(cursor.getString(32)),
-                            Integer.parseInt(cursor.getString(33)),
-                            Integer.parseInt(cursor.getString(34)),
-                            Integer.parseInt(cursor.getString(35)),
-                            Integer.parseInt(cursor.getString(36)),
-                            Integer.parseInt(cursor.getString(37)),
-                            Integer.parseInt(cursor.getString(38)),
-                            Integer.parseInt(cursor.getString(39)),
-                            cursor.isNull(40) ? 0 : Integer.parseInt(cursor.getString(40)),
-                            Integer.parseInt(cursor.getString(41)),
-                            Integer.parseInt(cursor.getString(43)) == 1,
-                            Integer.parseInt(cursor.getString(44)),
-                            Integer.parseInt(cursor.getString(45)),
-                            Integer.parseInt(cursor.getString(46)),
-                            Integer.parseInt(cursor.getString(47)),
-                            Integer.parseInt(cursor.getString(48)) == 1,
-                            Integer.parseInt(cursor.getString(49)),
-                            cursor.getString(50)
+                    profile = new Profile(Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID))),
+                            cursor.getString(cursor.getColumnIndex(KEY_NAME)),
+                            cursor.getString(cursor.getColumnIndex(KEY_ICON)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CHECKED))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_PORDER))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGER_MODE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGTONE)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_NOTIFICATION)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_MEDIA)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ALARM)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SYSTEM)),
+                            cursor.getString(cursor.getColumnIndex(KEY_VOLUME_VOICE)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_RINGTONE)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_NOTIFICATION)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_SOUND_ALARM)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AIRPLANE_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BLUETOOTH))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_SCREEN_TIMEOUT))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA_PREFS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_GPS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_CHANGE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME)),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOSYNC))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOROTATE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_LOCATION_SERVICE_PREFS))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SPEAKER_PHONE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NFC))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_AFTER_DURATION_DO))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_KEYGUARD))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_ON_TOUCH))),
+                            cursor.isNull(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP)) ? 0 : Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_POWER_SAVE_MODE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ASK_FOR_DURATION))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_NOTIFICATION_LED))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_WHEN_RINGING))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_FOR))),
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HIDE_STATUS_BAR_ICON))) == 1,
+                            Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE))),
+                            cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID))
                     );
                 } else
                     profile = null;
@@ -1519,7 +1519,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             int position = 0;
             if (cursor.moveToFirst()) {
                 do {
-                    lid = Long.parseLong(cursor.getString(0));
+                    lid = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
                     if (lid == profile._id)
                         return position;
                     position++;
@@ -1642,7 +1642,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             if (cursor != null) {
                 if (cursor.moveToFirst())
-                    profile._icon = cursor.getString(0);
+                    profile._icon = cursor.getString(cursor.getColumnIndex(KEY_ICON));
                 cursor.close();
             }
 
@@ -1686,82 +1686,82 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 if (cursor.moveToFirst()) {
                     do {
-                        if ((Integer.parseInt(cursor.getString(1)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AIRPLANE_MODE))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_AIRPLANE_MODE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(2)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(3)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BLUETOOTH))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_BLUETOOTH, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(4)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(5)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_MOBILE_DATA_PREFS))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_MOBILE_DATA_PREFS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(6)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_GPS))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_GPS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(7)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_LOCATION_SERVICE_PREFS))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(8)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NFC))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_NFC, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(10)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_WIFI_AP, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if (Integer.parseInt(cursor.getString(9)) == 5) {
+                        if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_RINGER_MODE))) == 5) {
                             boolean notRemove = ActivateProfileHelper.canChangeZenMode(context, true);
                             if (!notRemove) {
-                                int zenMode = cursor.getInt(12);
+                                int zenMode = cursor.getInt(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE));
                                 int ringerMode = 0;
                                 switch (zenMode) {
                                     case 1:
@@ -1786,51 +1786,51 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 values.clear();
                                 values.put(KEY_VOLUME_RINGER_MODE, ringerMode);
                                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                        new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                        new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                             }
                         }
 
-                        if ((Integer.parseInt(cursor.getString(11)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_POWER_SAVE_MODE))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context)
                                         == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(13)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, context)
                                         == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_DEVICE_NETWORK_TYPE, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(14)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_NOTIFICATION_LED))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, context)
                                         == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_NOTIFICATION_LED, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
-                        if ((Integer.parseInt(cursor.getString(15)) != 0) &&
+                        if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_WHEN_RINGING))) != 0) &&
                                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
                                         == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                             values.clear();
                             values.put(KEY_VIBRATE_WHEN_RINGING, 0);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
                         if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, context) == PPApplication.PREFERENCE_NOT_ALLOWED) {
                             values.clear();
                             values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
                             db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
-                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(0)))});
+                                    new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                         }
 
                     } while (cursor.moveToNext());
@@ -1877,11 +1877,11 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 if (cursor.moveToFirst()) {
                     do {
-                        long id = cursor.getLong(0);
-                        String icon = cursor.getString(1);
+                        long id = cursor.getLong(cursor.getColumnIndex(KEY_ID));
+                        String icon = cursor.getString(cursor.getColumnIndex(KEY_ICON));
 
-                        int wallpaperChange = cursor.getInt(2);
-                        String wallpaper = cursor.getString(3);
+                        int wallpaperChange = cursor.getInt(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE));
+                        String wallpaper = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER));
 
                         ContentValues values = new ContentValues();
 
@@ -1998,9 +1998,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 if (cursor.getCount() > 0) {
                     shortcut = new Shortcut();
-                    shortcut._id = Long.parseLong(cursor.getString(0));
-                    shortcut._intent = cursor.getString(1);
-                    shortcut._name = cursor.getString(2);
+                    shortcut._id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_S_ID)));
+                    shortcut._intent = cursor.getString(cursor.getColumnIndex(KEY_S_INTENT));
+                    shortcut._name = cursor.getString(cursor.getColumnIndex(KEY_S_NAME));
                 }
 
                 cursor.close();
