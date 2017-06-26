@@ -1922,10 +1922,10 @@ public class ActivateProfileHelper {
             //noinspection deprecation
             notificationBuilder.setContent(contentView);
 
-            Notification notification = notificationBuilder.build();
+            try {
+                Notification notification = notificationBuilder.build();
 
-
-            if (ApplicationPreferences.notificationStatusBarPermanent(context))
+                if (ApplicationPreferences.notificationStatusBarPermanent(context))
                 {
                     //notification.flags |= Notification.FLAG_NO_CLEAR;
                     notification.flags |= Notification.FLAG_ONGOING_EVENT;
@@ -1936,6 +1936,8 @@ public class ActivateProfileHelper {
                 }
 
                 notificationManager.notify(PPApplication.PROFILE_NOTIFICATION_ID, notification);
+
+            } catch (Exception ignored) {}
         }
         else
         {
