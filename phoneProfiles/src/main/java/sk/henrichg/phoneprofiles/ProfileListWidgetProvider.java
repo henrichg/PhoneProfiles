@@ -264,10 +264,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
     private void doOnUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetId)
     {
         Bundle myOptions;
-        if (android.os.Build.VERSION.SDK_INT >= 16)
-            myOptions = appWidgetManager.getAppWidgetOptions (appWidgetId);
-        else
-            myOptions = null;
+        myOptions = appWidgetManager.getAppWidgetOptions (appWidgetId);
         setLayoutParams(context, appWidgetManager, appWidgetId, myOptions);
         RemoteViews widget = buildLayout(context, appWidgetManager, appWidgetId, isLargeLayout);
         try {
