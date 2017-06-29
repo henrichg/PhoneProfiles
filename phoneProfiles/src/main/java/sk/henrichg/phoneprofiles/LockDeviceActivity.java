@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -33,32 +34,40 @@ public class LockDeviceActivity extends AppCompatActivity {
         */
 
         PPApplication.screenTimeoutBeforeDeviceLock = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
-        if (Permissions.checkLockDevice(getApplicationContext())) {
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
+        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
 
 
-            WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-            params.flags = 1808;
-            params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
-            params.gravity = Gravity.TOP;
-            params.width = -1;
-            params.height = -1;
-            params.format = -1;
-            params.screenBrightness = 0f;
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.flags = 1808;
+        params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+        params.gravity = Gravity.TOP;
+        params.width = -1;
+        params.height = -1;
+        params.format = -1;
+        params.screenBrightness = 0f;
 
-            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.activity_lock_device, null);
-            view.setSystemUiVisibility(5894);
-            view.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-                @Override
-                public void onSystemUiVisibilityChange(int i) {
-                    view.setSystemUiVisibility(5894);
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = layoutInflater.inflate(R.layout.activity_lock_device, null);
+        view.setSystemUiVisibility(5894);
+        view.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int i) {
+                view.setSystemUiVisibility(5894);
+            }
+        });
+
+        windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        windowManager.addView(view, params);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (PPApplication.lockDeviceActivity != null) {
+                    PPApplication.lockDeviceActivity.finish();
+                    PPApplication.lockDeviceActivity.overridePendingTransition(0, 0);
                 }
-            });
-
-            windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
-            windowManager.addView(view, params);
-        }
+            }
+        }, 20000);
     }
 
     @Override
