@@ -83,7 +83,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 systemCategory.removePreference(preference);
         }
 
-        if (Build.VERSION.SDK_INT >= 24) {
+        /*if (Build.VERSION.SDK_INT >= 24) {
             PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("applicationInterfaceCategory");
             Preference preference = findPreference(ApplicationPreferences.PREF_APPLICATION_LANGUAGE);
             if (preference != null)
@@ -109,12 +109,12 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 });
             }
         }
-        else {
-            PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("applicationInterfaceCategory");
-            Preference preference = findPreference(PREF_APPLICATION_LANGUAGE_24);
-            if (preference != null)
-                preferenceCategory.removePreference(preference);
-        }
+        else {*/
+            PreferenceScreen _preferenceCategory = (PreferenceScreen) findPreference("applicationInterfaceCategory");
+            Preference _preference = findPreference(PREF_APPLICATION_LANGUAGE_24);
+            if (_preference != null)
+                _preferenceCategory.removePreference(_preference);
+        //}
         if (Build.VERSION.SDK_INT >= 23) {
             Preference preference = prefMng.findPreference(PREF_APPLICATION_PERMISSIONS);
             if (preference != null) {

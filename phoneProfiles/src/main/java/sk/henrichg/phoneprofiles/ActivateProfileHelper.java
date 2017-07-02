@@ -1701,10 +1701,10 @@ public class ActivateProfileHelper {
             RemoveBrightnessViewBroadcastReceiver.setAlarm(context);
 
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-            if (GlobalGUIRoutines.brightneesView != null)
+            if (GlobalGUIRoutines.brightnessView != null)
             {
-                windowManager.removeView(GlobalGUIRoutines.brightneesView);
-                GlobalGUIRoutines.brightneesView = null;
+                windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                GlobalGUIRoutines.brightnessView = null;
             }
             int type;
             if (android.os.Build.VERSION.SDK_INT < 25)
@@ -1725,25 +1725,25 @@ public class ActivateProfileHelper {
                 params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             else
                 params.screenBrightness = profile.getDeviceBrightnessManualValue(context) / (float) 255;
-            GlobalGUIRoutines.brightneesView = new BrightnessView(context);
+            GlobalGUIRoutines.brightnessView = new BrightnessView(context);
             try {
-                windowManager.addView(GlobalGUIRoutines.brightneesView, params);
+                windowManager.addView(GlobalGUIRoutines.brightnessView, params);
             } catch (Exception e) {
-                GlobalGUIRoutines.brightneesView = null;
+                GlobalGUIRoutines.brightnessView = null;
                 //e.printStackTrace();
             }
         //}
     }
 
     static void removeBrightnessView(Context context) {
-        if (GlobalGUIRoutines.brightneesView != null)
+        if (GlobalGUIRoutines.brightnessView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
-                windowManager.removeView(GlobalGUIRoutines.brightneesView);
+                windowManager.removeView(GlobalGUIRoutines.brightnessView);
             } catch (Exception ignore) {
             }
-            GlobalGUIRoutines.brightneesView = null;
+            GlobalGUIRoutines.brightnessView = null;
         }
     }
 
