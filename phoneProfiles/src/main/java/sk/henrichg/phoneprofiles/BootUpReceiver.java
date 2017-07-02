@@ -25,7 +25,7 @@ public class BootUpReceiver extends BroadcastReceiver {
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, delayedBootUpIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 10);
-        alarmMgr.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
+        alarmMgr.set(AlarmManager.RTC, calendar.getTimeInMillis(), alarmIntent);
 
         PPApplication.setApplicationStarted(context, false);
 
