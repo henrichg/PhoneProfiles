@@ -31,7 +31,7 @@ import com.stericson.RootTools.RootTools;
 public class BrightnessDialogPreference extends
         DialogPreference implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    private Context _context = null;
+    Context _context = null;
     MaterialDialog mDialog;
 
     // Layout widgets.
@@ -98,7 +98,7 @@ public class BrightnessDialogPreference extends
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())
                 .icon(getDialogIcon())
-                        //.disableDefaultFonts()
+                //.disableDefaultFonts()
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
                 .content(getDialogMessage())
@@ -198,19 +198,19 @@ public class BrightnessDialogPreference extends
         }
     }
 
-    public void onShow(DialogInterface dialog) {
+    void onShow(DialogInterface dialog) {
         if (Permissions.grantBrightnessDialogPermissions(_context, this))
             enableViews();
-
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+
         if (Permissions.checkScreenBrightness(_context)) {
+            Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, savedBrightnessMode);
             Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, savedBrightness);
             setAdaptiveBrightness(savedAdaptiveBrightness);
-            Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, savedBrightnessMode);
         }
 
         Window win = ((Activity)_context).getWindow();
@@ -220,6 +220,7 @@ public class BrightnessDialogPreference extends
         else
             layoutParams.screenBrightness = savedBrightness / (float) 255;
         win.setAttributes(layoutParams);
+
         MaterialDialogsPrefUtil.unregisterOnActivityDestroyListener(this, this);
     }
 
@@ -284,9 +285,9 @@ public class BrightnessDialogPreference extends
         if (/*(isAutomatic) || */(_noChange == 1))
         {
             if (Permissions.checkScreenBrightness(_context)) {
+                Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, savedBrightnessMode);
                 Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, savedBrightness);
                 setAdaptiveBrightness(savedAdaptiveBrightness);
-                Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, savedBrightnessMode);
             }
 
             Window win = ((Activity)_context).getWindow();
@@ -300,13 +301,13 @@ public class BrightnessDialogPreference extends
         else
         {
             if (Permissions.checkScreenBrightness(_context)) {
-                Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
-                        Profile.convertPercentsToBrightnessManualValue(_value + minimumValue, _context));
-                setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(_value + minimumValue, _context));
                 if (_automatic == 1)
                     Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
                 else
                     Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
+                        Profile.convertPercentsToBrightnessManualValue(_value + minimumValue, _context));
+                setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(_value + minimumValue, _context));
             }
 
             Window win = ((Activity)_context).getWindow();
@@ -323,13 +324,13 @@ public class BrightnessDialogPreference extends
 
     private void setBrightnessFromSeekBar(int value) {
         if (Permissions.checkScreenBrightness(_context)) {
-            Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
-                    Profile.convertPercentsToBrightnessManualValue(value + minimumValue, _context));
-            setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value + minimumValue, _context));
             if (automatic == 1)
                 Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
             else
                 Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+            Settings.System.putInt(_context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
+                    Profile.convertPercentsToBrightnessManualValue(value + minimumValue, _context));
+            setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value + minimumValue, _context));
         }
 
         Window win = ((Activity)_context).getWindow();
@@ -462,25 +463,54 @@ public class BrightnessDialogPreference extends
                 Settings.System.putFloat(_context.getContentResolver(),
                         ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME, value);
             else {
-                if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
-                    synchronized (PPApplication.startRootCommandMutex) {
-                        String command1 = "settings put system " + ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
-                                Float.toString(value);
-                        //if (PPApplication.isSELinuxEnforcing())
-                        //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                        Command command = new Command(0, false, command1); //, command2);
-                        try {
-                            //RootTools.closeAllShells();
-                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                            //commandWait(command);
-                        } catch (Exception e) {
-                            Log.e("BrightnessDialogPreference.setAdaptiveBrightness", "Error on run su: " + e.toString());
+                try {
+                    Settings.System.putFloat(_context.getContentResolver(),
+                            ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME, value);
+                } catch (Exception ee) {
+                    if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
+                        synchronized (PPApplication.startRootCommandMutex) {
+                            String command1 = "settings put system " + ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
+                                    Float.toString(value);
+                            //if (PPApplication.isSELinuxEnforcing())
+                            //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                            Command command = new Command(0, false, command1); //, command2);
+                            try {
+                                //RootTools.closeAllShells();
+                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                //commandWait(command);
+                            } catch (Exception e) {
+                                Log.e("BrightnessDialogPreference.setAdaptiveBrightness", "Error on run su: " + e.toString());
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+    /*
+    private static void commandWait(Command cmd) throws Exception {
+        int waitTill = 50;
+        int waitTillMultiplier = 2;
+        int waitTillLimit = 3200; //7 tries, 6350 msec
+
+        while (!cmd.isFinished() && waitTill<=waitTillLimit) {
+            synchronized (cmd) {
+                try {
+                    if (!cmd.isFinished()) {
+                        cmd.wait(waitTill);
+                        waitTill *= waitTillMultiplier;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (!cmd.isFinished()){
+            Log.e("ActivateProfileHelper", "Could not finish root command in " + (waitTill/waitTillMultiplier));
+        }
+    }
+    */
 
     static boolean changeEnabled(String value) {
         String[] splits = value.split("\\|");
