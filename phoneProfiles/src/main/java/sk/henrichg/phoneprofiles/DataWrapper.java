@@ -735,7 +735,8 @@ public class DataWrapper {
             (startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
             (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR) ||
             (startupSource == PPApplication.STARTUP_SOURCE_EDITOR) ||
-            (startupSource == PPApplication.STARTUP_SOURCE_SERVICE))
+            (startupSource == PPApplication.STARTUP_SOURCE_SERVICE) ||
+            (startupSource == PPApplication.STARTUP_SOURCE_SERVICE_MANUAL))
         {
             // aktivita spustena z shortcutu alebo zo service, profil aktivujeme
             actProfile = true;

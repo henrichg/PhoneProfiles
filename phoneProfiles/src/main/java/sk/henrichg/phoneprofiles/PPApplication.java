@@ -61,6 +61,7 @@ public class PPApplication extends Application {
     static final int STARTUP_SOURCE_EDITOR = 8;
     static final int STARTUP_SOURCE_ACTIVATOR_START = 9;
     static final int STARTUP_SOURCE_EXTERNAL_APP = 10;
+    static final int STARTUP_SOURCE_SERVICE_MANUAL = 11;
 
     static final int PREFERENCES_STARTUP_SOURCE_ACTIVITY = 1;
     //static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
