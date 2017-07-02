@@ -2120,7 +2120,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                     SQLiteDatabase db = getMyWritableDatabase();
 
-                    if (db.getVersion() >= DATABASE_VERSION) {
+                    if (db.getVersion() <= DATABASE_VERSION) {
 
                         Cursor cursorExportedDB = null;
                         String[] columnNamesExportedDB;
