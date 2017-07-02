@@ -825,4 +825,17 @@ public class DataWrapper {
         }
 
     }
+
+    void activateProfileAfterDuration(long profile_id)
+    {
+        int startupSource = PPApplication.STARTUP_SOURCE_SERVICE_MANUAL;
+        Profile profile = getProfileById(profile_id);
+        if (Permissions.grantProfilePermissions(context, profile, true,
+                forGUI, monochrome, monochromeValue,
+                startupSource, true, null, true)) {
+            getActivateProfileHelper().initialize(this, context);
+            _activateProfile(profile, startupSource, true, null);
+        }
+    }
+
 }
