@@ -21,9 +21,6 @@ public class PhoneProfilesService extends Service {
 
     private static SettingsContentObserver settingsContentObserver = null;
 
-    private RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = null;
-    private DashClockBroadcastReceiver dashClockBroadcastReceiver = null;
-
     public static String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
 
     @Override
@@ -71,16 +68,6 @@ public class PhoneProfilesService extends Service {
         settingsContentObserver = new SettingsContentObserver(this, new Handler());
         getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
-        if (refreshGUIBroadcastReceiver != null)
-            LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(refreshGUIBroadcastReceiver);
-        refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(refreshGUIBroadcastReceiver, new IntentFilter("RefreshGUIBroadcastReceiver"));
-
-        if (dashClockBroadcastReceiver != null)
-            LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(dashClockBroadcastReceiver);
-        dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
-
         // start service for first start
         Intent firstStartServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
         getApplicationContext().startService(firstStartServiceIntent);
@@ -99,11 +86,6 @@ public class PhoneProfilesService extends Service {
 
         if (settingsContentObserver != null)
             getContentResolver().unregisterContentObserver(settingsContentObserver);
-
-        if (refreshGUIBroadcastReceiver != null)
-            LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(refreshGUIBroadcastReceiver);
-        if (dashClockBroadcastReceiver != null)
-            LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(dashClockBroadcastReceiver);
 
         instance = null;
 

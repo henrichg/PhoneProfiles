@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 
 public class DashClockBroadcastReceiver extends BroadcastReceiver {
 
@@ -10,7 +11,7 @@ public class DashClockBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+        LocalBroadcastManager.getInstance(context.getApplicationContext()).unregisterReceiver(PPApplication.dashClockBroadcastReceiver);
 
         PhoneProfilesDashClockExtension dashClockExtension =
                 PhoneProfilesDashClockExtension.getInstance();

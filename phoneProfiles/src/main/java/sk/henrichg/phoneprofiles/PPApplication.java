@@ -115,6 +115,9 @@ public class PPApplication extends Application {
     public static boolean sLookCocktailPanelEnabled = false;
     public static boolean sLookCocktailBarEnabled = false;
 
+    public static RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
+    public static DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
+
     @Override
     public void onCreate()
     {
