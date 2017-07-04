@@ -132,7 +132,7 @@ public class PPApplication extends Application {
         Fabric.with(getApplicationContext(), crashlyticsKit);
         // Crashlytics.logException(exception); -- this log will be associated with crash log.
 
-        if (BuildConfig.DEBUG) {
+        //if (BuildConfig.DEBUG) {
             int actualVersionCode = 0;
             try {
                 PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -140,8 +140,8 @@ public class PPApplication extends Application {
             } catch (PackageManager.NameNotFoundException e) {
                 //e.printStackTrace();
             }
-            Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(/*getApplicationContext(), */actualVersionCode));
-        }
+            Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(getApplicationContext(), actualVersionCode));
+        //}
 
     //	Debug.startMethodTracing("phoneprofiles");
 
