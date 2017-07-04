@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 
 import java.util.Calendar;
 
@@ -20,12 +21,14 @@ public class BootUpReceiver extends BroadcastReceiver {
 
         // start delayed bootup broadcast
         PPApplication.startedOnBoot = true;
-        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent delayedBootUpIntent = new Intent(context, DelayedBootUpReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, delayedBootUpIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 10);
-        alarmMgr.set(AlarmManager.RTC, calendar.getTimeInMillis(), alarmIntent);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PPApplication.logE("BootUpReceiver.onReceive", "delayed boot up");
+                PPApplication.startedOnBoot = false;
+            }
+        }, 10000);
 
         PPApplication.setApplicationStarted(context, false);
 

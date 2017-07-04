@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Handler;
 
 public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulIntentService 
 {
@@ -61,7 +62,14 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 //SystemClock.sleep(500);
                 PPApplication.sleep(500);
 
-                RingerModeChangeReceiver.setAlarmForDisableInternalChange(context);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        PPApplication.logE("ExecuteVolumeProfilePrefsService.onHandleIntent", "disable ringer mode change internal change");
+                        RingerModeChangeReceiver.internalChange = false;
+                    }
+                }, 3000);
 
             }
 

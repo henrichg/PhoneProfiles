@@ -390,22 +390,7 @@
             android:exported="false">
         </receiver>
         <receiver
-            android:name=".RemoveBrightnessViewBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".DisableRingerModeInernalChangeBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
             android:name=".RecreateNotificationBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false">
-        </receiver>
-        <receiver
-            android:name=".DelayedBootUpReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
@@ -418,11 +403,6 @@
             <intent-filter>
                 <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED"/>
             </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".DisableScreenTimeoutInternalChangeReceiver"
-            android:enabled="true"
-            android:exported="false">
         </receiver>
 
         <!-- use LocalBroadcastManager -->

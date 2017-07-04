@@ -41,6 +41,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
 import android.os.Build;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -77,6 +78,7 @@ public class ActivateProfileHelper {
     private NotificationManager notificationManager;
 
     static boolean lockRefresh = false;
+    static boolean disableScreenTimeoutInternalChange = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
 
@@ -1583,7 +1585,7 @@ public class ActivateProfileHelper {
     }
 
     void setScreenTimeout(int screenTimeout, Context context) {
-        DisableScreenTimeoutInternalChangeReceiver.internalChange = true;
+        disableScreenTimeoutInternalChange = true;
         //Log.d("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
         switch (screenTimeout) {
             case 1:
@@ -1646,7 +1648,14 @@ public class ActivateProfileHelper {
                 break;
         }
         setActivatedProfileScreenTimeout(context, 0);
-        DisableScreenTimeoutInternalChangeReceiver.setAlarm(context);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "disable screen timeout internal change");
+                disableScreenTimeoutInternalChange = false;
+            }
+        }, 3000);
     }
 
     private static void screenTimeoutLock(Context context)
@@ -1699,8 +1708,6 @@ public class ActivateProfileHelper {
     {
         //if (context != null)
         //{
-            RemoveBrightnessViewBroadcastReceiver.setAlarm(context);
-
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             if (GlobalGUIRoutines.brightnessView != null)
             {
@@ -1733,6 +1740,26 @@ public class ActivateProfileHelper {
                 GlobalGUIRoutines.brightnessView = null;
                 //e.printStackTrace();
             }
+
+            final Handler handler = new Handler();
+            final Context _context = context;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    PPApplication.logE("ActivateProfileHelper.createBrightnessView", "remove brightness view");
+
+                    WindowManager windowManager = (WindowManager)_context.getSystemService(Context.WINDOW_SERVICE);
+                    if (GlobalGUIRoutines.brightnessView != null)
+                    {
+                        try {
+                            windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                        } catch (Exception ignored) {
+                        }
+                        GlobalGUIRoutines.brightnessView = null;
+                    }
+                }
+            }, 5000);
+
         //}
     }
 
@@ -1988,7 +2015,7 @@ public class ActivateProfileHelper {
         Calendar now = Calendar.getInstance();
         long time = now.getTimeInMillis() + Integer.valueOf(ApplicationPreferences.notificationStatusBarCancel(context)) * 1000;
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+        alarmManager.set(AlarmManager.RTC, time, pendingIntent);
     }
 
     void setAlarmForRecreateNotification()
@@ -2001,7 +2028,7 @@ public class ActivateProfileHelper {
 
         Calendar now = Calendar.getInstance();
         long time = now.getTimeInMillis() + 500;
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+        alarmManager.set(AlarmManager.RTC, time, pendingIntent);
     }
 
     private void removeAlarmForRecreateNotification() {
