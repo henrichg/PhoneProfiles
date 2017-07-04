@@ -49,7 +49,6 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
                 aph.changeRingerModeForVolumeEqual0(profile);
                 aph.changeNotificationVolumeForVolumeEqual0(profile);
 
-                RingerModeChangeReceiver.removeAlarm(this);
                 RingerModeChangeReceiver.internalChange = true;
 
                 final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
