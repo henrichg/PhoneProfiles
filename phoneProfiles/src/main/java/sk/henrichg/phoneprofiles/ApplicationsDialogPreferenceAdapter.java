@@ -91,4 +91,5 @@ class ApplicationsDialogPreferenceAdapter extends RecyclerView.Adapter<Applicati
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }
+
 }

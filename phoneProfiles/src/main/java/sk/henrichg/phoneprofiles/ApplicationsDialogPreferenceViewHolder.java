@@ -47,7 +47,6 @@ class ApplicationsDialogPreferenceViewHolder extends RecyclerView.ViewHolder imp
     @SuppressLint("SetTextI18n")
     void bindApplication(Application application) {
 
-        // 4. Bind the data to the ViewHolder
         this.application = application;
 
         imageViewIcon.setImageDrawable(application.icon);
@@ -78,8 +77,6 @@ class ApplicationsDialogPreferenceViewHolder extends RecyclerView.ViewHolder imp
 
     @Override
     public void onClick(View v) {
-
-        // 5. Handle the onClick event for the ViewHolder
         if (this.application != null) {
             preference.startEditor(this.application);
         }
