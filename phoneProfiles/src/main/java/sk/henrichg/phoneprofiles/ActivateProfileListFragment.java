@@ -292,7 +292,7 @@ public class ActivateProfileListFragment extends Fragment {
                 // aktivita nebola spustena z notifikacie, ani z widgetu
                 // pre profil, ktory je prave aktivny, treba aktualizovat notifikaciu a widgety
                 activateProfileHelper.showNotification(profile);
-                activateProfileHelper.updateWidget();
+                activateProfileHelper.updateWidget(true);
             }
         }
         endOnStart();

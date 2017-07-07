@@ -428,7 +428,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             Profile activatedProfile = dataWrapper.getActivatedProfile();
             dataWrapper.refreshProfileIcon(activatedProfile, false, 0);
             activateProfileHelper.showNotification(activatedProfile);
-            activateProfileHelper.updateWidget();
+            activateProfileHelper.updateWidget(true);
 
             /*Intent intent5 = new Intent();
             intent5.setAction(RefreshGUIBroadcastReceiver.INTENT_REFRESH_GUI);

@@ -649,7 +649,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         dataWrapper.clearProfileList();
                         dataWrapper.getDatabaseHandler().deactivateProfile();
                         dataWrapper.getActivateProfileHelper().showNotification(null);
-                        dataWrapper.getActivateProfileHelper().updateWidget();
+                        dataWrapper.getActivateProfileHelper().updateWidget(true);
 
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
                         Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
@@ -989,7 +989,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
             fragment.updateHeader(activeProfile);
             fragment.dataWrapper.getActivateProfileHelper().showNotification(activeProfile);
-            fragment.dataWrapper.getActivateProfileHelper().updateWidget();
+            fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
         }
         redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, startTargetHelps);
     }

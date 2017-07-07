@@ -556,7 +556,7 @@ public class DataWrapper {
         }
 
         activateProfileHelper.showNotification(profile);
-        activateProfileHelper.updateWidget();
+        activateProfileHelper.updateWidget(true);
 
         if (ApplicationPreferences.notificationsToast(context) && (!ActivateProfileHelper.lockRefresh))
         {
@@ -810,7 +810,7 @@ public class DataWrapper {
         else
         {
             activateProfileHelper.showNotification(profile);
-            activateProfileHelper.updateWidget();
+            activateProfileHelper.updateWidget(true);
 
             // for startActivityForResult
             if (activity != null)

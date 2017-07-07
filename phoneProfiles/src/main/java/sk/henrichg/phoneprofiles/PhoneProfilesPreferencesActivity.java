@@ -134,7 +134,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
         dataWrapper.getActivateProfileHelper().removeNotification();
         dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-        dataWrapper.getActivateProfileHelper().updateWidget();
+        dataWrapper.getActivateProfileHelper().updateWidget(true);
         dataWrapper.invalidateDataWrapper();
 
     }
