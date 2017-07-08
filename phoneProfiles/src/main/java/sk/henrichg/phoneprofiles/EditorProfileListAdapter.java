@@ -62,7 +62,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
 
     @Override
     public void onBindViewHolder(final EditorProfileListViewHolder holder, int position) {
-        Profile profile = (Profile)getItem(position);
+        Profile profile = getItem(position);
         holder.bindProfile(profile);
 
         holder.dragHandle.setOnTouchListener(new View.OnTouchListener() {
@@ -102,19 +102,6 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
             return null;
 
         return profileList.get(position);
-    }
-
-    public int getItemId(Profile profile)
-    {
-        if (profileList == null)
-            return -1;
-
-        for (int i = 0; i < profileList.size(); i++)
-        {
-            if (profileList.get(i)._id == profile._id)
-                return i;
-        }
-        return -1;
     }
 
     int getItemPosition(Profile profile)
@@ -195,7 +182,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         }
 
         // teraz musime najst profile v profileList
-        int position = getItemId(profile);
+        int position = getItemPosition(profile);
         if (position != -1)
         {
             // najdenemu objektu nastavime _checked

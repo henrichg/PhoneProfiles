@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.mobeta.android.dslv.DragSortListView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -358,6 +357,16 @@ public class EditorProfileListFragment extends Fragment
 
         if (profile != null)
         {
+            int profilePos = profileListAdapter.getItemPosition(profile);
+            /*listView.setItemChecked(profilePos, true);
+            int last = listView.getLastVisiblePosition();
+            int first = listView.getFirstVisiblePosition();
+            if ((profilePos <= first) || (profilePos >= last)) {
+                listView.setSelection(profilePos);
+                //listView.smoothScrollToPosition(profilePos);
+            }*/
+            listView.getLayoutManager().scrollToPosition(profilePos);
+
             boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
             if (startTargetHelps)
                 showAdapterTargetHelps();
@@ -626,6 +635,9 @@ public class EditorProfileListFragment extends Fragment
     public void updateListView(Profile profile, boolean newProfile, boolean refreshIcons, boolean setPosition)
     {
         synchronized (PPApplication.refreshEditorProfilesListMutex) {
+            /*if (listView != null)
+                listView.cancelDrag();*/
+
             if (profileListAdapter != null) {
                 if (newProfile) {
                     // add profile into listview
