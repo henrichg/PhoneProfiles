@@ -14,7 +14,7 @@ Android application - manually change device settings like ringer mode, sounds, 
 Required external libs
 ----------------------
 
-- Android support library: core, appcomapt, gridlayout
+- Android support library: core, appcomapt, gridlayout, recyclerview
 - RootTools - https://github.com/Stericson/RootTools
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
