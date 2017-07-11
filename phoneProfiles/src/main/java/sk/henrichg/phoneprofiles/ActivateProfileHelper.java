@@ -1695,8 +1695,7 @@ public class ActivateProfileHelper {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
                 windowManager.removeView(GlobalGUIRoutines.keepScreenOnView);
-            } catch (Exception ignore) {
-            }
+            } catch (Exception ignore) {}
             GlobalGUIRoutines.keepScreenOnView = null;
         }
 
@@ -1711,7 +1710,9 @@ public class ActivateProfileHelper {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             if (GlobalGUIRoutines.brightnessView != null)
             {
-                windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                try {
+                    windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                } catch (Exception ignored) {}
                 GlobalGUIRoutines.brightnessView = null;
             }
             int type;
@@ -1753,8 +1754,7 @@ public class ActivateProfileHelper {
                     {
                         try {
                             windowManager.removeView(GlobalGUIRoutines.brightnessView);
-                        } catch (Exception ignored) {
-                        }
+                        } catch (Exception ignored) {}
                         GlobalGUIRoutines.brightnessView = null;
                     }
                 }
@@ -1769,8 +1769,7 @@ public class ActivateProfileHelper {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             try {
                 windowManager.removeView(GlobalGUIRoutines.brightnessView);
-            } catch (Exception ignore) {
-            }
+            } catch (Exception ignore) {}
             GlobalGUIRoutines.brightnessView = null;
         }
     }
