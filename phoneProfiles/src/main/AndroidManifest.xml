@@ -76,7 +76,7 @@
         android:required="false"/>
 
     <application
-        android:name="sk.henrichg.phoneprofiles.PPApplication"
+        android:name=".PPApplication"
         android:allowBackup="true"
         android:backupAgent=".PhoneProfilesBackupAgent"
         android:fullBackupContent="@xml/phoneprofiles_backup_scheme"
@@ -406,16 +406,17 @@
         </receiver>
 
         <!-- Samsung Edge Look provider -->
-        <receiver android:name=".SamsungEdgeProvider"
-                  android:enabled="true"
-                  android:exported="false" >
+        <receiver
+            android:name=".SamsungEdgeProvider"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
-                <action android:name=
-                            "com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE" />
+                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE"/>
             </intent-filter>
+
             <meta-data
                 android:name="com.samsung.android.cocktail.provider"
-                android:resource="@xml/samsung_edge" />
+                android:resource="@xml/samsung_edge"/>
         </receiver>
 
         <service
@@ -494,6 +495,10 @@
         <service
             android:name=".SamsungEdgeService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service
+            android:name=".ProfileDurationService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>
