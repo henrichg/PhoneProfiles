@@ -1995,7 +1995,6 @@ public class ActivateProfileHelper {
 
     void removeNotification()
     {
-        removeAlarmForRecreateNotification();
         if (notificationManager != null)
             notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
     }
@@ -2015,34 +2014,6 @@ public class ActivateProfileHelper {
         long time = now.getTimeInMillis() + Integer.valueOf(ApplicationPreferences.notificationStatusBarCancel(context)) * 1000;
 
         alarmManager.set(AlarmManager.RTC, time, pendingIntent);
-    }
-
-    void setAlarmForRecreateNotification()
-    {
-        Intent intent = new Intent(context, RecreateNotificationBroadcastReceiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
-
-        Calendar now = Calendar.getInstance();
-        long time = now.getTimeInMillis() + 500;
-        alarmManager.set(AlarmManager.RTC, time, pendingIntent);
-    }
-
-    private void removeAlarmForRecreateNotification() {
-        Intent intent = new Intent(context, RecreateNotificationBroadcastReceiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
-
-        if (pendingIntent != null)
-        {
-            alarmManager.cancel(pendingIntent);
-            pendingIntent.cancel();
-        }
-
     }
 
     void updateWidget(boolean alsoEditor)
