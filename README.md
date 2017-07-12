@@ -24,3 +24,4 @@ Required external libs
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
 - crashlytics - https://fabric.io/kits/android/crashlytics
 - quickscroll - https://github.com/andraskindler/quickscroll
+- cwac-wakeful - https://github.com/commonsguy/cwac-wakeful
