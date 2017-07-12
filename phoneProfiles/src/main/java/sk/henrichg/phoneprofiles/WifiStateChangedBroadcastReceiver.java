@@ -1,19 +1,17 @@
 package sk.henrichg.phoneprofiles;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.support.v4.content.WakefulBroadcastReceiver;
 
 import java.util.List;
 
-public class WifiStateChangedBroadcastReceiver extends WakefulBroadcastReceiver {
+public class WifiStateChangedBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         PPApplication.logE("##### WifiStateChangedBroadcastReceiver.onReceive", "xxx");
 
         //WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
