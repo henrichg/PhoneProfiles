@@ -764,7 +764,7 @@ public class EditorProfileListFragment extends Fragment
             }
             else {
                 //Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS=false");
-                final Handler handler = new Handler();
+                final Handler handler = new Handler(getActivity().getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

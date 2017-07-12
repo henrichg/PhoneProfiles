@@ -345,7 +345,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
                         targetHelpsSequenceStarted = false;
-                        final Handler handler = new Handler();
+                        final Handler handler = new Handler(getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -370,7 +370,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
             }
             else {
                 //Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
-                final Handler handler = new Handler();
+                final Handler handler = new Handler(getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

@@ -218,7 +218,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             refreshGUI(false, false);
         }
 
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -357,7 +357,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         case R.id.menu_exit:
             exitApp(getApplicationContext(), getDataWrapper());
 
-            Handler handler=new Handler();
+            Handler handler=new Handler(getMainLooper());
             Runnable r=new Runnable() {
                 public void run() {
                     finish();
@@ -1109,7 +1109,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
             else {
                 //Log.d("EditorProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
-                final Handler handler = new Handler();
+                final Handler handler = new Handler(getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
