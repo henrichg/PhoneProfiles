@@ -10,89 +10,21 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 
+import com.commonsware.cwac.wakeful.WakefulIntentService;
+
 import java.util.Calendar;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
-        final Context appContext = context.getApplicationContext();
-
         //int intentUid = intent.getExtras().getInt("android.intent.extra.UID");
         //int myUid = android.os.Process.myUid();
         //if (intentUid == myUid)
         //{
-            //PPApplication.loadPreferences(appContext);
-
-            // start delayed bootup broadcast
-            PPApplication.startedOnBoot = true;
-            final Handler handler = new Handler(context.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    PPApplication.logE("PackageReplacedReceiver.onReceive", "delayed boot up");
-                    PPApplication.startedOnBoot = false;
-                }
-            }, 10000);
-
-            Permissions.setShowRequestAccessNotificationPolicyPermission(appContext, true);
-            Permissions.setShowRequestWriteSettingsPermission(appContext, true);
-            //ActivateProfileHelper.setScreenUnlocked(appContext, true);
-
-            int oldVersionCode = PPApplication.getSavedVersionCode(appContext);
-            PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "oldVersionCode="+oldVersionCode);
-            int actualVersionCode;
-            try {
-                PackageInfo pinfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
-                actualVersionCode = pinfo.versionCode;
-                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "actualVersionCode=" + actualVersionCode);
-
-                if (oldVersionCode < actualVersionCode) {
-                    if (actualVersionCode <= 2100) {
-                        ApplicationPreferences.getSharedPreferences(appContext);
-                        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                        editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
-                        editor.apply();
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                //e.printStackTrace();
-            }
-
-            if (PPApplication.getApplicationStarted(appContext, false))
-            {
-                if (PhoneProfilesService.instance != null) {
-                    // stop PhoneProfilesService
-                    appContext.stopService(new Intent(appContext, PhoneProfilesService.class));
-                    Handler _handler = new Handler(context.getMainLooper());
-                    Runnable r = new Runnable() {
-                        public void run() {
-                            startService(appContext);
-                        }
-                    };
-                    _handler.postDelayed(r, 2000);
-                }
-                else
-                    startService(appContext);
-            }
-
+        Intent serviceIntent = new Intent(context.getApplicationContext(), PackageReplacedService.class);
+        WakefulIntentService.sendWakefulWork(context.getApplicationContext(), serviceIntent);
         //}
-    }
-
-    private void startService(Context context) {
-        // must by false for avoiding starts/pause events before restart events
-        PPApplication.setApplicationStarted(context, false);
-
-        // start PhoneProfilesService
-        context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
     }
 
 }
