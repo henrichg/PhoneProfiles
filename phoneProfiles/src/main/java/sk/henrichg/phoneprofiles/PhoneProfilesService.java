@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
@@ -35,58 +36,61 @@ public class PhoneProfilesService extends Service {
         //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         instance = this;
+        Context appContext = getApplicationContext();
 
         // save version code (is used in PackageReplacedReceiver)
         try {
             PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int actualVersionCode = pinfo.versionCode;
-            PPApplication.setSavedVersionCode(getApplicationContext(), actualVersionCode);
+            PPApplication.setSavedVersionCode(appContext, actualVersionCode);
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();
         }
 
         if (screenOnOffReceiver != null)
-            getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+            appContext.unregisterReceiver(screenOnOffReceiver);
         screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
-        getApplicationContext().registerReceiver(screenOnOffReceiver, intentFilter5);
+        appContext.registerReceiver(screenOnOffReceiver, intentFilter5);
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
-            if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, getApplicationContext())) {
+            if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, appContext)) {
                 interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
                 IntentFilter intentFilter11 = new IntentFilter();
                 intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
-                getApplicationContext().registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+                appContext.registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
             }
         }
 
         if (settingsContentObserver != null)
-            getContentResolver().unregisterContentObserver(settingsContentObserver);
+            appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
         //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
-        settingsContentObserver = new SettingsContentObserver(this, new Handler());
-        getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
+        settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
+        appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
         // start service for first start
-        Intent firstStartServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
-        WakefulIntentService.sendWakefulWork(getApplicationContext(), firstStartServiceIntent);
+        Intent firstStartServiceIntent = new Intent(appContext, FirstStartService.class);
+        WakefulIntentService.sendWakefulWork(appContext, firstStartServiceIntent);
     }
 
     @Override
     public void onDestroy()
     {
+        Context appContext = getApplicationContext();
+
         if (screenOnOffReceiver != null)
-            getApplicationContext().unregisterReceiver(screenOnOffReceiver);
+            appContext.unregisterReceiver(screenOnOffReceiver);
 
         if (android.os.Build.VERSION.SDK_INT >= 23)
             if (interruptionFilterChangedReceiver != null)
-                getApplicationContext().unregisterReceiver(interruptionFilterChangedReceiver);
+                appContext.unregisterReceiver(interruptionFilterChangedReceiver);
 
         if (settingsContentObserver != null)
-            getContentResolver().unregisterContentObserver(settingsContentObserver);
+            appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
 
         instance = null;
 
