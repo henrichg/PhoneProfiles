@@ -15,13 +15,15 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.commonsware.cwac.wakeful.WakefulIntentService;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 
-public class FirstStartService extends IntentService {
+public class FirstStartService extends WakefulIntentService {
 
     public static final int TONE_ID = R.raw.phoneprofiles_silent;
     public static final String TONE_NAME = "PhoneProfiles Silent";
@@ -32,11 +34,8 @@ public class FirstStartService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent)
-    {
-        PPApplication.logE("FirstStartService.onHandleIntent", "xxx");
-
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+    protected void doWakefulWork(Intent intent) {
+        PPApplication.logE("FirstStartService.doWakefulWork", "xxx");
 
         Context context = getApplicationContext();
 
@@ -52,12 +51,13 @@ public class FirstStartService extends IntentService {
             }
         //}
 
+        Permissions.clearMergedPermissions(context);
+
+
         if (PPApplication.getApplicationStarted(getApplicationContext(), false))
             return;
 
-        PPApplication.logE("FirstStartService.onHandleIntent", " application not started");
-
-        Permissions.clearMergedPermissions(context);
+        PPApplication.logE("FirstStartService.doWakefulWork", " application not started");
 
         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 

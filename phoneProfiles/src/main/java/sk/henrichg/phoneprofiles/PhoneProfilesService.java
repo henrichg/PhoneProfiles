@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.commonsware.cwac.wakeful.WakefulIntentService;
+
 
 public class PhoneProfilesService extends Service {
 
@@ -70,8 +72,7 @@ public class PhoneProfilesService extends Service {
 
         // start service for first start
         Intent firstStartServiceIntent = new Intent(getApplicationContext(), FirstStartService.class);
-        getApplicationContext().startService(firstStartServiceIntent);
-
+        WakefulIntentService.sendWakefulWork(getApplicationContext(), firstStartServiceIntent);
     }
 
     @Override
