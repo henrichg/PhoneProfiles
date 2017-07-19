@@ -213,19 +213,6 @@
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
             </intent-filter>
         </receiver>
-
-        <!-- implicit broadcast receivers, register it in PhoneProfilesService -->
-        <receiver android:name=".PhoneProfilesInstall">
-            <intent-filter
-                android:enabled="true"
-                android:exported="true"
-                android:priority="100">
-                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-
-                <data android:scheme="package"/>
-            </intent-filter>
-        </receiver>
         <receiver
             android:name=".LocaleChangedReceiver"
             android:enabled="true"
@@ -236,31 +223,14 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
+
+        <!-- non-implicit broadcast receivers -->
         <receiver
-            android:name=".PhoneCallBroadcastReceiver"
+            android:name=".PackageReplacedReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".RingerModeChangeReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.media.RINGER_MODE_CHANGED"/>
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".WifiStateChangedBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
             </intent-filter>
         </receiver>
 
@@ -306,16 +276,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/profile_list_widget_info"/>
-        </receiver>
-
-        <!-- no implicit broadcast receivers -->
-        <receiver
-            android:name=".PackageReplacedReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-            </intent-filter>
         </receiver>
 
         <!-- Device administrator receiver -->

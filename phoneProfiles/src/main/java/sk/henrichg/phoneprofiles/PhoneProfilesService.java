@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
+import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 
@@ -21,6 +25,9 @@ public class PhoneProfilesService extends Service {
 
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
+    private PhoneCallBroadcastReceiver phoneCallBroadcastReceiver = null;
+    private RingerModeChangeReceiver ringerModeChangeReceiver = null;
+    private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
 
     private static SettingsContentObserver settingsContentObserver = null;
 
@@ -65,6 +72,28 @@ public class PhoneProfilesService extends Service {
                 appContext.registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
             }
         }
+
+        if (phoneCallBroadcastReceiver != null)
+            appContext.unregisterReceiver(phoneCallBroadcastReceiver);
+        phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
+        IntentFilter intentFilter6 = new IntentFilter();
+        intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+        intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+        appContext.registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
+
+        if (ringerModeChangeReceiver != null)
+            appContext.unregisterReceiver(ringerModeChangeReceiver);
+        ringerModeChangeReceiver = new RingerModeChangeReceiver();
+        IntentFilter intentFilter7 = new IntentFilter();
+        intentFilter7.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
+        appContext.registerReceiver(ringerModeChangeReceiver, intentFilter7);
+
+        if (wifiStateChangedBroadcastReceiver != null)
+            appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
+        wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
+        IntentFilter intentFilter8 = new IntentFilter();
+        intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
         if (settingsContentObserver != null)
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
