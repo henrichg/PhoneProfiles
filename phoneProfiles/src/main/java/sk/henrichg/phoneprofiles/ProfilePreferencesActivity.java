@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -141,9 +140,9 @@ public class ProfilePreferencesActivity extends PreferenceActivity
 
         if (showSaveMenu) {
             //MenuInflater inflater = getMenuInflater();
-            //inflater.inflate(R.menu.profile_preferences_action_mode, menu);
+            //inflater.inflate(R.menu.profile_preferences_save, menu);
             Toolbar toolbar = (Toolbar) findViewById(R.id.mp_toolbar);
-            toolbar.inflateMenu(R.menu.profile_preferences_action_mode);
+            toolbar.inflateMenu(R.menu.profile_preferences_save);
         }
         return true;
     }
@@ -166,7 +165,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.profile_preferences_action_mode_save:
+            case R.id.profile_preferences_save:
                 savePreferences(newProfileMode, predefinedProfileIndex);
                 resultCode = RESULT_OK;
                 finish();
@@ -486,7 +485,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
 
             final TapTargetSequence sequence = new TapTargetSequence(this);
             sequence.targets(
-                    TapTarget.forToolbarMenuItem(toolbar, R.id.profile_preferences_action_mode_save, getString(R.string.profile_preference_activity_targetHelps_save_title), getString(R.string.profile_preference_activity_targetHelps_save_description))
+                    TapTarget.forToolbarMenuItem(toolbar, R.id.profile_preferences_save, getString(R.string.profile_preference_activity_targetHelps_save_title), getString(R.string.profile_preference_activity_targetHelps_save_description))
                             .targetCircleColorInt(circleColor)
                             .textColorInt(0xFFFFFF)
                             .drawShadow(true)
