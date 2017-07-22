@@ -10,11 +10,4 @@
           android:orderInCategory="200"
           henrichg:showAsAction="always"
           android:icon="?attr/actionDeleteAllIcon" />
-    <!--
-    <item android:id="@+id/menu_default_profile"
-          android:title="@string/menu_default_profile"
-          android:orderInCategory="300"
-          henrichg:showAsAction="always"
-          android:icon="?attr/actionSourceProfileIcon" />
-    -->
 </menu>
