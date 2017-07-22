@@ -1,5 +1,6 @@
 // Release versions (look at PackageReplacedReceiver)
 // 2100 = not show Activator and Editor target helps
+// 2500 = show target helps for shared profile toolbar item
 
 ext.versions = [
         minSdk: 16,
