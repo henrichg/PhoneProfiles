@@ -113,6 +113,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             arguments.putInt(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE);
         else
             arguments.putInt(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.PREFERENCES_STARTUP_SOURCE_ACTIVITY);
+        arguments.putBoolean(PreferenceFragment.EXTRA_NESTED, nested);
         fragment.setArguments(arguments);
 
         return fragment;
