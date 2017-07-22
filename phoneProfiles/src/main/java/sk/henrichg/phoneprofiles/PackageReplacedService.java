@@ -57,6 +57,7 @@ public class PackageReplacedService extends WakefulIntentService {
                         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
                         editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
+                        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
                         editor.apply();
                     }
                 }
