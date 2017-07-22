@@ -363,30 +363,28 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
     private void setTitleStyle(Preference preference, boolean bold, boolean underline, boolean systemSettings)
     {
-        CharSequence title = preference.getTitle();
-        if (systemSettings) {
-            String s = title.toString();
-            if (!s.contains("(S)"))
-                title = TextUtils.concat("(S) ", title);
-        }
-        Spannable sbt = new SpannableString(title);
-        Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
-        for(Object span: spansToRemove){
-            if(span instanceof CharacterStyle)
-                sbt.removeSpan(span);
-        }
-        sbt = new SpannableString(title);
-        if (bold || underline)
-        {
-            if (bold)
-                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            if (underline)
-                sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            preference.setTitle(sbt);
-        }
-        else
-        {
-            preference.setTitle(sbt);
+        if (preference != null) {
+            CharSequence title = preference.getTitle();
+            if (systemSettings) {
+                String s = title.toString();
+                if (!s.contains("(S)"))
+                    title = TextUtils.concat("(S) ", title);
+            }
+            Spannable sbt = new SpannableString(title);
+            Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
+            for (Object span : spansToRemove) {
+                if (span instanceof CharacterStyle)
+                    sbt.removeSpan(span);
+            }
+            if (bold || underline) {
+                if (bold)
+                    sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (underline)
+                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                preference.setTitle(sbt);
+            } else {
+                preference.setTitle(sbt);
+            }
         }
     }
 
@@ -763,6 +761,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             if (preference != null) {
                 preference.setSummary(value.toString());
                 setTitleStyle(preference, false, true, false);
+                setCategorySummary(preference, false);
             }
         }
         if (key.equals(Profile.PREF_PROFILE_VOLUME_RINGER_MODE))
