@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 
 public class ScreenOnOffService extends IntentService {
 

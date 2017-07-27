@@ -1,6 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;

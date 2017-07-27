@@ -1,8 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.IntentService;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 

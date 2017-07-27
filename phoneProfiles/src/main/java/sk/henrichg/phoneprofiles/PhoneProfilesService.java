@@ -12,8 +12,6 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.content.LocalBroadcastManager;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;

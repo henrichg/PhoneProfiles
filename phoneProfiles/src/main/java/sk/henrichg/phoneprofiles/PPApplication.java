@@ -7,7 +7,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
