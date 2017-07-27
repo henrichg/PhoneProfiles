@@ -55,7 +55,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-        //Log.e(TAG, "********** onNOtificationRemoved");
+        //Log.e(TAG, "********** onNotificationRemoved");
 
         //if (sbn == null)
         //    return;

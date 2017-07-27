@@ -134,8 +134,8 @@ public class PPApplication extends Application {
         //if (BuildConfig.DEBUG) {
             int actualVersionCode = 0;
             try {
-                PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                actualVersionCode = pinfo.versionCode;
+                PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                actualVersionCode = pInfo.versionCode;
             } catch (PackageManager.NameNotFoundException e) {
                 //e.printStackTrace();
             }
@@ -624,7 +624,7 @@ public class PPApplication extends Application {
             }
         }
         if (!cmd.isFinished()){
-            Log.e("GlobaData.commandWait", "Could not finish root command in " + (waitTill/waitTillMultiplier));
+            Log.e("PPApplication.commandWait", "Could not finish root command in " + (waitTill/waitTillMultiplier));
         }
     }
     */

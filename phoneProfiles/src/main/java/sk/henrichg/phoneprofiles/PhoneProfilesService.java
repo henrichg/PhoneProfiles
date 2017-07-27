@@ -43,8 +43,8 @@ public class PhoneProfilesService extends Service {
 
         // save version code (is used in PackageReplacedReceiver)
         try {
-            PackageInfo pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            int actualVersionCode = pinfo.versionCode;
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            int actualVersionCode = pInfo.versionCode;
             PPApplication.setSavedVersionCode(appContext, actualVersionCode);
         } catch (PackageManager.NameNotFoundException e) {
             //e.printStackTrace();

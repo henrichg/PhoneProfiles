@@ -54,7 +54,7 @@ class BitmapManipulator {
                 Bitmap decodedSampleBitmap;
                 inputStream = context.getContentResolver().openInputStream(uri);
 
-                // calaculate inSampleSize
+                // calculate inSampleSize
                 options.inSampleSize = calculateInSampleSize(options, rotatedWidth, rotatedHeight);
 
                 options.inJustDecodeBounds = false;
@@ -123,7 +123,7 @@ class BitmapManipulator {
         File f = new File(bitmapFile);
         if (f.exists())
         {
-            // first decode with inJustDecodeDpunds=true to check dimensions
+            // first decode with inJustDecodeBounds=true to check dimensions
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(bitmapFile, options);
@@ -155,7 +155,7 @@ class BitmapManipulator {
                 rotatedHeight = height;
             }
 
-            // calaculate inSampleSize
+            // calculate inSampleSize
             options.inSampleSize = calculateInSampleSize(options, rotatedWidth, rotatedHeight);
 
             // decode bitmap with inSampleSize
@@ -216,11 +216,11 @@ class BitmapManipulator {
 
     static Bitmap resampleResource(Resources resources, int bitmapResource, int width, int height)
     {
-        // first decode with inJustDecodeDpunds=true to check dimensions
+        // first decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, bitmapResource, options);
-        // calaculate inSampleSize
+        // calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, width, height);
         // decode bitmap with inSampleSize
         options.inJustDecodeBounds = false;
@@ -285,7 +285,7 @@ class BitmapManipulator {
             final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
 
-            // choose the smalest ratio as InSamleSize value, this will guarantee
+            // choose the smallest ratio as InSamleSize value, this will guarantee
             // a final image with both dimensions larger than or equal to the
             // requested height and width
             inSampleSize = (heightRatio < widthRatio) ? heightRatio : widthRatio;

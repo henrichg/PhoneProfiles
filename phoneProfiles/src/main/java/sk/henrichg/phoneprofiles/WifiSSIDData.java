@@ -14,13 +14,13 @@ class WifiSSIDData {
 
     String ssid;
     String bssid;
-    private boolean custom;
+    //private boolean custom;
 
-    WifiSSIDData(String ssid, String bssid, boolean custom)
+    WifiSSIDData(String ssid, String bssid/*, boolean custom*/)
     {
         this.ssid = ssid;
         this.bssid = bssid;
-        this.custom = custom;
+        //this.custom = custom;
     }
 
     private static final String SCAN_RESULT_COUNT_PREF = "count";
@@ -57,7 +57,7 @@ class WifiSSIDData {
                 }
                 if (!found)
                 {
-                    wifiConfigurationList.add(new WifiSSIDData(device.SSID, device.BSSID, false));
+                    wifiConfigurationList.add(new WifiSSIDData(device.SSID, device.BSSID/*, false*/));
                 }
             }
         }

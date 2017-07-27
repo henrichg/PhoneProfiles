@@ -194,7 +194,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         mDialog.show();
     }
 
-    public void onShow(DialogInterface dialog) {
+    private void onShow(DialogInterface dialog) {
 
         new AsyncTask<Void, Integer, Void>() {
 

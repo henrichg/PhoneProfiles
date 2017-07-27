@@ -21,7 +21,6 @@ class ProfilePreferenceDialog implements PreferenceManager.OnActivityDestroyList
     int addNoActivateItem;
     private ProfilePreferenceAdapter profilePreferenceAdapter;
 
-    private List<Profile> profileList;
     //String profileId;
 
     private MaterialDialog mDialog;
@@ -31,7 +30,7 @@ class ProfilePreferenceDialog implements PreferenceManager.OnActivityDestroyList
         profilePreference = preference;
 
         //this.profileId = profileId;
-        profileList = ProfilePreference.dataWrapper.getProfileList();
+        List<Profile> profileList = ProfilePreference.dataWrapper.getProfileList();
         Collections.sort(profileList, new AlphabeticallyComparator());
 
         addNoActivateItem = profilePreference.addNoActivateItem;

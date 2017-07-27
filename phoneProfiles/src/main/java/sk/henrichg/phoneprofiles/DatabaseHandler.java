@@ -729,7 +729,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_DEVICE_GPS, profile._deviceGPS);
             values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
             values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
-            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
+            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutoSync);
             values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
             values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
             values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);
@@ -984,7 +984,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     profile._deviceGPS = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_GPS)));
                     profile._deviceRunApplicationChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_CHANGE)));
                     profile._deviceRunApplicationPackageName = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME));
-                    profile._deviceAutosync = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOSYNC)));
+                    profile._deviceAutoSync = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOSYNC)));
                     profile._deviceAutoRotate = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_AUTOROTATE)));
                     profile._deviceLocationServicePrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_LOCATION_SERVICE_PREFS)));
                     profile._volumeSpeakerPhone = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_SPEAKER_PHONE)));
@@ -1054,7 +1054,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_DEVICE_GPS, profile._deviceGPS);
             values.put(KEY_DEVICE_RUN_APPLICATION_CHANGE, profile._deviceRunApplicationChange);
             values.put(KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME, profile._deviceRunApplicationPackageName);
-            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutosync);
+            values.put(KEY_DEVICE_AUTOSYNC, profile._deviceAutoSync);
             values.put(KEY_DEVICE_AUTOROTATE, profile._deviceAutoRotate);
             values.put(KEY_DEVICE_LOCATION_SERVICE_PREFS, profile._deviceLocationServicePrefs);
             values.put(KEY_VOLUME_SPEAKER_PHONE, profile._volumeSpeakerPhone);

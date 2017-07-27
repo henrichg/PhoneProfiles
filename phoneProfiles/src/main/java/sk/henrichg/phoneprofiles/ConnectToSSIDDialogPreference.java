@@ -116,7 +116,7 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
         mDialog.show();
     }
 
-    public void onShow(DialogInterface dialog) {
+    private void onShow(DialogInterface dialog) {
 
         new AsyncTask<Void, Integer, Void>() {
 
@@ -146,15 +146,15 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
                     for (WifiSSIDData wifiConfiguration : wifiConfigurationList)
                     {
                         if ((wifiConfiguration.ssid != null) && (wifiConfiguration.bssid != null))
-                            _SSIDList.add(new WifiSSIDData(wifiConfiguration.ssid/*.replace("\"", "")*/, wifiConfiguration.bssid, false));
+                            _SSIDList.add(new WifiSSIDData(wifiConfiguration.ssid/*.replace("\"", "")*/, wifiConfiguration.bssid/*, false*/));
                     }
                 }
 
                 Collections.sort(_SSIDList, new ConnectToSSIDDialogPreference.SortList());
 
                 if (disableDefaultProfile == 0)
-                    _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_DEFAULTPROFILE, "", false));
-                _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_JUSTANY, "", false));
+                    _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_DEFAULTPROFILE, ""/*, false*/));
+                _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_JUSTANY, ""/*, false*/));
 
                 return null;
             }

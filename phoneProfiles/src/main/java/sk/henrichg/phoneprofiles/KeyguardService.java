@@ -32,7 +32,7 @@ public class KeyguardService extends Service {
     public void onDestroy()
     {
         PPApplication.logE("$$$ KeyguardService.onStartCommand", "onDestroy");
-        reenableKeyguard();
+        reEnableKeyguard();
     }
 
     @SuppressWarnings("deprecation")
@@ -42,7 +42,7 @@ public class KeyguardService extends Service {
         Context context = getBaseContext();
 
         if (!PPApplication.getApplicationStarted(context, true)) {
-            reenableKeyguard();
+            reEnableKeyguard();
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -59,25 +59,24 @@ public class KeyguardService extends Service {
         isScreenOn = pm.isScreenOn();
         //}
 
-        boolean secureKeyguard = false;
-        secureKeyguard = keyguardManager.isKeyguardSecure();
+        boolean secureKeyguard = keyguardManager.isKeyguardSecure();
         PPApplication.logE("$$$ KeyguardService.onStartCommand","secureKeyguard="+secureKeyguard);
         if (!secureKeyguard)
         {
-            PPApplication.logE("$$$ KeyguardService.onStartCommand xxx","getLockscreenDisabled="+ ActivateProfileHelper.getLockscreenDisabled(context));
+            PPApplication.logE("$$$ KeyguardService.onStartCommand xxx","getLockScreenDisabled="+ ActivateProfileHelper.getLockScreenDisabled(context));
 
 
             if (isScreenOn) {
                 PPApplication.logE("$$$ KeyguardService.onStartCommand", "screen on");
 
-                if (ActivateProfileHelper.getLockscreenDisabled(context)) {
+                if (ActivateProfileHelper.getLockScreenDisabled(context)) {
                     PPApplication.logE("$$$ KeyguardService.onStartCommand", "Keyguard.disable(), START_STICKY");
-                    reenableKeyguard();
+                    reEnableKeyguard();
                     disableKeyguard();
                     return START_STICKY;
                 } else {
-                    PPApplication.logE("$$$ KeyguardService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
-                    reenableKeyguard();
+                    PPApplication.logE("$$$ KeyguardService.onStartCommand", "Keyguard.reEnable(), stopSelf(), START_NOT_STICKY");
+                    reEnableKeyguard();
                     stopSelf();
                     return START_NOT_STICKY;
                 }
@@ -85,11 +84,11 @@ public class KeyguardService extends Service {
             /*else {
                 PPApplication.logE("$$$ KeyguardService.onStartCommand", "screen off");
 
-                if (PPApplication.getLockscreenDisabled(context)) {
+                if (PPApplication.getLockScreenDisabled(context)) {
                     PPApplication.logE("$$$ KeyguardService.onStartCommand", "Keyguard.disable(), START_STICKY");
 
-                    // renable with old keyguardLock
-                    Keyguard.reenable(keyguardLock);
+                    // re-enable with old keyguardLock
+                    Keyguard.reEnable(keyguardLock);
 
                     // create new keyguardLock
                     //keyguardLock = keyguardManager.newKeyguardLock(KEYGUARD_LOCK);
@@ -118,9 +117,9 @@ public class KeyguardService extends Service {
             keyguardLock.disableKeyguard();
     }
 
-    private void reenableKeyguard()
+    private void reEnableKeyguard()
     {
-        PPApplication.logE("$$$ Keyguard.reenable","keyguardLock="+keyguardLock);
+        PPApplication.logE("$$$ Keyguard.reEnable","keyguardLock="+keyguardLock);
         if ((keyguardLock != null) && Permissions.hasPermission(getBaseContext(), Manifest.permission.DISABLE_KEYGUARD))
             keyguardLock.reenableKeyguard();
     }

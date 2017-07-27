@@ -404,7 +404,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         String preferenceKey = "isLargeLayout_"+appWidgetId;
         ApplicationPreferences.getSharedPreferences(context);
 
-        // remove preference, will by reseted in setLayoutParams
+        // remove preference, will by set in setLayoutParams
         Editor editor = ApplicationPreferences.preferences.edit();
         editor.remove(preferenceKey);
         editor.apply();

@@ -18,18 +18,16 @@ class ApplicationEditorDialogAdapter extends BaseAdapter implements Scrollable
     private Context context;
 
     private ApplicationEditorDialog dialog;
-    private Application application;
     private int selectedPosition;
 
     ApplicationEditorDialogAdapter(ApplicationEditorDialog dialog, Context context,
-                                                Application application, int selectedPosition)
+                                                /*Application application, */int selectedPosition)
     {
         // Cache the LayoutInflate to avoid asking for a new one each time.
         inflater = LayoutInflater.from(context);
         this.context = context;
 
         this.dialog = dialog;
-        this.application = application;
         this.selectedPosition = selectedPosition;
     }
 
@@ -46,8 +44,8 @@ class ApplicationEditorDialogAdapter extends BaseAdapter implements Scrollable
     }
 
     @Override
-    public String getIndicatorForPosition(int childposition, int groupposition) {
-        Application application = (Application) getItem(childposition);
+    public String getIndicatorForPosition(int childPosition, int groupPosition) {
+        Application application = (Application) getItem(childPosition);
         return application.appLabel.substring(0, 1);
     }
 
@@ -69,10 +67,10 @@ class ApplicationEditorDialogAdapter extends BaseAdapter implements Scrollable
     {
         ViewHolder holder;
 
-        ApplicationsCache applicationsCahce = EditorProfilesActivity.getApplicationsCache();
+        ApplicationsCache applicationsCache = EditorProfilesActivity.getApplicationsCache();
 
         // Application to display
-        Application application = applicationsCahce.getApplication(position, false);
+        Application application = applicationsCache.getApplication(position, false);
         //System.out.println(String.valueOf(position));
 
         // Create a new row view

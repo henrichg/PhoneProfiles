@@ -17,7 +17,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     public static final String INTENT_REFRESH_EDGEPANEL = "sk.henrichg.phoneprofiles.REFRESH_EDGEPANEL";
 
-    private static boolean isVisible = false;
+    //private static boolean isVisible = false;
 
     @SuppressWarnings("deprecation")
     private RemoteViews buildLayout(Context context, SlookCocktailManager cocktailBarManager, int appWidgetId)
@@ -281,7 +281,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     @Override
     public void onVisibilityChanged(Context context, int cocktailId, int visibility) {
-        isVisible = (visibility == SlookCocktailManager.COCKTAIL_VISIBILITY_SHOW);
+        //isVisible = (visibility == SlookCocktailManager.COCKTAIL_VISIBILITY_SHOW);
     }
 
 }

@@ -169,18 +169,18 @@ public class GrantPermissionActivity extends Activity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
                 if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
-                    String ntitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-                    String ntext = context.getString(R.string.permissions_for_install_tone_big_text_notification);
+                    String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                    String nText = context.getString(R.string.permissions_for_install_tone_big_text_notification);
                     if (android.os.Build.VERSION.SDK_INT < 24) {
-                        ntitle = context.getString(R.string.app_name);
-                        ntext = context.getString(R.string.permissions_for_install_tone_text_notification)+": "+
+                        nTitle = context.getString(R.string.app_name);
+                        nText = context.getString(R.string.permissions_for_install_tone_text_notification)+": "+
                                 context.getString(R.string.permissions_for_install_tone_big_text_notification);
                     }
                     mBuilder =   new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                            .setContentTitle(ntitle) // title for notification
-                            .setContentText(ntext)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText(ntext))
+                            .setContentTitle(nTitle) // title for notification
+                            .setContentText(nText)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
                             .setAutoCancel(true); // clear notification after click
                     notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
                 }

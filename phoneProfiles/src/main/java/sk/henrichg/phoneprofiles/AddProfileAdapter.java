@@ -13,17 +13,17 @@ import java.util.List;
 class AddProfileAdapter extends BaseAdapter {
 
     private List<Profile> profileList;
-    private AddProfileDialog dialog;
+    //private AddProfileDialog dialog;
 
     private Context context;
 
     private LayoutInflater inflater = null;
 
-    AddProfileAdapter(AddProfileDialog dialog, Context c, List<Profile> profileList)
+    AddProfileAdapter(/*AddProfileDialog dialog, */Context c, List<Profile> profileList)
     {
         context = c;
 
-        this.dialog = dialog;
+        //this.dialog = dialog;
         this.profileList = profileList;
 
         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

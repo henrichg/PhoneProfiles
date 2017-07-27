@@ -354,10 +354,10 @@ class GlobalGUIRoutines {
         return value.data;
     }
 
-    static int getResourceId(String pVariableName, String pResourcename, Context context)
+    static int getResourceId(String pVariableName, String pResourceName, Context context)
     {
         try {
-            return context.getResources().getIdentifier(pVariableName, pResourcename, context.getPackageName());
+            return context.getResources().getIdentifier(pVariableName, pResourceName, context.getPackageName());
         } catch (Exception e) {
             //e.printStackTrace();
             return -1;

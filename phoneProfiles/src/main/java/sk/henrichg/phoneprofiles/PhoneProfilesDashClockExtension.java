@@ -157,9 +157,9 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             if (profile._deviceAirplaneMode == 2)
                 indicator1 = addIntoIndicator(indicator1, "am0");
             // auto-sync
-            if ((profile._deviceAutosync == 1) || (profile._deviceAutosync == 3))
+            if ((profile._deviceAutoSync == 1) || (profile._deviceAutoSync == 3))
                 indicator1 = addIntoIndicator(indicator1, "as1");
-            if (profile._deviceAutosync == 2)
+            if (profile._deviceAutoSync == 2)
                 indicator1 = addIntoIndicator(indicator1, "as0");
             // Network type
             if (profile._deviceNetworkType != 0)

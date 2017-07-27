@@ -49,7 +49,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     private ImageView packageIcon3;
     private ImageView packageIcon4;
 
-    private ApplicationsMultiselectPreferenceAdapter listAdapter;
+    private ApplicationsMultiSelectPreferenceAdapter listAdapter;
 
     public ApplicationsMultiSelectDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -149,7 +149,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
             }
         });
 
-        listAdapter = new ApplicationsMultiselectPreferenceAdapter(_context, addShortcuts);
+        listAdapter = new ApplicationsMultiSelectPreferenceAdapter(_context, addShortcuts);
 
         TypedValue tv = new TypedValue();
         getContext().getTheme().resolveAttribute(R.attr.colorQSScrollbar, tv, true);

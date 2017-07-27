@@ -141,9 +141,10 @@ public class ImageViewPreference extends Preference {
 
     void setImageIdentifier(String newImageIdentifier)
     {
-        String newValue = newImageIdentifier;
+        //String newValue = newImageIdentifier;
 
-        if (!callChangeListener(newValue)) {
+        //if (!callChangeListener(newValue)) {
+        if (!callChangeListener(newImageIdentifier)) {
             // nema sa nova hodnota zapisat
             return;
         }
@@ -152,7 +153,8 @@ public class ImageViewPreference extends Preference {
         getBitmap();
 
         // zapis do preferences
-        persistString(newValue);
+        //persistString(newValue);
+        persistString(newImageIdentifier);
 
         // Data sa zmenili,notifikujeme
         notifyChanged();

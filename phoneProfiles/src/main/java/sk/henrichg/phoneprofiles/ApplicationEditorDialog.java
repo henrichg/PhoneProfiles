@@ -60,7 +60,7 @@ class ApplicationEditorDialog
             }
         }
 
-        ApplicationEditorDialogAdapter listAdapter = new ApplicationEditorDialogAdapter(this, context, application, position);
+        ApplicationEditorDialogAdapter listAdapter = new ApplicationEditorDialogAdapter(this, context, /*application, */position);
         listView.setAdapter(listAdapter);
 
         TypedValue tv = new TypedValue();

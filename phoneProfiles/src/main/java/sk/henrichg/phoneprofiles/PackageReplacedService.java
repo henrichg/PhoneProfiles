@@ -20,7 +20,7 @@ public class PackageReplacedService extends WakefulIntentService {
         if (intent != null) {
             final Context appContext = getApplicationContext();
 
-            // start delayed bootup broadcast
+            // start delayed boot up broadcast
             PPApplication.startedOnBoot = true;
             final Handler handler = new Handler(getMainLooper());
             handler.postDelayed(new Runnable() {
@@ -39,8 +39,8 @@ public class PackageReplacedService extends WakefulIntentService {
             PPApplication.logE("@@@ PackageReplacedService.onHandleIntent", "oldVersionCode="+oldVersionCode);
             int actualVersionCode;
             try {
-                PackageInfo pinfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
-                actualVersionCode = pinfo.versionCode;
+                PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
+                actualVersionCode = pInfo.versionCode;
                 PPApplication.logE("@@@ PackageReplacedService.onHandleIntent", "actualVersionCode=" + actualVersionCode);
 
                 if (oldVersionCode < actualVersionCode) {

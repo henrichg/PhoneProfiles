@@ -770,7 +770,7 @@ public class ActivateProfileHelper {
                     //
                     // java.lang.SecurityException: Not allowed to change Do Not Disturb state
                     //
-                    // when changed is ringer mode in activated Do not disturband
+                    // when changed is ringer mode in activated Do not disturb
                     // GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context) returns false.
                 }
             }
@@ -826,7 +826,7 @@ public class ActivateProfileHelper {
     }
 
     void setTones(Profile profile) {
-        if (Permissions.checkProfileRingtones(context, profile)) {
+        if (Permissions.checkProfileRingTones(context, profile)) {
             if (profile._soundRingtoneChange == 1) {
                 if (!profile._soundRingtone.isEmpty()) {
                     try {
@@ -962,8 +962,8 @@ public class ActivateProfileHelper {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context)) {
                 NotificationManager mNotificationManager = (NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                int interuptionFilter = mNotificationManager.getCurrentInterruptionFilter();
-                switch (interuptionFilter) {
+                int interruptionFilter = mNotificationManager.getCurrentInterruptionFilter();
+                switch (interruptionFilter) {
                     case NotificationManager.INTERRUPTION_FILTER_ALL:
                         return ActivateProfileHelper.ZENMODE_ALL;
                     case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
@@ -977,8 +977,8 @@ public class ActivateProfileHelper {
                 }
             }
             else {
-                int interuptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
-                switch (interuptionFilter) {
+                int interruptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
+                switch (interruptionFilter) {
                     case 0:
                         return ActivateProfileHelper.ZENMODE_ALL;
                     case 1:
@@ -991,8 +991,8 @@ public class ActivateProfileHelper {
             }
         }
         if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
-            int interuptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
-            switch (interuptionFilter) {
+            int interruptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
+            switch (interruptionFilter) {
                 case 0:
                     return ActivateProfileHelper.ZENMODE_ALL;
                 case 1:
@@ -1310,30 +1310,30 @@ public class ActivateProfileHelper {
         context.startService(radioServiceIntent);
 
         // nahodenie auto-sync
-        boolean _isAutosync = ContentResolver.getMasterSyncAutomatically();
-        boolean _setAutosync = false;
-        switch (profile._deviceAutosync) {
+        boolean _isAutoSync = ContentResolver.getMasterSyncAutomatically();
+        boolean _setAutoSync = false;
+        switch (profile._deviceAutoSync) {
             case 1:
-                if (!_isAutosync)
+                if (!_isAutoSync)
                 {
-                    _isAutosync = true;
-                    _setAutosync = true;
+                    _isAutoSync = true;
+                    _setAutoSync = true;
                 }
                 break;
             case 2:
-                if (_isAutosync)
+                if (_isAutoSync)
                 {
-                    _isAutosync = false;
-                    _setAutosync = true;
+                    _isAutoSync = false;
+                    _setAutoSync = true;
                 }
                 break;
             case 3:
-                _isAutosync = !_isAutosync;
-                _setAutosync = true;
+                _isAutoSync = !_isAutoSync;
+                _setAutoSync = true;
                 break;
         }
-        if (_setAutosync)
-            ContentResolver.setMasterSyncAutomatically(_isAutosync);
+        if (_setAutoSync)
+            ContentResolver.setMasterSyncAutomatically(_isAutoSync);
 
         // screen timeout
         if (Permissions.checkProfileScreenTimeout(context, profile)) {
@@ -1360,20 +1360,20 @@ public class ActivateProfileHelper {
         //    PPApplication.setActivatedProfileScreenTimeout(context, 0);
 
         // zapnutie/vypnutie lockscreenu
-        boolean setLockscreen = false;
+        boolean setLockScreen = false;
         switch (profile._deviceKeyguard) {
             case 1:
                 // enable lockscreen
-                setLockscreenDisabled(context, false);
-                setLockscreen = true;
+                setLockScreenDisabled(context, false);
+                setLockScreen = true;
                 break;
             case 2:
                 // disable lockscreen
-                setLockscreenDisabled(context, true);
-                setLockscreen = true;
+                setLockScreenDisabled(context, true);
+                setLockScreen = true;
                 break;
         }
-        if (setLockscreen) {
+        if (setLockScreen) {
             boolean isScreenOn;
             //if (android.os.Build.VERSION.SDK_INT >= 20)
             //{
@@ -1387,7 +1387,7 @@ public class ActivateProfileHelper {
             isScreenOn = pm.isScreenOn();
             //}
             //PPApplication.logE("$$$ ActivateProfileHelper.execute","isScreenOn="+isScreenOn);
-            boolean keyguardShowing = false;
+            boolean keyguardShowing;
             KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
             keyguardShowing = kgMgr.isKeyguardLocked();
             //PPApplication.logE("$$$ ActivateProfileHelper.execute","keyguardShowing="+keyguardShowing);
@@ -1514,7 +1514,7 @@ public class ActivateProfileHelper {
 
         if (Permissions.checkProfileLockDevice(context, profile)) {
             if (profile._lockDevice != 0) {
-                boolean keyguardLocked = false;
+                boolean keyguardLocked;
                 KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
                 keyguardLocked = kgMgr.isKeyguardLocked();
                 PPApplication.logE("---$$$ ActivateProfileHelper.execute","keyguardLocked="+keyguardLocked);
@@ -1626,7 +1626,7 @@ public class ActivateProfileHelper {
             case 6:
                 //2147483647 = Integer.MAX_VALUE
                 //18000000   = 5 hours
-                //86400000   = 24 hounrs
+                //86400000   = 24 hours
                 //43200000   = 12 hours
                 screenTimeoutUnlock(context);
                 if (PPApplication.lockDeviceActivity != null)
@@ -1778,7 +1778,7 @@ public class ActivateProfileHelper {
     public void showNotification(Profile profile)
     {
         if (lockRefresh)
-            // no refres notification
+            // no refresh notification
             return;
 
         if (ApplicationPreferences.notificationStatusBar(context))
@@ -1835,7 +1835,7 @@ public class ActivateProfileHelper {
                 //boolean screenUnlocked = !myKM.inKeyguardRestrictedInputMode();
                 boolean screenUnlocked = !myKM.isKeyguardLocked();
                 //boolean screenUnlocked = getScreenUnlocked(context);
-                if ((ApplicationPreferences.notificationHideInLockscreen(context) && (!screenUnlocked)) ||
+                if ((ApplicationPreferences.notificationHideInLockScreen(context) && (!screenUnlocked)) ||
                         ((profile != null) && profile._hideStatusBarIcon))
                     notificationBuilder.setPriority(Notification.PRIORITY_MIN);
                 else
@@ -2019,7 +2019,7 @@ public class ActivateProfileHelper {
     void updateWidget(boolean alsoEditor)
     {
         if (lockRefresh)
-            // no refres widgets
+            // no refresh widgets
             return;
 
         // icon widget
@@ -2567,14 +2567,14 @@ public class ActivateProfileHelper {
 
     static boolean canExploitGPS(Context context)
     {
-        // test expoiting power manager widget
+        // test exploiting power manager widget
         PackageManager pacman = context.getPackageManager();
         try {
             PackageInfo pacInfo = pacman.getPackageInfo("com.android.settings", PackageManager.GET_RECEIVERS);
 
             if(pacInfo != null){
                 for(ActivityInfo actInfo : pacInfo.receivers){
-                    //test if recevier is exported. if so, we can toggle GPS.
+                    //test if receiver is exported. if so, we can toggle GPS.
                     if(actInfo.name.equals("com.android.settings.widget.SettingsAppWidgetProvider") && actInfo.exported){
                         return true;
                     }
@@ -2705,11 +2705,11 @@ public class ActivateProfileHelper {
                         String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
                         String[] list = provider.split(",");
                         int j = 0;
-                        for (int i = 0; i < list.length; i++) {
-                            if (!list[i].equals(LocationManager.GPS_PROVIDER)) {
+                        for (String aList : list) {
+                            if (!aList.equals(LocationManager.GPS_PROVIDER)) {
                                 if (j > 0)
                                     newSet += ",";
-                                newSet += list[i];
+                                newSet += aList;
                                 j++;
                             }
                         }
@@ -2978,13 +2978,13 @@ public class ActivateProfileHelper {
     }
 
 
-    static boolean getLockscreenDisabled(Context context)
+    static boolean getLockScreenDisabled(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
         return ApplicationPreferences.preferences.getBoolean(PREF_LOCKSCREEN_DISABLED, false);
     }
 
-    static void setLockscreenDisabled(Context context, boolean disabled)
+    static void setLockScreenDisabled(Context context, boolean disabled)
     {
         ApplicationPreferences.getSharedPreferences(context);
         SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();

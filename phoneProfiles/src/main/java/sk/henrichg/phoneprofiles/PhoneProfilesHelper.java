@@ -42,9 +42,9 @@ class PhoneProfilesHelper {
 
         // get package version
         try {
-            PackageInfo pinfo = context.getPackageManager().getPackageInfo("sk.henrichg.phoneprofileshelper", 0);
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo("sk.henrichg.phoneprofileshelper", 0);
             PPApplication.logE("PhoneProfilesHelper.isPPHelperInstalled", "found");
-            PPHelperVersion = pinfo.versionCode;
+            PPHelperVersion = pInfo.versionCode;
         } catch (NameNotFoundException e) {
             PPApplication.logE("PhoneProfilesHelper.isPPHelperInstalled", "not found");
             //e.printStackTrace();
@@ -331,7 +331,7 @@ class PhoneProfilesHelper {
         if (settingsPaths.size() > 0) {
             String command1 = "rm " + file;
             //if (PPApplication.isSELinuxEnforcing())
-            //	command1 = PPApplication.getSELinuxEnforceCommad(command1);
+            //	command1 = PPApplication.getSELinuxEnforceCommand(command1);
             synchronized (PPApplication.startRootCommandMutex) {
                 Command command = new Command(0, false, command1);
                 try {

@@ -35,7 +35,6 @@ public class ActivateProfileListFragment extends Fragment {
     private ImageView activeProfileIcon;
 
     private int startupSource = 0;
-    private Intent intent;
 
     private WeakReference<LoadProfileListAsyncTask> asyncTaskContext;
 
@@ -62,7 +61,7 @@ public class ActivateProfileListFragment extends Fragment {
         activateProfileHelper = dataWrapper.getActivateProfileHelper();
         activateProfileHelper.initialize(dataWrapper, getActivity().getApplicationContext());
 
-        intent = getActivity().getIntent();
+        Intent intent = getActivity().getIntent();
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
 
 
@@ -192,7 +191,7 @@ public class ActivateProfileListFragment extends Fragment {
                 int modulo = profileList.size() % 3;
                 if (modulo > 0) {
                     for (int i = 0; i < 3 - modulo; i++)
-                        profileList.add(DataWrapper.getNoinitializedProfile(
+                        profileList.add(DataWrapper.getNonInitializedProfile(
                                 dataWrapper.context.getResources().getString(R.string.profile_name_default),
                                 Profile.PROFILE_ICON_DEFAULT, PORDER_FOR_IGNORED_PROFILE));
                 }

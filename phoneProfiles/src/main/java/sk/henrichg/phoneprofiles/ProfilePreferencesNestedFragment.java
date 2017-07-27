@@ -1264,7 +1264,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             ListPreference lockDevicePreference = (ListPreference) prefMng.findPreference(Profile.PREF_PROFILE_LOCK_DEVICE);
             if (lockDevicePreference != null) {
                 CharSequence[] entries = lockDevicePreference.getEntries();
-                if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE) {
+                if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAULT_PROFILE) {
                     if (!manager.isAdminActive(component))
                         entries[1] = getString(R.string.array_pref_lockDevice_deviceAdmin) + " (" +
                                 getString(R.string.array_pref_lockDevice_not_enabled) + ")";

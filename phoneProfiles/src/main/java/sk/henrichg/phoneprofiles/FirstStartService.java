@@ -67,7 +67,7 @@ public class FirstStartService extends WakefulIntentService {
         // install phoneprofiles_silent.ogg
         installTone(TONE_ID, TONE_NAME, context, false);
 
-        ActivateProfileHelper.setLockscreenDisabled(context, false);
+        ActivateProfileHelper.setLockScreenDisabled(context, false);
 
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         ActivateProfileHelper.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
@@ -332,7 +332,7 @@ public class FirstStartService extends WakefulIntentService {
                             PPApplication.sleep(300);
                         }
                         else {
-                            Log.e("FirstStartService","newUri is emty");
+                            Log.e("FirstStartService","newUri is empty");
                             cursor.close();
                             isError = true;
                         }
@@ -369,9 +369,9 @@ public class FirstStartService extends WakefulIntentService {
         else
             granted = Permissions.grantInstallTonePermissions(context, true);
         if (granted) {
-            boolean ringtone = installTone(resID, RingtoneManager.TYPE_RINGTONE, title, context, fromMenu);
-            boolean notification = installTone(resID, RingtoneManager.TYPE_NOTIFICATION, title, context, fromMenu);
-            boolean alarm = installTone(resID, RingtoneManager.TYPE_ALARM, title, context, fromMenu);
+            /*boolean ringtone = */installTone(resID, RingtoneManager.TYPE_RINGTONE, title, context, fromMenu);
+            /*boolean notification = */installTone(resID, RingtoneManager.TYPE_NOTIFICATION, title, context, fromMenu);
+            /*boolean alarm = */installTone(resID, RingtoneManager.TYPE_ALARM, title, context, fromMenu);
         }
     }
 

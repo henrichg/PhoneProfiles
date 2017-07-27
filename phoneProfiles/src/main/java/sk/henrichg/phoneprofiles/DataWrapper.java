@@ -105,7 +105,7 @@ public class DataWrapper {
         this.profileList = profileList;
     }
 
-    static Profile getNoinitializedProfile(String name, String icon, int order)
+    static Profile getNonInitializedProfile(String name, String icon, int order)
     {
         return new Profile(
                   name,
@@ -174,13 +174,13 @@ public class DataWrapper {
         int	maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         int	maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         //int	maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-        //int	maximumValueVoicecall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        //int	maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
 
         Profile profile;
 
         switch (index) {
             case 0:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -203,7 +203,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "60|0|0|0";
                 break;
             case 1:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -226,7 +226,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "255|0|0|0";
                 break;
             case 2:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -249,7 +249,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "60|0|0|0";
                 break;
             case 3:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -272,7 +272,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|1|1|0";
                 break;
             case 4:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
                 if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -295,8 +295,8 @@ public class DataWrapper {
                 //profile._deviceBrightness = "10|0|0|0";
                 break;
             case 5:
-                profile = getNoinitializedProfile(context.getString(R.string.default_profile_name_battery_low), "ic_profile_battery_1", 6);
-                profile._deviceAutosync = 2;
+                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_battery_low), "ic_profile_battery_1", 6);
+                profile._deviceAutoSync = 2;
                 profile._deviceMobileData = 2;
                 profile._deviceWiFi = 2;
                 profile._deviceBluetooth = 2;

@@ -13,8 +13,6 @@ import java.util.List;
 
 class AddProfileDialog
 {
-    private List<Profile> profileList;
-
     private EditorProfileListFragment profileListFragment;
 
     MaterialDialog mDialog;
@@ -23,10 +21,10 @@ class AddProfileDialog
     {
         this.profileListFragment = profileListFragment;
 
-        profileList = new ArrayList<>();
+        List<Profile> profileList = new ArrayList<>();
 
         Profile profile;
-        profile = DataWrapper.getNoinitializedProfile(
+        profile = DataWrapper.getNonInitializedProfile(
                                         context.getResources().getString(R.string.profile_name_default),
                                         Profile.PROFILE_ICON_DEFAULT, 0);
         profile.generateIconBitmap(context, false, 0xFF);
@@ -49,7 +47,7 @@ class AddProfileDialog
 
         ListView listView = (ListView)mDialog.getCustomView().findViewById(R.id.profile_pref_dlg_listview);
 
-        AddProfileAdapter addProfileAdapter = new AddProfileAdapter(this, context, profileList);
+        AddProfileAdapter addProfileAdapter = new AddProfileAdapter(/*this, */context, profileList);
         listView.setAdapter(addProfileAdapter);
 
         listView.setOnItemClickListener(new OnItemClickListener() {

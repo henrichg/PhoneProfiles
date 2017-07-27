@@ -725,7 +725,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         Intent phoneProfiles = packageManager.getLaunchIntentForPackage("sk.henrichg.phoneprofilesplus");
         if (phoneProfiles != null)
         {
-            // PhoneProfilesPlus is istalled
+            // PhoneProfilesPlus is installed
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.setTitle(R.string.import_profiles_from_phoneprofilesplus_alert_title);

@@ -58,7 +58,7 @@ public class Profile {
     String _deviceWallpaper;
     int _deviceRunApplicationChange;
     String _deviceRunApplicationPackageName;
-    int _deviceAutosync;
+    int _deviceAutoSync;
     int _deviceAutoRotate;
     int _volumeSpeakerPhone;
     int _deviceNFC;
@@ -202,7 +202,7 @@ public class Profile {
             0xff38d043, 0xff38d043, 0xff38d043, 0xff38d043
     };
 
-    // Empty constructorn
+    // Empty constructor
     public Profile(){
         this._iconBitmap = null;
     }
@@ -238,7 +238,7 @@ public class Profile {
                    int deviceGPS,
                    int deviceRunApplicationChange,
                    String deviceRunApplicationPackageName,
-                   int deviceAutosync,
+                   int deviceAutoSync,
                    int deviceAutoRotate,
                    int deviceLocationServicePrefs,
                    int volumeSpeakerPhone,
@@ -290,7 +290,7 @@ public class Profile {
         this._deviceWallpaper = deviceWallpaper;
         this._deviceRunApplicationChange = deviceRunApplicationChange;
         this._deviceRunApplicationPackageName = deviceRunApplicationPackageName;
-        this._deviceAutosync = deviceAutosync;
+        this._deviceAutoSync = deviceAutoSync;
         this._deviceAutoRotate = deviceAutoRotate;
         this._deviceLocationServicePrefs = deviceLocationServicePrefs;
         this._volumeSpeakerPhone = volumeSpeakerPhone;
@@ -344,7 +344,7 @@ public class Profile {
                    int deviceGPS,
                    int deviceRunApplicationChange,
                    String deviceRunApplicationPackageName,
-                   int deviceAutosync,
+                   int deviceAutoSync,
                    int deviceAutoRotate,
                    int deviceLocationServicePrefs,
                    int volumeSpeakerPhone,
@@ -395,7 +395,7 @@ public class Profile {
         this._deviceWallpaper = deviceWallpaper;
         this._deviceRunApplicationChange = deviceRunApplicationChange;
         this._deviceRunApplicationPackageName = deviceRunApplicationPackageName;
-        this._deviceAutosync = deviceAutosync;
+        this._deviceAutoSync = deviceAutoSync;
         this._deviceAutoRotate = deviceAutoRotate;
         this._deviceLocationServicePrefs = deviceLocationServicePrefs;
         this._volumeSpeakerPhone = volumeSpeakerPhone;
@@ -452,7 +452,7 @@ public class Profile {
         this._deviceWallpaper = profile._deviceWallpaper;
         this._deviceRunApplicationChange = profile._deviceRunApplicationChange;
         this._deviceRunApplicationPackageName = profile._deviceRunApplicationPackageName;
-        this._deviceAutosync = profile._deviceAutosync;
+        this._deviceAutoSync = profile._deviceAutoSync;
         this._deviceAutoRotate = profile._deviceAutoRotate;
         this._deviceLocationServicePrefs = profile._deviceLocationServicePrefs;
         this._volumeSpeakerPhone = profile._volumeSpeakerPhone;
@@ -503,7 +503,7 @@ public class Profile {
         return value;
     }
 
-    //gettig where icon has custom color
+    // getting where icon has custom color
     boolean getUseCustomColorForIcon() {
         boolean value;
         try {
@@ -516,8 +516,8 @@ public class Profile {
         return value;
     }
 
-    // geting icon custom color
-    int getIconCustomColor() {
+    // getting icon custom color
+    private int getIconCustomColor() {
         int value;
         try {
             String[] splits = _icon.split("\\|");
@@ -1135,7 +1135,7 @@ public class Profile {
         int	maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         int	maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         int	maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-        int	maximumValueVoicecall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        int	maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
 
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -1154,7 +1154,7 @@ public class Profile {
         profile._volumeMedia = preferences.getString(PREF_PROFILE_VOLUME_MEDIA, getVolumeLevelString(80, maximumValueMusic)+"|0|0");
         profile._volumeAlarm = preferences.getString(PREF_PROFILE_VOLUME_ALARM, getVolumeLevelString(100, maximumValueAlarm)+"|0|0");
         profile._volumeSystem = preferences.getString(PREF_PROFILE_VOLUME_SYSTEM, getVolumeLevelString(70, maximumValueSystem)+"|0|0");
-        profile._volumeVoice = preferences.getString(PREF_PROFILE_VOLUME_VOICE, getVolumeLevelString(70, maximumValueVoicecall)+"|0|0");
+        profile._volumeVoice = preferences.getString(PREF_PROFILE_VOLUME_VOICE, getVolumeLevelString(70, maximumValueVoiceCall)+"|0|0");
         profile._soundRingtoneChange = Integer.parseInt(preferences.getString(PREF_PROFILE_SOUND_RINGTONE_CHANGE, "0"));
         profile._soundRingtone = preferences.getString(PREF_PROFILE_SOUND_RINGTONE, Settings.System.DEFAULT_RINGTONE_URI.toString());
         profile._soundNotificationChange = Integer.parseInt(preferences.getString(PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, "0"));
@@ -1173,7 +1173,7 @@ public class Profile {
         profile._deviceGPS = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_GPS, "2")); //OFF
         profile._deviceRunApplicationChange = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, "0"));
         profile._deviceRunApplicationPackageName = preferences.getString(PREF_PROFILE_DEVICE_RUN_APPLICATION_PACKAGE_NAME, "-");
-        profile._deviceAutosync = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_AUTOSYNC, "1")); // ON
+        profile._deviceAutoSync = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_AUTOSYNC, "1")); // ON
         profile._deviceAutoRotate = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_AUTOROTATE, "1")); // ON
         profile._deviceLocationServicePrefs = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, "0"));
         profile._volumeSpeakerPhone = Integer.parseInt(preferences.getString(PREF_PROFILE_VOLUME_SPEAKER_PHONE, "0"));
@@ -1229,7 +1229,7 @@ public class Profile {
                     profile._deviceGPS,
                     profile._deviceRunApplicationChange,
                     profile._deviceRunApplicationPackageName,
-                    profile._deviceAutosync,
+                    profile._deviceAutoSync,
                     profile._deviceAutoRotate,
                     profile._deviceLocationServicePrefs,
                     profile._volumeSpeakerPhone,
@@ -1289,8 +1289,8 @@ public class Profile {
             }
             if (profile._deviceAirplaneMode == 99)
                 mappedProfile._deviceAirplaneMode = defaultProfile._deviceAirplaneMode;
-            if (profile._deviceAutosync == 99)
-                mappedProfile._deviceAutosync = defaultProfile._deviceAutosync;
+            if (profile._deviceAutoSync == 99)
+                mappedProfile._deviceAutoSync = defaultProfile._deviceAutoSync;
             if (profile._deviceMobileData == 99)
                 mappedProfile._deviceMobileData = defaultProfile._deviceMobileData;
             if (profile._deviceMobileDataPrefs == 99)
@@ -1397,7 +1397,7 @@ public class Profile {
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA))
         {
-            boolean mobileDataSupported = false;
+            boolean mobileDataSupported;
             if (!context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -1651,7 +1651,7 @@ public class Profile {
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_KEYGUARD))
         {
-            boolean secureKeyguard = false;
+            boolean secureKeyguard;
             KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Activity.KEYGUARD_SERVICE);
             secureKeyguard = keyguardManager.isKeyguardSecure();
             if (secureKeyguard) {
