@@ -60,7 +60,6 @@ public class FirstStartService extends WakefulIntentService {
 
         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
-        //PPApplication.loadPreferences(context);
         GlobalGUIRoutines.setLanguage(context);
 
         // remove phoneprofiles_silent.mp3

@@ -32,7 +32,6 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
             profileName = profileName.trim();
 
             if (!profileName.isEmpty()) {
-                //PPApplication.loadPreferences(getApplicationContext());
                 List<Profile> profileList = dataWrapper.getProfileList();
                 for (Profile profile : profileList) {
                     if (profile._name.trim().equals(profileName.trim())) {

@@ -20,8 +20,6 @@ public class PackageReplacedService extends WakefulIntentService {
         if (intent != null) {
             final Context appContext = getApplicationContext();
 
-            //PPApplication.loadPreferences(appContext);
-
             // start delayed bootup broadcast
             PPApplication.startedOnBoot = true;
             final Handler handler = new Handler(getMainLooper());

@@ -21,8 +21,6 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
     protected void onHandleIntent(Intent intent) {
         Context context = getApplicationContext();
 
-        //PPApplication.loadPreferences(context);
-
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
         long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);

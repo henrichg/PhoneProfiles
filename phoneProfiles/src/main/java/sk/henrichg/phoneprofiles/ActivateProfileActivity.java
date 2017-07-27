@@ -40,7 +40,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         instance = this;
 
-        //PPApplication.loadPreferences(getApplicationContext());
         GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 

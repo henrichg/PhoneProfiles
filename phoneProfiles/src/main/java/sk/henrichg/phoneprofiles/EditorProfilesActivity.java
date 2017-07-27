@@ -641,8 +641,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                     unlockScreenOrientation();
 
                     if (result == 1) {
-                        //PPApplication.loadPreferences(getApplicationContext());
-
                         dataWrapper.clearProfileList();
                         dataWrapper.getDatabaseHandler().deactivateProfile();
                         dataWrapper.getActivateProfileHelper().showNotification(null);
