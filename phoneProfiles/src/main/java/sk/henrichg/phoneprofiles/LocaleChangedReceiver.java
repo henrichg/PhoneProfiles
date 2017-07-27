@@ -9,8 +9,6 @@ public class LocaleChangedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         //PPApplication.loadPreferences(context);
 
         if (ApplicationPreferences.applicationLanguage(context).equals("system"))

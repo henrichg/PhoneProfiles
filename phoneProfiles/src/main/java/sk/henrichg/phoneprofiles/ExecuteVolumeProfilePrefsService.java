@@ -16,8 +16,6 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
     //@Override
     //protected void doWakefulWork(Intent intent) {
     protected void onHandleIntent(Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         Context context = getApplicationContext();
 
         //PPApplication.loadPreferences(context);

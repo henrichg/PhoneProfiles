@@ -91,8 +91,6 @@ public class EditorProfilesActivity extends AppCompatActivity
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         GlobalGUIRoutines.setTheme(this, false, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 

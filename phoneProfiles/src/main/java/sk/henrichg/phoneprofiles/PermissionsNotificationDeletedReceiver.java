@@ -9,8 +9,6 @@ public class PermissionsNotificationDeletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         PPApplication.logE("### PermissionsNotificationDeletedReceiver","xxx");
 
         Permissions.clearMergedPermissions(context.getApplicationContext());

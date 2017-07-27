@@ -24,8 +24,6 @@ class SettingsContentObserver  extends ContentObserver {
     SettingsContentObserver(Context c, Handler handler) {
         super(handler);
 
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         context=c;
 
         //Log.e("### SettingsContentObserver", "xxx");
@@ -77,8 +75,6 @@ class SettingsContentObserver  extends ContentObserver {
 
     @Override
     public void onChange(boolean selfChange) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         super.onChange(selfChange);
 
         //Log.e("### SettingsContentObserver", "internalChange=" + internalChange);

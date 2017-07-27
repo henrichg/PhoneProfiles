@@ -56,7 +56,6 @@ class SamsungEdgeFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     public void onCreate() {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
     }
   
     public void onDestroy() {
@@ -184,8 +183,6 @@ class SamsungEdgeFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     public void onDataSetChanged() {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         createProfilesDataWrapper();
 
         List<Profile> newProfileList = dataWrapper.getNewProfileList();

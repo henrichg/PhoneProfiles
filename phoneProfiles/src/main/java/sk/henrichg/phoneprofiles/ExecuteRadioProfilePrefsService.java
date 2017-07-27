@@ -19,8 +19,6 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
     //@Override
     //protected void doWakefulWork(Intent intent) {
     protected void onHandleIntent(Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         Context context = getApplicationContext();
 
         //PPApplication.loadPreferences(context);

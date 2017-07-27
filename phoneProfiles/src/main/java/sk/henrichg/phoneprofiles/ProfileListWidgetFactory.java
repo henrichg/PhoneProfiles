@@ -55,10 +55,6 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
         }
     }
 
-    public void onCreate() {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-    }
-  
     public void onDestroy() {
         if (dataWrapper != null)
             dataWrapper.invalidateDataWrapper();
@@ -181,9 +177,12 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
         return(true);
     }
 
-    public void onDataSetChanged() {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
+    @Override
+    public void onCreate() {
 
+    }
+
+    public void onDataSetChanged() {
         createProfilesDataWrapper();
 
         List<Profile> newProfileList = dataWrapper.getNewProfileList();

@@ -7,8 +7,6 @@ import android.content.Intent;
 public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
 
         Context appContext = context.getApplicationContext();

@@ -38,8 +38,6 @@ public class PhoneProfilesService extends Service {
 
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
-
         instance = this;
         Context appContext = getApplicationContext();
 
@@ -135,8 +133,6 @@ public class PhoneProfilesService extends Service {
         super.onStartCommand(intent, flags, startId);
 
         PPApplication.logE("PhoneProfilesService.onStartCommand", "xxx");
-
-        //Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler());
 
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
