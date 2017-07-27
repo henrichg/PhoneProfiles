@@ -213,8 +213,8 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         if (profileList == null)
             return false;
 
-        Log.d("----- EditorProfileListAdapter.onItemMove", "fromPosition="+fromPosition);
-        Log.d("----- EditorProfileListAdapter.onItemMove", "toPosition="+toPosition);
+        //Log.d("----- EditorProfileListAdapter.onItemMove", "fromPosition="+fromPosition);
+        //Log.d("----- EditorProfileListAdapter.onItemMove", "toPosition="+toPosition);
 
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
