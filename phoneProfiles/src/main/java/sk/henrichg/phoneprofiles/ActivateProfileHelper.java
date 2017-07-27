@@ -94,7 +94,7 @@ public class ActivateProfileHelper {
     static final String EXTRA_FOR_PROFILE_ACTIVATION = "for_profile_activation";
 
     private static final String PREF_LOCKSCREEN_DISABLED = "lockscreenDisabled";
-    private static final String PREF_SCREEN_UNLOCKED = "screen_unlocked";
+    //private static final String PREF_SCREEN_UNLOCKED = "screen_unlocked";
     private static final String PREF_RINGER_VOLUME = "ringer_volume";
     private static final String PREF_NOTIFICATION_VOLUME = "notification_volume";
     private static final String PREF_RINGER_MODE = "ringer_mode";

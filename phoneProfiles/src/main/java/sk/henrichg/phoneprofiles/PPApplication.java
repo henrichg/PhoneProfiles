@@ -37,12 +37,12 @@ public class PPApplication extends Application {
     public static final boolean exactAlarms = true;
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
-    public static final String LOG_FILENAME = "log.txt";
+    private static final String LOG_FILENAME = "log.txt";
 
     private static boolean logIntoLogCat = false;
     private static boolean logIntoFile = false;
     private static boolean rootToolsDebug = false;
-    public static String logFilterTags =     "PhoneProfilesHelper.doUninstallPPHelper"
+    private static String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
 
                                             //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"

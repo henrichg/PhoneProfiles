@@ -21,7 +21,7 @@ class ProfilePreferenceDialog implements PreferenceManager.OnActivityDestroyList
     int addNoActivateItem;
     private ProfilePreferenceAdapter profilePreferenceAdapter;
 
-    public List<Profile> profileList;
+    private List<Profile> profileList;
     //String profileId;
 
     private MaterialDialog mDialog;

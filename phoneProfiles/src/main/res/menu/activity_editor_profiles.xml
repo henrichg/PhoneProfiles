@@ -1,10 +1,12 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+      xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:henrichg="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/important_info"
           android:title="@string/info_notification_title"
           android:orderInCategory="190"
           henrichg:showAsAction="always"
-          android:icon="?attr/actionHelpIcon"/>
+          android:icon="?attr/actionHelpIcon"
+          tools:ignore="AlwaysShowAction"/>
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="200"

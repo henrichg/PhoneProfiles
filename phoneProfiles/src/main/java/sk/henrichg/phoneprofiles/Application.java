@@ -2,7 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.graphics.drawable.Drawable;
 
-public class Application {
+class Application {
     boolean shortcut = false;
     String appLabel = "";
     String packageName = "";

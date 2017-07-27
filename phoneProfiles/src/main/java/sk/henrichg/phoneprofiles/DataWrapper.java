@@ -314,7 +314,7 @@ public class DataWrapper {
         return profile;
     }
 
-    List<Profile>  getPredefinedProfileList()
+    void getPredefinedProfileList()
     {
         clearProfileList();
         getDatabaseHandler().deleteAllProfiles();
@@ -322,8 +322,7 @@ public class DataWrapper {
         for (int index = 0; index < 6; index++)
             getPredefinedProfile(index, true);
 
-        return getProfileList();
-
+        getProfileList();
     }
 
     void clearProfileList()

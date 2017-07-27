@@ -17,7 +17,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     public static final String INTENT_REFRESH_EDGEPANEL = "sk.henrichg.phoneprofiles.REFRESH_EDGEPANEL";
 
-    public static boolean isVisible = false;
+    private static boolean isVisible = false;
 
     @SuppressWarnings("deprecation")
     private RemoteViews buildLayout(Context context, SlookCocktailManager cocktailBarManager, int appWidgetId)
@@ -210,7 +210,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
         return widget;
     }
 
-    public void createProfilesDataWrapper(Context context)
+    private void createProfilesDataWrapper(Context context)
     {
         if (dataWrapper == null)
         {

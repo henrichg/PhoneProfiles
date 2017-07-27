@@ -16,7 +16,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class PhoneProfilesPreferencesActivity extends PreferenceActivity
                             implements PreferenceFragment.OnCreateNestedPreferenceFragment
 {
-    String extraScrollTo;
+    private String extraScrollTo;
 
     private boolean showEditorPrefIndicator;
     private boolean showEditorHeader;
@@ -26,7 +26,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
     private boolean invalidateEditor = false;
 
-    PhoneProfilesPreferencesNestedFragment fragment;
+    private PhoneProfilesPreferencesNestedFragment fragment;
 
     public static final String EXTRA_SCROLL_TO = "extra_phone_profile_preferences_scroll_to";
     public static final String EXTRA_SCROLL_TO_TYPE = "extra_phone_profile_preferences_scroll_to_type";
@@ -114,18 +114,6 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
     }
 
     @Override
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-    }
-
-    @Override
     protected void onStop()
     {
         super.onStop();
@@ -142,12 +130,6 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
             }
         }, 500);
         dataWrapper.getActivateProfileHelper().updateWidget(true);
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
     }
 
     @Override

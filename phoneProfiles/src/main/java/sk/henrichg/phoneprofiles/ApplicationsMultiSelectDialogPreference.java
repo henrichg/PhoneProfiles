@@ -32,12 +32,12 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 {
 
     private Context _context = null;
-    String value = "";
+    private String value = "";
 
     private int addShortcuts;
 
     // Layout widgets.
-    MaterialDialog mDialog;
+    private MaterialDialog mDialog;
     private ListView listView = null;
     private LinearLayout linlaProgress;
     private LinearLayout linlaListView;

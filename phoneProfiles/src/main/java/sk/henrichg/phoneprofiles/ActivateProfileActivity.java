@@ -25,8 +25,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     private static ActivateProfileActivity instance;
 
-    float popupWidth;
-    float popupHeight;
+    private float popupWidth;
+    private float popupHeight;
 
     private Toolbar toolbar;
 
@@ -154,18 +154,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
     public static ActivateProfileActivity getInstance()
     {
         return instance;
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
     }
 
     @Override

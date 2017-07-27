@@ -86,7 +86,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         return profileList.size();
     }
 
-    public Profile getItem(int position)
+    private Profile getItem(int position)
     {
         if (profileList == null)
             return null;

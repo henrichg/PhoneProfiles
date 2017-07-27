@@ -34,16 +34,16 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     protected PreferenceManager prefMng;
     protected SharedPreferences preferences;
 
-    static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
-    static final int RESULT_APPLICATION_PERMISSIONS = 1990;
-    static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "permissionsWriteSystemSettingsPermissions";
-    static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
-    static final String PREF_APPLICATION_LANGUAGE_24 = "applicationLanguage24";
-    static final int RESULT_LOCALE_SETTINGS = 1992;
-    static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "permissionsAccessNotificationPolicyPermissions";
-    static final int RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = 1993;
-    static final String PREF_DRAW_OVERLAYS_PERMISSIONS = "permissionsDrawOverlaysPermissions";
-    static final int RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS = 1998;
+    private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
+    private static final int RESULT_APPLICATION_PERMISSIONS = 1990;
+    private static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "permissionsWriteSystemSettingsPermissions";
+    private static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
+    private static final String PREF_APPLICATION_LANGUAGE_24 = "applicationLanguage24";
+    //static final int RESULT_LOCALE_SETTINGS = 1992;
+    private static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "permissionsAccessNotificationPolicyPermissions";
+    private static final int RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = 1993;
+    private static final String PREF_DRAW_OVERLAYS_PERMISSIONS = "permissionsDrawOverlaysPermissions";
+    private static final int RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS = 1998;
 
     @Override
     public int addPreferencesFromResource() {
@@ -225,7 +225,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    public static void setPreferenceTitleStyle(Preference preference, boolean bold, boolean underline, boolean errorColor)
+    private static void setPreferenceTitleStyle(Preference preference, boolean bold, boolean underline, boolean errorColor)
     {
         if (preference != null) {
             CharSequence title = preference.getTitle();
@@ -249,7 +249,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    public void setSummary(String key)
+    void setSummary(String key)
     {
         Preference preference = prefMng.findPreference(key);
 

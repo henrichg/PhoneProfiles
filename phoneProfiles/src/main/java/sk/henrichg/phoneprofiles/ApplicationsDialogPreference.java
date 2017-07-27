@@ -34,9 +34,9 @@ import java.util.List;
 public class ApplicationsDialogPreference  extends DialogPreference
                                             implements OnStartDragItemListener {
 
-    Context context;
+    private Context context;
 
-    String value = "";
+    private String value = "";
 
     List<Application> applicationsList = null;
 

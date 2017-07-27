@@ -19,7 +19,7 @@ class SettingsContentObserver  extends ContentObserver {
     //private int defaultRingerMode = 0;
     private static int previousScreenTimeout = 0;
 
-    Context context;
+    private Context context;
 
     SettingsContentObserver(Context c, Handler handler) {
         super(handler);
@@ -35,11 +35,6 @@ class SettingsContentObserver  extends ContentObserver {
         //previousVolumeAlarm = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
         //previousVolumeSystem = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
         //previousVolumeVoice = audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
-    }
-
-    @Override
-    public boolean deliverSelfNotifications() {
-        return super.deliverSelfNotifications();
     }
 
     private int volumeChangeDetect(int volumeStream, int previousVolume, AudioManager audioManager) {

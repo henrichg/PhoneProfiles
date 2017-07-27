@@ -24,12 +24,12 @@ package com.stericson.RootTools.containers;
 
 public class Permissions
 {
-    String type;
-    String user;
-    String group;
-    String other;
-    String symlink;
-    int permissions;
+    private String type;
+    private String user;
+    private String group;
+    private String other;
+    private String symlink;
+    private int permissions;
 
     public String getSymlink()
     {

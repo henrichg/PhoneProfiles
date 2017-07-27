@@ -16,12 +16,6 @@ public class ActivatorTargetHelpsActivity extends Activity {
     }
 
     @Override
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
-    @Override
     protected void onResume()
     {
         super.onResume();
@@ -33,12 +27,6 @@ public class ActivatorTargetHelpsActivity extends Activity {
             return;
         }
         activatorActivity.showTargetHelps();
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
     }
 
 }

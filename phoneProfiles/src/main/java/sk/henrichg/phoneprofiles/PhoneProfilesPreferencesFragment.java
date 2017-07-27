@@ -12,7 +12,7 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
 
     //private PreferenceManager prefMng;
     //private SharedPreferences preferences;
-    String extraScrollTo;
+    private String extraScrollTo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

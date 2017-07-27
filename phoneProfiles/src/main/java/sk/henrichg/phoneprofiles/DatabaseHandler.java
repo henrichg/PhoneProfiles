@@ -25,7 +25,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static SQLiteDatabase writableDb;
     private static final DatabaseHandlerMutex databaseHandlerMutex = new DatabaseHandlerMutex();
 
-    Context context;
+    private Context context;
     
     // Database Version
     private static final int DATABASE_VERSION = 1330;

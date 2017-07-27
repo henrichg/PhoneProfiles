@@ -26,7 +26,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
     private int newProfileMode = EditorProfileListFragment.EDIT_MODE_UNDEFINED;
     private int predefinedProfileIndex = 0;
 
-    ProfilePreferencesNestedFragment fragment;
+    private ProfilePreferencesNestedFragment fragment;
 
     private int resultCode = RESULT_CANCELED;
 
@@ -115,11 +115,6 @@ public class ProfilePreferencesActivity extends PreferenceActivity
         fragment.setArguments(arguments);
 
         return fragment;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override

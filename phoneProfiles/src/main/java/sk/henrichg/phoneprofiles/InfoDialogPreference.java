@@ -12,7 +12,7 @@ public class InfoDialogPreference extends DialogPreference {
 
     private String infoText;
     private Context _context;
-    AlertDialog mDialog;
+    private AlertDialog mDialog;
 
     public InfoDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

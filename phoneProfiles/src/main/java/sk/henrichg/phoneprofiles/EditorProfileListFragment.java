@@ -162,10 +162,8 @@ public class EditorProfileListFragment extends Fragment
             showTargetHelps();
     }
 
-    //@Override
-    //public void onActivityCreated(Bundle savedInstanceState)
     @SuppressLint("InflateParams")
-    public void doOnViewCreated(View view, Bundle savedInstanceState)
+    private void doOnViewCreated(View view, Bundle savedInstanceState)
     {
         //super.onActivityCreated(savedInstanceState);
 
@@ -317,12 +315,6 @@ public class EditorProfileListFragment extends Fragment
     }
 
     @Override
-    public void onStart()
-    {
-        super.onStart();
-    }
-
-    @Override
     public void onDestroy()
     {
         if (!isAsyncTaskPendingOrRunning())
@@ -384,7 +376,7 @@ public class EditorProfileListFragment extends Fragment
         onStartProfilePreferencesCallback.onStartProfilePreferences(profile, editMode, predefinedProfileIndex, true);
     }
 
-    public void duplicateProfile(Profile origProfile)
+    private void duplicateProfile(Profile origProfile)
     {
         int editMode;
 
@@ -397,7 +389,7 @@ public class EditorProfileListFragment extends Fragment
 
     }
 
-    public void deleteProfile(Profile profile)
+    private void deleteProfile(Profile profile)
     {
         //final Profile _profile = profile;
         //final Activity activity = getActivity();
@@ -428,7 +420,7 @@ public class EditorProfileListFragment extends Fragment
 
     }
 
-    public void deleteProfileWithAlert(Profile profile)
+    private void deleteProfileWithAlert(Profile profile)
     {
         final Profile _profile = profile;
 

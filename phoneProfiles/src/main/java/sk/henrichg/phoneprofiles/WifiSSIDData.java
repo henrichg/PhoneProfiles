@@ -14,7 +14,7 @@ class WifiSSIDData {
 
     String ssid;
     String bssid;
-    boolean custom;
+    private boolean custom;
 
     WifiSSIDData(String ssid, String bssid, boolean custom)
     {

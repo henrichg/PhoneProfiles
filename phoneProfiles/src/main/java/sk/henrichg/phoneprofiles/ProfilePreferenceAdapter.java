@@ -15,7 +15,7 @@ class ProfilePreferenceAdapter extends BaseAdapter {
 
     public List<Profile> profileList;
     private long profileId;
-    ProfilePreferenceDialog dialog;
+    private ProfilePreferenceDialog dialog;
 
     private Context context;
 

@@ -361,7 +361,7 @@ public class FirstStartService extends WakefulIntentService {
         return !isError;
     }
 
-    public static boolean installTone(int resID, String title, Context context, boolean fromMenu) {
+    public static void installTone(int resID, String title, Context context, boolean fromMenu) {
 
         boolean granted;
         if (fromMenu)
@@ -372,10 +372,7 @@ public class FirstStartService extends WakefulIntentService {
             boolean ringtone = installTone(resID, RingtoneManager.TYPE_RINGTONE, title, context, fromMenu);
             boolean notification = installTone(resID, RingtoneManager.TYPE_NOTIFICATION, title, context, fromMenu);
             boolean alarm = installTone(resID, RingtoneManager.TYPE_ALARM, title, context, fromMenu);
-            return ringtone && notification && alarm;
         }
-        else
-            return false;
     }
 
     /*

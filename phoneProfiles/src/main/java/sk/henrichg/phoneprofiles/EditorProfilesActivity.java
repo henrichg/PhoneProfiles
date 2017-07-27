@@ -74,17 +74,17 @@ public class EditorProfilesActivity extends AppCompatActivity
     // request code for startActivityForResult with intent ProfilePreferencesActivity
     static final int REQUEST_CODE_PROFILE_PREFERENCES = 6221;
     // request code for startActivityForResult with intent PhoneProfilesActivity
-    static final int REQUEST_CODE_APPLICATION_PREFERENCES = 6229;
+    private static final int REQUEST_CODE_APPLICATION_PREFERENCES = 6229;
     // request code for startActivityForResult with intent "phoneprofiles.intent.action.EXPORTDATA"
-    static final int REQUEST_CODE_REMOTE_EXPORT = 6250;
+    private static final int REQUEST_CODE_REMOTE_EXPORT = 6250;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
-    public static boolean mTwoPane;
+    private static boolean mTwoPane;
 
-    Toolbar editorToolbar;
+    private Toolbar editorToolbar;
 
     AddProfileDialog addProfileDialog;
 
@@ -185,12 +185,6 @@ public class EditorProfilesActivity extends AppCompatActivity
     public static EditorProfilesActivity getInstance()
     {
         return instance;
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
     }
 
     @Override
@@ -940,7 +934,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         startProfilePreferenceActivity(profile, EditorProfileListFragment.EDIT_MODE_EDIT, 0);
     }
 
-    public void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps) {
+    private void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps) {
         if (mTwoPane) {
             if (profile != null)
             {
@@ -967,7 +961,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
-    public void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps)
+    private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps)
     {
         // redraw headeru list fragmentu, notifikacie a widgetov
         EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);

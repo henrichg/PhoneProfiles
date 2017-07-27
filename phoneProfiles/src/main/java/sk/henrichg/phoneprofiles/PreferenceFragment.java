@@ -24,7 +24,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
     public abstract int addPreferencesFromResource();
 
-    public static HashMap<String, PreferenceScreen> preferenceScreenHashMap = new HashMap<>();
+    private static HashMap<String, PreferenceScreen> preferenceScreenHashMap = new HashMap<>();
 
     private PreferenceScreen mPreferenceScreen;
 
@@ -54,7 +54,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         }
     };
 
-    public void savePreferenceScreen(PreferenceScreen preferenceScreen) {
+    private void savePreferenceScreen(PreferenceScreen preferenceScreen) {
         mPreferenceScreen = preferenceScreen;
     }
 

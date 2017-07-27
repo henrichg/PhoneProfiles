@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,9 +13,10 @@ import android.view.WindowManager;
 
 public class LockDeviceActivity extends AppCompatActivity {
 
-    WindowManager windowManager;
-    View view = null;
+    private WindowManager windowManager;
+    private View view = null;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -41,9 +41,9 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:fontFamily="sans-serif"
-            android:singleLine="true"
             style="@style/MD_Preference_Title"
-            tools:text="Title" />
+            tools:text="Title"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@android:id/summary"

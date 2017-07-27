@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class GlobalGUIRoutines {
+class GlobalGUIRoutines {
 
     static BrightnessView brightnessView = null;
     static BrightnessView keepScreenOnView = null;

@@ -61,8 +61,7 @@ public class ShortcutCreatorListFragment extends Fragment {
         doOnViewCreated(view, savedInstanceState);
     }
 
-    //@Override
-    public void doOnViewCreated(View view, Bundle savedInstanceState)
+    private void doOnViewCreated(View view, Bundle savedInstanceState)
     {
         listView = (ListView)view.findViewById(R.id.shortcut_profiles_list);
 
@@ -137,12 +136,6 @@ public class ShortcutCreatorListFragment extends Fragment {
         return this.asyncTaskContext != null &&
               this.asyncTaskContext.get() != null &&
               !this.asyncTaskContext.get().getStatus().equals(AsyncTask.Status.FINISHED);
-    }
-
-    @Override
-    public void onStart()
-    {
-        super.onStart();
     }
 
     @Override
