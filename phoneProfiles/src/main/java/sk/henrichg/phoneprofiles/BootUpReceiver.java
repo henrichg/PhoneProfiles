@@ -11,25 +11,31 @@ public class BootUpReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         PPApplication.logE("BootUpReceiver.onReceive", "xxx");
 
-        // start delayed boot up broadcast
-        PPApplication.startedOnBoot = true;
-        final Handler handler = new Handler(context.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                PPApplication.logE("BootUpReceiver.onReceive", "delayed boot up");
-                PPApplication.startedOnBoot = false;
+        if (intent == null)
+            return;
+
+        String action = intent.getAction();
+        if (action.equals(Intent.ACTION_BOOT_COMPLETED) ||
+                action.equals("android.intent.action.QUICKBOOT_POWERON") ||
+                action.equals("com.htc.intent.action.QUICKBOOT_POWERON")) {
+            // start delayed boot up broadcast
+            PPApplication.startedOnBoot = true;
+            final Handler handler = new Handler(context.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    PPApplication.logE("BootUpReceiver.onReceive", "delayed boot up");
+                    PPApplication.startedOnBoot = false;
+                }
+            }, 10000);
+
+            PPApplication.setApplicationStarted(context, false);
+
+            if (ApplicationPreferences.applicationStartOnBoot(context)) {
+                // start ReceiverService
+                context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
             }
-        }, 10000);
-
-        PPApplication.setApplicationStarted(context, false);
-
-        if (ApplicationPreferences.applicationStartOnBoot(context))
-        {
-            // start ReceiverService
-            context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
         }
-
     }
 
 }
