@@ -616,21 +616,22 @@ public class DataWrapper {
             dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    if (Permissions.grantProfilePermissions(context, _profile, false,
-                            forGUI, monochrome, monochromeValue,
-                            _startupSource, true, _activity, true)) {
-                        if (_profile._askForDuration) {
-                            FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper, _startupSource, true);
-                            dlg.show();
-                        }
-                        else
-                            _activateProfile(_profile, _startupSource, true, _activity);
+                    if (_profile._askForDuration) {
+                        FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper,
+                                monochrome, monochromeValue, _startupSource, true);
+                        dlg.show();
                     }
                     else {
-                        Intent returnIntent = new Intent();
-                        _activity.setResult(Activity.RESULT_CANCELED,returnIntent);
+                        if (Permissions.grantProfilePermissions(context, _profile, false,
+                                forGUI, monochrome, monochromeValue,
+                                _startupSource, true, _activity, true))
+                            _activateProfile(_profile, _startupSource, true, _activity);
+                        else {
+                            Intent returnIntent = new Intent();
+                            _activity.setResult(Activity.RESULT_CANCELED,returnIntent);
 
-                        finishActivity(_startupSource, false, _activity);
+                            finishActivity(_startupSource, false, _activity);
+                        }
                     }
                 }
             });
@@ -659,21 +660,28 @@ public class DataWrapper {
         }
         else
         {
-            boolean granted;
-            if (interactive)
-                granted = Permissions.grantProfilePermissions(context, profile, false,
-                        forGUI, monochrome, monochromeValue,
-                        startupSource, true, activity, true);
-            else
-                granted = Permissions.grantProfilePermissions(context, profile, true,
-                        forGUI, monochrome, monochromeValue,
-                        startupSource, false, null, true);
-            if (granted) {
-                if (profile._askForDuration && interactive) {
-                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this, startupSource, true);
-                    dlg.show();
+            if (profile._askForDuration && interactive) {
+                FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
+                        monochrome, monochromeValue, startupSource, true);
+                dlg.show();
+            }
+            else {
+                boolean granted;
+                if (interactive) {
+                    // set theme and language for dialog alert ;-)
+                    // not working on Android 2.3.x
+                    GlobalGUIRoutines.setTheme(activity, true, false);
+                    GlobalGUIRoutines.setLanguage(activity.getBaseContext());
+
+                    granted = Permissions.grantProfilePermissions(context, profile, false,
+                            forGUI, monochrome, monochromeValue,
+                            startupSource, true, activity, true);
                 }
                 else
+                    granted = Permissions.grantProfilePermissions(context, profile, true,
+                            forGUI, monochrome, monochromeValue,
+                            startupSource, false, null, true);
+                if (granted)
                     _activateProfile(profile, startupSource, interactive, activity);
             }
         }
