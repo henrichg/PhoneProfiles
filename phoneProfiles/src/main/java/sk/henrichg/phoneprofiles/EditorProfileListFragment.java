@@ -595,7 +595,7 @@ public class EditorProfileListFragment extends Fragment
     private void setProfileSelection(Profile profile, boolean refreshIcons) {
         if (profileListAdapter != null)
         {
-            int profilePos = 0;
+            int profilePos = ListView.INVALID_POSITION;
 
             if (profile != null)
                 profilePos = profileListAdapter.getItemPosition(profile);
@@ -604,7 +604,7 @@ public class EditorProfileListFragment extends Fragment
 
             profileListAdapter.notifyDataSetChanged(refreshIcons);
 
-            if ((!ApplicationPreferences.applicationEditorHeader(dataWrapper.context)) && (profilePos != ListView.INVALID_POSITION))
+            if (/*(!ApplicationPreferences.applicationEditorHeader(dataWrapper.context)) && */(profilePos != ListView.INVALID_POSITION))
             {
                 // set profile visible in list
                 /*listView.setItemChecked(profilePos, true);
