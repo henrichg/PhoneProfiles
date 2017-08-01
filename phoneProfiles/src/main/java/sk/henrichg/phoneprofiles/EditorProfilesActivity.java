@@ -88,7 +88,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     AddProfileDialog addProfileDialog;
 
-    @SuppressLint("InlinedApi")
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         GlobalGUIRoutines.setTheme(this, false, true);
