@@ -559,6 +559,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
             dataWrapper.getDatabaseHandler().deleteShortcut(application.shortcutId);
 
         applicationsList.remove(application);
+        applicationsListView.getRecycledViewPool().clear();
         listAdapter.notifyDataSetChanged();
     }
 
@@ -582,6 +583,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
             if (!editedApplication.shortcut)
                 editedApplication.shortcutId = 0;
 
+            applicationsListView.getRecycledViewPool().clear();
             listAdapter.notifyDataSetChanged();
 
             if (editedApplication.shortcut &&
@@ -622,6 +624,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         dataWrapper.getDatabaseHandler().addShortcut(shortcut);
         application.shortcutId = shortcut._id;
 
+        applicationsListView.getRecycledViewPool().clear();
         listAdapter.notifyDataSetChanged();
     }
 }

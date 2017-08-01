@@ -119,6 +119,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     public void setList(List<Profile> pl)
     {
         profileList = pl;
+        fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
 
@@ -128,8 +129,10 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
             return;
 
         profileList.add(profile);
-        if (refresh)
+        if (refresh) {
+            fragment.listView.getRecycledViewPool().clear();
             notifyDataSetChanged();
+        }
     }
 
     void deleteItemNoNotify(Profile profile)
@@ -145,6 +148,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     public void clear()
     {
         clearNoNotify();
+        fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
 
@@ -183,6 +187,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
             if (_profile != null)
                 _profile._checked = true;
         }
+        fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
 
@@ -192,6 +197,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                 dataWrapper.refreshProfileIcon(profile, false, 0);
             }
         }
+        fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
 

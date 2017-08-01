@@ -963,24 +963,25 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps)
     {
-        // redraw headeru list fragmentu, notifikacie a widgetov
-        EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
+        synchronized (PPApplication.refreshEditorProfilesListMutex) {
+            // redraw headeru list fragmentu, notifikacie a widgetov
+            EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
 
-        if (fragment != null)
-        {
-            // update profile, this rewrite profile in profileList
-            fragment.dataWrapper.updateProfile(profile);
+            if (fragment != null) {
+                // update profile, this rewrite profile in profileList
+                fragment.dataWrapper.updateProfile(profile);
 
-            boolean newProfile = ((newProfileMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
-                                  (newProfileMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE));
-            fragment.updateListView(profile, newProfile, false, false);
+                boolean newProfile = ((newProfileMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
+                        (newProfileMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE));
+                fragment.updateListView(profile, newProfile, false, false);
 
-            Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
-            fragment.updateHeader(activeProfile);
-            fragment.dataWrapper.getActivateProfileHelper().showNotification(activeProfile);
-            fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
+                Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
+                fragment.updateHeader(activeProfile);
+                fragment.dataWrapper.getActivateProfileHelper().showNotification(activeProfile);
+                fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
+            }
+            redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, startTargetHelps);
         }
-        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, startTargetHelps);
     }
 
     public static ApplicationsCache getApplicationsCache()
