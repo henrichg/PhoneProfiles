@@ -5,7 +5,7 @@ PhoneProfiles
 
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [![License](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/henrichg/PhoneProfiles/blob/master/LICENSE)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](paypal.me/HenrichGron)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/HenrichGron)
 
 Android application - manually change device settings like ringer mode, sounds, Wi-Fi, Bluetooth, launcher wallpaper, ...
 
