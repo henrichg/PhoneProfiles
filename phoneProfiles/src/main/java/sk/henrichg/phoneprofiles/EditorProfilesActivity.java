@@ -25,6 +25,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -209,6 +211,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             refreshGUI(false, false);
         }
 
+        /*
         final Handler handler = new Handler(getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -216,6 +219,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 showTargetHelps();
             }
         }, 1000);
+        */
     }
 
     @Override
@@ -235,14 +239,33 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.activity_editor_profiles, menu);
         editorToolbar.inflateMenu(R.menu.activity_editor_profiles);
         return true;
     }
 
+    static void onNextLayout(final View view, final Runnable runnable) {
+        final ViewTreeObserver observer = view.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                final ViewTreeObserver trueObserver;
+
+                if (observer.isAlive()) {
+                    trueObserver = observer;
+                } else {
+                    trueObserver = view.getViewTreeObserver();
+                }
+
+                trueObserver.removeOnGlobalLayoutListener(this);
+
+                runnable.run();
+            }
+        });
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean ret = super.onPrepareOptionsMenu(menu);
 
         boolean toneInstalled = FirstStartService.isToneInstalled(FirstStartService.TONE_ID, getApplicationContext());
 
@@ -260,7 +283,14 @@ public class EditorProfilesActivity extends AppCompatActivity
             menuItem.setVisible(PhoneProfilesHelper.PPHelperVersion != -1);
         }
 
-        return super.onPrepareOptionsMenu(menu);
+        onNextLayout(editorToolbar, new Runnable() {
+            @Override
+            public void run() {
+                showTargetHelps();
+            }
+        });
+
+        return ret;
     }
 
     public static void exitApp(final Context context, DataWrapper dataWrapper) {
