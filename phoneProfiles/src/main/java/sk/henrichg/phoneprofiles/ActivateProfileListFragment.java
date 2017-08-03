@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -271,7 +272,10 @@ public class ActivateProfileListFragment extends Fragment {
             //getActivity().startService(firstStartServiceIntent);
 
             // start PhoneProfilesService
-            getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+            if (Build.VERSION.SDK_INT < 26)
+                getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+            else
+                getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
         }
         else
         {
@@ -279,7 +283,10 @@ public class ActivateProfileListFragment extends Fragment {
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
-                getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+                if (Build.VERSION.SDK_INT < 26)
+                    getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+                else
+                    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 
             Profile profile = dataWrapper.getActivatedProfile();

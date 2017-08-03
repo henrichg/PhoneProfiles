@@ -1666,11 +1666,13 @@ public class ActivateProfileHelper {
 
         int type;
         if (android.os.Build.VERSION.SDK_INT < 25)
+            //noinspection deprecation
             type = WindowManager.LayoutParams.TYPE_TOAST;
-        else
-            //TODO Android O - change to TYPE_APPLICATION_OVERLAY
-            //TODO             requires Requires SYSTEM_ALERT_WINDOW permission.
+        if (android.os.Build.VERSION.SDK_INT < 26)
+            //noinspection deprecation
             type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings
+        else
+            type = LayoutParams.TYPE_APPLICATION_OVERLAY;
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 1, 1,
                 type,
@@ -1719,11 +1721,14 @@ public class ActivateProfileHelper {
             }
             int type;
             if (android.os.Build.VERSION.SDK_INT < 25)
+                //noinspection deprecation
                 type = WindowManager.LayoutParams.TYPE_TOAST;
             else
-                //TODO Android O - change to TYPE_APPLICATION_OVERLAY
-                //TODO             requires Requires SYSTEM_ALERT_WINDOW permission.
+            if (android.os.Build.VERSION.SDK_INT < 26)
+                //noinspection deprecation
                 type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings
+            else
+                type = LayoutParams.TYPE_APPLICATION_OVERLAY;
             WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         1, 1,
                         type,

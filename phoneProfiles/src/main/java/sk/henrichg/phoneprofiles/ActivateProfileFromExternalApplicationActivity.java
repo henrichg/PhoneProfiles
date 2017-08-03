@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
@@ -50,7 +51,10 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
             PPApplication.logE("ActivateProfileFromExternalApplicationActivity.onStart","application not started");
-            startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+            if (Build.VERSION.SDK_INT < 26)
+                startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+            else
+                startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
         }
 
         if (profile_id != 0) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
@@ -92,7 +93,10 @@ public class PackageReplacedService extends WakefulIntentService {
         PPApplication.setApplicationStarted(context, false);
 
         // start PhoneProfilesService
-        context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+        if (Build.VERSION.SDK_INT < 26)
+            context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+        else
+            context.startForegroundService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
     }
 
 }

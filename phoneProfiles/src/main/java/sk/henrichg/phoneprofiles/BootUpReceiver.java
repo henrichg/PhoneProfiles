@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 
 public class BootUpReceiver extends BroadcastReceiver {
@@ -33,7 +34,10 @@ public class BootUpReceiver extends BroadcastReceiver {
 
             if (ApplicationPreferences.applicationStartOnBoot(context)) {
                 // start ReceiverService
-                context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+                if (Build.VERSION.SDK_INT < 26)
+                    context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+                else
+                    context.startForegroundService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
             }
         }
     }
