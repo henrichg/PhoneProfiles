@@ -34,10 +34,10 @@ public class BootUpReceiver extends BroadcastReceiver {
 
             if (ApplicationPreferences.applicationStartOnBoot(context)) {
                 // start ReceiverService
-                if (Build.VERSION.SDK_INT < 26)
+                //if (Build.VERSION.SDK_INT < 26)
                     context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
-                else
-                    context.startForegroundService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+                //else
+                //    context.startForegroundService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
             }
         }
     }

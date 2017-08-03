@@ -51,10 +51,10 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
             PPApplication.logE("ActivateProfileFromExternalApplicationActivity.onStart","application not started");
-            if (Build.VERSION.SDK_INT < 26)
+            //if (Build.VERSION.SDK_INT < 26)
                 startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
-            else
-                startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+            //else
+            //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
         }
 
         if (profile_id != 0) {

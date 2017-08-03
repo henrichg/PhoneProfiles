@@ -272,10 +272,10 @@ public class ActivateProfileListFragment extends Fragment {
             //getActivity().startService(firstStartServiceIntent);
 
             // start PhoneProfilesService
-            if (Build.VERSION.SDK_INT < 26)
+            //if (Build.VERSION.SDK_INT < 26)
                 getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-            else
-                getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+            //else
+            //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
         }
         else
         {
@@ -283,10 +283,10 @@ public class ActivateProfileListFragment extends Fragment {
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
-                if (Build.VERSION.SDK_INT < 26)
+                //if (Build.VERSION.SDK_INT < 26)
                     getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-                else
-                    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+                //else
+                //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 
             Profile profile = dataWrapper.getActivatedProfile();
