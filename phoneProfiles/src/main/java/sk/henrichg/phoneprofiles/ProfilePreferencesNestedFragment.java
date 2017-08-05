@@ -859,28 +859,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(Profile.PREF_PROFILE_SOUND_NOTIFICATION) ||
             key.equals(Profile.PREF_PROFILE_SOUND_ALARM))
         {
-            String ringtoneUri = value.toString();
-
-            Preference preference = prefMng.findPreference(key);
-            if (preference != null) {
-                if (ringtoneUri.isEmpty())
-                    preference.setSummary(R.string.preferences_notificationSound_None);
-                else {
-                    Uri uri = Uri.parse(ringtoneUri);
-                    Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
-                    String ringtoneName;
-                    if (ringtone == null)
-                        ringtoneName = "";
-                    else {
-                        try {
-                            ringtoneName = ringtone.getTitle(context);
-                        } catch (SecurityException e) {
-                            ringtoneName = "";
-                        }
-                    }
-                    preference.setSummary(ringtoneName);
-                }
-            }
             setSummaryForNotificationVolume0();
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE) ||
