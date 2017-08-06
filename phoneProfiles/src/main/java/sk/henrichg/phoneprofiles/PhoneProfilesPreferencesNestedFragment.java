@@ -390,7 +390,9 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     @Override
     public void onDestroy()
     {
-        preferences.unregisterOnSharedPreferenceChangeListener(this);
+        try {
+            preferences.unregisterOnSharedPreferenceChangeListener(this);
+        } catch (Exception ignored) {}
         super.onDestroy();
     }
 
