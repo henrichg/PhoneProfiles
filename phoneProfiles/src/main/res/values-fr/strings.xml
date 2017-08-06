@@ -244,7 +244,6 @@
   <string name="event_type_battery">Batterie</string>
   <string name="profile_preferences_volumeSpeakerPhone">Haut-parleur</string>
   <string name="event_preferences_notificationSound">Son de notification</string>
-  <string name="preferences_notificationSound_None">Aucun</string>
   <string name="event_preferences_battery_level_low">Niveau inférieur</string>
   <string name="event_preferences_battery_level_hight">Niveau supérieur</string>
   <string name="event_preferences_battery_charging">Chargement</string>
@@ -795,7 +794,7 @@
   <string name="donation_google_android_market_text">Quel montant?</string>
   <string name="donation_google_android_market_not_supported_title">Les Dons dans l\' application ne sont pas supportés.</string>
   <string name="donation_google_android_market_not_supported">Les Dons dans l\' application ne sont pas supportés. Google play store est-il installé correctement ?</string>
-  <string name="donation_google_android_market_description" tools:ignore="StringFormatCount,StringFormatInvalid">Google prend 30 % sur chaque don.</string>
+  <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google prend 30 % sur chaque don.</string>
   <string name="donation_google_android_market_donate_button">Donner</string>
   <string name="donation_thanks_dialog_title">Merci</string>
   <string name="donation_thanks_dialog">Merci pour le don. \nJ\'apprécie vraiment (la traduction est entièrement gratuite).</string>
@@ -1012,4 +1011,14 @@ Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="array_pref_value_zh_CN">zh-CN</string>
   <string name="action_for_external_application_notification_bad_action">Un action impossible est demandée.</string>
   <string name="action_for_external_application_notification_no_action">L\'action n\'est pas spécifiée.</string>
+  <!--
+    <string name="notification_channel_activated_profile">Activated profile</string>
+    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
+    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
+    -->
+  <string name="ringtone_preference_not_set">Not set</string>
+  <string name="ringtone_preference_default_ringtone">Default ringtone</string>
+  <string name="ringtone_preference_default_notification">Default notification</string>
+  <string name="ringtone_preference_default_alarm">Default alarm</string>
+  <string name="ringtone_preference_none">Aucun</string>
 </resources>

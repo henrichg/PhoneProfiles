@@ -244,7 +244,6 @@
   <string name="event_type_battery">Akkumulátor</string>
   <string name="profile_preferences_volumeSpeakerPhone">Kihangosító</string>
   <string name="event_preferences_notificationSound">Értesítések hangja</string>
-  <string name="preferences_notificationSound_None">None</string>
   <string name="event_preferences_battery_level_low">Alsó szint</string>
   <string name="event_preferences_battery_level_hight">Felső szint</string>
   <string name="event_preferences_battery_charging">Töltés</string>
@@ -1011,4 +1010,14 @@
   <string name="array_pref_value_zh_CN">zh-CN</string>
   <string name="action_for_external_application_notification_bad_action">Nem támogatott művelet van megadva.</string>
   <string name="action_for_external_application_notification_no_action">Nincs megadva a művelet.</string>
+  <!--
+    <string name="notification_channel_activated_profile">Activated profile</string>
+    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
+    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
+    -->
+  <string name="ringtone_preference_not_set">Not set</string>
+  <string name="ringtone_preference_default_ringtone">Default ringtone</string>
+  <string name="ringtone_preference_default_notification">Default notification</string>
+  <string name="ringtone_preference_default_alarm">Default alarm</string>
+  <string name="ringtone_preference_none">Nincs</string>
 </resources>
