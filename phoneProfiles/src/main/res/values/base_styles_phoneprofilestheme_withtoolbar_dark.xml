@@ -18,8 +18,7 @@
         <item name="dragHandleIcon">@drawable/ic_drag_handle_dark</item>
         <item name="actionProfilePrefSave">@drawable/ic_action_profile_pref_save_dark</item>
         <item name="actionProfilePrefCancel">@drawable/ic_action_profile_pref_cancel_dark</item>
-        <item name="actionProfileToolBackground">@drawable/abc_item_background_holo_dark</item>
-        <item name="actionProfileButtonTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item> 
+        <item name="actionProfileButtonTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
         <item name="editItemMenuIcon">@drawable/ic_profile_item_edit_menu_dark</item> 
         <item name="applicationSettingsLanguageIcon">@drawable/ic_settings_language_dark</item> 
         
