@@ -3,9 +3,8 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="?attr/activityPopupBackground"
               android:orientation="vertical"
-              tools:context=".ShortcutCreatorActivity">
+              tools:context=".ActivateProfileActivity">
 
     <LinearLayout
         android:id="@+id/act_prof_linlayout_header"
