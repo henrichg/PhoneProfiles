@@ -50,6 +50,7 @@ public class ActivateProfileFromExternalApplicationActivity extends Activity {
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
             PPApplication.logE("ActivateProfileFromExternalApplicationActivity.onStart","application not started");
+            //TODO Android O
             //if (Build.VERSION.SDK_INT < 26)
                 startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
             //else

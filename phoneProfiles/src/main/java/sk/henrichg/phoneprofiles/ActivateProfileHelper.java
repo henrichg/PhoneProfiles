@@ -1668,6 +1668,7 @@ public class ActivateProfileHelper {
             //noinspection deprecation
             type = WindowManager.LayoutParams.TYPE_TOAST;
         else
+            //TODO Android O
         //if (android.os.Build.VERSION.SDK_INT < 26)
             //noinspection deprecation
             type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings
@@ -1724,6 +1725,7 @@ public class ActivateProfileHelper {
                 //noinspection deprecation
                 type = WindowManager.LayoutParams.TYPE_TOAST;
             else
+                //TODO Android O
             //if (android.os.Build.VERSION.SDK_INT < 26)
                 //noinspection deprecation
                 type = LayoutParams.TYPE_SYSTEM_OVERLAY; // add show ACTION_MANAGE_OVERLAY_PERMISSION to Permissions app Settings

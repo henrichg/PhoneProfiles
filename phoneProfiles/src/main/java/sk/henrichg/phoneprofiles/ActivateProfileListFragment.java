@@ -271,6 +271,7 @@ public class ActivateProfileListFragment extends Fragment {
             //getActivity().startService(firstStartServiceIntent);
 
             // start PhoneProfilesService
+            //TODO Android O
             //if (Build.VERSION.SDK_INT < 26)
                 getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             //else
@@ -282,6 +283,7 @@ public class ActivateProfileListFragment extends Fragment {
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
+                //TODO Android O
                 //if (Build.VERSION.SDK_INT < 26)
                     getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
                 //else

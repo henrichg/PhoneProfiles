@@ -35,6 +35,7 @@ public class BackgroundActivateProfileActivity extends Activity {
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
             PPApplication.logE("BackgroundActivateProfileActivity.onStart","application not started");
+            //TODO Android O
             //if (Build.VERSION.SDK_INT < 26)
                 startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
             //else
