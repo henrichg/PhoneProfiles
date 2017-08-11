@@ -13,8 +13,10 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
+import com.crashlytics.android.Crashlytics;
 
 
 public class PhoneProfilesService extends Service {
@@ -40,6 +42,10 @@ public class PhoneProfilesService extends Service {
 
         instance = this;
         Context appContext = getApplicationContext();
+
+        Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(appContext));
+        Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(appContext));
+        Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(appContext));
 
         // save version code (is used in PackageReplacedReceiver)
         try {
