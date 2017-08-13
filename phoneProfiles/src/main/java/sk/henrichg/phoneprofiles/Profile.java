@@ -1500,6 +1500,10 @@ public class Profile {
                 PPApplication.logE("PPApplication.hardwareCheck","NFC=presented");
 
                 // device has nfc
+                if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                }
+                else
                 if (PPApplication.isRooted())
                     featurePresented = PPApplication.PREFERENCE_ALLOWED;
                 else

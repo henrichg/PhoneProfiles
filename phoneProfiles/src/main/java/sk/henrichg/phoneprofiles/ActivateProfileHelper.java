@@ -2553,11 +2553,11 @@ public class ActivateProfileHelper {
     private void setNFC(Context context, boolean enable)
     {
         //Log.e("ActivateProfileHelper.setNFC", "xxx");
-        /*if (Permissions.checkNFC(context)) {
+        if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
             Log.e("ActivateProfileHelper.setNFC", "permission granted!!");
             CmdNfc.run(enable);
         }
-        else */
+        else
         if (PPApplication.isRooted()/*PPApplication.isRootGranted()*/) {
             synchronized (PPApplication.startRootCommandMutex) {
                 String command1 = PPApplication.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
