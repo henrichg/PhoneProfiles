@@ -237,7 +237,8 @@ public class EditorProfileListFragment extends Fragment
             Profile profile;
             profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);
-            setProfileSelection(profile, false);
+            profileListAdapter.notifyDataSetChanged(false);
+            setProfileSelection(profile);
         }
 
     }
@@ -293,7 +294,8 @@ public class EditorProfileListFragment extends Fragment
                 Profile profile;
                 profile = fragment.dataWrapper.getActivatedProfile();
                 fragment.updateHeader(profile);
-                fragment.setProfileSelection(profile, false);
+                fragment.profileListAdapter.notifyDataSetChanged(false);
+                fragment.setProfileSelection(profile);
 
                 if (defaultProfilesGenerated)
                 {
@@ -594,7 +596,7 @@ public class EditorProfileListFragment extends Fragment
         dataWrapper.activateProfile(profile._id, PPApplication.STARTUP_SOURCE_EDITOR, getActivity());
     }
 
-    private void setProfileSelection(Profile profile, boolean refreshIcons) {
+    private void setProfileSelection(Profile profile) {
         if (profileListAdapter != null)
         {
             int profilePos = ListView.INVALID_POSITION;
@@ -603,8 +605,6 @@ public class EditorProfileListFragment extends Fragment
                 profilePos = profileListAdapter.getItemPosition(profile);
             //else
             //    profilePos = listView.getCheckedItemPosition();
-
-            profileListAdapter.notifyDataSetChanged(refreshIcons);
 
             if (/*(!ApplicationPreferences.applicationEditorHeader(dataWrapper.context)) && */(profilePos != ListView.INVALID_POSITION))
             {
@@ -638,7 +638,7 @@ public class EditorProfileListFragment extends Fragment
                 profileListAdapter.notifyDataSetChanged(refreshIcons);
 
                 if (setPosition || newProfile)
-                    setProfileSelection(profile, refreshIcons);
+                    setProfileSelection(profile);
             }
         }
     }
