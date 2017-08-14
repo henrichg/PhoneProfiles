@@ -41,6 +41,7 @@ public class Permissions {
     private static final int PERMISSION_VIBRATE_WHEN_RINGING = 16;
     private static final int PERMISSION_ACCESS_NOTIFICATION_POLICY = 17;
     private static final int PERMISSION_PROFILE_LOCK_DEVICE = 18;
+    private static final int PERMISSION_RINGTONE_PREFERENCE = 19;
 
     static final int GRANT_TYPE_PROFILE = 1;
     static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -49,6 +50,7 @@ public class Permissions {
     static final int GRANT_TYPE_EXPORT = 5;
     static final int GRANT_TYPE_IMPORT = 6;
     static final int GRANT_TYPE_BRIGHTNESS_DIALOG = 8;
+    static final int GRANT_TYPE_RINGTONE_PREFERENCE = 9;
 
     static final String EXTRA_GRANT_TYPE = "grant_type";
     static final String EXTRA_PERMISSION_TYPES = "permission_types";
@@ -65,6 +67,7 @@ public class Permissions {
     static ProfileIconPreference profileIconPreference = null;
     static EditorProfilesActivity editorActivity = null;
     static BrightnessDialogPreference brightnessDialogPreference = null;
+    static RingtonePreference ringtonePreference = null;
 
     private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
     private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
@@ -417,6 +420,13 @@ public class Permissions {
             return true;
     }
 
+    static boolean checkRingtones(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23)
+            return (ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        else
+            return true;
+    }
+
     static boolean checkProfileRadioPreferences(Context context, Profile profile) {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -689,6 +699,28 @@ public class Permissions {
                 intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                 intent.putExtra(EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
                 editorActivity = editor;
+                context.startActivity(intent);
+            }
+            return granted;
+        }
+        else
+            return true;
+    }
+
+    static boolean grantRingtonePreferencesDialogPermissions(Context context, RingtonePreference preference) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean granted = checkRingtones(context);
+            if (!granted) {
+                List<PermissionType> permissions = new ArrayList<>();
+                permissions.add(new PermissionType(PERMISSION_RINGTONE_PREFERENCE, permission.READ_EXTERNAL_STORAGE));
+
+                Intent intent = new Intent(context, GrantPermissionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
+                intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_RINGTONE_PREFERENCE);
+                intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
+                intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                ringtonePreference = preference;
                 context.startActivity(intent);
             }
             return granted;

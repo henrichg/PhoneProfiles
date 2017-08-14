@@ -617,6 +617,12 @@ public class GrantPermissionActivity extends Activity {
             if (Permissions.brightnessDialogPreference != null)
                 Permissions.brightnessDialogPreference.enableViews();
         }
+        else
+        if (grantType == Permissions.GRANT_TYPE_RINGTONE_PREFERENCE) {
+            if (Permissions.ringtonePreference != null)
+                Permissions.ringtonePreference.refreshListView();
+            finish();
+        }
         else {
             //finishAffinity();
             finish();
