@@ -750,7 +750,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     private void importData()
     {
         /*
-        // test whether the PhoneProfilePlus is installed
+        // test whether the PhoneProfilesPlus is installed
         PackageManager packageManager = getApplicationContext().getPackageManager();
         Intent phoneProfiles = packageManager.getLaunchIntentForPackage("sk.henrichg.phoneprofilesplus");
         if (phoneProfiles != null)

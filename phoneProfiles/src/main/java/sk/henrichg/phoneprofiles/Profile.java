@@ -1423,7 +1423,7 @@ public class Profile {
             if (mobileDataSupported) {
                 if (android.os.Build.VERSION.SDK_INT >= 21)
                 {
-                    // adb shell pm grant sk.henrichg.phoneprofilesplus android.permission.MODIFY_PHONE_STATE
+                    // adb shell pm grant sk.henrichg.phoneprofiles android.permission.MODIFY_PHONE_STATE
                     // not working :-/
                     if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
                         if (ActivateProfileHelper.canSetMobileData(context))
@@ -1467,7 +1467,7 @@ public class Profile {
             if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS))
             {
                 // device has gps
-                // adb shell pm grant sk.henrichg.phoneprofilesplus android.permission.WRITE_SECURE_SETTINGS
+                // adb shell pm grant sk.henrichg.phoneprofiles android.permission.WRITE_SECURE_SETTINGS
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
                     if (ActivateProfileHelper.canSetMobileData(context))
                         featurePresented = PPApplication.PREFERENCE_ALLOWED;
