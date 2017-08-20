@@ -155,7 +155,7 @@ public class Profile {
             "ic_profile_outdoors_5", "ic_profile_outdoors_6", "ic_profile_outdoors_7",
 
             "ic_profile_meeting", "ic_profile_meeting_2", "ic_profile_meeting_3", "ic_profile_mute", "ic_profile_mute_2",
-            "ic_profile_volume_1", "ic_profile_volume_2", "ic_profile_volume_3", "ic_profile_vibrate_1",
+            "ic_profile_volume_4", "ic_profile_volume_1", "ic_profile_volume_2", "ic_profile_volume_3", "ic_profile_vibrate_1",
 
             "ic_profile_work_1", "ic_profile_work_2", "ic_profile_work_3", "ic_profile_work_4", "ic_profile_work_5",
             "ic_profile_work_6", "ic_profile_work_7", "ic_profile_work_8", "ic_profile_work_9", "ic_profile_work_10",
@@ -190,7 +190,7 @@ public class Profile {
             0xffa801ff, 0xffa801ff, 0xffa801ff,
 
             0xff0099cc, 0xff0099cc, 0xff0099cc, 0xff0099cc, 0xff0099cc,
-            0xff0099cc, 0xff0099cc, 0xff0099cc, 0xff0099cc,
+            0xff0099cc, 0xff0099cc, 0xff0099cc, 0xff0099cc, 0xff0099cc,
 
             0xff28a174, 0xff28a174, 0xff28a174, 0xff28a174, 0xff28a174,
             0xff28a174, 0xff28a174, 0xff28a174, 0xff28a174, 0xff28a174,
