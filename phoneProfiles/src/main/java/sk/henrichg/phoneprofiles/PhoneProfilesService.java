@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.crashlytics.android.Crashlytics;
