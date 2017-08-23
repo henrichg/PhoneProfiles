@@ -1025,6 +1025,7 @@
     <string name="ringtone_preference_none">None</string>
     <string name="event_preferences_notificationVibrate">Notify by vibration</string>
     <string name="important_info_profile_grant">Some profile preferences require permission WRITE_SECURE_SETTINGS. ROOT is not required. These preferences are marked with \"(G1)\".</string>
+    <string name="important_info_profile_grant_lookSectionProfiles">For more information, look at the \"Profiles\" section further below.</string>
     <string name="profile_preferences_typesInfoGrant">For more informations look at \"Important information\", section \"Profiles\".</string>
     <string name="important_info_profile_grant_1_howTo_1">You can grant permission for PhoneProfiles required for profile parameters marked with (GX). This requires PC with installed adb.</string>
     <string name="important_info_profile_grant_1_howTo_2">If you do not have installed adb in PC:</string>
