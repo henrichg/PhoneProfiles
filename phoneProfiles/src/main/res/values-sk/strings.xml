@@ -1022,6 +1022,7 @@
   <string name="ringtone_preference_none">Žiadny</string>
   <string name="event_preferences_notificationVibrate">Upozorni vibráciami</string>
   <string name="important_info_profile_grant">Niektoré parametre profilu vyžadujú povolenie WRITE_SECURE_SETTINGS. ROOT nie je potrebný. Tieto parametre sú označená ako \"(G1)\".</string>
+  <string name="important_info_profile_grant_lookSectionProfiles">Pre viac informácií, pozrite si sekciu \"Profily\" ďalej nižšie.</string>
   <string name="profile_preferences_typesInfoGrant">Pre ďalšie informácie pozrite \"Dôležité informácie\", časť \"Profily\".</string>
   <string name="important_info_profile_grant_1_howTo_1">Môžete udeliť povolenie pre PhoneProfiles potrebné pre parametre profilu označené (GX). Potrebný je počítač s nainštalovaným adb.</string>
   <string name="important_info_profile_grant_1_howTo_2">Ak v počítači nemáte nainštalovaný adb:</string>
@@ -1029,7 +1030,7 @@
   <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
   <string name="important_info_profile_grant_1_howTo_4">2. Rozbaľte zip súbor.</string>
   <string name="important_info_profile_grant_1_howTo_5">Ako udeliť povolenie WRITE_SECURE_SETTINGS:</string>
-  <string name="important_info_profile_grant_1_howTo_6">1. V telefóne, prejdite do ponuky Nastavenia &gt; informácie o telefóne &gt; informácie o softvéri a kliknite na Číslo zostavy 10-krát, a budete mať v Nastaveniach položku Vývojárske možnosti.</string>
+  <string name="important_info_profile_grant_1_howTo_6">1. V telefóne, prejdite do ponuky Nastavenia &gt; informácie o telefóne &gt; informácie o softvéri a kliknite na Číslo zostavy 7-krát, a budete mať v Nastaveniach položku Vývojárske možnosti.</string>
   <string name="important_info_profile_grant_1_howTo_7">2. V telefóne, prejdite do ponuky Nastavenia &gt; Možnosti pre vývojárov a povoľte Ladenie USB.</string>
   <string name="important_info_profile_grant_1_howTo_8">3. V počítači, spustite CMD (Windows), Terminál (Linux, OSX), prejdite do priečinka, v ktorom je nainštalovaný adb a spustite tento príkaz:</string>
   <string name="important_info_profile_grant_1_howTo_9a">adb shell pm grant</string>
@@ -1037,7 +1038,7 @@
   <string name="important_info_profile_grant_1_howTo_10">4. Po úspešnom vykonaní, všetky parametre profilu označené značkou (G1) budú povolené.</string>
   <string name="important_info_activity_title">Dôležité informácie</string>
   <string name="important_info_quick_guide_tab">Rýchly sprievodca</string>
-  <string name="important_info_important_info_tab">Important information</string>
+  <string name="important_info_important_info_tab">Dôležité informácie</string>
   <string name="important_info_quick_guide_1">PhoneProfiles (PPP) má dve zložky:</string>
   <string name="important_info_quick_guide_2">1. <b>PROFILY:</b> určujú ako zmeniť nastavenia zariadenia.</string>
   <string name="important_info_quick_guide_3">2. <b>UDALOSTI:</b> určujú, kedy je sa zmenia nastavenia zariadenia.</string>
