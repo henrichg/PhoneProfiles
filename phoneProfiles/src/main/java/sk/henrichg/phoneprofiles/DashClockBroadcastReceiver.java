@@ -15,8 +15,11 @@ public class DashClockBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LocalBroadcastManager.getInstance(context.getApplicationContext()).unregisterReceiver(PPApplication.dashClockBroadcastReceiver);
 
-        Intent serviceIntent = new Intent(context.getApplicationContext(), DashClockService.class);
-        WakefulIntentService.sendWakefulWork(context.getApplicationContext(), serviceIntent);
+        try {
+            Intent serviceIntent = new Intent(context.getApplicationContext(), DashClockService.class);
+            WakefulIntentService.sendWakefulWork(context.getApplicationContext(), serviceIntent);
+        } catch (Exception ignored) {}
+
     }
 
 }

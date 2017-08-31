@@ -728,4 +728,13 @@ public class PPApplication extends Application {
         return line;
     }
 
+    static boolean hasSystemFeature(Context context, String feature) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            return packageManager.hasSystemFeature(feature);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
