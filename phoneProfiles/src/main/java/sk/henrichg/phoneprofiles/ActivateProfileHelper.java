@@ -2591,7 +2591,7 @@ public class ActivateProfileHelper {
                     }
                 }
             }
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Exception e) {
             return false; //package not found
         }
         return false;

@@ -32,7 +32,7 @@ class ImportantInfoNotification {
             }
             else
                 setShowInfoNotificationOnStartVersion(context, packageVersionCode);
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Exception e) {
             //e.printStackTrace();
         }
 
