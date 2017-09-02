@@ -135,8 +135,6 @@ public class PhoneProfilesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        super.onStartCommand(intent, flags, startId);
-
         PPApplication.logE("PhoneProfilesService.onStartCommand", "xxx");
 
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);

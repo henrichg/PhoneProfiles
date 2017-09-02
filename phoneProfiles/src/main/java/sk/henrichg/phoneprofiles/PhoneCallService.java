@@ -52,11 +52,13 @@ public class PhoneCallService extends IntentService {
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
                 //Log.e("PhoneCallService", "doCallEvent - unlink");
-                Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-                volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, linkMode);
-                volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_FOR_PROFILE_ACTIVATION, false);
-                context.startService(volumeServiceIntent);
+                try {
+                    Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
+                    volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                    volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, linkMode);
+                    volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_FOR_PROFILE_ACTIVATION, false);
+                    context.startService(volumeServiceIntent);
+                } catch (Exception ignored) {}
             }
             dataWrapper.invalidateDataWrapper();
         }

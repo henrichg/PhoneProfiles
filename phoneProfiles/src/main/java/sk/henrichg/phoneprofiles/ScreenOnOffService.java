@@ -76,8 +76,10 @@ public class ScreenOnOffService extends IntentService {
                     }
 
                     // enable/disable keyguard
-                    Intent keyguardService = new Intent(appContext, KeyguardService.class);
-                    appContext.startService(keyguardService);
+                    try {
+                        Intent keyguardService = new Intent(appContext, KeyguardService.class);
+                        appContext.startService(keyguardService);
+                    } catch (Exception ignored) {}
                 }
 
                 if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {

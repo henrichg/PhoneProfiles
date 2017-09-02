@@ -1215,11 +1215,11 @@ public class ActivateProfileHelper {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         try {
                             context.startActivity(intent);
+                            //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                            //SystemClock.sleep(1000);
+                            PPApplication.sleep(1000);
                         } catch (Exception ignore) {
                         }
-                        //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                        //SystemClock.sleep(1000);
-                        PPApplication.sleep(1000);
                     }
                 } else {
                     long shortcutId = ApplicationsCache.getShortcutId(split);
@@ -1231,11 +1231,10 @@ public class ActivateProfileHelper {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     context.startActivity(intent);
-                                } catch (Exception ignore) {
-                                }
-                                //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                                //SystemClock.sleep(1000);
-                                PPApplication.sleep(1000);
+                                    //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                    //SystemClock.sleep(1000);
+                                    PPApplication.sleep(1000);
+                                } catch (Exception ignore) {}
                             } catch (Exception ignored) {
                             }
                         }
@@ -1273,12 +1272,14 @@ public class ActivateProfileHelper {
 
         // nahodenie volume a ringer modu
         // run service for execute volumes
-        Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-        volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-        volumeServiceIntent.putExtra(EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
-        volumeServiceIntent.putExtra(EXTRA_FOR_PROFILE_ACTIVATION, true);
-        //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
-        context.startService(volumeServiceIntent);
+        try {
+            Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
+            volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+            volumeServiceIntent.putExtra(EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
+            volumeServiceIntent.putExtra(EXTRA_FOR_PROFILE_ACTIVATION, true);
+            //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
+            context.startService(volumeServiceIntent);
+        } catch (Exception ignored) {}
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         // nahodenie ringer modu - aby sa mohli nastavit hlasitosti
         setRingerMode(profile, audioManager);
@@ -1304,9 +1305,11 @@ public class ActivateProfileHelper {
 
         // nahodenie radio preferences
         // run service for execute radios
-        Intent radioServiceIntent = new Intent(context, ExecuteRadioProfilePrefsService.class);
-        radioServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-        context.startService(radioServiceIntent);
+        try {
+            Intent radioServiceIntent = new Intent(context, ExecuteRadioProfilePrefsService.class);
+            radioServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+            context.startService(radioServiceIntent);
+        } catch (Exception ignored) {}
 
         // nahodenie auto-sync
         try {
@@ -1392,8 +1395,10 @@ public class ActivateProfileHelper {
             //PPApplication.logE("$$$ ActivateProfileHelper.execute","keyguardShowing="+keyguardShowing);
 
             if (isScreenOn && !keyguardShowing) {
-                Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
-                context.startService(keyguardService);
+                try {
+                    Intent keyguardService = new Intent(context.getApplicationContext(), KeyguardService.class);
+                    context.startService(keyguardService);
+                } catch (Exception ignored) {}
             }
         }
 
@@ -1419,10 +1424,12 @@ public class ActivateProfileHelper {
                                         ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                         profile.getDeviceBrightnessAdaptiveValue(context));
                             } catch (Exception ee) {
-                                Intent rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-                                rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_ADAPTIVE_BRIGHTNESS);
-                                rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                                context.startService(rootServiceIntent);
+                                try {
+                                    Intent rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
+                                    rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_ADAPTIVE_BRIGHTNESS);
+                                    rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                                    context.startService(rootServiceIntent);
+                                } catch (Exception ignored) {}
                             }
                         }
                     }
@@ -1499,17 +1506,23 @@ public class ActivateProfileHelper {
         // nahodenie pozadia
         if (Permissions.checkProfileWallpaper(context, profile)) {
             if (profile._deviceWallpaperChange == 1) {
-                Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
-                wallpaperServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                context.startService(wallpaperServiceIntent);
+                try {
+                    Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
+                    wallpaperServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                    context.startService(wallpaperServiceIntent);
+                } catch (Exception ignored) {}
             }
         }
 
+        Intent rootServiceIntent;
+
         // set power save mode
-        Intent rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-        rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_POWER_SAVE_MODE);
-        rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-        context.startService(rootServiceIntent);
+        try {
+            rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
+            rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_POWER_SAVE_MODE);
+            rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+            context.startService(rootServiceIntent);
+        } catch (Exception ignored) {}
 
         if (Permissions.checkProfileLockDevice(context, profile)) {
             if (profile._lockDevice != 0) {
@@ -1518,10 +1531,12 @@ public class ActivateProfileHelper {
                 keyguardLocked = kgMgr.isKeyguardLocked();
                 PPApplication.logE("---$$$ ActivateProfileHelper.execute","keyguardLocked="+keyguardLocked);
                 if (!keyguardLocked) {
-                    rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-                    rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_LOCK_DEVICE);
-                    rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                    context.startService(rootServiceIntent);
+                    try {
+                        rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
+                        rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_LOCK_DEVICE);
+                        rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                        context.startService(rootServiceIntent);
+                    } catch (Exception ignored) {}
                 }
             }
         }
@@ -1574,9 +1589,11 @@ public class ActivateProfileHelper {
 
             if (profile._deviceRunApplicationChange == 1)
             {
-                Intent runApplicationsServiceIntent = new Intent(context, ExecuteRunApplicationsProfilePrefsService.class);
-                runApplicationsServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                context.startService(runApplicationsServiceIntent);
+                try {
+                    Intent runApplicationsServiceIntent = new Intent(context, ExecuteRunApplicationsProfilePrefsService.class);
+                    runApplicationsServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                    context.startService(runApplicationsServiceIntent);
+                } catch (Exception ignored) {}
             }
 
         }
@@ -2957,11 +2974,13 @@ public class ActivateProfileHelper {
                 break;
             case 1:
                 if (Permissions.checkLockDevice(context) && (PPApplication.lockDeviceActivity == null)) {
-                    Intent intent = new Intent(context, LockDeviceActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    context.startActivity(intent);
+                    try {
+                        Intent intent = new Intent(context, LockDeviceActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        context.startActivity(intent);
+                    } catch (Exception ignore) {}
                 }
                 break;
         }

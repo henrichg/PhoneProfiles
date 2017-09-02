@@ -30,11 +30,13 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         //Log.d("PhoneCallBroadcastReceiver","startService phoneEvent="+phoneEvent);
 
-        Intent intent = new Intent(savedContext, PhoneCallService.class);
-        intent.putExtra(EXTRA_SERVICE_PHONE_EVENT, phoneEvent);
-        intent.putExtra(EXTRA_SERVICE_PHONE_INCOMING, incoming);
-        intent.putExtra(EXTRA_SERVICE_PHONE_NUMBER, number);
-        savedContext.startService(intent);
+        try {
+            Intent intent = new Intent(savedContext, PhoneCallService.class);
+            intent.putExtra(EXTRA_SERVICE_PHONE_EVENT, phoneEvent);
+            intent.putExtra(EXTRA_SERVICE_PHONE_INCOMING, incoming);
+            intent.putExtra(EXTRA_SERVICE_PHONE_NUMBER, number);
+            savedContext.startService(intent);
+        } catch (Exception ignored) {}
     }
 
     protected void onIncomingCallStarted(String number, Date start) {
