@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -21,6 +22,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -36,6 +38,10 @@ public class PhoneProfilesService extends Service {
     public static PhoneProfilesService instance = null;
     private static boolean serviceRunning = false;
 
+    private KeyguardManager keyguardManager;
+    @SuppressWarnings("deprecation")
+    private KeyguardManager.KeyguardLock keyguardLock;
+
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
     private PhoneCallBroadcastReceiver phoneCallBroadcastReceiver = null;
@@ -48,6 +54,7 @@ public class PhoneProfilesService extends Service {
 
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
+    static final String EXTRA_SWITCH_KEYGUARD = "switch_keyguard";
 
     @Override
     public void onCreate()
@@ -144,6 +151,8 @@ public class PhoneProfilesService extends Service {
         if (settingsContentObserver != null)
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
 
+        reenableKeyguard();
+
         removeProfileNotification(this);
 
         instance = null;
@@ -176,6 +185,45 @@ public class PhoneProfilesService extends Service {
             if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                 PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
                 removeProfileNotification(this);
+            }
+
+            if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
+
+                Context appContext = getApplicationContext();
+
+                boolean isScreenOn;
+                //if (android.os.Build.VERSION.SDK_INT >= 20)
+                //{
+                //    Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+                //    isScreenOn = display.getState() == Display.STATE_ON;
+                //}
+                //else
+                //{
+                PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
+                isScreenOn = pm.isScreenOn();
+                //}
+
+                boolean secureKeyguard;
+                secureKeyguard = keyguardManager.isKeyguardSecure();
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand","secureKeyguard="+secureKeyguard);
+                if (!secureKeyguard)
+                {
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx","getLockScreenDisabled="+ ActivateProfileHelper.getLockScreenDisabled(appContext));
+
+                    if (isScreenOn) {
+                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
+
+                        if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
+                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.disable(), START_STICKY");
+                            reenableKeyguard();
+                            disableKeyguard();
+                        } else {
+                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
+                            reenableKeyguard();
+                        }
+                    }
+                }
             }
         }
 
@@ -466,4 +514,23 @@ public class PhoneProfilesService extends Service {
     }
 
     //----------------------------------------
+
+    // switch keyguard ------------------------------------
+
+    private void disableKeyguard()
+    {
+        PPApplication.logE("$$$ Keyguard.disable","keyguardLock="+keyguardLock);
+        if ((keyguardLock != null) && Permissions.hasPermission(getApplicationContext(), Manifest.permission.DISABLE_KEYGUARD))
+            keyguardLock.disableKeyguard();
+    }
+
+    private void reenableKeyguard()
+    {
+        PPApplication.logE("$$$ Keyguard.reenable","keyguardLock="+keyguardLock);
+        if ((keyguardLock != null) && Permissions.hasPermission(getApplicationContext(), Manifest.permission.DISABLE_KEYGUARD))
+            keyguardLock.reenableKeyguard();
+    }
+
+    //--------------------------------------
+
 }

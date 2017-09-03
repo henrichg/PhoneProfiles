@@ -305,7 +305,6 @@ public class EditorProfilesActivity extends AppCompatActivity
         Permissions.removeNotifications(context);
 
         context.stopService(new Intent(context, PhoneProfilesService.class));
-        context.stopService(new Intent(context, KeyguardService.class));
 
         if (PPApplication.brightnessHandler != null) {
             PPApplication.brightnessHandler.post(new Runnable() {
