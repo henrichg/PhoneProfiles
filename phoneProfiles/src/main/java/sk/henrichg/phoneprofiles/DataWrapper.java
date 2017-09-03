@@ -554,7 +554,8 @@ public class DataWrapper {
             ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
         }
 
-        activateProfileHelper.showNotification(profile);
+        if (PhoneProfilesService.instance != null)
+            PhoneProfilesService.instance.showProfileNotification(profile, this);
         activateProfileHelper.updateWidget(true);
 
         if (ApplicationPreferences.notificationsToast(context) && (!ActivateProfileHelper.lockRefresh))
@@ -816,7 +817,8 @@ public class DataWrapper {
         }
         else
         {
-            activateProfileHelper.showNotification(profile);
+            if (PhoneProfilesService.instance != null)
+                PhoneProfilesService.instance.showProfileNotification(profile, this);
             activateProfileHelper.updateWidget(true);
 
             // for startActivityForResult

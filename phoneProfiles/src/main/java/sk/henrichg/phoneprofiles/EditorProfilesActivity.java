@@ -301,7 +301,6 @@ public class EditorProfilesActivity extends AppCompatActivity
         Profile.setActivatedProfileForDuration(context, 0);
 
         // zrusenie notifikacie
-        dataWrapper.getActivateProfileHelper().removeNotification();
         ImportantInfoNotification.removeNotification(context);
         Permissions.removeNotifications(context);
 
@@ -667,7 +666,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (result == 1) {
                         dataWrapper.clearProfileList();
                         dataWrapper.getDatabaseHandler().deactivateProfile();
-                        dataWrapper.getActivateProfileHelper().showNotification(null);
+                        if (PhoneProfilesService.instance != null)
+                            PhoneProfilesService.instance.showProfileNotification(null, dataWrapper);
                         dataWrapper.getActivateProfileHelper().updateWidget(true);
 
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
@@ -1007,7 +1007,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
                 fragment.updateHeader(activeProfile);
-                fragment.dataWrapper.getActivateProfileHelper().showNotification(activeProfile);
+                if (PhoneProfilesService.instance != null)
+                    PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.dataWrapper);
                 fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
             }
             redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, startTargetHelps);

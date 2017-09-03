@@ -415,7 +415,8 @@ public class EditorProfileListFragment extends Fragment
             //Profile profile = databaseHandler.getActivatedProfile();
             Profile _profile = profileListAdapter.getActivatedProfile();
             updateHeader(_profile);
-            activateProfileHelper.showNotification(_profile);
+            if (PhoneProfilesService.instance != null)
+                PhoneProfilesService.instance.showProfileNotification(_profile, dataWrapper);
             activateProfileHelper.updateWidget(true);
 
             onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0, true);
@@ -504,7 +505,8 @@ public class EditorProfileListFragment extends Fragment
                         //Profile profile = databaseHandler.getActivatedProfile();
                         //Profile profile = profileListAdapter.getActivatedProfile();
                         updateHeader(null);
-                        activateProfileHelper.removeNotification();
+                        if (PhoneProfilesService.instance != null)
+                            PhoneProfilesService.instance.showProfileNotification(null, dataWrapper);
                         activateProfileHelper.updateWidget(true);
 
                         onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0, true);

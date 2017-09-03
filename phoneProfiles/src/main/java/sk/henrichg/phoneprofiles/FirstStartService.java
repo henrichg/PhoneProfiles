@@ -86,9 +86,6 @@ public class FirstStartService extends WakefulIntentService {
         DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
         dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
 
-        // zrusenie notifikacie
-        dataWrapper.getActivateProfileHelper().removeNotification();
-
         PPApplication.setApplicationStarted(context, true);
 
         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);

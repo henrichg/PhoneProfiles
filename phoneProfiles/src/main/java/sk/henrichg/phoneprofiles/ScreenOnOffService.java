@@ -38,7 +38,8 @@ public class ScreenOnOffService extends IntentService {
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                         Profile activatedProfile = dataWrapper.getActivatedProfile();
-                        dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
+                        if (PhoneProfilesService.instance != null)
+                            PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                         dataWrapper.invalidateDataWrapper();
                     }
                 }
@@ -54,7 +55,8 @@ public class ScreenOnOffService extends IntentService {
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                         Profile activatedProfile = dataWrapper.getActivatedProfile();
-                        dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
+                        if (PhoneProfilesService.instance != null)
+                            PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                     }
 
                     // change screen timeout
@@ -91,7 +93,8 @@ public class ScreenOnOffService extends IntentService {
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                         Profile activatedProfile = dataWrapper.getActivatedProfile();
-                        dataWrapper.getActivateProfileHelper().showNotification(activatedProfile);
+                        if (PhoneProfilesService.instance != null)
+                            PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                         dataWrapper.invalidateDataWrapper();
                     }
                 }
