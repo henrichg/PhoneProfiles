@@ -2755,7 +2755,9 @@ public class ActivateProfileHelper {
                         cmd.wait(waitTill);
                         waitTill *= waitTillMultiplier;
                     }
-                } catch (InterruptedException ignored) {
+                } catch (Exception e) {
+                    Log.e("ActivateProfileHelper", "Exception: Could not finish root command in " + (waitTill/waitTillMultiplier));
+                    return;
                 }
             }
         }
