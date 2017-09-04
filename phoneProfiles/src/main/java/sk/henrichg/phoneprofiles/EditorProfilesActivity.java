@@ -626,6 +626,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                     this.dialog.setCanceledOnTouchOutside(false);
                     this.dialog.show();
 
+                    if (PhoneProfilesService.instance != null)
+                        PhoneProfilesService.instance.stopSelf();
+
                     EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
                     if (fragment != null)
                         fragment.removeAdapter();
@@ -672,6 +675,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
                         Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
                         //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
+
+                        //TODO Android O
+                        //if (Build.VERSION.SDK_INT < 26)
+                        startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+                        //else
+                        //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
