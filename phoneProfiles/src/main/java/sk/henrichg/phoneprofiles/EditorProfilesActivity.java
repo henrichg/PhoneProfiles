@@ -692,6 +692,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                         GlobalGUIRoutines.reloadActivity(activity, true);
 
                     } else {
+                        //TODO Android O
+                        //if (Build.VERSION.SDK_INT < 26)
+                        startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+                        //else
+                        //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+
                         importExportErrorDialog(1);
                     }
                 }
