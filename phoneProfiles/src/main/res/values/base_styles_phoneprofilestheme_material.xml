@@ -9,6 +9,7 @@
         <item name="colorAccent">@color/accent</item>
 
         <item name="activityTextColor">@color/activityTextColor</item>
+        <item name="activityCommandBackgroundColor">@color/activityCommandBackgroundColor</item>
 
         <item name="actionNewProfileIcon">@drawable/ic_action_new_profile_dark</item>
         <item name="actionDeleteAllIcon">@drawable/ic_action_delete_all_dark</item>

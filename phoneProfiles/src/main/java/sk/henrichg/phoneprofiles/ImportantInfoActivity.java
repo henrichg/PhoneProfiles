@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -218,17 +221,32 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         TextView infoText41 = (TextView)findViewById(R.id.activity_info_activate_profile_from_tasker_params);
-        infoText41.setText("Send Intent [ \n" +
+        String str = "Send Intent [\n" +
                 " Extra:profile_name:profile name\n" +
                 " Package:sk.henrichg.phoneprofiles\n" +
                 " Class:sk.henrichg.phoneprofiles.ActivateProfileFromExternalApplicationActivity\n" +
                 " Target:Activity\n" +
-                "]");
+                "]";
+        Spannable spannable = new SpannableString(str);
+        spannable.setSpan(new BackgroundColorSpan(GlobalGUIRoutines.getThemeCommandBackgroundColor(this)), 0, str.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        infoText41.setText(spannable);
+
+        TextView infoTextADBDownload = (TextView)findViewById(R.id.activity_info_notification_dialog_info_text61);
+        str = getString(R.string.important_info_profile_grant_1_howTo_11);
+        spannable = new SpannableString(str);
+        spannable.setSpan(new BackgroundColorSpan(GlobalGUIRoutines.getThemeCommandBackgroundColor(this)), 0, str.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        infoTextADBDownload.setText(spannable);
 
         TextView infoTextGrant1Command = (TextView)findViewById(R.id.activity_info_notification_dialog_info_grant_1_command);
-        infoTextGrant1Command.setText(getString(R.string.important_info_profile_grant_1_howTo_9a) + " " +
-                getPackageName() + " " +
-                getString(R.string.important_info_profile_grant_1_howTo_9b));
+        str = getString(R.string.important_info_profile_grant_1_howTo_9a) + "\u00A0" +
+                context.getPackageName() + "\u00A0" +
+                getString(R.string.important_info_profile_grant_1_howTo_9b);
+        spannable = new SpannableString(str);
+        spannable.setSpan(new BackgroundColorSpan(GlobalGUIRoutines.getThemeCommandBackgroundColor(this)), 0, str.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        infoTextGrant1Command.setText(spannable);
 
         if (!news) {
             TextView infoTextNews = (TextView) findViewById(R.id.activity_info_notification_dialog_news);
