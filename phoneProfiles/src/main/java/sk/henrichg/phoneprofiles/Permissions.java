@@ -207,7 +207,7 @@ public class Permissions {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
-            return true;
+            return hasPermission(context, permission.WRITE_EXTERNAL_STORAGE);
     }
 
     static boolean checkProfileVibrationOnTouch(Context context, Profile profile) {
@@ -379,8 +379,13 @@ public class Permissions {
             else
                 return true;
         }
-        else
-            return true;
+        else {
+            if (profile._deviceWallpaperChange != 0) {
+                return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
+            }
+            else
+                return true;
+        }
     }
 
     private static boolean checkCustomProfileIcon(Context context, Profile profile) {
@@ -395,36 +400,44 @@ public class Permissions {
             else
                 return true;
         }
-        else
-            return true;
+        else {
+            DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
+            Profile _profile = dataWrapper.getDatabaseHandler().getProfile(profile._id);
+            if (_profile == null) return true;
+            if (!_profile.getIsIconResourceID()) {
+                return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
+            }
+            else
+                return true;
+        }
     }
 
     static boolean checkGallery(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
-            return true;
+            return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
     }
 
     private static boolean checkImport(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
-            return true;
+            return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
     }
 
     private static boolean checkExport(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
-            return true;
+            return hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     static boolean checkRingtones(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
-            return true;
+            return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
     }
 
     static boolean checkProfileRadioPreferences(Context context, Profile profile) {
@@ -440,8 +453,12 @@ public class Permissions {
                 granted = (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED);
             return granted;
         }
-        else
-            return true;
+        else {
+            if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
+                return hasPermission(context, Manifest.permission.READ_PHONE_STATE);
+            else
+                return true;
+        }
     }
 
     private static boolean checkProfilePhoneBroadcast(Context context, Profile profile) {
@@ -456,7 +473,8 @@ public class Permissions {
                 return true;
         }
         else
-            return true;
+            return hasPermission(context, Manifest.permission.READ_PHONE_STATE) &&
+                    hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);
     }
 
     static boolean checkProfileAccessNotificationPolicy(Context context, Profile profile) {
