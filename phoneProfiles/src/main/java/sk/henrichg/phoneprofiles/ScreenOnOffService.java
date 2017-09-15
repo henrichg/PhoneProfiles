@@ -82,7 +82,7 @@ public class ScreenOnOffService extends IntentService {
                         // start PhoneProfilesService
                         //PPApplication.firstStartServiceStarted = false;
                         Intent serviceIntent = new Intent(appContext, PhoneProfilesService.class);
-                        serviceIntent.putExtra(PhoneProfilesService.EXTRA_SWITCH_KEYGUARD, false);
+                        serviceIntent.putExtra(PhoneProfilesService.EXTRA_SWITCH_KEYGUARD, true);
                         //TODO Android O
                         //if (Build.VERSION.SDK_INT < 26)
                         appContext.startService(serviceIntent);
