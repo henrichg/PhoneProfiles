@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     private static final int RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = 1993;
     private static final String PREF_DRAW_OVERLAYS_PERMISSIONS = "permissionsDrawOverlaysPermissions";
     private static final int RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS = 1998;
+    private static final String PREF_AUTOSTART_PERMISSION_MIUI = "applicationAutoStartMIUI";
 
     @Override
     public int addPreferencesFromResource() {
@@ -222,6 +224,25 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categorySamsungEdgePanel");
             if (preferenceCategory != null)
                 preferenceScreen.removePreference(preferenceCategory);
+        }
+        Preference preference = prefMng.findPreference(PREF_AUTOSTART_PERMISSION_MIUI);
+        if (preference != null) {
+            String manufacturer = "xiaomi";
+            if (manufacturer.equalsIgnoreCase(android.os.Build.MANUFACTURER)) {
+                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        //this will open auto start screen where user can enable permission for your app
+                        Intent intent = new Intent();
+                        intent.setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
+                        startActivity(intent);
+                        return false;
+                    }
+                });
+            } else {
+                PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categoryApplicationStart");
+                preferenceCategory.removePreference(preference);
+            }
         }
     }
 
