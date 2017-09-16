@@ -37,9 +37,9 @@ public class PhoneProfilesService extends Service {
     public static PhoneProfilesService instance = null;
     private static boolean serviceRunning = false;
 
-    private KeyguardManager keyguardManager;
+    private static KeyguardManager keyguardManager;
     @SuppressWarnings("deprecation")
-    private KeyguardManager.KeyguardLock keyguardLock;
+    private static KeyguardManager.KeyguardLock keyguardLock;
 
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
@@ -79,6 +79,9 @@ public class PhoneProfilesService extends Service {
         } catch (Exception e) {
             //e.printStackTrace();
         }
+
+        keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
+        keyguardLock = keyguardManager.newKeyguardLock("phoneProfilesPlus.keyguardLock");
 
         if (screenOnOffReceiver != null)
             appContext.unregisterReceiver(screenOnOffReceiver);
@@ -206,6 +209,8 @@ public class PhoneProfilesService extends Service {
                 //}
 
                 boolean secureKeyguard;
+                if (keyguardManager == null)
+                    keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
                 secureKeyguard = keyguardManager.isKeyguardSecure();
                 PPApplication.logE("$$$ PhoneProfilesService.onStartCommand","secureKeyguard="+secureKeyguard);
                 if (!secureKeyguard)
