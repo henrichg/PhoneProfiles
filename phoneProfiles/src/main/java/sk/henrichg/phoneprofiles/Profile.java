@@ -833,7 +833,7 @@ public class Profile {
 
     private static int getMinimumScreenBrightnessSetting ()
     {
-        /*final Resources res = Resources.getSystem();
+        final Resources res = Resources.getSystem();
         int id = res.getIdentifier("config_screenBrightnessSettingMinimum", "integer", "android"); // API17+
         if (id == 0)
             id = res.getIdentifier("config_screenBrightnessDim", "integer", "android"); // lower API levels
@@ -842,11 +842,9 @@ public class Profile {
             try {
                 return res.getInteger(id);
             }
-            catch (Resources.NotFoundException e) {
-                // ignore
-            }
-        }*/
-        return 0;
+            catch (Exception ignored) {}
+        }
+        return 1;
     }
 
     private static int getMaximumScreenBrightnessSetting ()
@@ -874,7 +872,7 @@ public class Profile {
         int minimumValue = getMinimumScreenBrightnessSetting();
 
         if (maximumValue-minimumValue > 255) {
-            minimumValue = 0;
+            minimumValue = 1;
             maximumValue = 255;
         }
 
