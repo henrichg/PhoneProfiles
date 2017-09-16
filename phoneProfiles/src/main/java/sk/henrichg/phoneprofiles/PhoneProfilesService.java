@@ -37,9 +37,9 @@ public class PhoneProfilesService extends Service {
     public static PhoneProfilesService instance = null;
     private static boolean serviceRunning = false;
 
-    private static KeyguardManager keyguardManager;
+    private static KeyguardManager keyguardManager = null;
     @SuppressWarnings("deprecation")
-    private static KeyguardManager.KeyguardLock keyguardLock;
+    private static KeyguardManager.KeyguardLock keyguardLock = null;
 
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
