@@ -171,7 +171,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragmentManager.executePendingTransactions();
         }
 
-        editorToolbar = (Toolbar)findViewById(R.id.editor_tollbar);
+        editorToolbar = findViewById(R.id.editor_tollbar);
         //editorToolbar.inflateMenu(R.menu.activity_editor_profiles);
         setSupportActionBar(editorToolbar);
 

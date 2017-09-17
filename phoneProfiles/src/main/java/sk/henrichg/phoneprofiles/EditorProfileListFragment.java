@@ -168,20 +168,20 @@ public class EditorProfileListFragment extends Fragment
         //super.onActivityCreated(savedInstanceState);
 
         // az tu mame layout, tak mozeme ziskat view-y
-    /*	activeProfileName = (TextView)getActivity().findViewById(R.id.activated_profile_name);
-        activeProfileIcon = (ImageView)getActivity().findViewById(R.id.activated_profile_icon);
-        listView = (DragSortListView)getActivity().findViewById(R.id.main_profiles_list);
+    /*	activeProfileName = getActivity().findViewById(R.id.activated_profile_name);
+        activeProfileIcon = getActivity().findViewById(R.id.activated_profile_icon);
+        listView = getActivity().findViewById(R.id.main_profiles_list);
         listView.setEmptyView(getActivity().findViewById(R.id.editor_profiles_list_empty));
     */
-        activeProfileName = (TextView)view.findViewById(R.id.activated_profile_name);
-        activeProfileIcon = (ImageView)view.findViewById(R.id.activated_profile_icon);
+        activeProfileName = view.findViewById(R.id.activated_profile_name);
+        activeProfileIcon = view.findViewById(R.id.activated_profile_icon);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        listView = (RecyclerView) view.findViewById(R.id.main_profiles_list);
+        listView = view.findViewById(R.id.main_profiles_list);
         listView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         listView.setLayoutManager(layoutManager);
         listView.setHasFixedSize(true);
-        textViewNoData = (TextView)view.findViewById(R.id.editor_profiles_list_empty);
+        textViewNoData = view.findViewById(R.id.editor_profiles_list_empty);
 
         /*
         View footerView =  ((LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
@@ -192,7 +192,7 @@ public class EditorProfileListFragment extends Fragment
         final Activity activity = getActivity();
         final EditorProfileListFragment fragment = this;
 
-        bottomToolbar = (Toolbar)getActivity().findViewById(R.id.editor_list_bottom_bar);
+        bottomToolbar = getActivity().findViewById(R.id.editor_list_bottom_bar);
         Menu menu = bottomToolbar.getMenu();
         if (menu != null) menu.clear();
         bottomToolbar.inflateMenu(R.menu.editor_profiles_bottom_bar);
@@ -557,7 +557,7 @@ public class EditorProfileListFragment extends Fragment
 
         if (ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context))
         {
-            ImageView profilePrefIndicatorImageView = (ImageView)getActivity().findViewById(R.id.activated_profile_pref_indicator);
+            ImageView profilePrefIndicatorImageView = getActivity().findViewById(R.id.activated_profile_pref_indicator);
             if (profilePrefIndicatorImageView != null)
             {
                 //profilePrefIndicatorImageView.setImageBitmap(ProfilePreferencesIndicator.paint(profile, getActivity().getBaseContext()));

@@ -130,7 +130,7 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
                 Object o = getPreferenceScreen().getRootAdapter().getItem(i);
                 if (o instanceof PreferenceCategory ){
                     if (o.equals(scrollCategory)){
-                        ListView listView = (ListView) getActivity().findViewById(android.R.id.list);
+                        ListView listView = getActivity().findViewById(android.R.id.list);
                         if (listView != null)
                             listView.setSelection(i);
                     }

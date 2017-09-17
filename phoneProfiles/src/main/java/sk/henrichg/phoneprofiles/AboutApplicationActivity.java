@@ -58,7 +58,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.about_application_title);
         }
 
-        TextView text = (TextView) findViewById(R.id.about_application_application_version);
+        TextView text = findViewById(R.id.about_application_application_version);
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             text.setText(getString(R.string.about_application_version) + " " + pInfo.versionName + " (" + pInfo.versionCode + ")");
@@ -66,14 +66,14 @@ public class AboutApplicationActivity extends AppCompatActivity {
             text.setText("");
         }
 
-        text = (TextView) findViewById(R.id.about_application_author);
+        text = findViewById(R.id.about_application_author);
         CharSequence str1 = getString(R.string.about_application_author);
         CharSequence str2 = str1 + " Henrich Gron";
         Spannable sbt = new SpannableString(str2);
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text.setText(sbt);
 
-        text = (TextView) findViewById(R.id.about_application_email);
+        text = findViewById(R.id.about_application_email);
         str1 = getString(R.string.about_application_email);
         str2 = str1 + " henrich.gron@gmail.com";
         sbt = new SpannableString(str2);
@@ -102,7 +102,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
-        text = (TextView) findViewById(R.id.about_application_privacy_policy);
+        text = findViewById(R.id.about_application_privacy_policy);
         str1 = getString(R.string.about_application_privacy_policy);
         str2 = str1 + " https://sites.google.com/site/phoneprofiles/home/privacy-policy";
         sbt = new SpannableString(str2);
@@ -121,7 +121,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
-        text = (TextView) findViewById(R.id.about_application_releases);
+        text = findViewById(R.id.about_application_releases);
         str1 = getString(R.string.about_application_releases);
         str2 = str1 + " https://github.com/henrichg/PhoneProfiles/releases";
         sbt = new SpannableString(str2);
@@ -140,7 +140,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
-        text = (TextView) findViewById(R.id.about_application_source_code);
+        text = findViewById(R.id.about_application_source_code);
         str1 = getString(R.string.about_application_source_code);
         str2 = str1 + " https://github.com/henrichg/PhoneProfiles";
         sbt = new SpannableString(str2);
@@ -159,7 +159,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
-        text = (TextView) findViewById(R.id.about_application_translations);
+        text = findViewById(R.id.about_application_translations);
         str1 = getString(R.string.about_application_transaltions);
         str2 = str1 + " https://crowdin.com/project/phoneprofilesplus";
         sbt = new SpannableString(str2);
@@ -178,7 +178,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
-        text = (TextView) findViewById(R.id.about_application_rate_application);
+        text = findViewById(R.id.about_application_rate_application);
         str1 = getString(R.string.about_application_rate_in_gplay);
         sbt = new SpannableString(str1);
         clickableSpan = new ClickableSpan() {

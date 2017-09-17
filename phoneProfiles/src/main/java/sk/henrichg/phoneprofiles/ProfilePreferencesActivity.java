@@ -515,7 +515,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
                 editor.apply();
 
-                Toolbar toolbar = (Toolbar) findViewById(R.id.mp_toolbar);
+                Toolbar toolbar = findViewById(R.id.mp_toolbar);
 
                 //TypedValue tv = new TypedValue();
                 //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
@@ -566,7 +566,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                 editor.putBoolean(PREF_START_TARGET_HELPS_SAVE, false);
                 editor.apply();
 
-                Toolbar toolbar = (Toolbar) findViewById(R.id.mp_toolbar);
+                Toolbar toolbar = findViewById(R.id.mp_toolbar);
 
                 //TypedValue tv = new TypedValue();
                 //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
