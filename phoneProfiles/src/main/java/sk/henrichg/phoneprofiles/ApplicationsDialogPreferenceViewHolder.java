@@ -49,7 +49,7 @@ class ApplicationsDialogPreferenceViewHolder extends RecyclerView.ViewHolder imp
 
         this.application = application;
 
-        imageViewIcon.setImageDrawable(application.icon);
+        imageViewIcon.setImageBitmap(EditorProfilesActivity.getApplicationsCache().getApplicationIcon(application, false));
         String text = application.appLabel;
         if (application.shortcutId > 0) {
             Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(application.shortcutId);

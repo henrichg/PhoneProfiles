@@ -8,7 +8,6 @@ class Application {
     String packageName = "";
     String activityName = "";
     long shortcutId = 0;
-    Drawable icon;
     boolean checked = false;
 
     public Application() {
