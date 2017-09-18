@@ -9,6 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.pm.ShortcutInfoCompat;
+import android.support.v4.content.pm.ShortcutManagerCompat;
+import android.support.v4.graphics.drawable.IconCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -190,9 +193,15 @@ public class ShortcutCreatorListFragment extends Fragment {
         //noinspection ConstantConditions
         shortcutIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
 
+        /*
         Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, profileName);
+        */
+        ShortcutInfoCompat.Builder shortcutBuilder = new ShortcutInfoCompat.Builder(getActivity(), "profile_shortcut");
+        shortcutBuilder.setIntent(shortcutIntent);
+        shortcutBuilder.setShortLabel(profileName);
+        shortcutBuilder.setLongLabel(profileName);
 
         if (isIconResourceID)
         {
@@ -236,7 +245,11 @@ public class ShortcutCreatorListFragment extends Fragment {
         }
 
         profileShortcutBitmap = combineImages(profileBitmap, shortcutOverlayBitmap);
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, profileShortcutBitmap);
+        //intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, profileShortcutBitmap);
+        shortcutBuilder.setIcon(IconCompat.createWithBitmap(profileShortcutBitmap));
+
+        ShortcutInfoCompat shortcutInfo = shortcutBuilder.build();
+        Intent intent = ShortcutManagerCompat.createShortcutResultIntent(getActivity(), shortcutInfo);
 
         getActivity().setResult(Activity.RESULT_OK, intent);
 
