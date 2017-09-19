@@ -99,8 +99,6 @@ public class PPApplication extends Application {
     public static  String notAllowedReasonDetail;
 
     public static final StartRootCommandMutex startRootCommandMutex = new StartRootCommandMutex();
-    public static final RefreshActivatorListMutex refreshActivatorListMutex = new RefreshActivatorListMutex();
-    public static final RefreshEditorProfilesListMutex refreshEditorProfilesListMutex = new RefreshEditorProfilesListMutex();
     public static final ScanResultsMutex scanResultsMutex = new ScanResultsMutex();
 
     public static boolean startedOnBoot = false;
