@@ -12,6 +12,8 @@ public class ExecuteRunApplicationsProfilePrefsService extends IntentService
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) return;
+
         PPApplication.logE("$$$ ExecuteRunApplicationsProfilePrefsService.onHandleIntent", "-- START ----------");
 
         Context context = getApplicationContext();

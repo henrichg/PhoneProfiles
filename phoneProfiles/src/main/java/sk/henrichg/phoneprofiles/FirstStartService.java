@@ -34,6 +34,8 @@ public class FirstStartService extends WakefulIntentService {
 
     @Override
     protected void doWakefulWork(Intent intent) {
+        if (intent == null) return;
+
         PPApplication.logE("FirstStartService.doWakefulWork", "xxx");
 
         Context context = getApplicationContext();

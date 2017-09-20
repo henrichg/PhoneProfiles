@@ -16,6 +16,8 @@ public class ExecuteRootProfilePrefsService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) return;
+
         PPApplication.logE("$$$ ExecuteRootProfilePrefsService.onHandleIntent", "-- START ----------");
 
         Context context = getApplicationContext();

@@ -14,6 +14,8 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
     //@Override
     //protected void doWakefulWork(Intent intent) {
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) return;
+
         Context context = getApplicationContext();
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);

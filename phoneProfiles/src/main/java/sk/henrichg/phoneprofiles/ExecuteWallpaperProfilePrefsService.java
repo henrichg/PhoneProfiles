@@ -12,6 +12,8 @@ public class ExecuteWallpaperProfilePrefsService extends IntentService
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) return;
+
         PPApplication.logE("ExecuteWallpaperProfilePrefsService.onHandleIntent","-- START ----------");
 
         Context context = getApplicationContext();

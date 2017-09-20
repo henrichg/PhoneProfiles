@@ -16,6 +16,8 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
     //@Override
     //protected void doWakefulWork(Intent intent) {
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) return;
+
         Context context = getApplicationContext();
 
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
