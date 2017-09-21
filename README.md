@@ -20,8 +20,8 @@ Required external libs
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - google-gson - https://code.google.com/p/google-gson/
 - material-dialogs - https://github.com/afollestad/material-dialogs
-- input-mask-android - https://github.com/RedMadRobot/input-mask-android
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
 - crashlytics - https://fabric.io/kits/android/crashlytics
 - quickscroll - https://github.com/andraskindler/quickscroll
 - cwac-wakeful - https://github.com/commonsguy/cwac-wakeful
+- time-duration-picker - https://github.com/svenwiegand/time-duration-picker
