@@ -72,7 +72,7 @@ dependencies {
         transitive = true;
     }
     compile 'com.commonsware.cwac:wakeful:1.1.0'
-    compile 'mobi.upod:time-duration-picker:1.1.1'
+    compile 'mobi.upod:time-duration-picker:1.1.2'
 }
 
 
