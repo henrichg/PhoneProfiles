@@ -9,6 +9,7 @@ public class ExecuteRadioProfilePrefsService extends IntentService //WakefulInte
 
     public ExecuteRadioProfilePrefsService() {
         super("ExecuteRadioProfilePrefsService");
+        setIntentRedelivery(true);
     }
 
     //@Override

@@ -11,6 +11,7 @@ public class ExecuteVolumeProfilePrefsService extends IntentService //WakefulInt
 
     public ExecuteVolumeProfilePrefsService() {
         super("ExecuteRadioProfilePrefsService");
+        setIntentRedelivery(true);
     }
 
     //@Override

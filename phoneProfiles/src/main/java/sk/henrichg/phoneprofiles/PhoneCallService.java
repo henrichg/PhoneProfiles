@@ -20,6 +20,7 @@ public class PhoneCallService extends IntentService {
 
     public PhoneCallService() {
         super("PhoneCallService");
+        setIntentRedelivery(true);
     }
 
     @Override
