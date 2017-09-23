@@ -456,8 +456,13 @@ public class PhoneProfilesService extends Service {
             else
                 contentView.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
 
-            //noinspection deprecation
-            notificationBuilder.setContent(contentView);
+            if (android.os.Build.VERSION.SDK_INT >= 24) {
+                //notificationBuilder.setStyle(new Notification.DecoratedCustomViewStyle());
+                notificationBuilder.setCustomContentView(contentView);
+            }
+            else
+                //noinspection deprecation
+                notificationBuilder.setContent(contentView);
 
             try {
                 Notification notification = notificationBuilder.build();
