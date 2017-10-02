@@ -257,6 +257,8 @@ public class ImageViewPreference extends Preference {
             }*/
             return uri;
         } else {
+            if (cursor != null)
+                cursor.close();
             File file = new File(imageFile);
             if (file.exists()) {
                 ContentValues values = new ContentValues();
