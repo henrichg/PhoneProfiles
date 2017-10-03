@@ -14,6 +14,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -251,6 +253,19 @@ class BitmapManipulator {
     static Bitmap monochromeBitmap(Bitmap bitmap, int value) {
         int color = Color.argb(0xFF, value, value, value);
         return recolorBitmap(bitmap, color);
+    }
+
+    static Bitmap getBitmapFromDrawable(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
     static Bitmap grayscaleBitmap(Bitmap bitmap)

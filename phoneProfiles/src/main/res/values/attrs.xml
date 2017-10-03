@@ -21,6 +21,8 @@
     </declare-styleable>
     <declare-styleable name="ProfilePreference">
         <attr name="addNoActivateItem" format="integer" />
+        <attr name="noActivateAsDoNotApply" format="integer" />
+        <attr name="showDuration" format="integer" />
     </declare-styleable>
     <declare-styleable name="DurationDialogPreference">
         <attr name="dMax" format="integer" />

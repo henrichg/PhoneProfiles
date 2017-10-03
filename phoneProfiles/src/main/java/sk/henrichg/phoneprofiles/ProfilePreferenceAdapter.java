@@ -13,23 +13,26 @@ import java.util.List;
 
 class ProfilePreferenceAdapter extends BaseAdapter {
 
-    public List<Profile> profileList;
+    List<Profile> profileList;
     private long profileId;
-    private ProfilePreferenceDialog dialog;
+    private ProfilePreference preference;
 
     private Context context;
 
     private LayoutInflater inflater = null;
 
-    ProfilePreferenceAdapter(ProfilePreferenceDialog dialog, Context c, String profileId, List<Profile> profileList)
+    ProfilePreferenceAdapter(ProfilePreference preference, Context c, String profileId, List<Profile> profileList)
     {
         context = c;
 
-        this.dialog = dialog;
+        this.preference = preference;
         this.profileList = profileList;
 
         if (profileId.isEmpty())
-            this.profileId = 0;
+            if (preference.addNoActivateItem == 1)
+                this.profileId = Profile.PROFILE_NO_ACTIVATE;
+            else
+                this.profileId = 0;
         else
             this.profileId = Long.valueOf(profileId);
 
@@ -38,14 +41,14 @@ class ProfilePreferenceAdapter extends BaseAdapter {
 
     public int getCount() {
         int count = profileList.size();
-        if (dialog.addNoActivateItem == 1)
+        if (preference.addNoActivateItem == 1)
             count++;
         return count;
     }
 
     public Object getItem(int position) {
         Profile profile;
-        if (dialog.addNoActivateItem == 1)
+        if (preference.addNoActivateItem == 1)
         {
             if (position == 0)
                 profile = null;
@@ -66,7 +69,7 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         TextView profileLabel;
         ImageView profileIndicator;
         RadioButton radioBtn;
-        int position;
+        //int position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent)
@@ -95,7 +98,7 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         }
 
         Profile profile;
-        if (dialog.addNoActivateItem == 1)
+        if (preference.addNoActivateItem == 1)
         {
             if (position == 0)
                 profile = null;
@@ -109,7 +112,7 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         holder.radioBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb = (RadioButton) v;
-                dialog.doOnItemSelected((Integer)rb.getTag());
+                preference.doOnItemSelected((Integer)rb.getTag());
             }
         });
 
@@ -117,7 +120,10 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         {
             holder.radioBtn.setChecked(profileId == profile._id);
 
-            holder.profileLabel.setText(profile._name);
+            if (preference.showDuration == 1)
+                holder.profileLabel.setText(profile.getProfileNameWithDuration(false, context));
+            else
+                holder.profileLabel.setText(profile._name);
             holder.profileIcon.setVisibility(View.VISIBLE);
             if (profile.getIsIconResourceID())
             {
@@ -142,10 +148,13 @@ class ProfilePreferenceAdapter extends BaseAdapter {
         }
         else
         {
-            if ((dialog.addNoActivateItem == 1) && (position == 0))
+            if ((preference.addNoActivateItem == 1) && (position == 0))
             {
                 holder.radioBtn.setChecked((profileId == Profile.PROFILE_NO_ACTIVATE));
-                holder.profileLabel.setText(vi.getResources().getString(R.string.profile_preference_profile_end_no_activate));
+                if (preference.noActivateAsDoNotApply == 1)
+                    holder.profileLabel.setText(vi.getResources().getString(R.string.profile_preference_do_not_apply));
+                else
+                    holder.profileLabel.setText(vi.getResources().getString(R.string.profile_preference_profile_end_no_activate));
                 //holder.profileIcon.setImageResource(R.drawable.ic_empty);
                 holder.profileIcon.setVisibility(View.GONE);
                 if (ApplicationPreferences.applicationEditorPrefIndicator(context))
