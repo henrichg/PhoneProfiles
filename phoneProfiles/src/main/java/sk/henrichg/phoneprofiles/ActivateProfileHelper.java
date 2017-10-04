@@ -1191,34 +1191,41 @@ public class ActivateProfileHelper {
             PackageManager packageManager = context.getPackageManager();
 
             for (String split : splits) {
-                if (!ApplicationsCache.isShortcut(split)) {
-                    intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
-                    if (intent != null) {
-                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        try {
-                            context.startActivity(intent);
-                            //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                            //SystemClock.sleep(1000);
-                            PPApplication.sleep(1000);
-                        } catch (Exception ignore) {
-                        }
-                    }
-                } else {
-                    long shortcutId = ApplicationsCache.getShortcutId(split);
-                    if (shortcutId > 0) {
-                        Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
-                        if (shortcut != null) {
+                int startApplicationDelay = ApplicationsCache.getStartApplicationDelay(split);
+                if (ApplicationsCache.getStartApplicationDelay(split) > 0) {
+                    RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(context, startApplicationDelay, split);
+                }
+                else {
+                    if (!ApplicationsCache.isShortcut(split)) {
+                        intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
+                        if (intent != null) {
+                            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             try {
-                                intent = Intent.parseUri(shortcut._intent, 0);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                                //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                //SystemClock.sleep(1000);
+                                PPApplication.sleep(1000);
+                            } catch (Exception ignore) {
+                            }
+                        }
+                    } else {
+                        long shortcutId = ApplicationsCache.getShortcutId(split);
+                        if (shortcutId > 0) {
+                            Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
+                            if (shortcut != null) {
                                 try {
-                                    context.startActivity(intent);
-                                    //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                                    //SystemClock.sleep(1000);
-                                    PPApplication.sleep(1000);
-                                } catch (Exception ignore) {}
-                            } catch (Exception ignored) {
+                                    intent = Intent.parseUri(shortcut._intent, 0);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    try {
+                                        context.startActivity(intent);
+                                        //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                        //SystemClock.sleep(1000);
+                                        PPApplication.sleep(1000);
+                                    } catch (Exception ignore) {
+                                    }
+                                } catch (Exception ignored) {
+                                }
                             }
                         }
                     }
