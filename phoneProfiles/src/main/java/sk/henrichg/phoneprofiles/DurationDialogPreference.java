@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.internal.MDButton;
 
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
@@ -60,7 +59,7 @@ public class DurationDialogPreference extends DialogPreference
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
                 .content(getDialogMessage())
-                .customView(R.layout.activity_duration_pref_dialog2, false)
+                .customView(R.layout.activity_duration_pref_dialog, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
