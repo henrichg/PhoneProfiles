@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationsDialogPreference  extends DialogPreference
-                                            implements OnStartDragItemListener {
+        implements OnStartDragItemListener {
 
     private Context context;
 
@@ -165,6 +165,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         applicationsListView = layout.findViewById(R.id.applications_pref_dlg_listview);
+        //applicationsListView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         applicationsListView.setLayoutManager(layoutManager);
         applicationsListView.setHasFixedSize(true);
 
@@ -562,7 +563,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         listAdapter.notifyDataSetChanged();
     }
 
-    void updateApplication(Application application, int positionInEditor) {
+    void updateApplication(Application application, int positionInEditor, int startApplicationDelay) {
         List<Application> cachedApplicationList = EditorProfilesActivity.getApplicationsCache().getList(false);
         if (cachedApplicationList != null) {
             int _position = applicationsList.indexOf(application);
@@ -580,16 +581,18 @@ public class ApplicationsDialogPreference  extends DialogPreference
             editedApplication.activityName = cachedApplication.activityName;
             if (!editedApplication.shortcut)
                 editedApplication.shortcutId = 0;
+            editedApplication.startApplicationDelay = startApplicationDelay;
 
             applicationsListView.getRecycledViewPool().clear();
             listAdapter.notifyDataSetChanged();
 
             if (editedApplication.shortcut &&
-                (editedApplication.packageName != null)) {
+                    (editedApplication.packageName != null)) {
                 Intent intent = new Intent(context, LaunchShortcutActivity.class);
                 intent.putExtra(LaunchShortcutActivity.EXTRA_PACKAGE_NAME, editedApplication.packageName);
                 intent.putExtra(LaunchShortcutActivity.EXTRA_ACTIVITY_NAME, editedApplication.activityName);
                 intent.putExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_POSITION, _position);
+                intent.putExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, startApplicationDelay);
 
                 ProfilePreferencesFragment.setApplicationsDialogPreference(this);
                 ((Activity)context).startActivityForResult(intent, RESULT_APPLICATIONS_EDITOR);
@@ -597,7 +600,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         }
     }
 
-    void updateShortcut(Intent shortcutIntent, String shortcutName, int position) {
+    void updateShortcut(Intent shortcutIntent, String shortcutName, int position, int startApplicationDelay) {
         /* Storing Intent to SQLite ;-)
         You can simply store the intent in a String way:
 
@@ -621,6 +624,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         }
         dataWrapper.getDatabaseHandler().addShortcut(shortcut);
         application.shortcutId = shortcut._id;
+        application.startApplicationDelay = startApplicationDelay;
 
         applicationsListView.getRecycledViewPool().clear();
         listAdapter.notifyDataSetChanged();

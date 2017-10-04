@@ -162,8 +162,8 @@ public class DurationDialogPreference extends DialogPreference
             }
         );
 
-        TextView mValueDescription = layout.findViewById(R.id.duration_pref_dlg_value_spinnerChar);
-        mValueDescription.setOnClickListener(new View.OnClickListener() {
+        TextView mValueSpinnerChar = layout.findViewById(R.id.duration_pref_dlg_value_spinnerChar);
+        mValueSpinnerChar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int hours = mSeekBarHours.getProgress();
