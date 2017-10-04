@@ -151,7 +151,7 @@
                 android:disableDependentsState="true"
                 android:dependency="notificationStatusBar"
                 android:widgetLayout="@layout/mp_preference_switch" />
-            <sk.henrichg.phoneprofiles.DurationDialogPreference2
+            <sk.henrichg.phoneprofiles.DurationDialogPreference
                 android:key="notificationStatusBarCancel"
                 android:summary="@string/phone_profiles_pref_notificationStatusBarCancel"
                 android:title="@string/phone_profiles_pref_notificationStatusBarCancel"

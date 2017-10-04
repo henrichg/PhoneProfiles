@@ -27,7 +27,7 @@
             android:title="@string/profile_preferences_category_activation_duration"
             android:key="prf_pref_activationDurationCategory"
             android:widgetLayout="@layout/start_activity_preference"  >
-            <sk.henrichg.phoneprofiles.DurationDialogPreference2
+            <sk.henrichg.phoneprofiles.DurationDialogPreference
                 android:key="prf_pref_duration"
                 android:summary="@string/profile_preferences_duration"
                 android:title="@string/profile_preferences_duration"
