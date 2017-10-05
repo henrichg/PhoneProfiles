@@ -67,7 +67,7 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
-    compile 'com.getkeepsafe.taptargetview:taptargetview:1.9.1'
+    compile 'com.github.KeepSafe:TapTargetView:master-SNAPSHOT'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
