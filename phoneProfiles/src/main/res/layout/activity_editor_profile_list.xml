@@ -30,8 +30,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/editor_tollbar"
-        android:layout_above="@+id/editor_list_bottom_bar"
+        android:layout_below="@id/editor_tollbar"
+        android:layout_above="@id/editor_list_bottom_bar"
         android:foreground="?android:windowContentOverlay" >
 
         <FrameLayout
