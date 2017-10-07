@@ -334,6 +334,7 @@
                 android:resource="@xml/samsung_edge"/>
         </receiver>
 
+        <!-- widget services -->
         <service
             android:name=".ProfileListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
@@ -357,26 +358,14 @@
                 android:value="@string/dashclock_extension_description"/>
         </service>
         <service
-            android:name=".ExecuteRadioProfilePrefsService"
+            android:name=".SamsungEdgeService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service
+            android:name=".DashClockService"
             android:exported="false">
         </service>
-        <service
-            android:name=".ExecuteVolumeProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ExecuteWallpaperProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".FirstStartService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".PhoneProfilesService"
-            android:exported="false"
-            android:stopWithTask="false">
-        </service>
+
+        <!-- other services -->
         <service
             android:name=".PPNotificationListenerService"
             android:enabled="@bool/api_v18"
@@ -387,37 +376,14 @@
                 <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
         </service>
+
+        <!-- main service -->
         <service
-            android:name=".PhoneCallService"
-            android:exported="false">
+            android:name=".PhoneProfilesService"
+            android:exported="false"
+            android:stopWithTask="false">
         </service>
-        <service
-            android:name=".ExecuteRunApplicationsProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ScreenOnOffService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".ExecuteRootProfilePrefsService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".SamsungEdgeService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
-        <service
-            android:name=".ProfileDurationService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".DashClockService"
-            android:exported="false">
-        </service>
-        <service
-            android:name=".PackageReplacedService"
-            android:exported="false">
-        </service>
+
     </application>
 
 </manifest>

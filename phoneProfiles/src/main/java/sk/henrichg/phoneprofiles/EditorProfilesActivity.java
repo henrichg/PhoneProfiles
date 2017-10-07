@@ -267,7 +267,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean ret = super.onPrepareOptionsMenu(menu);
 
-        boolean toneInstalled = FirstStartService.isToneInstalled(FirstStartService.TONE_ID, getApplicationContext());
+        boolean toneInstalled = FirstStartJob.isToneInstalled(FirstStartJob.TONE_ID, getApplicationContext());
 
         MenuItem menuItem = menu.findItem(R.id.menu_install_tone);
         if ((menuItem != null) && toneInstalled)
@@ -344,7 +344,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             return true;
         case R.id.menu_install_tone:
-            FirstStartService.installTone(FirstStartService.TONE_ID, FirstStartService.TONE_NAME, getApplicationContext(), true);
+            FirstStartJob.installTone(FirstStartJob.TONE_ID, FirstStartJob.TONE_NAME, getApplicationContext(), true);
             return true;
         case R.id.menu_pphelper_uninstall:
             PhoneProfilesHelper.uninstallPPHelper(this);

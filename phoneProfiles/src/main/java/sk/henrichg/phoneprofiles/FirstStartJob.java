@@ -1,8 +1,8 @@
 package sk.henrichg.phoneprofiles;
 
+
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaScannerConnection;
@@ -11,88 +11,95 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.commonsware.cwac.wakeful.WakefulIntentService;
+import com.evernote.android.job.Job;
+import com.evernote.android.job.JobRequest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+class FirstStartJob extends Job {
 
-public class FirstStartService extends WakefulIntentService {
+    static final String JOB_TAG  = "FirstStartJob";
 
-    public static final int TONE_ID = R.raw.phoneprofiles_silent;
-    public static final String TONE_NAME = "PhoneProfiles Silent";
+    static final int TONE_ID = R.raw.phoneprofiles_silent;
+    static final String TONE_NAME = "PhoneProfiles Silent";
 
-    public FirstStartService()
-    {
-        super("FirstStartService");
-    }
-
+    @NonNull
     @Override
-    protected void doWakefulWork(Intent intent) {
-        if (intent == null) return;
+    protected Result onRunJob(Params params) {
+        PPApplication.logE("FirstStartJob.onRunJob", "xxx");
 
-        PPApplication.logE("FirstStartService.doWakefulWork", "xxx");
-
-        Context context = getApplicationContext();
+        Context appContext = getContext().getApplicationContext();
 
         PPApplication.initRoot();
         // grant root
         //if (PPApplication.isRooted(false))
         //{
-            if (PPApplication.isRootGranted())
-            {
-                PPApplication.settingsBinaryExists();
-                PPApplication.serviceBinaryExists();
-                //PPApplication.getSUVersion();
-            }
+        if (PPApplication.isRootGranted())
+        {
+            PPApplication.settingsBinaryExists();
+            PPApplication.serviceBinaryExists();
+            //PPApplication.getSUVersion();
+        }
         //}
 
-        Permissions.clearMergedPermissions(context);
+        Permissions.clearMergedPermissions(appContext);
 
 
-        if (PPApplication.getApplicationStarted(getApplicationContext(), false))
-            return;
+        if (PPApplication.getApplicationStarted(appContext, false))
+            return Result.SUCCESS;
 
-        PPApplication.logE("FirstStartService.doWakefulWork", " application not started");
+        PPApplication.logE("FirstStartJob.onRunJob", " application not started");
 
         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
-        GlobalGUIRoutines.setLanguage(context);
+        GlobalGUIRoutines.setLanguage(appContext);
 
         // remove phoneprofiles_silent.mp3
         //removeTone("phoneprofiles_silent.mp3", context);
         // install phoneprofiles_silent.ogg
-        installTone(TONE_ID, TONE_NAME, context, false);
+        installTone(TONE_ID, TONE_NAME, appContext, false);
 
-        ActivateProfileHelper.setLockScreenDisabled(context, false);
+        ActivateProfileHelper.setLockScreenDisabled(appContext, false);
 
-        AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        ActivateProfileHelper.setRingerVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-        ActivateProfileHelper.setNotificationVolume(context, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-        RingerModeChangeReceiver.setRingerMode(context, audioManager);
+        AudioManager audioManager = (AudioManager)appContext.getSystemService(Context.AUDIO_SERVICE);
+        ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+        ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-            PPNotificationListenerService.setZenMode(context, audioManager);
-        InterruptionFilterChangedBroadcastReceiver.setZenMode(context,audioManager);
+            PPNotificationListenerService.setZenMode(appContext, audioManager);
+        InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext,audioManager);
 
         // show info notification
-        ImportantInfoNotification.showInfoNotification(context);
+        ImportantInfoNotification.showInfoNotification(appContext);
 
-        ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        Profile.setActivatedProfileForDuration(context, 0);
+        ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
+        Profile.setActivatedProfileForDuration(appContext, 0);
 
-        DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, context);
+        DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
+        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
 
-        PPApplication.setApplicationStarted(context, true);
+        PPApplication.setApplicationStarted(appContext, true);
 
         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
         dataWrapper.invalidateDataWrapper();
 
+        return Result.SUCCESS;
+    }
+
+    static void start() {
+        JobRequest.Builder jobBuilder = new JobRequest.Builder(JOB_TAG);
+        jobBuilder
+                .setUpdateCurrent(false) // don't update current, it would cancel this currently running job
+                .startNow()
+                .build()
+                .schedule();
     }
 
     static String getPhoneProfilesSilentUri(Context context, int type) {
@@ -108,8 +115,8 @@ public class FirstStartService extends WakefulIntentService {
 
                 String uriId = uri + "/" + id;
 
-                //Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "title="+title);
-                //Log.d("FirstStartService.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
+                //Log.d("FirstStartJob.getPhoneProfilesSilentNotificationUri", "title="+title);
+                //Log.d("FirstStartJob.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
 
                 if (title.equals("PhoneProfiles Silent") || title.equals("phoneprofiles_silent"))
                     return uriId;
@@ -130,8 +137,8 @@ public class FirstStartService extends WakefulIntentService {
 
             String uriId = uri + "/" + id;
 
-            //Log.d("FirstStartService.getToneName", "title="+title);
-            //Log.d("FirstStartService.getToneName", "uriId="+uriId);
+            //Log.d("FirstStartJob.getToneName", "title="+title);
+            //Log.d("FirstStartJob.getToneName", "uriId="+uriId);
 
             if (uriId.equals(_uri))
                 return title;
@@ -142,7 +149,7 @@ public class FirstStartService extends WakefulIntentService {
     private static boolean  isToneInstalled(int resID, String directory, Context context) {
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            //Log.d("FirstStartService.isToneInstalled","not writable shared storage");
+            //Log.d("FirstStartJob.isToneInstalled","not writable shared storage");
             return false;
         }
 
@@ -155,7 +162,7 @@ public class FirstStartService extends WakefulIntentService {
         File outFile = new File(path, filename);
 
         if (!outFile.exists()) {
-            //Log.d("FirstStartService.isToneInstalled","file not exists");
+            //Log.d("FirstStartJob.isToneInstalled","file not exists");
             return false;
         }
 
@@ -166,29 +173,29 @@ public class FirstStartService extends WakefulIntentService {
         Cursor cursor = context.getContentResolver().query(contentUri,
                 new String[]{MediaStore.MediaColumns.DATA},
                 MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-        //Log.d("FirstStartService.isToneInstalled","cursor="+cursor);
+        //Log.d("FirstStartJob.isToneInstalled","cursor="+cursor);
         if ((cursor == null) || (!cursor.moveToFirst())) {
             if (cursor != null)
                 cursor.close();
-            //Log.d("FirstStartService.isToneInstalled","empty cursor");
+            //Log.d("FirstStartJob.isToneInstalled","empty cursor");
             return false;
         }
         else {
-            //Log.d("FirstStartService.isToneInstalled","DATA="+cursor.getString(0));
+            //Log.d("FirstStartJob.isToneInstalled","DATA="+cursor.getString(0));
             cursor.close();
         }
 
             /*if (getPhoneProfilesSilentUri(context, RingtoneManager.TYPE_RINGTONE).isEmpty()) {
-                Log.d("FirstStartService.isToneInstalled","not in ringtone manager");
+                Log.d("FirstStartJob.isToneInstalled","not in ringtone manager");
                 return false;
             }*/
 
-        //Log.d("FirstStartService.isToneInstalled","tone installed");
+        //Log.d("FirstStartJob.isToneInstalled","tone installed");
 
         return true;
     }
 
-    public static boolean isToneInstalled(int resID, Context context) {
+    static boolean isToneInstalled(int resID, Context context) {
         if (Permissions.checkInstallTone(context)) {
             boolean ringtone = isToneInstalled(resID, Environment.DIRECTORY_RINGTONES, context);
             boolean notification = isToneInstalled(resID, Environment.DIRECTORY_NOTIFICATIONS, context);
@@ -196,7 +203,7 @@ public class FirstStartService extends WakefulIntentService {
             return ringtone && notification && alarm;
         }
         else {
-            //Log.d("FirstStartService.isToneInstalled","not granted permission");
+            //Log.d("FirstStartJob.isToneInstalled","not granted permission");
             return false;
         }
     }
@@ -256,7 +263,7 @@ public class FirstStartService extends WakefulIntentService {
                 }
 
             } catch (Exception e) {
-                Log.e("FirstStartService", "installTone: Error writing " + filename, e);
+                Log.e("FirstStartJob", "installTone: Error writing " + filename, e);
                 isError = true;
             } finally {
                 // Close the streams
@@ -271,7 +278,7 @@ public class FirstStartService extends WakefulIntentService {
             }
 
             if (!outFile.exists()) {
-                Log.e("FirstStartService", "installTone: Error writing " + filename);
+                Log.e("FirstStartJob", "installTone: Error writing " + filename);
                 isError = true;
             }
         }
@@ -292,7 +299,7 @@ public class FirstStartService extends WakefulIntentService {
                 if (cursor != null) {
                     if (!cursor.moveToFirst()) {
 
-                        //Log.e("FirstStartService","not exists in resolver");
+                        //Log.e("FirstStartJob","not exists in resolver");
 
                         // not exists content
 
@@ -316,7 +323,7 @@ public class FirstStartService extends WakefulIntentService {
                         Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
                         if (newUri != null) {
-                            //Log.d("FirstStartService","inserted to resolver");
+                            //Log.d("FirstStartJob","inserted to resolver");
 
                             // Tell the media scanner about the new ringtone
                             MediaScannerConnection.scanFile(
@@ -331,17 +338,17 @@ public class FirstStartService extends WakefulIntentService {
                             PPApplication.sleep(300);
                         }
                         else {
-                            Log.e("FirstStartService","newUri is empty");
+                            Log.e("FirstStartJob","newUri is empty");
                             cursor.close();
                             isError = true;
                         }
                     } else {
-                        //Log.d("FirstStartService","exists in resolver");
+                        //Log.d("FirstStartJob","exists in resolver");
                         cursor.close();
                     }
                 }
             } catch (Exception e) {
-                Log.e("FirstStartService", "installTone: Error installing tone " + filename);
+                Log.e("FirstStartJob", "installTone: Error installing tone " + filename);
                 isError = true;
             }
         }
@@ -360,7 +367,7 @@ public class FirstStartService extends WakefulIntentService {
         return !isError;
     }
 
-    public static void installTone(int resID, String title, Context context, boolean fromMenu) {
+    static void installTone(int resID, String title, Context context, boolean fromMenu) {
 
         boolean granted;
         if (fromMenu)
@@ -397,5 +404,4 @@ public class FirstStartService extends WakefulIntentService {
         outFile.delete();
     }
     */
-
 }

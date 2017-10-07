@@ -130,9 +130,8 @@ public class PhoneProfilesService extends Service {
         settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
         appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
-        // start service for first start
-        Intent firstStartServiceIntent = new Intent(appContext, FirstStartService.class);
-        WakefulIntentService.sendWakefulWork(appContext, firstStartServiceIntent);
+        // start job for first start
+        FirstStartJob.start();
     }
 
     @Override

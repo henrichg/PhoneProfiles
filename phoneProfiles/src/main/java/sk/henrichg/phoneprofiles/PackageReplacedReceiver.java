@@ -10,9 +10,9 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        PPApplication.logE("PackageReplacedReceiver.onReceive", "intent="+intent);
         if ((intent != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
-            Intent serviceIntent = new Intent(context.getApplicationContext(), PackageReplacedService.class);
-            WakefulIntentService.sendWakefulWork(context.getApplicationContext(), serviceIntent);
+            PackageReplacedJob.start();
         }
     }
 

@@ -452,7 +452,7 @@ public class ActivateProfileHelper {
     /*
     private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
-        if (linkUnlink == PhoneCallService.LINKMODE_NONE) {
+        if (linkUnlink == PhoneCallJob.LINKMODE_NONE) {
             ringerMode = PPApplication.getRingerMode(context);
             zenMode = PPApplication.getZenMode(context);
         }
@@ -571,7 +571,7 @@ public class ActivateProfileHelper {
                 boolean volumesSet = false;
                 if (getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
                     //if (doUnlink) {
-                    //if (linkUnlink == PhoneCallService.LINKMODE_UNLINK) {
+                    //if (linkUnlink == PhoneCallJob.LINKMODE_UNLINK) {
                     if (callState == TelephonyManager.CALL_STATE_RINGING) {
                         // for separating ringing and notification
                         // in ringing state ringer volumes must by set
@@ -587,7 +587,7 @@ public class ActivateProfileHelper {
                             } catch (Exception ignored) { }
                         }
                         volumesSet = true;
-                    } else if (linkUnlink == PhoneCallService.LINKMODE_LINK) {
+                    } else if (linkUnlink == PhoneCallJob.LINKMODE_LINK) {
                         // for separating ringing and notification
                         // in not ringing state ringer and notification volume must by change
                         //Log.e("ActivateProfileHelper","setVolumes get audio mode="+audioManager.getMode());
@@ -1016,7 +1016,7 @@ public class ActivateProfileHelper {
     void setRingerMode(Profile profile, AudioManager audioManager, boolean firstCall, boolean forProfileActivation)
     {
         // linkUnlink == LINKMODE_NONE: not do link and unlink volumes for phone call - called from ActivateProfileHelper.execute()
-        // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallService
+        // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallJob
 
         int ringerMode;
         int zenMode;
@@ -1261,15 +1261,8 @@ public class ActivateProfileHelper {
         final Profile profile = Profile.getMappedProfile(_profile, context);
 
         // nahodenie volume a ringer modu
-        // run service for execute volumes
-        try {
-            Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-            volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-            volumeServiceIntent.putExtra(EXTRA_LINKUNLINK_VOLUMES, PhoneCallService.LINKMODE_NONE);
-            volumeServiceIntent.putExtra(EXTRA_FOR_PROFILE_ACTIVATION, true);
-            //WakefulIntentService.sendWakefulWork(context, radioServiceIntent);
-            context.startService(volumeServiceIntent);
-        } catch (Exception ignored) {}
+        // run job for execute volumes
+        ExecuteVolumeProfilePrefsJob.start(profile._id, PhoneCallJob.LINKMODE_NONE, true);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         // nahodenie ringer modu - aby sa mohli nastavit hlasitosti
         setRingerMode(profile, audioManager);
@@ -1290,16 +1283,12 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie tonov
-        // moved to ExecuteVolumeProfilePrefsService
+        // moved to ExecuteVolumeProfilePrefsJob
         //setTones(profile);
 
         // nahodenie radio preferences
-        // run service for execute radios
-        try {
-            Intent radioServiceIntent = new Intent(context, ExecuteRadioProfilePrefsService.class);
-            radioServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-            context.startService(radioServiceIntent);
-        } catch (Exception ignored) {}
+        // run job for execute radios
+        ExecuteRadioProfilePrefsJob.start(profile._id);
 
         // nahodenie auto-sync
         try {
@@ -1421,12 +1410,7 @@ public class ActivateProfileHelper {
                                         ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                         profile.getDeviceBrightnessAdaptiveValue(context));
                             } catch (Exception ee) {
-                                try {
-                                    Intent rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-                                    rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_ADAPTIVE_BRIGHTNESS);
-                                    rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                                    context.startService(rootServiceIntent);
-                                } catch (Exception ignored) {}
+                                ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
                             }
                         }
                     }
@@ -1503,23 +1487,14 @@ public class ActivateProfileHelper {
         // nahodenie pozadia
         if (Permissions.checkProfileWallpaper(context, profile)) {
             if (profile._deviceWallpaperChange == 1) {
-                try {
-                    Intent wallpaperServiceIntent = new Intent(context, ExecuteWallpaperProfilePrefsService.class);
-                    wallpaperServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                    context.startService(wallpaperServiceIntent);
-                } catch (Exception ignored) {}
+                ExecuteWallpaperProfilePrefsJob.start(profile._id);
             }
         }
 
         Intent rootServiceIntent;
 
         // set power save mode
-        try {
-            rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-            rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_POWER_SAVE_MODE);
-            rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-            context.startService(rootServiceIntent);
-        } catch (Exception ignored) {}
+        ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
 
         if (Permissions.checkProfileLockDevice(context, profile)) {
             if (profile._lockDevice != 0) {
@@ -1528,12 +1503,7 @@ public class ActivateProfileHelper {
                 keyguardLocked = kgMgr.isKeyguardLocked();
                 PPApplication.logE("---$$$ ActivateProfileHelper.execute","keyguardLocked="+keyguardLocked);
                 if (!keyguardLocked) {
-                    try {
-                        rootServiceIntent = new Intent(context, ExecuteRootProfilePrefsService.class);
-                        rootServiceIntent.setAction(ExecuteRootProfilePrefsService.ACTION_LOCK_DEVICE);
-                        rootServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                        context.startService(rootServiceIntent);
-                    } catch (Exception ignored) {}
+                    ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
                 }
             }
         }
@@ -1586,11 +1556,7 @@ public class ActivateProfileHelper {
 
             if (profile._deviceRunApplicationChange == 1)
             {
-                try {
-                    Intent runApplicationsServiceIntent = new Intent(context, ExecuteRunApplicationsProfilePrefsService.class);
-                    runApplicationsServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                    context.startService(runApplicationsServiceIntent);
-                } catch (Exception ignored) {}
+                ExecuteRunApplicationsProfilePrefsJob.start(profile._id);
             }
 
         }

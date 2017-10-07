@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.evernote.android.job.JobConfig;
+import com.evernote.android.job.JobManager;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
@@ -40,13 +42,16 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static boolean logIntoLogCat = false;
+    private static boolean logIntoLogCat = true;
     private static boolean logIntoFile = false;
     private static boolean rootToolsDebug = false;
     private static String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
 
-                                            //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
+                                            +"|FirstStartJob"
+                                            +"|PackageReplacedJob"
+                                            +"|PackageReplacedReceiver"
+                                            +"|ExecuteRadioProfilePrefsJob"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -146,6 +151,9 @@ public class PPApplication extends Application {
         //	Debug.startMethodTracing("phoneprofiles");
 
         //long nanoTimeStart = startMeasuringRunTime();
+
+        JobConfig.setForceAllowApi14(true); // https://github.com/evernote/android-job/issues/197
+        JobManager.create(this).addJobCreator(new PPJobsCreator());
 
         PACKAGE_NAME = getPackageName();
 

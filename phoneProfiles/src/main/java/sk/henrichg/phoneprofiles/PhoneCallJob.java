@@ -1,14 +1,18 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.IntentService;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 
-public class PhoneCallService extends IntentService {
+import com.evernote.android.job.Job;
+import com.evernote.android.job.JobRequest;
 
-    private Context context;
+class PhoneCallJob extends Job {
+
+    static final String JOB_TAG  = "PhoneCallJob";
+
     private static AudioManager audioManager = null;
 
     private static boolean savedSpeakerphone = false;
@@ -17,55 +21,64 @@ public class PhoneCallService extends IntentService {
     public static final int LINKMODE_NONE = 0;
     public static final int LINKMODE_LINK = 1;
     public static final int LINKMODE_UNLINK = 2;
-
-    public PhoneCallService() {
-        super("PhoneCallService");
-        setIntentRedelivery(true);
-    }
-
+    
+    @NonNull
     @Override
-    protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
+    protected Result onRunJob(Params params) {
+        PPApplication.logE("ScreenOnOffJob.onRunJob", "xxx");
 
-            context = getApplicationContext();
+        final Context appContext = getContext().getApplicationContext();
 
-            int phoneEvent = intent.getIntExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_EVENT, 0);
-            boolean incoming = intent.getBooleanExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_INCOMING, true);
-            //String number = intent.getStringExtra(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_NUMBER);
+        Bundle bundle = params.getTransientExtras();
 
-            switch (phoneEvent) {
-                case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_START:
-                    callStarted(incoming);
-                    break;
-                case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_ANSWER:
-                    callAnswered();
-                    break;
-                case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_END:
-                    callEnded(incoming);
-                    break;
-            }
+        int phoneEvent = bundle.getInt(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_EVENT, 0);
+        boolean incoming = bundle.getBoolean(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_INCOMING, true);
+        //String number = bundle.getString(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_NUMBER);
+
+        switch (phoneEvent) {
+            case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_START:
+                callStarted(incoming, appContext);
+                break;
+            case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_ANSWER:
+                callAnswered(appContext);
+                break;
+            case PhoneCallBroadcastReceiver.SERVICE_PHONE_EVENT_END:
+                callEnded(incoming, appContext);
+                break;
         }
+
+        return Result.SUCCESS;
     }
 
-    private void setLinkUnlinkNotificationVolume(int linkMode) {
+    static void start(int phoneEvent, boolean incoming/*, String number*/) {
+        JobRequest.Builder jobBuilder = new JobRequest.Builder(JOB_TAG);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_EVENT, phoneEvent);
+        bundle.putBoolean(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_INCOMING, incoming);
+        //bundle.putString(PhoneCallBroadcastReceiver.EXTRA_SERVICE_PHONE_NUMBER, number);
+
+        jobBuilder
+                .setUpdateCurrent(false) // don't update current, it would cancel this currently running job
+                .setTransientExtras(bundle)
+                .startNow()
+                .build()
+                .schedule();
+    }
+
+    private void setLinkUnlinkNotificationVolume(int linkMode, Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
             DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
             Profile profile = dataWrapper.getActivatedProfile();
             if (profile != null) {
-                //Log.e("PhoneCallService", "doCallEvent - unlink");
-                try {
-                    Intent volumeServiceIntent = new Intent(context, ExecuteVolumeProfilePrefsService.class);
-                    volumeServiceIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                    volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_LINKUNLINK_VOLUMES, linkMode);
-                    volumeServiceIntent.putExtra(ActivateProfileHelper.EXTRA_FOR_PROFILE_ACTIVATION, false);
-                    context.startService(volumeServiceIntent);
-                } catch (Exception ignored) {}
+                //Log.e("PhoneCallJob", "doCallEvent - unlink");
+                ExecuteVolumeProfilePrefsJob.start(profile._id, linkMode, false);
             }
             dataWrapper.invalidateDataWrapper();
         }
     }
 
-    private void callStarted(boolean incoming)
+    private void callStarted(boolean incoming, Context context)
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -73,10 +86,10 @@ public class PhoneCallService extends IntentService {
         speakerphoneSelected = false;
 
         if (incoming)
-            setLinkUnlinkNotificationVolume(LINKMODE_UNLINK);
+            setLinkUnlinkNotificationVolume(LINKMODE_UNLINK, context);
     }
 
-    private void callAnswered()
+    private void callAnswered(Context context)
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -91,7 +104,7 @@ public class PhoneCallService extends IntentService {
         } while (SystemClock.uptimeMillis() - start < 2000);
 
         // audiomode is set to MODE_IN_CALL by system
-        //Log.e("PhoneCallService", "callAnswered audioMode=" + audioManager.getMode());
+        //Log.e("PhoneCallJob", "callAnswered audioMode=" + audioManager.getMode());
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
@@ -118,7 +131,7 @@ public class PhoneCallService extends IntentService {
         dataWrapper.invalidateDataWrapper();
     }
 
-    private void callEnded(boolean incoming)
+    private void callEnded(boolean incoming, Context context)
     {
         //Deactivate loudspeaker
 
@@ -126,7 +139,7 @@ public class PhoneCallService extends IntentService {
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
         // audiomode is set to MODE_IN_CALL by system
-        //Log.e("PhoneCallService", "callEnded (before back speaker phone) audioMode="+audioManager.getMode());
+        //Log.e("PhoneCallJob", "callEnded (before back speaker phone) audioMode="+audioManager.getMode());
 
         if (speakerphoneSelected)
         {
@@ -146,10 +159,10 @@ public class PhoneCallService extends IntentService {
         } while (SystemClock.uptimeMillis() - start < 2000);
 
         // audiomode is set to MODE_NORMAL by system
-        //Log.e("PhoneCallService", "callEnded (before unlink) audioMode="+audioManager.getMode());
+        //Log.e("PhoneCallJob", "callEnded (before unlink) audioMode="+audioManager.getMode());
 
         if (incoming)
-            setLinkUnlinkNotificationVolume(LINKMODE_LINK);
+            setLinkUnlinkNotificationVolume(LINKMODE_LINK, context);
     }
-
+    
 }
