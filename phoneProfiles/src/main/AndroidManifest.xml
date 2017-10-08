@@ -360,10 +360,6 @@
         <service
             android:name=".SamsungEdgeService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
-        <service
-            android:name=".DashClockService"
-            android:exported="false">
-        </service>
 
         <!-- other services -->
         <service

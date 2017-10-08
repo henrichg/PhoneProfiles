@@ -30,6 +30,8 @@ class PPJobsCreator implements JobCreator {
                 return new ScreenOnOffJob();
             case PhoneCallJob.JOB_TAG:
                 return new PhoneCallJob();
+            case DashClockJob.JOB_TAG:
+                return new DashClockJob();
             default:
                 return null;
         }

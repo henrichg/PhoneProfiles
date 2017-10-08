@@ -26,7 +26,6 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.crashlytics.android.Crashlytics;
 
 import java.util.Calendar;
