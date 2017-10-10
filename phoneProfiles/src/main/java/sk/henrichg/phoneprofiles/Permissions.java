@@ -115,10 +115,12 @@ public class Permissions {
         return context.checkPermission(permission, Process.myPid(), Process.myUid()) == PackageManager.PERMISSION_GRANTED;
     }
 
+    /*
     static boolean isSystemApp(Context context) {
         return (context.getApplicationInfo().flags
                 & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) != 0;
     }
+    */
 
     static List<PermissionType> recheckPermissions(Context context, List<PermissionType> _permissions) {
         List<PermissionType>  permissions = new ArrayList<>();
@@ -148,7 +150,10 @@ public class Permissions {
             //if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));
             if (!checkProfileVibrateWhenRinging(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
             if (!checkProfileVibrationOnTouch(context, profile)) permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
-            if (!checkProfileRingTones(context, profile)) permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
+            if (!checkProfileRingTones(context, profile)) {
+                permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
+                permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.READ_EXTERNAL_STORAGE));
+            }
             if (!checkProfileScreenTimeout(context, profile)) {
                 permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
                 permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
@@ -264,10 +269,11 @@ public class Permissions {
             if ((profile._soundRingtoneChange != 0) ||
                 (profile._soundNotificationChange != 0) ||
                 (profile._soundAlarmChange != 0)) {
-                boolean granted = Settings.System.canWrite(context);
-                if (granted)
+                boolean grantedSystemSettings = Settings.System.canWrite(context);
+                boolean grantedStorage = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                if (grantedSystemSettings)
                     setShowRequestWriteSettingsPermission(context, true);
-                return granted;
+                return grantedSystemSettings && grantedStorage;
             }
             else
                 return true;
@@ -433,7 +439,7 @@ public class Permissions {
             return hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
-    static boolean checkRingtones(Context context) {
+    private static boolean checkRingtonePreference(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23)
             return (ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         else
@@ -753,9 +759,9 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantRingtonePreferencesDialogPermissions(Context context, RingtonePreference preference) {
+    static boolean grantRingtonePreferenceDialogPermissions(Context context, RingtonePreference preference) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            boolean granted = checkRingtones(context);
+            boolean granted = checkRingtonePreference(context);
             if (!granted) {
                 try {
                     List<PermissionType> permissions = new ArrayList<>();
