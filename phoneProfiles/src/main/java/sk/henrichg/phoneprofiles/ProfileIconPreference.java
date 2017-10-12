@@ -41,9 +41,9 @@ public class ProfileIconPreference extends DialogPreference {
     private ImageView dialogIcon;
     private Button colorChooserButton;
 
-    private Context prefContext;
+    private final Context prefContext;
 
-    static int RESULT_LOAD_IMAGE = 1971;
+    static final int RESULT_LOAD_IMAGE = 1971;
 
     private static final String PREF_SHOW_HELP = "profile_icon_pref_show_help";
 

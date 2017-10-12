@@ -22,15 +22,15 @@ import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 class ApplicationEditorDialog
 {
 
-    ApplicationsDialogPreference preference;
+    private final ApplicationsDialogPreference preference;
     private List<Application> cachedApplicationList;
-    private ApplicationEditorDialogAdapter listAdapter;
+    private final ApplicationEditorDialogAdapter listAdapter;
 
-    MaterialDialog mDialog;
-    private TextView mDelayValue;
-    private TimeDurationPickerDialog mDelayValueDialog;
+    final MaterialDialog mDialog;
+    final private TextView mDelayValue;
+    final private TimeDurationPickerDialog mDelayValueDialog;
 
-    private Application mApplication;
+    private final Application mApplication;
 
     int selectedPosition;
     private int startApplicationDelay = 0;

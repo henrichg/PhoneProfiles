@@ -40,11 +40,11 @@ class ShortcutProfileListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-          ImageView profileIcon;
-          TextView profileName;
-          ImageView profileIndicator;
-          int position;
-        }
+        ImageView profileIcon;
+        TextView profileName;
+        ImageView profileIndicator;
+        //int position;
+    }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
@@ -105,9 +105,11 @@ class ShortcutProfileListAdapter extends BaseAdapter {
         return vi;
     }
 
+    /*
     public void setList(List<Profile> pl) {
         profileList = pl;
         notifyDataSetChanged();
     }
+    */
 
 }

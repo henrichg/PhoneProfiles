@@ -42,10 +42,10 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static boolean logIntoLogCat = true;
-    private static boolean logIntoFile = false;
-    private static boolean rootToolsDebug = false;
-    private static String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
+    private static final boolean logIntoLogCat = true;
+    private static final boolean logIntoFile = false;
+    private static final boolean rootToolsDebug = false;
+    private static final String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
 
                                             +"|FirstStartJob"
@@ -116,10 +116,10 @@ public class PPApplication extends Application {
     // Samsung Look instance
     public static Slook sLook = null;
     public static boolean sLookCocktailPanelEnabled = false;
-    public static boolean sLookCocktailBarEnabled = false;
+    //public static boolean sLookCocktailBarEnabled = false;
 
-    public static RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
-    public static DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
+    public static final RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
+    public static final DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
 
     @Override
     public void onCreate()
@@ -179,7 +179,7 @@ public class PPApplication extends Application {
             // true = The Device supports Edge Single Mode, Edge Single Plus Mode, and Edge Feeds Mode.
             sLookCocktailPanelEnabled = sLook.isFeatureEnabled(Slook.COCKTAIL_PANEL);
             // true = The Device supports Edge Immersive Mode feature.
-            sLookCocktailBarEnabled = sLook.isFeatureEnabled(Slook.COCKTAIL_BAR);
+            //sLookCocktailBarEnabled = sLook.isFeatureEnabled(Slook.COCKTAIL_BAR);
         } catch (SsdkUnsupportedException e) {
             sLook = null;
         }

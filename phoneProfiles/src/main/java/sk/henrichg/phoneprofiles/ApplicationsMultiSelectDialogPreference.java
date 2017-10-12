@@ -34,7 +34,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     private Context _context = null;
     private String value = "";
 
-    private int addShortcuts;
+    private final int addShortcuts;
 
     // Layout widgets.
     private MaterialDialog mDialog;

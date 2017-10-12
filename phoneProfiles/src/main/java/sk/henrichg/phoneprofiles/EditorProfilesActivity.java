@@ -243,7 +243,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         return true;
     }
 
-    static void onNextLayout(final View view, final Runnable runnable) {
+    private static void onNextLayout(final View view, final Runnable runnable) {
         final ViewTreeObserver observer = view.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

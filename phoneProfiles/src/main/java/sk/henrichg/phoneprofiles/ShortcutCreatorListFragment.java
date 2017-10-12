@@ -93,8 +93,8 @@ public class ShortcutCreatorListFragment extends Fragment {
 
     private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private WeakReference<ShortcutCreatorListFragment> fragmentWeakRef;
-        private DataWrapper dataWrapper;
+        private final WeakReference<ShortcutCreatorListFragment> fragmentWeakRef;
+        private final DataWrapper dataWrapper;
 
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {

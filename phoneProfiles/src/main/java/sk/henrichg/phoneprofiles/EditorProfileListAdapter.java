@@ -21,7 +21,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
 {
 
     private EditorProfileListFragment fragment;
-    private DataWrapper dataWrapper;
+    private final DataWrapper dataWrapper;
     private List<Profile> profileList;
 
     private final OnStartDragItemListener mDragStartListener;
@@ -116,12 +116,14 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         return -1;
     }
 
+    /*
     public void setList(List<Profile> pl)
     {
         profileList = pl;
         fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
+    */
 
     void addItem(Profile profile, boolean refresh)
     {
@@ -145,12 +147,14 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         dataWrapper.deleteAllProfiles();
     }
 
+    /*
     public void clear()
     {
         clearNoNotify();
         fragment.listView.getRecycledViewPool().clear();
         notifyDataSetChanged();
     }
+    */
 
     public Profile getActivatedProfile()
     {

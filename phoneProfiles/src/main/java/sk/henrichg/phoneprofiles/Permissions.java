@@ -76,8 +76,8 @@ public class Permissions {
     private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
 
     static class PermissionType implements Parcelable {
-        int preference;
-        String permission;
+        final int preference;
+        final String permission;
 
         PermissionType (int preference, String permission) {
             this.preference = preference;

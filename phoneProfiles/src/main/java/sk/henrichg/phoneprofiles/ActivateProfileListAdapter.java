@@ -24,7 +24,7 @@ class ActivateProfileListAdapter extends BaseAdapter
 
     private List<Profile> profileList;
     private ActivateProfileListFragment fragment;
-    private DataWrapper dataWrapper;
+    private final DataWrapper dataWrapper;
 
     //private boolean targetHelpsSequenceStarted;
     static final String PREF_START_TARGET_HELPS = "activate_profile_list_adapter_start_target_helps";
@@ -57,6 +57,7 @@ class ActivateProfileListAdapter extends BaseAdapter
         return position;
     }
 
+    /*
     public int getItemId(Profile profile)
     {
         for (int i = 0; i < profileList.size(); i++)
@@ -72,6 +73,7 @@ class ActivateProfileListAdapter extends BaseAdapter
         profileList = pl;
         notifyDataSetChanged();
     }
+    */
 
     int getItemPosition(Profile profile)
     {
@@ -218,8 +220,8 @@ class ActivateProfileListAdapter extends BaseAdapter
             // Toolbar.findViewById() returns null
             return;*/
 
-        if (fragment.targetHelpsSequenceStarted)
-            return;
+        //if (fragment.targetHelpsSequenceStarted)
+        //    return;
 
         ApplicationPreferences.getSharedPreferences(activity);
 

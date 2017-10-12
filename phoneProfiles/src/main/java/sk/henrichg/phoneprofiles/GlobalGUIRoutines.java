@@ -274,7 +274,7 @@ class GlobalGUIRoutines {
      * Uses reflection to access divider private attribute and override its color
      * Use Color.Transparent if you wish to hide them
      */
-    static void setSeparatorColorForNumberPicker(NumberPicker picker, int separatorColor) {
+    /*static void setSeparatorColorForNumberPicker(NumberPicker picker, int separatorColor) {
         Field[] pickerFields = NumberPicker.class.getDeclaredFields();
         for (Field pf : pickerFields) {
             if (pf.getName().equals("mSelectionDivider")) {
@@ -286,9 +286,9 @@ class GlobalGUIRoutines {
                 break;
             }
         }
-    }
+    }*/
 
-    static void updateTextAttributesForNumberPicker(NumberPicker picker, /*int textColor,*/ int textSizeSP) {
+    /*static void updateTextAttributesForNumberPicker(NumberPicker picker, int textSizeSP) {
         for (int i = 0; i < picker.getChildCount(); i++){
             View child = picker.getChildAt(i);
             if (child instanceof EditText) {
@@ -311,7 +311,7 @@ class GlobalGUIRoutines {
                 }
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("deprecation")
     static Spanned fromHtml(String source) {

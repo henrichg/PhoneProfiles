@@ -25,7 +25,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static SQLiteDatabase writableDb;
     private static final DatabaseHandlerMutex databaseHandlerMutex = new DatabaseHandlerMutex();
 
-    private Context context;
+    private final Context context;
     
     // Database Version
     private static final int DATABASE_VERSION = 1330;
@@ -1574,6 +1574,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    /*
     public void setChecked(List<Profile> list)
     {
         synchronized (databaseHandlerMutex) {
@@ -1602,6 +1603,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             //db.close();
         }
     }
+    */
 
     /*
     public int getActiveProfileSpeakerphone()

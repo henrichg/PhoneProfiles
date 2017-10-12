@@ -12,8 +12,8 @@ import java.util.List;
 
 class WifiSSIDData {
 
-    String ssid;
-    String bssid;
+    final String ssid;
+    final String bssid;
     //private boolean custom;
 
     WifiSSIDData(String ssid, String bssid/*, boolean custom*/)

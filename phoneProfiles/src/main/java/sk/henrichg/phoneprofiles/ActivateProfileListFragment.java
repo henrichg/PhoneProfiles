@@ -40,10 +40,10 @@ public class ActivateProfileListFragment extends Fragment {
 
     private static final String START_TARGET_HELPS_ARGUMENT = "start_target_helps";
 
-    public boolean targetHelpsSequenceStarted;
+    //public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "activate_profile_list_fragment_start_target_helps";
 
-    public static int PORDER_FOR_IGNORED_PROFILE = 1000000;
+    public static final int PORDER_FOR_IGNORED_PROFILE = 1000000;
 
     public ActivateProfileListFragment() {
     }
@@ -167,8 +167,8 @@ public class ActivateProfileListFragment extends Fragment {
 
     private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private WeakReference<ActivateProfileListFragment> fragmentWeakRef;
-        private DataWrapper dataWrapper;
+        private final WeakReference<ActivateProfileListFragment> fragmentWeakRef;
+        private final DataWrapper dataWrapper;
 
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {

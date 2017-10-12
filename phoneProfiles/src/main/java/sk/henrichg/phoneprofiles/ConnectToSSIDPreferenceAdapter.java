@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 class ConnectToSSIDPreferenceAdapter extends BaseAdapter
 {
-    private ConnectToSSIDDialogPreference preference;
+    private final ConnectToSSIDDialogPreference preference;
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     ConnectToSSIDPreferenceAdapter(Context context, ConnectToSSIDDialogPreference preference)
     {
@@ -37,7 +37,7 @@ class ConnectToSSIDPreferenceAdapter extends BaseAdapter
     static class ViewHolder {
         TextView SSIDName;
         RadioButton radioButton;
-        int position;
+        //int position;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent)

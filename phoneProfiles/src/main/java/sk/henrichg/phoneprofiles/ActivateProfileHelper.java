@@ -66,7 +66,7 @@ public class ActivateProfileHelper {
 
     private Context context;
 
-    static boolean lockRefresh = false;
+    static final boolean lockRefresh = false;
     static boolean disableScreenTimeoutInternalChange = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
@@ -1491,7 +1491,7 @@ public class ActivateProfileHelper {
             }
         }
 
-        Intent rootServiceIntent;
+        //Intent rootServiceIntent;
 
         // set power save mode
         ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
@@ -2707,7 +2707,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private static void commandWait(Command cmd) throws Exception {
+    private static void commandWait(Command cmd) {
         int waitTill = 50;
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; //7 tries, 6350 msec

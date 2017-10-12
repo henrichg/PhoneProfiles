@@ -87,7 +87,7 @@ public class EditorProfileListFragment extends Fragment
      * A dummy implementation of the Callbacks interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
-    private static OnStartProfilePreferences sDummyOnStartProfilePreferencesCallback = new OnStartProfilePreferences() {
+    private static final OnStartProfilePreferences sDummyOnStartProfilePreferencesCallback = new OnStartProfilePreferences() {
         public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex, boolean startTargetHelps) {
         }
     };
@@ -245,8 +245,8 @@ public class EditorProfileListFragment extends Fragment
 
     private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private WeakReference<EditorProfileListFragment> fragmentWeakRef;
-        private DataWrapper dataWrapper;
+        private final WeakReference<EditorProfileListFragment> fragmentWeakRef;
+        private final DataWrapper dataWrapper;
         boolean defaultProfilesGenerated = false;
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {

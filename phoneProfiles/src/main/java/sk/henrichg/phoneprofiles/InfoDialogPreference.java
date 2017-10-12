@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 public class InfoDialogPreference extends DialogPreference {
 
     private String infoText;
-    private Context _context;
+    private final Context _context;
     private AlertDialog mDialog;
 
     public InfoDialogPreference(Context context, AttributeSet attrs) {

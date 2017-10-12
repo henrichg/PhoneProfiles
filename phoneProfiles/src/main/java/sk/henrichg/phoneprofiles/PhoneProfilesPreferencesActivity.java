@@ -134,7 +134,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Profile activatedProfile = dataWrapper.getActivatedProfile();
+                //Profile activatedProfile = dataWrapper.getActivatedProfile();
                 Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_SET_SERVICE_FOREGROUND, true);
                 //TODO Android O

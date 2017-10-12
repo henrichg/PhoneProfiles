@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -48,19 +49,19 @@ public class BrightnessDialogPreference extends
     private int disableDefaultProfile = 0;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private int maximumValue = 100;
-    private int minimumValue = 0;
-    private int stepSize = 1;
+    private final int maximumValue = 100;
+    private final int minimumValue = 0;
+    private final int stepSize = 1;
 
     private String sValue = "";
     private int value = 0;
 
     private boolean adaptiveAllowed = true;
-    private Profile _defaultProfile;
+    private final Profile _defaultProfile;
 
-    private int savedBrightness;
+    private final int savedBrightness;
     private float savedAdaptiveBrightness;
-    private int savedBrightnessMode;
+    private final int savedBrightnessMode;
 
     public BrightnessDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -346,6 +347,7 @@ public class BrightnessDialogPreference extends
     public void onProgressChanged(SeekBar seek, int newValue,
                                   boolean fromUser) {
         // Round the value to the closest integer value.
+        //noinspection ConstantConditions
         if (stepSize >= 1) {
             value = Math.round(newValue/stepSize)*stepSize;
         }
@@ -599,6 +601,7 @@ public class BrightnessDialogPreference extends
         int defaultProfile = 0;
         int disableDefaultProfile = 0;
 
+        @SuppressLint("ParcelClassLoader")
         SavedState(Parcel source)
         {
             super(source);

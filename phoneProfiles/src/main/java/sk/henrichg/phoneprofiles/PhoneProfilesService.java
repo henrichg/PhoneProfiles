@@ -495,7 +495,7 @@ public class PhoneProfilesService extends Service {
         }
     }
 
-    void removeProfileNotification(Context context)
+    private void removeProfileNotification(Context context)
     {
         if (ApplicationPreferences.notificationStatusBarPermanent(context))
             stopForeground(true);

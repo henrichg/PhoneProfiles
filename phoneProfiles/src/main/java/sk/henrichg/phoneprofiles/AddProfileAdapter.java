@@ -12,10 +12,10 @@ import java.util.List;
 
 class AddProfileAdapter extends BaseAdapter {
 
-    private List<Profile> profileList;
+    private final List<Profile> profileList;
     //private AddProfileDialog dialog;
 
-    private Context context;
+    private final Context context;
 
     private LayoutInflater inflater = null;
 
@@ -47,7 +47,7 @@ class AddProfileAdapter extends BaseAdapter {
         ImageView profileIcon;
         TextView profileLabel;
         ImageView profileIndicator;
-        int position;
+        //int position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent)

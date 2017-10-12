@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 class ProfileIconPreferenceAdapter extends BaseAdapter {
 
-    private Context context;
+    private final Context context;
     private LayoutInflater inflater = null;
     private String imageIdentifier;
     private boolean isImageResourceID;
@@ -45,7 +45,7 @@ class ProfileIconPreferenceAdapter extends BaseAdapter {
 
     static class ViewHolder {
         ImageView icon;
-        int position;
+        //int position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

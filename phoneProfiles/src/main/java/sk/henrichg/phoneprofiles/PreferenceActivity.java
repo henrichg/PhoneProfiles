@@ -12,7 +12,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
     Toolbar toolbar;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void setPreferenceFragment(sk.henrichg.phoneprofiles.PreferenceFragment preferenceFragment) {
+    void setPreferenceFragment(sk.henrichg.phoneprofiles.PreferenceFragment preferenceFragment) {
 
         //First check if it's already loaded (configuration change) so we don't overlap fragments
         if(getFragmentManager()
@@ -61,7 +61,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public PreferenceFragment getFragment() {
+    PreferenceFragment getFragment() {
         int id;
         //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             id = R.id.content;
