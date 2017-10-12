@@ -57,22 +57,7 @@ public class LaunchShortcutActivity extends Activity {
     {
         if (requestCode == 100) {
             if ((resultCode == RESULT_OK) && (data != null)) {
-                Intent intent = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
-                String name = data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
-                Bitmap icon = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
-
-                /*
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                */
-
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
-                returnIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
-                returnIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
+                Intent returnIntent = data;
                 returnIntent.putExtra(EXTRA_DIALOG_PREFERENCE_POSITION, dialogPreferencePosition);
                 returnIntent.putExtra(EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, startApplicationDelay);
                 setResult(RESULT_OK,returnIntent);

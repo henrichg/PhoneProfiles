@@ -809,6 +809,8 @@ public class Permissions {
         imageViewPreference = null;
         profileIconPreference = null;
         editorActivity = null;
+        brightnessDialogPreference = null;
+        ringtonePreference = null;
     }
 
 

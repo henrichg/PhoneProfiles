@@ -161,6 +161,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         super.onStop();
         if (instance == this)
             instance = null;
+        ActivatorTargetHelpsActivity.activatorActivity = null;
     }
 
     @Override
