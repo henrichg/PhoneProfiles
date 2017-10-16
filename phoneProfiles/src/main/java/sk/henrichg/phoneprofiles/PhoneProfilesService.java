@@ -469,7 +469,7 @@ public class PhoneProfilesService extends Service {
                 //if (Build.VERSION.SDK_INT < 26) {
                 if (ApplicationPreferences.notificationStatusBarPermanent(dataWrapper.context)) {
                     //notification.flags |= Notification.FLAG_NO_CLEAR;
-                    notification.flags |= Notification.FLAG_ONGOING_EVENT;
+                    notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
                 } else {
                     setAlarmForNotificationCancel(dataWrapper.context);
                 }
