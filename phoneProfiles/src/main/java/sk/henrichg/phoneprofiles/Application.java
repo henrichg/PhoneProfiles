@@ -1,7 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import android.graphics.drawable.Drawable;
-
 class Application {
     boolean shortcut = false;
     String appLabel = "";

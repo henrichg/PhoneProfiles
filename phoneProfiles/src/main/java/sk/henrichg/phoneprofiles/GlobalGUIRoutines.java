@@ -7,18 +7,12 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.NumberPicker;
 
-import java.lang.reflect.Field;
 import java.text.Collator;
 import java.util.Calendar;
 import java.util.List;
