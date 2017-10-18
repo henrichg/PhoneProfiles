@@ -20,6 +20,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -27,6 +28,7 @@ import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 
@@ -1288,6 +1290,11 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
     {
         String value;
+        if (key.equals(Profile.PREF_PROFILE_NAME)) {
+            value = sharedPreferences.getString(key, "");
+            Toolbar toolbar = getActivity().findViewById(R.id.mp_toolbar);
+            toolbar.setSubtitle(getString(R.string.profile_string_0) + ": " + value);
+        }
         if (key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
             key.equals(Profile.PREF_PROFILE_HIDE_STATUS_BAR_ICON)) {
             boolean bValue = sharedPreferences.getBoolean(key, false);
