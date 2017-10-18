@@ -208,8 +208,8 @@ class GlobalGUIRoutines {
                         _activity.overridePendingTransition(0, 0);
                         _activity.finish();
 
-                        _activity.overridePendingTransition(0, 0);
                         _activity.startActivity(intent);
+                        _activity.overridePendingTransition(0, 0);
                     } catch (Exception ignore) {}
                 }
             });

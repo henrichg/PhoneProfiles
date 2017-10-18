@@ -19,12 +19,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrantPermissionActivity extends Activity {
+public class GrantPermissionActivity extends AppCompatActivity {
 
     private int grantType;
     private List<Permissions.PermissionType> permissions;
@@ -54,6 +55,7 @@ public class GrantPermissionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
 
         Intent intent = getIntent();
         grantType = intent.getIntExtra(Permissions.EXTRA_GRANT_TYPE, 0);
@@ -653,6 +655,13 @@ public class GrantPermissionActivity extends Activity {
         //}
 
 
+    }
+
+    @Override
+    public void finish()
+    {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 
 }
