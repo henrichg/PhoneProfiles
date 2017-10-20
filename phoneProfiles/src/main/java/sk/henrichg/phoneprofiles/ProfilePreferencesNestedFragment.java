@@ -106,6 +106,15 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE) {
+            Toolbar toolbar = getActivity().findViewById(R.id.mp_toolbar);
+            Bundle bundle = getArguments();
+            if (bundle.getBoolean(PreferenceFragment.EXTRA_NESTED, false))
+                toolbar.setSubtitle(getString(R.string.title_activity_default_profile_preferences));
+            else
+                toolbar.setSubtitle(null);
+        }
+
         setPreferencesManager();
         preferences = prefMng.getSharedPreferences();
         preferences.registerOnSharedPreferenceChangeListener(this);
