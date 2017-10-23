@@ -14,7 +14,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
         if (PPApplication.getApplicationStarted(context, false)) {
-            ProfileDurationJob.start(intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0));
+            ProfileDurationJob.start(context.getApplicationContext(), intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0));
         }
     }
 

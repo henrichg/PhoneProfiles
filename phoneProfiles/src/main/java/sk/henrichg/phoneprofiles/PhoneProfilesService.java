@@ -130,7 +130,7 @@ public class PhoneProfilesService extends Service {
         appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
         // start job for first start
-        FirstStartJob.start();
+        FirstStartJob.start(appContext);
     }
 
     @Override
@@ -172,17 +172,27 @@ public class PhoneProfilesService extends Service {
 
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
-        final DataWrapper dataWrapper =  new DataWrapper(this, true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
-        Profile activatedProfile = dataWrapper.getActivatedProfile();
-        showProfileNotification(activatedProfile, dataWrapper);
+        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
+            final Context _this = this;
+            final Handler handler = new Handler(this.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    // set service foreground
+                    final DataWrapper dataWrapper =  new DataWrapper(_this, true, false, 0);
+                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
+                    Profile activatedProfile = dataWrapper.getActivatedProfile();
+                    showProfileNotification(activatedProfile, dataWrapper);
+                }
+            });
+        }
 
         if (intent != null) {
-            if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
+            /*if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
                 PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SET_SERVICE_FOREGROUND");
                 dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
                 showProfileNotification(activatedProfile, dataWrapper);
-            }
+            }*/
 
             if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                 PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");

@@ -1262,7 +1262,7 @@ public class ActivateProfileHelper {
 
         // nahodenie volume a ringer modu
         // run job for execute volumes
-        ExecuteVolumeProfilePrefsJob.start(profile._id, PhoneCallJob.LINKMODE_NONE, true);
+        ExecuteVolumeProfilePrefsJob.start(context, profile._id, PhoneCallJob.LINKMODE_NONE, true);
         /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         // nahodenie ringer modu - aby sa mohli nastavit hlasitosti
         setRingerMode(profile, audioManager);
@@ -1288,7 +1288,7 @@ public class ActivateProfileHelper {
 
         // nahodenie radio preferences
         // run job for execute radios
-        ExecuteRadioProfilePrefsJob.start(profile._id);
+        ExecuteRadioProfilePrefsJob.start(context, profile._id);
 
         // nahodenie auto-sync
         try {
@@ -1410,7 +1410,7 @@ public class ActivateProfileHelper {
                                         ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                         profile.getDeviceBrightnessAdaptiveValue(context));
                             } catch (Exception ee) {
-                                ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
+                                ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
                             }
                         }
                     }
@@ -1487,14 +1487,14 @@ public class ActivateProfileHelper {
         // nahodenie pozadia
         if (Permissions.checkProfileWallpaper(context, profile)) {
             if (profile._deviceWallpaperChange == 1) {
-                ExecuteWallpaperProfilePrefsJob.start(profile._id);
+                ExecuteWallpaperProfilePrefsJob.start(context, profile._id);
             }
         }
 
         //Intent rootServiceIntent;
 
         // set power save mode
-        ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
+        ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
 
         if (Permissions.checkProfileLockDevice(context, profile)) {
             if (profile._lockDevice != 0) {
@@ -1503,7 +1503,7 @@ public class ActivateProfileHelper {
                 keyguardLocked = kgMgr.isKeyguardLocked();
                 PPApplication.logE("---$$$ ActivateProfileHelper.execute","keyguardLocked="+keyguardLocked);
                 if (!keyguardLocked) {
-                    ExecuteRootProfilePrefsJob.start(ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
+                    ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
                 }
             }
         }
@@ -1556,7 +1556,7 @@ public class ActivateProfileHelper {
 
             if (profile._deviceRunApplicationChange == 1)
             {
-                ExecuteRunApplicationsProfilePrefsJob.start(profile._id);
+                ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
             }
 
         }
