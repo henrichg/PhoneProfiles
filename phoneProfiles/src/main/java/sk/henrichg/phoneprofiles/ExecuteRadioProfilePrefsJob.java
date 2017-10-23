@@ -47,12 +47,14 @@ class ExecuteRadioProfilePrefsJob extends Job {
         Bundle bundle = new Bundle();
         bundle.putLong(PPApplication.EXTRA_PROFILE_ID, profile_id);
 
-        jobBuilder
-                .setUpdateCurrent(false) // don't update current, it would cancel this currently running job
-                .setTransientExtras(bundle)
-                .startNow()
-                .build()
-                .schedule();
+        try {
+            jobBuilder
+                    .setUpdateCurrent(false) // don't update current, it would cancel this currently running job
+                    .setTransientExtras(bundle)
+                    .startNow()
+                    .build()
+                    .schedule();
+        } catch (Exception ignored) { }
     }
 
 }
