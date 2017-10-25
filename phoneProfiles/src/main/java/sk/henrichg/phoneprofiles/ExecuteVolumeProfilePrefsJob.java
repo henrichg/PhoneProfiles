@@ -41,21 +41,21 @@ class ExecuteVolumeProfilePrefsJob extends Job {
 
         if (profile != null)
         {
-            aph.setTones(profile);
+            aph.setTones(appContext, profile);
 
             if (/*Permissions.checkProfileVolumePreferences(context, profile) &&*/
                     Permissions.checkProfileAccessNotificationPolicy(appContext, profile)) {
 
                 aph.changeRingerModeForVolumeEqual0(profile);
-                aph.changeNotificationVolumeForVolumeEqual0(profile);
+                aph.changeNotificationVolumeForVolumeEqual0(appContext, profile);
 
                 RingerModeChangeReceiver.internalChange = true;
 
                 final AudioManager audioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
 
-                aph.setRingerMode(profile, audioManager, true, forProfileActivation);
-                aph.setVolumes(profile, audioManager, linkUnlink, forProfileActivation);
-                aph.setRingerMode(profile, audioManager, false, forProfileActivation);
+                aph.setRingerMode(appContext, profile, audioManager, true, forProfileActivation);
+                aph.setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+                aph.setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
 
                 //try { Thread.sleep(500); } catch (InterruptedException e) { }
                 //SystemClock.sleep(500);
@@ -72,7 +72,7 @@ class ExecuteVolumeProfilePrefsJob extends Job {
 
             }
 
-            aph.setTones(profile);
+            aph.setTones(appContext, profile);
         }
         dataWrapper.invalidateDataWrapper();
 
