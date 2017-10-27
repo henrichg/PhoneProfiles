@@ -54,8 +54,10 @@ class ExecuteVolumeProfilePrefsJob extends Job {
                 final AudioManager audioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
 
                 aph.setRingerMode(appContext, profile, audioManager, true, forProfileActivation);
-                aph.setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+                //aph.setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
                 aph.setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
+                PPApplication.sleep(500);
+                aph.setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
 
                 //try { Thread.sleep(500); } catch (InterruptedException e) { }
                 //SystemClock.sleep(500);
