@@ -28,7 +28,6 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.crashlytics.android.Crashlytics;
-import com.evernote.android.job.Job;
 
 import java.util.Calendar;
 
@@ -139,7 +138,7 @@ public class PhoneProfilesService extends Service {
             public void run() {
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.2");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 PPApplication.initRoot();
                 // grant root

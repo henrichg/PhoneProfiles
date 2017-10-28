@@ -402,7 +402,7 @@ public class ActivateProfileHelper {
 
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForRadios");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 boolean _isAirplaneMode = false;
                 boolean _setAirplaneMode = false;
@@ -883,7 +883,7 @@ public class ActivateProfileHelper {
 
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForVolumes");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 int linkUnlink;
                 if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext))
@@ -1212,7 +1212,7 @@ public class ActivateProfileHelper {
                 public void run() {
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForWallpaper");
-                    wakeLock.acquire();
+                    wakeLock.acquire(10 * 60 * 1000);
 
                     DisplayMetrics displayMetrics = new DisplayMetrics();
                     WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -1281,7 +1281,7 @@ public class ActivateProfileHelper {
 
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForRunApplications");
-                    wakeLock.acquire();
+                    wakeLock.acquire(10 * 60 * 1000);
 
                     String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
                     Intent intent;
@@ -1346,7 +1346,7 @@ public class ActivateProfileHelper {
 
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeRootForAdaptiveBrightness");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
                     synchronized (PPApplication.startRootCommandMutex) {
@@ -2731,7 +2731,7 @@ public class ActivateProfileHelper {
 
                         PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.setPowerSaveMode");
-                        wakeLock.acquire();
+                        wakeLock.acquire(10 * 60 * 1000);
 
                         if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
                             boolean _isPowerSaveMode = false;
@@ -2797,7 +2797,7 @@ public class ActivateProfileHelper {
 
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.lockDevice");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 switch (profile._lockDevice) {
                     case 3:

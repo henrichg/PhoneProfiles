@@ -12,8 +12,6 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
-import com.evernote.android.job.JobConfig;
-import com.evernote.android.job.JobManager;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;

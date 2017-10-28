@@ -30,7 +30,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
             public void run() {
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ScreenOnOffBroadcastReceiver.onReceive");
-                wakeLock.acquire();
+                wakeLock.acquire(10 * 60 * 1000);
 
                 if (action.equals(Intent.ACTION_SCREEN_ON))
                     PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
