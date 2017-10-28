@@ -7,14 +7,63 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.PowerManager;
 
 import java.util.Calendar;
+
+import static android.content.Context.POWER_SERVICE;
 
 public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
         if (PPApplication.getApplicationStarted(context, false)) {
-            ProfileDurationJob.start(context.getApplicationContext(), intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0));
+            //ProfileDurationJob.start(context.getApplicationContext(), intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0));
+            final Context appContext = context.getApplicationContext();
+            final long profileId = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+            final Handler handler = new Handler(appContext.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (profileId != 0) {
+
+                        PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProfileDurationAlarmBroadcastReceiver.onReceive");
+                        wakeLock.acquire();
+
+                        DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
+
+                        Profile profile = dataWrapper.getProfileById(profileId);
+                        Profile activatedProfile = dataWrapper.getActivatedProfile();
+
+                        if ((profile != null) && (activatedProfile != null) &&
+                                (activatedProfile._id == profile._id) &&
+                                (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
+                        {
+                            // alarm is from activated profile
+
+                            long activateProfileId = 0;
+                            if (profile._afterDurationDo == Profile.AFTERDURATIONDO_BACKGROUNPROFILE)
+                            {
+                                activateProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(appContext));
+                                if (activateProfileId == Profile.PROFILE_NO_ACTIVATE)
+                                    activateProfileId = 0;
+                            }
+                            if (profile._afterDurationDo == Profile.AFTERDURATIONDO_UNDOPROFILE)
+                            {
+                                activateProfileId = Profile.getActivatedProfileForDuration(appContext);
+                            }
+
+                            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
+                            dataWrapper.activateProfileAfterDuration(activateProfileId);
+                        }
+
+                        dataWrapper.invalidateDataWrapper();
+
+                        wakeLock.release();
+                    }
+                }
+            });
         }
     }
 

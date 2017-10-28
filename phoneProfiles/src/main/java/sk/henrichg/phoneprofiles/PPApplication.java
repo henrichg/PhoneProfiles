@@ -48,10 +48,8 @@ public class PPApplication extends Application {
     private static final String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
                                             +"|PhoneProfilesBackupAgent"
 
-                                            +"|FirstStartJob"
-                                            +"|PackageReplacedJob"
+                                            +"|PhoneProfilesService"
                                             +"|PackageReplacedReceiver"
-                                            +"|ExecuteRadioProfilePrefsJob"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -151,9 +149,6 @@ public class PPApplication extends Application {
         //	Debug.startMethodTracing("phoneprofiles");
 
         //long nanoTimeStart = startMeasuringRunTime();
-
-        JobConfig.setForceAllowApi14(true); // https://github.com/evernote/android-job/issues/197
-        JobManager.create(this).addJobCreator(new PPJobsCreator());
 
         PACKAGE_NAME = getPackageName();
 

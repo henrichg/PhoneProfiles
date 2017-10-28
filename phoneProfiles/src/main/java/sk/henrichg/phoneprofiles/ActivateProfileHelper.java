@@ -59,6 +59,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import static android.content.Context.DEVICE_POLICY_SERVICE;
+import static android.content.Context.POWER_SERVICE;
 
 public class ActivateProfileHelper {
 
@@ -391,51 +392,64 @@ public class ActivateProfileHelper {
         }
     }
 
-    void executeForRadios(Profile profile)
+    void executeForRadios(final Profile profile)
     {
-        boolean _isAirplaneMode = false;
-        boolean _setAirplaneMode = false;
-        if (profile._deviceAirplaneMode != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
-                _isAirplaneMode = isAirplaneMode(context);
-                switch (profile._deviceAirplaneMode) {
-                    case 1:
-                        if (!_isAirplaneMode) {
-                            _isAirplaneMode = true;
-                            _setAirplaneMode = true;
+        final Context appContext = context.getApplicationContext();
+        final Handler handler = new Handler(appContext.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForRadios");
+                wakeLock.acquire();
+
+                boolean _isAirplaneMode = false;
+                boolean _setAirplaneMode = false;
+                if (profile._deviceAirplaneMode != 0) {
+                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
+                        _isAirplaneMode = isAirplaneMode(context);
+                        switch (profile._deviceAirplaneMode) {
+                            case 1:
+                                if (!_isAirplaneMode) {
+                                    _isAirplaneMode = true;
+                                    _setAirplaneMode = true;
+                                }
+                                break;
+                            case 2:
+                                if (_isAirplaneMode) {
+                                    _isAirplaneMode = false;
+                                    _setAirplaneMode = true;
+                                }
+                                break;
+                            case 3:
+                                _isAirplaneMode = !_isAirplaneMode;
+                                _setAirplaneMode = true;
+                                break;
                         }
-                        break;
-                    case 2:
-                        if (_isAirplaneMode) {
-                            _isAirplaneMode = false;
-                            _setAirplaneMode = true;
-                        }
-                        break;
-                    case 3:
-                        _isAirplaneMode = !_isAirplaneMode;
-                        _setAirplaneMode = true;
-                        break;
+                    }
                 }
+
+                if (_setAirplaneMode /*&& _isAirplaneMode*/) {
+                    // switch ON airplane mode, set it before executeForRadios
+                    setAirplaneMode(context, _isAirplaneMode);
+
+                    PPApplication.sleep(2000);
+                }
+
+                doExecuteForRadios(profile);
+
+                /*if (_setAirplaneMode && (!_isAirplaneMode)) {
+                    // 200 miliseconds is in doExecuteForRadios
+                    PPApplication.sleep(1800);
+
+                    // switch OFF airplane mode, set if after executeForRadios
+                    setAirplaneMode(context, _isAirplaneMode);
+                }*/
+
+                wakeLock.release();
             }
-        }
-
-        if (_setAirplaneMode /*&& _isAirplaneMode*/) {
-            // switch ON airplane mode, set it before executeForRadios
-            setAirplaneMode(context, _isAirplaneMode);
-
-            PPApplication.sleep(2000);
-        }
-
-        doExecuteForRadios(profile);
-
-        /*if (_setAirplaneMode && (!_isAirplaneMode)) {
-            // 200 miliseconds is in doExecuteForRadios
-            PPApplication.sleep(1800);
-
-            // switch OFF airplane mode, set if after executeForRadios
-            setAirplaneMode(context, _isAirplaneMode);
-        }*/
-
+        });
     }
 
     private static boolean isAudibleRinging(int ringerMode, int zenMode) {
@@ -452,7 +466,7 @@ public class ActivateProfileHelper {
     /*
     private void correctVolume0(AudioManager audioManager, int linkUnlink) {
         int ringerMode, zenMode;
-        if (linkUnlink == PhoneCallJob.LINKMODE_NONE) {
+        if (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_NONE) {
             ringerMode = PPApplication.getRingerMode(context);
             zenMode = PPApplication.getZenMode(context);
         }
@@ -571,7 +585,7 @@ public class ActivateProfileHelper {
                 boolean volumesSet = false;
                 if (getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
                     //if (doUnlink) {
-                    //if (linkUnlink == PhoneCallJob.LINKMODE_UNLINK) {
+                    //if (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_UNLINK) {
                     if (callState == TelephonyManager.CALL_STATE_RINGING) {
                         // for separating ringing and notification
                         // in ringing state ringer volumes must by set
@@ -587,7 +601,7 @@ public class ActivateProfileHelper {
                             } catch (Exception ignored) { }
                         }
                         volumesSet = true;
-                    } else if (linkUnlink == PhoneCallJob.LINKMODE_LINK) {
+                    } else if (linkUnlink == PhoneCallBroadcastReceiver.LINKMODE_LINK) {
                         // for separating ringing and notification
                         // in not ringing state ringer and notification volume must by change
                         //Log.e("ActivateProfileHelper","setVolumes get audio mode="+audioManager.getMode());
@@ -860,6 +874,66 @@ public class ActivateProfileHelper {
         }
     }
 
+    void executeForVolumes(final Profile profile, final int linkUnlinkVolumes, final boolean forProfileActivation) {
+        final Context appContext = context.getApplicationContext();
+        final Handler handler = new Handler(appContext.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForVolumes");
+                wakeLock.acquire();
+
+                int linkUnlink;
+                if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext))
+                    linkUnlink = linkUnlinkVolumes;
+                else
+                    linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
+
+                if (profile != null)
+                {
+                    setTones(appContext, profile);
+
+                    if (/*Permissions.checkProfileVolumePreferences(context, profile) &&*/
+                            Permissions.checkProfileAccessNotificationPolicy(appContext, profile)) {
+
+                        changeRingerModeForVolumeEqual0(profile);
+                        changeNotificationVolumeForVolumeEqual0(appContext, profile);
+
+                        RingerModeChangeReceiver.internalChange = true;
+
+                        final AudioManager audioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
+
+                        setRingerMode(appContext, profile, audioManager, true, forProfileActivation);
+                        //setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+                        setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
+                        PPApplication.sleep(500);
+                        setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+
+                        //try { Thread.sleep(500); } catch (InterruptedException e) { }
+                        //SystemClock.sleep(500);
+                        PPApplication.sleep(500);
+
+                        final Handler handler = new Handler(appContext.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                PPApplication.logE("ActivateProfileHelper.executeForVolumes", "disable ringer mode change internal change");
+                                RingerModeChangeReceiver.internalChange = false;
+                            }
+                        }, 3000);
+
+                    }
+
+                    setTones(appContext, profile);
+                }
+
+                wakeLock.release();
+            }
+        });
+    }
+
     private void setNotificationLed(int value) {
         if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, context)
                 == PPApplication.PREFERENCE_ALLOWED) {
@@ -1016,7 +1090,7 @@ public class ActivateProfileHelper {
     void setRingerMode(Context context, Profile profile, AudioManager audioManager, boolean firstCall, boolean forProfileActivation)
     {
         // linkUnlink == LINKMODE_NONE: not do link and unlink volumes for phone call - called from ActivateProfileHelper.execute()
-        // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallJob
+        // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallBroadcastReceiver
 
         int ringerMode;
         int zenMode;
@@ -1128,94 +1202,101 @@ public class ActivateProfileHelper {
         }
     }
 
-    void executeForWallpaper(Profile profile) {
+    void executeForWallpaper(final Profile profile) {
         if (profile._deviceWallpaperChange == 1)
         {
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            Display display = wm.getDefaultDisplay();
-            if (android.os.Build.VERSION.SDK_INT >= 17)
-                display.getRealMetrics(displayMetrics);
-            else
-                display.getMetrics(displayMetrics);
-            int height = displayMetrics.heightPixels;
-            int width = displayMetrics.widthPixels;
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                //noinspection SuspiciousNameCombination
-                height = displayMetrics.widthPixels;
-                //noinspection SuspiciousNameCombination
-                width = displayMetrics.heightPixels;
-            }
-            // for lock screen no double width
-            if ((android.os.Build.VERSION.SDK_INT < 24) || (profile._deviceWallpaperFor != 2))
-                width = width << 1; // best wallpaper width is twice screen width
+            final Context appContext = context.getApplicationContext();
+            final Handler handler = new Handler(appContext.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForWallpaper");
+                    wakeLock.acquire();
 
-            Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmapUri(profile._deviceWallpaper, width, height, context);
-            if (decodedSampleBitmap != null)
-            {
-                // set wallpaper
-                WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 24) {
-                        int flags = WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK;
-                        Rect visibleCropHint = null;
-                        if (profile._deviceWallpaperFor == 1)
-                            flags = WallpaperManager.FLAG_SYSTEM;
-                        if (profile._deviceWallpaperFor == 2) {
-                            flags = WallpaperManager.FLAG_LOCK;
-                            int left = 0;
-                            int right = decodedSampleBitmap.getWidth();
-                            if (decodedSampleBitmap.getWidth() > width) {
-                                left = (decodedSampleBitmap.getWidth() / 2) - (width / 2);
-                                right = (decodedSampleBitmap.getWidth() / 2) + (width / 2);
-                            }
-                            visibleCropHint = new Rect(left, 0, right, decodedSampleBitmap.getHeight());
-                        }
-                        //noinspection WrongConstant
-                        wallpaperManager.setBitmap(decodedSampleBitmap, visibleCropHint, true, flags);
-                    }
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+                    if (android.os.Build.VERSION.SDK_INT >= 17)
+                        display.getRealMetrics(displayMetrics);
                     else
-                        wallpaperManager.setBitmap(decodedSampleBitmap);
-                } catch (IOException e) {
-                    Log.e("ActivateProfileHelper.executeForWallpaper", "Cannot set wallpaper. Image="+profile._deviceWallpaper);
+                        display.getMetrics(displayMetrics);
+                    int height = displayMetrics.heightPixels;
+                    int width = displayMetrics.widthPixels;
+                    if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        //noinspection SuspiciousNameCombination
+                        height = displayMetrics.widthPixels;
+                        //noinspection SuspiciousNameCombination
+                        width = displayMetrics.heightPixels;
+                    }
+                    // for lock screen no double width
+                    if ((android.os.Build.VERSION.SDK_INT < 24) || (profile._deviceWallpaperFor != 2))
+                        width = width << 1; // best wallpaper width is twice screen width
+
+                    Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmapUri(profile._deviceWallpaper, width, height, context);
+                    if (decodedSampleBitmap != null)
+                    {
+                        // set wallpaper
+                        WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+                        try {
+                            if (android.os.Build.VERSION.SDK_INT >= 24) {
+                                int flags = WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK;
+                                Rect visibleCropHint = null;
+                                if (profile._deviceWallpaperFor == 1)
+                                    flags = WallpaperManager.FLAG_SYSTEM;
+                                if (profile._deviceWallpaperFor == 2) {
+                                    flags = WallpaperManager.FLAG_LOCK;
+                                    int left = 0;
+                                    int right = decodedSampleBitmap.getWidth();
+                                    if (decodedSampleBitmap.getWidth() > width) {
+                                        left = (decodedSampleBitmap.getWidth() / 2) - (width / 2);
+                                        right = (decodedSampleBitmap.getWidth() / 2) + (width / 2);
+                                    }
+                                    visibleCropHint = new Rect(left, 0, right, decodedSampleBitmap.getHeight());
+                                }
+                                //noinspection WrongConstant
+                                wallpaperManager.setBitmap(decodedSampleBitmap, visibleCropHint, true, flags);
+                            }
+                            else
+                                wallpaperManager.setBitmap(decodedSampleBitmap);
+                        } catch (IOException e) {
+                            Log.e("ActivateProfileHelper.executeForWallpaper", "Cannot set wallpaper. Image="+profile._deviceWallpaper);
+                        }
+                    }
+
+                    wakeLock.release();
                 }
-            }
+            });
         }
     }
 
-    void executeForRunApplications(Profile profile) {
+    private void executeForRunApplications(final Profile profile) {
         if (profile._deviceRunApplicationChange == 1)
         {
-            String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
-            Intent intent;
-            PackageManager packageManager = context.getPackageManager();
+            final Context appContext = context.getApplicationContext();
+            final Handler handler = new Handler(appContext.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
 
-            for (String split : splits) {
-                int startApplicationDelay = ApplicationsCache.getStartApplicationDelay(split);
-                if (ApplicationsCache.getStartApplicationDelay(split) > 0) {
-                    RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(context, startApplicationDelay, split);
-                }
-                else {
-                    if (!ApplicationsCache.isShortcut(split)) {
-                        intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
-                        if (intent != null) {
-                            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            try {
-                                context.startActivity(intent);
-                                //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                                //SystemClock.sleep(1000);
-                                PPApplication.sleep(1000);
-                            } catch (Exception ignore) {
-                            }
+                    PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeForRunApplications");
+                    wakeLock.acquire();
+
+                    String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
+                    Intent intent;
+                    PackageManager packageManager = context.getPackageManager();
+
+                    for (String split : splits) {
+                        int startApplicationDelay = ApplicationsCache.getStartApplicationDelay(split);
+                        if (ApplicationsCache.getStartApplicationDelay(split) > 0) {
+                            RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(context, startApplicationDelay, split);
                         }
-                    } else {
-                        long shortcutId = ApplicationsCache.getShortcutId(split);
-                        if (shortcutId > 0) {
-                            Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
-                            if (shortcut != null) {
-                                try {
-                                    intent = Intent.parseUri(shortcut._intent, 0);
+                        else {
+                            if (!ApplicationsCache.isShortcut(split)) {
+                                intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
+                                if (intent != null) {
+                                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     try {
                                         context.startActivity(intent);
@@ -1224,33 +1305,69 @@ public class ActivateProfileHelper {
                                         PPApplication.sleep(1000);
                                     } catch (Exception ignore) {
                                     }
-                                } catch (Exception ignored) {
+                                }
+                            } else {
+                                long shortcutId = ApplicationsCache.getShortcutId(split);
+                                if (shortcutId > 0) {
+                                    Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
+                                    if (shortcut != null) {
+                                        try {
+                                            intent = Intent.parseUri(shortcut._intent, 0);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            try {
+                                                context.startActivity(intent);
+                                                //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                                //SystemClock.sleep(1000);
+                                                PPApplication.sleep(1000);
+                                            } catch (Exception ignore) {
+                                            }
+                                        } catch (Exception ignored) {
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+
+                    wakeLock.release();
                 }
-            }
+            });
+
+
         }
     }
 
-    void executeRootForAdaptiveBrightness(Profile profile) {
-        if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
-            synchronized (PPApplication.startRootCommandMutex) {
-                String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
-                        Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
-                //if (PPApplication.isSELinuxEnforcing())
-                //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                Command command = new Command(0, false, command1); //, command2);
-                try {
-                    //RootTools.closeAllShells();
-                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                    commandWait(command);
-                } catch (Exception e) {
-                    Log.e("ActivateProfileHelper.execute", "Error on run su: " + e.toString());
+    void executeRootForAdaptiveBrightness(final Profile profile) {
+        final Context appContext = context.getApplicationContext();
+        final Handler handler = new Handler(appContext.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.executeRootForAdaptiveBrightness");
+                wakeLock.acquire();
+
+                if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
+                    synchronized (PPApplication.startRootCommandMutex) {
+                        String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
+                                Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
+                        //if (PPApplication.isSELinuxEnforcing())
+                        //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                        Command command = new Command(0, false, command1); //, command2);
+                        try {
+                            //RootTools.closeAllShells();
+                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                            commandWait(command);
+                        } catch (Exception e) {
+                            Log.e("ActivateProfileHelper.execute", "Error on run su: " + e.toString());
+                        }
+                    }
                 }
+
+                wakeLock.release();
             }
-        }
+        });
     }
 
     public void execute(Profile _profile, boolean _interactive)
@@ -1262,13 +1379,8 @@ public class ActivateProfileHelper {
 
         // nahodenie volume a ringer modu
         // run job for execute volumes
-        ExecuteVolumeProfilePrefsJob.start(context, profile._id, PhoneCallJob.LINKMODE_NONE, true);
-        /*AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        // nahodenie ringer modu - aby sa mohli nastavit hlasitosti
-        setRingerMode(profile, audioManager);
-        setVolumes(profile, audioManager);
-        // nahodenie ringer modu - hlasitosti zmenia silent/vibrate
-        setRingerMode(profile, audioManager);*/
+        //ExecuteVolumeProfilePrefsJob.start(context, profile._id, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
+        executeForVolumes(profile, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
 
         // set vibration on touch
         if (Permissions.checkProfileVibrationOnTouch(context, profile)) {
@@ -1283,12 +1395,13 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie tonov
-        // moved to ExecuteVolumeProfilePrefsJob
+        // moved to executeForVolumes
         //setTones(profile);
 
         // nahodenie radio preferences
         // run job for execute radios
-        ExecuteRadioProfilePrefsJob.start(context, profile._id);
+        //ExecuteRadioProfilePrefsJob.start(context, profile._id);
+        executeForRadios(profile);
 
         // nahodenie auto-sync
         try {
@@ -1410,7 +1523,8 @@ public class ActivateProfileHelper {
                                         ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                         profile.getDeviceBrightnessAdaptiveValue(context));
                             } catch (Exception ee) {
-                                ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
+                                //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
+                                executeRootForAdaptiveBrightness(profile);
                             }
                         }
                     }
@@ -1487,14 +1601,16 @@ public class ActivateProfileHelper {
         // nahodenie pozadia
         if (Permissions.checkProfileWallpaper(context, profile)) {
             if (profile._deviceWallpaperChange == 1) {
-                ExecuteWallpaperProfilePrefsJob.start(context, profile._id);
+                //ExecuteWallpaperProfilePrefsJob.start(context, profile._id);
+                executeForWallpaper(profile);
             }
         }
 
         //Intent rootServiceIntent;
 
         // set power save mode
-        ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
+        //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
+        setPowerSaveMode(profile);
 
         if (Permissions.checkProfileLockDevice(context, profile)) {
             if (profile._lockDevice != 0) {
@@ -1503,7 +1619,8 @@ public class ActivateProfileHelper {
                 keyguardLocked = kgMgr.isKeyguardLocked();
                 PPApplication.logE("---$$$ ActivateProfileHelper.execute","keyguardLocked="+keyguardLocked);
                 if (!keyguardLocked) {
-                    ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
+                    //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
+                    lockDevice(profile);
                 }
             }
         }
@@ -1556,7 +1673,8 @@ public class ActivateProfileHelper {
 
             if (profile._deviceRunApplicationChange == 1)
             {
-                ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
+                //ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
+                executeForRunApplications(profile);
             }
 
         }
@@ -2602,109 +2720,139 @@ public class ActivateProfileHelper {
         context.sendBroadcast(intent);
     }
 
-    void setPowerSaveMode(Profile profile) {
+    void setPowerSaveMode(final Profile profile) {
         if (profile._devicePowerSaveMode != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
-                PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                boolean _isPowerSaveMode = false;
-                if (Build.VERSION.SDK_INT >= 21)
-                    _isPowerSaveMode = powerManager.isPowerSaveMode();
-                boolean _setPowerSaveMode = false;
-                switch (profile._devicePowerSaveMode) {
-                    case 1:
-                        if (!_isPowerSaveMode) {
-                            _isPowerSaveMode = true;
-                            _setPowerSaveMode = true;
+            final Context appContext = context.getApplicationContext();
+            final Handler handler = new Handler(appContext.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, appContext) == PPApplication.PREFERENCE_ALLOWED) {
+
+                        PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.setPowerSaveMode");
+                        wakeLock.acquire();
+
+                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
+                            boolean _isPowerSaveMode = false;
+                            if (Build.VERSION.SDK_INT >= 21)
+                                _isPowerSaveMode = powerManager.isPowerSaveMode();
+                            boolean _setPowerSaveMode = false;
+                            switch (profile._devicePowerSaveMode) {
+                                case 1:
+                                    if (!_isPowerSaveMode) {
+                                        _isPowerSaveMode = true;
+                                        _setPowerSaveMode = true;
+                                    }
+                                    break;
+                                case 2:
+                                    if (_isPowerSaveMode) {
+                                        _isPowerSaveMode = false;
+                                        _setPowerSaveMode = true;
+                                    }
+                                    break;
+                                case 3:
+                                    _isPowerSaveMode = !_isPowerSaveMode;
+                                    _setPowerSaveMode = true;
+                                    break;
+                            }
+                            if (_setPowerSaveMode) {
+                                if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                                    if (android.os.Build.VERSION.SDK_INT >= 21)
+                                        Settings.Global.putInt(context.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
+                                }
+                                else
+                                if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
+                                    synchronized (PPApplication.startRootCommandMutex) {
+                                        String command1 = "settings put global low_power " + ((_isPowerSaveMode) ? 1 : 0);
+                                        Command command = new Command(0, false, command1);
+                                        try {
+                                            //RootTools.closeAllShells();
+                                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                            commandWait(command);
+                                        } catch (Exception e) {
+                                            Log.e("ActivateProfileHelper.setPowerSaveMode", "Error on run su: " + e.toString());
+                                        }
+                                    }
+                                }
+                            }
                         }
+
+                        wakeLock.release();
+                    }
+                }
+            });
+        }
+    }
+
+    void lockDevice(final Profile profile) {
+        final Context appContext = context.getApplicationContext();
+        final Handler handler = new Handler(appContext.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (PPApplication.startedOnBoot)
+                    // not lock device after boot
+                    return;
+
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.lockDevice");
+                wakeLock.acquire();
+
+                switch (profile._lockDevice) {
+                    case 3:
+                        DevicePolicyManager manager = (DevicePolicyManager)context.getSystemService(DEVICE_POLICY_SERVICE);
+                        final ComponentName component = new ComponentName(context, PPDeviceAdminReceiver.class);
+                        if (manager.isAdminActive(component))
+                            manager.lockNow();
                         break;
                     case 2:
-                        if (_isPowerSaveMode) {
-                            _isPowerSaveMode = false;
-                            _setPowerSaveMode = true;
-                        }
-                        break;
-                    case 3:
-                        _isPowerSaveMode = !_isPowerSaveMode;
-                        _setPowerSaveMode = true;
-                        break;
-                }
-                if (_setPowerSaveMode) {
-                    if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                        if (android.os.Build.VERSION.SDK_INT >= 21)
-                            Settings.Global.putInt(context.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
-                    }
-                    else
-                    if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
-                        synchronized (PPApplication.startRootCommandMutex) {
-                            String command1 = "settings put global low_power " + ((_isPowerSaveMode) ? 1 : 0);
+                        /*if (PPApplication.isRooted()) {
+                            //String command1 = "input keyevent 26";
                             Command command = new Command(0, false, command1);
                             try {
                                 //RootTools.closeAllShells();
                                 RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                                 commandWait(command);
                             } catch (Exception e) {
-                                Log.e("ActivateProfileHelper.setPowerSaveMode", "Error on run su: " + e.toString());
+                                Log.e("ActivateProfileHelper.lockDevice", "Error on run su: " + e.toString());
+                            }
+                        }*/
+                        if (PPApplication.isRooted())
+                        {
+                            synchronized (PPApplication.startRootCommandMutex) {
+                                String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", context, 0);
+                                if (command1 != null) {
+                                    Command command = new Command(0, false, command1);
+                                    try {
+                                        //RootTools.closeAllShells();
+                                        RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
+                                        commandWait(command);
+                                    } catch (Exception e) {
+                                        Log.e("ActivateProfileHelper.lockDevice", "Error on run su");
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            }
-        }
-    }
-
-    void lockDevice(Profile profile) {
-        if (PPApplication.startedOnBoot)
-            // not lock device after boot
-            return;
-
-        switch (profile._lockDevice) {
-            case 3:
-                DevicePolicyManager manager = (DevicePolicyManager)context.getSystemService(DEVICE_POLICY_SERVICE);
-                final ComponentName component = new ComponentName(context, PPDeviceAdminReceiver.class);
-                if (manager.isAdminActive(component))
-                    manager.lockNow();
-                break;
-            case 2:
-                /*if (PPApplication.isRooted()) {
-                    //String command1 = "input keyevent 26";
-                    Command command = new Command(0, false, command1);
-                    try {
-                        //RootTools.closeAllShells();
-                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                        commandWait(command);
-                    } catch (Exception e) {
-                        Log.e("ActivateProfileHelper.lockDevice", "Error on run su: " + e.toString());
-                    }
-                }*/
-                if (PPApplication.isRooted())
-                {
-                    synchronized (PPApplication.startRootCommandMutex) {
-                        String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", context, 0);
-                        if (command1 != null) {
-                            Command command = new Command(0, false, command1);
+                        break;
+                    case 1:
+                        if (Permissions.checkLockDevice(context) && (PPApplication.lockDeviceActivity == null)) {
                             try {
-                                //RootTools.closeAllShells();
-                                RootTools.getShell(true, Shell.ShellContext.NORMAL).add(command);
-                                commandWait(command);
-                            } catch (Exception e) {
-                                Log.e("ActivateProfileHelper.lockDevice", "Error on run su");
-                            }
+                                Intent intent = new Intent(context, LockDeviceActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                context.startActivity(intent);
+                            } catch (Exception ignore) {}
                         }
-                    }
+                        break;
                 }
-                break;
-            case 1:
-                if (Permissions.checkLockDevice(context) && (PPApplication.lockDeviceActivity == null)) {
-                    try {
-                        Intent intent = new Intent(context, LockDeviceActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        context.startActivity(intent);
-                    } catch (Exception ignore) {}
-                }
-                break;
-        }
+
+                wakeLock.release();
+            }
+        });
+
+
     }
 
     private static void commandWait(Command cmd) {

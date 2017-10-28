@@ -587,7 +587,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             //finishAffinity();
             finish();
             Permissions.removeInstallToneNotification(context);
-            FirstStartJob.installTone(FirstStartJob.TONE_ID, FirstStartJob.TONE_NAME, context, true);
+            TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, context, true);
         }
         else
         if (grantType == Permissions.GRANT_TYPE_WALLPAPER) {

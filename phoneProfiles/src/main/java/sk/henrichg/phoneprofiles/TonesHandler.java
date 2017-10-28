@@ -1,116 +1,25 @@
 package sk.henrichg.phoneprofiles;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.media.AudioManager;
 import android.media.MediaScannerConnection;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.evernote.android.job.Job;
-import com.evernote.android.job.JobRequest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-class FirstStartJob extends Job {
-
-    static final String JOB_TAG  = "FirstStartJob";
+class TonesHandler {
 
     static final int TONE_ID = R.raw.phoneprofiles_silent;
     static final String TONE_NAME = "PhoneProfiles Silent";
-
-    @NonNull
-    @Override
-    protected Result onRunJob(Params params) {
-        PPApplication.logE("FirstStartJob.onRunJob", "xxx");
-
-        Context appContext = getContext().getApplicationContext();
-
-        PPApplication.initRoot();
-        // grant root
-        //if (PPApplication.isRooted(false))
-        //{
-        if (PPApplication.isRootGranted())
-        {
-            PPApplication.settingsBinaryExists();
-            PPApplication.serviceBinaryExists();
-            //PPApplication.getSUVersion();
-        }
-        //}
-
-        Permissions.clearMergedPermissions(appContext);
-
-
-        if (PPApplication.getApplicationStarted(appContext, false))
-            return Result.SUCCESS;
-
-        PPApplication.logE("FirstStartJob.onRunJob", " application not started");
-
-        //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
-
-        GlobalGUIRoutines.setLanguage(appContext);
-
-        // remove phoneprofiles_silent.mp3
-        //removeTone("phoneprofiles_silent.mp3", context);
-        // install phoneprofiles_silent.ogg
-        installTone(TONE_ID, TONE_NAME, appContext, false);
-
-        ActivateProfileHelper.setLockScreenDisabled(appContext, false);
-
-        AudioManager audioManager = (AudioManager)appContext.getSystemService(Context.AUDIO_SERVICE);
-        ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-        ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-        RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-            PPNotificationListenerService.setZenMode(appContext, audioManager);
-        InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext,audioManager);
-
-        // show info notification
-        ImportantInfoNotification.showInfoNotification(appContext);
-
-        ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
-        Profile.setActivatedProfileForDuration(appContext, 0);
-
-        DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
-
-        PPApplication.setApplicationStarted(appContext, true);
-
-        dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
-        dataWrapper.invalidateDataWrapper();
-
-        return Result.SUCCESS;
-    }
-
-    static void start(Context context) {
-        final JobRequest.Builder jobBuilder = new JobRequest.Builder(JOB_TAG);
-
-        final Handler handler = new Handler(context.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    jobBuilder
-                            .setUpdateCurrent(false) // don't update current, it would cancel this currently running job
-                            .startNow()
-                            .build()
-                            .schedule();
-                } catch (Exception ignored) { }
-            }
-        });
-    }
 
     static String getPhoneProfilesSilentUri(Context context, int type) {
         try {
@@ -125,8 +34,8 @@ class FirstStartJob extends Job {
 
                 String uriId = uri + "/" + id;
 
-                //Log.d("FirstStartJob.getPhoneProfilesSilentNotificationUri", "title="+title);
-                //Log.d("FirstStartJob.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
+                //Log.d("TonesHandler.getPhoneProfilesSilentNotificationUri", "title="+title);
+                //Log.d("TonesHandler.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
 
                 if (title.equals("PhoneProfiles Silent") || title.equals("phoneprofiles_silent"))
                     return uriId;
@@ -147,8 +56,8 @@ class FirstStartJob extends Job {
 
             String uriId = uri + "/" + id;
 
-            //Log.d("FirstStartJob.getToneName", "title="+title);
-            //Log.d("FirstStartJob.getToneName", "uriId="+uriId);
+            //Log.d("TonesHandler.getToneName", "title="+title);
+            //Log.d("TonesHandler.getToneName", "uriId="+uriId);
 
             if (uriId.equals(_uri))
                 return title;
@@ -159,7 +68,7 @@ class FirstStartJob extends Job {
     private static boolean  isToneInstalled(int resID, String directory, Context context) {
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            //Log.d("FirstStartJob.isToneInstalled","not writable shared storage");
+            //Log.d("TonesHandler.isToneInstalled","not writable shared storage");
             return false;
         }
 
@@ -172,7 +81,7 @@ class FirstStartJob extends Job {
         File outFile = new File(path, filename);
 
         if (!outFile.exists()) {
-            //Log.d("FirstStartJob.isToneInstalled","file not exists");
+            //Log.d("TonesHandler.isToneInstalled","file not exists");
             return false;
         }
 
@@ -183,24 +92,24 @@ class FirstStartJob extends Job {
         Cursor cursor = context.getContentResolver().query(contentUri,
                 new String[]{MediaStore.MediaColumns.DATA},
                 MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-        //Log.d("FirstStartJob.isToneInstalled","cursor="+cursor);
+        //Log.d("TonesHandler.isToneInstalled","cursor="+cursor);
         if ((cursor == null) || (!cursor.moveToFirst())) {
             if (cursor != null)
                 cursor.close();
-            //Log.d("FirstStartJob.isToneInstalled","empty cursor");
+            //Log.d("TonesHandler.isToneInstalled","empty cursor");
             return false;
         }
         else {
-            //Log.d("FirstStartJob.isToneInstalled","DATA="+cursor.getString(0));
+            //Log.d("TonesHandler.isToneInstalled","DATA="+cursor.getString(0));
             cursor.close();
         }
 
             /*if (getPhoneProfilesSilentUri(context, RingtoneManager.TYPE_RINGTONE).isEmpty()) {
-                Log.d("FirstStartJob.isToneInstalled","not in ringtone manager");
+                Log.d("TonesHandler.isToneInstalled","not in ringtone manager");
                 return false;
             }*/
 
-        //Log.d("FirstStartJob.isToneInstalled","tone installed");
+        //Log.d("TonesHandler.isToneInstalled","tone installed");
 
         return true;
     }
@@ -213,7 +122,7 @@ class FirstStartJob extends Job {
             return ringtone && notification && alarm;
         }
         else {
-            //Log.d("FirstStartJob.isToneInstalled","not granted permission");
+            //Log.d("TonesHandler.isToneInstalled","not granted permission");
             return false;
         }
     }
@@ -273,7 +182,7 @@ class FirstStartJob extends Job {
                 }
 
             } catch (Exception e) {
-                Log.e("FirstStartJob", "installTone: Error writing " + filename, e);
+                Log.e("TonesHandler", "installTone: Error writing " + filename, e);
                 isError = true;
             } finally {
                 // Close the streams
@@ -288,7 +197,7 @@ class FirstStartJob extends Job {
             }
 
             if (!outFile.exists()) {
-                Log.e("FirstStartJob", "installTone: Error writing " + filename);
+                Log.e("TonesHandler", "installTone: Error writing " + filename);
                 isError = true;
             }
         }
@@ -309,7 +218,7 @@ class FirstStartJob extends Job {
                 if (cursor != null) {
                     if (!cursor.moveToFirst()) {
 
-                        //Log.e("FirstStartJob","not exists in resolver");
+                        //Log.e("TonesHandler","not exists in resolver");
 
                         // not exists content
 
@@ -333,7 +242,7 @@ class FirstStartJob extends Job {
                         Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
                         if (newUri != null) {
-                            //Log.d("FirstStartJob","inserted to resolver");
+                            //Log.d("TonesHandler","inserted to resolver");
 
                             // Tell the media scanner about the new ringtone
                             MediaScannerConnection.scanFile(
@@ -348,17 +257,17 @@ class FirstStartJob extends Job {
                             PPApplication.sleep(300);
                         }
                         else {
-                            Log.e("FirstStartJob","newUri is empty");
+                            Log.e("TonesHandler","newUri is empty");
                             cursor.close();
                             isError = true;
                         }
                     } else {
-                        //Log.d("FirstStartJob","exists in resolver");
+                        //Log.d("TonesHandler","exists in resolver");
                         cursor.close();
                     }
                 }
             } catch (Exception e) {
-                Log.e("FirstStartJob", "installTone: Error installing tone " + filename);
+                Log.e("TonesHandler", "installTone: Error installing tone " + filename);
                 isError = true;
             }
         }

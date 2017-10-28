@@ -72,7 +72,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true;
     }
-    compile 'com.evernote:android-job:1.2.0'
 }
 
 

@@ -266,9 +266,6 @@ public class ActivateProfileListFragment extends Fragment {
         {
             PPApplication.logE("ActivateProfileListFragment.doOnStart","application not started");
 
-            // start job for first start
-            // FirstStartJob.start();
-
             // start PhoneProfilesService
             //TODO Android O
             //if (Build.VERSION.SDK_INT < 26)
@@ -312,7 +309,7 @@ public class ActivateProfileListFragment extends Fragment {
         // reset, aby sa to dalej chovalo ako normalne spustenie z lauchera
         startupSource = 0;
 
-        //  aplikacia uz je 1. krat spustena - moved to FirstStartJob
+        //  aplikacia uz je 1. krat spustena - moved to PhoneProfilesService.onCreate
         //PPApplication.setApplicationStarted(getActivity().getApplicationContext(), true);
     }
 

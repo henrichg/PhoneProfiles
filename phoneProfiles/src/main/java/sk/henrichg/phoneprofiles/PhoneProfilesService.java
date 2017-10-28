@@ -12,6 +12,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.crashlytics.android.Crashlytics;
+import com.evernote.android.job.Job;
 
 import java.util.Calendar;
 
@@ -62,7 +64,7 @@ public class PhoneProfilesService extends Service {
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
         instance = this;
-        Context appContext = getApplicationContext();
+        final Context appContext = getApplicationContext();
 
         try {
             Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(appContext));
@@ -130,7 +132,72 @@ public class PhoneProfilesService extends Service {
         appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
         // start job for first start
-        FirstStartJob.start(appContext);
+        //FirstStartJob.start(appContext);
+        final Handler handler = new Handler(this.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.2");
+                wakeLock.acquire();
+
+                PPApplication.initRoot();
+                // grant root
+                //if (PPApplication.isRooted(false))
+                //{
+                if (PPApplication.isRootGranted())
+                {
+                    PPApplication.settingsBinaryExists();
+                    PPApplication.serviceBinaryExists();
+                    //PPApplication.getSUVersion();
+                }
+                //}
+
+                Permissions.clearMergedPermissions(appContext);
+
+
+                if (PPApplication.getApplicationStarted(appContext, false))
+                    return;
+
+                PPApplication.logE("PhoneProfilesService.onCreate", " application not started");
+
+                //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
+
+                GlobalGUIRoutines.setLanguage(appContext);
+
+                // remove phoneprofiles_silent.mp3
+                //removeTone("phoneprofiles_silent.mp3", context);
+                // install phoneprofiles_silent.ogg
+                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
+
+                ActivateProfileHelper.setLockScreenDisabled(appContext, false);
+
+                AudioManager audioManager = (AudioManager)appContext.getSystemService(Context.AUDIO_SERVICE);
+                ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+                ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+                    PPNotificationListenerService.setZenMode(appContext, audioManager);
+                InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext,audioManager);
+
+                // show info notification
+                ImportantInfoNotification.showInfoNotification(appContext);
+
+                ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
+                Profile.setActivatedProfileForDuration(appContext, 0);
+
+                DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
+                dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
+
+                PPApplication.setApplicationStarted(appContext, true);
+
+                dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
+                dataWrapper.invalidateDataWrapper();
+
+                wakeLock.release();
+            }
+        });
+
     }
 
     @Override
