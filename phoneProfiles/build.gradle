@@ -70,7 +70,7 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.5.0'
     compile 'com.github.KeepSafe:TapTargetView:master-SNAPSHOT'
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true;
+        transitive = true
     }
 }
 
