@@ -14,8 +14,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     private static boolean savedSpeakerphone = false;
     private static boolean speakerphoneSelected = false;
 
-    public static final String EXTRA_SERVICE_PHONE_EVENT = "service_phone_event";
-    public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
+    //public static final String EXTRA_SERVICE_PHONE_EVENT = "service_phone_event";
+    //public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
     //public static final String EXTRA_SERVICE_PHONE_NUMBER = "service_phone_number";
 
     public static final int SERVICE_PHONE_EVENT_START = 1;
@@ -167,7 +167,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         if (speakerphoneSelected)
         {
-            audioManager.setSpeakerphoneOn(savedSpeakerphone);
+            if (audioManager != null)
+                audioManager.setSpeakerphoneOn(savedSpeakerphone);
         }
 
         speakerphoneSelected = false;

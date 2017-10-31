@@ -2,7 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -236,7 +235,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
                 }
                 NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(notificationID, mBuilder.build());
+                if (mNotificationManager != null)
+                    mNotificationManager.notify(notificationID, mBuilder.build());
 
                 finish();
                 return;
@@ -432,36 +432,39 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
         if (requestCode == ACCESS_NOTIFICATION_POLICY_REQUEST_CODE) {
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                dialogBuilder.setTitle(R.string.permissions_alert_title);
-                dialogBuilder.setMessage(R.string.permissions_access_notification_policy_not_allowed_confirm);
-                dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Permissions.setShowRequestAccessNotificationPolicyPermission(context, false);
-                        requestPermissions(3);
-                    }
-                });
-                dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
-                        requestPermissions(3);
-                    }
-                });
-                dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        requestPermissions(3);
-                    }
-                });
-                dialogBuilder.show();
+            if (mNotificationManager != null) {
+                if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                    dialogBuilder.setTitle(R.string.permissions_alert_title);
+                    dialogBuilder.setMessage(R.string.permissions_access_notification_policy_not_allowed_confirm);
+                    dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Permissions.setShowRequestAccessNotificationPolicyPermission(context, false);
+                            requestPermissions(3);
+                        }
+                    });
+                    dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
+                            requestPermissions(3);
+                        }
+                    });
+                    dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            requestPermissions(3);
+                        }
+                    });
+                    dialogBuilder.show();
+                } else {
+                    Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
+                    requestPermissions(3);
+                }
             }
-            else {
-                Permissions.setShowRequestAccessNotificationPolicyPermission(context, true);
+            else
                 requestPermissions(3);
-            }
         }
         if (requestCode == DRAW_OVERLAYS_REQUEST_CODE) {
             if (!Settings.canDrawOverlays(context)) {

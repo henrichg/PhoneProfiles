@@ -115,6 +115,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         mBuilder.positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText());
         mBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            @SuppressWarnings("StringConcatenationInLoop")
             @Override
             public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                 if (shouldPersist())

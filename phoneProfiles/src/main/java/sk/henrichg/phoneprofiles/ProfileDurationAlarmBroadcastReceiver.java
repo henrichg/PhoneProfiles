@@ -28,8 +28,11 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                     if (profileId != 0) {
 
                         PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProfileDurationAlarmBroadcastReceiver.onReceive");
-                        wakeLock.acquire(10 * 60 * 1000);
+                        PowerManager.WakeLock wakeLock = null;
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProfileDurationAlarmBroadcastReceiver.onReceive");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
 
                         DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
 
@@ -60,7 +63,8 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
                         dataWrapper.invalidateDataWrapper();
 
-                        wakeLock.release();
+                        if (wakeLock != null)
+                            wakeLock.release();
                     }
                 }
             });
@@ -97,17 +101,18 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
 
-            if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 23))
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-            else
-            if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 19))
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-            else
-                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-            //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
-            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
+            if (alarmManager != null) {
+                if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 23))
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+                else if (PPApplication.exactAlarms && (android.os.Build.VERSION.SDK_INT >= 19))
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+                else
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+                //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
+                //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
 
-            //this._isInDelay = true;
+                //this._isInDelay = true;
+            }
         }
         //else
         //	this._isInDelay = false;
@@ -118,19 +123,18 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
     static public void removeAlarm(Context context)
     {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
+        if (alarmManager != null) {
+            Intent intent = new Intent(context, ProfileDurationAlarmBroadcastReceiver.class);
 
-        Intent intent = new Intent(context, ProfileDurationAlarmBroadcastReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
+            if (pendingIntent != null) {
+                alarmManager.cancel(pendingIntent);
+                pendingIntent.cancel();
+            }
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
-        if (pendingIntent != null)
-        {
-            alarmManager.cancel(pendingIntent);
-            pendingIntent.cancel();
+            //this._isInDelay = false;
+            //dataWrapper.getDatabaseHandler().updateEventInDelay(this);
         }
-
-        //this._isInDelay = false;
-        //dataWrapper.getDatabaseHandler().updateEventInDelay(this);
-
         Profile.setActivatedProfileEndDurationTime(context, 0);
     }
 

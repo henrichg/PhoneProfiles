@@ -15,7 +15,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         PPApplication.logE("PackageReplacedReceiver.onReceive", "intent="+intent);
-        if ((intent != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
+        if ((intent != null) && (intent.getAction() != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
             // PackageReplacedJob.start(context.getApplicationContext());
             final Context appContext = context.getApplicationContext();
 
@@ -24,8 +24,11 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                 @Override
                 public void run() {
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                    PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive");
-                    wakeLock.acquire(10 * 60 * 1000);
+                    PowerManager.WakeLock wakeLock = null;
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
 
                     // start delayed boot up broadcast
                     PPApplication.startedOnBoot = true;
@@ -92,7 +95,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                             startService(appContext);
                     }
 
-                    wakeLock.release();
+                    if (wakeLock != null)
+                        wakeLock.release();
                 }
             });
 

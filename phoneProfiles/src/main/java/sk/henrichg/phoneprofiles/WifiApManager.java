@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -16,12 +17,15 @@ final class WifiApManager {
     //private Method wifiApState;
     private Method wifiApEnabled;
 
+    @SuppressLint("PrivateApi")
     WifiApManager(Context context) throws SecurityException, NoSuchMethodException {
         mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiControlMethod = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class,boolean.class);
-        wifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration"/*,null*/);
-        //wifiApState = mWifiManager.getClass().getMethod("getWifiApState");
-        wifiApEnabled = mWifiManager.getClass().getDeclaredMethod("isWifiApEnabled");
+        if (mWifiManager != null) {
+            wifiControlMethod = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
+            wifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration"/*,null*/);
+            //wifiApState = mWifiManager.getClass().getMethod("getWifiApState");
+            wifiApEnabled = mWifiManager.getClass().getDeclaredMethod("isWifiApEnabled");
+        }
     }
 
     private boolean setWifiApState(WifiConfiguration config, boolean enabled) {

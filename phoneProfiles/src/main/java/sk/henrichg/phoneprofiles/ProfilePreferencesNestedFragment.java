@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 
@@ -225,14 +224,15 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                         final boolean canEnableZenMode = ActivateProfileHelper.canChangeZenMode(context.getApplicationContext(), true);
 
                         Preference zenModePreference = prefMng.findPreference(Profile.PREF_PROFILE_VOLUME_ZEN_MODE);
+                        if (zenModePreference != null) {
+                            zenModePreference.setEnabled((iNewValue == 5) && canEnableZenMode);
 
-                        zenModePreference.setEnabled((iNewValue == 5) && canEnableZenMode);
-
-                        boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
-                        @SuppressLint("InlinedApi")
-                        boolean addS = !((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) &&
-                                GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context));
-                        setTitleStyle(zenModePreference, false, false, addS);
+                            boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
+                            @SuppressLint("InlinedApi")
+                            boolean addS = !((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) &&
+                                    GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context));
+                            setTitleStyle(zenModePreference, false, false, addS);
+                        }
 
                         return true;
                     }
@@ -289,7 +289,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             ListPreference networkTypePreference = (ListPreference) prefMng.findPreference(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE);
             if (networkTypePreference != null) {
                 final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                final int phoneType = telephonyManager.getPhoneType();
+                int phoneType = TelephonyManager.PHONE_TYPE_GSM;
+                if (telephonyManager != null)
+                    phoneType = telephonyManager.getPhoneType();
 
                 if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
                     if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE) {
@@ -346,7 +348,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (deviceAdminSettings != null) {
             DevicePolicyManager manager = (DevicePolicyManager)getActivity().getSystemService(DEVICE_POLICY_SERVICE);
             final ComponentName component = new ComponentName(getActivity(), PPDeviceAdminReceiver.class);
-            if (!manager.isAdminActive(component)) {
+            if ((manager == null) || !manager.isAdminActive(component)) {
                 deviceAdminSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
@@ -1281,7 +1283,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
         }*/
         if (key.equals(PREF_DEVICE_ADMINISTRATOR_SETTINGS)) {
-            if (manager.isAdminActive(component)) {
+            if ((manager != null) && manager.isAdminActive(component)) {
                 Preference preference = prefMng.findPreference(PREF_DEVICE_ADMINISTRATOR_SETTINGS);
                 if (preference != null) {
                     preference.setSummary(R.string.profile_preferences_lockDevice_deviceAdminSettings_summary_activated);

@@ -168,13 +168,21 @@ public class DataWrapper {
 
     Profile  getPredefinedProfile(int index, boolean saveToDB)
     {
+        int	maximumValueRing = 7;
+        int	maximumValueNotification = 7;
+        int	maximumValueMusic = 15;
+        int	maximumValueAlarm = 7;
+        //int	maximumValueSystem = 7;
+        //int	maximumValueVoiceCall = 7;
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        int	maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
-        int	maximumValueNotification = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-        int	maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        int	maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-        //int	maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-        //int	maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        if (audioManager != null) {
+            maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
+            maximumValueNotification = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+            maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+            //maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
+            //maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        }
 
         Profile profile;
 
@@ -435,7 +443,7 @@ public class DataWrapper {
         }
     }
 
-    public Profile getProfileById(long id)
+    Profile getProfileById(long id)
     {
         if (profileList == null)
         {

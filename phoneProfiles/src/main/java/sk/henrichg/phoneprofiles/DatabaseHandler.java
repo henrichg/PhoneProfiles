@@ -1666,7 +1666,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     int disableNotAllowedPreferences(Context context)
     {
         synchronized (databaseHandlerMutex) {
-            int ret = 0;
+            int ret;
 
             final String selectQuery = "SELECT " + KEY_ID + "," +
                     KEY_DEVICE_AIRPLANE_MODE + "," +

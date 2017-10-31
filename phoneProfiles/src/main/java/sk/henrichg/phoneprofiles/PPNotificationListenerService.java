@@ -180,7 +180,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
         String packageName = context.getPackageName();
         //Log.e(TAG, "enabledNotificationListeners(" + className + ')');
 
-        if (packageNames != null) {
+        //if (packageNames != null) {
             for (String pkgName : packageNames) {
                 //Log.e(TAG, "enabledNotificationListeners(" + pkgName + ')');
                 //if (className.contains(pkgName)) {
@@ -190,9 +190,9 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 }
             }
             return false;
-        }
-        else
-            return false;
+        //}
+        //else
+        //    return false;
     }
 
     private static Intent getInterruptionFilterRequestIntent(/*Context context, */final int filter) {
@@ -268,6 +268,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
 
     class NLServiceReceiver extends BroadcastReceiver {
 
+        @SuppressLint("InlinedApi")
         @Override
         public void onReceive(Context context, Intent intent) {
             //Log.e(TAG, "NLServiceReceiver.onReceive(" + intent.getAction()  + ')');
@@ -278,7 +279,6 @@ public class PPNotificationListenerService extends NotificationListenerService {
                 if (!TextUtils.isEmpty(intent.getAction())) {
                     if (ACTION_REQUEST_INTERRUPTION_FILTER.equals(intent.getAction())) {
                         if (intent.hasExtra(EXTRA_FILTER)) {
-                            @SuppressLint("InlinedApi")
                             final int filter = intent.getIntExtra(EXTRA_FILTER, INTERRUPTION_FILTER_ALL);
                             //Log.e(TAG, "filter= " + filter);
                             switch (filter) {
