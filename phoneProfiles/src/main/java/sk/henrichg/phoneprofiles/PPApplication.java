@@ -268,6 +268,7 @@ public class PPApplication extends Application {
 
         try
         {
+            // warnings when logIntoFile == false
             File sd = Environment.getExternalStorageDirectory();
             File exportDir = new File(sd, PPApplication.EXPORT_PATH);
             if (!(exportDir.exists() && exportDir.isDirectory()))
