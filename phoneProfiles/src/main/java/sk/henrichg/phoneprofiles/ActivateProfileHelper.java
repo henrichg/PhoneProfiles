@@ -408,7 +408,8 @@ public class ActivateProfileHelper {
     private void executeForRadios(final Profile profile)
     {
         final Context appContext = context.getApplicationContext();
-        final Handler handler = new Handler(appContext.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -894,7 +895,8 @@ public class ActivateProfileHelper {
 
     void executeForVolumes(final Profile profile, final int linkUnlinkVolumes, final boolean forProfileActivation) {
         final Context appContext = context.getApplicationContext();
-        final Handler handler = new Handler(appContext.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -936,7 +938,8 @@ public class ActivateProfileHelper {
                         //SystemClock.sleep(500);
                         PPApplication.sleep(500);
 
-                        final Handler handler = new Handler(appContext.getMainLooper());
+                        PhoneProfilesService.startHandlerThread();
+                        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -1302,7 +1305,8 @@ public class ActivateProfileHelper {
         if (profile._deviceRunApplicationChange == 1)
         {
             final Context appContext = context.getApplicationContext();
-            final Handler handler = new Handler(appContext.getMainLooper());
+            PhoneProfilesService.startHandlerThread();
+            final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -1371,7 +1375,8 @@ public class ActivateProfileHelper {
 
     private void executeRootForAdaptiveBrightness(final Profile profile) {
         final Context appContext = context.getApplicationContext();
-        final Handler handler = new Handler(appContext.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -1788,7 +1793,8 @@ public class ActivateProfileHelper {
                 break;
         }
         setActivatedProfileScreenTimeout(context, 0);
-        final Handler handler = new Handler(context.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -2813,7 +2819,8 @@ public class ActivateProfileHelper {
     private void setPowerSaveMode(final Profile profile) {
         if (profile._devicePowerSaveMode != 0) {
             final Context appContext = context.getApplicationContext();
-            final Handler handler = new Handler(appContext.getMainLooper());
+            PhoneProfilesService.startHandlerThread();
+            final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -2881,7 +2888,8 @@ public class ActivateProfileHelper {
 
     private void lockDevice(final Profile profile) {
         final Context appContext = context.getApplicationContext();
-        final Handler handler = new Handler(appContext.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {

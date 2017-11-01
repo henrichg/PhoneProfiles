@@ -20,7 +20,8 @@ public class BootUpReceiver extends BroadcastReceiver {
                 action.equals("com.htc.intent.action.QUICKBOOT_POWERON"))) {
             // start delayed boot up broadcast
             PPApplication.startedOnBoot = true;
-            final Handler handler = new Handler(context.getMainLooper());
+            PhoneProfilesService.startHandlerThread();
+            final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

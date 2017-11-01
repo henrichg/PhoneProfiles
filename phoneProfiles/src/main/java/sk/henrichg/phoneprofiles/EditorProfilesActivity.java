@@ -293,9 +293,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         return ret;
     }
 
-    public static void exitApp(final Context context, DataWrapper dataWrapper) {
-        PPApplication.setApplicationStarted(context, false);
-
+    public static void exitApp(final Context context, DataWrapper dataWrapper, final Activity activity) {
         // remove alarm for profile duration
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
@@ -303,8 +301,6 @@ public class EditorProfilesActivity extends AppCompatActivity
         // zrusenie notifikacie
         ImportantInfoNotification.removeNotification(context);
         Permissions.removeNotifications(context);
-
-        context.stopService(new Intent(context, PhoneProfilesService.class));
 
         if (PPApplication.brightnessHandler != null) {
             PPApplication.brightnessHandler.post(new Runnable() {
@@ -328,7 +324,22 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
         Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+        Permissions.setShowRequestDrawOverlaysPermission(context.getApplicationContext(), true);
         //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
+
+        context.stopService(new Intent(context, PhoneProfilesService.class));
+
+        PPApplication.setApplicationStarted(context, false);
+
+        if (activity != null) {
+            Handler handler = new Handler(context.getMainLooper());
+            Runnable r = new Runnable() {
+                public void run() {
+                    activity.finish();
+                }
+            };
+            handler.postDelayed(r, 500);
+        }
     }
 
     @Override
@@ -374,7 +385,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         case R.id.menu_exit:
-            exitApp(getApplicationContext(), getDataWrapper());
+            exitApp(getApplicationContext(), getDataWrapper(), this);
 
             Handler handler=new Handler(getMainLooper());
             Runnable r=new Runnable() {
