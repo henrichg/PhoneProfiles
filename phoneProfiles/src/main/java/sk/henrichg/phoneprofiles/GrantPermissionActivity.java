@@ -44,10 +44,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     private boolean started = false;
 
-    private static final int WRITE_SETTINGS_REQUEST_CODE = 909090;
-    private static final int PERMISSIONS_REQUEST_CODE = 909091;
-    private static final int ACCESS_NOTIFICATION_POLICY_REQUEST_CODE = 909092;
-    private static final int DRAW_OVERLAYS_REQUEST_CODE = 909093;
+    private static final int WRITE_SETTINGS_REQUEST_CODE = 9090;
+    private static final int PERMISSIONS_REQUEST_CODE = 9091;
+    private static final int ACCESS_NOTIFICATION_POLICY_REQUEST_CODE = 9092;
+    private static final int DRAW_OVERLAYS_REQUEST_CODE = 9093;
 
     private static final String NOTIFICATION_DELETED_ACTION = "sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED";
 
@@ -100,11 +100,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
         if (permissions.size() == 0) {
             // called from notification - recheck permissions
             if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
-                boolean granted = Permissions.checkInstallTone(context);
-                if (!granted) {
-                    permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_INSTALL_TONE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
-                }
-                else {
+                boolean granted = Permissions.checkInstallTone(context, permissions);
+                if (granted) {
                     Toast msg = Toast.makeText(context,
                             context.getResources().getString(R.string.toast_permissions_granted),
                             Toast.LENGTH_SHORT);

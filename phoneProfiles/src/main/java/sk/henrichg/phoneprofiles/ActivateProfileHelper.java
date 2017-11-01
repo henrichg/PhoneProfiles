@@ -810,7 +810,7 @@ public class ActivateProfileHelper {
         if (lValue != -1) {
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, context)
                     == PPApplication.PREFERENCE_ALLOWED) {
-                if (Permissions.checkProfileVibrateWhenRinging(context, profile)) {
+                if (Permissions.checkProfileVibrateWhenRinging(context, profile, null)) {
                     if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                         Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", lValue);
                     else {
@@ -841,7 +841,7 @@ public class ActivateProfileHelper {
     }
 
     private void setTones(Context context, Profile profile) {
-        if (Permissions.checkProfileRingTones(context, profile)) {
+        if (Permissions.checkProfileRingTones(context, profile, null)) {
             if (profile._soundRingtoneChange == 1) {
                 if (!profile._soundRingtone.isEmpty()) {
                     try {
@@ -919,7 +919,7 @@ public class ActivateProfileHelper {
                     setTones(appContext, profile);
 
                     if (/*Permissions.checkProfileVolumePreferences(context, profile) &&*/
-                            Permissions.checkProfileAccessNotificationPolicy(appContext, profile)) {
+                            Permissions.checkProfileAccessNotificationPolicy(appContext, profile, null)) {
 
                         changeRingerModeForVolumeEqual0(profile);
                         changeNotificationVolumeForVolumeEqual0(appContext, profile);
@@ -1424,7 +1424,7 @@ public class ActivateProfileHelper {
         executeForVolumes(profile, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
 
         // set vibration on touch
-        if (Permissions.checkProfileVibrationOnTouch(context, profile)) {
+        if (Permissions.checkProfileVibrationOnTouch(context, profile, null)) {
             switch (profile._vibrationOnTouch) {
                 case 1:
                     Settings.System.putInt(context.getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED, 1);
@@ -1471,7 +1471,7 @@ public class ActivateProfileHelper {
         } catch (Exception ignored) {} // fixed DeadObjectException
 
         // screen timeout
-        if (Permissions.checkProfileScreenTimeout(context, profile)) {
+        if (Permissions.checkProfileScreenTimeout(context, profile, null)) {
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             //noinspection deprecation
             if ((pm != null) && pm.isScreenOn()) {
@@ -1548,7 +1548,7 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie podsvietenia
-        if (Permissions.checkProfileScreenBrightness(context, profile)) {
+        if (Permissions.checkProfileScreenBrightness(context, profile, null)) {
             if (profile.getDeviceBrightnessChange()) {
                 if (profile.getDeviceBrightnessAutomatic()) {
                     Settings.System.putInt(context.getContentResolver(),
@@ -1596,7 +1596,7 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie rotate
-        if (Permissions.checkProfileAutoRotation(context, profile)) {
+        if (Permissions.checkProfileAutoRotation(context, profile, null)) {
             switch (profile._deviceAutoRotate) {
                 case 1:
                     // set autorotate on
@@ -1645,7 +1645,7 @@ public class ActivateProfileHelper {
         }
 
         // nahodenie pozadia
-        if (Permissions.checkProfileWallpaper(context, profile)) {
+        if (Permissions.checkProfileWallpaper(context, profile, null)) {
             if (profile._deviceWallpaperChange == 1) {
                 //ExecuteWallpaperProfilePrefsJob.start(context, profile._id);
                 executeForWallpaper(profile);
@@ -1658,7 +1658,7 @@ public class ActivateProfileHelper {
         //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
         setPowerSaveMode(profile);
 
-        if (Permissions.checkProfileLockDevice(context, profile)) {
+        if (Permissions.checkProfileLockDevice(context, profile, null)) {
             if (profile._lockDevice != 0) {
                 boolean keyguardLocked;
                 KeyguardManager kgMgr = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
