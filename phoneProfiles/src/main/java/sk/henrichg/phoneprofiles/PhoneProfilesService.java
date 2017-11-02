@@ -86,7 +86,7 @@ public class PhoneProfilesService extends Service {
 
         keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
         if (keyguardManager != null)
-            keyguardLock = keyguardManager.newKeyguardLock("phoneProfilesPlus.keyguardLock");
+            keyguardLock = keyguardManager.newKeyguardLock("phoneProfiles.keyguardLock");
 
         if (screenOnOffReceiver != null)
             appContext.unregisterReceiver(screenOnOffReceiver);
