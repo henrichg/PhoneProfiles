@@ -95,7 +95,6 @@ public class EditorProfileListFragment extends Fragment
     public EditorProfileListFragment() {
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

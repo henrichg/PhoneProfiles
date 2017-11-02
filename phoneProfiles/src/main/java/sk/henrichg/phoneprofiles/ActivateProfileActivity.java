@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
@@ -28,7 +29,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "activate_profiles_activity_start_target_helps";
 
-    @SuppressWarnings({ "deprecation" })
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +40,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     // set window dimensions ----------------------------------------------------------
 
-        Display display = getWindowManager().getDefaultDisplay();
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         LayoutParams params = getWindow().getAttributes();
         params.alpha = 1.0f;
@@ -49,8 +47,13 @@ public class ActivateProfileActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         // display dimensions
-        float popupWidth = display.getWidth();
-        float popupMaxHeight = display.getHeight();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        float popupWidth = displaymetrics.widthPixels;
+        float popupMaxHeight = displaymetrics.heightPixels;
+        //Display display = getWindowManager().getDefaultDisplay();
+        //float popupWidth = display.getWidth();
+        //float popupMaxHeight = display.getHeight();
         float popupHeight = 0;
         float actionBarHeight = 0;
 

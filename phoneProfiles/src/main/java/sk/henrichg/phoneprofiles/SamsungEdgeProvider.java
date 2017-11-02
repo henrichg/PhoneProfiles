@@ -19,7 +19,6 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     //private static boolean isVisible = false;
 
-    @SuppressWarnings("deprecation")
     private RemoteViews buildLayout(Context context, SlookCocktailManager cocktailBarManager, int appWidgetId)
     {
         Intent svcIntent=new Intent(context, SamsungEdgeService.class);
@@ -184,9 +183,9 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
         widget.setOnClickPendingIntent(R.id.widget_profile_list_header, pendingIntent);
 
         /*if (!ApplicationPreferences.applicationSamsungEdgeGridLayout(context))
-            widget.setRemoteAdapter(appWidgetId, R.id.widget_profile_list, svcIntent);
+            widget.setRemoteAdapter(R.id.widget_profile_list, svcIntent);
         else*/
-            widget.setRemoteAdapter(appWidgetId, R.id.widget_profile_grid, svcIntent);
+            widget.setRemoteAdapter(R.id.widget_profile_grid, svcIntent);
 
         // The empty view is displayed when the collection has no items.
         // It should be in the same layout used to instantiate the RemoteViews

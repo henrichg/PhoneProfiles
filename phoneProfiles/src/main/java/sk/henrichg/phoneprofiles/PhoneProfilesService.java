@@ -571,7 +571,6 @@ public class PhoneProfilesService extends Service {
                 notificationBuilder.setCustomContentView(contentView);
             }
             else
-                //noinspection deprecation
                 notificationBuilder.setContent(contentView);
 
             try {
