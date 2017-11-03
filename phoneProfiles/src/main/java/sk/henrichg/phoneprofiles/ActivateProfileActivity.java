@@ -20,6 +20,9 @@ import android.view.WindowManager.LayoutParams;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivateProfileActivity extends AppCompatActivity {
 
     private static ActivateProfileActivity instance;
@@ -282,15 +285,22 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
                     circleColor = 0x7F7F7F;
 
-                View editorActionView = toolbar.findViewById(R.id.menu_edit_profiles);
                 final TapTargetSequence sequence = new TapTargetSequence(ActivatorTargetHelpsActivity.activity);
-                sequence.targets(
-                        TapTarget.forView(editorActionView, getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
-                                .drawShadow(true)
-                                .id(1)
-                );
+                List<TapTarget> targets = new ArrayList<>();
+                int id = 1;
+                try {
+                    View editorActionView = toolbar.findViewById(R.id.menu_edit_profiles);
+                    targets.add(
+                            TapTarget.forView(editorActionView, getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
+                                    .targetCircleColorInt(circleColor)
+                                    .textColorInt(0xFFFFFF)
+                                    .drawShadow(true)
+                                    .id(id)
+                    );
+                    ++id;
+                } catch (Exception ignored) {} // not in action bar?
+
+                sequence.targets(targets);
                 sequence.listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence

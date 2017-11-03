@@ -43,6 +43,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1107,18 +1108,28 @@ public class EditorProfilesActivity extends AppCompatActivity
                     circleColor = 0x7F7F7F;
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
-                sequence.targets(
+                List<TapTarget> targets = new ArrayList<>();
+                targets.add(
                         TapTarget.forToolbarOverflow(editorToolbar, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
                                 .targetCircleColorInt(circleColor)
                                 .textColorInt(0xFFFFFF)
                                 .drawShadow(true)
-                                .id(1),
-                        TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
-                                .drawShadow(true)
-                                .id(2)
+                                .id(1)
                 );
+
+                int id = 2;
+                try {
+                    targets.add(
+                            TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
+                                    .targetCircleColorInt(circleColor)
+                                    .textColorInt(0xFFFFFF)
+                                    .drawShadow(true)
+                                    .id(id)
+                    );
+                    ++id;
+                } catch (Exception ignored) {} // not in action bar?
+
+                sequence.targets(targets);
                 sequence.listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence
