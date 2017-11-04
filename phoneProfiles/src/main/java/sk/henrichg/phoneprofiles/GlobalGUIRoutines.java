@@ -31,7 +31,6 @@ class GlobalGUIRoutines {
     static final String EXPORT_APP_PREF_FILENAME = "ApplicationPreferences.backup";
     static final String EXPORT_DEF_PROFILE_PREF_FILENAME = "DefaultProfilePreferences.backup";
 
-    @SuppressWarnings("deprecation")
     public static void setLanguage(Context context)//, boolean restart)
     {
         //if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -87,7 +86,6 @@ class GlobalGUIRoutines {
                 //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
                 //} else {
-                //noinspection deprecation
                 appLocale = Resources.getSystem().getConfiguration().locale;
                 //}
             }
@@ -250,6 +248,7 @@ class GlobalGUIRoutines {
     }
     */
 
+    /*
     private static float spToPixels(Context context, float sp) {
         return sp * context.getResources().getDisplayMetrics().scaledDensity;
     }
@@ -258,6 +257,7 @@ class GlobalGUIRoutines {
     {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
+    */
 
     /*static int pxToDp(int px)
     {
@@ -307,11 +307,11 @@ class GlobalGUIRoutines {
         }
     }*/
 
-    @SuppressWarnings("deprecation")
     static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {
+            //noinspection deprecation
             return Html.fromHtml(source);
         }
     }

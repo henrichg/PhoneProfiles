@@ -25,7 +25,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class AboutApplicationActivity extends AppCompatActivity {
 
-    @SuppressLint("InlinedApi")
+    @SuppressLint({"InlinedApi", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // must by called before super.onCreate() for PreferenceActivity
@@ -201,7 +201,6 @@ public class AboutApplicationActivity extends AppCompatActivity {
                             Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                             Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 else
-                    //noinspection deprecation
                     goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                             Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
                             Intent.FLAG_ACTIVITY_MULTIPLE_TASK);

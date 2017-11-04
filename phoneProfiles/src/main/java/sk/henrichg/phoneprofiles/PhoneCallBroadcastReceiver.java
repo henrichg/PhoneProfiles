@@ -14,8 +14,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     private static boolean savedSpeakerphone = false;
     private static boolean speakerphoneSelected = false;
 
-    public static final String EXTRA_SERVICE_PHONE_EVENT = "service_phone_event";
-    public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
+    //public static final String EXTRA_SERVICE_PHONE_EVENT = "service_phone_event";
+    //public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
     //public static final String EXTRA_SERVICE_PHONE_NUMBER = "service_phone_number";
 
     public static final int SERVICE_PHONE_EVENT_START = 1;
@@ -68,7 +68,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private void doCall(final Context context, final int phoneEvent, final boolean incoming/*, final String number*/) {
         final Context appContext = context.getApplicationContext();
-        final Handler handler = new Handler(appContext.getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -167,7 +168,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         if (speakerphoneSelected)
         {
-            audioManager.setSpeakerphoneOn(savedSpeakerphone);
+            if (audioManager != null)
+                audioManager.setSpeakerphoneOn(savedSpeakerphone);
         }
 
         speakerphoneSelected = false;

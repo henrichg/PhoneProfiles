@@ -4,36 +4,34 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivateProfileActivity extends AppCompatActivity {
 
     private static ActivateProfileActivity instance;
-
-    private float popupWidth;
-    private float popupHeight;
 
     private Toolbar toolbar;
 
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "activate_profiles_activity_start_target_helps";
 
-    @SuppressWarnings({ "deprecation" })
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +43,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     // set window dimensions ----------------------------------------------------------
 
-        Display display = getWindowManager().getDefaultDisplay();
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         LayoutParams params = getWindow().getAttributes();
         params.alpha = 1.0f;
@@ -54,9 +50,14 @@ public class ActivateProfileActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         // display dimensions
-        popupWidth = display.getWidth();
-        float popupMaxHeight = display.getHeight();
-        popupHeight = 0;
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        float popupWidth = displaymetrics.widthPixels;
+        float popupMaxHeight = displaymetrics.heightPixels;
+        //Display display = getWindowManager().getDefaultDisplay();
+        //float popupWidth = display.getWidth();
+        //float popupMaxHeight = display.getHeight();
+        float popupHeight = 0;
         float actionBarHeight = 0;
 
         // action bar height
@@ -280,32 +281,26 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
                 editor.apply();
 
-                TypedValue tv = new TypedValue();
-                //getTheme().resolveAttribute(R.attr.colorAccent, tv, true);
-
-                final Display display = getWindowManager().getDefaultDisplay();
-                @SuppressWarnings("deprecation") int popupLeft = (int) (display.getWidth() - popupWidth) / 2;
-                @SuppressWarnings("deprecation") int popupTop = (int) (display.getHeight() - popupHeight) / 2;
-
-                getTheme().resolveAttribute(R.attr.actionEditProfilesIcon, tv, true);
-                final Drawable actionEditProfilesIcon = ContextCompat.getDrawable(this, tv.resourceId);
-                final Rect actionEditProfilesTarget = new Rect(0, 0, actionEditProfilesIcon.getIntrinsicWidth(), actionEditProfilesIcon.getIntrinsicHeight());
-                actionEditProfilesTarget.offset((popupLeft+(int)popupWidth) - (/*iconWidth + */GlobalGUIRoutines.dpToPx(50))/* - GlobalGUIRoutines.dpToPx(30)*/, popupTop+GlobalGUIRoutines.dpToPx(35));
-                actionEditProfilesIcon.setBounds(0, 0, GlobalGUIRoutines.dpToPx(35), GlobalGUIRoutines.dpToPx(35));
-
                 int circleColor = 0xFFFFFF;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
                     circleColor = 0x7F7F7F;
 
                 final TapTargetSequence sequence = new TapTargetSequence(ActivatorTargetHelpsActivity.activity);
-                sequence.targets(
-                        TapTarget.forView(toolbar.findViewById(R.id.menu_edit_profiles), getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
-                                .icon(actionEditProfilesIcon, true)
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
-                                .drawShadow(true)
-                                .id(1)
-                );
+                List<TapTarget> targets = new ArrayList<>();
+                int id = 1;
+                try {
+                    View editorActionView = toolbar.findViewById(R.id.menu_edit_profiles);
+                    targets.add(
+                            TapTarget.forView(editorActionView, getString(R.string.activator_activity_targetHelps_editor_title), getString(R.string.activator_activity_targetHelps_editor_description_pp))
+                                    .targetCircleColorInt(circleColor)
+                                    .textColorInt(0xFFFFFF)
+                                    .drawShadow(true)
+                                    .id(id)
+                    );
+                    ++id;
+                } catch (Exception ignored) {} // not in action bar?
+
+                sequence.targets(targets);
                 sequence.listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence

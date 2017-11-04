@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShortcutCreatorActivity" >
+    tools:context=".ActivateProfileActivity" >
 
+    <!-- root LinearLayout is required -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="12dp">
+        android:layout_margin="12dp"
+        tools:ignore="UselessParent">
 
         <FrameLayout
             android:layout_width="match_parent"

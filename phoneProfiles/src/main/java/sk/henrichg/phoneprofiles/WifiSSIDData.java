@@ -34,6 +34,8 @@ class WifiSSIDData {
         List<WifiSSIDData> wifiConfigurationList = new ArrayList<>();
 
         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (wifi == null)
+            return;
 
         if (wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLED)
             // wifi must be enabled for wifi.getConfiguredNetworks()

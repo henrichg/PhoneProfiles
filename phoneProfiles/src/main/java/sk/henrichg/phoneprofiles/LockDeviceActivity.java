@@ -13,7 +13,6 @@ import android.view.WindowManager;
 
 public class LockDeviceActivity extends AppCompatActivity {
 
-    private WindowManager windowManager;
     private View view = null;
 
     @SuppressLint("InflateParams")
@@ -45,7 +44,6 @@ public class LockDeviceActivity extends AppCompatActivity {
         params.flags = 1808;
         //TODO Android O
         //if (android.os.Build.VERSION.SDK_INT < 26)
-            //noinspection deprecation
             params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
         //else
         //    params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -65,10 +63,12 @@ public class LockDeviceActivity extends AppCompatActivity {
             }
         });
 
-        windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
-        windowManager.addView(view, params);
+        WindowManager windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager != null)
+            windowManager.addView(view, params);
 
-        Handler handler = new Handler(getMainLooper());
+        PhoneProfilesService.startHandlerThread();
+        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
         handler.postDelayed(new Runnable() {
             public void run() {
                 if (PPApplication.lockDeviceActivity != null) {
@@ -85,7 +85,9 @@ public class LockDeviceActivity extends AppCompatActivity {
 
         if (view != null) {
             try {
-                windowManager.removeViewImmediate(view);
+                WindowManager windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+                if (windowManager != null)
+                    windowManager.removeViewImmediate(view);
             } catch (Exception ignored) {}
         }
 

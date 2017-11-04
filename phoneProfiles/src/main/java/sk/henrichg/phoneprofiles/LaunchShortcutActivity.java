@@ -1,6 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;

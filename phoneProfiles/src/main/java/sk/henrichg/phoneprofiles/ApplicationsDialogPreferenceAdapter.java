@@ -42,9 +42,19 @@ class ApplicationsDialogPreferenceAdapter extends RecyclerView.Adapter<Applicati
         holder.dragHandle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mDragStartListener.onStartDrag(holder);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        v.performClick();
+                        break;
+                    default:
+                        break;
                 }
+                /*if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                    mDragStartListener.onStartDrag(holder);
+                }*/
                 return false;
             }
         });

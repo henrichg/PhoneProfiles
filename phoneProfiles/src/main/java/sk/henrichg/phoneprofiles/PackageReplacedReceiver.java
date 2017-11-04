@@ -15,21 +15,26 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         PPApplication.logE("PackageReplacedReceiver.onReceive", "intent="+intent);
-        if ((intent != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
+        if ((intent != null) && (intent.getAction() != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
             // PackageReplacedJob.start(context.getApplicationContext());
             final Context appContext = context.getApplicationContext();
 
-            final Handler handler = new Handler(appContext.getMainLooper());
+            PhoneProfilesService.startHandlerThread();
+            final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                    PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive");
-                    wakeLock.acquire(10 * 60 * 1000);
+                    PowerManager.WakeLock wakeLock = null;
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
 
                     // start delayed boot up broadcast
                     PPApplication.startedOnBoot = true;
-                    final Handler handler = new Handler(appContext.getMainLooper());
+                    PhoneProfilesService.startHandlerThread();
+                    final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -80,7 +85,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         if (PhoneProfilesService.instance != null) {
                             // stop PhoneProfilesService
                             appContext.stopService(new Intent(appContext, PhoneProfilesService.class));
-                            Handler _handler = new Handler(appContext.getMainLooper());
+                            PhoneProfilesService.startHandlerThread();
+                            final Handler _handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
                             Runnable r = new Runnable() {
                                 public void run() {
                                     startService(appContext);
@@ -92,7 +98,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                             startService(appContext);
                     }
 
-                    wakeLock.release();
+                    if (wakeLock != null)
+                        wakeLock.release();
                 }
             });
 

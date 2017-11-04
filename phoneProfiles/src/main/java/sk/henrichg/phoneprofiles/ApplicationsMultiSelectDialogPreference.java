@@ -94,6 +94,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                 .positiveText(getPositiveButtonText())
                 .negativeText(getNegativeButtonText())
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @SuppressWarnings("StringConcatenationInLoop")
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (shouldPersist())
@@ -176,7 +177,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         mDialog.show();
     }
 
-    public void onShow(DialogInterface dialog) {
+    private void onShow(DialogInterface dialog) {
 
         new AsyncTask<Void, Integer, Void>() {
 

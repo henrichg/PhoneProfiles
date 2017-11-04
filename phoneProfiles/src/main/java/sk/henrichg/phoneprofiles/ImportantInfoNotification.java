@@ -98,13 +98,15 @@ class ImportantInfoNotification {
             mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
         NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (mNotificationManager != null)
         mNotificationManager.notify(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID, mBuilder.build());
     }
 
     static void removeNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID);
+        if (notificationManager != null)
+            notificationManager.cancel(PPApplication.IMPORTANT_INFO_NOTIFICATION_ID);
     }
 
 

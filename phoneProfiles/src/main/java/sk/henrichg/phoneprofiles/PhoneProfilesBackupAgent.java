@@ -17,7 +17,7 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
 
         DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
 
-        EditorProfilesActivity.exitApp(getApplicationContext(), dataWrapper);
+        EditorProfilesActivity.exitApp(getApplicationContext(), dataWrapper, null);
 
         ActivateProfileActivity activateProfileActivity = ActivateProfileActivity.getInstance();
         if (activateProfileActivity != null)

@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
@@ -12,7 +13,6 @@ public class ShortcutCreatorActivity extends AppCompatActivity {
 
     private DataWrapper dataWrapper;
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +24,6 @@ public class ShortcutCreatorActivity extends AppCompatActivity {
 
     // set window dimensions ----------------------------------------------------------
 
-        Display display = getWindowManager().getDefaultDisplay();
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         LayoutParams params = getWindow().getAttributes();
         params.alpha = 1.0f;
@@ -33,8 +31,13 @@ public class ShortcutCreatorActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         // display dimensions
-        float popupWidth = display.getWidth();
-        float popupMaxHeight = display.getHeight();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        float popupWidth = displaymetrics.widthPixels;
+        float popupMaxHeight = displaymetrics.heightPixels;
+        //Display display = getWindowManager().getDefaultDisplay();
+        //float popupWidth = display.getWidth();
+        //float popupMaxHeight = display.getHeight();
         float popupHeight = 0;
         float actionBarHeight = 0;
 

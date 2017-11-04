@@ -599,6 +599,7 @@ public class Profile {
         return value == 1;
     }
 
+    @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeRingtoneValue(int value) {
 
         try {
@@ -650,6 +651,7 @@ public class Profile {
         return value == 1;
     }
 
+    @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeNotificationValue(int value) {
 
         try {
@@ -1153,13 +1155,21 @@ public class Profile {
 
     static Profile getDefaultProfile(Context context)
     {
+        int	maximumValueRing = 7;
+        int	maximumValueNotification = 7;
+        int	maximumValueMusic = 15;
+        int	maximumValueAlarm = 7;
+        int	maximumValueSystem = 7;
+        int	maximumValueVoiceCall = 7;
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        int	maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
-        int	maximumValueNotification = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-        int	maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        int	maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-        int	maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
-        int	maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        if (audioManager != null) {
+            maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
+            maximumValueNotification = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+            maximumValueMusic = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+            maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
+            maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+        }
 
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -1216,7 +1226,7 @@ public class Profile {
         return profile;
     }
 
-    static public Profile getMappedProfile(Profile profile, Context context)
+    static Profile getMappedProfile(Profile profile, Context context)
     {
         if (profile != null)
         {
@@ -1424,6 +1434,7 @@ public class Profile {
             boolean mobileDataSupported;
             if (!PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY)) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (cm != null) {
                 /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     Network[] networks = cm.getAllNetworks();
                     for (Network network : networks) {
@@ -1437,10 +1448,12 @@ public class Profile {
                     }
                 }
                 else {*/
-                    //noinspection deprecation
                     NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
                     mobileDataSupported = ni != null;
-                //}
+                    //}
+                }
+                else
+                    mobileDataSupported = false;
             }
             else
                 mobileDataSupported = true;
@@ -1627,23 +1640,26 @@ public class Profile {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY))
             {
                 final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                final int phoneType = telephonyManager.getPhoneType();
-                if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
-                    if (PPApplication.isRooted()) {
-                        // device is rooted
-                        if (ActivateProfileHelper.telephonyServiceExists(context, Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
-                            if (PPApplication.serviceBinaryExists())
-                                featurePresented = PPApplication.PREFERENCE_ALLOWED;
-                            else
-                                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
-                        }
-                        else {
-                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                            PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
-                        }
+                if (telephonyManager != null) {
+                    final int phoneType = telephonyManager.getPhoneType();
+                    if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
+                        if (PPApplication.isRooted()) {
+                            // device is rooted
+                            if (ActivateProfileHelper.telephonyServiceExists(context, Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
+                                if (PPApplication.serviceBinaryExists())
+                                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                                else
+                                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                            } else {
+                                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                            }
+                        } else
+                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    } else {
+                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
                     }
-                    else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                 }
                 else {
                     PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
@@ -1681,13 +1697,14 @@ public class Profile {
         {
             boolean secureKeyguard;
             KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Activity.KEYGUARD_SERVICE);
-            secureKeyguard = keyguardManager.isKeyguardSecure();
-            if (secureKeyguard) {
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION;
-                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_secure_lock);
+            if (keyguardManager != null) {
+                secureKeyguard = keyguardManager.isKeyguardSecure();
+                if (secureKeyguard) {
+                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION;
+                    PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_secure_lock);
+                } else
+                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
             }
-            else
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID))

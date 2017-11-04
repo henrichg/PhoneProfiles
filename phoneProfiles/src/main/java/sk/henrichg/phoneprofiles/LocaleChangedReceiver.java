@@ -8,7 +8,7 @@ public class LocaleChangedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if ((intent != null) && intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
+        if ((intent != null) && (intent.getAction() != null) && intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
             if (ApplicationPreferences.applicationLanguage(context).equals("system")) {
                 if (PhoneProfilesService.instance != null) {
                     DataWrapper dataWrapper = new DataWrapper(context.getApplicationContext(), true, false, 0);

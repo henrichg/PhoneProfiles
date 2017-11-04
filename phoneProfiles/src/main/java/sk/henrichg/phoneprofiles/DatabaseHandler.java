@@ -263,15 +263,24 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 18)
         {
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_ICON + "=replace(" + KEY_ICON + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_RINGTONE + "=replace(" + KEY_VOLUME_RINGTONE + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_NOTIFICATION + "=replace(" + KEY_VOLUME_NOTIFICATION + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_MEDIA + "=replace(" + KEY_VOLUME_MEDIA + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_ALARM + "=replace(" + KEY_VOLUME_ALARM + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_SYSTEM + "=replace(" + KEY_VOLUME_SYSTEM + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_VOICE + "=replace(" + KEY_VOLUME_VOICE + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_BRIGHTNESS + "=replace(" + KEY_DEVICE_BRIGHTNESS + ",':','|')");
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WALLPAPER + "=replace(" + KEY_DEVICE_WALLPAPER + ",':','|')");
+            String value = "=replace(" + KEY_ICON + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_ICON + value);
+            value = "=replace(" + KEY_VOLUME_RINGTONE + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_RINGTONE + value);
+            value = "=replace(" + KEY_VOLUME_NOTIFICATION + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_NOTIFICATION + value);
+            value = "=replace(" + KEY_VOLUME_MEDIA + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_MEDIA + value);
+            value = "=replace(" + KEY_VOLUME_ALARM + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_ALARM + value);
+            value = "=replace(" + KEY_VOLUME_SYSTEM + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_SYSTEM + value);
+            value = "=replace(" + KEY_VOLUME_VOICE + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_VOICE + value);
+            value = "=replace(" + KEY_DEVICE_BRIGHTNESS + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_BRIGHTNESS + value);
+            value = "=replace(" + KEY_DEVICE_WALLPAPER + ",':','|')";
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WALLPAPER + value);
         }
 
         if (oldVersion < 19)
@@ -1666,7 +1675,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     int disableNotAllowedPreferences(Context context)
     {
         synchronized (databaseHandlerMutex) {
-            int ret = 0;
+            int ret;
 
             final String selectQuery = "SELECT " + KEY_ID + "," +
                     KEY_DEVICE_AIRPLANE_MODE + "," +
