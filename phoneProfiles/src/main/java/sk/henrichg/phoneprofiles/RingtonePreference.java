@@ -389,6 +389,11 @@ public class RingtonePreference extends DialogPreference {
     void playRingtone(final boolean play) {
         final AudioManager audioManager = (AudioManager)prefContext.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
+            if (playTimer != null) {
+                playTimer.cancel();
+                playTimer = null;
+            }
+
             if (mediaPlayer != null) {
                 try {
                     if (mediaPlayer.isPlaying())
@@ -400,11 +405,6 @@ public class RingtonePreference extends DialogPreference {
 
                 if (oldMediaVolume > -1)
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
-            }
-
-            if (playTimer != null) {
-                playTimer.cancel();
-                playTimer = null;
             }
 
             if (!play) return;
