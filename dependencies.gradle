@@ -7,7 +7,7 @@ ext.ppVersions = [
         targetSdk: 25,
         compileSdk: 26,
         buildTools: '27.0.0',
-        publishVersion: '4.5.5.2',
-        publishVersionCode: 2620,
+        publishVersion: '4.5.5.3',
+        publishVersionCode: 2630,
         supportLib: '27.0.0'
 ]
