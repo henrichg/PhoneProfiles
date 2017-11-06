@@ -423,8 +423,8 @@ public class ActivateProfileHelper {
                 boolean _isAirplaneMode = false;
                 boolean _setAirplaneMode = false;
                 if (profile._deviceAirplaneMode != 0) {
-                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
-                        _isAirplaneMode = isAirplaneMode(context);
+                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, appContext) == PPApplication.PREFERENCE_ALLOWED) {
+                        _isAirplaneMode = isAirplaneMode(appContext);
                         switch (profile._deviceAirplaneMode) {
                             case 1:
                                 if (!_isAirplaneMode) {
@@ -448,7 +448,7 @@ public class ActivateProfileHelper {
 
                 if (_setAirplaneMode /*&& _isAirplaneMode*/) {
                     // switch ON airplane mode, set it before executeForRadios
-                    setAirplaneMode(context, _isAirplaneMode);
+                    setAirplaneMode(appContext, _isAirplaneMode);
 
                     PPApplication.sleep(2000);
                 }
@@ -1252,7 +1252,7 @@ public class ActivateProfileHelper {
                     }
 
                     DisplayMetrics displayMetrics = new DisplayMetrics();
-                    WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                    WindowManager wm = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
                     if (wm != null) {
                         Display display = wm.getDefaultDisplay();
                         if (android.os.Build.VERSION.SDK_INT >= 17)
@@ -1261,7 +1261,7 @@ public class ActivateProfileHelper {
                             display.getMetrics(displayMetrics);
                         int height = displayMetrics.heightPixels;
                         int width = displayMetrics.widthPixels;
-                        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        if (appContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             //noinspection SuspiciousNameCombination
                             height = displayMetrics.widthPixels;
                             //noinspection SuspiciousNameCombination
@@ -1271,10 +1271,10 @@ public class ActivateProfileHelper {
                         if ((android.os.Build.VERSION.SDK_INT < 24) || (profile._deviceWallpaperFor != 2))
                             width = width << 1; // best wallpaper width is twice screen width
 
-                        Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmapUri(profile._deviceWallpaper, width, height, context);
+                        Bitmap decodedSampleBitmap = BitmapManipulator.resampleBitmapUri(profile._deviceWallpaper, width, height, appContext);
                         if (decodedSampleBitmap != null) {
                             // set wallpaper
-                            WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+                            WallpaperManager wallpaperManager = WallpaperManager.getInstance(appContext);
                             try {
                                 if (android.os.Build.VERSION.SDK_INT >= 24) {
                                     int flags = WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK;
@@ -1327,12 +1327,12 @@ public class ActivateProfileHelper {
 
                     String[] splits = profile._deviceRunApplicationPackageName.split("\\|");
                     Intent intent;
-                    PackageManager packageManager = context.getPackageManager();
+                    PackageManager packageManager = appContext.getPackageManager();
 
                     for (String split : splits) {
                         int startApplicationDelay = ApplicationsCache.getStartApplicationDelay(split);
                         if (ApplicationsCache.getStartApplicationDelay(split) > 0) {
-                            RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(context, startApplicationDelay, split);
+                            RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(appContext, startApplicationDelay, split);
                         }
                         else {
                             if (!ApplicationsCache.isShortcut(split)) {
@@ -1341,7 +1341,7 @@ public class ActivateProfileHelper {
                                     intent.addCategory(Intent.CATEGORY_LAUNCHER);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     try {
-                                        context.startActivity(intent);
+                                        appContext.startActivity(intent);
                                         //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                                         //SystemClock.sleep(1000);
                                         PPApplication.sleep(1000);
@@ -1358,7 +1358,7 @@ public class ActivateProfileHelper {
                                             intent = Intent.parseUri(shortcut._intent, 0);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             try {
-                                                context.startActivity(intent);
+                                                appContext.startActivity(intent);
                                                 //try { Thread.sleep(1000); } catch (InterruptedException e) { }
                                                 //SystemClock.sleep(1000);
                                                 PPApplication.sleep(1000);
@@ -1399,7 +1399,7 @@ public class ActivateProfileHelper {
                 if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
                     synchronized (PPApplication.startRootCommandMutex) {
                         String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
-                                Float.toString(profile.getDeviceBrightnessAdaptiveValue(context));
+                                Float.toString(profile.getDeviceBrightnessAdaptiveValue(appContext));
                         //if (PPApplication.isSELinuxEnforcing())
                         //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                         Command command = new Command(0, false, command1); //, command2);
