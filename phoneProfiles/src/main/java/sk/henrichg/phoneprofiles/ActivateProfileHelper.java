@@ -109,7 +109,7 @@ public class ActivateProfileHelper {
         context = null;
     }
 
-    private void doExecuteForRadios(Profile profile)
+    private void doExecuteForRadios(Context context, Profile profile)
     {
         //try { Thread.sleep(300); } catch (InterruptedException e) { }
         //SystemClock.sleep(300);
@@ -453,7 +453,7 @@ public class ActivateProfileHelper {
                     PPApplication.sleep(2000);
                 }
 
-                doExecuteForRadios(profile);
+                doExecuteForRadios(appContext, profile);
 
                 /*if (_setAirplaneMode && (!_isAirplaneMode)) {
                     // 200 miliseconds is in doExecuteForRadios
