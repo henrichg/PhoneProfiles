@@ -2834,7 +2834,7 @@ public class ActivateProfileHelper {
                         }
 
                         if (powerManager != null) {
-                            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, context) == PPApplication.PREFERENCE_ALLOWED) {
+                            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, appContext) == PPApplication.PREFERENCE_ALLOWED) {
                                 boolean _isPowerSaveMode = false;
                                 if (Build.VERSION.SDK_INT >= 21)
                                     _isPowerSaveMode = powerManager.isPowerSaveMode();
@@ -2858,9 +2858,9 @@ public class ActivateProfileHelper {
                                         break;
                                 }
                                 if (_setPowerSaveMode) {
-                                    if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                                    if (Permissions.hasPermission(appContext, Manifest.permission.WRITE_SECURE_SETTINGS)) {
                                         if (android.os.Build.VERSION.SDK_INT >= 21)
-                                            Settings.Global.putInt(context.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
+                                            Settings.Global.putInt(appContext.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
                                     } else if (PPApplication.isRooted() && PPApplication.settingsBinaryExists()) {
                                         synchronized (PPApplication.startRootCommandMutex) {
                                             String command1 = "settings put global low_power " + ((_isPowerSaveMode) ? 1 : 0);
@@ -2906,9 +2906,9 @@ public class ActivateProfileHelper {
 
                 switch (profile._lockDevice) {
                     case 3:
-                        DevicePolicyManager manager = (DevicePolicyManager)context.getSystemService(DEVICE_POLICY_SERVICE);
+                        DevicePolicyManager manager = (DevicePolicyManager)appContext.getSystemService(DEVICE_POLICY_SERVICE);
                         if (manager != null) {
-                            final ComponentName component = new ComponentName(context, PPDeviceAdminReceiver.class);
+                            final ComponentName component = new ComponentName(appContext, PPDeviceAdminReceiver.class);
                             if (manager.isAdminActive(component))
                                 manager.lockNow();
                         }
@@ -2928,7 +2928,7 @@ public class ActivateProfileHelper {
                         if (PPApplication.isRooted())
                         {
                             synchronized (PPApplication.startRootCommandMutex) {
-                                String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", context, 0);
+                                String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", appContext, 0);
                                 if (command1 != null) {
                                     Command command = new Command(0, false, command1);
                                     try {
@@ -2943,13 +2943,13 @@ public class ActivateProfileHelper {
                         }
                         break;
                     case 1:
-                        if (Permissions.checkLockDevice(context) && (PPApplication.lockDeviceActivity == null)) {
+                        if (Permissions.checkLockDevice(appContext) && (PPApplication.lockDeviceActivity == null)) {
                             try {
-                                Intent intent = new Intent(context, LockDeviceActivity.class);
+                                Intent intent = new Intent(appContext, LockDeviceActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                context.startActivity(intent);
+                                appContext.startActivity(intent);
                             } catch (Exception ignore) {}
                         }
                         break;
