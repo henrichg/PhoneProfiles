@@ -1351,7 +1351,8 @@ public class ActivateProfileHelper {
                             } else {
                                 long shortcutId = ApplicationsCache.getShortcutId(split);
                                 if (shortcutId > 0) {
-                                    Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
+                                    //Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
+                                    Shortcut shortcut = DatabaseHandler.getInstance(appContext).getShortcut(shortcutId);
                                     if (shortcut != null) {
                                         try {
                                             intent = Intent.parseUri(shortcut._intent, 0);
