@@ -899,10 +899,10 @@ public class Profile {
         int maximumValue = getMaximumScreenBrightnessSetting();
         int minimumValue = getMinimumScreenBrightnessSetting();
 
-        if (maximumValue-minimumValue > 255) {
-            minimumValue = 1;
+        //if (maximumValue-minimumValue > 255) {
+            minimumValue = 0;
             maximumValue = 255;
-        }
+        //}
 
         int value;
 
