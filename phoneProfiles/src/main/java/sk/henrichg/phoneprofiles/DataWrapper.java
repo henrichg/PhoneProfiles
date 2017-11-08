@@ -768,7 +768,7 @@ public class DataWrapper {
 
             if (ApplicationPreferences.applicationActivate(context))
             {
-                // je nastavene, ze pri starte sa ma aktivita aktivovat
+                // je nastavene, ze pri starte sa ma profil aktivovat
                 actProfile = true;
             }
             else
