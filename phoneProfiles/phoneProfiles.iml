@@ -127,6 +127,7 @@
     <orderEntry type="library" name="com.android.support:support-core-ui-27.0.0" level="project" />
     <orderEntry type="library" name="android.arch.core:common:1.0.0@jar" level="project" />
     <orderEntry type="library" name="io.fabric.sdk.android:fabric-1.4.1" level="project" />
+    <orderEntry type="library" name="com.android.support:gridlayout-v7-26.1.0" level="project" />
     <orderEntry type="library" name="com.crashlytics.sdk.android:crashlytics-core-2.4.1" level="project" />
     <orderEntry type="library" name="__local_aars__:/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/libs/hidden-apis.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.crashlytics.sdk.android:beta-1.2.7" level="project" />
@@ -137,7 +138,6 @@
     <orderEntry type="library" name="com.android.support:support-fragment-27.0.0" level="project" />
     <orderEntry type="library" name="com.crashlytics.sdk.android:answers-1.4.1" level="project" />
     <orderEntry type="library" name="com.google.android.apps.dashclock:dashclock-api:2.0.0@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:gridlayout-v7-27.0.0" level="project" />
     <orderEntry type="module" module-name="RootTools" />
     <orderEntry type="module" module-name="QuickScroll" />
     <orderEntry type="module" module-name="RootShell" />
