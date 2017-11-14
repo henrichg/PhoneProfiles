@@ -2472,6 +2472,22 @@ public class ActivateProfileHelper {
         }
     }
 
+    static boolean wifiServiceExists(Context context, String preference) {
+        try {
+            Object serviceManager = PPApplication.getServiceManager("wifi");
+            if (serviceManager != null) {
+                int transactionCode = -1;
+                if (preference.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
+                    transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setWifiApEnabled");
+                if (transactionCode != -1)
+                    return true;
+            }
+            return false;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+
     private void setWifiAP(WifiApManager wifiApManager, boolean enable) {
         if (Build.VERSION.SDK_INT < 26)
             wifiApManager.setWifiApState(enable);

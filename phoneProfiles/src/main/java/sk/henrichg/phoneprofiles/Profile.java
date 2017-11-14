@@ -1569,10 +1569,15 @@ public class Profile {
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
-                    if (PPApplication.serviceBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
-                    else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                    if (ActivateProfileHelper.wifiServiceExists(context, Profile.PREF_PROFILE_DEVICE_WIFI_AP)) {
+                        if (PPApplication.serviceBinaryExists())
+                            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        else
+                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                    } else {
+                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                    }
                 }
                 else
                     PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
