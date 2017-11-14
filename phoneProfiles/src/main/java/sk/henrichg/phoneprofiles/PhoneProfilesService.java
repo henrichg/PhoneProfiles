@@ -158,6 +158,7 @@ public class PhoneProfilesService extends Service {
                     PPApplication.settingsBinaryExists();
                     PPApplication.serviceBinaryExists();
                     //PPApplication.getSUVersion();
+                    PPApplication.getServicesList();
                 }
                 //}
 

@@ -192,7 +192,7 @@ public class ActivateProfileHelper {
                             break;
                     }
                     if (setWifiAPState) {
-                        wifiApManager.setWifiApState(isWifiAPEnabled);
+                        setWifiAP(wifiApManager, isWifiAPEnabled);
                         //try { Thread.sleep(200); } catch (InterruptedException e) { }
                         //SystemClock.sleep(200);
                         PPApplication.sleep(200);
@@ -2396,49 +2396,20 @@ public class ActivateProfileHelper {
     }
     */
 
-    private static String getTransactionCode(Context context, String fieldName) throws Exception {
-        //try {
-        final TelephonyManager mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (mTelephonyManager != null) {
-            final Class<?> mTelephonyClass = Class.forName(mTelephonyManager.getClass().getName());
-            final Method mTelephonyMethod = mTelephonyClass.getDeclaredMethod("getITelephony");
-            mTelephonyMethod.setAccessible(true);
-            final Object mTelephonyStub = mTelephonyMethod.invoke(mTelephonyManager);
-            final Class<?> mTelephonyStubClass = Class.forName(mTelephonyStub.getClass().getName());
-            final Class<?> mClass = mTelephonyStubClass.getDeclaringClass();
-            final Field field = mClass.getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return String.valueOf(field.getInt(null));
-            //} catch (Exception e) {
-            // The "TRANSACTION_setDataEnabled" field is not available,
-            // or named differently in the current API level, so we throw
-            // an exception and inform users that the method is not available.
-            //    throw e;
-            //}
-        }
-        else
-            return "";
-    }
-
     static boolean telephonyServiceExists(Context context, String preference) {
         try {
-            /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
-                Log.e("PPApplication.telephonyServiceExists","getActiveSubscriptionInfoCount="+mSubscriptionManager.getActiveSubscriptionInfoCount());
-                Log.e("PPApplication.telephonyServiceExists", "subscriptionInfo="+mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0));
-                if (mSubscriptionManager.getActiveSubscriptionInfoCount() > 1)
-                    // dual sim is not supported
-                    return false;
-            }*/
-
-            if (preference.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA)) {
-                getTransactionCode(context, "TRANSACTION_setDataEnabled");
+            Object serviceManager = PPApplication.getServiceManager("phone");
+            if (serviceManager != null) {
+                int transactionCode = -1;
+                if (preference.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA))
+                    transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setDataEnabled");
+                else
+                if (preference.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE))
+                    transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setPreferredNetworkType");
+                if (transactionCode != -1)
+                    return true;
             }
-            else
-            if (preference.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
-                getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
-            }
-            return true;
+            return false;
         } catch(Exception e) {
             return false;
         }
@@ -2450,8 +2421,13 @@ public class ActivateProfileHelper {
         {
             try {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
-                String transactionCode = getTransactionCode(context, "TRANSACTION_setPreferredNetworkType");
-                if (!transactionCode.isEmpty()) {
+                Object serviceManager = PPApplication.getServiceManager("phone");
+                int transactionCode = -1;
+                if (serviceManager != null) {
+                    transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setPreferredNetworkType");
+                }
+
+                if (transactionCode != -1) {
                     // Android 6?
                     if (Build.VERSION.SDK_INT >= 23) {
                         SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
@@ -2459,43 +2435,74 @@ public class ActivateProfileHelper {
                         List<SubscriptionInfo> subscriptionList = mSubscriptionManager.getActiveSubscriptionInfoList();
                         if (subscriptionList != null) {
                             for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
-                                if (transactionCode.length() > 0) {
-                                    // Get the active subscription ID for a given SIM card.
-                                    SubscriptionInfo subscriptionInfo = subscriptionList.get(i);
-                                    if (subscriptionInfo != null) {
-                                        int subscriptionId = subscriptionInfo.getSubscriptionId();
-                                        synchronized (PPApplication.startRootCommandMutex) {
-                                            String command1 = "service call phone " + transactionCode + " i32 " + subscriptionId + " i32 " + networkType;
-                                            Command command = new Command(0, false, command1);
-                                            try {
-                                                //RootTools.closeAllShells();
-                                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                                                commandWait(command);
-                                            } catch (Exception e) {
-                                                Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
-                                            }
+                                // Get the active subscription ID for a given SIM card.
+                                SubscriptionInfo subscriptionInfo = subscriptionList.get(i);
+                                if (subscriptionInfo != null) {
+                                    int subscriptionId = subscriptionInfo.getSubscriptionId();
+                                    synchronized (PPApplication.startRootCommandMutex) {
+                                        String command1 = PPApplication.getServiceCommand("phone", transactionCode, subscriptionId, networkType);
+                                        Command command = new Command(0, false, command1);
+                                        try {
+                                            //RootTools.closeAllShells();
+                                            RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                            commandWait(command);
+                                        } catch (Exception e) {
+                                            Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
                                         }
                                     }
                                 }
                             }
                         }
                     } else {
-                        if (transactionCode.length() > 0) {
-                            synchronized (PPApplication.startRootCommandMutex) {
-                                String command1 = "service call phone " + transactionCode + " i32 " + networkType;
-                                Command command = new Command(0, false, command1);
-                                try {
-                                    //RootTools.closeAllShells();
-                                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                                    commandWait(command);
-                                } catch (Exception e) {
-                                    Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
-                                }
+                        synchronized (PPApplication.startRootCommandMutex) {
+                            String command1 = PPApplication.getServiceCommand("phone", transactionCode, networkType);
+                            Command command = new Command(0, false, command1);
+                            try {
+                                //RootTools.closeAllShells();
+                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                commandWait(command);
+                            } catch (Exception e) {
+                                Log.e("ActivateProfileHelper.setPreferredNetworkType", "Error on run su");
                             }
                         }
                     }
                 }
             } catch(Exception ignored) {
+            }
+        }
+    }
+
+    private void setWifiAP(WifiApManager wifiApManager, boolean enable) {
+        if (Build.VERSION.SDK_INT < 26)
+            wifiApManager.setWifiApState(enable);
+        else {
+            if (PPApplication.isRooted() && PPApplication.serviceBinaryExists()) {
+                try {
+                    Object serviceManager = PPApplication.getServiceManager("wifi");
+                    int transactionCode = -1;
+                    if (serviceManager != null) {
+                        transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setWifiApEnabled");
+                    }
+                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-serviceManager="+String.valueOf(serviceManager));
+                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-transactionCode="+transactionCode);
+
+                    if (transactionCode != -1) {
+                        synchronized (PPApplication.startRootCommandMutex) {
+                            //String command1 = "service call phone " + transactionCode + " i32 " + networkType;
+                            String command1 = PPApplication.getServiceCommand("wifi", transactionCode, 0, (enable) ? 1 : 0);
+                            PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-command1="+command1);
+                            Command command = new Command(0, false, command1);
+                            try {
+                                //RootTools.closeAllShells();
+                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                commandWait(command);
+                            } catch (Exception e) {
+                                Log.e("ActivateProfileHelper.setWifiAP", "Error on run su");
+                            }
+                        }
+                    }
+                } catch(Exception ignored) {
+                }
             }
         }
     }
