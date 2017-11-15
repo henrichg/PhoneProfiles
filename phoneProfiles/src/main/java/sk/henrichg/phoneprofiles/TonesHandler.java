@@ -67,7 +67,7 @@ class TonesHandler {
 
     private static boolean  isToneInstalled(int resID, String directory, Context context) {
         // Make sure the shared storage is currently writable
-        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             //Log.d("TonesHandler.isToneInstalled","not writable shared storage");
             return false;
         }
