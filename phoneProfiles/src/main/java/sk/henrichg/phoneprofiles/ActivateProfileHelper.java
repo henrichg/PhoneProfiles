@@ -2503,6 +2503,15 @@ public class ActivateProfileHelper {
                     PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-transactionCode="+transactionCode);
 
                     if (transactionCode != -1) {
+                        if (enable) {
+                            WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                            if (wifiManager != null) {
+                                int wifiState = wifiManager.getWifiState();
+                                boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
+                                if (isWifiEnabled)
+                                    wifiManager.setWifiEnabled(false);
+                            }
+                        }
                         synchronized (PPApplication.startRootCommandMutex) {
                             //String command1 = "service call phone " + transactionCode + " i32 " + networkType;
                             String command1 = PPApplication.getServiceCommand("wifi", transactionCode, 0, (enable) ? 1 : 0);
