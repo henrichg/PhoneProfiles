@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -64,6 +65,7 @@ class ApplicationEditorDialog
         mDelayValue = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay);
         mDelayValue.setText(GlobalGUIRoutines.getDurationString(startApplicationDelay));
 
+        RelativeLayout delayValueRoot = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay_root);
         mDelayValueDialog = new TimeDurationPickerDialog(context, new TimeDurationPickerDialog.OnDurationSetListener() {
             @Override
             public void onDurationSet(TimeDurationPicker view, long duration) {
@@ -79,6 +81,14 @@ class ApplicationEditorDialog
                 startApplicationDelay = iValue;
             }
         }, startApplicationDelay * 1000, TimeDurationPicker.HH_MM_SS);
+        delayValueRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDelayValueDialog.setDuration(startApplicationDelay * 1000);
+                    mDelayValueDialog.show();
+                }
+            }
+        );
 
         mDelayValue.setOnClickListener(new View.OnClickListener() {
             @Override
