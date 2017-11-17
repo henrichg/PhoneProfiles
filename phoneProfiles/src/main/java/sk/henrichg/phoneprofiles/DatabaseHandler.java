@@ -217,7 +217,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
-        db.execSQL("CREATE INDEX IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
+        db.execSQL("CREATE INDEX IF NOT EXISTS IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
 
         final String CREATE_SHORTCUTS_TABLE = "CREATE TABLE " + TABLE_SHORTCUTS + "("
                 + KEY_S_ID + " INTEGER PRIMARY KEY,"
@@ -324,7 +324,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         if (oldVersion < 23)
         {
             // index na PORDER
-            db.execSQL("CREATE INDEX IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
+            db.execSQL("CREATE INDEX IF NOT EXISTS IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
         }
 
         if (oldVersion < 24)
