@@ -319,7 +319,7 @@ public class EditorProfileListFragment extends Fragment
     @Override
     public void onDestroy()
     {
-        if (!isAsyncTaskPendingOrRunning()) {
+        if (isAsyncTaskPendingOrRunning()) {
             this.asyncTaskContext.get().cancel(true);
         }
 
