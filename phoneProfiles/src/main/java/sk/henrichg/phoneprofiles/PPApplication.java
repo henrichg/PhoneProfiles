@@ -751,8 +751,9 @@ public class PPApplication extends Application {
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; // 6350 msec (3200 * 2 - 50)
 
-        while (!cmd.isFinished() && waitTill<=waitTillLimit) {
-            synchronized (cmd) {
+        //noinspection SynchronizationOnLocalVariableOrMethodParameter
+        synchronized (cmd) {
+            while (!cmd.isFinished() && waitTill<=waitTillLimit) {
                 try {
                     if (!cmd.isFinished()) {
                         cmd.wait(waitTill);
