@@ -94,7 +94,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
         Intent intent = getIntent();
         if (intent.hasCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES))
-            // activity is started from lockscreen, scroll to notifications cattegory
+            // activity is started from notification, scroll to notifications cattegory
             extraScrollTo = "categoryNotifications";
         else
             extraScrollTo = intent.getStringExtra(EXTRA_SCROLL_TO);
