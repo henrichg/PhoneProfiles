@@ -32,6 +32,8 @@ class PhoneProfilesHelper {
     private static boolean errorNoRoot = false;
     private static boolean nowPPHelperUninstalled = false;
 
+    static AsyncTask uninstallAsyncTask = null;
+
     static boolean isPPHelperInstalled(Context context, int minVersion)
     {
         PPHelperVersion = -1;
@@ -212,7 +214,7 @@ class PhoneProfilesHelper {
 
                 }
 
-                new UninstallAsyncTask().execute();
+                uninstallAsyncTask = new UninstallAsyncTask().execute();
             }
         });
         dialogBuilder.setNegativeButton(R.string.alert_button_no, null);

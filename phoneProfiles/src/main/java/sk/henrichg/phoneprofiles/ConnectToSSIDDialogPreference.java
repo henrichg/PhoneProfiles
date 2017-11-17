@@ -37,6 +37,8 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
 
     private ConnectToSSIDPreferenceAdapter listAdapter;
 
+    private AsyncTask asyncTask = null;
+
     public ConnectToSSIDDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -118,7 +120,7 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
 
     private void onShow(DialogInterface dialog) {
 
-        new AsyncTask<Void, Integer, Void>() {
+        asyncTask = new AsyncTask<Void, Integer, Void>() {
 
             List<WifiSSIDData> _SSIDList = null;
 
@@ -181,6 +183,11 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+
+        if ((asyncTask != null) && !asyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
+            asyncTask.cancel(true);
+        }
+
         MaterialDialogsPrefUtil.unregisterOnActivityDestroyListener(this, this);
     }
 

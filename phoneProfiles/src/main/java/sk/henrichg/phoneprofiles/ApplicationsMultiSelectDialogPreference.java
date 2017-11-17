@@ -51,6 +51,8 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 
     private ApplicationsMultiSelectPreferenceAdapter listAdapter;
 
+    private AsyncTask asyncTask = null;
+
     public ApplicationsMultiSelectDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -179,7 +181,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
 
     private void onShow(DialogInterface dialog) {
 
-        new AsyncTask<Void, Integer, Void>() {
+        asyncTask = new AsyncTask<Void, Integer, Void>() {
 
             @Override
             protected void onPreExecute()
@@ -218,6 +220,11 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
     public void onDismiss (DialogInterface dialog)
     {
         super.onDismiss(dialog);
+
+        if ((asyncTask != null) && !asyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
+            asyncTask.cancel(true);
+        }
+
         EditorProfilesActivity.getApplicationsCache().cancelCaching();
         if (!EditorProfilesActivity.getApplicationsCache().isCached())
             EditorProfilesActivity.getApplicationsCache().clearCache(false);

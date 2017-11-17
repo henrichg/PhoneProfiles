@@ -62,6 +62,9 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private static ApplicationsCache applicationsCache;
 
+    private AsyncTask importAsyncTask = null;
+    private AsyncTask exportAsyncTask = null;
+
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
     private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detali_predefined_profile_index";
@@ -226,6 +229,16 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
+        if ((importAsyncTask != null) && !importAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
+            importAsyncTask.cancel(true);
+        }
+        if ((exportAsyncTask != null) && !exportAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
+            exportAsyncTask.cancel(true);
+        }
+        if ((PhoneProfilesHelper.uninstallAsyncTask != null) && !PhoneProfilesHelper.uninstallAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
+            PhoneProfilesHelper.uninstallAsyncTask.cancel(true);
+        }
+
         if (!savedInstanceStateChanged)
         {
             // no destroy applicationsCache on orientation change
@@ -730,7 +743,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             }
 
-            new ImportAsyncTask().execute();
+            importAsyncTask = new ImportAsyncTask().execute();
 
         }
     }
@@ -923,7 +936,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             }
 
-            new ExportAsyncTask().execute();
+            exportAsyncTask = new ExportAsyncTask().execute();
 
         }
     }

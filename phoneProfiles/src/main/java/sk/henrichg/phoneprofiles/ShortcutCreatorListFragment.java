@@ -147,19 +147,20 @@ public class ShortcutCreatorListFragment extends Fragment {
     @Override
     public void onDestroy()
     {
-        if (!isAsyncTaskPendingOrRunning())
-        {
-            if (listView != null)
-                listView.setAdapter(null);
-            if (profileListAdapter != null)
-                profileListAdapter.release();
-
-            profileList = null;
-
-            if (dataWrapper != null)
-                dataWrapper.invalidateDataWrapper();
-            dataWrapper = null;
+        if (!isAsyncTaskPendingOrRunning()) {
+            this.asyncTaskContext.get().cancel(true);
         }
+
+        if (listView != null)
+            listView.setAdapter(null);
+        if (profileListAdapter != null)
+            profileListAdapter.release();
+
+        profileList = null;
+
+        if (dataWrapper != null)
+            dataWrapper.invalidateDataWrapper();
+        dataWrapper = null;
 
         super.onDestroy();
     }

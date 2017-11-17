@@ -317,25 +317,26 @@ public class ActivateProfileListFragment extends Fragment {
     @Override
     public void onDestroy()
     {
-        if (!isAsyncTaskPendingOrRunning())
-        {
-            AbsListView absListView;
-            if (!ApplicationPreferences.applicationActivatorGridLayout(dataWrapper.context))
-                absListView = listView;
-            else
-                absListView = gridView;
-            if (absListView != null)
-                absListView.setAdapter(null);
-            if (profileListAdapter != null)
-                profileListAdapter.release();
-
-            profileList = null;
-
-            activateProfileHelper = null;
-            if (dataWrapper != null)
-                dataWrapper.invalidateDataWrapper();
-            dataWrapper = null;
+        if (!isAsyncTaskPendingOrRunning()) {
+            this.asyncTaskContext.get().cancel(true);
         }
+
+        AbsListView absListView;
+        if (!ApplicationPreferences.applicationActivatorGridLayout(dataWrapper.context))
+            absListView = listView;
+        else
+            absListView = gridView;
+        if (absListView != null)
+            absListView.setAdapter(null);
+        if (profileListAdapter != null)
+            profileListAdapter.release();
+
+        profileList = null;
+
+        activateProfileHelper = null;
+        if (dataWrapper != null)
+            dataWrapper.invalidateDataWrapper();
+        dataWrapper = null;
 
         super.onDestroy();
     }
