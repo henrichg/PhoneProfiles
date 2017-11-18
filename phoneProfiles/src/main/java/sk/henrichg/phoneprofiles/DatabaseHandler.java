@@ -1628,12 +1628,11 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    int disableNotAllowedPreferences(Context context)
+    void disableNotAllowedPreferences(Context context)
     {
         PPApplication.logE("DatabaseHandler.disableNotAllowedPreferences", "xxx");
         importExportLock.lock();
         try {
-            int ret = 0;
             try {
                 startRunningCommand();
 
@@ -1820,12 +1819,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     }
 
                     db.setTransactionSuccessful();
-
-                    ret = 1;
                 } catch (Exception e) {
                     //Error in between database transaction
                     Log.e("DatabaseHandler.updateForHardware", e.toString());
-                    ret = 0;
                 } finally {
                     db.endTransaction();
                     cursor.close();
@@ -1835,9 +1831,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             } catch (Exception ignored) {
             }
-
-            return ret;
-
         } finally {
             stopRunningCommand();
         }
@@ -2403,6 +2396,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         } else {
                             ret = 0;
                         }
+                    } else {
+                        //    exportedDBObj.close();
+                        ret = -999;
                     }
                 } catch (Exception e) {
                     Log.e("DatabaseHandler.importDB", e.toString());

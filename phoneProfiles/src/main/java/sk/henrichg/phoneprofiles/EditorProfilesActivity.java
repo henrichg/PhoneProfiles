@@ -544,20 +544,24 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
-    private void importExportErrorDialog(int importExport)
+    private void importExportErrorDialog(int importExport, int result)
     {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        int resString;
+        String title;
         if (importExport == 1)
-            resString = R.string.import_profiles_alert_title;
+            title = getString(R.string.import_profiles_alert_title);
         else
-            resString = R.string.export_profiles_alert_title;
-        dialogBuilder.setTitle(resString);
-        if (importExport == 1)
-            resString = R.string.import_profiles_alert_error;
+            title = getString(R.string.export_profiles_alert_title);
+        dialogBuilder.setTitle(title);
+        String message;
+        if (importExport == 1) {
+            message = getString(R.string.import_profiles_alert_error);
+            if (result == -999)
+                message = message + ". " + getString(R.string.import_profiles_alert_error_database_newer_version);
+        }
         else
-            resString = R.string.export_profiles_alert_error;
-        dialogBuilder.setMessage(resString);
+            message = getString(R.string.export_profiles_alert_error);
+        dialogBuilder.setMessage(message);
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
         dialogBuilder.setPositiveButton(android.R.string.ok, null);
         dialogBuilder.show();
@@ -661,12 +665,14 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    int ret = dataWrapper.getDatabaseHandler().importDB(_applicationDataPath);
-
+                    int ret = this.dataWrapper.getDatabaseHandler().importDB(_applicationDataPath);
                     if (ret == 1) {
                         // check for hardware capability and update data
-                        ret = dataWrapper.getDatabaseHandler().disableNotAllowedPreferences(activity.getApplicationContext());
+                        this.dataWrapper.getDatabaseHandler().disableNotAllowedPreferences(activity.getApplicationContext());
+                        this.dataWrapper.clearProfileList();
+                        this.dataWrapper.getDatabaseHandler().deactivateProfile();
                     }
+
                     if (ret == 1) {
                         File sd = Environment.getExternalStorageDirectory();
                         File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
@@ -677,6 +683,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                             if (!importApplicationPreferences(exportFile, 2))
                                 ret = 0;
                         }
+                    }
+
+                    if (ret == 1) {
+                        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
+                        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
+                        //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
                     }
 
                     return ret;
@@ -691,15 +703,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     unlockScreenOrientation();
 
                     if (result == 1) {
-                        dataWrapper.clearProfileList();
-                        dataWrapper.getDatabaseHandler().deactivateProfile();
-                        if (PhoneProfilesService.instance != null)
-                            PhoneProfilesService.instance.showProfileNotification(null, dataWrapper);
-                        dataWrapper.getActivateProfileHelper().updateWidget(true);
-
-                        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-                        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-                        //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
+                        this.dataWrapper.getActivateProfileHelper().updateWidget(true);
 
                         //TODO Android O
                         //if (Build.VERSION.SDK_INT < 26)
@@ -723,7 +727,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         //else
                         //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
 
-                        importExportErrorDialog(1);
+                        importExportErrorDialog(1, result);
                     }
                 }
 
@@ -777,7 +781,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (list.size() > 0)
                         startActivityForResult(intent, REQUEST_CODE_REMOTE_EXPORT);
                     else
-                        importExportErrorDialog(1);
+                        importExportErrorDialog(1, 0);
                 } else
                     doImportData(PPApplication.EXPORT_PATH);
             }
@@ -930,7 +934,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         msg.show();
 
                     } else {
-                        importExportErrorDialog(2);
+                        importExportErrorDialog(2, result);
                     }
                 }
 
