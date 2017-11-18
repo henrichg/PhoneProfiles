@@ -716,13 +716,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    void startRunningCommand() throws Exception {
+    private void startRunningCommand() throws Exception {
         if (runningImportExport)
             runningImportExportCondition.await();
         runningCommand = true;
     }
 
-    void stopRunningCommand() {
+    private void stopRunningCommand() {
         runningCommand = false;
         runningCommandCondition.signalAll();
         importExportLock.unlock();
