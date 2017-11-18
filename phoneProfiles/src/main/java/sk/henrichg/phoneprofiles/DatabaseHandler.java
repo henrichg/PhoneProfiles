@@ -1291,7 +1291,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     r = 0;
                 else {
                     if (cursor.moveToFirst())
-                        // return max(porder)
                         r = cursor.getInt(0);
                     else
                         r = 0;
@@ -2072,13 +2071,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
 // OTHERS -----------------------------------------------------------------
 
-    void startRunningImportExport() throws Exception {
+    private void startRunningImportExport() throws Exception {
         if (runningCommand)
             runningCommandCondition.await();
         runningImportExport = true;
     }
 
-    void stopRunningImportExport() {
+    private void stopRunningImportExport() {
         runningImportExport = false;
         runningImportExportCondition.signalAll();
         importExportLock.unlock();
