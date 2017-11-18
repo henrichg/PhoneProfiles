@@ -1091,4 +1091,6 @@
     <string name="profile_preferences_sourceProfileInfoX_title">Shared profile functionality.</string>
     <string name="profile_preferences_sourceProfileInfoX_summary">You can configure each profile parameter to use \"Shared profile\" and during activation will be used values from shared profile.</string>
     <string name="import_profiles_alert_error_database_newer_version">The backed-up database is in a newer version.</string>
+    <string name="profile_preferences_durationNotificationSound">Duration end: Notification sound</string>
+    <string name="profile_preferences_durationNotificationVibrate">Duration end: Notify by vibration</string>
 </resources>

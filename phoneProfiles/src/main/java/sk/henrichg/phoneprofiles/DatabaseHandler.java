@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1330;
+    private static final int DATABASE_VERSION = 1340;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -85,13 +85,14 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_VOLUME_SPEAKER_PHONE = "volumeSpeakerPhone";
     private static final String KEY_DEVICE_NFC = "deviceNFC";
     private static final String KEY_DURATION = "duration";
+    private static final String KEY_ASK_FOR_DURATION = "askForDuration";
     private static final String KEY_AFTER_DURATION_DO = "afterDurationDo";
+    private static final String KEY_DURATION_NOTIFICATION_SOUND = "durationNotificationSound";
+    private static final String KEY_DURATION_NOTIFICATION_VIBRATE = "durationNotificationVibrate";
     private static final String KEY_DEVICE_KEYGUARD = "deviceKeyguard";
     private static final String KEY_VIBRATE_ON_TOUCH = "vibrateOnTouch";
     private static final String KEY_DEVICE_WIFI_AP = "deviceWiFiAP";
     private static final String KEY_DEVICE_POWER_SAVE_MODE = "devicePowerSaveMode";
-    private static final String KEY_SHOW_DURATION_BUTTON = "showDurationButton";
-    private static final String KEY_ASK_FOR_DURATION = "askForDuration";
     private static final String KEY_DEVICE_NETWORK_TYPE = "deviceNetworkType";
     private static final String KEY_NOTIFICATION_LED = "notificationLed";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrateWhenRinging";
@@ -211,7 +212,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_VIBRATE_ON_TOUCH + " INTEGER,"
                 + KEY_DEVICE_WIFI_AP + " INTEGER,"
                 + KEY_DEVICE_POWER_SAVE_MODE + " INTEGER,"
-                + KEY_SHOW_DURATION_BUTTON + " INTEGER,"
                 + KEY_ASK_FOR_DURATION + " INTEGER,"
                 + KEY_DEVICE_NETWORK_TYPE + " INTEGER,"
                 + KEY_NOTIFICATION_LED + " INTEGER,"
@@ -219,7 +219,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_DEVICE_WALLPAPER_FOR + " INTEGER,"
                 + KEY_HIDE_STATUS_BAR_ICON + " INTEGER,"
                 + KEY_LOCK_DEVICE + " INTEGER,"
-                + KEY_DEVICE_CONNECT_TO_SSID + " TEXT"
+                + KEY_DEVICE_CONNECT_TO_SSID + " TEXT,"
+                + KEY_DURATION_NOTIFICATION_SOUND + " TEXT,"
+                + KEY_DURATION_NOTIFICATION_VIBRATE + " INTEGER"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -610,15 +612,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_POWER_SAVE_MODE + "=0");
         }
 
-        if (oldVersion < 1230)
-        {
-            // pridame nove stlpce
-            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_SHOW_DURATION_BUTTON + " INTEGER");
-
-            // updatneme zaznamy
-            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_SHOW_DURATION_BUTTON + "=0");
-        }
-
         if (oldVersion < 1240)
         {
             // pridame nove stlpce
@@ -704,6 +697,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
             changePictureFilePathToUri(db);
         }
 
+        if (oldVersion < 1340)
+        {
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DURATION_NOTIFICATION_SOUND + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DURATION_NOTIFICATION_VIBRATE + " INTEGER");
+
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION_NOTIFICATION_SOUND + "=\"\"");
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION_NOTIFICATION_VIBRATE + "=0");
+        }
+
     }
 
     @Override
@@ -779,11 +781,12 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_DEVICE_NFC, profile._deviceNFC);
                 values.put(KEY_DURATION, profile._duration);
                 values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
+                values.put(KEY_DURATION_NOTIFICATION_SOUND, profile._durationNotificationSound);
+                values.put(KEY_DURATION_NOTIFICATION_VIBRATE, profile._durationNotificationVibrate);
                 values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
                 values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
                 values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
                 values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
-                values.put(KEY_SHOW_DURATION_BUTTON, 0);
                 values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
                 values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
                 values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
@@ -856,12 +859,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_DEVICE_NFC,
                                 KEY_DURATION,
                                 KEY_AFTER_DURATION_DO,
+                                KEY_DURATION_NOTIFICATION_SOUND,
+                                KEY_DURATION_NOTIFICATION_VIBRATE,
                                 KEY_VOLUME_ZEN_MODE,
                                 KEY_DEVICE_KEYGUARD,
                                 KEY_VIBRATE_ON_TOUCH,
                                 KEY_DEVICE_WIFI_AP,
                                 KEY_DEVICE_POWER_SAVE_MODE,
-                                KEY_SHOW_DURATION_BUTTON,
                                 KEY_ASK_FOR_DURATION,
                                 KEY_DEVICE_NETWORK_TYPE,
                                 KEY_NOTIFICATION_LED,
@@ -927,7 +931,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_FOR))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HIDE_STATUS_BAR_ICON))) == 1,
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE))),
-                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID))
+                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID)),
+                                cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1
                         );
                     }
                     cursor.close();
@@ -991,12 +997,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_DEVICE_NFC + "," +
                         KEY_DURATION + "," +
                         KEY_AFTER_DURATION_DO + "," +
+                        KEY_DURATION_NOTIFICATION_SOUND + "," +
+                        KEY_DURATION_NOTIFICATION_VIBRATE + "," +
                         KEY_VOLUME_ZEN_MODE + "," +
                         KEY_DEVICE_KEYGUARD + "," +
                         KEY_VIBRATE_ON_TOUCH + "," +
                         KEY_DEVICE_WIFI_AP + "," +
                         KEY_DEVICE_POWER_SAVE_MODE + "," +
-                        KEY_SHOW_DURATION_BUTTON + "," +
                         KEY_ASK_FOR_DURATION + "," +
                         KEY_DEVICE_NETWORK_TYPE + "," +
                         KEY_NOTIFICATION_LED + "," +
@@ -1053,6 +1060,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         profile._deviceNFC = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NFC)));
                         profile._duration = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION)));
                         profile._afterDurationDo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_AFTER_DURATION_DO)));
+                        profile._durationNotificationSound = cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND));
+                        profile._durationNotificationVibrate = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1);
                         profile._volumeZenMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VOLUME_ZEN_MODE)));
                         profile._deviceKeyguard = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_KEYGUARD)));
                         profile._vibrationOnTouch = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_VIBRATE_ON_TOUCH)));
@@ -1133,12 +1142,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_DEVICE_NFC, profile._deviceNFC);
                 values.put(KEY_DURATION, profile._duration);
                 values.put(KEY_AFTER_DURATION_DO, profile._afterDurationDo);
+                values.put(KEY_DURATION_NOTIFICATION_SOUND, profile._durationNotificationSound);
+                values.put(KEY_DURATION_NOTIFICATION_VIBRATE, profile._durationNotificationVibrate);
+                values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
                 values.put(KEY_DEVICE_KEYGUARD, profile._deviceKeyguard);
                 values.put(KEY_VIBRATE_ON_TOUCH, profile._vibrationOnTouch);
                 values.put(KEY_DEVICE_WIFI_AP, profile._deviceWiFiAP);
                 values.put(KEY_DEVICE_POWER_SAVE_MODE, profile._devicePowerSaveMode);
-                values.put(KEY_SHOW_DURATION_BUTTON, 0);
-                values.put(KEY_ASK_FOR_DURATION, (profile._askForDuration) ? 1 : 0);
                 values.put(KEY_DEVICE_NETWORK_TYPE, profile._deviceNetworkType);
                 values.put(KEY_NOTIFICATION_LED, profile._notificationLed);
                 values.put(KEY_VIBRATE_WHEN_RINGING, profile._vibrateWhenRinging);
@@ -1415,12 +1425,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_DEVICE_NFC,
                                 KEY_DURATION,
                                 KEY_AFTER_DURATION_DO,
+                                KEY_DURATION_NOTIFICATION_SOUND,
+                                KEY_DURATION_NOTIFICATION_VIBRATE,
                                 KEY_VOLUME_ZEN_MODE,
                                 KEY_DEVICE_KEYGUARD,
                                 KEY_VIBRATE_ON_TOUCH,
                                 KEY_DEVICE_WIFI_AP,
                                 KEY_DEVICE_POWER_SAVE_MODE,
-                                KEY_SHOW_DURATION_BUTTON,
                                 KEY_ASK_FOR_DURATION,
                                 KEY_DEVICE_NETWORK_TYPE,
                                 KEY_NOTIFICATION_LED,
@@ -1488,7 +1499,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_FOR))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HIDE_STATUS_BAR_ICON))) == 1,
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE))),
-                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID))
+                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID)),
+                                cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1
                         );
                     } else
                         profile = null;
@@ -2296,10 +2309,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             values.put(KEY_DEVICE_POWER_SAVE_MODE, 0);
                                         }
 
-                                        if (exportedDBObj.getVersion() < 1230) {
-                                            values.put(KEY_SHOW_DURATION_BUTTON, 0);
-                                        }
-
                                         if (exportedDBObj.getVersion() < 1240) {
                                             values.put(KEY_ASK_FOR_DURATION, 0);
                                         }
@@ -2330,6 +2339,11 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                         if (exportedDBObj.getVersion() < 1320) {
                                             values.put(KEY_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
+                                        }
+
+                                        if (exportedDBObj.getVersion() < 1340) {
+                                            values.put(KEY_DURATION_NOTIFICATION_SOUND, "");
+                                            values.put(KEY_DURATION_NOTIFICATION_VIBRATE, 0);
                                         }
 
                                         // Inserting Row do db z SQLiteOpenHelper

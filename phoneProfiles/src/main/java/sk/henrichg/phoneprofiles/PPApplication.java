@@ -55,7 +55,7 @@ public class PPApplication extends Application {
                                             +"|PhoneProfilesService"
                                             +"|PackageReplacedReceiver"
 
-                                            +"|DatabaseHandler"
+                                            +"|ProfileDurationAlarmBroadcastReceiver"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";

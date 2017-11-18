@@ -17,12 +17,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -30,6 +33,8 @@ import android.widget.RemoteViews;
 import com.crashlytics.android.Crashlytics;
 
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class PhoneProfilesService extends Service {
@@ -52,6 +57,11 @@ public class PhoneProfilesService extends Service {
     private static SettingsContentObserver settingsContentObserver = null;
 
     public static String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
+
+    private AudioManager audioManager = null;
+    private MediaPlayer notificationMediaPlayer = null;
+    private boolean notificationIsPlayed = false;
+    private Timer notificationPlayTimer = null;
 
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
@@ -657,5 +667,113 @@ public class PhoneProfilesService extends Service {
     }
 
     //--------------------------------------
+
+    //others -------------------------------
+
+    public void playNotificationSound (final String notificationSound, final boolean notificationVibrate) {
+        if (notificationVibrate) {
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            if ((vibrator != null) && vibrator.hasVibrator()) {
+                PPApplication.logE("PhoneProfilesService.playNotificationSound", "vibration");
+                //TODO Android O
+                //if (Build.VERSION.SDK_INT >= 26) {
+                //    vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                //} else {
+                vibrator.vibrate(500);
+                //}
+            }
+        }
+
+        if (audioManager == null )
+            audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+        if (notificationPlayTimer != null) {
+            notificationPlayTimer.cancel();
+            notificationPlayTimer = null;
+        }
+        if ((notificationMediaPlayer != null) && notificationIsPlayed) {
+            try {
+                if (notificationMediaPlayer.isPlaying())
+                    notificationMediaPlayer.stop();
+            } catch (Exception ignored) {}
+            notificationMediaPlayer.release();
+            notificationIsPlayed = false;
+            notificationMediaPlayer = null;
+        }
+
+        if (!notificationSound.isEmpty())
+        {
+            Uri notificationUri = Uri.parse(notificationSound);
+
+            try {
+                RingerModeChangeReceiver.internalChange = true;
+
+                notificationMediaPlayer = new MediaPlayer();
+                notificationMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                notificationMediaPlayer.setDataSource(this, notificationUri);
+                notificationMediaPlayer.prepare();
+                notificationMediaPlayer.setLooping(false);
+
+                /*
+                oldMediaVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+                int notificationVolume = ActivateProfileHelper.getNotificationVolume(this);
+
+                PPApplication.logE("PhoneProfilesService.playNotificationSound", "notificationVolume=" + notificationVolume);
+
+                int maximumNotificationValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+                int maximumMediaValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
+                float percentage = (float) notificationVolume / maximumNotificationValue * 100.0f;
+                int mediaNotificationVolume = Math.round(maximumMediaValue / 100.0f * percentage);
+
+                PPApplication.logE("PhoneProfilesService.playNotificationSound", "mediaNotificationVolume=" + mediaNotificationVolume);
+
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mediaNotificationVolume, 0);
+                */
+
+                notificationMediaPlayer.start();
+
+                notificationIsPlayed = true;
+
+                //final Context context = this;
+                notificationPlayTimer = new Timer();
+                notificationPlayTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        if (notificationMediaPlayer != null) {
+                            try {
+                                if (notificationMediaPlayer.isPlaying())
+                                    notificationMediaPlayer.stop();
+                            } catch (Exception ignored) {}
+                            notificationMediaPlayer.release();
+
+                            //audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
+                            PPApplication.logE("PhoneProfilesService.playNotificationSound", "notification stopped");
+                        }
+
+                        notificationIsPlayed = false;
+                        notificationMediaPlayer = null;
+                        notificationPlayTimer = null;
+                    }
+                }, notificationMediaPlayer.getDuration());
+
+            } catch (SecurityException e) {
+                PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
+                Permissions.grantPlayRingtoneNotificationPermissions(this, false);
+                notificationMediaPlayer = null;
+                notificationIsPlayed = false;
+            } catch (Exception e) {
+                PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
+                //e.printStackTrace();
+                notificationMediaPlayer = null;
+                notificationIsPlayed = false;
+            }
+
+        }
+    }
+
+    //----------------------------------------
 
 }
