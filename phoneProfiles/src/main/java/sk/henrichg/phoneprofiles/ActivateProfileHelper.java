@@ -463,7 +463,7 @@ public class ActivateProfileHelper {
                     setAirplaneMode(context, _isAirplaneMode);
                 }*/
 
-                if (wakeLock != null)
+                if ((wakeLock != null) && wakeLock.isHeld())
                     wakeLock.release();
             }
         });
@@ -952,7 +952,7 @@ public class ActivateProfileHelper {
                     setTones(appContext, profile);
                 }
 
-                if (wakeLock != null)
+                if ((wakeLock != null) && wakeLock.isHeld())
                     wakeLock.release();
             }
         });
@@ -1307,7 +1307,7 @@ public class ActivateProfileHelper {
                         }
                     }
 
-                    if (wakeLock != null)
+                    if ((wakeLock != null) && wakeLock.isHeld())
                         wakeLock.release();
                 }
             });
@@ -1378,7 +1378,7 @@ public class ActivateProfileHelper {
                         }
                     }
 
-                    if (wakeLock != null)
+                    if ((wakeLock != null) && wakeLock.isHeld())
                         wakeLock.release();
                 }
             });
@@ -1419,7 +1419,7 @@ public class ActivateProfileHelper {
                     }
                 }
 
-                if (wakeLock != null)
+                if ((wakeLock != null) && wakeLock.isHeld())
                     wakeLock.release();
             }
         });
@@ -2916,7 +2916,7 @@ public class ActivateProfileHelper {
                             }
                         }
 
-                        if (wakeLock != null)
+                        if ((wakeLock != null) && wakeLock.isHeld())
                             wakeLock.release();
                     }
                 }
@@ -2993,7 +2993,7 @@ public class ActivateProfileHelper {
                         break;
                 }
 
-                if (wakeLock != null)
+                if ((wakeLock != null) && wakeLock.isHeld())
                     wakeLock.release();
             }
         });

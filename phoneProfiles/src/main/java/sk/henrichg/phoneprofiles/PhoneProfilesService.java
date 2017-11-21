@@ -176,7 +176,7 @@ public class PhoneProfilesService extends Service {
 
 
                 if (PPApplication.getApplicationStarted(appContext, false)) {
-                    if (wakeLock != null)
+                    if ((wakeLock != null) && wakeLock.isHeld())
                         wakeLock.release();
                     return;
                 }
@@ -218,7 +218,7 @@ public class PhoneProfilesService extends Service {
                 dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                 dataWrapper.invalidateDataWrapper();
 
-                if (wakeLock != null)
+                if ((wakeLock != null) && wakeLock.isHeld())
                     wakeLock.release();
             }
         });

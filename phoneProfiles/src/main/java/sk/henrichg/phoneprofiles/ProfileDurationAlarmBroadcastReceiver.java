@@ -72,7 +72,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
                         dataWrapper.invalidateDataWrapper();
 
-                        if (wakeLock != null)
+                        if ((wakeLock != null) && wakeLock.isHeld())
                             wakeLock.release();
                     }
                 }
