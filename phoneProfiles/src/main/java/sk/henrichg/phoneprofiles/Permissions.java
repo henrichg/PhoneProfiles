@@ -33,7 +33,7 @@ public class Permissions {
     private static final int PERMISSION_RADIO_PREFERENCES = 8;
     private static final int PERMISSION_PHONE_BROADCAST = 9;
     private static final int PERMISSION_CUSTOM_PROFILE_ICON = 10;
-    static final int PERMISSION_INSTALL_TONE = 11;
+    private static final int PERMISSION_INSTALL_TONE = 11;
     private static final int PERMISSION_EXPORT = 12;
     private static final int PERMISSION_IMPORT = 13;
     private static final int PERMISSION_NOTIFICATION_LED = 15;
@@ -51,7 +51,7 @@ public class Permissions {
     static final int GRANT_TYPE_IMPORT = 6;
     static final int GRANT_TYPE_BRIGHTNESS_DIALOG = 8;
     static final int GRANT_TYPE_RINGTONE_PREFERENCE = 9;
-    static final int GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION = 10;
+    private static final int GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION = 10;
 
     static final String EXTRA_GRANT_TYPE = "grant_type";
     static final String EXTRA_PERMISSION_TYPES = "permission_types";
@@ -62,7 +62,7 @@ public class Permissions {
     static final String EXTRA_INTERACTIVE = "interactive";
     static final String EXTRA_APPLICATION_DATA_PATH = "application_data_path";
     static final String EXTRA_ACTIVATE_PROFILE = "activate_profile";
-    static final String EXTRA_GRANT_ALSO_CONTACTS = "grant_also_contacts";
+    private static final String EXTRA_GRANT_ALSO_CONTACTS = "grant_also_contacts";
 
     static Activity profileActivationActivity = null;
     static ImageViewPreference imageViewPreference = null;
@@ -255,8 +255,8 @@ public class Permissions {
             return true;
     }
 
-    private static boolean checkProfileNotificationLed(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return true;
+    private static void checkProfileNotificationLed(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return/* true*/;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             try {
                 if (profile._notificationLed != 0) {
@@ -265,15 +265,15 @@ public class Permissions {
                         setShowRequestWriteSettingsPermission(context, true);
                     if ((permissions != null) && (!granted))
                         permissions.add(new PermissionType(PERMISSION_NOTIFICATION_LED, permission.WRITE_SETTINGS));
-                    return granted;
-                } else
-                    return true;
+                    //return granted;
+                }// else
+                //    return/* true*/;
             } catch (Exception e) {
-                return false;
+                //return/* false*/;
             }
         }
-        else
-            return true;
+        //else
+        //    return/* true*/;
     }
 
     static boolean checkProfileRingTones(Context context, Profile profile, List<PermissionType>  permissions) {
@@ -669,7 +669,7 @@ public class Permissions {
             return true;
     }
 
-    static boolean checkPlayRingtoneNotification(Context context, boolean alsoContacts, List<PermissionType>  permissions) {
+    private static boolean checkPlayRingtoneNotification(Context context, boolean alsoContacts, List<PermissionType>  permissions) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 boolean grantedReadExternalStorage = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
@@ -913,10 +913,10 @@ public class Permissions {
             return true;
     }
 
-    static void grantPlayRingtoneNotificationPermissions(Context context/*, boolean onlyNotification*/, boolean alsoContacts) {
+    static void grantPlayRingtoneNotificationPermissions(Context context/*, boolean onlyNotification, boolean alsoContacts*/) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = new ArrayList<>();
-            boolean granted = checkPlayRingtoneNotification(context, alsoContacts, permissions);
+            boolean granted = checkPlayRingtoneNotification(context, true/*alsoContacts*/, permissions);
             if (!granted) {
                 try {
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
@@ -925,7 +925,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, true/*onlyNotification*/);
-                    intent.putExtra(EXTRA_GRANT_ALSO_CONTACTS, alsoContacts);
+                    intent.putExtra(EXTRA_GRANT_ALSO_CONTACTS, true/*alsoContacts*/);
                     context.startActivity(intent);
                 } catch (Exception e) {
                     //return false;

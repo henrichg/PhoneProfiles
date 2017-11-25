@@ -111,7 +111,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (fragment != null)
-            fragment.doOnActivityResult(requestCode, resultCode, data);
+            fragment.doOnActivityResult(requestCode/*, resultCode, data*/);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         super.onStop();
 
         final DataWrapper dataWrapper =  new DataWrapper(getApplicationContext(), true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
+        dataWrapper.getActivateProfileHelper().initialize(getApplicationContext());
 
         Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
         serviceIntent.putExtra(PhoneProfilesService.EXTRA_CLEAR_SERVICE_FOREGROUND, true);

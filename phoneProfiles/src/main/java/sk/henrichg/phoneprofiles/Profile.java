@@ -909,8 +909,8 @@ public class Profile {
 
     static int convertPercentsToBrightnessManualValue(int perc, Context context)
     {
-        int maximumValue = getMaximumScreenBrightnessSetting();
-        int minimumValue = getMinimumScreenBrightnessSetting();
+        int maximumValue;// = getMaximumScreenBrightnessSetting();
+        int minimumValue;// = getMinimumScreenBrightnessSetting();
 
         //if (maximumValue-minimumValue > 255) {
             minimumValue = 0;
@@ -1586,7 +1586,7 @@ public class Profile {
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
-                    if (ActivateProfileHelper.wifiServiceExists(context, Profile.PREF_PROFILE_DEVICE_WIFI_AP)) {
+                    if (ActivateProfileHelper.wifiServiceExists(Profile.PREF_PROFILE_DEVICE_WIFI_AP)) {
                         if (PPApplication.serviceBinaryExists())
                             featurePresented = PPApplication.PREFERENCE_ALLOWED;
                         else
@@ -1678,7 +1678,7 @@ public class Profile {
                     if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
                         if (PPApplication.isRooted()) {
                             // device is rooted
-                            if (ActivateProfileHelper.telephonyServiceExists(context, Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
+                            if (ActivateProfileHelper.telephonyServiceExists(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
                                 if (PPApplication.serviceBinaryExists())
                                     featurePresented = PPApplication.PREFERENCE_ALLOWED;
                                 else

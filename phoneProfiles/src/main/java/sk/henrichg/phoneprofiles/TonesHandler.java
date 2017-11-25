@@ -127,10 +127,10 @@ class TonesHandler {
         }
     }
 
-    private static boolean installTone(int resID, int type, String title, Context context, boolean fromMenu) {
+    private static void installTone(int resID, int type, String title, Context context, boolean fromMenu) {
         // Make sure the shared storage is currently writable
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-            return false;
+            return/* false*/;
 
         String directory;
         boolean isRingtone = false;
@@ -150,7 +150,7 @@ class TonesHandler {
                 isAlarm = true;
                 break;
             default:
-                return false;
+                return/* false*/;
         }
         File path = Environment.
                 getExternalStoragePublicDirectory(directory);
@@ -283,7 +283,7 @@ class TonesHandler {
             msg.show();
         }
 
-        return !isError;
+        return/* !isError*/;
     }
 
     static void installTone(int resID, String title, Context context, boolean fromMenu) {

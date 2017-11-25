@@ -178,14 +178,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy()
-    {
-    //	Debug.stopMethodTracing();
-
-        super.onDestroy();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         toolbar.inflateMenu(R.menu.activity_activate_profile);

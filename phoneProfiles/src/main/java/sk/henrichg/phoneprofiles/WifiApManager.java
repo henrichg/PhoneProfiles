@@ -28,7 +28,7 @@ final class WifiApManager {
         }
     }
 
-    private boolean setWifiApState(WifiConfiguration config, boolean enabled) {
+    private void setWifiApState(WifiConfiguration config, boolean enabled) {
         try {
             if (enabled) {
                 if (mWifiManager != null) {
@@ -39,16 +39,16 @@ final class WifiApManager {
                 }
             }
             wifiControlMethod.setAccessible(true);
-            return (Boolean) wifiControlMethod.invoke(mWifiManager, config, enabled);
+            /*return (Boolean) */wifiControlMethod.invoke(mWifiManager, config, enabled);
         } catch (Exception e) {
             Log.e(TAG, "", e);
-            return false;
+            //return false;
         }
     }
 
-    boolean setWifiApState(boolean enabled) {
+    void setWifiApState(boolean enabled) {
         WifiConfiguration wifiConfiguration = getWifiApConfiguration();
-        return setWifiApState(wifiConfiguration, enabled);
+        /*return */setWifiApState(wifiConfiguration, enabled);
     }
 
     private WifiConfiguration getWifiApConfiguration()

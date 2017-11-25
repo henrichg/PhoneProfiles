@@ -59,7 +59,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
         activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(dataWrapper, getActivity().getApplicationContext());
+        activateProfileHelper.initialize(getActivity().getApplicationContext());
 
         Intent intent = getActivity().getIntent();
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
@@ -99,14 +99,14 @@ public class ActivateProfileListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        doOnViewCreated(view, savedInstanceState);
+        doOnViewCreated(view/*, savedInstanceState*/);
 
         boolean startTargetHelps = getArguments() != null && getArguments().getBoolean(START_TARGET_HELPS_ARGUMENT, false);
         if (startTargetHelps)
             showTargetHelps();
     }
 
-    private void doOnViewCreated(View view, Bundle savedInstanceState)
+    private void doOnViewCreated(View view/*, Bundle savedInstanceState*/)
     {
         activeProfileName = view.findViewById(R.id.act_prof_activated_profile_name);
         activeProfileIcon = view.findViewById(R.id.act_prof_activated_profile_icon);
@@ -129,7 +129,7 @@ public class ActivateProfileListFragment extends Fragment {
 
                 if (!ApplicationPreferences.applicationLongClickActivation(dataWrapper.context))
                     //activateProfileWithAlert(position);
-                    activateProfile(position, PPApplication.STARTUP_SOURCE_ACTIVATOR);
+                    activateProfile(position);
 
             }
 
@@ -141,7 +141,7 @@ public class ActivateProfileListFragment extends Fragment {
 
                 if (ApplicationPreferences.applicationLongClickActivation(dataWrapper.context))
                     //activateProfileWithAlert(position);
-                    activateProfile(position, PPApplication.STARTUP_SOURCE_ACTIVATOR);
+                    activateProfile(position);
 
                 return false;
             }
@@ -211,7 +211,7 @@ public class ActivateProfileListFragment extends Fragment {
                 // get local profileList
                 List<Profile> profileList = dataWrapper.getProfileList();
                 // set copy local profile list into activity profilesDataWrapper
-                fragment.dataWrapper.setProfileList(profileList, false);
+                fragment.dataWrapper.setProfileList(profileList);
                 // set reference of profile list from profilesDataWrapper
                 fragment.profileList = fragment.dataWrapper.getProfileList();
 
@@ -390,19 +390,19 @@ public class ActivateProfileListFragment extends Fragment {
         }
     }
 
-    private void activateProfile(Profile profile, int startupSource)
+    private void activateProfile(Profile profile)
     {
         if ((dataWrapper == null) || (profile == null))
             return;
 
         if (profile._porder != PORDER_FOR_IGNORED_PROFILE)
-            dataWrapper.activateProfile(profile._id, startupSource, getActivity());
+            dataWrapper.activateProfile(profile._id, PPApplication.STARTUP_SOURCE_ACTIVATOR, getActivity());
     }
 
-    private void activateProfile(int position, int startupSource)
+    private void activateProfile(int position)
     {
         Profile profile = profileList.get(position);
-        activateProfile(profile, startupSource);
+        activateProfile(profile);
     }
 
     private void setProfileSelection(Profile profile, boolean refreshIcons) {
@@ -557,7 +557,7 @@ public class ActivateProfileListFragment extends Fragment {
         //Log.d("ActivateProfileListFragment.showAdapterTargetHelps", "profileListAdapter="+profileListAdapter);
         //Log.d("ActivateProfileListFragment.showAdapterTargetHelps", "itemView="+itemView);
         if ((profileListAdapter != null) && (itemView != null))
-            profileListAdapter.showTargetHelps(getActivity(), this,  itemView);
+            profileListAdapter.showTargetHelps(getActivity(), itemView);
         else {
             final Handler handler = new Handler(getActivity().getMainLooper());
             handler.postDelayed(new Runnable() {

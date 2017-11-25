@@ -34,12 +34,12 @@ class PhoneProfilesHelper {
 
     static AsyncTask uninstallAsyncTask = null;
 
-    static boolean isPPHelperInstalled(Context context, int minVersion)
+    static void isPPHelperInstalled(Context context)
     {
         PPHelperVersion = -1;
 
         if (nowPPHelperUninstalled)
-            return false;
+            return/* false*/;
 
         // get package version
         try {
@@ -50,7 +50,7 @@ class PhoneProfilesHelper {
             PPApplication.logE("PhoneProfilesHelper.isPPHelperInstalled", "not found");
             //e.printStackTrace();
         }
-        return PPHelperVersion >= minVersion;
+        //return PPHelperVersion >= PPHELPER_CURRENT_VERSION;
     }
 
     static private boolean doUninstallPPHelper(Activity activity)
@@ -193,10 +193,10 @@ class PhoneProfilesHelper {
 
                         if (result)
                         {
-                            restartAndroid(_activity, false);
+                            restartAndroid(_activity);
                         }
                         else
-                            installUnInstallPPhelperErrorDialog(_activity, false);
+                            installUnInstallPPhelperErrorDialog(_activity);
                     }
 
                     private void lockScreenOrientation() {
@@ -221,10 +221,10 @@ class PhoneProfilesHelper {
         dialogBuilder.show();
     }
 
-    static private void restartAndroid(Activity activity, boolean finishActivity)
+    static private void restartAndroid(Activity activity/*, boolean finishActivity*/)
     {
-        final Activity _activity = activity;
-        final boolean _finishActivity = finishActivity;
+        //final Activity _activity = activity;
+        //final boolean _finishActivity = finishActivity;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setTitle(R.string.phoneprofilehepler_reboot_title_uninstall);
@@ -238,7 +238,7 @@ class PhoneProfilesHelper {
                 RootTools.restartAndroid();
             }
         });
-        dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
+        /*dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (_finishActivity)
@@ -251,7 +251,7 @@ class PhoneProfilesHelper {
                 if (_finishActivity)
                     _activity.finish();
             }
-        });
+        });*/
 
         dialogBuilder.show();
     }
@@ -287,10 +287,10 @@ class PhoneProfilesHelper {
         return OK;
     }
 
-    static private void installUnInstallPPhelperErrorDialog(Activity activity, boolean finishActivity)
+    static private void installUnInstallPPhelperErrorDialog(Activity activity/*, boolean finishActivity*/)
     {
-        final Activity _activity = activity;
-        final boolean _finishActivity = finishActivity;
+        //final Activity _activity = activity;
+        //final boolean _finishActivity = finishActivity;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         int resString;
@@ -307,7 +307,7 @@ class PhoneProfilesHelper {
         dialogBuilder.setMessage(resString);
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 
-        dialogBuilder.setPositiveButton(android.R.string.ok, new OnClickListener() {
+        /*dialogBuilder.setPositiveButton(android.R.string.ok, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (_finishActivity)
@@ -320,7 +320,7 @@ class PhoneProfilesHelper {
                 if (_finishActivity)
                     _activity.finish();
             }
-        });
+        });*/
 
         dialogBuilder.show();
     }

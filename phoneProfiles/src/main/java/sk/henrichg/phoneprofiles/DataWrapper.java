@@ -95,11 +95,11 @@ public class DataWrapper {
     }
 
 
-    void setProfileList(List<Profile> profileList, boolean recycleBitmaps)
+    void setProfileList(List<Profile> profileList/*, boolean recycleBitmaps*/)
     {
-        if (recycleBitmaps)
+        /*if (recycleBitmaps)
             clearProfileList();
-        else
+        else*/
             if (this.profileList != null)
                 this.profileList.clear();
         this.profileList = profileList;
@@ -622,7 +622,7 @@ public class DataWrapper {
 
             if (_profile._askForDuration) {
                 FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper,
-                        monochrome, monochromeValue, _startupSource, true);
+                        monochrome, monochromeValue, _startupSource);
                 dlg.show();
             }
             else {
@@ -673,7 +673,7 @@ public class DataWrapper {
         {
             if (profile._askForDuration && interactive) {
                 FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
-                        monochrome, monochromeValue, startupSource, true);
+                        monochrome, monochromeValue, startupSource);
                 dlg.show();
             }
             else {
@@ -853,7 +853,7 @@ public class DataWrapper {
         if (Permissions.grantProfilePermissions(context, profile, true,
                 forGUI, monochrome, monochromeValue,
                 startupSource, true, null, true)) {
-            getActivateProfileHelper().initialize(this, context);
+            getActivateProfileHelper().initialize(context);
             _activateProfile(profile, startupSource, true, null);
         }
     }

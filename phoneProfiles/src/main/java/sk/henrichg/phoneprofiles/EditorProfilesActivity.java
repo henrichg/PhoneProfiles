@@ -289,7 +289,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             menuItem.setVisible(false);
         }
 
-        PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext(), PhoneProfilesHelper.PPHELPER_CURRENT_VERSION);
+        PhoneProfilesHelper.isPPHelperInstalled(getApplicationContext());
 
         menuItem = menu.findItem(R.id.menu_pphelper_uninstall);
         if (menuItem != null)
@@ -307,7 +307,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         return ret;
     }
 
-    public static void exitApp(final Context context, DataWrapper dataWrapper, final Activity activity) {
+    public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity) {
         // remove alarm for profile duration
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
@@ -399,7 +399,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         case R.id.menu_exit:
-            exitApp(getApplicationContext(), getDataWrapper(), this);
+            exitApp(getApplicationContext(), /*getDataWrapper(),*/ this);
 
             Handler handler=new Handler(getMainLooper());
             Runnable r=new Runnable() {
@@ -456,8 +456,8 @@ public class EditorProfilesActivity extends AppCompatActivity
             {
                 Editor editor = ApplicationPreferences.preferences.edit();
                 editor.putLong(SP_PROFILE_DETAILS_PROFILE_ID, ((ProfileDetailsFragment) fragment).profile_id);
-                editor.putInt(SP_PROFILE_DETAILS_EDIT_MODE, ((ProfileDetailsFragment) fragment).editMode);
-                editor.putInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, ((ProfileDetailsFragment) fragment).predefinedProfileIndex);
+                //editor.putInt(SP_PROFILE_DETAILS_EDIT_MODE, ((ProfileDetailsFragment) fragment).editMode);
+                //editor.putInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, ((ProfileDetailsFragment) fragment).predefinedProfileIndex);
                 editor.apply();
             }
         }
@@ -501,7 +501,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
                     // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
-                    redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex, true);
+                    redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex);
 
                     Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
@@ -752,9 +752,9 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
-    private void importDataAlert(boolean remoteExport)
+    private void importDataAlert(/*boolean remoteExport*/)
     {
-        final boolean _remoteExport = remoteExport;
+        //final boolean _remoteExport = remoteExport;
 
         AlertDialog.Builder dialogBuilder2 = new AlertDialog.Builder(this);
         /*if (remoteExport)
@@ -772,7 +772,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         dialogBuilder2.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                if (_remoteExport) {
+                /*if (_remoteExport) {
                     // start RemoteExportDataActivity
                     Intent intent = new Intent("phoneprofilesplus.intent.action.EXPORTDATA");
 
@@ -782,7 +782,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         startActivityForResult(intent, REQUEST_CODE_REMOTE_EXPORT);
                     else
                         importExportErrorDialog(1, 0);
-                } else
+                } else*/
                     doImportData(PPApplication.EXPORT_PATH);
             }
         });
@@ -818,7 +818,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             dialogBuilder.show();
         }
         else */
-            importDataAlert(false);
+            importDataAlert();
     }
 
     @SuppressLint("ApplySharedPref")
@@ -956,7 +956,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         startActivityForResult(intent, REQUEST_CODE_PROFILE_PREFERENCES);
     }
 
-    public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex, boolean startTargetHelps) {
+    public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex/*, boolean startTargetHelps*/) {
 
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
@@ -974,7 +974,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
                 arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, startTargetHelps);
+                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true/*startTargetHelps*/);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
@@ -1034,7 +1034,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
-    private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps)
+    private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/)
     {
         // redraw headeru list fragmentu, notifikacie a widgetov
         EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -1053,7 +1053,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.dataWrapper);
             fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
         }
-        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, startTargetHelps);
+        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, true/*startTargetHelps*/);
     }
 
     public static ApplicationsCache getApplicationsCache()

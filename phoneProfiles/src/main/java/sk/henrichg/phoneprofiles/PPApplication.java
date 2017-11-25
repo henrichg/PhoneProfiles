@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.util.Pair;
@@ -94,15 +95,15 @@ public class PPApplication extends Application {
     public static final int PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND = 2;
     public static final int PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND = 3;
     public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM = 4;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS = 5;
+    private static final int PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS = 5;
     public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION = 6;
 
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
 
-    public static HandlerWithContext brightnessHandler;
-    public static HandlerWithContext toastHandler;
-    public static HandlerWithContext screenTimeoutHandler;
+    public static Handler brightnessHandler;
+    public static Handler toastHandler;
+    public static Handler screenTimeoutHandler;
 
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
@@ -169,9 +170,9 @@ public class PPApplication extends Application {
 
         //getMeasuredRunTime(nanoTimeStart, "PPApplication.onCreate");
 
-        toastHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
-        brightnessHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
-        screenTimeoutHandler = new HandlerWithContext(getMainLooper(), getApplicationContext());
+        toastHandler = new Handler(getMainLooper());
+        brightnessHandler = new Handler(getMainLooper());
+        screenTimeoutHandler = new Handler(getMainLooper());
 
         // Samsung Look initialization
         sLook = new Slook();
@@ -675,6 +676,7 @@ public class PPApplication extends Application {
             public void commandOutput(int id, String line) {
                 Matcher matcher = compile.matcher(line);
                 if (matcher.find()) {
+                    //noinspection unchecked
                     serviceList.add(new Pair(matcher.group(1), matcher.group(2)));
                 }
                 super.commandOutput(id, line);
@@ -748,7 +750,7 @@ public class PPApplication extends Application {
         return stringBuilder.toString();
     }
 
-    private static void commandWait(Command cmd) throws Exception {
+    private static void commandWait(Command cmd) {
         int waitTill = 50;
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; // 6350 msec (3200 * 2 - 50)

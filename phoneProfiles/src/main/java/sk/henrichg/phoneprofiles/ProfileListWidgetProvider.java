@@ -24,7 +24,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
     private boolean isLargeLayout;
     private boolean isKeyguard;
 
-    private RemoteViews buildLayout(Context context, AppWidgetManager appWidgetManager, int appWidgetId, boolean largeLayout)
+    private RemoteViews buildLayout(Context context, /*AppWidgetManager appWidgetManager,*/ int appWidgetId, boolean largeLayout)
     {
         Intent svcIntent=new Intent(context, ProfileListWidgetService.class);
 
@@ -264,7 +264,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         Bundle myOptions;
         myOptions = appWidgetManager.getAppWidgetOptions (appWidgetId);
         setLayoutParams(context, appWidgetManager, appWidgetId, myOptions);
-        RemoteViews widget = buildLayout(context, appWidgetManager, appWidgetId, isLargeLayout);
+        RemoteViews widget = buildLayout(context, /*appWidgetManager,*/ appWidgetId, isLargeLayout);
         try {
             appWidgetManager.updateAppWidget(appWidgetId, widget);
         } catch (Exception ignored) {}
@@ -306,7 +306,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             setLayoutParamsMotorola(context, spanX, spanY, appWidgetId);
             RemoteViews layout;
-            layout = buildLayout(context, appWidgetManager, appWidgetId, isLargeLayout);
+            layout = buildLayout(context, /*appWidgetManager,*/ appWidgetId, isLargeLayout);
             try {
                 appWidgetManager.updateAppWidget(appWidgetId, layout);
             } catch (Exception ignored) {}
@@ -380,7 +380,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         
     }
 
-    private void setLayoutParamsMotorola(Context context, int spanX, int spanY, int appWidgetId)
+    private void setLayoutParamsMotorola(Context context, @SuppressWarnings("unused") int spanX, int spanY, int appWidgetId)
     {
         isKeyguard = false;
         isLargeLayout = spanY != 1;

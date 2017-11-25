@@ -134,16 +134,16 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     }
     */
 
-    void addItem(Profile profile, boolean refresh)
+    void addItem(Profile profile/*, boolean refresh*/)
     {
         if (profileList == null)
             return;
 
         profileList.add(profile);
-        if (refresh) {
+        /*if (refresh) {
             fragment.listView.getRecycledViewPool().clear();
             notifyDataSetChanged();
-        }
+        }*/
     }
 
     void deleteItemNoNotify(Profile profile)

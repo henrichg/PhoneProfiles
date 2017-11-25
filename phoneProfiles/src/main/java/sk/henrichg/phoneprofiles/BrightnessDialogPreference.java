@@ -121,7 +121,7 @@ public class BrightnessDialogPreference extends
         mBuilder.showListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                BrightnessDialogPreference.this.onShow(dialog);
+                BrightnessDialogPreference.this.onShow(/*dialog*/);
             }
         });
 
@@ -200,7 +200,7 @@ public class BrightnessDialogPreference extends
         }
     }
 
-    private void onShow(DialogInterface dialog) {
+    private void onShow(/*DialogInterface dialog*/) {
         if (Permissions.grantBrightnessDialogPermissions(_context, this))
             enableViews();
     }

@@ -19,7 +19,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     //private static boolean isVisible = false;
 
-    private RemoteViews buildLayout(Context context, SlookCocktailManager cocktailBarManager, int appWidgetId)
+    private RemoteViews buildLayout(Context context/*, SlookCocktailManager cocktailBarManager, int appWidgetId*/)
     {
         Intent svcIntent=new Intent(context, SamsungEdgeService.class);
         svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -219,7 +219,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     private void doOnUpdate(Context context, SlookCocktailManager cocktailBarManager, int cocktailId)
     {
-        RemoteViews widget = buildLayout(context, cocktailBarManager, cocktailId);
+        RemoteViews widget = buildLayout(context/*, cocktailBarManager, cocktailId*/);
         try {
             cocktailBarManager.updateCocktail(cocktailId, widget);
         } catch (Exception ignored) {}

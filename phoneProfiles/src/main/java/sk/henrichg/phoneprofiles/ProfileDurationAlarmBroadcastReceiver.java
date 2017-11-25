@@ -66,7 +66,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                                 activateProfileId = Profile.getActivatedProfileForDuration(appContext);
                             }
 
-                            dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
+                            dataWrapper.getActivateProfileHelper().initialize(appContext);
                             dataWrapper.activateProfileAfterDuration(activateProfileId);
                         }
 

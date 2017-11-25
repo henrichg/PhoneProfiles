@@ -96,6 +96,7 @@ public class PhoneProfilesService extends Service {
 
         keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
         if (keyguardManager != null)
+            //noinspection deprecation
             keyguardLock = keyguardManager.newKeyguardLock("phoneProfiles.keyguardLock");
 
         if (screenOnOffReceiver != null)
@@ -211,7 +212,7 @@ public class PhoneProfilesService extends Service {
                 Profile.setActivatedProfileForDuration(appContext, 0);
 
                 DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
-                dataWrapper.getActivateProfileHelper().initialize(dataWrapper, appContext);
+                dataWrapper.getActivateProfileHelper().initialize(appContext);
 
                 PPApplication.setApplicationStarted(appContext, true);
 
@@ -288,7 +289,7 @@ public class PhoneProfilesService extends Service {
                 public void run() {
                     // set service foreground
                     final DataWrapper dataWrapper =  new DataWrapper(_this, true, false, 0);
-                    dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
+                    dataWrapper.getActivateProfileHelper().initialize(getApplicationContext());
                     Profile activatedProfile = dataWrapper.getActivatedProfile();
                     showProfileNotification(activatedProfile, dataWrapper);
                 }
@@ -761,7 +762,7 @@ public class PhoneProfilesService extends Service {
 
             } catch (SecurityException e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
-                Permissions.grantPlayRingtoneNotificationPermissions(this, false);
+                Permissions.grantPlayRingtoneNotificationPermissions(this);
                 notificationMediaPlayer = null;
                 notificationIsPlayed = false;
             } catch (Exception e) {

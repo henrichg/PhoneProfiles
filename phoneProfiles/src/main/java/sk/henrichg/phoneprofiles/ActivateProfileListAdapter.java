@@ -212,7 +212,7 @@ class ActivateProfileListAdapter extends BaseAdapter
         return vi;
     }
 
-    void showTargetHelps(final Activity activity, ActivateProfileListFragment fragment, final View listItemView) {
+    void showTargetHelps(final Activity activity, /*ActivateProfileListFragment fragment,*/ final View listItemView) {
         /*if (Build.VERSION.SDK_INT <= 19)
             // TapTarget.forToolbarMenuItem FC :-(
             // Toolbar.findViewById() returns null

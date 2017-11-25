@@ -232,7 +232,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         }
     }
 
-    public boolean onPreferenceScreenClick(@NonNull PreferenceScreen preference) {
+    private void onPreferenceScreenClick(@NonNull PreferenceScreen preference) {
 
         final Dialog dialog = preference.getDialog();
         if (dialog != null) { //It might be null if PreferenceScreen contains an intent
@@ -260,17 +260,17 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
             transaction.commitAllowingStateLoss();
             //transaction.commit();
 
-            return true;
+            //return true;
         }else if(preference.getIntent() != null) {
             PPApplication.logE("PreferenceFragment.onPreferenceScreenClick","preference.getIntent() != null");
 
             startActivity(preference.getIntent());
-            return true;
+            //return true;
         }
         else
             PPApplication.logE("PreferenceFragment.onPreferenceScreenClick","????");
 
-        return false;
+        //return false;
     }
 
     protected String getSavedInstanceStateKeyName() {

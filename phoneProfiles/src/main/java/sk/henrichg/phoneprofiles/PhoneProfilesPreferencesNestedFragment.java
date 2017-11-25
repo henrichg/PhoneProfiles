@@ -262,7 +262,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    private static void setPreferenceTitleStyle(Preference preference, boolean bold, boolean underline, boolean errorColor)
+    private static void setPreferenceTitleStyle(Preference preference, boolean bold, /*boolean underline,*/ boolean errorColor)
     {
         if (preference != null) {
             CharSequence title = preference.getTitle();
@@ -272,11 +272,11 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 if (span instanceof CharacterStyle)
                     sbt.removeSpan(span);
             }
-            if (bold || underline) {
-                if (bold)
+            if (bold/* || underline*/) {
+                //if (bold)
                     sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                if (underline)
-                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                /*if (underline)
+                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);*/
                 if (errorColor)
                     sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 preference.setTitle(sbt);
@@ -297,21 +297,21 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         boolean notificationStatusBar = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, true);
         boolean notificationStatusBarPermanent = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, true);
         if (!(notificationStatusBar && notificationStatusBarPermanent)) {
-            setPreferenceTitleStyle(preferenceCategoryNotifications, true, false, true);
+            setPreferenceTitleStyle(preferenceCategoryNotifications, true, true);
             if (preferenceCategoryNotifications != null)
                 preferenceCategoryNotifications.setSummary(getString(R.string.phone_profiles_pref_notificationStatusBarNotEnabled_summary) + " " +
                         getString(R.string.phone_profiles_pref_notificationStatusBarRequired));
         }
         else {
-            setPreferenceTitleStyle(preferenceCategoryNotifications, false, false, false);
+            setPreferenceTitleStyle(preferenceCategoryNotifications, false, false);
             if (preferenceCategoryNotifications != null)
                 preferenceCategoryNotifications.setSummary(R.string.empty_string);
         }
         if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR)) {
-            setPreferenceTitleStyle(preference, !notificationStatusBar, false, !notificationStatusBar);
+            setPreferenceTitleStyle(preference, !notificationStatusBar, !notificationStatusBar);
         }
         if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT)) {
-            setPreferenceTitleStyle(preference, !notificationStatusBarPermanent, false, !notificationStatusBarPermanent);
+            setPreferenceTitleStyle(preference, !notificationStatusBarPermanent, !notificationStatusBarPermanent);
         }
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -438,7 +438,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         super.onDestroy();
     }
 
-    public void doOnActivityResult(int requestCode, int resultCode, Intent data)
+    public void doOnActivityResult(int requestCode/*, int resultCode, Intent data*/)
     {
         if ((requestCode == RESULT_APPLICATION_PERMISSIONS) ||
             (requestCode == RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS) ||
@@ -467,7 +467,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             DataWrapper dataWrapper = new DataWrapper(context, true, false, 0);
 
             ActivateProfileHelper activateProfileHelper = dataWrapper.getActivateProfileHelper();
-            activateProfileHelper.initialize(dataWrapper, context);
+            activateProfileHelper.initialize(context);
 
             Profile activatedProfile = dataWrapper.getActivatedProfile();
             dataWrapper.refreshProfileIcon(activatedProfile, false, 0);
@@ -490,7 +490,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        doOnActivityResult(requestCode, resultCode, data);
+        doOnActivityResult(requestCode/*, resultCode, data*/);
     }
 
     @Override

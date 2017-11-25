@@ -18,9 +18,9 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     //public static final String EXTRA_SERVICE_PHONE_INCOMING = "service_phone_incoming";
     //public static final String EXTRA_SERVICE_PHONE_NUMBER = "service_phone_number";
 
-    public static final int SERVICE_PHONE_EVENT_START = 1;
-    public static final int SERVICE_PHONE_EVENT_ANSWER = 2;
-    public static final int SERVICE_PHONE_EVENT_END = 3;
+    private static final int SERVICE_PHONE_EVENT_START = 1;
+    private static final int SERVICE_PHONE_EVENT_ANSWER = 2;
+    private static final int SERVICE_PHONE_EVENT_END = 3;
 
     static final int LINKMODE_NONE = 0;
     static final int LINKMODE_LINK = 1;
@@ -96,7 +96,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
                 //Log.e("PhoneCallBroadcastReceiver", "doCallEvent - unlink");
                 //ExecuteVolumeProfilePrefsJob.start(context, profile._id, linkMode, false);
                 ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-                aph.initialize(dataWrapper, context);
+                aph.initialize(context);
                 aph.executeForVolumes(profile, linkMode, false);
             }
             dataWrapper.invalidateDataWrapper();

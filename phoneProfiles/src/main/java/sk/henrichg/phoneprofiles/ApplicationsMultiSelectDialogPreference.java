@@ -131,7 +131,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         mBuilder.showListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                ApplicationsMultiSelectDialogPreference.this.onShow(dialog);
+                ApplicationsMultiSelectDialogPreference.this.onShow(/*dialog*/);
             }
         });
 
@@ -179,7 +179,7 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         mDialog.show();
     }
 
-    private void onShow(DialogInterface dialog) {
+    private void onShow(/*DialogInterface dialog*/) {
 
         asyncTask = new AsyncTask<Void, Integer, Void>() {
 
