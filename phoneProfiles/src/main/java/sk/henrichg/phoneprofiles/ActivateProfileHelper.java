@@ -1960,7 +1960,7 @@ public class ActivateProfileHelper {
         // icon widget
         try {
             Intent intent = new Intent(context, IconWidgetProvider.class);
-            intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, IconWidgetProvider.class));
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
             context.sendBroadcast(intent);
@@ -1969,7 +1969,7 @@ public class ActivateProfileHelper {
         // one row widget
         try {
             Intent intent4 = new Intent(context, OneRowWidgetProvider.class);
-            intent4.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+            intent4.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             int ids4[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, OneRowWidgetProvider.class));
             intent4.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids4);
             context.sendBroadcast(intent4);
