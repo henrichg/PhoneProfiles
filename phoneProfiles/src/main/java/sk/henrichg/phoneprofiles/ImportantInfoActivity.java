@@ -73,6 +73,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
 
+        //noinspection StatementWithEmptyBody
         if (newsLatest) {
             // empty this, for switch off news
             news = true;

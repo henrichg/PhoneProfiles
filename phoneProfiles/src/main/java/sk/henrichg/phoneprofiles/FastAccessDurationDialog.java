@@ -33,7 +33,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
     private final boolean mMonochrome;
     private final int mMonochromeValue;
     private final int mStartupSource;
-    private final boolean mInteractive;
+    //private final boolean mInteractive;
     private final Activity mActivity;
     //private boolean mLog;
     private final String[] afterDoValues;
@@ -68,7 +68,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
         mMonochrome = monochrome;
         mMonochromeValue = monochromeValue;
         mStartupSource = startupSource;
-        mInteractive = true/*interactive*/;
+        //mInteractive = true/*interactive*/;
 
         /*
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
@@ -102,8 +102,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
                         if (Permissions.grantProfilePermissions(mActivity, mProfile, false,
                                 true, mMonochrome, mMonochromeValue,
-                                mStartupSource, mInteractive, mActivity, true))
-                            mDataWrapper._activateProfile(mProfile, mStartupSource, mInteractive, mActivity);
+                                mStartupSource, true, mActivity, true))
+                            mDataWrapper._activateProfile(mProfile, mStartupSource, true, mActivity);
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -123,8 +123,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
                         if (Permissions.grantProfilePermissions(mActivity, mProfile, false,
                                 true, mMonochrome, mMonochromeValue,
-                                mStartupSource, mInteractive, mActivity, true))
-                            mDataWrapper._activateProfile(mProfile, mStartupSource, mInteractive, mActivity);
+                                mStartupSource, true, mActivity, true))
+                            mDataWrapper._activateProfile(mProfile, mStartupSource, true, mActivity);
                     }
                 })
                 .dismissListener(new DialogInterface.OnDismissListener() {

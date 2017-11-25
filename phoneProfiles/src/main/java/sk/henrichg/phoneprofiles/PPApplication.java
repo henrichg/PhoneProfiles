@@ -560,6 +560,7 @@ public class PPApplication extends Application {
                 if (f.exists()) {
                     try {
                         InputStream is = new FileInputStream("/sys/fs/selinux/enforce");
+                        //noinspection TryFinallyCanBeTryWithResources
                         try {
                             enforcing = (is.read() == '1');
                         } finally {

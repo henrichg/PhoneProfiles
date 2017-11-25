@@ -613,7 +613,7 @@ public class Profile {
     }
 
     @SuppressWarnings("StringConcatenationInLoop")
-    void setVolumeRingtoneValue(int value) {
+    void setVolumeRingtoneValue(@SuppressWarnings("SameParameterValue") int value) {
 
         try {
             String[] splits = _volumeRingtone.split("\\|");
@@ -665,7 +665,7 @@ public class Profile {
     }
 
     @SuppressWarnings("StringConcatenationInLoop")
-    void setVolumeNotificationValue(int value) {
+    void setVolumeNotificationValue(@SuppressWarnings("SameParameterValue") int value) {
 
         try {
             String[] splits = _volumeNotification.split("\\|");
@@ -872,6 +872,7 @@ public class Profile {
         return value == 1;
     }
 
+    /*
     private static int getMinimumScreenBrightnessSetting ()
     {
         final Resources res = Resources.getSystem();
@@ -889,7 +890,7 @@ public class Profile {
     }
 
     private static int getMaximumScreenBrightnessSetting ()
-    {
+    {*/
         /*final Resources res = Resources.getSystem();
         final int id = res.getIdentifier("config_screenBrightnessSettingMaximum", "integer", "android");  // API17+
         if (id != 0)
@@ -904,8 +905,9 @@ public class Profile {
                 // ignore
             }
         }*/
-        return 255;
+    /*    return 255;
     }
+    */
 
     static int convertPercentsToBrightnessManualValue(int perc, Context context)
     {
@@ -956,7 +958,8 @@ public class Profile {
     }
 
     static long convertBrightnessToPercents(int value,
-                                int maxValue, int minValue)
+                                            @SuppressWarnings("SameParameterValue") int maxValue,
+                                            @SuppressWarnings("SameParameterValue") int minValue)
     {
         long perc;
         if (value == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)

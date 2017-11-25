@@ -283,7 +283,7 @@ class TonesHandler {
             msg.show();
         }
 
-        return/* !isError*/;
+        //return/* !isError*/;
     }
 
     static void installTone(int resID, String title, Context context, boolean fromMenu) {

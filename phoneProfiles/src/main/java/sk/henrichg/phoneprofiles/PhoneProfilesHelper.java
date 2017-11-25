@@ -3,8 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -27,7 +25,7 @@ class PhoneProfilesHelper {
 
     static int PPHelperVersion = -1;
 
-    static final int PPHELPER_CURRENT_VERSION = 59;
+    //static final int PPHELPER_CURRENT_VERSION = 59;
 
     private static boolean errorNoRoot = false;
     private static boolean nowPPHelperUninstalled = false;
@@ -266,6 +264,7 @@ class PhoneProfilesHelper {
 
         OK = true;
 
+        //noinspection SynchronizationOnLocalVariableOrMethodParameter
         synchronized (cmd) {
             while (!cmd.isFinished() && waitTill<=waitTillLimit) {
                 try {

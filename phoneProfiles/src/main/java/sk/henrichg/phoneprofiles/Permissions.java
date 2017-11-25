@@ -439,21 +439,21 @@ public class Permissions {
         }
     }
 
-    private static boolean checkCustomProfileIcon(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return true;
+    private static void checkCustomProfileIcon(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return;// true;
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
                 Profile _profile = dataWrapper.getDatabaseHandler().getProfile(profile._id);
-                if (_profile == null) return true;
+                if (_profile == null) return;// true;
                 if (!_profile.getIsIconResourceID()) {
                     boolean granted = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                     if ((permissions != null) && (!granted))
                         permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
-                    return granted;
-                } else
-                    return true;
-            } else {
+                    //return;// granted;
+                } //else
+                  //  return;// true;
+            }/* else {
                 DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
                 Profile _profile = dataWrapper.getDatabaseHandler().getProfile(profile._id);
                 if (_profile == null) return true;
@@ -461,9 +461,9 @@ public class Permissions {
                     return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
                 } else
                     return true;
-            }
+            }*/
         } catch (Exception e) {
-            return false;
+            //return false;
         }
     }
 
@@ -511,8 +511,8 @@ public class Permissions {
         }
     }
 
-    private static boolean checkProfileRadioPreferences(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return true;
+    private static void checkProfileRadioPreferences(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return;// true;
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 boolean grantedWriteSettings = true;
@@ -533,20 +533,20 @@ public class Permissions {
                         permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.READ_PHONE_STATE));
                     //permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.MODIFY_PHONE_STATE));
                 }
-                return grantedWriteSettings && grantedReadPhoneState;
-            } else {
+                //return grantedWriteSettings && grantedReadPhoneState;
+            }/* else {
                 if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
                     return hasPermission(context, Manifest.permission.READ_PHONE_STATE);
                 else
                     return true;
-            }
+            }*/
         } catch (Exception e) {
-            return false;
+            //return false;
         }
     }
 
-    private static boolean checkProfilePhoneBroadcast(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return true;
+    private static void checkProfilePhoneBroadcast(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return;// true;
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 if (profile._volumeSpeakerPhone != 0) {
@@ -558,14 +558,14 @@ public class Permissions {
                         if (!grantedOutgoingCall)
                             permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
                     }
-                    return grantedOutgoingCall && grantedReadPhoneState;
-                } else
-                    return true;
-            } else
+                    //return grantedOutgoingCall && grantedReadPhoneState;
+                }// else
+                 //   return true;
+            }/* else
                 return hasPermission(context, Manifest.permission.READ_PHONE_STATE) &&
-                        hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);
+                        hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);*/
         } catch (Exception e) {
-            return false;
+            //return false;
         }
     }
 
@@ -669,12 +669,12 @@ public class Permissions {
             return true;
     }
 
-    private static boolean checkPlayRingtoneNotification(Context context, boolean alsoContacts, List<PermissionType>  permissions) {
+    private static boolean checkPlayRingtoneNotification(Context context, /*boolean alsoContacts,*/ List<PermissionType>  permissions) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 boolean grantedReadExternalStorage = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                boolean grantedContacts = true;
-                if (alsoContacts)
+                boolean grantedContacts;// = true;
+                //if (alsoContacts)
                     grantedContacts = ContextCompat.checkSelfPermission(context, permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
                 if (permissions != null) {
                     if (!grantedReadExternalStorage)
@@ -685,7 +685,7 @@ public class Permissions {
                 return grantedReadExternalStorage && grantedContacts;
             } else {
                 boolean granted = hasPermission(context, permission.READ_EXTERNAL_STORAGE);
-                if (alsoContacts)
+                //if (alsoContacts)
                     granted = granted && hasPermission(context, permission.READ_CONTACTS);
                 return granted;
             }
@@ -916,7 +916,7 @@ public class Permissions {
     static void grantPlayRingtoneNotificationPermissions(Context context/*, boolean onlyNotification, boolean alsoContacts*/) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = new ArrayList<>();
-            boolean granted = checkPlayRingtoneNotification(context, true/*alsoContacts*/, permissions);
+            boolean granted = checkPlayRingtoneNotification(context, /*alsoContacts,*/ permissions);
             if (!granted) {
                 try {
                     Intent intent = new Intent(context, GrantPermissionActivity.class);

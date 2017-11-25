@@ -542,6 +542,7 @@ public class BrightnessDialogPreference extends
         final SavedState myState = new SavedState(superState);
 
         Dialog dialog = getDialog();
+        //noinspection StatementWithEmptyBody
         if (dialog == null || !dialog.isShowing()) {
             //myState.isDialogShowing = superState.isDialogShowing;
             //myState.dialogBundle = dialogBundle;

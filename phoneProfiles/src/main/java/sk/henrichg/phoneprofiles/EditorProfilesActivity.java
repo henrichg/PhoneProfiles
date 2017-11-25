@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -501,7 +499,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
                     // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
-                    redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex);
+                    redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex/*, true*/);
 
                     Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
@@ -1007,7 +1005,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         startProfilePreferenceActivity(profile, EditorProfileListFragment.EDIT_MODE_EDIT, 0);
     }
 
-    private void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex, boolean startTargetHelps) {
+    private void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/) {
         if (mTwoPane) {
             if (profile != null)
             {
@@ -1016,7 +1014,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, newProfileMode);
                 arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, startTargetHelps);
+                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true/*startTargetHelps*/);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
@@ -1053,7 +1051,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.dataWrapper);
             fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
         }
-        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex, true/*startTargetHelps*/);
+        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
     }
 
     public static ApplicationsCache getApplicationsCache()
