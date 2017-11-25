@@ -546,10 +546,10 @@
     <string name="array_pref_powerSaveMode_off">Off</string>
     <string name="array_pref_powerSaveMode_5" tools:ignore="StringFormatCount,StringFormatInvalid">Turn on at 5% battery</string>
     <string name="array_pref_powerSaveMode_15" tools:ignore="StringFormatCount,StringFormatInvalid">Turn on at 15% battery</string>
-    <string name="important_info_profile_ringerMode_root">In Android 6 (Marshmallow), it is not possible to change the \"Vibrate when ringing\" system setting on non-rooted devices.</string>
-    <string name="important_info_profile_adaptiveBrightness_root">In Android 6 (Marshmallow), it is not possible to change the level of \"Adaptive brightness\" on non-rooted devices.</string>
-    <string name="important_info_profile_wifiScanning_location">In Android 6 (Marshmallow), for Wi-Fi scanning to work, you must enable Location and Wi-Fi scanning in Location settings.</string>
-    <string name="important_info_profile_bluetoothScanning_location">In Android 6 (Marshmallow), for Bluetooth LE scanning to work, you must enable Location and Bluetooth scanning in Location settings.</string>
+    <string name="important_info_profile_ringerMode_root">In Android 6, it is not possible to change the \"Vibrate when ringing\" system setting on non-rooted devices.</string>
+    <string name="important_info_profile_adaptiveBrightness_root">In Android 6+, it is not possible to change the level of \"Adaptive brightness\" on non-rooted devices.</string>
+    <string name="important_info_profile_wifiScanning_location">In Android 6+, for Wi-Fi scanning to work, you must enable Location and Wi-Fi scanning in Location settings.</string>
+    <string name="important_info_profile_bluetoothScanning_location">In Android 6+, for Bluetooth LE scanning to work, you must enable Location and Bluetooth scanning in Location settings.</string>
     <string name="profile_preferences_devicePowerSaveMode">(G1)(R) Power save mode</string>
     <string name="event_preferences_bluetooth_devices_type">Scanned devices type</string>
     <string name="array_event_pref_bluetoothDevicesType_classic">Classic [CL]</string>
