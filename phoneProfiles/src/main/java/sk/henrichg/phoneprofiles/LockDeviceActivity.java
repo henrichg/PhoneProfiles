@@ -73,7 +73,6 @@ public class LockDeviceActivity extends AppCompatActivity {
             public void run() {
                 if (PPApplication.lockDeviceActivity != null) {
                     PPApplication.lockDeviceActivity.finish();
-                    PPApplication.lockDeviceActivity.overridePendingTransition(0, 0);
                 }
             }
         }, 20000);
