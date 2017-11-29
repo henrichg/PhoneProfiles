@@ -67,15 +67,7 @@ public class LockDeviceActivity extends AppCompatActivity {
         if (windowManager != null)
             windowManager.addView(view, params);
 
-        PhoneProfilesService.startHandlerThread();
-        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                if (PPApplication.lockDeviceActivity != null) {
-                    PPApplication.lockDeviceActivity.finish();
-                }
-            }
-        }, 20000);
+        LockDeviceActivityFinishBroadcastReceiver.setAlarm(getApplicationContext());
     }
 
     @Override

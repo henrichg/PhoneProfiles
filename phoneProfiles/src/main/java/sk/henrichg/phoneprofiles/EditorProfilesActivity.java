@@ -310,6 +310,8 @@ public class EditorProfilesActivity extends AppCompatActivity
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
 
+        LockDeviceActivityFinishBroadcastReceiver.removeAlarm(context);
+
         // zrusenie notifikacie
         ImportantInfoNotification.removeNotification(context);
         Permissions.removeNotifications(context);
