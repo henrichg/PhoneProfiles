@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
