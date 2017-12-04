@@ -312,7 +312,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         LockDeviceActivityFinishBroadcastReceiver.removeAlarm(context);
 
-        // zrusenie notifikacie
         ImportantInfoNotification.removeNotification(context);
         Permissions.removeNotifications(context);
 
@@ -390,7 +389,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 startActivity(myIntent);
             } catch (ActivityNotFoundException e) {
                 //Toast.makeText(this, "No application can handle this request."
-                //    + " Please install a webbrowser",  Toast.LENGTH_LONG).show();
+                //    + " Please install a web browser",  Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
             return true;*/
@@ -1011,7 +1010,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         if (mTwoPane) {
             if (profile != null)
             {
-                // restart profile preferences fragmentu
+                // restart profile preferences fragment
                 Bundle arguments = new Bundle();
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, newProfileMode);
@@ -1036,7 +1035,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/)
     {
-        // redraw headeru list fragmentu, notifikacie a widgetov
+        // redraw list fragment header, notification and widgets
         EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
 
         if (fragment != null) {

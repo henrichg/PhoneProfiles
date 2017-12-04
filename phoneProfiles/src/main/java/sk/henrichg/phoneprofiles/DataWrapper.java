@@ -434,11 +434,9 @@ public class DataWrapper {
             p._checked = false;
         }
 
-        // teraz musime najst profile v profileList
         int position = getItemPosition(profile);
         if (position != -1)
         {
-            // najdenemu objektu nastavime _checked
             Profile _profile = profileList.get(position);
             if (_profile != null)
                 _profile._checked = true;
@@ -715,11 +713,7 @@ public class DataWrapper {
             finish = false;
             if (ApplicationPreferences.applicationClose(context))
             {
-                // ma sa zatvarat aktivita po aktivacii
                 if (PPApplication.getApplicationStarted(activity.getApplicationContext(), false))
-                    // aplikacia je uz spustena, mozeme aktivitu zavriet
-                    // tymto je vyriesene, ze pri spusteni aplikacie z launchera
-                    // sa hned nezavrie
                     finish = afterActivation;
             }
         }
@@ -737,7 +731,7 @@ public class DataWrapper {
     {
         Profile profile;
 
-        // pre profil, ktory je prave aktivny, treba aktualizovat aktivitu
+        // for activated profile, update of activity is required
         profile = getActivatedProfile();
 
         long backgroundProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
@@ -756,21 +750,20 @@ public class DataWrapper {
             (startupSource == PPApplication.STARTUP_SOURCE_SERVICE) ||
             (startupSource == PPApplication.STARTUP_SOURCE_SERVICE_MANUAL))
         {
-            // aktivita spustena z shortcutu alebo zo service, profil aktivujeme
+            // activity started from shortcut or service, activate profile
             actProfile = true;
             interactive = ((startupSource != PPApplication.STARTUP_SOURCE_SERVICE));
         }
         else
         if (startupSource == PPApplication.STARTUP_SOURCE_BOOT)
         {
-            // boot telefonu
+            // device boot
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
 
             if (ApplicationPreferences.applicationActivate(context))
             {
-                // je nastavene, ze pri starte sa ma profil aktivovat
                 actProfile = true;
             }
             else
@@ -786,14 +779,13 @@ public class DataWrapper {
         else
         if (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR_START)
         {
-            // aktivita bola spustena po boote telefonu
+            // activity started after device boot
 
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
 
             if (ApplicationPreferences.applicationActivate(context))
             {
-                // je nastavene, ze pri starte sa ma aktivita aktivovat
                 actProfile = true;
             }
             else
@@ -822,7 +814,6 @@ public class DataWrapper {
 
         if (actProfile && (profile != null))
         {
-            // aktivacia profilu
             activateProfileWithAlert(profile, startupSource, interactive, activity);
         }
         else

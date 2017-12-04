@@ -279,7 +279,7 @@ class PhoneProfilesHelper {
             }
         }
         if (!cmd.isFinished()){
-            Log.e("PhoneProfilesHelper.commandWaid", "Could not finish root command in " + (waitTill/waitTillMultiplier));
+            Log.e("PhoneProfilesHelper.commandWait", "Could not finish root command in " + (waitTill/waitTillMultiplier));
             OK = false;
         }
 

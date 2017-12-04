@@ -101,7 +101,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LOCK_DEVICE = "lockDevice";
     private static final String KEY_DEVICE_CONNECT_TO_SSID = "deviceConnectToSSID";
 
-    // Shortcuts Colums names
+    // Shortcuts Columns names
     private static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
     private static final String KEY_S_INTENT = "intent";
     private static final String KEY_S_NAME = "name";
@@ -155,10 +155,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /*
-    // be sure to call this method by: DatabaseHandler.getInstance().closeConnecion() 
+    // be sure to call this method by: DatabaseHandler.getInstance().closeConection()
     // when application is closed by somemeans most likely
     // onDestroy method of application
-    synchronized void closeConnecion() {
+    synchronized void closeConection() {
         if (instance != null)
         {
             instance.close();
@@ -260,11 +260,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 16)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WALLPAPER_CHANGE + " INTEGER");
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WALLPAPER + " TEXT");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WALLPAPER_CHANGE + "=0");
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WALLPAPER + "='-'");
         }
@@ -293,71 +291,55 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 19)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_MOBILE_DATA + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_MOBILE_DATA + "=0");
         }
 
         if (oldVersion < 20)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_MOBILE_DATA_PREFS + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_MOBILE_DATA_PREFS + "=0");
         }
 
         if (oldVersion < 21)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_GPS + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_GPS + "=0");
         }
 
         if (oldVersion < 22)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_RUN_APPLICATION_CHANGE + " INTEGER");
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME + " TEXT");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_RUN_APPLICATION_CHANGE + "=0");
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME + "=\"-\"");
         }
 
         if (oldVersion < 23)
         {
-            // index na PORDER
             db.execSQL("CREATE INDEX IF NOT EXISTS IDX_PORDER ON " + TABLE_PROFILES + " (" + KEY_PORDER + ")");
         }
 
         if (oldVersion < 24)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_AUTOSYNC + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_AUTOSYNC + "=0");
         }
 
         if (oldVersion < 51)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_AUTOROTATE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_AUTOROTATE + "=0");
         }
 
         if (oldVersion < 52)
         {
-            // updatneme zaznamy
-            // autorotate off -> rotation 0
-            // autorotate on -> autorotate
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_AUTOROTATE + "=1 WHERE " + KEY_DEVICE_AUTOROTATE + "=1");
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_AUTOROTATE + "=1 WHERE " + KEY_DEVICE_AUTOROTATE + "=3");
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_AUTOROTATE + "=2 WHERE " + KEY_DEVICE_AUTOROTATE + "=2");
@@ -365,48 +347,38 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1015)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_LOCATION_SERVICE_PREFS + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_LOCATION_SERVICE_PREFS + "=0");
         }
 
         if (oldVersion < 1020)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_VOLUME_SPEAKER_PHONE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_SPEAKER_PHONE + "=0");
         }
 
         if (oldVersion < 1035)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_NFC + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_NFC + "=0");
         }
 
         if (oldVersion < 1120)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DURATION + " INTEGER");
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_AFTER_DURATION_DO + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION + "=" + Profile.AFTERDURATIONDO_UNDOPROFILE);
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_AFTER_DURATION_DO + "=" +  + Profile.AFTERDURATIONDO_UNDOPROFILE);
         }
 
         if (oldVersion < 1150)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_VOLUME_ZEN_MODE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VOLUME_ZEN_MODE + "=0");
         }
 
@@ -414,7 +386,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
             {
-                // updatneme zaznamy
                 final String selectQuery = "SELECT " + KEY_ID + "," +
                                                 KEY_DEVICE_BRIGHTNESS +
                                             " FROM " + TABLE_PROFILES;
@@ -452,16 +423,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1160)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_KEYGUARD + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_KEYGUARD + "=0");
         }
 
         if (oldVersion < 1165)
         {
-            // updatneme zaznamy
             final String selectQuery = "SELECT " + KEY_ID + "," +
                                             KEY_DEVICE_BRIGHTNESS +
                                         " FROM " + TABLE_PROFILES;
@@ -500,7 +468,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
         {
             if (android.os.Build.VERSION.SDK_INT < 21)
             {
-                // updatneme zaznamy
                 final String selectQuery = "SELECT " + KEY_ID + "," +
                                                 KEY_DEVICE_BRIGHTNESS +
                                             " FROM " + TABLE_PROFILES;
@@ -540,19 +507,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1180)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_VIBRATE_ON_TOUCH + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VIBRATE_ON_TOUCH + "=0");
         }
 
         if (oldVersion < 1190)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WIFI_AP + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WIFI_AP + "=0");
         }
 
@@ -567,7 +530,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
-                    int delayStart = cursor.getInt(cursor.getColumnIndex(KEY_DURATION)) * 60;  // conversiont to seconds
+                    int delayStart = cursor.getInt(cursor.getColumnIndex(KEY_DURATION)) * 60;  // conversion to seconds
 
                     db.execSQL("UPDATE " + TABLE_PROFILES +
                             " SET " + KEY_DURATION + "=" + delayStart + " " +
@@ -605,46 +568,36 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1220)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_POWER_SAVE_MODE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_POWER_SAVE_MODE + "=0");
         }
 
         if (oldVersion < 1240)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_ASK_FOR_DURATION + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_ASK_FOR_DURATION + "=0");
         }
 
         if (oldVersion < 1250)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_NETWORK_TYPE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_NETWORK_TYPE + "=0");
         }
 
         if (oldVersion < 1260)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_NOTIFICATION_LED + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_NOTIFICATION_LED + "=0");
         }
 
         if (oldVersion < 1270)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_VIBRATE_WHEN_RINGING + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_VIBRATE_WHEN_RINGING + "=0");
         }
 
@@ -659,37 +612,29 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1290)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WALLPAPER_FOR + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WALLPAPER_FOR + "=0");
         }
 
         if (oldVersion < 1300)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_HIDE_STATUS_BAR_ICON + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_HIDE_STATUS_BAR_ICON + "=0");
         }
 
         if (oldVersion < 1310)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_LOCK_DEVICE + " INTEGER");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_LOCK_DEVICE + "=0");
         }
 
         if (oldVersion < 1320)
         {
-            // pridame nove stlpce
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_CONNECT_TO_SSID + " TEXT");
 
-            // updatneme zaznamy
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_CONNECT_TO_SSID + "=\""+Profile.CONNECTTOSSID_JUSTANY+"\"");
         }
 
@@ -2361,7 +2306,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 db.execSQL("DELETE FROM " + TABLE_SHORTCUTS);
 
                                 if (tableExists(TABLE_SHORTCUTS, exportedDBObj)) {
-                                    // cusor for events exportedDB
+                                    // cursor for events exportedDB
                                     cursorExportedDB = exportedDBObj.rawQuery("SELECT * FROM " + TABLE_SHORTCUTS, null);
                                     columnNamesExportedDB = cursorExportedDB.getColumnNames();
 

@@ -1408,7 +1408,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
 
             if (ProfilePreferencesFragment.changedImageViewPreference != null) {
-                // nastavime image identifikatoru na ziskanu cestu ku obrazku
                 ProfilePreferencesFragment.changedImageViewPreference.setImageIdentifier(selectedImage.toString());
                 ProfilePreferencesFragment.changedImageViewPreference = null;
             }
@@ -1428,7 +1427,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
 
             if (ProfilePreferencesFragment.changedProfileIconPreference != null) {
-                // nastavime image identifikatoru na ziskanu cestu ku obrazku
                 ProfilePreferencesFragment.changedProfileIconPreference.setImageIdentifierAndType(selectedImage.toString(), false, true);
                 ProfilePreferencesFragment.changedProfileIconPreference = null;
             }

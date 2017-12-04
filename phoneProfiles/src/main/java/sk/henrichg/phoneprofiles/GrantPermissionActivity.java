@@ -302,28 +302,28 @@ public class GrantPermissionActivity extends AppCompatActivity {
             notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
         }
         else {
-            String ntitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-            String ntext = "";
+            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+            String nText = "";
             if (android.os.Build.VERSION.SDK_INT < 24) {
-                ntitle = context.getString(R.string.app_name);
-                ntext = context.getString(R.string.permissions_for_profile_text_notification)+": ";
+                nTitle = context.getString(R.string.app_name);
+                nText = context.getString(R.string.permissions_for_profile_text_notification)+": ";
             }
             if (mergedNotification) {
-                ntext = ntext + context.getString(R.string.permissions_for_profile_text1m) + " " +
+                nText = nText + context.getString(R.string.permissions_for_profile_text1m) + " " +
                         context.getString(R.string.permissions_for_profile_big_text_notification);
             }
             else {
-                ntext = ntext + context.getString(R.string.permissions_for_profile_text1) + " ";
+                nText = nText + context.getString(R.string.permissions_for_profile_text1) + " ";
                 if (profile != null)
-                    ntext = ntext + "\"" + profile._name + "\" ";
-                ntext = ntext + context.getString(R.string.permissions_for_profile_big_text_notification);
+                    nText = nText + "\"" + profile._name + "\" ";
+                nText = nText + context.getString(R.string.permissions_for_profile_big_text_notification);
             }
             mBuilder =   new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                    .setContentTitle(ntitle) // title for notification
-                    .setContentText(ntext) // message for notification
+                    .setContentTitle(nTitle) // title for notification
+                    .setContentText(nText) // message for notification
                     .setAutoCancel(true); // clear notification after click
-            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(ntext));
+            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
 
             Intent deleteIntent = new Intent(NOTIFICATION_DELETED_ACTION);
             PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);

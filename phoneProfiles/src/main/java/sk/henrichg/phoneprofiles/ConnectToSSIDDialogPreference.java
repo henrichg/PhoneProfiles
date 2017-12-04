@@ -214,7 +214,6 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
         }
         else {
             // set state
-            // sem narvi default string aplikacii oddeleny |
             value = Profile.CONNECTTOSSID_JUSTANY;
             persistString(value);
         }

@@ -122,7 +122,6 @@ public class ApplicationsDialogPreference  extends DialogPreference
             public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                 if (shouldPersist())
                 {
-                    // sem narvi stringy aplikacii oddelenych |
                     value = "";
                     if (applicationsList != null)
                     {
@@ -275,7 +274,6 @@ public class ApplicationsDialogPreference  extends DialogPreference
         }
         else {
             // set state
-            // sem narvi default string aplikacii oddeleny |
             value = "";
             persistString("");
         }

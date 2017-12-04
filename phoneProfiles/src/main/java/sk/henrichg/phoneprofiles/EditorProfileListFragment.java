@@ -167,7 +167,6 @@ public class EditorProfileListFragment extends Fragment
     {
         //super.onActivityCreated(savedInstanceState);
 
-        // az tu mame layout, tak mozeme ziskat view-y
     /*	activeProfileName = getActivity().findViewById(R.id.activated_profile_name);
         activeProfileIcon = getActivity().findViewById(R.id.activated_profile_icon);
         listView = getActivity().findViewById(R.id.main_profiles_list);
@@ -233,7 +232,7 @@ public class EditorProfileListFragment extends Fragment
         {
             listView.setAdapter(profileListAdapter);
         
-            // pre profil, ktory je prave aktivny, treba aktualizovat aktivitu
+            // for activated profile update activity
             Profile profile;
             profile = dataWrapper.getActivatedProfile();
             updateHeader(profile);
@@ -290,7 +289,7 @@ public class EditorProfileListFragment extends Fragment
 
                 fragment.listView.setAdapter(fragment.profileListAdapter);
 
-                // pre profil, ktory je prave aktivny, treba aktualizovat aktivitu
+                // update activity for activated profile
                 Profile profile;
                 profile = fragment.dataWrapper.getActivatedProfile();
                 fragment.updateHeader(profile);
@@ -363,12 +362,10 @@ public class EditorProfileListFragment extends Fragment
             if (startTargetHelps)
                 showAdapterTargetHelps();
 
-            // editacia profilu
             editMode = EDIT_MODE_EDIT;
         }
         else
         {
-            // pridanie noveho profilu
             editMode = EDIT_MODE_INSERT;
         }
 
@@ -381,7 +378,6 @@ public class EditorProfileListFragment extends Fragment
     {
         int editMode;
 
-        // zduplikovanie profilu
         editMode = EDIT_MODE_DUPLICATE;
 
         // Notify the active callbacks interface (the activity, if the
@@ -411,8 +407,6 @@ public class EditorProfileListFragment extends Fragment
 
         listView.getRecycledViewPool().clear();
         profileListAdapter.notifyDataSetChanged();
-        // v pripade, ze sa odmaze aktivovany profil, nastavime, ze nic nie je aktivovane
-        //Profile profile = databaseHandler.getActivatedProfile();
         Profile _profile = profileListAdapter.getActivatedProfile();
         updateHeader(_profile);
         if (PhoneProfilesService.instance != null)
@@ -499,9 +493,6 @@ public class EditorProfileListFragment extends Fragment
 
                     listView.getRecycledViewPool().clear();
                     profileListAdapter.notifyDataSetChanged();
-                    // v pripade, ze sa odmaze aktivovany profil, nastavime, ze nic nie je aktivovane
-                    //Profile profile = databaseHandler.getActivatedProfile();
-                    //Profile profile = profileListAdapter.getActivatedProfile();
                     updateHeader(null);
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.showProfileNotification(null, dataWrapper);
@@ -538,16 +529,11 @@ public class EditorProfileListFragment extends Fragment
                     activeProfileIcon.setImageBitmap(profile._iconBitmap);
                 else {
                     int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
-                    activeProfileIcon.setImageResource(res); // resource na ikonu
+                    activeProfileIcon.setImageResource(res);
                 }
             }
             else
             {
-                //Resources resources = getResources();
-                //int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
-                //int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-                //Bitmap bitmap = BitmapResampler.resample(profile.getIconIdentifier(), width, height);
-                //activeProfileIcon.setImageBitmap(bitmap);
                 activeProfileIcon.setImageBitmap(profile._iconBitmap);
             }
         }

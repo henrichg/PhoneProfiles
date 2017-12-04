@@ -51,10 +51,10 @@ public class ImageViewPreference extends Preference {
     {
         super.onBindView(view);
 
-        //imageTitle = view.findViewById(R.id.imageview_pref_label);  // resource na image title
+        //imageTitle = view.findViewById(R.id.imageview_pref_label);
         //imageTitle.setText(preferenceTitle);
 
-        ImageView imageView = view.findViewById(R.id.imageview_pref_imageview); // resource na Textview v custom preference layoute
+        ImageView imageView = view.findViewById(R.id.imageview_pref_imageview);
 
         if (imageView != null)
         {
@@ -77,7 +77,7 @@ public class ImageViewPreference extends Preference {
     {
         super.onGetDefaultValue(a, index);
 
-        return a.getString(index);  // ikona bude vratena ako retazec
+        return a.getString(index);
     }
 
     @Override
@@ -99,19 +99,14 @@ public class ImageViewPreference extends Preference {
     @Override
     protected Parcelable onSaveInstanceState()
     {
-        // ulozime instance state - napriklad kvoli zmene orientacie
-
         final Parcelable superState = super.onSaveInstanceState();
         if (isPersistent()) {
-            // netreba ukladat, je ulozene persistentne
             return superState;
         }
 
-        // ulozenie istance state
         final SavedState myState = new SavedState(superState);
         myState.imageIdentifier = imageIdentifier;
         return myState;
-
     }
 
     @Override
@@ -145,20 +140,15 @@ public class ImageViewPreference extends Preference {
 
         //if (!callChangeListener(newValue)) {
         if (!callChangeListener(newImageIdentifier)) {
-            // nema sa nova hodnota zapisat
             return;
         }
 
         imageIdentifier = newImageIdentifier;
         getBitmap();
 
-        // zapis do preferences
-        //persistString(newValue);
         persistString(newImageIdentifier);
 
-        // Data sa zmenili,notifikujeme
         notifyChanged();
-
     }
 
     void startGallery()
@@ -176,7 +166,6 @@ public class ImageViewPreference extends Preference {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
 
-            // hm, neda sa ziskat aktivita z preference, tak vyuzivam static metodu
             ProfilePreferencesFragment.setChangedImageViewPreference(this);
             ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
         } catch (ActivityNotFoundException e) {
@@ -186,7 +175,6 @@ public class ImageViewPreference extends Preference {
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setType("image/*");
 
-                // hm, neda sa ziskat aktivita z preference, tak vyuzivam static metodu
                 ProfilePreferencesFragment.setChangedImageViewPreference(this);
                 ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
             } catch (Exception ignored) {}

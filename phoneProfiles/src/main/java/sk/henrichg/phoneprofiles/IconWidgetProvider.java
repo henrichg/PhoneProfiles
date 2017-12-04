@@ -28,11 +28,9 @@ public class IconWidgetProvider extends AppWidgetProvider {
 
         Profile profile = dataWrapper.getActivatedProfile();
 
-        // ziskanie vsetkych wigetov tejtor triedy na plochach lauchera
         ComponentName thisWidget = new ComponentName(context, IconWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
 
-        // prechadzame vsetky ziskane widgety
         for (int widgetId : allWidgetIds)
         {
             boolean isIconResourceID;
@@ -59,7 +57,6 @@ public class IconWidgetProvider extends AppWidgetProvider {
                 profileName = profile._name;
             }
 
-            // priprava view-u na aktualizacia widgetu
             RemoteViews remoteViews;
             if (ApplicationPreferences.applicationWidgetIconHideProfileName(context))
                 remoteViews = new RemoteViews(context.getPackageName(), R.layout.icon_widget_no_profile_name);
@@ -118,14 +115,12 @@ public class IconWidgetProvider extends AppWidgetProvider {
             if (!ApplicationPreferences.applicationWidgetIconHideProfileName(context))
                 remoteViews.setTextViewText(R.id.icon_widget_name, profileName);
 
-            // konfiguracia, ze ma spustit hlavnu aktivitu zoznamu profilov, ked kliknme na widget
             Intent intent = new Intent(context, ActivateProfileActivity.class);
             intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_WIDGET);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.icon_widget_icon, pendingIntent);
             remoteViews.setOnClickPendingIntent(R.id.icon_widget_name, pendingIntent);
 
-            // aktualizacia widgetu
             try {
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
             } catch (Exception ignored) {}

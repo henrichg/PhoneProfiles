@@ -191,7 +191,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                     //holder.profileIcon.setImageBitmap(null);
                     int res = vi.getResources().getIdentifier(profile.getIconIdentifier(), "drawable",
                             vi.getContext().getPackageName());
-                    holder.profileIcon.setImageResource(res); // resource na ikonu
+                    holder.profileIcon.setImageResource(res);
                 }
             } else {
                 holder.profileIcon.setImageBitmap(profile._iconBitmap);

@@ -72,8 +72,8 @@ public class Permissions {
     static RingtonePreference ringtonePreference = null;
 
     private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
-    private static final String PREF_MERGED_PERRMISSIONS = "merged_permissions";
-    private static final String PREF_MERGED_PERRMISSIONS_COUNT = "merged_permissions_count";
+    private static final String PREF_MERGED_PERMISSIONS = "merged_permissions";
+    private static final String PREF_MERGED_PERMISSIONS_COUNT = "merged_permissions_count";
     private static final String PREF_SHOW_REQUEST_ACCESS_NOTIFICATION_POLICY_PERMISSION = "show_request_access_notification_policy_permission";
     private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
 
@@ -1018,12 +1018,12 @@ public class Permissions {
 
         List<Permissions.PermissionType> permissions = new ArrayList<>();
 
-        int count = preferences.getInt(PREF_MERGED_PERRMISSIONS_COUNT, 0);
+        int count = preferences.getInt(PREF_MERGED_PERMISSIONS_COUNT, 0);
 
         Gson gson = new Gson();
 
         for (int i = 0; i < count; i++) {
-            String json = preferences.getString(PREF_MERGED_PERRMISSIONS + i, "");
+            String json = preferences.getString(PREF_MERGED_PERMISSIONS + i, "");
             if (!json.isEmpty()) {
                 Permissions.PermissionType permission = gson.fromJson(json, Permissions.PermissionType.class);
                 permissions.add(permission);
@@ -1056,14 +1056,14 @@ public class Permissions {
 
         editor.clear();
 
-        editor.putInt(PREF_MERGED_PERRMISSIONS_COUNT, savedPermissions.size());
+        editor.putInt(PREF_MERGED_PERMISSIONS_COUNT, savedPermissions.size());
 
         Gson gson = new Gson();
 
         for (int i = 0; i < savedPermissions.size(); i++)
         {
             String json = gson.toJson(savedPermissions.get(i));
-            editor.putString(PREF_MERGED_PERRMISSIONS+i, json);
+            editor.putString(PREF_MERGED_PERMISSIONS+i, json);
         }
 
         editor.apply();

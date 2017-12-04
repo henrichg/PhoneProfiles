@@ -10,7 +10,6 @@ class ProfilePreferencesIndicator {
 
     private static Bitmap createIndicatorBitmap(Context context, int countDrawables)
     {
-        // bitmapa, z ktorej zobrerieme velkost
         Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_profile_pref_volume_on);
 
         int width  = bmp.getWidth() * countDrawables;

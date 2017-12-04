@@ -97,10 +97,8 @@ public class RingtonePreference extends DialogPreference {
                             // set summary
                             _setSummary(ringtone);
 
-                            // zapis do preferences
                             persistString(ringtone);
 
-                            // Data sa zmenili,notifikujeme
                             notifyChanged();
 
                             mDialog.dismiss();

@@ -128,7 +128,7 @@ class ApplicationsMultiSelectPreferenceAdapter extends BaseAdapter implements Sc
     }
 
     @Override
-    public int getScrollPosition(int childposition, int groupposition) {
-        return childposition;
+    public int getScrollPosition(int childPosition, int groupPosition) {
+        return childPosition;
     }
 }

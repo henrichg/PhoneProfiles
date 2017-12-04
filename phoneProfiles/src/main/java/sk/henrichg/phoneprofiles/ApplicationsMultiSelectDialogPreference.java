@@ -101,7 +101,6 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (shouldPersist())
                         {
-                            // sem narvi stringy kontatkov oddelenych |
                             value = "";
                             List<Application> applicationList = EditorProfilesActivity.getApplicationsCache().getList(addShortcuts == 0);
                             if (applicationList != null)
@@ -247,7 +246,6 @@ public class ApplicationsMultiSelectDialogPreference extends DialogPreference
         }
         else {
             // set state
-            // sem narvi default string kontaktov oddeleny |
             value = "";
             persistString("");
         }

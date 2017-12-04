@@ -73,7 +73,6 @@ public class VolumeDialogPreference extends
 
         audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-        // zistime maximalnu hodnotu z audio managera
         if (volumeType.equalsIgnoreCase("RINGTONE"))
             maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
         else
@@ -93,7 +92,6 @@ public class VolumeDialogPreference extends
             maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
         maximumMediaValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
-        // zistime default hodnotu z audio managera
         defaultValueRing = audioManager.getStreamVolume(AudioManager.STREAM_RING);
         defaultValueNotification = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
         defaultValueMusic = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -353,15 +351,11 @@ public class VolumeDialogPreference extends
     @Override
     protected Parcelable onSaveInstanceState()
     {
-        // ulozime instance state - napriklad kvoli zmene orientacie
-
         final Parcelable superState = super.onSaveInstanceState();
         /*if (isPersistent()) {
-            // netreba ukladat, je ulozene persistentne
             return superState;
         }*/
 
-        // ulozenie istance state
         final SavedState myState = new SavedState(superState);
         myState.value = value;
         myState.volumeType = volumeType;
@@ -369,7 +363,6 @@ public class VolumeDialogPreference extends
         myState.defaultProfile = defaultProfile;
         myState.disableDefaultProfile = disableDefaultProfile;
         return myState;
-
     }
 
     @Override

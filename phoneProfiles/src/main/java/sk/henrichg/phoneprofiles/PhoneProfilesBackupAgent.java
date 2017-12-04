@@ -13,7 +13,7 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
     public void onRestoreFinished() {
         PPApplication.logE("PhoneProfilesBackupAgent","onRestoreFinished");
 
-        // NEZAVRIE APLIKACIU PO RESTORE.
+        // DO NOT CLOSE APPLICATION AFTER RESTORE
 
         //DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
 

@@ -149,7 +149,7 @@ public class ProfilePreference extends DialogPreference {
         //preferenceTitleView = view.findViewById(R.id.applications_pref_label);  // resource na title
         //preferenceTitleView.setText(preferenceTitle);
 
-        ImageView profileIcon = view.findViewById(R.id.profile_pref_icon); // resource na ImageView v custom preference layoute
+        ImageView profileIcon = view.findViewById(R.id.profile_pref_icon);
 
         if (profileIcon != null)
         {
@@ -164,7 +164,7 @@ public class ProfilePreference extends DialogPreference {
                         //profileIcon.setImageBitmap(null);
                         int res = prefContext.getResources().getIdentifier(profile.getIconIdentifier(), "drawable",
                                 prefContext.getPackageName());
-                        profileIcon.setImageResource(res); // resource na ikonu
+                        profileIcon.setImageResource(res);
                     }
                 }
                 else
@@ -175,9 +175,9 @@ public class ProfilePreference extends DialogPreference {
             else
             {
                 //if ((addNoActivateItem == 1) && (Long.parseLong(profileId) == PPApplication.PROFILE_NO_ACTIVATE))
-                //    profileIcon.setImageResource(R.drawable.ic_profile_default); // resource na ikonu
+                //    profileIcon.setImageResource(R.drawable.ic_profile_default);
                 //else
-                    profileIcon.setImageResource(R.drawable.ic_empty); // resource na ikonu
+                    profileIcon.setImageResource(R.drawable.ic_empty);
             }
             setSummary(Long.parseLong(profileId));
         }
@@ -249,22 +249,17 @@ public class ProfilePreference extends DialogPreference {
     @Override
     protected Parcelable onSaveInstanceState()
     {
-        // ulozime instance state - napriklad kvoli zmene orientacie
-
         final Parcelable superState = super.onSaveInstanceState();
         /*if (isPersistent()) {
-            // netreba ukladat, je ulozene persistentne
             return superState;
         }*/
 
-        // ulozenie istance state
         final SavedState myState = new SavedState(superState);
         myState.profileId = profileId;
         myState.addNoActivateItem = addNoActivateItem;
         myState.noActivateAsDoNotApply = noActivateAsDoNotApply;
         myState.showDuration = showDuration;
         return myState;
-
     }
 
     @Override
@@ -312,7 +307,6 @@ public class ProfilePreference extends DialogPreference {
         String newValue = String.valueOf(newProfileId);
 
         if (!callChangeListener(newValue)) {
-            // nema sa nova hodnota zapisat
             return;
         }
 
@@ -321,12 +315,9 @@ public class ProfilePreference extends DialogPreference {
         // set summary
         setSummary(Long.parseLong(profileId));
 
-        // zapis do preferences
         persistString(newValue);
 
-        // Data sa zmenili,notifikujeme
         notifyChanged();
-
     }
 
     public void setSummary(long profileId)

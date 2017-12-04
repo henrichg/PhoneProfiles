@@ -217,7 +217,7 @@ public class ActivateProfileListFragment extends Fragment {
 
                 if (fragment.profileList.size() == 0)
                 {
-                    // nie je ziaden profile, startneme Editor
+                    // no any profile activated, start of Editor
 
                     fragment.doOnStart();
 
@@ -291,8 +291,8 @@ public class ActivateProfileListFragment extends Fragment {
             setProfileSelection(profile, false);
             if (startupSource == 0)
             {
-                // aktivita nebola spustena z notifikacie, ani z widgetu
-                // pre profil, ktory je prave aktivny, treba aktualizovat notifikaciu a widgety
+                // activity not started from notification or widget
+                // for activated profile, update notification and widgets
                 if (PhoneProfilesService.instance != null)
                     PhoneProfilesService.instance.showProfileNotification(profile, dataWrapper);
                 activateProfileHelper.updateWidget(true);
@@ -306,11 +306,7 @@ public class ActivateProfileListFragment extends Fragment {
 
     private void endOnStart()
     {
-        // reset, aby sa to dalej chovalo ako normalne spustenie z lauchera
         startupSource = 0;
-
-        //  aplikacia uz je 1. krat spustena - moved to PhoneProfilesService.onCreate
-        //PPApplication.setApplicationStarted(getActivity().getApplicationContext(), true);
     }
 
 
@@ -364,7 +360,7 @@ public class ActivateProfileListFragment extends Fragment {
                     activeProfileIcon.setImageBitmap(profile._iconBitmap);
                 else {
                     int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable", getActivity().getPackageName());
-                    activeProfileIcon.setImageResource(res); // resource na ikonu
+                    activeProfileIcon.setImageResource(res);
                 }
             }
             else

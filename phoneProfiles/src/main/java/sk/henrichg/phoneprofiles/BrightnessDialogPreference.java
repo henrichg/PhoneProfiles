@@ -531,13 +531,7 @@ public class BrightnessDialogPreference extends
     @Override
     protected Parcelable onSaveInstanceState()
     {
-        // ulozime instance state - napriklad kvoli zmene orientacie
-
         final Parcelable superState = super.onSaveInstanceState();
-        /*if (isPersistent()) {
-            // netreba ukladat, je ulozene persistentne
-            return superState;
-        }*/
 
         final SavedState myState = new SavedState(superState);
 
@@ -552,14 +546,12 @@ public class BrightnessDialogPreference extends
             myState.dialogBundle = dialog.onSaveInstanceState();
         }
 
-        // ulozenie instance state
         myState.value = value;
         myState.noChange = noChange;
         myState.automatic = automatic;
         myState.defaultProfile = defaultProfile;
         myState.disableDefaultProfile = disableDefaultProfile;
         return myState;
-
     }
 
     @Override
@@ -580,12 +572,6 @@ public class BrightnessDialogPreference extends
         automatic = myState.automatic;
         defaultProfile = myState.defaultProfile;
         disableDefaultProfile = myState.disableDefaultProfile;
-
-        // nezobrazovat dialog, lebo je volany z NestedFragmentu a akoby sa otvoril 2x
-        // Ta ista chyba je aj v MaterilaDialogPreference
-        //if (myState.isDialogShowing) {
-        //    showDialog(myState.dialogBundle);
-        //}
 
         setSummaryBDP();
         notifyChanged();

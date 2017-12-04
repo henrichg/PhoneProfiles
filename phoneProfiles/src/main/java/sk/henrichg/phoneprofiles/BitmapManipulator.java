@@ -300,7 +300,7 @@ class BitmapManipulator {
             final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
 
-            // choose the smallest ratio as InSamleSize value, this will guarantee
+            // choose the smallest ratio as InSampleSize value, this will guarantee
             // a final image with both dimensions larger than or equal to the
             // requested height and width
             inSampleSize = (heightRatio < widthRatio) ? heightRatio : widthRatio;

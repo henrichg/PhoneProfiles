@@ -1107,14 +1107,14 @@ public class Profile {
         }
     }
 
-    public String getProfileNameWithDuration(boolean multyline, Context context) {
+    public String getProfileNameWithDuration(boolean multiLine, Context context) {
         String profileName = _name;
         if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
             boolean showEndTime = false;
             if (_checked) {
                 long endDurationTime = getActivatedProfileEndDurationTime(context);
                 if (endDurationTime > 0) {
-                    if (multyline)
+                    if (multiLine)
                         profileName = "(de:" + timeDateStringFromTimestamp(context, endDurationTime) + ")\n" + profileName;
                     else
                         profileName = "(de:" + timeDateStringFromTimestamp(context, endDurationTime) + ") " + profileName;
@@ -1123,7 +1123,7 @@ public class Profile {
             }
             if (!showEndTime) {
                 //profileName = "[" + _duration + "] " + profileName;
-                if (multyline)
+                if (multiLine)
                     profileName = "[" + GlobalGUIRoutines.getDurationString(_duration) + "]\n" + profileName;
                 else
                     profileName = "[" + GlobalGUIRoutines.getDurationString(_duration) + "] " + profileName;
@@ -1488,7 +1488,7 @@ public class Profile {
                     }
                     else
                     if (PPApplication.isRooted()) {
-                        // zariadenie je rootnute
+                        // decice is rooted
                         //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
                         featurePresented = PPApplication.PREFERENCE_ALLOWED;
                     }
@@ -1532,7 +1532,7 @@ public class Profile {
                 else
                 if (PPApplication.isRooted())
                 {
-                    // zariadenie je rootnute
+                    // device is rooted
                     if (PPApplication.settingsBinaryExists())
                         featurePresented = PPApplication.PREFERENCE_ALLOWED;
                     else

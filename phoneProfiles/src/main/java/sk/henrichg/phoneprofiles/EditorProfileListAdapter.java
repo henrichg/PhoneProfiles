@@ -191,11 +191,9 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
             p._checked = false;
         }
 
-        // teraz musime najst profile v profileList
         int position = getItemPosition(profile);
         if (position != -1)
         {
-            // najdenemu objektu nastavime _checked
             Profile _profile = profileList.get(position);
             if (_profile != null)
                 _profile._checked = true;

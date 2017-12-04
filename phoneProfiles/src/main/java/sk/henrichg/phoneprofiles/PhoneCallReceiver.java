@@ -94,7 +94,7 @@ public abstract class PhoneCallReceiver extends BroadcastReceiver {
                     onIncomingCallStarted(incomingNumber, callStartTime);
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:
-                    //Transition of ringing->offhook are pickups of incoming calls.  Nothing donw on them
+                    //Transition of ringing->offhook are pickups of incoming calls.  Nothing down on them
                     if(lastState != TelephonyManager.CALL_STATE_RINGING){
                         inCall = true;
                         isIncoming = false;

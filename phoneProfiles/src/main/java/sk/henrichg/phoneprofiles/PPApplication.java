@@ -417,7 +417,7 @@ public class PPApplication extends Application {
                 }*/
                 //if (RootTools.isRootAvailable()) {
                 if (RootToolsSmall.isRooted()) {
-                    // zariadenie je rootnute
+                    // device is rooted
                     PPApplication.logE("PPApplication._isRooted", "root available");
                     //rootChecked = true;
                     rooted = true;
@@ -466,11 +466,11 @@ public class PPApplication extends Application {
                         e.printStackTrace();
                     }*/
                 if (RootTools.isAccessGiven()) {
-                    // root grantnuty
+                    // root is granted
                     PPApplication.logE("PPApplication.isRootGranted", "root granted");
                     return true;
                 } else {
-                    // grant odmietnuty
+                    // grant declined
                     PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
                     return false;
                 }
