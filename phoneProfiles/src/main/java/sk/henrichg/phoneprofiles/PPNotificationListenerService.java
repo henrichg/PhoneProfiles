@@ -195,17 +195,17 @@ public class PPNotificationListenerService extends NotificationListenerService {
         //    return false;
     }
 
-    private static Intent getInterruptionFilterRequestIntent(/*Context context, */final int filter) {
+    private static Intent getInterruptionFilterRequestIntent(final int filter, final Context context) {
         Intent request = new Intent(ACTION_REQUEST_INTERRUPTION_FILTER);
         //request.setComponent(new ComponentName(context, PPNotificationListenerService.class));
-        //request.setPackage(context.getPackageName());
+        request.setPackage(context.getPackageName());
         request.putExtra(EXTRA_FILTER, filter);
         return request;
     }
 
     /** Convenience method for sending an {@link android.content.Intent} with {@link #ACTION_REQUEST_INTERRUPTION_FILTER}. */
     @SuppressLint("InlinedApi")
-    public static void requestInterruptionFilter(Context context, final int zenMode) {
+    public static void requestInterruptionFilter(final Context context, final int zenMode) {
         boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
         if (((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) || a60) {
             if (isNotificationListenerServiceEnabled(context)) {
@@ -225,7 +225,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
                         break;
                 }
                 //Log.e(TAG, "requestInterruptionFilter(" + interruptionFilter + ')');
-                Intent request = getInterruptionFilterRequestIntent(interruptionFilter);
+                Intent request = getInterruptionFilterRequestIntent(interruptionFilter, context);
                 context.sendBroadcast(request);
             }
         }
