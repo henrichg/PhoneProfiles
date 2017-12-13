@@ -511,12 +511,25 @@ public class Permissions {
         }
     }
 
-    private static void checkProfileRadioPreferences(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return;// true;
+    static boolean checkLocation(Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
+                return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
+                        (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+            } else
+                return hasPermission(context, permission.ACCESS_COARSE_LOCATION) &&
+                        hasPermission(context, permission.ACCESS_FINE_LOCATION);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static void checkProfileRadioPreferences(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return;// true;
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            try {
                 boolean grantedWriteSettings = true;
-                if ((profile._deviceWiFiAP != 0)) {
+                if (profile._deviceWiFiAP != 0) {
                     grantedWriteSettings = Settings.System.canWrite(context);
                     if (grantedWriteSettings)
                         setShowRequestWriteSettingsPermission(context, true);
@@ -531,18 +544,34 @@ public class Permissions {
                         permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
                     if (!grantedReadPhoneState)
                         permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.READ_PHONE_STATE));
-                    //permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.MODIFY_PHONE_STATE));
+                    //permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.MODIFY_PHONE_STATE));
                 }
-                //return grantedWriteSettings && grantedReadPhoneState;
-            }/* else {
+                boolean grantedLocation = true;
+                if (!profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY))
+                    grantedLocation = checkLocation(context);
+                if (permissions != null) {
+                    if (!grantedLocation) {
+                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.ACCESS_COARSE_LOCATION));
+                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.ACCESS_FINE_LOCATION));
+                    }
+                }
+                //return grantedWriteSettings && grantedReadPhoneState && grantedLocation;
+            } catch (Exception ignored) {
+                //return false;
+            }
+        }
+        /*else {
+            try {
                 if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
-                    return hasPermission(context, Manifest.permission.READ_PHONE_STATE);
+                    return hasPermission(context, permission.READ_PHONE_STATE);
+                if (!profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY))
+                    return checkLocation(context);
                 else
                     return true;
-            }*/
-        } catch (Exception e) {
-            //return false;
-        }
+            } catch (Exception e) {
+                return false;
+            }
+        }*/
     }
 
     private static void checkProfilePhoneBroadcast(Context context, Profile profile, List<PermissionType>  permissions) {
