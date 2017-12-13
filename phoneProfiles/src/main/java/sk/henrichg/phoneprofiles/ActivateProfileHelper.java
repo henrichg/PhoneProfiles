@@ -255,7 +255,13 @@ public class ActivateProfileHelper {
                         int wifiState = wifiManager.getWifiState();
                         if (wifiState == WifiManager.WIFI_STATE_ENABLED) {
                             // check if wifi is connected
-                            ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                            ConnectivityManager connManager = null;
+                            try {
+                                connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                            } catch (Exception ignored) {
+                                // java.lang.NullPointerException: missing IConnectivityManager
+                                // Dual SIM?? Bug in Android ???
+                            }
                             if (connManager != null) {
                                 NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
                                 boolean wifiConnected = (activeNetwork != null) &&
@@ -2064,7 +2070,13 @@ public class ActivateProfileHelper {
     {
         if (android.os.Build.VERSION.SDK_INT < 21)
         {
-            final ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = null;
+            try {
+                connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            } catch (Exception ignored) {
+                // java.lang.NullPointerException: missing IConnectivityManager
+                // Dual SIM?? Bug in Android ???
+            }
             if (connectivityManager != null) {
                 try {
                     final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
@@ -2181,7 +2193,13 @@ public class ActivateProfileHelper {
         }
         else
         {
-            final ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = null;
+            try {
+                connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            } catch (Exception ignored) {
+                // java.lang.NullPointerException: missing IConnectivityManager
+                // Dual SIM?? Bug in Android ???
+            }
             if (connectivityManager != null) {
                 try {
                     final Class<?> connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
@@ -2314,7 +2332,13 @@ public class ActivateProfileHelper {
             }
         }
         else {
-            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = null;
+            try {
+                connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            } catch (Exception ignored) {
+                // java.lang.NullPointerException: missing IConnectivityManager
+                // Dual SIM?? Bug in Android ???
+            }
             if (connectivityManager != null) {
                 boolean OK = false;
                 try {
