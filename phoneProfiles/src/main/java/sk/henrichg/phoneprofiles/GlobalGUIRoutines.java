@@ -9,10 +9,13 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
 
+import java.lang.reflect.Method;
 import java.text.Collator;
 import java.util.Calendar;
 import java.util.List;
@@ -215,32 +218,6 @@ class GlobalGUIRoutines {
             activity.recreate();
     }
 
-    /* using is MaterialDialogsPrefUtil version
-    static void registerOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
-        try {
-            PreferenceManager pm = preference.getPreferenceManager();
-            Method method = pm.getClass().getDeclaredMethod(
-                    "registerOnActivityDestroyListener",
-                    PreferenceManager.OnActivityDestroyListener.class);
-            method.setAccessible(true);
-            method.invoke(pm, listener);
-        } catch (Exception ignored) {
-        }
-    }
-
-    static void unregisterOnActivityDestroyListener(Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
-        try {
-            PreferenceManager pm = preference.getPreferenceManager();
-            Method method = pm.getClass().getDeclaredMethod(
-                    "unregisterOnActivityDestroyListener",
-                    PreferenceManager.OnActivityDestroyListener.class);
-            method.setAccessible(true);
-            method.invoke(pm, listener);
-        } catch (Exception ignored) {
-        }
-    }
-    */
-
     /*
     private static float pixelsToSp(Context context, float px) {
         return px / context.getResources().getDisplayMetrics().scaledDensity;
@@ -390,4 +367,33 @@ class GlobalGUIRoutines {
         }
     }
 
+    static void registerOnActivityDestroyListener(
+        Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+        try {
+            PreferenceManager pm = preference.getPreferenceManager();
+            Method method =
+                    pm.getClass()
+                            .getDeclaredMethod(
+                                    "registerOnActivityDestroyListener",
+                                    PreferenceManager.OnActivityDestroyListener.class);
+            method.setAccessible(true);
+            method.invoke(pm, listener);
+        } catch (Exception ignored) {
+        }
+    }
+
+    static void unregisterOnActivityDestroyListener(
+        Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
+        try {
+            PreferenceManager pm = preference.getPreferenceManager();
+            Method method =
+                    pm.getClass()
+                            .getDeclaredMethod(
+                                    "unregisterOnActivityDestroyListener",
+                                    PreferenceManager.OnActivityDestroyListener.class);
+            method.setAccessible(true);
+            method.invoke(pm, listener);
+        } catch (Exception ignored) {
+        }
+    }
 }

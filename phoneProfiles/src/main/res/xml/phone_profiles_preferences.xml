@@ -10,7 +10,7 @@
         android:title="@string/phone_profiles_pref_category_gui"
         android:key="applicationInterfaceCategory"
         android:widgetLayout="@layout/start_activity_preference" >
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationLanguage"
             android:summary="@string/phone_profiles_pref_applicationLanguage_system"
             android:key="applicationLanguage"
@@ -24,7 +24,7 @@
             android:summary="@string/phone_profiles_pref_systemLanguage_summary"
             android:widgetLayout="@layout/start_activity_preference">
         </Preference>
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationTheme"
             android:summary="@string/phone_profiles_pref_applicationTheme_dlight"
             android:key="applicationTheme"
@@ -81,7 +81,7 @@
             android:title="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes"
             android:summary="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes_info"
             android:widgetLayout="@layout/info_preference" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:key="applicationForceSetMergeRingNotificationVolumes"
             android:title="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes"
             android:summary="@string/array_pref_forceSetMergeRingNotificationVolumes_keepDetected"
@@ -176,7 +176,7 @@
                 android:title="@string/phone_profiles_pref_notificationStatusBarStyleInfo_title"
                 android:summary="@string/phone_profiles_pref_notificationStatusBarStyleInfo_summary"
                 android:widgetLayout="@layout/info_preference" />
-            <sk.henrichg.phoneprofiles.MaterialListPreference
+            <com.afollestad.materialdialogs.prefs.MaterialListPreference
                 android:title="@string/phone_profiles_pref_notificationStatusBarStyle"
                 android:summary="@string/phone_profiles_pref_notificationStatusBarStyle_android"
                 android:key="notificationStatusBarStyle"
@@ -191,7 +191,7 @@
                 android:defaultValue="true"
                 android:dependency="notificationStatusBar"
                 android:widgetLayout="@layout/mp_preference_switch" />
-            <sk.henrichg.phoneprofiles.MaterialListPreference
+            <com.afollestad.materialdialogs.prefs.MaterialListPreference
                 android:title="@string/phone_profiles_pref_notificationTextColor"
                 android:summary="@string/array_pref_no_change"
                 android:key="notificationTextColor"
@@ -200,7 +200,7 @@
                 android:entryValues="@array/notificationTextColorValues"
                 android:dependency="notificationStatusBar"
                 app:useStockLayout="true" />
-            <sk.henrichg.phoneprofiles.MaterialListPreference
+            <com.afollestad.materialdialogs.prefs.MaterialListPreference
                 android:title="@string/phone_profiles_pref_notificationTheme"
                 android:summary="@string/array_pref_color_native"
                 android:key="notificationTheme"
@@ -294,7 +294,7 @@
             android:title="@string/phone_profiles_pref_applicationGridLayout"
             android:defaultValue="true"
             android:widgetLayout="@layout/mp_preference_switch" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetBackground"
             android:summary="25"
             android:key="applicationWidgetListBackground"
@@ -302,7 +302,7 @@
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessB"
             android:summary="0"
             android:key="applicationWidgetListLightnessB"
@@ -315,7 +315,7 @@
             android:title="@string/phone_profiles_pref_applicationWidgetRoundedCorners"
             android:defaultValue="true"
             android:widgetLayout="@layout/mp_preference_switch" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessT"
             android:summary="100"
             android:key="applicationWidgetListLightnessT"
@@ -323,7 +323,7 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
             android:key="applicationWidgetListIconColor"
@@ -331,7 +331,7 @@
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
             android:key="applicationWidgetListIconLightness"
@@ -345,7 +345,7 @@
         android:title="@string/phone_profiles_pref_category_widget_icon_shortcut"
         android:key="categoryWidgetIcon"
         android:widgetLayout="@layout/start_activity_preference" >
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconBackground"
             android:summary="0%"
             android:key="applicationWidgetIconBackground"
@@ -353,7 +353,7 @@
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconLightnessB"
             android:summary="0"
             android:key="applicationWidgetIconLightnessB"
@@ -372,7 +372,7 @@
             android:defaultValue="false"
             android:disableDependentsState="true"
             android:widgetLayout="@layout/mp_preference_switch" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconLightnessT"
             android:summary="100"
             android:key="applicationWidgetIconLightnessT"
@@ -381,7 +381,7 @@
             android:entryValues="@array/widgetLightnessValues"
             android:dependency="applicationWidgetIconHideProfileName"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
             android:key="applicationWidgetIconColor"
@@ -389,7 +389,7 @@
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
             android:key="applicationWidgetIconLightness"
@@ -422,7 +422,7 @@
             android:defaultValue="true"
             android:widgetLayout="@layout/mp_preference_switch" />
         -->
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetBackground"
             android:summary="25%"
             android:key="applicationSamsungEdgeBackground"
@@ -430,7 +430,7 @@
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessB"
             android:summary="0"
             android:key="applicationSamsungEdgeLightnessB"
@@ -438,7 +438,7 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessT"
             android:summary="100"
             android:key="applicationSamsungEdgeLightnessT"
@@ -446,7 +446,7 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
             android:key="applicationSamsungEdgeIconColor"
@@ -454,7 +454,7 @@
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
             app:useStockLayout="true" />
-        <sk.henrichg.phoneprofiles.MaterialListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
             android:key="applicationSamsungEdgeIconLightness"

@@ -132,7 +132,7 @@ public class ProfilePreference extends DialogPreference {
         }
         listView.setSelection(position);
 
-        MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
+        GlobalGUIRoutines.registerOnActivityDestroyListener(this, this);
 
         if (state != null)
             mDialog.onRestoreInstanceState(state);
@@ -191,7 +191,7 @@ public class ProfilePreference extends DialogPreference {
     public void onDismiss (DialogInterface dialog)
     {
         super.onDismiss(dialog);
-        MaterialDialogsPrefUtil.unregisterOnActivityDestroyListener(this, this);
+        GlobalGUIRoutines.unregisterOnActivityDestroyListener(this, this);
     }
 
     @Override

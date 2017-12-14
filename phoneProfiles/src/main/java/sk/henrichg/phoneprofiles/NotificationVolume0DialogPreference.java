@@ -77,7 +77,7 @@ public class NotificationVolume0DialogPreference extends DialogPreference {
             });*/
         }
 
-        MaterialDialogsPrefUtil.registerOnActivityDestroyListener(this, this);
+        GlobalGUIRoutines.registerOnActivityDestroyListener(this, this);
 
         mDialog = dialogBuilder.show();
     }
@@ -85,7 +85,7 @@ public class NotificationVolume0DialogPreference extends DialogPreference {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        MaterialDialogsPrefUtil.unregisterOnActivityDestroyListener(this, this);
+        GlobalGUIRoutines.unregisterOnActivityDestroyListener(this, this);
     }
 
     @Override
