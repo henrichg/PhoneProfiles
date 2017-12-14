@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 
 public class ProfileIconPreference extends DialogPreference {
 
@@ -208,8 +209,8 @@ public class ProfileIconPreference extends DialogPreference {
     @Override
     public void onActivityDestroy() {
         super.onActivityDestroy();
-        if (mColorDialog != null && mColorDialog.mDialog != null && mColorDialog.mDialog.isShowing())
-            mColorDialog.mDialog.dismiss();
+        /*if (mColorDialog != null && mColorDialog.mDialog != null && mColorDialog.mDialog.isShowing())
+            mColorDialog.mDialog.dismiss();*/
         if (mDialog != null && mDialog.isShowing())
             mDialog.dismiss();
     }
@@ -430,6 +431,10 @@ public class ProfileIconPreference extends DialogPreference {
         mColorDialog = new ProfileIconColorChooserDialog(prefContext, this, useCustomColor, customColor,
                 ProfileIconPreferenceAdapter.getIconColor(imageIdentifier));
         mColorDialog.show();
+        /*
+        mColorDialog = new ColorChooserDialog.Builder(prefContext, R.string.colorChooser_pref_dialog_title)
+                .preselect(ProfileIconPreferenceAdapter.getIconColor(imageIdentifier))
+                .show((ProfilePreferencesActivity)prefContext);*/
     }
 
     private void updateIcon(boolean inDialog) {
