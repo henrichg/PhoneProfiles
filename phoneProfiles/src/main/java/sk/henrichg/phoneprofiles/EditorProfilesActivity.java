@@ -62,6 +62,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private AsyncTask importAsyncTask = null;
     private AsyncTask exportAsyncTask = null;
+    private boolean doImport = true;
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
@@ -649,6 +650,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected void onPreExecute() {
                     super.onPreExecute();
 
+                    doImport = true;
+
                     lockScreenOrientation();
                     this.dialog.setCancelable(false);
                     this.dialog.setCanceledOnTouchOutside(false);
@@ -716,6 +719,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                                 Toast.LENGTH_SHORT);
                         msg.show();
 
+                        doImport = false;
+
                         // refresh activity
                         GlobalGUIRoutines.reloadActivity(activity, true);
 
@@ -725,6 +730,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                         startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
                         //else
                         //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+
+                        doImport = false;
 
                         importExportErrorDialog(1, result);
                     }
@@ -1087,9 +1094,12 @@ public class EditorProfilesActivity extends AppCompatActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (doImport)
+                    return;
+
                 EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
                 if (fragment != null)
-                fragment.refreshGUI(_refreshIcons, _setPosition);
+                    fragment.refreshGUI(_refreshIcons, _setPosition);
             }
         });
     }
