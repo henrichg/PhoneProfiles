@@ -1081,14 +1081,14 @@
   <string name="email_chooser">Şununla e-posta gönder:</string>
   <string name="web_browser_chooser">Şununla internet adresine bak:</string>
   <string name="google_play_chooser">Şununla Google Play\'e bak:</string>
-  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesExtender yüklü değil</string>
-  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">Erişilebilirlik ayarlarında PhoneProfilesExtender\'a izin verilmemiş</string>
+  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesPlusExtender yüklü değil</string>
+  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">Erişilebilirlik ayarlarında PhoneProfilesPlusExtender\'a izin verilmemiş</string>
   <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary">\"Uygulamalar şartları\"nı faal edebilmek için sistem ayarlarında \"Erişilebilirlik\" tercihlerinde PhoneProfilesExtender\'a izin verin.</string>
   <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary">\"Uygulamalar için ihmal et\" değerleri açmak için \"Sistem Ayarları\" → \"Erişilebilirlik\" ayarlarında PhoneProfilesExtender\'a izin verin.</string>
-  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesExtender</string>
-  <string name="event_preferences_applications_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermek için PhoneProfilesExtender yüklemek için buraya dokunun.</string>
-  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesExtender</string>
-  <string name="event_preferences_orientation_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermeyi sağlayan PhoneProfilesExtender\'ı yüklemek için buraya dokunun.</string>
+  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesPlusExtender</string>
+  <string name="event_preferences_applications_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermek için PhoneProfilesPlusExtender yüklemek için buraya dokunun.</string>
+  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesPlusExtender</string>
+  <string name="event_preferences_orientation_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermeyi sağlayan PhoneProfilesPlusExtender\'ı yüklemek için buraya dokunun.</string>
   <string name="event_preferences_applications_PPPExtender_upgrade_summary">Değişiklikleri kontrol etmek ve PhoneProfilesExtender\'ı güncellemek için buraya dokunun.</string>
   <string name="event_preferences_orientation_PPPExtender_upgrade_summary">Değişiklikleri kontrol etmek ve PhoneProfilesExtender\'ı güncellemek için buraya dokunun.</string>
   <string name="important_info_accessibility_service_text1">Erişebilirlik hizmetleri hakkında Google kuralları değişikliği sebebiyle, sensör durumları \"Uygulama şartları\" ve \"Ekran döndürme şartları\" için PhoneProfilesExtender\'ı yüklemeniz icab ediyor. Daha fazla malumat için bu sensörlerin şartlarına bakınız.</string>
@@ -1125,4 +1125,11 @@
   <string name="phone_profiles_pref_eventBluetoothLocationSystemSettings_summary">Konum ve Bluetooth taramasını Sistem Ayarları\'nda açın. Bluetooth taraması için bu gereklidir.</string>
   <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings">\"Wi-Fi açık tut\" Sistem ayarı</string>
   <string name="phone_profiles_pref_eventWiFiKeppOnSystemSettings_summary">\"Wi-Fi\'yi uyku modunda bırak\" seçeneğini \"her zaman\" olarak yapılandırın. Uyku esnasında Wi-Fi taramasının çalışması için bu gereklidir.</string>
+  <string name="important_info_accessibility_service_new_version">Lutfen, durum sensörleri \"Uygulama şartları\" ve \"Ekran döndürme şartları\" için PhoneProfilesExtender\'ın yeni sürümünü yükleyiniz. Daha fazla malumat için bu sensörlerin şartlarına bakınız.</string>
+  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary1">Lütfen aralık değerini şundan daha az olarak ayarlamayın:</string>
+  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary2">dakika. Bu pil tüketimini gayet artırır.</string>
+  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary3">saniye. Bu pil tüketimini gayet artırır.</string>
+  <string name="phone_profiles_pref_applicationWidgetIconRoundedCorners">Kavisli köşeler (widget)</string>
+  <string name="phone_profiles_pref_applicationWidgetRoundedCorners">Kavisli köşeler</string>
+  <string name="preference_not_allowed_reason_extender_not_upgraded">phoneProfilesPlusExtender yükseltilmemiş</string>
 </resources>
