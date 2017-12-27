@@ -226,6 +226,9 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         //Log.d("----- EditorProfileListAdapter.onItemMove", "fromPosition="+fromPosition);
         //Log.d("----- EditorProfileListAdapter.onItemMove", "toPosition="+toPosition);
 
+        if ((fromPosition < 0) || (toPosition < 0))
+            return false;
+
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
                 Collections.swap(profileList, i, i + 1);
