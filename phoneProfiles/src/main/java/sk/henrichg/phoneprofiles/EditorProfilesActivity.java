@@ -62,7 +62,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private AsyncTask importAsyncTask = null;
     private AsyncTask exportAsyncTask = null;
-    private boolean doImport = true;
+    static boolean doImport = true;
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
@@ -230,6 +230,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     {
         if ((importAsyncTask != null) && !importAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
             importAsyncTask.cancel(true);
+            doImport = false;
         }
         if ((exportAsyncTask != null) && !exportAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
             exportAsyncTask.cancel(true);
@@ -704,6 +705,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected void onPostExecute(Integer result) {
                     super.onPostExecute(result);
 
+                    doImport = false;
+
                     if (dialog.isShowing())
                         dialog.dismiss();
                     unlockScreenOrientation();
@@ -723,8 +726,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                                 Toast.LENGTH_SHORT);
                         msg.show();
 
-                        doImport = false;
-
                         // refresh activity
                         GlobalGUIRoutines.reloadActivity(activity, true);
 
@@ -734,8 +735,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                         startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
                         //else
                         //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
-
-                        doImport = false;
 
                         importExportErrorDialog(1, result);
                     }
@@ -911,7 +910,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-
                     int ret = dataWrapper.getDatabaseHandler().exportDB();
                     if (ret == 1) {
                         File sd = Environment.getExternalStorageDirectory();

@@ -67,7 +67,7 @@ public class ActivateProfileHelper {
 
     private Context context;
 
-    static final boolean lockRefresh = false;
+    static boolean lockRefresh = false;
     static boolean disableScreenTimeoutInternalChange = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
@@ -1969,7 +1969,7 @@ public class ActivateProfileHelper {
 
     void updateWidget(boolean alsoEditor)
     {
-        if (lockRefresh)
+        if (lockRefresh || EditorProfilesActivity.doImport)
             // no refresh widgets
             return;
 
