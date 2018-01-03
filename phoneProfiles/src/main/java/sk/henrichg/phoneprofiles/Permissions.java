@@ -255,6 +255,21 @@ public class Permissions {
             return true;
     }
 
+    static boolean checkVibrateWhenRinging(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            try {
+                boolean granted = Settings.System.canWrite(context);
+                if (granted)
+                    setShowRequestWriteSettingsPermission(context, true);
+                return granted;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        else
+            return true;
+    }
+
     private static void checkProfileNotificationLed(Context context, Profile profile, List<PermissionType>  permissions) {
         if (profile == null) return/* true*/;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
