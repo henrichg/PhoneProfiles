@@ -307,52 +307,56 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity) {
-        // remove alarm for profile duration
-        ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
-        Profile.setActivatedProfileForDuration(context, 0);
+        try {
+            // remove alarm for profile duration
+            ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
+            Profile.setActivatedProfileForDuration(context, 0);
 
-        LockDeviceActivityFinishBroadcastReceiver.removeAlarm(context);
+            LockDeviceActivityFinishBroadcastReceiver.removeAlarm(context);
 
-        ImportantInfoNotification.removeNotification(context);
-        Permissions.removeNotifications(context);
+            ImportantInfoNotification.removeNotification(context);
+            Permissions.removeNotifications(context);
 
-        if (PPApplication.brightnessHandler != null) {
-            PPApplication.brightnessHandler.post(new Runnable() {
-                public void run() {
-                    ActivateProfileHelper.removeBrightnessView(context);
+            if (PPApplication.brightnessHandler != null) {
+                PPApplication.brightnessHandler.post(new Runnable() {
+                    public void run() {
+                        ActivateProfileHelper.removeBrightnessView(context);
 
-                }
-            });
-        }
-        if (PPApplication.screenTimeoutHandler != null) {
-            PPApplication.screenTimeoutHandler.post(new Runnable() {
-                public void run() {
-                    ActivateProfileHelper.screenTimeoutUnlock(context);
-                    ActivateProfileHelper.removeBrightnessView(context);
+                    }
+                });
+            }
+            if (PPApplication.screenTimeoutHandler != null) {
+                PPApplication.screenTimeoutHandler.post(new Runnable() {
+                    public void run() {
+                        ActivateProfileHelper.screenTimeoutUnlock(context);
+                        ActivateProfileHelper.removeBrightnessView(context);
 
-                }
-            });
-        }
+                    }
+                });
+            }
 
-        PPApplication.initRoot();
+            PPApplication.initRoot();
 
-        Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-        Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-        Permissions.setShowRequestDrawOverlaysPermission(context.getApplicationContext(), true);
-        //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
+            Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestDrawOverlaysPermission(context.getApplicationContext(), true);
+            //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
 
-        context.stopService(new Intent(context, PhoneProfilesService.class));
+            context.stopService(new Intent(context, PhoneProfilesService.class));
 
-        PPApplication.setApplicationStarted(context, false);
+            PPApplication.setApplicationStarted(context, false);
 
-        if (activity != null) {
-            Handler handler = new Handler(context.getMainLooper());
-            Runnable r = new Runnable() {
-                public void run() {
-                    activity.finish();
-                }
-            };
-            handler.postDelayed(r, 500);
+            if (activity != null) {
+                Handler handler = new Handler(context.getMainLooper());
+                Runnable r = new Runnable() {
+                    public void run() {
+                        activity.finish();
+                    }
+                };
+                handler.postDelayed(r, 500);
+            }
+        } catch (Exception ignored) {
+
         }
     }
 
