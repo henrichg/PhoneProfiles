@@ -218,7 +218,7 @@ public class PhoneProfilesService extends Service {
 
                 PPApplication.setApplicationStarted(appContext, true);
 
-                dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
+                dataWrapper._activateProfile(null, PPApplication.STARTUP_SOURCE_BOOT, /*boolean _interactive,*/ null);
                 //dataWrapper.invalidateDataWrapper();
 
                 if ((wakeLock != null) && wakeLock.isHeld())
