@@ -1701,7 +1701,16 @@ public class ActivateProfileHelper {
             }
         }
 
-        if (true/*_interactive*/)
+        if (profile._deviceRunApplicationChange == 1)
+        {
+            //ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
+            executeForRunApplications(profile);
+        }
+
+        PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+        KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        if ((pm != null) && pm.isScreenOn() && (myKM != null) && !myKM.isKeyguardLocked())
+        //if (_interactive)
         {
             // preferences, required user interaction
 
@@ -1746,13 +1755,6 @@ public class ActivateProfileHelper {
                     }
                 }
             //}
-
-            if (profile._deviceRunApplicationChange == 1)
-            {
-                //ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
-                executeForRunApplications(profile);
-            }
-
         }
 
     }
