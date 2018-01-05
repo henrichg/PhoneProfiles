@@ -35,7 +35,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private boolean monochrome;
     private int monochromeValue;
     private int startupSource;
-    private boolean interactive;
+    //private boolean interactive;
     private String applicationDataPath;
     private boolean activateProfile;
 
@@ -71,7 +71,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         monochrome = intent.getBooleanExtra(Permissions.EXTRA_MONOCHROME, false);
         monochromeValue = intent.getIntExtra(Permissions.EXTRA_MONOCHROME_VALUE, 0xFF);
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
-        interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
+        //interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
         activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.DEFAULT_PROFILE_ID);
 
@@ -340,7 +340,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
         intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
         intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
-        intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
+        //intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
 
         PendingIntent pi = PendingIntent.getActivity(context, grantType, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
@@ -636,7 +636,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             finish();
             Permissions.removeProfileNotification(context);
             if (activateProfile)
-                dataWrapper._activateProfile(profile, startupSource, interactive, Permissions.profileActivationActivity);
+                dataWrapper._activateProfile(profile, startupSource, /*interactive,*/ Permissions.profileActivationActivity);
         }
         Permissions.releaseReferences();
         if (mergedNotification)

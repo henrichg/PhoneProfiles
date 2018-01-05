@@ -538,7 +538,7 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    void _activateProfile(Profile _profile, int startupSource, boolean _interactive, Activity _activity)
+    void _activateProfile(Profile _profile, int startupSource, /*boolean _interactive,*/ Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -551,16 +551,16 @@ public class DataWrapper {
         databaseHandler.activateProfile(profile);
         setProfileActive(profile);
 
-        activateProfileHelper.execute(profile, _interactive);
+        activateProfileHelper.execute(profile/*, _interactive*/);
 
-        if (_interactive)
-        {
+        /*if (_interactive)
+        {*/
             long profileId = 0;
             if (activatedProfile != null)
                 profileId = activatedProfile._id;
             Profile.setActivatedProfileForDuration(context, profileId);
             ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
-        }
+        //}
 
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(profile, this);
@@ -603,9 +603,9 @@ public class DataWrapper {
         msg.show();
     }
 
-    private void activateProfileWithAlert(Profile profile, int startupSource, boolean interactive, Activity activity)
+    private void activateProfileWithAlert(Profile profile, int startupSource, /*boolean interactive,*/ Activity activity)
     {
-        if (interactive && (ApplicationPreferences.applicationActivateWithAlert(context) ||
+        if (/*interactive &&*/ (ApplicationPreferences.applicationActivateWithAlert(context) ||
                             (startupSource == PPApplication.STARTUP_SOURCE_EDITOR)))
         {
             // set theme and language for dialog alert ;-)
@@ -633,8 +633,8 @@ public class DataWrapper {
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
                                 forGUI, monochrome, monochromeValue,
-                                _startupSource, true, _activity, true))
-                            _dataWrapper._activateProfile(_profile, _startupSource, true, _activity);
+                                _startupSource, /*true,*/ _activity, true))
+                            _dataWrapper._activateProfile(_profile, _startupSource, /*true,*/ _activity);
                         else {
                             Intent returnIntent = new Intent();
                             _activity.setResult(Activity.RESULT_CANCELED, returnIntent);
@@ -669,14 +669,14 @@ public class DataWrapper {
         }
         else
         {
-            if (profile._askForDuration && interactive) {
+            if (profile._askForDuration/* && interactive*/) {
                 FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
                         monochrome, monochromeValue, startupSource);
                 dlg.show();
             }
             else {
                 boolean granted;
-                if (interactive) {
+                //if (interactive) {
                     // set theme and language for dialog alert ;-)
                     // not working on Android 2.3.x
                     GlobalGUIRoutines.setTheme(activity, true, false);
@@ -684,14 +684,14 @@ public class DataWrapper {
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
                             forGUI, monochrome, monochromeValue,
-                            startupSource, true, activity, true);
-                }
+                            startupSource, /*true,*/ activity, true);
+                /*}
                 else
                     granted = Permissions.grantProfilePermissions(context, profile, true,
                             forGUI, monochrome, monochromeValue,
-                            startupSource, false, null, true);
+                            startupSource, false, null, true);*/
                 if (granted)
-                    _activateProfile(profile, startupSource, interactive, activity);
+                    _activateProfile(profile, startupSource, /*interactive,*/ activity);
             }
         }
     }
@@ -742,7 +742,7 @@ public class DataWrapper {
         }
 
         boolean actProfile = false;
-        boolean interactive = false;
+        //boolean interactive = false;
         if ((startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT) ||
             (startupSource == PPApplication.STARTUP_SOURCE_WIDGET) ||
             (startupSource == PPApplication.STARTUP_SOURCE_ACTIVATOR) ||
@@ -752,7 +752,7 @@ public class DataWrapper {
         {
             // activity started from shortcut or service, activate profile
             actProfile = true;
-            interactive = ((startupSource != PPApplication.STARTUP_SOURCE_SERVICE));
+            //interactive = ((startupSource != PPApplication.STARTUP_SOURCE_SERVICE));
         }
         else
         if (startupSource == PPApplication.STARTUP_SOURCE_BOOT)
@@ -814,7 +814,7 @@ public class DataWrapper {
 
         if (actProfile && (profile != null))
         {
-            activateProfileWithAlert(profile, startupSource, interactive, activity);
+            activateProfileWithAlert(profile, startupSource, /*interactive,*/ activity);
         }
         else
         {
@@ -843,9 +843,9 @@ public class DataWrapper {
         if (profile == null) return;
         if (Permissions.grantProfilePermissions(context, profile, true,
                 forGUI, monochrome, monochromeValue,
-                startupSource, true, null, true)) {
+                startupSource, /*true,*/ null, true)) {
             getActivateProfileHelper().initialize(context);
-            _activateProfile(profile, startupSource, true, null);
+            _activateProfile(profile, startupSource, /*true,*/ null);
         }
     }
 

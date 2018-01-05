@@ -1441,7 +1441,7 @@ public class ActivateProfileHelper {
         });
     }
 
-    public void execute(Profile _profile, boolean _interactive)
+    public void execute(Profile _profile/*, boolean _interactive*/)
     {
         // separate ringing and notification - is marked with @Hide :-(
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
@@ -1701,7 +1701,7 @@ public class ActivateProfileHelper {
             }
         }
 
-        if (_interactive)
+        if (true/*_interactive*/)
         {
             // preferences, required user interaction
 
