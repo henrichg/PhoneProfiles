@@ -50,4 +50,5 @@
     <bool name="prf_pref_hideStatusBarIcon">false</bool>
     <string name="prf_pref_lockDevice">0</string>
     <string name="prf_pref_deviceConnectToSSID">^just_any^</string>
+    <string name="prf_pref_deviceWiFiAPPrefs">0</string>
 </resources>
