@@ -39,26 +39,11 @@
         android:layout_height="15dp"
         android:layout_below="@id/notification_activated_profile_name"
         android:layout_toEndOf="@id/notification_activated_profile_icon"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="5dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/empty_string"
         android:scaleType="@integer/profilePrefIndicatorScaleType"
         android:src="@drawable/ic_profile_pref_volume_on" />
-
-
-    <!--
-    <ImageView
-        android:id="@+id/notification_activated_profile_activated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/empty_string"
-        android:maxHeight="20dp"
-        android:maxWidth="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher" />
-    -->
 
 </RelativeLayout>
