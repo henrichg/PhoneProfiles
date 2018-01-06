@@ -1803,6 +1803,28 @@ public class ActivateProfileHelper {
                     }
                 }
             //}
+            if (profile._deviceWiFiAPPrefs == 1) {
+                if ((pm != null) && pm.isScreenOn() && (myKM != null) && !myKM.isKeyguardLocked()) {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.TetherSettings"));
+                        context.startActivity(intent);
+                    } catch (Exception ignored) {
+                    }
+                }
+                else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN, null);
+                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.TetherSettings"));
+                    if (GlobalGUIRoutines.activityIntentExists(intent, context)) {
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        String title = context.getString(R.string.profile_activation_interactive_preference_notification_title) + " " + profile._name;
+                        String text = context.getString(R.string.profile_activation_interactive_preference_notification_text) + " " +
+                                context.getString(R.string.profile_preferences_deviceWiFiAPPrefs);
+                        showNotificationForInteractiveParameters(title, text, intent, PPApplication.PROFILE_ACTIVATION_WIFI_AP_PREFS_NOTIFICATION_ID);
+                    }
+                }
+            }
         //}
 
     }
