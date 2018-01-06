@@ -27,6 +27,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -471,7 +472,7 @@ public class PhoneProfilesService extends Service {
 
                         // FC in Note 4, 6.0.1 :-/
                         String manufacturer = PPApplication.getROMManufacturer();
-                        boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
+                        boolean isNote4 = (manufacturer != null) && (manufacturer.compareToIgnoreCase("samsung") == 0) &&
                                 /*(Build.MODEL.startsWith("SM-N910") ||  // Samsung Note 4
                                  Build.MODEL.startsWith("SM-G900")     // Samsung Galaxy S5
                                 ) &&*/
@@ -529,7 +530,7 @@ public class PhoneProfilesService extends Service {
             {
                 // FC in Note 4, 6.0.1 :-/
                 String manufacturer = PPApplication.getROMManufacturer();
-                boolean isNote4 = (manufacturer != null) && (manufacturer.compareTo("samsung") == 0) &&
+                boolean isNote4 = (manufacturer != null) && (manufacturer.compareToIgnoreCase("samsung") == 0) &&
                         /*(Build.MODEL.startsWith("SM-N910") ||  // Samsung Note 4
                          Build.MODEL.startsWith("SM-G900")     // Samsung Galaxy S5
                         ) &&*/
@@ -555,6 +556,13 @@ public class PhoneProfilesService extends Service {
 
             // workaround for LG G4, Android 6.0
             if (android.os.Build.VERSION.SDK_INT < 24)
+                contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
+
+            // workaround for MIUI
+            String manufacturer = PPApplication.getROMManufacturer();
+            boolean miui = (manufacturer != null) && (manufacturer.compareToIgnoreCase("xiaomi") == 0) &&
+                    (android.os.Build.VERSION.SDK_INT >= 24);
+            if (miui)
                 contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
 
             if (ApplicationPreferences.notificationTextColor(dataWrapper.context).equals("1")) {
