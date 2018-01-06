@@ -76,6 +76,7 @@ public class Profile {
     boolean _hideStatusBarIcon;
     int _lockDevice;
     String _deviceConnectToSSID;
+    int _deviceWiFiAPPrefs;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -132,6 +133,7 @@ public class Profile {
     static final String PREF_PROFILE_DEVICE_CONNECT_TO_SSID = "prf_pref_deviceConnectToSSID";
     // no preferences, bud checked from isProfilePreferenceAllowed
     static final String PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS = "prf_pref_deviceAdaptiveBrightness";
+    static final String PREF_PROFILE_DEVICE_WIFI_AP_PREFS = "prf_pref_deviceWiFiAPPrefs";
 
     static final int AFTERDURATIONDO_NOTHING = 0;
     static final int AFTERDURATIONDO_UNDOPROFILE = 1;
@@ -288,7 +290,8 @@ public class Profile {
                    int lockDevice,
                    String deviceConnectToSSID,
                    String durationNotificationSound,
-                   boolean durationNotificationVibrate)
+                   boolean durationNotificationVibrate,
+                   int deviceWiFiAPPrefs)
     {
         this._id = id;
         this._name = name;
@@ -342,6 +345,7 @@ public class Profile {
         this._hideStatusBarIcon = hideStatusBarIcon;
         this._lockDevice = lockDevice;
         this._deviceConnectToSSID = deviceConnectToSSID;
+        this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -398,7 +402,8 @@ public class Profile {
                    int lockDevice,
                    String deviceConnectToSSID,
                    String durationNotificationSound,
-                   boolean durationNotificationVibrate)
+                   boolean durationNotificationVibrate,
+                   int deviceWiFiAPPrefs)
     {
         this._name = name;
         this._icon = icon;
@@ -451,6 +456,7 @@ public class Profile {
         this._hideStatusBarIcon = hideStatusBarIcon;
         this._lockDevice = lockDevice;
         this._deviceConnectToSSID = deviceConnectToSSID;
+        this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -510,6 +516,7 @@ public class Profile {
         this._hideStatusBarIcon = profile._hideStatusBarIcon;
         this._lockDevice = profile._lockDevice;
         this._deviceConnectToSSID = profile._deviceConnectToSSID;
+        this._deviceWiFiAPPrefs = profile._deviceWiFiAPPrefs;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
@@ -1240,6 +1247,7 @@ public class Profile {
         profile._deviceWallpaperFor = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_WALLPAPER_FOR, "0"));
         profile._lockDevice = Integer.parseInt(preferences.getString(PREF_PROFILE_LOCK_DEVICE, "0"));
         profile._deviceConnectToSSID = preferences.getString(PREF_PROFILE_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
+        profile._deviceWiFiAPPrefs = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_WIFI_AP_PREFS, "0"));
 
         return profile;
     }
@@ -1302,7 +1310,8 @@ public class Profile {
                     profile._lockDevice,
                     profile._deviceConnectToSSID,
                     profile._durationNotificationSound,
-                    profile._durationNotificationVibrate);
+                    profile._durationNotificationVibrate,
+                    profile._deviceWiFiAPPrefs);
 
             boolean zenModeMapped = false;
             if (profile._volumeRingerMode == 99) {
@@ -1396,6 +1405,8 @@ public class Profile {
                 mappedProfile._lockDevice = defaultProfile._lockDevice;
             if ((profile._deviceConnectToSSID != null) && (profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_DEFAULTPROFILE)))
                 mappedProfile._deviceConnectToSSID = defaultProfile._deviceConnectToSSID;
+            if (profile._deviceWiFiAPPrefs == 99)
+                mappedProfile._deviceWiFiAPPrefs = defaultProfile._deviceWiFiAPPrefs;
 
             mappedProfile._iconBitmap = profile._iconBitmap;
             mappedProfile._preferencesIndicator = profile._preferencesIndicator;
@@ -1754,6 +1765,16 @@ public class Profile {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI))
                 // device has Wifi
                 featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            else
+                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+        }
+        else
+        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS))
+        {
+            if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI))
+            {
+                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            }
             else
                 PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
