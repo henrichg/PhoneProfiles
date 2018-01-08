@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:paddingLeft="16dip"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dip"
     android:paddingRight="16dip"
-	android:orientation="vertical">
+    android:orientation="vertical">
 
     <CheckBox
         android:id="@+id/volumePrefDialogNoChange"
@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volume_pref_dialog_default_profile_chb" />
-    
-	<TextView
+
+    <TextView
         android:id="@+id/volumePrefDialogValueText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,9 +28,11 @@
         android:textSize="32sp"
         tools:ignore="HardcodedText"/>
 
-	<SeekBar
-	    android:id="@+id/volumePrefDialogSeekbar"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" />
+    <SeekBar
+        android:id="@+id/volumePrefDialogSeekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:splitTrack="false"
+        tools:ignore="UnusedAttribute"/>
 
 </LinearLayout>

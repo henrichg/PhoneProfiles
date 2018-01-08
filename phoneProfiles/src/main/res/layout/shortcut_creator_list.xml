@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:padding="10dip"
         android:drawSelectorOnTop="true"
-	    android:clipToPadding="false"
-    	android:scrollbarStyle="outsideOverlay" >
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay" >
 
     </ListView>
 
