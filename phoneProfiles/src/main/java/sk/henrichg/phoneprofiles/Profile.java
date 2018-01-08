@@ -1425,8 +1425,8 @@ public class Profile {
 
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE))
         {
-            if (android.os.Build.VERSION.SDK_INT >= 17)
-            {
+            //if (android.os.Build.VERSION.SDK_INT >= 17)
+            //{
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
@@ -1437,9 +1437,9 @@ public class Profile {
                 }
                 else
                     PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
-            }
+            /*}
             else
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                featurePresented = PPApplication.PREFERENCE_ALLOWED;*/
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_WIFI))

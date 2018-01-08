@@ -557,7 +557,7 @@ public class PPApplication extends Application {
 
             // First known firmware with SELinux built-in was a 4.2 (17)
             // leak
-            if (android.os.Build.VERSION.SDK_INT >= 17) {
+            //if (android.os.Build.VERSION.SDK_INT >= 17) {
                 // Detect enforcing through sysfs, not always present
                 File f = new File("/sys/fs/selinux/enforce");
                 if (f.exists()) {
@@ -580,7 +580,7 @@ public class PPApplication extends Application {
                     enforcing = (android.os.Build.VERSION.SDK_INT >= 19);
                 }
                 */
-            }
+            //}
 
             isSELinuxEnforcing = enforcing;
             //isSELinuxEnforcingChecked = true;

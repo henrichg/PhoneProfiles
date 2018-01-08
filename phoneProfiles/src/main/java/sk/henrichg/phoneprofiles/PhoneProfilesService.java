@@ -201,7 +201,7 @@ public class PhoneProfilesService extends Service {
                     ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
                     ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
                     RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+                    //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
                         PPNotificationListenerService.setZenMode(appContext, audioManager);
                     InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext, audioManager);
                 }
@@ -254,10 +254,10 @@ public class PhoneProfilesService extends Service {
         removeProfileNotification(this);
 
         if (handlerThread != null) {
-            if (Build.VERSION.SDK_INT >= 18)
+            //if (Build.VERSION.SDK_INT >= 18)
                 handlerThread.quitSafely();
-            else
-                handlerThread.quit();
+            //else
+            //    handlerThread.quit();
             handlerThread = null;
         }
 

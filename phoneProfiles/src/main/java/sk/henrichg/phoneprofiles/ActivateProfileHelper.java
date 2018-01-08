@@ -313,15 +313,15 @@ public class ActivateProfileHelper {
         if (profile._deviceBluetooth != 0) {
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, context) == PPApplication.PREFERENCE_ALLOWED) {
                 BluetoothAdapter bluetoothAdapter;
-                if (android.os.Build.VERSION.SDK_INT < 18)
+                /*if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                else {
+                else {*/
                     BluetoothManager bluetoothManager = (BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE);
                     if (bluetoothManager != null)
                         bluetoothAdapter = bluetoothManager.getAdapter();
                     else
                         bluetoothAdapter = null;
-                }
+                //}
                 if (bluetoothAdapter != null) {
                     boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
                     boolean setBluetoothState = false;
@@ -358,15 +358,15 @@ public class ActivateProfileHelper {
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, context) == PPApplication.PREFERENCE_ALLOWED) {
                 boolean isEnabled = false;
                 boolean ok = true;
-                if (android.os.Build.VERSION.SDK_INT < 19)
+                /*if (android.os.Build.VERSION.SDK_INT < 19)
                     isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
-                else {
+                else {*/
                     LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                     if (locationManager != null)
                         isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
                     else
                         ok = false;
-                }
+                //}
                 if (ok) {
                     switch (profile._deviceGPS) {
                         case 1:
@@ -1280,10 +1280,10 @@ public class ActivateProfileHelper {
                     WindowManager wm = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
                     if (wm != null) {
                         Display display = wm.getDefaultDisplay();
-                        if (android.os.Build.VERSION.SDK_INT >= 17)
+                        //if (android.os.Build.VERSION.SDK_INT >= 17)
                             display.getRealMetrics(displayMetrics);
-                        else
-                            display.getMetrics(displayMetrics);
+                        /*else
+                            display.getMetrics(displayMetrics);*/
                         int height = displayMetrics.heightPixels;
                         int width = displayMetrics.widthPixels;
                         if (appContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -2125,19 +2125,19 @@ public class ActivateProfileHelper {
     @SuppressLint("NewApi")
     private boolean isAirplaneMode(Context context)
     {
-        if (android.os.Build.VERSION.SDK_INT >= 17)
+        //if (android.os.Build.VERSION.SDK_INT >= 17)
             return Settings.Global.getInt(context.getContentResolver(), Global.AIRPLANE_MODE_ON, 0) != 0;
-        else
+        /*else
             //noinspection deprecation
-            return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+            return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) != 0;*/
     }
 
     private void setAirplaneMode(Context context, boolean mode)
     {
-        if (android.os.Build.VERSION.SDK_INT >= 17)
+        //if (android.os.Build.VERSION.SDK_INT >= 17)
             setAirplaneMode_SDK17(/*context, */mode);
-        else
-            setAirplaneMode_SDK8(context, mode);
+        /*else
+            setAirplaneMode_SDK8(context, mode);*/
     }
 
     /*
@@ -2716,15 +2716,15 @@ public class ActivateProfileHelper {
     {
         boolean isEnabled = false;
         boolean ok = true;
-        if (android.os.Build.VERSION.SDK_INT < 19)
+        /*if (android.os.Build.VERSION.SDK_INT < 19)
             isEnabled = Settings.Secure.isLocationProviderEnabled(context.getContentResolver(), LocationManager.GPS_PROVIDER);
-        else {
+        else {*/
             LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             if (locationManager != null)
                 isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             else
                 ok = false;
-        }
+        //}
         if (!ok)
             return;
 
@@ -2978,6 +2978,7 @@ public class ActivateProfileHelper {
         //}
     }
 
+    /*
     private void setAirplaneMode_SDK8(Context context, boolean mode)
     {
         Settings.System.putInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, mode ? 1 : 0);
@@ -2985,6 +2986,7 @@ public class ActivateProfileHelper {
         intent.putExtra("state", mode);
         context.sendBroadcast(intent);
     }
+    */
 
     private void setPowerSaveMode(final Profile profile) {
         if (profile._devicePowerSaveMode != 0) {
