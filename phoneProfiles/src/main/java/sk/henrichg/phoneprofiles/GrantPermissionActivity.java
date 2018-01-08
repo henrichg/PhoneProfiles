@@ -132,6 +132,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
         boolean showRequestReadPhoneState = false;
         boolean showRequestProcessOutgoingCalls = false;
         boolean showRequestWriteExternalStorage = false;
+        boolean showRequestAccessCoarseLocation = false;
+        boolean showRequestAccessFineLocation = false;
 
         //Log.e("GrantPermissionActivity", "onStart - permissions.size="+permissions.size());
 
@@ -150,6 +152,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 showRequestProcessOutgoingCalls = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.PROCESS_OUTGOING_CALLS);
             if (permissionType.permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 showRequestWriteExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permissionType.permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION))
+                showRequestAccessCoarseLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+            if (permissionType.permission.equals(Manifest.permission.ACCESS_FINE_LOCATION))
+                showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
         }
 
         if (showRequestWriteSettings ||
@@ -158,6 +164,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 showRequestProcessOutgoingCalls ||
                 showRequestWriteExternalStorage ||
                 showRequestAccessNotificationPolicy ||
+                showRequestAccessCoarseLocation ||
+                showRequestAccessFineLocation ||
                 showRequestDrawOverlays) {
 
             if (onlyNotification) {
@@ -204,6 +212,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 if (showRequestReadPhoneState || showRequestProcessOutgoingCalls) {
                     //Log.e("GrantPermissionActivity", "onStart - showRequestReadPhoneState");
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
+                    showRequestString = showRequestString + "<br>";
+                }
+                if (showRequestAccessCoarseLocation || showRequestAccessFineLocation) {
+                    //Log.e("GrantPermissionActivity", "onStart - showRequestReadCalendar");
+                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_location) + "</b>";
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestAccessNotificationPolicy) {
