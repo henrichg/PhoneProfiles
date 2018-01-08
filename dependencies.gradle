@@ -3,8 +3,6 @@
 // 2500 = show target helps for shared profile toolbar item
 
 ext.ppVersions = [
-        minSdk: 16,
-        targetSdk: 25,
         compileSdk: 27,
         buildTools: '27.0.3',
         publishVersion: '4.5.6.2',
