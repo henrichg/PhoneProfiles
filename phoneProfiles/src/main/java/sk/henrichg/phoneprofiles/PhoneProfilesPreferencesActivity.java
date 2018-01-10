@@ -2,11 +2,14 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -80,6 +83,8 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         showEditorHeader = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
 
+        Permissions.disablePermissionsChanged(this);
+
         fragment = createFragment(false);
 
         setPreferenceFragment(fragment);
@@ -152,6 +157,10 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
         Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
         Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));
+
+        if (Permissions.getPermissionsChanged(getApplicationContext())) {
+            invalidateEditor = true;
+        }
 
         if (!activeLanguage.equals(ApplicationPreferences.applicationLanguage(getApplicationContext())))
         {
