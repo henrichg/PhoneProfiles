@@ -76,7 +76,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
         //noinspection StatementWithEmptyBody
         if (newsLatest) {
             // empty this, for switch off news
-            news = true;
         }
         else {
             // empty this, for switch off news

@@ -53,7 +53,7 @@ class ImportantInfoNotification {
         boolean afterInstall = savedVersionCode == 0;
 
         if (newsLatest) {
-            news = true;
+            news = false;
         }
 
         if (news1634) {
