@@ -815,7 +815,10 @@ public class DataWrapper {
 
         if (actProfile && (profile != null))
         {
-            activateProfileWithAlert(profile, startupSource, /*interactive,*/ activity);
+            if (startupSource == PPApplication.STARTUP_SOURCE_BOOT)
+                _activateProfile(profile, PPApplication.STARTUP_SOURCE_BOOT, /*boolean _interactive,*/ null);
+            else
+                activateProfileWithAlert(profile, startupSource, /*interactive,*/ activity);
         }
         else
         {
