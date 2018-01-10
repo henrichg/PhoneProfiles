@@ -254,7 +254,7 @@ public class PPApplication extends Application {
             case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION:
                 return context.getString(R.string.preference_not_allowed_reason_not_supported_by_application) + " (" + notAllowedReasonDetail + ")";
             case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_ANDROID_VERSION:
-                return context.getString(R.string.preference_not_allowed_reason_not_supported_android_version);
+                return context.getString(R.string.preference_not_allowed_reason_not_supported_android_version) + " (" + notAllowedReasonDetail + ")";
             default: return context.getString(R.string.empty_string);
         }
     }
