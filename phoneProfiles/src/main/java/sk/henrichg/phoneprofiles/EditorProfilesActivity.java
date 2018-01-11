@@ -62,7 +62,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private AsyncTask importAsyncTask = null;
     private AsyncTask exportAsyncTask = null;
-    static boolean doImport = true;
+    static boolean doImport = false;
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
