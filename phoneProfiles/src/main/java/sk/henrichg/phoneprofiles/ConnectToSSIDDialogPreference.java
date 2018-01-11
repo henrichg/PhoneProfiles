@@ -58,6 +58,7 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
 
     @Override
     protected void showDialog(Bundle state) {
+        getValueCTSDP();
 
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())

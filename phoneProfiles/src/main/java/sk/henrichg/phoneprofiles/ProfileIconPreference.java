@@ -85,6 +85,8 @@ public class ProfileIconPreference extends DialogPreference {
 
     @Override
     protected void showDialog(Bundle state) {
+        getValuePIDP();
+
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(getContext())
                 .title(getDialogTitle())
                 .icon(getDialogIcon())
