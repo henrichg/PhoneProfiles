@@ -58,6 +58,8 @@ class ApplicationPreferences {
     //private static final String PREF_APPLICATION_SAMSUNG_EDGE_GRID_LAYOUT= "applicationSamsungEdgeGridLayout";
     private static final String PREF_APPLICATION_WIDGET_LIST_ROUNDED_CORNERS = "applicationWidgetListRoundedCorners";
     private static final String PREF_APPLICATION_WIDGET_ICON_ROUNDED_CORNERS = "applicationWidgetIconRoundedCorners";
+    static final String PREF_APPLICATION_WIDGET_LIST_BACKGROUND_TYPE = "applicationWidgetListBackgroundType";
+    static final String PREF_APPLICATION_WIDGET_LIST_BACKGROUND_COLOR = "applicationWidgetListBackgroundColor";
 
     static SharedPreferences getSharedPreferences(Context context) {
         if (preferences == null)
@@ -274,6 +276,14 @@ class ApplicationPreferences {
 
     static boolean applicationWidgetIconRoundedCorners(Context context) {
         return getSharedPreferences(context).getBoolean(PREF_APPLICATION_WIDGET_ICON_ROUNDED_CORNERS, true);
+    }
+
+    static boolean applicationWidgetListBackgroundType(Context context) {
+        return getSharedPreferences(context).getBoolean(PREF_APPLICATION_WIDGET_LIST_BACKGROUND_TYPE, false);
+    }
+
+    static String applicationWidgetListBackgroundColor(Context context) {
+        return getSharedPreferences(context).getString(PREF_APPLICATION_WIDGET_LIST_BACKGROUND_COLOR, "-1"); // white color
     }
 
 }
