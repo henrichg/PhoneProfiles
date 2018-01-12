@@ -52,26 +52,10 @@
             android:fontFamily="sans-serif-condensed"
             android:maxLines="1"/>
 
-        <!--
-        <ImageView
-            android:id="@+id/widget_one_row_header_profile_activated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/empty_string"
-            android:maxHeight="20dp"
-            android:maxWidth="20dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_profile_activated" />
-            -->
-
         <ImageView
             android:id="@+id/widget_one_row_header_profile_pref_indicator"
             android:layout_width="match_parent"
-            android:layout_height="14dp"
+            android:layout_height="15dp"
             android:layout_below="@id/widget_one_row_header_profile_name"
             android:layout_toEndOf="@id/widget_one_row_header_profile_icon"
             android:adjustViewBounds="true"
