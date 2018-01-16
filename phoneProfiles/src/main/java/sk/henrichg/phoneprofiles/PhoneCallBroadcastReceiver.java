@@ -68,8 +68,8 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private void doCall(final Context context, final int phoneEvent, final boolean incoming/*, final String number*/) {
         final Context appContext = context.getApplicationContext();
-        PhoneProfilesService.startHandlerThread();
-        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {

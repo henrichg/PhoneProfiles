@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.util.Pair;
@@ -106,6 +107,8 @@ public class PPApplication extends Application {
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
 
+    public static HandlerThread handlerThread = null;
+
     public static Handler brightnessHandler;
     public static Handler toastHandler;
     public static Handler screenTimeoutHandler;
@@ -164,6 +167,8 @@ public class PPApplication extends Application {
 
         PACKAGE_NAME = getPackageName();
 
+        startHandlerThread();
+
         // initialization
         //loadPreferences(this);
 
@@ -208,6 +213,13 @@ public class PPApplication extends Application {
             return true;
         }
         return false;
+    }
+
+    static void startHandlerThread() {
+        if (handlerThread == null) {
+            handlerThread = new HandlerThread("PPHandlerThread");
+            handlerThread.start();
+        }
     }
 
     //--------------------------------------------------------------

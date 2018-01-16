@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -42,8 +41,6 @@ public class PhoneProfilesService extends Service {
 
     public static PhoneProfilesService instance = null;
     private static boolean serviceRunning = false;
-
-    public static HandlerThread handlerThread = null;
 
     private static KeyguardManager keyguardManager = null;
     @SuppressWarnings("deprecation")
@@ -92,8 +89,6 @@ public class PhoneProfilesService extends Service {
         } catch (Exception e) {
             //e.printStackTrace();
         }
-
-        startHandlerThread();
 
         keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
         if (keyguardManager != null)
@@ -149,8 +144,8 @@ public class PhoneProfilesService extends Service {
 
         // start job for first start
         //FirstStartJob.start(appContext);
-        PhoneProfilesService.startHandlerThread();
-        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -253,25 +248,10 @@ public class PhoneProfilesService extends Service {
 
         removeProfileNotification(this);
 
-        if (handlerThread != null) {
-            //if (Build.VERSION.SDK_INT >= 18)
-                handlerThread.quitSafely();
-            //else
-            //    handlerThread.quit();
-            handlerThread = null;
-        }
-
         instance = null;
         serviceRunning = false;
 
         super.onDestroy();
-    }
-
-    static void startHandlerThread() {
-        if (handlerThread == null) {
-            handlerThread = new HandlerThread("PPHandlerThread");
-            handlerThread.start();
-        }
     }
 
     @Override
@@ -285,8 +265,8 @@ public class PhoneProfilesService extends Service {
 
         if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
             final Context _this = this;
-            PhoneProfilesService.startHandlerThread();
-            final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+            PPApplication.startHandlerThread();
+            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -768,8 +748,8 @@ public class PhoneProfilesService extends Service {
                         notificationIsPlayed = false;
                         notificationMediaPlayer = null;
 
-                        PhoneProfilesService.startHandlerThread();
-                        final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+                        PPApplication.startHandlerThread();
+                        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -784,8 +764,8 @@ public class PhoneProfilesService extends Service {
             } catch (SecurityException e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
                 stopPlayNotificationSound();
-                PhoneProfilesService.startHandlerThread();
-                final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+                PPApplication.startHandlerThread();
+                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -796,8 +776,8 @@ public class PhoneProfilesService extends Service {
             } catch (Exception e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
                 stopPlayNotificationSound();
-                PhoneProfilesService.startHandlerThread();
-                final Handler handler = new Handler(PhoneProfilesService.handlerThread.getLooper());
+                PPApplication.startHandlerThread();
+                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
