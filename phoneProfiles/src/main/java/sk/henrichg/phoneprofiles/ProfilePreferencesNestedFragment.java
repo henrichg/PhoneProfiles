@@ -734,7 +734,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 key.equals(Profile.PREF_PROFILE_DEVICE_KEYGUARD) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_AUTOROTATE) ||
-                key.equals(Profile.PREF_PROFILE_NOTIFICATION_LED)) {
+                key.equals(Profile.PREF_PROFILE_NOTIFICATION_LED) ||
+                key.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS)) {
             String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, false);
             if (!title.isEmpty()) {
                 _bold = true;
@@ -759,6 +760,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_NOTIFICATION_LED, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, false);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1093,6 +1100,28 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     if (canChange == PPApplication.PREFERENCE_NOT_ALLOWED)
                         listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
                                 ": "+ PPApplication.getNotAllowedPreferenceReasonString(getActivity()));
+                    setTitleStyle(listPreference, false, false, false);
+                    setCategorySummary(listPreference, false);
+                } else {
+                    String sValue = value.toString();
+                    int index = listPreference.findIndexOfValue(sValue);
+                    CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
+                    listPreference.setSummary(summary);
+                    setTitleStyle(listPreference, index > 0, false, false);
+                    setCategorySummary(listPreference, index > 0);
+                }
+            }
+        }
+        if (key.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS))
+        {
+            ListPreference listPreference = (ListPreference) prefMng.findPreference(key);
+            if (listPreference != null) {
+                int canChange = Profile.isProfilePreferenceAllowed(key, context);
+                if (canChange != PPApplication.PREFERENCE_ALLOWED) {
+                    listPreference.setEnabled(false);
+                    if (canChange == PPApplication.PREFERENCE_NOT_ALLOWED)
+                        listPreference.setSummary(getResources().getString(R.string.profile_preferences_device_not_allowed)+
+                                ": "+ PPApplication.getNotAllowedPreferenceReasonString(context));
                     setTitleStyle(listPreference, false, false, false);
                     setCategorySummary(listPreference, false);
                 } else {

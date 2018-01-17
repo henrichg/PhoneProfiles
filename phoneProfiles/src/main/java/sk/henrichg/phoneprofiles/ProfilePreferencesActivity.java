@@ -315,7 +315,8 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                     origProfile._deviceConnectToSSID,
                     origProfile._durationNotificationSound,
                     origProfile._durationNotificationVibrate,
-                    origProfile._deviceWiFiAPPrefs);
+                    origProfile._deviceWiFiAPPrefs,
+                    origProfile._headsUpNotifications);
             showSaveMenu = true;
         }
         else
@@ -404,6 +405,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             editor.putString(Profile.PREF_PROFILE_LOCK_DEVICE, Integer.toString(profile._lockDevice));
             editor.putString(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
             editor.putString(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, Integer.toString(profile._deviceWiFiAPPrefs));
+            editor.putString(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, Integer.toString(profile._headsUpNotifications));
             editor.apply();
         }
     }
@@ -495,6 +497,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
         profile._lockDevice = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_LOCK_DEVICE, ""));
         profile._deviceConnectToSSID = preferences.getString(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, "");
         profile._deviceWiFiAPPrefs = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, ""));
+        profile._headsUpNotifications = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, ""));
 
         if (startupSource != PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
         {

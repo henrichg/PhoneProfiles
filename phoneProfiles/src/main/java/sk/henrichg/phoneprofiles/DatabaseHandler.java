@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1350;
+    private static final int DATABASE_VERSION = 1360;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -101,6 +101,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LOCK_DEVICE = "lockDevice";
     private static final String KEY_DEVICE_CONNECT_TO_SSID = "deviceConnectToSSID";
     private static final String KEY_DEVICE_WIFI_AP_PREFS = "deviceWifiAPPrefs";
+    private static final String KEY_HEADS_UP_NOTIFICATIONS = "headsUpNotifications";
 
     // Shortcuts Columns names
     private static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
@@ -223,7 +224,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_DEVICE_CONNECT_TO_SSID + " TEXT,"
                 + KEY_DURATION_NOTIFICATION_SOUND + " TEXT,"
                 + KEY_DURATION_NOTIFICATION_VIBRATE + " INTEGER,"
-                + KEY_DEVICE_WIFI_AP_PREFS + " INTEGER"
+                + KEY_DEVICE_WIFI_AP_PREFS + " INTEGER,"
+                + KEY_HEADS_UP_NOTIFICATIONS + " INTEGER"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -653,11 +655,18 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION_NOTIFICATION_VIBRATE + "=0");
         }
 
-        if (oldVersion < 1350)
+        if (oldVersion < 1360)
         {
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WIFI_AP_PREFS + " INTEGER");
 
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WIFI_AP_PREFS + "=0");
+        }
+
+        if (oldVersion < 2030)
+        {
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_HEADS_UP_NOTIFICATIONS + " INTEGER");
+
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_HEADS_UP_NOTIFICATIONS + "=0");
         }
 
     }
@@ -750,6 +759,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_LOCK_DEVICE, profile._lockDevice);
                 values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
                 values.put(KEY_DEVICE_WIFI_AP_PREFS, profile._deviceWiFiAPPrefs);
+                values.put(KEY_HEADS_UP_NOTIFICATIONS, profile._headsUpNotifications);
 
                 // Inserting Row
                 profile._id = db.insert(TABLE_PROFILES, null, values);
@@ -829,7 +839,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_HIDE_STATUS_BAR_ICON,
                                 KEY_LOCK_DEVICE,
                                 KEY_DEVICE_CONNECT_TO_SSID,
-                                KEY_DEVICE_WIFI_AP_PREFS
+                                KEY_DEVICE_WIFI_AP_PREFS,
+                                KEY_HEADS_UP_NOTIFICATIONS
                         },
                         KEY_ID + "=?",
                         new String[]{String.valueOf(profile_id)}, null, null, null, null);
@@ -890,7 +901,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID)),
                                 cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1,
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)))
                         );
                     }
                     cursor.close();
@@ -969,7 +981,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_HIDE_STATUS_BAR_ICON + "," +
                         KEY_LOCK_DEVICE + "," +
                         KEY_DEVICE_CONNECT_TO_SSID + "," +
-                        KEY_DEVICE_WIFI_AP_PREFS +
+                        KEY_DEVICE_WIFI_AP_PREFS + "," +
+                        KEY_HEADS_UP_NOTIFICATIONS +
                         " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
                 //SQLiteDatabase db = this.getReadableDatabase();
@@ -1034,6 +1047,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         profile._lockDevice = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_LOCK_DEVICE)));
                         profile._deviceConnectToSSID = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID));
                         profile._deviceWiFiAPPrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS)));
+                        profile._headsUpNotifications = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)));
                         // Adding contact to list
                         profileList.add(profile);
                     } while (cursor.moveToNext());
@@ -1116,6 +1130,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_LOCK_DEVICE, profile._lockDevice);
                 values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
                 values.put(KEY_DEVICE_WIFI_AP_PREFS, profile._deviceWiFiAPPrefs);
+                values.put(KEY_HEADS_UP_NOTIFICATIONS, profile._headsUpNotifications);
 
                 // updating row
                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -1400,7 +1415,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_HIDE_STATUS_BAR_ICON,
                                 KEY_LOCK_DEVICE,
                                 KEY_DEVICE_CONNECT_TO_SSID,
-                                KEY_DEVICE_WIFI_AP_PREFS
+                                KEY_DEVICE_WIFI_AP_PREFS,
+                                KEY_HEADS_UP_NOTIFICATIONS
                         },
                         KEY_CHECKED + "=?",
                         new String[]{"1"}, null, null, null, null);
@@ -1463,7 +1479,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID)),
                                 cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1,
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)))
                         );
                     } else
                         profile = null;
@@ -1628,7 +1645,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_NOTIFICATION_LED + "," +
                         KEY_VIBRATE_WHEN_RINGING + "," +
                         KEY_DEVICE_CONNECT_TO_SSID + "," +
-                        KEY_DEVICE_WIFI_AP_PREFS +
+                        KEY_DEVICE_WIFI_AP_PREFS + "," +
+                        KEY_HEADS_UP_NOTIFICATIONS +
                         " FROM " + TABLE_PROFILES;
 
                 //SQLiteDatabase db = this.getWritableDatabase();
@@ -1795,6 +1813,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                     (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, context) == PPApplication.PREFERENCE_NOT_ALLOWED)) {
                                 values.clear();
                                 values.put(KEY_DEVICE_WIFI_AP_PREFS, 0);
+                                db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                                        new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
+                            }
+
+                            if ((Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS))) != 0) &&
+                                    (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, context)
+                                            == PPApplication.PREFERENCE_NOT_ALLOWED)) {
+                                values.clear();
+                                values.put(KEY_HEADS_UP_NOTIFICATIONS, 0);
                                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
                                         new String[]{String.valueOf(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))))});
                             }
@@ -2322,6 +2349,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                         if (exportedDBObj.getVersion() < 1350) {
                                             values.put(KEY_DEVICE_WIFI_AP_PREFS, 0);
+                                        }
+
+                                        if (exportedDBObj.getVersion() < 1360) {
+                                            values.put(KEY_HEADS_UP_NOTIFICATIONS, 0);
                                         }
 
                                         // Inserting Row do db z SQLiteOpenHelper

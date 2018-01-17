@@ -1144,4 +1144,5 @@
     <string name="phone_profiles_pref_applicationWidgetColorB">Background color</string>
     <string name="phone_profiles_pref_applicationWidgetIconBackgroundType">Color background type (widget)</string>
     <string name="phone_profiles_pref_applicationWidgetIconColorB">Background color (widget)</string>
+    <string name="profile_preferences_headsUpNotifications">(G1)(R) Pop-up notifications</string>
 </resources>

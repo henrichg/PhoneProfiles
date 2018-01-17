@@ -78,6 +78,7 @@ public class Profile {
     int _lockDevice;
     String _deviceConnectToSSID;
     int _deviceWiFiAPPrefs;
+    int _headsUpNotifications;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -132,9 +133,9 @@ public class Profile {
     static final String PREF_PROFILE_HIDE_STATUS_BAR_ICON = "prf_pref_hideStatusBarIcon";
     static final String PREF_PROFILE_LOCK_DEVICE = "prf_pref_lockDevice";
     static final String PREF_PROFILE_DEVICE_CONNECT_TO_SSID = "prf_pref_deviceConnectToSSID";
-    // no preferences, bud checked from isProfilePreferenceAllowed
     static final String PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS = "prf_pref_deviceAdaptiveBrightness";
     static final String PREF_PROFILE_DEVICE_WIFI_AP_PREFS = "prf_pref_deviceWiFiAPPrefs";
+    static final String PREF_PROFILE_HEADS_UP_NOTIFICATIONS = "prf_pref_headsUpNotifications";
 
     static final int AFTERDURATIONDO_NOTHING = 0;
     static final int AFTERDURATIONDO_UNDOPROFILE = 1;
@@ -292,7 +293,8 @@ public class Profile {
                    String deviceConnectToSSID,
                    String durationNotificationSound,
                    boolean durationNotificationVibrate,
-                   int deviceWiFiAPPrefs)
+                   int deviceWiFiAPPrefs,
+                   int headsUpNotifications)
     {
         this._id = id;
         this._name = name;
@@ -347,6 +349,7 @@ public class Profile {
         this._lockDevice = lockDevice;
         this._deviceConnectToSSID = deviceConnectToSSID;
         this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
+        this._headsUpNotifications = headsUpNotifications;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -404,7 +407,8 @@ public class Profile {
                    String deviceConnectToSSID,
                    String durationNotificationSound,
                    boolean durationNotificationVibrate,
-                   int deviceWiFiAPPrefs)
+                   int deviceWiFiAPPrefs,
+                   int headsUpNotifications)
     {
         this._name = name;
         this._icon = icon;
@@ -458,6 +462,7 @@ public class Profile {
         this._lockDevice = lockDevice;
         this._deviceConnectToSSID = deviceConnectToSSID;
         this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
+        this._headsUpNotifications = headsUpNotifications;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -518,6 +523,7 @@ public class Profile {
         this._lockDevice = profile._lockDevice;
         this._deviceConnectToSSID = profile._deviceConnectToSSID;
         this._deviceWiFiAPPrefs = profile._deviceWiFiAPPrefs;
+        this._headsUpNotifications = profile._headsUpNotifications;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
@@ -1249,6 +1255,7 @@ public class Profile {
         profile._lockDevice = Integer.parseInt(preferences.getString(PREF_PROFILE_LOCK_DEVICE, "0"));
         profile._deviceConnectToSSID = preferences.getString(PREF_PROFILE_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
         profile._deviceWiFiAPPrefs = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_WIFI_AP_PREFS, "0"));
+        profile._headsUpNotifications = Integer.parseInt(preferences.getString(PREF_PROFILE_HEADS_UP_NOTIFICATIONS, "0"));
 
         return profile;
     }
@@ -1312,7 +1319,8 @@ public class Profile {
                     profile._deviceConnectToSSID,
                     profile._durationNotificationSound,
                     profile._durationNotificationVibrate,
-                    profile._deviceWiFiAPPrefs);
+                    profile._deviceWiFiAPPrefs,
+                    profile._headsUpNotifications);
 
             boolean zenModeMapped = false;
             if (profile._volumeRingerMode == 99) {
@@ -1408,6 +1416,8 @@ public class Profile {
                 mappedProfile._deviceConnectToSSID = defaultProfile._deviceConnectToSSID;
             if (profile._deviceWiFiAPPrefs == 99)
                 mappedProfile._deviceWiFiAPPrefs = defaultProfile._deviceWiFiAPPrefs;
+            if (profile._headsUpNotifications == 99)
+                mappedProfile._headsUpNotifications = defaultProfile._headsUpNotifications;
 
             mappedProfile._iconBitmap = profile._iconBitmap;
             mappedProfile._preferencesIndicator = profile._preferencesIndicator;
@@ -1781,6 +1791,33 @@ public class Profile {
             }
             else
                 PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+        }
+        else
+        if (preferenceKey.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS))
+        {
+            int value = Settings.Global.getInt(context.getContentResolver(), "heads_up_notifications_enabled", -10);
+            if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 21)) {
+                if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                }
+                else
+                if (PPApplication.isRooted()) {
+                    // device is rooted
+                    if (PPApplication.settingsBinaryExists())
+                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    else
+                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                }
+                else
+                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+            }
+            else
+            if (value != -10)
+                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            else {
+                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+            }
         }
         else
             featurePresented = PPApplication.PREFERENCE_ALLOWED;
