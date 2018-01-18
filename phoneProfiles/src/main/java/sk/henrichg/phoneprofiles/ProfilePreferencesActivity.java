@@ -504,14 +504,14 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             if ((new_profile_mode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
                 (new_profile_mode == EditorProfileListFragment.EDIT_MODE_DUPLICATE))
             {
-                dataWrapper.getDatabaseHandler().addProfile(profile);
+                DatabaseHandler.getInstance(getApplicationContext()).addProfile(profile);
                 profile_id = profile._id;
             }
             else
             if (profile_id > 0)
             {
                 // update profile
-                dataWrapper.getDatabaseHandler().updateProfile(profile);
+                DatabaseHandler.getInstance(getApplicationContext()).updateProfile(profile);
             }
         }
     }

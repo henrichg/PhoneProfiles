@@ -502,7 +502,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 if (profile_id > 0)
                 {
                     //noinspection ConstantConditions
-                    Profile profile = getDataWrapper().getDatabaseHandler().getProfile(profile_id);
+                    Profile profile = DatabaseHandler.getInstance(getApplicationContext()).getProfile(profile_id);
                     // generate bitmaps
                     profile.generateIconBitmap(getBaseContext(), false, 0);
                     profile.generatePreferencesIndicator(getBaseContext(), false, 0);
@@ -674,12 +674,12 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    int ret = this.dataWrapper.getDatabaseHandler().importDB(_applicationDataPath);
+                    int ret = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
                     if (ret == 1) {
                         // check for hardware capability and update data
-                        this.dataWrapper.getDatabaseHandler().disableNotAllowedPreferences(activity.getApplicationContext());
+                        DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences(activity.getApplicationContext());
                         this.dataWrapper.clearProfileList();
-                        this.dataWrapper.getDatabaseHandler().deactivateProfile();
+                        DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
                     }
 
                     if (ret == 1) {
@@ -912,7 +912,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    int ret = dataWrapper.getDatabaseHandler().exportDB();
+                    int ret = DatabaseHandler.getInstance(this.dataWrapper.context).exportDB();
                     if (ret == 1) {
                         File sd = Environment.getExternalStorageDirectory();
                         File exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);

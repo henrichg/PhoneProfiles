@@ -40,7 +40,6 @@ public class EditorProfileListFragment extends Fragment
 
     public DataWrapper dataWrapper;
     public ActivateProfileHelper activateProfileHelper;
-    public DatabaseHandler databaseHandler;
 
     private List<Profile> profileList;
 
@@ -127,8 +126,6 @@ public class EditorProfileListFragment extends Fragment
         setRetainInstance(true);
 
         dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
-
-        databaseHandler = dataWrapper.getDatabaseHandler();
 
         activateProfileHelper = dataWrapper.getActivateProfileHelper();
         activateProfileHelper.initialize(getActivity().getApplicationContext());
@@ -333,7 +330,6 @@ public class EditorProfileListFragment extends Fragment
 
         activateProfileHelper = null;
         profileList = null;
-        databaseHandler = null;
 
         if (dataWrapper != null)
             dataWrapper.invalidateDataWrapper();
@@ -407,7 +403,7 @@ public class EditorProfileListFragment extends Fragment
         }
 
         profileListAdapter.deleteItemNoNotify(profile);
-        databaseHandler.deleteProfile(profile);
+        DatabaseHandler.getInstance(dataWrapper.context).deleteProfile(profile);
 
         listView.getRecycledViewPool().clear();
         profileListAdapter.notifyDataSetChanged();
@@ -493,7 +489,7 @@ public class EditorProfileListFragment extends Fragment
                     Profile.setActivatedProfileForDuration(getActivity().getApplicationContext(), 0);
 
                     profileListAdapter.clearNoNotify();
-                    databaseHandler.deleteAllProfiles();
+                    DatabaseHandler.getInstance(dataWrapper.context).deleteAllProfiles();
 
                     listView.getRecycledViewPool().clear();
                     profileListAdapter.notifyDataSetChanged();
@@ -643,7 +639,7 @@ public class EditorProfileListFragment extends Fragment
             }
         }
 
-        Profile profileFromDB = dataWrapper.getDatabaseHandler().getActivatedProfile();
+        Profile profileFromDB = DatabaseHandler.getInstance(dataWrapper.context).getActivatedProfile();
         if (profileFromDB != null)
         {
             Profile profileFromDataWrapper = dataWrapper.getProfileById(profileFromDB._id);
