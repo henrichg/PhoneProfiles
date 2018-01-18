@@ -20,7 +20,6 @@ public class DataWrapper {
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
 
-    private DatabaseHandler databaseHandler = null;
     private ActivateProfileHelper activateProfileHelper = null;
     private List<Profile> profileList = null;
 
@@ -32,7 +31,6 @@ public class DataWrapper {
 
         setParameters(fgui, mono, monoVal);
 
-        databaseHandler = getDatabaseHandler();
         //activateProfileHelper = getActivateProfileHelper();
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.constructor");
@@ -46,15 +44,6 @@ public class DataWrapper {
         forGUI = fgui;
         monochrome = mono;
         monochromeValue = monoVal;
-    }
-
-    public DatabaseHandler getDatabaseHandler()
-    {
-        if (databaseHandler == null)
-            // parameter must by application context
-            databaseHandler = DatabaseHandler.getInstance(context);
-
-        return databaseHandler;
     }
 
     public ActivateProfileHelper getActivateProfileHelper()
@@ -80,7 +69,7 @@ public class DataWrapper {
     }
 
     List<Profile> getNewProfileList() {
-        List<Profile> newProfileList = getDatabaseHandler().getAllProfiles();
+        List<Profile> newProfileList = DatabaseHandler.getInstance(context).getAllProfiles();
 
         if (forGUI)
         {
@@ -320,7 +309,7 @@ public class DataWrapper {
 
         if (profile != null) {
             if (saveToDB)
-                getDatabaseHandler().addProfile(profile);
+                DatabaseHandler.getInstance(context).addProfile(profile);
         }
 
         return profile;
@@ -329,7 +318,7 @@ public class DataWrapper {
     void getPredefinedProfileList()
     {
         clearProfileList();
-        getDatabaseHandler().deleteAllProfiles();
+        DatabaseHandler.getInstance(context).deleteAllProfiles();
 
         for (int index = 0; index < 6; index++)
             getPredefinedProfile(index, true);
@@ -353,7 +342,7 @@ public class DataWrapper {
 
     private Profile getActivatedProfileFromDB()
     {
-        Profile profile = getDatabaseHandler().getActivatedProfile();
+        Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
         if (forGUI && (profile != null))
         {
             profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -387,7 +376,7 @@ public class DataWrapper {
     {
         if (profileList == null)
         {
-            Profile profile = getDatabaseHandler().getFirstProfile();
+            Profile profile = DatabaseHandler.getInstance(context).getFirstProfile();
             if (forGUI && (profile != null))
             {
                 profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -414,7 +403,7 @@ public class DataWrapper {
             return -1;
 
         if (profileList == null)
-            return getDatabaseHandler().getProfilePosition(profile);
+            return DatabaseHandler.getInstance(context).getProfilePosition(profile);
         else
         {
             for (int i = 0; i < profileList.size(); i++)
@@ -449,7 +438,7 @@ public class DataWrapper {
     {
         if (profileList == null)
         {
-            Profile profile = getDatabaseHandler().getProfile(id);
+            Profile profile = DatabaseHandler.getInstance(context).getProfile(id);
             if (forGUI && (profile != null))
             {
                 profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -520,7 +509,6 @@ public class DataWrapper {
     public void invalidateDataWrapper()
     {
         clearProfileList();
-        databaseHandler = null;
         if (activateProfileHelper != null)
             activateProfileHelper.deinitialize();
         activateProfileHelper = null;
@@ -530,7 +518,7 @@ public class DataWrapper {
         if (profile != null) {
             boolean isIconResourceID = profile.getIsIconResourceID();
             String iconIdentifier = profile.getIconIdentifier();
-            getDatabaseHandler().getProfileIcon(profile);
+            DatabaseHandler.getInstance(context).getProfileIcon(profile);
             if (isIconResourceID && iconIdentifier.equals("ic_profile_default") && (!profile.getIsIconResourceID())) {
                 profile.generateIconBitmap(context, monochrome, monochromeValue);
                 profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
@@ -550,7 +538,7 @@ public class DataWrapper {
 
         Profile activatedProfile = getActivatedProfile();
 
-        databaseHandler.activateProfile(profile);
+        DatabaseHandler.getInstance(context).activateProfile(profile);
         setProfileActive(profile);
 
         activateProfileHelper.execute(profile/*, _interactive*/);
@@ -772,7 +760,7 @@ public class DataWrapper {
             {
                 if (profile != null)
                 {
-                    getDatabaseHandler().deactivateProfile();
+                    DatabaseHandler.getInstance(context).deactivateProfile();
                     //profile._checked = false;
                     profile = null;
                 }
@@ -794,7 +782,7 @@ public class DataWrapper {
             {
                 if (profile != null)
                 {
-                    getDatabaseHandler().deactivateProfile();
+                    DatabaseHandler.getInstance(context).deactivateProfile();
                     //profile._checked = false;
                     profile = null;
                 }
