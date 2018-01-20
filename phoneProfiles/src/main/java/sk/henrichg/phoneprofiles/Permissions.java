@@ -246,8 +246,8 @@ public class Permissions {
             return true;
     }
 
-    static boolean checkProfileVibrateWhenRinging(Context context, Profile profile, List<PermissionType>  permissions) {
-        if (profile == null) return true;
+    private static void checkProfileVibrateWhenRinging(Context context, Profile profile, List<PermissionType>  permissions) {
+        if (profile == null) return; // true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             try {
                 if (profile._vibrateWhenRinging != 0) {
@@ -256,15 +256,15 @@ public class Permissions {
                         setShowRequestWriteSettingsPermission(context, true);
                     else if (permissions != null)
                         permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
-                    return granted;
-                } else
-                    return true;
-            } catch (Exception e) {
-                return false;
+                    //return granted;
+                } /*else
+                    return true;*/
+            } catch (Exception ignored) {
+                //return false;
             }
         }
-        else
-            return true;
+        //else
+        //    return true;
     }
 
     static boolean checkVibrateWhenRinging(Context context) {

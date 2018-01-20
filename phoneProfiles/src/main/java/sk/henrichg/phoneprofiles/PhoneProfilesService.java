@@ -667,8 +667,8 @@ public class PhoneProfilesService extends Service {
             try {
                 if (notificationMediaPlayer.isPlaying())
                     notificationMediaPlayer.stop();
+                notificationMediaPlayer.release();
             } catch (Exception ignored) {}
-            notificationMediaPlayer.release();
             notificationIsPlayed = false;
             notificationMediaPlayer = null;
         }
@@ -738,8 +738,8 @@ public class PhoneProfilesService extends Service {
                             try {
                                 if (notificationMediaPlayer.isPlaying())
                                     notificationMediaPlayer.stop();
+                                notificationMediaPlayer.release();
                             } catch (Exception ignored) {}
-                            notificationMediaPlayer.release();
 
                             //audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
                             PPApplication.logE("PhoneProfilesService.playNotificationSound", "notification stopped");
