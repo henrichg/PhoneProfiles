@@ -126,6 +126,7 @@ public class ProfileIconPreference extends DialogPreference {
         mDialog = mBuilder.build();
         View layout = mDialog.getCustomView();
 
+        //noinspection ConstantConditions
         GridView gridView = layout.findViewById(R.id.profileicon_pref_dlg_gridview);
         adapter = new ProfileIconPreferenceAdapter(prefContext, imageIdentifier, isImageResourceID, useCustomColor, customColor);
         gridView.setAdapter(adapter);
@@ -143,9 +144,11 @@ public class ProfileIconPreference extends DialogPreference {
             }
         });
 
+        //noinspection ConstantConditions
         dialogIcon = layout.findViewById(R.id.profileicon_pref_dlg_icon);
         updateIcon(true);
 
+        //noinspection ConstantConditions
         colorChooserButton = layout.findViewById(R.id.profileicon_pref_dlg_change_color);
         colorChooserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,8 +161,10 @@ public class ProfileIconPreference extends DialogPreference {
         else
             colorChooserButton.setVisibility(View.GONE);
 
+        //noinspection ConstantConditions
         final TextView helpText = layout.findViewById(R.id.profileicon_pref_dlg_helpText);
 
+        //noinspection ConstantConditions
         final ImageView helpIcon = layout.findViewById(R.id.profileicon_pref_dlg_helpIcon);
         ApplicationPreferences.getSharedPreferences(prefContext);
         if (ApplicationPreferences.preferences.getBoolean(PREF_SHOW_HELP, true)) {

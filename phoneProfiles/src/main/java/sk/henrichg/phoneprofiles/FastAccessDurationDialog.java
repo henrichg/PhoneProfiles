@@ -140,12 +140,18 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
         View layout = mDialog.getCustomView();
 
+        //noinspection ConstantConditions
         TextView mTextViewRange = layout.findViewById(R.id.duration_pref_dlg_range);
 
+        //noinspection ConstantConditions
         mValue = layout.findViewById(R.id.duration_pref_dlg_value);
+        //noinspection ConstantConditions
         mSeekBarHours = layout.findViewById(R.id.duration_pref_dlg_hours);
+        //noinspection ConstantConditions
         mSeekBarMinutes = layout.findViewById(R.id.duration_pref_dlg_minutes);
+        //noinspection ConstantConditions
         mSeekBarSeconds = layout.findViewById(R.id.duration_pref_dlg_seconds);
+        //noinspection ConstantConditions
         mEnds = layout.findViewById(R.id.duration_pref_dlg_ends);
 
         //mSeekBarHours.setRotation(180);

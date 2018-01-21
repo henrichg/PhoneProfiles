@@ -161,15 +161,19 @@ public class ApplicationsDialogPreference  extends DialogPreference
         mDialog = mBuilder.build();
         View layout = mDialog.getCustomView();
 
+        //noinspection ConstantConditions
         AppCompatImageButton addButton = layout.findViewById(R.id.applications_pref_dlg_add);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        //noinspection ConstantConditions
         applicationsListView = layout.findViewById(R.id.applications_pref_dlg_listview);
         //applicationsListView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         applicationsListView.setLayoutManager(layoutManager);
         applicationsListView.setHasFixedSize(true);
 
+        //noinspection ConstantConditions
         linlaProgress = layout.findViewById(R.id.applications_pref_dlg_linla_progress);
+        //noinspection ConstantConditions
         rellaDialog = layout.findViewById(R.id.applications_pref_dlg_rella_dialog);
 
         listAdapter = new ApplicationsDialogPreferenceAdapter(context, this, this);

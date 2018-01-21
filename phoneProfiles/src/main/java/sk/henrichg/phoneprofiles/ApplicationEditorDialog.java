@@ -62,9 +62,11 @@ class ApplicationEditorDialog
         mDialog = dialogBuilder.build();
         View layout = mDialog.getCustomView();
 
+        //noinspection ConstantConditions
         mDelayValue = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay);
         mDelayValue.setText(GlobalGUIRoutines.getDurationString(startApplicationDelay));
 
+        //noinspection ConstantConditions
         RelativeLayout delayValueRoot = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay_root);
         mDelayValueDialog = new TimeDurationPickerDialog(context, new TimeDurationPickerDialog.OnDurationSetListener() {
             @Override
