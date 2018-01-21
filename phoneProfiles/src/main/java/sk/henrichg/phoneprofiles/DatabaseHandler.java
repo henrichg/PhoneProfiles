@@ -1851,7 +1851,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "xxx");
         //if (lock)
         //    importExportLock.lock();
-        try {
+        //try {
             try {
                 //if (lock)
                 //    startRunningCommand();
@@ -1949,10 +1949,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
             } catch (Exception ignored) {
             }
-        } finally {
-            //if (lock)
-            //    stopRunningCommand();
-        }
+        //} finally {
+        //    if (lock)
+        //        stopRunningCommand();
+        //}
     }
 
 // SHORTCUTS ----------------------------------------------------------------------
