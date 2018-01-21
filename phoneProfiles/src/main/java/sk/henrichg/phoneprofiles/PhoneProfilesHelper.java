@@ -176,7 +176,9 @@ class PhoneProfilesHelper {
 
                     @Override
                     protected Boolean doInBackground(Void... params) {
-                        return doUninstallPPHelper(_activity);
+                        synchronized (PPApplication.startRootCommandMutex) {
+                            return doUninstallPPHelper(_activity);
+                        }
                     }
 
                     @Override
@@ -232,7 +234,9 @@ class PhoneProfilesHelper {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // restart device
-                RootTools.restartAndroid();
+                synchronized (PPApplication.startRootCommandMutex) {
+                    RootTools.restartAndroid();
+                }
             }
         });
         /*dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
@@ -326,8 +330,8 @@ class PhoneProfilesHelper {
     private static boolean deleteFile_su(String file) {
         boolean OK;
 
-        List<String> settingsPaths = RootTools.findBinary("rm", true);
-        if (settingsPaths.size() > 0) {
+        boolean found = RootToolsSmall.hasBinary("/rm");
+        if (found) {
             String command1 = "rm " + file;
             //if (PPApplication.isSELinuxEnforcing())
             //	command1 = PPApplication.getSELinuxEnforceCommand(command1);
