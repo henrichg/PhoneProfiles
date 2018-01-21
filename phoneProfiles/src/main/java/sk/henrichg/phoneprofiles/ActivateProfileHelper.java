@@ -70,7 +70,7 @@ public class ActivateProfileHelper {
 
     private Context context;
 
-    static boolean lockRefresh = false;
+    static final boolean lockRefresh = false;
     static boolean disableScreenTimeoutInternalChange = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
@@ -459,7 +459,7 @@ public class ActivateProfileHelper {
 
                 if (_setAirplaneMode /*&& _isAirplaneMode*/) {
                     // switch ON airplane mode, set it before executeForRadios
-                    setAirplaneMode(appContext, _isAirplaneMode);
+                    setAirplaneMode(/*appContext, */_isAirplaneMode);
 
                     PPApplication.sleep(2000);
                 }
@@ -2171,7 +2171,7 @@ public class ActivateProfileHelper {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) != 0;*/
     }
 
-    private void setAirplaneMode(Context context, boolean mode)
+    private void setAirplaneMode(/*Context context, */boolean mode)
     {
         //if (android.os.Build.VERSION.SDK_INT >= 17)
             setAirplaneMode_SDK17(/*context, */mode);
@@ -2644,7 +2644,8 @@ public class ActivateProfileHelper {
         }
     }
 
-    static boolean wifiServiceExists(/*Context context, */String preference) {
+    /*
+    static boolean wifiServiceExists(Context context, String preference) {
         try {
             Object serviceManager = PPApplication.getServiceManager("wifi");
             if (serviceManager != null) {
@@ -2659,6 +2660,7 @@ public class ActivateProfileHelper {
             return false;
         }
     }
+    */
 
     private void setWifiAP(WifiApManager wifiApManager, boolean enable) {
         if (Build.VERSION.SDK_INT < 26)
@@ -2751,6 +2753,7 @@ public class ActivateProfileHelper {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     private void setGPS(Context context, boolean enable)
     {
         boolean isEnabled = false;

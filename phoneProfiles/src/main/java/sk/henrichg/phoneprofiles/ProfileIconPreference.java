@@ -34,7 +34,6 @@ public class ProfileIconPreference extends DialogPreference {
     private Bitmap bitmap;
 
     private MaterialDialog mDialog;
-    private ProfileIconColorChooserDialog mColorDialog;
 
     private ImageView imageView;
     private ProfileIconPreferenceAdapter adapter;
@@ -429,7 +428,7 @@ public class ProfileIconPreference extends DialogPreference {
     }
 
     private void showCustomColorChooser() {
-        mColorDialog = new ProfileIconColorChooserDialog(prefContext, this, useCustomColor, customColor,
+        ProfileIconColorChooserDialog mColorDialog = new ProfileIconColorChooserDialog(prefContext, this, useCustomColor, customColor,
                 ProfileIconPreferenceAdapter.getIconColor(imageIdentifier));
         mColorDialog.show();
         /*

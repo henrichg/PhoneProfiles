@@ -58,8 +58,6 @@ public class ApplicationsDialogPreference  extends DialogPreference
     private ImageView packageIcon3;
     private ImageView packageIcon4;
 
-    private final DataWrapper dataWrapper;
-
     private AsyncTask asyncTask = null;
 
     static final int RESULT_APPLICATIONS_EDITOR = 2100;
@@ -77,7 +75,6 @@ public class ApplicationsDialogPreference  extends DialogPreference
         */
 
         this.context = context;
-        dataWrapper = new DataWrapper(context.getApplicationContext(), false, false, 0);
 
         applicationsList = new ArrayList<>();
 

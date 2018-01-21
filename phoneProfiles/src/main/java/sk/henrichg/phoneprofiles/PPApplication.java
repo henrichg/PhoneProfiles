@@ -740,9 +740,7 @@ public class PPApplication extends Application {
                             field.setAccessible(true);
                             code = field.getInt(field);
                             break;
-                        } catch (IllegalAccessException e) {
-                            Log.e("PPApplication.getTransactionCode", e.toString());
-                        } catch (IllegalArgumentException e) {
+                        } catch (Exception e) {
                             Log.e("PPApplication.getTransactionCode", e.toString());
                         }
                     }
