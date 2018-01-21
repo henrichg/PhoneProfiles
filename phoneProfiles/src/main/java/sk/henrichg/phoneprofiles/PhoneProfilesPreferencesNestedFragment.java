@@ -25,7 +25,6 @@ import android.text.SpannableString;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 
 public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener

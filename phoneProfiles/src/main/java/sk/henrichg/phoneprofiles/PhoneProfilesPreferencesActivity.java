@@ -2,14 +2,11 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
