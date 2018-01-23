@@ -240,9 +240,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
         infoTextADBDownload.setText(spannable);
 
         TextView infoTextGrant1Command = findViewById(R.id.activity_info_notification_dialog_info_grant_1_command);
-        str = getString(R.string.important_info_profile_grant_1_howTo_9a) + "\u00A0" +
-                context.getPackageName() + "\u00A0" +
-                getString(R.string.important_info_profile_grant_1_howTo_9b);
+        str = "adb\u00A0shell\u00A0pm\u00A0grant\u00A0"+context.getPackageName()+"\u00A0" +
+                "android.permission.WRITE_SECURE_SETTINGS";
         spannable = new SpannableString(str);
         spannable.setSpan(new BackgroundColorSpan(GlobalGUIRoutines.getThemeCommandBackgroundColor(this)), 0, str.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
