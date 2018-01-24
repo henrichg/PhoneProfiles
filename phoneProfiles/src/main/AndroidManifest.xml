@@ -202,6 +202,10 @@
             android:excludeFromRecents="true"
             android:theme="@style/LockDeviceActivity">
         </activity>
+        <activity
+            android:name=".DonationActivity"
+            android:label="@string/donation_activity_title">
+        </activity>
 
         <!-- implicit broadcast receivers, in Android O exception group -->
         <!-- https://developer.android.com/preview/features/background-broadcasts.html -->

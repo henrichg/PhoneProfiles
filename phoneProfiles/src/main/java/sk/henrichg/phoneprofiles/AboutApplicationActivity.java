@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -217,6 +218,15 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(new UnderlineSpan(), 0, str1.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
+
+        Button donateButton = findViewById(R.id.about_application_donate_button);
+        donateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), DonationActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
