@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1360;
+    private static final int DATABASE_VERSION = 1370;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -655,14 +655,14 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DURATION_NOTIFICATION_VIBRATE + "=0");
         }
 
-        if (oldVersion < 1360)
+        if (oldVersion < 1350)
         {
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_WIFI_AP_PREFS + " INTEGER");
 
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_WIFI_AP_PREFS + "=0");
         }
 
-        if (oldVersion < 2030)
+        if (oldVersion < 1370)
         {
             db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_HEADS_UP_NOTIFICATIONS + " INTEGER");
 
@@ -2351,7 +2351,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             values.put(KEY_DEVICE_WIFI_AP_PREFS, 0);
                                         }
 
-                                        if (exportedDBObj.getVersion() < 1360) {
+                                        if (exportedDBObj.getVersion() < 1370) {
                                             values.put(KEY_HEADS_UP_NOTIFICATIONS, 0);
                                         }
 

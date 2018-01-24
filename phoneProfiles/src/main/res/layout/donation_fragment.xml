@@ -17,13 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="15dp"
-        android:text="@string/donation_google_android_market"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
         android:text="@string/donation_paypal"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

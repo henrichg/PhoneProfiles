@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -218,6 +219,8 @@ public class ActivateProfileListFragment extends Fragment {
                 if (fragment.profileList.size() == 0)
                 {
                     // no any profile activated, start of Editor
+
+                    Log.e("ActivateProfileListFragment","profile list empty");
 
                     fragment.doOnStart();
 
