@@ -140,10 +140,8 @@ class PhoneProfilesHelper {
         return OK;
     }
 
-    static void uninstallPPHelper(Activity activity)
+    static void uninstallPPHelper(final EditorProfilesActivity activity)
     {
-        final Activity _activity = activity;
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setTitle(activity.getResources().getString(R.string.phoneprofilehepler_uninstall_title));
         dialogBuilder.setMessage(activity.getResources().getString(R.string.phoneprofilehepler_uninstall_message));
@@ -152,11 +150,9 @@ class PhoneProfilesHelper {
 
                 class UninstallAsyncTask extends AsyncTask<Void, Integer, Boolean>
                 {
-                    private MaterialDialog dialog;
-
                     private UninstallAsyncTask()
                     {
-                        this.dialog = new MaterialDialog.Builder(_activity)
+                        activity.uninstallPPHelperProgressDialog = new MaterialDialog.Builder(activity)
                                 .content(R.string.phoneprofilehepler_uninstall_title)
                                         //.disableDefaultFonts()
                                 .progress(true, 0)
@@ -168,16 +164,16 @@ class PhoneProfilesHelper {
                     {
                         super.onPreExecute();
 
-                        lockScreenOrientation();
-                        this.dialog.setCancelable(false);
-                        this.dialog.setCanceledOnTouchOutside(false);
-                        this.dialog.show();
+                        GlobalGUIRoutines.lockScreenOrientation(activity);
+                        activity.uninstallPPHelperProgressDialog.setCancelable(false);
+                        activity.uninstallPPHelperProgressDialog.setCanceledOnTouchOutside(false);
+                        activity.uninstallPPHelperProgressDialog.show();
                     }
 
                     @Override
                     protected Boolean doInBackground(Void... params) {
                         synchronized (PPApplication.startRootCommandMutex) {
-                            return doUninstallPPHelper(_activity);
+                            return doUninstallPPHelper(activity);
                         }
                     }
 
@@ -186,29 +182,18 @@ class PhoneProfilesHelper {
                     {
                         super.onPostExecute(result);
 
-                        if (dialog.isShowing())
-                            dialog.dismiss();
-                        unlockScreenOrientation();
+                        if ((activity.uninstallPPHelperProgressDialog != null) && activity.uninstallPPHelperProgressDialog.isShowing()) {
+                            activity.uninstallPPHelperProgressDialog.dismiss();
+                            activity.uninstallPPHelperProgressDialog = null;
+                        }
+                        GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                         if (result)
                         {
-                            restartAndroid(_activity);
+                            restartAndroid(activity);
                         }
                         else
-                            installUnInstallPPhelperErrorDialog(_activity);
-                    }
-
-                    private void lockScreenOrientation() {
-                        int currentOrientation = _activity.getResources().getConfiguration().orientation;
-                        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-                            _activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-                        } else {
-                            _activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                        }
-                    }
-
-                    private void unlockScreenOrientation() {
-                        _activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                            installUnInstallPPhelperErrorDialog(activity);
                     }
 
                 }

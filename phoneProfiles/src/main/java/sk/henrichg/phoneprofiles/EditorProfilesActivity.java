@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.microedition.khronos.opengles.GL;
+
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
 
@@ -62,6 +64,10 @@ public class EditorProfilesActivity extends AppCompatActivity
     private AsyncTask importAsyncTask = null;
     private AsyncTask exportAsyncTask = null;
     static boolean doImport = false;
+    private MaterialDialog importProgressDialog = null;
+    private MaterialDialog exportProgressDialog = null;
+
+    MaterialDialog uninstallPPHelperProgressDialog = null;
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
@@ -227,6 +233,18 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
+        if ((uninstallPPHelperProgressDialog != null) && uninstallPPHelperProgressDialog.isShowing()) {
+            uninstallPPHelperProgressDialog.dismiss();
+            uninstallPPHelperProgressDialog = null;
+        }
+        if ((importProgressDialog != null) && importProgressDialog.isShowing()) {
+            importProgressDialog.dismiss();
+            importProgressDialog = null;
+        }
+        if ((exportProgressDialog != null) && exportProgressDialog.isShowing()) {
+            exportProgressDialog.dismiss();
+            exportProgressDialog = null;
+        }
         if ((importAsyncTask != null) && !importAsyncTask.getStatus().equals(AsyncTask.Status.FINISHED)){
             importAsyncTask.cancel(true);
             doImport = false;
@@ -638,11 +656,10 @@ public class EditorProfilesActivity extends AppCompatActivity
         if (Permissions.grantImportPermissions(activity.getApplicationContext(), activity, applicationDataPath)) {
 
             class ImportAsyncTask extends AsyncTask<Void, Integer, Integer> {
-                private MaterialDialog dialog;
                 private DataWrapper dataWrapper;
 
                 private ImportAsyncTask() {
-                    this.dialog = new MaterialDialog.Builder(activity)
+                    importProgressDialog = new MaterialDialog.Builder(activity)
                             .content(R.string.import_profiles_alert_title)
                                     //.disableDefaultFonts()
                             .progress(true, 0)
@@ -657,10 +674,10 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     doImport = true;
 
-                    lockScreenOrientation();
-                    this.dialog.setCancelable(false);
-                    this.dialog.setCanceledOnTouchOutside(false);
-                    this.dialog.show();
+                    GlobalGUIRoutines.lockScreenOrientation(activity);
+                    importProgressDialog.setCancelable(false);
+                    importProgressDialog.setCanceledOnTouchOutside(false);
+                    importProgressDialog.show();
 
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.stopSelf();
@@ -707,9 +724,11 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     doImport = false;
 
-                    if (dialog.isShowing())
-                        dialog.dismiss();
-                    unlockScreenOrientation();
+                    if ((importProgressDialog != null) && importProgressDialog.isShowing()) {
+                        importProgressDialog.dismiss();
+                        importProgressDialog = null;
+                    }
+                    GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     if (result == 1) {
                         this.dataWrapper.getActivateProfileHelper().updateWidget(true);
@@ -739,20 +758,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                         importExportErrorDialog(1, result);
                     }
                 }
-
-                private void lockScreenOrientation() {
-                    int currentOrientation = activity.getResources().getConfiguration().orientation;
-                    if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-                    } else {
-                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                    }
-                }
-
-                private void unlockScreenOrientation() {
-                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                }
-
 
             }
 
@@ -887,11 +892,10 @@ public class EditorProfilesActivity extends AppCompatActivity
         if (Permissions.grantExportPermissions(activity.getApplicationContext(), activity)) {
 
             class ExportAsyncTask extends AsyncTask<Void, Integer, Integer> {
-                private MaterialDialog dialog;
                 private DataWrapper dataWrapper;
 
                 private ExportAsyncTask() {
-                    this.dialog = new MaterialDialog.Builder(activity)
+                    exportProgressDialog = new MaterialDialog.Builder(activity)
                             .content(R.string.export_profiles_alert_title)
                                     //.disableDefaultFonts()
                             .progress(true, 0)
@@ -903,9 +907,10 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected void onPreExecute() {
                     super.onPreExecute();
 
-                    this.dialog.setCancelable(false);
-                    this.dialog.setCanceledOnTouchOutside(false);
-                    this.dialog.show();
+                    GlobalGUIRoutines.lockScreenOrientation(activity);
+                    exportProgressDialog.setCancelable(false);
+                    exportProgressDialog.setCanceledOnTouchOutside(false);
+                    exportProgressDialog.show();
                 }
 
                 @Override
@@ -930,8 +935,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected void onPostExecute(Integer result) {
                     super.onPostExecute(result);
 
-                    if (dialog.isShowing())
-                        dialog.dismiss();
+                    if ((exportProgressDialog != null) && exportProgressDialog.isShowing()) {
+                        exportProgressDialog.dismiss();
+                        exportProgressDialog = null;
+                    }
+                    GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     if (result == 1) {
 
