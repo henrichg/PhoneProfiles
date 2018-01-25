@@ -25,6 +25,7 @@ public class DonationFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        /*
         //noinspection ConstantConditions
         Button paypalButton = getActivity().findViewById(R.id.donation_paypal_donate_button);
         paypalButton.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,7 @@ public class DonationFragment extends Fragment {
                 }
             }
         });
+        */
 
     }
 
