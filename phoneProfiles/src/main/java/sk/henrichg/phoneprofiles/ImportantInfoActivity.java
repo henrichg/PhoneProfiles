@@ -70,6 +70,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         boolean news = false;
         boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
+        boolean news2690 = ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
 
@@ -79,6 +80,17 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
         else {
             // empty this, for switch off news
+        }
+
+        if (news2690) {
+            news = true;
+        }
+        else {
+            // empty this, for switch off news
+            TextView infoText1 = findViewById(R.id.activity_info_notification_dialog_info_text50_news);
+            infoText1.setVisibility(View.GONE);
+            TextView infoText2 = findViewById(R.id.activity_info_notification_dialog_info_text50_profiles_news);
+            infoText2.setVisibility(View.GONE);
         }
 
         if (news1634) {
