@@ -75,6 +75,12 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
                                 editor.apply();
                             }
+                            if (actualVersionCode <= 2700) {
+                                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "donation alarm restart");
+                                PPApplication.setDaysAfterFirstStart(appContext, 0);
+                                PPApplication.setDonationNotificationCount(appContext, 0);
+                                AboutApplicationJob.scheduleJob(/*appContext*/true);
+                            }
                         }
                     } catch (Exception e) {
                         //e.printStackTrace();

@@ -15,6 +15,8 @@ import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.evernote.android.job.JobConfig;
+import com.evernote.android.job.JobManager;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
@@ -86,6 +88,7 @@ public class PPApplication extends Application {
     static final int PROFILE_ACTIVATION_MOBILE_DATA_PREFS_NOTIFICATION_ID = 700426;
     static final int PROFILE_ACTIVATION_LOCATION_PREFS_NOTIFICATION_ID = 700427;
     static final int PROFILE_ACTIVATION_WIFI_AP_PREFS_NOTIFICATION_ID = 700428;
+    static final int ABOUT_APPLICATION_DONATE_NOTIFICATION_ID = 700429;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     static final String DEFAULT_PROFILE_PREFS_NAME = "profile_preferences_default_profile"; //PPApplication.APPLICATION_PREFS_NAME;
@@ -106,6 +109,8 @@ public class PPApplication extends Application {
 
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
+    private static final String PREF_DAYS_AFTER_FIRST_START = "days_after_first_start";
+    private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
 
     public static HandlerThread handlerThread = null;
 
@@ -173,6 +178,9 @@ public class PPApplication extends Application {
         //loadPreferences(this);
 
         PPApplication.initRoot();
+
+        JobConfig.setForceAllowApi14(true); // https://github.com/evernote/android-job/issues/197
+        JobManager.create(this).addJobCreator(new PPJobsCreator());
 
         //Log.d("PPApplication.onCreate", "memory usage (after create activateProfileHelper)=" + Debug.getNativeHeapAllocatedSize());
 
@@ -387,6 +395,34 @@ public class PPApplication extends Application {
             if (logIntoLogCat) Log.d(tag, text);
             logIntoFile("D", tag, text);
         }
+    }
+
+    static public int getDaysAfterFirstStart(Context context)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_DAYS_AFTER_FIRST_START, 0);
+    }
+
+    static public void setDaysAfterFirstStart(Context context, int days)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
+        editor.putInt(PREF_DAYS_AFTER_FIRST_START, days);
+        editor.apply();
+    }
+
+    static public int getDonationNotificationCount(Context context)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_DONATION_NOTIFICATION_COUNT, 0);
+    }
+
+    static public void setDonationNotificationCount(Context context, int days)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
+        editor.putInt(PREF_DONATION_NOTIFICATION_COUNT, days);
+        editor.apply();
     }
 
     //--------------------------------------------------------------

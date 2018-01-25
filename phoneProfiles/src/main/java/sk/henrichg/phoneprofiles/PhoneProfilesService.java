@@ -141,8 +141,8 @@ public class PhoneProfilesService extends Service {
         settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
         appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
 
-        // start job for first start
-        //FirstStartJob.start(appContext);
+        AboutApplicationJob.scheduleJob(/*getApplicationContext()*/true);
+
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
