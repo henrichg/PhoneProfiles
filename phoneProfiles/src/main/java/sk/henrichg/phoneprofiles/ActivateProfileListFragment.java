@@ -220,7 +220,7 @@ public class ActivateProfileListFragment extends Fragment {
                 {
                     // no any profile activated, start of Editor
 
-                    Log.e("ActivateProfileListFragment","profile list empty");
+                    //Log.e("ActivateProfileListFragment","profile list empty");
 
                     fragment.doOnStart();
 
