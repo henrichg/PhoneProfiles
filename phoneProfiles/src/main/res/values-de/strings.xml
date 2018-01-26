@@ -787,7 +787,6 @@
   <string name="donation_google_android_market_text">Wie viel?</string>
   <string name="donation_google_android_market_not_supported_title">In-App-Spenden werden nicht unterstützt.</string>
   <string name="donation_google_android_market_not_supported">In-App-Spenden werden nicht unterstützt. Ist der Google Play Store richtig installiert?</string>
-  <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google nimmt 30% jeder Spende.</string>
   <string name="donation_google_android_market_donate_button">Spenden</string>
   <string name="donation_thanks_dialog_title">Vielen Dank</string>
   <string name="donation_thanks_dialog">Vielen Dank für Ihre Spende,\nI die ich wirklich zu schätzen weiß.</string>
@@ -1003,11 +1002,6 @@
   <string name="array_pref_value_zh_CN">zh-CN</string>
   <string name="action_for_external_application_notification_bad_action">Nicht unterstütze Aktion angegeben.</string>
   <string name="action_for_external_application_notification_no_action">Aktion nicht angegeben.</string>
-  <!--
-    <string name="notification_channel_activated_profile">Activated profile</string>
-    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
-    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
-    -->
   <string name="ringtone_preference_not_set">Nicht festgelegt</string>
   <string name="ringtone_preference_default_ringtone">Standard-Klingelton</string>
   <string name="ringtone_preference_default_notification">Standard-Benachrichtigungston</string>
@@ -1026,8 +1020,6 @@
   <string name="important_info_profile_grant_1_howTo_6">1. Unter Einstellungen &gt; Über das Telefon &gt; Software Informationen, sieben mal auf \"Build Number\" klicken. Dies wird die Entwicklereinstellungen unter Einstellungen aktivieren.</string>
   <string name="important_info_profile_grant_1_howTo_7">2. Unter Einstellungen &gt; Entwicklereinstellungen \"USB Debugging\" aktivieren.</string>
   <string name="important_info_profile_grant_1_howTo_8">3. On your PC, open a Command Prompt (Windows), or Terminal (Linux, OSX). Navigate to the folder where you extracted your adb files, and EXACTLY execute the following command:</string>
-  <string name="important_info_profile_grant_1_howTo_9a">adb shell pm grant</string>
-  <string name="important_info_profile_grant_1_howTo_9b">android.permission.WRITE_SECURE_SETTINGS</string>
   <string name="important_info_profile_grant_1_howTo_10">4. After successful execution, all profile parameters marked with (G1) will be enabled.</string>
   <string name="important_info_activity_title">Wichtige Information</string>
   <string name="important_info_quick_guide_tab">Kurzanleitung</string>
@@ -1152,4 +1144,13 @@
   <string name="profile_preferences_applicationDisableMobileCellScanning">Disable mobile cell scanning</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Disable orientation scanning</string>
   <string name="profile_preferences_headsUpNotifications">(G1)(R) Pop-up notifications</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">How to install PhoneProfilesPlusExtender</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_summary">Download latest version of PhoneProfilesPlusExtender.apk from it\'s GitHub. Then click to notification about downloaded apk and install it.</string>
+  <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
+  <!--
+    <string name="notification_channel_activated_profile">Activated profile</string>
+    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
+    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
+    -->
+  <!-- <string name="donation_paypal">PayPal</string> -->
 </resources>

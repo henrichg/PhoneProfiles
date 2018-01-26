@@ -780,14 +780,13 @@
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag je zapisovateľný</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag nie je zapisovateľný</string>
   <string name="about_application_donate_button">Prosím prispejte</string>
-  <string name="donation_activity_title">Dar</string>
+  <string name="donation_activity_title">Príspevok</string>
   <string name="donation_button_close">Zavrieť</string>
   <string name="donation_description">Je tato aplikácia užitočná?\nPodporte jej vývoj zaslaním príspevku vývojárovi.</string>
   <string name="donation_google_android_market">Obchod Play</string>
   <string name="donation_google_android_market_text">Koľko to stojí?</string>
   <string name="donation_google_android_market_not_supported_title">Platby z aplikácií nie sú podporované.</string>
   <string name="donation_google_android_market_not_supported">Platby z aplikácií nie sú podporované. Ste si istý, že je Obchod Play správne nainštalovaný?</string>
-  <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google si strháva 30 % z každého príspevku.</string>
   <string name="donation_google_android_market_donate_button">Prispejte</string>
   <string name="donation_thanks_dialog_title">Ďakujem</string>
   <string name="donation_thanks_dialog">Ďakujem za darovanie.\nNaozaj si to vážim.</string>
@@ -1003,11 +1002,6 @@
   <string name="array_pref_value_zh_CN">zh-CN</string>
   <string name="action_for_external_application_notification_bad_action">Je zadaná nepodporovaná akcia.</string>
   <string name="action_for_external_application_notification_no_action">Akcia nie je zadaná.</string>
-  <!--
-    <string name="notification_channel_activated_profile">Activated profile</string>
-    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
-    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
-    -->
   <string name="ringtone_preference_not_set">Nenastavené</string>
   <string name="ringtone_preference_default_ringtone">Predvolený vyzváňací tón</string>
   <string name="ringtone_preference_default_notification">Predvolené zvukové upozornenie</string>
@@ -1026,8 +1020,6 @@
   <string name="important_info_profile_grant_1_howTo_6">1. V telefóne, prejdite do ponuky Nastavenia &gt; informácie o telefóne &gt; informácie o softvéri a kliknite na Číslo zostavy 7-krát, a budete mať v Nastaveniach položku Vývojárske možnosti.</string>
   <string name="important_info_profile_grant_1_howTo_7">2. V telefóne, prejdite do ponuky Nastavenia &gt; Možnosti pre vývojárov a povoľte Ladenie USB.</string>
   <string name="important_info_profile_grant_1_howTo_8">3. V počítači, spustite CMD (Windows), Terminál (Linux, OSX), prejdite do priečinka, v ktorom je nainštalovaný adb a spustite tento príkaz:</string>
-  <string name="important_info_profile_grant_1_howTo_9a">adb shell pm grant</string>
-  <string name="important_info_profile_grant_1_howTo_9b">android.permission.WRITE_SECURE_SETTINGS</string>
   <string name="important_info_profile_grant_1_howTo_10">4. Po úspešnom vykonaní, všetky parametre profilu označené značkou (G1) budú povolené.</string>
   <string name="important_info_activity_title">Dôležité informácie</string>
   <string name="important_info_quick_guide_tab">Rýchly sprievodca</string>
@@ -1152,4 +1144,13 @@
   <string name="profile_preferences_applicationDisableMobileCellScanning">Zakázať skenovanie mobilných buniek</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Zakázať skenovanie orientácie</string>
   <string name="profile_preferences_headsUpNotifications">(G1) (R) Vyskakovacie notifikácie</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">Ako nainštalovať PhoneProfilesPlusExtender</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_summary">Stiahnite si najnovšiu verziu PhoneProfilesPlusExtender.apk z jeho GitHub. Kliknite na notifikáciu o stiahnutom apk a nainštalujte ho.</string>
+  <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
+  <!--
+    <string name="notification_channel_activated_profile">Activated profile</string>
+    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
+    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
+    -->
+  <!-- <string name="donation_paypal">PayPal</string> -->
 </resources>

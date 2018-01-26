@@ -780,14 +780,13 @@
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag je zapisovatelný</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag není zapisovatelný</string>
   <string name="about_application_donate_button">Prosím přispějte</string>
-  <string name="donation_activity_title">Dar</string>
+  <string name="donation_activity_title">Příspěvek</string>
   <string name="donation_button_close">Zavřít</string>
   <string name="donation_description">Je tato aplikace užitečná?\nPodpořte její vývoj zasláním příspěvku vývojáři.</string>
   <string name="donation_google_android_market">Obchod Google Play</string>
   <string name="donation_google_android_market_text">Kolik to stojí?</string>
   <string name="donation_google_android_market_not_supported_title">Platby z aplikací nejsou podporovány.</string>
   <string name="donation_google_android_market_not_supported">Platby z aplikací nejsou podporovány. Jste si jistý, že je Obchod Google Play správně nainstalován?</string>
-  <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google si strhává 30% z každého příspěvku.</string>
   <string name="donation_google_android_market_donate_button">Darujte</string>
   <string name="donation_thanks_dialog_title">Děkuji</string>
   <string name="donation_thanks_dialog">Děkuji za darování.\nOpravdu si toho vážím.</string>
@@ -1003,11 +1002,6 @@
   <string name="array_pref_value_zh_CN">zh-CN</string>
   <string name="action_for_external_application_notification_bad_action">Je zadána nepodporovaná akce.</string>
   <string name="action_for_external_application_notification_no_action">Akce není zadána.</string>
-  <!--
-    <string name="notification_channel_activated_profile">Activated profile</string>
-    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
-    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
-    -->
   <string name="ringtone_preference_not_set">Nenastaveno</string>
   <string name="ringtone_preference_default_ringtone">Výchozí vyzvánění</string>
   <string name="ringtone_preference_default_notification">Výchozí oznámení</string>
@@ -1026,8 +1020,6 @@
   <string name="important_info_profile_grant_1_howTo_6">1. V telefonu, přejděte do nabídky Nastavení &gt; informace o telefonu &gt; informace o softwaru a klepněte na Číslo sestavy 7-krát, a budete mít v Nastaveních položku Vývojářské možnosti.</string>
   <string name="important_info_profile_grant_1_howTo_7">2. V telefonu, přejděte do nabídky Nastavení &gt; Možnosti pro vývojáře a povolte Ladění USB.</string>
   <string name="important_info_profile_grant_1_howTo_8">3. V počítači, spusťte CMD (Windows), Terminál (Linux, OSX), přejděte do složky, ve kterém je nainstalován adb a spusťte tento příkaz:</string>
-  <string name="important_info_profile_grant_1_howTo_9a">adb shell pm grant</string>
-  <string name="important_info_profile_grant_1_howTo_9b">android.permission.WRITE_SECURE_SETTINGS</string>
   <string name="important_info_profile_grant_1_howTo_10">4. Po úspěšném provedení, všechny parametry profilu označené značkou (G1) budou povoleny.</string>
   <string name="important_info_activity_title">Důležité informace</string>
   <string name="important_info_quick_guide_tab">Stručná příručka</string>
@@ -1151,5 +1143,14 @@
   <string name="phone_profiles_pref_applicationEventScanningDisabled">Skenování je zakázáno!</string>
   <string name="profile_preferences_applicationDisableMobileCellScanning">Zakázat skenování mobilních buněk</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Zakázat skenování orientace</string>
-  <string name="profile_preferences_headsUpNotifications">(G1)(R) Pop-up notifications</string>
+  <string name="profile_preferences_headsUpNotifications">(G1)(R) Pop-up oznámení</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">Jak nainstalovat PhoneProfilesPlusExtender</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_summary">Stáhněte si nejnovější verzi PhoneProfilesPlusExtender.apk z jeho GitHub. Klikněte na notifikaci o staženém apk a nainstalujte ho.</string>
+  <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
+  <!--
+    <string name="notification_channel_activated_profile">Activated profile</string>
+    <string name="notification_channel_activated_profile_ppp">Shows the activated profile with the event that triggered it</string>
+    <string name="notification_channel_activated_profile_pp">Shows the activated profile</string>
+    -->
+  <!-- <string name="donation_paypal">PayPal</string> -->
 </resources>
