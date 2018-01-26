@@ -9,8 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -44,8 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.microedition.khronos.opengles.GL;
 
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
