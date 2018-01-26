@@ -5,10 +5,10 @@
     <string name="empty_string" translatable="false"></string>
     <string name="dash_string" translatable="false">-</string>
     <string name="activator_string" translatable="false">activator</string>
-    <string name="app_name">PhoneProfilesPlus</string>
+    <string name="app_name">PhoneProfiles</string>
     <string name="menu_edit_profiles">Editor</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_phone_profiles">PhoneProfilesPlus</string>
+    <string name="title_activity_phone_profiles">PhoneProfiles</string>
     <string name="title_activity_profile_preferences">Profile preferences</string>
     <string name="title_activity_event_preferences">Event preferences</string>
     <string name="menu_new_profile">New profile</string>
@@ -107,7 +107,7 @@
     <string name="phone_profiles_pref_applicationLanguage_sv">Svenska</string>
     <string name="phone_profiles_pref_applicationLanguage_hu">Magyar</string>
     <string name="phone_profiles_pref_applicationLanguage_zh_TW">繁體中文</string>
-    <string name="title_activity_shortcut_creator">PhoneProfilesPlus-shortcut</string>
+    <string name="title_activity_shortcut_creator">PhoneProfiles-shortcut</string>
     <string name="phone_profiles_pref_applicationStartOnBoot">Start on phone boot</string>
     <string name="array_pref_value_system">system</string>
     <string name="array_pref_value_en">en</string>
@@ -159,9 +159,9 @@
     <string name="event_preferences_eventEnabled">Enable run</string>
     <string name="event_preferences_eventName">Event name</string>
     <string name="event_preferences_eventProfileStart">Activate profile</string>
-    <string name="widget_label_icon">PhoneProfilesPlus-icon</string>
-    <string name="widget_label_one_row">PhoneProfilesPlus-single row</string>
-    <string name="widget_label_list">PhoneProfilesPlus-list</string>
+    <string name="widget_label_icon">PhoneProfiles-icon</string>
+    <string name="widget_label_one_row">PhoneProfiles-single row</string>
+    <string name="widget_label_list">PhoneProfiles-list</string>
     <string name="phone_profiles_pref_category_widget_list">Widget-List</string>
     <string name="phone_profiles_pref_applicationWidgetBackground">Background opaqueness</string>
     <string name="phone_profiles_pref_applicationWidgetLightnessB">Background lightness</string>
@@ -443,14 +443,14 @@
     <string name="bluetooth_name_pref_dlg_info_about_wildcards">in Bluetooth name,</string>
     <string name="calendar_pref_dlg_info_about_wildcards">in search string,</string>
     <string name="pref_dlg_info_about_wildcards_3">add \"\\\" around these characters.</string>
-    <string name="important_into_sony_stamina_mode">For Sony devices, please enable \"Stamina\" mode in \"Power management\". Please also add PhoneProfilesPlus into \"Apps active in standby\". Without this, the application will not work correctly.</string>
+    <string name="important_into_sony_stamina_mode">For Sony devices, please enable \"Stamina\" mode in \"Power management\". Please also add PhoneProfiles into \"Apps active in standby\". Without this, the application will not work correctly.</string>
     <string name="important_info_profile_settings">Some profile preferences require changes in system Settings. These preferences are marked with \"(S)\".</string>
     <string name="profile_preferences_volumeNotificationsAccessSettings_title">Notification access</string>
-    <string name="profile_preferences_volumeNotificationsAccessSettings_summary">To enable \"Interruptions type\" profile parameters, allow PhoneProfilesPlus \"Notification access\" in system settings.</string>
+    <string name="profile_preferences_volumeNotificationsAccessSettings_summary">To enable \"Interruptions type\" profile parameters, allow PhoneProfiles \"Notification access\" in system settings.</string>
     <string name="array_pref_zenModeArray_allWithVibration">All with vibration</string>
     <string name="array_pref_zenModeArray_priorityWithVibration">Priority with vibration</string>
     <string name="important_info_news">News</string>
-    <string name="important_info_profile_zenMode">\"Interruptions\" in profile \"Ringer mode\" requires enabling PhoneProfilesPlus in \"Notification access\" system settings. Click here and enable PhoneProfilesPlus.</string>
+    <string name="important_info_profile_zenMode">\"Interruptions\" in profile \"Ringer mode\" requires enabling PhoneProfiles in \"Notification access\" system settings. Click here and enable PhoneProfiles.</string>
     <string name="profile_preferences_zenMode_none_summary">No interruptions; not even alarms</string>
     <string name="profile_preferences_zenMode_priority_summary">Priority interruptions only</string>
     <string name="profile_preferences_zenMode_all_summary">All interruptions</string>
@@ -461,7 +461,7 @@
     <string name="event_type_notifications">Notifications</string>
     <string name="event_preferences_category_eventNotificationsParameters">Notification parameters</string>
     <string name="event_preferences_notifications_applications">Applications</string>
-    <string name="event_preferences_volumeNotificationsAccessSettings_summary">To enable Notification parameters, allow PhoneProfilesPlus \"Notification access\" in system settings.</string>
+    <string name="event_preferences_volumeNotificationsAccessSettings_summary">To enable Notification parameters, allow PhoneProfiles \"Notification access\" in system settings.</string>
     <string name="array_pref_zenModeArray_alarms">Alarms only</string>
     <string name="profile_preferences_zenMode_alarms_summary">Interrupt only with alarms</string>
     <string name="phone_profiles_pref_applicationShortcutEmblem">Add emblem to shortcut</string>
@@ -495,7 +495,7 @@
     <string name="permissions_write_settings_not_allowed_confirm">You have not enabled \"Modify system settings\". Never ask again?</string>
     <string name="phone_profiles_pref_category_permissions">Permissions</string>
     <string name="phone_profiles_pref_writeSystemSettingPermissions">Modify system settings</string>
-    <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Please search for \"PhoneProfilesPlus\" application and enable it.</string>
+    <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Please search for \"PhoneProfiles\" application and enable it.</string>
     <string name="phone_profiles_pref_applicationPermissions">Application permissions</string>
     <string name="phone_profiles_pref_applicationPermissions_summary">Please enable permissions in option \"Permissions\".</string>
     <string name="permissions_for_event_text1">Event</string>
@@ -563,7 +563,7 @@
     <string name="important_info_profile_activation_text11">- Red: events are stopped - events run can be enabled through Editor menu item \"Enable events run\".</string>
     <string name="important_info_profile_activation_restart_events_icon">Restart events icon:</string>
     <string name="important_info_profile_activation_traffic_light_icon">\"Traffic light\" icon:</string>
-    <string name="important_info_android_doze_mode">Android 6+ implements \"Doze mode\" and \"App Standby\". Concerning problems with event profile activation, if you leave the device unplugged and stationary for a period of time with the screen off, add PhoneProfilesPlus into \"Battery\"→\"Battery optimization\"→\"Not optimized\".</string>
+    <string name="important_info_android_doze_mode">Android 6+ implements \"Doze mode\" and \"App Standby\". Concerning problems with event profile activation, if you leave the device unplugged and stationary for a period of time with the screen off, add PhoneProfiles into \"Battery\"→\"Battery optimization\"→\"Not optimized\".</string>
     <string name="profile_preferences_volumeVibrateWhenRingingRootInfo_title">Vibrate when ringing</string>
     <string name="info_notification_event_states">An event may be in one of 5 states:</string>
     <string name="info_notification_event_states_running">Running: event is started and running. Event parameters are satisfied.</string>
@@ -682,8 +682,8 @@
     <string name="permission_group_name_access_notification_policy">Do not disturb access</string>
     <string name="permissions_access_notification_policy_not_allowed_confirm">You have not enabled \"Do not disturb access\". Never ask again?</string>
     <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Do not disturb access</string>
-    <string name="phone_profiles_pref_accessNotificationPolicyPermissions_summary">Please search for \"PhoneProfilesPlus\" application and enable it.</string>
-    <string name="phone_profiles_pref_applicationBatteryOptimization_summary">Add PhoneProfilesPlus to \"Not optimized\" if you encounter problems with event profile activation, or if you leave your device unplugged and stationary for a period of time with the screen off.</string>
+    <string name="phone_profiles_pref_accessNotificationPolicyPermissions_summary">Please search for \"PhoneProfiles\" application and enable it.</string>
+    <string name="phone_profiles_pref_applicationBatteryOptimization_summary">Add PhoneProfiles to \"Not optimized\" if you encounter problems with event profile activation, or if you leave your device unplugged and stationary for a period of time with the screen off.</string>
     <string name="profile_preferences_deviceWallpaperFor">Set wallpaper for</string>
     <string name="array_pref_device_wallpaper_homescreen">Home screen</string>
     <string name="array_pref_device_wallpaper_lockscreen">Lock screen</string>
@@ -782,17 +782,17 @@
     <string name="permission_group_name_draw_overalys">Draw over apps</string>
     <string name="permissions_draw_overlays_not_allowed_confirm">You have not enabled \"Draw over apps\". Never ask again?</string>
     <string name="phone_profiles_pref_drawOverlaysPermissions">Draw over apps</string>
-    <string name="phone_profiles_pref_drawOverlaysPermissions_summary">Please search for \"PhoneProfilesPlus\" application and enable it.</string>
+    <string name="phone_profiles_pref_drawOverlaysPermissions_summary">Please search for \"PhoneProfiles\" application and enable it.</string>
     <string name="preference_not_allowed_reason_not_configured_in_system_settings">not configured in System Settings</string>
-    <string name="important_into_huawei_protected_apps">For Huawei devices, please enable protection of PhoneProfilesPlus in \"Advanced settings\"→\"Battery manager\"→\"Protected apps\". Without this, the app will not work properly.</string>
-    <string name="important_into_xiaomi_no_restrictions">For Xiaomi devices, please set \"No restrictions\" for PhoneProfilesPlus in \"Settings\"→\"Battery &amp; performance\"→\"Manager apps battery usage\"→\"Choose apps\". Without this, the app will not work properly.</string>
-    <string name="important_into_samsung_no_save_power">For Samsung devices, please turn off \"App power saving\" for PhoneProfilesPlus in \"Settings\"→\"Battery\"→\"App power saving\"→\"Detail\". Without this, the app will not work properly.</string>
+    <string name="important_into_huawei_protected_apps">For Huawei devices, please enable protection of PhoneProfiles in \"Advanced settings\"→\"Battery manager\"→\"Protected apps\". Without this, the app will not work properly.</string>
+    <string name="important_into_xiaomi_no_restrictions">For Xiaomi devices, please set \"No restrictions\" for PhoneProfiles in \"Settings\"→\"Battery &amp; performance\"→\"Manager apps battery usage\"→\"Choose apps\". Without this, the app will not work properly.</string>
+    <string name="important_into_samsung_no_save_power">For Samsung devices, please turn off \"App power saving\" for PhoneProfiles in \"Settings\"→\"Battery\"→\"App power saving\"→\"Detail\". Without this, the app will not work properly.</string>
     <string name="mobile_cells_pref_dlg_last_connected">connected:</string>
     <string name="bluetooth_name_pref_dlg_add_bt_name_icon">Add Bluetooth name</string>
     <string name="mobile_cells_pref_dlg_rename_icon">Rename cell</string>
     <string name="nfc_tag_pref_dlg_add_icon">Add NFC tag</string>
     <string name="wifi_ssid_pref_dlg_add_wifi_ssid_icon">Add Wi-Fi SSID</string>
-    <string name="about_application_application_icon">PhoneProfilesPlus icon</string>
+    <string name="about_application_application_icon">PhoneProfiles icon</string>
     <string name="applications_editor_dialog_item_icon">Application icon</string>
     <string name="preference_item_edit_menu">Edit menu</string>
     <string name="preference_item_drag_handle">Order change handle</string>
@@ -907,7 +907,7 @@
     <string name="array_pref_color_light">Light</string>
     <string name="altype_applicationStartOnBoot">start on boot</string>
     <string name="profile_preferences_hideStatusBarIcon">Hide status bar icon</string>
-    <string name="device_admin_description">Provides support for some PhoneProfilesPlus actions</string>
+    <string name="device_admin_description">Provides support for some PhoneProfiles actions</string>
     <string name="device_admin_disable_warning_ppp">Disabling this may cause some profiles and events parameters to malfunction.</string>
     <string name="device_admin_disable_warning_pp">Disabling this may cause some profiles parameters to malfunction.</string>
     <string name="profile_preferences_lockDevice">Lock device</string>
@@ -915,7 +915,7 @@
     <string name="array_pref_lockDevice_root">(R) Use root (device must be rooted)</string>
     <string name="array_pref_lockDevice_screenOff">Use quick screen off</string>
     <string name="profile_preferences_lockDevice_deviceAdminSettings_title">Device administrator</string>
-    <string name="profile_preferences_lockDevice_deviceAdminSettings_summary">Enable \"PhoneProfilesPlus\" in Device administrator; for Lock method \"Use Device administrator\".</string>
+    <string name="profile_preferences_lockDevice_deviceAdminSettings_summary">Enable \"PhoneProfiles\" in Device administrator; for Lock method \"Use Device administrator\".</string>
     <string name="profile_preferences_lockDevice_deviceAdminSettings_summary_activated">Already enabled</string>
     <string name="lockDevice_screenOff_text">Quick screen off lock</string>
     <string name="event_preferences_calendar_start_before_event">Start before the event</string>
@@ -958,7 +958,7 @@
     <string name="duration_pref_dlg_activation_end_label">End activation:</string>
     <string name="phone_profiles_pref_applicationLanguage_pt_BR">Português (Brasil)</string>
     <string name="array_pref_value_pt_BR">pt-BR</string>
-    <string name="important_info_profile_zenModeM">\"Do not disturb\" in profile \"Ringer mode\" requires enabling PhoneProfilesPlus in \"Notification access\" system settings. Click here and enable.</string>
+    <string name="important_info_profile_zenModeM">\"Do not disturb\" in profile \"Ringer mode\" requires enabling PhoneProfiles in \"Notification access\" system settings. Click here and enable.</string>
     <string name="profile_preferences_volumeVibrateWhenRingingRootInfoM_summary">In Android 6: This system setting can be changed only on rooted devices. Affected are ringer modes and do not disturb types with vibration.</string>
     <string name="setting_screen_not_found_alert">Setting screen not found.</string>
     <string name="action_for_external_application_notification_title">External app support (Tasker)</string>
@@ -970,7 +970,7 @@
     <string name="phone_profiles_pref_applicationRingerNotificationVolumesUnlinked_info">Your device does not have linked volumes for ringtone and notifications.</string>
     <string name="phone_profiles_pref_applicationLanguage_el">Ελληνικά</string>
     <string name="array_pref_value_el">el</string>
-    <string name="samsung_edge_name">PhoneProfilesPlus</string>
+    <string name="samsung_edge_name">PhoneProfiles</string>
     <string name="samsung_edge_description">Activator as edge panel</string>
     <string name="phone_profiles_pref_category_samsung_edge_panel">Samsung edge panel</string>
     <string name="phone_profiles_pref_applicationLanguage_zh_CN">简体中文</string>
@@ -986,7 +986,7 @@
     <string name="important_info_profile_grant">Some profile preferences require permission WRITE_SECURE_SETTINGS. ROOT is not required. These preferences are marked with \"(G1)\".</string>
     <string name="important_info_profile_grant_lookSectionProfiles">For more information, look at the \"Profiles\" section further below.</string>
     <string name="profile_preferences_typesInfoGrant">For more information see \"Important information\", section \"Profiles\".</string>
-    <string name="important_info_profile_grant_1_howTo_1">Profile parameters marked with (GX) need special permission for PhoneProfilesPlus. This is done through your PC with installed adb.</string>
+    <string name="important_info_profile_grant_1_howTo_1">Profile parameters marked with (GX) need special permission for PhoneProfiles. This is done through your PC with installed adb.</string>
     <string name="important_info_profile_grant_1_howTo_2">If you do not have adb installed on your PC:</string>
     <string name="important_info_profile_grant_1_howTo_3">1. Download SDK Platform Tools from:</string>
     <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
@@ -999,7 +999,7 @@
     <string name="important_info_activity_title">Important information</string>
     <string name="important_info_quick_guide_tab">Quick guide</string>
     <string name="important_info_important_info_tab">Important information</string>
-    <string name="important_info_quick_guide_1">PhoneProfilesPlus (PPP) has two components:</string>
+    <string name="important_info_quick_guide_1">PhoneProfiles (PPP) has two components:</string>
     <string name="important_info_quick_guide_2">1. <b>PROFILES:</b> Specifies how to change device settings.</string>
     <string name="important_info_quick_guide_3">2. <b>EVENTS:</b> Specifies when to change device settings.</string>
     <string name="important_info_quick_guide_profiles_1"><b>PROFILES:</b> Allow you to configure device settings such as ringer mode, volume levels, ringtone and notification sounds, radio switch (Wi-Fi, Bluetooth, mobile data, etc.). When a profile is activated, the corresponding settings are permanent. If you want settings to change, another profile must be activated.</string>
@@ -1033,7 +1033,7 @@
     <string name="array_pref_value_sl">sl</string>
     <string name="phone_profiles_pref_applicationStartEvents">Start events on startup</string>
     <string name="phone_profiles_pref_systemAutoStartMIUI">AutoStart permission</string>
-    <string name="phone_profiles_pref_systemAutoStartMIUI_summary">Click here to enable AutoStart permission for PhoneProfilesPlus</string>
+    <string name="phone_profiles_pref_systemAutoStartMIUI_summary">Click here to enable AutoStart permission for PhoneProfiles</string>
     <string name="phone_profiles_pref_applicationEventScanOnlyWhenScreenIsOn">Scan only when screen is on</string>
     <string name="phone_profiles_pref_applicationRestartEventsAlert">Confirm restart events</string>
     <string name="fast_access_duration_activate_with_button">Act. with</string>
@@ -1122,7 +1122,7 @@
     <string name="event_preferences_PPPExtenderInstallInfo_text">How to install PhoneProfilesPlusExtender</string>
     <string name="event_preferences_PPPExtenderInstallInfo_summary">Download latest version of PhoneProfilesPlusExtender.apk from it\'s GitHub. Then click to notification about downloaded apk and install it.</string>
     <string name="editor_drawer_open">Open navigation drawer</string>
-    <string name="donation_thanks_dialog">Thank you for donating.\nI really appreciate it.</string>
+    <string name="donation_thanks_dialog">Thank you for donating.\nI really appreciate it.</string>-->
     <string name="donation_google_android_market_not_supported">In-App Donations are not supported. Is Google Play Store installed correctly?</string>
     <string name="donation_google_error">Error.</string>
     <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
@@ -1138,13 +1138,13 @@
     <!--<string name="phone_profiles_pref_applicationEventBluetoothEnableBluetooth">Enable Bluetooth scanning</string>-->
     <!--<string name="phone_profiles_pref_applicationEventRescan_none">None</string>-->
     <!--<string name="phone_profiles_pref_applicationEventRescan_restartEvents">Restart events</string>-->
-    <!--<string name="accessibility_service_name">PhoneProfilesPlus</string>-->
-    <!--<string name="accessibility_service_description">Allow PhoneProfilesPlus to detect which application is in the foreground. This is necessary for events with \"Applications parameters\" enabled.</string>-->
-    <!--<string name="event_preferences_applications_AccessibilitySettings_summary">To enable Application parameters, allow PhoneProfilesPlus \"Accessibility\" in system settings.</string>-->
+    <!--<string name="accessibility_service_name">PhoneProfiles</string>-->
+    <!--<string name="accessibility_service_description">Allow PhoneProfiles to detect which application is in the foreground. This is necessary for events with \"Applications parameters\" enabled.</string>-->
+    <!--<string name="event_preferences_applications_AccessibilitySettings_summary">To enable Application parameters, allow PhoneProfiles \"Accessibility\" in system settings.</string>-->
     <!--<string name="event_preferences_notifications_end_when_removed">End when dismissed</string>-->
     <!--<string name="profile_preferences_volumeVibrateWhenRingingRootInfo_summary">In Android 6 this system setting can be changed only on rooted devices. Affected are ringer modes and interruption types with vibration.</string>-->
     <!--<string name="info_notification_unlink_ringer_notification_volumes2">If your device does not have separate volumes for ringtone and notifications, keep volume separation enabled.</string>-->
-    <!--<string name="event_preferences_orientation_AccessibilitySettings_summary">To enable \"Ignore for applications\" parameter, allow PhoneProfilesPlus \"Accessibility\" in system settings.</string>-->
+    <!--<string name="event_preferences_orientation_AccessibilitySettings_summary">To enable \"Ignore for applications\" parameter, allow PhoneProfiles \"Accessibility\" in system settings.</string>-->
     <!--<string name="donation_button_close">Close</string>-->
     <!--<string name="donation_google_android_market_not_supported_title">In-App Donations are not supported.</string>-->
     <!--<string name="donation_thanks_dialog_title">Thank you</string>-->
