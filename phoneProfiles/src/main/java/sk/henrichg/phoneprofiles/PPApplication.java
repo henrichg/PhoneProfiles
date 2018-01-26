@@ -53,8 +53,7 @@ public class PPApplication extends Application {
     private static final boolean logIntoLogCat = false;
     private static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
-    private static final String logFilterTags =    "PhoneProfilesHelper.doUninstallPPHelper"
-                                            +"|PhoneProfilesBackupAgent"
+    private static final String logFilterTags = "|PhoneProfilesBackupAgent"
 
                                             +"|PhoneProfilesService"
                                             +"|PackageReplacedReceiver"

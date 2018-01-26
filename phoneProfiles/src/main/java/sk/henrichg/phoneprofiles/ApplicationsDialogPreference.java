@@ -213,7 +213,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
 
             @Override
             protected Void doInBackground(Void... params) {
-                if (!EditorProfilesActivity.getApplicationsCache().isCached())
+                if (!EditorProfilesActivity.getApplicationsCache().cached)
                     EditorProfilesActivity.getApplicationsCache().getApplicationsList(context);
 
                 getValueAMSDP();
@@ -226,7 +226,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
             {
                 super.onPostExecute(result);
 
-                if (!EditorProfilesActivity.getApplicationsCache().isCached())
+                if (!EditorProfilesActivity.getApplicationsCache().cached)
                     EditorProfilesActivity.getApplicationsCache().clearCache(false);
 
                 applicationsListView.setAdapter(listAdapter);
@@ -252,7 +252,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         }
 
         EditorProfilesActivity.getApplicationsCache().cancelCaching();
-        if (!EditorProfilesActivity.getApplicationsCache().isCached())
+        if (!EditorProfilesActivity.getApplicationsCache().cached)
             EditorProfilesActivity.getApplicationsCache().clearCache(false);
         GlobalGUIRoutines.unregisterOnActivityDestroyListener(this, this);
     }

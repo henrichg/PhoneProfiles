@@ -15,10 +15,6 @@
           android:title="@string/menu_install_tone"
           android:orderInCategory="202"
           henrichg:showAsAction="never" />
-    <item android:id="@+id/menu_pphelper_uninstall"
-        android:title="@string/menu_phoneprofilehepler_uninstall"
-        android:orderInCategory="206"
-        henrichg:showAsAction="never" />
     <item android:id="@+id/menu_export"
         android:title="@string/menu_export"
         android:orderInCategory="210"

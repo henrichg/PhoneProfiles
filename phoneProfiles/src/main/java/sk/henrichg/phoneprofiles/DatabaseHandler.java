@@ -2388,12 +2388,12 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             }
 
                                             // for non existent fields set default value
-                                /*if (exportedDBObj.getVersion() < 1480) {
-                                    values.put(KEY_G_CHECKED, 0);
-                                }
-                                if (exportedDBObj.getVersion() < 1510) {
-                                    values.put(KEY_G_TRANSITION, 0);
-                                }*/
+                                            /*if (exportedDBObj.getVersion() < 1480) {
+                                                values.put(KEY_G_CHECKED, 0);
+                                            }
+                                            if (exportedDBObj.getVersion() < 1510) {
+                                                values.put(KEY_G_TRANSITION, 0);
+                                            }*/
 
                                             // Inserting Row do db z SQLiteOpenHelper
                                             db.insert(TABLE_SHORTCUTS, null, values);
