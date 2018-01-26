@@ -63,8 +63,6 @@ public class EditorProfilesActivity extends AppCompatActivity
     private MaterialDialog importProgressDialog = null;
     private MaterialDialog exportProgressDialog = null;
 
-    MaterialDialog uninstallPPHelperProgressDialog = null;
-
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
     private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detali_predefined_profile_index";
@@ -229,10 +227,6 @@ public class EditorProfilesActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        if ((uninstallPPHelperProgressDialog != null) && uninstallPPHelperProgressDialog.isShowing()) {
-            uninstallPPHelperProgressDialog.dismiss();
-            uninstallPPHelperProgressDialog = null;
-        }
         if ((importProgressDialog != null) && importProgressDialog.isShowing()) {
             importProgressDialog.dismiss();
             importProgressDialog = null;
