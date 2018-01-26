@@ -101,6 +101,8 @@ public class BillingManager implements PurchasesUpdatedListener {
                                    List<Purchase> purchases) {
         PPApplication.logE(TAG, "onPurchasesUpdated() response: " + responseCode);
         if (responseCode == BillingClient.BillingResponse.OK) {
+            getFragment().purchaseSuccessfull();
+
             for (Purchase purchase : purchases) {
                 consumePurchase(purchase);
             }
