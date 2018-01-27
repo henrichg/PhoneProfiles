@@ -39,7 +39,6 @@ public class EditorProfileListFragment extends Fragment
                                         implements OnStartDragItemListener {
 
     public DataWrapper dataWrapper;
-    public ActivateProfileHelper activateProfileHelper;
 
     private List<Profile> profileList;
 
@@ -127,11 +126,7 @@ public class EditorProfileListFragment extends Fragment
 
         dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
 
-        activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(getActivity().getApplicationContext());
-
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -295,7 +290,7 @@ public class EditorProfileListFragment extends Fragment
 
                 if (defaultProfilesGenerated)
                 {
-                    fragment.activateProfileHelper.updateWidget(true);
+                    ActivateProfileHelper.updateWidget(fragment.dataWrapper.context, true);
                     Toast msg = Toast.makeText(fragment.getActivity(),
                             fragment.getResources().getString(R.string.toast_default_profiles_generated),
                             Toast.LENGTH_SHORT);
@@ -328,7 +323,6 @@ public class EditorProfileListFragment extends Fragment
         if (profileListAdapter != null)
             profileListAdapter.release();
 
-        activateProfileHelper = null;
         profileList = null;
 
         if (dataWrapper != null)
@@ -411,7 +405,7 @@ public class EditorProfileListFragment extends Fragment
         updateHeader(_profile);
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(_profile, dataWrapper);
-        activateProfileHelper.updateWidget(true);
+        ActivateProfileHelper.updateWidget(dataWrapper.context, true);
 
         onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
     }
@@ -496,7 +490,7 @@ public class EditorProfileListFragment extends Fragment
                     updateHeader(null);
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.showProfileNotification(null, dataWrapper);
-                    activateProfileHelper.updateWidget(true);
+                    ActivateProfileHelper.updateWidget(dataWrapper.context, true);
 
                     onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 

@@ -705,7 +705,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     if (result == 1) {
-                        this.dataWrapper.getActivateProfileHelper().updateWidget(true);
+                        ActivateProfileHelper.updateWidget(dataWrapper.context, true);
 
                         //TODO Android O
                         //if (Build.VERSION.SDK_INT < 26)
@@ -1041,7 +1041,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragment.updateHeader(activeProfile);
             if (PhoneProfilesService.instance != null)
                 PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.dataWrapper);
-            fragment.dataWrapper.getActivateProfileHelper().updateWidget(true);
+            ActivateProfileHelper.updateWidget(fragment.dataWrapper.context, true);
         }
         redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
     }

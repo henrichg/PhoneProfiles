@@ -24,8 +24,6 @@ public class BackgroundActivateProfileActivity extends AppCompatActivity {
             (startupSource == PPApplication.STARTUP_SOURCE_SHORTCUT)) {
 
             dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
-
-            dataWrapper.getActivateProfileHelper().initialize(getApplicationContext());
         }
     }
 

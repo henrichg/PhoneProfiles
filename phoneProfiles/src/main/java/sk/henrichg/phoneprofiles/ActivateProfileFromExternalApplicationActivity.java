@@ -27,7 +27,6 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
         String profileName = intent.getStringExtra(EXTRA_PROFILE_NAME);
 
         dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
-        dataWrapper.getActivateProfileHelper().initialize(getApplicationContext());
 
         if (profileName != null) {
             profileName = profileName.trim();

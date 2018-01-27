@@ -6,12 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import java.util.Iterator;
 import java.util.List;
+
+import static android.content.Context.POWER_SERVICE;
 
 public class DataWrapper {
 
@@ -20,7 +24,6 @@ public class DataWrapper {
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
 
-    private ActivateProfileHelper activateProfileHelper = null;
     private List<Profile> profileList = null;
 
     DataWrapper(Context c, boolean fgui, boolean mono, int monoVal)
@@ -44,14 +47,6 @@ public class DataWrapper {
         forGUI = fgui;
         monochrome = mono;
         monochromeValue = monoVal;
-    }
-
-    public ActivateProfileHelper getActivateProfileHelper()
-    {
-        if (activateProfileHelper == null)
-            activateProfileHelper = new ActivateProfileHelper();
-
-        return activateProfileHelper;
     }
 
     public List<Profile> getProfileList()
@@ -509,9 +504,6 @@ public class DataWrapper {
     public void invalidateDataWrapper()
     {
         clearProfileList();
-        if (activateProfileHelper != null)
-            activateProfileHelper.deinitialize();
-        activateProfileHelper = null;
     }
 
     void refreshProfileIcon(Profile profile, boolean monochrome, int monochromeValue) {
@@ -534,14 +526,34 @@ public class DataWrapper {
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
 
-        Profile profile = Profile.getMappedProfile(_profile, context);
+        final Profile profile = Profile.getMappedProfile(_profile, context);
 
         Profile activatedProfile = getActivatedProfile();
 
         DatabaseHandler.getInstance(context).activateProfile(profile);
         setProfileActive(profile);
 
-        activateProfileHelper.execute(profile/*, _interactive*/);
+        final Context appContext = context;
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BluetoothLEScanBroadcastReceiver.onReceive");
+                    wakeLock.acquire(10 * 60 * 1000);
+                }
+
+                ActivateProfileHelper.execute(context, profile/*, _interactive*/);
+
+                if ((wakeLock != null) && wakeLock.isHeld())
+                    wakeLock.release();
+            }
+        });
+
 
         /*if (_interactive)
         {*/
@@ -554,7 +566,7 @@ public class DataWrapper {
 
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(profile, this);
-        activateProfileHelper.updateWidget(true);
+        ActivateProfileHelper.updateWidget(context, true);
 
         if (ApplicationPreferences.notificationsToast(context) && (!ActivateProfileHelper.lockRefresh))
         {
@@ -813,7 +825,7 @@ public class DataWrapper {
         {
             if (PhoneProfilesService.instance != null)
                 PhoneProfilesService.instance.showProfileNotification(profile, this);
-            activateProfileHelper.updateWidget(true);
+            ActivateProfileHelper.updateWidget(context, true);
 
             // for startActivityForResult
             if (activity != null)
@@ -837,7 +849,6 @@ public class DataWrapper {
         if (Permissions.grantProfilePermissions(context, profile, true,
                 forGUI, monochrome, monochromeValue,
                 startupSource, /*true,*/ null, true)) {
-            getActivateProfileHelper().initialize(context);
             _activateProfile(profile, startupSource, /*true,*/ null);
         }
     }

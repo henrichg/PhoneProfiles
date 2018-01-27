@@ -95,9 +95,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             if (profile != null) {
                 //Log.e("PhoneCallBroadcastReceiver", "doCallEvent - unlink");
                 //ExecuteVolumeProfilePrefsJob.start(context, profile._id, linkMode, false);
-                ActivateProfileHelper aph = dataWrapper.getActivateProfileHelper();
-                aph.initialize(context);
-                aph.executeForVolumes(profile, linkMode, false);
+                ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
             }
             dataWrapper.invalidateDataWrapper();
         }

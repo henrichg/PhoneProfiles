@@ -243,7 +243,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         }
 
         DatabaseHandler.getInstance(dataWrapper.context).setPOrder(profileList);  // set profiles _porder and write it into db
-        fragment.activateProfileHelper.updateWidget(false);
+        ActivateProfileHelper.updateWidget(dataWrapper.context, false);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }

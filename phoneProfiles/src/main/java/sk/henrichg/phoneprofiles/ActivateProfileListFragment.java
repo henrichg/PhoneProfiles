@@ -26,7 +26,6 @@ import java.util.List;
 public class ActivateProfileListFragment extends Fragment {
 
     private DataWrapper dataWrapper;
-    private ActivateProfileHelper activateProfileHelper;
     private List<Profile> profileList = null;
     private ActivateProfileListAdapter profileListAdapter = null;
     private ListView listView = null;
@@ -58,8 +57,6 @@ public class ActivateProfileListFragment extends Fragment {
         setRetainInstance(true);
 
         dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
-        activateProfileHelper = dataWrapper.getActivateProfileHelper();
-        activateProfileHelper.initialize(getActivity().getApplicationContext());
 
         Intent intent = getActivity().getIntent();
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
@@ -301,7 +298,7 @@ public class ActivateProfileListFragment extends Fragment {
                 // for activated profile, update notification and widgets
                 if (PhoneProfilesService.instance != null)
                     PhoneProfilesService.instance.showProfileNotification(profile, dataWrapper);
-                activateProfileHelper.updateWidget(true);
+                ActivateProfileHelper.updateWidget(dataWrapper.context, true);
             }
         }
         endOnStart();
@@ -335,7 +332,6 @@ public class ActivateProfileListFragment extends Fragment {
 
         profileList = null;
 
-        activateProfileHelper = null;
         if (dataWrapper != null)
             dataWrapper.invalidateDataWrapper();
         dataWrapper = null;

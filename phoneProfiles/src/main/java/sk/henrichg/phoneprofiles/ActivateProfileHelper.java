@@ -68,8 +68,6 @@ public class ActivateProfileHelper {
 
     //private DataWrapper dataWrapper;
 
-    private Context context;
-
     static final boolean lockRefresh = false;
     static boolean disableScreenTimeoutInternalChange = false;
 
@@ -95,24 +93,7 @@ public class ActivateProfileHelper {
     private static final String PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT = "activated_profile_screen_timeout";
     static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
 
-    public ActivateProfileHelper()
-    {
-
-    }
-
-    public void initialize(/*DataWrapper dataWrapper, */Context c)
-    {
-        //this.dataWrapper = dataWrapper;
-        this.context = c;
-    }
-
-    void deinitialize()
-    {
-        //dataWrapper = null;
-        context = null;
-    }
-
-    private void doExecuteForRadios(Context context, Profile profile)
+    private static void doExecuteForRadios(Context context, Profile profile)
     {
         //try { Thread.sleep(300); } catch (InterruptedException e) { }
         //SystemClock.sleep(300);
@@ -195,7 +176,7 @@ public class ActivateProfileHelper {
                             break;
                     }
                     if (setWifiAPState) {
-                        setWifiAP(wifiApManager, isWifiAPEnabled);
+                        setWifiAP(context, wifiApManager, isWifiAPEnabled);
                         //try { Thread.sleep(200); } catch (InterruptedException e) { }
                         //SystemClock.sleep(200);
                         PPApplication.sleep(200);
@@ -415,7 +396,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void executeForRadios(final Profile profile)
+    private static void executeForRadios(Context context, final Profile profile)
     {
         final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThread();
@@ -486,7 +467,7 @@ public class ActivateProfileHelper {
         ));
     }
 
-    private boolean isVibrateRingerMode(int ringerMode) {
+    private static boolean isVibrateRingerMode(int ringerMode) {
         return (ringerMode == 3);
 
     }
@@ -577,7 +558,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressLint("NewApi")
-    private void setVolumes(Context context, Profile profile, AudioManager audioManager, int linkUnlink, boolean forProfileActivation)
+    private static void setVolumes(Context context, Profile profile, AudioManager audioManager, int linkUnlink, boolean forProfileActivation)
     {
         if (profile.getVolumeRingtoneChange()) {
             if (forProfileActivation)
@@ -744,7 +725,7 @@ public class ActivateProfileHelper {
 
     }
 
-    private void setZenMode(Context context, int zenMode, AudioManager audioManager, int ringerMode)
+    private static void setZenMode(Context context, int zenMode, AudioManager audioManager, int ringerMode)
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
@@ -804,7 +785,7 @@ public class ActivateProfileHelper {
             audioManager.setRingerMode(ringerMode);
     }
 
-    private void setVibrateWhenRinging(Context context, Profile profile, int value) {
+    private static void setVibrateWhenRinging(Context context, Profile profile, int value) {
         int lValue = value;
         if (profile != null) {
             switch (profile._vibrateWhenRinging) {
@@ -850,7 +831,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void setTones(Context context, Profile profile) {
+    private static void setTones(Context context, Profile profile) {
         if (Permissions.checkProfileRingTones(context, profile, null)) {
             if (profile._soundRingtoneChange == 1) {
                 if (!profile._soundRingtone.isEmpty()) {
@@ -903,7 +884,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    void executeForVolumes(final Profile profile, final int linkUnlinkVolumes, final boolean forProfileActivation) {
+    static void executeForVolumes(Context context, final Profile profile, final int linkUnlinkVolumes, final boolean forProfileActivation) {
         final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
@@ -969,7 +950,7 @@ public class ActivateProfileHelper {
         });
     }
 
-    private void setNotificationLed(int value) {
+    private static void setNotificationLed(Context context, int value) {
         if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, context)
                 == PPApplication.PREFERENCE_ALLOWED) {
             if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
@@ -994,7 +975,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void setHeadsUpNotifications(int value) {
+    private static void setHeadsUpNotifications(Context context, int value) {
         if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, context)
                 == PPApplication.PREFERENCE_ALLOWED) {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -1021,7 +1002,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void changeRingerModeForVolumeEqual0(Profile profile, AudioManager audioManager) {
+    private static void changeRingerModeForVolumeEqual0(Profile profile, AudioManager audioManager) {
         PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "volumeRingtoneChange=" + profile.getVolumeRingtoneChange());
         PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "volumeRingtoneValue=" + profile.getVolumeRingtoneValue());
 
@@ -1053,7 +1034,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void changeNotificationVolumeForVolumeEqual0(Context context, Profile profile) {
+    private static void changeNotificationVolumeForVolumeEqual0(Context context, Profile profile) {
         if (profile.getVolumeNotificationChange() && getMergedRingNotificationVolumes(context)) {
             if (profile.getVolumeNotificationValue() == 0) {
                 PPApplication.logE("ActivateProfileHelper.changeNotificationVolumeForVolumeEqual0", "changed notification value to 1");
@@ -1156,7 +1137,7 @@ public class ActivateProfileHelper {
         //(vibrateWhenRinging == 1);
     }
 
-    private void setRingerMode(Context context, Profile profile, AudioManager audioManager, boolean firstCall, boolean forProfileActivation)
+    private static void setRingerMode(Context context, Profile profile, AudioManager audioManager, boolean firstCall, boolean forProfileActivation)
     {
         // linkUnlink == LINKMODE_NONE: not do link and unlink volumes for phone call - called from ActivateProfileHelper.execute()
         // linkUnlink != LINKMODE_NONE: do link and unlink volumes for phone call - called from PhoneCallBroadcastReceiver
@@ -1287,7 +1268,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void executeForWallpaper(final Profile profile) {
+    private static void executeForWallpaper(Context context, final Profile profile) {
         if (profile._deviceWallpaperChange == 1)
         {
             final Context appContext = context.getApplicationContext();
@@ -1360,7 +1341,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void executeForRunApplications(final Profile profile) {
+    private static void executeForRunApplications(Context context, final Profile profile) {
         if (profile._deviceRunApplicationChange == 1)
         {
             final Context appContext = context.getApplicationContext();
@@ -1433,7 +1414,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void executeRootForAdaptiveBrightness(final Profile profile) {
+    private static void executeRootForAdaptiveBrightness(Context context, final Profile profile) {
         final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
@@ -1471,7 +1452,7 @@ public class ActivateProfileHelper {
         });
     }
 
-    public void execute(Profile _profile/*, boolean _interactive*/)
+    public static void execute(final Context context, Profile _profile/*, boolean _interactive*/)
     {
         // separate ringing and notification - is marked with @Hide :-(
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
@@ -1481,7 +1462,7 @@ public class ActivateProfileHelper {
         // setup volume and ringer mode
         // run job for execute volumes
         //ExecuteVolumeProfilePrefsJob.start(context, profile._id, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
-        executeForVolumes(profile, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
+        executeForVolumes(context, profile, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);
 
         // set vibration on touch
         if (Permissions.checkProfileVibrationOnTouch(context, profile, null)) {
@@ -1502,7 +1483,7 @@ public class ActivateProfileHelper {
         // setup radio preferences
         // run job for execute radios
         //ExecuteRadioProfilePrefsJob.start(context, profile._id);
-        executeForRadios(profile);
+        executeForRadios(context, profile);
 
         // setup auto-sync
         try {
@@ -1536,10 +1517,9 @@ public class ActivateProfileHelper {
             if ((pm != null) && pm.isScreenOn()) {
                 //Log.d("ActivateProfileHelper.execute","screen on");
                 if (PPApplication.screenTimeoutHandler != null) {
-                    final Context _context = context;
                     PPApplication.screenTimeoutHandler.post(new Runnable() {
                         public void run() {
-                            setScreenTimeout(profile._deviceScreenTimeout, _context);
+                            setScreenTimeout(profile._deviceScreenTimeout, context);
                         }
                     });
                 }// else
@@ -1628,7 +1608,7 @@ public class ActivateProfileHelper {
                                         profile.getDeviceBrightnessAdaptiveValue(context));
                             } catch (Exception ee) {
                                 //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_ADAPTIVE_BRIGHTNESS, profile._id);
-                                executeRootForAdaptiveBrightness(profile);
+                                executeRootForAdaptiveBrightness(context, profile);
                             }
                         }
                     }
@@ -1642,10 +1622,9 @@ public class ActivateProfileHelper {
                 }
 
                 if (PPApplication.brightnessHandler != null) {
-                    final Context __context = context;
                     PPApplication.brightnessHandler.post(new Runnable() {
                         public void run() {
-                            createBrightnessView(profile, __context);
+                            createBrightnessView(profile, context);
                         }
                     });
                 }// else
@@ -1693,10 +1672,10 @@ public class ActivateProfileHelper {
             //if (Permissions.checkProfileNotificationLed(context, profile)) { not needed for Android 6+, because root is required
             switch (profile._notificationLed) {
                 case 1:
-                    setNotificationLed(1);
+                    setNotificationLed(context, 1);
                     break;
                 case 2:
-                    setNotificationLed(0);
+                    setNotificationLed(context, 0);
                     break;
             }
             //}
@@ -1706,7 +1685,7 @@ public class ActivateProfileHelper {
         if (Permissions.checkProfileWallpaper(context, profile, null)) {
             if (profile._deviceWallpaperChange == 1) {
                 //ExecuteWallpaperProfilePrefsJob.start(context, profile._id);
-                executeForWallpaper(profile);
+                executeForWallpaper(context, profile);
             }
         }
 
@@ -1714,7 +1693,7 @@ public class ActivateProfileHelper {
 
         // set power save mode
         //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_POWER_SAVE_MODE, profile._id);
-        setPowerSaveMode(profile);
+        setPowerSaveMode(context, profile);
 
         if (Permissions.checkProfileLockDevice(context, profile, null)) {
             if (profile._lockDevice != 0) {
@@ -1725,7 +1704,7 @@ public class ActivateProfileHelper {
                     PPApplication.logE("---$$$ ActivateProfileHelper.execute", "keyguardLocked=" + keyguardLocked);
                     if (!keyguardLocked) {
                         //ExecuteRootProfilePrefsJob.start(context, ExecuteRootProfilePrefsJob.ACTION_LOCK_DEVICE, profile._id);
-                        lockDevice(profile);
+                        lockDevice(context, profile);
                     }
                 }
             }
@@ -1734,17 +1713,17 @@ public class ActivateProfileHelper {
         if (profile._deviceRunApplicationChange == 1)
         {
             //ExecuteRunApplicationsProfilePrefsJob.start(context, profile._id);
-            executeForRunApplications(profile);
+            executeForRunApplications(context, profile);
         }
 
         // set heads-up notifications
         if (profile._headsUpNotifications != 0) {
             switch (profile._headsUpNotifications) {
                 case 1:
-                    setHeadsUpNotifications(1);
+                    setHeadsUpNotifications(context, 1);
                     break;
                 case 2:
-                    setHeadsUpNotifications(0);
+                    setHeadsUpNotifications(context, 0);
                     break;
             }
         }
@@ -1812,7 +1791,7 @@ public class ActivateProfileHelper {
                             String title = context.getString(R.string.profile_activation_interactive_preference_notification_title) + " " + profile._name;
                             String text = context.getString(R.string.profile_activation_interactive_preference_notification_text) + " " +
                                     context.getString(R.string.profile_preferences_deviceMobileDataPrefs);
-                            showNotificationForInteractiveParameters(title, text, intent, PPApplication.PROFILE_ACTIVATION_MOBILE_DATA_PREFS_NOTIFICATION_ID);
+                            showNotificationForInteractiveParameters(context, title, text, intent, PPApplication.PROFILE_ACTIVATION_MOBILE_DATA_PREFS_NOTIFICATION_ID);
                         }
                     }
                 }
@@ -1837,7 +1816,7 @@ public class ActivateProfileHelper {
                             String title = context.getString(R.string.profile_activation_interactive_preference_notification_title) + " " + profile._name;
                             String text = context.getString(R.string.profile_activation_interactive_preference_notification_text) + " " +
                                     context.getString(R.string.profile_preferences_deviceLocationServicePrefs);
-                            showNotificationForInteractiveParameters(title, text, intent, PPApplication.PROFILE_ACTIVATION_LOCATION_PREFS_NOTIFICATION_ID);
+                            showNotificationForInteractiveParameters(context, title, text, intent, PPApplication.PROFILE_ACTIVATION_LOCATION_PREFS_NOTIFICATION_ID);
                         }
                     }
                 }
@@ -1860,7 +1839,7 @@ public class ActivateProfileHelper {
                         String title = context.getString(R.string.profile_activation_interactive_preference_notification_title) + " " + profile._name;
                         String text = context.getString(R.string.profile_activation_interactive_preference_notification_text) + " " +
                                 context.getString(R.string.profile_preferences_deviceWiFiAPPrefs);
-                        showNotificationForInteractiveParameters(title, text, intent, PPApplication.PROFILE_ACTIVATION_WIFI_AP_PREFS_NOTIFICATION_ID);
+                        showNotificationForInteractiveParameters(context, title, text, intent, PPApplication.PROFILE_ACTIVATION_WIFI_AP_PREFS_NOTIFICATION_ID);
                     }
                 }
             }
@@ -1868,7 +1847,7 @@ public class ActivateProfileHelper {
 
     }
 
-    private void showNotificationForInteractiveParameters(String title, String text, Intent intent, int notificationId) {
+    private static void showNotificationForInteractiveParameters(Context context, String title, String text, Intent intent, int notificationId) {
         String nTitle = title;
         String nText = text;
         if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -1894,7 +1873,7 @@ public class ActivateProfileHelper {
             mNotificationManager.notify(notificationId, mBuilder.build());
     }
 
-    void setScreenTimeout(int screenTimeout, Context context) {
+    static void setScreenTimeout(int screenTimeout, Context context) {
         disableScreenTimeoutInternalChange = true;
         //Log.d("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
         switch (screenTimeout) {
@@ -2022,7 +2001,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressLint("RtlHardcoded")
-    private void createBrightnessView(Profile profile, Context context)
+    private static void createBrightnessView(Profile profile, Context context)
     {
         //if (context != null)
         //{
@@ -2104,7 +2083,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    void updateWidget(boolean alsoEditor)
+    static void updateWidget(Context context, boolean alsoEditor)
     {
         if (lockRefresh || EditorProfilesActivity.doImport)
             // no refresh widgets
@@ -2162,7 +2141,7 @@ public class ActivateProfileHelper {
 
 
     @SuppressLint("NewApi")
-    private boolean isAirplaneMode(Context context)
+    private static boolean isAirplaneMode(Context context)
     {
         //if (android.os.Build.VERSION.SDK_INT >= 17)
             return Settings.Global.getInt(context.getContentResolver(), Global.AIRPLANE_MODE_ON, 0) != 0;
@@ -2171,7 +2150,7 @@ public class ActivateProfileHelper {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) != 0;*/
     }
 
-    private void setAirplaneMode(/*Context context, */boolean mode)
+    private static void setAirplaneMode(/*Context context, */boolean mode)
     {
         //if (android.os.Build.VERSION.SDK_INT >= 17)
             setAirplaneMode_SDK17(/*context, */mode);
@@ -2213,7 +2192,7 @@ public class ActivateProfileHelper {
         }
     }
     */
-    private boolean isMobileData(Context context)
+    private static boolean isMobileData(Context context)
     {
         if (android.os.Build.VERSION.SDK_INT < 21)
         {
@@ -2362,7 +2341,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void setMobileData(Context context, boolean enable)
+    private static void setMobileData(Context context, boolean enable)
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
@@ -2587,7 +2566,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void setPreferredNetworkType(Context context, int networkType)
+    private static void setPreferredNetworkType(Context context, int networkType)
     {
         if (PPApplication.isRooted() && PPApplication.serviceBinaryExists())
         {
@@ -2662,7 +2641,7 @@ public class ActivateProfileHelper {
     }
     */
 
-    private void setWifiAP(WifiApManager wifiApManager, boolean enable) {
+    private static void setWifiAP(Context context, WifiApManager wifiApManager, boolean enable) {
         if (Build.VERSION.SDK_INT < 26)
             wifiApManager.setWifiApState(enable);
         else {
@@ -2706,7 +2685,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void setNFC(Context context, boolean enable)
+    private static void setNFC(Context context, boolean enable)
     {
         //Log.e("ActivateProfileHelper.setNFC", "xxx");
         if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
@@ -2754,7 +2733,7 @@ public class ActivateProfileHelper {
     }
 
     @SuppressWarnings("deprecation")
-    private void setGPS(Context context, boolean enable)
+    private static void setGPS(Context context, boolean enable)
     {
         boolean isEnabled = false;
         boolean ok = true;
@@ -2980,7 +2959,7 @@ public class ActivateProfileHelper {
             }
     }
 
-    private void setAirplaneMode_SDK17(/*Context context, */boolean mode)
+    private static void setAirplaneMode_SDK17(/*Context context, */boolean mode)
     {
         if (PPApplication.isRooted() && PPApplication.settingsBinaryExists())
         {
@@ -3030,7 +3009,7 @@ public class ActivateProfileHelper {
     }
     */
 
-    private void setPowerSaveMode(final Profile profile) {
+    private static void setPowerSaveMode(Context context, final Profile profile) {
         if (profile._devicePowerSaveMode != 0) {
             final Context appContext = context.getApplicationContext();
             PPApplication.startHandlerThread();
@@ -3100,7 +3079,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    private void lockDevice(final Profile profile) {
+    private static void lockDevice(Context context, final Profile profile) {
         final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());

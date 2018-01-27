@@ -52,7 +52,6 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
                             ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                         DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
-                        dataWrapper.getActivateProfileHelper().initialize(appContext);
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                         Profile activatedProfile = dataWrapper.getActivatedProfile();
@@ -66,7 +65,6 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     //ActivateProfileHelper.setScreenUnlocked(appContext, true);
 
                     final DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
-                    dataWrapper.getActivateProfileHelper().initialize(appContext);
 
                     if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
                             ApplicationPreferences.notificationHideInLockScreen(appContext)) {
@@ -85,7 +83,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         if (PPApplication.screenTimeoutHandler != null) {
                             PPApplication.screenTimeoutHandler.post(new Runnable() {
                                 public void run() {
-                                    dataWrapper.getActivateProfileHelper().setScreenTimeout(screenTimeout, appContext);
+                                    ActivateProfileHelper.setScreenTimeout(screenTimeout, appContext);
                                     dataWrapper.invalidateDataWrapper();
                                 }
                             });
@@ -114,7 +112,6 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
                             ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                         DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
-                        dataWrapper.getActivateProfileHelper().initialize(appContext);
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
                         Profile activatedProfile = dataWrapper.getActivatedProfile();
