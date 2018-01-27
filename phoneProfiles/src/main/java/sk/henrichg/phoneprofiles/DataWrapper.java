@@ -78,14 +78,14 @@ public class DataWrapper {
     }
 
 
-    void setProfileList(List<Profile> profileList/*, boolean recycleBitmaps*/)
+    void setProfileList(List<Profile> _profileList/*, boolean recycleBitmaps*/)
     {
         /*if (recycleBitmaps)
             clearProfileList();
         else*/
             if (this.profileList != null)
                 this.profileList.clear();
-        this.profileList = profileList;
+        this.profileList = _profileList;
     }
 
     static Profile getNonInitializedProfile(String name, String icon, int order)
