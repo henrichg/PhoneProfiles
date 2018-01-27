@@ -24,7 +24,7 @@ public class DataWrapper {
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
 
-    private List<Profile> profileList = null;
+    List<Profile> profileList = null;
 
     DataWrapper(Context c, boolean fgui, boolean mono, int monoVal)
     {
@@ -49,7 +49,7 @@ public class DataWrapper {
         monochromeValue = monoVal;
     }
 
-    public List<Profile> getProfileList()
+    public void fillProfileList()
     {
         //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
@@ -59,8 +59,6 @@ public class DataWrapper {
         }
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
-
-        return profileList;
     }
 
     List<Profile> getNewProfileList() {
@@ -68,6 +66,7 @@ public class DataWrapper {
 
         if (forGUI)
         {
+            //noinspection ForLoopReplaceableByForEach
             for (Iterator<Profile> it = newProfileList.iterator(); it.hasNext();) {
                 Profile profile = it.next();
                 profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -310,7 +309,7 @@ public class DataWrapper {
         return profile;
     }
 
-    void getPredefinedProfileList()
+    void fillPredefinedProfileList()
     {
         clearProfileList();
         DatabaseHandler.getInstance(context).deleteAllProfiles();
@@ -318,7 +317,7 @@ public class DataWrapper {
         for (int index = 0; index < 6; index++)
             getPredefinedProfile(index, true);
 
-        getProfileList();
+        fillProfileList();
     }
 
     void clearProfileList()

@@ -32,8 +32,8 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
             profileName = profileName.trim();
 
             if (!profileName.isEmpty()) {
-                List<Profile> profileList = dataWrapper.getProfileList();
-                for (Profile profile : profileList) {
+                dataWrapper.fillProfileList();
+                for (Profile profile : dataWrapper.profileList) {
                     if (profile._name.trim().equals(profileName.trim())) {
                         profile_id = profile._id;
                         break;

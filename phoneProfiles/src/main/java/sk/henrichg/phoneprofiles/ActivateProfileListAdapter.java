@@ -20,34 +20,31 @@ import java.util.List;
 class ActivateProfileListAdapter extends BaseAdapter
 {
 
-    private List<Profile> profileList;
     private ActivateProfileListFragment fragment;
-    private final DataWrapper dataWrapper;
+    private final DataWrapper activityDataWrapper;
 
     //private boolean targetHelpsSequenceStarted;
     static final String PREF_START_TARGET_HELPS = "activate_profile_list_adapter_start_target_helps";
 
-    ActivateProfileListAdapter(ActivateProfileListFragment f, List<Profile> pl, DataWrapper dataWrapper)
+    ActivateProfileListAdapter(ActivateProfileListFragment f, /*List<Profile> pl, */DataWrapper dataWrapper)
     {
         fragment = f;
-        profileList = pl;
-        this.dataWrapper = dataWrapper;
+        this.activityDataWrapper = dataWrapper;
     }
 
     public void release()
     {
         fragment = null;
-        profileList = null;
     }
 
     public int getCount()
     {
-        return profileList.size();
+        return activityDataWrapper.profileList.size();
     }
 
     public Object getItem(int position)
     {
-        return profileList.get(position);
+        return activityDataWrapper.profileList.get(position);
     }
 
     public long getItemId(int position)
@@ -78,15 +75,15 @@ class ActivateProfileListAdapter extends BaseAdapter
         if (profile == null)
             return -1;
 
-        if (profileList == null)
+        if (activityDataWrapper.profileList == null)
             return -1;
 
         int pos = -1;
 
-        for (int i = 0; i < profileList.size(); i++)
+        for (int i = 0; i < activityDataWrapper.profileList.size(); i++)
         {
             ++pos;
-            if (profileList.get(i)._id == profile._id)
+            if (activityDataWrapper.profileList.get(i)._id == profile._id)
                 return pos;
         }
         return -1;
@@ -94,7 +91,7 @@ class ActivateProfileListAdapter extends BaseAdapter
 
     public Profile getActivatedProfile()
     {
-        for (Profile p : profileList)
+        for (Profile p : activityDataWrapper.profileList)
         {
             if (p._checked)
             {
@@ -107,8 +104,8 @@ class ActivateProfileListAdapter extends BaseAdapter
 
     void notifyDataSetChanged(boolean refreshIcons) {
         if (refreshIcons) {
-            for (Profile profile : profileList) {
-                dataWrapper.refreshProfileIcon(profile, false, 0);
+            for (Profile profile : activityDataWrapper.profileList) {
+                activityDataWrapper.refreshProfileIcon(profile, false, 0);
             }
         }
         notifyDataSetChanged();
@@ -157,7 +154,7 @@ class ActivateProfileListAdapter extends BaseAdapter
             holder = (ViewHolder)vi.getTag();
         }
 
-        final Profile profile = profileList.get(position);
+        final Profile profile = activityDataWrapper.profileList.get(position);
 
         if ((ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity())) &&
                 (profile._porder == ActivateProfileListFragment.PORDER_FOR_IGNORED_PROFILE)) {
@@ -181,7 +178,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                 holder.profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(fragment.getActivity()));
             }
 
-            String profileName = profile.getProfileNameWithDuration(ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity()), dataWrapper.context);
+            String profileName = profile.getProfileNameWithDuration(ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity()), activityDataWrapper.context);
             holder.profileName.setText(profileName);
 
             if (profile.getIsIconResourceID()) {

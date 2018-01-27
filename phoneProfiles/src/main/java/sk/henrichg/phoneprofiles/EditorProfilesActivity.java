@@ -1031,17 +1031,17 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         if (fragment != null) {
             // update profile, this rewrite profile in profileList
-            fragment.dataWrapper.updateProfile(profile);
+            fragment.activityDataWrapper.updateProfile(profile);
 
             boolean newProfile = ((newProfileMode == EditorProfileListFragment.EDIT_MODE_INSERT) ||
                     (newProfileMode == EditorProfileListFragment.EDIT_MODE_DUPLICATE));
             fragment.updateListView(profile, newProfile, false, false);
 
-            Profile activeProfile = fragment.dataWrapper.getActivatedProfile();
+            Profile activeProfile = fragment.activityDataWrapper.getActivatedProfile();
             fragment.updateHeader(activeProfile);
             if (PhoneProfilesService.instance != null)
-                PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.dataWrapper);
-            ActivateProfileHelper.updateWidget(fragment.dataWrapper.context, true);
+                PhoneProfilesService.instance.showProfileNotification(activeProfile, fragment.activityDataWrapper);
+            ActivateProfileHelper.updateWidget(fragment.activityDataWrapper.context, true);
         }
         redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
     }
@@ -1065,7 +1065,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     {
         EditorProfileListFragment fragment = (EditorProfileListFragment)getFragmentManager().findFragmentById(R.id.editor_profile_list);
         if (fragment != null)
-            return fragment.dataWrapper;
+            return fragment.activityDataWrapper;
         else
             return null;
     }
