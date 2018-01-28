@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" />
-      <module fileurl="file://$PROJECT_DIR$/QuickScroll/QuickScroll.iml" filepath="$PROJECT_DIR$/QuickScroll/QuickScroll.iml" />
       <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" />
     </modules>
   </component>

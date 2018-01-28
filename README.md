@@ -15,6 +15,7 @@ Required external libs
 ----------------------
 
 - Android support library: core, appcomapt, gridlayout, recyclerview
+- Google Billing library: donations
 - RootTools - https://github.com/Stericson/RootTools
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
@@ -22,5 +23,5 @@ Required external libs
 - material-dialogs - https://github.com/afollestad/material-dialogs
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
 - crashlytics - https://fabric.io/kits/android/crashlytics
-- quickscroll - https://github.com/andraskindler/quickscroll
+- FastScroll - https://github.com/L4Digital/FastScroll
 - time-duration-picker - https://github.com/svenwiegand/time-duration-picker

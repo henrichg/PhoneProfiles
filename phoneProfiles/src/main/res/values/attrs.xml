@@ -28,9 +28,6 @@
         <attr name="dMax" format="integer" />
         <attr name="dMin" format="integer" />
     </declare-styleable>
-    <declare-styleable name="ApplicationsMultiSelectDialogPreference">
-        <attr name="addShortcuts" format="integer" />
-    </declare-styleable>
     <declare-styleable name="InfoDialogPreference">
         <attr name="infoText" format="string" />
     </declare-styleable>

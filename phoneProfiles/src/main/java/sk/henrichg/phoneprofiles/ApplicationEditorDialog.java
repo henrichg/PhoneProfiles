@@ -1,19 +1,16 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.util.TypedValue;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.andraskindler.quickscroll.QuickScroll;
+import com.l4digital.fastscroll.FastScrollRecyclerView;
 
 import java.util.List;
 
@@ -24,13 +21,13 @@ class ApplicationEditorDialog
 {
 
     private final ApplicationsDialogPreference preference;
-    private List<Application> cachedApplicationList;
     private final ApplicationEditorDialogAdapter listAdapter;
 
     final MaterialDialog mDialog;
-    final private TextView mDelayValue;
-    final private TimeDurationPickerDialog mDelayValueDialog;
+    private final TextView mDelayValue;
+    private final TimeDurationPickerDialog mDelayValueDialog;
 
+    List<Application> cachedApplicationList;
     private final Application mApplication;
 
     int selectedPosition;
@@ -66,7 +63,6 @@ class ApplicationEditorDialog
         mDelayValue = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay);
         mDelayValue.setText(GlobalGUIRoutines.getDurationString(startApplicationDelay));
 
-        //noinspection ConstantConditions
         RelativeLayout delayValueRoot = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay_root);
         mDelayValueDialog = new TimeDurationPickerDialog(context, new TimeDurationPickerDialog.OnDurationSetListener() {
             @Override
@@ -92,24 +88,11 @@ class ApplicationEditorDialog
             }
         );
 
-        mDelayValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDelayValueDialog.setDuration(startApplicationDelay * 1000);
-                mDelayValueDialog.show();
-            }
-        });
-
-        TextView mValueSpinnerChar = layout.findViewById(R.id.applications_editor_dialog_startApplicationDelay_spinnerChar);
-        mValueSpinnerChar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDelayValueDialog.setDuration(startApplicationDelay * 1000);
-                mDelayValueDialog.show();
-            }
-        });
-
-        ListView listView = layout.findViewById(R.id.applications_editor_dialog_listview);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        //noinspection ConstantConditions
+        FastScrollRecyclerView listView = layout.findViewById(R.id.applications_editor_dialog_listview);
+        listView.setLayoutManager(layoutManager);
+        listView.setHasFixedSize(true);
 
         if (EditorProfilesActivity.getApplicationsCache() == null)
             EditorProfilesActivity.createApplicationsCache();
@@ -122,8 +105,8 @@ class ApplicationEditorDialog
             if (cachedApplicationList != null) {
                 for (Application _application : cachedApplicationList) {
                     if ((mApplication.shortcut == _application.shortcut) &&
-                            mApplication.packageName.equals(_application.packageName) &&
-                            mApplication.activityName.equals(_application.activityName)) {
+                        mApplication.packageName.equals(_application.packageName) &&
+                        mApplication.activityName.equals(_application.activityName)) {
                         selectedPosition = pos;
                         break;
                     }
@@ -140,35 +123,9 @@ class ApplicationEditorDialog
         listAdapter = new ApplicationEditorDialogAdapter(this, context);
         listView.setAdapter(listAdapter);
 
-        TypedValue tv = new TypedValue();
-        preference.getContext().getTheme().resolveAttribute(R.attr.colorQSScrollbar, tv, true);
-        int colorQSScrollbar = tv.data;
-        preference.getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarInactive, tv, true);
-        int colorQSHandlebarInactive = tv.data;
-        preference.getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarActive, tv, true);
-        int colorQSHandlebarActive = tv.data;
-        preference.getContext().getTheme().resolveAttribute(R.attr.colorQSHandlebarStroke, tv, true);
-        int colorQSHandlebarStroke = tv.data;
-
-        final QuickScroll quickscroll = layout.findViewById(R.id.applications_editor_dialog_quickscroll);
-        quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, listView, listAdapter, QuickScroll.STYLE_HOLO, colorQSScrollbar);
-        quickscroll.setHandlebarColor(colorQSHandlebarInactive, colorQSHandlebarActive, colorQSHandlebarStroke);
-        quickscroll.setIndicatorColor(colorQSHandlebarActive, colorQSHandlebarActive, Color.WHITE);
-        quickscroll.setFixedSize(1);
-
         if (selectedPosition > -1) {
-            listView.setSelection(selectedPosition);
+            listView.getLayoutManager().scrollToPosition(selectedPosition);
         }
-
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View item, int position, long id) {
-                ApplicationEditorViewHolder viewHolder = (ApplicationEditorViewHolder) item.getTag();
-                doOnItemSelected(position);
-                viewHolder.radioBtn.setChecked(true);
-            }
-
-        });
-
     }
 
     void doOnItemSelected(int position)
