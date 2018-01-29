@@ -843,7 +843,15 @@ public class DataWrapper {
     {
         int startupSource = PPApplication.STARTUP_SOURCE_SERVICE_MANUAL;
         Profile profile = getProfileById(profile_id);
-        if (profile == null) return;
+        if (profile == null) {
+            // remove last configured profile duration alarm
+            ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
+            Profile.setActivatedProfileForDuration(context, 0);
+            if (PhoneProfilesService.instance != null)
+                PhoneProfilesService.instance.showProfileNotification(getActivatedProfile(), this);
+            ActivateProfileHelper.updateWidget(context, true);
+            return;
+        }
         if (Permissions.grantProfilePermissions(context, profile, true,
                 forGUI, monochrome, monochromeValue,
                 startupSource, /*true,*/ null, true)) {
