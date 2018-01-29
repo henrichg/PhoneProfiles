@@ -14,13 +14,14 @@ Android application - manually change device settings like ringer mode, sounds, 
 Required external libs
 ----------------------
 
-- Android support library: core, appcomapt, gridlayout, recyclerview
+- Android support library: core, appcomapt, gridlayout, cardview, recyclerview
 - Google Billing library: donations
 - RootTools - https://github.com/Stericson/RootTools
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - google-gson - https://code.google.com/p/google-gson/
 - material-dialogs - https://github.com/afollestad/material-dialogs
+- RelativePopupWindow - https://github.com/kakajika/RelativePopupWindow
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
 - crashlytics - https://fabric.io/kits/android/crashlytics
 - RecyclerView-FastScroll - https://github.com/timusus/RecyclerView-FastScroll
