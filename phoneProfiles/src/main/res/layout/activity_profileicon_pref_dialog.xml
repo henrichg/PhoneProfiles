@@ -18,6 +18,15 @@
             android:layout_marginBottom="5dp"
             android:background="?attr/dialogDivider" />
 
+        <Button
+            android:id="@+id/profileicon_pref_dlg_custom_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/imageview_resource_file_pref_dialog_gallery_btn"
+            android:textColor="?attr/colorAccent"
+            android:background="?attr/selectableItemBackground" />
+
         <!-- <TextView
             android:id="@+id/profileicon_pref_dlg_helpText"
             android:layout_width="match_parent"
@@ -87,8 +96,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_above="@id/profileicon_pref_dlg_et_btn"
-        android:layout_alignParentTop="true"
-        >
+        android:layout_alignParentTop="true" >
 
         <View
             android:id="@+id/profileicon_pref_dlg_titleBarDivider"
