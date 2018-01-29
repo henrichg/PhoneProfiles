@@ -23,5 +23,5 @@ Required external libs
 - material-dialogs - https://github.com/afollestad/material-dialogs
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
 - crashlytics - https://fabric.io/kits/android/crashlytics
-- FastScroll - https://github.com/L4Digital/FastScroll
+- RecyclerView-FastScroll - https://github.com/timusus/RecyclerView-FastScroll
 - time-duration-picker - https://github.com/svenwiegand/time-duration-picker
