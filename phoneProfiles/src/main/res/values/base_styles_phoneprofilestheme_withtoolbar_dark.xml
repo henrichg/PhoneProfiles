@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/primary_dark</item>
         <item name="colorPrimaryDark">@color/primaryDark_dark</item>
         <item name="colorAccent">@color/accent_dark</item>
+        <item name="colorAccentDisabled">@color/accent_dark_disabled</item>
 
         <item name="activityTextColor">@color/activityTextColor_dark</item>
         <item name="activityCommandBackgroundColor">@color/activityCommandBackgroundColor_dark</item>
