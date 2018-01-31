@@ -110,8 +110,8 @@
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-27.0.2" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.0.2" level="project" />
-    <orderEntry type="library" name="com.simplecityapps:recyclerview-fastscroll-1.0.16" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:27.0.2@jar" level="project" />
+    <orderEntry type="library" name="com.simplecityapps:recyclerview-fastscroll-1.0.17" level="project" />
     <orderEntry type="library" name="__local_aars__:/home/henrisko/Projekty/Android/AndroidStudio/PhoneProfiles/phoneProfiles/libs/sdk-v1.0.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.getkeepsafe.taptargetview:taptargetview-1.11.0" level="project" />
     <orderEntry type="library" name="RootShell:@aar" level="project" />
