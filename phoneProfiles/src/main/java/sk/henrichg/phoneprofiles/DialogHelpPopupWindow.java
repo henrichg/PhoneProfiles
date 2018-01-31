@@ -1,7 +1,9 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,26 +33,23 @@ class DialogHelpPopupWindow extends GuiInfoPopupWindow {
         int measuredWPopup = contentView.getMeasuredWidth();
         int measuredHPopup = contentView.getMeasuredHeight();
 
-        int[] location = new int[2];
-        helpIcon.getLocationOnScreen(location);
+        int[] locationHelpIcon = new int[2];
+        helpIcon.getLocationOnScreen(locationHelpIcon);
 
         int x = 0;
         int y = 0;
 
-        if (location[0] + helpIcon.getWidth() - measuredWPopup < 0)
-            x = -(location[0] + helpIcon.getWidth() - measuredWPopup);
+        if (locationHelpIcon[0] + helpIcon.getWidth() - measuredWPopup < 0)
+            x = -(locationHelpIcon[0] + helpIcon.getWidth() - measuredWPopup);
 
-        /*
-        try {
-            //noinspection ConstantConditions
-            int yDialog = dialog.getWindow().getDecorView().getTop();
-            int hDialog = dialog.getWindow().getDecorView().getHeight();
+        Point screenSize = GlobalGUIRoutines.getRealScreenSize(context);
+        Point navigationBarSize = GlobalGUIRoutines.getNavigationBarSize(context);
+        if ((screenSize != null) && (navigationBarSize != null)) {
+            int screenBottom = screenSize.y - navigationBarSize.y;
 
-            if ((location[1] + helpIcon.getHeight() + measuredHPopup) > (yDialog + hDialog))
-                y = -(location[1] - helpIcon.getHeight()
-                        - ((yDialog + hDialog) - measuredHPopup));
-        } catch (Exception ignored) {}
-        */
+            if ((locationHelpIcon[1] + measuredHPopup) > screenBottom)
+                y = -((locationHelpIcon[1] + measuredHPopup) - screenBottom);
+        }
 
         popup.setClippingEnabled(false);
         popup.showOnAnchor(helpIcon, RelativePopupWindow.VerticalPosition.ALIGN_TOP,

@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.Preference;
@@ -15,6 +16,8 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 import java.text.Collator;
@@ -411,6 +414,62 @@ class GlobalGUIRoutines {
 
     static void unlockScreenOrientation(Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+    }
+
+    static Point getRealScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager != null) {
+            Display display = windowManager.getDefaultDisplay();
+            Point size = new Point();
+
+            //if (Build.VERSION.SDK_INT >= 17) {
+            display.getRealSize(size);
+            /*} else {
+                try {
+                    size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+                    size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+                } catch (Exception ignored) {
+                }
+            }*/
+
+            return size;
+        }
+        else
+            return null;
+    }
+
+    static Point getNavigationBarSize(Context context) {
+        Point appUsableSize = getAppUsableScreenSize(context);
+        Point realScreenSize = getRealScreenSize(context);
+
+        if ((appUsableSize != null) && (realScreenSize != null)) {
+            // navigation bar on the right
+            if (appUsableSize.x < realScreenSize.x) {
+                return new Point(realScreenSize.x - appUsableSize.x, appUsableSize.y);
+            }
+
+            // navigation bar at the bottom
+            if (appUsableSize.y < realScreenSize.y) {
+                return new Point(appUsableSize.x, realScreenSize.y - appUsableSize.y);
+            }
+
+            // navigation bar is not present
+            return new Point();
+        }
+        else
+            return null;
+    }
+
+    private static Point getAppUsableScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager != null) {
+            Display display = windowManager.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            return size;
+        }
+        else
+            return null;
     }
 
 }
