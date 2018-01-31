@@ -461,16 +461,26 @@ public class ActivateProfileHelper {
         });
     }
 
-    private static boolean isAudibleRinging(int ringerMode, int zenMode) {
-        return (!((ringerMode == Profile.RINGERMODE_VIBRATE) || (ringerMode == Profile.RINGERMODE_SILENT) ||
-                ((ringerMode == Profile.RINGERMODE_ZENMODE) &&
-                        ((zenMode == Profile.ZENMODE_NONE) || (zenMode == Profile.ZENMODE_ALL_AND_VIBRATE) ||
-                         (zenMode == Profile.ZENMODE_PRIORITY_AND_VIBRATE) || (zenMode == Profile.ZENMODE_ALARMS)))
-        ));
+    private static boolean isAudibleRinging(int ringerMode, int zenMode/*, boolean onlyVibrateSilent*/) {
+        //if (onlyVibrateSilent)
+            return (!((ringerMode == Profile.RINGERMODE_VIBRATE) || (ringerMode == Profile.RINGERMODE_SILENT) ||
+                    ((ringerMode == Profile.RINGERMODE_ZENMODE) &&
+                            ((zenMode == Profile.ZENMODE_ALL_AND_VIBRATE) || (zenMode == Profile.ZENMODE_PRIORITY_AND_VIBRATE)))
+            ));
+        /*else
+            return (!((ringerMode == Profile.RINGERMODE_VIBRATE) || (ringerMode == Profile.RINGERMODE_SILENT) ||
+                    ((ringerMode == Profile.RINGERMODE_ZENMODE) &&
+                            ((zenMode == Profile.ZENMODE_NONE) || (zenMode == Profile.ZENMODE_ALL_AND_VIBRATE) ||
+                                    (zenMode == Profile.ZENMODE_PRIORITY_AND_VIBRATE) || (zenMode == Profile.ZENMODE_ALARMS)))
+            ));*/
     }
 
     private static boolean isVibrateRingerMode(int ringerMode) {
         return (ringerMode == Profile.RINGERMODE_VIBRATE);
+    }
+
+    private static boolean isAudibleSystemRingerMode(AudioManager audioManager) {
+        return audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
     }
 
     /*
@@ -573,11 +583,9 @@ public class ActivateProfileHelper {
         int ringerMode = getRingerMode(context);
         int zenMode = getZenMode(context);
 
-        // for ringer mode VIBRATE or SILENT (and not for link/unlink volumes) or
-        // for interruption types NONE and ONLY_ALARMS
-        // not set system, ringer, notification volume
-        // (Android 6 - priority mode = ONLY_ALARMS)
-        if (isAudibleRinging(ringerMode, zenMode)) {
+        //if (isAudibleRinging(ringerMode, zenMode))
+        if (isAudibleSystemRingerMode(audioManager)) {
+            // test only system ringer mode
 
             //if (Permissions.checkAccessNotificationPolicy(context)) {
 
@@ -921,7 +929,8 @@ public class ActivateProfileHelper {
                         RingerModeChangeReceiver.internalChange = true;
 
                         setRingerMode(appContext, profile, audioManager, true, forProfileActivation);
-                        //setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+                        // !!! DO NOT CALL setVolumes before setRingerMode(..., firsCall:false).
+                        //     Ringer mode must be changed before call of setVolumes() because is checked in setVolumes().
                         setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
                         PPApplication.sleep(500);
                         setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
@@ -1014,11 +1023,7 @@ public class ActivateProfileHelper {
 
                 // for profile ringer/zen mode = "only vibrate" do not change ringer mode to Silent
                 if (!isVibrateRingerMode(profile._volumeRingerMode/*, profile._volumeZenMode*/)) {
-                    // for ringer mode VIBRATE or SILENT or
-                    // for interruption types NONE and ONLY_ALARMS
-                    // not change ringer mode
-                    // (Android 6 - priority mode = ONLY_ALARMS)
-                    if (isAudibleRinging(profile._volumeRingerMode, profile._volumeZenMode)) {
+                    if (isAudibleRinging(profile._volumeRingerMode, profile._volumeZenMode/*, true*/)) {
                         // change ringer mode to Silent
                         PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "changed to silent");
                         profile._volumeRingerMode = Profile.RINGERMODE_SILENT;
