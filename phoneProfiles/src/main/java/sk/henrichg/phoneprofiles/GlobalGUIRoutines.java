@@ -373,6 +373,7 @@ class GlobalGUIRoutines {
         }
     }
 
+    @SuppressLint("PrivateApi")
     static void registerOnActivityDestroyListener(
         Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
         try {
@@ -388,6 +389,7 @@ class GlobalGUIRoutines {
         }
     }
 
+    @SuppressLint("PrivateApi")
     static void unregisterOnActivityDestroyListener(
         Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
         try {
