@@ -584,7 +584,7 @@ public class ActivateProfileHelper {
         int zenMode = getZenMode(context);
 
         //if (isAudibleRinging(ringerMode, zenMode))
-        if (isAudibleSystemRingerMode(audioManager)) {
+        if (isAudibleSystemRingerMode(audioManager) || (ringerMode == 0)) {
             // test only system ringer mode
 
             //if (Permissions.checkAccessNotificationPolicy(context)) {
