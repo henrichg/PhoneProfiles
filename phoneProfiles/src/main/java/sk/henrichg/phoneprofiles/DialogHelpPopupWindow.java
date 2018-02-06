@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
