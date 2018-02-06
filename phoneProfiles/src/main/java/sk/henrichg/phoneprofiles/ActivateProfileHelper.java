@@ -64,7 +64,7 @@ import java.util.List;
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static android.content.Context.POWER_SERVICE;
 
-public class ActivateProfileHelper {
+class ActivateProfileHelper {
 
     //private DataWrapper dataWrapper;
 
@@ -581,7 +581,7 @@ public class ActivateProfileHelper {
         }
 
         int ringerMode = getRingerMode(context);
-        int zenMode = getZenMode(context);
+        //int zenMode = getZenMode(context);
 
         //if (isAudibleRinging(ringerMode, zenMode))
         if (isAudibleSystemRingerMode(audioManager) || (ringerMode == 0)) {
@@ -2640,7 +2640,7 @@ public class ActivateProfileHelper {
         }
     }
 
-    static boolean wifiServiceExists(Context context, String preference) {
+    static boolean wifiServiceExists(/*Context context, */String preference) {
         try {
             Object serviceManager = PPApplication.getServiceManager("wifi");
             if (serviceManager != null) {

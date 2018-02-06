@@ -104,7 +104,7 @@ public class PPApplication extends Application {
     public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM = 4;
     private static final int PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS = 5;
     public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION = 6;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_ANDROID_VERSION = 7;
+    private static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_ANDROID_VERSION = 7;
 
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";

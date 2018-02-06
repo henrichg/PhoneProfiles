@@ -42,7 +42,7 @@ public class ProfileIconPreference extends DialogPreference {
 
     static final int RESULT_LOAD_IMAGE = 1971;
 
-    private static final String PREF_SHOW_HELP = "profile_icon_pref_show_help";
+    //private static final String PREF_SHOW_HELP = "profile_icon_pref_show_help";
 
     public ProfileIconPreference(Context context, AttributeSet attrs)
     {
@@ -190,7 +190,7 @@ public class ProfileIconPreference extends DialogPreference {
         helpIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogHelpPopupWindow.showPopup(mDialog, helpIcon, prefContext, R.string.profileicon_pref_dialog_info_about_status_bar_icon);
+                DialogHelpPopupWindow.showPopup(helpIcon, prefContext, R.string.profileicon_pref_dialog_info_about_status_bar_icon);
             }
         });
 

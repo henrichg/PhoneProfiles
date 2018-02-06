@@ -146,6 +146,7 @@ class ApplicationsCache {
         cached = true;
     }
 
+    /*
     int getLength(boolean noShortcuts)
     {
         if (cached) {
@@ -157,6 +158,7 @@ class ApplicationsCache {
         else
             return 0;
     }
+    */
 
     List<Application> getList(boolean noShortcuts)
     {
@@ -170,6 +172,7 @@ class ApplicationsCache {
             return null;
     }
 
+    /*
     Application getApplication(int position, boolean noShortcuts)
     {
         if (cached) {
@@ -181,6 +184,7 @@ class ApplicationsCache {
         else
             return null;
     }
+    */
 
     Bitmap getApplicationIcon(Application application, boolean noShortcuts) {
         if (cached) {

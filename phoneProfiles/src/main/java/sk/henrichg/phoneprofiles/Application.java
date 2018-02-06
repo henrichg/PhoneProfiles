@@ -16,7 +16,9 @@ class Application {
         return appLabel;
     }
 
+    /*
     void toggleChecked() {
         checked = !checked;
     }
+    */
 }

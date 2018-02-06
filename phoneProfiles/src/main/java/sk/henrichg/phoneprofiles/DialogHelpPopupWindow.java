@@ -24,7 +24,7 @@ class DialogHelpPopupWindow extends GuiInfoPopupWindow {
         textView.setText(helpTextResource);
     }
 
-    static void showPopup(MaterialDialog dialog, ImageView helpIcon, Context context, int helpTextResource) {
+    static void showPopup(/*MaterialDialog dialog, */ImageView helpIcon, Context context, int helpTextResource) {
         DialogHelpPopupWindow popup = new DialogHelpPopupWindow(context, helpTextResource);
 
         View contentView = popup.getContentView();
