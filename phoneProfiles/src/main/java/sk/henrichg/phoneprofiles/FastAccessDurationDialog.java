@@ -78,7 +78,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
 
         MaterialDialog.Builder mBuilder = new MaterialDialog.Builder(mActivity)
-                .title(mActivity.getString(R.string.profile_preferences_duration))
+                .title(mActivity.getString(R.string.profile_preferences_duration) + " - " +
+                        mActivity.getString(R.string.profile_string_0) + ": " + profile._name)
                 .positiveText(android.R.string.ok)
                 .negativeText(android.R.string.cancel)
                 .customView(R.layout.activity_fast_access_duration_dialog, true)
