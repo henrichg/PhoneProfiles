@@ -21,12 +21,12 @@ public class ActivatorTargetHelpsActivity extends AppCompatActivity {
     {
         super.onResume();
 
-        GlobalGUIRoutines.setTheme(this, true, true);
-
         if (activatorActivity == null) {
             finish();
             return;
         }
+
+        //GlobalGUIRoutines.setTheme(this, true, true);
         activatorActivity.showTargetHelps();
     }
 
