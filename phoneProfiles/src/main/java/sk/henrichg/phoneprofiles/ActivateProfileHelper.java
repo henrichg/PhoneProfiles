@@ -2640,7 +2640,6 @@ public class ActivateProfileHelper {
         }
     }
 
-    /*
     static boolean wifiServiceExists(Context context, String preference) {
         try {
             Object serviceManager = PPApplication.getServiceManager("wifi");
@@ -2656,7 +2655,6 @@ public class ActivateProfileHelper {
             return false;
         }
     }
-    */
 
     private static void setWifiAP(Context context, WifiApManager wifiApManager, boolean enable) {
         if (Build.VERSION.SDK_INT < 26)
