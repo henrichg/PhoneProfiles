@@ -440,19 +440,18 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if ((preference != null) && (preference.isEnabled())) {
             if (key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
                 key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE)) {
-                boolean defaultValue =
+                /*boolean defaultValue =
                         getResources().getBoolean(
-                                GlobalGUIRoutines.getResourceId(preference.getKey(), "bool", context));
+                                GlobalGUIRoutines.getResourceId(preference.getKey(), "bool", context));*/
+                boolean defaultValue = Profile.defaultValuesBoolean.get(preference.getKey());
                 if (preferences.getBoolean(key, defaultValue) != defaultValue)
                     title = preference.getTitle().toString();
             }
             else {
-                String defaultValue =
+                /*String defaultValue =
                         getResources().getString(
-                                GlobalGUIRoutines.getResourceId(preference.getKey(), "string", context));
-                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  key="+key);
-                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  defaultValue="+defaultValue);
-                //Log.e("------ ProfilePreferencesFragment","preferenceChanged  value="+preferences.getString(preference.getKey(), defaultValue));
+                                GlobalGUIRoutines.getResourceId(preference.getKey(), "string", context));*/
+                String defaultValue = Profile.defaultValuesString.get(preference.getKey());
                 if (preference instanceof VolumeDialogPreference) {
                     if (VolumeDialogPreference.changeEnabled(preferences.getString(preference.getKey(), defaultValue)))
                         title = preference.getTitle().toString();
@@ -1155,9 +1154,10 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 int index = listPreference.findIndexOfValue(sValue);
                 CharSequence summary = (index >= 0) ? listPreference.getEntries()[index] : null;
                 listPreference.setSummary(summary);
-                String defaultValue =
+                /*String defaultValue =
                         getResources().getString(
-                                GlobalGUIRoutines.getResourceId(key, "string", context));
+                                GlobalGUIRoutines.getResourceId(key, "string", context));*/
+                String defaultValue = Profile.defaultValuesString.get(key);
                 setTitleStyle(listPreference, value != defaultValue, false, false);
                 setCategorySummary(listPreference, /*index > 0*/false);
             }
