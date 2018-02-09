@@ -77,7 +77,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         dataWrapper = new DataWrapper(getApplicationContext(), forGUI, monochrome, monochromeValue);
         if (profile_id != Profile.DEFAULT_PROFILE_ID)
-            profile = dataWrapper.getProfileById(profile_id);
+            profile = dataWrapper.getProfileById(profile_id, true, true);
         else
             profile = Profile.getDefaultProfile(getApplicationContext());
     }
@@ -653,7 +653,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             Permissions.clearMergedPermissions(context);
 
         //if (grantType != Permissions.GRANT_TYPE_PROFILE) {
-            Profile activatedProfile = dataWrapper.getActivatedProfile();
+            Profile activatedProfile = dataWrapper.getActivatedProfile(false, false);
             if ((activatedProfile == null) || (activatedProfile._id == profile_id)) {
                 if (PhoneProfilesService.instance != null)
                     PhoneProfilesService.instance.showProfileNotification(profile, dataWrapper);

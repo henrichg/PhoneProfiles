@@ -91,7 +91,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     private void setLinkUnlinkNotificationVolume(int linkMode, Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
             DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
-            Profile profile = dataWrapper.getActivatedProfile();
+            Profile profile = dataWrapper.getActivatedProfile(false, false);
             if (profile != null) {
                 //Log.e("PhoneCallBroadcastReceiver", "doCallEvent - unlink");
                 //ExecuteVolumeProfilePrefsJob.start(context, profile._id, linkMode, false);
@@ -131,7 +131,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
         DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
 
-        Profile profile = dataWrapper.getActivatedProfile();
+        Profile profile = dataWrapper.getActivatedProfile(false, false);
         profile = Profile.getMappedProfile(profile, context);
 
         if (profile != null) {

@@ -224,7 +224,7 @@ public class EditorProfileListFragment extends Fragment
         
             // for activated profile update activity
             Profile profile;
-            profile = activityDataWrapper.getActivatedProfile();
+            profile = activityDataWrapper.getActivatedProfile(true, true);
             updateHeader(profile);
             profileListAdapter.notifyDataSetChanged(false);
             setProfileSelection(profile);
@@ -279,7 +279,7 @@ public class EditorProfileListFragment extends Fragment
 
                 // update activity for activated profile
                 Profile profile;
-                profile = fragment.activityDataWrapper.getActivatedProfile();
+                profile = fragment.activityDataWrapper.getActivatedProfile(true, true);
                 fragment.updateHeader(profile);
                 fragment.profileListAdapter.notifyDataSetChanged(false);
                 fragment.setProfileSelection(profile);
@@ -379,11 +379,11 @@ public class EditorProfileListFragment extends Fragment
         //final Profile _profile = profile;
         //final Activity activity = getActivity();
 
-        if (activityDataWrapper.getProfileById(profile._id) == null)
+        if (activityDataWrapper.getProfileById(profile._id, false, false) == null)
             // profile not exists
             return;
 
-        Profile activatedProfile = activityDataWrapper.getActivatedProfile();
+        Profile activatedProfile = activityDataWrapper.getActivatedProfile(false, false);
         if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
             // remove alarm for profile duration
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(getActivity().getApplicationContext());
@@ -551,7 +551,7 @@ public class EditorProfileListFragment extends Fragment
             if(resultCode == Activity.RESULT_OK)
             {
                 long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, -1);
-                Profile profile = activityDataWrapper.getProfileById(profile_id);
+                Profile profile = activityDataWrapper.getProfileById(profile_id, true, true);
 
                 if (profileListAdapter != null)
                     profileListAdapter.activateProfile(profile);
@@ -630,7 +630,7 @@ public class EditorProfileListFragment extends Fragment
         Profile profileFromDB = DatabaseHandler.getInstance(activityDataWrapper.context).getActivatedProfile();
         if (profileFromDB != null)
         {
-            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id);
+            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true, true);
             if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
                 if (refreshIcons) {

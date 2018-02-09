@@ -103,7 +103,7 @@ public class ProfileDetailsFragment extends Fragment {
 
         DataWrapper dataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
 
-        final Profile profile = dataWrapper.getProfileById(profile_id);
+        final Profile profile = dataWrapper.getProfileById(profile_id, true, true);
 
         profileName.setTypeface(null, Typeface.BOLD);
 

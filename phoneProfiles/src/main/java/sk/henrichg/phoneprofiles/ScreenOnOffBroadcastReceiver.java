@@ -54,7 +54,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                        Profile activatedProfile = dataWrapper.getActivatedProfile();
+                        Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                         if (PhoneProfilesService.instance != null)
                             PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                         dataWrapper.invalidateDataWrapper();
@@ -70,7 +70,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                             ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                        Profile activatedProfile = dataWrapper.getActivatedProfile();
+                        Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                         if (PhoneProfilesService.instance != null)
                             PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                     }
@@ -114,7 +114,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
                         //dataWrapper.getActivateProfileHelper().removeNotification();
                         //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                        Profile activatedProfile = dataWrapper.getActivatedProfile();
+                        Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                         if (PhoneProfilesService.instance != null)
                             PhoneProfilesService.instance.showProfileNotification(activatedProfile, dataWrapper);
                         dataWrapper.invalidateDataWrapper();

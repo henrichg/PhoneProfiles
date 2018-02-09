@@ -270,7 +270,7 @@ public class PhoneProfilesService extends Service {
                 public void run() {
                     // set service foreground
                     final DataWrapper dataWrapper =  new DataWrapper(_this, true, false, 0);
-                    Profile activatedProfile = dataWrapper.getActivatedProfile();
+                    Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                     showProfileNotification(activatedProfile, dataWrapper);
                 }
             });

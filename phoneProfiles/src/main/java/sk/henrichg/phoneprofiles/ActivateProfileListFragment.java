@@ -285,7 +285,7 @@ public class ActivateProfileListFragment extends Fragment {
                 //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 
-            Profile profile = activityDataWrapper.getActivatedProfile();
+            Profile profile = activityDataWrapper.getActivatedProfile(true, true);
             updateHeader(profile);
             setProfileSelection(profile, false);
             if (startupSource == 0)
@@ -452,7 +452,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         Profile profileFromDB = DatabaseHandler.getInstance(activityDataWrapper.context).getActivatedProfile();
         if (profileFromDB != null) {
-            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id);
+            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true, true);
             if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
                 if (refreshIcons) {

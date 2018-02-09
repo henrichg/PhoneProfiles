@@ -155,7 +155,7 @@ public class ProfilePreference extends DialogPreference {
 
         if (profileIcon != null)
         {
-            Profile profile = dataWrapper.getProfileById(Long.parseLong(profileId));
+            Profile profile = dataWrapper.getProfileById(Long.parseLong(profileId), true, false);
             if (profile != null)
             {
                 if (profile.getIsIconResourceID())
@@ -326,7 +326,7 @@ public class ProfilePreference extends DialogPreference {
 
     public void setSummary(long profileId)
     {
-        Profile profile = dataWrapper.getProfileById(profileId);
+        Profile profile = dataWrapper.getProfileById(profileId, false, false);
         if (profile != null)
         {
             if (showDuration == 1)

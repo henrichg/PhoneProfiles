@@ -334,22 +334,24 @@ public class DataWrapper {
         profileList = null;
     }
 
-    private Profile getActivatedProfileFromDB()
+    private Profile getActivatedProfileFromDB(boolean generateIcon, boolean generateIndicators)
     {
         Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
         if (forGUI && (profile != null))
         {
-            profile.generateIconBitmap(context, monochrome, monochromeValue);
-            profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+            if (generateIcon)
+                profile.generateIconBitmap(context, monochrome, monochromeValue);
+            if (generateIndicators)
+                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
         }
         return profile;
     }
 
-    public Profile getActivatedProfile()
+    public Profile getActivatedProfile(boolean generateIcon, boolean generateIndicators)
     {
         if (profileList == null)
         {
-            return getActivatedProfileFromDB();
+            return getActivatedProfileFromDB(generateIcon, generateIndicators);
         }
         else
         {
@@ -428,15 +430,17 @@ public class DataWrapper {
         }
     }
 
-    Profile getProfileById(long id)
+    Profile getProfileById(long id, boolean generateIcon, boolean generateIndicators)
     {
         if (profileList == null)
         {
             Profile profile = DatabaseHandler.getInstance(context).getProfile(id);
             if (forGUI && (profile != null))
             {
-                profile.generateIconBitmap(context, monochrome, monochromeValue);
-                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+                if (generateIcon)
+                    profile.generateIconBitmap(context, monochrome, monochromeValue);
+                if (generateIndicators)
+                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
             }
             return profile;
         }
@@ -458,7 +462,7 @@ public class DataWrapper {
     {
         if (profile != null)
         {
-            Profile origProfile = getProfileById(profile._id);
+            Profile origProfile = getProfileById(profile._id, true, true);
             if (origProfile != null)
                 origProfile.copyProfile(profile);
         }
@@ -530,7 +534,7 @@ public class DataWrapper {
         DatabaseHandler.getInstance(context).activateProfile(profile);
         setProfileActive(_profile);
 
-        Profile activatedProfile = getActivatedProfile();
+        Profile activatedProfile = getActivatedProfile(true, true);
 
         /*if (_interactive)
         {*/
@@ -732,13 +736,13 @@ public class DataWrapper {
         Profile profile;
 
         // for activated profile, update of activity is required
-        profile = getActivatedProfile();
+        profile = getActivatedProfile(true, true);
 
         long backgroundProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
         if ((profile == null) &&
             (backgroundProfileId != Profile.PROFILE_NO_ACTIVATE))
         {
-            profile = getProfileById(backgroundProfileId);
+            profile = getProfileById(backgroundProfileId, true, true);
         }
 
         boolean actProfile = false;
@@ -808,7 +812,7 @@ public class DataWrapper {
             if (profile_id == 0)
                 profile = null;
             else
-                profile = getProfileById(profile_id);
+                profile = getProfileById(profile_id, true, true);
         }
 
 
@@ -842,13 +846,13 @@ public class DataWrapper {
     void activateProfileAfterDuration(long profile_id)
     {
         int startupSource = PPApplication.STARTUP_SOURCE_SERVICE_MANUAL;
-        Profile profile = getProfileById(profile_id);
+        Profile profile = getProfileById(profile_id, true, true);
         if (profile == null) {
             // remove last configured profile duration alarm
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
             if (PhoneProfilesService.instance != null)
-                PhoneProfilesService.instance.showProfileNotification(getActivatedProfile(), this);
+                PhoneProfilesService.instance.showProfileNotification(getActivatedProfile(true, true), this);
             ActivateProfileHelper.updateWidget(context, true);
             return;
         }
