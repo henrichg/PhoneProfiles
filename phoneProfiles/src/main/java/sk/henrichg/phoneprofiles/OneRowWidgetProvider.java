@@ -22,7 +22,7 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
         if (applicationWidgetListIconLightness.equals("75")) monochromeValue = 0xC0;
         if (applicationWidgetListIconLightness.equals("100")) monochromeValue = 0xFF;
 
-        DataWrapper dataWrapper = new DataWrapper(context, true,
+        DataWrapper dataWrapper = new DataWrapper(context,
                                                         ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
                                                         monochromeValue);
 

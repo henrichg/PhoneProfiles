@@ -42,13 +42,12 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
 
         if (dataWrapper == null)
         {
-            dataWrapper = new DataWrapper(context, true,
-                                                        ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
+            dataWrapper = new DataWrapper(context, ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
                                                         monochromeValue);
         }
         else
         {
-            dataWrapper.setParameters(true, ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
+            dataWrapper.setParameters(ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
                                                         monochromeValue);
         }
     }
@@ -183,7 +182,7 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
     public void onDataSetChanged() {
         createProfilesDataWrapper();
 
-        List<Profile> newProfileList = dataWrapper.getNewProfileList();
+        List<Profile> newProfileList = dataWrapper.getNewProfileList(true, true);
 
         dataWrapper.clearProfileList();
         dataWrapper.setProfileList(newProfileList);

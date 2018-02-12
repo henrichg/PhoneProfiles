@@ -815,7 +815,7 @@ public class Permissions {
     }
 
     static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
-                                                  boolean forGUI, boolean monochrome, int monochromeValue,
+                                                  /*boolean forGUI,*/ boolean monochrome, int monochromeValue,
                                                   int startupSource, /*boolean interactive,*/ Activity activity,
                                                   boolean activateProfile) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -832,7 +832,7 @@ public class Permissions {
                     else
                         intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
-                    intent.putExtra(EXTRA_FOR_GUI, forGUI);
+                    //intent.putExtra(EXTRA_FOR_GUI, forGUI);
                     intent.putExtra(EXTRA_MONOCHROME, monochrome);
                     intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);

@@ -20,19 +20,19 @@ import static android.content.Context.POWER_SERVICE;
 public class DataWrapper {
 
     public Context context = null;
-    private boolean forGUI = false;
+    //private boolean forGUI = false;
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
 
     List<Profile> profileList = null;
 
-    DataWrapper(Context c, boolean fgui, boolean mono, int monoVal)
+    DataWrapper(Context c, /*boolean fgui,*/ boolean mono, int monoVal)
     {
         //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
         context = c;
 
-        setParameters(fgui, mono, monoVal);
+        setParameters(/*fgui,*/ mono, monoVal);
 
         //activateProfileHelper = getActivateProfileHelper();
 
@@ -40,40 +40,41 @@ public class DataWrapper {
     }
 
     void setParameters(
-            boolean fgui,
+            //boolean fgui,
             boolean mono,
             int monoVal)
     {
-        forGUI = fgui;
+        //forGUI = fgui;
         monochrome = mono;
         monochromeValue = monoVal;
     }
 
-    public void fillProfileList()
+    void fillProfileList(boolean generateIcons, boolean generateIndicators)
     {
         //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
         if (profileList == null)
         {
-            profileList = getNewProfileList();
+            profileList = getNewProfileList(generateIcons, generateIndicators);
         }
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
     }
 
-    List<Profile> getNewProfileList() {
+    List<Profile> getNewProfileList(boolean generateIcons, boolean generateIndicators) {
         List<Profile> newProfileList = DatabaseHandler.getInstance(context).getAllProfiles();
 
-        if (forGUI)
-        {
+        //if (forGUI)
+        //{
             //noinspection ForLoopReplaceableByForEach
             for (Iterator<Profile> it = newProfileList.iterator(); it.hasNext();) {
                 Profile profile = it.next();
-                profile.generateIconBitmap(context, monochrome, monochromeValue);
-                //if (generateIndicators)
-                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+                if (generateIcons)
+                    profile.generateIconBitmap(context, monochrome, monochromeValue);
+                if (generateIndicators)
+                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
             }
-        }
+        //}
         return newProfileList;
     }
 
@@ -309,7 +310,7 @@ public class DataWrapper {
         return profile;
     }
 
-    void fillPredefinedProfileList()
+    void fillPredefinedProfileList(boolean generateIcons, boolean generateIndicators)
     {
         clearProfileList();
         DatabaseHandler.getInstance(context).deleteAllProfiles();
@@ -317,7 +318,7 @@ public class DataWrapper {
         for (int index = 0; index < 6; index++)
             getPredefinedProfile(index, true);
 
-        fillProfileList();
+        fillProfileList(generateIcons, generateIndicators);
     }
 
     void clearProfileList()
@@ -337,7 +338,7 @@ public class DataWrapper {
     private Profile getActivatedProfileFromDB(boolean generateIcon, boolean generateIndicators)
     {
         Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
-        if (forGUI && (profile != null))
+        if (/*forGUI &&*/ (profile != null))
         {
             if (generateIcon)
                 profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -435,7 +436,7 @@ public class DataWrapper {
         if (profileList == null)
         {
             Profile profile = DatabaseHandler.getInstance(context).getProfile(id);
-            if (forGUI && (profile != null))
+            if (/*forGUI &&*/ (profile != null))
             {
                 if (generateIcon)
                     profile.generateIconBitmap(context, monochrome, monochromeValue);
@@ -515,8 +516,10 @@ public class DataWrapper {
             String iconIdentifier = profile.getIconIdentifier();
             DatabaseHandler.getInstance(context).getProfileIcon(profile);
             if (isIconResourceID && iconIdentifier.equals("ic_profile_default") && (!profile.getIsIconResourceID())) {
-                profile.generateIconBitmap(context, monochrome, monochromeValue);
-                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+                if (profile._iconBitmap != null)
+                    profile.generateIconBitmap(context, monochrome, monochromeValue);
+                if (profile._preferencesIndicator != null)
+                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
             }
         }
     }
@@ -636,7 +639,7 @@ public class DataWrapper {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
-                                forGUI, monochrome, monochromeValue,
+                                /*forGUI,*/ monochrome, monochromeValue,
                                 _startupSource, /*true,*/ _activity, true))
                             _dataWrapper._activateProfile(_profile, _startupSource, /*true,*/ _activity);
                         else {
@@ -687,7 +690,7 @@ public class DataWrapper {
                     GlobalGUIRoutines.setLanguage(activity.getBaseContext());
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
-                            forGUI, monochrome, monochromeValue,
+                            /*forGUI,*/ monochrome, monochromeValue,
                             startupSource, /*true,*/ activity, true);
                 /*}
                 else
@@ -857,7 +860,7 @@ public class DataWrapper {
             return;
         }
         if (Permissions.grantProfilePermissions(context, profile, true,
-                forGUI, monochrome, monochromeValue,
+                /*forGUI,*/ monochrome, monochromeValue,
                 startupSource, /*true,*/ null, true)) {
             _activateProfile(profile, startupSource, /*true,*/ null);
         }

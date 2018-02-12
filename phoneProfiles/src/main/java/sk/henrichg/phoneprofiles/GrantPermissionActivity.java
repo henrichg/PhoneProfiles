@@ -31,7 +31,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private long profile_id;
     private boolean onlyNotification;
     private boolean mergedNotification;
-    private boolean forGUI;
+    //private boolean forGUI;
     private boolean monochrome;
     private int monochromeValue;
     private int startupSource;
@@ -67,7 +67,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
 
         profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
-        forGUI = intent.getBooleanExtra(Permissions.EXTRA_FOR_GUI, false);
+        //forGUI = intent.getBooleanExtra(Permissions.EXTRA_FOR_GUI, false);
         monochrome = intent.getBooleanExtra(Permissions.EXTRA_MONOCHROME, false);
         monochromeValue = intent.getIntExtra(Permissions.EXTRA_MONOCHROME_VALUE, 0xFF);
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
@@ -75,7 +75,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
         activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.DEFAULT_PROFILE_ID);
 
-        dataWrapper = new DataWrapper(getApplicationContext(), forGUI, monochrome, monochromeValue);
+        dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ monochrome, monochromeValue);
         if (profile_id != Profile.DEFAULT_PROFILE_ID)
             profile = dataWrapper.getProfileById(profile_id, true, true);
         else
@@ -343,7 +343,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             mBuilder.setDeleteIntent(deletePendingIntent);
 
             intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-            intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
+            //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
             intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
             intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
             notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
@@ -593,7 +593,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private void finishGrant() {
         Context context = getApplicationContext();
 
-        if (forGUI && (profile != null))
+        if (/*forGUI &&*/ (profile != null))
         {
             // regenerate profile icon
             dataWrapper.refreshProfileIcon(profile, monochrome, monochromeValue);

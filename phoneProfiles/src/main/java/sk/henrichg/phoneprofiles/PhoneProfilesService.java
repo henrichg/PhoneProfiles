@@ -208,7 +208,7 @@ public class PhoneProfilesService extends Service {
 
                 LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
 
-                DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
+                DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
 
                 PPApplication.setApplicationStarted(appContext, true);
 
@@ -269,7 +269,7 @@ public class PhoneProfilesService extends Service {
                 @Override
                 public void run() {
                     // set service foreground
-                    final DataWrapper dataWrapper =  new DataWrapper(_this, true, false, 0);
+                    final DataWrapper dataWrapper =  new DataWrapper(_this, false, 0);
                     Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                     showProfileNotification(activatedProfile, dataWrapper);
                 }

@@ -90,7 +90,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private void setLinkUnlinkNotificationVolume(int linkMode, Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
-            DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
+            DataWrapper dataWrapper = new DataWrapper(context, false, 0);
             Profile profile = dataWrapper.getActivatedProfile(false, false);
             if (profile != null) {
                 //Log.e("PhoneCallBroadcastReceiver", "doCallEvent - unlink");
@@ -129,7 +129,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         // audio mode is set to MODE_IN_CALL by system
         //Log.e("PhoneCallBroadcastReceiver", "callAnswered audioMode=" + audioManager.getMode());
 
-        DataWrapper dataWrapper = new DataWrapper(context, false, false, 0);
+        DataWrapper dataWrapper = new DataWrapper(context, false, 0);
 
         Profile profile = dataWrapper.getActivatedProfile(false, false);
         profile = Profile.getMappedProfile(profile, context);

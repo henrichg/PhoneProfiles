@@ -280,7 +280,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
     {
         if (dataWrapper == null)
         {
-            dataWrapper = new DataWrapper(context.getApplicationContext(), false, false, 0);
+            dataWrapper = new DataWrapper(context.getApplicationContext(), false, 0);
         }
     }
 

@@ -54,7 +54,7 @@ public class ActivateProfileListFragment extends Fragment {
         // configuration changes for example
         setRetainInstance(true);
 
-        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
+        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0);
 
         Intent intent = getActivity().getIntent();
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
@@ -176,12 +176,12 @@ public class ActivateProfileListFragment extends Fragment {
 
         private LoadProfileListAsyncTask (ActivateProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
-            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
+            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0);
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            dataWrapper.fillProfileList();
+            dataWrapper.fillProfileList(true, true);
             if (ApplicationPreferences.applicationActivatorGridLayout(dataWrapper.context)) {
                 int modulo = dataWrapper.profileList.size() % 3;
                 if (modulo > 0) {
@@ -204,7 +204,7 @@ public class ActivateProfileListFragment extends Fragment {
             if ((fragment != null) && (fragment.isAdded())) {
 
                 // get local profileList
-                dataWrapper.fillProfileList();
+                dataWrapper.fillProfileList(true, true);
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
 

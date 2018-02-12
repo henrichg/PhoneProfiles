@@ -22,8 +22,7 @@ public class IconWidgetProvider extends AppWidgetProvider {
         if (applicationWidgetIconLightness.equals("75")) monochromeValue = 0xC0;
         if (applicationWidgetIconLightness.equals("100")) monochromeValue = 0xFF;
 
-        DataWrapper dataWrapper = new DataWrapper(context, true,
-                                                        ApplicationPreferences.applicationWidgetIconColor(context).equals("1"),
+        DataWrapper dataWrapper = new DataWrapper(context, ApplicationPreferences.applicationWidgetIconColor(context).equals("1"),
                                                         monochromeValue);
 
         Profile profile = dataWrapper.getActivatedProfile(true, true);

@@ -122,7 +122,7 @@ public class EditorProfileListFragment extends Fragment
         // configuration changes for example
         setRetainInstance(true);
 
-        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), true, false, 0);
+        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0);
 
         setHasOptionsMenu(true);
     }
@@ -240,16 +240,16 @@ public class EditorProfileListFragment extends Fragment
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
-            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), true, false, 0);
+            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0);
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            dataWrapper.fillProfileList();
+            dataWrapper.fillProfileList(true, true);
             if (dataWrapper.profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
-                dataWrapper.fillPredefinedProfileList();
+                dataWrapper.fillPredefinedProfileList(true, true);
                 defaultProfilesGenerated = true;
             }
             return null;
@@ -264,7 +264,7 @@ public class EditorProfileListFragment extends Fragment
             if ((fragment != null) && (fragment.isAdded())) {
 
                 // get local profileList
-                dataWrapper.fillProfileList();
+                dataWrapper.fillProfileList(true, true);
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
 
