@@ -516,10 +516,8 @@ public class DataWrapper {
             String iconIdentifier = profile.getIconIdentifier();
             DatabaseHandler.getInstance(context).getProfileIcon(profile);
             if (isIconResourceID && iconIdentifier.equals("ic_profile_default") && (!profile.getIsIconResourceID())) {
-                if (profile._iconBitmap != null)
-                    profile.generateIconBitmap(context, monochrome, monochromeValue);
-                if (profile._preferencesIndicator != null)
-                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+                profile.generateIconBitmap(context, monochrome, monochromeValue);
+                profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
             }
         }
     }
@@ -639,7 +637,7 @@ public class DataWrapper {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
-                                /*forGUI,*/ monochrome, monochromeValue,
+                                true, monochrome, monochromeValue,
                                 _startupSource, /*true,*/ _activity, true))
                             _dataWrapper._activateProfile(_profile, _startupSource, /*true,*/ _activity);
                         else {
@@ -690,7 +688,7 @@ public class DataWrapper {
                     GlobalGUIRoutines.setLanguage(activity.getBaseContext());
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
-                            /*forGUI,*/ monochrome, monochromeValue,
+                            true, monochrome, monochromeValue,
                             startupSource, /*true,*/ activity, true);
                 /*}
                 else
@@ -860,7 +858,7 @@ public class DataWrapper {
             return;
         }
         if (Permissions.grantProfilePermissions(context, profile, true,
-                /*forGUI,*/ monochrome, monochromeValue,
+                true, monochrome, monochromeValue,
                 startupSource, /*true,*/ null, true)) {
             _activateProfile(profile, startupSource, /*true,*/ null);
         }
