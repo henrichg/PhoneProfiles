@@ -182,7 +182,7 @@ class SamsungEdgeFactory implements RemoteViewsService.RemoteViewsFactory {
     public void onDataSetChanged() {
         createProfilesDataWrapper();
 
-        List<Profile> newProfileList = dataWrapper.getNewProfileList(true, true);
+        List<Profile> newProfileList = dataWrapper.getNewProfileList(true, false);
 
         dataWrapper.clearProfileList();
         dataWrapper.setProfileList(newProfileList);

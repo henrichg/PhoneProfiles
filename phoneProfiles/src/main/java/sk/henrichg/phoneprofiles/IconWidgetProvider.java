@@ -25,7 +25,7 @@ public class IconWidgetProvider extends AppWidgetProvider {
         DataWrapper dataWrapper = new DataWrapper(context, ApplicationPreferences.applicationWidgetIconColor(context).equals("1"),
                                                         monochromeValue);
 
-        Profile profile = dataWrapper.getActivatedProfile(true, true);
+        Profile profile = dataWrapper.getActivatedProfile(true, false);
 
         ComponentName thisWidget = new ComponentName(context, IconWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);

@@ -26,7 +26,8 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
                                                         ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
                                                         monochromeValue);
 
-        Profile profile = dataWrapper.getActivatedProfile(true, true);
+        Profile profile = dataWrapper.getActivatedProfile(true,
+                                            ApplicationPreferences.applicationWidgetListPrefIndicator(context));
 
         ComponentName thisWidget = new ComponentName(context, OneRowWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
