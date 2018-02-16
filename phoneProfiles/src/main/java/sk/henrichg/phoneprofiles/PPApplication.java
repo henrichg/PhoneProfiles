@@ -43,6 +43,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class PPApplication extends Application {
 
+    static String romManufacturer = getROMManufacturer();
     static String PACKAGE_NAME;
 
     public static final boolean exactAlarms = true;
@@ -856,7 +857,7 @@ public class PPApplication extends Application {
         try{ Thread.sleep(ms); }catch(InterruptedException ignored){ }
     }
 
-    public static String getROMManufacturer() {
+    private static String getROMManufacturer() {
         String line;
         BufferedReader input = null;
         try {
