@@ -224,7 +224,8 @@ public class EditorProfileListFragment extends Fragment
         
             // for activated profile update activity
             Profile profile;
-            profile = activityDataWrapper.getActivatedProfile(true, true);
+            profile = activityDataWrapper.getActivatedProfile(true,
+                    ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
             updateHeader(profile);
             profileListAdapter.notifyDataSetChanged(false);
             setProfileSelection(profile);
@@ -245,11 +246,11 @@ public class EditorProfileListFragment extends Fragment
 
         @Override
         protected Void doInBackground(Void... params) {
-            dataWrapper.fillProfileList(true, true);
+            dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
             if (dataWrapper.profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
-                dataWrapper.fillPredefinedProfileList(true, true);
+                dataWrapper.fillPredefinedProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
                 defaultProfilesGenerated = true;
             }
             return null;
@@ -264,7 +265,7 @@ public class EditorProfileListFragment extends Fragment
             if ((fragment != null) && (fragment.isAdded())) {
 
                 // get local profileList
-                dataWrapper.fillProfileList(true, true);
+                dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
 
@@ -279,7 +280,8 @@ public class EditorProfileListFragment extends Fragment
 
                 // update activity for activated profile
                 Profile profile;
-                profile = fragment.activityDataWrapper.getActivatedProfile(true, true);
+                profile = fragment.activityDataWrapper.getActivatedProfile(true,
+                        ApplicationPreferences.applicationEditorPrefIndicator(fragment.activityDataWrapper.context));
                 fragment.updateHeader(profile);
                 fragment.profileListAdapter.notifyDataSetChanged(false);
                 fragment.setProfileSelection(profile);
@@ -383,7 +385,8 @@ public class EditorProfileListFragment extends Fragment
             // profile not exists
             return;
 
-        Profile activatedProfile = activityDataWrapper.getActivatedProfile(false, false);
+        Profile activatedProfile = activityDataWrapper.getActivatedProfile(false,
+                ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
         if ((activatedProfile != null) && (activatedProfile._id == profile._id)) {
             // remove alarm for profile duration
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(getActivity().getApplicationContext());
@@ -551,7 +554,8 @@ public class EditorProfileListFragment extends Fragment
             if(resultCode == Activity.RESULT_OK)
             {
                 long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, -1);
-                Profile profile = activityDataWrapper.getProfileById(profile_id, false, false);
+                Profile profile = activityDataWrapper.getProfileById(profile_id, true,
+                        ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
 
                 if (profileListAdapter != null)
                     profileListAdapter.activateProfile(profile);
@@ -623,18 +627,21 @@ public class EditorProfileListFragment extends Fragment
         if (profileFromAdapter != null) {
             profileFromAdapter._checked = false;
             if (refreshIcons) {
-                activityDataWrapper.refreshProfileIcon(profileFromAdapter, false, 0);
+                activityDataWrapper.refreshProfileIcon(profileFromAdapter, true,
+                        ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
             }
         }
 
         Profile profileFromDB = DatabaseHandler.getInstance(activityDataWrapper.context).getActivatedProfile();
         if (profileFromDB != null)
         {
-            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true, true);
+            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true,
+                    ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
             if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
                 if (refreshIcons) {
-                    activityDataWrapper.refreshProfileIcon(profileFromDataWrapper, false, 0);
+                    activityDataWrapper.refreshProfileIcon(profileFromDataWrapper, true,
+                            ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
                 }
             }
             updateHeader(profileFromDataWrapper);

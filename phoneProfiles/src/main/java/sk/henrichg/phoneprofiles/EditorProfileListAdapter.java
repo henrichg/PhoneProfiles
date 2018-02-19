@@ -200,7 +200,8 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     void notifyDataSetChanged(boolean refreshIcons) {
         if (refreshIcons) {
             for (Profile profile : activityDataWrapper.profileList) {
-                activityDataWrapper.refreshProfileIcon(profile, false, 0);
+                activityDataWrapper.refreshProfileIcon(profile, true,
+                        ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
             }
         }
         fragment.listView.getRecycledViewPool().clear();

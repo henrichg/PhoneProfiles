@@ -181,7 +181,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            dataWrapper.fillProfileList(true, true);
+            dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context));
             if (ApplicationPreferences.applicationActivatorGridLayout(dataWrapper.context)) {
                 int modulo = dataWrapper.profileList.size() % 3;
                 if (modulo > 0) {
@@ -204,7 +204,7 @@ public class ActivateProfileListFragment extends Fragment {
             if ((fragment != null) && (fragment.isAdded())) {
 
                 // get local profileList
-                dataWrapper.fillProfileList(true, true);
+                dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
 
@@ -285,7 +285,7 @@ public class ActivateProfileListFragment extends Fragment {
                 //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 
-            Profile profile = activityDataWrapper.getActivatedProfile(true, true);
+            Profile profile = activityDataWrapper.getActivatedProfile(true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
             updateHeader(profile);
             setProfileSelection(profile, false);
             if (startupSource == 0)
@@ -446,17 +446,17 @@ public class ActivateProfileListFragment extends Fragment {
         if (profileFromAdapter != null) {
             profileFromAdapter._checked = false;
             if (refreshIcons) {
-                activityDataWrapper.refreshProfileIcon(profileFromAdapter, false, 0);
+                activityDataWrapper.refreshProfileIcon(profileFromAdapter, true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
             }
         }
 
         Profile profileFromDB = DatabaseHandler.getInstance(activityDataWrapper.context).getActivatedProfile();
         if (profileFromDB != null) {
-            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true, true);
+            Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
             if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
                 if (refreshIcons) {
-                    activityDataWrapper.refreshProfileIcon(profileFromDataWrapper, false, 0);
+                    activityDataWrapper.refreshProfileIcon(profileFromDataWrapper, true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
                 }
             }
             updateHeader(profileFromDataWrapper);
