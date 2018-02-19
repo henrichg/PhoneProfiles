@@ -97,7 +97,8 @@ public class ProfilePreference extends DialogPreference {
             }
         });
 
-        dataWrapper.fillProfileList(true, true);
+        //TODO add this to AsyncTask
+        dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
         Collections.sort(dataWrapper.profileList, new AlphabeticallyComparator());
 
         profilePreferenceAdapter = new ProfilePreferenceAdapter(this, prefContext, profileId, dataWrapper.profileList);

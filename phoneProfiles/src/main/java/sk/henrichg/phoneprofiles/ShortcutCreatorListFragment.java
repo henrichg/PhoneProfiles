@@ -110,7 +110,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            this.dataWrapper.fillProfileList(true, true);
+            this.dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context));
             Collections.sort(dataWrapper.profileList, new ProfileComparator());
             return null;
         }
@@ -124,7 +124,7 @@ public class ShortcutCreatorListFragment extends Fragment {
             if ((fragment != null) && (fragment.isAdded())) {
 
                 // get local profileList
-                dataWrapper.fillProfileList(true, true);
+                dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
 
