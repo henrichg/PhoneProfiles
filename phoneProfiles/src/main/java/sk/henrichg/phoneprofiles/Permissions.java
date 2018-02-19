@@ -57,9 +57,9 @@ public class Permissions {
     static final String EXTRA_GRANT_TYPE = "grant_type";
     static final String EXTRA_PERMISSION_TYPES = "permission_types";
     static final String EXTRA_ONLY_NOTIFICATION = "only_notification";
-    static final String EXTRA_FOR_GUI = "for_gui";
-    static final String EXTRA_MONOCHROME = "monochrome";
-    static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
+    //static final String EXTRA_FOR_GUI = "for_gui";
+    //static final String EXTRA_MONOCHROME = "monochrome";
+    //static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
     //static final String EXTRA_INTERACTIVE = "interactive";
     static final String EXTRA_APPLICATION_DATA_PATH = "application_data_path";
     static final String EXTRA_ACTIVATE_PROFILE = "activate_profile";
@@ -815,7 +815,7 @@ public class Permissions {
     }
 
     static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
-                                                  boolean forGUI, boolean monochrome, int monochromeValue,
+                                                  /*boolean forGUI, boolean monochrome, int monochromeValue,*/
                                                   int startupSource, /*boolean interactive,*/ Activity activity,
                                                   boolean activateProfile) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -832,9 +832,9 @@ public class Permissions {
                     else
                         intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, onlyNotification);
-                    intent.putExtra(EXTRA_FOR_GUI, forGUI);
-                    intent.putExtra(EXTRA_MONOCHROME, monochrome);
-                    intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
+                    //intent.putExtra(EXTRA_FOR_GUI, forGUI);
+                    //intent.putExtra(EXTRA_MONOCHROME, monochrome);
+                    //intent.putExtra(EXTRA_MONOCHROME_VALUE, monochromeValue);
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                     //intent.putExtra(EXTRA_INTERACTIVE, interactive);
                     intent.putExtra(EXTRA_ACTIVATE_PROFILE, activateProfile);

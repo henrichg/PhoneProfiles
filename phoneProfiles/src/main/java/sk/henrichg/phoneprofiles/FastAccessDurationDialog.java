@@ -30,8 +30,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
     //private Context context;
 
     private final DataWrapper mDataWrapper;
-    private final boolean mMonochrome;
-    private final int mMonochromeValue;
+    //private final boolean mMonochrome;
+    //private final int mMonochromeValue;
     private final int mStartupSource;
     //private final boolean mInteractive;
     private final Activity mActivity;
@@ -54,7 +54,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
     @SuppressLint("SetTextI18n")
     FastAccessDurationDialog(Activity activity, Profile profile, DataWrapper dataWrapper,
-                             boolean monochrome, int monochromeValue,
+                             /*boolean monochrome, int monochromeValue,*/
                              int startupSource/*, boolean interactive*/) {
 
         mMax = 86400;
@@ -65,8 +65,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
         //mContext = activity.getBaseContext();
         mProfile = profile;
         mDataWrapper = dataWrapper;
-        mMonochrome = monochrome;
-        mMonochromeValue = monochromeValue;
+        //mMonochrome = monochrome;
+        //mMonochromeValue = monochromeValue;
         mStartupSource = startupSource;
         //mInteractive = true/*interactive*/;
 
@@ -101,7 +101,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
                         DatabaseHandler.getInstance(mDataWrapper.context).updateProfile(mProfile);
 
                         if (Permissions.grantProfilePermissions(mActivity, mProfile, false,
-                                true, mMonochrome, mMonochromeValue,
+                                /*true, mMonochrome, mMonochromeValue,*/
                                 mStartupSource, /*true,*/ mActivity, true))
                             mDataWrapper._activateProfile(mProfile, mStartupSource, /*true,*/ mActivity);
                     }
@@ -266,7 +266,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
                 DatabaseHandler.getInstance(mDataWrapper.context).updateProfile(mProfile);
 
                 if (Permissions.grantProfilePermissions(mActivity, mProfile, false,
-                        true, mMonochrome, mMonochromeValue,
+                        /*true, mMonochrome, mMonochromeValue,*/
                         mStartupSource, /*true,*/ mActivity, true))
                     mDataWrapper._activateProfile(mProfile, mStartupSource, /*true,*/ mActivity);
 

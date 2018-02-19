@@ -551,7 +551,7 @@ public class EditorProfileListFragment extends Fragment
             if(resultCode == Activity.RESULT_OK)
             {
                 long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, -1);
-                Profile profile = activityDataWrapper.getProfileById(profile_id, true, true);
+                Profile profile = activityDataWrapper.getProfileById(profile_id, false, false);
 
                 if (profileListAdapter != null)
                     profileListAdapter.activateProfile(profile);

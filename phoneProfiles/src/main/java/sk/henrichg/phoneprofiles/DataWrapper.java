@@ -463,7 +463,7 @@ public class DataWrapper {
     {
         if (profile != null)
         {
-            Profile origProfile = getProfileById(profile._id, true, true);
+            Profile origProfile = getProfileById(profile._id, false, false);
             if (origProfile != null)
                 origProfile.copyProfile(profile);
         }
@@ -621,7 +621,7 @@ public class DataWrapper {
 
             if (_profile._askForDuration) {
                 FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper,
-                        monochrome, monochromeValue, _startupSource);
+                        /*monochrome, monochromeValue,*/ _startupSource);
                 dlg.show();
             }
             else {
@@ -633,7 +633,7 @@ public class DataWrapper {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
-                                true, monochrome, monochromeValue,
+                                /*true, monochrome, monochromeValue,*/
                                 _startupSource, /*true,*/ _activity, true))
                             _dataWrapper._activateProfile(_profile, _startupSource, /*true,*/ _activity);
                         else {
@@ -672,7 +672,7 @@ public class DataWrapper {
         {
             if (profile._askForDuration/* && interactive*/) {
                 FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
-                        monochrome, monochromeValue, startupSource);
+                        /*monochrome, monochromeValue,*/ startupSource);
                 dlg.show();
             }
             else {
@@ -684,7 +684,7 @@ public class DataWrapper {
                     GlobalGUIRoutines.setLanguage(activity.getBaseContext());
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
-                            true, monochrome, monochromeValue,
+                            /*true, monochrome, monochromeValue,*/
                             startupSource, /*true,*/ activity, true);
                 /*}
                 else
@@ -733,13 +733,13 @@ public class DataWrapper {
         Profile profile;
 
         // for activated profile, update of activity is required
-        profile = getActivatedProfile(true, true);
+        profile = getActivatedProfile(false, false);
 
         long backgroundProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
         if ((profile == null) &&
             (backgroundProfileId != Profile.PROFILE_NO_ACTIVATE))
         {
-            profile = getProfileById(backgroundProfileId, true, true);
+            profile = getProfileById(backgroundProfileId, false, false);
         }
 
         boolean actProfile = false;
@@ -809,7 +809,7 @@ public class DataWrapper {
             if (profile_id == 0)
                 profile = null;
             else
-                profile = getProfileById(profile_id, true, true);
+                profile = getProfileById(profile_id, false, false);
         }
 
 
@@ -843,7 +843,7 @@ public class DataWrapper {
     void activateProfileAfterDuration(long profile_id)
     {
         int startupSource = PPApplication.STARTUP_SOURCE_SERVICE_MANUAL;
-        Profile profile = getProfileById(profile_id, true, true);
+        Profile profile = getProfileById(profile_id, false, false);
         if (profile == null) {
             // remove last configured profile duration alarm
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -854,7 +854,7 @@ public class DataWrapper {
             return;
         }
         if (Permissions.grantProfilePermissions(context, profile, true,
-                true, monochrome, monochromeValue,
+                /*false, monochrome, monochromeValue,*/
                 startupSource, /*true,*/ null, true)) {
             _activateProfile(profile, startupSource, /*true,*/ null);
         }

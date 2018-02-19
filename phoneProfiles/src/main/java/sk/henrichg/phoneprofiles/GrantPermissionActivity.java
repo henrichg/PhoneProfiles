@@ -77,7 +77,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ monochrome, monochromeValue);
         if (profile_id != Profile.DEFAULT_PROFILE_ID)
-            profile = dataWrapper.getProfileById(profile_id, true, true);
+            profile = dataWrapper.getProfileById(profile_id, false, false);
         else
             profile = Profile.getDefaultProfile(getApplicationContext());
     }
