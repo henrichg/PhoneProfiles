@@ -270,8 +270,7 @@ public class PhoneProfilesService extends Service {
                 public void run() {
                     // set service foreground
                     final DataWrapper dataWrapper =  new DataWrapper(_this, false, 0);
-                    Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
-                    showProfileNotification(activatedProfile, dataWrapper);
+                    showProfileNotification(dataWrapper);
                 }
             });
         }
@@ -362,7 +361,7 @@ public class PhoneProfilesService extends Service {
     // profile notification -------------------------------------------
 
     @SuppressLint("NewApi")
-    public void showProfileNotification(Profile profile, DataWrapper dataWrapper)
+    public void showProfileNotification(DataWrapper dataWrapper)
     {
         if (ActivateProfileHelper.lockRefresh)
             // no refresh notification
@@ -393,6 +392,8 @@ public class PhoneProfilesService extends Service {
             String profileName;
             Bitmap iconBitmap;
             Bitmap preferencesIndicator;
+
+            Profile profile = dataWrapper.getActivatedProfile(true, ApplicationPreferences.notificationPrefIndicator(dataWrapper.context));
 
             if (profile != null)
             {

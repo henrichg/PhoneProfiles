@@ -363,9 +363,9 @@ public class DataWrapper {
                 if (profile._checked)
                     return profile;
             }
+            // when profile not found, get profile from db
+            return getActivatedProfileFromDB(generateIcon, generateIndicators);
         }
-
-        return null;
     }
 
     /*
@@ -532,23 +532,19 @@ public class DataWrapper {
 
         final Profile profile = Profile.getMappedProfile(_profile, context);
 
-        DatabaseHandler.getInstance(context).activateProfile(profile);
+        DatabaseHandler.getInstance(context).activateProfile(_profile);
         setProfileActive(_profile);
-
-        Profile activatedProfile = getActivatedProfile(true, true);
 
         /*if (_interactive)
         {*/
-        long profileId = 0;
-        if (activatedProfile != null)
-            profileId = activatedProfile._id;
+        long profileId = _profile._id;
         Profile.setActivatedProfileForDuration(context, profileId);
         ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
         //}
 
         if (PhoneProfilesService.instance != null)
-            PhoneProfilesService.instance.showProfileNotification(profile, this);
-        ActivateProfileHelper.updateWidget(context, true);
+            PhoneProfilesService.instance.showProfileNotification(this);
+        ActivateProfileHelper.updateGUI(context, true);
 
         final Context appContext = context;
         PPApplication.startHandlerThread();
@@ -827,8 +823,8 @@ public class DataWrapper {
         else
         {
             if (PhoneProfilesService.instance != null)
-                PhoneProfilesService.instance.showProfileNotification(profile, this);
-            ActivateProfileHelper.updateWidget(context, true);
+                PhoneProfilesService.instance.showProfileNotification(this);
+            ActivateProfileHelper.updateGUI(context, true);
 
             // for startActivityForResult
             if (activity != null)
@@ -853,8 +849,8 @@ public class DataWrapper {
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
             if (PhoneProfilesService.instance != null)
-                PhoneProfilesService.instance.showProfileNotification(getActivatedProfile(true, true), this);
-            ActivateProfileHelper.updateWidget(context, true);
+                PhoneProfilesService.instance.showProfileNotification(this);
+            ActivateProfileHelper.updateGUI(context, true);
             return;
         }
         if (Permissions.grantProfilePermissions(context, profile, true,

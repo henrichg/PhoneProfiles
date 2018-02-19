@@ -293,8 +293,8 @@ public class ActivateProfileListFragment extends Fragment {
                 // activity not started from notification or widget
                 // for activated profile, update notification and widgets
                 if (PhoneProfilesService.instance != null)
-                    PhoneProfilesService.instance.showProfileNotification(profile, activityDataWrapper);
-                ActivateProfileHelper.updateWidget(activityDataWrapper.context, true);
+                    PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
+                ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
             }
         }
         endOnStart();
