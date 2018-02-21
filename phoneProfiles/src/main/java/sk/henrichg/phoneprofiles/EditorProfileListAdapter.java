@@ -82,7 +82,9 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     @Override
     public int getItemCount() {
         fragment.textViewNoData.setVisibility(
-                ((activityDataWrapper.profileList != null) && (activityDataWrapper.profileList.size() > 0)) ? View.GONE : View.VISIBLE);
+                (((activityDataWrapper.profileList != null) &&
+                  (activityDataWrapper.profileList.size() > 0))
+                ) ? View.GONE : View.VISIBLE);
 
         if (activityDataWrapper.profileList == null)
             return 0;

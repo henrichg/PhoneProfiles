@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class EditorProfileListFragment extends Fragment
     private ImageView activeProfileIcon;
     private Toolbar bottomToolbar;
     TextView textViewNoData;
-
+    LinearLayout progressBar;
 
     private WeakReference<LoadProfileListAsyncTask> asyncTaskContext;
 
@@ -171,6 +172,7 @@ public class EditorProfileListFragment extends Fragment
         listView.setLayoutManager(layoutManager);
         listView.setHasFixedSize(true);
         textViewNoData = view.findViewById(R.id.editor_profiles_list_empty);
+        progressBar = view.findViewById(R.id.editor_profiles_list_linla_progress);
 
         /*
         View footerView =  ((LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
@@ -245,6 +247,19 @@ public class EditorProfileListFragment extends Fragment
         }
 
         @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+
+            EditorProfileListFragment fragment = this.fragmentWeakRef.get();
+
+            if ((fragment != null) && (fragment.isAdded())) {
+                fragment.textViewNoData.setVisibility(View.GONE);
+                fragment.progressBar.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
             dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
             if (dataWrapper.profileList.size() == 0)
@@ -263,6 +278,7 @@ public class EditorProfileListFragment extends Fragment
             EditorProfileListFragment fragment = this.fragmentWeakRef.get(); 
             
             if ((fragment != null) && (fragment.isAdded())) {
+                fragment.progressBar.setVisibility(View.GONE);
 
                 // get local profileList
                 dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
