@@ -30,7 +30,7 @@
         android:visibility="gone" >
 
         <ProgressBar
-            android:id="@+id/editor_profiles_lis_progress"
+            android:id="@+id/editor_profiles_list_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
