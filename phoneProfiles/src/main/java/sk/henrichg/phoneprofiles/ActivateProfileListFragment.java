@@ -30,6 +30,7 @@ public class ActivateProfileListFragment extends Fragment {
     private GridView gridView = null;
     private TextView activeProfileName;
     private ImageView activeProfileIcon;
+    TextView textViewNoData;
 
     private int startupSource = 0;
 
@@ -109,6 +110,7 @@ public class ActivateProfileListFragment extends Fragment {
             listView = view.findViewById(R.id.act_prof_profiles_list);
         else
             gridView = view.findViewById(R.id.act_prof_profiles_grid);
+        textViewNoData = view.findViewById(R.id.act_prof_list_empty);
 
         AbsListView absListView;
         if (!ApplicationPreferences.applicationActivatorGridLayout(activityDataWrapper.context))
