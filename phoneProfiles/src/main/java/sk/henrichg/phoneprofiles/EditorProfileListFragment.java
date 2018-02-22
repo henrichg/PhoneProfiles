@@ -230,7 +230,8 @@ public class EditorProfileListFragment extends Fragment
                     ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
             updateHeader(profile);
             profileListAdapter.notifyDataSetChanged(false);
-            setProfileSelection(profile);
+            if (!ApplicationPreferences.applicationEditorHeader(fragment.activityDataWrapper.context))
+                setProfileSelection(profile);
         }
 
     }
@@ -300,7 +301,8 @@ public class EditorProfileListFragment extends Fragment
                         ApplicationPreferences.applicationEditorPrefIndicator(fragment.activityDataWrapper.context));
                 fragment.updateHeader(profile);
                 fragment.profileListAdapter.notifyDataSetChanged(false);
-                fragment.setProfileSelection(profile);
+                if (!ApplicationPreferences.applicationEditorHeader(fragment.activityDataWrapper.context))
+                    fragment.setProfileSelection(profile);
 
                 if (defaultProfilesGenerated)
                 {
