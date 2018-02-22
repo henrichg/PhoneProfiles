@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class ActivateProfileListFragment extends Fragment {
     private TextView activeProfileName;
     private ImageView activeProfileIcon;
     TextView textViewNoData;
+    LinearLayout progressBar;
 
     private int startupSource = 0;
 
@@ -111,6 +113,7 @@ public class ActivateProfileListFragment extends Fragment {
         else
             gridView = view.findViewById(R.id.act_prof_profiles_grid);
         textViewNoData = view.findViewById(R.id.act_prof_list_empty);
+        progressBar = view.findViewById(R.id.act_prof_list_linla_progress);
 
         AbsListView absListView;
         if (!ApplicationPreferences.applicationActivatorGridLayout(activityDataWrapper.context))
@@ -182,6 +185,19 @@ public class ActivateProfileListFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+
+            ActivateProfileListFragment fragment = this.fragmentWeakRef.get();
+
+            if ((fragment != null) && (fragment.isAdded())) {
+                fragment.textViewNoData.setVisibility(View.GONE);
+                fragment.progressBar.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
             dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context));
             if (ApplicationPreferences.applicationActivatorGridLayout(dataWrapper.context)) {
@@ -204,6 +220,7 @@ public class ActivateProfileListFragment extends Fragment {
             final ActivateProfileListFragment fragment = this.fragmentWeakRef.get();
             
             if ((fragment != null) && (fragment.isAdded())) {
+                fragment.progressBar.setVisibility(View.GONE);
 
                 // get local profileList
                 dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context));
