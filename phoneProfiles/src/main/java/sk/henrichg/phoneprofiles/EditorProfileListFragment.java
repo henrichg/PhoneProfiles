@@ -49,7 +49,7 @@ public class EditorProfileListFragment extends Fragment
     private ImageView activeProfileIcon;
     private Toolbar bottomToolbar;
     TextView textViewNoData;
-    LinearLayout progressBar;
+    private LinearLayout progressBar;
 
     private WeakReference<LoadProfileListAsyncTask> asyncTaskContext;
 

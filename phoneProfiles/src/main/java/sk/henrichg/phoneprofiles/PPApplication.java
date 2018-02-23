@@ -43,7 +43,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class PPApplication extends Application {
 
-    static String romManufacturer = getROMManufacturer();
+    static final String romManufacturer = getROMManufacturer();
     static String PACKAGE_NAME;
 
     public static final boolean exactAlarms = true;
