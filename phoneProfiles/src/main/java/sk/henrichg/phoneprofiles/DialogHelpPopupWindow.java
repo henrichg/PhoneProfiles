@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.labo.kaji.relativepopupwindow.RelativePopupWindow;
 
 class DialogHelpPopupWindow extends GuiInfoPopupWindow {
