@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.multidex.MultiDex;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.Pair;
 
@@ -171,6 +173,9 @@ public class PPApplication extends Application {
         //long nanoTimeStart = startMeasuringRunTime();
 
         PACKAGE_NAME = getPackageName();
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.refreshGUIBroadcastReceiver, new IntentFilter("RefreshGUIBroadcastReceiver"));
 
         startHandlerThread();
 

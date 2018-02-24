@@ -12,8 +12,6 @@ public class RefreshGUIBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        LocalBroadcastManager.getInstance(context.getApplicationContext()).unregisterReceiver(PPApplication.refreshGUIBroadcastReceiver);
-
         boolean refreshIcons = intent.getBooleanExtra(EXTRA_REFRESH_ICONS, false);
         boolean refreshAlsoEditor = intent.getBooleanExtra(EXTRA_REFRESH_ALSO_EDITOR, true);
 

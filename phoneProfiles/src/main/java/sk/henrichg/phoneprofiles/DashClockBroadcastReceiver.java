@@ -12,8 +12,6 @@ public class DashClockBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        LocalBroadcastManager.getInstance(context.getApplicationContext()).unregisterReceiver(PPApplication.dashClockBroadcastReceiver);
-
         //DashClockJob.start(context.getApplicationContext());
         //final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThread();
