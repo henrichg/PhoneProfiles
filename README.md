@@ -17,6 +17,7 @@ Required external libs
 - Android support library: core, appcomapt, gridlayout, cardview, recyclerview
 - Google Billing library: donations
 - RootTools - https://github.com/Stericson/RootTools
+- android-hidden-api - https://github.com/anggrayudi/android-hidden-api 
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
 - SystemBarTint - https://github.com/jgilfelt/SystemBarTint
 - google-gson - https://code.google.com/p/google-gson/
