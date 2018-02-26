@@ -30,7 +30,6 @@
   <string name="activate_profile_alert_message">¿Activar perfil?</string>
   <string name="brightness_pref_dialog_no_change_chb">No cambiar</string>
   <string name="brightness_pref_dialog_automatic_chb">Automático</string>
-  <string name="imageview_resource_file_pref_dialog_gallery_btn">Personalizar&#8230;</string>
   <string name="volume_pref_dialog_no_change_chb">No cambiar</string>
   <string name="phone_profiles_pref_category_activator">Activador</string>
   <string name="phone_profiles_pref_category_editor">Editor</string>
@@ -1042,17 +1041,17 @@
   <string name="email_chooser">Enviar correo electrónico usando</string>
   <string name="web_browser_chooser">Ver dirección web utilizando</string>
   <string name="google_play_chooser">Ver Google Play utilizando</string>
-  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesPlusExtender no instalado</string>
-  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">no habilitada la configuración de accesibilidad para PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary">Para habilitar el parámetros \"Aplicación\", permita a PhoneProfilesPlusExtender \"Accesibilidad\" en la configuración del sistema.</string>
-  <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary">Para habilitar el parámetro \"Ignorar aplicaciones\" permita a PhoneProfilesPlusExtender \"Accesibilidad\" en la configuración del sistema.</string>
-  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_applications_PPPExtender_install_summary">Para habilitar el parámetro \"Aplicaciones\", haga click aquí para instalar PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_orientation_PPPExtender_install_summary">Para habilitar el parámetro \"Ignorar aplicaciones\", haga click aquí para instalar PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_applications_PPPExtender_upgrade_summary">Haga click aquí para ver los cambios y actualizar PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_orientation_PPPExtender_upgrade_summary">Haga click aquí para ver los cambios y actualizar PhoneProfilesPlusExtender.</string>
-  <string name="important_info_accessibility_service_text1">Debido a un cambio en las reglas de Google, sobre el uso de los servicios de accesibilidad, debe instalar PhoneProfilesPlusExtender para usar los sensores de evento \"Parámetros de Aplicación\" y \"Parámetros de Orientación\". Revise los parámetros de esos sensores para más información.</string>
+  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesExtender no instalado</string>
+  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">no habilitada la configuración de accesibilidad para PhoneProfilesExtender</string>
+  <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary">Para habilitar el parámetros \"Aplicación\", permita a PhoneProfilesExtender \"Accesibilidad\" en la configuración del sistema.</string>
+  <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary">Para habilitar el parámetro \"Ignorar aplicaciones\" permita a PhoneProfilesExtender \"Accesibilidad\" en la configuración del sistema.</string>
+  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesExtender</string>
+  <string name="event_preferences_applications_PPPExtender_install_summary">Para habilitar el parámetro \"Aplicaciones\", haga click aquí para instalar PhoneProfilesExtender.</string>
+  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesExtender</string>
+  <string name="event_preferences_orientation_PPPExtender_install_summary">Para habilitar el parámetro \"Ignorar aplicaciones\", haga click aquí para instalar PhoneProfilesExtender.</string>
+  <string name="event_preferences_applications_PPPExtender_upgrade_summary">Haga click aquí para ver los cambios y actualizar PhoneProfilesExtender.</string>
+  <string name="event_preferences_orientation_PPPExtender_upgrade_summary">Haga click aquí para ver los cambios y actualizar PhoneProfilesExtender.</string>
+  <string name="important_info_accessibility_service_text1">Debido a un cambio en las reglas de Google, sobre el uso de los servicios de accesibilidad, debe instalar PhoneProfilesExtender para usar los sensores de evento \"Parámetros de Aplicación\" y \"Parámetros de Orientación\". Revise los parámetros de esos sensores para más información.</string>
   <string name="about_application_extender_source_code">Código fuente - extensor:</string>
   <string name="pref_dlg_info_about_wildcards_4">Puede configurar más cadenas. Separándolas con el caracter \"|\".</string>
   <string name="profile_preferences_sourceProfileInfoX_title">Perfil de funcionalidad compartido.</string>
@@ -1086,7 +1085,7 @@
   <string name="phone_profiles_pref_eventBluetoothLocationSystemSettings_summary">Por favor habilite la ubicación y el escaneo de Bluetooth en la configuración del sistema. Sin esto, el escaneo de Bluetooth no funcionará.</string>
   <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings">\"Mantener la red Wi-Fi encendida\" configuración del sistema</string>
   <string name="phone_profiles_pref_eventWiFiKeppOnSystemSettings_summary">Por favor configure \"Mantener red Wi-Fi durante el modo en reposo\" a \"Siempre\". Sin esto, el escaneo de Wi-Fi no funcionará mientras el dispositivo esté en reposo.</string>
-  <string name="important_info_accessibility_service_new_version">Por favor instale la nueva versión de PhoneProfilesPlusExtender para usar los sensores de evento \"Parámetros de aplicación\" y \"Parámetros de orientación\". Revise los parámetros de esos sensores para más información.</string>
+  <string name="important_info_accessibility_service_new_version">Por favor instale la nueva versión de PhoneProfilesExtender para usar los sensores de evento \"Parámetros de aplicación\" y \"Parámetros de orientación\". Revise los parámetros de esos sensores para más información.</string>
   <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary1">Por favor no configurar el intervalo por un valor menor a</string>
   <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary2">minutos. Esto aumenta considerablemente el consumo de batería.</string>
   <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary3">segundos. Esto aumenta considerablemente el consumo de batería.</string>
@@ -1116,12 +1115,22 @@
   <string name="profile_preferences_applicationDisableMobileCellScanning">Disable mobile cell scanning</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Disable orientation scanning</string>
   <string name="profile_preferences_headsUpNotifications">(G1)(R) Notificaciones emergentes</string>
-  <string name="event_preferences_PPPExtenderInstallInfo_text">How to install PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_PPPExtenderInstallInfo_summary">Download latest version of PhoneProfilesPlusExtender.apk from it\'s GitHub. Then click to notification about downloaded apk and install it.</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">How to install PhoneProfilesExtender</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_summary">Download latest version of PhoneProfilesExtender.apk from it\'s GitHub. Then click to notification about downloaded apk and install it.</string>
   <string name="editor_drawer_open">Abrir diseño navegación</string>
   <string name="donation_thanks_dialog">Gracias por donar. \nl realmente lo apreciamos.</string>
   <string name="donation_google_android_market_not_supported">No se admiten donaciones dentro de la aplicación. ¿Tiene la Google Play Store instalada correctamente?</string>
   <string name="donation_google_error">Error.</string>
+  <string name="button_close">Close</string>
+  <string name="fast_access_duration_activate_without_button_2">Activate without duration</string>
+  <string name="profileicon_pref_dlg_customIconButton">Custom icon</string>
+  <string name="mobile_cells_registration_cell_name_hint">Click to set cell name</string>
+  <string name="profile_preferences_deviceWiFiAPInfo_summary">May not working connection into hotspot from another devices.</string>
+  <string name="array_event_pref_battery_charging_not_use">Do not use</string>
+  <string name="array_event_pref_battery_charging_start_when_charging">Start when charging</string>
+  <string name="array_event_pref_battery_charging_stop_when_charging">Stop when charging</string>
+  <string name="profile_multiselect_summary_text_selected">Selected</string>
+  <string name="profile_multiselect_summary_text_not_selected">None selected</string>
   <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
   <!--
     <string name="notification_channel_activated_profile">Activated profile</string>
@@ -1142,9 +1151,9 @@
   <!--<string name="profile_preferences_volumeVibrateWhenRingingRootInfo_summary">In Android 6 this system setting can be changed only on rooted devices. Affected are ringer modes and interruption types with vibration.</string>-->
   <!--<string name="info_notification_unlink_ringer_notification_volumes2">If your device does not have separate volumes for ringtone and notifications, keep volume separation enabled.</string>-->
   <!--<string name="event_preferences_orientation_AccessibilitySettings_summary">To enable \"Ignore for applications\" parameter, allow PhoneProfiles \"Accessibility\" in system settings.</string>-->
-  <!--<string name="donation_button_close">Close</string>-->
   <!--<string name="donation_google_android_market_not_supported_title">In-App Donations are not supported.</string>-->
   <!--<string name="donation_thanks_dialog_title">Thank you</string>-->
   <!--<string name="phone_profiles_pref_applicationAlertSummary">This is used only for manual profile activation.</string>-->
   <!--<string name="profile_preferences_zenModeM_alarms_summary">Disturb only with alarms</string>-->
+  <!--<string name="imageview_resource_file_pref_dialog_gallery_btn">Custom&#8230;</string>-->
 </resources>

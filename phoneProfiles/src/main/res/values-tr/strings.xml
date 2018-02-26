@@ -30,7 +30,6 @@
   <string name="activate_profile_alert_message">Tercih faaliyete geçsin mi?</string>
   <string name="brightness_pref_dialog_no_change_chb">Değiştirilmesin</string>
   <string name="brightness_pref_dialog_automatic_chb">Otomatik parlaklık</string>
-  <string name="imageview_resource_file_pref_dialog_gallery_btn">Özel&#8230;</string>
   <string name="volume_pref_dialog_no_change_chb">Değiştirilmesin</string>
   <string name="phone_profiles_pref_category_activator">Muharrik</string>
   <string name="phone_profiles_pref_category_editor">Düzenleyici</string>
@@ -1042,14 +1041,14 @@
   <string name="email_chooser">Şununla e-posta gönder:</string>
   <string name="web_browser_chooser">Şununla internet adresine bak:</string>
   <string name="google_play_chooser">Şununla Google Play\'e bak:</string>
-  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesPlusExtender yüklü değil</string>
-  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">Erişilebilirlik ayarlarında PhoneProfilesPlusExtender\'a izin verilmemiş</string>
+  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesExtender yüklü değil</string>
+  <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">Erişilebilirlik ayarlarında PhoneProfilesExtender\'a izin verilmemiş</string>
   <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary">\"Uygulamalar şartları\"nı faal edebilmek için sistem ayarlarında \"Erişilebilirlik\" tercihlerinde PhoneProfilesExtender\'a izin verin.</string>
   <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary">\"Uygulamalar için ihmal et\" değerleri açmak için \"Sistem Ayarları\" → \"Erişilebilirlik\" ayarlarında PhoneProfilesExtender\'a izin verin.</string>
-  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_applications_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermek için PhoneProfilesPlusExtender yüklemek için buraya dokunun.</string>
-  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_orientation_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermeyi sağlayan PhoneProfilesPlusExtender\'ı yüklemek için buraya dokunun.</string>
+  <string name="event_preferences_applications_PPPExtender_title">PhoneProfilesExtender</string>
+  <string name="event_preferences_applications_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermek için PhoneProfilesExtender yüklemek için buraya dokunun.</string>
+  <string name="event_preferences_orientation_PPPExtender_title">PhoneProfilesExtender</string>
+  <string name="event_preferences_orientation_PPPExtender_install_summary">\"Uygulamalar\" şartlarına izin vermeyi sağlayan PhoneProfilesExtender\'ı yüklemek için buraya dokunun.</string>
   <string name="event_preferences_applications_PPPExtender_upgrade_summary">Değişiklikleri kontrol etmek ve PhoneProfilesExtender\'ı güncellemek için buraya dokunun.</string>
   <string name="event_preferences_orientation_PPPExtender_upgrade_summary">Değişiklikleri kontrol etmek ve PhoneProfilesExtender\'ı güncellemek için buraya dokunun.</string>
   <string name="important_info_accessibility_service_text1">Erişebilirlik hizmetleri hakkında Google kuralları değişikliği sebebiyle, sensör durumları \"Uygulama şartları\" ve \"Ekran döndürme şartları\" için PhoneProfilesExtender\'ı yüklemeniz icab ediyor. Daha fazla malumat için bu sensörlerin şartlarına bakınız.</string>
@@ -1116,12 +1115,22 @@
   <string name="profile_preferences_applicationDisableMobileCellScanning">Şebeke hücre taramasını kapat</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Döndürme sensörü taramasını kapat</string>
   <string name="profile_preferences_headsUpNotifications">(G1) (R) açılan bildirimler</string>
-  <string name="event_preferences_PPPExtenderInstallInfo_text">PhoneProfilesPlusExtender nasıl kurulur</string>
-  <string name="event_preferences_PPPExtenderInstallInfo_summary">PhoneProfilesPlusExtender.apk\'nın son sürümünü GitHub\'dan indirin. Daha sonra indirilen apk ilgili bildirime tıklayın ve yükleyin.</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">PhoneProfilesExtender nasıl kurulur</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_summary">PhoneProfilesExtender.apk\'nın son sürümünü GitHub\'dan indirin. Daha sonra indirilen apk ilgili bildirime tıklayın ve yükleyin.</string>
   <string name="editor_drawer_open">Düzenleyici ekranınını aç</string>
   <string name="donation_thanks_dialog">Bağış için teşekkür ederiz.\nGerçekten bunu takdir ediyoruz.</string>
   <string name="donation_google_android_market_not_supported">Uygulama-içi Bağış mümkün değil. Google Play Mağaza doğru yüklenmiş mi?</string>
-  <string name="donation_google_error">Error.</string>
+  <string name="donation_google_error">Hata.</string>
+  <string name="button_close">Kapat</string>
+  <string name="fast_access_duration_activate_without_button_2">Süresiz faaliyete geçir</string>
+  <string name="profileicon_pref_dlg_customIconButton">Özel simge</string>
+  <string name="mobile_cells_registration_cell_name_hint">Hücre ismi vermek için buraya dokunun</string>
+  <string name="profile_preferences_deviceWiFiAPInfo_summary">Başka bir cihazdan hotspot\'a yapılan bağlantı çalışmayabilir.</string>
+  <string name="array_event_pref_battery_charging_not_use">Kullanılmasın</string>
+  <string name="array_event_pref_battery_charging_start_when_charging">Sarjda iken başla</string>
+  <string name="array_event_pref_battery_charging_stop_when_charging">Sarjda iken durdur</string>
+  <string name="profile_multiselect_summary_text_selected">Seçilen</string>
+  <string name="profile_multiselect_summary_text_not_selected">Seçilmeyen</string>
   <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
   <!--
     <string name="notification_channel_activated_profile">Activated profile</string>
@@ -1142,9 +1151,9 @@
   <!--<string name="profile_preferences_volumeVibrateWhenRingingRootInfo_summary">In Android 6 this system setting can be changed only on rooted devices. Affected are ringer modes and interruption types with vibration.</string>-->
   <!--<string name="info_notification_unlink_ringer_notification_volumes2">If your device does not have separate volumes for ringtone and notifications, keep volume separation enabled.</string>-->
   <!--<string name="event_preferences_orientation_AccessibilitySettings_summary">To enable \"Ignore for applications\" parameter, allow PhoneProfiles \"Accessibility\" in system settings.</string>-->
-  <!--<string name="donation_button_close">Close</string>-->
   <!--<string name="donation_google_android_market_not_supported_title">In-App Donations are not supported.</string>-->
   <!--<string name="donation_thanks_dialog_title">Thank you</string>-->
   <!--<string name="phone_profiles_pref_applicationAlertSummary">This is used only for manual profile activation.</string>-->
   <!--<string name="profile_preferences_zenModeM_alarms_summary">Disturb only with alarms</string>-->
+  <!--<string name="imageview_resource_file_pref_dialog_gallery_btn">Custom&#8230;</string>-->
 </resources>
