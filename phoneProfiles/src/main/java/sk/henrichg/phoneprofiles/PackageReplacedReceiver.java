@@ -79,7 +79,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "donation alarm restart");
                                 PPApplication.setDaysAfterFirstStart(appContext, 0);
                                 PPApplication.setDonationNotificationCount(appContext, 0);
-                                AboutApplicationJob.scheduleJob(/*appContext*/true);
+                                AboutApplicationJob.scheduleJob(appContext, true);
                             }
                         }
                     } catch (Exception e) {
