@@ -448,70 +448,59 @@ public class PPApplication extends Application {
     //--------------------------------------------------------------
     // root -----------------------------------------------------
 
-    //static private boolean rootChecked;
+    static private boolean rootChecked;
     static private boolean rooted;
-    //static private boolean settingsBinaryChecked;
+    static private boolean settingsBinaryChecked;
     static private boolean settingsBinaryExists;
     //static private boolean isSELinuxEnforcingChecked;
-    static private boolean isSELinuxEnforcing;
+    //static private boolean isSELinuxEnforcing;
     //static private String suVersion;
     //static private boolean suVersionChecked;
-    //static private boolean serviceBinaryChecked;
+    static private boolean serviceBinaryChecked;
     static private boolean serviceBinaryExists;
     static private ArrayList<Pair> serviceList = null;
 
     static synchronized void initRoot() {
-        //synchronized (PPApplication.rootMutex) {
-        //rootChecked = false;
-        rooted = false;
-        //settingsBinaryChecked = false;
-        settingsBinaryExists = false;
-        //isSELinuxEnforcingChecked = false;
-        isSELinuxEnforcing = false;
-        //suVersion = null;
-        //suVersionChecked = false;
-        //serviceBinaryChecked = false;
-        serviceBinaryExists = false;
-        //}
+        synchronized (PPApplication.startRootCommandMutex) {
+            rootChecked = false;
+            rooted = false;
+            settingsBinaryChecked = false;
+            settingsBinaryExists = false;
+            //isSELinuxEnforcingChecked = false;
+            //isSELinuxEnforcing = false;
+            //suVersion = null;
+            //suVersionChecked = false;
+            serviceBinaryChecked = false;
+            serviceBinaryExists = false;
+        }
     }
 
     private static boolean _isRooted()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        //if (!rootChecked)
-        if (!rooted)
-        {
-            try {
-                PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
-                //rootChecking = true;
-                /*try {
-                    RootTools.closeAllShells();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-                //if (RootTools.isRootAvailable()) {
-                if (RootToolsSmall.isRooted()) {
-                    // device is rooted
-                    PPApplication.logE("PPApplication._isRooted", "root available");
-                    //rootChecked = true;
-                    rooted = true;
-                } else {
-                    PPApplication.logE("PPApplication._isRooted", "root NOT available");
-                    //rootChecked = true;
-                    rooted = false;
-                    settingsBinaryExists = false;
-                    //settingsBinaryChecked = false;
-                    //isSELinuxEnforcingChecked = false;
-                    isSELinuxEnforcing = false;
-                    //suVersionChecked = false;
-                    //suVersion = null;
-                    serviceBinaryExists = false;
-                    //serviceBinaryChecked = false;
-                }
-            } catch (Exception e) {
-                Log.e("PPApplication._isRooted", "Error on run su: " + e.toString());
+        try {
+            PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
+            //if (RootTools.isRootAvailable()) {
+            if (RootToolsSmall.isRooted()) {
+                // device is rooted
+                PPApplication.logE("PPApplication._isRooted", "root available");
+                rooted = true;
+            } else {
+                PPApplication.logE("PPApplication._isRooted", "root NOT available");
+                rooted = false;
+                settingsBinaryExists = false;
+                settingsBinaryChecked = false;
+                //isSELinuxEnforcingChecked = false;
+                //isSELinuxEnforcing = false;
+                //suVersionChecked = false;
+                //suVersion = null;
+                serviceBinaryExists = false;
+                serviceBinaryChecked = false;
             }
+            rootChecked = true;
+        } catch (Exception e) {
+            Log.e("PPApplication._isRooted", "Error on check root: " + e.toString());
         }
         //if (rooted)
         //	getSUVersion();
@@ -519,28 +508,22 @@ public class PPApplication extends Application {
     }
 
     static boolean isRooted() {
-        //synchronized (PPApplication.rootMutex) {
-        _isRooted();
-        //}
-        return rooted;
+        synchronized (PPApplication.startRootCommandMutex) {
+            if (!rootChecked) {
+                _isRooted();
+            }
+            return rooted;
+        }
     }
 
     static boolean isRootGranted()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        //synchronized (PPApplication.rootMutex) {
-
         if (_isRooted()) {
             try {
                 synchronized (PPApplication.startRootCommandMutex) {
                     PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
-                    //grantChecking = true;
-                    /*try {
-                        RootTools.closeAllShells();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
                     if (RootTools.isAccessGiven()) {
                         // root is granted
                         PPApplication.logE("PPApplication.isRootGranted", "root granted");
@@ -560,57 +543,40 @@ public class PPApplication extends Application {
             PPApplication.logE("PPApplication.isRootGranted", "not rooted");
             return false;
         }
-        //}
     }
 
     static boolean settingsBinaryExists()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        //if (!settingsBinaryChecked)
-        if (!settingsBinaryExists)
-        {
-            //synchronized (PPApplication.rootMutex) {
-            PPApplication.logE("PPApplication.settingsBinaryExists", "start");
-            //settingsBinaryChecking = true;
-                /*try {
-                    RootTools.closeAllShells();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-            //List<String> settingsPaths = RootTools.findBinary("settings");
-            //settingsBinaryExists = settingsPaths.size() > 0;
-            settingsBinaryExists = RootToolsSmall.hasSettingBin();
-            //settingsBinaryChecked = true;
-            //}
+        synchronized (PPApplication.startRootCommandMutex) {
+            if (!settingsBinaryChecked) {
+                PPApplication.logE("PPApplication.settingsBinaryExists", "start");
+                //List<String> settingsPaths = RootTools.findBinary("settings");
+                //settingsBinaryExists = settingsPaths.size() > 0;
+                settingsBinaryExists = RootToolsSmall.hasSettingBin();
+                settingsBinaryChecked = true;
+            }
+            PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists=" + settingsBinaryExists);
+            return settingsBinaryExists;
         }
-        PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists="+settingsBinaryExists);
-        return settingsBinaryExists;
     }
 
     static boolean serviceBinaryExists()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        //if (!serviceBinaryChecked)
-        if (!serviceBinaryExists)
-        {
-            //synchronized (PPApplication.rootMutex) {
-            PPApplication.logE("PPApplication.serviceBinaryExists", "start");
-            //serviceBinaryChecking = true;
-                /*try {
-                    RootTools.closeAllShells();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-            //List<String> servicePaths = RootTools.findBinary("service");
-            //serviceBinaryExists = servicePaths.size() > 0;
-            serviceBinaryExists = RootToolsSmall.hasServiceBin();
-            //serviceBinaryChecked = true;
-            //}
+        synchronized (PPApplication.startRootCommandMutex) {
+            if (!serviceBinaryChecked) {
+                PPApplication.logE("PPApplication.serviceBinaryExists", "start");
+                //List<String> servicePaths = RootTools.findBinary("service");
+                //serviceBinaryExists = servicePaths.size() > 0;
+                serviceBinaryExists = RootToolsSmall.hasServiceBin();
+                serviceBinaryChecked = true;
+            }
+            PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists=" + serviceBinaryExists);
+            return serviceBinaryExists;
         }
-        PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists="+serviceBinaryExists);
-        return serviceBinaryExists;
     }
 
     /**
@@ -619,52 +585,43 @@ public class PPApplication extends Application {
      * @return true if SELinux set to enforcing, or false in the case of
      *         permissive or not present
      */
-    public static boolean isSELinuxEnforcing()
+    /*public static boolean isSELinuxEnforcing()
     {
         RootShell.debugMode = rootToolsDebug;
 
-        //if (!isSELinuxEnforcingChecked)
-        if (!isSELinuxEnforcing)
-        {
-            //synchronized (PPApplication.rootMutex) {
-            boolean enforcing = false;
+        synchronized (PPApplication.startRootCommandMutex) {
+            if (!isSELinuxEnforcingChecked)
+            {
+                boolean enforcing = false;
 
-            // First known firmware with SELinux built-in was a 4.2 (17)
-            // leak
-            //if (android.os.Build.VERSION.SDK_INT >= 17) {
-                // Detect enforcing through sysfs, not always present
-                File f = new File("/sys/fs/selinux/enforce");
-                if (f.exists()) {
-                    try {
-                        InputStream is = new FileInputStream("/sys/fs/selinux/enforce");
-                        //noinspection TryFinallyCanBeTryWithResources
+                // First known firmware with SELinux built-in was a 4.2 (17)
+                // leak
+                //if (android.os.Build.VERSION.SDK_INT >= 17) {
+                    // Detect enforcing through sysfs, not always present
+                    File f = new File("/sys/fs/selinux/enforce");
+                    if (f.exists()) {
                         try {
-                            enforcing = (is.read() == '1');
-                        } finally {
-                            is.close();
+                            InputStream is = new FileInputStream("/sys/fs/selinux/enforce");
+                            //noinspection TryFinallyCanBeTryWithResources
+                            try {
+                                enforcing = (is.read() == '1');
+                            } finally {
+                                is.close();
+                            }
+                        } catch (Exception ignored) {
                         }
-                    } catch (Exception ignore) {
                     }
-                }
+                //}
 
-                /*
-                // 4.4+ builds are enforcing by default, take the gamble
-                if (!enforcing)
-                {
-                    enforcing = (android.os.Build.VERSION.SDK_INT >= 19);
-                }
-                */
-            //}
+                isSELinuxEnforcing = enforcing;
+                isSELinuxEnforcingChecked = true;
+            }
 
-            isSELinuxEnforcing = enforcing;
-            //isSELinuxEnforcingChecked = true;
-            //}
+            PPApplication.logE("PPApplication.isSELinuxEnforcing", "isSELinuxEnforcing="+isSELinuxEnforcing);
+
+            return isSELinuxEnforcing;
         }
-
-        PPApplication.logE("PPApplication.isSELinuxEnforcing", "isSELinuxEnforcing="+isSELinuxEnforcing);
-
-        return isSELinuxEnforcing;
-    }
+    }*/
 
     /*
     public static String getSELinuxEnforceCommand(String command, Shell.ShellContext context)
