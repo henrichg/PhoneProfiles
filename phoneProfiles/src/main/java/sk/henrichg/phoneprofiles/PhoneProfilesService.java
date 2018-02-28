@@ -157,12 +157,13 @@ public class PhoneProfilesService extends Service {
 
                 PPApplication.initRoot();
                 // grant root
+                //noinspection StatementWithEmptyBody
                 if (PPApplication.isRootGranted())
                 {
-                    PPApplication.settingsBinaryExists();
-                    PPApplication.serviceBinaryExists();
                     //PPApplication.getSUVersion();
                 }
+                PPApplication.settingsBinaryExists();
+                PPApplication.serviceBinaryExists();
                 PPApplication.getServicesList();
 
                 Permissions.clearMergedPermissions(appContext);
