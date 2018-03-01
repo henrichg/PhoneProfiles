@@ -355,9 +355,13 @@ public class PPApplication extends Application {
         return contains;
     }
 
+    static public boolean logEnabled() {
+        return (logIntoLogCat || logIntoFile);
+    }
+
     static public void logI(String tag, String text)
     {
-        if (!(logIntoLogCat || logIntoFile))
+        if (!logEnabled())
             return;
 
         if (logContainsFilterTag(tag))
@@ -369,7 +373,7 @@ public class PPApplication extends Application {
 
     static public void logW(String tag, String text)
     {
-        if (!(logIntoLogCat || logIntoFile))
+        if (!logEnabled())
             return;
 
         if (logContainsFilterTag(tag))
@@ -381,7 +385,7 @@ public class PPApplication extends Application {
 
     static public void logE(String tag, String text)
     {
-        if (!(logIntoLogCat || logIntoFile))
+        if (!logEnabled())
             return;
 
         if (logContainsFilterTag(tag))
@@ -393,7 +397,7 @@ public class PPApplication extends Application {
 
     static public void logD(String tag, String text)
     {
-        if (!(logIntoLogCat || logIntoFile))
+        if (!logEnabled())
             return;
 
         if (logContainsFilterTag(tag))
