@@ -113,7 +113,7 @@ public class PPApplication extends Application {
     private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
     private static final String PREF_DONATION_DONATED = "donation_donated";
 
-    public static HandlerThread handlerThread = new HandlerThread("PPHandlerThread");
+    public static final HandlerThread handlerThread = new HandlerThread("PPHandlerThread");
     static {
         handlerThread.start();
     }
@@ -140,8 +140,8 @@ public class PPApplication extends Application {
     public static boolean sLookCocktailPanelEnabled = false;
     //public static boolean sLookCocktailBarEnabled = false;
 
-    public static final RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
-    public static final DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
+    private static final RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
+    private static final DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
 
     @Override
     public void onCreate()
