@@ -3,9 +3,12 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
 
 import java.util.Date;
+
+import static android.content.Context.POWER_SERVICE;
 
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
@@ -88,13 +91,28 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         });
     }
 
-    private void setLinkUnlinkNotificationVolume(int linkMode, Context context) {
+    private void setLinkUnlinkNotificationVolume(final int linkMode, final Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
             DataWrapper dataWrapper = new DataWrapper(context, false, 0);
-            Profile profile = dataWrapper.getActivatedProfile(false, false);
+            final Profile profile = dataWrapper.getActivatedProfile(false, false);
             if (profile != null) {
-                //ExecuteVolumeProfilePrefsJob.start(context, profile._id, linkMode, false);
-                ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
+                Handler handler = new Handler(ActivateProfileHelper.handlerThreadVolumes.getLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
+                        PowerManager.WakeLock wakeLock = null;
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.handlerThreadVolumes");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
+
+                        ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
+
+                        if ((wakeLock != null) && wakeLock.isHeld())
+                            wakeLock.release();
+                    }
+                });
             }
             dataWrapper.invalidateDataWrapper();
         }
