@@ -93,7 +93,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             DataWrapper dataWrapper = new DataWrapper(context, false, 0);
             Profile profile = dataWrapper.getActivatedProfile(false, false);
             if (profile != null) {
-                //Log.e("PhoneCallBroadcastReceiver", "doCallEvent - unlink");
                 //ExecuteVolumeProfilePrefsJob.start(context, profile._id, linkMode, false);
                 ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
             }
@@ -127,7 +126,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         } while (SystemClock.uptimeMillis() - start < 2000);
 
         // audio mode is set to MODE_IN_CALL by system
-        //Log.e("PhoneCallBroadcastReceiver", "callAnswered audioMode=" + audioManager.getMode());
 
         DataWrapper dataWrapper = new DataWrapper(context, false, 0);
 
@@ -162,7 +160,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
         // audio mode is set to MODE_IN_CALL by system
-        //Log.e("PhoneCallBroadcastReceiver", "callEnded (before back speaker phone) audioMode="+audioManager.getMode());
 
         if (speakerphoneSelected)
         {
@@ -183,7 +180,6 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         } while (SystemClock.uptimeMillis() - start < 2000);
 
         // audio mode is set to MODE_NORMAL by system
-        //Log.e("PhoneCallBroadcastReceiver", "callEnded (before unlink) audioMode="+audioManager.getMode());
 
         if (incoming)
             setLinkUnlinkNotificationVolume(LINKMODE_LINK, context);

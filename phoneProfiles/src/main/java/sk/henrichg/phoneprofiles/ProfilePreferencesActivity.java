@@ -82,8 +82,6 @@ public class ProfilePreferencesActivity extends PreferenceActivity
         predefinedProfileIndex = getIntent().getIntExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
 
 
-        //Log.e("******** ProfilePreferenceFragmentActivity", "profile_id=" + profile_id);
-
         /*
         if (profile_id == PPApplication.DEFAULT_PROFILE_ID)
             getSupportActionBar().setTitle(R.string.title_activity_default_profile_preferences);

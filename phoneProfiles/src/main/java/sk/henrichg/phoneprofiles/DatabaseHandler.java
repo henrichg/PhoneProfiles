@@ -1832,7 +1832,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     db.setTransactionSuccessful();
                 } catch (Exception e) {
                     //Error in between database transaction
-                    Log.e("DatabaseHandler.updateForHardware", e.toString());
+                    Log.e("DatabaseHandler.updateForHardware", Log.getStackTraceString(e));
                 } finally {
                     db.endTransaction();
                     cursor.close();
@@ -2062,7 +2062,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 } catch (Exception e) {
                     //Error in between database transaction
-                    Log.e("DatabaseHandler.deleteGeofence", e.toString());
+                    Log.e("DatabaseHandler.deleteGeofence", Log.getStackTraceString(e));
                 } finally {
                     db.endTransaction();
                 }
@@ -2424,7 +2424,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         ret = -999;
                     }
                 } catch (Exception e) {
-                    Log.e("DatabaseHandler.importDB", e.toString());
+                    Log.e("DatabaseHandler.importDB", Log.getStackTraceString(e));
                     ret = 0;
                 }
 
@@ -2472,7 +2472,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         ret = 1;
                     }
                 } catch (Exception e) {
-                    Log.e("DatabaseHandler.exportDB", e.toString());
+                    Log.e("DatabaseHandler.exportDB", Log.getStackTraceString(e));
                 }
             } catch (Exception ignored) {}
             return ret;

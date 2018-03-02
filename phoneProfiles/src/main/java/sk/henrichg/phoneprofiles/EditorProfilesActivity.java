@@ -387,9 +387,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/henrichg/PhoneProfiles/wiki"));
                 startActivity(myIntent);
             } catch (ActivityNotFoundException e) {
-                //Toast.makeText(this, "No application can handle this request."
-                //    + " Please install a web browser",  Toast.LENGTH_LONG).show();
-                e.printStackTrace();
+                Toast.makeText(this, "No application can handle this request."
+                    + " Please install a web browser",  Toast.LENGTH_LONG).show();
             }
             return true;*/
         case R.id.menu_about:
@@ -608,7 +607,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                 prefEdit.apply();
             } catch (FileNotFoundException ignored) {
                 // no error, this is OK
-                //e.printStackTrace();
             } catch (Exception e) {
                 res = false;
             }
@@ -826,7 +824,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                 output.writeObject(pref.getAll());
             } catch (FileNotFoundException ignored) {
                 // this is OK
-                //e.printStackTrace();
             } catch (IOException e) {
                 res = false;
             }

@@ -26,8 +26,6 @@ class SettingsContentObserver  extends ContentObserver {
 
         context=c;
 
-        //Log.e("### SettingsContentObserver", "xxx");
-
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
             previousVolumeRing = audioManager.getStreamVolume(AudioManager.STREAM_RING);
@@ -42,14 +40,11 @@ class SettingsContentObserver  extends ContentObserver {
     private int volumeChangeDetect(int volumeStream, int previousVolume, AudioManager audioManager) {
 
         int currentVolume = audioManager.getStreamVolume(volumeStream);
-        //Log.e("### SettingsContentObserver", "channel="+volumeStream+" currentVolume="+currentVolume);
-        //Log.e("### SettingsContentObserver", "channel="+volumeStream+" previousVolume="+previousVolume);
 
         int delta=previousVolume-currentVolume;
 
         if(delta>0)
         {
-            //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Decreased");
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
                     ActivateProfileHelper.setRingerVolume(context, currentVolume);
@@ -59,7 +54,6 @@ class SettingsContentObserver  extends ContentObserver {
         }
         else if(delta<0)
         {
-            //Log.e("### SettingsContentObserver", "channel="+volumeStream+" Increased");
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING)
                     ActivateProfileHelper.setRingerVolume(context, currentVolume);
@@ -73,8 +67,6 @@ class SettingsContentObserver  extends ContentObserver {
     @Override
     public void onChange(boolean selfChange) {
         super.onChange(selfChange);
-
-        //Log.e("### SettingsContentObserver", "internalChange=" + internalChange);
 
         ////// volume change
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);

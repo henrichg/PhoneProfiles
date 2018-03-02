@@ -231,8 +231,6 @@ public class ActivateProfileListFragment extends Fragment {
                 {
                     // no any profile activated, start of Editor
 
-                    //Log.e("ActivateProfileListFragment","profile list empty");
-
                     fragment.doOnStart();
 
                     Intent intent = new Intent(fragment.getActivity().getBaseContext(), EditorProfilesActivity.class);

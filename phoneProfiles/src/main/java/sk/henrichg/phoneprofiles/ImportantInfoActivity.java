@@ -64,8 +64,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             versionCode = pInfo.versionCode;
-        } catch (Exception e) {
-            //e.printStackTrace();
+        } catch (Exception ignored) {
         }
 
         boolean news = false;

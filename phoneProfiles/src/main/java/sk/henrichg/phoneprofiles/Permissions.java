@@ -165,7 +165,6 @@ public class Permissions {
 
     private static List<PermissionType> checkProfilePermissions(Context context, Profile profile) {
         List<PermissionType>  permissions = new ArrayList<>();
-        //Log.e("Permissions", "checkProfilePermissions - profile.icon="+profile._icon);
         if (profile == null) return permissions;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             //if (!checkProfileVolumePreferences(context, profile)) permissions.add(new PermissionType(PERMISSION_VOLUME_PREFERENCES, permission.WRITE_SETTINGS));

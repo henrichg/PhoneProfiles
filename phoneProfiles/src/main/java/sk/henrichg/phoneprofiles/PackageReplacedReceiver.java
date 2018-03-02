@@ -82,8 +82,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 AboutApplicationJob.scheduleJob(appContext, true);
                             }
                         }
-                    } catch (Exception e) {
-                        //e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
 
                     if (PPApplication.getApplicationStarted(appContext, false))

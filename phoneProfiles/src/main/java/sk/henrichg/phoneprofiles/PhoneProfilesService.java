@@ -85,8 +85,7 @@ public class PhoneProfilesService extends Service {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int actualVersionCode = pInfo.versionCode;
             PPApplication.setSavedVersionCode(appContext, actualVersionCode);
-        } catch (Exception e) {
-            //e.printStackTrace();
+        } catch (Exception ignored) {
         }
 
         keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);

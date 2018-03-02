@@ -210,7 +210,6 @@ class BitmapManipulator {
             return bmRotated;
         }
         catch (OutOfMemoryError e) {
-            //e.printStackTrace();
             return null;
         }
     }

@@ -11,8 +11,6 @@ public class RingerModeChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Log.e("### RingerModeChangeReceiver", "xxx");
-
         if (!internalChange) {
             final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             setRingerMode(context, audioManager);
@@ -75,7 +73,6 @@ public class RingerModeChangeReceiver extends BroadcastReceiver {
     public static void setRingerMode(Context context, AudioManager audioManager) {
         int pRingerMode = getRingerMode(context, audioManager);
         if (pRingerMode != 0) {
-            //Log.e("RingerModeChangeReceiver",".setRingerMode  new ringerMode="+pRingerMode);
             ActivateProfileHelper.setRingerMode(context, pRingerMode);
         }
     }
