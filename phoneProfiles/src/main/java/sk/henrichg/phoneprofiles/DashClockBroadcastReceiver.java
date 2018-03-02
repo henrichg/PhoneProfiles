@@ -13,7 +13,6 @@ public class DashClockBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //DashClockJob.start(context.getApplicationContext());
         //final Context appContext = context.getApplicationContext();
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override

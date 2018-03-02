@@ -113,7 +113,10 @@ public class PPApplication extends Application {
     private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
     private static final String PREF_DONATION_DONATED = "donation_donated";
 
-    public static HandlerThread handlerThread = null;
+    public static HandlerThread handlerThread = new HandlerThread("PPHandlerThread");
+    static {
+        handlerThread.start();
+    }
 
     public static Handler brightnessHandler;
     public static Handler toastHandler;
@@ -175,8 +178,6 @@ public class PPApplication extends Application {
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.refreshGUIBroadcastReceiver, new IntentFilter("RefreshGUIBroadcastReceiver"));
 
-        startHandlerThread();
-
         // initialization
         //loadPreferences(this);
 
@@ -224,13 +225,6 @@ public class PPApplication extends Application {
             return true;
         }
         return false;
-    }
-
-    static void startHandlerThread() {
-        if (handlerThread == null) {
-            handlerThread = new HandlerThread("PPHandlerThread");
-            handlerThread.start();
-        }
     }
 
     //--------------------------------------------------------------

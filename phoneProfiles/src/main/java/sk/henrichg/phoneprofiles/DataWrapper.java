@@ -549,7 +549,6 @@ public class DataWrapper {
         ActivateProfileHelper.updateGUI(context, true);
 
         final Context appContext = context;
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override

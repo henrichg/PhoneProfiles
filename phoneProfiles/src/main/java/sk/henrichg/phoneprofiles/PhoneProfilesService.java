@@ -142,7 +142,6 @@ public class PhoneProfilesService extends Service {
 
         AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
@@ -260,7 +259,6 @@ public class PhoneProfilesService extends Service {
 
         if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
             final Context _this = this;
-            PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
@@ -740,7 +738,6 @@ public class PhoneProfilesService extends Service {
                         notificationIsPlayed = false;
                         notificationMediaPlayer = null;
 
-                        PPApplication.startHandlerThread();
                         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -756,7 +753,6 @@ public class PhoneProfilesService extends Service {
             } catch (SecurityException e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
                 stopPlayNotificationSound();
-                PPApplication.startHandlerThread();
                 final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -768,7 +764,6 @@ public class PhoneProfilesService extends Service {
             } catch (Exception e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
                 stopPlayNotificationSound();
-                PPApplication.startHandlerThread();
                 final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override

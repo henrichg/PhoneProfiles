@@ -416,7 +416,6 @@ class ActivateProfileHelper {
     private static void executeForRadios(Context context, final Profile profile)
     {
         final Context appContext = context.getApplicationContext();
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
@@ -908,7 +907,6 @@ class ActivateProfileHelper {
 
     static void executeForVolumes(Context context, final Profile profile, final int linkUnlinkVolumes, final boolean forProfileActivation) {
         final Context appContext = context.getApplicationContext();
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
@@ -952,7 +950,6 @@ class ActivateProfileHelper {
                         //SystemClock.sleep(500);
                         PPApplication.sleep(500);
 
-                        PPApplication.startHandlerThread();
                         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -1302,7 +1299,6 @@ class ActivateProfileHelper {
         if (profile._deviceWallpaperChange == 1)
         {
             final Context appContext = context.getApplicationContext();
-            PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
@@ -1375,7 +1371,6 @@ class ActivateProfileHelper {
         if (profile._deviceRunApplicationChange == 1)
         {
             final Context appContext = context.getApplicationContext();
-            PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
@@ -1446,7 +1441,6 @@ class ActivateProfileHelper {
 
     private static void executeRootForAdaptiveBrightness(Context context, final Profile profile) {
         final Context appContext = context.getApplicationContext();
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
@@ -2088,7 +2082,6 @@ class ActivateProfileHelper {
                 break;
         }
         setActivatedProfileScreenTimeout(context, 0);
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -3136,7 +3129,6 @@ class ActivateProfileHelper {
     private static void setPowerSaveMode(Context context, final Profile profile) {
         if (profile._devicePowerSaveMode != 0) {
             final Context appContext = context.getApplicationContext();
-            PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
@@ -3205,7 +3197,6 @@ class ActivateProfileHelper {
 
     private static void lockDevice(Context context, final Profile profile) {
         final Context appContext = context.getApplicationContext();
-        PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
