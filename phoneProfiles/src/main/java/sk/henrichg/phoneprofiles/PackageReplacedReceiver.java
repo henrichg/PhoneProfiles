@@ -19,6 +19,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             // PackageReplacedJob.start(context.getApplicationContext());
             final Context appContext = context.getApplicationContext();
 
+            PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
@@ -32,6 +33,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                     // start delayed boot up broadcast
                     PPApplication.startedOnBoot = true;
+                    PPApplication.startHandlerThread();
                     final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                     handler.postDelayed(new Runnable() {
                         @Override

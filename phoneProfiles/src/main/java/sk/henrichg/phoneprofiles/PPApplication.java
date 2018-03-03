@@ -113,10 +113,16 @@ public class PPApplication extends Application {
     private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
     private static final String PREF_DONATION_DONATED = "donation_donated";
 
-    public static final HandlerThread handlerThread = new HandlerThread("PPHandlerThread");
-    static {
-        handlerThread.start();
-    }
+    public static HandlerThread handlerThread = null;
+
+    public static HandlerThread handlerThreadVolumes = null;
+    public static HandlerThread handlerThreadRadios = null;
+    public static HandlerThread handlerThreadAdaptiveBrightness = null;
+    public static HandlerThread handlerThreadWallpaper = null;
+    public static HandlerThread handlerThreadPowerSaveMode = null;
+    public static HandlerThread handlerThreadLockDevice = null;
+    public static HandlerThread handlerThreadRunApplication = null;
+    public static HandlerThread handlerThreadHeadsUpNotifications = null;
 
     public static Handler brightnessHandler;
     public static Handler toastHandler;
@@ -178,6 +184,20 @@ public class PPApplication extends Application {
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.refreshGUIBroadcastReceiver, new IntentFilter("RefreshGUIBroadcastReceiver"));
 
+        startHandlerThread();
+        startHandlerThreadVolumes();
+        startHandlerThreadRadios();
+        startHandlerThreadAdaptiveBrightness();
+        startHandlerThreadWallpaper();
+        startHandlerThreadPowerSaveMode();
+        startHandlerThreadLockDevice();
+        startHandlerThreadRunApplication();
+        startHandlerThreadHeadsUpNotifications();
+
+        toastHandler = new Handler(getMainLooper());
+        brightnessHandler = new Handler(getMainLooper());
+        screenTimeoutHandler = new Handler(getMainLooper());
+
         // initialization
         //loadPreferences(this);
 
@@ -191,10 +211,6 @@ public class PPApplication extends Application {
         //Log.d("PPApplication.onCreate","xxx");
 
         //getMeasuredRunTime(nanoTimeStart, "PPApplication.onCreate");
-
-        toastHandler = new Handler(getMainLooper());
-        brightnessHandler = new Handler(getMainLooper());
-        screenTimeoutHandler = new Handler(getMainLooper());
 
         // Samsung Look initialization
         sLook = new Slook();
@@ -859,6 +875,69 @@ public class PPApplication extends Application {
             return packageManager.hasSystemFeature(feature);
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    static void startHandlerThread() {
+        if (handlerThread == null) {
+            handlerThread = new HandlerThread("PPHandlerThread");
+            handlerThread.start();
+        }
+    }
+
+    static void startHandlerThreadVolumes() {
+        if (handlerThreadVolumes == null) {
+            handlerThreadVolumes = new HandlerThread("handlerThreadVolumes");
+            handlerThreadVolumes.start();
+        }
+    }
+
+    static void startHandlerThreadRadios() {
+        if (handlerThreadRadios == null) {
+            handlerThreadRadios = new HandlerThread("handlerThreadRadios");
+            handlerThreadRadios.start();
+        }
+    }
+
+    static void startHandlerThreadAdaptiveBrightness() {
+        if (handlerThreadAdaptiveBrightness == null) {
+            handlerThreadAdaptiveBrightness = new HandlerThread("handlerThreadAdaptiveBrightness");
+            handlerThreadAdaptiveBrightness.start();
+        }
+    }
+
+    static void startHandlerThreadWallpaper() {
+        if (handlerThreadWallpaper == null) {
+            handlerThreadWallpaper = new HandlerThread("handlerThreadWallpaper");
+            handlerThreadWallpaper.start();
+        }
+    }
+
+    static void startHandlerThreadPowerSaveMode() {
+        if (handlerThreadPowerSaveMode == null) {
+            handlerThreadPowerSaveMode = new HandlerThread("handlerThreadPowerSaveMode");
+            handlerThreadPowerSaveMode.start();
+        }
+    }
+
+    static void startHandlerThreadLockDevice() {
+        if (handlerThreadLockDevice == null) {
+            handlerThreadLockDevice = new HandlerThread("handlerThreadLockDevice");
+            handlerThreadLockDevice.start();
+        }
+    }
+
+    static void startHandlerThreadRunApplication() {
+        if (handlerThreadRunApplication == null) {
+            handlerThreadRunApplication = new HandlerThread("handlerThreadRunApplication");
+            handlerThreadRunApplication.start();
+        }
+    }
+
+    static void startHandlerThreadHeadsUpNotifications() {
+        if (handlerThreadHeadsUpNotifications == null) {
+            handlerThreadHeadsUpNotifications = new HandlerThread("handlerThreadHeadsUpNotifications");
+            handlerThreadHeadsUpNotifications.start();
         }
     }
 
