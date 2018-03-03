@@ -96,23 +96,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             DataWrapper dataWrapper = new DataWrapper(context, false, 0);
             final Profile profile = dataWrapper.getActivatedProfile(false, false);
             if (profile != null) {
-                Handler handler = new Handler(ActivateProfileHelper.handlerThreadVolumes.getLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
-                        PowerManager.WakeLock wakeLock = null;
-                        if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ActivateProfileHelper.handlerThreadVolumes");
-                            wakeLock.acquire(10 * 60 * 1000);
-                        }
-
-                        ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
-
-                        if ((wakeLock != null) && wakeLock.isHeld())
-                            wakeLock.release();
-                    }
-                });
+                ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
             }
             dataWrapper.invalidateDataWrapper();
         }
