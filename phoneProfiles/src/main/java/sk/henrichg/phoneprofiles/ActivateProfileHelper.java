@@ -950,7 +950,7 @@ class ActivateProfileHelper {
                         //SystemClock.sleep(500);
                         PPApplication.sleep(500);
 
-                        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                        final Handler handler = new Handler(handlerThreadVolumes.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
