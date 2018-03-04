@@ -490,6 +490,9 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
+        if (rootChecked)
+            return rooted;
+
         try {
             PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
             //if (RootTools.isRootAvailable()) {
@@ -520,10 +523,7 @@ public class PPApplication extends Application {
 
     static boolean isRooted() {
         synchronized (PPApplication.startRootCommandMutex) {
-            if (!rootChecked) {
-                _isRooted();
-            }
-            return rooted;
+            return _isRooted();
         }
     }
 
