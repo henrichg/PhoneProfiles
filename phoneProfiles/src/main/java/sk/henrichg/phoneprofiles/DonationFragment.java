@@ -16,8 +16,12 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsResponseListener;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.PurchaseEvent;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 import sk.henrichg.phoneprofiles.billing.BillingProvider;
@@ -158,18 +162,18 @@ public class DonationFragment extends Fragment {
     }
 
     public void purchaseSuccessful(List<Purchase> purchases) {
-        /*if (purchases != null) {
+        if (purchases != null) {
             for (Purchase purchase : purchases) {
                 String sku = purchase.getSku();
                 for (SkuDetails skuDetail : SKU_DETAILS) {
                     if (skuDetail.getSku().equals(sku)) {
-                        Log.e("DonationFragment.purchaseSuccessful", "sku=" + sku);
-                        Log.e("DonationFragment.purchaseSuccessful", "currency=" + skuDetail.getPriceCurrencyCode());
-                        Log.e("DonationFragment.purchaseSuccessful", "priceS=" + skuDetail.getPrice());
-                        Log.e("DonationFragment.purchaseSuccessful", "priceMicros=" + skuDetail.getPriceAmountMicros());
-                        Log.e("DonationFragment.purchaseSuccessful", "price=" + skuDetail.getPriceAmountMicros() / 1000000);
+                        PPApplication.logE(TAG, "purchaseSuccessful - sku=" + sku);
+                        PPApplication.logE(TAG, "purchaseSuccessful - currency=" + skuDetail.getPriceCurrencyCode());
+                        PPApplication.logE(TAG, "purchaseSuccessful - priceS=" + skuDetail.getPrice());
+                        PPApplication.logE(TAG, "purchaseSuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
+                        PPApplication.logE(TAG, "purchaseSuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
                         Answers.getInstance().logPurchase(new PurchaseEvent()
-                                .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000))
+                                .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000.0))
                                 .putCurrency(Currency.getInstance(skuDetail.getPriceCurrencyCode()))
                                 .putItemName("Donation")
                                 //.putItemType("Apparel")
@@ -178,7 +182,7 @@ public class DonationFragment extends Fragment {
                     }
                 }
             }
-        }*/
+        }
 
         if (getActivity() != null) {
             PPApplication.setDonationDonated(getActivity().getApplicationContext());
@@ -186,20 +190,19 @@ public class DonationFragment extends Fragment {
         }
     }
 
-    /*
     public void purchaseUnsuccessful(List<Purchase> purchases) {
         if (purchases != null) {
             for (Purchase purchase : purchases) {
                 String sku = purchase.getSku();
                 for (SkuDetails skuDetail : SKU_DETAILS) {
                     if (skuDetail.getSku().equals(sku)) {
-                        Log.e("DonationFragment.purchaseUnsuccessful", "sku=" + sku);
-                        Log.e("DonationFragment.purchaseUnsuccessful", "currency=" + skuDetail.getPriceCurrencyCode());
-                        Log.e("DonationFragment.purchaseUnsuccessful", "priceS=" + skuDetail.getPrice());
-                        Log.e("DonationFragment.purchaseUnsuccessful", "priceMicros=" + skuDetail.getPriceAmountMicros());
-                        Log.e("DonationFragment.purchaseUnsuccessful", "price=" + skuDetail.getPriceAmountMicros() / 1000000);
+                        PPApplication.logE(TAG, "purchaseUnsuccessful - sku=" + sku);
+                        PPApplication.logE(TAG, "purchaseUnsuccessful - currency=" + skuDetail.getPriceCurrencyCode());
+                        PPApplication.logE(TAG, "purchaseUnsuccessful - priceS=" + skuDetail.getPrice());
+                        PPApplication.logE(TAG, "purchaseUnsuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
+                        PPApplication.logE(TAG, "purchaseUnsuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
                         Answers.getInstance().logPurchase(new PurchaseEvent()
-                                .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000))
+                                .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000.0))
                                 .putCurrency(Currency.getInstance(skuDetail.getPriceCurrencyCode()))
                                 .putItemName("Donation")
                                 //.putItemType("Apparel")
@@ -210,7 +213,6 @@ public class DonationFragment extends Fragment {
             }
         }
     }
-    */
 
     public void displayAnErrorIfNeeded(int response) {
         if (getActivity() == null || getActivity().isFinishing()) {
