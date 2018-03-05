@@ -131,7 +131,7 @@ public class PPApplication extends Application {
     public static int notAllowedReason;
     public static  String notAllowedReasonDetail;
 
-    public static final StartRootCommandMutex startRootCommandMutex = new StartRootCommandMutex();
+    public static final RootMutex rootMutex = new RootMutex();
     public static final ScanResultsMutex scanResultsMutex = new ScanResultsMutex();
 
     public static boolean startedOnBoot = false;
@@ -459,30 +459,18 @@ public class PPApplication extends Application {
     //--------------------------------------------------------------
     // root -----------------------------------------------------
 
-    static private boolean rootChecked;
-    static private boolean rooted;
-    static private boolean settingsBinaryChecked;
-    static private boolean settingsBinaryExists;
-    //static private boolean isSELinuxEnforcingChecked;
-    //static private boolean isSELinuxEnforcing;
-    //static private String suVersion;
-    //static private boolean suVersionChecked;
-    static private boolean serviceBinaryChecked;
-    static private boolean serviceBinaryExists;
-    static private ArrayList<Pair> serviceList = null;
-
     static synchronized void initRoot() {
-        synchronized (PPApplication.startRootCommandMutex) {
-            rootChecked = false;
-            rooted = false;
-            settingsBinaryChecked = false;
-            settingsBinaryExists = false;
-            //isSELinuxEnforcingChecked = false;
-            //isSELinuxEnforcing = false;
-            //suVersion = null;
-            //suVersionChecked = false;
-            serviceBinaryChecked = false;
-            serviceBinaryExists = false;
+        synchronized (PPApplication.rootMutex) {
+            rootMutex.rootChecked = false;
+            rootMutex.rooted = false;
+            rootMutex.settingsBinaryChecked = false;
+            rootMutex.settingsBinaryExists = false;
+            //rootMutex.isSELinuxEnforcingChecked = false;
+            //rootMutex.isSELinuxEnforcing = false;
+            //rootMutex.suVersion = null;
+            //rootMutex.suVersionChecked = false;
+            rootMutex.serviceBinaryChecked = false;
+            rootMutex.serviceBinaryExists = false;
         }
     }
 
@@ -490,8 +478,8 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        if (rootChecked)
-            return rooted;
+        if (rootMutex.rootChecked)
+            return rootMutex.rooted;
 
         try {
             PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
@@ -499,30 +487,30 @@ public class PPApplication extends Application {
             if (RootToolsSmall.isRooted()) {
                 // device is rooted
                 PPApplication.logE("PPApplication._isRooted", "root available");
-                rooted = true;
+                rootMutex.rooted = true;
             } else {
                 PPApplication.logE("PPApplication._isRooted", "root NOT available");
-                rooted = false;
-                //settingsBinaryExists = false;
-                //settingsBinaryChecked = false;
-                //isSELinuxEnforcingChecked = false;
-                //isSELinuxEnforcing = false;
-                //suVersionChecked = false;
-                //suVersion = null;
-                //serviceBinaryExists = false;
-                //serviceBinaryChecked = false;
+                rootMutex.rooted = false;
+                //rootMutex.settingsBinaryExists = false;
+                //rootMutex.settingsBinaryChecked = false;
+                //rootMutex.isSELinuxEnforcingChecked = false;
+                //rootMutex.isSELinuxEnforcing = false;
+                //rootMutex.suVersionChecked = false;
+                //rootMutex.suVersion = null;
+                //rootMutex.serviceBinaryExists = false;
+                //rootMutex.serviceBinaryChecked = false;
             }
-            rootChecked = true;
+            rootMutex.rootChecked = true;
         } catch (Exception e) {
             Log.e("PPApplication._isRooted", Log.getStackTraceString(e));
         }
         //if (rooted)
         //	getSUVersion();
-        return rooted;
+        return rootMutex.rooted;
     }
 
     static boolean isRooted() {
-        synchronized (PPApplication.startRootCommandMutex) {
+        synchronized (PPApplication.rootMutex) {
             return _isRooted();
         }
     }
@@ -531,27 +519,25 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        synchronized (PPApplication.startRootCommandMutex) {
-            if (_isRooted()) {
-                try {
-                    PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
-                    if (RootTools.isAccessGiven()) {
-                        // root is granted
-                        PPApplication.logE("PPApplication.isRootGranted", "root granted");
-                        return true;
-                    } else {
-                        // grant declined
-                        PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
-                        return false;
-                    }
-                } catch (Exception e) {
-                    Log.e("PPApplication.isRootGranted", Log.getStackTraceString(e));
+        if (isRooted()) {
+            try {
+                PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
+                if (RootTools.isAccessGiven()) {
+                    // root is granted
+                    PPApplication.logE("PPApplication.isRootGranted", "root granted");
+                    return true;
+                } else {
+                    // grant declined
+                    PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
                     return false;
                 }
-            } else {
-                PPApplication.logE("PPApplication.isRootGranted", "not rooted");
+            } catch (Exception e) {
+                Log.e("PPApplication.isRootGranted", Log.getStackTraceString(e));
                 return false;
             }
+        } else {
+            PPApplication.logE("PPApplication.isRootGranted", "not rooted");
+            return false;
         }
     }
 
@@ -559,16 +545,14 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        synchronized (PPApplication.startRootCommandMutex) {
-            if (!settingsBinaryChecked) {
+        synchronized (PPApplication.rootMutex) {
+            if (!rootMutex.settingsBinaryChecked) {
                 PPApplication.logE("PPApplication.settingsBinaryExists", "start");
-                //List<String> settingsPaths = RootTools.findBinary("settings");
-                //settingsBinaryExists = settingsPaths.size() > 0;
-                settingsBinaryExists = RootToolsSmall.hasSettingBin();
-                settingsBinaryChecked = true;
+                rootMutex.settingsBinaryExists = RootToolsSmall.hasSettingBin();
+                rootMutex.settingsBinaryChecked = true;
             }
-            PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists=" + settingsBinaryExists);
-            return settingsBinaryExists;
+            PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists=" + rootMutex.settingsBinaryExists);
+            return rootMutex.settingsBinaryExists;
         }
     }
 
@@ -576,16 +560,14 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        synchronized (PPApplication.startRootCommandMutex) {
-            if (!serviceBinaryChecked) {
+        synchronized (PPApplication.rootMutex) {
+            if (!rootMutex.serviceBinaryChecked) {
                 PPApplication.logE("PPApplication.serviceBinaryExists", "start");
-                //List<String> servicePaths = RootTools.findBinary("service");
-                //serviceBinaryExists = servicePaths.size() > 0;
-                serviceBinaryExists = RootToolsSmall.hasServiceBin();
-                serviceBinaryChecked = true;
+                rootMutex.serviceBinaryExists = RootToolsSmall.hasServiceBin();
+                rootMutex.serviceBinaryChecked = true;
             }
-            PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists=" + serviceBinaryExists);
-            return serviceBinaryExists;
+            PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists=" + rootMutex.serviceBinaryExists);
+            return rootMutex.serviceBinaryExists;
         }
     }
 
@@ -599,7 +581,7 @@ public class PPApplication extends Application {
     {
         RootShell.debugMode = rootToolsDebug;
 
-        synchronized (PPApplication.startRootCommandMutex) {
+        synchronized (PPApplication.rootMutex) {
             if (!isSELinuxEnforcingChecked)
             {
                 boolean enforcing = false;
@@ -660,7 +642,6 @@ public class PPApplication extends Application {
                 RootTools.getShell(false).add(command);
                 commandWait(command);
                 suVersionChecked = true;
-                //RootTools.closeAllShells();
             } catch (Exception e) {
                 Log.e("PPApplication.getSUVersion", Log.getStackTraceString(e));
             }
@@ -708,11 +689,11 @@ public class PPApplication extends Application {
     }
 
     static void getServicesList() {
-        synchronized (PPApplication.startRootCommandMutex) {
-            if (serviceList == null)
-                serviceList = new ArrayList<>();
+        synchronized (PPApplication.rootMutex) {
+            if (rootMutex.serviceList == null)
+                rootMutex.serviceList = new ArrayList<>();
             else
-                serviceList.clear();
+                rootMutex.serviceList.clear();
 
             final Pattern compile = Pattern.compile("^[0-9]+\\s+([a-zA-Z0-9_\\-\\.]+): \\[(.*)\\]$");
             Command command = new Command(0, false, "service list") {
@@ -721,13 +702,12 @@ public class PPApplication extends Application {
                     Matcher matcher = compile.matcher(line);
                     if (matcher.find()) {
                         //noinspection unchecked
-                        serviceList.add(new Pair(matcher.group(1), matcher.group(2)));
+                        rootMutex.serviceList.add(new Pair(matcher.group(1), matcher.group(2)));
                     }
                     super.commandOutput(id, line);
                 }
             };
             try {
-                //RootTools.closeAllShells();
                 RootTools.getShell(false).add(command);
                 commandWait(command);
             } catch (Exception e) {
@@ -737,14 +717,16 @@ public class PPApplication extends Application {
     }
 
     static Object getServiceManager(String serviceType) {
-        if (serviceList != null) {
-            for (Pair pair : serviceList) {
-                if (serviceType.equals(pair.first)) {
-                    return pair.second;
+        synchronized (PPApplication.rootMutex) {
+            if (rootMutex.serviceList != null) {
+                for (Pair pair : rootMutex.serviceList) {
+                    if (serviceType.equals(pair.first)) {
+                        return pair.second;
+                    }
                 }
             }
+            return null;
         }
-        return null;
     }
 
     static int getTransactionCode(String serviceManager, String method) {
@@ -792,7 +774,7 @@ public class PPApplication extends Application {
         return stringBuilder.toString();
     }
 
-    private static void commandWait(Command cmd) {
+    static void commandWait(Command cmd) {
         int waitTill = 50;
         int waitTillMultiplier = 2;
         int waitTillLimit = 3200; // 6350 msec (3200 * 2 - 50)

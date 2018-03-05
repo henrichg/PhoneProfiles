@@ -159,8 +159,8 @@ public class PhoneProfilesService extends Service {
                 //noinspection StatementWithEmptyBody
                 if (PPApplication.isRootGranted())
                 {
-                    //PPApplication.getSUVersion();
                 }
+                //PPApplication.getSUVersion();
                 PPApplication.settingsBinaryExists();
                 PPApplication.serviceBinaryExists();
                 PPApplication.getServicesList();
