@@ -335,7 +335,7 @@ public class DataWrapper {
         profileList = null;
     }
 
-    private Profile getActivatedProfileFromDB(boolean generateIcon, boolean generateIndicators)
+    Profile getActivatedProfileFromDB(boolean generateIcon, boolean generateIndicators)
     {
         Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
         if (/*forGUI &&*/ (profile != null))
