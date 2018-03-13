@@ -4,6 +4,6 @@
 // 2700 = start About application alarm for notification "Please donate me."
 
 ext.ppVersions = [
-        publishVersion: '4.5.8.2',
-        publishVersionCode: 2730,
+        publishVersion: '4.5.8.3b',
+        publishVersionCode: 2731,
 ]
