@@ -534,12 +534,15 @@ public class DataWrapper {
 
         final Profile profile = Profile.getMappedProfile(_profile, context);
 
+        // get currently activated profile
+        Profile activatedProfile = getActivatedProfile(false, false);
+
         DatabaseHandler.getInstance(context).activateProfile(_profile);
         setProfileActive(_profile);
 
         /*if (_interactive)
         {*/
-        long profileId = _profile._id;
+        long profileId = activatedProfile._id;
         Profile.setActivatedProfileForDuration(context, profileId);
         ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
         //}
