@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,8 +36,9 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
         this.mDragStartListener = dragStartListener;
     }
 
+    @NonNull
     @Override
-    public EditorProfileListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EditorProfileListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if (ApplicationPreferences.applicationEditorPrefIndicator(fragment.getActivity()))
             view = LayoutInflater.from(parent.getContext())
@@ -49,7 +51,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
     }
 
     @Override
-    public void onBindViewHolder(final EditorProfileListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final EditorProfileListViewHolder holder, int position) {
         Profile profile = getItem(position);
         holder.bindProfile(profile);
 
