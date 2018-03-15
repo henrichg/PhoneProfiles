@@ -3,12 +3,9 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.os.SystemClock;
 
 import java.util.Date;
-
-import static android.content.Context.POWER_SERVICE;
 
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
