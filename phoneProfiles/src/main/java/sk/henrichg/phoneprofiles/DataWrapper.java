@@ -540,12 +540,13 @@ public class DataWrapper {
         DatabaseHandler.getInstance(context).activateProfile(_profile);
         setProfileActive(_profile);
 
-        /*if (_interactive)
-        {*/
-        long profileId = activatedProfile._id;
-        Profile.setActivatedProfileForDuration(context, profileId);
+        if (activatedProfile != null) {
+            long profileId = activatedProfile._id;
+            Profile.setActivatedProfileForDuration(context, profileId);
+        }
+        else
+            Profile.setActivatedProfileForDuration(context, 0);
         ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
-        //}
 
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(this);
