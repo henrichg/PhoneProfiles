@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
@@ -241,6 +242,16 @@ public class PPApplication extends Application {
             return true;
         }
         return false;
+    }
+
+    //--------------------------------------------------------------
+
+    static void startPPService(Context context, Intent serviceIntent) {
+        //TODO Android O
+        // if (Build.VERSION.SDK_INT < 26)
+        context.getApplicationContext().startService(serviceIntent);
+        //else
+        //    startForegroundService(serviceIntent);
     }
 
     //--------------------------------------------------------------

@@ -97,11 +97,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         //PPApplication.firstStartServiceStarted = false;
                         Intent serviceIntent = new Intent(appContext, PhoneProfilesService.class);
                         serviceIntent.putExtra(PhoneProfilesService.EXTRA_SWITCH_KEYGUARD, true);
-                        //TODO Android O
-                        //if (Build.VERSION.SDK_INT < 26)
-                        appContext.startService(serviceIntent);
-                        //else
-                        //    startForegroundService(serviceIntent);
+                        PPApplication.startPPService(appContext, serviceIntent);
                     } catch (Exception ignored) {}
                 }
 

@@ -705,11 +705,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (result == 1) {
                         ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
-                        //TODO Android O
-                        //if (Build.VERSION.SDK_INT < 26)
-                        startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
-                        //else
-                        //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+                        PPApplication.startPPService(activity, new Intent(activity.getApplicationContext(), PhoneProfilesService.class));
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),
@@ -721,11 +717,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         GlobalGUIRoutines.reloadActivity(activity, true);
 
                     } else {
-                        //TODO Android O
-                        //if (Build.VERSION.SDK_INT < 26)
-                        startService(new Intent(getApplicationContext(), PhoneProfilesService.class));
-                        //else
-                        //    startForegroundService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+                        PPApplication.startPPService(activity, new Intent(activity.getApplicationContext(), PhoneProfilesService.class));
 
                         importExportErrorDialog(1, result);
                     }

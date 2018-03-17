@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -123,24 +124,17 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
         Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
         serviceIntent.putExtra(PhoneProfilesService.EXTRA_CLEAR_SERVICE_FOREGROUND, true);
-        //TODO Android O
-        // if (Build.VERSION.SDK_INT < 26)
-        startService(serviceIntent);
-        //else
-        //    startForegroundService(serviceIntent);
+        PPApplication.startPPService(this, serviceIntent);
 
+        final Context context = this;
         Handler handler = new Handler(getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //Profile activatedProfile = dataWrapper.getActivatedProfile();
-                Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+                Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_SET_SERVICE_FOREGROUND, true);
-                //TODO Android O
-                // if (Build.VERSION.SDK_INT < 26)
-                startService(serviceIntent);
-                //else
-                //    startForegroundService(serviceIntent);
+                PPApplication.startPPService(context, serviceIntent);
             }
         }, 500);
         ActivateProfileHelper.updateGUI(getApplicationContext(), true);

@@ -34,11 +34,7 @@ public class BootUpReceiver extends BroadcastReceiver {
 
             if (ApplicationPreferences.applicationStartOnBoot(context)) {
                 // start ReceiverService
-                //TODO Android O
-                //if (Build.VERSION.SDK_INT < 26)
-                    context.startService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
-                //else
-                //    context.startForegroundService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+                PPApplication.startPPService(context, new Intent(context.getApplicationContext(), PhoneProfilesService.class));
             }
         }
     }

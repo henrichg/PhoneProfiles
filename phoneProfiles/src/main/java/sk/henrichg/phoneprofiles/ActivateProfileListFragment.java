@@ -283,11 +283,7 @@ public class ActivateProfileListFragment extends Fragment {
             PPApplication.logE("ActivateProfileListFragment.doOnStart","application not started");
 
             // start PhoneProfilesService
-            //TODO Android O
-            //if (Build.VERSION.SDK_INT < 26)
-                getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-            //else
-            //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+            PPApplication.startPPService(getActivity(), new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
         }
         else
         {
@@ -295,11 +291,7 @@ public class ActivateProfileListFragment extends Fragment {
 
             if (PhoneProfilesService.instance == null) {
                 // start PhoneProfilesService
-                //TODO Android O
-                //if (Build.VERSION.SDK_INT < 26)
-                    getActivity().startService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-                //else
-                //    getActivity().startForegroundService(new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
+                PPApplication.startPPService(getActivity(), new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
 
             Profile profile = activityDataWrapper.getActivatedProfile(true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));

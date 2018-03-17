@@ -1591,11 +1591,7 @@ class ActivateProfileHelper {
                             //PPApplication.firstStartServiceStarted = false;
                             Intent serviceIntent = new Intent(context, PhoneProfilesService.class);
                             serviceIntent.putExtra(PhoneProfilesService.EXTRA_SWITCH_KEYGUARD, true);
-                            //TODO Android O
-                            //if (Build.VERSION.SDK_INT < 26)
-                            context.startService(serviceIntent);
-                            //else
-                            //    startForegroundService(serviceIntent);
+                            PPApplication.startPPService(context, serviceIntent);
                         } catch (Exception ignored) {
                         }
                     }
