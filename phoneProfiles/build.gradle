@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "sk.henrichg.phoneprofiles"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode ppVersions.publishVersionCode
         versionName ppVersions.publishVersion
         multiDexEnabled true
