@@ -616,6 +616,9 @@ public class PhoneProfilesService extends Service {
 
     private void setAlarmForNotificationCancel(Context context)
     {
+        if (Build.VERSION.SDK_INT >= 26)
+            return;
+
         if (ApplicationPreferences.notificationStatusBarCancel(context).isEmpty() || ApplicationPreferences.notificationStatusBarCancel(context).equals("0"))
             return;
 
