@@ -705,7 +705,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (result == 1) {
                         ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
-                        PPApplication.startPPService(activity, new Intent(activity.getApplicationContext(), PhoneProfilesService.class));
+                        Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+                        serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+                        PPApplication.startPPService(activity, serviceIntent);
 
                         // toast notification
                         Toast msg = Toast.makeText(getApplicationContext(),

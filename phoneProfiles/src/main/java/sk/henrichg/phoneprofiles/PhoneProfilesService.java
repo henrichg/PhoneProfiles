@@ -12,6 +12,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -61,6 +62,7 @@ public class PhoneProfilesService extends Service {
     private boolean notificationIsPlayed = false;
     private Timer notificationPlayTimer = null;
 
+    static final String EXTRA_ONLY_START = "only_start";
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
     static final String EXTRA_SWITCH_KEYGUARD = "switch_keyguard";
@@ -149,81 +151,6 @@ public class PhoneProfilesService extends Service {
 
         AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
-        PPApplication.startHandlerThread();
-        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                PowerManager.WakeLock wakeLock = null;
-                if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.2");
-                    wakeLock.acquire(10 * 60 * 1000);
-                }
-
-                PPApplication.initRoot();
-                // grant root
-                //noinspection StatementWithEmptyBody
-                if (PPApplication.isRootGranted())
-                {
-                }
-                //PPApplication.getSUVersion();
-                PPApplication.settingsBinaryExists();
-                PPApplication.serviceBinaryExists();
-                PPApplication.getServicesList();
-
-                Permissions.clearMergedPermissions(appContext);
-
-
-                if (PPApplication.getApplicationStarted(appContext, false)) {
-                    if ((wakeLock != null) && wakeLock.isHeld())
-                        wakeLock.release();
-                    return;
-                }
-
-                PPApplication.logE("PhoneProfilesService.onCreate", " application not started");
-
-                //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
-
-                GlobalGUIRoutines.setLanguage(appContext);
-
-                // remove phoneprofiles_silent.mp3
-                //removeTone("phoneprofiles_silent.mp3", context);
-                // install phoneprofiles_silent.ogg
-                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
-
-                ActivateProfileHelper.setLockScreenDisabled(appContext, false);
-
-                AudioManager audioManager = (AudioManager)appContext.getSystemService(Context.AUDIO_SERVICE);
-                if (audioManager != null) {
-                    ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-                    ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-                    RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
-                    //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-                        PPNotificationListenerService.setZenMode(appContext, audioManager);
-                    InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext, audioManager);
-                }
-
-                // show info notification
-                ImportantInfoNotification.showInfoNotification(appContext);
-
-                ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
-                Profile.setActivatedProfileForDuration(appContext, 0);
-
-                LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
-
-                DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
-
-                PPApplication.setApplicationStarted(appContext, true);
-
-                dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
-                //dataWrapper.invalidateDataWrapper();
-
-                if ((wakeLock != null) && wakeLock.isHeld())
-                    wakeLock.release();
-            }
-        });
-
     }
 
     @Override
@@ -256,6 +183,109 @@ public class PhoneProfilesService extends Service {
         super.onDestroy();
     }
 
+    // start service for first start
+    private boolean doForFirstStart(Intent intent/*, int flags, int startId*/) {
+        boolean onlyStart = false;
+
+        if (intent != null) {
+            onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, false);
+        }
+
+        if (onlyStart)
+            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart", "EXTRA_ONLY_START");
+
+        final Context appContext = getApplicationContext();
+
+        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
+            // do not call this from handlerThread. In Android 8 handlerThread is not called
+            // when for service is not displayed foreground notification
+            final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+            showProfileNotification(dataWrapper);
+        }
+
+        if (onlyStart) {
+
+            PPApplication.startHandlerThread();
+            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = null;
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.2");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
+
+                    PPApplication.initRoot();
+                    // grant root
+                    //noinspection StatementWithEmptyBody
+                    if (PPApplication.isRootGranted())
+                    {
+                    }
+                    //PPApplication.getSUVersion();
+                    PPApplication.settingsBinaryExists();
+                    PPApplication.serviceBinaryExists();
+                    PPApplication.getServicesList();
+
+                    Permissions.clearMergedPermissions(appContext);
+
+
+                    if (PPApplication.getApplicationStarted(appContext, false)) {
+                        if ((wakeLock != null) && wakeLock.isHeld())
+                            wakeLock.release();
+                        return;
+                    }
+
+                    PPApplication.logE("PhoneProfilesService.onCreate", " application not started");
+
+                    //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
+
+                    GlobalGUIRoutines.setLanguage(appContext);
+
+                    // remove phoneprofiles_silent.mp3
+                    //removeTone("phoneprofiles_silent.mp3", context);
+                    // install phoneprofiles_silent.ogg
+                    TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
+
+                    ActivateProfileHelper.setLockScreenDisabled(appContext, false);
+
+                    AudioManager audioManager = (AudioManager)appContext.getSystemService(Context.AUDIO_SERVICE);
+                    if (audioManager != null) {
+                        ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+                        ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                        RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
+                        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+                        PPNotificationListenerService.setZenMode(appContext, audioManager);
+                        InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext, audioManager);
+                    }
+
+                    // show info notification
+                    ImportantInfoNotification.showInfoNotification(appContext);
+
+                    ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
+                    Profile.setActivatedProfileForDuration(appContext, 0);
+
+                    LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
+
+                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+
+                    PPApplication.setApplicationStarted(appContext, true);
+
+                    dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
+                    //dataWrapper.invalidateDataWrapper();
+
+                    if ((wakeLock != null) && wakeLock.isHeld())
+                        wakeLock.release();
+                }
+            });
+
+            ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, false);
+        }
+
+        return onlyStart;
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
@@ -263,58 +293,51 @@ public class PhoneProfilesService extends Service {
 
         serviceRunning = true;
 
-        ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
+        if (!doForFirstStart(intent/*, flags, startId*/)) {
+            if (intent != null) {
 
-        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
-            // do not call this from handlerThread. In Android 8 handlerThread is not called
-            // when for service is not displayed foreground notification
-            final DataWrapper dataWrapper =  new DataWrapper(this, false, 0);
-            showProfileNotification(dataWrapper);
-        }
+                if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
+                    removeProfileNotification(this);
+                }
 
-        if (intent != null) {
+                if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
 
-            if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
-                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
-                removeProfileNotification(this);
-            }
+                    Context appContext = getApplicationContext();
 
-            if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
-                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
+                    boolean isScreenOn;
+                    //if (android.os.Build.VERSION.SDK_INT >= 20)
+                    //{
+                    //    Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+                    //    isScreenOn = display.getState() == Display.STATE_ON;
+                    //}
+                    //else
+                    //{
+                    PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
+                    isScreenOn = ((pm != null) && pm.isScreenOn());
+                    //}
 
-                Context appContext = getApplicationContext();
+                    boolean secureKeyguard;
+                    if (keyguardManager == null)
+                        keyguardManager = (KeyguardManager) appContext.getSystemService(Activity.KEYGUARD_SERVICE);
+                    if (keyguardManager != null) {
+                        secureKeyguard = keyguardManager.isKeyguardSecure();
+                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "secureKeyguard=" + secureKeyguard);
+                        if (!secureKeyguard) {
+                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
 
-                boolean isScreenOn;
-                //if (android.os.Build.VERSION.SDK_INT >= 20)
-                //{
-                //    Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-                //    isScreenOn = display.getState() == Display.STATE_ON;
-                //}
-                //else
-                //{
-                PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-                isScreenOn = ((pm != null) && pm.isScreenOn());
-                //}
+                            if (isScreenOn) {
+                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
 
-                boolean secureKeyguard;
-                if (keyguardManager == null)
-                    keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
-                if (keyguardManager != null) {
-                    secureKeyguard = keyguardManager.isKeyguardSecure();
-                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "secureKeyguard=" + secureKeyguard);
-                    if (!secureKeyguard) {
-                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
-
-                        if (isScreenOn) {
-                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
-
-                            if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
-                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.disable(), START_STICKY");
-                                reenableKeyguard();
-                                disableKeyguard();
-                            } else {
-                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
-                                reenableKeyguard();
+                                if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
+                                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.disable(), START_STICKY");
+                                    reenableKeyguard();
+                                    disableKeyguard();
+                                } else {
+                                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
+                                    reenableKeyguard();
+                                }
                             }
                         }
                     }

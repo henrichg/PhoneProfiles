@@ -110,7 +110,9 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
         PPApplication.setApplicationStarted(context, false);
 
         // start PhoneProfilesService
-        PPApplication.startPPService(context, new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+        Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
+        serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+        PPApplication.startPPService(context, serviceIntent);
     }
 
 }
