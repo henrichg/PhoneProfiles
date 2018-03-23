@@ -19,89 +19,17 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             // PackageReplacedJob.start(context.getApplicationContext());
             final Context appContext = context.getApplicationContext();
 
-            PPApplication.startHandlerThread();
-            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                    PowerManager.WakeLock wakeLock = null;
-                    if (powerManager != null) {
-                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive");
-                        wakeLock.acquire(10 * 60 * 1000);
-                    }
-
-                    // start delayed boot up broadcast
-                    PPApplication.startedOnBoot = true;
-                    PPApplication.startHandlerThread();
-                    final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            PPApplication.logE("PackageReplacedReceiver.onReceive", "delayed boot up");
-                            PPApplication.startedOnBoot = false;
-                        }
-                    }, 10000);
-
-                    Permissions.setShowRequestAccessNotificationPolicyPermission(appContext, true);
-                    Permissions.setShowRequestWriteSettingsPermission(appContext, true);
-                    //ActivateProfileHelper.setScreenUnlocked(appContext, true);
-
-                    int oldVersionCode = PPApplication.getSavedVersionCode(appContext);
-                    PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "oldVersionCode="+oldVersionCode);
-                    int actualVersionCode;
-                    try {
-                        PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
-                        actualVersionCode = pInfo.versionCode;
-                        PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "actualVersionCode=" + actualVersionCode);
-
-                        if (oldVersionCode < actualVersionCode) {
-                            if (actualVersionCode <= 2100) {
-                                ApplicationPreferences.getSharedPreferences(appContext);
-                                SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                                editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
-                                editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
-                                editor.apply();
-                            }
-                            if (actualVersionCode <= 2500) {
-                                ApplicationPreferences.getSharedPreferences(appContext);
-                                SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                                editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
-                                editor.apply();
-                            }
-                            if (actualVersionCode <= 2700) {
-                                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "donation alarm restart");
-                                PPApplication.setDaysAfterFirstStart(appContext, 0);
-                                PPApplication.setDonationNotificationCount(appContext, 0);
-                                AboutApplicationJob.scheduleJob(appContext, true);
-                            }
-                        }
-                    } catch (Exception ignored) {
-                    }
-
-                    if (PPApplication.getApplicationStarted(appContext, false))
-                    {
-                        if (PhoneProfilesService.instance != null) {
-                            // stop PhoneProfilesService
-                            appContext.stopService(new Intent(appContext, PhoneProfilesService.class));
-                            PPApplication.sleep(2000);
-                            startService(appContext);
-                        }
-                        else
-                            startService(appContext);
-                    }
-
-                    if ((wakeLock != null) && wakeLock.isHeld())
-                        wakeLock.release();
+            if (PPApplication.getApplicationStarted(appContext, false))
+            {
+                if (PhoneProfilesService.instance != null) {
+                    // stop PhoneProfilesService
+                    appContext.stopService(new Intent(appContext, PhoneProfilesService.class));
+                    PPApplication.sleep(2000);
+                    startService(appContext);
                 }
-            });
-
+                else
+                    startService(appContext);
+            }
         }
     }
 
@@ -112,6 +40,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
         // start PhoneProfilesService
         Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
         serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+        serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_PACKAGE_REPLACE, true);
         PPApplication.startPPService(context, serviceIntent);
     }
 

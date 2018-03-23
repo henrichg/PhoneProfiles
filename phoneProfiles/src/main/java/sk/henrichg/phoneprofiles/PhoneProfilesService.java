@@ -62,6 +62,7 @@ public class PhoneProfilesService extends Service {
     private boolean notificationIsPlayed = false;
     private Timer notificationPlayTimer = null;
 
+    static final String EXTRA_START_ON_PACKAGE_REPLACE = "start_on_package_replace";
     static final String EXTRA_ONLY_START = "only_start";
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
@@ -186,13 +187,17 @@ public class PhoneProfilesService extends Service {
     // start service for first start
     private boolean doForFirstStart(Intent intent/*, int flags, int startId*/) {
         boolean onlyStart = false;
+        boolean startOnPackageReplace = false;
 
         if (intent != null) {
             onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, false);
+            startOnPackageReplace = intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false);
         }
 
         if (onlyStart)
-            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart", "EXTRA_ONLY_START");
+            PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_ONLY_START");
+        if (startOnPackageReplace)
+            PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_START_ON_PACKAGE_REPLACE");
 
         final Context appContext = getApplicationContext();
 
@@ -204,6 +209,79 @@ public class PhoneProfilesService extends Service {
         }
 
         if (onlyStart) {
+
+            if (startOnPackageReplace) {
+                PPApplication.startHandlerThread();
+                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                        PowerManager.WakeLock wakeLock = null;
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.1");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
+
+                        // start delayed boot up broadcast
+                        PPApplication.startedOnBoot = true;
+                        PPApplication.startHandlerThread();
+                        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                PPApplication.logE("PhoneProfilesService.doForFirstStart", "delayed boot up");
+                                PPApplication.startedOnBoot = false;
+                            }
+                        }, 10000);
+
+                        Permissions.setShowRequestAccessNotificationPolicyPermission(appContext, true);
+                        Permissions.setShowRequestWriteSettingsPermission(appContext, true);
+                        //ActivateProfileHelper.setScreenUnlocked(appContext, true);
+
+                        int oldVersionCode = PPApplication.getSavedVersionCode(appContext);
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart", "oldVersionCode=" + oldVersionCode);
+                        int actualVersionCode;
+                        try {
+                            PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
+                            actualVersionCode = pInfo.versionCode;
+                            PPApplication.logE("PhoneProfilesService.doForFirstStart", "actualVersionCode=" + actualVersionCode);
+
+                            if (oldVersionCode < actualVersionCode) {
+                                if (actualVersionCode <= 2100) {
+                                    ApplicationPreferences.getSharedPreferences(appContext);
+                                    SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
+                                    editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
+                                    editor.apply();
+                                }
+                                if (actualVersionCode <= 2500) {
+                                    ApplicationPreferences.getSharedPreferences(appContext);
+                                    SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
+                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
+                                    editor.apply();
+                                }
+                                if (actualVersionCode <= 2700) {
+                                    PPApplication.logE("PhoneProfilesService.doForFirstStart", "donation alarm restart");
+                                    PPApplication.setDaysAfterFirstStart(appContext, 0);
+                                    PPApplication.setDonationNotificationCount(appContext, 0);
+                                    AboutApplicationJob.scheduleJob(appContext, true);
+                                }
+                            }
+                        } catch (Exception ignored) {
+                        }
+
+                        if ((wakeLock != null) && wakeLock.isHeld())
+                            wakeLock.release();
+                    }
+                });
+            }
 
             PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
