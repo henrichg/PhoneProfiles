@@ -382,14 +382,23 @@ public class PhoneProfilesService extends Service {
             PendingIntent pIntent = PendingIntent.getActivity(dataWrapper.context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             Notification.Builder notificationBuilder;
+
+            boolean miui = (PPApplication.romManufacturer != null) &&
+                    (PPApplication.romManufacturer.compareToIgnoreCase("xiaomi") == 0) &&
+                    (android.os.Build.VERSION.SDK_INT >= 24);
+
             RemoteViews contentView;
-            if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
+            /*if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
                 contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_dark);
             else
             if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("2"))
                 contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_light);
-            else
-                contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer);
+            else {*/
+                if (miui)
+                    contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_miui);
+                else
+                    contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer);
+            //}
 
             boolean isIconResourceID;
             String iconIdentifier;
@@ -416,27 +425,32 @@ public class PhoneProfilesService extends Service {
                 preferencesIndicator = null;
             }
 
-            notificationBuilder = new Notification.Builder(dataWrapper.context)
-                    .setContentIntent(pIntent);
+            notificationBuilder = new Notification.Builder(dataWrapper.context);
+            notificationBuilder.setContentIntent(pIntent);
 
-            if (ApplicationPreferences.notificationShowInStatusBar(dataWrapper.context)) {
-                KeyguardManager myKM = (KeyguardManager) dataWrapper.context.getSystemService(Context.KEYGUARD_SERVICE);
-                if (myKM != null) {
-                    //boolean screenUnlocked = !myKM.inKeyguardRestrictedInputMode();
-                    boolean screenUnlocked = !myKM.isKeyguardLocked();
-                    //boolean screenUnlocked = getScreenUnlocked(context);
-                    if ((ApplicationPreferences.notificationHideInLockScreen(dataWrapper.context) && (!screenUnlocked)) ||
-                            ((profile != null) && profile._hideStatusBarIcon))
-                        notificationBuilder.setPriority(Notification.PRIORITY_MIN);
-                    else
-                        notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
-                }
-                else
-                    notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
+            if (Build.VERSION.SDK_INT >= 26) {
+                PPApplication.createProfileNotificationChannel(profile, dataWrapper.context);
+                notificationBuilder.setChannelId(PPApplication.PROFILE_NOTIFICATION_CHANNEL);
+                notificationBuilder.setSettingsText("Pokus");
             }
-            else
-                notificationBuilder.setPriority(Notification.PRIORITY_MIN);
-            //notificationBuilder.setPriority(Notification.PRIORITY_HIGH); // for heads-up in Android 5.0
+            else {
+                if (ApplicationPreferences.notificationShowInStatusBar(dataWrapper.context)) {
+                    KeyguardManager myKM = (KeyguardManager) dataWrapper.context.getSystemService(Context.KEYGUARD_SERVICE);
+                    if (myKM != null) {
+                        //boolean screenUnlocked = !myKM.inKeyguardRestrictedInputMode();
+                        boolean screenUnlocked = !myKM.isKeyguardLocked();
+                        //boolean screenUnlocked = getScreenUnlocked(context);
+                        if ((ApplicationPreferences.notificationHideInLockScreen(dataWrapper.context) && (!screenUnlocked)) ||
+                                ((profile != null) && profile._hideStatusBarIcon))
+                            notificationBuilder.setPriority(Notification.PRIORITY_MIN);
+                        else
+                            notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
+                    } else
+                        notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
+                } else
+                    notificationBuilder.setPriority(Notification.PRIORITY_MIN);
+            }
+
             if (android.os.Build.VERSION.SDK_INT >= 21)
             {
                 notificationBuilder.setCategory(Notification.CATEGORY_STATUS);
@@ -534,38 +548,24 @@ public class PhoneProfilesService extends Service {
                     contentView.setImageViewResource(R.id.notification_activated_profile_icon, R.drawable.ic_profile_default);
             }
 
-            // workaround for LG G4, Android 6.0
-            if (android.os.Build.VERSION.SDK_INT < 24)
-                contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
-
-            // workaround for MIUI
-            boolean miui = (PPApplication.romManufacturer != null) && (PPApplication.romManufacturer.compareToIgnoreCase("xiaomi") == 0) &&
-                    (android.os.Build.VERSION.SDK_INT >= 24);
-            if (miui)
-                contentView.setInt(R.id.notification_activated_app_root, "setVisibility", View.GONE);
-
             if (ApplicationPreferences.notificationTextColor(dataWrapper.context).equals("1")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
-                if (android.os.Build.VERSION.SDK_INT >= 24)
-                    contentView.setTextColor(R.id.notification_activated_app_name, Color.BLACK);
             }
             else
             if (ApplicationPreferences.notificationTextColor(dataWrapper.context).equals("2")) {
                 contentView.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
-                if (android.os.Build.VERSION.SDK_INT >= 24)
-                    contentView.setTextColor(R.id.notification_activated_app_name, Color.WHITE);
             }
             contentView.setTextViewText(R.id.notification_activated_profile_name, profileName);
 
-            //contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator,
-            //		ProfilePreferencesIndicator.paint(profile, context));
             if ((preferencesIndicator != null) && (ApplicationPreferences.notificationPrefIndicator(dataWrapper.context)))
                 contentView.setImageViewBitmap(R.id.notification_activated_profile_pref_indicator, preferencesIndicator);
             else
                 contentView.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
 
             if (android.os.Build.VERSION.SDK_INT >= 24) {
-                //notificationBuilder.setStyle(new Notification.DecoratedCustomViewStyle());
+                // workaround for MIUI :-(
+                if (!miui)
+                    notificationBuilder.setStyle(new Notification.DecoratedCustomViewStyle());
                 notificationBuilder.setCustomContentView(contentView);
             }
             else

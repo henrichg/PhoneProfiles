@@ -646,6 +646,7 @@
     <item>1</item>
     <item>2</item>
 </string-array>
+<!--
 <string-array name="notificationThemeArray">
     <item>@string/array_pref_color_native</item>
     <item>@string/array_pref_color_dark</item>
@@ -656,6 +657,7 @@
     <item>1</item>
     <item>2</item>
 </string-array>
+-->
 <string-array name="lockDeviceArray">
     <item>@string/array_pref_no_change</item>
     <item>@string/array_pref_default_profile</item>

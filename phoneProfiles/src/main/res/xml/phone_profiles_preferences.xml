@@ -232,7 +232,7 @@
                 android:dependency="notificationStatusBar"
                 android:layout="@layout/mp_preference_material_widget"
                 app:useStockLayout="true" />
-            <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        <!--    <com.afollestad.materialdialogs.prefs.MaterialListPreference
                 android:title="@string/phone_profiles_pref_notificationTheme"
                 android:summary="@string/array_pref_color_native"
                 android:key="notificationTheme"
@@ -241,7 +241,7 @@
                 android:entryValues="@array/notificationThemeValues"
                 android:dependency="notificationStatusBar"
                 android:layout="@layout/mp_preference_material_widget"
-                app:useStockLayout="true" />
+                app:useStockLayout="true" /> -->
         </PreferenceCategory>
     </PreferenceScreen>
 

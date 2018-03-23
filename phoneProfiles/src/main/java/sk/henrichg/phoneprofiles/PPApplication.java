@@ -2,6 +2,9 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.KeyguardManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -81,6 +84,10 @@ public class PPApplication extends Application {
     static final int PREFERENCES_STARTUP_SOURCE_ACTIVITY = 1;
     //static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
     static final int PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE = 3;
+
+    static final String PROFILE_NOTIFICATION_CHANNEL = "phoneProfilesPlus_activated_profile";
+    static final String INFORMATION_NOTIFICATION_CHANNEL = "phoneProfilesPlus_information";
+    static final String EXCLAMATION_NOTIFICATION_CHANNEL = "phoneProfilesPlus_exclamation";
 
     static final int PROFILE_NOTIFICATION_ID = 700420;
     static final int IMPORTANT_INFO_NOTIFICATION_ID = 700422;
@@ -468,6 +475,51 @@ public class PPApplication extends Application {
     }
 
     //--------------------------------------------------------------
+
+    // notification channels -------------------------
+
+    static void createProfileNotificationChannel(Profile profile, Context context) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            // no sound
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            if (ApplicationPreferences.notificationShowInStatusBar(context)) {
+                KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+                if (myKM != null) {
+                    //boolean screenUnlocked = !myKM.inKeyguardRestrictedInputMode();
+                    //boolean screenUnlocked = getScreenUnlocked(context);
+                    boolean screenUnlocked = !myKM.isKeyguardLocked();
+                    if ((ApplicationPreferences.notificationHideInLockScreen(context) && (!screenUnlocked)) ||
+                            ((profile != null) && profile._hideStatusBarIcon))
+                        importance = NotificationManager.IMPORTANCE_MIN;
+                }
+            } else
+                importance = NotificationManager.IMPORTANCE_MIN;
+
+            // The user-visible name of the channel.
+            CharSequence name = context.getString(R.string.notification_channel_activated_profile);
+            // The user-visible description of the channel.
+            String description = context.getString(R.string.notification_channel_activated_profile_pp);
+
+            NotificationChannel channel = new NotificationChannel(PROFILE_NOTIFICATION_CHANNEL, name, importance);
+
+            // Configure the notification channel.
+            channel.setImportance(importance);
+            channel.setDescription(description);
+            channel.enableLights(false);
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            //channel.setLightColor(Color.RED);
+            channel.enableVibration(false);
+            //channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null)
+                notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    // -----------------------------------------------
+
     // root -----------------------------------------------------
 
     static synchronized void initRoot() {
