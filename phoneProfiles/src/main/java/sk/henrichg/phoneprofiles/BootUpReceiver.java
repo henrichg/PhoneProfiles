@@ -18,6 +18,7 @@ public class BootUpReceiver extends BroadcastReceiver {
         if ((action != null) && (action.equals(Intent.ACTION_BOOT_COMPLETED) ||
                 action.equals("android.intent.action.QUICKBOOT_POWERON") ||
                 action.equals("com.htc.intent.action.QUICKBOOT_POWERON"))) {
+
             // start delayed boot up broadcast
             PPApplication.startedOnBoot = true;
             PPApplication.startHandlerThread();
@@ -28,7 +29,7 @@ public class BootUpReceiver extends BroadcastReceiver {
                     PPApplication.logE("BootUpReceiver.onReceive", "delayed boot up");
                     PPApplication.startedOnBoot = false;
                 }
-            }, 10000);
+            }, 30000);
 
             PPApplication.setApplicationStarted(context, false);
 
