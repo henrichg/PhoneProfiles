@@ -79,7 +79,7 @@ public class PhoneProfilesService extends Service {
             if ((Build.VERSION.SDK_INT >= 26)) {
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, true);
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, true);
-                Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));
+                Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, true);
             } else {
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
@@ -266,25 +266,13 @@ public class PhoneProfilesService extends Service {
         ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), false);
 
         if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
-            final Context _this = this;
-            PPApplication.startHandlerThread();
-            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    // set service foreground
-                    final DataWrapper dataWrapper =  new DataWrapper(_this, false, 0);
-                    showProfileNotification(dataWrapper);
-                }
-            });
+            // do not call this from handlerThread. In Android 8 handlerThread is not called
+            // when for service is not displayed foreground notification
+            final DataWrapper dataWrapper =  new DataWrapper(this, false, 0);
+            showProfileNotification(dataWrapper);
         }
 
         if (intent != null) {
-            /*if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
-                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SET_SERVICE_FOREGROUND");
-                dataWrapper.getActivateProfileHelper().initialize(dataWrapper, getApplicationContext());
-                showProfileNotification(activatedProfile, dataWrapper);
-            }*/
 
             if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                 PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");

@@ -481,7 +481,7 @@ public class PPApplication extends Application {
     static void createProfileNotificationChannel(Profile profile, Context context) {
         if (Build.VERSION.SDK_INT >= 26) {
             // no sound
-            int importance = NotificationManager.IMPORTANCE_LOW;
+            /*int importance = NotificationManager.IMPORTANCE_LOW;
             if (ApplicationPreferences.notificationShowInStatusBar(context)) {
                 KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
                 if (myKM != null) {
@@ -493,17 +493,17 @@ public class PPApplication extends Application {
                         importance = NotificationManager.IMPORTANCE_MIN;
                 }
             } else
-                importance = NotificationManager.IMPORTANCE_MIN;
+                importance = NotificationManager.IMPORTANCE_MIN;*/
 
             // The user-visible name of the channel.
             CharSequence name = context.getString(R.string.notification_channel_activated_profile);
             // The user-visible description of the channel.
             String description = context.getString(R.string.notification_channel_activated_profile_pp);
 
-            NotificationChannel channel = new NotificationChannel(PROFILE_NOTIFICATION_CHANNEL, name, importance);
+            NotificationChannel channel = new NotificationChannel(PROFILE_NOTIFICATION_CHANNEL, name, NotificationManager.IMPORTANCE_LOW);
 
             // Configure the notification channel.
-            channel.setImportance(importance);
+            //channel.setImportance(importance);
             channel.setDescription(description);
             channel.enableLights(false);
             // Sets the notification light color for notifications posted to this
