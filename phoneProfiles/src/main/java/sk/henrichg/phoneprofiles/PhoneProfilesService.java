@@ -99,6 +99,20 @@ public class PhoneProfilesService extends Service {
         } catch (Exception ignored) {
         }
 
+        /*
+        ApplicationPreferences.getSharedPreferences(appContext);
+        SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
+        editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, true);
+        editor.apply();
+        */
+
         keyguardManager = (KeyguardManager)appContext.getSystemService(Activity.KEYGUARD_SERVICE);
         if (keyguardManager != null)
             //noinspection deprecation

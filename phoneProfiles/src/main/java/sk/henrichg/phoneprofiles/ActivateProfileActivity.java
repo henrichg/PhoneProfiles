@@ -322,6 +322,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                                     //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                                     ActivatorTargetHelpsActivity.activity.finish();
                                     ActivatorTargetHelpsActivity.activity = null;
+                                    ActivatorTargetHelpsActivity.activatorActivity = null;
                                 }
                             }
                         }, 500);
@@ -357,6 +358,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                 ActivatorTargetHelpsActivity.activity.finish();
                 ActivatorTargetHelpsActivity.activity = null;
+                ActivatorTargetHelpsActivity.activatorActivity = null;
             }
         }
     }
