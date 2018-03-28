@@ -547,10 +547,7 @@ class ActivateProfileHelper {
                             newNotificationVolume = oldNotificationVolume + 1;
                         audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, newNotificationVolume, 0);
                         PPApplication.sleep(1000);
-                        if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == newNotificationVolume)
-                            merged = true;
-                        else
-                            merged = false;
+                        merged = audioManager.getStreamVolume(AudioManager.STREAM_RING) == newNotificationVolume;
                     } else
                         merged = false;
                     audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, oldNotificationVolume, 0);
@@ -2546,8 +2543,7 @@ class ActivateProfileHelper {
                 else
                 if (preference.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE))
                     transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setPreferredNetworkType");
-                if (transactionCode != -1)
-                    return true;
+                return transactionCode != -1;
             }
             return false;
         } catch(Exception e) {
@@ -2617,8 +2613,7 @@ class ActivateProfileHelper {
                 int transactionCode = -1;
                 if (preference.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
                     transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setWifiApEnabled");
-                if (transactionCode != -1)
-                    return true;
+                return transactionCode != -1;
             }
             return false;
         } catch(Exception e) {

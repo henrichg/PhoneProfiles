@@ -19,7 +19,7 @@ import static android.content.Context.POWER_SERVICE;
 
 public class DataWrapper {
 
-    public Context context;
+    public final Context context;
     //private boolean forGUI = false;
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
@@ -552,14 +552,13 @@ public class DataWrapper {
             PhoneProfilesService.instance.showProfileNotification(this);
         ActivateProfileHelper.updateGUI(context, true);
 
-        final Context appContext = context;
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
 
-                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
                 if (powerManager != null) {
                     wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BluetoothLEScanBroadcastReceiver.onReceive");
