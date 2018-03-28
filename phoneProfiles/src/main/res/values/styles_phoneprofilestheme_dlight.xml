@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.Phoneprofilestheme_dlight" parent="@style/Base.Theme.Phoneprofilestheme_dlight">
-   	</style>
+    </style>
 
 </resources>

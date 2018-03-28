@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.Phoneprofilestheme_material" parent="@style/Base.Theme.Phoneprofilestheme_material">
-   	</style>
+    </style>
 
 </resources>
