@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -26,9 +27,9 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
     private final Context context;
 
     String value = "";
-    private int disableDefaultProfile = 0;
+    private int disableDefaultProfile;
 
-    List<WifiSSIDData> ssidList = null;
+    List<WifiSSIDData> ssidList;
 
     private MaterialDialog mDialog;
 
@@ -121,6 +122,7 @@ public class ConnectToSSIDDialogPreference extends DialogPreference {
         mDialog.show();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void onShow(/*DialogInterface dialog*/) {
 
         asyncTask = new AsyncTask<Void, Integer, Void>() {

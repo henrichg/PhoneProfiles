@@ -17,7 +17,7 @@ class AddProfileAdapter extends BaseAdapter {
 
     private final Context context;
 
-    private LayoutInflater inflater = null;
+    private LayoutInflater inflater;
 
     AddProfileAdapter(/*AddProfileDialog dialog, */Context c, List<Profile> profileList)
     {

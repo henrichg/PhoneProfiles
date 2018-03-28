@@ -28,10 +28,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     protected boolean onStartReceive()
     {
-        if (!PPApplication.getApplicationStarted(super.savedContext, true))
-            return false;
-
-        return true;
+        return PPApplication.getApplicationStarted(super.savedContext, true);
     }
 
     protected void onEndReceive()

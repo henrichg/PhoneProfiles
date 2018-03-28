@@ -1070,7 +1070,8 @@ class ActivateProfileHelper {
             else
                 return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
         }
-        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23))
+        else
+        if (android.os.Build.VERSION.SDK_INT >= 21)
             return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
         return false;
     }
@@ -2473,6 +2474,7 @@ class ActivateProfileHelper {
 
                 if (!OK) {
                     try {
+                        //noinspection JavaReflectionMemberAccess
                         @SuppressLint("PrivateApi")
                         Method setMobileDataEnabledMethod = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
 

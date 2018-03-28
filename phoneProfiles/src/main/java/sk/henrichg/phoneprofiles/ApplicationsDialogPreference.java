@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,7 +39,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
 
     private String value = "";
 
-    List<Application> applicationsList = null;
+    List<Application> applicationsList;
 
     private MaterialDialog mDialog;
     private ApplicationEditorDialog mEditorDialog;
@@ -200,6 +201,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         mDialog.show();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void onShow(/*DialogInterface dialog*/) {
 
         asyncTask = new AsyncTask<Void, Integer, Void>() {

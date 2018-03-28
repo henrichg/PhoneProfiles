@@ -19,7 +19,7 @@ import static android.content.Context.POWER_SERVICE;
 
 public class DataWrapper {
 
-    public Context context = null;
+    public Context context;
     //private boolean forGUI = false;
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;

@@ -2,7 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.app.KeyguardManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -56,7 +55,7 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static final boolean logIntoLogCat = false;
+    private static final boolean logIntoLogCat = true;
     private static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
     private static final String logFilterTags = "|PhoneProfilesBackupAgent"
@@ -328,6 +327,7 @@ public class PPApplication extends Application {
         logFile.delete();
     }
 
+    @SuppressWarnings("UnusedAssignment")
     @SuppressLint("SimpleDateFormat")
     static private void logIntoFile(String type, String tag, String text)
     {
@@ -382,9 +382,11 @@ public class PPApplication extends Application {
     }
 
     static public boolean logEnabled() {
+        //noinspection ConstantConditions
         return (logIntoLogCat || logIntoFile);
     }
 
+    @SuppressWarnings("unused")
     static public void logI(String tag, String text)
     {
         if (!logEnabled())
@@ -397,6 +399,7 @@ public class PPApplication extends Application {
         }
     }
 
+    @SuppressWarnings("unused")
     static public void logW(String tag, String text)
     {
         if (!logEnabled())
@@ -409,6 +412,7 @@ public class PPApplication extends Application {
         }
     }
 
+    @SuppressWarnings("unused")
     static public void logE(String tag, String text)
     {
         if (!logEnabled())
@@ -421,6 +425,7 @@ public class PPApplication extends Application {
         }
     }
 
+    @SuppressWarnings("unused")
     static public void logD(String tag, String text)
     {
         if (!logEnabled())

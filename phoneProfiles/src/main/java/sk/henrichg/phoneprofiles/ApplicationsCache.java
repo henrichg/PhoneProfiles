@@ -241,8 +241,7 @@ class ApplicationsCache {
     static boolean isShortcut(String value) {
         if (value.length() > 2) {
             String shortcut = value.substring(0, 3);
-            if (shortcut.equals("(s)"))
-                return true;
+            return shortcut.equals("(s)");
         }
         return false;
     }

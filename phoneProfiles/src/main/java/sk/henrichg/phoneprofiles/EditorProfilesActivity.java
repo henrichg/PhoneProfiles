@@ -627,6 +627,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         if (Permissions.grantImportPermissions(activity.getApplicationContext(), activity, applicationDataPath)) {
 
+            @SuppressLint("StaticFieldLeak")
             class ImportAsyncTask extends AsyncTask<Void, Integer, Integer> {
                 private DataWrapper dataWrapper;
 
@@ -856,6 +857,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         if (Permissions.grantExportPermissions(activity.getApplicationContext(), activity)) {
 
+            @SuppressLint("StaticFieldLeak")
             class ExportAsyncTask extends AsyncTask<Void, Integer, Integer> {
                 private DataWrapper dataWrapper;
 

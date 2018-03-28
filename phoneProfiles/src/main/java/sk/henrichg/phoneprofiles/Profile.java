@@ -149,7 +149,6 @@ public class Profile {
         defaultValuesString = new HashMap<>();
         defaultValuesString.put("prf_pref_profileIcon", "ic_profile_default|1|0|0");
         defaultValuesString.put("prf_pref_profileIcon_withoutIcon", "|1|0|0");
-        defaultValuesString.put("prf_pref_profileIcon_withoutIcon", "|1|0|0");
         defaultValuesString.put("prf_pref_duration", "0");
         defaultValuesString.put("prf_pref_afterDurationDo", "0");
         defaultValuesString.put("prf_pref_durationNotificationSound", "");
