@@ -16,6 +16,7 @@ Required external libs
 
 - Android support library: core, appcomapt, gridlayout, cardview, recyclerview
 - Google Billing library: donations
+- Samsung Look - http://developer.samsung.com/galaxy/edge
 - RootTools - https://github.com/Stericson/RootTools
 - android-hidden-api - https://github.com/anggrayudi/android-hidden-api 
 - DashClock API - https://github.com/romannurik/dashclock/wiki/API
