@@ -557,7 +557,7 @@
                     android:entryValues="@array/forceStopApplicationValues"
                     android:layout="@layout/mp_preference_material_widget"
                     app:useStockLayout="true" />
-                <sk.henrichg.phoneprofilesplus.ApplicationsMultiSelectDialogPreference
+                <sk.henrichg.phoneprofiles.ApplicationsMultiSelectDialogPreference
                     android:defaultValue="@string/dash_string"
                     android:key="prf_pref_deviceForceStopApplicationPackageName"
                     android:title="@string/profile_preferences_deviceForceStopApplicationsPackageName"
