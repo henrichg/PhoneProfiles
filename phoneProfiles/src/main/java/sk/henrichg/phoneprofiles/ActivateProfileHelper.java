@@ -1745,11 +1745,6 @@ class ActivateProfileHelper {
             ActivateProfileHelper.executeForRunApplications(context, profile);
         }
 
-        if (profile._deviceForceStopApplicationChange == 1)
-        {
-            ActivateProfileHelper.executeForForceStopApplications(profile, context);
-        }
-
         // set heads-up notifications
         if (profile._headsUpNotifications != 0) {
             switch (profile._headsUpNotifications) {
@@ -1878,6 +1873,13 @@ class ActivateProfileHelper {
                 }
             }
         //}
+
+
+        /// !!!! must be last !!!!
+        if (profile._deviceForceStopApplicationChange == 1)
+        {
+            ActivateProfileHelper.executeForForceStopApplications(profile, context);
+        }
 
     }
 
