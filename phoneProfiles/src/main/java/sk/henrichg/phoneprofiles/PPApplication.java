@@ -60,12 +60,19 @@ public class PPApplication extends Application {
     private static final boolean logIntoLogCat = true;
     private static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
-    private static final String logFilterTags = "|PhoneProfilesBackupAgent"
-
-                                            +"|PhoneProfilesService"
+    private static final String logFilterTags = "##### PPApplication.onCreate"
+                                            +"|PhoneProfilesService.onCreate"
+                                            //+"|PhoneProfilesService.onStartCommand"
+                                            //+"|PhoneProfilesService.doForFirstStart"
+                                            //+"|PhoneProfilesService.showProfileNotification"
+                                            +"|PhoneProfilesService.onDestroy"
+                                            +"|BootUpReceiver"
                                             +"|PackageReplacedReceiver"
+                                            +"|ShutdownBroadcastReceiver"
 
                                             //+"|ProfileDurationAlarmBroadcastReceiver"
+
+                                            +"|ActivateProfilesHelper.executeForForceStopApplications"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";

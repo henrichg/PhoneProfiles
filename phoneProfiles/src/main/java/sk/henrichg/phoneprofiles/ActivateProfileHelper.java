@@ -1439,6 +1439,7 @@ class ActivateProfileHelper {
     }
 
     private static void executeForForceStopApplications(final Profile profile, Context context) {
+        PPApplication.logE("ActivateProfilesHelper.executeForForceStopApplications", "xxx");
         if (PPApplication.startedOnBoot)
             // not force stop applications after boot
             return;
