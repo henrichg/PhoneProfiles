@@ -27,7 +27,7 @@ class ImportantInfoNotification {
             savedVersionCode = getShowInfoNotificationOnStartVersion(context);
             if (packageVersionCode > savedVersionCode) {
                 //boolean show = (versionCode >= VERSION_CODE_FOR_NEWS);
-                boolean show = canShowNotification(packageVersionCode, savedVersionCode);
+                boolean show = canShowNotification(packageVersionCode, savedVersionCode, context);
                 setShowInfoNotificationOnStart(context, show, packageVersionCode);
             }
             else
@@ -45,7 +45,7 @@ class ImportantInfoNotification {
         }
     }
 
-    static private boolean canShowNotification(int packageVersionCode, int savedVersionCode) {
+    static private boolean canShowNotification(int packageVersionCode, int savedVersionCode, Context context) {
         boolean news = false;
         boolean newsLatest = (packageVersionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
         boolean news1634 = ((packageVersionCode >= 1634) && (packageVersionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
@@ -67,6 +67,10 @@ class ImportantInfoNotification {
                 news = true;
             }
         }
+
+        int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
+        if ((extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER))
+            news = true;
 
         if (afterInstall)
             news = true;

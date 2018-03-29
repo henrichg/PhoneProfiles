@@ -258,6 +258,18 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         infoTextGrant1Command.setText(spannable);
 
+        int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
+
+        if ((extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER)) {
+            news = true;
+            TextView infoText1 = findViewById(R.id.activity_info_notification_accessibility_service_new_version);
+            infoText1.setVisibility(View.VISIBLE);
+        }
+        else {
+            TextView infoText1 = findViewById(R.id.activity_info_notification_accessibility_service_new_version);
+            infoText1.setVisibility(View.GONE);
+        }
+
         if (!news) {
             TextView infoTextNews = findViewById(R.id.activity_info_notification_dialog_news);
             infoTextNews.setVisibility(View.GONE);

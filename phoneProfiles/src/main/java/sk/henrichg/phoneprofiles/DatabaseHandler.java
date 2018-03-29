@@ -103,6 +103,12 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEVICE_WIFI_AP_PREFS = "deviceWifiAPPrefs";
     private static final String KEY_HEADS_UP_NOTIFICATIONS = "headsUpNotifications";
 
+    /*
+    // profile type
+    static final int PTYPE_CONNECT_TO_SSID = 1;
+    static final int PTYPE_FORCE_STOP = 2;
+    */
+
     // Shortcuts Columns names
     private static final String KEY_S_ID = "_id";  // for CursorAdapter must by this name
     private static final String KEY_S_INTENT = "intent";
@@ -1954,6 +1960,59 @@ class DatabaseHandler extends SQLiteOpenHelper {
         //        stopRunningCommand();
         //}
     }
+
+    /*
+    int getTypeProfilesCount(int profileType, boolean sharedProfile)
+    {
+        importExportLock.lock();
+        try {
+            int r = 0;
+            try {
+                startRunningCommand();
+
+                final String countQuery;
+                String whereString = "";
+                if (profileType == PTYPE_CONNECT_TO_SSID) {
+                    String profileTypeChecked;
+                    if (!sharedProfile)
+                        profileTypeChecked = KEY_DEVICE_CONNECT_TO_SSID + "!=\"" + Profile.CONNECTTOSSID_JUSTANY + "\"";
+                    else
+                        profileTypeChecked = KEY_DEVICE_CONNECT_TO_SSID + "!=\"" + Profile.CONNECTTOSSID_DEFAULTPROFILE + "\"";
+                    whereString = " WHERE " + profileTypeChecked;
+                }
+                if (profileType == PTYPE_FORCE_STOP) {
+                    String profileTypeChecked;
+                    if (!sharedProfile)
+                        profileTypeChecked = KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + "!=0";
+                    else
+                        profileTypeChecked = KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + "!=99";
+                    whereString = " WHERE " + profileTypeChecked;
+                }
+
+                countQuery = "SELECT  count(*) FROM " + TABLE_PROFILES + whereString;
+
+                //SQLiteDatabase db = this.getReadableDatabase();
+                SQLiteDatabase db = getMyWritableDatabase();
+
+                Cursor cursor = db.rawQuery(countQuery, null);
+
+                if (cursor != null) {
+                    cursor.moveToFirst();
+                    r = Integer.parseInt(cursor.getString(0));
+                    cursor.close();
+                } else
+                    r = 0;
+
+                //db.close();
+
+            } catch (Exception ignored) {
+            }
+            return r;
+        } finally {
+            stopRunningCommand();
+        }
+    }
+    */
 
 // SHORTCUTS ----------------------------------------------------------------------
 

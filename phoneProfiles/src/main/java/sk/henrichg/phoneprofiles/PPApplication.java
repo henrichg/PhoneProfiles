@@ -50,6 +50,8 @@ public class PPApplication extends Application {
     static final String romManufacturer = getROMManufacturer();
     static String PACKAGE_NAME;
 
+    static final int VERSION_CODE_EXTENDER = 62;
+
     public static final boolean exactAlarms = true;
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
@@ -121,6 +123,10 @@ public class PPApplication extends Application {
     private static final String PREF_DAYS_AFTER_FIRST_START = "days_after_first_start";
     private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
     private static final String PREF_DONATION_DONATED = "donation_donated";
+
+    static final String EXTENDER_ACCESSIBILITY_SERVICE_ID = "sk.henrichg.phoneprofilesplusextender/.PPPEAccessibilityService";
+    static final String ACTION_ACCESSIBILITY_SERVICE_UNBIND = "sk.henrichg.phoneprofilesplusextender.ACTION_ACCESSIBILITY_SERVICE_UNBIND";
+    static final String ACCESSIBILITY_SERVICE_PERMISSION = "sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION";
 
     public static HandlerThread handlerThread = null;
 

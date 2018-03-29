@@ -52,6 +52,7 @@ public class PhoneProfilesService extends Service {
     private PhoneCallBroadcastReceiver phoneCallBroadcastReceiver = null;
     private RingerModeChangeReceiver ringerModeChangeReceiver = null;
     private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
+    private AccessibilityServiceBroadcastReceiver accessibilityServiceBroadcastReceiver = null;
 
     private static SettingsContentObserver settingsContentObserver = null;
 
@@ -158,6 +159,14 @@ public class PhoneProfilesService extends Service {
         intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
+        if (accessibilityServiceBroadcastReceiver != null)
+            appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
+        accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
+        IntentFilter intentFilter23 = new IntentFilter();
+        intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
+        appContext.registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
+                PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
+
         if (settingsContentObserver != null)
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
         //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
@@ -184,6 +193,8 @@ public class PhoneProfilesService extends Service {
             appContext.unregisterReceiver(ringerModeChangeReceiver);
         if (wifiStateChangedBroadcastReceiver != null)
             appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
+        if (accessibilityServiceBroadcastReceiver != null)
+            appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
 
         if (settingsContentObserver != null)
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);

@@ -1088,7 +1088,6 @@
     <string name="phone_profiles_pref_eventBluetoothLocationSystemSettings_summary">Please enable Location and Bluetooth scanning in System Settings. Without this, Bluetooth scanning will not work.</string>
     <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings">\"Keep Wi-Fi on\" system setting</string>
     <string name="phone_profiles_pref_eventWiFiKeppOnSystemSettings_summary">Please configure \"Keep Wi-Fi on during sleep\" to \"Always\". Without this, Wi-Fi scanning will not work during device sleep.</string>
-    <string name="important_info_accessibility_service_new_version">Please install the new version of PhoneProfilesExtender to use the event sensors \"Applications parameters\" and \"Orientation parameters\". Check the parameters of these sensors for more information.</string>
     <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary1">Please do not configure interval to value less than</string>
     <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary2">minutes. This greatly increases the battery consumption.</string>
     <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary3">seconds. This greatly increases the battery consumption.</string>
@@ -1141,6 +1140,7 @@
     <string name="notification_channel_exclamation">Exclamation</string>
     <string name="notification_channel_grant_permission">Grant permission</string>
     <string name="notification_channel_grant_permission_description">Shows permission witch is needed grant it.</string>
+    <string name="important_info_accessibility_service_new_version">Please install the new version of PhoneProfilesPlusExtender. More information about installation is in parameters for which is PhoneProfilesPlusExtender required.</string>
 
     <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
     <!-- <string name="donation_paypal">PayPal</string> -->
