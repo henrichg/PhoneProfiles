@@ -39,6 +39,11 @@
         <attr name="showSilent" format="boolean" />
         <attr name="showDefault" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="ApplicationsMultiSelectDialogPreference">
+        <attr name="addShortcuts" format="integer" />
+        <attr name="removePPApplications" format="integer" />
+        <attr name="systemSettings" format="string" />
+    </declare-styleable>
 
     <!-- theme dependent drawables -->
     <attr name="colorAccentDisabled" format="reference" />

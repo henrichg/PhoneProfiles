@@ -93,6 +93,8 @@ class ActivateProfileHelper {
     private static final String PREF_ACTIVATED_PROFILE_SCREEN_TIMEOUT = "activated_profile_screen_timeout";
     static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
 
+    private static final String ACTION_FORCE_STOP_INFO_START = "sk.henrichg.phoneprofilesplusextender.ACTION_FORCE_STOP_START";
+
     private static void doExecuteForRadios(Context context, Profile profile)
     {
         //try { Thread.sleep(300); } catch (InterruptedException e) { }
@@ -1436,6 +1438,24 @@ class ActivateProfileHelper {
         }
     }
 
+    private static void executeForForceStopApplications(final Profile profile, Context context) {
+        if (PPApplication.startedOnBoot)
+            // not force stop applications after boot
+            return;
+
+        if (profile._lockDevice != 0)
+            // not force stop if profile has lock device enabled
+            return;
+
+        String applications = profile._deviceForceStopApplicationPackageName;
+        if (!(applications.isEmpty() || (applications.equals("-")))) {
+            Intent intent = new Intent(ACTION_FORCE_STOP_INFO_START);
+            intent.putExtra("extra_applications", applications);
+            context.sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+        }
+    }
+
+
     private static void executeRootForAdaptiveBrightness(Context context, final Profile profile) {
         final Context appContext = context.getApplicationContext();
         PPApplication.startHandlerThreadAdaptiveBrightness();
@@ -1722,6 +1742,11 @@ class ActivateProfileHelper {
         if (profile._deviceRunApplicationChange == 1)
         {
             ActivateProfileHelper.executeForRunApplications(context, profile);
+        }
+
+        if (profile._deviceForceStopApplicationChange == 1)
+        {
+            ActivateProfileHelper.executeForForceStopApplications(profile, context);
         }
 
         // set heads-up notifications

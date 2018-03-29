@@ -315,7 +315,9 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                         origProfile._durationNotificationSound,
                         origProfile._durationNotificationVibrate,
                         origProfile._deviceWiFiAPPrefs,
-                        origProfile._headsUpNotifications);
+                        origProfile._headsUpNotifications,
+                        origProfile._deviceForceStopApplicationChange,
+                        origProfile._deviceForceStopApplicationPackageName);
                 showSaveMenu = true;
             }
             else
@@ -410,6 +412,8 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             editor.putString(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
             editor.putString(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, Integer.toString(profile._deviceWiFiAPPrefs));
             editor.putString(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, Integer.toString(profile._headsUpNotifications));
+            editor.putString(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, Integer.toString(profile._deviceForceStopApplicationChange));
+            editor.putString(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, profile._deviceForceStopApplicationPackageName);
             editor.apply();
         }
     }
@@ -501,6 +505,11 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             profile._deviceConnectToSSID = preferences.getString(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, "");
             profile._deviceWiFiAPPrefs = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, ""));
             profile._headsUpNotifications = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, ""));
+            profile._deviceForceStopApplicationChange = Integer.parseInt(preferences.getString(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, ""));
+            if (profile._deviceForceStopApplicationChange == 1)
+                profile._deviceForceStopApplicationPackageName = preferences.getString(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, "-");
+            else
+                profile._deviceForceStopApplicationPackageName = "-";
 
             if (startupSource != PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE) {
                 if ((new_profile_mode == EditorProfileListFragment.EDIT_MODE_INSERT) ||

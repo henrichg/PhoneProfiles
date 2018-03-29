@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1370;
+    private static final int DATABASE_VERSION = 1380;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -102,6 +102,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEVICE_CONNECT_TO_SSID = "deviceConnectToSSID";
     private static final String KEY_DEVICE_WIFI_AP_PREFS = "deviceWifiAPPrefs";
     private static final String KEY_HEADS_UP_NOTIFICATIONS = "headsUpNotifications";
+    private static final String KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE = "deviceForceStopApplicationChange";
+    private static final String KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME = "deviceForceStopApplicationPackageName";
 
     /*
     // profile type
@@ -231,7 +233,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_DURATION_NOTIFICATION_SOUND + " TEXT,"
                 + KEY_DURATION_NOTIFICATION_VIBRATE + " INTEGER,"
                 + KEY_DEVICE_WIFI_AP_PREFS + " INTEGER,"
-                + KEY_HEADS_UP_NOTIFICATIONS + " INTEGER"
+                + KEY_HEADS_UP_NOTIFICATIONS + " INTEGER,"
+                + KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + " INTEGER,"
+                + KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME + " TEXT"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -675,6 +679,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_HEADS_UP_NOTIFICATIONS + "=0");
         }
 
+        if (oldVersion < 1380)
+        {
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + " INTEGER");
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME + " TEXT");
+
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + "=0");
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME + "=\"-\"");
+        }
+
     }
 
     @Override
@@ -766,6 +779,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
                 values.put(KEY_DEVICE_WIFI_AP_PREFS, profile._deviceWiFiAPPrefs);
                 values.put(KEY_HEADS_UP_NOTIFICATIONS, profile._headsUpNotifications);
+                values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE, profile._deviceForceStopApplicationChange);
+                values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, profile._deviceForceStopApplicationPackageName);
 
                 // Inserting Row
                 profile._id = db.insert(TABLE_PROFILES, null, values);
@@ -846,7 +861,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_LOCK_DEVICE,
                                 KEY_DEVICE_CONNECT_TO_SSID,
                                 KEY_DEVICE_WIFI_AP_PREFS,
-                                KEY_HEADS_UP_NOTIFICATIONS
+                                KEY_HEADS_UP_NOTIFICATIONS,
+                                KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE,
+                                KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME
                         },
                         KEY_ID + "=?",
                         new String[]{String.valueOf(profile_id)}, null, null, null, null);
@@ -908,7 +925,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1,
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS))),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE))),
+                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME))
                         );
                     }
                     cursor.close();
@@ -988,7 +1007,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_LOCK_DEVICE + "," +
                         KEY_DEVICE_CONNECT_TO_SSID + "," +
                         KEY_DEVICE_WIFI_AP_PREFS + "," +
-                        KEY_HEADS_UP_NOTIFICATIONS +
+                        KEY_HEADS_UP_NOTIFICATIONS + "," +
+                        KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE + "," +
+                        KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME +
                         " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
                 //SQLiteDatabase db = this.getReadableDatabase();
@@ -1054,6 +1075,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         profile._deviceConnectToSSID = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CONNECT_TO_SSID));
                         profile._deviceWiFiAPPrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS)));
                         profile._headsUpNotifications = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)));
+                        profile._deviceForceStopApplicationChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE)));
+                        profile._deviceForceStopApplicationPackageName = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME));
                         // Adding contact to list
                         profileList.add(profile);
                     } while (cursor.moveToNext());
@@ -1137,6 +1160,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_DEVICE_CONNECT_TO_SSID, profile._deviceConnectToSSID);
                 values.put(KEY_DEVICE_WIFI_AP_PREFS, profile._deviceWiFiAPPrefs);
                 values.put(KEY_HEADS_UP_NOTIFICATIONS, profile._headsUpNotifications);
+                values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE, profile._deviceForceStopApplicationChange);
+                values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, profile._deviceForceStopApplicationPackageName);
 
                 // updating row
                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -1422,7 +1447,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_LOCK_DEVICE,
                                 KEY_DEVICE_CONNECT_TO_SSID,
                                 KEY_DEVICE_WIFI_AP_PREFS,
-                                KEY_HEADS_UP_NOTIFICATIONS
+                                KEY_HEADS_UP_NOTIFICATIONS,
+                                KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE,
+                                KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME
                         },
                         KEY_CHECKED + "=?",
                         new String[]{"1"}, null, null, null, null);
@@ -1486,7 +1513,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_SOUND)),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DURATION_NOTIFICATION_VIBRATE))) == 1,
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WIFI_AP_PREFS))),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE))),
+                                cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME))
                         );
                     } else
                         profile = null;
@@ -2412,6 +2441,11 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                         if (exportedDBObj.getVersion() < 1370) {
                                             values.put(KEY_HEADS_UP_NOTIFICATIONS, 0);
+                                        }
+
+                                        if (exportedDBObj.getVersion() < 1380) {
+                                            values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE, 0);
+                                            values.put(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, "-");
                                         }
 
                                         // Inserting Row do db z SQLiteOpenHelper

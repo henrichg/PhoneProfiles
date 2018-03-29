@@ -79,6 +79,8 @@ public class Profile {
     String _deviceConnectToSSID;
     int _deviceWiFiAPPrefs;
     int _headsUpNotifications;
+    int _deviceForceStopApplicationChange;
+    String _deviceForceStopApplicationPackageName;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -136,6 +138,8 @@ public class Profile {
     static final String PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS = "prf_pref_deviceAdaptiveBrightness";
     static final String PREF_PROFILE_DEVICE_WIFI_AP_PREFS = "prf_pref_deviceWiFiAPPrefs";
     static final String PREF_PROFILE_HEADS_UP_NOTIFICATIONS = "prf_pref_headsUpNotifications";
+    static final String PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE = "prf_pref_deviceForceStopApplicationChange";
+    static final String PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME = "prf_pref_deviceForceStopApplicationPackageName";
 
     static final HashMap<String, Boolean> defaultValuesBoolean;
     static {
@@ -196,6 +200,8 @@ public class Profile {
         defaultValuesString.put("prf_pref_deviceConnectToSSID", "^just_any^");
         defaultValuesString.put("prf_pref_deviceWiFiAPPrefs", "0");
         defaultValuesString.put("prf_pref_headsUpNotifications", "0");
+        defaultValuesString.put("prf_pref_deviceForceStopApplicationChange", "0");
+        defaultValuesString.put("prf_pref_deviceForceStopApplicationPackageName", "-");
     }
 
     static final int RINGERMODE_RING = 1;
@@ -368,7 +374,9 @@ public class Profile {
                    String durationNotificationSound,
                    boolean durationNotificationVibrate,
                    int deviceWiFiAPPrefs,
-                   int headsUpNotifications)
+                   int headsUpNotifications,
+                   int deviceForceStopApplicationChange,
+                   String deviceForceStopApplicationPackageName)
     {
         this._id = id;
         this._name = name;
@@ -424,6 +432,8 @@ public class Profile {
         this._deviceConnectToSSID = deviceConnectToSSID;
         this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
         this._headsUpNotifications = headsUpNotifications;
+        this._deviceForceStopApplicationChange = deviceForceStopApplicationChange;
+        this._deviceForceStopApplicationPackageName = deviceForceStopApplicationPackageName;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -482,7 +492,9 @@ public class Profile {
                    String durationNotificationSound,
                    boolean durationNotificationVibrate,
                    int deviceWiFiAPPrefs,
-                   int headsUpNotifications)
+                   int headsUpNotifications,
+                   int deviceForceStopApplicationChange,
+                   String deviceForceStopApplicationPackageName)
     {
         this._name = name;
         this._icon = icon;
@@ -537,6 +549,8 @@ public class Profile {
         this._deviceConnectToSSID = deviceConnectToSSID;
         this._deviceWiFiAPPrefs = deviceWiFiAPPrefs;
         this._headsUpNotifications = headsUpNotifications;
+        this._deviceForceStopApplicationChange = deviceForceStopApplicationChange;
+        this._deviceForceStopApplicationPackageName = deviceForceStopApplicationPackageName;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -598,6 +612,8 @@ public class Profile {
         this._deviceConnectToSSID = profile._deviceConnectToSSID;
         this._deviceWiFiAPPrefs = profile._deviceWiFiAPPrefs;
         this._headsUpNotifications = profile._headsUpNotifications;
+        this._deviceForceStopApplicationChange = profile._deviceForceStopApplicationChange;
+        this._deviceForceStopApplicationPackageName = profile._deviceForceStopApplicationPackageName;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
@@ -1330,6 +1346,8 @@ public class Profile {
         profile._deviceConnectToSSID = preferences.getString(PREF_PROFILE_DEVICE_CONNECT_TO_SSID, Profile.CONNECTTOSSID_JUSTANY);
         profile._deviceWiFiAPPrefs = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_WIFI_AP_PREFS, "0"));
         profile._headsUpNotifications = Integer.parseInt(preferences.getString(PREF_PROFILE_HEADS_UP_NOTIFICATIONS, "0"));
+        profile._deviceForceStopApplicationChange = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, "0"));
+        profile._deviceForceStopApplicationPackageName = preferences.getString(PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, "-");
 
         return profile;
     }
@@ -1394,7 +1412,9 @@ public class Profile {
                     profile._durationNotificationSound,
                     profile._durationNotificationVibrate,
                     profile._deviceWiFiAPPrefs,
-                    profile._headsUpNotifications);
+                    profile._headsUpNotifications,
+                    profile._deviceForceStopApplicationChange,
+                    profile._deviceForceStopApplicationPackageName);
 
             boolean zenModeMapped = false;
             if (profile._volumeRingerMode == 99) {
@@ -1492,6 +1512,11 @@ public class Profile {
                 mappedProfile._deviceWiFiAPPrefs = defaultProfile._deviceWiFiAPPrefs;
             if (profile._headsUpNotifications == 99)
                 mappedProfile._headsUpNotifications = defaultProfile._headsUpNotifications;
+            if (profile._deviceForceStopApplicationChange == 99)
+            {
+                mappedProfile._deviceForceStopApplicationChange = defaultProfile._deviceForceStopApplicationChange;
+                mappedProfile._deviceForceStopApplicationPackageName = defaultProfile._deviceForceStopApplicationPackageName;
+            }
 
             mappedProfile._iconBitmap = profile._iconBitmap;
             mappedProfile._preferencesIndicator = profile._preferencesIndicator;
@@ -1893,6 +1918,22 @@ public class Profile {
                 PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
                 PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
             }
+        }
+        else
+        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE))
+        {
+            //if (AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context.getApplicationContext()))
+            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            //else
+            //    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_EXTENDER_INSTALLED;
+        }
+        else
+        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE))
+        {
+            //if (AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context.getApplicationContext()))
+            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            //else
+            //    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_EXTENDER_INSTALLED;
         }
         else
             featurePresented = PPApplication.PREFERENCE_ALLOWED;

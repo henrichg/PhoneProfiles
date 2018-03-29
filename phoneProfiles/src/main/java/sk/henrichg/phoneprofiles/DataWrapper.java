@@ -144,7 +144,9 @@ public class DataWrapper {
                 Profile.defaultValuesString.get("prf_pref_durationNotificationSound"),
                 Profile.defaultValuesBoolean.get("prf_pref_durationNotificationVibrate"),
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_deviceWiFiAPPrefs")),
-                Integer.valueOf(Profile.defaultValuesString.get("prf_pref_headsUpNotifications"))
+                Integer.valueOf(Profile.defaultValuesString.get("prf_pref_headsUpNotifications")),
+                Integer.valueOf(Profile.defaultValuesString.get("prf_pref_deviceForceStopApplicationChange")),
+                Profile.defaultValuesString.get("prf_pref_deviceForceStopApplicationPackageName")
             );
     }
 
