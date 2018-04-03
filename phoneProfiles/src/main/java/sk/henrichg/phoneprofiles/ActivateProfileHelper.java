@@ -94,6 +94,7 @@ class ActivateProfileHelper {
     static final String PREF_MERGED_RING_NOTIFICATION_VOLUMES = "merged_ring_notification_volumes";
 
     private static final String ACTION_FORCE_STOP_INFO_START = "sk.henrichg.phoneprofilesplusextender.ACTION_FORCE_STOP_START";
+    private static final String EXTRA_APPLICATIONS = "extra_applications";
 
     private static void doExecuteForRadios(Context context, Profile profile)
     {
@@ -1451,7 +1452,7 @@ class ActivateProfileHelper {
         String applications = profile._deviceForceStopApplicationPackageName;
         if (!(applications.isEmpty() || (applications.equals("-")))) {
             Intent intent = new Intent(ACTION_FORCE_STOP_INFO_START);
-            intent.putExtra("extra_applications", applications);
+            intent.putExtra(EXTRA_APPLICATIONS, applications);
             context.sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
         }
     }
