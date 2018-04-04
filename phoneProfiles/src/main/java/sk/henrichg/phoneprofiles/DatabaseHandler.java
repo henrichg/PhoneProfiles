@@ -412,7 +412,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
                         String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
-                        //value|noChange|automatic|defaultProfile
+                        //value|noChange|automatic|sharedProfile
                         String[] splits = brightness.split("\\|");
 
                         if (splits[2].equals("1")) // automatic is set
@@ -456,7 +456,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
                     String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
-                    //value|noChange|automatic|defaultProfile
+                    //value|noChange|automatic|sharedProfile
                     String[] splits = brightness.split("\\|");
 
                     int perc = Integer.parseInt(splits[0]);
@@ -494,7 +494,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
                         String brightness = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_BRIGHTNESS));
 
-                        //value|noChange|automatic|defaultProfile
+                        //value|noChange|automatic|sharedProfile
                         String[] splits = brightness.split("\\|");
 
                         if (splits[2].equals("1")) // automatic is set
@@ -2006,7 +2006,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     if (!sharedProfile)
                         profileTypeChecked = KEY_DEVICE_CONNECT_TO_SSID + "!=\"" + Profile.CONNECTTOSSID_JUSTANY + "\"";
                     else
-                        profileTypeChecked = KEY_DEVICE_CONNECT_TO_SSID + "!=\"" + Profile.CONNECTTOSSID_DEFAULTPROFILE + "\"";
+                        profileTypeChecked = KEY_DEVICE_CONNECT_TO_SSID + "!=\"" + Profile.CONNECTTOSSID_SHAREDPROFILE + "\"";
                     whereString = " WHERE " + profileTypeChecked;
                 }
                 if (profileType == PTYPE_FORCE_STOP) {
@@ -2272,7 +2272,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                     if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
                                                         if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
                                                         {
-                                                            //value|noChange|automatic|defaultProfile
+                                                            //value|noChange|automatic|sharedProfile
                                                             String[] splits = value.split("\\|");
 
                                                             if (splits[2].equals("1")) // automatic is set
@@ -2288,7 +2288,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                 }
                                                 if (exportedDBObj.getVersion() < 1165) {
                                                     if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
-                                                        //value|noChange|automatic|defaultProfile
+                                                        //value|noChange|automatic|sharedProfile
                                                         String[] splits = value.split("\\|");
 
                                                         int perc = Integer.parseInt(splits[0]);
@@ -2304,7 +2304,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                 if (exportedDBObj.getVersion() < 1175) {
                                                     if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
                                                         if (android.os.Build.VERSION.SDK_INT < 21) {
-                                                            //value|noChange|automatic|defaultProfile
+                                                            //value|noChange|automatic|sharedProfile
                                                             String[] splits = value.split("\\|");
 
                                                             if (splits[2].equals("1")) // automatic is set

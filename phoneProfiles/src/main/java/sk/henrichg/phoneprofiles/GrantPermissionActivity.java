@@ -71,13 +71,13 @@ public class GrantPermissionActivity extends AppCompatActivity {
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
         //interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
-        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.DEFAULT_PROFILE_ID);
+        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.SHARED_PROFILE_ID);
 
         dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ false, 0);
-        if (profile_id != Profile.DEFAULT_PROFILE_ID)
+        if (profile_id != Profile.SHARED_PROFILE_ID)
             profile = dataWrapper.getProfileById(profile_id, false, false);
         else
-            profile = Profile.getDefaultProfile(getApplicationContext());
+            profile = Profile.getSharedProfile(getApplicationContext());
     }
 
     @Override

@@ -200,10 +200,10 @@ public class EditorProfileListFragment extends Fragment
                     case R.id.menu_delete_all_profiles:
                         deleteAllProfiles();
                         return true;
-                    /*case R.id.menu_default_profile:
+                    /*case R.id.menu_shared_profile:
                         // start preferences activity for default profile
                         Intent intent = new Intent(getActivity().getBaseContext(), ProfilePreferencesActivity.class);
-                        intent.putExtra(PPApplication.EXTRA_PROFILE_ID, PPApplication.DEFAULT_PROFILE_ID);
+                        intent.putExtra(PPApplication.EXTRA_PROFILE_ID, PPApplication.SHARED_PROFILE_ID);
                         intent.putExtra(PPApplication.EXTRA_NEW_PROFILE_MODE, EDIT_MODE_EDIT);
                         intent.putExtra(PPApplication.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
                         getActivity().startActivityForResult(intent, PPApplication.REQUEST_CODE_PROFILE_PREFERENCES);

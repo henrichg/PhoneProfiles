@@ -12,7 +12,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 
     //static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
     //static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
-    //static final String PREFS_NAME_DEFAULT_PROFILE = PPApplication.DEFAULT_PROFILE_PREFS_NAME;
+    //static final String PREFS_NAME_SHARED_PROFILE = PPApplication.SHARED_PROFILE_PREFS_NAME;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
         if (bundle != null)
             startupSource = bundle.getInt(PPApplication.EXTRA_STARTUP_SOURCE, 0);
 
-        if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+        if (startupSource == PPApplication.PREFERENCES_STARTUP_SOURCE_SHARED_PROFILE)
             return R.xml.default_profile_preferences;
         else
             return R.xml.profile_preferences;
@@ -67,7 +67,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
 
             setSummary(Profile.PREF_PROFILE_VOLUME_UNLINK_VOLUMES_APP_SETTINGS);
 
-            if (startupSource != PPApplication.PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE)
+            if (startupSource != PPApplication.PREFERENCES_STARTUP_SOURCE_SHARED_PROFILE)
             {
                 setSummary(Profile.PREF_PROFILE_NAME);
                 setSummary(Profile.PREF_PROFILE_DURATION);

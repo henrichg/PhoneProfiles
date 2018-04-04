@@ -507,13 +507,13 @@ public class EditorProfilesActivity extends AppCompatActivity
                             /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
                 }
                 else
-                if (profile_id == Profile.DEFAULT_PROFILE_ID)
+                if (profile_id == Profile.SHARED_PROFILE_ID)
                 {
                     // refresh activity for changes of default profile
                     GlobalGUIRoutines.reloadActivity(this, false);
 
-                    Profile defaultProfile = Profile.getDefaultProfile(getApplicationContext());
-                    Permissions.grantProfilePermissions(getApplicationContext(), defaultProfile, false,
+                    Profile sharedProfile = Profile.getSharedProfile(getApplicationContext());
+                    Permissions.grantProfilePermissions(getApplicationContext(), sharedProfile, false,
                             /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
 
                 }
@@ -576,7 +576,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 if (what == 1)
                     prefEdit = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE).edit();
                 else
-                    prefEdit = getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE).edit();
+                    prefEdit = getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE).edit();
                 prefEdit.clear();
                 //noinspection unchecked
                 Map<String, ?> entries = (Map<String, ?>) input.readObject();
@@ -813,7 +813,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 if (what == 1)
                     pref = getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
                 else
-                    pref = getSharedPreferences(PPApplication.DEFAULT_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE);
+                    pref = getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.commit();
                 output.writeObject(pref.getAll());

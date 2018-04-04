@@ -91,7 +91,7 @@ public class PPApplication extends Application {
 
     static final int PREFERENCES_STARTUP_SOURCE_ACTIVITY = 1;
     //static final int PREFERENCES_STARTUP_SOURCE_FRAGMENT = 2;
-    static final int PREFERENCES_STARTUP_SOURCE_DEFAUT_PROFILE = 3;
+    static final int PREFERENCES_STARTUP_SOURCE_SHARED_PROFILE = 3;
 
     static final String PROFILE_NOTIFICATION_CHANNEL = "phoneProfiles_activated_profile";
     static final String INFORMATION_NOTIFICATION_CHANNEL = "phoneProfiles_information";
@@ -109,7 +109,7 @@ public class PPApplication extends Application {
     static final int ABOUT_APPLICATION_DONATE_NOTIFICATION_ID = 700429;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
-    static final String DEFAULT_PROFILE_PREFS_NAME = "profile_preferences_default_profile"; //PPApplication.APPLICATION_PREFS_NAME;
+    static final String SHARED_PROFILE_PREFS_NAME = "profile_preferences_default_profile";
     static final String PERMISSIONS_PREFS_NAME = "permissions_list";
     static final String PERMISSIONS_STATUS_PREFS_NAME = "permissions_status";
     static final String WIFI_CONFIGURATION_LIST_PREFS_NAME = "wifi_configuration_list";
