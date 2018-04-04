@@ -943,7 +943,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE))),
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME)),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)))
+                                Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)))
                         );
                     }
                     cursor.close();
@@ -1094,7 +1094,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         profile._headsUpNotifications = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS)));
                         profile._deviceForceStopApplicationChange = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE)));
                         profile._deviceForceStopApplicationPackageName = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME));
-                        profile._activationByUserCount = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)));
+                        profile._activationByUserCount = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)));
                         // Adding contact to list
                         profileList.add(profile);
                     } while (cursor.moveToNext());
@@ -1536,7 +1536,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_HEADS_UP_NOTIFICATIONS))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE))),
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME)),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)))
+                                Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)))
                         );
                     } else
                         profile = null;
@@ -2063,6 +2063,81 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
     */
+
+    long getActivationByUserCount(long profileId) {
+        importExportLock.lock();
+        try {
+            long r = 0;
+            try {
+                startRunningCommand();
+
+                //SQLiteDatabase db = this.getReadableDatabase();
+                SQLiteDatabase db = getMyWritableDatabase();
+
+                Cursor cursor = db.query(TABLE_PROFILES,
+                        new String[]{KEY_ACTIVATION_BY_USER_COUNT},
+                        KEY_ID + "=?",
+                        new String[]{Long.toString(profileId)}, null, null, null, null);
+
+                if (cursor != null) {
+                    cursor.moveToFirst();
+                    r = Long.parseLong(cursor.getString(0));
+                    cursor.close();
+                } else
+                    r = 0;
+
+                //db.close();
+            } catch (Exception ignored) {
+            }
+            return r;
+        } finally {
+            stopRunningCommand();
+        }
+    }
+
+    void increaseActivationByUserCount(long profileId) {
+        long count = getActivationByUserCount(profileId);
+        ++count;
+
+        importExportLock.lock();
+        try {
+            try {
+                startRunningCommand();
+
+                //SQLiteDatabase db = this.getWritableDatabase();
+                SQLiteDatabase db = getMyWritableDatabase();
+
+                db.beginTransaction();
+                try {
+                    ContentValues values = new ContentValues();
+                    values.put(KEY_ACTIVATION_BY_USER_COUNT, count);
+
+                    db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
+                            new String[]{String.valueOf(profileId)});
+
+                    db.setTransactionSuccessful();
+                } catch (Exception e) {
+                    //Error in between database transaction
+                } finally {
+                    db.endTransaction();
+                }
+
+                //db.close();
+            } catch (Exception ignored) {
+            }
+        } finally {
+            stopRunningCommand();
+        }
+    }
+
+    void increaseActivationByUserCount(Profile profile) {
+        if (profile != null) {
+            long count = getActivationByUserCount(profile._id);
+            ++count;
+            profile._activationByUserCount = count;
+            increaseActivationByUserCount(profile._id);
+        }
+    }
 
 // SHORTCUTS ----------------------------------------------------------------------
 

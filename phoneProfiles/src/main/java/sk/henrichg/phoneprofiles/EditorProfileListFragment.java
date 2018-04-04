@@ -589,6 +589,7 @@ public class EditorProfileListFragment extends Fragment
     public void activateProfile(Profile profile)
     {
         activityDataWrapper.activateProfile(profile._id, PPApplication.STARTUP_SOURCE_EDITOR, getActivity());
+        DatabaseHandler.getInstance(activityDataWrapper.context).increaseActivationByUserCount(profile);
     }
 
     private void setProfileSelection(Profile profile) {
