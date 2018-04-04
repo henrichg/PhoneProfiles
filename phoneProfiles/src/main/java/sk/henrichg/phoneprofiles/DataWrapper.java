@@ -140,13 +140,14 @@ public class DataWrapper {
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_deviceWallpaperFor")),
                 Profile.defaultValuesBoolean.get("prf_pref_hideStatusBarIcon"),
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_lockDevice")),
-                Profile.CONNECTTOSSID_JUSTANY,
+                Profile.defaultValuesString.get("prf_pref_deviceConnectToSSID"),
                 Profile.defaultValuesString.get("prf_pref_durationNotificationSound"),
                 Profile.defaultValuesBoolean.get("prf_pref_durationNotificationVibrate"),
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_deviceWiFiAPPrefs")),
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_headsUpNotifications")),
                 Integer.valueOf(Profile.defaultValuesString.get("prf_pref_deviceForceStopApplicationChange")),
-                Profile.defaultValuesString.get("prf_pref_deviceForceStopApplicationPackageName")
+                Profile.defaultValuesString.get("prf_pref_deviceForceStopApplicationPackageName"),
+                0
             );
     }
 
