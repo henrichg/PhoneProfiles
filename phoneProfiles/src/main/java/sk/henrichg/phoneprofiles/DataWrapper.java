@@ -604,6 +604,9 @@ public class DataWrapper {
         // for startActivityForResult
         if (_activity != null)
         {
+            DatabaseHandler.getInstance(context).increaseActivationByUserCount(_profile);
+            setDynamicLauncherShortcuts();
+
             Intent returnIntent = new Intent();
             returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);
             returnIntent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
