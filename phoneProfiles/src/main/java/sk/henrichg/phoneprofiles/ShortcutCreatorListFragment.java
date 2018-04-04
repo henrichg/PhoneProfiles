@@ -219,7 +219,7 @@ public class ShortcutCreatorListFragment extends Fragment {
         ShortcutInfoCompat.Builder shortcutBuilder = new ShortcutInfoCompat.Builder(getActivity(), "profile_shortcut");
         shortcutBuilder.setIntent(shortcutIntent);
         shortcutBuilder.setShortLabel(profileName);
-        shortcutBuilder.setLongLabel(profileName);
+        shortcutBuilder.setLongLabel(getString(R.string.shortcut_activate_profile) + profileName);
 
         if (isIconResourceID)
         {
@@ -259,7 +259,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                 profileBitmap = BitmapManipulator.monochromeBitmap(profileBitmap, monochromeValue);
             }
             else
-                profileBitmap = BitmapManipulator.grayscaleBitmap(profileBitmap);
+                profileBitmap = BitmapManipulator.grayScaleBitmap(profileBitmap);
         }
 
         profileShortcutBitmap = combineImages(profileBitmap, shortcutOverlayBitmap);

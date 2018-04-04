@@ -308,6 +308,8 @@ public class PhoneProfilesService extends Service {
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
+                    PPApplication.logE("PhoneProfilesService.doForFirstStart", "doForFirstStart.2");
+
                     PPApplication.initRoot();
                     // grant root
                     //noinspection StatementWithEmptyBody
@@ -360,6 +362,8 @@ public class PhoneProfilesService extends Service {
                     LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
 
                     DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+
+                    dataWrapper.setDynamicLauncherShortcuts();
 
                     PPApplication.setApplicationStarted(appContext, true);
 

@@ -267,7 +267,7 @@ class BitmapManipulator {
         return bitmap;
     }
 
-    static Bitmap grayscaleBitmap(Bitmap bitmap)
+    static Bitmap grayScaleBitmap(Bitmap bitmap)
     {
         if (bitmap == null)
             return null;

@@ -1164,7 +1164,7 @@ public class Profile {
             }
             else
             if (monochrome)
-                _iconBitmap = BitmapManipulator.grayscaleBitmap(_iconBitmap);
+                _iconBitmap = BitmapManipulator.grayScaleBitmap(_iconBitmap);
         }
         else
         if (monochrome)

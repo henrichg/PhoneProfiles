@@ -63,7 +63,7 @@ public class PPApplication extends Application {
     private static final String logFilterTags = "##### PPApplication.onCreate"
                                             +"|PhoneProfilesService.onCreate"
                                             //+"|PhoneProfilesService.onStartCommand"
-                                            //+"|PhoneProfilesService.doForFirstStart"
+                                            +"|PhoneProfilesService.doForFirstStart"
                                             //+"|PhoneProfilesService.showProfileNotification"
                                             +"|PhoneProfilesService.onDestroy"
                                             +"|BootUpReceiver"
@@ -72,7 +72,8 @@ public class PPApplication extends Application {
 
                                             //+"|ProfileDurationAlarmBroadcastReceiver"
 
-                                            +"|ActivateProfilesHelper.executeForForceStopApplications"
+                                            //+"|ActivateProfilesHelper.executeForForceStopApplications"
+                                            +"|DataWrapper.setDynamicLauncherShortcuts"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
