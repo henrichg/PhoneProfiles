@@ -82,6 +82,7 @@ public class Profile {
     int _deviceForceStopApplicationChange;
     String _deviceForceStopApplicationPackageName;
     long _activationByUserCount;
+    int _deviceNetworkTypePrefs;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -141,6 +142,7 @@ public class Profile {
     static final String PREF_PROFILE_HEADS_UP_NOTIFICATIONS = "prf_pref_headsUpNotifications";
     static final String PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE = "prf_pref_deviceForceStopApplicationChange";
     static final String PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME = "prf_pref_deviceForceStopApplicationPackageName";
+    static final String PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS = "prf_pref_deviceNetworkTypePrefs";
 
     static final HashMap<String, Boolean> defaultValuesBoolean;
     static {
@@ -203,6 +205,7 @@ public class Profile {
         defaultValuesString.put("prf_pref_headsUpNotifications", "0");
         defaultValuesString.put("prf_pref_deviceForceStopApplicationChange", "0");
         defaultValuesString.put("prf_pref_deviceForceStopApplicationPackageName", "-");
+        defaultValuesString.put("prf_pref_deviceNetworkTypePrefs", "0");
     }
 
     static final int RINGERMODE_RING = 1;
@@ -393,7 +396,8 @@ public class Profile {
                    int headsUpNotifications,
                    int deviceForceStopApplicationChange,
                    String deviceForceStopApplicationPackageName,
-                   long activationByUserCount)
+                   long activationByUserCount,
+                   int deviceNetworkTypePrefs)
     {
         this._id = id;
         this._name = name;
@@ -451,6 +455,7 @@ public class Profile {
         this._headsUpNotifications = headsUpNotifications;
         this._deviceForceStopApplicationChange = deviceForceStopApplicationChange;
         this._deviceForceStopApplicationPackageName = deviceForceStopApplicationPackageName;
+        this._deviceNetworkTypePrefs = deviceNetworkTypePrefs;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -513,7 +518,8 @@ public class Profile {
                    int headsUpNotifications,
                    int deviceForceStopApplicationChange,
                    String deviceForceStopApplicationPackageName,
-                   long activationByUserCount)
+                   long activationByUserCount,
+                   int deviceNetworkTypePrefs)
     {
         this._name = name;
         this._icon = icon;
@@ -570,6 +576,7 @@ public class Profile {
         this._headsUpNotifications = headsUpNotifications;
         this._deviceForceStopApplicationChange = deviceForceStopApplicationChange;
         this._deviceForceStopApplicationPackageName = deviceForceStopApplicationPackageName;
+        this._deviceNetworkTypePrefs = deviceNetworkTypePrefs;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -634,6 +641,7 @@ public class Profile {
         this._headsUpNotifications = profile._headsUpNotifications;
         this._deviceForceStopApplicationChange = profile._deviceForceStopApplicationChange;
         this._deviceForceStopApplicationPackageName = profile._deviceForceStopApplicationPackageName;
+        this._deviceNetworkTypePrefs = profile._deviceNetworkTypePrefs;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
@@ -1370,6 +1378,7 @@ public class Profile {
         profile._headsUpNotifications = Integer.parseInt(preferences.getString(PREF_PROFILE_HEADS_UP_NOTIFICATIONS, "0"));
         profile._deviceForceStopApplicationChange = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, "0"));
         profile._deviceForceStopApplicationPackageName = preferences.getString(PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME, "-");
+        profile._deviceNetworkTypePrefs = Integer.parseInt(preferences.getString(PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, "0"));
 
         return profile;
     }
@@ -1437,7 +1446,8 @@ public class Profile {
                     profile._headsUpNotifications,
                     profile._deviceForceStopApplicationChange,
                     profile._deviceForceStopApplicationPackageName,
-                    profile._activationByUserCount);
+                    profile._activationByUserCount,
+                    profile._deviceNetworkTypePrefs);
 
             boolean zenModeMapped = false;
             if (profile._volumeRingerMode == SHARED_PROFILE_VALUE) {
@@ -1540,6 +1550,8 @@ public class Profile {
                 mappedProfile._deviceForceStopApplicationChange = sharedProfile._deviceForceStopApplicationChange;
                 mappedProfile._deviceForceStopApplicationPackageName = sharedProfile._deviceForceStopApplicationPackageName;
             }
+            if (profile._deviceNetworkTypePrefs == SHARED_PROFILE_VALUE)
+                mappedProfile._deviceNetworkTypePrefs = sharedProfile._deviceNetworkTypePrefs;
 
             mappedProfile._iconBitmap = profile._iconBitmap;
             mappedProfile._preferencesIndicator = profile._preferencesIndicator;
@@ -1957,6 +1969,16 @@ public class Profile {
             featurePresented = PPApplication.PREFERENCE_ALLOWED;
             //else
             //    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_EXTENDER_INSTALLED;
+        }
+        else
+        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS))
+        {
+            if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY))
+            {
+                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            }
+            else
+                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
             featurePresented = PPApplication.PREFERENCE_ALLOWED;

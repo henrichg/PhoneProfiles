@@ -1153,6 +1153,7 @@
     <string name="shortcut_activate_profile">Activate profile:</string>
     <string name="profile_preferences_deviceForceStopApplicationsInfo_summary">It works only when the screen is on and unlocked.</string>
     <string name="important_info_contact">If you have problems, questions and suggestions, write me an email:</string>
+    <string name="profile_preferences_deviceNetworkTypePrefs">(I) Mobile network type preferences</string>
 
     <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
     <!-- <string name="donation_paypal">PayPal</string> -->

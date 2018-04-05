@@ -691,6 +691,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 key.equals(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_NFC) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE) ||
+                key.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID)) {
             String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, false);
             if (!title.isEmpty()) {
@@ -704,6 +705,12 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, false);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -992,6 +999,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS) ||
             key.equals(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE) ||
             key.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE) ||
+            key.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS) ||
             key.equals(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID))
         {
             if (key.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA)) {

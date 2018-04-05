@@ -121,6 +121,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
             setSummary(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID);
             setSummary(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS);
             setSummary(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS);
+            setSummary(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS);
 
         //}
     }
