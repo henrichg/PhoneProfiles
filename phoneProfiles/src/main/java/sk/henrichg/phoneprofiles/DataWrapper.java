@@ -939,7 +939,7 @@ public class DataWrapper {
 
         return new ShortcutInfo.Builder(context, "profile_" + profile._id)
                 .setShortLabel(profile._name)
-                .setLongLabel(context.getString(R.string.shortcut_activate_profile) + profile._name)
+                .setLongLabel(/*context.getString(R.string.shortcut_activate_profile) + */profile._name)
                 .setIcon(Icon.createWithBitmap(profileBitmap))
                 .setIntent(shortcutIntent)
                 .build();
