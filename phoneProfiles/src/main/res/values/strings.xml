@@ -1154,6 +1154,9 @@
     <string name="profile_preferences_deviceForceStopApplicationsInfo_summary">It works only when the screen is on and unlocked.</string>
     <string name="important_info_contact">If you have problems, questions and suggestions, write me an email:</string>
     <string name="profile_preferences_deviceNetworkTypePrefs">(I) Mobile network type preferences</string>
+    <string name="profile_preferences_deviceCloseAllApplications">Close all applications</string>
+    <string name="array_pref_not_to_close">Not to close</string>
+    <string name="array_pref_close">Close</string>
 
     <!-- <string name="donation_google_android_market_description" tools:ignore="StringFormatCount">Google takes 30% off every donation.</string> -->
     <!-- <string name="donation_paypal">PayPal</string> -->

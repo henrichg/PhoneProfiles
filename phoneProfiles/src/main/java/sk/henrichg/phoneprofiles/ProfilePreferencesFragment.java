@@ -122,6 +122,7 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
             setSummary(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS);
             setSummary(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS);
             setSummary(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS);
+            setSummary(Profile.PREF_PROFILE_DEVICE_CLOSE_ALL_APPLICATIONS);
 
         //}
     }
