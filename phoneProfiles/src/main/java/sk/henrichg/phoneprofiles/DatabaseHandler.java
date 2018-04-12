@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1410;
+    private static final int DATABASE_VERSION = 1420;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -107,6 +107,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ACTIVATION_BY_USER_COUNT = "activationByUserCount";
     private static final String KEY_DEVICE_NETWORK_TYPE_PREFS = "deviceNetworkTypePrefs";
     private static final String KEY_DEVICE_CLOSE_ALL_APPLICATIONS = "deviceCloseAllApplications";
+    private static final String KEY_SCREEN_NIGHT_MODE = "screenNightMode";
 
     /*
     // profile type
@@ -241,7 +242,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME + " TEXT,"
                 + KEY_ACTIVATION_BY_USER_COUNT + " INTEGER,"
                 + KEY_DEVICE_NETWORK_TYPE_PREFS + " INTEGER,"
-                + KEY_DEVICE_CLOSE_ALL_APPLICATIONS + " INTEGER"
+                + KEY_DEVICE_CLOSE_ALL_APPLICATIONS + " INTEGER,"
+                + KEY_SCREEN_NIGHT_MODE + " INTEGER"
                 + ")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
@@ -719,6 +721,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_DEVICE_CLOSE_ALL_APPLICATIONS + "=0");
         }
 
+        if (oldVersion < 1420)
+        {
+            db.execSQL("ALTER TABLE " + TABLE_PROFILES + " ADD COLUMN " + KEY_SCREEN_NIGHT_MODE + " INTEGER");
+
+            db.execSQL("UPDATE " + TABLE_PROFILES + " SET " + KEY_SCREEN_NIGHT_MODE + "=0");
+        }
+
     }
 
     @Override
@@ -815,6 +824,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_ACTIVATION_BY_USER_COUNT, profile._activationByUserCount);
                 values.put(KEY_DEVICE_NETWORK_TYPE_PREFS, profile._deviceNetworkTypePrefs);
                 values.put(KEY_DEVICE_CLOSE_ALL_APPLICATIONS, profile._deviceCloseAllApplications);
+                values.put(KEY_SCREEN_NIGHT_MODE, profile._screenNightMode);
 
                 // Inserting Row
                 profile._id = db.insert(TABLE_PROFILES, null, values);
@@ -900,7 +910,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME,
                                 KEY_ACTIVATION_BY_USER_COUNT,
                                 KEY_DEVICE_NETWORK_TYPE_PREFS,
-                                KEY_DEVICE_CLOSE_ALL_APPLICATIONS
+                                KEY_DEVICE_CLOSE_ALL_APPLICATIONS,
+                                KEY_SCREEN_NIGHT_MODE
                         },
                         KEY_ID + "=?",
                         new String[]{String.valueOf(profile_id)}, null, null, null, null);
@@ -967,7 +978,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME)),
                                 Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE_PREFS))),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CLOSE_ALL_APPLICATIONS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CLOSE_ALL_APPLICATIONS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SCREEN_NIGHT_MODE)))
                         );
                     }
                     cursor.close();
@@ -1052,7 +1064,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME + "," +
                         KEY_ACTIVATION_BY_USER_COUNT + "," +
                         KEY_DEVICE_NETWORK_TYPE_PREFS + "," +
-                        KEY_DEVICE_CLOSE_ALL_APPLICATIONS +
+                        KEY_DEVICE_CLOSE_ALL_APPLICATIONS + "," +
+                        KEY_SCREEN_NIGHT_MODE +
                         " FROM " + TABLE_PROFILES + " ORDER BY " + KEY_PORDER;
 
                 //SQLiteDatabase db = this.getReadableDatabase();
@@ -1123,6 +1136,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         profile._activationByUserCount = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT)));
                         profile._deviceNetworkTypePrefs = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE_PREFS)));
                         profile._deviceCloseAllApplications = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CLOSE_ALL_APPLICATIONS)));
+                        profile._screenNightMode = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SCREEN_NIGHT_MODE)));
                         // Adding contact to list
                         profileList.add(profile);
                     } while (cursor.moveToNext());
@@ -1211,6 +1225,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 values.put(KEY_ACTIVATION_BY_USER_COUNT, profile._activationByUserCount);
                 values.put(KEY_DEVICE_NETWORK_TYPE_PREFS, profile._deviceNetworkTypePrefs);
                 values.put(KEY_DEVICE_CLOSE_ALL_APPLICATIONS, profile._deviceCloseAllApplications);
+                values.put(KEY_SCREEN_NIGHT_MODE, profile._screenNightMode);
 
                 // updating row
                 db.update(TABLE_PROFILES, values, KEY_ID + " = ?",
@@ -1501,7 +1516,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME,
                                 KEY_ACTIVATION_BY_USER_COUNT,
                                 KEY_DEVICE_NETWORK_TYPE_PREFS,
-                                KEY_DEVICE_CLOSE_ALL_APPLICATIONS
+                                KEY_DEVICE_CLOSE_ALL_APPLICATIONS,
+                                KEY_SCREEN_NIGHT_MODE
                         },
                         KEY_CHECKED + "=?",
                         new String[]{"1"}, null, null, null, null);
@@ -1570,7 +1586,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getString(cursor.getColumnIndex(KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME)),
                                 Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ACTIVATION_BY_USER_COUNT))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_NETWORK_TYPE_PREFS))),
-                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CLOSE_ALL_APPLICATIONS)))
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DEVICE_CLOSE_ALL_APPLICATIONS))),
+                                Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SCREEN_NIGHT_MODE)))
                         );
                     } else
                         profile = null;
@@ -2656,6 +2673,10 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                         if (exportedDBObj.getVersion() < 1410) {
                                             values.put(KEY_DEVICE_CLOSE_ALL_APPLICATIONS, 0);
+                                        }
+
+                                        if (exportedDBObj.getVersion() < 1420) {
+                                            values.put(KEY_SCREEN_NIGHT_MODE, 0);
                                         }
 
                                         // Inserting Row do db z SQLiteOpenHelper
