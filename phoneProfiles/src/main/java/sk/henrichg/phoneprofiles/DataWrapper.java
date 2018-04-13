@@ -952,26 +952,27 @@ public class DataWrapper {
             ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
 
             if (shortcutManager != null) {
-                List<Profile> countedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(true);
-                List<Profile> notCountedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(false);
+                final int limit = 5;
+                List<Profile> countedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(true, limit);
+                List<Profile> notCountedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(false, limit);
 
                 ArrayList<ShortcutInfo> shortcuts = new ArrayList<>();
 
                 for (Profile profile : countedProfiles) {
                     PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "countedProfile=" + profile._name);
                     profile.generateIconBitmap(context, monochrome, monochromeValue);
-                    shortcuts.add(0, createShortcutInfo(profile));
+                    shortcuts.add(createShortcutInfo(profile));
                 }
 
                 int shortcutsCount = countedProfiles.size();
-                if (shortcutsCount < 4) {
+                if (shortcutsCount < limit) {
                     for (Profile profile : notCountedProfiles) {
                         PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "notCountedProfile=" + profile._name);
                         profile.generateIconBitmap(context, monochrome, monochromeValue);
-                        shortcuts.add(0, createShortcutInfo(profile));
+                        shortcuts.add(createShortcutInfo(profile));
 
                         ++shortcutsCount;
-                        if (shortcutsCount == 4)
+                        if (shortcutsCount == limit)
                             break;
                     }
                 }
