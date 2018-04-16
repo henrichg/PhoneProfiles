@@ -239,62 +239,10 @@ public class PhoneProfilesService extends Service {
                 });
             }
 
-            if (screenOnOffReceiver != null)
-                appContext.unregisterReceiver(screenOnOffReceiver);
-            screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
-            IntentFilter intentFilter5 = new IntentFilter();
-            intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
-            intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
-            intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
-            appContext.registerReceiver(screenOnOffReceiver, intentFilter5);
-
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
-                if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, appContext)) {
-                    interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
-                    IntentFilter intentFilter11 = new IntentFilter();
-                    intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
-                    appContext.registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
-                }
-            }
-
-            if (phoneCallBroadcastReceiver != null)
-                appContext.unregisterReceiver(phoneCallBroadcastReceiver);
-            phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
-            IntentFilter intentFilter6 = new IntentFilter();
-            intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
-            intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-            appContext.registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
-
-            if (ringerModeChangeReceiver != null)
-                appContext.unregisterReceiver(ringerModeChangeReceiver);
-            ringerModeChangeReceiver = new RingerModeChangeReceiver();
-            IntentFilter intentFilter7 = new IntentFilter();
-            intentFilter7.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
-            appContext.registerReceiver(ringerModeChangeReceiver, intentFilter7);
-
-            if (wifiStateChangedBroadcastReceiver != null)
-                appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
-            wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
-            IntentFilter intentFilter8 = new IntentFilter();
-            intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-            appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
-
-            if (accessibilityServiceBroadcastReceiver != null)
-                appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
-            accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
-            IntentFilter intentFilter23 = new IntentFilter();
-            intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
-            appContext.registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
-                    PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
-
-            if (settingsContentObserver != null)
-                appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
-            //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
-            settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
-            appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
-
+            /*
+            registerReceivers();
             AboutApplicationJob.scheduleJob(getApplicationContext(), true);
+            */
 
             PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
@@ -364,6 +312,9 @@ public class PhoneProfilesService extends Service {
                     DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
 
                     dataWrapper.setDynamicLauncherShortcuts();
+
+                    registerReceivers();
+                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
                     PPApplication.setApplicationStarted(appContext, true);
 
@@ -466,6 +417,65 @@ public class PhoneProfilesService extends Service {
     public IBinder onBind(Intent intent)
     {
         return null;
+    }
+
+    private void registerReceivers() {
+        Context appContext = getApplicationContext();
+
+        if (screenOnOffReceiver != null)
+            appContext.unregisterReceiver(screenOnOffReceiver);
+        screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
+        IntentFilter intentFilter5 = new IntentFilter();
+        intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
+        intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
+        intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
+        appContext.registerReceiver(screenOnOffReceiver, intentFilter5);
+
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
+            if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, appContext)) {
+                interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
+                IntentFilter intentFilter11 = new IntentFilter();
+                intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
+                appContext.registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+            }
+        }
+
+        if (phoneCallBroadcastReceiver != null)
+            appContext.unregisterReceiver(phoneCallBroadcastReceiver);
+        phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
+        IntentFilter intentFilter6 = new IntentFilter();
+        intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+        intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+        appContext.registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
+
+        if (ringerModeChangeReceiver != null)
+            appContext.unregisterReceiver(ringerModeChangeReceiver);
+        ringerModeChangeReceiver = new RingerModeChangeReceiver();
+        IntentFilter intentFilter7 = new IntentFilter();
+        intentFilter7.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
+        appContext.registerReceiver(ringerModeChangeReceiver, intentFilter7);
+
+        if (wifiStateChangedBroadcastReceiver != null)
+            appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
+        wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
+        IntentFilter intentFilter8 = new IntentFilter();
+        intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
+
+        if (accessibilityServiceBroadcastReceiver != null)
+            appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
+        accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
+        IntentFilter intentFilter23 = new IntentFilter();
+        intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
+        appContext.registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
+                PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
+
+        if (settingsContentObserver != null)
+            appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
+        //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
+        settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
+        appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
     }
 
     // profile notification -------------------------------------------
