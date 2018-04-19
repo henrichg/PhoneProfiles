@@ -421,6 +421,7 @@ public class EditorProfileListFragment extends Fragment
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
         ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
+        activityDataWrapper.setDynamicLauncherShortcuts();
 
         onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
     }
@@ -506,6 +507,7 @@ public class EditorProfileListFragment extends Fragment
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
                     ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
+                    activityDataWrapper.setDynamicLauncherShortcuts();
 
                     onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 
