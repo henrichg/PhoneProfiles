@@ -184,9 +184,10 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
 
         List<Profile> newProfileList = dataWrapper.getNewProfileList(true,
                                             ApplicationPreferences.applicationWidgetListPrefIndicator(context));
-
-        dataWrapper.clearProfileList();
-        dataWrapper.setProfileList(newProfileList);
-        profileList = newProfileList;
+        if (dataWrapper != null) {
+            dataWrapper.clearProfileList();
+            dataWrapper.setProfileList(newProfileList);
+            profileList = newProfileList;
+        }
     }
 }
