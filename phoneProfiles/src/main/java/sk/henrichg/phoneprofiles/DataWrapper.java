@@ -939,9 +939,13 @@ public class DataWrapper {
         //noinspection ConstantConditions
         shortcutIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
 
+        String profileName = profile._name;
+        if (profileName.isEmpty())
+            profileName = " ";
+
         return new ShortcutInfo.Builder(context, "profile_" + profile._id)
-                .setShortLabel(profile._name)
-                .setLongLabel(/*context.getString(R.string.shortcut_activate_profile) + */profile._name)
+                .setShortLabel(profileName)
+                .setLongLabel(/*context.getString(R.string.shortcut_activate_profile) + */profileName)
                 .setIcon(Icon.createWithBitmap(profileBitmap))
                 .setIntent(shortcutIntent)
                 .build();

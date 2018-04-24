@@ -204,6 +204,8 @@ public class ShortcutCreatorListFragment extends Fragment {
             profileName = getResources().getString(R.string.profile_name_default);
             useCustomColor = false;
         }
+        if (profileName.isEmpty())
+            profileName = " ";
 
         Intent shortcutIntent = new Intent(getActivity().getApplicationContext(), BackgroundActivateProfileActivity.class);
         shortcutIntent.setAction(Intent.ACTION_MAIN);
