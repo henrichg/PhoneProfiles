@@ -68,6 +68,7 @@
                 android:background="?attr/selectableItemBackground"
                 tools:ignore="RelativeOverlap"/>
 
+            <!--
             <ImageView
                 android:id="@+id/profileicon_pref_dlg_helpIcon"
                 android:layout_width="wrap_content"
@@ -85,6 +86,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/menu_help"
                 android:focusable="true"/>
+            -->
 
         </RelativeLayout>
 
