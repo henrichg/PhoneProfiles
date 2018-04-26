@@ -50,7 +50,9 @@ public class PPApplication extends Application {
     static final String romManufacturer = getROMManufacturer();
     static String PACKAGE_NAME;
 
-    static final int VERSION_CODE_EXTENDER = 62;
+    static final int VERSION_CODE_EXTENDER_1_0_4 = 60;
+    static final int VERSION_CODE_EXTENDER_2_0 = 70;
+    static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_2_0;
 
     public static final boolean exactAlarms = true;
 
