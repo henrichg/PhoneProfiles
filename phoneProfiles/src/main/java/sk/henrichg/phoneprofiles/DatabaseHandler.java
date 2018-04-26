@@ -2016,7 +2016,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 }
 
                                 if (!isIconResourceId.equals("1")) {
-                                    Uri imageUri = ImageViewPreference.getImageContentUri(context, iconIdentifier);
+                                    Uri imageUri = WallpaperViewPreference.getImageContentUri(context, iconIdentifier);
                                     if (imageUri != null)
                                         values.put(KEY_ICON, imageUri.toString() + "|" +
                                                 isIconResourceId + "|" +
@@ -2031,7 +2031,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             if (wallpaperChange == 1) {
                                 try {
                                     String[] splits = wallpaper.split("\\|");
-                                    Uri imageUri = ImageViewPreference.getImageContentUri(context, splits[0]);
+                                    Uri imageUri = WallpaperViewPreference.getImageContentUri(context, splits[0]);
                                     if (imageUri != null)
                                         values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
                                     else {

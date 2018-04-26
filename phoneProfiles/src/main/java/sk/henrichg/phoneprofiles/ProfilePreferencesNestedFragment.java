@@ -1607,7 +1607,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 }
             }
         }
-        if (requestCode == ImageViewPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
+        if (requestCode == WallpaperViewPreference.RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null)
         {
             //Uri selectedImage = data.getData();
             String  d = data.getDataString();
@@ -1623,9 +1623,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     }
                 }
 
-                if (ProfilePreferencesFragment.changedImageViewPreference != null) {
-                    ProfilePreferencesFragment.changedImageViewPreference.setImageIdentifier(selectedImage.toString());
-                    ProfilePreferencesFragment.changedImageViewPreference = null;
+                if (ProfilePreferencesFragment.changedWallpaperViewPreference != null) {
+                    ProfilePreferencesFragment.changedWallpaperViewPreference.setImageIdentifier(selectedImage.toString());
+                    ProfilePreferencesFragment.changedWallpaperViewPreference = null;
                 }
             }
         }

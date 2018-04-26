@@ -22,7 +22,7 @@ import android.widget.ImageView;
 
 import java.io.File;
 
-public class ImageViewPreference extends Preference {
+public class WallpaperViewPreference extends Preference {
 
     private String imageIdentifier;
     private Bitmap bitmap;
@@ -31,7 +31,7 @@ public class ImageViewPreference extends Preference {
 
     static final int RESULT_LOAD_IMAGE = 1970;
 
-    public ImageViewPreference(Context context, AttributeSet attrs)
+    public WallpaperViewPreference(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
@@ -130,7 +130,7 @@ public class ImageViewPreference extends Preference {
             Resources resources = prefContext.getResources();
             int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-            bitmap = BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, prefContext);
+            bitmap = BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, false, prefContext);
         }
     }
 
@@ -166,7 +166,7 @@ public class ImageViewPreference extends Preference {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
 
-            ProfilePreferencesFragment.setChangedImageViewPreference(this);
+            ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
             ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
         } catch (ActivityNotFoundException e) {
             try {
@@ -175,7 +175,7 @@ public class ImageViewPreference extends Preference {
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setType("image/*");
 
-                ProfilePreferencesFragment.setChangedImageViewPreference(this);
+                ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
                 ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
             } catch (Exception ignored) {}
         }

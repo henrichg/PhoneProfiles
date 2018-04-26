@@ -238,7 +238,7 @@ public class ShortcutCreatorListFragment extends Fragment {
             Resources resources = getResources();
             int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-            profileBitmap = BitmapManipulator.resampleBitmapUri(iconIdentifier, width, height, getActivity().getApplicationContext());
+            profileBitmap = BitmapManipulator.resampleBitmapUri(iconIdentifier, width, height, true, getActivity().getApplicationContext());
             if (profileBitmap == null) {
                 int iconResource = R.drawable.ic_profile_default;
                 profileBitmap = BitmapFactory.decodeResource(getResources(), iconResource);

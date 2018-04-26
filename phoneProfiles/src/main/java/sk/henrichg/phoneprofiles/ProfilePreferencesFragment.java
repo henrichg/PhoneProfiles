@@ -6,7 +6,7 @@ import android.os.Bundle;
 public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
                                         implements SharedPreferences.OnSharedPreferenceChangeListener
 {
-    public static ImageViewPreference changedImageViewPreference;
+    public static WallpaperViewPreference changedWallpaperViewPreference;
     public static ProfileIconPreference changedProfileIconPreference;
     public static ApplicationsDialogPreference applicationsDialogPreference;
 
@@ -128,9 +128,9 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
         //}
     }
 
-    static public void setChangedImageViewPreference(ImageViewPreference changedImageViewPref)
+    static public void setChangedWallpaperViewPreference(WallpaperViewPreference changedImageViewPref)
     {
-        changedImageViewPreference = changedImageViewPref;
+        changedWallpaperViewPreference = changedImageViewPref;
     }
 
     static public void setChangedProfileIconPreference(ProfileIconPreference changedProfileIconPref)
