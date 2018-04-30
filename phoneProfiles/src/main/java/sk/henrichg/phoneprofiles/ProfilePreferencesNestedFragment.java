@@ -533,7 +533,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(Profile.PREF_PROFILE_AFTER_DURATION_DO) ||
             key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
             key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_SOUND) ||
-            key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_SOUND)) {
+            key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE)) {
             String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION, false);
             String afterDurationDoTitle = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_AFTER_DURATION_DO, false);
             if (!title.isEmpty()) {
@@ -565,7 +565,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
         if (key.equals(Profile.PREF_PROFILE_VOLUME_RINGER_MODE) ||
                 key.equals(Profile.PREF_PROFILE_VOLUME_ZEN_MODE) ||
-                key.equals(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH) ||
                 key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING)) {
             String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, false);
             if (!title.isEmpty()) {
@@ -583,12 +582,6 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 summary = summary + title;
             }
             title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, false);
-            if (!title.isEmpty()) {
-                _bold = true;
-                if (!summary.isEmpty()) summary = summary +" • ";
-                summary = summary + title;
-            }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, false);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -679,6 +672,30 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
             //_bold = _bold || isBold(Profile.PREF_PROFILE_SOUND_ALARM);
             preferenceScreen = prefMng.findPreference("prf_pref_soundsCategory");
+        }
+
+        if (key.equals(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH) ||
+            key.equals(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING) ||
+            key.equals(Profile.PREF_PROFILE_SOUND_ON_TOUCH)) {
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_ON_TOUCH, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING, false);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            preferenceScreen = prefMng.findPreference("prf_pref_touchEffectsCategory");
         }
 
         if (key.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE) ||
@@ -1125,7 +1142,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING) ||
             key.equals(Profile.PREF_PROFILE_DEVICE_WALLPAPER_FOR) ||
             key.equals(Profile.PREF_PROFILE_LOCK_DEVICE) ||
-            key.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS))
+            key.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS) ||
+            key.equals(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING) ||
+            key.equals(Profile.PREF_PROFILE_SOUND_ON_TOUCH))
         {
             int canChange = PPApplication.PREFERENCE_ALLOWED;
             if (key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
