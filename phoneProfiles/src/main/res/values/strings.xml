@@ -1159,6 +1159,8 @@
     <string name="profile_preferences_deviceCloseAllApplicationsInfo_summary">Simulates press of Home button in navigation bar.</string>
     <string name="profileicon_pref_dialog_custom_icon_image_too_large">Custom icon image is too large. Allowed is max.</string>
     <string name="profile_preferences_category_touchEffects">Touch effects</string>
+    <string name="profile_preferences_soundOnTouch">Sound on touch</string>
+    <string name="profile_preferences_dtmfToneWhenDialing">DTMF tone when dialing</string>
 
     <!-- <string name="profile_preferences_screenNightMode">Night mode</string>
     <string name="array_pref_screenNightMode_automatic">Automatic</string> -->
