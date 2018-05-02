@@ -694,6 +694,12 @@ public class PhoneProfilesService extends Service {
             try {
                 Notification notification = notificationBuilder.build();
 
+                if (Build.VERSION.SDK_INT < 26) {
+                    notification.flags &= ~Notification.FLAG_SHOW_LIGHTS;
+                    notification.ledOnMS = 0;
+                    notification.ledOffMS = 0;
+                }
+
                 if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(dataWrapper.context)) {
                     //notification.flags |= Notification.FLAG_NO_CLEAR;
                     notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
