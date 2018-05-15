@@ -59,6 +59,7 @@ public class Permissions {
     static final String EXTRA_GRANT_TYPE = "grant_type";
     static final String EXTRA_PERMISSION_TYPES = "permission_types";
     static final String EXTRA_ONLY_NOTIFICATION = "only_notification";
+    static final String EXTRA_FORCE_GRANT = "force_grant";
     //static final String EXTRA_FOR_GUI = "for_gui";
     //static final String EXTRA_MONOCHROME = "monochrome";
     //static final String EXTRA_MONOCHROME_VALUE = "monochrome_value";
@@ -973,6 +974,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_WALLPAPER);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     wallpaperViewPreference = preference;
                     context.startActivity(intent);
                 } catch (Exception e) {
@@ -999,6 +1001,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_CUSTOM_PROFILE_ICON);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     profileIconPreference = preference;
                     context.startActivity(intent);
                 } catch (Exception e) {
@@ -1023,6 +1026,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_BRIGHTNESS_DIALOG);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     brightnessDialogPreference = preference;
                     context.startActivity(intent);
                 } catch (Exception e) {
@@ -1049,6 +1053,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_EXPORT);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     editorActivity = editor;
                     context.startActivity(intent);
                 } catch (Exception e) {
@@ -1076,6 +1081,7 @@ public class Permissions {
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     editorActivity = editor;
                     context.startActivity(intent);
                 } catch (Exception e) {
@@ -1102,6 +1108,7 @@ public class Permissions {
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_RINGTONE_PREFERENCE);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
+                    intent.putExtra(EXTRA_FORCE_GRANT, true);
                     ringtonePreference = preference;
                     context.startActivity(intent);
                 } catch (Exception e) {
