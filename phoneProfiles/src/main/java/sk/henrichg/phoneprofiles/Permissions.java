@@ -81,14 +81,19 @@ public class Permissions {
     private static final String PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION = "show_request_draw_overlays_permission";
 
     private static final String PREF_PERMISSIONS_CHANGED = "permissionsChanged";
+
+    // permission groups
     private static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSION = "writeSystemSettingsPermission";
     private static final String PREF_NOTIFICATION_POLICY_PERMISSION = "notificationPolicyPermission";
     private static final String PREF_DRAW_OVERLAY_PERMISSION= "drawOverlayPermission";
     private static final String PREF_CALENDAR_PERMISSION = "calendarPermission";
+    private static final String PREF_CAMERA_PERMISSION = "cameraPermission";
     private static final String PREF_CONTACTS_PERMISSION = "contactsPermission";
     private static final String PREF_LOCATION_PERMISSION = "locationPermission";
-    private static final String PREF_SMS_PERMISSION = "smsPermission";
+    private static final String PREF_MICROPHONE_PERMISSION = "microphonePermission";
     private static final String PREF_PHONE_PERMISSION = "phonePermission";
+    private static final String PREF_SENSORS_PERMISSION = "sensorsPermission";
+    private static final String PREF_SMS_PERMISSION = "smsPermission";
     private static final String PREF_STORAGE_PERMISSION = "storagePermission";
 
     static class PermissionType implements Parcelable {
@@ -859,6 +864,39 @@ public class Permissions {
             return true;
     }
 
+    static boolean checkCamera(Context context) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 23) {
+                return true;
+            } else
+                return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    static boolean checkMicrophone(Context context) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 23) {
+                return true;
+            } else
+                return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    static boolean checkSensors(Context context) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 23) {
+                return true;
+            } else
+                return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
                                                   /*boolean forGUI, boolean monochrome, int monochromeValue,*/
                                                   int startupSource, /*boolean interactive,*/ Activity activity,
@@ -1249,10 +1287,13 @@ public class Permissions {
         editor.putBoolean(PREF_NOTIFICATION_POLICY_PERMISSION, (mNotificationManager != null) && (mNotificationManager.isNotificationPolicyAccessGranted()));
         editor.putBoolean(PREF_DRAW_OVERLAY_PERMISSION, Settings.canDrawOverlays(context));
         editor.putBoolean(PREF_CALENDAR_PERMISSION, Permissions.checkCalendar(context));
+        editor.putBoolean(PREF_CAMERA_PERMISSION, Permissions.checkCamera(context));
         editor.putBoolean(PREF_CONTACTS_PERMISSION, Permissions.checkContacts(context));
         editor.putBoolean(PREF_LOCATION_PERMISSION, Permissions.checkLocation(context));
-        editor.putBoolean(PREF_SMS_PERMISSION, Permissions.checkSMS(context));
+        editor.putBoolean(PREF_MICROPHONE_PERMISSION, Permissions.checkMicrophone(context));
         editor.putBoolean(PREF_PHONE_PERMISSION, Permissions.checkPhone(context));
+        editor.putBoolean(PREF_SENSORS_PERMISSION, Permissions.checkSensors(context));
+        editor.putBoolean(PREF_SMS_PERMISSION, Permissions.checkSMS(context));
         editor.putBoolean(PREF_STORAGE_PERMISSION, Permissions.checkStorage(context));
 
         editor.putBoolean(PREF_PERMISSIONS_CHANGED, permissionsChanged);
@@ -1315,6 +1356,21 @@ public class Permissions {
     static boolean getStoragePermission(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_STATUS_PREFS_NAME, Context.MODE_PRIVATE);
         return preferences.getBoolean(PREF_STORAGE_PERMISSION, false);
+    }
+
+    static boolean getCameraPermission(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_STATUS_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_CAMERA_PERMISSION, false);
+    }
+
+    static boolean getMicrophonePermission(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_STATUS_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_MICROPHONE_PERMISSION, false);
+    }
+
+    static boolean getSensorsPermission(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_STATUS_PREFS_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREF_SENSORS_PERMISSION, false);
     }
 
 }
