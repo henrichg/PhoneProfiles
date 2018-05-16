@@ -195,7 +195,7 @@ public class PPApplication extends Application {
                 .build();
 
         Fabric.with(getApplicationContext(), crashlyticsKit);
-        // Crashlytics.logException(exception); -- this log will be associated with crash log.
+        // Crashlytics.getInstance().core.logException(exception); -- this log will be associated with crash log.
 
         // set up ANR-WatchDog
         ANRWatchDog anrWatchDog = new ANRWatchDog();
@@ -203,7 +203,7 @@ public class PPApplication extends Application {
         anrWatchDog.setANRListener(new ANRWatchDog.ANRListener() {
             @Override
             public void onAppNotResponding(ANRError error) {
-                Crashlytics.logException(error);
+                Crashlytics.getInstance().core.logException(error);
             }
         });
         anrWatchDog.start();
