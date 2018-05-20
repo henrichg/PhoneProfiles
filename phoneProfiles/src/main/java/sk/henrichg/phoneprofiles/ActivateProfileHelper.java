@@ -479,8 +479,19 @@ class ActivateProfileHelper {
         return (ringerMode == Profile.RINGERMODE_VIBRATE);
     }
 
-    private static boolean isAudibleSystemRingerMode(AudioManager audioManager) {
-        return audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
+    private static boolean isAudibleSystemRingerMode(AudioManager audioManager, Context context) {
+        int ringerMode = audioManager.getRingerMode();
+        if (ringerMode != AudioManager.RINGER_MODE_NORMAL) {
+            if (ringerMode == AudioManager.RINGER_MODE_SILENT) {
+                int zenMode = getSystemZenMode(context, -1);
+                return (zenMode == ActivateProfileHelper.ZENMODE_PRIORITY) ||
+                        (zenMode == ActivateProfileHelper.ZENMODE_ALL);
+            }
+            else
+                return false;
+        }
+        else
+            return true;
     }
 
     /*
@@ -580,7 +591,7 @@ class ActivateProfileHelper {
         //int zenMode = getZenMode(context);
 
         //if (isAudibleRinging(ringerMode, zenMode))
-        if (isAudibleSystemRingerMode(audioManager) || (ringerMode == 0)) {
+        if (isAudibleSystemRingerMode(audioManager, context) || (ringerMode == 0)) {
             // test only system ringer mode
 
             //if (Permissions.checkAccessNotificationPolicy(context)) {
