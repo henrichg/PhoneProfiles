@@ -119,11 +119,12 @@ public class ProfileIconPreference extends DialogPreference {
         GridView gridView = layout.findViewById(R.id.profileicon_pref_dlg_gridview);
         adapter = new ProfileIconPreferenceAdapter(prefContext, imageIdentifier, isImageResourceID, useCustomColor, customColor);
         gridView.setAdapter(adapter);
-        gridView.setSelection(ProfileIconPreferenceAdapter.getImageResourcePosition(imageIdentifier, prefContext));
+        gridView.setSelection(ProfileIconPreferenceAdapter.getImageResourcePosition(imageIdentifier/*, prefContext*/));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                setImageIdentifierAndType(prefContext.getResources().getResourceEntryName(Profile.profileIconId[position]),
+                setImageIdentifierAndType(/*prefContext.getResources().getResourceEntryName(Profile.profileIconId[position]),*/
+                        ProfileIconPreferenceAdapter.getImageResourceName(position),
                         true, false);
                 adapter.imageIdentifierAndTypeChanged(imageIdentifier, isImageResourceID);
                 updateIcon(true);
@@ -232,7 +233,7 @@ public class ProfileIconPreference extends DialogPreference {
         try {
             customColor = Integer.valueOf(splits[3]);
         } catch (Exception e) {
-            customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier, prefContext);
+            customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier/*, prefContext*/);
         }
 
         if (!isImageResourceID)
@@ -268,7 +269,7 @@ public class ProfileIconPreference extends DialogPreference {
             try {
                 customColor = Integer.valueOf(splits[3]);
             } catch (Exception e) {
-                customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier, prefContext);
+                customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier/*, prefContext*/);
             }
 
             if (!isImageResourceID)
@@ -410,7 +411,7 @@ public class ProfileIconPreference extends DialogPreference {
 
     private void showCustomColorChooser() {
         ProfileIconColorChooserDialog mColorDialog = new ProfileIconColorChooserDialog(prefContext, this, useCustomColor, customColor,
-                ProfileIconPreferenceAdapter.getIconColor(imageIdentifier, prefContext));
+                ProfileIconPreferenceAdapter.getIconColor(imageIdentifier/*, prefContext*/));
         mColorDialog.show();
         /*
         mColorDialog = new ColorChooserDialog.Builder(prefContext, R.string.colorChooser_pref_dialog_title)
