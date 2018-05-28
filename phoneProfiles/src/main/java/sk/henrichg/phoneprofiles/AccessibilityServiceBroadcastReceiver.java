@@ -103,7 +103,8 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    static boolean isEnabled(Context context, int version) {
+    static boolean isEnabled(Context context,
+                             @SuppressWarnings("SameParameterValue") int version) {
         int extenderVersion = isExtenderInstalled(context);
         boolean enabled = false;
         if (extenderVersion >= version)

@@ -2410,7 +2410,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
         importExportLock.unlock();
     }
 
-    private boolean tableExists(String tableName, SQLiteDatabase db)
+    private boolean tableExists(@SuppressWarnings("SameParameterValue") String tableName,
+                                SQLiteDatabase db)
     {
         boolean tableExists = false;
 

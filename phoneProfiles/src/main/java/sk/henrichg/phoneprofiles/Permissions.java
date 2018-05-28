@@ -471,10 +471,7 @@ public class Permissions {
                 } else
                     return true;
             } else {
-                if (profile._deviceWallpaperChange != 0) {
-                    return hasPermission(context, permission.READ_EXTERNAL_STORAGE);
-                } else
-                    return true;
+                return profile._deviceWallpaperChange == 0 || hasPermission(context, permission.READ_EXTERNAL_STORAGE);
             }
         } catch (Exception e) {
             return false;
@@ -865,7 +862,7 @@ public class Permissions {
             return true;
     }
 
-    static boolean checkCamera(Context context) {
+    static boolean checkCamera(@SuppressWarnings("unused") Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 return true;
@@ -876,7 +873,7 @@ public class Permissions {
         }
     }
 
-    static boolean checkMicrophone(Context context) {
+    static boolean checkMicrophone(@SuppressWarnings("unused") Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 return true;
@@ -887,7 +884,7 @@ public class Permissions {
         }
     }
 
-    static boolean checkSensors(Context context) {
+    static boolean checkSensors(@SuppressWarnings("unused") Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 return true;

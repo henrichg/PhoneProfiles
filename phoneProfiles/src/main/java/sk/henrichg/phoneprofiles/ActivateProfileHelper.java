@@ -7,7 +7,6 @@ import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.UiModeManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
@@ -1076,10 +1075,7 @@ class ActivateProfileHelper {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context)) {
-                if (notCheckAccess)
-                    return true;
-                else
-                    return Permissions.checkAccessNotificationPolicy(context);
+                return notCheckAccess || Permissions.checkAccessNotificationPolicy(context);
             }
             else
                 return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
@@ -2637,7 +2633,8 @@ class ActivateProfileHelper {
     }
     */
 
-    static boolean telephonyServiceExists(/*Context context, */String preference) {
+    static boolean telephonyServiceExists(/*Context context, */
+            @SuppressWarnings("SameParameterValue") String preference) {
         try {
             Object serviceManager = PPApplication.getServiceManager("phone");
             if (serviceManager != null) {
@@ -2714,7 +2711,8 @@ class ActivateProfileHelper {
         }
     }
 
-    static boolean wifiServiceExists(/*Context context, */String preference) {
+    static boolean wifiServiceExists(/*Context context, */
+            @SuppressWarnings("SameParameterValue") String preference) {
         try {
             Object serviceManager = PPApplication.getServiceManager("wifi");
             if (serviceManager != null) {

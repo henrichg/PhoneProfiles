@@ -419,7 +419,7 @@ class GlobalGUIRoutines {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
     }
 
-    static Point getRealScreenSize(Context context) {
+    private static Point getRealScreenSize(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
             Display display = windowManager.getDefaultDisplay();
@@ -436,28 +436,6 @@ class GlobalGUIRoutines {
             }*/
 
             return size;
-        }
-        else
-            return null;
-    }
-
-    static Point getNavigationBarSize(Context context) {
-        Point appUsableSize = getAppUsableScreenSize(context);
-        Point realScreenSize = getRealScreenSize(context);
-
-        if ((appUsableSize != null) && (realScreenSize != null)) {
-            // navigation bar on the right
-            if (appUsableSize.x < realScreenSize.x) {
-                return new Point(realScreenSize.x - appUsableSize.x, appUsableSize.y);
-            }
-
-            // navigation bar at the bottom
-            if (appUsableSize.y < realScreenSize.y) {
-                return new Point(appUsableSize.x, realScreenSize.y - appUsableSize.y);
-            }
-
-            // navigation bar is not present
-            return new Point();
         }
         else
             return null;

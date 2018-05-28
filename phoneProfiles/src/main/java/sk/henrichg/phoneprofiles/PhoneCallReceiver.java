@@ -48,13 +48,21 @@ public abstract class PhoneCallReceiver extends BroadcastReceiver {
 
     //Derived classes should override these to respond to specific events of interest
     protected abstract boolean onStartReceive();
+    @SuppressWarnings("unused")
     protected abstract void onIncomingCallStarted(String number, Date start);
+    @SuppressWarnings("unused")
     protected abstract void onOutgoingCallStarted(String number, Date start);
+    @SuppressWarnings("unused")
     protected abstract void onOutgoingCallAnswered(String number, Date start);
+    @SuppressWarnings("unused")
     protected abstract void onIncomingCallAnswered(String number, Date start);
+    @SuppressWarnings("unused")
     protected abstract void onIncomingCallEnded(String number, Date start, Date end);
+    @SuppressWarnings("unused")
     protected abstract void onOutgoingCallEnded(String number, Date start, Date end);
+    @SuppressWarnings("unused")
     protected abstract void onMissedCall(String number, Date start);
+    @SuppressWarnings("EmptyMethod")
     protected abstract void onEndReceive();
 
     //Deals with actual events

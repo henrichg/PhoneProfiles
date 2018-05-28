@@ -18,7 +18,6 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -328,7 +327,8 @@ public class DataWrapper {
         return profile;
     }
 
-    void fillPredefinedProfileList(boolean generateIcons, boolean generateIndicators)
+    void fillPredefinedProfileList(@SuppressWarnings("SameParameterValue") boolean generateIcons,
+                                   boolean generateIndicators)
     {
         clearProfileList();
         DatabaseHandler.getInstance(context).deleteAllProfiles();
@@ -528,7 +528,9 @@ public class DataWrapper {
         clearProfileList();
     }
 
-    void refreshProfileIcon(Profile profile, boolean generateIcon, boolean generateIndicators) {
+    void refreshProfileIcon(Profile profile,
+                            @SuppressWarnings("SameParameterValue") boolean generateIcon,
+                            boolean generateIndicators) {
         if (profile != null) {
             boolean isIconResourceID = profile.getIsIconResourceID();
             String iconIdentifier = profile.getIconIdentifier();
