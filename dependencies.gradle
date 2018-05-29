@@ -2,10 +2,11 @@
 // 2100 = not show Activator and Editor target helps
 // 2500 = show target helps for shared profile toolbar item
 // 2700 = start About application alarm for notification "Please donate me."
+// 2900 = updated privacy policy
 
 ext.ppVersions = [
     publishVersion: '4.6b',
-    publishVersionCode: 2752,
+    publishVersionCode: 2753,
 
     minSdk: 19,
     targetSdk: 27,

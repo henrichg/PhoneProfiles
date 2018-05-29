@@ -13,7 +13,7 @@ import android.support.v4.content.ContextCompat;
 class ImportantInfoNotification {
 
     // this version code must by <= version code in manifest
-    static final int VERSION_CODE_FOR_NEWS = 2700;
+    static final int VERSION_CODE_FOR_NEWS = 2752;
 
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START = "show_info_notification_on_start";
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION = "show_info_notification_on_start_version";
@@ -53,7 +53,7 @@ class ImportantInfoNotification {
         boolean afterInstall = savedVersionCode == 0;
 
         if (newsLatest) {
-            news = false;
+            news = true;
         }
 
         if (news1634) {

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -64,21 +65,43 @@ public class ImportantInfoActivity extends AppCompatActivity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             versionCode = pInfo.versionCode;
+            PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "versionCode="+versionCode);
         } catch (Exception ignored) {
         }
 
         boolean news = false;
         boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
+        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "newsLatest="+newsLatest);
         boolean news2690 = ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2690);
         boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1634="+news1634);
         boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1622="+news1622);
 
         //noinspection StatementWithEmptyBody
         if (newsLatest) {
-            // empty this, for switch off news
+            // move this to newXXX, for switch off news
+            news = true;
+            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
+            infoText1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "https://sites.google.com/site/phoneprofiles/home/privacy-policy";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    try {
+                        startActivity(Intent.createChooser(i, getString(R.string.web_browser_chooser)));
+                    } catch (Exception ignored) {}
+                }
+            });
         }
         else {
-            // empty this, for switch off news
+            // move this to newXXX, for switch off news
+            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files);
+            infoText1.setVisibility(View.GONE);
+            infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
+            infoText1.setVisibility(View.GONE);
         }
 
         if (news2690) {
