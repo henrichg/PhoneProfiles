@@ -269,8 +269,7 @@ public class PhoneProfilesService extends Service {
                     PPApplication.serviceBinaryExists();
                     PPApplication.getServicesList();
 
-                    Permissions.clearMergedPermissions(appContext);
-
+                    GlobalGUIRoutines.setLanguage(appContext);
 
                     if (PPApplication.getApplicationStarted(appContext, false)) {
                         if ((wakeLock != null) && wakeLock.isHeld())
@@ -280,9 +279,14 @@ public class PhoneProfilesService extends Service {
 
                     PPApplication.logE("PhoneProfilesService.onCreate", " application not started");
 
-                    //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
+                    Permissions.clearMergedPermissions(appContext);
 
-                    GlobalGUIRoutines.setLanguage(appContext);
+                    PPApplication.createProfileNotificationChannel(appContext);
+                    PPApplication.createInformationNotificationChannel(appContext);
+                    PPApplication.createExclamationNotificationChannel(appContext);
+                    PPApplication.createGrantPermissionNotificationChannel(appContext);
+
+                    //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
                     // remove phoneprofiles_silent.mp3
                     //removeTone("phoneprofiles_silent.mp3", context);
