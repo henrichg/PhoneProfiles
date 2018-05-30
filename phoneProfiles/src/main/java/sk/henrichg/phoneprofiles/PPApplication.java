@@ -639,6 +639,13 @@ public class PPApplication extends Application {
         }
     }
 
+    static void createNotificationChannels(Context appContext) {
+        PPApplication.createProfileNotificationChannel(appContext);
+        PPApplication.createInformationNotificationChannel(appContext);
+        PPApplication.createExclamationNotificationChannel(appContext);
+        PPApplication.createGrantPermissionNotificationChannel(appContext);
+    }
+
     // -----------------------------------------------
 
     // root -----------------------------------------------------

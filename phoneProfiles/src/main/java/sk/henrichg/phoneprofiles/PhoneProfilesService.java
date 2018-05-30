@@ -281,10 +281,7 @@ public class PhoneProfilesService extends Service {
 
                     Permissions.clearMergedPermissions(appContext);
 
-                    PPApplication.createProfileNotificationChannel(appContext);
-                    PPApplication.createInformationNotificationChannel(appContext);
-                    PPApplication.createExclamationNotificationChannel(appContext);
-                    PPApplication.createGrantPermissionNotificationChannel(appContext);
+                    PPApplication.createNotificationChannels(appContext);
 
                     //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 

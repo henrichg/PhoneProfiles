@@ -76,6 +76,8 @@ class GlobalGUIRoutines {
 
         // collator for application locale sorting
         collator = getCollator(context);
+
+        PPApplication.createNotificationChannels(context);
     }
 
     private static Collator getCollator(Context context)
