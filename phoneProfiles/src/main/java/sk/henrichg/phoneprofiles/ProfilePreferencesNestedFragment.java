@@ -37,11 +37,11 @@ import static android.content.Context.DEVICE_POLICY_SERVICE;
 public class ProfilePreferencesNestedFragment extends PreferenceFragment
                                         implements SharedPreferences.OnSharedPreferenceChangeListener
 {
-    protected int startupSource;
+    int startupSource;
 
-    protected PreferenceManager prefMng;
-    protected SharedPreferences preferences;
-    protected Context context;
+    private PreferenceManager prefMng;
+    private SharedPreferences preferences;
+    private Context context;
 
     private static final String PREFS_NAME_ACTIVITY = "profile_preferences_activity";
     //static final String PREFS_NAME_FRAGMENT = "profile_preferences_fragment";
@@ -101,7 +101,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         return PREFS_NAME;
     }
 
-    protected void setPreferencesManager() {
+    void setPreferencesManager() {
         String PREFS_NAME = getPreferenceName(startupSource);
 
         prefMng = getPreferenceManager();
@@ -1585,7 +1585,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    protected void disableDependedPref(String key) {
+    void disableDependedPref(String key) {
         String value = preferences.getString(key, "");
         disableDependedPref(key, value);
     }

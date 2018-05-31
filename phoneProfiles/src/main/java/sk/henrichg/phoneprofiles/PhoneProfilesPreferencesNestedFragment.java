@@ -31,8 +31,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
 {
 
-    protected PreferenceManager prefMng;
-    protected SharedPreferences preferences;
+    PreferenceManager prefMng;
+    SharedPreferences preferences;
 
     private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
     private static final int RESULT_APPLICATION_PERMISSIONS = 1990;

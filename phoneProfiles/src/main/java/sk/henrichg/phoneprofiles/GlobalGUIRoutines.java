@@ -8,7 +8,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.Preference;
@@ -16,8 +15,6 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
-import android.view.Display;
-import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 import java.text.Collator;
@@ -421,6 +418,7 @@ class GlobalGUIRoutines {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
     }
 
+    /*
     private static Point getRealScreenSize(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
@@ -429,20 +427,22 @@ class GlobalGUIRoutines {
 
             //if (Build.VERSION.SDK_INT >= 17) {
             display.getRealSize(size);
-            /*} else {
-                try {
-                    size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
-                    size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-                } catch (Exception ignored) {
-                }
-            }*/
+            //} else {
+            //    try {
+            //        size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+            //        size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+            //    } catch (Exception ignored) {
+            //    }
+            //}
 
             return size;
         }
         else
             return null;
     }
+    */
 
+    /*
     private static Point getAppUsableScreenSize(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
@@ -454,5 +454,6 @@ class GlobalGUIRoutines {
         else
             return null;
     }
+    */
 
 }
