@@ -454,8 +454,11 @@ class ActivateProfileHelper {
                     setAirplaneMode(context, _isAirplaneMode);
                 }*/
 
-                if ((wakeLock != null) && wakeLock.isHeld())
-                    wakeLock.release();
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
             }
         });
     }
@@ -957,8 +960,11 @@ class ActivateProfileHelper {
                     setTones(appContext, profile);
                 }
 
-                if ((wakeLock != null) && wakeLock.isHeld())
-                    wakeLock.release();
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
             }
         });
     }
@@ -1022,8 +1028,11 @@ class ActivateProfileHelper {
                                 }
                             }
 
-                            if ((wakeLock != null) && wakeLock.isHeld())
-                                wakeLock.release();
+                            if ((wakeLock != null) && wakeLock.isHeld()) {
+                                try {
+                                    wakeLock.release();
+                                } catch (Exception ignored) {}
+                            }
                         }
                     });
                 }
@@ -1371,8 +1380,11 @@ class ActivateProfileHelper {
                         }
                     }
 
-                    if ((wakeLock != null) && wakeLock.isHeld())
-                        wakeLock.release();
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             });
         }
@@ -1442,8 +1454,11 @@ class ActivateProfileHelper {
                         }
                     }
 
-                    if ((wakeLock != null) && wakeLock.isHeld())
-                        wakeLock.release();
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             });
         }
@@ -1640,8 +1655,11 @@ class ActivateProfileHelper {
                     }
                 }
 
-                if ((wakeLock != null) && wakeLock.isHeld())
-                    wakeLock.release();
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
             }
         });
     }
@@ -3150,8 +3168,11 @@ class ActivateProfileHelper {
                             }
                         }
 
-                        if ((wakeLock != null) && wakeLock.isHeld())
-                            wakeLock.release();
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
                     }
                 }
             });
@@ -3225,8 +3246,11 @@ class ActivateProfileHelper {
                         break;
                 }
 
-                if ((wakeLock != null) && wakeLock.isHeld())
-                    wakeLock.release();
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
             }
         });
     }

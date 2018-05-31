@@ -50,8 +50,11 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
                         Profile profile = DatabaseHandler.getInstance(appContext).getProfile(profileId);
                         ActivateProfileHelper.executeForInteractivePreferences(profile, appContext);
 
-                        if ((wakeLock != null) && wakeLock.isHeld())
-                            wakeLock.release();
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
                     }
                 });
             }

@@ -233,8 +233,11 @@ public class PhoneProfilesService extends Service {
                         } catch (Exception ignored) {
                         }
 
-                        if ((wakeLock != null) && wakeLock.isHeld())
-                            wakeLock.release();
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
                     }
                 });
             }
@@ -272,8 +275,11 @@ public class PhoneProfilesService extends Service {
                     GlobalGUIRoutines.setLanguage(appContext);
 
                     if (PPApplication.getApplicationStarted(appContext, false)) {
-                        if ((wakeLock != null) && wakeLock.isHeld())
-                            wakeLock.release();
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
                         return;
                     }
 
@@ -322,8 +328,11 @@ public class PhoneProfilesService extends Service {
                     dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                     //dataWrapper.invalidateDataWrapper();
 
-                    if ((wakeLock != null) && wakeLock.isHeld())
-                        wakeLock.release();
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             });
 
