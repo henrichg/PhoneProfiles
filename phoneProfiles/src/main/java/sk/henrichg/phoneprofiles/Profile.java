@@ -1281,6 +1281,8 @@ public class Profile {
         try {
             String[] splits = _deviceBrightness.split("\\|");
             value = Integer.parseInt(splits[0]);
+            if ((value < 0) || (value > 100))
+                value = 50;
         } catch (Exception e) {
             value = 0;
         }
