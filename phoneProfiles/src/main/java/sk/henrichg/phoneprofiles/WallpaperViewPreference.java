@@ -155,22 +155,20 @@ public class WallpaperViewPreference extends Preference {
     {
         Intent intent;
         try {
-            /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
                 intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
                 intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-            }else{*/
+            }else
                 intent = new Intent(Intent.ACTION_GET_CONTENT);
-            //}
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
 
             ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
             ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
-        } catch (Exception ignored) {}
-        /*} catch (ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException e) {
             try {
                 intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
@@ -180,7 +178,7 @@ public class WallpaperViewPreference extends Preference {
                 ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
                 ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
             } catch (Exception ignored) {}
-        }*/
+        }
     }
 
 
