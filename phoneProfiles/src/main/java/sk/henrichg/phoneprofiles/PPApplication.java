@@ -56,8 +56,6 @@ public class PPApplication extends Application {
     static final int VERSION_CODE_EXTENDER_2_0 = 70;
     static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_2_0;
 
-    public static final boolean exactAlarms = true;
-
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
