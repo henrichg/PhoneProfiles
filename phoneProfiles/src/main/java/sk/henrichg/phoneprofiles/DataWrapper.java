@@ -546,7 +546,7 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    void _activateProfile(Profile _profile, int startupSource, /*boolean _interactive,*/ Activity _activity)
+    void _activateProfile(final Profile _profile, int startupSource, /*boolean _interactive,*/ Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -573,7 +573,7 @@ public class DataWrapper {
         ActivateProfileHelper.updateGUI(context, true);
 
         PPApplication.startHandlerThread();
-        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -581,7 +581,7 @@ public class DataWrapper {
                 PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
                 if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BluetoothLEScanBroadcastReceiver.onReceive");
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.1");
                     wakeLock.acquire(10 * 60 * 1000);
                 }
 
@@ -614,8 +614,28 @@ public class DataWrapper {
         // for startActivityForResult
         if (_activity != null)
         {
-            DatabaseHandler.getInstance(context).increaseActivationByUserCount(_profile);
-            setDynamicLauncherShortcuts();
+            PPApplication.startHandlerThread();
+            handler = new Handler(PPApplication.handlerThread.getLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = null;
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.2");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
+
+                    DatabaseHandler.getInstance(context).increaseActivationByUserCount(_profile);
+                    setDynamicLauncherShortcuts();
+
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
+                }
+            });
 
             Intent returnIntent = new Intent();
             returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);

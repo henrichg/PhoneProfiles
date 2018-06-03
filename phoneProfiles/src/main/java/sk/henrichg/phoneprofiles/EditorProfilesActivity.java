@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -1021,7 +1022,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/)
     {
         // redraw list fragment header, notification and widgets
-        EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
+        final EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
 
         if (fragment != null) {
             // update profile, this rewrite profile in profileList
@@ -1037,7 +1038,28 @@ public class EditorProfilesActivity extends AppCompatActivity
             if (PhoneProfilesService.instance != null)
                 PhoneProfilesService.instance.showProfileNotification(fragment.activityDataWrapper);
             ActivateProfileHelper.updateGUI(fragment.activityDataWrapper.context, true);
-            fragment.activityDataWrapper.setDynamicLauncherShortcuts();
+
+            PPApplication.startHandlerThread();
+            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    PowerManager powerManager = (PowerManager) fragment.activityDataWrapper.context.getSystemService(POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = null;
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EditorProfilesActivity.redrawProfileListFragment");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
+
+                    fragment.activityDataWrapper.setDynamicLauncherShortcuts();
+
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
+                }
+            });
         }
         redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
     }

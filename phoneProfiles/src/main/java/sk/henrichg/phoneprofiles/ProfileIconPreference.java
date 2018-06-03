@@ -1,7 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.support.annotation.NonNull;
@@ -29,7 +29,7 @@ public class ProfileIconPreference extends DialogPreference {
     private boolean isImageResourceID;
     private boolean useCustomColor;
     private int customColor;
-    private Bitmap bitmap;
+    //private Bitmap bitmap;
 
     private MaterialDialog mDialog;
 
@@ -205,11 +205,11 @@ public class ProfileIconPreference extends DialogPreference {
         return a.getString(index);
     }
 
-    private void getBitmap() {
+    private Bitmap getBitmap() {
         Resources resources = prefContext.getResources();
         int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
         int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
-        bitmap = BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, true, prefContext);
+        return BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, true, prefContext);
     }
 
     private void getValuePIDP() {
@@ -236,8 +236,8 @@ public class ProfileIconPreference extends DialogPreference {
             customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier/*, prefContext*/);
         }
 
-        if (!isImageResourceID)
-            getBitmap();
+        /*if (!isImageResourceID)
+            getBitmap();*/
     }
 
     @Override
@@ -272,8 +272,8 @@ public class ProfileIconPreference extends DialogPreference {
                 customColor = ProfileIconPreferenceAdapter.getIconColor(imageIdentifier/*, prefContext*/);
             }
 
-            if (!isImageResourceID)
-                getBitmap();
+            //if (!isImageResourceID)
+            //    getBitmap();
 
             persistString(value);
         }
@@ -361,7 +361,7 @@ public class ProfileIconPreference extends DialogPreference {
                 isImageResourceID = false;
                 useCustomColor = false;
                 customColor = 0;
-                getBitmap();
+                //getBitmap();
             }
             newValue = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor;
             if (callChangeListener(newValue)) {
@@ -420,38 +420,72 @@ public class ProfileIconPreference extends DialogPreference {
                 .show((ProfilePreferencesActivity)prefContext);*/
     }
 
-    private void updateIcon(boolean inDialog) {
-        ImageView imageView;
-        if (inDialog)
-            imageView = this.dialogIcon;
-        else
-            imageView = this.imageView;
+    @SuppressLint("StaticFieldLeak")
+    private void updateIcon(final boolean inDialog) {
+        new AsyncTask<Void, Integer, Void>() {
 
-        if (imageView != null)
-        {
-            if (isImageResourceID)
+            ImageView _imageView;
+            Bitmap bitmap;
+
+            @Override
+            protected void onPreExecute()
             {
-                // je to resource id
-                //int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
-                int res = Profile.profileIconIdMap.get(imageIdentifier);
+                super.onPreExecute();
+                if (inDialog)
+                    _imageView = dialogIcon;
+                else
+                    _imageView = imageView;
+            }
 
-                if (useCustomColor) {
-                    Bitmap bitmap = BitmapFactory.decodeResource(prefContext.getResources(), res);
-                    bitmap = BitmapManipulator.recolorBitmap(bitmap, customColor);
-                    imageView.setImageBitmap(bitmap);
+            @Override
+            protected Void doInBackground(Void... params) {
+                if (isImageResourceID)
+                {
+                    // je to resource id
+                    if (useCustomColor) {
+                        //int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
+                        int res = Profile.profileIconIdMap.get(imageIdentifier);
+                        bitmap = BitmapFactory.decodeResource(prefContext.getResources(), res);
+                        bitmap = BitmapManipulator.recolorBitmap(bitmap, customColor/*, prefContext*/);
+                    }
                 }
                 else
-                    imageView.setImageResource(res);
+                {
+                    // je to file
+                    bitmap = getBitmap();
+                }
+                return null;
             }
-            else
+
+            @Override
+            protected void onPostExecute(Void result)
             {
-                // je to file
-                if (bitmap != null)
-                    imageView.setImageBitmap(bitmap);
-                else
-                    imageView.setImageResource(R.drawable.ic_profile_default);
+                super.onPostExecute(result);
+                if (_imageView != null)
+                {
+                    if (isImageResourceID)
+                    {
+                        // je to resource id
+                        if (useCustomColor)
+                            _imageView.setImageBitmap(bitmap);
+                        else {
+                            //int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
+                            int res = Profile.profileIconIdMap.get(imageIdentifier);
+                            _imageView.setImageResource(res); // icon resource
+                        }
+                    }
+                    else
+                    {
+                        // je to file
+                        if (bitmap != null)
+                            _imageView.setImageBitmap(bitmap);
+                        else
+                            _imageView.setImageResource(R.drawable.ic_profile_default);
+                    }
+                }
             }
-        }
+
+        }.execute();
     }
 
     /*

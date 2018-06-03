@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +36,8 @@ import com.getkeepsafe.taptargetview.TapTargetSequence;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.POWER_SERVICE;
 
 public class EditorProfileListFragment extends Fragment
                                         implements OnStartDragItemListener {
@@ -421,7 +424,28 @@ public class EditorProfileListFragment extends Fragment
         if (PhoneProfilesService.instance != null)
             PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
         ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
-        activityDataWrapper.setDynamicLauncherShortcuts();
+
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) activityDataWrapper.context.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EditorProfileListFragment.deleteProfile");
+                    wakeLock.acquire(10 * 60 * 1000);
+                }
+
+                activityDataWrapper.setDynamicLauncherShortcuts();
+
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
+            }
+        });
 
         onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
     }
@@ -507,7 +531,27 @@ public class EditorProfileListFragment extends Fragment
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
                     ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
-                    activityDataWrapper.setDynamicLauncherShortcuts();
+                    PPApplication.startHandlerThread();
+                    final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            PowerManager powerManager = (PowerManager) activityDataWrapper.context.getSystemService(POWER_SERVICE);
+                            PowerManager.WakeLock wakeLock = null;
+                            if (powerManager != null) {
+                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EditorProfileListFragment.deleteAllProfiles");
+                                wakeLock.acquire(10 * 60 * 1000);
+                            }
+
+                            activityDataWrapper.setDynamicLauncherShortcuts();
+
+                            if ((wakeLock != null) && wakeLock.isHeld()) {
+                                try {
+                                    wakeLock.release();
+                                } catch (Exception ignored) {}
+                            }
+                        }
+                    });
 
                     onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 
