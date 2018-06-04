@@ -600,10 +600,9 @@ public class DataWrapper {
             // toast notification
             if (PPApplication.toastHandler != null)
             {
-                final Profile __profile = _profile;
                 PPApplication.toastHandler.post(new Runnable() {
                     public void run() {
-                        showToastAfterActivation(__profile);
+                        showToastAfterActivation(profile);
                     }
                 });
             }
