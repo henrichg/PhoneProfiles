@@ -118,7 +118,7 @@ public class ProfileDetailsFragment extends Fragment {
                     //holder.profileIcon.setImageBitmap(null);
                     //int res = getResources().getIdentifier(profile.getIconIdentifier(), "drawable",
                     //        getActivity().getPackageName());
-                    int res = Profile.profileIconIdMap.get(profile.getIconIdentifier());
+                    int res = Profile.getIconResource(profile.getIconIdentifier());
                     profileIcon.setImageResource(res);
                 }
             } else {

@@ -1484,7 +1484,7 @@ public class Profile {
                 if (monochrome)
                 {
                     //int iconResource = context.getResources().getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
-                    int iconResource = profileIconIdMap.get(getIconIdentifier());
+                    int iconResource = getIconResource(getIconIdentifier());
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), iconResource);
                     _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue);
                     // getIsIconResourceID must return false
@@ -1500,7 +1500,7 @@ public class Profile {
         {
             Resources resources = context.getResources();
             //int iconResource = resources.getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
-            int iconResource = profileIconIdMap.get(getIconIdentifier());
+            int iconResource = getIconResource(getIconIdentifier());
             int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
             Bitmap bitmap = BitmapManipulator.resampleResource(resources, iconResource, width, height);
@@ -1520,7 +1520,7 @@ public class Profile {
         if (getUseCustomColorForIcon()) {
             Resources resources = context.getResources();
             //int iconResource = resources.getIdentifier(getIconIdentifier(), "drawable", context.getPackageName());
-            int iconResource = profileIconIdMap.get(getIconIdentifier());
+            int iconResource = getIconResource(getIconIdentifier());
             int height = (int) resources.getDimension(android.R.dimen.app_icon_size);
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
             Bitmap bitmap = BitmapManipulator.resampleResource(resources, iconResource, width, height);
@@ -2354,6 +2354,14 @@ public class Profile {
         SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
         editor.putLong(PREF_ACTIVATED_PROFILE_END_DURATION_TIME, time);
         editor.apply();
+    }
+
+    static int getIconResource(String identifier) {
+        int iconResource = R.drawable.ic_profile_default;
+        try {
+            iconResource = getIconResource(identifier);
+        } catch (Exception ignored) {}
+        return iconResource;
     }
 
 }

@@ -94,7 +94,7 @@ class SamsungEdgeFactory implements RemoteViewsService.RemoteViewsFactory {
                 else {
                     row.setImageViewResource(R.id.widget_profile_list_item_profile_icon,
                             /*context.getResources().getIdentifier(profile.getIconIdentifier(), "drawable", context.getPackageName()));*/
-                            Profile.profileIconIdMap.get(profile.getIconIdentifier()));
+                            Profile.getIconResource(profile.getIconIdentifier()));
 
                 }
             } else {

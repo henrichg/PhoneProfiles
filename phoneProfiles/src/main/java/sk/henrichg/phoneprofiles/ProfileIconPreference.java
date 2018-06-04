@@ -444,7 +444,7 @@ public class ProfileIconPreference extends DialogPreference {
                     // je to resource id
                     if (useCustomColor) {
                         //int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
-                        int res = Profile.profileIconIdMap.get(imageIdentifier);
+                        int res = Profile.getIconResource(imageIdentifier);
                         bitmap = BitmapFactory.decodeResource(prefContext.getResources(), res);
                         bitmap = BitmapManipulator.recolorBitmap(bitmap, customColor/*, prefContext*/);
                     }
@@ -470,7 +470,7 @@ public class ProfileIconPreference extends DialogPreference {
                             _imageView.setImageBitmap(bitmap);
                         else {
                             //int res = prefContext.getResources().getIdentifier(imageIdentifier, "drawable", prefContext.getPackageName());
-                            int res = Profile.profileIconIdMap.get(imageIdentifier);
+                            int res = Profile.getIconResource(imageIdentifier);
                             _imageView.setImageResource(res); // icon resource
                         }
                     }
