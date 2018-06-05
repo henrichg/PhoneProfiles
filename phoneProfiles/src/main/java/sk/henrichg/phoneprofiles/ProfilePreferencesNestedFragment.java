@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -62,6 +63,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
     static final String PREF_FORCE_STOP_APPLICATIONS_INSTALL_EXTENDER = "prf_pref_deviceForceStopApplicationInstallExtender";
     private static final String PREF_FORCE_STOP_APPLICATIONS_ACCESSIBILITY_SETTINGS = "prf_pref_deviceForceStopApplicationAccessibilitySettings";
     private static final int RESULT_ACCESSIBILITY_SETTINGS = 1983;
+    private static final String PREF_NOTIFICATION_SYSTEM_SETTINGS = "notificationSystemSettings";
 
     @Override
     public int addPreferencesFromResource() {
@@ -453,6 +455,33 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     return false;
                 }
             });
+        }
+        if (Build.VERSION.SDK_INT >= 26) {
+            preference = prefMng.findPreference(PREF_NOTIFICATION_SYSTEM_SETTINGS);
+            if (preference != null) {
+                preference.setSummary(getString(R.string.phone_profiles_pref_notificationSystemSettings_summary) +
+                        " " + getString(R.string.notification_channel_activated_profile));
+                //preference.setWidgetLayoutResource(R.layout.start_activity_preference);
+                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @TargetApi(Build.VERSION_CODES.O)
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+                        intent.putExtra(Settings.EXTRA_CHANNEL_ID, PPApplication.PROFILE_NOTIFICATION_CHANNEL);
+                        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getActivity().getPackageName());
+                        if (GlobalGUIRoutines.activityIntentExists(intent, getActivity().getApplicationContext())) {
+                            startActivity(intent);
+                        } else {
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+                            dialogBuilder.setMessage(R.string.setting_screen_not_found_alert);
+                            //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+                            dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                            dialogBuilder.show();
+                        }
+                        return false;
+                    }
+                });
+            }
         }
     }
 
