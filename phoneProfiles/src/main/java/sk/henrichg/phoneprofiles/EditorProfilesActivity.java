@@ -1035,8 +1035,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             Profile activeProfile = fragment.activityDataWrapper.getActivatedProfile(true,
                     ApplicationPreferences.applicationEditorPrefIndicator(fragment.activityDataWrapper.context));
             fragment.updateHeader(activeProfile);
-            if (PhoneProfilesService.instance != null)
-                PhoneProfilesService.instance.showProfileNotification(fragment.activityDataWrapper);
+            PPApplication.showProfileNotification(fragment.activityDataWrapper.context);
             ActivateProfileHelper.updateGUI(fragment.activityDataWrapper.context, true);
 
             fragment.activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();

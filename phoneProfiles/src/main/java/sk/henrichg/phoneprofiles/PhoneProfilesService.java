@@ -64,6 +64,7 @@ public class PhoneProfilesService extends Service {
     private boolean notificationIsPlayed = false;
     private Timer notificationPlayTimer = null;
 
+    static final String EXTRA_SHOW_PROFILE_NOTIFICATION = "show_profile_notification";
     static final String EXTRA_START_ON_PACKAGE_REPLACE = "start_on_package_replace";
     static final String EXTRA_ONLY_START = "only_start";
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
@@ -172,8 +173,7 @@ public class PhoneProfilesService extends Service {
         if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
             // do not call this from handlerThread. In Android 8 handlerThread is not called
             // when for service is not displayed foreground notification
-            final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
-            showProfileNotification(dataWrapper);
+            showProfileNotification();
         }
 
         if (onlyStart) {
@@ -351,6 +351,10 @@ public class PhoneProfilesService extends Service {
 
         if (!doForFirstStart(intent/*, flags, startId*/)) {
             if (intent != null) {
+                if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
+                    showProfileNotification();
+                }
 
                 if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
@@ -492,21 +496,23 @@ public class PhoneProfilesService extends Service {
     // profile notification -------------------------------------------
 
     @SuppressLint("NewApi")
-    public void showProfileNotification(DataWrapper _dataWrapper)
+    private void showProfileNotification()
     {
         if (ActivateProfileHelper.lockRefresh)
             // no refresh notification
             return;
 
-        if (serviceRunning && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(_dataWrapper.context)))
-        {
-            final DataWrapper dataWrapper = _dataWrapper.copyDataWrapper();
+        final Context appContext = getApplicationContext();
 
+        if (serviceRunning && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
+        {
             PPApplication.startHandlerThreadProfileNotification();
             final Handler handler = new Handler(PPApplication.handlerThreadProfileNotification.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
+                    final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+
                     // close showed notification
                     //notificationManager.cancel(PPApplication.NOTIFICATION_ID);
                     Intent intent = new Intent(dataWrapper.context, ActivateProfileActivity.class);
@@ -751,15 +757,17 @@ public class PhoneProfilesService extends Service {
                         }
 
                     } catch (Exception ignored) {}
+
+                    dataWrapper.invalidateDataWrapper();
                 }
             });
         }
         else
         {
-            if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(_dataWrapper.context))
+            if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(appContext))
                 stopForeground(true);
             else {
-                NotificationManager notificationManager = (NotificationManager) _dataWrapper.context.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 if (notificationManager != null)
                     notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
             }
