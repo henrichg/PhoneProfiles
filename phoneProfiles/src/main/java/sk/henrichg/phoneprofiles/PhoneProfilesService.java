@@ -522,12 +522,12 @@ public class PhoneProfilesService extends Service {
                             (android.os.Build.VERSION.SDK_INT >= 24);
 
                     RemoteViews contentView;
-            /*if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
-                contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_dark);
-            else
-            if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("2"))
-                contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_light);
-            else {*/
+                    /*if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
+                        contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_dark);
+                    else
+                    if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("2"))
+                        contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_light);
+                    else {*/
                     if (miui && (Build.VERSION.SDK_INT < 25))
                         contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_miui);
                     else
