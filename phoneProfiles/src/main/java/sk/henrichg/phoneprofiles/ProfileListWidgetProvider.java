@@ -12,6 +12,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.RemoteViews;
 
 @SuppressLint("NewApi")
@@ -303,62 +304,64 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
     {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        if (PPApplication.widgetHandler != null) {
-            PPApplication.widgetHandler.post(new Runnable() {
-                public void run() {
-                    createProfilesDataWrapper(context);
+        PPApplication.startHandlerThreadWidget();
+        final Handler handler = new Handler(PPApplication.handlerThreadWidget.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                createProfilesDataWrapper(context);
 
-                    for (int appWidgetId : appWidgetIds) {
-                        doOnUpdate(context, appWidgetManager, appWidgetId);
-                    }
-
-                    if (dataWrapper != null)
-                        dataWrapper.invalidateDataWrapper();
-                    dataWrapper = null;
+                for (int appWidgetId : appWidgetIds) {
+                    doOnUpdate(context, appWidgetManager, appWidgetId);
                 }
-            });
-        }
+
+                if (dataWrapper != null)
+                    dataWrapper.invalidateDataWrapper();
+                dataWrapper = null;
+            }
+        });
     }
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
         super.onReceive(context, intent);
 
-        if (PPApplication.widgetHandler != null) {
-            PPApplication.widgetHandler.post(new Runnable() {
-                public void run() {
-                    String action = intent.getAction();
+        PPApplication.startHandlerThreadWidget();
+        final Handler handler = new Handler(PPApplication.handlerThreadWidget.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String action = intent.getAction();
 
-                    int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                            AppWidgetManager.INVALID_APPWIDGET_ID);
+                int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                        AppWidgetManager.INVALID_APPWIDGET_ID);
 
-                    createProfilesDataWrapper(context);
+                createProfilesDataWrapper(context);
 
-                    if ((action != null) &&
-                            (action.equalsIgnoreCase("com.motorola.blur.home.ACTION_SET_WIDGET_SIZE")))
-                    {
-                        int spanX = intent.getIntExtra("spanX", 1);
-                        int spanY = intent.getIntExtra("spanY", 1);
+                if ((action != null) &&
+                        (action.equalsIgnoreCase("com.motorola.blur.home.ACTION_SET_WIDGET_SIZE")))
+                {
+                    int spanX = intent.getIntExtra("spanX", 1);
+                    int spanY = intent.getIntExtra("spanY", 1);
 
-                        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                        setLayoutParamsMotorola(context, spanX, spanY, appWidgetId);
-                        RemoteViews layout;
-                        layout = buildLayout(context, /*appWidgetManager,*/ appWidgetId, isLargeLayout);
-                        try {
-                            appWidgetManager.updateAppWidget(appWidgetId, layout);
-                        } catch (Exception ignored) {}
-                    }
-                    else
-                    if ((action != null) &&
-                            (action.equalsIgnoreCase(INTENT_REFRESH_LISTWIDGET)))
-                        updateWidgets(context);
-
-                    if (dataWrapper != null)
-                        dataWrapper.invalidateDataWrapper();
-                    dataWrapper = null;
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                    setLayoutParamsMotorola(context, spanX, spanY, appWidgetId);
+                    RemoteViews layout;
+                    layout = buildLayout(context, /*appWidgetManager,*/ appWidgetId, isLargeLayout);
+                    try {
+                        appWidgetManager.updateAppWidget(appWidgetId, layout);
+                    } catch (Exception ignored) {}
                 }
-            });
-        }
+                else
+                if ((action != null) &&
+                        (action.equalsIgnoreCase(INTENT_REFRESH_LISTWIDGET)))
+                    updateWidgets(context);
+
+                if (dataWrapper != null)
+                    dataWrapper.invalidateDataWrapper();
+                dataWrapper = null;
+            }
+        });
     }
 
     private void setLayoutParams(Context context, AppWidgetManager appWidgetManager,
@@ -440,27 +443,28 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                                           final int appWidgetId,
                                           final Bundle newOptions)
     {
-        if (PPApplication.widgetHandler != null) {
-            PPApplication.widgetHandler.post(new Runnable() {
-                public void run() {
-                    createProfilesDataWrapper(context);
+        PPApplication.startHandlerThreadWidget();
+        final Handler handler = new Handler(PPApplication.handlerThreadWidget.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                createProfilesDataWrapper(context);
 
-                    String preferenceKey = "isLargeLayout_"+appWidgetId;
-                    ApplicationPreferences.getSharedPreferences(context);
+                String preferenceKey = "isLargeLayout_"+appWidgetId;
+                ApplicationPreferences.getSharedPreferences(context);
 
-                    // remove preference, will by set in setLayoutParams
-                    Editor editor = ApplicationPreferences.preferences.edit();
-                    editor.remove(preferenceKey);
-                    editor.apply();
+                // remove preference, will by set in setLayoutParams
+                Editor editor = ApplicationPreferences.preferences.edit();
+                editor.remove(preferenceKey);
+                editor.apply();
 
-                    updateWidget(context, appWidgetId);
+                updateWidget(context, appWidgetId);
 
-                    if (dataWrapper != null)
-                        dataWrapper.invalidateDataWrapper();
-                    dataWrapper = null;
-                }
-            });
-        }
+                if (dataWrapper != null)
+                    dataWrapper.invalidateDataWrapper();
+                dataWrapper = null;
+            }
+        });
     }
 
     private void updateWidget(Context context, int appWidgetId) {
