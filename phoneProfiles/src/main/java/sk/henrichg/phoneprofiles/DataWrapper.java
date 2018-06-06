@@ -969,10 +969,13 @@ public class DataWrapper {
         String profileName = profile._name;
         if (profileName.isEmpty())
             profileName = " ";
+        String longLabel = profileName;
+        if (longLabel.isEmpty())
+            longLabel = " ";
 
         return new ShortcutInfo.Builder(context, "profile_" + profile._id)
                 .setShortLabel(profileName)
-                .setLongLabel(/*context.getString(R.string.shortcut_activate_profile) + */profileName)
+                .setLongLabel(/*context.getString(R.string.shortcut_activate_profile) + */longLabel)
                 .setIcon(Icon.createWithBitmap(profileBitmap))
                 .setIntent(shortcutIntent)
                 .build();
