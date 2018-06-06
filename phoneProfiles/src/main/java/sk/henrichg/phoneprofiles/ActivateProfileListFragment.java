@@ -150,7 +150,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         //absListView.setRemoveListener(onRemove);
 
-        if (activityDataWrapper.profileList == null)
+        if (!activityDataWrapper.profileListFilled)
         {
             LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
             this.asyncTaskContext = new WeakReference<>(asyncTask );
@@ -225,7 +225,7 @@ public class ActivateProfileListFragment extends Fragment {
                 // get local profileList
                 dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
-                fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
+                fragment.activityDataWrapper.copyProfileList(dataWrapper);
 
                 if (fragment.activityDataWrapper.profileList.size() == 0)
                 {

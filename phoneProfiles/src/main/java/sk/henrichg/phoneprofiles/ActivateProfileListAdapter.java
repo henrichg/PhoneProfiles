@@ -78,7 +78,7 @@ class ActivateProfileListAdapter extends BaseAdapter
         if (profile == null)
             return -1;
 
-        if (activityDataWrapper.profileList == null)
+        if (!activityDataWrapper.profileListFilled)
             return -1;
 
         int pos = -1;

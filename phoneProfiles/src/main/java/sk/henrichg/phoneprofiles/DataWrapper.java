@@ -21,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class DataWrapper {
     private boolean monochrome = false;
     private int monochromeValue = 0xFF;
 
-    List<Profile> profileList = null;
+    boolean profileListFilled = false;
+    final List<Profile> profileList = Collections.synchronizedList(new ArrayList<Profile>());
 
     DataWrapper(Context c, /*boolean fgui,*/ boolean mono, int monoVal)
     {
@@ -58,13 +60,24 @@ public class DataWrapper {
         monochromeValue = monoVal;
     }
 
+    DataWrapper copyDataWrapper() {
+        DataWrapper dataWrapper = new DataWrapper(context, monochrome, monochromeValue);
+        synchronized (profileList) {
+            dataWrapper.copyProfileList(this);
+        }
+        return dataWrapper;
+    }
+
     void fillProfileList(boolean generateIcons, boolean generateIndicators)
     {
         //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
-        if (profileList == null)
-        {
-            profileList = getNewProfileList(generateIcons, generateIndicators);
+        synchronized (profileList) {
+            if (!profileListFilled)
+            {
+                profileList.addAll(getNewProfileList(generateIcons, generateIndicators));
+                profileListFilled = true;
+            }
         }
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ProfilesDataWrapper.getProfileList");
@@ -88,14 +101,28 @@ public class DataWrapper {
     }
 
 
-    void setProfileList(List<Profile> _profileList/*, boolean recycleBitmaps*/)
+    void setProfileList(List<Profile> sourceProfileList)
     {
-        /*if (recycleBitmaps)
-            clearProfileList();
-        else*/
-            if (this.profileList != null)
-                this.profileList.clear();
-        this.profileList = _profileList;
+        synchronized (profileList) {
+            if (profileListFilled)
+                profileList.clear();
+            profileList.addAll(sourceProfileList);
+            profileListFilled = true;
+        }
+    }
+
+    void copyProfileList(DataWrapper fromDataWrapper)
+    {
+        synchronized (profileList) {
+            if (profileListFilled) {
+                profileList.clear();
+                profileListFilled = false;
+            }
+            if (fromDataWrapper.profileListFilled) {
+                profileList.addAll(fromDataWrapper.profileList);
+                profileListFilled = true;
+            }
+        }
     }
 
     static Profile getNonInitializedProfile(String name, String icon, int order)
@@ -330,27 +357,31 @@ public class DataWrapper {
     void fillPredefinedProfileList(@SuppressWarnings("SameParameterValue") boolean generateIcons,
                                    boolean generateIndicators)
     {
-        clearProfileList();
-        DatabaseHandler.getInstance(context).deleteAllProfiles();
+        synchronized (profileList) {
+            clearProfileList();
+            DatabaseHandler.getInstance(context).deleteAllProfiles();
 
-        for (int index = 0; index < 6; index++)
-            getPredefinedProfile(index, true);
+            for (int index = 0; index < 6; index++)
+                getPredefinedProfile(index, true);
 
-        fillProfileList(generateIcons, generateIndicators);
+            fillProfileList(generateIcons, generateIndicators);
+        }
     }
 
     void clearProfileList()
     {
-        if (profileList != null)
-        {
-            for(Iterator<Profile> it = profileList.iterator(); it.hasNext();) {
-                Profile profile = it.next();
-                profile.releaseIconBitmap();
-                profile.releasePreferencesIndicator();
-                it.remove();
+        synchronized (profileList) {
+            if (profileListFilled)
+            {
+                for (Iterator<Profile> it = profileList.iterator(); it.hasNext(); ) {
+                    Profile profile = it.next();
+                    profile.releaseIconBitmap();
+                    profile.releasePreferencesIndicator();
+                    it.remove();
+                }
             }
+            profileListFilled = false;
         }
-        profileList = null;
     }
 
     Profile getActivatedProfileFromDB(boolean generateIcon, boolean generateIndicators)
@@ -368,21 +399,20 @@ public class DataWrapper {
 
     public Profile getActivatedProfile(boolean generateIcon, boolean generateIndicators)
     {
-        if (profileList == null)
-        {
-            return getActivatedProfileFromDB(generateIcon, generateIndicators);
-        }
-        else
-        {
-            Profile profile;
-            for (int i = 0; i < profileList.size(); i++)
-            {
-                profile = profileList.get(i);
-                if (profile._checked)
-                    return profile;
+        synchronized (profileList) {
+            if (!profileListFilled) {
+                return getActivatedProfileFromDB(generateIcon, generateIndicators);
+            } else {
+                //noinspection ForLoopReplaceableByForEach
+                for (Iterator<Profile> it = profileList.iterator(); it.hasNext(); ) {
+                    Profile profile = it.next();
+                    if (profile._checked) {
+                        return profile;
+                    }
+                }
+                // when profile not found, get profile from db
+                return getActivatedProfileFromDB(generateIcon, generateIndicators);
             }
-            // when profile not found, get profile from db
-            return getActivatedProfileFromDB(generateIcon, generateIndicators);
         }
     }
 
@@ -432,48 +462,42 @@ public class DataWrapper {
 
     private void setProfileActive(Profile profile)
     {
-        if ((profileList == null) || (profile == null))
-            return;
+        synchronized (profileList) {
+            if (!profileListFilled)
+                return;
 
-        for (Profile p : profileList)
-        {
-            p._checked = false;
-        }
+            //noinspection ForLoopReplaceableByForEach
+            for (Iterator<Profile> it = profileList.iterator(); it.hasNext();) {
+                Profile _profile = it.next();
+                _profile._checked = false;
+            }
 
-        int position = getItemPosition(profile);
-        if (position != -1)
-        {
-            Profile _profile = profileList.get(position);
-            if (_profile != null)
-                _profile._checked = true;
+            if (profile != null)
+                profile._checked = true;
         }
     }
 
     Profile getProfileById(long id, boolean generateIcon, boolean generateIndicators)
     {
-        if (profileList == null)
-        {
-            Profile profile = DatabaseHandler.getInstance(context).getProfile(id);
-            if (/*forGUI &&*/ (profile != null))
-            {
-                if (generateIcon)
-                    profile.generateIconBitmap(context, monochrome, monochromeValue);
-                if (generateIndicators)
-                    profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+        synchronized (profileList) {
+            if (!profileListFilled) {
+                Profile profile = DatabaseHandler.getInstance(context).getProfile(id);
+                if (/*forGUI &&*/ (profile != null)) {
+                    if (generateIcon)
+                        profile.generateIconBitmap(context, monochrome, monochromeValue);
+                    if (generateIndicators)
+                        profile.generatePreferencesIndicator(context, monochrome, monochromeValue);
+                }
+                return profile;
+            } else {
+                //noinspection ForLoopReplaceableByForEach
+                for (Iterator<Profile> it = profileList.iterator(); it.hasNext(); ) {
+                    Profile profile = it.next();
+                    if (profile._id == id)
+                        return profile;
+                }
+                return null;
             }
-            return profile;
-        }
-        else
-        {
-            Profile profile;
-            for (int i = 0; i < profileList.size(); i++)
-            {
-                profile = profileList.get(i);
-                if (profile._id == id)
-                    return profile;
-            }
-
-            return null;
         }
     }
 
@@ -1014,6 +1038,34 @@ public class DataWrapper {
                 shortcutManager.setDynamicShortcuts(shortcuts);
             }
         }
+    }
+
+    void setDynamicLauncherShortcutsFromMainThread()
+    {
+        PPApplication.logE("DataWrapper.setDynamicLauncherShortcutsFromMainThread", "start");
+        final DataWrapper dataWrapper = copyDataWrapper();
+
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) dataWrapper.context.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper.setDynamicLauncherShortcutsFromMainThread");
+                    wakeLock.acquire(10 * 60 * 1000);
+                }
+
+                dataWrapper.setDynamicLauncherShortcuts();
+
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
+            }
+        });
     }
 
 }

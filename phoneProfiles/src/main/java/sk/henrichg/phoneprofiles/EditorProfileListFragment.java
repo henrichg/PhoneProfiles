@@ -217,26 +217,24 @@ public class EditorProfileListFragment extends Fragment
         });
 
 
-        if (activityDataWrapper.profileList == null)
-        {
-            LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
-            this.asyncTaskContext = new WeakReference< >(asyncTask );
-            asyncTask.execute();
-        }
-        else
-        {
-            listView.setAdapter(profileListAdapter);
-        
-            // for activated profile update activity
-            Profile profile;
-            profile = activityDataWrapper.getActivatedProfile(true,
-                    ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
-            updateHeader(profile);
-            profileListAdapter.notifyDataSetChanged(false);
-            if (!ApplicationPreferences.applicationEditorHeader(fragment.activityDataWrapper.context))
-                setProfileSelection(profile);
-        }
+        synchronized (activityDataWrapper.profileList) {
+            if (!activityDataWrapper.profileListFilled) {
+                LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
+                this.asyncTaskContext = new WeakReference<>(asyncTask);
+                asyncTask.execute();
+            } else {
+                listView.setAdapter(profileListAdapter);
 
+                // for activated profile update activity
+                Profile profile;
+                profile = activityDataWrapper.getActivatedProfile(true,
+                        ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
+                updateHeader(profile);
+                profileListAdapter.notifyDataSetChanged(false);
+                if (!ApplicationPreferences.applicationEditorHeader(fragment.activityDataWrapper.context))
+                    setProfileSelection(profile);
+            }
+        }
     }
 
     private static class LoadProfileListAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -287,7 +285,7 @@ public class EditorProfileListFragment extends Fragment
                 // get local profileList
                 dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
-                fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
+                fragment.activityDataWrapper.copyProfileList(dataWrapper);
 
                 fragment.profileListAdapter = new EditorProfileListAdapter(fragment, fragment.activityDataWrapper, fragment);
 
@@ -425,27 +423,7 @@ public class EditorProfileListFragment extends Fragment
             PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
         ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
 
-        PPApplication.startHandlerThread();
-        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                PowerManager powerManager = (PowerManager) activityDataWrapper.context.getSystemService(POWER_SERVICE);
-                PowerManager.WakeLock wakeLock = null;
-                if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EditorProfileListFragment.deleteProfile");
-                    wakeLock.acquire(10 * 60 * 1000);
-                }
-
-                activityDataWrapper.setDynamicLauncherShortcuts();
-
-                if ((wakeLock != null) && wakeLock.isHeld()) {
-                    try {
-                        wakeLock.release();
-                    } catch (Exception ignored) {}
-                }
-            }
-        });
+        activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();
 
         onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
     }
@@ -531,27 +509,8 @@ public class EditorProfileListFragment extends Fragment
                     if (PhoneProfilesService.instance != null)
                         PhoneProfilesService.instance.showProfileNotification(activityDataWrapper);
                     ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
-                    PPApplication.startHandlerThread();
-                    final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            PowerManager powerManager = (PowerManager) activityDataWrapper.context.getSystemService(POWER_SERVICE);
-                            PowerManager.WakeLock wakeLock = null;
-                            if (powerManager != null) {
-                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EditorProfileListFragment.deleteAllProfiles");
-                                wakeLock.acquire(10 * 60 * 1000);
-                            }
 
-                            activityDataWrapper.setDynamicLauncherShortcuts();
-
-                            if ((wakeLock != null) && wakeLock.isHeld()) {
-                                try {
-                                    wakeLock.release();
-                                } catch (Exception ignored) {}
-                            }
-                        }
-                    });
+                    activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();
 
                     onStartProfilePreferencesCallback.onStartProfilePreferences(null, EDIT_MODE_DELETE, 0);
 

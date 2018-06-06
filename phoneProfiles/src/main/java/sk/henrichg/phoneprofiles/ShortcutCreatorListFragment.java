@@ -85,7 +85,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         });
 
-        if (activityDataWrapper.profileList == null)
+        if (!activityDataWrapper.profileListFilled)
         {
             LoadProfileListAsyncTask asyncTask = new LoadProfileListAsyncTask(this);
             this.asyncTaskContext = new WeakReference<>(asyncTask );
@@ -149,7 +149,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                 // get local profileList
                 dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context));
                 // set copy local profile list into activity profilesDataWrapper
-                fragment.activityDataWrapper.setProfileList(dataWrapper.profileList);
+                fragment.activityDataWrapper.copyProfileList(dataWrapper);
 
                 fragment.profileListAdapter = new ShortcutCreatorListAdapter(fragment, fragment.activityDataWrapper);
                 fragment.listView.setAdapter(fragment.profileListAdapter);
