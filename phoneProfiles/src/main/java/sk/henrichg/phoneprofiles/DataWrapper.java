@@ -60,7 +60,7 @@ public class DataWrapper {
         monochromeValue = monoVal;
     }
 
-    DataWrapper copyDataWrapper() {
+    private DataWrapper copyDataWrapper() {
         DataWrapper dataWrapper = new DataWrapper(context, monochrome, monochromeValue);
         synchronized (profileList) {
             dataWrapper.copyProfileList(this);
@@ -442,6 +442,7 @@ public class DataWrapper {
     }
     */
 
+    /*
     private int getItemPosition(Profile profile)
     {
         if (profile == null)
@@ -459,6 +460,7 @@ public class DataWrapper {
             return -1;
         }
     }
+    */
 
     private void setProfileActive(Profile profile)
     {
@@ -524,7 +526,9 @@ public class DataWrapper {
         if (profile == null)
             return;
 
-        profileList.remove(profile);
+        synchronized (profileList) {
+            profileList.remove(profile);
+        }
 
         // unlink profile from Background profile
         if (Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context)) == profile._id)
@@ -538,7 +542,9 @@ public class DataWrapper {
 
     void deleteAllProfiles()
     {
-        profileList.clear();
+        synchronized (profileList) {
+            profileList.clear();
+        }
 
         // unlink profiles from Background profile
         ApplicationPreferences.getSharedPreferences(context);
