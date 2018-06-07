@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,8 +35,6 @@ import com.getkeepsafe.taptargetview.TapTargetSequence;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.POWER_SERVICE;
 
 public class EditorProfileListFragment extends Fragment
                                         implements OnStartDragItemListener {
