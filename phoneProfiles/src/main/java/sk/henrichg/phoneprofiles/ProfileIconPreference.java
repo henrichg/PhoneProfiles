@@ -168,7 +168,7 @@ public class ProfileIconPreference extends DialogPreference {
             public void onClick(View v) {
                 if (Permissions.grantCustomProfileIconPermissions(prefContext, ProfileIconPreference.this)) {
                     startGallery();
-                    mDialog.dismiss();
+                    //mDialog.dismiss();
                 }
             }
         });
@@ -486,6 +486,11 @@ public class ProfileIconPreference extends DialogPreference {
             }
 
         }.execute();
+    }
+
+    void dismissDialog() {
+        if (mDialog != null && mDialog.isShowing())
+            mDialog.dismiss();
     }
 
     /*

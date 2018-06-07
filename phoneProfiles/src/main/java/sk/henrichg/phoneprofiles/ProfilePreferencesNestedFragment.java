@@ -1711,6 +1711,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
                 if (BitmapManipulator.checkBitmapSize(selectedImage.toString(), width, height, context)) {
                     if (ProfilePreferencesFragment.changedProfileIconPreference != null) {
+                        ProfilePreferencesFragment.changedProfileIconPreference.dismissDialog();
                         ProfilePreferencesFragment.changedProfileIconPreference.setImageIdentifierAndType(selectedImage.toString(), false, true);
                         ProfilePreferencesFragment.changedProfileIconPreference = null;
                     }
