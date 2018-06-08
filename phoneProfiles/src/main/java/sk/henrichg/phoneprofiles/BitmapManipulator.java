@@ -26,7 +26,7 @@ class BitmapManipulator {
 
     static final int ICON_BITMAP_SIZE_MULTIPLIER = 4;
 
-    static Bitmap resampleBitmapUri(String bitmapUri, int width, int height, boolean checkSize, Context context) {
+    static Bitmap resampleBitmapUri(String bitmapUri, int width, int height, boolean checkSize, boolean checkOrientation, Context context) {
         if (bitmapUri == null)
             return null;
 
@@ -51,17 +51,22 @@ class BitmapManipulator {
                         return null;
                 }
 
-                int rotatedWidth, rotatedHeight;
-                int orientation = getBitmapUriOrientation(context, uri);
+                int rotatedWidth = width;
+                int rotatedHeight = height;
+                int orientation = 0;
 
-                if (orientation == 90 || orientation == 270) {
-                    //noinspection SuspiciousNameCombination
-                    rotatedWidth = height;
-                    //noinspection SuspiciousNameCombination
-                    rotatedHeight = width;
-                } else {
-                    rotatedWidth = width;
-                    rotatedHeight = height;
+                if (checkOrientation) {
+                    orientation = getBitmapUriOrientation(context, uri);
+
+                    if (orientation == 90 || orientation == 270) {
+                        //noinspection SuspiciousNameCombination
+                        rotatedWidth = height;
+                        //noinspection SuspiciousNameCombination
+                        rotatedHeight = width;
+                    } /*else {
+                        rotatedWidth = width;
+                        rotatedHeight = height;
+                    }*/
                 }
 
                 Bitmap decodedSampleBitmap;
@@ -80,7 +85,7 @@ class BitmapManipulator {
                  * if the orientation is not 0 (or -1, which means we don't know), we
                  * have to do a rotation.
                  */
-                if (orientation > 0) {
+                if (checkOrientation && (orientation > 0)) {
                     Matrix matrix = new Matrix();
                     matrix.postRotate(orientation);
 
