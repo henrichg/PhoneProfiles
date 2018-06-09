@@ -504,7 +504,7 @@ public class PhoneProfilesService extends Service {
 
         final Context appContext = getApplicationContext();
 
-        if (serviceRunning && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
+        if (serviceRunning && (instance != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
         {
             PPApplication.startHandlerThreadProfileNotification();
             final Handler handler = new Handler(PPApplication.handlerThreadProfileNotification.getLooper());
@@ -524,8 +524,8 @@ public class PhoneProfilesService extends Service {
                     Notification.Builder notificationBuilder;
 
                     boolean miui = (PPApplication.romManufacturer != null) &&
-                            (PPApplication.romManufacturer.compareToIgnoreCase("xiaomi") == 0) &&
-                            (android.os.Build.VERSION.SDK_INT >= 24);
+                            (PPApplication.romManufacturer.compareToIgnoreCase("xiaomi") == 0)/* &&
+                            (android.os.Build.VERSION.SDK_INT >= 24)*/;
 
                     RemoteViews contentView;
                     /*if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
@@ -534,7 +534,7 @@ public class PhoneProfilesService extends Service {
                     if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("2"))
                         contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_light);
                     else {*/
-                    if (miui && (Build.VERSION.SDK_INT < 25))
+                    if (miui/* && (Build.VERSION.SDK_INT < 25)*/)
                         contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_miui);
                     else
                         contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer);
@@ -725,7 +725,7 @@ public class PhoneProfilesService extends Service {
 
                     if (android.os.Build.VERSION.SDK_INT >= 24) {
                         // workaround for MIUI :-(
-                        if ((!miui) || (Build.VERSION.SDK_INT >= 25))
+                        if ((!miui) || (Build.VERSION.SDK_INT >= 26))
                             notificationBuilder.setStyle(new Notification.DecoratedCustomViewStyle());
                         notificationBuilder.setCustomContentView(contentView);
                     }
@@ -749,7 +749,8 @@ public class PhoneProfilesService extends Service {
                         }
 
                         if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(dataWrapper.context))
-                            instance.startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
+                            if (instance != null)
+                                instance.startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
                         else {
                             NotificationManager notificationManager = (NotificationManager) dataWrapper.context.getSystemService(Context.NOTIFICATION_SERVICE);
                             if (notificationManager != null)
