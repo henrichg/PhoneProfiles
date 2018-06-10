@@ -12,16 +12,19 @@ public class LocaleChangedReceiver extends BroadcastReceiver {
         if ((intent != null) && (intent.getAction() != null) && intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
 
             final Context appContext = context.getApplicationContext();
-            PPApplication.startHandlerThread();
-            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (ApplicationPreferences.applicationLanguage(appContext).equals("system")) {
-                        PPApplication.showProfileNotification(appContext);
+
+            if (PPApplication.getApplicationStarted(appContext, false)) {
+                PPApplication.startHandlerThread();
+                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (ApplicationPreferences.applicationLanguage(appContext).equals("system")) {
+                            PPApplication.showProfileNotification(appContext);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 
