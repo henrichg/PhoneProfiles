@@ -147,6 +147,7 @@ public class PPApplication extends Application {
     public static HandlerThread handlerThread = null;
     public static HandlerThread handlerThreadWidget = null;
     public static HandlerThread handlerThreadProfileNotification = null;
+    public static HandlerThread handlerThreadPlayTone = null;
 
     public static HandlerThread handlerThreadVolumes = null;
     public static HandlerThread handlerThreadRadios = null;
@@ -237,6 +238,7 @@ public class PPApplication extends Application {
         startHandlerThread();
         startHandlerThreadWidget();
         startHandlerThreadProfileNotification();
+        startHandlerThreadPlayTone();
         startHandlerThreadVolumes();
         startHandlerThreadRadios();
         startHandlerThreadAdaptiveBrightness();
@@ -1099,6 +1101,13 @@ public class PPApplication extends Application {
         if (handlerThreadProfileNotification == null) {
             handlerThreadProfileNotification = new HandlerThread("PPHandlerThreadProfileNotification");
             handlerThreadProfileNotification.start();
+        }
+    }
+
+    static void startHandlerThreadPlayTone() {
+        if (handlerThreadPlayTone == null) {
+            handlerThreadPlayTone = new HandlerThread("PPHandlerThreadPlayTone");
+            handlerThreadPlayTone.start();
         }
     }
 
