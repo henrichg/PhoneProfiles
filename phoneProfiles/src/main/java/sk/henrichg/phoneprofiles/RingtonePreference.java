@@ -136,7 +136,7 @@ public class RingtonePreference extends DialogPreference {
                 RingtonePreferenceAdapter.ViewHolder viewHolder = (RingtonePreferenceAdapter.ViewHolder) item.getTag();
                 setRingtone((String)listAdapter.getItem(position)/*, viewHolder.radioBtn*/);
                 viewHolder.radioBtn.setChecked(true);
-                playRingtone(true);
+                playRingtone();
             }
         });
 
@@ -170,7 +170,7 @@ public class RingtonePreference extends DialogPreference {
     {
         super.onDismiss(dialog);
         PPApplication.logE("RingtonePreference.onDismiss", "ringtone="+ringtone);
-        playRingtone(false);
+        stopPlayRingtone(true);
         GlobalGUIRoutines.unregisterOnActivityDestroyListener(this, this);
     }
 
@@ -178,14 +178,14 @@ public class RingtonePreference extends DialogPreference {
     public void onActivityDestroy() {
         super.onActivityDestroy();
         PPApplication.logE("RingtonePreference.onActivityDestroy", "ringtone="+ringtone);
-        playRingtone(false);
+        stopPlayRingtone(true);
         if (mDialog != null && mDialog.isShowing())
             mDialog.dismiss();
     }
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        playRingtone(false);
+        stopPlayRingtone(false);
 
         final Parcelable superState = super.onSaveInstanceState();
         Dialog dialog = getDialog();
@@ -202,7 +202,7 @@ public class RingtonePreference extends DialogPreference {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        playRingtone(false);
+        stopPlayRingtone(false);
 
         if (state == null || !state.getClass().equals(SavedState.class)) {
             // Didn't save state for us in onSaveInstanceState
@@ -391,7 +391,7 @@ public class RingtonePreference extends DialogPreference {
         _setSummary(ringtone);
     }
 
-    private void stopPlayRingtone() {
+    private void stopPlayRingtone(boolean release) {
         final AudioManager audioManager = (AudioManager)prefContext.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
             if (playTimer != null) {
@@ -402,31 +402,32 @@ public class RingtonePreference extends DialogPreference {
                 try {
                     if (mediaPlayer.isPlaying())
                         mediaPlayer.stop();
-                    mediaPlayer.release();
+                    if (release)
+                        mediaPlayer.release();
                 } catch (Exception ignored) {
                 }
                 ringtoneIsPlayed = false;
-                mediaPlayer = null;
+                if (release)
+                    mediaPlayer = null;
 
                 if (oldMediaVolume > -1)
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
             }
         }
     }
-    void playRingtone(final boolean play) {
-        stopPlayRingtone();
+    void playRingtone() {
+        stopPlayRingtone(false);
 
         final AudioManager audioManager = (AudioManager)prefContext.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
-
-            if (!play) return;
 
             Uri ringtoneUri = Uri.parse(ringtone);
 
             try {
                 RingerModeChangeReceiver.internalChange = true;
 
-                mediaPlayer = new MediaPlayer();
+                if (mediaPlayer == null)
+                    mediaPlayer = new MediaPlayer();
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.setDataSource(prefContext, ringtoneUri);
                 mediaPlayer.prepare();
@@ -498,7 +499,7 @@ public class RingtonePreference extends DialogPreference {
 
             } catch (SecurityException e) {
                 PPApplication.logE("RingtonePreference.playRingtone", "security exception");
-                stopPlayRingtone();
+                stopPlayRingtone(false);
                 PPApplication.startHandlerThread();
                 final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
@@ -509,7 +510,7 @@ public class RingtonePreference extends DialogPreference {
                 }, 3000);
             } catch (Exception e) {
                 PPApplication.logE("RingtonePreference.playRingtone", "exception");
-                stopPlayRingtone();
+                stopPlayRingtone(false);
                 PPApplication.startHandlerThread();
                 final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
                 handler.postDelayed(new Runnable() {
