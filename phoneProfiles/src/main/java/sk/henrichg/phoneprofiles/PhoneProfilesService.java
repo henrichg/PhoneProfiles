@@ -807,6 +807,7 @@ public class PhoneProfilesService extends Service {
             if (notificationManager != null)
                 notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
         }
+        runningInForeground = false;
     }
 
     private void setAlarmForNotificationCancel(Context context)
