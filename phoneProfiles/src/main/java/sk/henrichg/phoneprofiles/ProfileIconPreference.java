@@ -193,7 +193,7 @@ public class ProfileIconPreference extends DialogPreference {
         super.onActivityDestroy();
         /*if (mColorDialog != null && mColorDialog.mDialog != null && mColorDialog.mDialog.isShowing())
             mColorDialog.mDialog.dismiss();*/
-        if (mDialog != null && mDialog.isShowing())
+        if ((mDialog != null) && mDialog.isShowing())
             mDialog.dismiss();
     }
 
@@ -489,7 +489,7 @@ public class ProfileIconPreference extends DialogPreference {
     }
 
     void dismissDialog() {
-        if (mDialog != null && mDialog.isShowing())
+        if ((mDialog != null) && mDialog.isShowing())
             mDialog.dismiss();
     }
 

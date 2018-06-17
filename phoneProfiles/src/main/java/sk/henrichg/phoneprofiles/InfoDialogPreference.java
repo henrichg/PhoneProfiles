@@ -49,7 +49,7 @@ public class InfoDialogPreference extends DialogPreference {
     @Override
     public void onActivityDestroy() {
         super.onActivityDestroy();
-        if (mDialog != null && mDialog.isShowing())
+        if ((mDialog != null) && mDialog.isShowing())
             mDialog.dismiss();
     }
 
