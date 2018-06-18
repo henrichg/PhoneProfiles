@@ -212,6 +212,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                     profileName = profile._name;
                     longLabel = getString(R.string.shortcut_activate_profile) + profileName;
                     useCustomColor = profile.getUseCustomColorForIcon();
+                    String id = "profile_" + profile._id;
 
                     if (profileName.isEmpty())
                         profileName = " ";
@@ -228,7 +229,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                     intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, profileName);
                     */
 
-                    shortcutBuilder = new ShortcutInfoCompat.Builder(context, "profile_shortcut");
+                    shortcutBuilder = new ShortcutInfoCompat.Builder(context, id);
                     shortcutBuilder.setIntent(shortcutIntent);
                     shortcutBuilder.setShortLabel(profileName);
                     shortcutBuilder.setLongLabel(longLabel);
