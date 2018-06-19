@@ -258,7 +258,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
 
             Intent clickIntent=new Intent(context, BackgroundActivateProfileActivity.class);
             clickIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_WIDGET);
-            PendingIntent clickPI=PendingIntent.getActivity(context, 0,
+            PendingIntent clickPI=PendingIntent.getActivity(context, 300,
                                                         clickIntent,
                                                         PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -271,8 +271,9 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         else
         {
             Intent intent = new Intent(context, ActivateProfileActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_WIDGET);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent,
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 300, intent,
                                                         PendingIntent.FLAG_UPDATE_CURRENT);
             widget.setOnClickPendingIntent(R.id.widget_profile_list_header, pendingIntent);
         }

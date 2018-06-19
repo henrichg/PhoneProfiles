@@ -178,8 +178,9 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
 
 
                     Intent intent = new Intent(context, ActivateProfileActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_WIDGET);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 200, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     remoteViews.setOnClickPendingIntent(R.id.widget_one_row_header, pendingIntent);
 
                     try {
