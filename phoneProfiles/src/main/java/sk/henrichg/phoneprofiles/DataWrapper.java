@@ -41,7 +41,7 @@ public class DataWrapper {
     {
         //long nanoTimeStart = PPApplication.startMeasuringRunTime();
 
-        context = c;
+        context = c.getApplicationContext();
 
         setParameters(/*fgui,*/ mono, monoVal);
 
