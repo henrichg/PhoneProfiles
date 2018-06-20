@@ -1622,6 +1622,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    /*
     int getProfilePosition(Profile profile)
     {
         PPApplication.logE("DatabaseHandler.getProfilePosition", "xxx");
@@ -1669,6 +1670,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             stopRunningCommand();
         }
     }
+    */
 
     void setPOrder(List<Profile> list)
     {

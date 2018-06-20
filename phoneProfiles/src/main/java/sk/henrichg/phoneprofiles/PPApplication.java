@@ -166,7 +166,7 @@ public class PPApplication extends Application {
     public static  String notAllowedReasonDetail;
 
     public static final RootMutex rootMutex = new RootMutex();
-    public static final ServiceListMutex serviceListMutex = new ServiceListMutex();
+    private static final ServiceListMutex serviceListMutex = new ServiceListMutex();
     public static final ScanResultsMutex scanResultsMutex = new ScanResultsMutex();
 
     public static boolean startedOnBoot = false;
