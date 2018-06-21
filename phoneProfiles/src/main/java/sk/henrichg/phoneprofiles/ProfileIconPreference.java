@@ -128,10 +128,7 @@ public class ProfileIconPreference extends DialogPreference {
                         true, false);
                 adapter.imageIdentifierAndTypeChanged(imageIdentifier, isImageResourceID);
                 updateIcon(true);
-                if (isImageResourceID)
-                    colorChooserButton.setVisibility(View.VISIBLE);
-                else
-                    colorChooserButton.setVisibility(View.GONE);
+                colorChooserButton.setEnabled(isImageResourceID);
             }
         });
 
@@ -147,10 +144,7 @@ public class ProfileIconPreference extends DialogPreference {
                 showCustomColorChooser();
             }
         });
-        if (isImageResourceID)
-            colorChooserButton.setVisibility(View.VISIBLE);
-        else
-            colorChooserButton.setVisibility(View.GONE);
+        colorChooserButton.setEnabled(isImageResourceID);
 
         /*
         final ImageView helpIcon = layout.findViewById(R.id.profileicon_pref_dlg_helpIcon);
