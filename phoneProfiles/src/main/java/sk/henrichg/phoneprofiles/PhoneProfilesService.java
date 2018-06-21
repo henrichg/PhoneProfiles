@@ -276,6 +276,12 @@ public class PhoneProfilesService extends Service {
 
                     GlobalGUIRoutines.setLanguage(appContext);
 
+                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+                    dataWrapper.setDynamicLauncherShortcuts();
+
+                    registerReceivers();
+                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
+
                     if (PPApplication.getApplicationStarted(appContext, false)) {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
@@ -317,13 +323,6 @@ public class PhoneProfilesService extends Service {
                     Profile.setActivatedProfileForDuration(appContext, 0);
 
                     LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
-
-                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
-
-                    dataWrapper.setDynamicLauncherShortcuts();
-
-                    registerReceivers();
-                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
                     PPApplication.setApplicationStarted(appContext, true);
 
