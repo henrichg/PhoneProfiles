@@ -42,6 +42,7 @@ import java.util.TimerTask;
 public class PhoneProfilesService extends Service {
 
     public static PhoneProfilesService instance = null;
+    public static boolean serviceHasFirstStart = false;
     private static boolean serviceRunning = false;
     private static boolean runningInForeground = false;
 
@@ -80,6 +81,8 @@ public class PhoneProfilesService extends Service {
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
         instance = this;
+        serviceHasFirstStart = false;
+
         final Context appContext = getApplicationContext();
 
         try {
@@ -149,6 +152,7 @@ public class PhoneProfilesService extends Service {
         removeProfileNotification(this);
 
         instance = null;
+        serviceHasFirstStart = false;
         serviceRunning = false;
         runningInForeground = false;
 
@@ -276,13 +280,8 @@ public class PhoneProfilesService extends Service {
 
                     GlobalGUIRoutines.setLanguage(appContext);
 
-                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
-                    dataWrapper.setDynamicLauncherShortcuts();
-
-                    registerReceivers();
-                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
-
-                    if (PPApplication.getApplicationStarted(appContext, false)) {
+                    //if (PPApplication.getApplicationStarted(appContext, false)) {
+                    if (serviceHasFirstStart) {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
                                 wakeLock.release();
@@ -324,6 +323,13 @@ public class PhoneProfilesService extends Service {
 
                     LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
 
+                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+                    dataWrapper.setDynamicLauncherShortcuts();
+
+                    registerReceivers();
+                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
+
+                    serviceHasFirstStart = true;
                     PPApplication.setApplicationStarted(appContext, true);
 
                     dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
