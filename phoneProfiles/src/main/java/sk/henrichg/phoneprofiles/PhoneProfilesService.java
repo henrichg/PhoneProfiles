@@ -113,12 +113,17 @@ public class PhoneProfilesService extends Service {
             //noinspection deprecation
             keyguardLock = keyguardManager.newKeyguardLock("phoneProfiles.keyguardLock");
 
-        doForFirstStart(null);
+        if (PPApplication.getApplicationStarted(getApplicationContext(), false))
+            doForFirstStart(null);
+        else
+            stopSelf();
     }
 
     @Override
     public void onDestroy()
     {
+        PPApplication.logE("PhoneProfilesService.onDestroy", "xxxxx");
+
         Context appContext = getApplicationContext();
 
         if (screenOnOffReceiver != null)
@@ -152,11 +157,11 @@ public class PhoneProfilesService extends Service {
 
     // start service for first start
     private boolean doForFirstStart(Intent intent/*, int flags, int startId*/) {
-        boolean onlyStart = false;
+        boolean onlyStart = true;
         boolean startOnPackageReplace = false;
 
         if (intent != null) {
-            onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, false);
+            onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, true);
             startOnPackageReplace = intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false);
         }
 
@@ -188,75 +193,6 @@ public class PhoneProfilesService extends Service {
         if (onlyStart) {
 
             if (startOnPackageReplace) {
-                final int oldVersionCode = PPApplication.getSavedVersionCode(appContext);
-                // save version code
-                try {
-                    PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
-                    int actualVersionCode = pInfo.versionCode;
-                    PPApplication.setSavedVersionCode(appContext, actualVersionCode);
-                } catch (Exception ignored) {
-                }
-
-                PPApplication.startHandlerThread();
-                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                        PowerManager.WakeLock wakeLock = null;
-                        if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesService.doForFirstStart.1");
-                            wakeLock.acquire(10 * 60 * 1000);
-                        }
-
-                        Permissions.setShowRequestAccessNotificationPolicyPermission(appContext, true);
-                        Permissions.setShowRequestWriteSettingsPermission(appContext, true);
-                        //ActivateProfileHelper.setScreenUnlocked(appContext, true);
-
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart", "oldVersionCode=" + oldVersionCode);
-                        int actualVersionCode;
-                        try {
-                            PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
-                            actualVersionCode = pInfo.versionCode;
-                            PPApplication.logE("PhoneProfilesService.doForFirstStart", "actualVersionCode=" + actualVersionCode);
-
-                            if (oldVersionCode < actualVersionCode) {
-                                if (actualVersionCode <= 2100) {
-                                    ApplicationPreferences.getSharedPreferences(appContext);
-                                    SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                                    editor.putBoolean(ActivateProfileActivity.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ActivateProfileListFragment.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ActivateProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
-                                    editor.apply();
-                                }
-                                if (actualVersionCode <= 2500) {
-                                    ApplicationPreferences.getSharedPreferences(appContext);
-                                    SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
-                                    editor.apply();
-                                }
-                                if (actualVersionCode <= 2700) {
-                                    PPApplication.logE("PhoneProfilesService.doForFirstStart", "donation alarm restart");
-                                    PPApplication.setDaysAfterFirstStart(appContext, 0);
-                                    PPApplication.setDonationNotificationCount(appContext, 0);
-                                    AboutApplicationJob.scheduleJob(appContext, true);
-                                }
-                            }
-                        } catch (Exception ignored) {
-                        }
-
-                        if ((wakeLock != null) && wakeLock.isHeld()) {
-                            try {
-                                wakeLock.release();
-                            } catch (Exception ignored) {}
-                        }
-                    }
-                });
             }
 
             /*
@@ -301,7 +237,7 @@ public class PhoneProfilesService extends Service {
                         return;
                     }
 
-                    PPApplication.logE("PhoneProfilesService.onCreate", " application not started");
+                    PPApplication.logE("PhoneProfilesService.doForFirstStart", " application not started");
 
                     Permissions.clearMergedPermissions(appContext);
 
@@ -341,7 +277,7 @@ public class PhoneProfilesService extends Service {
                     AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
                     serviceHasFirstStart = true;
-                    PPApplication.setApplicationStarted(appContext, true);
+                    //PPApplication.setApplicationStarted(appContext, true);
 
                     dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                     //dataWrapper.invalidateDataWrapper();
@@ -363,7 +299,12 @@ public class PhoneProfilesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        PPApplication.logE("PhoneProfilesService.onStartCommand", "xxx");
+        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "intent="+intent);
+
+        if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
+            stopSelf();
+            return START_NOT_STICKY;
+        }
 
         if ((intent != null) && (!doForFirstStart(intent/*, flags, startId*/))) {
             //if (intent != null) {
@@ -516,6 +457,8 @@ public class PhoneProfilesService extends Service {
     @SuppressLint("NewApi")
     private void _showProfileNotification(Profile profile, boolean inHandlerThread)
     {
+        PPApplication.logE("PhoneProfilesService.showProfileNotification", "xxx");
+
         if (ActivateProfileHelper.lockRefresh)
             // no refresh notification
             return;
@@ -524,6 +467,8 @@ public class PhoneProfilesService extends Service {
 
         if ((instance != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
         {
+            PPApplication.logE("PhoneProfilesService.showProfileNotification", "show");
+
             // close showed notification
             //notificationManager.cancel(PPApplication.NOTIFICATION_ID);
             Intent intent = new Intent(appContext, ActivateProfileActivity.class);

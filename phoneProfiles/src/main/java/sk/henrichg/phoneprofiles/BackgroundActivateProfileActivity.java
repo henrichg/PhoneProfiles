@@ -34,6 +34,7 @@ public class BackgroundActivateProfileActivity extends AppCompatActivity {
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true)) {
             PPApplication.logE("BackgroundActivateProfileActivity.onStart","application not started");
+            PPApplication.setApplicationStarted(getApplicationContext(), true);
             Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
             PPApplication.startPPService(this, serviceIntent);

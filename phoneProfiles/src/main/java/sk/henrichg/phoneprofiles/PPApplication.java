@@ -60,14 +60,14 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static final boolean logIntoLogCat = false;
+    private static final boolean logIntoLogCat = true;
     private static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
     private static final String logFilterTags = "##### PPApplication.onCreate"
                                             +"|PhoneProfilesService.onCreate"
-                                            //+"|PhoneProfilesService.onStartCommand"
+                                            +"|PhoneProfilesService.onStartCommand"
                                             +"|PhoneProfilesService.doForFirstStart"
-                                            //+"|PhoneProfilesService.showProfileNotification"
+                                            +"|PhoneProfilesService.showProfileNotification"
                                             +"|PhoneProfilesService.onDestroy"
                                             +"|BootUpReceiver"
                                             +"|PackageReplacedReceiver"
@@ -189,6 +189,8 @@ public class PPApplication extends Application {
     {
         super.onCreate();
 
+        PPApplication.logE("##### PPApplication.onCreate", "romManufacturer="+romManufacturer);
+
         if (checkAppReplacingState())
             return;
 
@@ -279,12 +281,15 @@ public class PPApplication extends Application {
             sLook = null;
         }
 
-        try {
-            PPApplication.logE("PPApplication.onCreate", "start service");
-            Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
-            serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
-            startPPService(getApplicationContext(), serviceIntent);
-        } catch (Exception ignored) {}
+        if (PPApplication.getApplicationStarted(getApplicationContext(), false)) {
+            try {
+                PPApplication.logE("##### PPApplication.onCreate", "start service");
+                Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+                startPPService(getApplicationContext(), serviceIntent);
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     @Override

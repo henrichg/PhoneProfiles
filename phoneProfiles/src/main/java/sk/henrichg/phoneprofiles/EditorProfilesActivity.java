@@ -706,6 +706,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (result == 1) {
                         ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
+                        PPApplication.setApplicationStarted(getApplicationContext(), true);
                         Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
                         serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
                         PPApplication.startPPService(activity, serviceIntent);
