@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Handler;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
@@ -25,7 +26,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             }, 30000);
 
             final Context appContext = context.getApplicationContext();
-            if (PPApplication.getApplicationStarted(appContext, false))
+            if (PPApplication.getApplicationStarted(appContext, false) && PPApplication.isNewVersion(appContext))
             {
                 if (PhoneProfilesService.instance != null) {
                     // stop PhoneProfilesService
