@@ -50,6 +50,7 @@ public class PhoneProfilesService extends Service {
     @SuppressWarnings("deprecation")
     private static KeyguardManager.KeyguardLock keyguardLock = null;
 
+    private ShutdownBroadcastReceiver shutdownBroadcastReceiver = null;
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
     private PhoneCallBroadcastReceiver phoneCallBroadcastReceiver = null;
@@ -126,6 +127,8 @@ public class PhoneProfilesService extends Service {
 
         Context appContext = getApplicationContext();
 
+        if (shutdownBroadcastReceiver != null)
+            appContext.unregisterReceiver(shutdownBroadcastReceiver);
         if (screenOnOffReceiver != null)
             appContext.unregisterReceiver(screenOnOffReceiver);
         if (android.os.Build.VERSION.SDK_INT >= 23)
@@ -195,11 +198,6 @@ public class PhoneProfilesService extends Service {
             if (startOnPackageReplace) {
             }
 
-            /*
-            registerReceivers();
-            AboutApplicationJob.scheduleJob(getApplicationContext(), true);
-            */
-
             PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
@@ -229,6 +227,7 @@ public class PhoneProfilesService extends Service {
 
                     //if (PPApplication.getApplicationStarted(appContext, false)) {
                     if (serviceHasFirstStart) {
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart", " application already started");
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
                                 wakeLock.release();
@@ -392,6 +391,13 @@ public class PhoneProfilesService extends Service {
 
     private void registerReceivers() {
         Context appContext = getApplicationContext();
+
+        if (shutdownBroadcastReceiver != null)
+            appContext.unregisterReceiver(shutdownBroadcastReceiver);
+        shutdownBroadcastReceiver = new ShutdownBroadcastReceiver();
+        IntentFilter intentFilter50 = new IntentFilter();
+        intentFilter50.addAction(Intent.ACTION_SHUTDOWN);
+        appContext.registerReceiver(shutdownBroadcastReceiver, intentFilter50);
 
         if (screenOnOffReceiver != null)
             appContext.unregisterReceiver(screenOnOffReceiver);

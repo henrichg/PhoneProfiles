@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -1121,6 +1122,64 @@ public class PPApplication extends Application {
             return packageManager.hasSystemFeature(feature);
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity, boolean shutdown) {
+        try {
+            // remove alarm for profile duration
+            ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
+            Profile.setActivatedProfileForDuration(context, 0);
+
+            LockDeviceActivityFinishBroadcastReceiver.removeAlarm(context);
+
+            ImportantInfoNotification.removeNotification(context);
+            Permissions.removeNotifications(context);
+
+            if (!shutdown) {
+                if (PPApplication.brightnessHandler != null) {
+                    PPApplication.brightnessHandler.post(new Runnable() {
+                        public void run() {
+                            ActivateProfileHelper.removeBrightnessView(context);
+
+                        }
+                    });
+                }
+                if (PPApplication.screenTimeoutHandler != null) {
+                    PPApplication.screenTimeoutHandler.post(new Runnable() {
+                        public void run() {
+                            ActivateProfileHelper.screenTimeoutUnlock(context);
+                            ActivateProfileHelper.removeBrightnessView(context);
+
+                        }
+                    });
+                }
+
+                PPApplication.initRoot();
+            }
+
+            Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
+            Permissions.setShowRequestDrawOverlaysPermission(context.getApplicationContext(), true);
+            //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
+
+            context.stopService(new Intent(context, PhoneProfilesService.class));
+
+            PPApplication.setApplicationStarted(context, false);
+
+            if (!shutdown) {
+                if (activity != null) {
+                    Handler handler = new Handler(context.getMainLooper());
+                    Runnable r = new Runnable() {
+                        public void run() {
+                            activity.finish();
+                        }
+                    };
+                    handler.postDelayed(r, 500);
+                }
+            }
+        } catch (Exception ignored) {
+
         }
     }
 
