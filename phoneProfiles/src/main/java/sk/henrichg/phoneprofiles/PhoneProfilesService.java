@@ -491,9 +491,11 @@ public class PhoneProfilesService extends Service {
 
         if (settingsContentObserver != null)
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
-        //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
-        settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
-        appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
+        try {
+            //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
+            settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
+            appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
+        } catch (Exception ignored) {}
     }
 
     // profile notification -------------------------------------------
