@@ -62,7 +62,6 @@ public class BackgroundActivateProfileActivity extends AppCompatActivity {
                 long profileId = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
                 int startupSource = data.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
                 boolean activateProfile = data.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, false);
-                ;
 
                 if (activateProfile) {
                     Profile profile = dataWrapper.getProfileById(profileId, false, false);

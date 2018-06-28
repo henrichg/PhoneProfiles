@@ -618,39 +618,47 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
         else
         if (grantType == Permissions.GRANT_TYPE_WALLPAPER) {
+            setResult(Activity.RESULT_OK);
             finish();
-            if (Permissions.wallpaperViewPreference != null)
-                Permissions.wallpaperViewPreference.startGallery();
+            /*if (Permissions.wallpaperViewPreference != null)
+                Permissions.wallpaperViewPreference.startGallery();*/
         }
         else
         if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON) {
+            setResult(Activity.RESULT_OK);
             finish();
-            if (Permissions.profileIconPreference != null)
-                Permissions.profileIconPreference.startGallery();
+            /*if (Permissions.profileIconPreference != null)
+                Permissions.profileIconPreference.startGallery();*/
         }
         else
         if (grantType == Permissions.GRANT_TYPE_EXPORT) {
+            setResult(Activity.RESULT_OK);
             finish();
-            if (Permissions.editorActivity != null)
-                Permissions.editorActivity.doExportData();
+            /*if (Permissions.editorActivity != null)
+                Permissions.editorActivity.doExportData();*/
         }
         else
         if (grantType == Permissions.GRANT_TYPE_IMPORT) {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra(Permissions.EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
+            setResult(Activity.RESULT_OK,returnIntent);
             finish();
-            if (Permissions.editorActivity != null)
-                Permissions.editorActivity.doImportData(applicationDataPath);
+            /*if (Permissions.editorActivity != null)
+                Permissions.editorActivity.doImportData(applicationDataPath);*/
         }
         else
         if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG) {
+            setResult(Activity.RESULT_OK);
             finish();
-            if (Permissions.brightnessDialogPreference != null)
-                Permissions.brightnessDialogPreference.enableViews();
+            /*if (Permissions.brightnessDialogPreference != null)
+                Permissions.brightnessDialogPreference.enableViews();*/
         }
         else
         if (grantType == Permissions.GRANT_TYPE_RINGTONE_PREFERENCE) {
-            if (Permissions.ringtonePreference != null)
-                Permissions.ringtonePreference.refreshListView();
+            setResult(Activity.RESULT_OK);
             finish();
+            /*if (Permissions.ringtonePreference != null)
+                Permissions.ringtonePreference.refreshListView();*/
         }
         else {
             Intent returnIntent = new Intent();

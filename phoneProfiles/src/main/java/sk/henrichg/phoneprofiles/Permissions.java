@@ -71,11 +71,11 @@ public class Permissions {
     private static final String EXTRA_GRANT_ALSO_CONTACTS = "grant_also_contacts";
 
     //static Activity profileActivationActivity = null;
-    static WallpaperViewPreference wallpaperViewPreference = null;
-    static ProfileIconPreference profileIconPreference = null;
-    static EditorProfilesActivity editorActivity = null;
-    static BrightnessDialogPreference brightnessDialogPreference = null;
-    static RingtonePreference ringtonePreference = null;
+    //static WallpaperViewPreference wallpaperViewPreference = null;
+    //static ProfileIconPreference profileIconPreference = null;
+    //static EditorProfilesActivity editorActivity = null;
+    //static BrightnessDialogPreference brightnessDialogPreference = null;
+    //static RingtonePreference ringtonePreference = null;
 
     private static final String PREF_SHOW_REQUEST_WRITE_SETTINGS_PERMISSION = "show_request_write_settings_permission";
     private static final String PREF_MERGED_PERMISSIONS = "merged_permissions";
@@ -963,7 +963,7 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantWallpaperPermissions(Context context, WallpaperViewPreference preference) {
+    static boolean grantWallpaperPermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean granted = checkGallery(context);
             if (!granted) {
@@ -972,14 +972,15 @@ public class Permissions {
                     permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_WALLPAPER);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    wallpaperViewPreference = preference;
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_WALLPAPER);
+                    //wallpaperViewPreference = preference;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -990,7 +991,7 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantCustomProfileIconPermissions(Context context, ProfileIconPreference preference) {
+    static boolean grantCustomProfileIconPermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean granted = checkGallery(context);
             if (!granted) {
@@ -999,14 +1000,15 @@ public class Permissions {
                     permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_CUSTOM_PROFILE_ICON);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    profileIconPreference = preference;
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_CUSTOM_PROFILE_ICON);
+                    //profileIconPreference = preference;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1017,21 +1019,22 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantBrightnessDialogPermissions(Context context, BrightnessDialogPreference preference) {
+    static boolean grantBrightnessDialogPermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = new ArrayList<>();
             boolean granted = checkScreenBrightness(context, permissions);
             if (!granted) {
                 try {
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_BRIGHTNESS_DIALOG);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    brightnessDialogPreference = preference;
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_BRIGHTNESS_DIALOG);
+                    //brightnessDialogPreference = preference;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1051,14 +1054,15 @@ public class Permissions {
                     permissions.add(new PermissionType(PERMISSION_EXPORT, permission.WRITE_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_EXPORT);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    editorActivity = editor;
-                    context.startActivity(intent);
+                    editor.startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_EXPORT);
+                    //editorActivity = editor;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1078,15 +1082,16 @@ public class Permissions {
                     permissions.add(new PermissionType(PERMISSION_IMPORT, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_IMPORT);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    editorActivity = editor;
-                    context.startActivity(intent);
+                    editor.startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_IMPORT);
+                    //editorActivity = editor;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1097,7 +1102,7 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantRingtonePreferenceDialogPermissions(Context context, RingtonePreference preference) {
+    static boolean grantRingtonePreferenceDialogPermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean granted = checkRingtonePreference(context);
             if (!granted) {
@@ -1106,14 +1111,15 @@ public class Permissions {
                     permissions.add(new PermissionType(PERMISSION_RINGTONE_PREFERENCE, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_RINGTONE_PREFERENCE);
                     intent.putParcelableArrayListExtra(EXTRA_PERMISSION_TYPES, (ArrayList<PermissionType>) permissions);
                     intent.putExtra(EXTRA_ONLY_NOTIFICATION, false);
                     intent.putExtra(EXTRA_FORCE_GRANT, true);
-                    ringtonePreference = preference;
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_RINGTONE_PREFERENCE);
+                    //ringtonePreference = preference;
+                    //context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1173,11 +1179,11 @@ public class Permissions {
 
     static  void releaseReferences() {
         //profileActivationActivity = null;
-        wallpaperViewPreference = null;
-        profileIconPreference = null;
-        editorActivity = null;
-        brightnessDialogPreference = null;
-        ringtonePreference = null;
+        //wallpaperViewPreference = null;
+        //profileIconPreference = null;
+        //editorActivity = null;
+        //brightnessDialogPreference = null;
+        //ringtonePreference = null;
     }
 
 
