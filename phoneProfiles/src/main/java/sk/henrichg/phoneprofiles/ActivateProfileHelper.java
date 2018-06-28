@@ -69,6 +69,12 @@ class ActivateProfileHelper {
     //private DataWrapper dataWrapper;
 
     static final boolean lockRefresh = false;
+
+    private static BrightnessView brightnessView = null;
+    private static BrightnessView keepScreenOnView = null;
+
+    public static LockDeviceActivity lockDeviceActivity = null;
+    public static int screenTimeoutBeforeDeviceLock = 0;
     static boolean disableScreenTimeoutInternalChange = false;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
@@ -2017,36 +2023,36 @@ class ActivateProfileHelper {
         switch (screenTimeout) {
             case 1:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 15000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 15000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
                 break;
             case 2:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 30000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 30000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 30000);
                 break;
             case 3:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 60000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 60000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
                 break;
             case 4:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 120000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 120000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 120000);
                 break;
             case 5:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 600000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 600000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 600000);
                 break;
@@ -2056,21 +2062,21 @@ class ActivateProfileHelper {
                 //86400000   = 24 hours
                 //43200000   = 12 hours
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 86400000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 86400000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000); //18000000);
                 break;
             case 7:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity != null)
-                    PPApplication.screenTimeoutBeforeDeviceLock = 300000;
+                if (lockDeviceActivity != null)
+                    screenTimeoutBeforeDeviceLock = 300000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
                 break;
             case 8:
                 screenTimeoutUnlock(context);
-                if (PPApplication.lockDeviceActivity == null)
+                if (lockDeviceActivity == null)
                     screenTimeoutLock(context);
                 break;
         }
@@ -2112,26 +2118,26 @@ class ActivateProfileHelper {
                 params.gravity = Gravity.RIGHT | Gravity.TOP;
             else
                 params.gravity = Gravity.END | Gravity.TOP;*/
-            GlobalGUIRoutines.keepScreenOnView = new BrightnessView(appContext);
+            keepScreenOnView = new BrightnessView(appContext);
             try {
-                windowManager.addView(GlobalGUIRoutines.keepScreenOnView, params);
+                windowManager.addView(keepScreenOnView, params);
             } catch (Exception e) {
-                GlobalGUIRoutines.keepScreenOnView = null;
+                keepScreenOnView = null;
             }
         }
     }
 
     static void screenTimeoutUnlock(Context context)
     {
-        if (GlobalGUIRoutines.keepScreenOnView != null)
+        if (keepScreenOnView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
                 try {
-                    windowManager.removeView(GlobalGUIRoutines.keepScreenOnView);
+                    windowManager.removeView(keepScreenOnView);
                 } catch (Exception ignore) {
                 }
-                GlobalGUIRoutines.keepScreenOnView = null;
+                keepScreenOnView = null;
             }
         }
 
@@ -2147,12 +2153,12 @@ class ActivateProfileHelper {
 
             WindowManager windowManager = (WindowManager)appContext.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
-                if (GlobalGUIRoutines.brightnessView != null) {
+                if (brightnessView != null) {
                     try {
-                        windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                        windowManager.removeView(brightnessView);
                     } catch (Exception ignored) {
                     }
-                    GlobalGUIRoutines.brightnessView = null;
+                    brightnessView = null;
                 }
                 int type;
                 if (android.os.Build.VERSION.SDK_INT < 25)
@@ -2176,11 +2182,11 @@ class ActivateProfileHelper {
                     params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
                 else
                     params.screenBrightness = profile.getDeviceBrightnessManualValue(appContext) / (float) 255;
-                GlobalGUIRoutines.brightnessView = new BrightnessView(appContext);
+                brightnessView = new BrightnessView(appContext);
                 try {
-                    windowManager.addView(GlobalGUIRoutines.brightnessView, params);
+                    windowManager.addView(brightnessView, params);
                 } catch (Exception e) {
-                    GlobalGUIRoutines.brightnessView = null;
+                    brightnessView = null;
                 }
 
                 final Handler handler = new Handler(appContext.getMainLooper());
@@ -2191,12 +2197,12 @@ class ActivateProfileHelper {
 
                         WindowManager windowManager = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
                         if (windowManager != null) {
-                            if (GlobalGUIRoutines.brightnessView != null) {
+                            if (brightnessView != null) {
                                 try {
-                                    windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                                    windowManager.removeView(brightnessView);
                                 } catch (Exception ignored) {
                                 }
-                                GlobalGUIRoutines.brightnessView = null;
+                                brightnessView = null;
                             }
                         }
                     }
@@ -2207,15 +2213,15 @@ class ActivateProfileHelper {
     }
 
     static void removeBrightnessView(Context context) {
-        if (GlobalGUIRoutines.brightnessView != null)
+        if (brightnessView != null)
         {
             WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
                 try {
-                    windowManager.removeView(GlobalGUIRoutines.brightnessView);
+                    windowManager.removeView(brightnessView);
                 } catch (Exception ignore) {
                 }
-                GlobalGUIRoutines.brightnessView = null;
+                brightnessView = null;
             }
         }
     }
@@ -3242,7 +3248,7 @@ class ActivateProfileHelper {
                         }
                         break;
                     case 1:
-                        if (Permissions.checkLockDevice(appContext) && (PPApplication.lockDeviceActivity == null)) {
+                        if (Permissions.checkLockDevice(appContext) && (lockDeviceActivity == null)) {
                             try {
                                 Intent intent = new Intent(appContext, LockDeviceActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

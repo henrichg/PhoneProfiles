@@ -123,8 +123,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_S_NAME = "name";
 
     private DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
+        super(context.getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context.getApplicationContext();
     }
 
     public static DatabaseHandler getInstance(Context context) {
@@ -1742,7 +1742,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    void disableNotAllowedPreferences(Context context)
+    void disableNotAllowedPreferences()
     {
         PPApplication.logE("DatabaseHandler.disableNotAllowedPreferences", "xxx");
         importExportLock.lock();

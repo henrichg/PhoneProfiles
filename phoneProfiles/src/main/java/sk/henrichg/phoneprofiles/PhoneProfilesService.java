@@ -56,7 +56,7 @@ public class PhoneProfilesService extends Service {
     private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
     private AccessibilityServiceBroadcastReceiver accessibilityServiceBroadcastReceiver = null;
 
-    private static SettingsContentObserver settingsContentObserver = null;
+    private SettingsContentObserver settingsContentObserver = null;
 
     public static String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
 
@@ -125,24 +125,40 @@ public class PhoneProfilesService extends Service {
 
         Context appContext = getApplicationContext();
 
-        if (shutdownBroadcastReceiver != null)
+        if (shutdownBroadcastReceiver != null) {
             appContext.unregisterReceiver(shutdownBroadcastReceiver);
-        if (screenOnOffReceiver != null)
+            shutdownBroadcastReceiver = null;
+        }
+        if (screenOnOffReceiver != null) {
             appContext.unregisterReceiver(screenOnOffReceiver);
+            screenOnOffReceiver = null;
+        }
         if (android.os.Build.VERSION.SDK_INT >= 23)
-            if (interruptionFilterChangedReceiver != null)
+            if (interruptionFilterChangedReceiver != null) {
                 appContext.unregisterReceiver(interruptionFilterChangedReceiver);
-        if (phoneCallBroadcastReceiver != null)
+                interruptionFilterChangedReceiver = null;
+            }
+        if (phoneCallBroadcastReceiver != null) {
             appContext.unregisterReceiver(phoneCallBroadcastReceiver);
-        if (ringerModeChangeReceiver != null)
+            phoneCallBroadcastReceiver = null;
+        }
+        if (ringerModeChangeReceiver != null) {
             appContext.unregisterReceiver(ringerModeChangeReceiver);
-        if (wifiStateChangedBroadcastReceiver != null)
+            ringerModeChangeReceiver = null;
+        }
+        if (wifiStateChangedBroadcastReceiver != null) {
             appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
-        if (accessibilityServiceBroadcastReceiver != null)
+            wifiStateChangedBroadcastReceiver = null;
+        }
+        if (accessibilityServiceBroadcastReceiver != null) {
             appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
+            accessibilityServiceBroadcastReceiver = null;
+        }
 
-        if (settingsContentObserver != null)
+        if (settingsContentObserver != null) {
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
+            settingsContentObserver = null;
+        }
 
         reenableKeyguard();
 
@@ -391,15 +407,19 @@ public class PhoneProfilesService extends Service {
     private void registerReceivers() {
         Context appContext = getApplicationContext();
 
-        if (shutdownBroadcastReceiver != null)
+        if (shutdownBroadcastReceiver != null) {
             appContext.unregisterReceiver(shutdownBroadcastReceiver);
+            shutdownBroadcastReceiver = null;
+        }
         shutdownBroadcastReceiver = new ShutdownBroadcastReceiver();
         IntentFilter intentFilter50 = new IntentFilter();
         intentFilter50.addAction(Intent.ACTION_SHUTDOWN);
         appContext.registerReceiver(shutdownBroadcastReceiver, intentFilter50);
 
-        if (screenOnOffReceiver != null)
+        if (screenOnOffReceiver != null) {
             appContext.unregisterReceiver(screenOnOffReceiver);
+            screenOnOffReceiver = null;
+        }
         screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
         IntentFilter intentFilter5 = new IntentFilter();
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
@@ -408,6 +428,10 @@ public class PhoneProfilesService extends Service {
         appContext.registerReceiver(screenOnOffReceiver, intentFilter5);
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (interruptionFilterChangedReceiver != null) {
+                appContext.unregisterReceiver(interruptionFilterChangedReceiver);
+                interruptionFilterChangedReceiver = null;
+            }
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, appContext)) {
                 interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
@@ -417,30 +441,38 @@ public class PhoneProfilesService extends Service {
             }
         }
 
-        if (phoneCallBroadcastReceiver != null)
+        if (phoneCallBroadcastReceiver != null) {
             appContext.unregisterReceiver(phoneCallBroadcastReceiver);
+            phoneCallBroadcastReceiver = null;
+        }
         phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
         IntentFilter intentFilter6 = new IntentFilter();
         intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
         intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         appContext.registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
 
-        if (ringerModeChangeReceiver != null)
+        if (ringerModeChangeReceiver != null) {
             appContext.unregisterReceiver(ringerModeChangeReceiver);
+            ringerModeChangeReceiver = null;
+        }
         ringerModeChangeReceiver = new RingerModeChangeReceiver();
         IntentFilter intentFilter7 = new IntentFilter();
         intentFilter7.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
         appContext.registerReceiver(ringerModeChangeReceiver, intentFilter7);
 
-        if (wifiStateChangedBroadcastReceiver != null)
+        if (wifiStateChangedBroadcastReceiver != null) {
             appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
+            wifiStateChangedBroadcastReceiver = null;
+        }
         wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
         IntentFilter intentFilter8 = new IntentFilter();
         intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
-        if (accessibilityServiceBroadcastReceiver != null)
+        if (accessibilityServiceBroadcastReceiver != null) {
             appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
+            accessibilityServiceBroadcastReceiver = null;
+        }
         accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
         IntentFilter intentFilter23 = new IntentFilter();
         intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
@@ -448,8 +480,10 @@ public class PhoneProfilesService extends Service {
         appContext.registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
-        if (settingsContentObserver != null)
+        if (settingsContentObserver != null) {
             appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
+            settingsContentObserver = null;
+        }
         try {
             //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
             settingsContentObserver = new SettingsContentObserver(appContext, new Handler());

@@ -16,8 +16,8 @@ public class LockDeviceActivityFinishBroadcastReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
         PPApplication.logE("##### LockDeviceActivityFinishBroadcastReceiver.onReceive", "xxx");
 
-        if (PPApplication.lockDeviceActivity != null) {
-            PPApplication.lockDeviceActivity.finish();
+        if (ActivateProfileHelper.lockDeviceActivity != null) {
+            ActivateProfileHelper.lockDeviceActivity.finish();
         }
     }
 

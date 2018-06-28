@@ -190,7 +190,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         super.onStop();
         if (instance == this)
             instance = null;
-        ActivatorTargetHelpsActivity.activatorActivity = null;
+        //ActivatorTargetHelpsActivity.activatorActivity = null;
     }
 
     @Override
@@ -273,7 +273,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
             //Log.d("ActivateProfilesActivity.startTargetHelpsActivity", "(2)");
 
-            ActivatorTargetHelpsActivity.activatorActivity = this;
+            //ActivatorTargetHelpsActivity.activatorActivity = this;
             Intent intent = new Intent(this, ActivatorTargetHelpsActivity.class);
             startActivity(intent);
 
@@ -350,7 +350,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                                     //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                                     ActivatorTargetHelpsActivity.activity.finish();
                                     ActivatorTargetHelpsActivity.activity = null;
-                                    ActivatorTargetHelpsActivity.activatorActivity = null;
+                                    //ActivatorTargetHelpsActivity.activatorActivity = null;
                                 }
                             }
                         }, 500);
@@ -386,7 +386,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                 ActivatorTargetHelpsActivity.activity.finish();
                 ActivatorTargetHelpsActivity.activity = null;
-                ActivatorTargetHelpsActivity.activatorActivity = null;
+                //ActivatorTargetHelpsActivity.activatorActivity = null;
             }
         }
     }

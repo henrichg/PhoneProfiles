@@ -24,9 +24,6 @@ import java.util.Locale;
 
 class GlobalGUIRoutines {
 
-    static BrightnessView brightnessView = null;
-    static BrightnessView keepScreenOnView = null;
-
     static Collator collator = null;
 
     // import/export

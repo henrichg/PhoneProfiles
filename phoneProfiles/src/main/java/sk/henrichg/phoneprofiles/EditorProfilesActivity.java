@@ -610,7 +610,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     int ret = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
                     if (ret == 1) {
                         // check for hardware capability and update data
-                        DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences(activity.getApplicationContext());
+                        DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences();
                         this.dataWrapper.clearProfileList();
                         DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
                     }
