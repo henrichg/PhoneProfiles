@@ -190,7 +190,7 @@ public class WallpaperViewPreference extends Preference {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
 
-            ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
+            //ProfilePreferencesFragment.setChangedWallpaperViewPreference(this);
             ((Activity)prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
         } catch (Exception ignored) {}
         /*} catch (ActivityNotFoundException e) {

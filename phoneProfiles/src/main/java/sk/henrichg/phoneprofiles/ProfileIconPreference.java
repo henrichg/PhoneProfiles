@@ -388,7 +388,7 @@ public class ProfileIconPreference extends DialogPreference {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
 
-            ProfilePreferencesFragment.setChangedProfileIconPreference(this);
+            //ProfilePreferencesFragment.setChangedProfileIconPreference(this);
             ((Activity) prefContext).startActivityForResult(intent, RESULT_LOAD_IMAGE);
         } catch (Exception ignored) {}
         /*} catch (ActivityNotFoundException e) {
