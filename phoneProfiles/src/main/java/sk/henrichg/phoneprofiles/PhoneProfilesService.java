@@ -193,8 +193,9 @@ public class PhoneProfilesService extends Service {
 
         if (onlyStart) {
 
-            if (startOnPackageReplace) {
-            }
+            //if (startOnPackageReplace) {
+            //  moved to PackageReplacedReceiver
+            //}
 
             PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
