@@ -243,6 +243,24 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
     */
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_PROFILE) {
+            if (data != null) {
+                long profileId = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+                int startupSource = data.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
+                boolean activateProfile = data.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, false);
+                ;
+
+                if (activateProfile && (getDataWrapper() != null)) {
+                    Profile profile = getDataWrapper().getProfileById(profileId, false, false);
+                    getDataWrapper()._activateProfile(profile, startupSource, this);
+                }
+            }
+        }
+    }
+
     public void refreshGUI(boolean refreshIcons)
     {
         final boolean _refreshIcons = refreshIcons;
@@ -255,6 +273,15 @@ public class ActivateProfileActivity extends AppCompatActivity {
                     ((ActivateProfileListFragment)fragment).refreshGUI(_refreshIcons);
             }
         });
+    }
+
+    private DataWrapper getDataWrapper()
+    {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.activate_profile_list);
+        if (fragment != null)
+            return ((ActivateProfileListFragment)fragment).activityDataWrapper;
+        else
+            return null;
     }
 
     public void startTargetHelpsActivity() {

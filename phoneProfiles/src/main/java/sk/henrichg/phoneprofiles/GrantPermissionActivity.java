@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -652,11 +653,18 @@ public class GrantPermissionActivity extends AppCompatActivity {
             finish();
         }
         else {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+            returnIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
+            returnIntent.putExtra(Permissions.EXTRA_ACTIVATE_PROFILE, activateProfile);
+            setResult(Activity.RESULT_OK,returnIntent);
+
             //finishAffinity();
             finish();
             Permissions.removeProfileNotification(context);
-            if (activateProfile)
-                dataWrapper._activateProfile(profile, startupSource, /*interactive,*/ Permissions.profileActivationActivity);
+            /*if (activateProfile)
+                dataWrapper._activateProfile(profile, startupSource, //interactive,
+                                                Permissions.profileActivationActivity);*/
         }
         Permissions.releaseReferences();
         if (mergedNotification)

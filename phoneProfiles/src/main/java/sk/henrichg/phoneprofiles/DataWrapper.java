@@ -667,7 +667,7 @@ public class DataWrapper {
 
             Intent returnIntent = new Intent();
             returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);
-            returnIntent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
+            returnIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
             _activity.setResult(Activity.RESULT_OK,returnIntent);
         }
 
@@ -909,7 +909,7 @@ public class DataWrapper {
             {
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile_id);
-                returnIntent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
+                returnIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                 activity.setResult(Activity.RESULT_OK,returnIntent);
             }
 

@@ -56,6 +56,8 @@ public class Permissions {
     static final int GRANT_TYPE_RINGTONE_PREFERENCE = 9;
     private static final int GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION = 10;
 
+    static final int REQUEST_CODE = 5000;
+
     static final String EXTRA_GRANT_TYPE = "grant_type";
     static final String EXTRA_PERMISSION_TYPES = "permission_types";
     static final String EXTRA_ONLY_NOTIFICATION = "only_notification";
@@ -68,7 +70,7 @@ public class Permissions {
     static final String EXTRA_ACTIVATE_PROFILE = "activate_profile";
     private static final String EXTRA_GRANT_ALSO_CONTACTS = "grant_also_contacts";
 
-    static Activity profileActivationActivity = null;
+    //static Activity profileActivationActivity = null;
     static WallpaperViewPreference wallpaperViewPreference = null;
     static ProfileIconPreference profileIconPreference = null;
     static EditorProfilesActivity editorActivity = null;
@@ -904,7 +906,8 @@ public class Permissions {
             if (permissions.size() > 0) {
                 try {
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    if (activity == null)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
                     intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
@@ -919,11 +922,14 @@ public class Permissions {
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                     //intent.putExtra(EXTRA_INTERACTIVE, interactive);
                     intent.putExtra(EXTRA_ACTIVATE_PROFILE, activateProfile);
-                    if (!onlyNotification)
+                    /*if (!onlyNotification)
                         profileActivationActivity = activity;
                     else
-                        profileActivationActivity = null;
-                    context.startActivity(intent);
+                        profileActivationActivity = null;*/
+                    if (activity != null)
+                        activity.startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_PROFILE);
+                    else
+                        context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }
@@ -1166,7 +1172,7 @@ public class Permissions {
     }
 
     static  void releaseReferences() {
-        profileActivationActivity = null;
+        //profileActivationActivity = null;
         wallpaperViewPreference = null;
         profileIconPreference = null;
         editorActivity = null;

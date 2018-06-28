@@ -25,7 +25,7 @@ import java.util.Comparator;
 
 public class ActivateProfileListFragment extends Fragment {
 
-    private DataWrapper activityDataWrapper;
+    DataWrapper activityDataWrapper;
     private ActivateProfileListAdapter profileListAdapter = null;
     private ListView listView = null;
     private GridView gridView = null;

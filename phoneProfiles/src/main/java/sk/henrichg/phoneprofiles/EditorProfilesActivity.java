@@ -486,6 +486,20 @@ public class EditorProfilesActivity extends AppCompatActivity
                 doImportData(GlobalGUIRoutines.REMOTE_EXPORT_PATH);
             }
         }
+        else
+        if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_PROFILE) {
+            if (data != null) {
+                long profileId = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+                int startupSource = data.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, 0);
+                boolean activateProfile = data.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, false);
+                ;
+
+                if (activateProfile && (getDataWrapper() != null)) {
+                    Profile profile = getDataWrapper().getProfileById(profileId, false, false);
+                    getDataWrapper()._activateProfile(profile, startupSource, this);
+                }
+            }
+        }
     }
 
     private void importExportErrorDialog(int importExport, int result)
