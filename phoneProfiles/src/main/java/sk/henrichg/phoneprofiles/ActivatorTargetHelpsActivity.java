@@ -26,7 +26,7 @@ public class ActivatorTargetHelpsActivity extends AppCompatActivity {
             return;
         }
 
-        GlobalGUIRoutines.setTheme(this, true, false);
+        GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
 
         ActivateProfileActivity.getInstance().showTargetHelps();
