@@ -1751,10 +1751,11 @@ class ActivateProfileHelper {
         if (Permissions.checkProfileScreenTimeout(context, profile, null)) {
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             if ((pm != null) && pm.isScreenOn()) {
-                //Log.d("ActivateProfileHelper.execute","screen on");
+                PPApplication.logE("ActivateProfileHelper.execute","screen on");
                 if (PPApplication.screenTimeoutHandler != null) {
                     PPApplication.screenTimeoutHandler.post(new Runnable() {
                         public void run() {
+                            PPApplication.logE("ActivateProfileHelper.execute","call setScreenTimeout");
                             setScreenTimeout(profile._deviceScreenTimeout, context);
                         }
                     });
@@ -1762,7 +1763,7 @@ class ActivateProfileHelper {
                 //    setScreenTimeout(profile._deviceScreenTimeout);
             }
             else {
-                //Log.d("ActivateProfileHelper.execute","screen off");
+                PPApplication.logE("ActivateProfileHelper.execute","screen off");
                 setActivatedProfileScreenTimeout(context, profile._deviceScreenTimeout);
             }
         }
@@ -2015,6 +2016,7 @@ class ActivateProfileHelper {
     static void setScreenTimeout(int screenTimeout, Context context) {
         disableScreenTimeoutInternalChange = true;
         //Log.d("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
+        PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
         switch (screenTimeout) {
             case 1:
                 screenTimeoutUnlock(context);
@@ -2057,10 +2059,14 @@ class ActivateProfileHelper {
                 //86400000   = 24 hours
                 //43200000   = 12 hours
                 screenTimeoutUnlock(context);
-                if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null)) {
+                    PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "max value - lock activity displayed");
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 86400000;
-                else
+                }
+                else {
+                    PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "max value - lock activity not displayed");
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000); //18000000);
+                }
                 break;
             case 7:
                 screenTimeoutUnlock(context);
@@ -2071,8 +2077,14 @@ class ActivateProfileHelper {
                 break;
             case 8:
                 screenTimeoutUnlock(context);
-                if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null)) {
+                    PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "permanent on - lock activity displayed");
+                    PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = Integer.MAX_VALUE;
+                }
+                else {
+                    PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "permanent on - lock activity not displayed");
                     screenTimeoutLock(context);
+                }
                 break;
         }
         setActivatedProfileScreenTimeout(context, 0);
@@ -2089,6 +2101,7 @@ class ActivateProfileHelper {
 
     private static void screenTimeoutLock(Context context)
     {
+        PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "xxx");
         screenTimeoutUnlock(context);
 
         if (PhoneProfilesService.instance != null) {
@@ -2096,6 +2109,9 @@ class ActivateProfileHelper {
 
             WindowManager windowManager = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
+
+                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "windowManager != null");
+
                 int type;
                 if (android.os.Build.VERSION.SDK_INT < 25)
                     type = WindowManager.LayoutParams.TYPE_TOAST;
@@ -2109,14 +2125,18 @@ class ActivateProfileHelper {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE*/ | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                         PixelFormat.TRANSLUCENT
                 );
+                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "params configured");
                 /*if (android.os.Build.VERSION.SDK_INT < 17)
                     params.gravity = Gravity.RIGHT | Gravity.TOP;
                 else
                     params.gravity = Gravity.END | Gravity.TOP;*/
                 PhoneProfilesService.instance.keepScreenOnView = new BrightnessView(appContext);
+                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "new BrightnessView() called");
                 try {
+                    PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "call addView");
                     windowManager.addView(PhoneProfilesService.instance.keepScreenOnView, params);
                 } catch (Exception e) {
+                    PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", Log.getStackTraceString(e));
                     PhoneProfilesService.instance.keepScreenOnView = null;
                 }
             }

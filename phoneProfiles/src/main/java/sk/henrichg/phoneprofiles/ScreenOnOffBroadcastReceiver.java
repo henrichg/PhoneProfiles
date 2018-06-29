@@ -77,10 +77,13 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     /*if (lockDeviceEnabled && Permissions.checkLockDevice(appContext))
                         Settings.System.putInt(appContext.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, PPApplication.screenTimeoutBeforeDeviceLock);*/
                     final int screenTimeout = ActivateProfileHelper.getActivatedProfileScreenTimeout(appContext);
+                    PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screenTimeout="+screenTimeout);
                     if ((screenTimeout > 0) && (Permissions.checkScreenTimeout(appContext))) {
+                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "permission ok");
                         if (PPApplication.screenTimeoutHandler != null) {
                             PPApplication.screenTimeoutHandler.post(new Runnable() {
                                 public void run() {
+                                    PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "call ActivateProfileHelper.setScreenTimeout");
                                     ActivateProfileHelper.setScreenTimeout(screenTimeout, appContext);
                                     dataWrapper.invalidateDataWrapper();
                                 }
