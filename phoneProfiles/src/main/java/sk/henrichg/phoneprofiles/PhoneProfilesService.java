@@ -48,6 +48,12 @@ public class PhoneProfilesService extends Service {
     @SuppressWarnings("deprecation")
     private static KeyguardManager.KeyguardLock keyguardLock = null;
 
+    BrightnessView brightnessView = null;
+    BrightnessView keepScreenOnView = null;
+
+    LockDeviceActivity lockDeviceActivity = null;
+    int screenTimeoutBeforeDeviceLock = 0;
+
     private ShutdownBroadcastReceiver shutdownBroadcastReceiver = null;
     private ScreenOnOffBroadcastReceiver screenOnOffReceiver = null;
     private InterruptionFilterChangedBroadcastReceiver interruptionFilterChangedReceiver = null;
