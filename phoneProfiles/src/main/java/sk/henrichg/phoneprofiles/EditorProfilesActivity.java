@@ -598,6 +598,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             @SuppressLint("StaticFieldLeak")
             class ImportAsyncTask extends AsyncTask<Void, Integer, Integer> {
                 private DataWrapper dataWrapper;
+                private boolean dbError = false;
+                private boolean appSettingsError = false;
+                private boolean defaultProfileError = false;
 
                 private ImportAsyncTask() {
                     importProgressDialog = new MaterialDialog.Builder(activity)
@@ -637,26 +640,29 @@ public class EditorProfilesActivity extends AppCompatActivity
                         this.dataWrapper.clearProfileList();
                         DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
                     }
+                    else
+                        dbError = true;
 
-                    if (ret == 1) {
-                        File sd = Environment.getExternalStorageDirectory();
-                        File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
-                        if (importApplicationPreferences(exportFile, 1)) {
-                            exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
-                            if (!importApplicationPreferences(exportFile, 2))
-                                ret = 0;
-                        }
-                        else
-                            ret = 0;
-                    }
+                    File sd = Environment.getExternalStorageDirectory();
+                    File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
+                    appSettingsError = !importApplicationPreferences(exportFile, 1);
+                    exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
+                    defaultProfileError = !importApplicationPreferences(exportFile, 2);
 
-                    if (ret == 1) {
+                    PPApplication.logE("EditorProfilesActivity.doImportData", "dbError="+dbError);
+                    PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError="+appSettingsError);
+                    PPApplication.logE("EditorProfilesActivity.doImportData", "defaultProfileError="+defaultProfileError);
+
+                    if (!appSettingsError) {
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
                         Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-                        //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
+                        Permissions.setShowRequestDrawOverlaysPermission(getApplicationContext(), true);
                     }
 
-                    return ret;
+                    if (!(dbError && appSettingsError && defaultProfileError))
+                        return 1;
+                    else
+                        return 0;
                 }
 
                 @Override

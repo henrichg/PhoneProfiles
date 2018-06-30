@@ -2777,7 +2777,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     ret = 0;
                 }
 
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                Log.e("DatabaseHandler.importDB", Log.getStackTraceString(e));
+            }
             return ret;
         } finally {
             stopRunningImportExport();
