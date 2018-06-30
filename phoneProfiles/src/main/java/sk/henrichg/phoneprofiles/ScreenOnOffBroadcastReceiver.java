@@ -64,8 +64,6 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
                     //ActivateProfileHelper.setScreenUnlocked(appContext, true);
 
-                    final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
-
                     if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
                             ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                         //dataWrapper.getActivateProfileHelper().removeNotification();
@@ -74,6 +72,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     }
 
                     // change screen timeout
+                    final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
                     /*if (lockDeviceEnabled && Permissions.checkLockDevice(appContext))
                         Settings.System.putInt(appContext.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, PPApplication.screenTimeoutBeforeDeviceLock);*/
                     final int screenTimeout = ActivateProfileHelper.getActivatedProfileScreenTimeout(appContext);
@@ -85,14 +84,13 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                                 public void run() {
                                     PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "call ActivateProfileHelper.setScreenTimeout");
                                     ActivateProfileHelper.setScreenTimeout(screenTimeout, appContext);
-                                    dataWrapper.invalidateDataWrapper();
                                 }
                             });
                         }/* else {
-                        dataWrapper.getActivateProfileHelper().setScreenTimeout(screenTimeout);
-                        dataWrapper.invalidateDataWrapper();
-                    }*/
+                            dataWrapper.getActivateProfileHelper().setScreenTimeout(screenTimeout);
+                        }*/
                     }
+                    dataWrapper.invalidateDataWrapper();
 
                     // enable/disable keyguard
                     try {

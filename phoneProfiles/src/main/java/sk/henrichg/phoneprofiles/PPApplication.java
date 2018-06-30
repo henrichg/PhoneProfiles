@@ -54,7 +54,7 @@ public class PPApplication extends Application {
     static final String romManufacturer = getROMManufacturer();
     static String PACKAGE_NAME;
 
-    static final int VERSION_CODE_EXTENDER_1_0_4 = 60;
+    //static final int VERSION_CODE_EXTENDER_1_0_4 = 60;
     static final int VERSION_CODE_EXTENDER_2_0 = 100;
     static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_2_0;
 
@@ -1150,7 +1150,7 @@ public class PPApplication extends Application {
                 if (PPApplication.screenTimeoutHandler != null) {
                     PPApplication.screenTimeoutHandler.post(new Runnable() {
                         public void run() {
-                            ActivateProfileHelper.screenTimeoutUnlock(context);
+                            ActivateProfileHelper.removeScreenTimeoutAlwaysOnView(context);
                             ActivateProfileHelper.removeBrightnessView(context);
 
                         }

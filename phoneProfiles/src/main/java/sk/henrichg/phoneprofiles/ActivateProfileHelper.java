@@ -2019,36 +2019,41 @@ class ActivateProfileHelper {
         PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "current="+Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0));
         switch (screenTimeout) {
             case 1:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 15000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
                 break;
             case 2:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 30000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 30000);
                 break;
             case 3:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 60000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
                 break;
             case 4:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 120000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 120000);
                 break;
             case 5:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 600000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 600000);
@@ -2058,9 +2063,10 @@ class ActivateProfileHelper {
                 //18000000   = 5 hours
                 //86400000   = 24 hours
                 //43200000   = 12 hours
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null)) {
                     PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "max value - lock activity displayed");
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 86400000;
                 }
                 else {
@@ -2069,21 +2075,23 @@ class ActivateProfileHelper {
                 }
                 break;
             case 7:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 300000;
                 else
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
                 break;
             case 8:
-                screenTimeoutUnlock(context);
+                removeScreenTimeoutAlwaysOnView(context);
                 if ((PhoneProfilesService.instance != null) && (PhoneProfilesService.instance.lockDeviceActivity != null)) {
                     PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "permanent on - lock activity displayed");
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
                     PhoneProfilesService.instance.screenTimeoutBeforeDeviceLock = 86400000;
                 }
                 else {
                     PPApplication.logE("ActivateProfileHelper.setScreenTimeout", "permanent on - lock activity not displayed");
-                    screenTimeoutLock(context);
+                    createScreenTimeoutAlwaysOnView(context);
                 }
                 break;
         }
@@ -2099,20 +2107,22 @@ class ActivateProfileHelper {
         }, 3000);
     }
 
-    private static void screenTimeoutLock(Context context)
+    private static void createScreenTimeoutAlwaysOnView(Context context)
     {
-        PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "xxx");
-        screenTimeoutUnlock(context);
+        PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", "xxx");
+        removeScreenTimeoutAlwaysOnView(context);
 
         if (PhoneProfilesService.instance != null) {
             final Context appContext = context.getApplicationContext();
 
+            // Put 24 hour screen timeout. Required for SettingsContentObserver.OnChange to call removeScreenTimeoutAlwaysOnView
+            // when user change system setting.
             Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 86400000);
 
             WindowManager windowManager = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
 
-                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "windowManager != null");
+                PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", "windowManager != null");
 
                 int type;
                 if (android.os.Build.VERSION.SDK_INT < 25)
@@ -2127,25 +2137,25 @@ class ActivateProfileHelper {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE*/ | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                         PixelFormat.TRANSLUCENT
                 );
-                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "params configured");
+                PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", "params configured");
                 /*if (android.os.Build.VERSION.SDK_INT < 17)
                     params.gravity = Gravity.RIGHT | Gravity.TOP;
                 else
                     params.gravity = Gravity.END | Gravity.TOP;*/
                 PhoneProfilesService.instance.keepScreenOnView = new BrightnessView(appContext);
-                PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "new BrightnessView() called");
+                PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", "new BrightnessView() called");
                 try {
-                    PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", "call addView");
+                    PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", "call addView");
                     windowManager.addView(PhoneProfilesService.instance.keepScreenOnView, params);
                 } catch (Exception e) {
-                    PPApplication.logE("ActivateProfileHelper.screenTimeoutLock", Log.getStackTraceString(e));
+                    PPApplication.logE("ActivateProfileHelper.createScreenTimeoutAlwaysOnView", Log.getStackTraceString(e));
                     PhoneProfilesService.instance.keepScreenOnView = null;
                 }
             }
         }
     }
 
-    static void screenTimeoutUnlock(Context context)
+    static void removeScreenTimeoutAlwaysOnView(Context context)
     {
         if (PhoneProfilesService.instance != null) {
             if (PhoneProfilesService.instance.keepScreenOnView != null) {
@@ -2159,7 +2169,7 @@ class ActivateProfileHelper {
                 }
             }
         }
-        PPApplication.logE("@@@ screenTimeoutLock.unlock", "xxx");
+        PPApplication.logE("@@@ createScreenTimeoutAlwaysOnView.unlock", "xxx");
     }
 
     @SuppressLint("RtlHardcoded")
