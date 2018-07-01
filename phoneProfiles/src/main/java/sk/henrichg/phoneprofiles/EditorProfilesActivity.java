@@ -634,8 +634,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    int ret = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
-                    if (ret == 1) {
+                    int dbRet = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
+                    if (dbRet == 1) {
                         // check for hardware capability and update data
                         DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences();
                         this.dataWrapper.clearProfileList();
@@ -662,8 +662,12 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if (!(dbError && appSettingsError && defaultProfileError))
                         return 1;
-                    else
-                        return 0;
+                    else {
+                        if (dbError)
+                            return dbRet;
+                        else
+                            return 0;
+                    }
                 }
 
                 @Override
