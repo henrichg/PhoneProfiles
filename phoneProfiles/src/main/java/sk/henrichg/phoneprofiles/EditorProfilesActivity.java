@@ -511,6 +511,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
+    /*
     private void importExportErrorDialog(int importExport, int result)
     {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -523,7 +524,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         String message;
         if (importExport == 1) {
             message = getString(R.string.import_profiles_alert_error);
-            if (result == -999)
+            if (result == DatabaseHandler.IMPORT_ERROR_NEVER_VERSION)
                 message = message + ". " + getString(R.string.import_profiles_alert_error_database_newer_version);
         }
         else
@@ -533,6 +534,36 @@ public class EditorProfilesActivity extends AppCompatActivity
         dialogBuilder.setPositiveButton(android.R.string.ok, null);
         dialogBuilder.show();
     }
+    */
+    private void importExportErrorDialog(int importExport, int dbResult, int appSettingsResult, int sharedProfileResult)
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        String title;
+        if (importExport == 1)
+            title = getString(R.string.import_profiles_alert_title);
+        else
+            title = getString(R.string.export_profiles_alert_title);
+        dialogBuilder.setTitle(title);
+        String message;
+        if (importExport == 1) {
+            message = getString(R.string.import_profiles_alert_error) + ":";
+            if (dbResult == DatabaseHandler.IMPORT_ERROR_NEVER_VERSION)
+                message = message + "\n• " + getString(R.string.import_profiles_alert_error_database_newer_version);
+            else
+                message = message + "\n• " + getString(R.string.import_profiles_alert_error_database_bug);
+            if (appSettingsResult == 0)
+                message = message + "\n• " + getString(R.string.import_profiles_alert_error_appSettings_bug);
+            if (sharedProfileResult == 0)
+                message = message + "\n• " + getString(R.string.import_profiles_alert_error_sharedProfile_bug);
+        }
+        else
+            message = getString(R.string.export_profiles_alert_error);
+        dialogBuilder.setMessage(message);
+        //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+        dialogBuilder.show();
+    }
+
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean importApplicationPreferences(File src, int what) {
@@ -601,7 +632,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 private DataWrapper dataWrapper;
                 private boolean dbError = false;
                 private boolean appSettingsError = false;
-                private boolean defaultProfileError = false;
+                private boolean sharedProfileError = false;
 
                 private ImportAsyncTask() {
                     importProgressDialog = new MaterialDialog.Builder(activity)
@@ -635,7 +666,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 @Override
                 protected Integer doInBackground(Void... params) {
                     int dbRet = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
-                    if (dbRet == 1) {
+                    if (dbRet == DatabaseHandler.IMPORT_OK) {
                         // check for hardware capability and update data
                         DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences();
                         this.dataWrapper.clearProfileList();
@@ -648,11 +679,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                     File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
                     appSettingsError = !importApplicationPreferences(exportFile, 1);
                     exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
-                    defaultProfileError = !importApplicationPreferences(exportFile, 2);
+                    sharedProfileError = !importApplicationPreferences(exportFile, 2);
 
                     PPApplication.logE("EditorProfilesActivity.doImportData", "dbError="+dbError);
                     PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError="+appSettingsError);
-                    PPApplication.logE("EditorProfilesActivity.doImportData", "defaultProfileError="+defaultProfileError);
+                    PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError="+sharedProfileError);
 
                     if (!appSettingsError) {
                         Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
@@ -660,7 +691,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         Permissions.setShowRequestDrawOverlaysPermission(getApplicationContext(), true);
                     }
 
-                    if (!(dbError && appSettingsError && defaultProfileError))
+                    if (!(dbError && appSettingsError && sharedProfileError))
                         return 1;
                     else {
                         if (dbError)
@@ -682,7 +713,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     }
                     GlobalGUIRoutines.unlockScreenOrientation(activity);
 
-                    if (result == 1) {
+                    if (!(dbError && appSettingsError && sharedProfileError)) {
                         ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
                         PPApplication.setApplicationStarted(getApplicationContext(), true);
@@ -702,7 +733,13 @@ public class EditorProfilesActivity extends AppCompatActivity
                     } else {
                         PPApplication.startPPService(activity, new Intent(activity.getApplicationContext(), PhoneProfilesService.class));
 
-                        importExportErrorDialog(1, result);
+                        int dbResult = 1;
+                        if (dbError) dbResult = result;
+                        int appSettingsResult = 1;
+                        if (appSettingsError) appSettingsResult = 0;
+                        int sharedProfileResult = 1;
+                        if (sharedProfileError) sharedProfileResult = 0;
+                        importExportErrorDialog(1, dbResult, appSettingsResult, sharedProfileResult);
                     }
                 }
 
@@ -898,7 +935,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         msg.show();
 
                     } else {
-                        importExportErrorDialog(2, result);
+                        importExportErrorDialog(2, 0, 0,0);
                     }
                 }
 

@@ -46,6 +46,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Condition runningCommandCondition = importExportLock.newCondition();
     private boolean runningImportExport = false;
     private boolean runningCommand = false;
+    static final int IMPORT_ERROR_BUG = 0;
+    static final int IMPORT_ERROR_NEVER_VERSION = -999;
+    static final int IMPORT_OK = 1;
 
     // Profiles Table Columns names
     private static final String KEY_ID = "id";
@@ -2438,7 +2441,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         PPApplication.logE("DatabaseHandler.importDB", "xxx");
         importExportLock.lock();
         try {
-            int ret = 0;
+            int ret = IMPORT_ERROR_BUG;
             try {
                 startRunningImportExport();
 
@@ -2756,7 +2759,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                 db.setTransactionSuccessful();
 
-                                ret = 1;
+                                ret = IMPORT_OK;
                             } finally {
                                 db.endTransaction();
                                 if ((cursorExportedDB != null) && (!cursorExportedDB.isClosed()))
@@ -2766,15 +2769,15 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 //db.close();
                             }
                         } else {
-                            ret = 0;
+                            ret = IMPORT_ERROR_BUG;
                         }
                     } else {
                         //    exportedDBObj.close();
-                        ret = -999;
+                        ret = IMPORT_ERROR_NEVER_VERSION;
                     }
                 } catch (Exception e) {
                     Log.e("DatabaseHandler.importDB", Log.getStackTraceString(e));
-                    ret = 0;
+                    ret = IMPORT_ERROR_BUG;
                 }
 
             } catch (Exception e) {
