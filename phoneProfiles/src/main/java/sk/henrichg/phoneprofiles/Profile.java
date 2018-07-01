@@ -2105,6 +2105,9 @@ public class Profile {
                     }
                 }
                 else
+                if (WifiApManager.canExploitWifiTethering(context))
+                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                else
                     PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else

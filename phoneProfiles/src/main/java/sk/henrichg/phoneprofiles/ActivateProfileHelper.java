@@ -152,7 +152,7 @@ class ActivateProfileHelper {
                 WifiApManager wifiApManager = null;
                 try {
                     wifiApManager = new WifiApManager(context);
-                } catch (NoSuchMethodException ignored) {
+                } catch (Exception ignored) {
                 }
                 if (wifiApManager != null) {
                     boolean setWifiAPState = false;
@@ -2831,6 +2831,12 @@ class ActivateProfileHelper {
                     }
                 } catch(Exception ignored) {
                 }
+            }
+            else {
+                if (enable)
+                    wifiApManager.startTethering();
+                else
+                    wifiApManager.stopTethering();
             }
         }
     }
