@@ -37,7 +37,7 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/toolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu"
-        android:elevation="4dp"
+        android:elevation="1dp"
         tools:ignore="UnusedAttribute" />
 
     <FrameLayout
@@ -72,7 +72,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="4dp"
+            android:layout_height="1dp"
             android:background="@drawable/bottombar_dropshadow"
             android:layout_gravity="bottom" />
 

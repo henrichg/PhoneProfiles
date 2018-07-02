@@ -58,6 +58,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.info_notification_title);
+            getSupportActionBar().setElevation(GlobalGUIRoutines.dpToPx(1));
         }
 
         int versionCode = 0;

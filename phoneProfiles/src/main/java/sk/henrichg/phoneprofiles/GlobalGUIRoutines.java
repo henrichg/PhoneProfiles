@@ -230,12 +230,12 @@ class GlobalGUIRoutines {
     private static float spToPixels(Context context, float sp) {
         return sp * context.getResources().getDisplayMetrics().scaledDensity;
     }
+    */
 
     static int dpToPx(int dp)
     {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
-    */
 
     /*static int pxToDp(int px)
     {
