@@ -3,6 +3,7 @@
 // 2500 = show target helps for shared profile toolbar item
 // 2700 = start About application alarm for notification "Please donate me."
 // 2800 = updated privacy policy
+// 2900 = Wi-Fi AP = Toggle is not supported fro Android 8+
 
 ext.ppVersions = [
     publishVersion: '4.6.0.4b',

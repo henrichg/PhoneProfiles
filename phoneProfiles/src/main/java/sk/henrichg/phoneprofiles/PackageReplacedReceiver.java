@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 
@@ -86,6 +87,16 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 PPApplication.setDaysAfterFirstStart(appContext, 0);
                                 PPApplication.setDonationNotificationCount(appContext, 0);
                                 AboutApplicationJob.scheduleJob(appContext, true);
+                            }
+                            if (actualVersionCode <= 2900) {
+                                SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
+                                if ((preferences.getInt(Profile.PREF_PROFILE_DEVICE_WIFI_AP, 0) == 3) &&
+                                        (Build.VERSION.SDK_INT >= 26)) {
+                                    // Toggle is not supported for wifi AP in Android 8+
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putInt(Profile.PREF_PROFILE_DEVICE_WIFI_AP, 0);
+                                    editor.apply();
+                                }
                             }
                         }
                     } catch (Exception ignored) {
