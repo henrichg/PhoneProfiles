@@ -17,12 +17,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -532,7 +534,14 @@ public class EditorProfilesActivity extends AppCompatActivity
         dialogBuilder.setMessage(message);
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
         dialogBuilder.setPositiveButton(android.R.string.ok, null);
-        dialogBuilder.show();
+        AlertDialog dialog = dialogBuilder.create();
+
+        Button positive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (positive != null) positive.setAllCaps(false);
+        Button negative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        if (negative != null) negative.setAllCaps(false);
+
+        dialog.show();
     }
     */
     private void importExportErrorDialog(int importExport, int dbResult, int appSettingsResult, int sharedProfileResult)
@@ -575,7 +584,17 @@ public class EditorProfilesActivity extends AppCompatActivity
                 GlobalGUIRoutines.reloadActivity(EditorProfilesActivity.this, true);
             }
         });
-        dialogBuilder.show();
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positive != null) positive.setAllCaps(false);
+                Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negative != null) negative.setAllCaps(false);
+            }
+        });
+        dialog.show();
     }
 
 
@@ -788,7 +807,17 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         });
         dialogBuilder2.setNegativeButton(R.string.alert_button_no, null);
-        dialogBuilder2.show();
+        AlertDialog dialog = dialogBuilder2.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positive != null) positive.setAllCaps(false);
+                Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negative != null) negative.setAllCaps(false);
+            }
+        });
+        dialog.show();
     }
 
     private void importData()
@@ -816,7 +845,14 @@ public class EditorProfilesActivity extends AppCompatActivity
                     importDataAlert(false);
                 }
             });
-            dialogBuilder.show();
+            AlertDialog dialog = dialogBuilder.create();
+
+            Button positive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            if (positive != null) positive.setAllCaps(false);
+            Button negative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            if (negative != null) negative.setAllCaps(false);
+
+            dialog.show();
         }
         else */
             importDataAlert();
@@ -869,7 +905,17 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         });
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
-        dialogBuilder.show();
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positive != null) positive.setAllCaps(false);
+                Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negative != null) negative.setAllCaps(false);
+            }
+        });
+        dialog.show();
     }
 
     public void doExportData()
