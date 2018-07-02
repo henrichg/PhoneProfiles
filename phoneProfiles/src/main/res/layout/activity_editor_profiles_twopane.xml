@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimary"
-        android:theme="?attr/toolbarTheme"
+        android:theme="?attr/bottomToolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu"
         android:elevation="1dp"
         tools:ignore="UnusedAttribute" />

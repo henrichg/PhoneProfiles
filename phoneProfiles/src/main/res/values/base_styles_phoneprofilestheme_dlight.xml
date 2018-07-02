@@ -11,8 +11,14 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorAccentDisabled">@color/accent_disabled</item>
 
+        <item name="android:windowBackground">@color/activityBackgroundColor</item>
+        <item name="activityBackgroundColor">@color/activityBackgroundColor</item>
         <item name="activityTextColor">@color/activityTextColor</item>
         <item name="activityCommandBackgroundColor">@color/activityCommandBackgroundColor</item>
+        <item name="actionOverflowMenuStyle">@style/PopupMenu_dlight</item>
+
+        <item name="md_background_color">@color/activityBackgroundColor</item>
+        <item name="md_widget_color">?attr/colorAccent</item>
 
         <item name="actionNewProfileIcon">@drawable/ic_action_new_profile_dark</item>
         <item name="actionDeleteAllIcon">@drawable/ic_action_delete_all_dark</item>
