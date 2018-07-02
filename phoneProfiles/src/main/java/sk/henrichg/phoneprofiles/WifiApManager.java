@@ -14,8 +14,7 @@ import java.lang.reflect.Method;
 
 final class WifiApManager {
     //private static final int WIFI_AP_STATE_FAILED = 4;
-    private WifiManager mWifiManager;
-    private final String TAG = "Wifi Access Manager";
+    private final WifiManager mWifiManager;
     private Method wifiControlMethod;
     private Method wifiApConfigurationMethod;
     //private Method wifiApState;
@@ -23,6 +22,8 @@ final class WifiApManager {
 
     private ConnectivityManager mConnectivityManager;
     private String packageName;
+
+    private final String TAG = "Wifi Access Manager";
 
     @SuppressLint("PrivateApi")
     WifiApManager(Context context) throws SecurityException, NoSuchMethodException {

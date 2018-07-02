@@ -1177,6 +1177,7 @@ public class Permissions {
         }
     }
 
+    /*
     static  void releaseReferences() {
         //profileActivationActivity = null;
         //wallpaperViewPreference = null;
@@ -1185,7 +1186,7 @@ public class Permissions {
         //brightnessDialogPreference = null;
         //ringtonePreference = null;
     }
-
+    */
 
     static boolean getShowRequestWriteSettingsPermission(Context context)
     {

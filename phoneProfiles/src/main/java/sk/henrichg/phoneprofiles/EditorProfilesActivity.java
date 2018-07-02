@@ -17,7 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -653,7 +652,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         return res;
     }
 
-    public void doImportData(String applicationDataPath)
+    private void doImportData(String applicationDataPath)
     {
         final EditorProfilesActivity activity = this;
         final String _applicationDataPath = applicationDataPath;
@@ -918,7 +917,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         dialog.show();
     }
 
-    public void doExportData()
+    private void doExportData()
     {
         final EditorProfilesActivity activity = this;
 

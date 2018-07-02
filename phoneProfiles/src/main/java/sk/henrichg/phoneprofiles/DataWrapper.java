@@ -18,7 +18,6 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
