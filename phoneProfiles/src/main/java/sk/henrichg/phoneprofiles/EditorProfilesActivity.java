@@ -118,7 +118,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("material"))
+            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("color"))
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
             else
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_dark));
@@ -630,7 +630,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (what == 1) {
                         if (key.equals(ApplicationPreferences.PREF_APPLICATION_THEME)) {
                             if (v.equals("light"))
-                                prefEdit.putString(key, "material");
+                                prefEdit.putString(key, "color");
+                            if (v.equals("material"))
+                                prefEdit.putString(key, "color");
                         }
                         if (key.equals(ActivateProfileHelper.PREF_MERGED_RING_NOTIFICATION_VOLUMES))
                             ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), true, prefEdit);

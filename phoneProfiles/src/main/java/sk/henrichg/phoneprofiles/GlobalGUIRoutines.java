@@ -108,21 +108,21 @@ class GlobalGUIRoutines {
     }
 
     private static int getTheme(boolean forPopup, boolean withToolbar, Context context) {
-        if (ApplicationPreferences.applicationTheme(context).equals("material"))
+        if (ApplicationPreferences.applicationTheme(context).equals("color"))
         {
             if (forPopup)
             {
                 if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_material;
+                    return R.style.PopupTheme_withToolbar_color;
                 else
-                    return R.style.PopupTheme_material;
+                    return R.style.PopupTheme_color;
             }
             else
             {
                 if (withToolbar)
-                    return R.style.Theme_Phoneprofilestheme_withToolbar_material;
+                    return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
                 else
-                    return R.style.Theme_Phoneprofilestheme_material;
+                    return R.style.Theme_PhoneProfilesTheme_color;
             }
         }
         else
@@ -138,9 +138,9 @@ class GlobalGUIRoutines {
             else
             {
                 if (withToolbar)
-                    return R.style.Theme_Phoneprofilestheme_withToolbar_dark;
+                    return R.style.Theme_PhoneProfilesTheme_withToolbar_dark;
                 else
-                    return R.style.Theme_Phoneprofilestheme_dark;
+                    return R.style.Theme_PhoneProfilesTheme_dark;
             }
         }
         else
@@ -156,42 +156,13 @@ class GlobalGUIRoutines {
             else
             {
                 if (withToolbar)
-                    return R.style.Theme_Phoneprofilestheme_withToolbar_dlight;
+                    return R.style.Theme_PhoneProfilesTheme_withToolbar_dlight;
                 else
-                    return R.style.Theme_Phoneprofilestheme_dlight;
+                    return R.style.Theme_PhoneProfilesTheme_dlight;
             }
         }
         return 0;
     }
-
-    /*
-    public static int getDialogTheme(boolean forAlert) {
-        if (PPApplication.applicationTheme.equals("material"))
-        {
-            if (forAlert)
-                return R.style.AlertDialogStyle;
-            else
-                return R.style.DialogStyle;
-        }
-        else
-        if (PPApplication.applicationTheme.equals("dark"))
-        {
-            if (forAlert)
-                return R.style.AlertDialogStyleDark;
-            else
-                return R.style.DialogStyleDark;
-        }
-        else
-        if (PPApplication.applicationTheme.equals("dlight"))
-        {
-            if (forAlert)
-                return R.style.AlertDialogStyle;
-            else
-                return R.style.DialogStyle;
-        }
-        return 0;
-    }
-    */
 
     static void reloadActivity(Activity activity, boolean newIntent)
     {
