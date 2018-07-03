@@ -121,6 +121,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("color"))
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
             else
+            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
+                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_white));
+            else
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_dark));
         }
 
@@ -1176,16 +1179,19 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 //final Display display = getWindowManager().getDefaultDisplay();
 
-                int circleColor = 0xFFFFFF;
+                int circleColor = R.color.tabTargetHelpCircleColor;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
-                    circleColor = 0x7F7F7F;
+                    circleColor = R.color.tabTargetHelpCircleColor_dark;
+                int textColor = R.color.tabTargetHelpTextColor;
+                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
+                    textColor = R.color.tabTargetHelpTextColor_white;
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 List<TapTarget> targets = new ArrayList<>();
                 targets.add(
                         TapTarget.forToolbarOverflow(editorToolbar, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
+                                .targetCircleColor(circleColor)
+                                .textColor(textColor)
                                 .drawShadow(true)
                                 .id(1)
                 );
@@ -1194,8 +1200,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
-                                    .targetCircleColorInt(circleColor)
-                                    .textColorInt(0xFFFFFF)
+                                    .targetCircleColor(circleColor)
+                                    .textColor(textColor)
                                     .drawShadow(true)
                                     .id(id)
                     );

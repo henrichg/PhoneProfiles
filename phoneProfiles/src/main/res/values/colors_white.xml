@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_white">#237e9f</color>      <!-- 500 -->
-    <color name="primaryDark_white">#237e9f</color> <!-- 700 -->
-    <!--<color name="primaryDark_white">#1d6681</color>--> <!-- 700 -->
+    <color name="primary_white">#F0F0F0</color>      <!-- 500 -->
+    <color name="primaryDark_white">#F0F0F0</color> <!-- 700 -->
     <color name="accent_white">#DC8160</color>       <!-- A200 -->
     <color name="accent_white_disabled">#70DC8160</color>
 
@@ -12,6 +11,9 @@
 
     <color name="activityPopupBackground_white">#FFd0d0d0</color>
     <color name="dialog_divider_white">#10000000</color>
+
+    <color name="tabTargetHelpCircleColor_white">#FFFFFFFF</color>
+    <color name="tabTargetHelpTextColor_white">#FF000000</color>
 
     <!--
     <color name="notificationBackground_white">#FFFFFFFF</color>

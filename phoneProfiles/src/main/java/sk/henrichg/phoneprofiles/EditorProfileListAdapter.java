@@ -287,9 +287,12 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
 
             //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
-            int circleColor = 0xFFFFFF;
-            if (ApplicationPreferences.applicationTheme(fragment.getActivity()).equals("dark"))
-                circleColor = 0x7F7F7F;
+            int circleColor = R.color.tabTargetHelpCircleColor;
+            if (ApplicationPreferences.applicationTheme(activity).equals("dark"))
+                circleColor = R.color.tabTargetHelpCircleColor_dark;
+            int textColor = R.color.tabTargetHelpTextColor;
+            if (ApplicationPreferences.applicationTheme(activity).equals("white"))
+                textColor = R.color.tabTargetHelpTextColor_white;
 
             if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
                 //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=true");
@@ -308,17 +311,17 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                 sequence.targets(
                         TapTarget.forBounds(profileItemTarget, activity.getString(R.string.editor_activity_targetHelps_profilePreferences_title), activity.getString(R.string.editor_activity_targetHelps_profilePreferences_description))
                                 .transparentTarget(true)
-                                .textColorInt(0xFFFFFF)
+                                .textColor(textColor)
                                 .drawShadow(true)
                                 .id(1),
                         TapTarget.forView(listItemView.findViewById(R.id.main_list_item_edit_menu), activity.getString(R.string.editor_activity_targetHelps_profileMenu_title), activity.getString(R.string.editor_activity_targetHelps_profileMenu_description))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
+                                .targetCircleColor(circleColor)
+                                .textColor(textColor)
                                 .drawShadow(true)
                                 .id(2),
                         TapTarget.forView(listItemView.findViewById(R.id.main_list_drag_handle), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_title), activity.getString(R.string.editor_activity_targetHelps_profileOrderHandler_description))
-                                .targetCircleColorInt(circleColor)
-                                .textColorInt(0xFFFFFF)
+                                .targetCircleColor(circleColor)
+                                .textColor(textColor)
                                 .drawShadow(true)
                                 .id(3)
                 );
