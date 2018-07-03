@@ -726,9 +726,12 @@ public class EditorProfileListFragment extends Fragment
                 editor.putBoolean(PREF_START_TARGET_HELPS, false);
                 editor.apply();
 
-                int circleColor = 0xFFFFFF;
+                int circleColor = R.color.tabTargetHelpCircleColor;
                 if (ApplicationPreferences.applicationTheme(getActivity()).equals("dark"))
-                    circleColor = 0x7F7F7F;
+                    circleColor = R.color.tabTargetHelpCircleColor_dark;
+                int textColor = R.color.tabTargetHelpTextColor;
+                if (ApplicationPreferences.applicationTheme(getActivity()).equals("white"))
+                    textColor = R.color.tabTargetHelpTextColor_white;
 
                 final TapTargetSequence sequence = new TapTargetSequence(getActivity());
                 List<TapTarget> targets = new ArrayList<>();
@@ -736,8 +739,8 @@ public class EditorProfileListFragment extends Fragment
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_add_profile, getString(R.string.editor_activity_targetHelps_newProfileButton_title), getString(R.string.editor_activity_targetHelps_newProfileButton_description))
-                                    .targetCircleColorInt(circleColor)
-                                    .textColorInt(0xFFFFFF)
+                                    .targetCircleColor(circleColor)
+                                    .textColor(textColor)
                                     .drawShadow(true)
                                     .id(id)
                     );
@@ -746,8 +749,8 @@ public class EditorProfileListFragment extends Fragment
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_delete_all_profiles, getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_title), getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_description))
-                                    .targetCircleColorInt(circleColor)
-                                    .textColorInt(0xFFFFFF)
+                                    .targetCircleColor(circleColor)
+                                    .textColor(textColor)
                                     .drawShadow(true)
                                     .id(id)
                     );
