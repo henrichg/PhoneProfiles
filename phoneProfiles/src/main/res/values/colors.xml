@@ -10,7 +10,7 @@
     <color name="activityTextColor">#FF000000</color>
     <color name="activityCommandBackgroundColor">#1F000000</color>
 
-    <color name="activityPopupBackground_phoneprofilestheme">#FFd0d0d0</color>
+    <color name="activityPopupBackground">#FFd0d0d0</color>
     <color name="dialog_divider">#10000000</color>
 
     <!--
