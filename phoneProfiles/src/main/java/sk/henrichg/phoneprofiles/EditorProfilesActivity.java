@@ -1185,6 +1185,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 int textColor = R.color.tabTargetHelpTextColor;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
                     textColor = R.color.tabTargetHelpTextColor_white;
+                boolean tintTarget = !ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 List<TapTarget> targets = new ArrayList<>();
@@ -1192,6 +1193,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         TapTarget.forToolbarOverflow(editorToolbar, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
                                 .targetCircleColor(circleColor)
                                 .textColor(textColor)
+                                .tintTarget(tintTarget)
                                 .drawShadow(true)
                                 .id(1)
                 );
@@ -1202,6 +1204,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                             TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
                                     .targetCircleColor(circleColor)
                                     .textColor(textColor)
+                                    .tintTarget(tintTarget)
                                     .drawShadow(true)
                                     .id(id)
                     );
