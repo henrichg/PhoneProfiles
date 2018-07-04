@@ -804,7 +804,10 @@ public class PhoneProfilesService extends Service {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                final DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), false, 0);
+                final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
                 _showProfileNotification(profile, true);
+                dataWrapper.invalidateDataWrapper();
             }
         });
     }
