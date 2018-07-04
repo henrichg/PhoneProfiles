@@ -810,7 +810,7 @@ public class PhoneProfilesService extends Service {
                 if (instance != null) {
                     DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    _showProfileNotification(profile, true);
+                    instance._showProfileNotification(profile, true);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
