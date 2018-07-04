@@ -2866,9 +2866,9 @@ class ActivateProfileHelper {
     static boolean canExploitGPS(Context context)
     {
         // test exploiting power manager widget
-        PackageManager pacman = context.getPackageManager();
+        PackageManager packageManager = context.getPackageManager();
         try {
-            PackageInfo pacInfo = pacman.getPackageInfo("com.android.settings", PackageManager.GET_RECEIVERS);
+            PackageInfo pacInfo = packageManager.getPackageInfo("com.android.settings", PackageManager.GET_RECEIVERS);
 
             if(pacInfo != null){
                 for(ActivityInfo actInfo : pacInfo.receivers){
