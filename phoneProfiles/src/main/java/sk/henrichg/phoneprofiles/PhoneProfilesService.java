@@ -574,7 +574,10 @@ public class PhoneProfilesService extends Service {
             {
                 isIconResourceID = true;
                 iconIdentifier = Profile.PROFILE_ICON_DEFAULT;
-                profileName = appContext.getResources().getString(R.string.profiles_header_profile_name_no_activated);
+                if (inHandlerThread)
+                    profileName = appContext.getResources().getString(R.string.profiles_header_profile_name_no_activated);
+                else
+                    profileName = appContext.getResources().getString(R.string.empty_string);
                 iconBitmap = null;
                 preferencesIndicator = null;
             }
