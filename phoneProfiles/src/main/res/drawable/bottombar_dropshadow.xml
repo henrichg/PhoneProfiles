@@ -4,4 +4,7 @@
         android:endColor="@android:color/transparent"
         android:startColor="#44333333"
         android:angle="90"/>
+    <size
+        android:height="@dimen/bottomBar_dropShadow_height"
+        android:width="0dp" />
 </shape>

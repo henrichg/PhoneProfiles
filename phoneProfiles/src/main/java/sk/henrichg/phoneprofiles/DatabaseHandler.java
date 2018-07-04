@@ -159,9 +159,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     /*
     // be sure to call this method by: DatabaseHandler.getInstance().closeConection()
-    // when application is closed by somemeans most likely
+    // when application is closed by some means most likely
     // onDestroy method of application
-    synchronized void closeConection() {
+    synchronized void closeConnection() {
         if (instance != null)
         {
             instance.close();
