@@ -127,7 +127,7 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onDestroy()
     {
-        PPApplication.logE("PhoneProfilesService.onDestroy", "xxxxx");
+        PPApplication.logE("PhoneProfilesService.onDestroy", "xxx");
 
         Context appContext = getApplicationContext();
 
@@ -390,7 +390,7 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onTaskRemoved(Intent rootIntent)
     {
-        PPApplication.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxxxx");
+        PPApplication.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxx");
 
         if (PPApplication.screenTimeoutHandler != null) {
             PPApplication.screenTimeoutHandler.post(new Runnable() {
@@ -583,7 +583,7 @@ public class PhoneProfilesService extends Service {
             if (Build.VERSION.SDK_INT >= 26) {
                 PPApplication.createProfileNotificationChannel(/*profile, */appContext);
                 notificationBuilder.setChannelId(PPApplication.PROFILE_NOTIFICATION_CHANNEL);
-                //notificationBuilder.setSettingsText("Pokus");
+                //notificationBuilder.setSettingsText("Test");
             }
             else {
                 if (ApplicationPreferences.notificationShowInStatusBar(appContext)) {

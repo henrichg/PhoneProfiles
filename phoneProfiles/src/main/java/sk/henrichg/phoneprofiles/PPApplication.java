@@ -1044,7 +1044,7 @@ public class PPApplication extends Application {
     static void commandWait(Command cmd) {
         int waitTill = 50;
         int waitTillMultiplier = 2;
-        int waitTillLimit = 3200; // 6350 msec (3200 * 2 - 50)
+        int waitTillLimit = 3200; // 6350 milliseconds (3200 * 2 - 50)
 
         //noinspection SynchronizationOnLocalVariableOrMethodParameter
         synchronized (cmd) {
