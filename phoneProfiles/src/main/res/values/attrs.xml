@@ -65,7 +65,7 @@
     <attr name="toolbarPopupMenu" format="reference" />
     <attr name="actionSharedProfileIcon" format="reference" />
     <attr name="actionHelpIcon" format="reference" />
-    <attr name="actionProfileActivtionDuration" format="reference" />
+    <attr name="actionProfileActivationDuration" format="reference" />
     <attr name="targetHelpsOuterCircle" format="reference" />
     <attr name="targetHelpsTargetCircle" format="reference" />
     <attr name="targetHelpsText" format="reference" />

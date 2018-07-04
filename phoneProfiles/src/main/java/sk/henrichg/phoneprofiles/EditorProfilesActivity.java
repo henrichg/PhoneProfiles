@@ -65,7 +65,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
-    private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detali_predefined_profile_index";
+    private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detail_predefined_profile_index";
 
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "editor_profiles_activity_start_target_helps";
@@ -176,7 +176,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             fragmentManager.executePendingTransactions();
         }
 
-        editorToolbar = findViewById(R.id.editor_tollbar);
+        editorToolbar = findViewById(R.id.editor_toolbar);
         //editorToolbar.inflateMenu(R.menu.activity_editor_profiles);
         setSupportActionBar(editorToolbar);
 

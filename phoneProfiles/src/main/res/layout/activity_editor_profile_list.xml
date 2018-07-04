@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true" >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/editor_tollbar"
+        android:id="@+id/editor_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
@@ -30,7 +30,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/editor_tollbar"
+        android:layout_below="@id/editor_toolbar"
         android:layout_above="@id/editor_list_bottom_bar"
         android:foreground="?android:windowContentOverlay" >
 
@@ -42,7 +42,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/bottomBar_dropShadow_height"
             android:background="@drawable/bottombar_dropshadow"
             android:layout_gravity="bottom" />
 
