@@ -24,7 +24,6 @@ public class DonationActivity extends AppCompatActivity implements BillingProvid
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // must by called before super.onCreate() for PreferenceActivity
         GlobalGUIRoutines.setTheme(this, false, false); // must by called before super.onCreate()
         GlobalGUIRoutines.setLanguage(getBaseContext());
 
@@ -46,7 +45,7 @@ public class DonationActivity extends AppCompatActivity implements BillingProvid
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
             else
             if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
-                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_white));
+                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primaryDark19_white));
             else
                 tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_dark));
         }
