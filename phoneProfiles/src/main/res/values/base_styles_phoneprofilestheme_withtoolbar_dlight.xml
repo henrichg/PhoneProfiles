@@ -29,30 +29,24 @@
         <item name="actionProfileButtonTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
         <item name="editItemMenuIcon">@drawable/ic_profile_item_edit_menu</item> 
         <item name="applicationSettingsLanguageIcon">@drawable/ic_settings_language</item> 
-        
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeCloseButtonStyle">@style/NoCloseButton</item>
         <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
-
         <item name="dialogDivider">@color/dialog_divider</item>
-
         <item name="alertDialogTheme">@style/AlertDialogStyleDLight</item>
         <item name="dialogTheme">@style/DialogStyleDLight</item>
-
         <item name="toolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="bottomToolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-
         <item name="actionSharedProfileIcon">@drawable/ic_action_shared_profile</item>
         <item name="actionHelpIcon">@drawable/ic_action_help</item>
-
         <item name="actionProfileActivationDuration">@drawable/ic_action_profile_activation_duration</item>
-
         <item name="fastScrollTrackPP">@color/fastScrollTrackPP</item>
         <item name="fastScrollThumbPP">@color/fastScrollThumbPP</item>
         <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP</item>
         <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP</item>
+        <item name="buttonBackground">@drawable/pp_button_background_dlight</item>
 
     </style>
 
