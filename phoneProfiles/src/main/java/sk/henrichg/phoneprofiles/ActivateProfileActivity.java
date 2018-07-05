@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -137,6 +138,12 @@ public class ActivateProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_activate_profile);
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContentView");
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            View toolbarShadow = findViewById(R.id.activate_profile_toolbar_shadow);
+            if (toolbarShadow != null)
+                toolbarShadow.setVisibility(View.GONE);
+        }
 
         toolbar = findViewById(R.id.act_prof_toolbar);
         setSupportActionBar(toolbar);
