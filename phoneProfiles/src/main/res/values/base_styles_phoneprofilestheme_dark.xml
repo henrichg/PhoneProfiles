@@ -10,7 +10,6 @@
         <item name="colorPrimaryDark">@color/primaryDark_dark</item>
         <item name="colorAccent">@color/accent_dark</item>
         <item name="colorAccentDisabled">@color/accent_dark_disabled</item>
-        <item name="actionOverflowMenuStyle">@style/PopupMenu_dark</item>
 
         <item name="android:windowBackground">@color/activityBackgroundColor_dark</item>
         <item name="activityBackgroundColor">@color/activityBackgroundColor_dark</item>
