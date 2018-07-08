@@ -444,16 +444,18 @@ public class EditorProfilesActivity extends AppCompatActivity
                 {
                     //noinspection ConstantConditions
                     Profile profile = DatabaseHandler.getInstance(getApplicationContext()).getProfile(profile_id);
-                    // generate bitmaps
-                    profile.generateIconBitmap(getBaseContext(), false, 0);
-                    profile.generatePreferencesIndicator(getBaseContext(), false, 0);
+                    if (profile != null) {
+                        // generate bitmaps
+                        profile.generateIconBitmap(getBaseContext(), false, 0);
+                        profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
-                    // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
-                    redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex/*, true*/);
+                        // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
+                        redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex/*, true*/);
 
-                    Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
-                    Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
+                        Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
+                        Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
+                                /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
+                    }
                 }
                 else
                 if (profile_id == Profile.SHARED_PROFILE_ID)
