@@ -3,9 +3,9 @@
 
     <!-- Drop Shadow Stack -->
     <item>
-        <shape>
+        <shape android:shape="rectangle">
 
-            <solid android:color="#00505050" />
+            <solid android:color="#00202020" />
 
             <corners android:radius="@dimen/popup_corner_radius" />
         </shape>
@@ -13,20 +13,33 @@
     <item>
         <shape>
             <padding
+                android:bottom="2dp"
+                android:left="1dp"
+                android:right="1dp" />
+
+            <solid android:color="#80202020" />
+
+            <corners android:radius="@dimen/popup_corner_radius" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
                 android:bottom="1dp"
                 android:left="1dp"
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="#FF505050" />
+            <solid android:color="#FF202020" />
 
             <corners android:radius="@dimen/popup_corner_radius" />
         </shape>
     </item>
 
     <!-- Background -->
-    <item>
-        <shape>
+    <item android:bottom="3px"
+          android:right="3px">
+        <shape android:shape="rectangle">
             <solid android:color="@color/activityBackgroundColor_dark" />
 
             <corners android:radius="@dimen/popup_corner_radius" />
