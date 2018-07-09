@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.widget.Button;
 
 public class NotificationVolume0DialogPreference extends DialogPreference {
 
@@ -81,7 +80,7 @@ public class NotificationVolume0DialogPreference extends DialogPreference {
         GlobalGUIRoutines.registerOnActivityDestroyListener(this, this);
 
         mDialog = dialogBuilder.create();
-        mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        /*mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
                 Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -89,7 +88,7 @@ public class NotificationVolume0DialogPreference extends DialogPreference {
                 Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                 if (negative != null) negative.setAllCaps(false);
             }
-        });
+        });*/
         mDialog.show();
     }
 
