@@ -88,7 +88,7 @@ public class DonationFragment extends Fragment {
 
         btGoogle = root.findViewById(
                 R.id.donation_google_android_market_donate_button);
-        btGoogle.setAllCaps(false);
+        //btGoogle.setAllCaps(false);
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +100,7 @@ public class DonationFragment extends Fragment {
 
         /*
         Button paypalButton = root.findViewById(R.id.donation_paypal_donate_button);
-        paypalButton.setAllCaps(false);
+        //paypalButton.setAllCaps(false);
         paypalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

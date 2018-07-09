@@ -19,7 +19,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -276,7 +275,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     }
                 });
                 AlertDialog dialog = dialogBuilder.create();
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialog) {
                         Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -284,7 +283,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                         if (negative != null) negative.setAllCaps(false);
                     }
-                });
+                });*/
                 dialog.show();
             }
         }
@@ -451,7 +450,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         }
                     });
                     AlertDialog dialog = dialogBuilder.create();
-                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
                         public void onShow(DialogInterface dialog) {
                             Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -459,7 +458,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                             Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                             if (negative != null) negative.setAllCaps(false);
                         }
-                    });
+                    });*/
                     dialog.show();
                 }
                 else
@@ -499,7 +498,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                             }
                         });
                         AlertDialog dialog = dialogBuilder.create();
-                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                             @Override
                             public void onShow(DialogInterface dialog) {
                                 Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -507,7 +506,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                                 Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                                 if (negative != null) negative.setAllCaps(false);
                             }
-                        });
+                        });*/
                         dialog.show();
                     }
                     else
@@ -547,7 +546,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         }
                     });
                     AlertDialog dialog = dialogBuilder.create();
-                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
                         public void onShow(DialogInterface dialog) {
                             Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -555,7 +554,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                             Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                             if (negative != null) negative.setAllCaps(false);
                         }
-                    });
+                    });*/
                     dialog.show();
                 }
                 else

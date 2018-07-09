@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
@@ -20,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -150,7 +148,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
                         dialogBuilder.setPositiveButton(android.R.string.ok, null);
                         AlertDialog dialog = dialogBuilder.create();
-                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                             @Override
                             public void onShow(DialogInterface dialog) {
                                 Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -158,7 +156,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                 Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                                 if (negative != null) negative.setAllCaps(false);
                             }
-                        });
+                        });*/
                         dialog.show();
                     }
                 }
@@ -193,7 +191,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                 //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
                                 dialogBuilder.setPositiveButton(android.R.string.ok, null);
                                 AlertDialog dialog = dialogBuilder.create();
-                                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                                     @Override
                                     public void onShow(DialogInterface dialog) {
                                         Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -201,7 +199,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                         Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                                         if (negative != null) negative.setAllCaps(false);
                                     }
-                                });
+                                });*/
                                 dialog.show();
                             }
                         }
@@ -237,7 +235,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                             //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
                             dialogBuilder.setPositiveButton(android.R.string.ok, null);
                             AlertDialog dialog = dialogBuilder.create();
-                            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                                 @Override
                                 public void onShow(DialogInterface dialog) {
                                     Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
@@ -245,7 +243,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                     Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                                     if (negative != null) negative.setAllCaps(false);
                                 }
-                            });
+                            });*/
                             dialog.show();
                         }
                     }
