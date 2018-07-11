@@ -782,6 +782,12 @@ public class DataWrapper {
                             startupSource, false, null, true);*/
                 if (granted)
                     _activateProfile(profile, startupSource, /*interactive,*/ activity);
+                else {
+                    Intent returnIntent = new Intent();
+                    activity.setResult(Activity.RESULT_CANCELED, returnIntent);
+
+                    finishActivity(startupSource, false, activity);
+                }
             }
         }
     }
