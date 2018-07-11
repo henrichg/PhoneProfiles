@@ -141,10 +141,10 @@
   <string name="alert_title_delete_all_events">Supprimer tous les événements</string>
   <string name="alert_message_delete_all_events">Etes-vous sûr?</string>
   <string name="phone_profiles_pref_applicationTheme">Thème de l\'application</string>
-  <string name="phone_profiles_pref_applicationTheme_material">Couleur</string>
+  <string name="phone_profiles_pref_applicationTheme_color">Color</string>
   <string name="phone_profiles_pref_applicationTheme_dark">Sombre</string>
   <string name="phone_profiles_pref_applicationTheme_dlight">Lumineux avec titre foncé</string>
-  <string name="array_pref_value_material">material</string>
+  <string name="array_pref_value_color">color</string>
   <string name="array_pref_value_dark">dark</string>
   <string name="array_pref_value_dlight">dlight</string>
   <string name="phone_preferences_actionmode_save">Enregistrer</string>
@@ -1028,7 +1028,7 @@ Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="email_chooser">Envoyer courrier électronique à l’aide</string>
   <string name="web_browser_chooser">Voir les liens avec</string>
   <string name="google_play_chooser">Voir google play avec</string>
-  <string name="preference_not_allowed_reason_not_extender_installed">PhoneProfilesExtender n’a pas été installé</string>
+  <string name="preference_not_allowed_reason_not_extender_installed">phoneProfilesPlusExtender n’a pas été installé</string>
   <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">paramètres d’accessibilité pour PhoneProfilesExtender non activés</string>
   <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary">Pour activer le paramètre « Applications », autoriser PhoneProfilesExtender dans les paramètres système.</string>
   <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary">Pour activer le paramètre « Ignorer pour les applications », autoriser PhoneProfilesExtender dans les paramètres système.</string>
@@ -1100,7 +1100,7 @@ Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="profile_preferences_applicationDisableMobileCellScanning">Désactiver le scan des antennes cellulaire</string>
   <string name="profile_preferences_applicationDisableOrientationScanning">Désactiver le scan des antennes cellulaire</string>
   <string name="profile_preferences_headsUpNotifications">(G1)(R) Utiliser des notifications contextuelles (Popup)</string>
-  <string name="event_preferences_PPPExtenderInstallInfo_text">Comment installer PhoneProfilesExtender</string>
+  <string name="event_preferences_PPPExtenderInstallInfo_text">Comment installer phoneProfilesPlusExtender</string>
   <string name="event_preferences_PPPExtenderInstallInfo_summary">Télécharger dernière version de PhoneProfilesExtender.apk sur son GitHub. Valider l\'installation d\'apk téléchargé, puis installez-le.</string>
   <string name="donation_thanks_dialog">Merci pour le don. \nJ\'apprécie vraiment (la traduction est entièrement gratuite).</string>
   <string name="donation_google_android_market_not_supported">Les Dons dans l\' application ne sont pas supportés. Google play store est-il installé correctement ?</string>
@@ -1183,6 +1183,11 @@ Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="altype_allProfilesDeleted">All profiles deleted</string>
   <string name="event_preference_wifi_ssidName_type" tools:ignore="TypographyOther">(C) configured in system, (S) returned by scanner.</string>
   <string name="event_preference_bluetooth_btName_type" tools:ignore="TypographyOther">(C) configured in system, (S) returned by scanner.</string>
+  <string name="import_profiles_alert_error_database_bug">Error restoring the database.</string>
+  <string name="import_profiles_alert_error_appSettings_bug">Error restoring the application settings.</string>
+  <string name="import_profiles_alert_error_sharedProfile_bug">Error restoring the shared profile preferences.</string>
+  <string name="phone_profiles_pref_applicationTheme_white">White</string>
+  <string name="array_pref_value_white">white</string>
   <string name="extender_app_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_description">Allow PhoneProfilesExtender for:\n• profile parameter \"Force stop applications\"\n• event parameters \"Application sensor\" and \"Orientation sensor\".</string>
