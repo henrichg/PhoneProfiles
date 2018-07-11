@@ -576,7 +576,7 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    void _activateProfile(final Profile _profile, int startupSource, /*boolean _interactive,*/ Activity _activity)
+    void _activateProfile(final Profile _profile, int startupSource, final boolean interactive, Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -639,9 +639,7 @@ public class DataWrapper {
             //    showToastAfterActivation(_profile);
         }
 
-        // for startActivityForResult
-        if (_activity != null)
-        {
+        if (interactive) {
             PPApplication.startHandlerThread();
             handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
@@ -660,11 +658,16 @@ public class DataWrapper {
                     if ((wakeLock != null) && wakeLock.isHeld()) {
                         try {
                             wakeLock.release();
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {
+                        }
                     }
                 }
             });
+        }
 
+        // for startActivityForResult
+        if (_activity != null)
+        {
             Intent returnIntent = new Intent();
             returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);
             returnIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
@@ -713,13 +716,13 @@ public class DataWrapper {
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
                                 /*true, monochrome, monochromeValue,*/
-                                _startupSource, /*true,*/ _activity, true))
-                            _dataWrapper._activateProfile(_profile, _startupSource, /*true,*/ _activity);
+                                _startupSource, true, true))
+                            _dataWrapper._activateProfile(_profile, _startupSource, true, _activity);
                         else {
                             Intent returnIntent = new Intent();
                             _activity.setResult(Activity.RESULT_CANCELED, returnIntent);
 
-                            finishActivity(_startupSource, false, _activity);
+                            finishActivity(_startupSource, true, _activity);
                         }
                     }
                 });
@@ -774,25 +777,25 @@ public class DataWrapper {
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
                             /*true, monochrome, monochromeValue,*/
-                            startupSource, /*true,*/ activity, true);
+                            startupSource, true, true);
                 /*}
                 else
                     granted = Permissions.grantProfilePermissions(context, profile, true,
                             forGUI, monochrome, monochromeValue,
                             startupSource, false, null, true);*/
                 if (granted)
-                    _activateProfile(profile, startupSource, /*interactive,*/ activity);
+                    _activateProfile(profile, startupSource, true, activity);
                 else {
                     Intent returnIntent = new Intent();
                     activity.setResult(Activity.RESULT_CANCELED, returnIntent);
 
-                    finishActivity(startupSource, false, activity);
+                    finishActivity(startupSource, true, activity);
                 }
             }
         }
     }
 
-    void finishActivity(int startupSource, boolean afterActivation, Activity activity)
+    void finishActivity(int startupSource, boolean closeActivator, Activity activity)
     {
         if (activity == null)
             return;
@@ -810,7 +813,7 @@ public class DataWrapper {
             if (ApplicationPreferences.applicationClose(context))
             {
                 if (PPApplication.getApplicationStarted(activity.getApplicationContext(), false))
-                    finish = afterActivation;
+                    finish = closeActivator;
             }
         }
         else
@@ -911,7 +914,7 @@ public class DataWrapper {
         if (actProfile && (profile != null))
         {
             if (startupSource == PPApplication.STARTUP_SOURCE_BOOT)
-                _activateProfile(profile, PPApplication.STARTUP_SOURCE_BOOT, /*boolean _interactive,*/ null);
+                _activateProfile(profile, PPApplication.STARTUP_SOURCE_BOOT, false, null);
             else
                 activateProfileWithAlert(profile, startupSource, /*interactive,*/ activity);
         }
@@ -948,8 +951,8 @@ public class DataWrapper {
         }
         if (Permissions.grantProfilePermissions(context, profile, true,
                 /*false, monochrome, monochromeValue,*/
-                startupSource, /*true,*/ null, true)) {
-            _activateProfile(profile, startupSource, /*true,*/ null);
+                startupSource, true, true)) {
+            _activateProfile(profile, startupSource, true, null);
         }
     }
 

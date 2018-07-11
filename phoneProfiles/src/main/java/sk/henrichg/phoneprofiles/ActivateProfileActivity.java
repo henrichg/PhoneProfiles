@@ -250,6 +250,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
     */
 
+    /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -266,6 +267,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
             }
         }
     }
+    */
 
     public void refreshGUI(boolean refreshIcons)
     {

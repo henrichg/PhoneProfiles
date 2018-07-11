@@ -1739,7 +1739,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 {
                     Profile sharedProfile = Profile.getSharedProfile(context.getApplicationContext());
                     Permissions.grantProfilePermissions(context.getApplicationContext(), sharedProfile, true,
-                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ null, false);
+                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false);
                 }
             }
         }

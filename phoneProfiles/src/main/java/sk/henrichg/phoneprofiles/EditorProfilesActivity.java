@@ -453,7 +453,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                         Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
                         Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                                /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
+                                /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false);
                     }
                 }
                 else
@@ -464,7 +464,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile sharedProfile = Profile.getSharedProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), sharedProfile, false,
-                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, /*true,*/ this, false);
+                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false);
 
                 }
             }
@@ -491,7 +491,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 doImportData(GlobalGUIRoutines.REMOTE_EXPORT_PATH);
             }
         }
-        else
+        /*else
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_PROFILE) {
             if (data != null) {
                 long profileId = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
@@ -503,7 +503,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     getDataWrapper()._activateProfile(profile, startupSource, this);
                 }
             }
-        }
+        }*/
         else
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_EXPORT) {
             doExportData();

@@ -59,9 +59,11 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
         if (profile_id != 0) {
             Profile profile = dataWrapper.getProfileById(profile_id, false, false);
             if (Permissions.grantProfilePermissions(getApplicationContext(), profile, true,
-                    /*false, false, 0,*/ PPApplication.STARTUP_SOURCE_EXTERNAL_APP, /*true,*/ this, true)) {
-                dataWrapper._activateProfile(profile, PPApplication.STARTUP_SOURCE_EXTERNAL_APP, /*true,*/ this);
+                    /*false, false, 0,*/ PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, true)) {
+                dataWrapper._activateProfile(profile, PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, this);
             }
+            else
+                dataWrapper.finishActivity(PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, this);
         }
         else {
             showNotification(getString(R.string.action_for_external_application_notification_title),
@@ -71,6 +73,7 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
         }
     }
 
+    /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -87,6 +90,7 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
             }
         }
     }
+    */
 
     private void showNotification(String title, String text) {
         String nTitle = title;
