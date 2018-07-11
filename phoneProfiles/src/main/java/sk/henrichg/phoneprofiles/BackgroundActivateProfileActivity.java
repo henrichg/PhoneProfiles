@@ -54,6 +54,7 @@ public class BackgroundActivateProfileActivity extends AppCompatActivity {
         dataWrapper = null;
     }
 
+    /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -70,6 +71,7 @@ public class BackgroundActivateProfileActivity extends AppCompatActivity {
             }
         }
     }
+    */
 
     @Override
     public void finish()
