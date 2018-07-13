@@ -1825,22 +1825,24 @@ class ActivateProfileHelper {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
                             Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-                    Settings.System.putInt(context.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS,
-                            profile.getDeviceBrightnessManualValue(context));
-                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
-                            == PPApplication.PREFERENCE_ALLOWED) {
-                        if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
-                            Settings.System.putFloat(context.getContentResolver(),
-                                    ADAPTIVE_BRIGHTNESS_SETTING_NAME,
-                                    profile.getDeviceBrightnessAdaptiveValue(context));
-                        else {
-                            try {
+                    if (profile.getDeviceBrightnessChangeLevel()) {
+                        Settings.System.putInt(context.getContentResolver(),
+                                Settings.System.SCREEN_BRIGHTNESS,
+                                profile.getDeviceBrightnessManualValue(context));
+                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, context)
+                                == PPApplication.PREFERENCE_ALLOWED) {
+                            if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                                 Settings.System.putFloat(context.getContentResolver(),
                                         ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                         profile.getDeviceBrightnessAdaptiveValue(context));
-                            } catch (Exception ee) {
-                                 ActivateProfileHelper.executeRootForAdaptiveBrightness(context, profile);
+                            else {
+                                try {
+                                    Settings.System.putFloat(context.getContentResolver(),
+                                            ADAPTIVE_BRIGHTNESS_SETTING_NAME,
+                                            profile.getDeviceBrightnessAdaptiveValue(context));
+                                } catch (Exception ee) {
+                                    ActivateProfileHelper.executeRootForAdaptiveBrightness(context, profile);
+                                }
                             }
                         }
                     }
@@ -1848,9 +1850,11 @@ class ActivateProfileHelper {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
                             Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                    Settings.System.putInt(context.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS,
-                            profile.getDeviceBrightnessManualValue(context));
+                    if (profile.getDeviceBrightnessChangeLevel()) {
+                        Settings.System.putInt(context.getContentResolver(),
+                                Settings.System.SCREEN_BRIGHTNESS,
+                                profile.getDeviceBrightnessManualValue(context));
+                    }
                 }
 
                 if (PPApplication.brightnessHandler != null) {
@@ -2204,7 +2208,7 @@ class ActivateProfileHelper {
                     params.gravity = Gravity.RIGHT | Gravity.TOP;
                 else
                     params.gravity = Gravity.END | Gravity.TOP;*/
-                if (profile.getDeviceBrightnessAutomatic())
+                if (profile.getDeviceBrightnessAutomatic() || (!profile.getDeviceBrightnessChangeLevel()))
                     params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
                 else
                     params.screenBrightness = profile.getDeviceBrightnessManualValue(appContext) / (float) 255;
