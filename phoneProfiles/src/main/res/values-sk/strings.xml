@@ -29,7 +29,7 @@
   <string name="menu_exit">Ukončiť</string>
   <string name="activate_profile_alert_message">Aktivovať profil?</string>
   <string name="brightness_pref_dialog_no_change_chb">Nemeniť</string>
-  <string name="brightness_pref_dialog_automatic_chb">Automaticky</string>
+  <string name="brightness_pref_dialog_automatic_chb">Automatický</string>
   <string name="volume_pref_dialog_no_change_chb">Nemeniť</string>
   <string name="phone_profiles_pref_category_activator">Aktivátor</string>
   <string name="phone_profiles_pref_category_editor">Editor</string>
@@ -1187,6 +1187,10 @@
   <string name="import_profiles_alert_error_sharedProfile_bug">Chyba pri obnovovaní parametrov zdieľaného profilu.</string>
   <string name="phone_profiles_pref_applicationTheme_white">Biela téma</string>
   <string name="array_pref_value_white">white</string>
+  <string name="permission_ask_button">Pýtať sa</string>
+  <string name="permission_not_ask_button">Nepýtať sa</string>
+  <string name="brightness_pref_dialog_level_chb">Zmeniť úroveň</string>
+  <string name="preference_profile_manual_brightness">Manuálny</string>
   <string name="extender_app_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_description">Povoľte PhoneProfilesExtender pre:\n• parameter profilu \"Vynútiť zastavenie aplikácií\"\n• parametre udalosti \"Senzor aplikácií\" and \"Senzor orientácie\".</string>
@@ -1198,8 +1202,6 @@
   <string name="extender_accessibility_service_button">Povoliť/Zakázať\nslužbu Dostupnosť</string>
   <string name="extender_setting_screen_not_found_alert">Obrazovka nastavenia nebola nájdená.</string>
   <string name="extender_accessibility_service_permission">Služba dostupnosti PhoneProfilesExtender</string>
-  <string name="permission_ask_button">Pýtať sa</string>
-  <string name="permission_not_ask_button">Nepýtať sa</string>
   <!--    <string name="profile_preferences_screenNightMode">Night mode</string>
     <string name="array_pref_screenNightMode_automatic">Automatic</string> -->
   <!--<string name="phone_profiles_pref_notificationTheme">Notification theme</string>
