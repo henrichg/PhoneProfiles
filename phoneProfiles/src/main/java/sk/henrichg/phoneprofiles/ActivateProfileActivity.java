@@ -283,6 +283,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         });
     }
 
+    /*
     private DataWrapper getDataWrapper()
     {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.activate_profile_list);
@@ -291,6 +292,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         else
             return null;
     }
+    */
 
     public void startTargetHelpsActivity() {
         /*if (Build.VERSION.SDK_INT <= 19)

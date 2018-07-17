@@ -2001,7 +2001,7 @@ public class Profile {
                     }
                     else
                     if (PPApplication.isRooted()) {
-                        // decice is rooted
+                        // device is rooted
                         //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
                         featurePresented = PPApplication.PREFERENCE_ALLOWED;
                     }
