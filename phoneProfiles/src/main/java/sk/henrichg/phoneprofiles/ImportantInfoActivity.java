@@ -76,6 +76,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
         boolean news = false;
         boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "newsLatest="+newsLatest);
+        boolean news2755 = ((versionCode >= 2755) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2755);
         boolean news2690 = ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2690);
         boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
@@ -86,6 +88,12 @@ public class ImportantInfoActivity extends AppCompatActivity {
         //noinspection StatementWithEmptyBody
         if (newsLatest) {
             // move this to newXXX, for switch off news
+        }
+        else {
+            // move this to newXXX, for switch off news
+        }
+
+        if (news2755) {
             news = true;
             TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
             infoText1.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +109,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
             });
         }
         else {
-            // move this to newXXX, for switch off news
             TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files);
             infoText1.setVisibility(View.GONE);
             infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
