@@ -1075,7 +1075,7 @@
   <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary3">segundos. Esto aumenta considerablemente el consumo de batería.</string>
   <string name="phone_profiles_pref_applicationWidgetIconRoundedCorners">Esquinas redondeadas (widget)</string>
   <string name="phone_profiles_pref_applicationWidgetRoundedCorners">Esquinas redondeadas</string>
-  <string name="preference_not_allowed_reason_extender_not_upgraded">phoneProfilesPlusExtender no actualizado</string>
+  <string name="preference_not_allowed_reason_extender_not_upgraded">PhoneProfilesExtender no actualizado</string>
   <string name="profile_activation_interactive_preference_notification_title">Perfil activo:</string>
   <string name="profile_activation_interactive_preference_notification_text">Haz clic aquí para abrir:</string>
   <string name="profile_preferences_deviceWiFiAPPrefs">(I) Wi-Fi Preferencias de hotspot</string>
@@ -1187,6 +1187,10 @@
   <string name="import_profiles_alert_error_sharedProfile_bug">Error restoring the shared profile preferences.</string>
   <string name="phone_profiles_pref_applicationTheme_white">White</string>
   <string name="array_pref_value_white">white</string>
+  <string name="permission_ask_button">Ask</string>
+  <string name="permission_not_ask_button">Not ask</string>
+  <string name="brightness_pref_dialog_level_chb">Change level</string>
+  <string name="preference_profile_manual_brightness">Manual</string>
   <string name="extender_app_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_name">PhoneProfilesExtender</string>
   <string name="extender_accessibility_service_description">Allow PhoneProfilesExtender for:\n• profile parameter \"Force stop applications\"\n• event parameters \"Application sensor\" and \"Orientation sensor\".</string>
@@ -1198,8 +1202,6 @@
   <string name="extender_accessibility_service_button">Enable/Disable\nAccessibility service</string>
   <string name="extender_setting_screen_not_found_alert">Setting screen not found.</string>
   <string name="extender_accessibility_service_permission">PhoneProfilesExtender accessibility service</string>
-  <string name="permission_ask_button">Ask</string>
-  <string name="permission_not_ask_button">Not ask</string>
   <!--    <string name="profile_preferences_screenNightMode">Night mode</string>
     <string name="array_pref_screenNightMode_automatic">Automatic</string> -->
   <!--<string name="phone_profiles_pref_notificationTheme">Notification theme</string>
