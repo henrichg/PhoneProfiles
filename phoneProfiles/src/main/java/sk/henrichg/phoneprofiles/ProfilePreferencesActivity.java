@@ -677,12 +677,12 @@ public class ProfilePreferencesActivity extends PreferenceActivity
 
                 //final Display display = getWindowManager().getDefaultDisplay();
 
-                int circleColor = 0xFFFFFF;
+                int circleColor = R.color.tabTargetHelpCircleColor;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
-                    circleColor = 0x7F7F7F;
-                int textColor = 0xFFFFFF;
+                    circleColor = R.color.tabTargetHelpCircleColor_dark;
+                int textColor = R.color.tabTargetHelpTextColor;
                 if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
-                    textColor = 0x000000;
+                    textColor = R.color.tabTargetHelpTextColor_white;
                 boolean tintTarget = !ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
