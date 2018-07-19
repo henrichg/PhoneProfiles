@@ -331,8 +331,8 @@ public class PhoneProfilesService extends Service {
             return START_NOT_STICKY;
         }
 
-        if ((intent != null) && (!doForFirstStart(intent/*, flags, startId*/))) {
-            //if (intent != null) {
+        if (!doForFirstStart(intent/*, flags, startId*/)) {
+            if (intent != null) {
                 if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
                     showProfileNotification();
@@ -384,7 +384,7 @@ public class PhoneProfilesService extends Service {
                         }
                     }
                 }
-            //}
+            }
         }
 
         // We want this service to continue running until it is explicitly
@@ -810,7 +810,8 @@ public class PhoneProfilesService extends Service {
                 if (instance != null) {
                     DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    instance._showProfileNotification(profile, true);
+                    if (instance != null)
+                        instance._showProfileNotification(profile, true);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
