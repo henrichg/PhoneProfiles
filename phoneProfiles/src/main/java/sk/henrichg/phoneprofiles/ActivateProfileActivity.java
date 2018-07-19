@@ -36,7 +36,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        instance = this;
+        ActivateProfileActivity.instance = this;
 
         GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
@@ -160,7 +160,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     public static ActivateProfileActivity getInstance()
     {
-        return instance;
+        return ActivateProfileActivity.instance;
     }
 
     @Override
@@ -195,8 +195,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
     protected void onStop()
     {
         super.onStop();
-        if (instance == this)
-            instance = null;
+        if (ActivateProfileActivity.instance == this)
+            ActivateProfileActivity.instance = null;
         //ActivatorTargetHelpsActivity.activatorActivity = null;
     }
 
@@ -206,9 +206,9 @@ public class ActivateProfileActivity extends AppCompatActivity {
         //Debug.stopMethodTracing();
         super.onResume();
 
-        if (instance == null)
+        if (ActivateProfileActivity.instance == null)
         {
-            instance = this;
+            ActivateProfileActivity.instance = this;
             refreshGUI(false);
         }
     }
