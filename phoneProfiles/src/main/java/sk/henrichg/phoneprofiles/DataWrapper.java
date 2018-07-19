@@ -198,7 +198,7 @@ public class DataWrapper {
         return String.valueOf(dValue.intValue());
     }
 
-    Profile  getPredefinedProfile(int index, boolean saveToDB)
+    Profile  getPredefinedProfile(int index, boolean saveToDB, Context baseContext)
     {
         int	maximumValueRing = 7;
         int	maximumValueNotification = 7;
@@ -220,7 +220,7 @@ public class DataWrapper {
 
         switch (index) {
             case 0:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_home), "ic_profile_home_2", 1);
                 //if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -243,7 +243,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "60|0|0|0";
                 break;
             case 1:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_outdoor), "ic_profile_outdoors_1", 2);
                 //if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -266,7 +266,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "255|0|0|0";
                 break;
             case 2:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_work), "ic_profile_work_5", 3);
                 //if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -289,7 +289,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "60|0|0|0";
                 break;
             case 3:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_meeting), "ic_profile_meeting_2", 4);
                 //if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -312,7 +312,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET+"|1|1|0";
                 break;
             case 4:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_sleep), "ic_profile_sleep", 5);
                 //if (android.os.Build.VERSION.SDK_INT >= 18) {
                     if (ActivateProfileHelper.canChangeZenMode(context, true)) {
                         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -335,7 +335,7 @@ public class DataWrapper {
                 //profile._deviceBrightness = "10|0|0|0";
                 break;
             case 5:
-                profile = getNonInitializedProfile(context.getString(R.string.default_profile_name_battery_low), "ic_profile_battery_1", 6);
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_battery_low), "ic_profile_battery_1", 6);
                 profile._deviceAutoSync = 2;
                 profile._deviceMobileData = 2;
                 profile._deviceWiFi = 2;
@@ -355,14 +355,15 @@ public class DataWrapper {
     }
 
     void fillPredefinedProfileList(@SuppressWarnings("SameParameterValue") boolean generateIcons,
-                                   boolean generateIndicators)
+                                   boolean generateIndicators,
+                                   Context baseContext)
     {
         synchronized (profileList) {
             clearProfileList();
             DatabaseHandler.getInstance(context).deleteAllProfiles();
 
             for (int index = 0; index < 6; index++)
-                getPredefinedProfile(index, true);
+                getPredefinedProfile(index, true, baseContext);
 
             fillProfileList(generateIcons, generateIndicators);
         }
