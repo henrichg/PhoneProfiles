@@ -602,20 +602,22 @@ public class DataWrapper {
         PPApplication.showProfileNotification(context);
         ActivateProfileHelper.updateGUI(context, true);
 
+        final Context _context = context;
+
         PPApplication.startHandlerThread();
         Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
 
-                PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
+                PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
                 if (powerManager != null) {
                     wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.1");
                     wakeLock.acquire(10 * 60 * 1000);
                 }
 
-                ActivateProfileHelper.execute(context, profile/*, _interactive*/);
+                ActivateProfileHelper.execute(_context, profile/*, _interactive*/);
 
                 if ((wakeLock != null) && wakeLock.isHeld()) {
                     try {
@@ -641,20 +643,22 @@ public class DataWrapper {
         }
 
         if (interactive) {
+            final DataWrapper dataWrapper = copyDataWrapper();
+
             PPApplication.startHandlerThread();
             handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
+                    PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
                     if (powerManager != null) {
                         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.2");
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
-                    DatabaseHandler.getInstance(context).increaseActivationByUserCount(_profile);
-                    setDynamicLauncherShortcuts();
+                    DatabaseHandler.getInstance(_context).increaseActivationByUserCount(_profile);
+                    dataWrapper.setDynamicLauncherShortcuts();
 
                     if ((wakeLock != null) && wakeLock.isHeld()) {
                         try {
