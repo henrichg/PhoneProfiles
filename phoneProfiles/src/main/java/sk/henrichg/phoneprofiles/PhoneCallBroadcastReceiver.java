@@ -85,7 +85,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         });
     }
 
-    private void setLinkUnlinkNotificationVolume(final int linkMode, final Context context) {
+    private static void setLinkUnlinkNotificationVolume(final int linkMode, final Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
             DataWrapper dataWrapper = new DataWrapper(context, false, 0);
             final Profile profile = dataWrapper.getActivatedProfile(false, false);
@@ -96,7 +96,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         }
     }
 
-    private void callStarted(boolean incoming, Context context)
+    private static void callStarted(boolean incoming, Context context)
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -107,7 +107,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
             setLinkUnlinkNotificationVolume(LINKMODE_UNLINK, context);
     }
 
-    private void callAnswered(Context context)
+    private static void callAnswered(Context context)
     {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -148,7 +148,7 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         dataWrapper.invalidateDataWrapper();
     }
 
-    private void callEnded(boolean incoming, Context context)
+    private static void callEnded(boolean incoming, Context context)
     {
         //Deactivate loudspeaker
 

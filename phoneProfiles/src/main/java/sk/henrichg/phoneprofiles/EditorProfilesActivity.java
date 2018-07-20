@@ -220,7 +220,8 @@ public class EditorProfilesActivity extends AppCompatActivity
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                showTargetHelps();
+                if (instance != null)
+                    instance.showTargetHelps();
             }
         }, 1000);
         */
@@ -349,7 +350,8 @@ public class EditorProfilesActivity extends AppCompatActivity
             Handler handler=new Handler(getMainLooper());
             Runnable r=new Runnable() {
                 public void run() {
-                    finish();
+                    if (instance != null)
+                        instance.finish();
                 }
             };
             handler.postDelayed(r, 500);
@@ -1251,9 +1253,11 @@ public class EditorProfilesActivity extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Fragment fragment = getFragmentManager().findFragmentById(R.id.editor_profile_list);
-                        if (fragment != null) {
-                            ((EditorProfileListFragment) fragment).showTargetHelps();
+                        if (instance != null) {
+                            Fragment fragment = instance.getFragmentManager().findFragmentById(R.id.editor_profile_list);
+                            if (fragment != null) {
+                                ((EditorProfileListFragment) fragment).showTargetHelps();
+                            }
                         }
                     }
                 }, 500);
