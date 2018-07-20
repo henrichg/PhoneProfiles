@@ -124,7 +124,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                             wakeLock.acquire(10 * 60 * 1000);
                         }
 
-                        if (PhoneProfilesService.instance != null) {
+                        if (PhoneProfilesService.getInstance() != null) {
                             // stop PhoneProfilesService
                             PPApplication.sleep(2000);
                             appContext.stopService(new Intent(appContext, PhoneProfilesService.class));

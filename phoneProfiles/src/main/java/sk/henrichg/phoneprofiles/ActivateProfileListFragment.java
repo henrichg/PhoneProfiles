@@ -289,7 +289,7 @@ public class ActivateProfileListFragment extends Fragment {
         {
             PPApplication.logE("ActivateProfileListFragment.doOnStart", "xxx");
 
-            if (PhoneProfilesService.instance == null) {
+            if (PhoneProfilesService.getInstance() == null) {
                 // start PhoneProfilesService
                 PPApplication.startPPService(getActivity(), new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
             }
