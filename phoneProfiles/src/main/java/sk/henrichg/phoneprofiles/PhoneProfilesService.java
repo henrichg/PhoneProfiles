@@ -39,8 +39,8 @@ import java.util.TimerTask;
 
 public class PhoneProfilesService extends Service {
 
-    public static PhoneProfilesService instance = null;
-    public static boolean serviceHasFirstStart = false;
+    private static PhoneProfilesService instance = null;
+    private static boolean serviceHasFirstStart = false;
     private static boolean serviceRunning = false;
     private static boolean runningInForeground = false;
 
@@ -85,7 +85,7 @@ public class PhoneProfilesService extends Service {
 
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
-        PhoneProfilesService.instance = this;
+        instance = this;
         serviceHasFirstStart = false;
         serviceRunning = false;
         runningInForeground = false;
@@ -175,12 +175,20 @@ public class PhoneProfilesService extends Service {
 
         removeProfileNotification(this);
 
-        PhoneProfilesService.instance = null;
+        instance = null;
         serviceHasFirstStart = false;
         serviceRunning = false;
         runningInForeground = false;
 
         super.onDestroy();
+    }
+
+    static PhoneProfilesService getInstance() {
+        return instance;
+    }
+
+    static boolean getServiceHasFirstStart() {
+        return serviceHasFirstStart;
     }
 
     // start service for first start
@@ -298,7 +306,8 @@ public class PhoneProfilesService extends Service {
                     DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
                     dataWrapper.setDynamicLauncherShortcuts();
 
-                    registerReceivers();
+                    if (instance != null)
+                        instance.registerReceivers();
                     AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
                     serviceHasFirstStart = true;
@@ -515,7 +524,7 @@ public class PhoneProfilesService extends Service {
 
         final Context appContext = getApplicationContext();
 
-        if ((PhoneProfilesService.instance != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
+        if ((instance != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
         {
             PPApplication.logE("PhoneProfilesService.showProfileNotification", "show");
 
@@ -769,8 +778,8 @@ public class PhoneProfilesService extends Service {
                 }
 
                 if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(appContext))
-                    if (PhoneProfilesService.instance != null)
-                        PhoneProfilesService.instance.startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
+                    if (instance != null)
+                        instance.startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
                 else {
                     NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
                     if (notificationManager != null)
@@ -807,11 +816,11 @@ public class PhoneProfilesService extends Service {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (PhoneProfilesService.instance != null) {
-                    DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.instance.getApplicationContext(), false, 0);
+                if (instance != null) {
+                    DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    if (PhoneProfilesService.instance != null)
-                        PhoneProfilesService.instance._showProfileNotification(profile, true);
+                    if (instance != null)
+                        instance._showProfileNotification(profile, true);
                     dataWrapper.invalidateDataWrapper();
                 }
             }

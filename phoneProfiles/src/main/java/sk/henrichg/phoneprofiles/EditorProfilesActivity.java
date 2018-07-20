@@ -99,7 +99,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        EditorProfilesActivity.instance = this;
+        instance = this;
 
         savedInstanceStateChanged = (savedInstanceState != null);
 
@@ -190,7 +190,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     public static EditorProfilesActivity getInstance()
     {
-        return EditorProfilesActivity.instance;
+        return instance;
     }
 
     @Override
@@ -201,17 +201,17 @@ public class EditorProfilesActivity extends AppCompatActivity
         if ((addProfileDialog != null) && (addProfileDialog.mDialog != null) && addProfileDialog.mDialog.isShowing())
             addProfileDialog.mDialog.dismiss();
 
-        if (EditorProfilesActivity.instance == this)
-            EditorProfilesActivity.instance = null;
+        if (instance == this)
+            instance = null;
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        if (EditorProfilesActivity.instance == null)
+        if (instance == null)
         {
-            EditorProfilesActivity.instance = this;
+            instance = this;
             refreshGUI(false, false);
         }
 
@@ -693,8 +693,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                     importProgressDialog.setCanceledOnTouchOutside(false);
                     importProgressDialog.show();
 
-                    if (PhoneProfilesService.instance != null)
-                        PhoneProfilesService.instance.stopSelf();
+                    if (PhoneProfilesService.getInstance() != null)
+                        PhoneProfilesService.getInstance().stopSelf();
 
                     EditorProfileListFragment fragment = (EditorProfileListFragment) getFragmentManager().findFragmentById(R.id.editor_profile_list);
                     if (fragment != null)
