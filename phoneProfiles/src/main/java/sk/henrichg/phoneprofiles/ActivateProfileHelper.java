@@ -289,7 +289,8 @@ class ActivateProfileHelper {
                 //        wifiManager.reconnect();
                 //    }
                 //}
-                PhoneProfilesService.connectToSSID = profile._deviceConnectToSSID;
+                if (PhoneProfilesService.getInstance() != null)
+                    PhoneProfilesService.getInstance().connectToSSID = profile._deviceConnectToSSID;
             }
         }
 

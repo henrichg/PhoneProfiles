@@ -64,7 +64,7 @@ public class PhoneProfilesService extends Service {
 
     private SettingsContentObserver settingsContentObserver = null;
 
-    public static String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
+    String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
 
     private AudioManager audioManager = null;
     private MediaPlayer notificationMediaPlayer = null;
