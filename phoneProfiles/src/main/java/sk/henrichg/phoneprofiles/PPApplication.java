@@ -125,17 +125,6 @@ public class PPApplication extends Application {
     static final String PERMISSIONS_STATUS_PREFS_NAME = "permissions_status";
     static final String WIFI_CONFIGURATION_LIST_PREFS_NAME = "wifi_configuration_list";
 
-    public static final int PREFERENCE_NOT_ALLOWED = 0;
-    public static final int PREFERENCE_ALLOWED = 1;
-    public static final int PREFERENCE_NOT_ALLOWED_NO_HARDWARE = 0;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_ROOTED = 1;
-    public static final int PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND = 2;
-    public static final int PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND = 3;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM = 4;
-    private static final int PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS = 5;
-    public static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION = 6;
-    private static final int PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_ANDROID_VERSION = 7;
-
     private static final String PREF_APPLICATION_STARTED = "applicationStarted";
     private static final String PREF_SAVED_VERSION_CODE = "saved_version_code";
     private static final String PREF_DAYS_AFTER_FIRST_START = "days_after_first_start";
@@ -379,24 +368,8 @@ public class PPApplication extends Application {
     }
 
 
-    public static String getNotAllowedPreferenceReasonString(Context context, PreferenceAllowed preferenceAllowed) {
-        switch (preferenceAllowed.notAllowedReason) {
-            case PREFERENCE_NOT_ALLOWED_NO_HARDWARE: return context.getString(R.string.preference_not_allowed_reason_no_hardware);
-            case PREFERENCE_NOT_ALLOWED_NOT_ROOTED: return context.getString(R.string.preference_not_allowed_reason_not_rooted);
-            case PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND: return context.getString(R.string.preference_not_allowed_reason_settings_not_found);
-            case PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND: return context.getString(R.string.preference_not_allowed_reason_service_not_found);
-            case PREFERENCE_NOT_ALLOWED_NOT_CONFIGURED_IN_SYSTEM_SETTINGS: return context.getString(R.string.preference_not_allowed_reason_not_configured_in_system_settings);
-            case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM:
-                return context.getString(R.string.preference_not_allowed_reason_not_supported) + " (" + preferenceAllowed.notAllowedReasonDetail + ")";
-            case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION:
-                return context.getString(R.string.preference_not_allowed_reason_not_supported_by_application) + " (" + preferenceAllowed.notAllowedReasonDetail + ")";
-            case PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_ANDROID_VERSION:
-                return context.getString(R.string.preference_not_allowed_reason_not_supported_android_version) + " (" + preferenceAllowed.notAllowedReasonDetail + ")";
-            default: return context.getString(R.string.empty_string);
-        }
-    }
-
     //-------------------------------------
+
     // log ----------------------------------------------------------
 
     static private void resetLog()
