@@ -50,7 +50,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                                                OnStartProfilePreferencesFromDetail
 {
 
-    private static EditorProfilesActivity instance;
+    private static volatile EditorProfilesActivity instance;
 
     private static boolean savedInstanceStateChanged;
 
@@ -99,7 +99,9 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        instance = this;
+        synchronized (EditorProfilesActivity.class) {
+            instance = this;
+        }
 
         savedInstanceStateChanged = (savedInstanceState != null);
 
@@ -201,17 +203,20 @@ public class EditorProfilesActivity extends AppCompatActivity
         if ((addProfileDialog != null) && (addProfileDialog.mDialog != null) && addProfileDialog.mDialog.isShowing())
             addProfileDialog.mDialog.dismiss();
 
-        if (instance == this)
+        synchronized (EditorProfilesActivity.class) {
             instance = null;
+        }
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        if (instance == null)
+        if (EditorProfilesActivity.getInstance() == null)
         {
-            instance = this;
+            synchronized (EditorProfilesActivity.class) {
+                instance = this;
+            }
             refreshGUI(false, false);
         }
 
@@ -221,7 +226,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             @Override
             public void run() {
                 if (instance != null)
-                    instance.showTargetHelps();
+                    EditorProfilesActivity.getInstance().showTargetHelps();
             }
         }, 1000);
         */
@@ -350,8 +355,8 @@ public class EditorProfilesActivity extends AppCompatActivity
             Handler handler=new Handler(getMainLooper());
             Runnable r=new Runnable() {
                 public void run() {
-                    if (instance != null)
-                        instance.finish();
+                    if (EditorProfilesActivity.getInstance() != null)
+                        EditorProfilesActivity.getInstance().finish();
                 }
             };
             handler.postDelayed(r, 500);
@@ -1253,8 +1258,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (instance != null) {
-                            Fragment fragment = instance.getFragmentManager().findFragmentById(R.id.editor_profile_list);
+                        if (EditorProfilesActivity.getInstance() != null) {
+                            Fragment fragment = EditorProfilesActivity.getInstance().getFragmentManager().findFragmentById(R.id.editor_profile_list);
                             if (fragment != null) {
                                 ((EditorProfileListFragment) fragment).showTargetHelps();
                             }

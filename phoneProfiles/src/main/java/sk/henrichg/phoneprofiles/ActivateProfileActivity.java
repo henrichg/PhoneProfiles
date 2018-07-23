@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ActivateProfileActivity extends AppCompatActivity {
 
-    private static ActivateProfileActivity instance;
+    private static volatile ActivateProfileActivity instance;
 
     private Toolbar toolbar;
 
@@ -36,7 +36,9 @@ public class ActivateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        instance = this;
+        synchronized (ActivateProfileActivity.class) {
+            instance = this;
+        }
 
         GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(getBaseContext());
@@ -180,7 +182,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
         else
         {
-            if (!PhoneProfilesService.getServiceHasFirstStart()) {
+            if ((PhoneProfilesService.getInstance() == null) || (!PhoneProfilesService.getInstance().getServiceHasFirstStart())) {
                 // start PhoneProfilesService
                 //PPApplication.firstStartServiceStarted = false;
                 Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
@@ -195,8 +197,9 @@ public class ActivateProfileActivity extends AppCompatActivity {
     protected void onStop()
     {
         super.onStop();
-        if (instance == this)
+        synchronized (ActivateProfileActivity.class) {
             instance = null;
+        }
         //ActivatorTargetHelpsActivity.activatorActivity = null;
     }
 
@@ -206,9 +209,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
         //Debug.stopMethodTracing();
         super.onResume();
 
-        if (instance == null)
+        if (ActivateProfileActivity.getInstance() == null)
         {
-            instance = this;
+            synchronized (ActivateProfileActivity.class) {
+                instance = this;
+            }
             refreshGUI(false);
         }
     }
@@ -414,8 +419,8 @@ public class ActivateProfileActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (instance != null) {
-                            Fragment fragment = instance.getFragmentManager().findFragmentById(R.id.activate_profile_list);
+                        if (ActivateProfileActivity.getInstance() != null) {
+                            Fragment fragment = ActivateProfileActivity.getInstance().getFragmentManager().findFragmentById(R.id.activate_profile_list);
                             if (fragment != null) {
                                 ((ActivateProfileListFragment) fragment).showTargetHelps();
                             }

@@ -39,14 +39,14 @@ import java.util.TimerTask;
 
 public class PhoneProfilesService extends Service {
 
-    private static PhoneProfilesService instance = null;
-    private static boolean serviceHasFirstStart = false;
-    private static boolean serviceRunning = false;
-    private static boolean runningInForeground = false;
+    private static volatile PhoneProfilesService instance = null;
+    private boolean serviceHasFirstStart = false;
+    private boolean serviceRunning = false;
+    private boolean runningInForeground = false;
 
-    private static KeyguardManager keyguardManager = null;
+    private KeyguardManager keyguardManager = null;
     @SuppressWarnings("deprecation")
-    private static KeyguardManager.KeyguardLock keyguardLock = null;
+    private KeyguardManager.KeyguardLock keyguardLock = null;
 
     BrightnessView brightnessView = null;
     BrightnessView keepScreenOnView = null;
@@ -85,7 +85,10 @@ public class PhoneProfilesService extends Service {
 
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
-        instance = this;
+        synchronized (PhoneProfilesService.class) {
+            instance = this;
+        }
+
         serviceHasFirstStart = false;
         serviceRunning = false;
         runningInForeground = false;
@@ -175,7 +178,10 @@ public class PhoneProfilesService extends Service {
 
         removeProfileNotification(this);
 
-        instance = null;
+        synchronized (PhoneProfilesService.class) {
+            instance = null;
+        }
+
         serviceHasFirstStart = false;
         serviceRunning = false;
         runningInForeground = false;
@@ -187,7 +193,7 @@ public class PhoneProfilesService extends Service {
         return instance;
     }
 
-    static boolean getServiceHasFirstStart() {
+    boolean getServiceHasFirstStart() {
         return serviceHasFirstStart;
     }
 
@@ -307,7 +313,7 @@ public class PhoneProfilesService extends Service {
                     dataWrapper.setDynamicLauncherShortcuts();
 
                     if (instance != null)
-                        instance.registerReceivers();
+                        PhoneProfilesService.getInstance().registerReceivers();
                     AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
                     serviceHasFirstStart = true;
@@ -779,7 +785,7 @@ public class PhoneProfilesService extends Service {
 
                 if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(appContext))
                     if (instance != null)
-                        instance.startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
+                        PhoneProfilesService.getInstance().startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
                 else {
                     NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
                     if (notificationManager != null)
@@ -817,10 +823,10 @@ public class PhoneProfilesService extends Service {
             @Override
             public void run() {
                 if (instance != null) {
-                    DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0);
+                    DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
                     if (instance != null)
-                        instance._showProfileNotification(profile, true);
+                        PhoneProfilesService.getInstance()._showProfileNotification(profile, true);
                     dataWrapper.invalidateDataWrapper();
                 }
             }
