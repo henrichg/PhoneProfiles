@@ -1915,9 +1915,11 @@ public class Profile {
 
     // ----- Check if preference is allowed in device -------------------------------------
 
-    static int isProfilePreferenceAllowed(String preferenceKey, Context context)
+    static PreferenceAllowed isProfilePreferenceAllowed(String preferenceKey, Context context)
     {
-        int featurePresented = PPApplication.PREFERENCE_NOT_ALLOWED;
+        PreferenceAllowed preferenceAllowed = new PreferenceAllowed();
+
+        preferenceAllowed.allowed = PPApplication.PREFERENCE_NOT_ALLOWED;
 
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE))
         {
@@ -1927,12 +1929,12 @@ public class Profile {
                 {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             /*}
             else
                 featurePresented = PPApplication.PREFERENCE_ALLOWED;*/
@@ -1942,18 +1944,18 @@ public class Profile {
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI))
                 // device has Wifi
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_BLUETOOTH))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_BLUETOOTH))
                 // device has bluetooth
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA))
@@ -1997,39 +1999,39 @@ public class Profile {
                     // not working :-/
                     if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
                         if (ActivateProfileHelper.canSetMobileData(context))
-                            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     }
                     else
                     if (PPApplication.isRooted()) {
                         // device is rooted
                         //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     }
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                 }
                 else
                 {
                     if (ActivateProfileHelper.canSetMobileData(context))
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else {
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
                     }
                 }
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY))
             {
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_GPS))
@@ -2040,27 +2042,27 @@ public class Profile {
                 // adb shell pm grant sk.henrichg.phoneprofiles android.permission.WRITE_SECURE_SETTINGS
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
                     if (ActivateProfileHelper.canSetMobileData(context))
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 }
                 else
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
                 if (ActivateProfileHelper.canExploitGPS(context))
                 {
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NFC))
@@ -2071,18 +2073,18 @@ public class Profile {
 
                 // device has nfc
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 }
                 else
                 if (PPApplication.isRooted())
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
             {
                 PPApplication.logE("PPApplication.hardwareCheck","NFC=not presented");
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
             }
         }
         else
@@ -2092,10 +2094,10 @@ public class Profile {
                 // device has Wifi
                 if (android.os.Build.VERSION.SDK_INT < 26) {
                     if (WifiApManager.canExploitWifiAP(context))
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else {
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
                     }
                 }
                 /*else {
@@ -2108,22 +2110,22 @@ public class Profile {
                     // device is rooted
                     if (ActivateProfileHelper.wifiServiceExists(Profile.PREF_PROFILE_DEVICE_WIFI_AP)) {
                         if (PPApplication.serviceBinaryExists())
-                            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                         else
-                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                            preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
                     } else {
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
                     }
                 }
                 else
                 if (WifiApManager.canExploitWifiTethering(context))
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
@@ -2132,15 +2134,15 @@ public class Profile {
                 if (PPApplication.isRooted()) {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS))
@@ -2152,19 +2154,19 @@ public class Profile {
                     {
                         // device is rooted
                         if (PPApplication.settingsBinaryExists())
-                            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                         else
-                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                            preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                     }
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                 }
                 else
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             }
             else {
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
             }
         }
         else
@@ -2172,22 +2174,22 @@ public class Profile {
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 }
                 else
                 if (PPApplication.isRooted()) {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else {
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
             }
         }
         else
@@ -2203,27 +2205,27 @@ public class Profile {
                             // device is rooted
                             if (ActivateProfileHelper.telephonyServiceExists(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
                                 if (PPApplication.serviceBinaryExists())
-                                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                                 else
-                                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
                             } else {
-                                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
                             }
                         } else
-                            PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                            preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                     } else {
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                        PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
                     }
                 }
                 else {
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                    PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                    preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_network_type);
                 }
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_NOTIFICATION_LED))
@@ -2233,19 +2235,19 @@ public class Profile {
                 if (PPApplication.isRooted()) {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
             if (value != -10)
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             else {
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
             }
         }
         else
@@ -2256,10 +2258,10 @@ public class Profile {
             if (keyguardManager != null) {
                 secureKeyguard = keyguardManager.isKeyguardSecure();
                 if (secureKeyguard) {
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION;
-                    PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_secure_lock);
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_APPLICATION;
+                    preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_secure_lock);
                 } else
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             }
         }
         else
@@ -2267,19 +2269,19 @@ public class Profile {
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI))
                 // device has Wifi
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI))
             {
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS))
@@ -2287,32 +2289,32 @@ public class Profile {
             int value = Settings.Global.getInt(context.getContentResolver(), "heads_up_notifications_enabled", -10);
             if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 21)) {
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                    featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                    preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                 }
                 else
                 if (PPApplication.isRooted()) {
                     // device is rooted
                     if (PPApplication.settingsBinaryExists())
-                        featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                        preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
                     else
-                        PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                        preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
                 }
                 else
-                    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
             }
             else
             if (value != -10)
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             else {
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
-                PPApplication.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
             }
         }
         else
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE))
         {
             //if (AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context.getApplicationContext()))
-            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             //else
             //    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_EXTENDER_INSTALLED;
         }
@@ -2320,7 +2322,7 @@ public class Profile {
         if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE))
         {
             //if (AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context.getApplicationContext()))
-            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             //else
             //    PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_EXTENDER_INSTALLED;
         }
@@ -2329,15 +2331,15 @@ public class Profile {
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY))
             {
-                featurePresented = PPApplication.PREFERENCE_ALLOWED;
+                preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
             }
             else
-                PPApplication.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+                preferenceAllowed.notAllowedReason = PPApplication.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
         }
         else
-            featurePresented = PPApplication.PREFERENCE_ALLOWED;
+            preferenceAllowed.allowed = PPApplication.PREFERENCE_ALLOWED;
 
-        return featurePresented;
+        return preferenceAllowed;
     }
 
     //--------------------------------------------------------------
