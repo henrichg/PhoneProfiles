@@ -176,7 +176,7 @@ public class PhoneProfilesService extends Service {
 
         reenableKeyguard();
 
-        removeProfileNotification(this);
+        removeProfileNotification(this, true);
 
         synchronized (PhoneProfilesService.class) {
             instance = null;
@@ -350,14 +350,15 @@ public class PhoneProfilesService extends Service {
             if (intent != null) {
                 if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
-                    showProfileNotification();
+                    // not needed, is called in doForFirstStart
+                    //showProfileNotification();
                 }
-
+                else
                 if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
-                    removeProfileNotification(this);
+                    removeProfileNotification(this, false);
                 }
-
+                else
                 if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
 
@@ -833,16 +834,25 @@ public class PhoneProfilesService extends Service {
         });
     }
 
-    private void removeProfileNotification(Context context)
+    private void removeProfileNotification(Context context, boolean onlyEmpty)
     {
-        if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(context))
-            stopForeground(true);
-        else {
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            if (notificationManager != null)
-                notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
+        if (onlyEmpty) {
+            final Context appContext = getApplicationContext();
+            final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+            final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
+            dataWrapper.invalidateDataWrapper();
+            _showProfileNotification(profile, false);
         }
-        runningInForeground = false;
+        else {
+            if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(context))
+                stopForeground(true);
+            else {
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                if (notificationManager != null)
+                    notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
+            }
+            runningInForeground = false;
+        }
     }
 
     private void setAlarmForNotificationCancel(Context context)
