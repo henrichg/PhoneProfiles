@@ -23,9 +23,6 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
         // must by false to avoid FC when rotation changes and preference dialogs are shown
         setRetainInstance(false);
 
-        preferences = prefMng.getSharedPreferences();
-        preferences.registerOnSharedPreferenceChangeListener(this);
-
         extraScrollTo = getArguments().getString(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "");
 
         updateSharedPreference();

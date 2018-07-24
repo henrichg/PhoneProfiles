@@ -60,6 +60,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         // must by false to avoid FC when rotation changes and preference dialogs are shown
         setRetainInstance(false);
 
+        prefMng = getPreferenceManager();
+        preferences = prefMng.getSharedPreferences();
     }
 
     @Override
