@@ -59,7 +59,7 @@ public class ActivateProfileFromExternalApplicationActivity extends AppCompatAct
         if (profile_id != 0) {
             Profile profile = dataWrapper.getProfileById(profile_id, false, false);
             if (Permissions.grantProfilePermissions(getApplicationContext(), profile, true,
-                    /*false, false, 0,*/ PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, true)) {
+                    /*false, false, 0,*/ PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, true, false)) {
                 dataWrapper._activateProfile(profile, PPApplication.STARTUP_SOURCE_EXTERNAL_APP, false, this);
             }
             else
