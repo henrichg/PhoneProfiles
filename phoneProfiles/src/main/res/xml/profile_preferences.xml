@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="rootScreen"
     android:title="@string/title_activity_profile_preferences" >
-
     <PreferenceCategory
         android:summary="@string/profile_preferences_category_profileIdentification"
         android:title="@string/profile_preferences_category_profileIdentification"

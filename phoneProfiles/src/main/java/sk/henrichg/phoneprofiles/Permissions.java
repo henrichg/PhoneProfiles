@@ -173,7 +173,7 @@ public class Permissions {
         return permissions;
     }
 
-    private static List<PermissionType> checkProfilePermissions(Context context, Profile profile) {
+    static List<PermissionType> checkProfilePermissions(Context context, Profile profile) {
         List<PermissionType>  permissions = new ArrayList<>();
         if (profile == null) return permissions;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -900,13 +900,15 @@ public class Permissions {
     static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
                                                   /*boolean forGUI, boolean monochrome, int monochromeValue,*/
                                                   int startupSource, boolean interactive,
-                                                  boolean activateProfile) {
+                                                  boolean activateProfile,
+                                                  boolean fromPreferences) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = checkProfilePermissions(context, profile);
             if (permissions.size() > 0) {
                 try {
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    if (!fromPreferences)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // this close all activities with same taskAffinity
                     intent.putExtra(EXTRA_GRANT_TYPE, GRANT_TYPE_PROFILE);
                     intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
@@ -921,7 +923,10 @@ public class Permissions {
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
                     intent.putExtra(EXTRA_INTERACTIVE, interactive);
                     intent.putExtra(EXTRA_ACTIVATE_PROFILE, activateProfile);
-                    context.startActivity(intent);
+                    if (fromPreferences)
+                        ((Activity)context).startActivityForResult(intent, REQUEST_CODE + GRANT_TYPE_PROFILE);
+                    else
+                        context.startActivity(intent);
                 } catch (Exception e) {
                     return false;
                 }

@@ -721,7 +721,7 @@ public class DataWrapper {
                     public void onClick(DialogInterface dialog, int which) {
                         if (Permissions.grantProfilePermissions(context, _profile, false,
                                 /*true, monochrome, monochromeValue,*/
-                                _startupSource, true, true))
+                                _startupSource, true, true, false))
                             _dataWrapper._activateProfile(_profile, _startupSource, true, _activity);
                         else {
                             Intent returnIntent = new Intent();
@@ -782,7 +782,7 @@ public class DataWrapper {
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
                             /*true, monochrome, monochromeValue,*/
-                            startupSource, true, true);
+                            startupSource, true, true, false);
                 /*}
                 else
                     granted = Permissions.grantProfilePermissions(context, profile, true,
@@ -956,7 +956,7 @@ public class DataWrapper {
         }
         if (Permissions.grantProfilePermissions(context, profile, true,
                 /*false, monochrome, monochromeValue,*/
-                startupSource, true, true)) {
+                startupSource, true, true, false)) {
             _activateProfile(profile, startupSource, true, null);
         }
     }
