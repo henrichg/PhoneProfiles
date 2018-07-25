@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -47,11 +48,19 @@ class EditorProfileListViewHolder extends RecyclerView.ViewHolder
 
         this.profile = profile;
 
+        boolean isPermissionGranted = Permissions.checkProfilePermissions(context, profile).size() == 0;
+
         if (profile._checked && (!ApplicationPreferences.applicationEditorHeader(context)))
         {
             profileName.setTypeface(null, Typeface.BOLD);
             profileName.setTextSize(16);
             profileName.setTextColor(GlobalGUIRoutines.getThemeAccentColor(context));
+        }
+        else
+        if (!isPermissionGranted) {
+            profileName.setTypeface(null, Typeface.NORMAL);
+            profileName.setTextSize(15);
+            profileName.setTextColor(Color.RED);
         }
         else
         {
