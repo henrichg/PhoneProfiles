@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -104,6 +105,15 @@ public class ProfileDetailsFragment extends Fragment {
         DataWrapper dataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0);
 
         final Profile profile = dataWrapper.getProfileById(profile_id, true, true);
+
+        boolean isPermissionGranted = Permissions.checkProfilePermissions(getActivity().getApplicationContext(), profile).size() == 0;
+        if (!isPermissionGranted) {
+            profileName.setTextColor(Color.RED);
+        }
+        else
+        {
+            profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(getActivity()));
+        }
 
         profileName.setTypeface(null, Typeface.BOLD);
 
