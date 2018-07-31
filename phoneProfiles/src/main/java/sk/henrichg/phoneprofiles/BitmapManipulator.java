@@ -1,6 +1,8 @@
 package sk.henrichg.phoneprofiles;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -36,6 +38,15 @@ class BitmapManipulator {
         Uri uri = Uri.parse(bitmapUri);
         if (uri != null) {
             try {
+                ContentResolver contentResolver = context.getContentResolver();
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                try {
+                    context.grantUriPermission(context.getPackageName(), uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                } catch (Exception e) {
+                    Log.e("BitmapManipulator.resampleBitmapUri", Log.getStackTraceString(e));
+                }
+                //}
                 InputStream inputStream = context.getContentResolver().openInputStream(uri);
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
