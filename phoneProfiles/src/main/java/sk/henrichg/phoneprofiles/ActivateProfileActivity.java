@@ -36,7 +36,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "activate_profiles_activity_start_target_helps";
 
-    private BroadcastReceiver refreshGUIBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver refreshGUIBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent ) {
             boolean refreshIcons = intent.getBooleanExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ICONS, false);
@@ -45,7 +45,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     };
 
     static final String EXTRA_SHOW_TARGET_HELPS_FOR_ACTIVITY = "show_target_helps_for_activity";
-    private BroadcastReceiver showTargetHelpsBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver showTargetHelpsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive( Context context, Intent intent ) {
             boolean forActivity = intent.getBooleanExtra(EXTRA_SHOW_TARGET_HELPS_FOR_ACTIVITY, false);
@@ -60,7 +60,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
     };
 
-    private BroadcastReceiver finishBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver finishBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive( Context context, Intent intent ) {
             ActivateProfileActivity.this.finish();
@@ -328,7 +328,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
     }
     */
 
-    public void refreshGUI(boolean refreshIcons)
+    private void refreshGUI(boolean refreshIcons)
     {
         final boolean _refreshIcons = refreshIcons;
 
@@ -376,7 +376,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void showTargetHelps() {
+    private void showTargetHelps() {
         /*if (Build.VERSION.SDK_INT <= 19)
             // TapTarget.forToolbarMenuItem FC :-(
             // Toolbar.findViewById() returns null
@@ -469,7 +469,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
             }
             else {
                 //Log.d("ActivateProfilesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=false");
-                final Context context = getApplicationContext();
+                //final Context context = getApplicationContext();
                 final Handler handler = new Handler(getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override

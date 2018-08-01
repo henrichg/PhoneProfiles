@@ -95,7 +95,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     AddProfileDialog addProfileDialog;
 
-    private BroadcastReceiver refreshGUIBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver refreshGUIBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent ) {
             boolean refreshIcons = intent.getBooleanExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ICONS, false);
@@ -104,7 +104,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     };
 
-    private BroadcastReceiver showTargetHelpsBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver showTargetHelpsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive( Context context, Intent intent ) {
             Fragment fragment = EditorProfilesActivity.this.getFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -114,7 +114,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     };
 
-    private BroadcastReceiver finishBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver finishBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive( Context context, Intent intent ) {
             EditorProfilesActivity.this.finish();
@@ -245,30 +245,21 @@ public class EditorProfilesActivity extends AppCompatActivity
         }*/
     }
 
+    /*
     @Override
     protected void onResume()
     {
         super.onResume();
 
-        /*if (EditorProfilesActivity.getInstance() == null)
+        if (EditorProfilesActivity.getInstance() == null)
         {
             synchronized (EditorProfilesActivity.class) {
                 instance = this;
             }
             refreshGUI(false, false);
-        }*/
-
-        /*
-        final Handler handler = new Handler(getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (instance != null)
-                    EditorProfilesActivity.getInstance().showTargetHelps();
-            }
-        }, 1000);
-        */
+        }
     }
+    */
 
     @Override
     protected void onDestroy()
@@ -1179,7 +1170,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             return null;
     }
 
-    public void refreshGUI(boolean refreshIcons, boolean setPosition)
+    private void refreshGUI(boolean refreshIcons, boolean setPosition)
     {
         final boolean _refreshIcons = refreshIcons;
         final boolean _setPosition = setPosition;

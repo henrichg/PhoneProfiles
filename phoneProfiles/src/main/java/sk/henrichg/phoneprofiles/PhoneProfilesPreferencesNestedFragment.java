@@ -32,7 +32,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
 {
 
     PreferenceManager prefMng;
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
 
     private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
     private static final int RESULT_APPLICATION_PERMISSIONS = 1990;
