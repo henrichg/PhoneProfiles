@@ -5,7 +5,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +33,6 @@ import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.widget.Toast;
 
 import static android.content.Context.DEVICE_POLICY_SERVICE;
@@ -599,7 +597,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        Log.e("***** ProfilePreferencesNestedFragment.setPermissionPreference","CLICKED");
+                        //Log.e("***** ProfilePreferencesNestedFragment.setPermissionPreference","CLICKED");
                         //Profile mappedProfile = Profile.getMappedProfile(profile, appContext);
                         Permissions.grantProfilePermissions(activity, profile, false,
                                 /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false, true);
