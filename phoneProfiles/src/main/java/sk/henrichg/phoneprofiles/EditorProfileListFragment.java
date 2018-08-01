@@ -238,13 +238,13 @@ public class EditorProfileListFragment extends Fragment
 
         private final WeakReference<EditorProfileListFragment> fragmentWeakRef;
         private final DataWrapper dataWrapper;
-        private final Context baseContext;
+        //private final Context baseContext;
         boolean defaultProfilesGenerated = false;
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0);
-            this.baseContext = fragment.getActivity();
+            //this.baseContext = fragment.getActivity();
         }
 
         @Override
@@ -266,8 +266,11 @@ public class EditorProfileListFragment extends Fragment
             if (dataWrapper.profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
-                dataWrapper.fillPredefinedProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context), baseContext);
-                defaultProfilesGenerated = true;
+                EditorProfileListFragment fragment = this.fragmentWeakRef.get();
+                if ((fragment != null) && (fragment.getActivity() != null)) {
+                    dataWrapper.fillPredefinedProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context), fragment.getActivity());
+                    defaultProfilesGenerated = true;
+                }
             }
             return null;
         }
