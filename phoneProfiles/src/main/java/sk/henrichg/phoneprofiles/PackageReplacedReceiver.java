@@ -112,6 +112,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
             if (PPApplication.getApplicationStarted(appContext, false))
             {
+                startService(appContext);
+                /*
                 PPApplication.startHandlerThread();
                 final Handler handler3 = new Handler(PPApplication.handlerThread.getLooper());
                 handler3.post(new Runnable() {
@@ -140,6 +142,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         }
                     }
                 });
+                */
             }
         }
     }

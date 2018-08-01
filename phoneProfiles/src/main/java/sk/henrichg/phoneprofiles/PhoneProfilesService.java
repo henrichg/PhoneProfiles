@@ -138,42 +138,7 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("PhoneProfilesService.onDestroy", "xxx");
 
-        Context appContext = getApplicationContext();
-
-        if (shutdownBroadcastReceiver != null) {
-            appContext.unregisterReceiver(shutdownBroadcastReceiver);
-            shutdownBroadcastReceiver = null;
-        }
-        if (screenOnOffReceiver != null) {
-            appContext.unregisterReceiver(screenOnOffReceiver);
-            screenOnOffReceiver = null;
-        }
-        if (android.os.Build.VERSION.SDK_INT >= 23)
-            if (interruptionFilterChangedReceiver != null) {
-                appContext.unregisterReceiver(interruptionFilterChangedReceiver);
-                interruptionFilterChangedReceiver = null;
-            }
-        if (phoneCallBroadcastReceiver != null) {
-            appContext.unregisterReceiver(phoneCallBroadcastReceiver);
-            phoneCallBroadcastReceiver = null;
-        }
-        if (ringerModeChangeReceiver != null) {
-            appContext.unregisterReceiver(ringerModeChangeReceiver);
-            ringerModeChangeReceiver = null;
-        }
-        if (wifiStateChangedBroadcastReceiver != null) {
-            appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
-            wifiStateChangedBroadcastReceiver = null;
-        }
-        if (accessibilityServiceBroadcastReceiver != null) {
-            appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
-            accessibilityServiceBroadcastReceiver = null;
-        }
-
-        if (settingsContentObserver != null) {
-            appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
-            settingsContentObserver = null;
-        }
+        unregisterReceivers();
 
         reenableKeyguard();
 
@@ -206,12 +171,6 @@ public class PhoneProfilesService extends Service {
         if (intent != null) {
             onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, true);
             startOnPackageReplace = intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false);
-        }
-
-        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
-            // do not call this from handlerThread. In Android 8 handlerThread is not called
-            // when for service is not displayed foreground notification
-            showProfileNotification();
         }
 
         if (serviceRunning && onlyStart && !startOnPackageReplace) {
@@ -342,9 +301,27 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "intent="+intent);
 
+        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
+            // do not call this from handlerThread. In Android 8 handlerThread is not called
+            // when for service is not displayed foreground notification
+            showProfileNotification();
+        }
+
         if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
             stopSelf();
             return START_NOT_STICKY;
+        }
+
+        if (intent != null) {
+            if (intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false)) {
+                unregisterReceivers();
+
+                reenableKeyguard();
+
+                serviceHasFirstStart = false;
+                serviceRunning = false;
+                runningInForeground = false;
+            }
         }
 
         if (!doForFirstStart(intent/*, flags, startId*/)) {
@@ -433,19 +410,19 @@ public class PhoneProfilesService extends Service {
     }
 
     private void registerReceivers() {
-        Context appContext = getApplicationContext();
+        //Context appContext = getApplicationContext();
 
         if (shutdownBroadcastReceiver != null) {
-            appContext.unregisterReceiver(shutdownBroadcastReceiver);
+            unregisterReceiver(shutdownBroadcastReceiver);
             shutdownBroadcastReceiver = null;
         }
         shutdownBroadcastReceiver = new ShutdownBroadcastReceiver();
         IntentFilter intentFilter50 = new IntentFilter();
         intentFilter50.addAction(Intent.ACTION_SHUTDOWN);
-        appContext.registerReceiver(shutdownBroadcastReceiver, intentFilter50);
+        registerReceiver(shutdownBroadcastReceiver, intentFilter50);
 
         if (screenOnOffReceiver != null) {
-            appContext.unregisterReceiver(screenOnOffReceiver);
+            unregisterReceiver(screenOnOffReceiver);
             screenOnOffReceiver = null;
         }
         screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
@@ -453,70 +430,107 @@ public class PhoneProfilesService extends Service {
         intentFilter5.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter5.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter5.addAction(Intent.ACTION_USER_PRESENT);
-        appContext.registerReceiver(screenOnOffReceiver, intentFilter5);
+        registerReceiver(screenOnOffReceiver, intentFilter5);
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (interruptionFilterChangedReceiver != null) {
-                appContext.unregisterReceiver(interruptionFilterChangedReceiver);
+                unregisterReceiver(interruptionFilterChangedReceiver);
                 interruptionFilterChangedReceiver = null;
             }
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
-            if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, appContext)) {
+            if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, this)) {
                 interruptionFilterChangedReceiver = new InterruptionFilterChangedBroadcastReceiver();
                 IntentFilter intentFilter11 = new IntentFilter();
                 intentFilter11.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
-                appContext.registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
+                registerReceiver(interruptionFilterChangedReceiver, intentFilter11);
             }
         }
 
         if (phoneCallBroadcastReceiver != null) {
-            appContext.unregisterReceiver(phoneCallBroadcastReceiver);
+            unregisterReceiver(phoneCallBroadcastReceiver);
             phoneCallBroadcastReceiver = null;
         }
         phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
         IntentFilter intentFilter6 = new IntentFilter();
         intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
         intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-        appContext.registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
+        registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
 
         if (ringerModeChangeReceiver != null) {
-            appContext.unregisterReceiver(ringerModeChangeReceiver);
+            unregisterReceiver(ringerModeChangeReceiver);
             ringerModeChangeReceiver = null;
         }
         ringerModeChangeReceiver = new RingerModeChangeReceiver();
         IntentFilter intentFilter7 = new IntentFilter();
         intentFilter7.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
-        appContext.registerReceiver(ringerModeChangeReceiver, intentFilter7);
+        registerReceiver(ringerModeChangeReceiver, intentFilter7);
 
         if (wifiStateChangedBroadcastReceiver != null) {
-            appContext.unregisterReceiver(wifiStateChangedBroadcastReceiver);
+            unregisterReceiver(wifiStateChangedBroadcastReceiver);
             wifiStateChangedBroadcastReceiver = null;
         }
         wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
         IntentFilter intentFilter8 = new IntentFilter();
         intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        appContext.registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
+        registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
         if (accessibilityServiceBroadcastReceiver != null) {
-            appContext.unregisterReceiver(accessibilityServiceBroadcastReceiver);
+            unregisterReceiver(accessibilityServiceBroadcastReceiver);
             accessibilityServiceBroadcastReceiver = null;
         }
         accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
         IntentFilter intentFilter23 = new IntentFilter();
         intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
         intentFilter23.addAction(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END);
-        appContext.registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
+        registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
         if (settingsContentObserver != null) {
-            appContext.getContentResolver().unregisterContentObserver(settingsContentObserver);
+            getContentResolver().unregisterContentObserver(settingsContentObserver);
             settingsContentObserver = null;
         }
         try {
             //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
-            settingsContentObserver = new SettingsContentObserver(appContext, new Handler());
-            appContext.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
+            settingsContentObserver = new SettingsContentObserver(this, new Handler());
+            getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
         } catch (Exception ignored) {}
+    }
+
+    private void unregisterReceivers() {
+        if (shutdownBroadcastReceiver != null) {
+            unregisterReceiver(shutdownBroadcastReceiver);
+            shutdownBroadcastReceiver = null;
+        }
+        if (screenOnOffReceiver != null) {
+            unregisterReceiver(screenOnOffReceiver);
+            screenOnOffReceiver = null;
+        }
+        if (android.os.Build.VERSION.SDK_INT >= 23)
+            if (interruptionFilterChangedReceiver != null) {
+                unregisterReceiver(interruptionFilterChangedReceiver);
+                interruptionFilterChangedReceiver = null;
+            }
+        if (phoneCallBroadcastReceiver != null) {
+            unregisterReceiver(phoneCallBroadcastReceiver);
+            phoneCallBroadcastReceiver = null;
+        }
+        if (ringerModeChangeReceiver != null) {
+            unregisterReceiver(ringerModeChangeReceiver);
+            ringerModeChangeReceiver = null;
+        }
+        if (wifiStateChangedBroadcastReceiver != null) {
+            unregisterReceiver(wifiStateChangedBroadcastReceiver);
+            wifiStateChangedBroadcastReceiver = null;
+        }
+        if (accessibilityServiceBroadcastReceiver != null) {
+            unregisterReceiver(accessibilityServiceBroadcastReceiver);
+            accessibilityServiceBroadcastReceiver = null;
+        }
+
+        if (settingsContentObserver != null) {
+            getContentResolver().unregisterContentObserver(settingsContentObserver);
+            settingsContentObserver = null;
+        }
     }
 
     // profile notification -------------------------------------------
