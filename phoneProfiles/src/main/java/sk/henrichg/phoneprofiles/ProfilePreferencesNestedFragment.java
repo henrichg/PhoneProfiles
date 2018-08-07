@@ -1096,8 +1096,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             Preference preference = prefMng.findPreference(key);
             if (preference != null) {
                 preference.setSummary(value.toString());
-                setTitleStyle(preference, false, true, false);
-                setCategorySummary(preference, false);
+                setTitleStyle(preference, !value.toString().isEmpty(), false, false);
+                setCategorySummary(preference, !value.toString().isEmpty());
             }
         }
         if (key.equals(Profile.PREF_PROFILE_VOLUME_RINGER_MODE))
