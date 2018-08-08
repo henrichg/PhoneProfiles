@@ -1195,6 +1195,11 @@
     <string name="preference_profile_manual_brightness">Manual</string>
     <string name="preferences_grantPermissions_title">Not granted permissions</string>
     <string name="preferences_grantPermissions_summary">Some permissions are not granted. Click here to grant it.</string>
+    <string name="permission_group_name_draw_overlays_miui">Display pop-up window</string>
+    <string name="permissions_draw_overlays_not_allowed_confirm_miui">You have not enabled \"Display pop-up window\". Never ask again?</string>
+    <string name="phone_profiles_pref_drawOverlaysPermissions_miui">Display pop-up window</string>
+    <string name="phone_profiles_pref_writeSystemSettingPermissions_summary_miui">Please enable it.</string>
+    <string name="phone_profiles_pref_drawOverlaysPermissions_summary_miui">Please enable it.</string>
 
     <string name="extender_app_name">PhoneProfilesExtender</string>
     <string name="extender_accessibility_service_name">PhoneProfilesExtender</string>
