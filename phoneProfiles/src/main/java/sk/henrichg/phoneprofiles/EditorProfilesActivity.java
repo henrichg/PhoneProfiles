@@ -350,43 +350,43 @@ public class EditorProfilesActivity extends AppCompatActivity
         Intent intent;
 
         switch (item.getItemId()) {
-        case R.id.menu_settings:
-            intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
+            case R.id.menu_settings:
+                intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
 
-            startActivityForResult(intent, REQUEST_CODE_APPLICATION_PREFERENCES);
+                startActivityForResult(intent, REQUEST_CODE_APPLICATION_PREFERENCES);
 
-            return true;
-        case R.id.menu_install_tone:
-            TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, getApplicationContext(), true);
-            return true;
-        case R.id.menu_export:
-            exportData();
-            return true;
-        case R.id.menu_import:
-            importData();
-            return true;
-        case R.id.important_info:
-            intent = new Intent(getBaseContext(), ImportantInfoActivity.class);
-            startActivity(intent);
-            return true;
-        /*case R.id.menu_help:
-            try {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/henrichg/PhoneProfiles/wiki"));
-                startActivity(myIntent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(getApplicationContext(), "No application can handle this request."
-                    + " Please install a web browser",  Toast.LENGTH_LONG).show();
-            }
-            return true;*/
-        case R.id.menu_about:
-            intent = new Intent(getBaseContext(), AboutApplicationActivity.class);
-            startActivity(intent);
-            return true;
-        case R.id.menu_exit:
-            PPApplication.exitApp(getApplicationContext(), /*getDataWrapper(),*/ this, false);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+                return true;
+            case R.id.menu_install_tone:
+                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, getApplicationContext(), true);
+                return true;
+            case R.id.menu_export:
+                exportData();
+                return true;
+            case R.id.menu_import:
+                importData();
+                return true;
+            case R.id.important_info:
+                intent = new Intent(getBaseContext(), ImportantInfoActivity.class);
+                startActivity(intent);
+                return true;
+            /*case R.id.menu_help:
+                try {
+                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/henrichg/PhoneProfiles/wiki"));
+                    startActivity(myIntent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "No application can handle this request."
+                        + " Please install a web browser",  Toast.LENGTH_LONG).show();
+                }
+                return true;*/
+            case R.id.menu_about:
+                intent = new Intent(getBaseContext(), AboutApplicationActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_exit:
+                PPApplication.exitApp(getApplicationContext(), /*getDataWrapper(),*/ this, false);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
