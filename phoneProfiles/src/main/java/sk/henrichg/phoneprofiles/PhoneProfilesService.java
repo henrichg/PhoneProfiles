@@ -539,9 +539,11 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("PhoneProfilesService.showProfileNotification", "xxx");
 
+        /*
         if (ActivateProfileHelper.lockRefresh)
             // no refresh notification
             return;
+        */
 
         final Context appContext = getApplicationContext();
 
