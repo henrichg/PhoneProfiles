@@ -327,13 +327,19 @@ public class PhoneProfilesService extends Service {
             if (intent != null) {
                 if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
-                    // not needed, is called in doForFirstStart
+                    // not needed, is already called in start of onStartCommand
                     //showProfileNotification();
                 }
                 else
                 if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
                     removeProfileNotification(this, false);
+                }
+                else
+                if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SET_SERVICE_FOREGROUND");
+                    // not needed, is already called in start of onStartCommand
+                    //showProfileNotification();
                 }
                 else
                 if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
