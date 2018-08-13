@@ -4,10 +4,11 @@
 // 2700 = start About application alarm for notification "Please donate me."
 // 2800 = updated privacy policy
 // 2900 = Wi-Fi AP = Toggle is not supported fro Android 8+
+// 3000 = show Important info on first application start
 
 ext.ppVersions = [
-    publishVersion: '4.6.1.2b',
-    publishVersionCode: 2911,
+    publishVersion: '4.6.2b',
+    publishVersionCode: 2912,
 
     minSdk: 19,
     targetSdk: 27,

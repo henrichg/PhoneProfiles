@@ -3253,14 +3253,6 @@ class ActivateProfileHelper {
                 }
 
                 switch (profile._lockDevice) {
-                    case 3:
-                        DevicePolicyManager manager = (DevicePolicyManager)appContext.getSystemService(DEVICE_POLICY_SERVICE);
-                        if (manager != null) {
-                            final ComponentName component = new ComponentName(appContext, PPDeviceAdminReceiver.class);
-                            if (manager.isAdminActive(component))
-                                manager.lockNow();
-                        }
-                        break;
                     case 2:
                         /*if (PPApplication.isRooted()) {
                             //String command1 = "input keyevent 26";
@@ -3289,6 +3281,7 @@ class ActivateProfileHelper {
                         }
                         break;
                     case 1:
+                    case 3:
                         if (PhoneProfilesService.getInstance() != null) {
                             if (Permissions.checkLockDevice(appContext) && (PhoneProfilesService.getInstance().lockDeviceActivity == null)) {
                                 try {

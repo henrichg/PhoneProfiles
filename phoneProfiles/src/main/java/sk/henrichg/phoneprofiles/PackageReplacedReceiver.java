@@ -98,6 +98,14 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                     editor.apply();
                                 }
                             }
+                            if (actualVersionCode <= 3000) {
+                                SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
+                                if (preferences.getInt(Profile.PREF_PROFILE_LOCK_DEVICE, 0) == 3) {
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putInt(Profile.PREF_PROFILE_LOCK_DEVICE, 1);
+                                    editor.apply();
+                                }
+                            }
                         }
                     } catch (Exception ignored) {
                     }
