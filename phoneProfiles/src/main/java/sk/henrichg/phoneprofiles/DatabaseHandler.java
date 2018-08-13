@@ -30,7 +30,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1440;
+    private static final int DATABASE_VERSION = 1450;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -745,6 +745,30 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         db.execSQL("UPDATE " + TABLE_PROFILES +
                                 " SET " + KEY_DEVICE_WIFI_AP + "=0" + " " +
                                 "WHERE " + KEY_ID + "=" + id);
+
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+        }
+
+        if (oldVersion < 1450) {
+            final String selectQuery = "SELECT " + KEY_ID + "," +
+                    KEY_LOCK_DEVICE +
+                    " FROM " + TABLE_PROFILES;
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID)));
+                    int lockDevice = cursor.getInt(cursor.getColumnIndex(KEY_LOCK_DEVICE));
+
+                    if (lockDevice == 3) {
+                        db.execSQL("UPDATE " + TABLE_PROFILES +
+                                " SET " + KEY_LOCK_DEVICE + "=1" + " " +
+                                "WHERE " + KEY_ID + "=" + id);
+                    }
 
                 } while (cursor.moveToNext());
             }
@@ -2507,6 +2531,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                                 int duration = 0;
                                 int zenMode = 0;
+                                int lockDevice = 0;
 
                                 if (cursorExportedDB.moveToFirst()) {
                                     do {
@@ -2596,6 +2621,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                 duration = cursorExportedDB.getInt(i);
                                             if (columnNamesExportedDB[i].equals(KEY_VOLUME_ZEN_MODE))
                                                 zenMode = cursorExportedDB.getInt(i);
+                                            if (columnNamesExportedDB[i].equals(KEY_LOCK_DEVICE))
+                                                lockDevice = cursorExportedDB.getInt(i);
 
                                         }
 
@@ -2729,6 +2756,11 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                         if (exportedDBObj.getVersion() < 1430) {
                                             values.put(KEY_DTMF_TONE_WHEN_DIALING, 0);
                                             values.put(KEY_SOUND_ON_TOUCH, 0);
+                                        }
+
+                                        if (exportedDBObj.getVersion() < 1450) {
+                                            if (lockDevice == 3)
+                                                values.put(KEY_LOCK_DEVICE, 1);
                                         }
 
                                         // Inserting Row do db z SQLiteOpenHelper
