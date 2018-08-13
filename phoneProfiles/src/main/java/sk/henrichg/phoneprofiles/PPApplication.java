@@ -1093,7 +1093,7 @@ public class PPApplication extends Application {
     }
     */
 
-    static boolean isMIUI() {
+    private static boolean isMIUI() {
         String device = Build.MANUFACTURER;
         if (device.equals("Xiaomi")) {
             try {

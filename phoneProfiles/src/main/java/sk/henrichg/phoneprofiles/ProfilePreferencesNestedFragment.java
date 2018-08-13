@@ -559,7 +559,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         super.onDestroy();
     }
 
-    private void setTitleStyle(Preference preference, boolean bold, boolean underline, boolean systemSettings)
+    private void setTitleStyle(Preference preference, boolean bold,
+                               @SuppressWarnings("SameParameterValue") boolean underline,
+                               boolean systemSettings)
     {
         if (preference != null) {
             CharSequence title = preference.getTitle();
