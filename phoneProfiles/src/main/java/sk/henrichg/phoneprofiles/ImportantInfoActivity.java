@@ -333,10 +333,14 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 }
             });
             /* currently not implemented in KillerManager
-            if (device instanceof Sony) {
+            if (!(device instanceof Sony)) {
                 infoText = findViewById(R.id.activity_info_notification_sony_stamina_mode);
                 infoText.setVisibility(View.GONE);
             }*/
+            if (!Build.MANUFACTURER.equalsIgnoreCase("sony")) {
+                infoText = findViewById(R.id.activity_info_notification_sony_stamina_mode);
+                infoText.setVisibility(View.GONE);
+            }
         }
         else {
             TextView infoText = findViewById(R.id.activity_info_notification_power_manager);
