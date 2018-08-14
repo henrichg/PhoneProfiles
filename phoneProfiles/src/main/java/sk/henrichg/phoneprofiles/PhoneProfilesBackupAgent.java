@@ -1,7 +1,10 @@
 package sk.henrichg.phoneprofiles;
 
 import android.app.backup.BackupAgentHelper;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.support.v4.content.LocalBroadcastManager;
 
 public class PhoneProfilesBackupAgent extends BackupAgentHelper {
@@ -15,16 +18,18 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
     public void onRestoreFinished() {
         PPApplication.logE("PhoneProfilesBackupAgent","onRestoreFinished");
 
+        final Context appContext = getApplicationContext();
+
         // DO NOT CLOSE APPLICATION AFTER RESTORE
 
-        //DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), true, false, 0);
+        //DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
 
-        PPApplication.exitApp(getApplicationContext(), /*dataWrapper,*/ null, false);
+        PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false);
 
         Intent intent = new Intent("FinishActivatorBroadcastReceiver");
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(appContext).sendBroadcast(intent);
         intent = new Intent("FinishEditorBroadcastReceiver");
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(appContext).sendBroadcast(intent);
         /*
         ActivateProfileActivity activateProfileActivity = ActivateProfileActivity.getInstance();
         if (activateProfileActivity != null)
@@ -41,12 +46,31 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
         }
         */
 
-        PPApplication.setSavedVersionCode(getApplicationContext(), 0);
-        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-        //ActivateProfileHelper.setScreenUnlocked(getApplicationContext(), true);
-        ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), true);
-    }
+        PPApplication.startHandlerThread();
+        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PhoneProfilesBackupAgent.onRestoreFinished");
+                    wakeLock.acquire(10 * 60 * 1000);
+                }
 
+                PPApplication.setSavedVersionCode(appContext, 0);
+                Permissions.setShowRequestAccessNotificationPolicyPermission(appContext, true);
+                Permissions.setShowRequestWriteSettingsPermission(appContext, true);
+                //ActivateProfileHelper.setScreenUnlocked(appContext, true);
+                ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, true);
+
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
+                }
+            }
+        });
+    }
 
 }
