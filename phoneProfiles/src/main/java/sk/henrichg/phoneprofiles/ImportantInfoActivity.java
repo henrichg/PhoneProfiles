@@ -22,6 +22,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.thelittlefireman.appkillermanager.devices.DeviceBase;
+import com.thelittlefireman.appkillermanager.killerManager.KillerManager;
+import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 
 public class ImportantInfoActivity extends AppCompatActivity {
 
@@ -95,7 +98,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         if (news2755) {
             news = true;
-            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
+            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2_news);
             infoText1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,9 +112,9 @@ public class ImportantInfoActivity extends AppCompatActivity {
             });
         }
         else {
-            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files);
+            TextView infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_news);
             infoText1.setVisibility(View.GONE);
-            infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2);
+            infoText1 = findViewById(R.id.activity_info_notification_privacy_policy_backup_files_2_news);
             infoText1.setVisibility(View.GONE);
         }
 
@@ -120,27 +123,27 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
         else {
             // empty this, for switch off news
-            TextView infoText1 = findViewById(R.id.activity_info_notification_dialog_info_text50_news);
+            TextView infoText1 = findViewById(R.id.activity_info_notification_profile_grant_news);
             infoText1.setVisibility(View.GONE);
-            TextView infoText2 = findViewById(R.id.activity_info_notification_dialog_info_text50_profiles_news);
+            TextView infoText2 = findViewById(R.id.activity_info_notification_profile_grant_lookSectionProfiles_news);
             infoText2.setVisibility(View.GONE);
         }
 
         if (news1634) {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                TextView infoText16 = findViewById(R.id.activity_info_notification_dialog_info_text16);
+                TextView infoText16 = findViewById(R.id.activity_info_notification_profile_ringerMode_root);
                 infoText16.setVisibility(View.GONE);
-                TextView infoText18 = findViewById(R.id.activity_info_notification_dialog_info_text18);
+                TextView infoText18 = findViewById(R.id.activity_info_notification_profile_adaptiveBrightness_root);
                 infoText18.setVisibility(View.GONE);
                 news = true;
             }
         }
         else {
-            TextView infoText15 = findViewById(R.id.activity_info_notification_dialog_info_text15);
+            TextView infoText15 = findViewById(R.id.activity_info_notification_profile_ringerMode_root_news);
             infoText15.setVisibility(View.GONE);
-            TextView infoText17 = findViewById(R.id.activity_info_notification_dialog_info_text17);
+            TextView infoText17 = findViewById(R.id.activity_info_notification_profile_adaptiveBrightness_root_news);
             infoText17.setVisibility(View.GONE);
-            TextView infoText10a = findViewById(R.id.activity_info_notification_dialog_info_text10a);
+            TextView infoText10a = findViewById(R.id.activity_info_notification_app_standby);
             infoText10a.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -172,17 +175,17 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         if (news1622) {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
-                TextView infoText14 = findViewById(R.id.activity_info_notification_dialog_info_text14);
+                TextView infoText14 = findViewById(R.id.activity_info_notification_profile_zenMode);
                 infoText14.setVisibility(View.GONE);
 
                 boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
                 if ((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) &&
                         GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context)) {
-                    TextView infoText13 = findViewById(R.id.activity_info_notification_dialog_info_text13);
+                    TextView infoText13 = findViewById(R.id.activity_info_notification_profile_zenMode_news);
                     infoText13.setVisibility(View.GONE);
                 }
                 else {
-                    TextView infoText13 = findViewById(R.id.activity_info_notification_dialog_info_text13);
+                    TextView infoText13 = findViewById(R.id.activity_info_notification_profile_zenMode_news);
                     if (android.os.Build.VERSION.SDK_INT >= 23)
                         infoText13.setText(R.string.important_info_profile_zenModeM);
                     infoText13.setOnClickListener(new View.OnClickListener() {
@@ -216,17 +219,17 @@ public class ImportantInfoActivity extends AppCompatActivity {
             }
         }
         else {
-            TextView infoText13 = findViewById(R.id.activity_info_notification_dialog_info_text13);
+            TextView infoText13 = findViewById(R.id.activity_info_notification_profile_zenMode_news);
             infoText13.setVisibility(View.GONE);
 
             boolean a60 = (android.os.Build.VERSION.SDK_INT == 23) && Build.VERSION.RELEASE.equals("6.0");
             if ((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) &&
                     GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context)) {
-                TextView infoText14 = findViewById(R.id.activity_info_notification_dialog_info_text14);
+                TextView infoText14 = findViewById(R.id.activity_info_notification_profile_zenMode);
                 infoText14.setVisibility(View.GONE);
             }
             else {
-                TextView infoText14 = findViewById(R.id.activity_info_notification_dialog_info_text14);
+                TextView infoText14 = findViewById(R.id.activity_info_notification_profile_zenMode);
                 if (android.os.Build.VERSION.SDK_INT >= 23)
                     infoText14.setText(R.string.important_info_profile_zenModeM);
                 infoText14.setOnClickListener(new View.OnClickListener() {
@@ -259,27 +262,27 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         if (android.os.Build.VERSION.SDK_INT < 23) {
-            TextView infoText15 = findViewById(R.id.activity_info_notification_dialog_info_text15);
+            TextView infoText15 = findViewById(R.id.activity_info_notification_profile_ringerMode_root_news);
             infoText15.setVisibility(View.GONE);
-            TextView infoText16 = findViewById(R.id.activity_info_notification_dialog_info_text16);
+            TextView infoText16 = findViewById(R.id.activity_info_notification_profile_ringerMode_root);
             infoText16.setVisibility(View.GONE);
-            TextView infoText17 = findViewById(R.id.activity_info_notification_dialog_info_text17);
+            TextView infoText17 = findViewById(R.id.activity_info_notification_profile_adaptiveBrightness_root_news);
             infoText17.setVisibility(View.GONE);
-            TextView infoText18 = findViewById(R.id.activity_info_notification_dialog_info_text18);
+            TextView infoText18 = findViewById(R.id.activity_info_notification_profile_adaptiveBrightness_root);
             infoText18.setVisibility(View.GONE);
-            TextView infoText10a = findViewById(R.id.activity_info_notification_dialog_info_text10a);
+            TextView infoText10a = findViewById(R.id.activity_info_notification_app_standby);
             infoText10a.setVisibility(View.GONE);
         }
 
         if (android.os.Build.VERSION.SDK_INT < 21) {
-            TextView infoText13 = findViewById(R.id.activity_info_notification_dialog_info_text13);
+            TextView infoText13 = findViewById(R.id.activity_info_notification_profile_zenMode_news);
             infoText13.setVisibility(View.GONE);
-            TextView infoText14 = findViewById(R.id.activity_info_notification_dialog_info_text14);
+            TextView infoText14 = findViewById(R.id.activity_info_notification_profile_zenMode);
             infoText14.setVisibility(View.GONE);
         }
 
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context)) {
-            TextView infoText3 = findViewById(R.id.activity_info_notification_dialog_info_text3);
+            TextView infoText3 = findViewById(R.id.activity_info_notification_unlink_ringer_notification_volumes);
             infoText3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -291,8 +294,48 @@ public class ImportantInfoActivity extends AppCompatActivity {
             });
         }
         else {
-            TextView infoText3 = findViewById(R.id.activity_info_notification_dialog_info_text3);
+            TextView infoText3 = findViewById(R.id.activity_info_notification_unlink_ringer_notification_volumes);
             infoText3.setVisibility(View.GONE);
+        }
+
+        boolean intentFound = false;
+        KillerManager.init(getBaseContext());
+        DeviceBase device = KillerManager.getDevice();
+        if (device != null) {
+            Intent intent = device.getActionPowerSaving(getBaseContext());
+            if (intent != null && ActionsUtils.isIntentAvailable(getBaseContext(), intent))
+                intentFound = true;
+        }
+        if (intentFound) {
+            TextView infoText = findViewById(R.id.activity_info_notification_power_manager);
+            infoText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        KillerManager.doActionPowerSaving(getBaseContext());
+                    }catch (Exception e) {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                        dialogBuilder.setMessage(R.string.setting_screen_not_found_alert);
+                        //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+                        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = dialogBuilder.create();
+                            /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                @Override
+                                public void onShow(DialogInterface dialog) {
+                                    Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                                    if (positive != null) positive.setAllCaps(false);
+                                    Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                                    if (negative != null) negative.setAllCaps(false);
+                                }
+                            });*/
+                        dialog.show();
+                    }
+                }
+            });
+        }
+        else {
+            TextView infoText = findViewById(R.id.activity_info_notification_power_manager);
+            infoText.setVisibility(View.GONE);
         }
 
         TextView infoText41 = findViewById(R.id.activity_info_activate_profile_from_tasker_params);
@@ -307,7 +350,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         infoText41.setText(spannable);
 
-        TextView infoTextADBDownload = findViewById(R.id.activity_info_notification_dialog_info_text61);
+        TextView infoTextADBDownload = findViewById(R.id.activity_info_notification_profile_grant_1_howTo_11);
         str = getString(R.string.important_info_profile_grant_1_howTo_11);
         spannable = new SpannableString(str);
         spannable.setSpan(new BackgroundColorSpan(GlobalGUIRoutines.getThemeCommandBackgroundColor(this)), 0, str.length(),
@@ -322,7 +365,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         infoTextGrant1Command.setText(spannable);
 
-        AboutApplicationActivity.emailMe((TextView) findViewById(R.id.activity_info_notification_dialog_contact),
+        AboutApplicationActivity.emailMe((TextView) findViewById(R.id.activity_info_notification_contact),
                 getString(R.string.important_info_contact), true, this);
 
         int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
@@ -353,7 +396,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         if (!news) {
-            TextView infoTextNews = findViewById(R.id.activity_info_notification_dialog_news);
+            TextView infoTextNews = findViewById(R.id.activity_info_notification_news);
             infoTextNews.setVisibility(View.GONE);
         }
 
