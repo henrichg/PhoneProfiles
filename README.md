@@ -28,3 +28,4 @@ Required external libs
 - crashlytics - https://fabric.io/kits/android/crashlytics
 - RecyclerView-FastScroll - https://github.com/timusus/RecyclerView-FastScroll
 - time-duration-picker - https://github.com/svenwiegand/time-duration-picker
+- AppKillerManager - https://github.com/thelittlefireman/AppKillerManager
