@@ -2101,6 +2101,14 @@ class ActivateProfileHelper {
                     createScreenTimeoutAlwaysOnView(context);
                 }
                 break;
+            case 9:
+                removeScreenTimeoutAlwaysOnView(context);
+                if ((PhoneProfilesService.getInstance() != null) && (PhoneProfilesService.getInstance().lockDeviceActivity != null))
+                    // in LockDeviceActivity.onDestroy() will be used this value to revert back system screen timeout
+                    PhoneProfilesService.getInstance().screenTimeoutBeforeDeviceLock = 1800000;
+                else
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 1800000);
+                break;
         }
         setActivatedProfileScreenTimeout(context, 0);
         PPApplication.startHandlerThread();
