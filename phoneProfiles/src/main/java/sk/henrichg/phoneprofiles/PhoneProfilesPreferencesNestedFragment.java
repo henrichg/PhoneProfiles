@@ -27,9 +27,7 @@ import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
-import com.thelittlefireman.appkillermanager.devices.DeviceBase;
-import com.thelittlefireman.appkillermanager.killerManager.KillerManager;
-import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
+import com.thelittlefireman.appkillermanager.managers.KillerManager;
 
 public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                               implements SharedPreferences.OnSharedPreferenceChangeListener
@@ -382,15 +380,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
         Preference preference = prefMng.findPreference(PREF_AUTOSTART_MANAGER);
         if (preference != null) {
-            boolean intentFound = false;
-            KillerManager.init(getActivity());
-            DeviceBase device = KillerManager.getDevice();
-            if (device != null) {
-                Intent intent = device.getActionAutoStart(getActivity());
-                if (intent != null && ActionsUtils.isIntentAvailable(getActivity(), intent))
-                    intentFound = true;
-            }
-            if (intentFound) {
+            if (KillerManager.isActionAvailable(getActivity(), KillerManager.Actions.ACTION_AUTOSTART)) {
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
@@ -517,15 +507,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         }
         preference = prefMng.findPreference(PREF_APPLICATION_POWER_MANAGER);
         if (preference != null) {
-            boolean intentFound = false;
-            KillerManager.init(getActivity());
-            DeviceBase device = KillerManager.getDevice();
-            if (device != null) {
-                Intent intent = device.getActionPowerSaving(getActivity());
-                if (intent != null && ActionsUtils.isIntentAvailable(getActivity(), intent))
-                    intentFound = true;
-            }
-            if (intentFound) {
+            if (KillerManager.isActionAvailable(getActivity(), KillerManager.Actions.ACTION_POWERSAVING)) {
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {

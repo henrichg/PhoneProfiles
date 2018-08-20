@@ -22,9 +22,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.thelittlefireman.appkillermanager.devices.DeviceBase;
-import com.thelittlefireman.appkillermanager.killerManager.KillerManager;
-import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
+import com.thelittlefireman.appkillermanager.managers.KillerManager;
 
 public class ImportantInfoActivity extends AppCompatActivity {
 
@@ -298,15 +296,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
             infoText3.setVisibility(View.GONE);
         }
 
-        boolean intentFound = false;
-        KillerManager.init(getBaseContext());
-        DeviceBase device = KillerManager.getDevice();
-        if (device != null) {
-            Intent intent = device.getActionPowerSaving(getBaseContext());
-            if (intent != null && ActionsUtils.isIntentAvailable(getBaseContext(), intent))
-                intentFound = true;
-        }
-        if (intentFound) {
+        if (KillerManager.isActionAvailable(getBaseContext(), KillerManager.Actions.ACTION_POWERSAVING)) {
             TextView infoText = findViewById(R.id.activity_info_notification_power_manager);
             infoText.setOnClickListener(new View.OnClickListener() {
                 @Override
