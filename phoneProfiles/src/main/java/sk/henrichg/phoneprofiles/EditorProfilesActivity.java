@@ -21,6 +21,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -63,8 +63,8 @@ public class EditorProfilesActivity extends AppCompatActivity
     private AsyncTask importAsyncTask = null;
     private AsyncTask exportAsyncTask = null;
     static boolean doImport = false;
-    private MaterialDialog importProgressDialog = null;
-    private MaterialDialog exportProgressDialog = null;
+    private AlertDialog importProgressDialog = null;
+    private AlertDialog exportProgressDialog = null;
 
     private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
     private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
@@ -713,11 +713,14 @@ public class EditorProfilesActivity extends AppCompatActivity
                 private boolean sharedProfileError = false;
 
                 private ImportAsyncTask() {
-                    importProgressDialog = new MaterialDialog.Builder(activity)
-                            .content(R.string.import_profiles_alert_title)
-                                    //.disableDefaultFonts()
-                            .progress(true, 0)
-                            .build();
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                    dialogBuilder.setMessage(R.string.import_profiles_alert_title);
+
+                    LayoutInflater inflater = (activity.getLayoutInflater());
+                    View layout = inflater.inflate(R.layout.activity_progress_bar_dialog, null);
+                    dialogBuilder.setView(layout);
+
+                    importProgressDialog = dialogBuilder.create();
 
                     this.dataWrapper = getDataWrapper();
                 }
@@ -974,11 +977,15 @@ public class EditorProfilesActivity extends AppCompatActivity
                 private DataWrapper dataWrapper;
 
                 private ExportAsyncTask() {
-                    exportProgressDialog = new MaterialDialog.Builder(activity)
-                            .content(R.string.export_profiles_alert_title)
-                                    //.disableDefaultFonts()
-                            .progress(true, 0)
-                            .build();
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                    dialogBuilder.setMessage(R.string.export_profiles_alert_title);
+
+                    LayoutInflater inflater = (activity.getLayoutInflater());
+                    View layout = inflater.inflate(R.layout.activity_progress_bar_dialog, null);
+                    dialogBuilder.setView(layout);
+
+                    exportProgressDialog = dialogBuilder.create();
+
                     this.dataWrapper = getDataWrapper();
                 }
 
