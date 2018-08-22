@@ -273,7 +273,7 @@ public class PhoneProfilesService extends Service {
                     DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
                     dataWrapper.setDynamicLauncherShortcuts();
 
-                    if (instance != null)
+                    if (PhoneProfilesService.getInstance() != null)
                         PhoneProfilesService.getInstance().registerReceivers();
                     AboutApplicationJob.scheduleJob(getApplicationContext(), true);
 
@@ -553,7 +553,7 @@ public class PhoneProfilesService extends Service {
 
         final Context appContext = getApplicationContext();
 
-        if ((instance != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
+        if ((PhoneProfilesService.getInstance() != null) && ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext)))
         {
             PPApplication.logE("PhoneProfilesService.showProfileNotification", "show");
 
@@ -813,7 +813,7 @@ public class PhoneProfilesService extends Service {
                 }
 
                 if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(appContext))
-                    if (instance != null)
+                    if (PhoneProfilesService.getInstance() != null)
                         PhoneProfilesService.getInstance().startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
                 else {
                     NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -851,10 +851,10 @@ public class PhoneProfilesService extends Service {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (instance != null) {
+                if (PhoneProfilesService.getInstance() != null) {
                     DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    if (instance != null)
+                    if (PhoneProfilesService.getInstance() != null)
                         PhoneProfilesService.getInstance()._showProfileNotification(profile, true);
                     dataWrapper.invalidateDataWrapper();
                 }
