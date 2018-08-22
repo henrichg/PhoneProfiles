@@ -14,7 +14,7 @@ Android application - manually change device settings like ringer mode, sounds, 
 Required external libs
 ----------------------
 
-- Android support library: core, appcomapt, gridlayout, cardview, recyclerview
+- Android support library: core, appcompat, gridlayout, cardview, recyclerview
 - Google Billing library: donations
 - Samsung Look - http://developer.samsung.com/galaxy/edge
 - RootTools - https://github.com/Stericson/RootTools
