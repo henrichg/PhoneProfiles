@@ -689,6 +689,7 @@ public class PPApplication extends Application {
         synchronized (PPApplication.rootMutex) {
             rootMutex.rootChecked = false;
             rootMutex.rooted = false;
+            rootMutex.rootGranted = false;
             rootMutex.settingsBinaryChecked = false;
             rootMutex.settingsBinaryExists = false;
             //rootMutex.isSELinuxEnforcingChecked = false;
@@ -749,20 +750,25 @@ public class PPApplication extends Application {
         RootShell.debugMode = rootToolsDebug;
 
         if (isRooted()) {
-            try {
-                PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
-                if (RootTools.isAccessGiven()) {
-                    // root is granted
-                    PPApplication.logE("PPApplication.isRootGranted", "root granted");
-                    return true;
-                } else {
-                    // grant declined
-                    PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
+            synchronized (PPApplication.rootMutex) {
+                try {
+                    PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
+                    if (RootTools.isAccessGiven()) {
+                        // root is granted
+                        PPApplication.logE("PPApplication.isRootGranted", "root granted");
+                        rootMutex.rootGranted = true;
+                        return true;
+                    } else {
+                        // grant denied
+                        PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
+                        rootMutex.rootGranted = false;
+                        return false;
+                    }
+                } catch (Exception e) {
+                    Log.e("PPApplication.isRootGranted", Log.getStackTraceString(e));
+                    rootMutex.rootGranted = false;
                     return false;
                 }
-            } catch (Exception e) {
-                Log.e("PPApplication.isRootGranted", Log.getStackTraceString(e));
-                return false;
             }
         } else {
             PPApplication.logE("PPApplication.isRootGranted", "not rooted");
@@ -877,7 +883,9 @@ public class PPApplication extends Application {
                 RootTools.getShell(false).add(command);
                 commandWait(command);
                 suVersionChecked = true;
+                PPApplication.rootMutex.rootGranted = true;
             } catch (Exception e) {
+                PPApplication.rootMutex.rootGranted = false;
                 Log.e("PPApplication.getSUVersion", Log.getStackTraceString(e));
             }
         }
