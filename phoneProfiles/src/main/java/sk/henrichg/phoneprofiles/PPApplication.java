@@ -153,6 +153,7 @@ public class PPApplication extends Application {
     public static HandlerThread handlerThreadLockDevice = null;
     public static HandlerThread handlerThreadRunApplication = null;
     public static HandlerThread handlerThreadHeadsUpNotifications = null;
+    public static HandlerThread handlerThreadNotificationLed = null;
 
     public static Handler brightnessHandler;
     public static Handler toastHandler;
@@ -241,6 +242,7 @@ public class PPApplication extends Application {
         startHandlerThreadLockDevice();
         startHandlerThreadRunApplication();
         startHandlerThreadHeadsUpNotifications();
+        startHandlerThreadNotificationLed();
 
         toastHandler = new Handler(getMainLooper());
         brightnessHandler = new Handler(getMainLooper());
@@ -1257,6 +1259,13 @@ public class PPApplication extends Application {
         if (handlerThreadHeadsUpNotifications == null) {
             handlerThreadHeadsUpNotifications = new HandlerThread("handlerThreadHeadsUpNotifications");
             handlerThreadHeadsUpNotifications.start();
+        }
+    }
+
+    static void startHandlerThreadNotificationLed() {
+        if (handlerThreadNotificationLed == null) {
+            handlerThreadNotificationLed = new HandlerThread("handlerThreadNotificationLed");
+            handlerThreadNotificationLed.start();
         }
     }
 
