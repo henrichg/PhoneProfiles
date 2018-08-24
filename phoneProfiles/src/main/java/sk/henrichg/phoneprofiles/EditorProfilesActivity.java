@@ -765,9 +765,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError="+sharedProfileError);
 
                     if (!appSettingsError) {
-                        Permissions.setShowRequestAccessNotificationPolicyPermission(getApplicationContext(), true);
-                        Permissions.setShowRequestWriteSettingsPermission(getApplicationContext(), true);
-                        Permissions.setShowRequestDrawOverlaysPermission(getApplicationContext(), true);
+                        Permissions.setAllShowRequestPermissions(getApplicationContext(), true);
                     }
 
                     if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError)))

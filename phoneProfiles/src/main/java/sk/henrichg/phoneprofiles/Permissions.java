@@ -1185,6 +1185,8 @@ public class Permissions {
     }
     */
 
+    //-------
+
     static boolean getShowRequestWriteSettingsPermission(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
@@ -1226,6 +1228,14 @@ public class Permissions {
         editor.putBoolean(PREF_SHOW_REQUEST_DRAW_OVERLAYS_PERMISSION, value);
         editor.apply();
     }
+
+    static void setAllShowRequestPermissions(Context context, boolean value) {
+        Permissions.setShowRequestAccessNotificationPolicyPermission(context, value);
+        Permissions.setShowRequestWriteSettingsPermission(context, value);
+        Permissions.setShowRequestDrawOverlaysPermission(context, value);
+    }
+
+    //----------
 
     static List<Permissions.PermissionType> getMergedPermissions(Context context)
     {

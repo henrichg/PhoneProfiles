@@ -1152,9 +1152,8 @@ public class PPApplication extends Application {
                 PPApplication.initRoot();
             }
 
-            Permissions.setShowRequestAccessNotificationPolicyPermission(context.getApplicationContext(), true);
-            Permissions.setShowRequestWriteSettingsPermission(context.getApplicationContext(), true);
-            Permissions.setShowRequestDrawOverlaysPermission(context.getApplicationContext(), true);
+            Permissions.setAllShowRequestPermissions(context.getApplicationContext(), true);
+
             //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
 
             context.stopService(new Intent(context, PhoneProfilesService.class));
