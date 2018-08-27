@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,6 +15,10 @@ import android.os.Parcelable;
 import android.os.Process;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 
@@ -55,6 +60,7 @@ public class Permissions {
     static final int GRANT_TYPE_BRIGHTNESS_DIALOG = 8;
     static final int GRANT_TYPE_RINGTONE_PREFERENCE = 9;
     private static final int GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION = 10;
+    //static final int GRANT_TYPE_GRANT_ROOT = 11;
 
     static final int REQUEST_CODE = 5000;
 
@@ -1229,7 +1235,8 @@ public class Permissions {
         editor.apply();
     }
 
-    static void setAllShowRequestPermissions(Context context, boolean value) {
+    static void setAllShowRequestPermissions(Context context,
+                                             @SuppressWarnings("SameParameterValue") boolean value) {
         Permissions.setShowRequestAccessNotificationPolicyPermission(context, value);
         Permissions.setShowRequestWriteSettingsPermission(context, value);
         Permissions.setShowRequestDrawOverlaysPermission(context, value);
@@ -1395,6 +1402,108 @@ public class Permissions {
     static boolean getSensorsPermission(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PPApplication.PERMISSIONS_STATUS_PREFS_NAME, Context.MODE_PRIVATE);
         return preferences.getBoolean(PREF_SENSORS_PERMISSION, false);
+    }
+
+    //------------------------
+
+    static void grantRoot(final Activity activity) {
+        final AppCompatCheckBox doNotShowAgain = new AppCompatCheckBox(activity);
+
+        FrameLayout container = new FrameLayout(activity);
+        container.addView(doNotShowAgain);
+        FrameLayout.LayoutParams containerParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+        containerParams.leftMargin = GlobalGUIRoutines.dpToPx(20);
+        container.setLayoutParams(containerParams);
+
+        FrameLayout superContainer = new FrameLayout(activity);
+        superContainer.addView(container);
+
+        doNotShowAgain.setText(R.string.alert_message_enable_event_check_box);
+        doNotShowAgain.setChecked(ApplicationPreferences.applicationNeverAskForGrantRoot(activity));
+        doNotShowAgain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences settings = ApplicationPreferences.getSharedPreferences(activity);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean(ApplicationPreferences.PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT, isChecked);
+                editor.apply();
+            }
+        });
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        dialogBuilder.setTitle(R.string.phone_profiles_pref_grantRootPermission);
+        dialogBuilder.setMessage(R.string.phone_profiles_pref_grantRootPermission_summary_pp);
+        //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+        //dialogBuilder.setView(doNotShowAgain);
+        dialogBuilder.setView(superContainer);
+        dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences settings = ApplicationPreferences.getSharedPreferences(activity);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean(ApplicationPreferences.PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT, false);
+                editor.apply();
+
+                boolean ok = false;
+                PackageManager packageManager = activity.getPackageManager();
+                // SuperSU
+                Intent intent = packageManager.getLaunchIntentForPackage("eu.chainfire.supersu");
+                if (intent != null) {
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        // startActivityForResult not working, it is external application
+                        activity.startActivity(intent/*, Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT*/);
+                        ok = true;
+                    } catch (Exception ignore) {
+                    }
+                }
+                if (!ok) {
+                    // MAGISK
+                    intent = packageManager.getLaunchIntentForPackage("com.topjohnwu.magisk");
+                    if (intent != null) {
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        try {
+                            // startActivityForResult not working, it is external application
+                            activity.startActivity(intent/*, Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT*/);
+                            ok = true;
+                        } catch (Exception ignore) {
+                        }
+                    }
+                }
+                if (!ok) {
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                    dialogBuilder.setMessage(R.string.phone_profiles_pref_grantRootPermission_otherManagers);
+                    //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+                    dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog2 = dialogBuilder.create();
+                    /*dialog2.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialog) {
+                            Button positive = ((AlertDialog)dialog2).getButton(DialogInterface.BUTTON_POSITIVE);
+                            if (positive != null) positive.setAllCaps(false);
+                            Button negative = ((AlertDialog)dialog2).getButton(DialogInterface.BUTTON_NEGATIVE);
+                            if (negative != null) negative.setAllCaps(false);
+                        }
+                    });*/
+                    dialog2.show();
+                }
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.alert_button_no, null);
+        AlertDialog dialog = dialogBuilder.create();
+        /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positive != null) positive.setAllCaps(false);
+                Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negative != null) negative.setAllCaps(false);
+            }
+        });*/
+        dialog.show();
     }
 
 }

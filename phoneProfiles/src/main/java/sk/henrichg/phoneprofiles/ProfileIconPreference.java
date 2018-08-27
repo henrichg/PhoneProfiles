@@ -98,6 +98,7 @@ public class ProfileIconPreference extends DialogPreference {
         });
 
         LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
+        @SuppressLint("InflateParams")
         View layout = inflater.inflate(R.layout.activity_profileicon_pref_dialog, null);
         dialogBuilder.setView(layout);
 

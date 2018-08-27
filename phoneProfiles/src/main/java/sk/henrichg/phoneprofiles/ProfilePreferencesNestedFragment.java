@@ -500,6 +500,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             int predefinedProfileIndex = bundle.getInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
             final Profile profile = ((ProfilePreferencesActivity) getActivity())
                     .getProfileFromPreferences(profile_id, newProfileMode, predefinedProfileIndex);
+
+            // not some permissions
             if (Permissions.checkProfilePermissions(context, profile).size() == 0) {
                 Preference preference = prefMng.findPreference(PRF_GRANT_PERMISSIONS);
                 if (preference != null) {
@@ -1698,6 +1700,10 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_PROFILE) {
             setPermissionsPreference();
         }
+        /*if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT) {
+            PPApplication.isRootGranted();
+            setPermissionsPreference();
+        }*/
         if (requestCode == EditorProfilesActivity.REQUEST_CODE_PROFILE_PREFERENCES)
         {
             if ((resultCode == Activity.RESULT_OK) && (data != null))
