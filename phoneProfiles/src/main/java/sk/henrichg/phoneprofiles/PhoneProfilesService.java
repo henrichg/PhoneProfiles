@@ -212,10 +212,9 @@ public class PhoneProfilesService extends Service {
                     PPApplication.logE("PhoneProfilesService.doForFirstStart", "doForFirstStart.2");
 
                     PPApplication.initRoot();
-                    // grant root
-                    //noinspection StatementWithEmptyBody
-                    if (PPApplication.isRootGranted())
-                    {
+                    if (!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) {
+                        // grant root
+                        PPApplication.isRootGranted();
                     }
                     //PPApplication.getSUVersion();
                     PPApplication.settingsBinaryExists();
