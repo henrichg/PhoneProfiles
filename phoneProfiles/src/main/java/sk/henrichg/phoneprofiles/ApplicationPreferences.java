@@ -64,6 +64,7 @@ class ApplicationPreferences {
     static final String PREF_APPLICATION_WIDGET_ICON_BACKGROUND_COLOR = "applicationWidgetIconBackgroundColor";
     static final String PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND_TYPE = "applicationSamsungEdgeBackgroundType";
     static final String PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND_COLOR = "applicationSamsungEdgeBackgroundColor";
+    static final String PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT = "applicationNeverAskForGrantRoot";
 
     static SharedPreferences getSharedPreferences(Context context) {
         if (preferences == null)
@@ -313,4 +314,9 @@ class ApplicationPreferences {
     static String applicationSamsungEdgeBackgroundColor(Context context) {
         return getSharedPreferences(context).getString(PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND_COLOR, "-1"); // white color
     }
+
+    static boolean applicationNeverAskForGrantRoot(Context context) {
+        return getSharedPreferences(context).getBoolean(PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT, false);
+    }
+
 }
