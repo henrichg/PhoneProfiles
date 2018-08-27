@@ -137,7 +137,7 @@ public class MaterialEditTextPreference extends EditTextPreference {
         View layout = LayoutInflater.from(getContext()).inflate(R.layout.material_edit_text_preference_dialog, null);
         onBindDialogView(layout);
 
-        TextView message = (TextView) layout.findViewById(android.R.id.message);
+        TextView message = layout.findViewById(android.R.id.message);
         if (getDialogMessage() != null && getDialogMessage().toString().length() > 0) {
             message.setVisibility(View.VISIBLE);
             message.setText(getDialogMessage());

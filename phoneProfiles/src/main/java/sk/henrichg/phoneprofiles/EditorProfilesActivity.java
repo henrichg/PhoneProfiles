@@ -717,6 +717,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     dialogBuilder.setMessage(R.string.import_profiles_alert_title);
 
                     LayoutInflater inflater = (activity.getLayoutInflater());
+                    @SuppressLint("InflateParams")
                     View layout = inflater.inflate(R.layout.activity_progress_bar_dialog, null);
                     dialogBuilder.setView(layout);
 
@@ -979,6 +980,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     dialogBuilder.setMessage(R.string.export_profiles_alert_title);
 
                     LayoutInflater inflater = (activity.getLayoutInflater());
+                    @SuppressLint("InflateParams")
                     View layout = inflater.inflate(R.layout.activity_progress_bar_dialog, null);
                     dialogBuilder.setView(layout);
 

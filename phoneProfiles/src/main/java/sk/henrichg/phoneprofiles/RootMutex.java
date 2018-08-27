@@ -3,7 +3,7 @@ package sk.henrichg.phoneprofiles;
 class RootMutex {
     boolean rootChecked;
     boolean rooted;
-    boolean rootGranted;
+    //boolean rootGranted;
     boolean settingsBinaryChecked;
     boolean settingsBinaryExists;
     //boolean isSELinuxEnforcingChecked;
