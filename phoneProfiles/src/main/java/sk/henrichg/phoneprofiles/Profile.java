@@ -1915,7 +1915,7 @@ public class Profile {
 
     // ----- Check if preference is allowed in device -------------------------------------
 
-    static PreferenceAllowed isProfilePreferenceAllowed(String preferenceKey, Context context)
+    static PreferenceAllowed isProfilePreferenceAllowed(String preferenceKey, Profile profile, Context context)
     {
         PreferenceAllowed preferenceAllowed = new PreferenceAllowed();
 
@@ -1923,13 +1923,23 @@ public class Profile {
 
         boolean checked = false;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE))
         {
             //if (android.os.Build.VERSION.SDK_INT >= 17)
             //{
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else
@@ -1969,7 +1979,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA))
         {
             boolean mobileDataSupported;
             if (!PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY)) {
@@ -2015,6 +2025,16 @@ public class Profile {
                     else
                     if (PPApplication.isRooted()) {
                         // device is rooted
+
+                        if (profile != null) {
+                            // test if grant root is disabled
+                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+
                         //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     }
@@ -2051,7 +2071,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_GPS))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_GPS))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_LOCATION_GPS))
             {
@@ -2065,6 +2085,16 @@ public class Profile {
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else
@@ -2085,7 +2115,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NFC))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NFC))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_NFC))
             {
@@ -2097,6 +2127,16 @@ public class Profile {
                 }
                 else
                 if (PPApplication.isRooted()) {
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                 }
                 else
@@ -2112,7 +2152,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_WIFI)) {
                 // device has Wifi
@@ -2132,6 +2172,16 @@ public class Profile {
                 if (PPApplication.isRooted())
                 {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (ActivateProfileHelper.wifiServiceExists(Profile.PREF_PROFILE_DEVICE_WIFI_AP)) {
                         if (PPApplication.serviceBinaryExists())
                             preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2155,11 +2205,21 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
         {
             if (android.os.Build.VERSION.SDK_INT == 23) {
                 if (PPApplication.isRooted()) {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else
@@ -2175,7 +2235,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS))
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 if (android.os.Build.VERSION.SDK_INT >= 23)
@@ -2183,6 +2243,16 @@ public class Profile {
                     if (PPApplication.isRooted())
                     {
                         // device is rooted
+
+                        if (profile != null) {
+                            // test if grant root is disabled
+                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+
                         if (PPApplication.settingsBinaryExists())
                             preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                         else
@@ -2203,7 +2273,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE))
         {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
@@ -2212,6 +2282,16 @@ public class Profile {
                 else
                 if (PPApplication.isRooted()) {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else
@@ -2229,7 +2309,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE))
         {
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY))
             {
@@ -2239,6 +2319,16 @@ public class Profile {
                     if ((phoneType == TelephonyManager.PHONE_TYPE_GSM) || (phoneType == TelephonyManager.PHONE_TYPE_CDMA)) {
                         if (PPApplication.isRooted()) {
                             // device is rooted
+
+                            if (profile != null) {
+                                // test if grant root is disabled
+                                if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                    // not needed to test all parameters
+                                    return preferenceAllowed;
+                                }
+                            }
+
                             if (ActivateProfileHelper.telephonyServiceExists(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
                                 if (PPApplication.serviceBinaryExists())
                                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2267,12 +2357,22 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_NOTIFICATION_LED))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_NOTIFICATION_LED))
         {
             int value = Settings.System.getInt(context.getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE, -10);
             if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 23)) {
                 if (PPApplication.isRooted()) {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else
@@ -2335,7 +2435,7 @@ public class Profile {
         if (checked)
             return preferenceAllowed;
 
-        if (preferenceKey.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS))
+        if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS))
         {
             int value = Settings.Global.getInt(context.getContentResolver(), "heads_up_notifications_enabled", -10);
             if ((value != -10) && (android.os.Build.VERSION.SDK_INT >= 21)) {
@@ -2345,6 +2445,16 @@ public class Profile {
                 else
                 if (PPApplication.isRooted()) {
                     // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                            // not needed to test all parameters
+                            return preferenceAllowed;
+                        }
+                    }
+
                     if (PPApplication.settingsBinaryExists())
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                     else

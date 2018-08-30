@@ -92,7 +92,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
         {
             maxLength = 25;
             if (profile._volumeRingerMode != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if (profile._volumeRingerMode == 5) {
                         // zen mode
                         if (profile._volumeZenMode == 1)
@@ -140,17 +140,17 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
                     profile.getVolumeRingtoneChange() ||
                     profile.getVolumeSystemChange() ||
                     profile.getVolumeVoiceChange()) {
-                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_ALARM, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_MEDIA, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_NOTIFICATION, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_RINGTONE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_SYSTEM, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_VOICE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED))
+                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_ALARM, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_MEDIA, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_NOTIFICATION, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_RINGTONE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_SYSTEM, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_VOICE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED))
                     indicator1 = addIntoIndicator(indicator1, "vol");
             }
             // speaker phone
             if (profile._volumeSpeakerPhone != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if (profile._volumeSpeakerPhone == 1)
                         indicator1 = addIntoIndicator(indicator1, "sp1");
                     if (profile._volumeSpeakerPhone == 2)
@@ -161,14 +161,14 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             if ((profile._soundRingtoneChange == 1) ||
                     (profile._soundNotificationChange == 1) ||
                     (profile._soundAlarmChange == 1)) {
-                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_RINGTONE_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
-                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_ALARM_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED))
+                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_RINGTONE_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) ||
+                        (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_ALARM_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED))
                     indicator1 = addIntoIndicator(indicator1, "snd");
             }
             // sound on touch
             if (profile._soundOnTouch != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_ON_TOUCH, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_SOUND_ON_TOUCH, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._soundOnTouch == 1) || (profile._soundOnTouch == 3))
                         indicator1 = addIntoIndicator(indicator1, "st1");
                     if (profile._soundOnTouch == 2)
@@ -177,7 +177,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // vibration on touch
             if (profile._vibrationOnTouch != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._vibrationOnTouch == 1) || (profile._vibrationOnTouch == 3))
                         indicator1 = addIntoIndicator(indicator1, "vt1");
                     if (profile._vibrationOnTouch == 2)
@@ -186,7 +186,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // dtmf tone when dialing
             if (profile._dtmfToneWhenDialing != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._dtmfToneWhenDialing == 1) || (profile._dtmfToneWhenDialing == 3))
                         indicator1 = addIntoIndicator(indicator1, "dd1");
                     if (profile._dtmfToneWhenDialing == 2)
@@ -195,7 +195,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // airplane mode
             if (profile._deviceAirplaneMode != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceAirplaneMode == 1) || (profile._deviceAirplaneMode == 3))
                         indicator1 = addIntoIndicator(indicator1, "am1");
                     if (profile._deviceAirplaneMode == 2)
@@ -204,7 +204,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // auto-sync
             if (profile._deviceAutoSync != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AUTOSYNC, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AUTOSYNC, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceAutoSync == 1) || (profile._deviceAutoSync == 3))
                         indicator1 = addIntoIndicator(indicator1, "as1");
                     if (profile._deviceAutoSync == 2)
@@ -213,17 +213,17 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // Network type
             if (profile._deviceNetworkType != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "ntt");
             }
             // Network type prefs
             if (profile._deviceNetworkTypePrefs != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "ntp");
             }
             // mobile data
             if (profile._deviceMobileData != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceMobileData == 1) || (profile._deviceMobileData == 3))
                         indicator1 = addIntoIndicator(indicator1, "md1");
                     if (profile._deviceMobileData == 2)
@@ -232,12 +232,12 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // mobile data preferences
             if (profile._deviceMobileDataPrefs == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "mdP");
             }
             // wifi
             if (profile._deviceWiFi != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceWiFi == 1) || (profile._deviceWiFi == 3) || (profile._deviceWiFi == 4) || (profile._deviceWiFi == 5))
                         indicator1 = addIntoIndicator(indicator1, "wf1");
                     if (profile._deviceWiFi == 2)
@@ -246,7 +246,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // wifi AP
             if (profile._deviceWiFiAP != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceWiFiAP == 1) || (profile._deviceWiFiAP == 3))
                         indicator1 = addIntoIndicator(indicator1, "wp1");
                     if (profile._deviceWiFiAP == 2)
@@ -255,12 +255,12 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // wifi AP preferences
             if (profile._deviceWiFiAPPrefs == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "wpP");
             }
             // bluetooth
             if (profile._deviceBluetooth != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceBluetooth == 1) || (profile._deviceBluetooth == 3))
                         indicator1 = addIntoIndicator(indicator1, "bt1");
                     if (profile._deviceBluetooth == 2)
@@ -269,7 +269,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // gps
             if (profile._deviceGPS != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceGPS == 1) || (profile._deviceGPS == 3))
                         indicator1 = addIntoIndicator(indicator1, "gp1");
                     if (profile._deviceGPS == 2)
@@ -278,12 +278,12 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // location settings preferences
             if (profile._deviceLocationServicePrefs == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "loP");
             }
             // nfc
             if (profile._deviceNFC != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceNFC == 1) || (profile._deviceNFC == 3))
                         indicator1 = addIntoIndicator(indicator1, "nf1");
                     if (profile._deviceNFC == 2)
@@ -292,12 +292,12 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // screen timeout
             if (profile._deviceScreenTimeout != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "stm");
             }
             // lock screen
             if (profile._deviceKeyguard != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_KEYGUARD, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_KEYGUARD, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._deviceKeyguard == 1) || (profile._deviceKeyguard == 3))
                         indicator1 = addIntoIndicator(indicator1, "ls1");
                     if (profile._deviceKeyguard == 2)
@@ -307,7 +307,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             // brightness/auto-brightness
             if (profile.getDeviceBrightnessChange())
             {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if (profile.getDeviceBrightnessAutomatic())
                         indicator1 = addIntoIndicator(indicator1, "brA");
                     else
@@ -316,12 +316,12 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // auto-rotation
             if (profile._deviceAutoRotate != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AUTOROTATE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AUTOROTATE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "rot");
             }
             // notification led
             if (profile._notificationLed != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._notificationLed == 1) || (profile._notificationLed == 3))
                         indicator1 = addIntoIndicator(indicator1, "nl1");
                     if (profile._notificationLed == 2)
@@ -330,7 +330,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // heads-up notifications
             if (profile._headsUpNotifications != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._headsUpNotifications == 1) || (profile._headsUpNotifications == 3))
                         indicator1 = addIntoIndicator(indicator1, "pn1");
                     if (profile._headsUpNotifications == 2)
@@ -350,7 +350,7 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             */
             // power save mode
             if (profile._devicePowerSaveMode != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     if ((profile._devicePowerSaveMode == 1) || (profile._devicePowerSaveMode == 3))
                         indicator1 = addIntoIndicator(indicator1, "ps1");
                     if (profile._devicePowerSaveMode == 2)
@@ -359,28 +359,28 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
             }
             // run application
             if (profile._deviceRunApplicationChange == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "rap");
             }
             // close all applications
             if (profile._deviceCloseAllApplications == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CLOSE_ALL_APPLICATIONS, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CLOSE_ALL_APPLICATIONS, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "cap");
             }
             // force stop application
             if (profile._deviceForceStopApplicationChange == 1) {
-                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
+                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
                         AccessibilityServiceBroadcastReceiver.isEnabled(this, PPApplication.VERSION_CODE_EXTENDER_2_0))
                     indicator1 = addIntoIndicator(indicator1, "sap");
             }
             // wallpaper
             if (profile._deviceWallpaperChange == 1) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "wlp");
             }
             // lock device
             if (profile._lockDevice != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_LOCK_DEVICE, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_LOCK_DEVICE, null, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                     indicator1 = addIntoIndicator(indicator1, "lck");
             }
         }
