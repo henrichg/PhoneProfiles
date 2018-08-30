@@ -498,6 +498,14 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 }
             }
+            else
+            if (data != null) {
+                boolean restart = data.getBooleanExtra(PhoneProfilesPreferencesActivity.EXTRA_RESET_EDITOR, false);
+                if (restart) {
+                    // refresh activity for special changes
+                    GlobalGUIRoutines.reloadActivity(this, true);
+                }
+            }
         }
         else
         if (requestCode == REQUEST_CODE_APPLICATION_PREFERENCES)

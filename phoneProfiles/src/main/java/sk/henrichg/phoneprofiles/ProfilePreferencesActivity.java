@@ -123,6 +123,8 @@ public class ProfilePreferencesActivity extends PreferenceActivity
         returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile_id);
         returnIntent.putExtra(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, newProfileMode);
         returnIntent.putExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
+        returnIntent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_RESET_EDITOR, sk.henrichg.phoneprofiles.Permissions.grantRootChanged);
+        sk.henrichg.phoneprofiles.Permissions.grantRootChanged = false;
         setResult(resultCode, returnIntent);
 
         super.finish();
