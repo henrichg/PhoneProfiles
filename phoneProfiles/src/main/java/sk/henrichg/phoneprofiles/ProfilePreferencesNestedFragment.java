@@ -489,7 +489,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         }
     }
 
-    private void setPermissionsPreference() {
+    void setPermissionsPreference() {
         Bundle bundle = getArguments();
 
         if (bundle.getBoolean(EXTRA_NESTED, true))
@@ -545,8 +545,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
             }
 
             // not enabled grant root
-            if (Profile.isProfilePreferenceAllowed(null, profile, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
-                Preference preference = prefMng.findPreference(PRF_GRANT_PERMISSIONS);
+            if (Profile.isProfilePreferenceAllowed("-", profile, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                Preference preference = prefMng.findPreference(PRF_GRANT_ROOT);
                 if (preference != null) {
                     PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("rootScreen");
                     preferenceCategory.removePreference(preference);
@@ -572,10 +572,11 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 preference.setSummary(summary);
 
                 final Activity activity = getActivity();
+                final ProfilePreferencesNestedFragment fragment = this;
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        Permissions.grantRoot(activity);
+                        Permissions.grantRoot(fragment, activity);
                         return false;
                     }
                 });

@@ -394,7 +394,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        Permissions.grantRoot(getActivity());
+                        Permissions.grantRoot(null, getActivity());
                         return false;
                     }
                 });
