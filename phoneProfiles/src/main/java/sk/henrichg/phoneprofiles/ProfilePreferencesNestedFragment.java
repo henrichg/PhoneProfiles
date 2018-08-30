@@ -1159,7 +1159,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     }
                 }
             }
-            PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, context);
+            PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, context);
             if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED)
             {
                 Preference preference = prefMng.findPreference(key);
@@ -1200,7 +1200,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         {
             ListPreference listPreference = (ListPreference)prefMng.findPreference(key);
             if (listPreference != null) {
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -1259,7 +1259,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         {
             PreferenceAllowed preferenceAllowed;
             if (key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
-                preferenceAllowed = Profile.isProfilePreferenceAllowed(key, context);
+                preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, context);
             else {
                 preferenceAllowed = new PreferenceAllowed();
                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -1298,7 +1298,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     listPreference.setTitle(R.string.profile_preferences_notificationLed);
                     listPreference.setDialogTitle(R.string.profile_preferences_notificationLed);
                 }
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -1321,7 +1321,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         {
             ListPreference listPreference = (ListPreference) prefMng.findPreference(key);
             if (listPreference != null) {
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -1613,7 +1613,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
         {
-            if (Profile.isProfilePreferenceAllowed(key, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(key, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 boolean enabled = !sValue.equals(ON);
                 ListPreference preference = (ListPreference) prefMng.findPreference(Profile.PREF_PROFILE_DEVICE_WIFI);
                 if (preference != null) {
@@ -1629,7 +1629,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 String ringerMode = preferences.getString(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, "0");
                 String zenMode = preferences.getString(Profile.PREF_PROFILE_VOLUME_ZEN_MODE, "0");
                 boolean enabled = false;
-                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
+                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
                         ringerMode.equals("5")) {
                     if (zenMode.equals("1") || zenMode.equals("2"))
                         enabled = true;
