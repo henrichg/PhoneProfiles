@@ -769,23 +769,6 @@ class ActivateProfileHelper {
                 if ((zenMode != _zenMode) || (zenMode == ZENMODE_PRIORITY)) {
                     PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
                     InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
-                /* if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                        (PPApplication.isRootGranted(false) && (PPApplication.settingsBinaryExists())))
-                {
-                    String command1 = "settings put global zen_mode " + mode;
-                    //if (PPApplication.isSELinuxEnforcing())
-                    //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                    Command command = new Command(0, false, command1);
-                    try {
-                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                        commandWait(command);
-                    } catch (RootDeniedException e) {
-                        PPApplication.rootMutex.rootGranted = false;
-                        Log.e("ActivateProfileHelper.setZenMode", Log.getStackTraceString(e));
-                    } catch (Exception e) {
-                        Log.e("ActivateProfileHelper.setZenMode", Log.getStackTraceString(e));
-                    }
-                }*/
                 }
             } else {
                 try {
@@ -957,6 +940,10 @@ class ActivateProfileHelper {
                         setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
                         PPApplication.sleep(500);
                         setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
+                        if (getSystemZenMode(appContext, -1) == ActivateProfileHelper.ZENMODE_PRIORITY) {
+                            //PPApplication.sleep(500);
+                            setRingerMode(appContext, profile, audioManager, false, /*linkUnlink,*/ forProfileActivation);
+                        }
 
                         //try { Thread.sleep(500); } catch (InterruptedException e) { }
                         //SystemClock.sleep(500);
