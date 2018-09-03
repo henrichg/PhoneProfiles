@@ -1,16 +1,12 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class LockDeviceActivityFinishBroadcastReceiver extends BroadcastReceiver {
     @Override
@@ -48,12 +44,6 @@ public class LockDeviceActivityFinishBroadcastReceiver extends BroadcastReceiver
         int delay = 20; // 20 seconds
 
         long alarmTime = SystemClock.elapsedRealtime() + delay * 1000;
-
-        if (PPApplication.logEnabled()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("EE d.MM.yyyy HH:mm:ss:S");
-            String result = sdf.format(alarmTime);
-            PPApplication.logE("LockDeviceActivityFinishBroadcastReceiver.setAlarm", "alarmTime=" + result);
-        }
 
         Intent intent = new Intent(context, LockDeviceActivityFinishBroadcastReceiver.class);
 

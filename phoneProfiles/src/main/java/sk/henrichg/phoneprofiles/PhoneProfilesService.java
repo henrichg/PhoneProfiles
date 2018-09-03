@@ -33,7 +33,6 @@ import android.widget.RemoteViews;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
