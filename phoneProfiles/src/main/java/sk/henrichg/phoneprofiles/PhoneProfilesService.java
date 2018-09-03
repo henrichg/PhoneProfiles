@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
@@ -894,12 +895,11 @@ public class PhoneProfilesService extends Service {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
-            Calendar now = Calendar.getInstance();
-            long time = now.getTimeInMillis() + Integer.valueOf(ApplicationPreferences.notificationStatusBarCancel(context)) * 1000;
+            long time = SystemClock.elapsedRealtime() + Integer.valueOf(ApplicationPreferences.notificationStatusBarCancel(context)) * 1000;
 
-            alarmManager.set(AlarmManager.RTC, time, pendingIntent);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME, time, pendingIntent);
         }
     }
 

@@ -110,7 +110,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), (int) profile._id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
             if (alarmManager != null) {
                 if (android.os.Build.VERSION.SDK_INT >= 23)
@@ -133,7 +133,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
     static public void removeAlarm(Context context)
     {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Activity.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
             Intent intent = new Intent(context, ProfileDurationAlarmBroadcastReceiver.class);
 
