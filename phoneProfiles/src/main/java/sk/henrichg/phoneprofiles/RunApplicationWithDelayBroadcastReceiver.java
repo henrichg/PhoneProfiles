@@ -1,16 +1,12 @@
 package sk.henrichg.phoneprofiles;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import android.os.SystemClock;
 
 public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver {
 
@@ -71,16 +67,7 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
 
         if (startApplicationDelay > 0)
         {
-            Calendar now = Calendar.getInstance();
-            now.add(Calendar.SECOND, startApplicationDelay);
-            long alarmTime = now.getTimeInMillis();
-
-            if (PPApplication.logEnabled()) {
-                @SuppressLint("SimpleDateFormat")
-                SimpleDateFormat sdf = new SimpleDateFormat("EE d.MM.yyyy HH:mm:ss:S");
-                String result = sdf.format(alarmTime);
-                PPApplication.logE("RunApplicationWithDelayBroadcastReceiver.setDelayAlarm", "startTime=" + result);
-            }
+            long alarmTime = SystemClock.elapsedRealtime() + startApplicationDelay * 1000;
 
             Intent intent = new Intent(context, RunApplicationWithDelayBroadcastReceiver.class);
             intent.putExtra(EXTRA_RUN_APPLICATION_DATA, runApplicationData);
@@ -90,13 +77,11 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             if (alarmManager != null) {
                 if (android.os.Build.VERSION.SDK_INT >= 23)
-                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarmTime, pendingIntent);
                 else //if (android.os.Build.VERSION.SDK_INT >= 19)
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+                    alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarmTime, pendingIntent);
                 //else
-                //    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-                //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
-                //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 24 * 60 * 60 * 1000 , pendingIntent);
+                //    alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarmTime, pendingIntent);
             }
         }
     }
