@@ -427,11 +427,11 @@ public class Permissions {
             try {
                 if (profile.getDeviceBrightnessChange()) {
                     boolean grantedWriteSettings = Settings.System.canWrite(context);
-                    Log.e("Permissions.checkProfileScreenBrightness", "grantedWriteSettings="+grantedWriteSettings);
+                    //Log.e("Permissions.checkProfileScreenBrightness", "grantedWriteSettings="+grantedWriteSettings);
                     if (grantedWriteSettings)
                         setShowRequestWriteSettingsPermission(context, true);
                     boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
-                    Log.e("Permissions.checkProfileScreenBrightness", "grantedDrawOverlays="+grantedDrawOverlays);
+                    //Log.e("Permissions.checkProfileScreenBrightness", "grantedDrawOverlays="+grantedDrawOverlays);
                     if (grantedDrawOverlays)
                         setShowRequestDrawOverlaysPermission(context, true);
                     if (permissions != null) {
