@@ -17,6 +17,7 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 
@@ -426,9 +427,11 @@ public class Permissions {
             try {
                 if (profile.getDeviceBrightnessChange()) {
                     boolean grantedWriteSettings = Settings.System.canWrite(context);
+                    Log.e("Permissions.checkProfileScreenBrightness", "grantedWriteSettings="+grantedWriteSettings);
                     if (grantedWriteSettings)
                         setShowRequestWriteSettingsPermission(context, true);
                     boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                    Log.e("Permissions.checkProfileScreenBrightness", "grantedDrawOverlays="+grantedDrawOverlays);
                     if (grantedDrawOverlays)
                         setShowRequestDrawOverlaysPermission(context, true);
                     if (permissions != null) {
