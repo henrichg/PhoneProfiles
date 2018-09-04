@@ -813,16 +813,22 @@ class ActivateProfileHelper {
         if (lValue != -1) {
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, context).allowed
                     == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                Log.e("ActivateProfileHelper.setVibrateWhenRinging", "1");
                 if (Permissions.checkVibrateWhenRinging(context)) {
-                    if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
+                    Log.e("ActivateProfileHelper.setVibrateWhenRinging", "2");
+                    if (android.os.Build.VERSION.SDK_INT < 23) {   // Not working in Android M (exception)
+                        Log.e("ActivateProfileHelper.setVibrateWhenRinging", "3");
                         Settings.System.putInt(context.getContentResolver(), "vibrate_when_ringing", lValue);
+                    }
                     else {
                         try {
+                            Log.e("ActivateProfileHelper.setVibrateWhenRinging", "4");
                             Settings.System.putInt(context.getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, lValue);
                         } catch (Exception ee) {
                             Log.e("ActivateProfileHelper.setVibrateWhenRinging", Log.getStackTraceString(ee));
                             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
                                     (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
+                                Log.e("ActivateProfileHelper.setVibrateWhenRinging", "5");
                                 synchronized (PPApplication.rootMutex) {
                                     String command1 = "settings put system " + Settings.System.VIBRATE_WHEN_RINGING + " " + lValue;
                                     //if (PPApplication.isSELinuxEnforcing())
