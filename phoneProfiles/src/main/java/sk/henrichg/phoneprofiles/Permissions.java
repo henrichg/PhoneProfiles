@@ -17,7 +17,6 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 

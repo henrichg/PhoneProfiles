@@ -443,6 +443,7 @@ public class PPApplication extends Application {
         return contains;
     }
 
+    @SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
     static public boolean logEnabled() {
         //noinspection ConstantConditions
         return (logIntoLogCat || logIntoFile);
