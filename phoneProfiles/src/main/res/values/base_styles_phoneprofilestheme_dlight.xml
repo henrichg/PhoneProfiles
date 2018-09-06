@@ -28,7 +28,6 @@
         <item name="actionProfilePrefCancel">@drawable/ic_action_profile_pref_cancel_dark</item>
         <item name="actionProfileButtonTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
         <item name="editItemMenuIcon">@drawable/ic_profile_item_edit_menu</item> 
-        <item name="applicationSettingsLanguageIcon">@drawable/ic_settings_language</item> 
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="actionModeCloseButtonStyle">@style/NoCloseButton</item>
