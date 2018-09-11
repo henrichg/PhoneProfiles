@@ -343,6 +343,24 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     .setAutoCancel(true); // clear notification after click
             notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
         }
+        else
+        if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
+            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+            String nText = context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
+            if (android.os.Build.VERSION.SDK_INT < 24) {
+                nTitle = context.getString(R.string.app_name);
+                nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                        context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
+            }
+            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                    .setColor(ContextCompat.getColor(context, R.color.primary))
+                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                    .setContentTitle(nTitle) // title for notification
+                    .setContentText(nText)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
+                    .setAutoCancel(true); // clear notification after click
+            notificationID = PPApplication.GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID;
+        }
         else {
             String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
             String nText = "";
@@ -372,13 +390,16 @@ public class GrantPermissionActivity extends AppCompatActivity {
             PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);
             mBuilder.setDeleteIntent(deletePendingIntent);
 
-            if (profile != null)
-                intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-
             //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
             //intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
             //intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
-            notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
+
+            if (profile != null) {
+                intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                notificationID = 9999 + (int)profile._id;
+            }
+            else
+                notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
         }
         //permissions.clear();
         intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
