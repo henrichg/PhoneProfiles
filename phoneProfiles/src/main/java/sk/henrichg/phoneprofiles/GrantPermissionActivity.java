@@ -28,9 +28,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     private int grantType;
     private List<Permissions.PermissionType> permissions;
-    private boolean onlyNotification;
+    //private boolean onlyNotification;
     private boolean forceGrant;
-    private boolean mergedNotification;
+    //private boolean mergedNotification;
     //private boolean forGUI;
     //private boolean monochrome;
     //private int monochromeValue;
@@ -38,6 +38,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private boolean interactive;
     private String applicationDataPath;
     private boolean activateProfile;
+    private boolean fromNotification;
 
     private Profile profile;
     private DataWrapper dataWrapper;
@@ -58,14 +59,14 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         grantType = intent.getIntExtra(Permissions.EXTRA_GRANT_TYPE, 0);
-        onlyNotification = intent.getBooleanExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+        //onlyNotification = intent.getBooleanExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
         forceGrant = intent.getBooleanExtra(Permissions.EXTRA_FORCE_GRANT, false);
         permissions = intent.getParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES);
-        mergedNotification = false;
+        /*mergedNotification = false;
         if (permissions == null) {
             permissions = Permissions.getMergedPermissions(getApplicationContext());
             mergedNotification = true;
-        }
+        }*/
 
         long profile_id = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
         //forGUI = intent.getBooleanExtra(Permissions.EXTRA_FOR_GUI, false);
@@ -75,6 +76,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
         interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
         activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.SHARED_PROFILE_ID);
+
+        fromNotification = intent.getBooleanExtra(Permissions.EXTRA_FROM_NOTIFICATION, false);
 
         dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ false, 0);
         if (profile_id != Profile.SHARED_PROFILE_ID)
@@ -98,7 +101,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         final Context context = getApplicationContext();
 
-        if (permissions.size() == 0) {
+        if (fromNotification) {
             // called from notification - recheck permissions
             if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
                 boolean granted = Permissions.checkInstallTone(context, permissions);
@@ -111,10 +114,23 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     return;
                 }
             }
+            else
+            if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
+                boolean granted = Permissions.checkPlayRingtoneNotification(context, permissions);
+                if (granted) {
+                    Toast msg = Toast.makeText(context,
+                            context.getResources().getString(R.string.toast_permissions_granted),
+                            Toast.LENGTH_SHORT);
+                    msg.show();
+                    finish();
+                    return;
+                }
+            }
             else {
                 // get permissions from shared preferences and recheck it
-                permissions = Permissions.recheckPermissions(context, Permissions.getMergedPermissions(context));
-                mergedNotification = true;
+                /*permissions = Permissions.recheckPermissions(context, Permissions.getMergedPermissions(context));
+                mergedNotification = true;*/
+                permissions = Permissions.recheckPermissions(context, permissions);
                 if (permissions.size() == 0) {
                     Toast msg = Toast.makeText(context,
                             context.getResources().getString(R.string.toast_permissions_granted),
@@ -167,10 +183,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 showRequestAccessFineLocation ||
                 showRequestDrawOverlays) {
 
-            if (onlyNotification) {
+            /*if (onlyNotification) {
                 showNotification(context);
             }
-            else {
+            else {*/
                 String showRequestString;
 
                 if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
@@ -186,16 +202,16 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
                     showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
                 else {
-                    if (mergedNotification) {
+                    /*if (mergedNotification) {
                         showRequestString = context.getString(R.string.permissions_for_profile_text1m) + " ";
                         showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text2) + "<br><br>";
                     }
-                    else {
+                    else {*/
                         showRequestString = context.getString(R.string.permissions_for_profile_text1) + " ";
                         if (profile != null)
                             showRequestString = showRequestString + "\"" + profile._name + "\" ";
                         showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text2) + "<br><br>";
-                    }
+                    //}
                 }
 
                 if (showRequestWriteSettings) {
@@ -273,8 +289,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     public void onCancel(DialogInterface dialog) {
                         finish();
                         //Permissions.releaseReferences();
-                        if (mergedNotification)
-                            Permissions.clearMergedPermissions(context);
+                        /*if (mergedNotification)
+                            Permissions.clearMergedPermissions(context);*/
                     }
                 });
                 AlertDialog dialog = dialogBuilder.create();
@@ -288,17 +304,20 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     }
                 });*/
                 dialog.show();
-            }
+            //}
         }
         else {
-            if (onlyNotification)
+            /*if (onlyNotification)
                 showNotification(context);
-            else
+            else*/
                 requestPermissions(4);
         }
     }
 
-    private void showNotification(Context context) {
+    static void showNotification(int grantType, List<Permissions.PermissionType> permissions,
+                                 @SuppressWarnings("SameParameterValue") boolean forceGrant,
+                                 int startupSource, boolean interactive,
+                                 Profile profile, boolean activateProfile, Context context) {
         int notificationID;
         NotificationCompat.Builder mBuilder;
 
@@ -331,16 +350,16 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 nTitle = context.getString(R.string.app_name);
                 nText = context.getString(R.string.permissions_for_profile_text_notification)+": ";
             }
-            if (mergedNotification) {
+            /*if (mergedNotification) {
                 nText = nText + context.getString(R.string.permissions_for_profile_text1m) + " " +
                         context.getString(R.string.permissions_for_profile_big_text_notification);
             }
-            else {
+            else {*/
                 nText = nText + context.getString(R.string.permissions_for_profile_text1) + " ";
                 if (profile != null)
                     nText = nText + "\"" + profile._name + "\" ";
                 nText = nText + context.getString(R.string.permissions_for_profile_big_text_notification);
-            }
+            //}
             mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
                     .setColor(ContextCompat.getColor(context, R.color.primary))
                     .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
@@ -353,19 +372,23 @@ public class GrantPermissionActivity extends AppCompatActivity {
             PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);
             mBuilder.setDeleteIntent(deletePendingIntent);
 
-            intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+            if (profile != null)
+                intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+
             //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
             //intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
             //intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
             notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
         }
-        permissions.clear();
+        //permissions.clear();
         intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
         intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
-        intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+        //intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+        intent.putExtra(Permissions.EXTRA_FROM_NOTIFICATION, true);
         intent.putExtra(Permissions.EXTRA_FORCE_GRANT, forceGrant);
         intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
         intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
+        intent.putExtra(Permissions.EXTRA_ACTIVATE_PROFILE, activateProfile);
 
         PendingIntent pi = PendingIntent.getActivity(context, grantType, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
@@ -379,7 +402,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         if (mNotificationManager != null)
             mNotificationManager.notify(notificationID, mBuilder.build());
 
-        finish();
+        //finish();
     }
 
     @Override
@@ -401,18 +424,18 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 if (allGranted) {
                     finishGrant();
                 } else {
-                    if (!onlyNotification) {
+                    //if (!onlyNotification) {
                         Context context = getApplicationContext();
                         Toast msg = Toast.makeText(context,
                                 context.getResources().getString(R.string.app_name) + ": " +
                                         context.getResources().getString(R.string.toast_permissions_not_granted),
                                 Toast.LENGTH_SHORT);
                         msg.show();
-                    }
+                    //}
                     finish();
                     //Permissions.releaseReferences();
-                    if (mergedNotification)
-                        Permissions.clearMergedPermissions(getApplicationContext());
+                    /*if (mergedNotification)
+                        Permissions.clearMergedPermissions(getApplicationContext());*/
                 }
                 //return;
                 break;
@@ -781,8 +804,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
 
         //Permissions.releaseReferences();
-        if (mergedNotification)
-            Permissions.clearMergedPermissions(context);
+        /*if (mergedNotification)
+            Permissions.clearMergedPermissions(context);*/
 
         //if (grantType != Permissions.GRANT_TYPE_PROFILE) {
             PPApplication.showProfileNotification(dataWrapper.context);
