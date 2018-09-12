@@ -236,30 +236,38 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
                 if (showRequestWriteSettings) {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_write_settings) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[0];
+                    if (whyPermissionString[0] != null)
+                        showRequestString = showRequestString + whyPermissionString[0];
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestReadExternalStorage || showRequestWriteExternalStorage) {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[3];
-                    showRequestString = showRequestString + whyPermissionString[6];
+                    if (whyPermissionString[3] != null)
+                        showRequestString = showRequestString + whyPermissionString[3];
+                    if (whyPermissionString[6] != null)
+                        showRequestString = showRequestString + whyPermissionString[6];
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestReadPhoneState || showRequestProcessOutgoingCalls) {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[4];
-                    showRequestString = showRequestString + whyPermissionString[5];
+                    if (whyPermissionString[4] != null)
+                        showRequestString = showRequestString + whyPermissionString[4];
+                    if (whyPermissionString[5] != null)
+                        showRequestString = showRequestString + whyPermissionString[5];
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestAccessCoarseLocation || showRequestAccessFineLocation) {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_location) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[7];
-                    showRequestString = showRequestString + whyPermissionString[8];
+                    if (whyPermissionString[7] != null)
+                        showRequestString = showRequestString + whyPermissionString[7];
+                    if (whyPermissionString[8] != null)
+                        showRequestString = showRequestString + whyPermissionString[8];
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestAccessNotificationPolicy) {
                     showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_access_notification_policy) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[1];
+                    if (whyPermissionString[1] != null)
+                        showRequestString = showRequestString + whyPermissionString[1];
                     showRequestString = showRequestString + "<br>";
                 }
                 if (showRequestDrawOverlays) {
@@ -267,7 +275,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays) + "</b>";
                     else
                         showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays_miui) + "</b>";
-                    showRequestString = showRequestString + whyPermissionString[2];
+                    if (whyPermissionString[2] != null)
+                        showRequestString = showRequestString + whyPermissionString[2];
                     showRequestString = showRequestString + "<br>";
                 }
 
@@ -421,7 +430,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         if (s.isEmpty())
             return s;
         else
-            return "- " + s + "<br>";
+            return "<br>" + "&nbsp;&nbsp;&nbsp;- for " + s;
     }
 
     static void showNotification(int grantType, List<Permissions.PermissionType> permissions,
