@@ -37,7 +37,7 @@ public class Permissions {
     private static final int PERMISSION_AUTOROTATION = 6;
     private static final int PERMISSION_WALLPAPER = 7;
     private static final int PERMISSION_RADIO_PREFERENCES = 8;
-    private static final int PERMISSION_PHONE_BROADCAST = 9;
+    private static final int PERMISSION_SPEAKER_PHONE_BROADCAST = 9;
     private static final int PERMISSION_CUSTOM_PROFILE_ICON = 10;
     private static final int PERMISSION_INSTALL_TONE = 11;
     private static final int PERMISSION_EXPORT = 12;
@@ -437,7 +437,7 @@ public class Permissions {
                         if (!grantedWriteSettings)
                             permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
                         if (!grantedDrawOverlays)
-                            permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
+                            permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.SYSTEM_ALERT_WINDOW));
                     }
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
@@ -633,9 +633,9 @@ public class Permissions {
                     boolean grantedOutgoingCall = ContextCompat.checkSelfPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED;
                     if (permissions != null) {
                         if (!grantedReadPhoneState)
-                            permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.READ_PHONE_STATE));
+                            permissions.add(new PermissionType(PERMISSION_SPEAKER_PHONE_BROADCAST, permission.READ_PHONE_STATE));
                         if (!grantedOutgoingCall)
-                            permissions.add(new PermissionType(PERMISSION_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
+                            permissions.add(new PermissionType(PERMISSION_SPEAKER_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
                     }
                     //return grantedOutgoingCall && grantedReadPhoneState;
                 }// else
