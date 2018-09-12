@@ -30,26 +30,29 @@ import static android.Manifest.permission;
 public class Permissions {
 
     //private static final int PERMISSION_VOLUME_PREFERENCES = 1;
-    private static final int PERMISSION_VIBRATION_ON_TOUCH = 2;
-    private static final int PERMISSION_RINGTONES = 3;
-    private static final int PERMISSION_SCREEN_TIMEOUT = 4;
-    private static final int PERMISSION_SCREEN_BRIGHTNESS = 5;
-    private static final int PERMISSION_AUTOROTATION = 6;
-    private static final int PERMISSION_WALLPAPER = 7;
-    private static final int PERMISSION_RADIO_PREFERENCES = 8;
-    private static final int PERMISSION_SPEAKER_PHONE_BROADCAST = 9;
-    private static final int PERMISSION_CUSTOM_PROFILE_ICON = 10;
+    private static final int PERMISSION_PROFILE_VIBRATION_ON_TOUCH = 2;
+    private static final int PERMISSION_PROFILE_RINGTONES = 3;
+    private static final int PERMISSION_PROFILE_SCREEN_TIMEOUT = 4;
+    private static final int PERMISSION_PROFILE_SCREEN_BRIGHTNESS = 5;
+    private static final int PERMISSION_PROFILE_AUTOROTATION = 6;
+    private static final int PERMISSION_PROFILE_WALLPAPER = 7;
+    private static final int PERMISSION_PROFILE_RADIO_PREFERENCES = 8;
+    private static final int PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST = 9;
+    private static final int PERMISSION_PROFILE_CUSTOM_PROFILE_ICON = 10;
     private static final int PERMISSION_INSTALL_TONE = 11;
     private static final int PERMISSION_EXPORT = 12;
     private static final int PERMISSION_IMPORT = 13;
-    private static final int PERMISSION_NOTIFICATION_LED = 15;
-    private static final int PERMISSION_VIBRATE_WHEN_RINGING = 16;
-    private static final int PERMISSION_ACCESS_NOTIFICATION_POLICY = 17;
-    private static final int PERMISSION_LOCK_DEVICE = 18;
+    private static final int PERMISSION_PROFILE_NOTIFICATION_LED = 15;
+    private static final int PERMISSION_PROFILE_VIBRATE_WHEN_RINGING = 16;
+    private static final int PERMISSION_PROFILE_ACCESS_NOTIFICATION_POLICY = 17;
+    private static final int PERMISSION_PROFILE_LOCK_DEVICE = 18;
     private static final int PERMISSION_RINGTONE_PREFERENCE = 19;
     private static final int PERMISSION_PLAY_RINGTONE_NOTIFICATION = 20;
     private static final int PERMISSION_PROFILE_DTMF_TONE_WHEN_DIALING = 21;
     private static final int PERMISSION_PROFILE_SOUND_ON_TOUCH = 22;
+    private static final int PERMISSION_BRIGHTNESS_PREFERENCE = 23;
+    private static final int PERMISSION_WALLPAPER_PREFERENCE = 24;
+    private static final int PERMISSION_CUSTOM_PROFILE_ICON_PREFERENCE = 25;
 
     static final int GRANT_TYPE_PROFILE = 1;
     static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -253,7 +256,7 @@ public class Permissions {
                     if (granted)
                         setShowRequestWriteSettingsPermission(context, true);
                     else if (permissions != null)
-                        permissions.add(new PermissionType(PERMISSION_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
                     return granted;
                 } else
                     return true;
@@ -274,7 +277,7 @@ public class Permissions {
                     if (granted)
                         setShowRequestWriteSettingsPermission(context, true);
                     else if (permissions != null)
-                        permissions.add(new PermissionType(PERMISSION_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
                     //return granted;
                 } /*else
                     return true;*/
@@ -310,7 +313,7 @@ public class Permissions {
                     if (granted)
                         setShowRequestWriteSettingsPermission(context, true);
                     if ((permissions != null) && (!granted))
-                        permissions.add(new PermissionType(PERMISSION_NOTIFICATION_LED, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_NOTIFICATION_LED, permission.WRITE_SETTINGS));
                     //return granted;
                 }// else
                 //    return/* true*/;
@@ -335,9 +338,9 @@ public class Permissions {
                         setShowRequestWriteSettingsPermission(context, true);
                     if (permissions != null) {
                         if (!grantedSystemSettings)
-                            permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.WRITE_SETTINGS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_RINGTONES, permission.WRITE_SETTINGS));
                         if (!grantedStorage)
-                            permissions.add(new PermissionType(PERMISSION_RINGTONES, permission.READ_EXTERNAL_STORAGE));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_RINGTONES, permission.READ_EXTERNAL_STORAGE));
                     }
                     return grantedSystemSettings && grantedStorage;
                 } else
@@ -381,9 +384,9 @@ public class Permissions {
                         setShowRequestDrawOverlaysPermission(context, true);
                     if (permissions != null) {
                         if (!grantedWriteSettings)
-                            permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SCREEN_TIMEOUT, permission.WRITE_SETTINGS));
                         if (!grantedDrawOverlays)
-                            permissions.add(new PermissionType(PERMISSION_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SCREEN_TIMEOUT, permission.SYSTEM_ALERT_WINDOW));
                     }
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
@@ -407,9 +410,9 @@ public class Permissions {
                     setShowRequestDrawOverlaysPermission(context, true);
                 if (permissions != null) {
                     if (!grantedWriteSettings)
-                        permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_BRIGHTNESS_PREFERENCE, permission.WRITE_SETTINGS));
                     if (!grantedDrawOverlays)
-                        permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.SYSTEM_ALERT_WINDOW));
+                        permissions.add(new PermissionType(PERMISSION_BRIGHTNESS_PREFERENCE, permission.SYSTEM_ALERT_WINDOW));
                 }
                 return grantedWriteSettings && grantedDrawOverlays;
             } catch (Exception e) {
@@ -435,9 +438,9 @@ public class Permissions {
                         setShowRequestDrawOverlaysPermission(context, true);
                     if (permissions != null) {
                         if (!grantedWriteSettings)
-                            permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SCREEN_BRIGHTNESS, permission.WRITE_SETTINGS));
                         if (!grantedDrawOverlays)
-                            permissions.add(new PermissionType(PERMISSION_SCREEN_BRIGHTNESS, permission.SYSTEM_ALERT_WINDOW));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SCREEN_BRIGHTNESS, permission.SYSTEM_ALERT_WINDOW));
                     }
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
@@ -459,7 +462,7 @@ public class Permissions {
                     if (granted)
                         setShowRequestWriteSettingsPermission(context, true);
                     if ((permissions != null) && (!granted))
-                        permissions.add(new PermissionType(PERMISSION_AUTOROTATION, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_AUTOROTATION, permission.WRITE_SETTINGS));
                     return granted;
                 } else
                     return true;
@@ -478,7 +481,7 @@ public class Permissions {
                 if (profile._deviceWallpaperChange != 0) {
                     boolean granted = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                     if ((permissions != null) && (!granted))
-                        permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
                     return granted;
                 } else
                     return true;
@@ -499,7 +502,7 @@ public class Permissions {
                 if (!_profile.getIsIconResourceID()) {
                     boolean granted = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                     if ((permissions != null) && (!granted))
-                        permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
                     //return;// granted;
                 } //else
                   //  return;// true;
@@ -591,9 +594,9 @@ public class Permissions {
                 //    granted = checkNFC(context);
                 if (permissions != null) {
                     if (!grantedWriteSettings)
-                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.WRITE_SETTINGS));
                     if (!grantedReadPhoneState)
-                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.READ_PHONE_STATE));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.READ_PHONE_STATE));
                     //permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.MODIFY_PHONE_STATE));
                 }
                 boolean grantedLocation = true;
@@ -601,8 +604,8 @@ public class Permissions {
                     grantedLocation = checkLocation(context);
                 if (permissions != null) {
                     if (!grantedLocation) {
-                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.ACCESS_COARSE_LOCATION));
-                        permissions.add(new PermissionType(PERMISSION_RADIO_PREFERENCES, permission.ACCESS_FINE_LOCATION));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_COARSE_LOCATION));
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_FINE_LOCATION));
                     }
                 }
                 //return grantedWriteSettings && grantedReadPhoneState && grantedLocation;
@@ -633,9 +636,9 @@ public class Permissions {
                     boolean grantedOutgoingCall = ContextCompat.checkSelfPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED;
                     if (permissions != null) {
                         if (!grantedReadPhoneState)
-                            permissions.add(new PermissionType(PERMISSION_SPEAKER_PHONE_BROADCAST, permission.READ_PHONE_STATE));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST, permission.READ_PHONE_STATE));
                         if (!grantedOutgoingCall)
-                            permissions.add(new PermissionType(PERMISSION_SPEAKER_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
                     }
                     //return grantedOutgoingCall && grantedReadPhoneState;
                 }// else
@@ -665,7 +668,7 @@ public class Permissions {
                         if (granted)
                             setShowRequestAccessNotificationPolicyPermission(context, true);
                         if ((permissions != null) && (!granted))
-                            permissions.add(new PermissionType(PERMISSION_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
                         return granted;
                     } else
                         return true;
@@ -733,9 +736,9 @@ public class Permissions {
                         setShowRequestDrawOverlaysPermission(context, true);
                     if (permissions != null) {
                         if (!grantedWriteSettings)
-                            permissions.add(new PermissionType(PERMISSION_LOCK_DEVICE, permission.WRITE_SETTINGS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.WRITE_SETTINGS));
                         if (!grantedDrawOverlays)
-                            permissions.add(new PermissionType(PERMISSION_LOCK_DEVICE, permission.SYSTEM_ALERT_WINDOW));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.SYSTEM_ALERT_WINDOW));
                     }
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
@@ -988,7 +991,7 @@ public class Permissions {
             if (!granted) {
                 try {
                     List<PermissionType> permissions = new ArrayList<>();
-                    permissions.add(new PermissionType(PERMISSION_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
+                    permissions.add(new PermissionType(PERMISSION_WALLPAPER_PREFERENCE, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1016,7 +1019,7 @@ public class Permissions {
             if (!granted) {
                 try {
                     List<PermissionType> permissions = new ArrayList<>();
-                    permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON, permission.READ_EXTERNAL_STORAGE));
+                    permissions.add(new PermissionType(PERMISSION_CUSTOM_PROFILE_ICON_PREFERENCE, permission.READ_EXTERNAL_STORAGE));
 
                     Intent intent = new Intent(context, GrantPermissionActivity.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
