@@ -372,73 +372,73 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     //case Permissions.PERMISSION_PROFILE_VOLUME_PREFERENCES:
                     //    break;
                     case Permissions.PERMISSION_PROFILE_VIBRATION_ON_TOUCH:
-                        s = "enable/disable vibration on touch";
+                        s = getString(R.string.permission_why_profile_vibration_on_touch);
                         break;
                     case Permissions.PERMISSION_PROFILE_RINGTONES:
-                        s = "change ringtone, notification, alarm sound";
+                        s = getString(R.string.permission_why_profile_ringtones);
                         break;
                     case Permissions.PERMISSION_PROFILE_SCREEN_TIMEOUT:
-                        s = "change screen timeout";
+                        s = getString(R.string.permission_why_profile_screen_timeout);
                         break;
                     case Permissions.PERMISSION_PROFILE_SCREEN_BRIGHTNESS:
-                        s = "change screen brightness";
+                        s = getString(R.string.permission_why_profile_screen_brightness);
                         break;
                     case Permissions.PERMISSION_PROFILE_AUTOROTATION:
-                        s = "change screen rotation";
+                        s = getString(R.string.permission_why_profile_autorotation);
                         break;
                     case Permissions.PERMISSION_PROFILE_WALLPAPER:
-                        s = "change wallpaper";
+                        s = getString(R.string.permission_why_profile_wallpaper);
                         break;
                     case Permissions.PERMISSION_PROFILE_RADIO_PREFERENCES:
-                        s = "enable/disable mobile data, enable/disable mobile network type, connect to SSID";
+                        s = getString(R.string.permission_why_profile_radio_preferences);
                         break;
                     case Permissions.PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST:
-                        s = "enable/disable speakerphone during call";
+                        s = getString(R.string.permission_why_profile_speaker_phone_broadcast);
                         break;
                     case Permissions.PERMISSION_PROFILE_CUSTOM_PROFILE_ICON:
-                        s = "use custom profile icon";
+                        s = getString(R.string.permission_why_profile_custom_profile_icon);
                         break;
                     case Permissions.PERMISSION_INSTALL_TONE:
-                        s = "save tone to storage";
+                        s = getString(R.string.permission_why_install_tone);
                         break;
                     case Permissions.PERMISSION_EXPORT:
-                        s = "save backup data to storage";
+                        s = getString(R.string.permission_why_export);
                         break;
                     case Permissions.PERMISSION_IMPORT:
-                        s = "load backup data from storage";
+                        s = getString(R.string.permission_why_import);
                         break;
                     case Permissions.PERMISSION_PROFILE_NOTIFICATION_LED:
-                        s = "enable/disable notification LED";
+                        s = getString(R.string.permission_why_profile_notification_led);
                         break;
                     case Permissions.PERMISSION_PROFILE_VIBRATE_WHEN_RINGING:
-                        s = "enable/disable vibrate when ringing";
+                        s = getString(R.string.permission_why_profile_vibrate_when_ringing);
                         break;
                     case Permissions.PERMISSION_PLAY_RINGTONE_NOTIFICATION:
-                        s = "play ringing and notification sounds";
+                        s = getString(R.string.permission_why_play_ringtone_notification);
                         break;
                     case Permissions.PERMISSION_PROFILE_ACCESS_NOTIFICATION_POLICY:
-                        s = "change sound profile, change ringing, notification, system volume";
+                        s = getString(R.string.permission_why_profile_access_notification_policy);
                         break;
                     case Permissions.PERMISSION_PROFILE_LOCK_DEVICE:
-                        s = "lock device";
+                        s = getString(R.string.permission_why_profile_lock_device);
                         break;
                     case Permissions.PERMISSION_RINGTONE_PREFERENCE:
-                        s = "load ringtones from storage";
+                        s = getString(R.string.permission_why_ringtone_preference);
                         break;
                     case Permissions.PERMISSION_PROFILE_DTMF_TONE_WHEN_DIALING:
-                        s = "enable/disable DTMF tone when dialing";
+                        s = getString(R.string.permission_why_profile_dtmf_tone_when_dialing);
                         break;
                     case Permissions.PERMISSION_PROFILE_SOUND_ON_TOUCH:
-                        s = "enable/disable sound on touch";
+                        s = getString(R.string.permission_why_profile_sound_on_touch);
                         break;
                     case Permissions.PERMISSION_BRIGHTNESS_PREFERENCE:
-                        s = "change brightness during configuration";
+                        s = getString(R.string.permission_why_brightness_preference);
                         break;
                     case Permissions.PERMISSION_WALLPAPER_PREFERENCE:
-                        s = "load wallpapers from storage";
+                        s = getString(R.string.permission_why_wallpaper_preference);
                         break;
                     case Permissions.PERMISSION_CUSTOM_PROFILE_ICON_PREFERENCE:
-                        s = "load custom icons from storage";
+                        s = getString(R.string.permission_why_custom_profile_icon_preference);
                         break;
                 }
             }
