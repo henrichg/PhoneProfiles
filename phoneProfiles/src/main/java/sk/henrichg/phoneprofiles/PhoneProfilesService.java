@@ -236,7 +236,7 @@ public class PhoneProfilesService extends Service {
 
                     PPApplication.logE("PhoneProfilesService.doForFirstStart", " application not started");
 
-                    Permissions.clearMergedPermissions(appContext);
+                    //Permissions.clearMergedPermissions(appContext);
 
                     PPApplication.createNotificationChannels(appContext);
 
