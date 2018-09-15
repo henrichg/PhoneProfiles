@@ -921,16 +921,12 @@ class ActivateProfileHelper {
                 }
 
                 // link, unlink volumes during activation of profile
-                int linkUnlink;
-                if (Permissions.checkPhone(appContext)) {
-                    if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) &&
-                            ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext))
+                int linkUnlink  = PhoneCallBroadcastReceiver.LINKMODE_NONE;
+                if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) &&
+                        ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext)) {
+                    if (Permissions.checkPhone(appContext))
                         linkUnlink = linkUnlinkVolumes;
-                    else
-                        linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
                 }
-                else
-                    linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
 
                 if (profile != null)
                 {
