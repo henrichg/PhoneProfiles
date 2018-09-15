@@ -920,9 +920,15 @@ class ActivateProfileHelper {
                     wakeLock.acquire(10 * 60 * 1000);
                 }
 
+                // link, unlink volumes during activation of profile
                 int linkUnlink;
-                if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext))
-                    linkUnlink = linkUnlinkVolumes;
+                if (Permissions.checkPhone(appContext)) {
+                    if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) &&
+                            ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(appContext))
+                        linkUnlink = linkUnlinkVolumes;
+                    else
+                        linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
+                }
                 else
                     linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
 

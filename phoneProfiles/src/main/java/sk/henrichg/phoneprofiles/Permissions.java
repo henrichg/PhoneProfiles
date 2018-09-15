@@ -37,7 +37,7 @@ public class Permissions {
     static final int PERMISSION_PROFILE_AUTOROTATION = 6;
     static final int PERMISSION_PROFILE_WALLPAPER = 7;
     static final int PERMISSION_PROFILE_RADIO_PREFERENCES = 8;
-    static final int PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST = 9;
+    static final int PERMISSION_PROFILE_PHONE_STATE_BROADCAST = 9;
     static final int PERMISSION_PROFILE_CUSTOM_PROFILE_ICON = 10;
     static final int PERMISSION_INSTALL_TONE = 11;
     static final int PERMISSION_EXPORT = 12;
@@ -631,14 +631,16 @@ public class Permissions {
         if (profile == null) return;// true;
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                if (profile._volumeSpeakerPhone != 0) {
+                boolean unlinkEnabled = ActivateProfileHelper.getMergedRingNotificationVolumes(context) &&
+                        ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context);
+                if (unlinkEnabled || (profile._volumeSpeakerPhone != 0)) {
                     boolean grantedReadPhoneState = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
                     boolean grantedOutgoingCall = ContextCompat.checkSelfPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED;
                     if (permissions != null) {
                         if (!grantedReadPhoneState)
-                            permissions.add(new PermissionType(PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST, permission.READ_PHONE_STATE));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.READ_PHONE_STATE));
                         if (!grantedOutgoingCall)
-                            permissions.add(new PermissionType(PERMISSION_PROFILE_SPEAKER_PHONE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
                     }
                     //return grantedOutgoingCall && grantedReadPhoneState;
                 }// else
