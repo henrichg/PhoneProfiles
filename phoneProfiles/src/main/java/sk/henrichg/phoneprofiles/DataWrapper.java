@@ -800,7 +800,7 @@ public class DataWrapper {
         }
     }
 
-    void finishActivity(int startupSource, boolean closeActivator, Activity activity)
+    void finishActivity(int startupSource, boolean closeActivator, final Activity activity)
     {
         if (activity == null)
             return;
@@ -827,8 +827,15 @@ public class DataWrapper {
             finish = false;
         }
 
-        if (finish)
-            activity.finish();
+        if (finish) {
+            final Handler handler = new Handler(context.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    activity.finish();
+                }
+            });
+        }
     }
 
     public void activateProfile(long profile_id, int startupSource, Activity activity)
