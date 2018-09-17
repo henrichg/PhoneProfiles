@@ -143,9 +143,9 @@ public class PhoneProfilesService extends Service {
 
         removeProfileNotification(this, true);
 
-        synchronized (PhoneProfilesService.class) {
+        /*synchronized (PhoneProfilesService.class) {
             instance = null;
-        }
+        }*/
 
         serviceHasFirstStart = false;
         serviceRunning = false;
