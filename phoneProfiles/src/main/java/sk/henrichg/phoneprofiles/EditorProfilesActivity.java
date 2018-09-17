@@ -793,30 +793,33 @@ public class EditorProfilesActivity extends AppCompatActivity
                         importProgressDialog.dismiss();
                         importProgressDialog = null;
                     }
-                    GlobalGUIRoutines.unlockScreenOrientation(activity);
+                    if (!isFinishing())
+                        GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
-                    PPApplication.setApplicationStarted(getApplicationContext(), true);
-                    Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+                    PPApplication.setApplicationStarted(this.dataWrapper.context, true);
+                    Intent serviceIntent = new Intent(this.dataWrapper.context, PhoneProfilesService.class);
                     serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
                     PPApplication.startPPService(activity, serviceIntent);
 
                     if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError))) {
                         // toast notification
-                        Toast msg = Toast.makeText(getApplicationContext(),
+                        Toast msg = Toast.makeText(this.dataWrapper.context,
                                 getResources().getString(R.string.toast_import_ok),
                                 Toast.LENGTH_SHORT);
                         msg.show();
 
                         // refresh activity
-                        GlobalGUIRoutines.reloadActivity(activity, true);
+                        if (!isFinishing())
+                            GlobalGUIRoutines.reloadActivity(activity, true);
                     } else {
                         int appSettingsResult = 1;
                         if (appSettingsError) appSettingsResult = 0;
                         int sharedProfileResult = 1;
                         if (sharedProfileError) sharedProfileResult = 0;
-                        importExportErrorDialog(1, dbError, appSettingsResult, sharedProfileResult);
+                        if (!isFinishing())
+                            importExportErrorDialog(1, dbError, appSettingsResult, sharedProfileResult);
                     }
                 }
 
@@ -1033,18 +1036,20 @@ public class EditorProfilesActivity extends AppCompatActivity
                         exportProgressDialog.dismiss();
                         exportProgressDialog = null;
                     }
-                    GlobalGUIRoutines.unlockScreenOrientation(activity);
+                    if (!isFinishing())
+                        GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     if (result == 1) {
 
                         // toast notification
-                        Toast msg = Toast.makeText(getApplicationContext(),
+                        Toast msg = Toast.makeText(this.dataWrapper.context,
                                 getResources().getString(R.string.toast_export_ok),
                                 Toast.LENGTH_SHORT);
                         msg.show();
 
                     } else {
-                        importExportErrorDialog(2, 0, 0,0);
+                        if (!isFinishing())
+                            importExportErrorDialog(2, 0, 0,0);
                     }
                 }
 
