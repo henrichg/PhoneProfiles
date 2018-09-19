@@ -34,7 +34,7 @@ public class ExitApplicationActivity extends AppCompatActivity {
         dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 PPApplication.logE("ExitApplicationActivity.onStart", "exit");
-                PPApplication.exitApp(getApplicationContext(), ExitApplicationActivity.this, false);
+                PPApplication.exitApp(getApplicationContext(), ExitApplicationActivity.this, false, true);
             }
         });
         dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
