@@ -65,6 +65,7 @@ class ApplicationPreferences {
     static final String PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND_TYPE = "applicationSamsungEdgeBackgroundType";
     static final String PREF_APPLICATION_SAMSUNG_EDGE_BACKGROUND_COLOR = "applicationSamsungEdgeBackgroundColor";
     static final String PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT = "applicationNeverAskForGrantRoot";
+    static final String PREF_NOTIFICATION_SHOW_BUTTON_EXIT = "notificationShowButtonExit";
 
     static SharedPreferences getSharedPreferences(Context context) {
         if (preferences == null)
@@ -317,6 +318,10 @@ class ApplicationPreferences {
 
     static boolean applicationNeverAskForGrantRoot(Context context) {
         return getSharedPreferences(context).getBoolean(PREF_APPLICATION_NEVER_ASK_FOR_GRANT_ROOT, false);
+    }
+
+    static boolean notificationShowButtonExit(Context context) {
+        return getSharedPreferences(context).getBoolean(PREF_NOTIFICATION_SHOW_BUTTON_EXIT, true);
     }
 
 }
