@@ -123,7 +123,7 @@ public class PPApplication extends Application {
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     static final String SHARED_PROFILE_PREFS_NAME = "profile_preferences_default_profile";
-    static final String PERMISSIONS_PREFS_NAME = "permissions_list";
+    //static final String PERMISSIONS_PREFS_NAME = "permissions_list";
     static final String PERMISSIONS_STATUS_PREFS_NAME = "permissions_status";
     static final String WIFI_CONFIGURATION_LIST_PREFS_NAME = "wifi_configuration_list";
 
