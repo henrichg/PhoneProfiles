@@ -1134,7 +1134,8 @@ public class PPApplication extends Application {
         }
     }
 
-    public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity, boolean shutdown) {
+    public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity,
+                               boolean shutdown, boolean killProcess) {
         try {
             // remove alarm for profile duration
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -1177,13 +1178,22 @@ public class PPApplication extends Application {
 
             if (!shutdown) {
                 if (activity != null) {
-                    Handler handler = new Handler(context.getMainLooper());
+                    Handler _handler = new Handler(context.getMainLooper());
                     Runnable r = new Runnable() {
                         public void run() {
                             activity.finish();
                         }
                     };
-                    handler.postDelayed(r, 500);
+                    _handler.post(r);
+                }
+                if (killProcess) {
+                    Handler _handler = new Handler(context.getMainLooper());
+                    Runnable r = new Runnable() {
+                        public void run() {
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }
+                    };
+                    _handler.postDelayed(r, 1000);
                 }
             }
         } catch (Exception ignored) {
