@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1004732344843",
+    "firebase_url": "https://phoneprofiles-a5cab.firebaseio.com",
+    "project_id": "phoneprofiles-a5cab",
+    "storage_bucket": "phoneprofiles-a5cab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004732344843:android:2bd904b388705139",
+        "android_client_info": {
+          "package_name": "sk.henrichg.phoneprofiles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004732344843-5rivmie6cmknfsp4o16m4s0e2iicojk0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sk.henrichg.phoneprofiles",
+            "certificate_hash": "da50f331830f67a29b8cf673cab5b807eedf2820"
+          }
+        },
+        {
+          "client_id": "1004732344843-2kt0sjkd22ba4nk6m20njng6ijv4a7io.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtwR838dnQFt17QI_kcgRROA2wKGWwTYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004732344843-2kt0sjkd22ba4nk6m20njng6ijv4a7io.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
