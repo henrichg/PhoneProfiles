@@ -299,11 +299,11 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "intent="+intent);
 
-        if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
+        //if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
             // do not call this from handlerThread. In Android 8 handlerThread is not called
             // when for service is not displayed foreground notification
             showProfileNotification();
-        }
+        //}
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
             stopSelf();
