@@ -12,6 +12,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -24,6 +25,7 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 import com.evernote.android.job.JobConfig;
 import com.evernote.android.job.JobManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
@@ -141,6 +143,9 @@ public class PPApplication extends Application {
 
     static final String EXTRA_APPLICATIONS = "extra_applications";
 
+    @SuppressWarnings("SpellCheckingInspection")
+    static private FirebaseAnalytics mFirebaseAnalytics;
+
     public static HandlerThread handlerThread = null;
     public static HandlerThread handlerThreadWidget = null;
     public static HandlerThread handlerThreadProfileNotification = null;
@@ -186,6 +191,9 @@ public class PPApplication extends Application {
 
         if (checkAppReplacingState())
             return;
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Set up Crashlytics, disabled for debug builds
         Crashlytics crashlyticsKit = new Crashlytics.Builder()
@@ -1291,5 +1299,17 @@ public class PPApplication extends Application {
             handlerThreadNotificationLed.start();
         }
     }
+
+    // Google Alaytics ----------------------------------------------------------------------------
+
+    static void logAnalyticsEvent(String itemId, String itemName, String contentType) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, itemId);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, itemName);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    //---------------------------------------------------------------------------------------------
 
 }
