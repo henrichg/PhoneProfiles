@@ -613,7 +613,7 @@ public class DataWrapper {
                 PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
                 if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.1");
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper._activateProfile.1");
                     wakeLock.acquire(10 * 60 * 1000);
                 }
 
@@ -653,7 +653,7 @@ public class DataWrapper {
                     PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
                     if (powerManager != null) {
-                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper._activateProfile.2");
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper._activateProfile.2");
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
@@ -1087,7 +1087,7 @@ public class DataWrapper {
                 PowerManager powerManager = (PowerManager) dataWrapper.context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
                 if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DataWrapper.setDynamicLauncherShortcutsFromMainThread");
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper.setDynamicLauncherShortcutsFromMainThread");
                     wakeLock.acquire(10 * 60 * 1000);
                 }
 
