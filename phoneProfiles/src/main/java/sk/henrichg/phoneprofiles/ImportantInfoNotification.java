@@ -54,6 +54,7 @@ class ImportantInfoNotification {
 
         if (newsLatest) {
             // change to false for not show notification
+            //noinspection ConstantConditions
             news = false;
         }
 

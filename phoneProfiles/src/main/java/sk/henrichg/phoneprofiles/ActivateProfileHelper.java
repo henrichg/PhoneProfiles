@@ -495,7 +495,7 @@ class ActivateProfileHelper {
         else
             return true;*/
         return (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) ||
-                ((getSystemZenMode(context, -1) == ActivateProfileHelper.ZENMODE_PRIORITY) &&
+                ((getSystemZenMode(context/*, -1*/) == ActivateProfileHelper.ZENMODE_PRIORITY) &&
                         (audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE));
     }
 
@@ -755,7 +755,7 @@ class ActivateProfileHelper {
     {
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
-            int _zenMode = getSystemZenMode(context, -1);
+            int _zenMode = getSystemZenMode(context/*, -1*/);
             PPApplication.logE("ActivateProfileHelper.setZenMode", "_zenMode=" + _zenMode);
             int _ringerMode = audioManager.getRingerMode();
             PPApplication.logE("ActivateProfileHelper.setZenMode", "_ringerMode=" + _ringerMode);
@@ -948,7 +948,7 @@ class ActivateProfileHelper {
                         setRingerMode(appContext, profile, audioManager, false, forProfileActivation);
                         PPApplication.sleep(500);
                         setVolumes(appContext, profile, audioManager, linkUnlink, forProfileActivation);
-                        if (getSystemZenMode(appContext, -1) == ActivateProfileHelper.ZENMODE_PRIORITY) {
+                        if (getSystemZenMode(appContext/*, -1*/) == ActivateProfileHelper.ZENMODE_PRIORITY) {
                             //PPApplication.sleep(500);
                             setRingerMode(appContext, profile, audioManager, false, /*linkUnlink,*/ forProfileActivation);
                         }
@@ -1137,7 +1137,7 @@ class ActivateProfileHelper {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    static int getSystemZenMode(Context context, int defaultValue) {
+    static int getSystemZenMode(Context context/*, int defaultValue*/) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context)) {
@@ -1185,7 +1185,7 @@ class ActivateProfileHelper {
                     return ActivateProfileHelper.ZENMODE_ALARMS;
             }
         }
-        return defaultValue;
+        return -1;//defaultValue;
     }
 
     static boolean vibrationIsOn(AudioManager audioManager, boolean testRingerMode) {
@@ -2804,8 +2804,11 @@ class ActivateProfileHelper {
                     // Android 6?
                     if (Build.VERSION.SDK_INT >= 23) {
                         SubscriptionManager mSubscriptionManager = SubscriptionManager.from(context);
+                        List<SubscriptionInfo> subscriptionList = null;
                         // Loop through the subscription list i.e. SIM list.
-                        List<SubscriptionInfo> subscriptionList = mSubscriptionManager.getActiveSubscriptionInfoList();
+                        try {
+                            subscriptionList = mSubscriptionManager.getActiveSubscriptionInfoList();
+                        } catch (SecurityException ignored) {}
                         if (subscriptionList != null) {
                             for (int i = 0; i < mSubscriptionManager.getActiveSubscriptionInfoCountMax(); i++) {
                                 // Get the active subscription ID for a given SIM card.

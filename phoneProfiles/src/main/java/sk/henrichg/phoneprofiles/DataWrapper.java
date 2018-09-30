@@ -1009,7 +1009,7 @@ public class DataWrapper {
             if (applicationWidgetIconLightness.equals("25")) monochromeValue = 0x40;
             if (applicationWidgetIconLightness.equals("50")) monochromeValue = 0x80;
             if (applicationWidgetIconLightness.equals("75")) monochromeValue = 0xC0;
-            if (applicationWidgetIconLightness.equals("100")) monochromeValue = 0xFF;
+            //if (applicationWidgetIconLightness.equals("100")) monochromeValue = 0xFF;
 
             if (isIconResourceID || useCustomColor) {
                 // icon is from resource or colored by custom color
@@ -1025,11 +1025,11 @@ public class DataWrapper {
         shortcutIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
 
         String profileName = profile._name;
-        if (profileName.isEmpty())
-            profileName = " ";
         String longLabel = profileName;
-        if (longLabel.isEmpty())
+        if (profileName.isEmpty()) {
+            profileName = " ";
             longLabel = " ";
+        }
 
         return new ShortcutInfo.Builder(context, "profile_" + profile._id)
                 .setShortLabel(profileName)
@@ -1045,8 +1045,8 @@ public class DataWrapper {
 
             if (shortcutManager != null) {
                 final int limit = 5;
-                List<Profile> countedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(true, limit);
-                List<Profile> notCountedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(false, limit);
+                List<Profile> countedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(true/*, limit*/);
+                List<Profile> notCountedProfiles = DatabaseHandler.getInstance(context).getProfilesForDynamicShortcuts(false/*, limit*/);
 
                 ArrayList<ShortcutInfo> shortcuts = new ArrayList<>();
 

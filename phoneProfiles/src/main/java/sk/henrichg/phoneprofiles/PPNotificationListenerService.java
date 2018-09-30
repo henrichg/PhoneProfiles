@@ -101,7 +101,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
     private static int getZenMode(Context context, AudioManager audioManager) {
         // convert to profile zenMode
         int zenMode = 0;
-        int systemZenMode = ActivateProfileHelper.getSystemZenMode(context, -1);
+        int systemZenMode = ActivateProfileHelper.getSystemZenMode(context/*, -1*/);
         PPApplication.logE(TAG, "getZenMode(" + systemZenMode + ')');
         switch (systemZenMode) {
             case ActivateProfileHelper.ZENMODE_ALL:

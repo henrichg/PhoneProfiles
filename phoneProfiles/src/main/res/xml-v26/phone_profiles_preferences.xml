@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:henrichg="http://schemas.android.com/apk/res/sk.henrichg.phoneprofiles"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="rootScreen"
     android:title="@string/title_activity_phone_profiles_preferences" >
@@ -224,7 +223,7 @@
             android:defaultValue="-999"
             android:key="applicationBackgroundProfile"
             android:title="@string/phone_profiles_pref_applicationEventBackgroundProfile"
-            henrichg:addNoActivateItem="1"
+            app:addNoActivateItem="1"
             android:layout="@layout/mp_preference_material_widget" />
         <CheckBoxPreference
             android:key="applicationAlert"

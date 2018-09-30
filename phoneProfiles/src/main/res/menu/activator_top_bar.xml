@@ -1,9 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:henrichg="http://schemas.android.com/apk/res-auto" >
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:keep="@menu/activity_activate_profile">
     <item android:id="@+id/menu_edit_profiles"
         android:title="@string/menu_edit_profiles"
         android:orderInCategory="100"
-        henrichg:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="?attr/actionEditProfilesIcon" />
     
 </menu>

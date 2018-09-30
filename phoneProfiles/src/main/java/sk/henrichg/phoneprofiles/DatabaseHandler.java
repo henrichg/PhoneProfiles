@@ -1397,8 +1397,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.moveToFirst();
                     r = Integer.parseInt(cursor.getString(0));
                     cursor.close();
-                } else
-                    r = 0;
+                }
 
                 //db.close();
 
@@ -1427,13 +1426,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 Cursor cursor = db.rawQuery(countQuery, null);
 
-                if (cursor.getCount() == 0)
-                    r = 0;
-                else {
+                if (cursor.getCount() > 0) {
                     if (cursor.moveToFirst())
                         r = cursor.getInt(0);
-                    else
-                        r = 0;
                 }
 
                 cursor.close();
@@ -1653,11 +1648,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_DTMF_TONE_WHEN_DIALING))),
                                 Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_SOUND_ON_TOUCH)))
                         );
-                    } else
-                        profile = null;
+                    }
                     cursor.close();
-                } else
-                    profile = null;
+                }
 
 
                 //db.close();
@@ -2210,8 +2203,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.moveToFirst();
                     r = Long.parseLong(cursor.getString(0));
                     cursor.close();
-                } else
-                    r = 0;
+                }
 
                 //db.close();
             } catch (Exception ignored) {
@@ -2266,7 +2258,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    List<Profile> getProfilesForDynamicShortcuts(boolean counted, int limit) {
+    List<Profile> getProfilesForDynamicShortcuts(boolean counted/*, int limit*/) {
         importExportLock.lock();
         try {
 
@@ -2286,13 +2278,13 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     selectQuery = selectQuery +
                             " WHERE " + KEY_ACTIVATION_BY_USER_COUNT + "> 0" +
                             " ORDER BY " + KEY_ACTIVATION_BY_USER_COUNT + " DESC " +
-                            " LIMIT " + limit;
+                            " LIMIT " + "5";//limit;
                 }
                 else {
                     selectQuery = selectQuery +
                             " WHERE " + KEY_ACTIVATION_BY_USER_COUNT + "= 0" +
                             " ORDER BY " + KEY_PORDER +
-                            " LIMIT " + limit;
+                            " LIMIT " + "5";//limit;
                 }
 
                 //SQLiteDatabase db = this.getReadableDatabase();
