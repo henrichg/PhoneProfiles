@@ -456,7 +456,8 @@ public class PhoneProfilesService extends Service {
         }
         phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
         IntentFilter intentFilter6 = new IntentFilter();
-        intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+        // removed, not needed for unlink volumes
+        //intentFilter6.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
         intentFilter6.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
 

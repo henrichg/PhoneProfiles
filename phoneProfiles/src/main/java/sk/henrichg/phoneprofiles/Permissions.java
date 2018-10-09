@@ -236,15 +236,18 @@ public class Permissions {
     static boolean checkInstallTone(Context context, List<PermissionType>  permissions) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                boolean granted = ContextCompat.checkSelfPermission(context, permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                granted = granted && ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                if ((permissions != null) && (!granted)) {
-                    permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_INSTALL_TONE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
-                    permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_INSTALL_TONE, Manifest.permission.READ_EXTERNAL_STORAGE));
+                boolean writeGranted = ContextCompat.checkSelfPermission(context, permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                boolean readGranted = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                if (permissions != null) {
+                    if (!readGranted)
+                        permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_INSTALL_TONE, Manifest.permission.READ_EXTERNAL_STORAGE));
+                    if (!writeGranted)
+                        permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_INSTALL_TONE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
                 }
-                return granted;
+                return readGranted && writeGranted;
             } else
-                return hasPermission(context, permission.WRITE_EXTERNAL_STORAGE) && hasPermission(context, permission.READ_EXTERNAL_STORAGE);
+                return hasPermission(context, permission.WRITE_EXTERNAL_STORAGE) &&
+                        hasPermission(context, permission.READ_EXTERNAL_STORAGE);
         } catch (Exception e) {
             return false;
         }
@@ -638,19 +641,20 @@ public class Permissions {
                         ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context);
                 if (unlinkEnabled || (profile._volumeSpeakerPhone != 0)) {
                     boolean grantedReadPhoneState = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                    boolean grantedOutgoingCall = ContextCompat.checkSelfPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED;
+                    // not needed for unlink volumes
+                    //boolean grantedOutgoingCall = ContextCompat.checkSelfPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED;
                     if (permissions != null) {
                         if (!grantedReadPhoneState)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.READ_PHONE_STATE));
-                        if (!grantedOutgoingCall)
-                            permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));
+                        /*if (!grantedOutgoingCall)
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));*/
                     }
                     //return grantedOutgoingCall && grantedReadPhoneState;
                 }// else
                  //   return true;
             }/* else
-                return hasPermission(context, Manifest.permission.READ_PHONE_STATE) &&
-                        hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);*/
+                return hasPermission(context, Manifest.permission.READ_PHONE_STATE);// &&
+                        //hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);*/
         } catch (Exception e) {
             //return false;
         }
@@ -819,10 +823,11 @@ public class Permissions {
     static boolean checkPhone(Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                return (ContextCompat.checkSelfPermission(context, permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) &&
-                        (ContextCompat.checkSelfPermission(context, permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED);
+                return (ContextCompat.checkSelfPermission(context, permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)/* &&
+                        (ContextCompat.checkSelfPermission(context, permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED)*/;
             } else
-                return hasPermission(context, permission.READ_CALENDAR);
+                return hasPermission(context, Manifest.permission.READ_PHONE_STATE);// &&
+                        //hasPermission(context, Manifest.permission.PROCESS_OUTGOING_CALLS);
         } catch (Exception e) {
             return false;
         }

@@ -35,31 +35,31 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
     {
     }
 
-    protected void onIncomingCallStarted(String number, Date start) {
+    protected void onIncomingCallStarted(/*String number, Date start*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_START, true/*, number*/);
     }
-    
-    protected void onOutgoingCallStarted(String number, Date start) {
-        doCall(savedContext, SERVICE_PHONE_EVENT_START, false/*, number*/);
-    }
 
-    protected void onIncomingCallAnswered(String number, Date start) {
+    //protected void onOutgoingCallStarted(/*String number, Date start*/) {
+    //    doCall(savedContext, SERVICE_PHONE_EVENT_START, false/*, number*/);
+    //}
+
+    protected void onIncomingCallAnswered(/*String number, Date start*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_ANSWER, true/*, number*/);
     }
 
-    protected void onOutgoingCallAnswered(String number, Date start) {
+    protected void onOutgoingCallAnswered(/*String number, Date start*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_ANSWER, false/*, number*/);
     }
 
-    protected void onIncomingCallEnded(String number, Date start, Date end) {
+    protected void onIncomingCallEnded(/*String number, Date start, Date end*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_END, true/*, number*/);
     }
 
-    protected void onOutgoingCallEnded(String number, Date start, Date end) {
+    protected void onOutgoingCallEnded(/*String number, Date start, Date end*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_END, false/*, number*/);
     }
 
-    protected void onMissedCall(String number, Date start) {
+    protected void onMissedCall(/*String number, Date start*/) {
         doCall(savedContext, SERVICE_PHONE_EVENT_END, true/*, number*/);
     }
 
@@ -101,14 +101,14 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-        speakerphoneSelected = false;
-
         if (incoming)
             setLinkUnlinkNotificationVolume(LINKMODE_UNLINK, context);
     }
 
     private static void callAnswered(Context context)
     {
+        speakerphoneSelected = false;
+
         if (audioManager == null )
             audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
