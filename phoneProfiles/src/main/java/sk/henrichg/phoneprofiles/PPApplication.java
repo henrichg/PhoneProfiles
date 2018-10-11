@@ -143,7 +143,7 @@ public class PPApplication extends Application {
 
     static final String EXTRA_APPLICATIONS = "extra_applications";
 
-    @SuppressWarnings("SpellCheckingInspection")
+    //@SuppressWarnings("SpellCheckingInspection")
     //static private FirebaseAnalytics mFirebaseAnalytics;
 
     public static HandlerThread handlerThread = null;
