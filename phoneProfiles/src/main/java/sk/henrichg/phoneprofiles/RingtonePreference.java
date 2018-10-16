@@ -329,11 +329,6 @@ public class RingtonePreference extends DialogPreference {
                 Ringtone defaultRingtone;
 
                 @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                }
-
-                @Override
                 protected Void doInBackground(Void... params) {
                     RingtoneManager manager = new RingtoneManager(prefContext);
 

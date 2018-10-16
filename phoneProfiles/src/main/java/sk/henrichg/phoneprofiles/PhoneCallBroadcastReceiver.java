@@ -5,8 +5,6 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.SystemClock;
 
-import java.util.Date;
-
 public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private static AudioManager audioManager = null;
