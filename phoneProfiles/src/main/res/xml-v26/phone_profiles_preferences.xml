@@ -17,8 +17,7 @@
             android:defaultValue="@string/array_pref_value_system"
             android:entries="@array/languageArray"
             android:entryValues="@array/languageValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <Preference
             android:key="applicationLanguage24"
             android:title="@string/phone_profiles_pref_applicationLanguage"
@@ -33,8 +32,7 @@
             android:defaultValue="@string/array_pref_value_color"
             android:entries="@array/themeArray"
             android:entryValues="@array/themeValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -94,8 +92,7 @@
             android:defaultValue="0"
             android:entries="@array/forceSetMergeRingNotificationVolumesArray"
             android:entryValues="@array/forceSetMergeRingNotificationVolumesValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <Preference
             android:key="applicationBatteryOptimization"
             android:title="@string/phone_profiles_pref_applicationBatteryOptimization"
@@ -188,8 +185,7 @@
                 android:defaultValue="1"
                 android:entries="@array/notificationIconStyleArray"
                 android:entryValues="@array/notificationIconStyleValues"
-                android:layout="@layout/mp_preference_material_widget"
-                app:useStockLayout="true" />
+                android:layout="@layout/mp_preference_material_widget" />
             <CheckBoxPreference
                 android:key="notificationPrefIndicator"
                 android:title="@string/phone_profiles_pref_notificationPrefIndicator"
@@ -203,8 +199,7 @@
                 android:defaultValue="0"
                 android:entries="@array/notificationTextColorArray"
                 android:entryValues="@array/notificationTextColorValues"
-                android:layout="@layout/mp_preference_material_widget"
-                app:useStockLayout="true" />
+                android:layout="@layout/mp_preference_material_widget" />
             <CheckBoxPreference
                 android:key="notificationShowButtonExit"
                 android:title="@string/phone_profiles_pref_notificationShowButtonExit"
@@ -319,8 +314,7 @@
             android:defaultValue="25"
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <CheckBoxPreference
             android:key="applicationWidgetListBackgroundType"
             android:title="@string/phone_profiles_pref_applicationWidgetBackgroundType"
@@ -334,8 +328,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.ColorChooserPreference
             android:title="@string/phone_profiles_pref_applicationWidgetColorB"
             android:key="applicationWidgetListBackgroundColor"
@@ -354,8 +347,7 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
@@ -363,8 +355,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
@@ -372,8 +363,7 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
     
     <PreferenceScreen
@@ -388,8 +378,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <CheckBoxPreference
             android:key="applicationWidgetIconBackgroundType"
             android:title="@string/phone_profiles_pref_applicationWidgetIconBackgroundType"
@@ -403,8 +392,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.ColorChooserPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColorB"
             android:key="applicationWidgetIconBackgroundColor"
@@ -431,8 +419,7 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             android:dependency="applicationWidgetIconHideProfileName"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
@@ -440,8 +427,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
@@ -449,8 +435,7 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <!--<CheckBoxPreference
             android:key="applicationShortcutEmblem"
             android:title="@string/phone_profiles_pref_applicationShortcutEmblem"
@@ -493,8 +478,7 @@
             android:defaultValue="25"
             android:entries="@array/widgetBackgroundArray"
             android:entryValues="@array/widgetBackgroundValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <CheckBoxPreference
             android:key="applicationSamsungEdgeBackgroundType"
             android:title="@string/phone_profiles_pref_applicationWidgetBackgroundType"
@@ -508,8 +492,7 @@
             android:defaultValue="0"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.ColorChooserPreference
             android:title="@string/phone_profiles_pref_applicationWidgetColorB"
             android:key="applicationSamsungEdgeBackgroundColor"
@@ -522,8 +505,7 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetIconColor"
             android:summary="0"
@@ -531,16 +513,15 @@
             android:defaultValue="0"
             android:entries="@array/widgetColorArray"
             android:entryValues="@array/widgetColorValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
+        <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationWidgetLightnessI"
             android:summary="100"
             android:key="applicationSamsungEdgeIconLightness"
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
-            android:layout="@layout/mp_preference_material_widget"
-            app:useStockLayout="true" />
+            android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 
 </PreferenceScreen>
