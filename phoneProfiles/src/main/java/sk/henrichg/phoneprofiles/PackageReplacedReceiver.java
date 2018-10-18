@@ -110,6 +110,11 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                     } catch (Exception ignored) {
                     }
 
+                    if (PPApplication.getApplicationStarted(appContext, false))
+                    {
+                        startService(appContext);
+                    }
+
                     if ((wakeLock != null) && wakeLock.isHeld()) {
                         try {
                             wakeLock.release();
@@ -117,41 +122,6 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                     }
                 }
             });
-
-            if (PPApplication.getApplicationStarted(appContext, false))
-            {
-                startService(appContext);
-                /*
-                PPApplication.startHandlerThread();
-                final Handler handler3 = new Handler(PPApplication.handlerThread.getLooper());
-                handler3.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        PowerManager powerManager = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-                        PowerManager.WakeLock wakeLock = null;
-                        if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PackageReplacedReceiver.onReceive.3");
-                            wakeLock.acquire(10 * 60 * 1000);
-                        }
-
-                        if (PhoneProfilesService.getInstance() != null) {
-                            // stop PhoneProfilesService
-                            PPApplication.sleep(2000);
-                            appContext.stopService(new Intent(appContext, PhoneProfilesService.class));
-                            PPApplication.sleep(2000);
-                            startService(appContext);
-                        } else
-                            startService(appContext);
-
-                        if ((wakeLock != null) && wakeLock.isHeld()) {
-                            try {
-                                wakeLock.release();
-                            } catch (Exception ignored) {}
-                        }
-                    }
-                });
-                */
-            }
         }
     }
 
