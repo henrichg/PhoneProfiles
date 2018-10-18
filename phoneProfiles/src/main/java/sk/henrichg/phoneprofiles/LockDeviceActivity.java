@@ -36,11 +36,6 @@ public class LockDeviceActivity extends AppCompatActivity {
             getWindow().setAttributes(lp);
             */
 
-            PhoneProfilesService.getInstance().screenTimeoutBeforeDeviceLock = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
-            ActivateProfileHelper.removeScreenTimeoutAlwaysOnView(getApplicationContext());
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 1000);
-
-
             WindowManager.LayoutParams params = new WindowManager.LayoutParams();
             params.flags = 1808;
             if (android.os.Build.VERSION.SDK_INT < 26)
@@ -68,9 +63,13 @@ public class LockDeviceActivity extends AppCompatActivity {
             if (windowManager != null)
                 windowManager.addView(view, params);
 
-            LockDeviceActivityFinishBroadcastReceiver.setAlarm(getApplicationContext());
-
             displayed = true;
+
+            PhoneProfilesService.getInstance().screenTimeoutBeforeDeviceLock = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
+            ActivateProfileHelper.removeScreenTimeoutAlwaysOnView(getApplicationContext());
+            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 1000);
+
+            LockDeviceActivityFinishBroadcastReceiver.setAlarm(getApplicationContext());
         }
         else
             finish();
@@ -81,6 +80,8 @@ public class LockDeviceActivity extends AppCompatActivity {
         super.onDestroy();
 
         if (displayed && (PhoneProfilesService.getInstance() != null)) {
+            displayed = false;
+
             if (view != null) {
                 try {
                     WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
@@ -127,7 +128,6 @@ public class LockDeviceActivity extends AppCompatActivity {
     {
         super.finish();
         overridePendingTransition(0, 0);
-        displayed = false;
     }
 
 }
