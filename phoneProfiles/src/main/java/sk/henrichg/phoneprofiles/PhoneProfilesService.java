@@ -202,6 +202,10 @@ public class PhoneProfilesService extends Service {
         final Context appContext = getApplicationContext();
 
         if (onlyStart) {
+            if (startOnBoot || startOnPackageReplace) {
+                // restart first start
+                serviceHasFirstStart = false;
+            }
 
             //if (startOnPackageReplace) {
             //  moved to PackageReplacedReceiver
