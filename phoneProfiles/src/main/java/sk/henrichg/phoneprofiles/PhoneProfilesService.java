@@ -128,9 +128,11 @@ public class PhoneProfilesService extends Service {
             //noinspection deprecation
             keyguardLock = keyguardManager.newKeyguardLock("phoneProfiles.keyguardLock");
 
-        if (PPApplication.getApplicationStarted(getApplicationContext(), false))
+        /*if (PPApplication.getApplicationStarted(getApplicationContext(), false))
             doForFirstStart(null);
         else
+            stopSelf();*/
+        if (!PPApplication.getApplicationStarted(getApplicationContext(), false))
             stopSelf();
     }
 
@@ -241,7 +243,7 @@ public class PhoneProfilesService extends Service {
 
                     GlobalGUIRoutines.setLanguage(appContext);
 
-                    if (_startOnBoot || _startOnPackageReplace) {
+                    if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
                         // restart first start
                         serviceHasFirstStart = false;
                     }
