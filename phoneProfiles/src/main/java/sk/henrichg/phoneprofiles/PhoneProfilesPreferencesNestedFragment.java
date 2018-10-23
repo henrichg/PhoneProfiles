@@ -90,9 +90,11 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         //PreferenceScreen systemCategory = (PreferenceScreen) findPreference("categorySystem");
         if (!ActivateProfileHelper.getMergedRingNotificationVolumes(getActivity().getApplicationContext())) {
             Preference preference = findPreference(ApplicationPreferences.PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES);
-            if (preference != null)
+            if (preference != null) {
                 preference.setEnabled(false);
+                preference.setSummary(R.string.phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary);
                 //systemCategory.removePreference(preference);
+            }
         }
         /*else {
             Preference preference = findPreference(ApplicationPreferences.PREF_APPLICATION_RINGER_NOTIFICATION_VOLUMES_UNLINKED_INFO);
