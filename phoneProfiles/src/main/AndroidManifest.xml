@@ -49,9 +49,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="com.android.vending.BILLING"/>
 
-    <!-- required for Crashlytics -->
-    <!--<uses-permission android:name="android.permission.INTERNET"/>-->
-
     <uses-permission android:name="sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION" />
 
     <!-- for Samsung SLook -->
