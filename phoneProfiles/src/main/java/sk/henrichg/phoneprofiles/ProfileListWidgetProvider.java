@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.RemoteViews;
 
 @SuppressLint("NewApi")
@@ -108,6 +109,9 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         if (applicationWidgetListBackground.equals("100")) alpha = 0xFF;
         boolean roundedCorners = ApplicationPreferences.applicationWidgetListRoundedCorners(context);
         if (roundedCorners) {
+            widget.setViewVisibility(R.id.widget_profile_list_background, View.VISIBLE);
+            widget.setViewVisibility(R.id.widget_profile_list_not_rounded_border, View.GONE);
+            widget.setViewVisibility(R.id.widget_profile_list_rounded_border, View.VISIBLE);
             widget.setInt(R.id.widget_profile_list_root, "setBackgroundColor", 0x00000000);
             widget.setInt(R.id.widget_profile_list_background, "setColorFilter", Color.argb(0xFF, red, green, blue));
             //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
@@ -116,12 +120,15 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
             //    widget.setInt(R.id.widget_profile_list_background, "setAlpha", alpha);
         }
         else {
+            widget.setViewVisibility(R.id.widget_profile_list_background, View.GONE);
+            widget.setViewVisibility(R.id.widget_profile_list_rounded_border, View.GONE);
+            widget.setViewVisibility(R.id.widget_profile_list_not_rounded_border, View.VISIBLE);
             widget.setInt(R.id.widget_profile_list_root, "setBackgroundColor", Color.argb(alpha, red, green, blue));
-            widget.setInt(R.id.widget_profile_list_background, "setColorFilter", 0x00000000);
+            /*widget.setInt(R.id.widget_profile_list_background, "setColorFilter", 0x00000000);
             //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
                 widget.setInt(R.id.widget_profile_list_background, "setImageAlpha", 0);
             //else
-            //    widget.setInt(R.id.widget_profile_list_background, "setAlpha", 0);
+            //    widget.setInt(R.id.widget_profile_list_background, "setAlpha", 0);*/
         }
 
         // header
