@@ -1251,6 +1251,8 @@
     <string name="altype_applicationUpgrade">application upgrade</string>
     <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary">Your device does not have linked volumes for ringtone and notifications.</string>
     <string name="phone_profiles_pref_category_widget_one_row">Widget-single row</string>
+    <string name="phone_profiles_pref_applicationWidgetLightnessBorder">Border lightness</string>
+    <string name="phone_profiles_pref_applicationWidgetIconLightnessBorder">Border lightness (widget)</string>
 
     <string name="extender_app_name">PhoneProfilesPlusExtender</string>
     <string name="extender_accessibility_service_name">PhoneProfilesPlusExtender</string>

@@ -107,6 +107,17 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         if (applicationWidgetListBackground.equals("50")) alpha = 0x80;
         if (applicationWidgetListBackground.equals("75")) alpha = 0xC0;
         if (applicationWidgetListBackground.equals("100")) alpha = 0xFF;
+        int redBorder = 0xFF;
+        int greenBorder;
+        int blueBorder;
+        String applicationWidgetListLightnessBorder = ApplicationPreferences.applicationWidgetListLightnessBorder(context);
+        if (applicationWidgetListLightnessBorder.equals("0")) redBorder = 0x00;
+        if (applicationWidgetListLightnessBorder.equals("25")) redBorder = 0x40;
+        if (applicationWidgetListLightnessBorder.equals("50")) redBorder = 0x80;
+        if (applicationWidgetListLightnessBorder.equals("75")) redBorder = 0xC0;
+        //if (applicationWidgetListLightnessBorder.equals("100")) redBorder = 0xFF;
+        greenBorder = redBorder;
+        blueBorder = redBorder;
         boolean roundedCorners = ApplicationPreferences.applicationWidgetListRoundedCorners(context);
         if (roundedCorners) {
             widget.setViewVisibility(R.id.widget_profile_list_background, View.VISIBLE);
@@ -118,6 +129,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                 widget.setInt(R.id.widget_profile_list_background, "setImageAlpha", alpha);
             //else
             //    widget.setInt(R.id.widget_profile_list_background, "setAlpha", alpha);
+            widget.setInt(R.id.widget_profile_list_rounded_border, "setColorFilter", Color.argb(0xFF, redBorder, greenBorder, blueBorder));
         }
         else {
             widget.setViewVisibility(R.id.widget_profile_list_background, View.GONE);
@@ -129,6 +141,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                 widget.setInt(R.id.widget_profile_list_background, "setImageAlpha", 0);
             //else
             //    widget.setInt(R.id.widget_profile_list_background, "setAlpha", 0);*/
+            widget.setInt(R.id.widget_profile_list_not_rounded_border, "setColorFilter", Color.argb(0xFF, redBorder, greenBorder, blueBorder));
         }
 
         // header
