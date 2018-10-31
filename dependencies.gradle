@@ -5,10 +5,11 @@
 // 2800 = updated privacy policy
 // 2900 = Wi-Fi AP = Toggle is not supported fro Android 8+
 // 3000 = show Important info on first application start
+// 3100 = separated preferences for single row widget
 
 ext.ppVersions = [
-    publishVersion: '4.6.3.6',
-    publishVersionCode: 3070,
+    publishVersion: '4.6.4b',
+    publishVersionCode: 3071,
 
     minSdk: 19,
     targetSdk: 27,
