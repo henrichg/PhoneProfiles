@@ -1175,7 +1175,7 @@ public class PPApplication extends Application {
                     });
                 }
 
-                PPApplication.initRoot();
+                //PPApplication.initRoot();
             }
 
             Permissions.setAllShowRequestPermissions(context.getApplicationContext(), true);

@@ -222,7 +222,7 @@ public class PhoneProfilesService extends Service {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart.2 START");
+                    PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 START");
 
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
@@ -231,7 +231,8 @@ public class PhoneProfilesService extends Service {
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
-                    PPApplication.initRoot();
+                    // is called from PPApplication
+                    //PPApplication.initRoot();
                     if (!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) {
                         // grant root
                         PPApplication.isRootGranted();
@@ -250,22 +251,23 @@ public class PhoneProfilesService extends Service {
 
                     //if (PPApplication.getApplicationStarted(appContext, false)) {
                     if (serviceHasFirstStart) {
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart", " application already started");
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application already started");
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
                                 wakeLock.release();
                             } catch (Exception ignored) {}
                         }
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart.2 END");
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
                         return;
                     }
 
-                    PPApplication.createNotificationChannels(appContext);
-
                     DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
 
+                    PPApplication.createNotificationChannels(appContext);
+                    dataWrapper.setDynamicLauncherShortcuts();
+
                     if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart", " application not started, start it");
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application not started, start it");
 
                         //Permissions.clearMergedPermissions(appContext);
 
@@ -297,16 +299,14 @@ public class PhoneProfilesService extends Service {
                         Profile.setActivatedProfileForDuration(appContext, 0);
 
                         LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
-                    }
 
-                    dataWrapper.setDynamicLauncherShortcuts();
+                        if (PhoneProfilesService.getInstance() != null)
+                            PhoneProfilesService.getInstance().registerReceivers();
+                        AboutApplicationJob.scheduleJob(appContext, true);
+                    //}
 
-                    if (PhoneProfilesService.getInstance() != null)
-                        PhoneProfilesService.getInstance().registerReceivers();
-                    AboutApplicationJob.scheduleJob(getApplicationContext(), true);
-
-                    if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
-                        PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart", "application started");
+                    //if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
+                        PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
 
                         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                     }
@@ -315,7 +315,7 @@ public class PhoneProfilesService extends Service {
 
                     serviceHasFirstStart = true;
 
-                    PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart.2 END");
+                    PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
 
                     if ((wakeLock != null) && wakeLock.isHeld()) {
                         try {
