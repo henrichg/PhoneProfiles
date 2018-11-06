@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -196,7 +197,10 @@ public class Profile {
         defaultValuesString.put("prf_pref_deviceNFC", "0");
         defaultValuesString.put("prf_pref_deviceScreenTimeout", "0");
         defaultValuesString.put("prf_pref_deviceKeyguard", "0");
-        defaultValuesString.put("prf_pref_deviceBrightness", "50|1|1|0");
+        if (Build.VERSION.SDK_INT >= 28)
+            defaultValuesString.put("prf_pref_deviceBrightness", "24|1|1|0");
+        else
+            defaultValuesString.put("prf_pref_deviceBrightness", "50|1|1|0");
         defaultValuesString.put("prf_pref_deviceBrightness_withoutLevel", "|1|1|0");
         defaultValuesString.put("prf_pref_deviceAutoRotation", "0");
         defaultValuesString.put("prf_pref_devicePowerSaveMode", "0");
@@ -1386,12 +1390,20 @@ public class Profile {
 
         int value;
 
-        if (percentage == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)
+        if (percentage == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET) {
             // brightness is not set, change it to default manual brightness value
+            int defaultValue = 128;
+            if (Build.VERSION.SDK_INT >= 28)
+                defaultValue = 24;
             value = Settings.System.getInt(context.getContentResolver(),
-                                            Settings.System.SCREEN_BRIGHTNESS, 128);
-        else
-            value = Math.round((float)(maximumValue - minimumValue) / 100 * percentage) + minimumValue;
+                    Settings.System.SCREEN_BRIGHTNESS, defaultValue);
+        }
+        else {
+            if (Build.VERSION.SDK_INT < 28)
+                value = Math.round((float) (maximumValue - minimumValue) / 100 * percentage) + minimumValue;
+            else
+                value = percentage;
+        }
 
         return value;
     }
@@ -1410,8 +1422,12 @@ public class Profile {
             // brightness is not set, change it to default adaptive brightness value
             value = Settings.System.getFloat(context.getContentResolver(),
                                 ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME, 0f);
-        else
-            value = (percentage - 50) / 50f;
+        else {
+            if (Build.VERSION.SDK_INT < 28)
+                value = (percentage - 50) / 50f;
+            else
+                value = (percentage - 128) / 128f;
+        }
 
         return value;
     }
@@ -1429,8 +1445,12 @@ public class Profile {
         long percentage;
         if (value == BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)
             percentage = value; // keep BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET
-        else
-            percentage = Math.round((float)(value-minValue) / (maxValue - minValue) * 100.0);
+        else {
+            if (Build.VERSION.SDK_INT < 28)
+                percentage = Math.round((float) (value - minValue) / (maxValue - minValue) * 100.0);
+            else
+                percentage = value;
+        }
 
         return percentage;
     }
