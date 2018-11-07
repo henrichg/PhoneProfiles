@@ -798,34 +798,18 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             else
                 preference.setSummary(null);
         }
-        /*else if (preference instanceof RingtonePreference) {
-            // For ringtone preferences, look up the correct display value
-            // using RingtoneManager.
-            if (TextUtils.isEmpty(stringValue)) {
-                // Empty values correspond to 'silent' (no ringtone).
-                preference.setSummary(R.string.ringtone_silent);
-            } else {
-                Ringtone ringtone = RingtoneManager.getRingtone(
-                        preference.getContext(), Uri.parse(stringValue));
-
-                if (ringtone == null) {
-                    // Clear the summary if there was a lookup error.
-                    preference.setSummary(null);
-                } else {
-                    // Set the summary to reflect the new ringtone display
-                    // name.
-                    String name = ringtone
-                            .getTitle(preference.getContext());
-                    preference.setSummary(name);
-                }
-            }
-
-        }*/
+        else
+        //noinspection StatementWithEmptyBody
+        if (preference instanceof RingtonePreference) {
+            // keep summary from preference
+        }
         else {
-            // For all other preferences, set the summary to the value's
-            // simple string representation.
-            //preference.setSummary(preference.toString());
-            preference.setSummary(stringValue);
+            if (!stringValue.isEmpty()) {
+                // For all other preferences, set the summary to the value's
+                // simple string representation.
+                //preference.setSummary(preference.toString());
+                preference.setSummary(stringValue);
+            }
         }
         if (key.equals(ApplicationPreferences.PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES)) {
             Preference _preference = prefMng.findPreference(ApplicationPreferences.PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES);
@@ -866,6 +850,51 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             if (_preference != null) {
                 boolean colorful = preferences.getString(key, "0").equals("1");
                 _preference.setEnabled(colorful);
+            }
+        }
+        /*if (key.equals(PREF_GRANT_ROOT_PERMISSION)) {
+            if (PPApplication.isRooted()) {
+                String summary;
+                if (PPApplication.isRootGranted(true))
+                    summary = getString(R.string.permission_granted);
+                else
+                    summary = getString(R.string.permission_not_granted);
+                preference.setSummary(summary);
+            }
+        }*/
+        if (Build.VERSION.SDK_INT >= 23) {
+            /*if (key.equals(PREF_APPLICATION_PERMISSIONS)) {
+                // not possible to get granted runtime permission groups :-(
+            }*/
+            if (key.equals(PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS)) {
+                String summary = "";
+                if (Settings.System.canWrite(getActivity().getApplicationContext()))
+                    summary = getString(R.string.permission_granted);
+                else {
+                    summary = getString(R.string.permission_not_granted);
+                    summary = summary + "\n\n" + getString(R.string.phone_profiles_pref_writeSystemSettingPermissions_summary);
+                }
+                preference.setSummary(summary);
+            }
+            if (key.equals(PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS)) {
+                String summary = "";
+                if (Permissions.checkAccessNotificationPolicy(getActivity().getApplicationContext()))
+                    summary = getString(R.string.permission_granted);
+                else {
+                    summary = getString(R.string.permission_not_granted);
+                    summary = summary + "\n\n" + getString(R.string.phone_profiles_pref_accessNotificationPolicyPermissions_summary);
+                }
+                preference.setSummary(summary);
+            }
+            if (key.equals(PREF_DRAW_OVERLAYS_PERMISSIONS)) {
+                String summary = "";
+                if (Settings.canDrawOverlays(getActivity().getApplicationContext()))
+                    summary = getString(R.string.permission_granted);
+                else {
+                    summary = getString(R.string.permission_not_granted);
+                    summary = summary + "\n\n" + getString(R.string.phone_profiles_pref_drawOverlaysPermissions_summary);
+                }
+                preference.setSummary(summary);
             }
         }
     }
