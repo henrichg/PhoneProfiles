@@ -130,6 +130,17 @@ public class PhoneProfilesPreferencesFragment extends PhoneProfilesPreferencesNe
         setSummary(ApplicationPreferences.PREF_APPLICATION_WIDGET_LIST_LIGHTNESS_BORDER);
         setSummary(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_LIGHTNESS_BORDER);
         setSummary(ApplicationPreferences.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_BORDER);
+        setSummary(ApplicationPreferences.PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_BATTERY_OPTIMIZATION_SYSTEM_SETTINGS);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_APPLICATION_POWER_MANAGER);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_GRANT_ROOT_PERMISSION);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_DRAW_OVERLAYS_PERMISSIONS);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_APPLICATION_PERMISSIONS);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_AUTOSTART_MANAGER);
+        setSummary(PhoneProfilesPreferencesNestedFragment.PREF_NOTIFICATION_SYSTEM_SETTINGS);
+        setSummary(ApplicationPreferences.PREF_NOTIFICATION_PREF_INDICATOR);
     }
 
     @Override

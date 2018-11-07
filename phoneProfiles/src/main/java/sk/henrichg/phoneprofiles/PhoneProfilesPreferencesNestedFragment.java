@@ -35,22 +35,22 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
     PreferenceManager prefMng;
     private SharedPreferences preferences;
 
-    private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
+    static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
     private static final int RESULT_APPLICATION_PERMISSIONS = 1990;
-    private static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "permissionsWriteSystemSettingsPermissions";
+    static final String PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS = "permissionsWriteSystemSettingsPermissions";
     private static final int RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS = 1991;
     private static final String PREF_APPLICATION_LANGUAGE_24 = "applicationLanguage24";
     //static final int RESULT_LOCALE_SETTINGS = 1992;
-    private static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "permissionsAccessNotificationPolicyPermissions";
+    static final String PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = "permissionsAccessNotificationPolicyPermissions";
     private static final int RESULT_ACCESS_NOTIFICATION_POLICY_PERMISSIONS = 1993;
-    private static final String PREF_DRAW_OVERLAYS_PERMISSIONS = "permissionsDrawOverlaysPermissions";
+    static final String PREF_DRAW_OVERLAYS_PERMISSIONS = "permissionsDrawOverlaysPermissions";
     private static final int RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS = 1998;
-    private static final String PREF_GRANT_ROOT_PERMISSION = "permissionsGrantRootPermission";
+    static final String PREF_GRANT_ROOT_PERMISSION = "permissionsGrantRootPermission";
 
-    private static final String PREF_AUTOSTART_MANAGER = "applicationAutoStartManager";
-    private static final String PREF_NOTIFICATION_SYSTEM_SETTINGS = "notificationSystemSettings";
-    private static final String PREF_APPLICATION_POWER_MANAGER = "applicationPowerManager";
-    private static final String PREF_BATTERY_OPTIMIZATION_SYSTEM_SETTINGS = "applicationBatteryOptimization";
+    static final String PREF_AUTOSTART_MANAGER = "applicationAutoStartManager";
+    static final String PREF_NOTIFICATION_SYSTEM_SETTINGS = "notificationSystemSettings";
+    static final String PREF_APPLICATION_POWER_MANAGER = "applicationPowerManager";
+    static final String PREF_BATTERY_OPTIMIZATION_SYSTEM_SETTINGS = "applicationBatteryOptimization";
 
     @Override
     public int addPreferencesFromResource() {
