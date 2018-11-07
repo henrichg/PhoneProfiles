@@ -909,7 +909,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         if (key.equals(ApplicationPreferences.PREF_APPLICATION_LANGUAGE) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_THEME)) {
             categoryPreference = "applicationInterfaceCategory";
-            if (!summary.isEmpty()) summary = summary +" • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationLanguage);
             if (!summary.isEmpty()) summary = summary +" • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationTheme);
@@ -917,7 +916,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         if (key.equals(ApplicationPreferences.PREF_APPLICATION_START_ON_BOOT) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_ACTIVATE)) {
             categoryPreference = "categoryApplicationStart";
-            if (!summary.isEmpty()) summary = summary +" • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationStartOnBoot);
             if (KillerManager.isActionAvailable(getActivity(), KillerManager.Actions.ACTION_AUTOSTART)) {
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -931,7 +929,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(PREF_BATTERY_OPTIMIZATION_SYSTEM_SETTINGS) ||
                 key.equals(PREF_APPLICATION_POWER_MANAGER)) {
             categoryPreference = "categorySystem";
-            if (!summary.isEmpty()) summary = summary +" • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationUnlinkRingerNotificationVolumes);
             if (!summary.isEmpty()) summary = summary +" • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes);
@@ -951,7 +948,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(PREF_APPLICATION_PERMISSIONS)) {
             categoryPreference = "categoryPermissions";
             if (PPApplication.isRooted()) {
-                if (!summary.isEmpty()) summary = summary + " • ";
                 summary = summary + getString(R.string.phone_profiles_pref_grantRootPermission);
             }
             if (Build.VERSION.SDK_INT >= 23) {
@@ -973,7 +969,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(ApplicationPreferences.PREF_NOTIFICATION_PREF_INDICATOR) ||
                 key.equals(ApplicationPreferences.PREF_NOTIFICATION_TEXT_COLOR)) {
             categoryPreference = "categoryNotifications";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_notificationsToast);
             if (Build.VERSION.SDK_INT >= 26) {
                 if (!summary.isEmpty()) summary = summary + " • ";
@@ -995,7 +990,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         if (key.equals(ApplicationPreferences.PREF_APPLICATION_BACKGROUND_PROFILE) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_ALERT)) {
             categoryPreference = "profileActivationCategory";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationEventBackgroundProfile);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationAlert);
@@ -1005,7 +999,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(ApplicationPreferences.PREF_APPLICATION_CLOSE) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT)) {
             categoryPreference = "categoryActivator";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationPrefIndicator);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationHeader);
@@ -1017,7 +1010,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         if (key.equals(ApplicationPreferences.PREF_APPLICATION_EDITOR_PREF_INDICATOR) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER)) {
             categoryPreference = "categoryEditor";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationPrefIndicator);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationHeader);
@@ -1035,7 +1027,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_LIST_ICON_COLOR) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_LIST_ICON_LIGHTNESS)) {
             categoryPreference = "categoryWidgetList";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationPrefIndicator);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationHeader);
@@ -1071,7 +1062,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_ICON_COLOR) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_ICON_LIGHTNESS)) {
             categoryPreference = "categoryWidgetOneRow";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationPrefIndicator);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationWidgetBackgroundType);
@@ -1103,7 +1093,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_ICON_COLOR) ||
                 key.equals(ApplicationPreferences.PREF_APPLICATION_WIDGET_ICON_LIGHTNESS)) {
             categoryPreference = "categoryWidgetIcon";
-            if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationWidgetIconBackgroundType);
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + getString(R.string.phone_profiles_pref_applicationWidgetIconBackground);
@@ -1134,7 +1123,6 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     key.equals(ApplicationPreferences.PREF_APPLICATION_SAMSUNG_EDGE_ICON_COLOR) ||
                     key.equals(ApplicationPreferences.PREF_APPLICATION_SAMSUNG_EDGE_ICON_LIGHTNESS)) {
                 categoryPreference = "categorySamsungEdgePanel";
-                if (!summary.isEmpty()) summary = summary + " • ";
                 summary = summary + getString(R.string.phone_profiles_pref_applicationHeader);
                 if (!summary.isEmpty()) summary = summary + " • ";
                 summary = summary + getString(R.string.phone_profiles_pref_applicationWidgetBackgroundType);
