@@ -53,6 +53,7 @@ public class BrightnessDialogPreference extends
     private int changeLevel;
 
     @SuppressWarnings("FieldCanBeLocal")
+    int defaultValue = 128;
     private int maximumValue = 100;
     private final int minimumValue = 0;
     private final int stepSize = 1;
@@ -94,7 +95,6 @@ public class BrightnessDialogPreference extends
                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, _context).allowed
                         == PreferenceAllowed.PREFERENCE_ALLOWED);
 
-        int defaultValue = 128;
         if (Build.VERSION.SDK_INT >= 28) {
             defaultValue = 24;
             maximumValue = 255;
@@ -428,7 +428,7 @@ public class BrightnessDialogPreference extends
         }
         else {
             // set state
-            value = 50;
+            value = this.defaultValue;
             noChange = 1;
             automatic = 1;
             sharedProfile = 0;
@@ -450,13 +450,16 @@ public class BrightnessDialogPreference extends
         String[] splits = sValue.split("\\|");
         try {
             value = Integer.parseInt(splits[0]);
-            if (value == Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET)
+            if (value == Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET) {
                 // brightness is not set, change it to default adaptive brightness value
-                value = Math.round(savedAdaptiveBrightness * 50 + 50);
-            if ((value < 0) || (value > 100))
-                value = 50;
+                int halfValue = maximumValue / 2;
+                value = Math.round(savedAdaptiveBrightness * halfValue + halfValue);
+            }
+            if ((value < 0) || (value > maximumValue)) {
+                value = defaultValue;
+            }
         } catch (Exception e) {
-            value = 50;
+            value = defaultValue;
         }
         value = value - minimumValue;
         try {
@@ -509,7 +512,7 @@ public class BrightnessDialogPreference extends
                 prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_manual_brightness);
 
             if ((changeLevel == 1) && (adaptiveAllowed || automatic == 0)) {
-                String _value = String.valueOf(value) + " / 100";
+                String _value = String.valueOf(value) + " / " + maximumValue;
                 prefVolumeDataSummary = prefVolumeDataSummary + "; " + _value;
             }
         }
