@@ -697,7 +697,7 @@ public class PPApplication extends Application {
 
     // root -----------------------------------------------------
 
-    static synchronized void initRoot() {
+    private static synchronized void initRoot() {
         synchronized (PPApplication.rootMutex) {
             rootMutex.rootChecked = false;
             rootMutex.rooted = false;
@@ -757,12 +757,12 @@ public class PPApplication extends Application {
         }
     }
 
-    static boolean isRootGranted(boolean onlyCheck)
+    static void isRootGranted(/*boolean onlyCheck*/)
     {
         RootShell.debugMode = rootToolsDebug;
 
-        if (onlyCheck && rootMutex.grantRootChecked)
-            return rootMutex.rootGranted;
+        //if (onlyCheck && rootMutex.grantRootChecked)
+        //    return rootMutex.rootGranted;
 
         if (isRooted()) {
             synchronized (PPApplication.rootMutex) {
@@ -771,24 +771,24 @@ public class PPApplication extends Application {
                     if (RootTools.isAccessGiven()) {
                         // root is granted
                         PPApplication.logE("PPApplication.isRootGranted", "root granted");
-                        rootMutex.rootGranted = true;
-                        rootMutex.grantRootChecked = true;
+                        //rootMutex.rootGranted = true;
+                        //rootMutex.grantRootChecked = true;
                     } else {
                         // grant denied
                         PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
-                        rootMutex.rootGranted = false;
-                        rootMutex.grantRootChecked = true;
+                        //rootMutex.rootGranted = false;
+                        //rootMutex.grantRootChecked = true;
                     }
                 } catch (Exception e) {
                     Log.e("PPApplication.isRootGranted", Log.getStackTraceString(e));
-                    rootMutex.rootGranted = false;
+                    //rootMutex.rootGranted = false;
                 }
-                return rootMutex.rootGranted;
+                //return rootMutex.rootGranted;
             }
         } else {
             PPApplication.logE("PPApplication.isRootGranted", "not rooted");
         }
-        return false;
+        //return false;
     }
 
     static boolean settingsBinaryExists()
