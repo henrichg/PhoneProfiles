@@ -75,7 +75,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
 
         Toolbar toolbar = getActivity().findViewById(R.id.mp_toolbar);
         Bundle bundle = getArguments();
-        if (bundle.getBoolean(PreferenceFragment.EXTRA_NESTED, false))
+        boolean nestedFragment = bundle.getBoolean(PreferenceFragment.EXTRA_NESTED, false);
+        if (nestedFragment)
             toolbar.setSubtitle(getString(R.string.title_activity_phone_profiles_preferences));
         else
             toolbar.setSubtitle(null);
@@ -87,32 +88,35 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
         preferences = prefMng.getSharedPreferences();
         preferences.registerOnSharedPreferenceChangeListener(this);
 
-        PreferenceScreen preferenceCategoryScreen;
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("applicationInterfaceCategory");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryApplicationStart");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categorySystem");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryPermissions");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryNotifications");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("profileActivationCategory");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryActivator");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryEditor");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryWidgetList");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryWidgetOneRow");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        preferenceCategoryScreen = (PreferenceScreen)prefMng.findPreference("categoryWidgetIcon");
-        if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
-        if ((PPApplication.sLook != null) && PPApplication.sLookCocktailPanelEnabled) {
-            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categorySamsungEdgePanel");
+        if (!nestedFragment) {
+            PreferenceScreen preferenceCategoryScreen;
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("applicationInterfaceCategory");
             if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryApplicationStart");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categorySystem");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryPermissions");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryNotifications");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("profileActivationCategory");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryActivator");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryEditor");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryWidgetList");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryWidgetOneRow");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categoryWidgetIcon");
+            if (preferenceCategoryScreen != null) setCategorySummary(preferenceCategoryScreen, "");
+            if ((PPApplication.sLook != null) && PPApplication.sLookCocktailPanelEnabled) {
+                preferenceCategoryScreen = (PreferenceScreen) prefMng.findPreference("categorySamsungEdgePanel");
+                if (preferenceCategoryScreen != null)
+                    setCategorySummary(preferenceCategoryScreen, "");
+            }
         }
 
         //PreferenceScreen systemCategory = (PreferenceScreen) findPreference("categorySystem");
