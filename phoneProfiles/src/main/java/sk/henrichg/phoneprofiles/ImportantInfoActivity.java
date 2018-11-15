@@ -369,7 +369,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         infoTextGrant1Command.setText(spannable);
 
         AboutApplicationActivity.emailMe((TextView) findViewById(R.id.activity_info_notification_contact),
-                getString(R.string.important_info_contact), true, this);
+                getString(R.string.important_info_contact), "", "", true, activity);
 
         int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
 
