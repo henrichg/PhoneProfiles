@@ -59,6 +59,9 @@ public class BootUpReceiver extends BroadcastReceiver {
                         serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_BOOT, true);
                         PPApplication.startPPService(appContext, serviceIntent);
                     }
+                    else {
+                        PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false, true);
+                    }
 
                     if ((wakeLock != null) && wakeLock.isHeld()) {
                         try {
