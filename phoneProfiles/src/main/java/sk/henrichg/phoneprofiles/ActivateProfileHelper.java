@@ -101,7 +101,7 @@ class ActivateProfileHelper {
         // setup network type
         // in array.xml, networkTypeGSMValues are 100+ values
         if (profile._deviceNetworkType >= 100) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
             {
                 // in array.xml, networkTypeGSMValues are 100+ values
                 setPreferredNetworkType(context, profile._deviceNetworkType - 100);
@@ -113,7 +113,7 @@ class ActivateProfileHelper {
 
         // setup mobile data
         if (profile._deviceMobileData != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 boolean _isMobileData = isMobileData(context);
                 boolean _setMobileData = false;
                 switch (profile._deviceMobileData) {
@@ -146,7 +146,7 @@ class ActivateProfileHelper {
         // setup WiFi AP
         boolean canChangeWifi = true;
         if (profile._deviceWiFiAP != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI_AP, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 WifiApManager wifiApManager = null;
                 try {
                     wifiApManager = new WifiApManager(context);
@@ -189,7 +189,7 @@ class ActivateProfileHelper {
         if (canChangeWifi) {
             // setup WiFi
             if (profile._deviceWiFi != 0) {
-                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_WIFI, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                     boolean isWifiAPEnabled = WifiApManager.isWifiAPEnabled(context);
                     if ((!isWifiAPEnabled) || (profile._deviceWiFi == 4)) { // only when wifi AP is not enabled, change wifi
                         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -233,7 +233,7 @@ class ActivateProfileHelper {
             }
 
             // connect to SSID
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 if (!profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
                     if (Permissions.checkLocation(context)) {
                         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -294,7 +294,7 @@ class ActivateProfileHelper {
 
         // setup bluetooth
         if (profile._deviceBluetooth != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 BluetoothAdapter bluetoothAdapter;
                 /*if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -338,7 +338,7 @@ class ActivateProfileHelper {
 
         // setup GPS
         if (profile._deviceGPS != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_GPS, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 boolean isEnabled = false;
                 boolean ok = true;
                 /*if (android.os.Build.VERSION.SDK_INT < 19)
@@ -372,7 +372,7 @@ class ActivateProfileHelper {
 
         // setup NFC
         if (profile._deviceNFC != 0) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NFC, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
                 if (nfcAdapter != null) {
                     switch (profile._deviceNFC) {
@@ -414,7 +414,7 @@ class ActivateProfileHelper {
                 boolean _isAirplaneMode = false;
                 boolean _setAirplaneMode = false;
                 if (profile._deviceAirplaneMode != 0) {
-                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, null, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, null, false, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                         _isAirplaneMode = isAirplaneMode(appContext);
                         switch (profile._deviceAirplaneMode) {
                             case 1:
@@ -716,7 +716,7 @@ class ActivateProfileHelper {
                     }
                     else {
                         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                                (PPApplication.isRooted())) {
+                                (PPApplication.isRooted(false))) {
                             synchronized (PPApplication.rootMutex) {
                                 String command1 = "settings put global audio_safe_volume_state 2";
                                 Command command = new Command(0, false, command1);
@@ -811,7 +811,7 @@ class ActivateProfileHelper {
         }
 
         if (lValue != -1) {
-            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, context).allowed
+            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, false, context).allowed
                     == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 //Log.e("ActivateProfileHelper.setVibrateWhenRinging", "1");
                 if (Permissions.checkVibrateWhenRinging(context)) {
@@ -827,7 +827,7 @@ class ActivateProfileHelper {
                         } catch (Exception ee) {
                             Log.e("ActivateProfileHelper.setVibrateWhenRinging", Log.getStackTraceString(ee));
                             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                                    (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
+                                    (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
                                 //Log.e("ActivateProfileHelper.setVibrateWhenRinging", "5");
                                 synchronized (PPApplication.rootMutex) {
                                     String command1 = "settings put system " + Settings.System.VIBRATE_WHEN_RINGING + " " + lValue;
@@ -982,26 +982,26 @@ class ActivateProfileHelper {
     }
 
     private static void setNotificationLed(Context context, final int value) {
-        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, null, context).allowed
-                == PreferenceAllowed.PREFERENCE_ALLOWED) {
-            if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
-                Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE, value);
-            else {
-                if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                        (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
-                    final Context appContext = context.getApplicationContext();
-                    PPApplication.startHandlerThreadNotificationLed();
-                    final Handler handler = new Handler(PPApplication.handlerThreadNotificationLed.getLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                            PowerManager.WakeLock wakeLock = null;
-                            if (powerManager != null) {
-                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":ActivateProfileHelper.setHeadsUpNotifications");
-                                wakeLock.acquire(10 * 60 * 1000);
-                            }
+        final Context appContext = context.getApplicationContext();
+        PPApplication.startHandlerThreadNotificationLed();
+        final Handler handler = new Handler(PPApplication.handlerThreadNotificationLed.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":ActivateProfileHelper.setHeadsUpNotifications");
+                    wakeLock.acquire(10 * 60 * 1000);
+                }
 
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_NOTIFICATION_LED, null, false, appContext).allowed
+                        == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                    if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
+                        Settings.System.putInt(appContext.getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE, value);
+                    else {
+                        if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
+                                (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
                             synchronized (PPApplication.rootMutex) {
                                 String command1 = "settings put system " + Settings.System.NOTIFICATION_LIGHT_PULSE + " " + value;
                                 //if (PPApplication.isSELinuxEnforcing())
@@ -1017,68 +1017,68 @@ class ActivateProfileHelper {
                                     Log.e("ActivateProfileHelper.setNotificationLed", Log.getStackTraceString(e));
                                 }
                             }
-
-                            if ((wakeLock != null) && wakeLock.isHeld()) {
-                                try {
-                                    wakeLock.release();
-                                } catch (Exception ignored) {}
-                            }
                         }
-                    });
+                    }
+                }
+
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
                 }
             }
-        }
+        });
     }
 
     private static void setHeadsUpNotifications(Context context, final int value) {
-        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, null, context).allowed
-                == PreferenceAllowed.PREFERENCE_ALLOWED) {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                    Settings.Global.putInt(context.getContentResolver(), "heads_up_notifications_enabled", value);
+        final Context appContext = context.getApplicationContext();
+        PPApplication.startHandlerThreadHeadsUpNotifications();
+        final Handler handler = new Handler(PPApplication.handlerThreadHeadsUpNotifications.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = null;
+                if (powerManager != null) {
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":ActivateProfileHelper.setHeadsUpNotifications");
+                    wakeLock.acquire(10 * 60 * 1000);
                 }
-                else
-                if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                        (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
-                    final Context appContext = context.getApplicationContext();
-                    PPApplication.startHandlerThreadHeadsUpNotifications();
-                    final Handler handler = new Handler(PPApplication.handlerThreadHeadsUpNotifications.getLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                            PowerManager.WakeLock wakeLock = null;
-                            if (powerManager != null) {
-                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":ActivateProfileHelper.setHeadsUpNotifications");
-                                wakeLock.acquire(10 * 60 * 1000);
-                            }
 
-                            synchronized (PPApplication.rootMutex) {
-                                String command1 = "settings put global " + "heads_up_notifications_enabled" + " " + value;
-                                //if (PPApplication.isSELinuxEnforcing())
-                                //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
-                                Command command = new Command(0, false, command1); //, command2);
-                                try {
-                                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                                    PPApplication.commandWait(command);
-                                /*} catch (RootDeniedException e) {
-                                    PPApplication.rootMutex.rootGranted = false;
-                                    Log.e("ActivateProfileHelper.setHeadsUpNotifications", Log.getStackTraceString(e));*/
-                                } catch (Exception e) {
-                                    Log.e("ActivateProfileHelper.setHeadsUpNotifications", Log.getStackTraceString(e));
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, null, false, appContext).allowed
+                        == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                    if (android.os.Build.VERSION.SDK_INT >= 21) {
+                        if (Permissions.hasPermission(appContext, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                            Settings.Global.putInt(appContext.getContentResolver(), "heads_up_notifications_enabled", value);
+                        } else {
+                            if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
+                                    (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
+                                synchronized (PPApplication.rootMutex) {
+                                    String command1 = "settings put global " + "heads_up_notifications_enabled" + " " + value;
+                                    //if (PPApplication.isSELinuxEnforcing())
+                                    //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
+                                    Command command = new Command(0, false, command1); //, command2);
+                                    try {
+                                        RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                        PPApplication.commandWait(command);
+                                    /*} catch (RootDeniedException e) {
+                                        PPApplication.rootMutex.rootGranted = false;
+                                        Log.e("ActivateProfileHelper.setHeadsUpNotifications", Log.getStackTraceString(e));*/
+                                    } catch (Exception e) {
+                                        Log.e("ActivateProfileHelper.setHeadsUpNotifications", Log.getStackTraceString(e));
+                                    }
                                 }
                             }
-
-                            if ((wakeLock != null) && wakeLock.isHeld()) {
-                                try {
-                                    wakeLock.release();
-                                } catch (Exception ignored) {}
-                            }
                         }
-                    });
+                    }
+                }
+
+                if ((wakeLock != null) && wakeLock.isHeld()) {
+                    try {
+                        wakeLock.release();
+                    } catch (Exception ignored) {}
                 }
             }
-        }
+        });
     }
 
     private static void changeRingerModeForVolumeEqual0(Profile profile, AudioManager audioManager) {
@@ -1534,7 +1534,7 @@ class ActivateProfileHelper {
 
         PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
         KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
         {
             if (profile._deviceMobileDataPrefs == 1)
             {
@@ -1597,7 +1597,7 @@ class ActivateProfileHelper {
             }
         }
 
-        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, null, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
+        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
         {
             if (profile._deviceNetworkTypePrefs == 1)
             {
@@ -1684,7 +1684,7 @@ class ActivateProfileHelper {
                 }
 
                 if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
-                        (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
+                        (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
                     synchronized (PPApplication.rootMutex) {
                         String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
                                 Float.toString(profile.getDeviceBrightnessAdaptiveValue(appContext));
@@ -1871,7 +1871,7 @@ class ActivateProfileHelper {
                         Settings.System.putInt(context.getContentResolver(),
                                 Settings.System.SCREEN_BRIGHTNESS,
                                 profile.getDeviceBrightnessManualValue(context));
-                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, context).allowed
+                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, true, context).allowed
                                 == PreferenceAllowed.PREFERENCE_ALLOWED) {
                             if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                                 Settings.System.putFloat(context.getContentResolver(),
@@ -2610,7 +2610,7 @@ class ActivateProfileHelper {
             }
             else
             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                    (PPApplication.isRooted()))
+                    (PPApplication.isRooted(false)))
             {
                 synchronized (PPApplication.rootMutex) {
                     String command1 = "svc data " + (enable ? "enable" : "disable");
@@ -2790,7 +2790,7 @@ class ActivateProfileHelper {
     private static void setPreferredNetworkType(Context context, int networkType)
     {
         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                (PPApplication.isRooted() && PPApplication.serviceBinaryExists()))
+                (PPApplication.isRooted(false) && PPApplication.serviceBinaryExists(false)))
         {
             try {
                 // Get the value of the "TRANSACTION_setPreferredNetworkType" field.
@@ -2877,7 +2877,7 @@ class ActivateProfileHelper {
             wifiApManager.setWifiApState(enable);
         else {
             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                    (PPApplication.isRooted() && PPApplication.serviceBinaryExists())) {
+                    (PPApplication.isRooted(false) && PPApplication.serviceBinaryExists(false))) {
                 try {
                     Object serviceManager = PPApplication.getServiceManager("wifi");
                     int transactionCode = -1;
@@ -2934,7 +2934,7 @@ class ActivateProfileHelper {
         }
         else
         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                (PPApplication.isRooted())) {
+                (PPApplication.isRooted(false))) {
             synchronized (PPApplication.rootMutex) {
                 String command1 = PPApplication.getJavaCommandFile(CmdNfc.class, "nfc", context, enable);
                 if (command1 != null) {
@@ -3012,7 +3012,7 @@ class ActivateProfileHelper {
             }
             else
             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                    (PPApplication.isRooted() && PPApplication.settingsBinaryExists()))
+                    (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false)))
             {
                 // device is rooted
                 PPApplication.logE("ActivateProfileHelper.setGPS", "rooted");
@@ -3116,7 +3116,7 @@ class ActivateProfileHelper {
                 }
                 else
                 if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                        (PPApplication.isRooted() && PPApplication.settingsBinaryExists()))
+                        (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false)))
                 {
                     // device is rooted
                     PPApplication.logE("ActivateProfileHelper.setGPS", "rooted");
@@ -3206,7 +3206,7 @@ class ActivateProfileHelper {
     private static void setAirplaneMode_SDK17(Context context, boolean mode)
     {
         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                (PPApplication.isRooted() && PPApplication.settingsBinaryExists()))
+                (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false)))
         {
             // device is rooted
             synchronized (PPApplication.rootMutex) {
@@ -3263,7 +3263,7 @@ class ActivateProfileHelper {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                    if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, false, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
 
                         PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = null;
@@ -3273,7 +3273,7 @@ class ActivateProfileHelper {
                         }
 
                         if (powerManager != null) {
-                            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, false, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                                 boolean _isPowerSaveMode = false;
                                 if (Build.VERSION.SDK_INT >= 21)
                                     _isPowerSaveMode = powerManager.isPowerSaveMode();
@@ -3302,7 +3302,7 @@ class ActivateProfileHelper {
                                             Settings.Global.putInt(appContext.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
                                     } else
                                     if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
-                                            (PPApplication.isRooted() && PPApplication.settingsBinaryExists())) {
+                                            (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
                                         synchronized (PPApplication.rootMutex) {
                                             String command1 = "settings put global low_power " + ((_isPowerSaveMode) ? 1 : 0);
                                             Command command = new Command(0, false, command1);
@@ -3367,7 +3367,7 @@ class ActivateProfileHelper {
                             }
                         }*/
                         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
-                                (PPApplication.isRooted()))
+                                (PPApplication.isRooted(false)))
                         {
                             synchronized (PPApplication.rootMutex) {
                                 String command1 = PPApplication.getJavaCommandFile(CmdGoToSleep.class, "power", appContext, 0);

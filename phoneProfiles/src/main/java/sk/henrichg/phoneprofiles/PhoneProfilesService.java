@@ -238,8 +238,8 @@ public class PhoneProfilesService extends Service {
                         PPApplication.isRootGranted();
                     }
                     //PPApplication.getSUVersion();
-                    PPApplication.settingsBinaryExists();
-                    PPApplication.serviceBinaryExists();
+                    PPApplication.settingsBinaryExists(false);
+                    PPApplication.serviceBinaryExists(false);
                     PPApplication.getServicesList();
 
                     GlobalGUIRoutines.setLanguage(appContext);
