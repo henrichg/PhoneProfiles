@@ -931,12 +931,12 @@
   <string name="important_info_activity_title">Důležité informace</string>
   <string name="important_info_quick_guide_tab">Stručná příručka</string>
   <string name="important_info_important_info_tab">Důležité informace</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PPP) má dvě složky:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) má dvě složky:</string>
   <string name="important_info_quick_guide_2">1. <b>PROFILY:</b> určují jak změnit nastavení zařízení.</string>
   <string name="important_info_quick_guide_3">2. <b>UDÁLOSTI:</b> Určují, kdy se změní nastavení zařízení.</string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILY:</b> Umožňují konfigurovat nastavení zařízení jako režim vyzvánění, hlasitost, tóny zvonění a oznámení, přepínání rádií (Wi-Fi, Bluetooth, mobilní data, atd.). Po aktivaci profilu příslušné nastavení jsou trvalé. Pokud chcete nastavení změnit, musí být aktivován jiný profil.</string>
   <string name="important_info_quick_guide_profiles_2">Profily lze aktivovat manuálně nebo událostí.</string>
-  <string name="important_info_quick_guide_profiles_3">Můžete manuálně aktivovat profil přes PPP Aktivátor (pop-up okno se seznamem dostupných profilů). Aktivátor lze zobrazit přes domovskou ikonu PPP, PPP notifikaci, PPP widgety a pro zařízení Samsung Edge z panelu Edge. Můžete také přímo aktivovat profil přes PPP 4x4 widget, odkaz na profil nebo na zařízeních Samsung Edge z panelu Edge.</string>
+  <string name="important_info_quick_guide_profiles_3">Můžete manuálně aktivovat profil přes PhoneProfiles Aktivátor (pop-up okno se seznamem dostupných profilů). Aktivátor lze zobrazit přes domovskou ikonu PhoneProfiles, PhoneProfiles notifikaci, PhoneProfiles widgety a pro zařízení Samsung Edge z panelu Edge. Můžete také přímo aktivovat profil přes PhoneProfiles 4x4 widget, odkaz na profil nebo na zařízeních Samsung Edge z panelu Edge.</string>
   <string name="important_info_quick_guide_events_1"><b>UDÁLOSTI:</b>Umožňují nakonfigurovat kdy se profil aktivuje. Události mají začátek a konec. Můžete nakonfigurovat, co se stane na začátku události, a co se stane po skončení události.</string>
   <string name="important_info_quick_guide_events_2">Události obsahují důležité konfigurační parametry senzorů, které se musí všechny splnit předtím, než se událost spustí. Pokud nějaký senzor není splněn, událost skončí (pozastaví).</string>
   <string name="important_info_quick_guide_sensors_1">Příklady senzorů:</string>

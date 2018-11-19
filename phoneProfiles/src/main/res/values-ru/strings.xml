@@ -932,7 +932,7 @@
   <string name="important_info_activity_title">Важная информация</string>
   <string name="important_info_quick_guide_tab">Краткое руководство</string>
   <string name="important_info_important_info_tab">Важная информация</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PPP) состоит из двух компонентов:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) состоит из двух компонентов:</string>
   <string name="important_info_quick_guide_2">1. <b>ПРОФИЛИ:</b> указывает, как изменить настройки устройства.</string>
   <string name="important_info_quick_guide_3">2. <b>СОБЫТИЯ:</b> указывает, когда следует изменить настройки устройства.</string>
   <string name="important_info_quick_guide_profiles_1"><b>ПРОФИЛИ:</b> Позволяют вам настроить параметры устройства, такие как режим звонка, уровни громкости, мелодию звонка и звуки уведомлений, переключение радиомодулей (Wi-Fi, Bluetooth, мобильные данные и т.д.). Когда профиль активирован, соответствующие ему параметры постоянны. Если вы хотите изменить какой-то параметр, нужно активировать другой профиль.</string>
