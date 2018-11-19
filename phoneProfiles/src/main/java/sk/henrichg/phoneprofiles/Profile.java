@@ -1378,7 +1378,7 @@ public class Profile {
     }
     */
 
-    ////// from AOSP and changed for PPP
+    ////// from AOSP and changed for PP
     private static final int GAMMA_SPACE_MAX = 1023;
 
     private static int getBrightnessPercentage_A9(int settingsValue, int minValue, int maxValue) {

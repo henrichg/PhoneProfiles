@@ -179,7 +179,6 @@ public class PPApplication extends Application {
     //public static boolean sLookCocktailBarEnabled = false;
 
     private static final RefreshGUIBroadcastReceiver refreshGUIBroadcastReceiver = new RefreshGUIBroadcastReceiver();
-    private static final DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
 
     @Override
     public void onCreate()
@@ -236,7 +235,6 @@ public class PPApplication extends Application {
 
         PACKAGE_NAME = getPackageName();
 
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.refreshGUIBroadcastReceiver, new IntentFilter("RefreshGUIBroadcastReceiver"));
 
         startHandlerThread();
