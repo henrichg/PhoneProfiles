@@ -299,13 +299,13 @@ public class PhoneProfilesService extends Service {
                         Profile.setActivatedProfileForDuration(appContext, 0);
 
                         LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
+                    }
 
-                        if (PhoneProfilesService.getInstance() != null)
-                            PhoneProfilesService.getInstance().registerReceivers();
-                        AboutApplicationJob.scheduleJob(appContext, true);
-                    //}
+                    if (PhoneProfilesService.getInstance() != null)
+                        PhoneProfilesService.getInstance().registerReceivers();
+                    AboutApplicationJob.scheduleJob(appContext, false);
 
-                    //if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
+                    if (_startOnBoot || _startOnPackageReplace || _startedFromApp) {
                         PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
 
                         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
