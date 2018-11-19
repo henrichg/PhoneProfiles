@@ -370,13 +370,13 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         AboutApplicationActivity.emailMe((TextView) findViewById(R.id.activity_info_notification_contact),
                 getString(R.string.important_info_contact), "", "",
-                AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_SUPPORT),
+                AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_SUPPORT, activity),
                 true, activity);
         AboutApplicationActivity.emailMe((TextView) findViewById(R.id.activity_info_translations),
                 getString(R.string.important_info_translations),
                 getString(R.string.about_application_translations2),
                 getString(R.string.about_application_translations_subject),
-                AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_TRANSLATIONS),
+                AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_TRANSLATIONS, activity),
                 true,activity);
 
         int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
