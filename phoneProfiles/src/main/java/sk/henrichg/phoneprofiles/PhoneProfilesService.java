@@ -310,6 +310,17 @@ public class PhoneProfilesService extends Service {
 
                         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                     }
+                    if (!_startOnBoot && !_startOnPackageReplace && !_startedFromApp) {
+                        PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### started from PPApplication ######");
+                        if (ApplicationPreferences.applicationActivate(appContext))
+                        {
+                            Profile profile = DatabaseHandler.getInstance(appContext).getActivatedProfile();
+                            long profileId = 0;
+                            if (profile != null)
+                                profileId = profile._id;
+                            dataWrapper.activateProfile(profileId, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
+                        }
+                    }
 
                     dataWrapper.invalidateDataWrapper();
 
