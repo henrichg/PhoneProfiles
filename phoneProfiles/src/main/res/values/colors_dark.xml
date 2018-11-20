@@ -10,7 +10,7 @@
     <color name="activityTextColor_dark">#FFFFFFFF</color>
     <color name="activityCommandBackgroundColor_dark">#1FFFFFFF</color>
 
-    <color name="activityPopupBackground_dark">#FF303030</color>
+    <color name="activityPopupBackground_dark">#FF2B2B2B</color>
     <color name="dialog_divider_dark">#10FFFFFF</color>
 
     <color name="tabTargetHelpCircleColor_dark">#FF7F7F7F</color>
