@@ -1682,7 +1682,38 @@ public class Profile {
         }
     }
 
-    public String getProfileNameWithDuration(boolean multiLine, Context context) {
+    public String getProfileNameWithDuration(String indicators, boolean multiLine, Context context) {
+        String profileName = _name;
+        String durationString = "";
+        if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
+            boolean showEndTime = false;
+            if (_checked) {
+                long endDurationTime = getActivatedProfileEndDurationTime(context);
+                if (endDurationTime > 0) {
+                    durationString = "(de:" + timeDateStringFromTimestamp(context, endDurationTime) + ")";
+                    showEndTime = true;
+                }
+            }
+            if (!showEndTime) {
+                durationString = "[" + GlobalGUIRoutines.getDurationString(_duration) + "]";
+            }
+        }
+        if (!(indicators.isEmpty() && durationString.isEmpty())) {
+            if (multiLine)
+                profileName = profileName + "\n";
+            else
+                profileName = profileName + "   ";
+        }
+        if (!indicators.isEmpty())
+            profileName = profileName + indicators;
+        if (!durationString.isEmpty()) {
+            if (!indicators.isEmpty())
+                profileName = profileName + " ";
+            profileName = profileName + durationString;
+        }
+        return profileName;
+    }
+    /*public String getProfileNameWithDuration(boolean multiLine, Context context) {
         String profileName = _name;
         if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
             boolean showEndTime = false;
@@ -1705,7 +1736,7 @@ public class Profile {
             }
         }
         return profileName;
-    }
+    }*/
 
     @SuppressLint("SimpleDateFormat")
     private static String timeDateStringFromTimestamp(Context applicationContext, long timestamp){

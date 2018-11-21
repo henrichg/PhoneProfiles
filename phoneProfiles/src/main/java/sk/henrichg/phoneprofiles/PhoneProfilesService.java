@@ -648,7 +648,7 @@ public class PhoneProfilesService extends Service {
             {
                 isIconResourceID = profile.getIsIconResourceID();
                 iconIdentifier = profile.getIconIdentifier();
-                profileName = profile.getProfileNameWithDuration(false, appContext);
+                profileName = profile.getProfileNameWithDuration("", false, appContext);
 
                 if (inHandlerThread) {
                     profile.generateIconBitmap(appContext, false, 0);
