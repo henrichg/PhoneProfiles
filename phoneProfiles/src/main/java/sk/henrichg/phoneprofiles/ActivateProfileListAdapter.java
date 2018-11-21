@@ -181,7 +181,8 @@ class ActivateProfileListAdapter extends BaseAdapter
                 holder.profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(fragment.getActivity()));
             }
 
-            String profileName = profile.getProfileNameWithDuration("", ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity()), activityDataWrapper.context);
+            String profileName = profile.getProfileNameWithDuration("",
+                    true/*ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity())*/, activityDataWrapper.context);
             holder.profileName.setText(profileName);
 
             if (profile.getIsIconResourceID()) {
