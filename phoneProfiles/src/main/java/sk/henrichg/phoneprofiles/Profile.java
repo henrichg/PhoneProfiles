@@ -16,6 +16,9 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -1682,7 +1685,7 @@ public class Profile {
         }
     }
 
-    public String getProfileNameWithDuration(String indicators, boolean multiLine, Context context) {
+    public Spannable getProfileNameWithDuration(String indicators, boolean multiLine, Context context) {
         String profileName = _name;
         String durationString = "";
         if ((_duration > 0) && (_afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
@@ -1698,6 +1701,7 @@ public class Profile {
                 durationString = "[" + GlobalGUIRoutines.getDurationString(_duration) + "]";
             }
         }
+        int startSpan = profileName.length();
         if (!(indicators.isEmpty() && durationString.isEmpty())) {
             if (multiLine)
                 profileName = profileName + "\n";
@@ -1711,7 +1715,10 @@ public class Profile {
                 profileName = profileName + " ";
             profileName = profileName + durationString;
         }
-        return profileName;
+        Spannable sbt = new SpannableString(profileName);
+        if (multiLine)
+            sbt.setSpan(new RelativeSizeSpan(0.8f), startSpan, profileName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return sbt;
     }
     /*public String getProfileNameWithDuration(boolean multiLine, Context context) {
         String profileName = _name;

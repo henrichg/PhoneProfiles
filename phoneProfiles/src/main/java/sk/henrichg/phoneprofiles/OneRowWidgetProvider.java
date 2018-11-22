@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -43,7 +45,7 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
                     for (int widgetId : allWidgetIds) {
                         boolean isIconResourceID;
                         String iconIdentifier;
-                        String profileName;
+                        Spannable profileName;
                         if (profile != null) {
                             isIconResourceID = profile.getIsIconResourceID();
                             iconIdentifier = profile.getIconIdentifier();
@@ -59,7 +61,7 @@ public class OneRowWidgetProvider extends AppWidgetProvider {
                                     monochromeValue);
                             isIconResourceID = profile.getIsIconResourceID();
                             iconIdentifier = profile.getIconIdentifier();
-                            profileName = profile._name;
+                            profileName = new SpannableString(profile._name);
                         }
 
                         RemoteViews remoteViews;

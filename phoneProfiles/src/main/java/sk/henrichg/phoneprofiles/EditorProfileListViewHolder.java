@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ class EditorProfileListViewHolder extends RecyclerView.ViewHolder
             profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(context));
         }
 
-        String _profileName = profile.getProfileNameWithDuration("",true, context);
+        Spannable _profileName = profile.getProfileNameWithDuration("",true, context);
         profileName.setText(_profileName);
 
         if (profile.getIsIconResourceID())

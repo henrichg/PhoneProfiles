@@ -13,6 +13,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -170,7 +172,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
 
             boolean isIconResourceID;
             String iconIdentifier;
-            String profileName;
+            Spannable profileName;
             if (profile != null)
             {
                 profile.generateIconBitmap(context,
@@ -200,7 +202,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                         monochromeValue);
                 isIconResourceID = profile.getIsIconResourceID();
                 iconIdentifier = profile.getIconIdentifier();
-                profileName = profile._name;
+                profileName = new SpannableString(profile._name);
             }
             if (isIconResourceID)
             {

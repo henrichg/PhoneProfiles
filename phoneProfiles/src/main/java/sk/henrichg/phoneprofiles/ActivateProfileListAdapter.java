@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -181,7 +182,7 @@ class ActivateProfileListAdapter extends BaseAdapter
                 holder.profileName.setTextColor(GlobalGUIRoutines.getThemeTextColor(fragment.getActivity()));
             }
 
-            String profileName = profile.getProfileNameWithDuration("",
+            Spannable profileName = profile.getProfileNameWithDuration("",
                     true/*ApplicationPreferences.applicationActivatorGridLayout(fragment.getActivity())*/, activityDataWrapper.context);
             holder.profileName.setText(profileName);
 
