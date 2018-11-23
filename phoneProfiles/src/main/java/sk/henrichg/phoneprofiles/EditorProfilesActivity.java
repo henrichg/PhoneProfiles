@@ -327,15 +327,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean ret = super.onPrepareOptionsMenu(menu);
 
-        boolean toneInstalled = TonesHandler.isToneInstalled(TonesHandler.TONE_ID, getApplicationContext());
-
-        MenuItem menuItem = menu.findItem(R.id.menu_install_tone);
-        if ((menuItem != null) && toneInstalled)
-        {
-            menuItem.setVisible(false);
-        }
-
-        menuItem = menu.findItem(R.id.menu_dark_theme);
+        MenuItem menuItem = menu.findItem(R.id.menu_dark_theme);
         if (menuItem != null)
         {
             if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
@@ -383,9 +375,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                     editor.apply();
                 }
                 GlobalGUIRoutines.reloadActivity(this, true);
-                return true;
-            case R.id.menu_install_tone:
-                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, getApplicationContext(), true);
                 return true;
             case R.id.menu_export:
                 exportData();

@@ -275,10 +275,7 @@ public class PhoneProfilesService extends Service {
 
                         //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
-                        // remove phoneprofiles_silent.mp3
-                        //removeTone("phoneprofiles_silent.mp3", context);
-                        // install phoneprofiles_silent.ogg
-                        TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
+                        //TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
 
                         ActivateProfileHelper.setLockScreenDisabled(appContext, false);
 

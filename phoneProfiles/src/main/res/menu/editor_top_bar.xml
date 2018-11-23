@@ -15,10 +15,6 @@
           android:title="@string/menu_dark_theme_on"
           android:orderInCategory="201"
           henrichg:showAsAction="never" />
-    <item android:id="@+id/menu_install_tone"
-          android:title="@string/menu_install_tone"
-          android:orderInCategory="202"
-          henrichg:showAsAction="never" />
     <item android:id="@+id/menu_export"
         android:title="@string/menu_export"
         android:orderInCategory="210"
