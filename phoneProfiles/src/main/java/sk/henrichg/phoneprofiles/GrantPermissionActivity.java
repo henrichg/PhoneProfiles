@@ -126,6 +126,18 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     return;
                 }
             }
+            else
+            if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
+                boolean granted = Permissions.checkLogToFile(context, permissions);
+                if (granted) {
+                    Toast msg = Toast.makeText(context,
+                            context.getResources().getString(R.string.toast_permissions_granted),
+                            Toast.LENGTH_SHORT);
+                    msg.show();
+                    finish();
+                    return;
+                }
+            }
             else {
                 // get permissions from shared preferences and recheck it
                 /*permissions = Permissions.recheckPermissions(context, Permissions.getMergedPermissions(context));
@@ -222,6 +234,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     showRequestString = context.getString(R.string.permissions_for_import_app_data_text1) + "<br><br>";
                 else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
                     showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
+                else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
+                    showRequestString = context.getString(R.string.permissions_for_log_to_file_text1) + "<br><br>";
                 else {
                     /*if (mergedNotification) {
                         showRequestString = context.getString(R.string.permissions_for_profile_text1m) + " ";
@@ -307,6 +321,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_import_app_data_text2);
                 else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_brightness_dialog_text2);
+                else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
+                    showRequestString = showRequestString + context.getString(R.string.permissions_for_log_to_file_text2);
                 else
                     showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text3);
 
@@ -441,6 +457,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     case Permissions.PERMISSION_CUSTOM_PROFILE_ICON_PREFERENCE:
                         s = getString(R.string.permission_why_custom_profile_icon_preference);
                         break;
+                    case Permissions.PERMISSION_LOG_TO_FILE:
+                        s = getString(R.string.permission_why_log_to_file);
+                        break;
                 }
             }
         }
@@ -496,6 +515,24 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
                     .setAutoCancel(true); // clear notification after click
             notificationID = PPApplication.GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID;
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
+            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+            String nText = context.getString(R.string.permissions_for_log_to_file_big_text_notification);
+            if (android.os.Build.VERSION.SDK_INT < 24) {
+                nTitle = context.getString(R.string.app_name);
+                nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                        context.getString(R.string.permissions_for_log_to_file_big_text_notification);
+            }
+            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                    .setColor(ContextCompat.getColor(context, R.color.primary))
+                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                    .setContentTitle(nTitle) // title for notification
+                    .setContentText(nText)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
+                    .setAutoCancel(true); // clear notification after click
+            notificationID = PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID;
         }
         else {
             String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
@@ -935,6 +972,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
             finish();
             /*if (Permissions.ringtonePreference != null)
                 Permissions.ringtonePreference.refreshListView();*/
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
+            //finishAffinity();
+            finish();
+            Permissions.removeLogToFileNotification(context);
         }
         else {
             /*Intent returnIntent = new Intent();

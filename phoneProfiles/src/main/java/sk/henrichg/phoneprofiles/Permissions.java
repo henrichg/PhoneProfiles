@@ -53,6 +53,7 @@ public class Permissions {
     static final int PERMISSION_BRIGHTNESS_PREFERENCE = 23;
     static final int PERMISSION_WALLPAPER_PREFERENCE = 24;
     static final int PERMISSION_CUSTOM_PROFILE_ICON_PREFERENCE = 25;
+    static final int PERMISSION_LOG_TO_FILE = 26;
 
     static final int GRANT_TYPE_PROFILE = 1;
     static final int GRANT_TYPE_INSTALL_TONE = 2;
@@ -63,7 +64,8 @@ public class Permissions {
     static final int GRANT_TYPE_BRIGHTNESS_DIALOG = 8;
     static final int GRANT_TYPE_RINGTONE_PREFERENCE = 9;
     static final int GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION = 10;
-    //static final int GRANT_TYPE_GRANT_ROOT = 11;
+    static final int GRANT_TYPE_LOG_TO_FILE = 11;
+    //static final int GRANT_TYPE_GRANT_ROOT = 12;
 
     static final int REQUEST_CODE = 5000;
 
@@ -920,6 +922,23 @@ public class Permissions {
         }
     }
 
+    static boolean checkLogToFile(Context context, List<PermissionType>  permissions) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 23) {
+                boolean grantedWriteExternalStorage = ContextCompat.checkSelfPermission(context, permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                if (permissions != null) {
+                    if (!grantedWriteExternalStorage)
+                        permissions.add(new Permissions.PermissionType(Permissions.PERMISSION_LOG_TO_FILE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
+                }
+                return grantedWriteExternalStorage;
+            } else {
+                return hasPermission(context, permission.WRITE_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     static boolean grantProfilePermissions(Context context, Profile profile, boolean onlyNotification,
                                                   /*boolean forGUI, boolean monochrome, int monochromeValue,*/
                                                   int startupSource, boolean interactive,
@@ -1187,6 +1206,17 @@ public class Permissions {
         //    return true;
     }
 
+    static void grantLogToFilePermissions(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            List<PermissionType> permissions = new ArrayList<>();
+            boolean granted = checkLogToFile(context, permissions);
+            if (!granted) {
+                GrantPermissionActivity.showNotification(GRANT_TYPE_LOG_TO_FILE, permissions, false,
+                        PPApplication.STARTUP_SOURCE_ACTIVATOR, true, null, false, context);
+            }
+        }
+    }
+
     static void removeProfileNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -1201,12 +1231,20 @@ public class Permissions {
             notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
 
+    static void removeLogToFileNotification(Context context)
+    {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null)
+            notificationManager.cancel(PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID);
+    }
+
     static void removeNotifications(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             notificationManager.cancel(PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
             notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
+            notificationManager.cancel(PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID);
         }
     }
 

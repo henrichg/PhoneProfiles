@@ -64,8 +64,8 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static final boolean logIntoLogCat = false;
-    private static final boolean logIntoFile = false;
+    static final boolean logIntoLogCat = false;
+    static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
     private static final String logFilterTags = "##### PPApplication.onCreate"
                                             +"|PhoneProfilesService.onCreate"
@@ -122,6 +122,7 @@ public class PPApplication extends Application {
     static final int ABOUT_APPLICATION_DONATE_NOTIFICATION_ID = 700429;
     static final int PROFILE_ACTIVATION_NETWORK_TYPE_PREFS_NOTIFICATION_ID = 700430;
     static final int GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID = 700431;
+    static final int GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID = 700432;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     static final String SHARED_PROFILE_PREFS_NAME = "profile_preferences_default_profile";
@@ -190,6 +191,9 @@ public class PPApplication extends Application {
 
         if (checkAppReplacingState())
             return;
+
+        if (logIntoLogCat && logIntoFile)
+            Permissions.grantLogToFilePermissions(getApplicationContext());
 
         // Obtain the FirebaseAnalytics instance.
         //mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
