@@ -192,7 +192,7 @@ public class PPApplication extends Application {
         if (checkAppReplacingState())
             return;
 
-        if (logIntoLogCat && logIntoFile)
+        if (logIntoFile)
             Permissions.grantLogToFilePermissions(getApplicationContext());
 
         // Obtain the FirebaseAnalytics instance.
