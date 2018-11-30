@@ -42,6 +42,7 @@
             android:text="@string/profile_name_default"
             android:textColor="#33b5e5"
             android:textSize="16sp"
+            android:ellipsize="end"
             android:maxLines="1"/>
 
         <!--<TextView
@@ -59,6 +60,7 @@
             android:text="@string/profile_name_default"
             android:textColor="#33b5e5"
             android:textSize="16sp"
+            android:ellipsize="end"
             android:maxLines="1"/>-->
 
     </RelativeLayout>

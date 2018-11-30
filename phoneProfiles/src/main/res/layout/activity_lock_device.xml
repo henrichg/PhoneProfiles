@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:maxLines="1"
+        android:ellipsize="end"
         android:paddingBottom="200dp"
         android:textColor="@color/lockDevice_textColor"
         android:textSize="75sp" />
