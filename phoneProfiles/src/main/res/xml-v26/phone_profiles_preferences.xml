@@ -378,6 +378,12 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             android:layout="@layout/mp_preference_material_widget" />
+        <CheckBoxPreference
+            android:key="applicationWidgetListCustomIconLightness"
+            android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
+            android:defaultValue="true"
+            android:widgetLayout="@layout/mp_preference_switch"
+            android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -461,6 +467,12 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
+            android:layout="@layout/mp_preference_material_widget" />
+        <CheckBoxPreference
+            android:key="applicationWidgetOneRowCustomIconLightness"
+            android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
+            android:defaultValue="true"
+            android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 
@@ -548,6 +560,12 @@
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
             android:layout="@layout/mp_preference_material_widget" />
+        <CheckBoxPreference
+            android:key="applicationWidgetIconCustomIconLightness"
+            android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
+            android:defaultValue="true"
+            android:widgetLayout="@layout/mp_preference_switch"
+            android:layout="@layout/mp_preference_material_widget" />
         <!--<CheckBoxPreference
             android:key="applicationShortcutEmblem"
             android:title="@string/phone_profiles_pref_applicationShortcutEmblem"
@@ -633,6 +651,12 @@
             android:defaultValue="100"
             android:entries="@array/widgetLightnessArray"
             android:entryValues="@array/widgetLightnessValues"
+            android:layout="@layout/mp_preference_material_widget" />
+        <CheckBoxPreference
+            android:key="applicationSamsungEdgeCustomIconLightness"
+            android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
+            android:defaultValue="true"
+            android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 
