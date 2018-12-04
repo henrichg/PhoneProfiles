@@ -263,7 +263,7 @@ public class PhoneProfilesService extends Service {
                         return;
                     }
 
-                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
 
                     PPApplication.createNotificationChannels(appContext);
                     dataWrapper.setDynamicLauncherShortcuts();
@@ -659,7 +659,7 @@ public class PhoneProfilesService extends Service {
                 profileName = profile.getProfileNameWithDuration("", false, appContext);
 
                 if (inHandlerThread) {
-                    profile.generateIconBitmap(appContext, false, 0);
+                    profile.generateIconBitmap(appContext, false, 0, false);
                     if (ApplicationPreferences.notificationPrefIndicator(appContext))
                         profile.generatePreferencesIndicator(appContext, false, 0);
                     iconBitmap = profile._iconBitmap;
@@ -936,7 +936,7 @@ public class PhoneProfilesService extends Service {
 
     private void showProfileNotification() {
         final Context appContext = getApplicationContext();
-        final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+        final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
         dataWrapper.invalidateDataWrapper();
 
@@ -951,7 +951,7 @@ public class PhoneProfilesService extends Service {
             @Override
             public void run() {
                 if (PhoneProfilesService.getInstance() != null) {
-                    DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0);
+                    DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0, false);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
                     if (PhoneProfilesService.getInstance() != null)
                         PhoneProfilesService.getInstance()._showProfileNotification(profile, true);
@@ -965,7 +965,7 @@ public class PhoneProfilesService extends Service {
     {
         if (onlyEmpty) {
             final Context appContext = getApplicationContext();
-            final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+            final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
             final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
             dataWrapper.invalidateDataWrapper();
             _showProfileNotification(profile, false);

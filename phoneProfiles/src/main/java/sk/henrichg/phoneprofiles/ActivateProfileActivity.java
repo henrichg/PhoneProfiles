@@ -132,7 +132,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
 
         // add list items height
-        DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), false, 0);
+        DataWrapper dataWrapper = new DataWrapper(getApplicationContext(), false, 0, false);
         int profileCount = DatabaseHandler.getInstance(getApplicationContext()).getProfilesCount();
         dataWrapper.invalidateDataWrapper();
 

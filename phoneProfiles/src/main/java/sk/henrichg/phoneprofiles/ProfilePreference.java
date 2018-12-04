@@ -52,7 +52,7 @@ public class ProfilePreference extends DialogPreference {
         prefContext = context;
         //preferenceTitle = getTitle();
 
-        dataWrapper = new DataWrapper(context.getApplicationContext(), false, 0);
+        dataWrapper = new DataWrapper(context.getApplicationContext(), false, 0, false);
 
         setWidgetLayoutResource(R.layout.profile_preference); // resource na layout custom preference - TextView-ImageView
 
@@ -294,7 +294,7 @@ public class ProfilePreference extends DialogPreference {
     protected void onRestoreInstanceState(Parcelable state)
     {
         if (dataWrapper == null)
-            dataWrapper = new DataWrapper(prefContext, false, 0);
+            dataWrapper = new DataWrapper(prefContext, false, 0, false);
 
         if (!state.getClass().equals(SavedState.class)) {
             // Didn't save state for us in onSaveInstanceState

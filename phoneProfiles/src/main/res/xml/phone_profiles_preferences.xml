@@ -426,7 +426,7 @@
         <CheckBoxPreference
             android:key="applicationWidgetListCustomIconLightness"
             android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
@@ -516,7 +516,7 @@
         <CheckBoxPreference
             android:key="applicationWidgetOneRowCustomIconLightness"
             android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
@@ -608,7 +608,7 @@
         <CheckBoxPreference
             android:key="applicationWidgetIconCustomIconLightness"
             android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
         <CheckBoxPreference
@@ -700,7 +700,7 @@
         <CheckBoxPreference
             android:key="applicationSamsungEdgeCustomIconLightness"
             android:title="@string/phone_profiles_pref_applicationWidgetIconCustomIconLightness"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:widgetLayout="@layout/mp_preference_switch"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>

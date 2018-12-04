@@ -33,7 +33,8 @@ public class IconWidgetProvider extends AppWidgetProvider {
                 //if (applicationWidgetIconLightness.equals("100")) monochromeValue = 0xFF;
 
                 DataWrapper dataWrapper = new DataWrapper(context, ApplicationPreferences.applicationWidgetIconColor(context).equals("1"),
-                        monochromeValue);
+                        monochromeValue,
+                        ApplicationPreferences.applicationWidgetIconCustomIconLightness(context));
 
                 Profile profile = dataWrapper.getActivatedProfile(true, false);
 
@@ -56,8 +57,9 @@ public class IconWidgetProvider extends AppWidgetProvider {
                             profile._icon = Profile.PROFILE_ICON_DEFAULT + "|1|0|0";
 
                             profile.generateIconBitmap(context,
-                                    ApplicationPreferences.applicationWidgetListIconColor(context).equals("1"),
-                                    monochromeValue);
+                                    ApplicationPreferences.applicationWidgetIconColor(context).equals("1"),
+                                    monochromeValue,
+                                    ApplicationPreferences.applicationWidgetIconCustomIconLightness(context));
                             isIconResourceID = profile.getIsIconResourceID();
                             iconIdentifier = profile.getIconIdentifier();
                             profileName = new SpannableString(profile._name);

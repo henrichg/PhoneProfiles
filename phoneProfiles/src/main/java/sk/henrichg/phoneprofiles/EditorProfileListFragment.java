@@ -123,7 +123,7 @@ public class EditorProfileListFragment extends Fragment
         // configuration changes for example
         setRetainInstance(true);
 
-        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0);
+        activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0, false);
 
         setHasOptionsMenu(true);
     }
@@ -243,7 +243,7 @@ public class EditorProfileListFragment extends Fragment
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
-            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0);
+            this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0, false);
             //this.baseContext = fragment.getActivity();
         }
 

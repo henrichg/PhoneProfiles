@@ -43,12 +43,14 @@ class SamsungEdgeFactory implements RemoteViewsService.RemoteViewsFactory {
         if (dataWrapper == null)
         {
             dataWrapper = new DataWrapper(context, ApplicationPreferences.applicationSamsungEdgeIconColor(context).equals("1"),
-                                                        monochromeValue);
+                                                        monochromeValue,
+                                            ApplicationPreferences.applicationSamsungEdgeCustomIconLightness(context));
         }
         else
         {
             dataWrapper.setParameters(ApplicationPreferences.applicationSamsungEdgeIconColor(context).equals("1"),
-                                                        monochromeValue);
+                                                        monochromeValue,
+                                        ApplicationPreferences.applicationSamsungEdgeCustomIconLightness(context));
         }
     }
 

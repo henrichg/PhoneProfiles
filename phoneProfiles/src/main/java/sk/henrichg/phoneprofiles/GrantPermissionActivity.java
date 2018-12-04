@@ -79,7 +79,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         fromNotification = intent.getBooleanExtra(Permissions.EXTRA_FROM_NOTIFICATION, false);
 
-        dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ false, 0);
+        dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ false, 0, false);
         if (profile_id != Profile.SHARED_PROFILE_ID)
             profile = dataWrapper.getProfileById(profile_id, false, false);
         else

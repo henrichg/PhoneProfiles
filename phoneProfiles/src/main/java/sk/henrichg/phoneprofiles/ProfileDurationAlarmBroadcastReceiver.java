@@ -35,7 +35,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                             wakeLock.acquire(10 * 60 * 1000);
                         }
 
-                        DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
+                        DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
 
                         Profile profile = dataWrapper.getProfileById(profileId, false, false);
                         Profile activatedProfile = dataWrapper.getActivatedProfile(false, false);
