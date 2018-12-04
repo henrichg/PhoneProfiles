@@ -1614,8 +1614,16 @@ public class Profile {
                 }
             }
             else
-            if (monochrome)
+            if (monochrome) {
+                float monoValue = 255f;
+                if (monochromeValue == 0x00) monoValue = -255f;
+                if (monochromeValue == 0x40) monoValue = -128f;
+                if (monochromeValue == 0x80) monoValue = 0f;
+                if (monochromeValue == 0xC0) monoValue = 128f;
+                //if (monochromeValue == 0xFF) monoValue = 255f;
                 _iconBitmap = BitmapManipulator.grayScaleBitmap(_iconBitmap);
+                _iconBitmap = BitmapManipulator.setBitmapBrightness(_iconBitmap, monoValue);
+            }
         }
         else
         if (monochrome)
