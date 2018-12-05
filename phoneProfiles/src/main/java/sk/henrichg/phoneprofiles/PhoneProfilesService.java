@@ -639,6 +639,12 @@ public class PhoneProfilesService extends Service {
                 if ((android.os.Build.VERSION.SDK_INT >= 24) && (!useDecorator))
                     contentView = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_compact_miui);
             }
+            else
+            if (PPApplication.romIsEMUI) {
+                contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_emui);
+                if (android.os.Build.VERSION.SDK_INT >= 24)
+                    contentView = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_compact);
+            }
             else {
                 contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer);
                 if (android.os.Build.VERSION.SDK_INT >= 24)
