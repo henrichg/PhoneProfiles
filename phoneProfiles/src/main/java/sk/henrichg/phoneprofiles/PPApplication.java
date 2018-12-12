@@ -1182,11 +1182,13 @@ public class PPApplication extends Application {
 
     private static boolean isEMUI() {
         String emuiRomName = getEmuiRomName();
-        return "EmotionUI_3.0.1".equalsIgnoreCase(emuiRomName) ||
-                "EmotionUI_3.1".equalsIgnoreCase(emuiRomName) ||
-                "EmotionUI_4.1".equalsIgnoreCase(emuiRomName) ||
-                "EmotionUI_3.0".equalsIgnoreCase(emuiRomName) ||
-                ("EmotionUI_2.3".equalsIgnoreCase(emuiRomName) || Build.DISPLAY.toLowerCase().contains("emui2.3") || "EMUI 2.3".equalsIgnoreCase(emuiRomName)) ||
+        PPApplication.logE("PPApplication.isEMUI", "emuiRomName="+emuiRomName);
+        String romName = "";
+        if (emuiRomName != null)
+            romName = emuiRomName.toLowerCase();
+
+        return (romName.indexOf("emotionui_") == 0) ||
+                Build.DISPLAY.toLowerCase().contains("emui2.3") || "EMUI 2.3".equalsIgnoreCase(emuiRomName) ||
                 Build.BRAND.equalsIgnoreCase("huawei") ||
                 Build.MANUFACTURER.equalsIgnoreCase("huawei") ||
                 Build.FINGERPRINT.toLowerCase().contains("huawei");
