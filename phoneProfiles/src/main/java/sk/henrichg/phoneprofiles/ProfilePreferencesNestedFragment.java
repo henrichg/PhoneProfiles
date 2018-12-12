@@ -74,7 +74,10 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
         // this is really important in order to save the state across screen
         // configuration changes for example
-        setRetainInstance(false);
+        //setRetainInstance(false);
+        // this is really important in order to save the state across screen
+        // configuration changes for example
+        setRetainInstance(true);
 
         Bundle bundle = this.getArguments();
         if (bundle != null)
