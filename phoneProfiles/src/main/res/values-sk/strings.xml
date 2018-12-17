@@ -56,7 +56,6 @@
   <string name="profile_preferences_volumeMedia">Hlasitosť médií</string>
   <string name="profile_preferences_volumeAlarm">Hlasitosť budíka</string>
   <string name="profile_preferences_volumeSystem">Hlasitosť sys. zvukov</string>
-  <string name="profile_preferences_volumeVoice">Hlasitosť slúchadla</string>
   <string name="profile_preferences_soundRingtoneChange">Zmeniť tón zvonenia</string>
   <string name="profile_preferences_soundRingtone">Tón zvonenia</string>
   <string name="profile_preferences_soundNotificationChange">Zmenit tón notifikácie</string>
