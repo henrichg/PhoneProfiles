@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">ERREUR d’écriture sur la balise</string>
   <string name="read_nfc_tag_read">Balise lues</string>
   <string name="pref_event_permanentRun">Activation permanente</string>
-  <string name="pref_event_permanentRun_summary">Pauser l\'événement après activation manuelle et redémarrer les évènements</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag est accessible en écriture</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag n’est pas accessible en écriture</string>
   <string name="about_application_donate_button">S’il vous plaît faites un don</string>
@@ -868,8 +867,7 @@
   <string name="event_preferences_radioSwitch_nfc">NFC</string>
   <string name="event_preferences_radioSwitch_airplaneMode">Mode avion</string>
   <string name="event_preferences_radioSwitch_info_title">Configuration des capteurs</string>
-  <string name="event_preferences_radioSwitch_info_summary">L\'état de toutes les radios doivent être remplies pour commencer les évènements.
-Configurez uniquement les radios dont vous avez besoin.</string>
+  <string name="event_preferences_radioSwitch_info_summary">L\'état de toutes les radios doivent être remplies pour commencer les évènements. Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="connect_to_ssid_pref_dlg_summary_text_just_any">N\'importe lequel</string>
   <string name="profile_preferences_deviceConnectToSSID">Se connecter au SSID</string>
   <string name="phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes">Fusion des volumes</string>
@@ -930,12 +928,12 @@ Configurez uniquement les radios dont vous avez besoin.</string>
   <string name="important_info_activity_title">Information importante</string>
   <string name="important_info_quick_guide_tab">Guide rapide</string>
   <string name="important_info_important_info_tab">Information importante</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) comporte deux volets :</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) comporte deux volets :</string>
   <string name="important_info_quick_guide_2">1. <b>PROFILS:</b> spécifie comment modifier les paramètres du périphérique.</string>
   <string name="important_info_quick_guide_3">2. <b>ÉVÉNEMENTS:</b> spécifie quand changer les paramètres du périphérique.</string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILS:</b> Permet de configurer les paramètres de périphérique comme le mode de sonnerie, les volumes, sonnerie et notification des sons, radio (Wi-Fi, Bluetooth, mobile, etc.). Lorsqu’un profil est activé, les paramètres correspondants sont permanents. Si vous souhaitez modifier les paramètres, un autre profil doit être activé.</string>
   <string name="important_info_quick_guide_profiles_2">Les Profils peuvent être activés manuellement, ou par un événement.</string>
-  <string name="important_info_quick_guide_profiles_3">Vous pouvez activer manuellement un profil par l’intermédiaire de l’activateur de PhoneProfiles (fenêtre pop-up avec la liste des profils disponibles). L’activateur peut être affiché via l’icône Accueil de PhoneProfiles, la notification de PhoneProfiles, le widget PhoneProfiles et, pour les appareils Samsung, depuis le panneau Edge. Vous pouvez également directement activer un profil via le widget PhoneProfiles 4x4 , un raccourci vers le profil ou, pour les appareils Samsung, depuis le panneau Edge.</string>
+  <string name="important_info_quick_guide_profiles_3">Vous pouvez activer manuellement un profil par l’intermédiaire de l’activateur de PP (fenêtre pop-up avec la liste des profils disponibles). L’activateur peut être affiché via l’icône Accueil de PP, la notification de PP, le widget PP et, pour les appareils Samsung, depuis le panneau Edge. Vous pouvez également directement activer un profil via le widget PP 4x4 , un raccourci vers le profil ou, pour les appareils Samsung, depuis le panneau Edge.</string>
   <string name="important_info_quick_guide_events_1"><b>ÉVÉNEMENTS:</b> Vous permettent de configurer lorsqu’un profil est activé. Les événements ont un début et une fin. Vous pouvez configurer ce qui va arriver au début d’un événement, et ce qui se passera-t-il lorsque l’événement se terminera.</string>
   <string name="important_info_quick_guide_events_2">Les événements contiennent des paramètres de configuration des capteurs importants, qui doivent toutes être satisfaits avant qu\'un événement soit déclenché. Si certains capteurs ne sont plus actifs, l’événement se terminera (pause).</string>
   <string name="important_info_quick_guide_sensors_1">Exemples de capteur :</string>
@@ -1234,6 +1232,15 @@ Configurez uniquement les radios dont vous avez besoin.</string>
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1245,6 +1252,11 @@ Configurez uniquement les radios dont vous avez besoin.</string>
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">Affiche le profil actif avec indicateur de préférences. Ouvre l\'activateur sur contact.</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 

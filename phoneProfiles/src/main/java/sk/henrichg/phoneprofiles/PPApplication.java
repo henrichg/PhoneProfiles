@@ -65,7 +65,7 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    static final boolean logIntoLogCat = false;
+    private static final boolean logIntoLogCat = false;
     static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
     private static final String logFilterTags = "##### PPApplication.onCreate"
@@ -1150,7 +1150,7 @@ public class PPApplication extends Application {
                 Build.FINGERPRINT.toLowerCase().contains("xiaomi");
     }
 
-    public static String getEmuiRomName() {
+    private static String getEmuiRomName() {
         try {
             String line;
             //BufferedReader input = null;

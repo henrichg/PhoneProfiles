@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">Tag write ERROR</string>
   <string name="read_nfc_tag_read">Tag read</string>
   <string name="pref_event_permanentRun">Permanent run</string>
-  <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and then restart events</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag is writable</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag is not writable</string>
   <string name="about_application_donate_button">Please donate</string>
@@ -929,12 +928,12 @@
   <string name="important_info_activity_title">Important information</string>
   <string name="important_info_quick_guide_tab">Quick guide</string>
   <string name="important_info_important_info_tab">Important information</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) has two components:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) has two components:</string>
   <string name="important_info_quick_guide_2">1. <b>PROFILES:</b> Specifies how to change device settings.</string>
   <string name="important_info_quick_guide_3">2. <b>EVENTS:</b> Specifies when to change device settings.</string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILES:</b> Allow you to configure device settings such as ringer mode, volume levels, ringtone and notification sounds, radio switch (Wi-Fi, Bluetooth, mobile data, etc.). When a profile is activated, the corresponding settings are permanent. If you want settings to change, another profile must be activated.</string>
   <string name="important_info_quick_guide_profiles_2">Profiles can be activated manually, or by an Event.</string>
-  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PhoneProfiles Activator (pop-up window with list of available profiles). The Activator can be displayed via the PhoneProfiles home icon, the PhoneProfiles notification, PhoneProfiles widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PhoneProfiles 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
+  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PP Activator (pop-up window with list of available profiles). The Activator can be displayed via the PP home icon, the PP notification, PP widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PP 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
   <string name="important_info_quick_guide_events_1"><b>EVENTS:</b> Allow you to configure when a profile activates. Events have a start and end. You can configure what will happen at the start of an event, and what will happen when the event ends.</string>
   <string name="important_info_quick_guide_events_2">Events contain important sensor configuration parameters, which must all be satisfied before an event is triggered. If any sensor does not pass, the event will end (pause).</string>
   <string name="important_info_quick_guide_sensors_1">Sensor examples:</string>
@@ -1233,6 +1232,15 @@
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1244,6 +1252,11 @@
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">Mostra un perfil actiu amb indicador de preferències. Obre activador al tacte.</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 

@@ -985,16 +985,16 @@ public class Permissions {
             return true;
     }
 
-    static boolean grantInstallTonePermissions(Context context, boolean onlyNotification) {
+    static boolean grantInstallTonePermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             List<PermissionType> permissions = new ArrayList<>();
             boolean granted = checkInstallTone(context, permissions);
             if (!granted) {
-                if (onlyNotification) {
+                /*if (onlyNotification) {
                     GrantPermissionActivity.showNotification(GRANT_TYPE_INSTALL_TONE, permissions, false,
                             PPApplication.STARTUP_SOURCE_ACTIVATOR, true, null, false, context);
                 }
-                else {
+                else {*/
                     try {
                         Intent intent = new Intent(context, GrantPermissionActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1006,7 +1006,7 @@ public class Permissions {
                     } catch (Exception e) {
                         return false;
                     }
-                }
+                //}
             }
             return granted;
         }

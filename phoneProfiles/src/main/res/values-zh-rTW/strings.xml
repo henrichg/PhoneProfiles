@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">Tag write ERROR</string>
   <string name="read_nfc_tag_read">Tag read</string>
   <string name="pref_event_permanentRun">常駐執行</string>
-  <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and then restart events</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag is writable</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag is not writable</string>
   <string name="about_application_donate_button">Please donate</string>
@@ -929,12 +928,12 @@
   <string name="important_info_activity_title">Important information</string>
   <string name="important_info_quick_guide_tab">Quick guide</string>
   <string name="important_info_important_info_tab">Important information</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) has two components:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) has two components:</string>
   <string name="important_info_quick_guide_2">1. <b>設定檔:</b> 指定如何變更手機設定.</string>
   <string name="important_info_quick_guide_3">2. <b>事件:</b> 指定何時變更手機設定.</string>
   <string name="important_info_quick_guide_profiles_1"><b>設定檔:</b>允許您配置手機設定如鈴聲模式, 音量大小, 來電與通知的音效, 無線開關 (Wi-Fi, 藍牙, 移動網路等等). 當設定檔被啟動時, 相關設定將固定. 若要改變設定, 必須啟動另一個設定檔.</string>
   <string name="important_info_quick_guide_profiles_2">設定檔可以手動啟動, 也可由事件啟動.</string>
-  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PhoneProfiles Activator (pop-up window with list of available profiles). The Activator can be displayed via the PhoneProfiles home icon, the PhoneProfiles notification, PhoneProfiles widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PhoneProfiles 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
+  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PP Activator (pop-up window with list of available profiles). The Activator can be displayed via the PP home icon, the PP notification, PP widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PP 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
   <string name="important_info_quick_guide_events_1"><b>事件:</b> 允許您配置何時啟動設定檔. 事件有開始及結束. 您可以配置在事件開始時做什麼, 以及事件結束時做什麼.</string>
   <string name="important_info_quick_guide_events_2">Events contain important sensor configuration parameters, which must all be satisfied before an event is triggered. If any sensor does not pass, the event will end (pause).</string>
   <string name="important_info_quick_guide_sensors_1">Sensor examples:</string>
@@ -1206,14 +1205,12 @@
   <string name="phone_profiles_pref_notificationShowButtonExit">Show button \"Exit\"</string>
   <string name="altype_applicationUpgrade">application upgrade</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary">您的手機未連結鈴聲與通知音量.</string>
-
     <string name="phone_profiles_pref_category_widget_list">Widget: List</string>
     <string name="phone_profiles_pref_category_widget_icon_shortcut">Widget: Icon; Shortcut</string>
     <string name="title_activity_shortcut_creator">Shortcut</string>
     <string name="widget_label_icon">Icon</string>
     <string name="widget_label_one_row">Single row</string>
     <string name="widget_label_list">List</string>
-
     <string name="phone_profiles_pref_backgroundProfileUsage">When to activate default profile</string>
     <string name="phone_profiles_pref_backgroundProfileUsage_summary">Activate it only when at end of event is not activated any profile and for restart events.</string>
     <string name="phone_profiles_pref_manualProfileActivation">Manual profile activation</string>
@@ -1233,6 +1230,15 @@
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1244,6 +1250,11 @@
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">以偏好設定指示器顯示啟動中的設定檔. 輕點開啟啟動器.</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 

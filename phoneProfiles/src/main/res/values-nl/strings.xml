@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">Tag bewaarFOUT</string>
   <string name="read_nfc_tag_read">Tag gelezen</string>
   <string name="pref_event_permanentRun">Permanent uitvoeren</string>
-  <string name="pref_event_permanentRun_summary">Pauzeer event na handmatige profiel activatie en start events opnieuw</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Tag is beschrijfbaar</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Tag is niet beschrijfbaar</string>
   <string name="about_application_donate_button">Doneer alstublieft</string>
@@ -929,12 +928,12 @@
   <string name="important_info_activity_title">Belangrijke informatie</string>
   <string name="important_info_quick_guide_tab">Snelstart gids</string>
   <string name="important_info_important_info_tab">Belangrijke informatie</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) bestaat uit twee onderdelen:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) bestaat uit twee onderdelen:</string>
   <string name="important_info_quick_guide_2">1. <b>PROFIELEN:</b> geeft aan hoe apparaatinstellingen te wijzigen.</string>
   <string name="important_info_quick_guide_3">2. <b>EVENTS:</b> Geeft aan hoe apparaatinstellingen te wijzigen.</string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFIELEN:</b> Je kunt apparaatinstellingen wijzigen zoals Beltoonmodus, volumeniveaus, beltoon en notificatiegeluid configureren, radio schakelaar (Wi-Fi, Bluetooth, mobiele data, enz.). Wanneer je profiel activeert worden de corresponderende instellingen permanent. Als je de instellingen wilt wijzigen moet je een ander profiel activeren.</string>
   <string name="important_info_quick_guide_profiles_2">Profielen kunnen handmatig of door een Event worden geactiveerd.</string>
-  <string name="important_info_quick_guide_profiles_3">Je kunt handmatig een profiel activeren met de PhoneProfiles-Activator (pop-up venster met de lijst met beschikbare profielen). De Activator kun je tonen via het PhoneProfiles \' thuis \' icoon, de PhoneProfiles notificatie, PhoneProfiles-widgets en voor Samsung Edge-apparaten via het Edge-deelvenster. Je kunt ook direct een profiel via de PhoneProfiles-4 x 4 widget activeren, een snelkoppeling naar het profiel of op Samsung Edge-apparaten, via het Configuratiescherm van de rand.</string>
+  <string name="important_info_quick_guide_profiles_3">Je kunt handmatig een profiel activeren met de PP-Activator (pop-up venster met de lijst met beschikbare profielen). De Activator kun je tonen via het PP \' thuis \' icoon, de PP notificatie, PP-widgets en voor Samsung Edge-apparaten via het Edge-deelvenster. Je kunt ook direct een profiel via de PP-4 x 4 widget activeren, een snelkoppeling naar het profiel of op Samsung Edge-apparaten, via het Configuratiescherm van de rand.</string>
   <string name="important_info_quick_guide_events_1"><b>Events:</b> Kun je configureren bij activeren van een profiel. Events hebben een begin en eind. Je kunt de actie configureren bij de start van een event en de actie bij het eindigen van een event.</string>
   <string name="important_info_quick_guide_events_2">Events bevatten belangrijke sensor configuratie parameters die allemaal voorwaardelijk zijn om een event te starten. Als een sensor parameter afwijkt zal het event eindigen (pauze).</string>
   <string name="important_info_quick_guide_sensors_1">Sensor voorbeelden:</string>
@@ -1233,6 +1232,15 @@
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1244,6 +1252,11 @@
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">Actief profiel weergeven met voorkeuraanduiding. Opent de Activator bij aanraken.</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 

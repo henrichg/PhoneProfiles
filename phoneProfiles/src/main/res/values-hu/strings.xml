@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">Címke írási HIBA</string>
   <string name="read_nfc_tag_read">Címke olvasva</string>
   <string name="pref_event_permanentRun">Állandó futtatás</string>
-  <string name="pref_event_permanentRun_summary">Esemény szüneteltetés kézi aktiválás után, és indítsa újra az eseményeket</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">Címke írható</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">Címke nem írható</string>
   <string name="about_application_donate_button">Adományát kérjük</string>
@@ -929,12 +928,12 @@
   <string name="important_info_activity_title">Fontos információ</string>
   <string name="important_info_quick_guide_tab">Gyors útmutató</string>
   <string name="important_info_important_info_tab">Fontos információ</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) két részből áll:</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) két részből áll:</string>
   <string name="important_info_quick_guide_2">(1) <b>PROFILOK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.</string>
   <string name="important_info_quick_guide_3">(1) <b>ESEMÉNYEK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.</string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILOK:</b> Segítségével megadhatók az eszközök beállításai között a csengetési mód, a hangerőt, a csengőhang és értesítési hangok, rádió váltás (Wi-Fi, Bluetooth, mobil adat, stb.). A profil aktiválásakor a megfelelő beállítások is állandósulnak. Ha a beállításokat módosításítani akarja, egy másik profilt is aktiválni kell.</string>
   <string name="important_info_quick_guide_profiles_2">Profilokat lehet aktiválni kézzel, vagy egy eseménnyel.</string>
-  <string name="important_info_quick_guide_profiles_3">Egy profil a PhoneProfiles-aktivátoron keresztül (előugró ablak a rendelkezésre álló profilok listájával) kézzel aktiválhatja. Az aktiválás otthon PhoneProfiles-ikon, a PhoneProfiles-értesítés, PhoneProfiles widget keresztül, és a széle panelről a Samsung EDGE eszközökön jeleníthetők meg. Közvetlenül is aktiválhatja a profil révén a PhoneProfiles 4 x 4 widget, a profilokon vagy az Edge panelen keresztül a Samsung Edge eszközökön.</string>
+  <string name="important_info_quick_guide_profiles_3">Egy profil a PP-aktivátoron keresztül (előugró ablak a rendelkezésre álló profilok listájával) kézzel aktiválhatja. Az aktiválás otthon PP-ikon, a PP-értesítés, PP widget keresztül, és a széle panelről a Samsung EDGE eszközökön jeleníthetők meg. Közvetlenül is aktiválhatja a profil révén a PP 4 x 4 widget, a profilokon vagy az Edge panelen keresztül a Samsung Edge eszközökön.</string>
   <string name="important_info_quick_guide_events_1"><b>ESEMÉNYEK:</b> Segítségével konfigurálhatja a profil aktiválásának lefolyását. Eseményeknek van kezdete és vége. Beállíthatja, mi történjen az esemény kezdetekor, és mi fog történni, amikor a esemény véget ér.</string>
   <string name="important_info_quick_guide_events_2">Események tartalmaznak fontos szenzor konfigurációs paramétereket, amelyek az esemény kezdete előtt megfelelő értéket kell adnia. Ha néhány szenzor nem felel meg, az esemény véget ér (szünet).</string>
   <string name="important_info_quick_guide_sensors_1">Szenzor példák:</string>
@@ -1233,6 +1232,15 @@
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1244,6 +1252,11 @@
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">Megjeleníti az aktív profilt beállításait indikátorral. Aktivátor megnyitás érintésre.</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 

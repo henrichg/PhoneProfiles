@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,6 +25,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
 
     // singleton fields
+    @SuppressLint("StaticFieldLeak")
     private static volatile DatabaseHandler instance;
     private SQLiteDatabase writableDb;
 

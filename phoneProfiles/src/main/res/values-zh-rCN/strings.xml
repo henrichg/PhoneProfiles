@@ -714,7 +714,6 @@
   <string name="write_nfc_tag_error">标签写入错误</string>
   <string name="read_nfc_tag_read">标签读取</string>
   <string name="pref_event_permanentRun">常驻运行</string>
-  <string name="pref_event_permanentRun_summary">手动激活情景并重启事件后暂停事件。</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_writable">标签可写</string>
   <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable">标签不可写</string>
   <string name="about_application_donate_button">请捐赠</string>
@@ -929,12 +928,12 @@
   <string name="important_info_activity_title">重要信息</string>
   <string name="important_info_quick_guide_tab">快速指南</string>
   <string name="important_info_important_info_tab">重要信息</string>
-  <string name="important_info_quick_guide_1">PhoneProfiles (PhoneProfiles) 有两个组件：</string>
+  <string name="important_info_quick_guide_1">PhoneProfiles (PP) 有两个组件：</string>
   <string name="important_info_quick_guide_2">1. <b>配置文件</b>：指定如何更改设备设置。</string>
   <string name="important_info_quick_guide_3">2. <b>事件</b>：指定何时更改设备设置。</string>
   <string name="important_info_quick_guide_profiles_1"><b>配置文件</b>：允许您更改设备设置，如响铃模式、音量级别、铃声和通知声音、网络设置 (Wi-Fi、蓝牙、移动数据等)。当配置文件被激活时，相应的设置将被永久更改。如果要更改设置，则必须激活另一个配置文件。</string>
   <string name="important_info_quick_guide_profiles_2">配置文件可手动激活，或者由事件激活。</string>
-  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PhoneProfiles Activator (pop-up window with list of available profiles). The Activator can be displayed via the PhoneProfiles home icon, the PhoneProfiles notification, PhoneProfiles widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PhoneProfiles 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
+  <string name="important_info_quick_guide_profiles_3">You can manually activate a profile through the PP Activator (pop-up window with list of available profiles). The Activator can be displayed via the PP home icon, the PP notification, PP widgets and, for Samsung Edge devices, from the Edge panel. You can also directly activate a profile through the PP 4x4 widget, a shortcut to the profile or, on Samsung Edge devices, through the Edge panel.</string>
   <string name="important_info_quick_guide_events_1"><b>事件</b>：允许您在配置文件激活时进行配置。每个事件有开始和结束。您可以配置事件开始时将发生的情况，以及事件结束时将发生的情况。</string>
   <string name="important_info_quick_guide_events_2">事件包含重要的传感器配置参数，在触发事件之前都必须满足。如果有任何传感器没有通过，则事件将结束 (暂停)。</string>
   <string name="important_info_quick_guide_sensors_1">传感器示例：</string>
@@ -1233,6 +1232,15 @@
     <string name="about_application_translations2">contact:</string>
     <string name="about_application_translations_subject">translation</string>
     <string name="important_info_translations">Please help me with translation, thank you:</string>
+
+    <string name="important_info_email_body_device">Device:</string>
+    <string name="important_info_email_body_android_version">Android version:</string>
+    <string name="important_info_email_body_problems">Problems:</string>
+    <string name="important_info_email_body_questions">Questions:</string>
+    <string name="important_info_email_body_suggestions">Suggestions:</string>
+    <string name="important_info_email_body_translation_language_from">Language from which to translate:</string>
+    <string name="important_info_email_body_translation_language_to">Language to translate:</string>
+
     <string name="about_application_support">Support:</string>
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
@@ -1244,6 +1252,11 @@
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_big_text_notification">Write debug log into log.txt and crash.txt requires some permissions to be granted.</string>
     <string name="dashclock_extension_description">以配置指示器显示激活的情景。触碰时打开激活清单。</string>
+    <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Use icon lightness for custom profile icons</string>
+
+    <string name="preferences_not_enabled_accessibility_service_title">Accessibility service is not enabled!</string>
+    <string name="profile_preferences_volumeVoiceCall">Voice call volume</string>
+    <string name="pref_event_permanentRun_summary">Pause event after manual profile activation and the restart events</string>
 
 
 
