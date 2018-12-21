@@ -132,10 +132,14 @@ public class PhoneProfilesService extends Service {
 
         /*if (PPApplication.getApplicationStarted(getApplicationContext(), false))
             doForFirstStart(null);
-        else
-            stopSelf();*/
-        if (!PPApplication.getApplicationStarted(getApplicationContext(), false))
+        else {
+            showProfileNotification();
             stopSelf();
+        }*/
+        if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
+            showProfileNotification();
+            stopSelf();
+        }
     }
 
     @Override
@@ -147,7 +151,8 @@ public class PhoneProfilesService extends Service {
 
         reenableKeyguard();
 
-        removeProfileNotification(this, true);
+        //clearProfileNotification(this, true);
+        stopForeground(true);
 
         /*synchronized (PhoneProfilesService.class) {
             instance = null;
@@ -379,7 +384,7 @@ public class PhoneProfilesService extends Service {
                 else
                 if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
-                    removeProfileNotification(this, false);
+                    clearProfileNotification(this);
                 }
                 else
                 if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
@@ -967,15 +972,15 @@ public class PhoneProfilesService extends Service {
         });
     }
 
-    private void removeProfileNotification(Context context, boolean onlyEmpty)
+    private void clearProfileNotification(Context context/*, boolean onlyEmpty*/)
     {
-        if (onlyEmpty) {
+        //if (onlyEmpty) {
             final Context appContext = getApplicationContext();
             final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
-            final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
+            //final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
+            _showProfileNotification(null, false);
             dataWrapper.invalidateDataWrapper();
-            _showProfileNotification(profile, false);
-        }
+        /*}
         else {
             if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(context))
                 stopForeground(true);
@@ -985,7 +990,7 @@ public class PhoneProfilesService extends Service {
                     notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
             }
             runningInForeground = false;
-        }
+        }*/
     }
 
     private void setAlarmForNotificationCancel(Context context)

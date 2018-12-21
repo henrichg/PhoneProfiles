@@ -1241,7 +1241,9 @@ public class PPApplication extends Application {
 
             //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
 
-            context.stopService(new Intent(context, PhoneProfilesService.class));
+            if (PhoneProfilesService.getInstance() != null) {
+                context.stopService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
+            }
 
             PPApplication.setApplicationStarted(context, false);
 
