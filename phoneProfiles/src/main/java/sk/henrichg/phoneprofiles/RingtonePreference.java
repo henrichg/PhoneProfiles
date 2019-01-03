@@ -398,7 +398,8 @@ public class RingtonePreference extends DialogPreference {
                     if (showSilent)
                         _toneList.put("", prefContext.getString(R.string.ringtone_preference_none));
 
-                    Cursor cursor = manager.getCursor();
+                    try {
+                        Cursor cursor = manager.getCursor();
 
                     /*
                     profile._soundRingtone=content://settings/system/ringtone
@@ -406,12 +407,13 @@ public class RingtonePreference extends DialogPreference {
                     profile._soundAlarm=content://settings/system/alarm_alert
                     */
 
-                    while (cursor.moveToNext()) {
-                        String _uri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
-                        String _title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX);
-                        String _id = cursor.getString(RingtoneManager.ID_COLUMN_INDEX);
-                        _toneList.put(_uri + "/" + _id, _title);
-                    }
+                        while (cursor.moveToNext()) {
+                            String _uri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
+                            String _title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX);
+                            String _id = cursor.getString(RingtoneManager.ID_COLUMN_INDEX);
+                            _toneList.put(_uri + "/" + _id, _title);
+                        }
+                    } catch (Exception ignored) {}
 
                     return null;
                 }
