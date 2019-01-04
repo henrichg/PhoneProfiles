@@ -3,8 +3,8 @@
                 android:id="@+id/notification_activated_profile_root"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_centerInParent="true"
-                android:padding="6dp">
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp" >
 
     <ImageView
         android:id="@+id/notification_activated_profile_icon"
@@ -13,8 +13,7 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:contentDescription="@string/profile_preferences_profileIcon"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="3dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_profile_default" />
 
@@ -33,7 +32,7 @@
             android:text="@string/profile_name_default"
             style="@style/TextAppearance.Compat.Notification.Title"
             android:ellipsize="end"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <ImageView
             android:id="@+id/notification_activated_profile_pref_indicator"
@@ -50,4 +49,3 @@
     </RelativeLayout>
 
 </RelativeLayout>
-
