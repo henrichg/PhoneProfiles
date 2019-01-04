@@ -104,7 +104,9 @@ class GlobalGUIRoutines {
 
     public static void setTheme(Activity activity, boolean forPopup, boolean withToolbar)
     {
-        activity.setTheme(getTheme(forPopup, withToolbar, activity));
+        int theme = getTheme(forPopup, withToolbar, activity);
+        if (theme != 0)
+            activity.setTheme(theme);
     }
 
     private static int getTheme(boolean forPopup, boolean withToolbar, Context context) {
@@ -179,7 +181,22 @@ class GlobalGUIRoutines {
                     return R.style.Theme_PhoneProfilesTheme_dlight;
             }
         }
-        return 0;
+        else {
+            if (forPopup)
+            {
+                if (withToolbar)
+                    return R.style.PopupTheme_withToolbar_color;
+                else
+                    return R.style.PopupTheme_color;
+            }
+            else
+            {
+                if (withToolbar)
+                    return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
+                else
+                    return R.style.Theme_PhoneProfilesTheme_color;
+            }
+        }
     }
 
     static void reloadActivity(Activity activity, boolean newIntent)
