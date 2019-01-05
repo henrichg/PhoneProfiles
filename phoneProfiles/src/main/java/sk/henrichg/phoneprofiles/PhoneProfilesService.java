@@ -636,15 +636,13 @@ public class PhoneProfilesService extends Service {
 
             RemoteViews contentView = null;
             RemoteViews contentViewLarge;
+
+            boolean darkBackground = ApplicationPreferences.notificationDarkBackground(appContext);
+
             boolean useDecorator = (!PPApplication.romIsMIUI) || (Build.VERSION.SDK_INT >= 26);
             useDecorator = useDecorator && ApplicationPreferences.notificationUseDecoration(appContext);
+            useDecorator = useDecorator && (!darkBackground);
 
-            /*if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("1"))
-                contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_dark);
-            else
-            if (ApplicationPreferences.notificationTheme(dataWrapper.context).equals("2"))
-                contentView = new RemoteViews(dataWrapper.context.getPackageName(), R.layout.notification_drawer_light);
-            else {*/
             if (PPApplication.romIsMIUI) {
                 if (android.os.Build.VERSION.SDK_INT >= 24) {
                     contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_miui);
@@ -887,24 +885,25 @@ public class PhoneProfilesService extends Service {
                     contentView.setImageViewResource(R.id.notification_activated_profile_icon, R.drawable.ic_empty);
             }
 
-            if (ApplicationPreferences.notificationDarkBackground(appContext)) {
+            if (darkBackground) {
                 int color = getResources().getColor(R.color.notificationBackground_dark);
                 contentViewLarge.setInt(R.id.notification_activated_profile_root, "setBackgroundColor", color);
                 if ((Build.VERSION.SDK_INT >= 24) && (contentView != null))
                     contentView.setInt(R.id.notification_activated_profile_root, "setBackgroundColor", color);
             }
 
-            if (ApplicationPreferences.notificationTextColor(appContext).equals("1")) {
+            if (ApplicationPreferences.notificationTextColor(appContext).equals("1") && (!darkBackground)) {
                 contentViewLarge.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
                 if ((Build.VERSION.SDK_INT >= 24) && (contentView != null))
                     contentView.setTextColor(R.id.notification_activated_profile_name, Color.BLACK);
             }
             else
-            if (ApplicationPreferences.notificationTextColor(appContext).equals("2")) {
+            if (ApplicationPreferences.notificationTextColor(appContext).equals("2") || darkBackground) {
                 contentViewLarge.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
                 if ((Build.VERSION.SDK_INT >= 24) && (contentView != null))
                     contentView.setTextColor(R.id.notification_activated_profile_name, Color.WHITE);
             }
+
             contentViewLarge.setTextViewText(R.id.notification_activated_profile_name, profileName);
             if ((Build.VERSION.SDK_INT >= 24) && (contentView != null))
                 contentView.setTextViewText(R.id.notification_activated_profile_name, profileName);
@@ -928,7 +927,7 @@ public class PhoneProfilesService extends Service {
             else
                 notificationBuilder.setContent(contentViewLarge);
 
-            if ((Build.VERSION.SDK_INT >= 26) && (ApplicationPreferences.notificationShowButtonExit(appContext))) {
+            if ((Build.VERSION.SDK_INT >= 24) && (ApplicationPreferences.notificationShowButtonExit(appContext))) {
                 // add action button to stop application
 
                 // intent to LauncherActivity, for click on notification
@@ -1012,23 +1011,24 @@ public class PhoneProfilesService extends Service {
 
     private void clearProfileNotification(/*Context context, boolean onlyEmpty*/)
     {
-        //if (onlyEmpty) {
+        /*if (onlyEmpty) {
             final Context appContext = getApplicationContext();
             final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
             //final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
             _showProfileNotification(null, false);
             dataWrapper.invalidateDataWrapper();
-        /*}
-        else {
-            if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(context))
+        }
+        else*/ {
+        final Context appContext = getApplicationContext();
+            if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBarPermanent(appContext))
                 stopForeground(true);
             else {
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 if (notificationManager != null)
                     notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
             }
             runningInForeground = false;
-        }*/
+        }
     }
 
     private void setAlarmForNotificationCancel(Context context)

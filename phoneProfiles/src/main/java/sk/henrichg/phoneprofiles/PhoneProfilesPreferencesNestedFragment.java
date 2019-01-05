@@ -641,9 +641,13 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preferenceCategory.removePreference(preference);
             }
         }
+
         if (Build.VERSION.SDK_INT < 24) {
             PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("categoryNotifications");
             preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_USE_DECORATION);
+            if ((preferenceCategory != null) && (preference != null))
+                preferenceCategory.removePreference(preference);
+            preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_SHOW_BUTTON_EXIT);
             if ((preferenceCategory != null) && (preference != null))
                 preferenceCategory.removePreference(preference);
         }
@@ -805,6 +809,27 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
             if (_preference != null) {
                 _preference.setEnabled(preferences.getBoolean(key, false));
             }
+        }
+
+        if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_DARK_BACKGROUND)) {
+            boolean darkBackground = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_DARK_BACKGROUND, false);
+            Preference _preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_TEXT_COLOR);
+            if (_preference != null)
+                _preference.setEnabled(!darkBackground);
+            _preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_USE_DECORATION);
+            if (_preference != null)
+                _preference.setEnabled(!darkBackground);
+            boolean useDecoration = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_USE_DECORATION, true);
+            _preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_SHOW_BUTTON_EXIT);
+            if (_preference != null)
+                _preference.setEnabled(useDecoration && !darkBackground);
+        }
+        if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_USE_DECORATION)) {
+            boolean useDecoration = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_USE_DECORATION, true);
+            boolean darkBackground = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_DARK_BACKGROUND, false);
+            Preference _preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_SHOW_BUTTON_EXIT);
+            if (_preference != null)
+                _preference.setEnabled(useDecoration && !darkBackground);
         }
 
         // Do not bind toggles.
