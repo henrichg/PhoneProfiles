@@ -56,6 +56,7 @@ public class PPApplication extends Application {
     //static final String romManufacturer = getROMManufacturer();
     static final boolean romIsMIUI = isMIUI();
     static final boolean romIsEMUI = isEMUI();
+    static final boolean romIsSamsung = isSamsung();
     static String PACKAGE_NAME;
 
     //static final int VERSION_CODE_EXTENDER_1_0_4 = 60;
@@ -1192,6 +1193,12 @@ public class PPApplication extends Application {
                 Build.BRAND.equalsIgnoreCase("huawei") ||
                 Build.MANUFACTURER.equalsIgnoreCase("huawei") ||
                 Build.FINGERPRINT.toLowerCase().contains("huawei");
+    }
+
+    private static boolean isSamsung() {
+        return Build.BRAND.equalsIgnoreCase("samsung") ||
+                Build.MANUFACTURER.equalsIgnoreCase("samsung") ||
+                Build.FINGERPRINT.toLowerCase().contains("samsung");
     }
 
     static boolean hasSystemFeature(Context context, String feature) {
