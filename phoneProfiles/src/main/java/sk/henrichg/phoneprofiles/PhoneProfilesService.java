@@ -932,12 +932,25 @@ public class PhoneProfilesService extends Service {
                 contentViewLarge.setImageViewResource(R.id.notification_activated_profile_pref_indicator, R.drawable.ic_empty);
 
             if (android.os.Build.VERSION.SDK_INT >= 24) {
-                // workaround for MIUI :-(
                 if (useDecorator)
                     notificationBuilder.setStyle(new Notification.DecoratedCustomViewStyle());
                 //if (contentView != null) {
-                    notificationBuilder.setCustomContentView(contentView);
-                    notificationBuilder.setCustomBigContentView(contentViewLarge);
+                    String layoutType = ApplicationPreferences.notificationLayoutType(appContext);
+                    switch (layoutType) {
+                        case "1":
+                            // only large layout
+                            notificationBuilder.setCustomContentView(contentViewLarge);
+                            break;
+                        case "2":
+                            // only small layout
+                            notificationBuilder.setCustomContentView(contentView);
+                            break;
+                        default:
+                            // expandable layout
+                            notificationBuilder.setCustomContentView(contentView);
+                            notificationBuilder.setCustomBigContentView(contentViewLarge);
+                            break;
+                    }
                 //}
                 //else
                 //    notificationBuilder.setCustomContentView(contentViewLarge);
