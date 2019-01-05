@@ -580,7 +580,7 @@ public class PPApplication extends Application {
                         importance = NotificationManager.IMPORTANCE_LOW;
                 }
                 else*/
-                    importance = NotificationManager.IMPORTANCE_LOW;
+                    importance = NotificationManager.IMPORTANCE_DEFAULT;
             } else
                 importance = NotificationManager.IMPORTANCE_MIN;
 
@@ -600,6 +600,7 @@ public class PPApplication extends Application {
             //channel.setLightColor(Color.RED);
             channel.enableVibration(false);
             //channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            channel.setSound(null, null);
 
             NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             if (notificationManager != null)
