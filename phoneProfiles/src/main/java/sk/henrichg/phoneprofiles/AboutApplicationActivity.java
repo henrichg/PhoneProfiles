@@ -71,7 +71,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.about_application_application_version);
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            text.setText(getString(R.string.about_application_version) + " " + pInfo.versionName + " (" + pInfo.versionCode + ")");
+            text.setText(getString(R.string.about_application_version) + " " + pInfo.versionName + " (" + PPApplication.getVersionCode(pInfo) + ")");
         } catch (Exception e) {
             text.setText("");
         }
@@ -299,7 +299,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
                 String packageVersion = "";
                 try {
                     PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-                    packageVersion = " - v" + pInfo.versionName + " (" + pInfo.versionCode + ")";
+                    packageVersion = " - v" + pInfo.versionName + " (" + PPApplication.getVersionCode(pInfo) + ")";
                 } catch (Exception ignored) {
                 }
                 if (subjectText.isEmpty())

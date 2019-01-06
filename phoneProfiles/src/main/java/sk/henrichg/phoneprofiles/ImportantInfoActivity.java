@@ -69,7 +69,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            versionCode = pInfo.versionCode;
+            versionCode = PPApplication.getVersionCode(pInfo);
             PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "versionCode="+versionCode);
         } catch (Exception ignored) {
         }

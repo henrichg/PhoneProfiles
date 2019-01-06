@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
-import android.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -57,6 +58,7 @@ public class ActivateProfileListFragment extends Fragment {
         // configuration changes for example
         setRetainInstance(true);
 
+        //noinspection ConstantConditions
         activityDataWrapper = new DataWrapper(getActivity().getApplicationContext(), false, 0, false);
 
         Intent intent = getActivity().getIntent();
@@ -66,7 +68,7 @@ public class ActivateProfileListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView;
 
@@ -95,7 +97,7 @@ public class ActivateProfileListFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         doOnViewCreated(view/*, savedInstanceState*/);
 
@@ -181,6 +183,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         private LoadProfileListAsyncTask (ActivateProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
+            //noinspection ConstantConditions
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0, false);
         }
 
@@ -233,6 +236,7 @@ public class ActivateProfileListFragment extends Fragment {
 
                     fragment.doOnStart();
 
+                    //noinspection ConstantConditions
                     Intent intent = new Intent(fragment.getActivity().getBaseContext(), EditorProfilesActivity.class);
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR_START);
                     fragment.getActivity().startActivity(intent);
@@ -253,6 +257,7 @@ public class ActivateProfileListFragment extends Fragment {
 
                 fragment.doOnStart();
 
+                //noinspection ConstantConditions
                 final Handler handler = new Handler(fragment.getActivity().getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -278,6 +283,7 @@ public class ActivateProfileListFragment extends Fragment {
 
     private void doOnStart()
     {
+        //noinspection ConstantConditions
         if (!PPApplication.getApplicationStarted(getActivity().getApplicationContext(), false))
         {
             PPApplication.logE("ActivateProfileListFragment.doOnStart","application not started");
@@ -376,6 +382,7 @@ public class ActivateProfileListFragment extends Fragment {
 
         if (ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context))
         {
+            //noinspection ConstantConditions
             ImageView profilePrefIndicatorImageView = getActivity().findViewById(R.id.act_prof_activated_profile_pref_indicator);
             if (profilePrefIndicatorImageView != null)
             {

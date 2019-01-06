@@ -16,11 +16,13 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
     void setPreferenceFragment(sk.henrichg.phoneprofiles.PreferenceFragment preferenceFragment) {
 
         //First check if it's already loaded (configuration change) so we don't overlap fragments
+        //noinspection deprecation
         if(getFragmentManager()
                 .findFragmentByTag("sk.henrichg.phoneprofiles.MainFragment") != null){
             return;
         }
 
+        @SuppressWarnings("deprecation")
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             fragmentTransaction.replace(R.id.content, preferenceFragment,
@@ -67,7 +69,9 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                //noinspection deprecation
                 if (getFragmentManager().getBackStackEntryCount() > 0) {
+                    //noinspection deprecation
                     getFragmentManager().popBackStack();
                 } else {
                     finish();
@@ -85,6 +89,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
         //    id = android.R.id.content;
         //}
 
+        //noinspection deprecation
         return (PreferenceFragment) getFragmentManager().findFragmentById(id);
     }
 
