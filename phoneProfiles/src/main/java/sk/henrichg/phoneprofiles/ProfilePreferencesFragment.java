@@ -20,10 +20,10 @@ public class ProfilePreferencesFragment extends ProfilePreferencesNestedFragment
         super.onCreate(savedInstanceState);
 
         // must by false to avoid FC when rotation changes and preference dialogs are shown
-        //setRetainInstance(false);
+        setRetainInstance(false);
         // this is really important in order to save the state across screen
         // configuration changes for example
-        setRetainInstance(true);
+        //setRetainInstance(true);
 
         updateSharedPreference();
 
