@@ -777,7 +777,7 @@ public class PhoneProfilesService extends Service {
                 notificationBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
             }
 
-            notificationBuilder.setTicker(profileName);
+            //notificationBuilder.setTicker(profileName);
 
             if (inHandlerThread) {
                 if (isIconResourceID)
