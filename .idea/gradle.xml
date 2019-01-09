@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/android-job" />
             <option value="$PROJECT_DIR$/appkillermanager" />
             <option value="$PROJECT_DIR$/phoneProfiles" />
+            <option value="$PROJECT_DIR$/taptargetview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
