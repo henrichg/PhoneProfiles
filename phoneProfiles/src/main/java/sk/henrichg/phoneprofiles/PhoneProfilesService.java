@@ -63,6 +63,7 @@ public class PhoneProfilesService extends Service {
     private RingerModeChangeReceiver ringerModeChangeReceiver = null;
     private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
     private PPPExtenderBroadcastReceiver pppExtenderForceStopApplicationBroadcastReceiver = null;
+    private PPPExtenderBroadcastReceiver pppExtenderBroadcastReceiver = null;
 
     private SettingsContentObserver settingsContentObserver = null;
 
@@ -536,6 +537,16 @@ public class PhoneProfilesService extends Service {
         intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
+        if (pppExtenderBroadcastReceiver != null) {
+            unregisterReceiver(pppExtenderBroadcastReceiver);
+            pppExtenderBroadcastReceiver = null;
+        }
+        pppExtenderBroadcastReceiver = new PPPExtenderBroadcastReceiver();
+        IntentFilter intentFilter23 = new IntentFilter();
+        intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_CONNECTED);
+        registerReceiver(pppExtenderBroadcastReceiver, intentFilter23,
+                PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
+
         if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
             unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
             pppExtenderForceStopApplicationBroadcastReceiver = null;
@@ -549,9 +560,9 @@ public class PhoneProfilesService extends Service {
         intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_REGISTER);
         sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
         pppExtenderForceStopApplicationBroadcastReceiver = new PPPExtenderBroadcastReceiver();
-        IntentFilter intentFilter23 = new IntentFilter();
-        intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
-        intentFilter23.addAction(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END);
+        IntentFilter intentFilter24 = new IntentFilter();
+        intentFilter24.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
+        intentFilter24.addAction(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END);
         registerReceiver(pppExtenderForceStopApplicationBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
