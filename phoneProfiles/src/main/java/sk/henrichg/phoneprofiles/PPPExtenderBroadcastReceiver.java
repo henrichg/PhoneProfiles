@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,33 +33,41 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
 
         PPApplication.logE("PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
 
-        if (intent.getAction().equals(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END)) {
-            final long profileId = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
-            if (profileId != 0) {
-                PPApplication.startHandlerThread();
-                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
-                        PowerManager.WakeLock wakeLock = null;
-                        if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PPPExtenderBroadcastReceiver.onReceive");
-                            wakeLock.acquire(10 * 60 * 1000);
-                        }
+        switch (intent.getAction()) {
+            case PPApplication.ACTION_ACCESSIBILITY_SERVICE_CONNECTED:
+                Intent _intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+                _intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+                _intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_REGISTER);
+                context.sendBroadcast(_intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+                break;
+            case PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END:
+                final long profileId = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+                if (profileId != 0) {
+                    PPApplication.startHandlerThread();
+                    final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
+                            PowerManager.WakeLock wakeLock = null;
+                            if (powerManager != null) {
+                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PPPExtenderBroadcastReceiver.onReceive");
+                                wakeLock.acquire(10 * 60 * 1000);
+                            }
 
-                        Profile profile = DatabaseHandler.getInstance(appContext).getProfile(profileId);
-                        if (profile != null)
-                            ActivateProfileHelper.executeForInteractivePreferences(profile, appContext);
+                            Profile profile = DatabaseHandler.getInstance(appContext).getProfile(profileId);
+                            if (profile != null)
+                                ActivateProfileHelper.executeForInteractivePreferences(profile, appContext);
 
-                        if ((wakeLock != null) && wakeLock.isHeld()) {
-                            try {
-                                wakeLock.release();
-                            } catch (Exception ignored) {}
+                            if ((wakeLock != null) && wakeLock.isHeld()) {
+                                try {
+                                    wakeLock.release();
+                                } catch (Exception ignored) {}
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+                break;
         }
     }
 

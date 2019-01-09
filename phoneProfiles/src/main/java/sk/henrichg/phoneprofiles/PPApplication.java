@@ -139,6 +139,8 @@ public class PPApplication extends Application {
     private static final String PREF_DONATION_DONATED = "donation_donated";
 
     static final String EXTENDER_ACCESSIBILITY_SERVICE_ID = "sk.henrichg.phoneprofilesplusextender/.PPPEAccessibilityService";
+
+    static final String ACTION_ACCESSIBILITY_SERVICE_CONNECTED = "sk.henrichg.phoneprofilesplusextender.ACTION_ACCESSIBILITY_SERVICE_CONNECTED";
     static final String ACTION_ACCESSIBILITY_SERVICE_UNBIND = "sk.henrichg.phoneprofilesplusextender.ACTION_ACCESSIBILITY_SERVICE_UNBIND";
     static final String ACTION_REGISTER_PPPE_FUNCTION = "sk.henrichg.phoneprofilesplusextender.ACTION_REGISTER_PPPE_FUNCTION";
     static final String ACTION_FORCE_STOP_APPLICATIONS_START = "sk.henrichg.phoneprofilesplusextender.ACTION_FORCE_STOP_APPLICATIONS_START";
