@@ -16,7 +16,7 @@ import java.util.List;
 
 import static android.content.Context.POWER_SERVICE;
 
-class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
+class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
 
 
     @Override
@@ -30,7 +30,7 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
         if ((intent == null) || (intent.getAction() == null))
             return;
 
-        PPApplication.logE("AccessibilityServiceBroadcastReceiver.onReceive", "action="+intent.getAction());
+        PPApplication.logE("PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
 
         if (intent.getAction().equals(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END)) {
             final long profileId = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
@@ -43,7 +43,7 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
                         PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = null;
                         if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":AccessibilityServiceBroadcastReceiver.onReceive");
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PPPExtenderBroadcastReceiver.onReceive");
                             wakeLock.acquire(10 * 60 * 1000);
                         }
 
@@ -70,17 +70,17 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
 
             for (AccessibilityServiceInfo service : runningServices) {
                 if (service != null) {
-                    PPApplication.logE("AccessibilityServiceBroadcastReceiver.isAccessibilityServiceEnabled", "serviceId=" + service.getId());
+                    PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "serviceId=" + service.getId());
                     if (PPApplication.EXTENDER_ACCESSIBILITY_SERVICE_ID.equals(service.getId())) {
-                        PPApplication.logE("AccessibilityServiceBroadcastReceiver.isAccessibilityServiceEnabled", "true");
+                        PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "true");
                         return true;
                     }
                 }
             }
-            PPApplication.logE("AccessibilityServiceBroadcastReceiver.isAccessibilityServiceEnabled", "false");
+            PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
             return false;
         }
-        PPApplication.logE("AccessibilityServiceBroadcastReceiver.isAccessibilityServiceEnabled", "false");
+        PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
         return false;
     }
 
@@ -90,19 +90,19 @@ class AccessibilityServiceBroadcastReceiver extends BroadcastReceiver {
             ApplicationInfo appInfo = packageManager.getApplicationInfo("sk.henrichg.phoneprofilesplusextender", 0);
             boolean installed = appInfo.enabled;
             if (installed) {
-                PPApplication.logE("AccessibilityServiceBroadcastReceiver.isExtenderInstalled", "installed=true");
+                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=true");
                 PackageInfo pInfo = packageManager.getPackageInfo(appInfo.packageName, 0);
                 int version = PPApplication.getVersionCode(pInfo);
-                PPApplication.logE("AccessibilityServiceBroadcastReceiver.isExtenderInstalled", "version="+version);
+                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "version="+version);
                 return version;
             }
             else {
-                PPApplication.logE("AccessibilityServiceBroadcastReceiver.isExtenderInstalled", "installed=false");
+                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=false");
                 return 0;
             }
         }
         catch (Exception e) {
-            PPApplication.logE("AccessibilityServiceBroadcastReceiver.isExtenderInstalled", "exception");
+            PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "exception");
             return 0;
         }
     }

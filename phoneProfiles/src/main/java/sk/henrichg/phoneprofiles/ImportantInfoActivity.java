@@ -380,7 +380,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_TRANSLATIONS, activity),
                 true,activity);
 
-        int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
+        int extenderVersion = PPPExtenderBroadcastReceiver.isExtenderInstalled(context);
 
         if ((extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_LATEST)) {
             news = true;

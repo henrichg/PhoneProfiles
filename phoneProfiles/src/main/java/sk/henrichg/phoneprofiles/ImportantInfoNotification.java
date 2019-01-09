@@ -70,7 +70,7 @@ class ImportantInfoNotification {
             }
         }
 
-        int extenderVersion = AccessibilityServiceBroadcastReceiver.isExtenderInstalled(context);
+        int extenderVersion = PPPExtenderBroadcastReceiver.isExtenderInstalled(context);
         if ((extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_LATEST))
             news = true;
 

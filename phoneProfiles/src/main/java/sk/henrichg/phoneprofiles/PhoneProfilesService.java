@@ -62,7 +62,7 @@ public class PhoneProfilesService extends Service {
     private PhoneCallBroadcastReceiver phoneCallBroadcastReceiver = null;
     private RingerModeChangeReceiver ringerModeChangeReceiver = null;
     private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
-    private AccessibilityServiceBroadcastReceiver accessibilityServiceBroadcastReceiver = null;
+    private PPPExtenderBroadcastReceiver pppExtenderForceStopApplicationBroadcastReceiver = null;
 
     private SettingsContentObserver settingsContentObserver = null;
 
@@ -536,15 +536,23 @@ public class PhoneProfilesService extends Service {
         intentFilter8.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
-        if (accessibilityServiceBroadcastReceiver != null) {
-            unregisterReceiver(accessibilityServiceBroadcastReceiver);
-            accessibilityServiceBroadcastReceiver = null;
+        if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
+            unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
+            pppExtenderForceStopApplicationBroadcastReceiver = null;
+            Intent intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+            intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+            intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_UNREGISTER);
+            sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
         }
-        accessibilityServiceBroadcastReceiver = new AccessibilityServiceBroadcastReceiver();
+        Intent intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_REGISTER);
+        sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+        pppExtenderForceStopApplicationBroadcastReceiver = new PPPExtenderBroadcastReceiver();
         IntentFilter intentFilter23 = new IntentFilter();
         intentFilter23.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
         intentFilter23.addAction(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END);
-        registerReceiver(accessibilityServiceBroadcastReceiver, intentFilter23,
+        registerReceiver(pppExtenderForceStopApplicationBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
         if (settingsContentObserver != null) {
@@ -584,9 +592,9 @@ public class PhoneProfilesService extends Service {
             unregisterReceiver(wifiStateChangedBroadcastReceiver);
             wifiStateChangedBroadcastReceiver = null;
         }
-        if (accessibilityServiceBroadcastReceiver != null) {
-            unregisterReceiver(accessibilityServiceBroadcastReceiver);
-            accessibilityServiceBroadcastReceiver = null;
+        if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
+            unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
+            pppExtenderForceStopApplicationBroadcastReceiver = null;
         }
 
         if (settingsContentObserver != null) {
