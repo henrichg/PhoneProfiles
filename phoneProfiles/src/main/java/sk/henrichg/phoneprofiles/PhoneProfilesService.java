@@ -160,9 +160,9 @@ public class PhoneProfilesService extends Service {
                 notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
         }
 
-        /*synchronized (PhoneProfilesService.class) {
+        synchronized (PhoneProfilesService.class) {
             instance = null;
-        }*/
+        }
 
         serviceHasFirstStart = false;
         serviceRunning = false;
