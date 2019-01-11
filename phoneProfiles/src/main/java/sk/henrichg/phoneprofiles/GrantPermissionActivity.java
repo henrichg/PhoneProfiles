@@ -363,7 +363,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         if (negative != null) negative.setAllCaps(false);
                     }
                 });*/
-                dialog.show();
+                if (!isFinishing())
+                    dialog.show();
             //}
         }
         else {
@@ -673,7 +674,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                             if (negative != null) negative.setAllCaps(false);
                         }
                     });*/
-                    dialog.show();
+                    if (!isFinishing())
+                        dialog.show();
                 }
                 else
                     requestPermissions(2);
@@ -721,7 +723,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                                 if (negative != null) negative.setAllCaps(false);
                             }
                         });*/
-                        dialog.show();
+                        if (!isFinishing())
+                            dialog.show();
                     }
                     else
                         requestPermissions(3);
@@ -772,7 +775,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                             if (negative != null) negative.setAllCaps(false);
                         }
                     });*/
-                    dialog.show();
+                    if (!isFinishing())
+                        dialog.show();
                 }
                 else
                     requestPermissions(4);
@@ -786,6 +790,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.M)
     private void requestPermissions(int iteration) {
+
+        if (isFinishing())
+            return;
 
         if (iteration == 1) {
             boolean writeSettingsFound = false;

@@ -711,9 +711,11 @@ public class DataWrapper {
             final DataWrapper _dataWrapper = this;
 
             if (_profile._askForDuration) {
-                FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper,
-                        /*monochrome, monochromeValue,*/ _startupSource);
-                dlg.show();
+                if (!_activity.isFinishing()) {
+                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(_activity, _profile, _dataWrapper,
+                            /*monochrome, monochromeValue,*/ _startupSource);
+                    dlg.show();
+                }
             }
             else {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -766,15 +768,18 @@ public class DataWrapper {
                         if (negative != null) negative.setAllCaps(false);
                     }
                 });*/
-                dialog.show();
+                if (!activity.isFinishing())
+                    dialog.show();
             }
         }
         else
         {
             if (profile._askForDuration/* && interactive*/) {
-                FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
-                        /*monochrome, monochromeValue,*/ startupSource);
-                dlg.show();
+                if (!activity.isFinishing()) {
+                    FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
+                            /*monochrome, monochromeValue,*/ startupSource);
+                    dlg.show();
+                }
             }
             else {
                 boolean granted;
