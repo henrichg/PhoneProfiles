@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEditorDialogViewHolder>
-                                                implements FastScrollRecyclerView.SectionedAdapter
+        implements FastScrollRecyclerView.SectionedAdapter
 {
     private final Context context;
 
@@ -34,7 +34,7 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
     @Override
     public void onBindViewHolder(@NonNull ApplicationEditorDialogViewHolder holder, int position) {
         // Application to display
-        Application application = dialog.cachedApplicationList.get(position);
+        Application application = dialog.applicationList.get(position);
         //System.out.println(String.valueOf(position));
 
         holder.bindApplication(application, position);
@@ -43,7 +43,7 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
     @NonNull
     @Override
     public String getSectionName(int position) {
-        Application application = dialog.cachedApplicationList.get(position);
+        Application application = dialog.applicationList.get(position);
         /*if (application.checked)
             return "*";
         else*/
@@ -55,12 +55,12 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
         if (dialog.cachedApplicationList == null)
             return 0;
         else
-            return dialog.cachedApplicationList.size();
+            return dialog.applicationList.size();
     }
 
     /*
     public Object getItem(int position) {
-        return dialog.cachedApplicationList.get(position);
+        return dialog.applicationList.get(position);
     }
     */
 
