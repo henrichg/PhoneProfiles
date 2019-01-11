@@ -346,6 +346,14 @@ public class DataWrapper {
                 profile._deviceBluetooth = 2;
                 profile._deviceGPS = 2;
                 break;
+            case 6:
+                profile = getNonInitializedProfile(baseContext.getString(R.string.default_profile_name_battery_ok), "ic_profile_battery_3", 7);
+                profile._deviceAutoSync = 1;
+                profile._deviceMobileData = 1;
+                profile._deviceWiFi = 1;
+                profile._deviceBluetooth = 1;
+                profile._deviceGPS = 1;
+                break;
             default:
                 profile = null;
         }
