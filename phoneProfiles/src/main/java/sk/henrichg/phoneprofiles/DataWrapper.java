@@ -374,7 +374,7 @@ public class DataWrapper {
             clearProfileList();
             DatabaseHandler.getInstance(context).deleteAllProfiles();
 
-            for (int index = 0; index < 6; index++)
+            for (int index = 0; index < 7; index++)
                 getPredefinedProfile(index, true, baseContext);
 
             fillProfileList(generateIcons, generateIndicators);
