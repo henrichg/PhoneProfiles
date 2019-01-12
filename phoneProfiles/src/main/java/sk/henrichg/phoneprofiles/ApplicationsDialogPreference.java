@@ -157,15 +157,12 @@ public class ApplicationsDialogPreference  extends DialogPreference
         AppCompatImageButton addButton = layout.findViewById(R.id.applications_pref_dlg_add);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        //noinspection ConstantConditions
         applicationsListView = layout.findViewById(R.id.applications_pref_dlg_listview);
         //applicationsListView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         applicationsListView.setLayoutManager(layoutManager);
         applicationsListView.setHasFixedSize(true);
 
-        //noinspection ConstantConditions
         linlaProgress = layout.findViewById(R.id.applications_pref_dlg_linla_progress);
-        //noinspection ConstantConditions
         rellaDialog = layout.findViewById(R.id.applications_pref_dlg_rella_dialog);
 
         listAdapter = new ApplicationsDialogPreferenceAdapter(context, this, this);
@@ -548,7 +545,7 @@ public class ApplicationsDialogPreference  extends DialogPreference
         Context context = view.getContext();
         PopupMenu popup;
         //if (android.os.Build.VERSION.SDK_INT >= 19)
-            popup = new PopupMenu(context, view, Gravity.END);
+        popup = new PopupMenu(context, view, Gravity.END);
         //else
         //    popup = new PopupMenu(context, view);
         new MenuInflater(context).inflate(R.menu.applications_pref_dlg_item_edit, popup.getMenu());
@@ -589,45 +586,24 @@ public class ApplicationsDialogPreference  extends DialogPreference
         listAdapter.notifyDataSetChanged();
     }
 
-    void updateApplication(Application application, int filterInEditor, int positionInEditor, int startApplicationDelay) {
-        if (positionInEditor == -1)
+    void updateApplication(Application application, Application selectedApplication, int startApplicationDelay) {
+        if (selectedApplication == null)
             return;
 
         if (EditorProfilesActivity.getApplicationsCache() != null) {
             List<Application> cachedApplicationList = EditorProfilesActivity.getApplicationsCache().getList(false);
             if (cachedApplicationList != null) {
                 int _position = applicationsList.indexOf(application);
-
-                // search filtered application in cachedApplicationList
-                int pos = 0;
-                Application cachedApplication = null;
-                for (Application _application : cachedApplicationList) {
-                    boolean search = false;
-                    if ((filterInEditor == 0) && (!_application.shortcut))
-                        search = true;
-                    if ((filterInEditor == 1) && (_application.shortcut))
-                        search = true;
-                    if (search) {
-                        if (pos == positionInEditor) {
-                            cachedApplication = _application;
-                            break;
-                        }
-                        pos++;
-                    }
-                }
-
                 Application editedApplication = application;
                 if (editedApplication == null) {
                     editedApplication = new Application();
                     applicationsList.add(editedApplication);
                     _position = applicationsList.size() - 1;
                 }
-                if (cachedApplication != null) {
-                    editedApplication.shortcut = cachedApplication.shortcut;
-                    editedApplication.appLabel = cachedApplication.appLabel;
-                    editedApplication.packageName = cachedApplication.packageName;
-                    editedApplication.activityName = cachedApplication.activityName;
-                }
+                editedApplication.shortcut = selectedApplication.shortcut;
+                editedApplication.appLabel = selectedApplication.appLabel;
+                editedApplication.packageName = selectedApplication.packageName;
+                editedApplication.activityName = selectedApplication.activityName;
 
                 if (!editedApplication.shortcut)
                     editedApplication.shortcutId = 0;
