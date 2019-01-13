@@ -9,6 +9,12 @@ import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
 public class Letv extends DeviceAbstract {
+
+    private final String LETV_ACTION_POWERSAVE_V1[] = {"com.letv.android.letvsafe", "com.letv.android.letvsafe.BackgroundAppManageActivity"};
+
+    private final String LETV_ACTION_AUTOSTART_V1[] = {"com.letv.android.letvsafe", "com.letv.android.letvsafe.AutobootManageActivity"};
+
+
     @Override
     public boolean isThatRom() {
         return Build.BRAND.equalsIgnoreCase(getDeviceManufacturer().toString()) ||
@@ -22,36 +28,23 @@ public class Letv extends DeviceAbstract {
     }
 
     @Override
-    public boolean isActionPowerSavingAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionPowerSaving(context));
-    }
-
-    @Override
-    public boolean isActionAutoStartAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionAutoStart(context));
-    }
-
-    @Override
-    public boolean isActionNotificationAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionNotification(context));
-    }
-
-    @Override
     public Intent getActionPowerSaving(Context context) {
         Intent intent = ActionsUtils.createIntent();
-        intent.setComponent(
-                new ComponentName("com.letv.android.letvsafe",
-                        "com.letv.android.letvsafe.BackgroundAppManageActivity"));
-        return intent;
+        intent.setComponent(new ComponentName(LETV_ACTION_POWERSAVE_V1[0], LETV_ACTION_POWERSAVE_V1[1]));
+        if (ActionsUtils.isIntentAvailable(context, intent))
+            return intent;
+
+        return null;
     }
 
     @Override
     public Intent getActionAutoStart(Context context) {
         Intent intent = ActionsUtils.createIntent();
-        intent.setComponent(
-                new ComponentName("com.letv.android.letvsafe",
-                        "com.letv.android.letvsafe.AutobootManageActivity"));
-        return intent;
+        intent.setComponent(new ComponentName(LETV_ACTION_AUTOSTART_V1[0], LETV_ACTION_AUTOSTART_V1[1]));
+        if (ActionsUtils.isIntentAvailable(context, intent))
+            return intent;
+
+        return null;
     }
 
     @Override

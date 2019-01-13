@@ -13,6 +13,9 @@ import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 // TODO TESTS
 public class Asus extends DeviceAbstract {
 
+    //new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(
+    //        Uri.parse("mobilemanager://function/entry/AutoStart"))
+
     private static final String ASUS_PACAKGE_MOBILEMANAGER = "com.asus.mobilemanager";
     private static final String ASUS_ACTIVITY_MOBILEMANAGER_FUNCTION_ACTIVITY = "com.asus.mobilemanager.entry.FunctionActivity";
     private static final String ASUS_ACTIVITY_MOBILEMANAGER_FUNCTION_AUTOSTART_ACTIVITY = "com.asus.mobilemanager.autostart.AutoStartActivity";
@@ -30,21 +33,6 @@ public class Asus extends DeviceAbstract {
     }
 
     @Override
-    public boolean isActionPowerSavingAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionPowerSaving(context));
-    }
-
-    @Override
-    public boolean isActionAutoStartAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionAutoStart(context));
-    }
-
-    @Override
-    public boolean isActionNotificationAvailable(Context context) {
-        return ActionsUtils.isIntentAvailable(context, getActionNotification(context));
-    }
-
-    @Override
     public Intent getActionPowerSaving(Context context) {
         // Juste need to use the regular battery non optimization
         // permission =)
@@ -56,7 +44,10 @@ public class Asus extends DeviceAbstract {
         Intent intent = ActionsUtils.createIntent();
         intent.putExtra("showNotice",true);
         intent.setComponent(new ComponentName(ASUS_PACAKGE_MOBILEMANAGER, ASUS_ACTIVITY_MOBILEMANAGER_FUNCTION_AUTOSTART_ACTIVITY));
-        return intent;
+        if (ActionsUtils.isIntentAvailable(context, intent))
+            return intent;
+
+        return null;
     }
 
     @Override
@@ -65,7 +56,10 @@ public class Asus extends DeviceAbstract {
         Intent intent = ActionsUtils.createIntent();
         intent.putExtra("showNotice",true);
         intent.setComponent(new ComponentName(ASUS_PACAKGE_MOBILEMANAGER, ASUS_ACTIVITY_MOBILEMANAGER_FUNCTION_ACTIVITY));
-        return intent;
+        if (ActionsUtils.isIntentAvailable(context, intent))
+            return intent;
+
+        return null;
     }
 
     @Override
