@@ -60,13 +60,17 @@ public class ProfilePreferencesActivity extends PreferenceActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("color"))
-                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
-            else
-            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
-                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primaryDark19_white));
-            else
-                tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_dark));
+            switch (ApplicationPreferences.applicationTheme(getApplicationContext())) {
+                case "color":
+                    tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
+                    break;
+                case "white":
+                    tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primaryDark19_white));
+                    break;
+                default:
+                    tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary_dark));
+                    break;
+            }
         }
 
         //getSupportActionBar().setHomeButtonEnabled(true);
@@ -614,6 +618,8 @@ public class ProfilePreferencesActivity extends PreferenceActivity
 
         ApplicationPreferences.getSharedPreferences(this);
 
+        String applicationTheme = ApplicationPreferences.applicationTheme(getApplicationContext());
+
         if (!showSaveMenu) {
             if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
                 //Log.d("ProfilePreferencesActivity.showTargetHelps", "PREF_START_TARGET_HELPS=true");
@@ -630,12 +636,12 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                 //final Display display = getWindowManager().getDefaultDisplay();
 
                 int circleColor = R.color.tabTargetHelpCircleColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
+                if (applicationTheme.equals("dark"))
                     circleColor = R.color.tabTargetHelpCircleColor_dark;
                 int textColor = R.color.tabTargetHelpTextColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
+                if (applicationTheme.equals("white"))
                     textColor = R.color.tabTargetHelpTextColor_white;
-                boolean tintTarget = !ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white");
+                boolean tintTarget = !applicationTheme.equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 List<TapTarget> targets = new ArrayList<>();
@@ -693,12 +699,12 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                 //final Display display = getWindowManager().getDefaultDisplay();
 
                 int circleColor = R.color.tabTargetHelpCircleColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
+                if (applicationTheme.equals("dark"))
                     circleColor = R.color.tabTargetHelpCircleColor_dark;
                 int textColor = R.color.tabTargetHelpTextColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
+                if (applicationTheme.equals("white"))
                     textColor = R.color.tabTargetHelpTextColor_white;
-                boolean tintTarget = !ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white");
+                boolean tintTarget = !applicationTheme.equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {

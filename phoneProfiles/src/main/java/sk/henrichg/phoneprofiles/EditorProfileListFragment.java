@@ -129,10 +129,13 @@ public class EditorProfileListFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView;
 
-        if (ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context) && ApplicationPreferences.applicationEditorHeader(activityDataWrapper.context))
+        boolean applicationEditorPrefIndicator = ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context);
+        boolean applicationEditorHeader = ApplicationPreferences.applicationEditorHeader(activityDataWrapper.context);
+
+        if (applicationEditorPrefIndicator && applicationEditorHeader)
             rootView = inflater.inflate(R.layout.editor_profile_list, container, false);
         else
-        if (ApplicationPreferences.applicationEditorHeader(activityDataWrapper.context))
+        if (applicationEditorHeader)
             rootView = inflater.inflate(R.layout.editor_profile_list_no_indicator, container, false);
         else
             rootView = inflater.inflate(R.layout.editor_profile_list_no_header, container, false);
@@ -239,11 +242,15 @@ public class EditorProfileListFragment extends Fragment
         //private final Context baseContext;
         boolean defaultProfilesGenerated = false;
 
+        boolean applicationEditorPrefIndicator;
+
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
             //noinspection ConstantConditions
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0, false);
             //this.baseContext = fragment.getActivity();
+
+            applicationEditorPrefIndicator = ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context);
         }
 
         @Override
@@ -261,13 +268,13 @@ public class EditorProfileListFragment extends Fragment
 
         @Override
         protected Void doInBackground(Void... params) {
-            dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
+            dataWrapper.fillProfileList(true, applicationEditorPrefIndicator);
             if (dataWrapper.profileList.size() == 0)
             {
                 // no profiles in DB, generate default profiles
                 EditorProfileListFragment fragment = this.fragmentWeakRef.get();
                 if ((fragment != null) && (fragment.getActivity() != null)) {
-                    dataWrapper.fillPredefinedProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context), fragment.getActivity());
+                    dataWrapper.fillPredefinedProfileList(true, applicationEditorPrefIndicator, fragment.getActivity());
                     defaultProfilesGenerated = true;
                 }
             }
@@ -284,7 +291,7 @@ public class EditorProfileListFragment extends Fragment
                 fragment.progressBar.setVisibility(View.GONE);
 
                 // get local profileList
-                dataWrapper.fillProfileList(true, ApplicationPreferences.applicationEditorPrefIndicator(dataWrapper.context));
+                dataWrapper.fillProfileList(true, applicationEditorPrefIndicator);
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.copyProfileList(dataWrapper);
 
@@ -300,7 +307,7 @@ public class EditorProfileListFragment extends Fragment
                 // update activity for activated profile
                 Profile profile;
                 profile = fragment.activityDataWrapper.getActivatedProfile(true,
-                        ApplicationPreferences.applicationEditorPrefIndicator(fragment.activityDataWrapper.context));
+                        applicationEditorPrefIndicator);
                 fragment.updateHeader(profile);
                 fragment.profileListAdapter.notifyDataSetChanged(false);
                 if (!ApplicationPreferences.applicationEditorHeader(fragment.activityDataWrapper.context))
@@ -677,12 +684,14 @@ public class EditorProfileListFragment extends Fragment
         if ((activityDataWrapper == null) || (profileListAdapter == null))
             return;
 
+        boolean applicationEditorPrefIndicator = ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context);
+
         Profile profileFromAdapter = profileListAdapter.getActivatedProfile();
         if (profileFromAdapter != null) {
             profileFromAdapter._checked = false;
             if (refreshIcons) {
                 activityDataWrapper.refreshProfileIcon(profileFromAdapter, true,
-                        ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
+                        applicationEditorPrefIndicator);
             }
         }
 
@@ -690,12 +699,12 @@ public class EditorProfileListFragment extends Fragment
         if (profileFromDB != null)
         {
             Profile profileFromDataWrapper = activityDataWrapper.getProfileById(profileFromDB._id, true,
-                    ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
+                    applicationEditorPrefIndicator);
             if (profileFromDataWrapper != null) {
                 profileFromDataWrapper._checked = true;
                 if (refreshIcons) {
                     activityDataWrapper.refreshProfileIcon(profileFromDataWrapper, true,
-                            ApplicationPreferences.applicationEditorPrefIndicator(activityDataWrapper.context));
+                            applicationEditorPrefIndicator);
                 }
             }
             updateHeader(profileFromDataWrapper);
@@ -727,12 +736,14 @@ public class EditorProfileListFragment extends Fragment
 
         ApplicationPreferences.getSharedPreferences(getActivity());
 
-        if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true) ||
+        boolean startTargetHelps = ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true);
+
+        if (startTargetHelps ||
                 ApplicationPreferences.preferences.getBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true)) {
 
             //Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
-            if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+            if (startTargetHelps) {
 
                 //Log.d("EditorProfileListFragment.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 

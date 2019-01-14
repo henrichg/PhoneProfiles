@@ -283,7 +283,9 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
 
         ApplicationPreferences.getSharedPreferences(activity);
 
-        if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+        boolean startTargetHelps = ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true);
+
+        if (startTargetHelps) {
 
             //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS_ORDER=true");
 
@@ -295,7 +297,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                 textColor = R.color.tabTargetHelpTextColor_white;
             boolean tintTarget = !ApplicationPreferences.applicationTheme(activity).equals("white");
 
-            if (ApplicationPreferences.preferences.getBoolean(PREF_START_TARGET_HELPS, true)) {
+            if (startTargetHelps) {
                 //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 
                 SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();

@@ -2077,6 +2077,8 @@ public class Profile {
 
         boolean checked = false;
 
+        boolean applicationNeverAskForGrantRoot = ApplicationPreferences.applicationNeverAskForGrantRoot(context);
+
         if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE))
         {
             //if (android.os.Build.VERSION.SDK_INT >= 17)
@@ -2088,7 +2090,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._deviceAirplaneMode != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2185,7 +2187,7 @@ public class Profile {
                         if (profile != null) {
                             // test if grant root is disabled
                             if (profile._deviceMobileData != 0) {
-                                if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                if (applicationNeverAskForGrantRoot) {
                                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                     // not needed to test all parameters
                                     return preferenceAllowed;
@@ -2247,7 +2249,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._deviceGPS != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2291,7 +2293,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._deviceNFC != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2338,7 +2340,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._deviceWiFiAP != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2378,7 +2380,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._vibrateWhenRinging != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2413,7 +2415,7 @@ public class Profile {
                         if (profile != null) {
                             // test if grant root is disabled
                             if (profile.getDeviceBrightnessChange() && profile.getDeviceBrightnessAutomatic()) {
-                                if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                if (applicationNeverAskForGrantRoot) {
                                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                     // not needed to test all parameters
                                     return preferenceAllowed;
@@ -2454,7 +2456,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._devicePowerSaveMode != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2493,7 +2495,7 @@ public class Profile {
                             if (profile != null) {
                                 // test if grant root is disabled
                                 if (profile._deviceNetworkType != 0) {
-                                    if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                                    if (applicationNeverAskForGrantRoot) {
                                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                         // not needed to test all parameters
                                         return preferenceAllowed;
@@ -2539,7 +2541,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._notificationLed != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;
@@ -2623,7 +2625,7 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._headsUpNotifications != 0) {
-                            if (ApplicationPreferences.applicationNeverAskForGrantRoot(context)) {
+                            if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
                                 return preferenceAllowed;

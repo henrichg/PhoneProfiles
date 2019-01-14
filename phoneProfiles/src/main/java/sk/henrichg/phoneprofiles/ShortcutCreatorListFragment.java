@@ -105,6 +105,8 @@ public class ShortcutCreatorListFragment extends Fragment {
         private final WeakReference<ShortcutCreatorListFragment> fragmentWeakRef;
         private final DataWrapper dataWrapper;
 
+        boolean applicationActivatorPrefIndicator;
+
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {
                 if (GlobalGUIRoutines.collator != null)
@@ -118,6 +120,8 @@ public class ShortcutCreatorListFragment extends Fragment {
             this.fragmentWeakRef = new WeakReference<>(fragment);
             //noinspection ConstantConditions
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0, false);
+
+            applicationActivatorPrefIndicator = ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context);
         }
 
         @Override
@@ -135,7 +139,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            this.dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context));
+            this.dataWrapper.fillProfileList(true, applicationActivatorPrefIndicator);
             Collections.sort(dataWrapper.profileList, new ProfileComparator());
             return null;
         }
@@ -150,7 +154,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                 fragment.progressBar.setVisibility(View.GONE);
 
                 // get local profileList
-                dataWrapper.fillProfileList(true, ApplicationPreferences.applicationActivatorPrefIndicator(this.dataWrapper.context));
+                dataWrapper.fillProfileList(true, applicationActivatorPrefIndicator);
                 // set copy local profile list into activity profilesDataWrapper
                 fragment.activityDataWrapper.copyProfileList(dataWrapper);
 
