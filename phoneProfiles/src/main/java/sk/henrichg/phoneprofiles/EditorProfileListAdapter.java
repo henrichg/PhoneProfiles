@@ -297,7 +297,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                 textColor = R.color.tabTargetHelpTextColor_white;
             boolean tintTarget = !ApplicationPreferences.applicationTheme(activity).equals("white");
 
-            if (startTargetHelps) {
+            //if (startTargetHelps) {
                 //Log.d("EditorProfileListAdapter.showTargetHelps", "PREF_START_TARGET_HELPS=true");
 
                 SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
@@ -354,7 +354,7 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                         .considerOuterCircleCanceled(true);
                 //targetHelpsSequenceStarted = true;
                 sequence.start();
-            }
+            //}
         }
 
     }

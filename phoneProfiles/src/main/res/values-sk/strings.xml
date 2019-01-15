@@ -260,7 +260,6 @@
   <string name="event_preferences_peripheral_type">Typ príslušenstva</string>
   <string name="array_event_pref_peripheralType_wired_headset">Drôtové handsfree</string>
   <string name="array_event_pref_peripheralType_bluetooth_headset">Bluetooth handsfree</string>
-  <string name="array_event_pref_peripheralType_headphones">Slúchadlá</string>
   <string name="toast_default_events_generated">Prednastavené udalosti vygenerované</string>
   <string name="default_event_name_during_the_week">Cez týždeň</string>
   <string name="default_event_name_weekend">Víkend</string>
@@ -1236,7 +1235,6 @@
     <string name="important_info_email_body_problems">Problémy:</string>
     <string name="important_info_email_body_questions">Otázky:</string>
     <string name="important_info_email_body_suggestions">Návrhy:</string>
-    <string name="important_info_email_body_translation_language_from">Jazyk ktorý prekladať:</string>
     <string name="important_info_email_body_translation_language_to">Jazyk do ktorého prekladať:</string>
 
     <string name="about_application_support">Podpora:</string>
@@ -1261,6 +1259,24 @@
     <string name="permission_why_event_sms_preferences">pre čítanie kontaktov v senzore SMS/MMS</string>
     <string name="permission_why_event_call_preferences">pre čítanie kontaktov, detekciu zvonenia hovoru (pre \"nočný hovor\") v senzore hovoru</string>
     <string name="important_info_accessibility_service_text3">Vzhľadom k tomu, že spoločnosť Google zmenila pravidlá o používaní práv pre prijem hovorov, musíte pre udalostný senzor hovorov nainštalovať PhoneProfilesPlusExtender. Pozrite sa na parametre tohoto senzora pre viac informácií.</string>
+
+    <string name="phone_profiles_pref_notificationDarkBackground">Dark background</string>
+    <string name="phone_profiles_pref_notificationUseDecoration">Use decoration</string>
+    <string name="phone_profiles_pref_notificationLayoutType">Layout type</string>
+    <string name="phone_profiles_pref_notificationLayoutType_expandable">Expandable</string>
+    <string name="phone_profiles_pref_notificationLayoutType_large">Large</string>
+    <string name="phone_profiles_pref_notificationLayoutType_small">Small</string>
+    <string name="event_preferences_applications_LaunchExtender_title">Launch PhoneProfilesPlusExtender</string>
+    <string name="event_preferences_call_LaunchExtender_summary">Please grant permission Phone in PhoneProfilesPlusExtender. Is required for receiving calls by Extender.</string>
+    <string name="event_preferences_sms_LaunchExtender_summary">Please grant permission SMS in PhoneProfilesPlusExtender. Is required for receiving SMS/MMS by Extender.</string>
+    <string name="event_preferences_extender_not_installed">PhoneProfilesPlusExtender is not installed.</string>
+    <string name="array_event_pref_peripheralType_headphones">Slúchadlá bez mikrofónu</string>
+    <string name="preferences_not_installed_PPPExtender_title">PhoneProfilesPlusExtender is not installed!</string>
+    <string name="preferences_old_version_PPPExtender_title">PhoneProfilesPlusExtender is not in newest version!</string>
+    <string name="default_profile_name_battery_ok">OK battery</string>
+    <string name="array_pref_applicationsEditorDialogFilter_applications">(A) Applications</string>
+    <string name="array_pref_applicationsEditorDialogFilter_shortcuts">(S) Shortcuts</string>
+    <string name="array_pref_applicationsEditorDialogFilter_intents">(I) Intents</string>
 
 
 

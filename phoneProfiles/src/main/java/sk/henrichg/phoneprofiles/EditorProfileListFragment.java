@@ -194,8 +194,8 @@ public class EditorProfileListFragment extends Fragment
                 switch (item.getItemId()) {
                     case R.id.menu_add_profile:
                         if (profileListAdapter != null) {
-                            ((EditorProfilesActivity) getActivity()).addProfileDialog = new AddProfileDialog(activity, fragment);
-                            ((EditorProfilesActivity) getActivity()).addProfileDialog.show();
+                            ((EditorProfilesActivity) activity).addProfileDialog = new AddProfileDialog(activity, fragment);
+                            ((EditorProfilesActivity) activity).addProfileDialog.show();
                         }
                         return true;
                     case R.id.menu_delete_all_profiles:
@@ -242,7 +242,7 @@ public class EditorProfileListFragment extends Fragment
         //private final Context baseContext;
         boolean defaultProfilesGenerated = false;
 
-        boolean applicationEditorPrefIndicator;
+        final boolean applicationEditorPrefIndicator;
 
         private LoadProfileListAsyncTask (EditorProfileListFragment fragment) {
             this.fragmentWeakRef = new WeakReference<>(fragment);
@@ -520,8 +520,8 @@ public class EditorProfileListFragment extends Fragment
 
                 public void onClick(DialogInterface dialog, int which) {
                     // remove alarm for profile duration
-                    ProfileDurationAlarmBroadcastReceiver.removeAlarm(getActivity().getApplicationContext());
-                    Profile.setActivatedProfileForDuration(getActivity().getApplicationContext(), 0);
+                    ProfileDurationAlarmBroadcastReceiver.removeAlarm(activityDataWrapper.context);
+                    Profile.setActivatedProfileForDuration(activityDataWrapper.context, 0);
 
                     profileListAdapter.clearNoNotify();
                     DatabaseHandler.getInstance(activityDataWrapper.context).deleteAllProfiles();

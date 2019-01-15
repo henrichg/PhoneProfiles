@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -51,7 +50,7 @@ class ApplicationEditorDialog
     int selectedPosition = -1;
     private int selectedFilter = 0;
 
-    FastScrollRecyclerView listView;
+    private FastScrollRecyclerView listView;
 
     ApplicationEditorDialog(Activity activity, ApplicationsDialogPreference preference,
                             final Application application)

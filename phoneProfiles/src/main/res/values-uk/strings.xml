@@ -260,7 +260,6 @@
   <string name="event_preferences_peripheral_type">Тип аксесуарів</string>
   <string name="array_event_pref_peripheralType_wired_headset">Гарнітура</string>
   <string name="array_event_pref_peripheralType_bluetooth_headset">Гарнітура Bluetooth</string>
-  <string name="array_event_pref_peripheralType_headphones">Навушники</string>
   <string name="toast_default_events_generated">Події за замовчуванням згенеровано</string>
   <string name="default_event_name_during_the_week">Протягом тижня</string>
   <string name="default_event_name_weekend">Вихідні</string>
@@ -1237,7 +1236,6 @@
     <string name="important_info_email_body_problems">Проблеми:</string>
     <string name="important_info_email_body_questions">Запитання:</string>
     <string name="important_info_email_body_suggestions">Пропозиції:</string>
-    <string name="important_info_email_body_translation_language_from">Мова з якої перекладати:</string>
     <string name="important_info_email_body_translation_language_to">Мова на яку перекладати:</string>
 
     <string name="about_application_support">Підтримка:</string>
@@ -1262,6 +1260,24 @@
     <string name="permission_why_event_sms_preferences">для читання контактів SMS/MMS датчиком</string>
     <string name="permission_why_event_call_preferences">для читання контактів, виявлення виклику для \"нічний виклик\") Датчиком викликів</string>
     <string name="important_info_accessibility_service_text3">Завдяки змінам в правилах Google, нарахунок використання дозволів для про отриманя інформації про викликі, потрібно встановити PhoneProfilesPlusExtender щоб використовувати Датчик викликів . Для додаткової інформації перевірте параметри цього датчику.</string>
+
+    <string name="phone_profiles_pref_notificationDarkBackground">Dark background</string>
+    <string name="phone_profiles_pref_notificationUseDecoration">Use decoration</string>
+    <string name="phone_profiles_pref_notificationLayoutType">Layout type</string>
+    <string name="phone_profiles_pref_notificationLayoutType_expandable">Expandable</string>
+    <string name="phone_profiles_pref_notificationLayoutType_large">Large</string>
+    <string name="phone_profiles_pref_notificationLayoutType_small">Small</string>
+    <string name="event_preferences_applications_LaunchExtender_title">Launch PhoneProfilesPlusExtender</string>
+    <string name="event_preferences_call_LaunchExtender_summary">Please grant permission Phone in PhoneProfilesPlusExtender. Is required for receiving calls by Extender.</string>
+    <string name="event_preferences_sms_LaunchExtender_summary">Please grant permission SMS in PhoneProfilesPlusExtender. Is required for receiving SMS/MMS by Extender.</string>
+    <string name="event_preferences_extender_not_installed">PhoneProfilesPlusExtender is not installed.</string>
+    <string name="array_event_pref_peripheralType_headphones">Headphones without microphone</string>
+    <string name="preferences_not_installed_PPPExtender_title">PhoneProfilesPlusExtender is not installed!</string>
+    <string name="preferences_old_version_PPPExtender_title">PhoneProfilesPlusExtender is not in newest version!</string>
+    <string name="default_profile_name_battery_ok">OK battery</string>
+    <string name="array_pref_applicationsEditorDialogFilter_applications">(A) Applications</string>
+    <string name="array_pref_applicationsEditorDialogFilter_shortcuts">(S) Shortcuts</string>
+    <string name="array_pref_applicationsEditorDialogFilter_intents">(I) Intents</string>
 
 
 

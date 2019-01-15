@@ -3275,6 +3275,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                 //db.close();
                             }
                         } else {
+                            //noinspection ConstantConditions
                             ret = IMPORT_ERROR_BUG;
                         }
                     } else {

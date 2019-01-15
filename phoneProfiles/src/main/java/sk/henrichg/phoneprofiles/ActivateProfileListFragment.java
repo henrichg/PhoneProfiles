@@ -178,9 +178,8 @@ public class ActivateProfileListFragment extends Fragment {
         private final WeakReference<ActivateProfileListFragment> fragmentWeakRef;
         private final DataWrapper dataWrapper;
 
-        private boolean applicationActivatorPrefIndicator;
-        private boolean applicationActivatorHeader;
-        private boolean applicationActivatorGridLayout;
+        private final boolean applicationActivatorPrefIndicator;
+        private final boolean applicationActivatorGridLayout;
 
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {
@@ -197,7 +196,6 @@ public class ActivateProfileListFragment extends Fragment {
             this.dataWrapper = new DataWrapper(fragment.getActivity().getApplicationContext(), false, 0, false);
 
             applicationActivatorPrefIndicator = ApplicationPreferences.applicationActivatorPrefIndicator(dataWrapper.context);
-            applicationActivatorHeader = ApplicationPreferences.applicationActivatorHeader(this.dataWrapper.context);
             applicationActivatorGridLayout = ApplicationPreferences.applicationActivatorGridLayout(this.dataWrapper.context);
         }
 

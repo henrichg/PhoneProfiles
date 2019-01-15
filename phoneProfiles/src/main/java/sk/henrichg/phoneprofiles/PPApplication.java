@@ -1078,10 +1078,10 @@ public class PPApplication extends Application {
         synchronized (cmd) {
             while (!cmd.isFinished() && waitTill<=waitTillLimit) {
                 try {
-                    if (!cmd.isFinished()) {
+                    //if (!cmd.isFinished()) {
                         cmd.wait(waitTill);
                         waitTill *= waitTillMultiplier;
-                    }
+                    //}
                 } catch (InterruptedException e) {
                     Log.e("PPApplication.commandWait", Log.getStackTraceString(e));
                 }
