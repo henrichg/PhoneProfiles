@@ -184,7 +184,7 @@ class ApplicationEditorDialog
         fillApplicationList();
         updateSelectedAppViews();
 
-        listAdapter = new ApplicationEditorDialogAdapter(this, activity);
+        listAdapter = new ApplicationEditorDialogAdapter(this);
         listView.setAdapter(listAdapter);
 
         if (selectedPosition > -1) {
