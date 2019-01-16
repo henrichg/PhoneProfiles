@@ -1495,26 +1495,13 @@ class ActivateProfileHelper {
                     PackageManager packageManager = appContext.getPackageManager();
 
                     for (String split : splits) {
-                        int startApplicationDelay = ApplicationsCache.getStartApplicationDelay(split);
-                        if (ApplicationsCache.getStartApplicationDelay(split) > 0) {
+                        int startApplicationDelay = Application.getStartApplicationDelay(split);
+                        if (Application.getStartApplicationDelay(split) > 0) {
                             RunApplicationWithDelayBroadcastReceiver.setDelayAlarm(appContext, startApplicationDelay, split);
                         }
                         else {
-                            if (!ApplicationsCache.isShortcut(split)) {
-                                intent = packageManager.getLaunchIntentForPackage(ApplicationsCache.getPackageName(split));
-                                if (intent != null) {
-                                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    try {
-                                        appContext.startActivity(intent);
-                                        //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                                        //SystemClock.sleep(1000);
-                                        PPApplication.sleep(1000);
-                                    } catch (Exception ignore) {
-                                    }
-                                }
-                            } else {
-                                long shortcutId = ApplicationsCache.getShortcutId(split);
+                            if (Application.isShortcut(split)) {
+                                long shortcutId = Application.getShortcutId(split);
                                 if (shortcutId > 0) {
                                     //Shortcut shortcut = dataWrapper.getDatabaseHandler().getShortcut(shortcutId);
                                     Shortcut shortcut = DatabaseHandler.getInstance(appContext).getShortcut(shortcutId);
@@ -1531,6 +1518,23 @@ class ActivateProfileHelper {
                                             }
                                         } catch (Exception ignored) {
                                         }
+                                    }
+                                }
+                            }
+                            else
+                            if (Application.isIntent(split)) {
+                                //TODO intnet
+                            } else {
+                                intent = packageManager.getLaunchIntentForPackage(Application.getPackageName(split));
+                                if (intent != null) {
+                                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    try {
+                                        appContext.startActivity(intent);
+                                        //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                        //SystemClock.sleep(1000);
+                                        PPApplication.sleep(1000);
+                                    } catch (Exception ignore) {
                                     }
                                 }
                             }

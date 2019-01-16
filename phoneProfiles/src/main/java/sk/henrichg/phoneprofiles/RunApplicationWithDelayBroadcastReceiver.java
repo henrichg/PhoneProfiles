@@ -28,19 +28,8 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
             Intent appIntent;
             PackageManager packageManager = context.getPackageManager();
 
-            if (!ApplicationsCache.isShortcut(runApplicationData)) {
-                String packageName = ApplicationsCache.getPackageName(runApplicationData);
-                appIntent = packageManager.getLaunchIntentForPackage(packageName);
-                if (appIntent != null) {
-                    appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                    appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    try {
-                        context.startActivity(appIntent);
-                    } catch (Exception ignored) {
-                    }
-                }
-            } else {
-                long shortcutId = ApplicationsCache.getShortcutId(runApplicationData);
+            if (Application.isShortcut(runApplicationData)) {
+                long shortcutId = Application.getShortcutId(runApplicationData);
                 if (shortcutId > 0) {
                     Shortcut shortcut = DatabaseHandler.getInstance(context).getShortcut(shortcutId);
                     if (shortcut != null) {
@@ -55,6 +44,21 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
                             }
                         } catch (Exception ignored) {
                         }
+                    }
+                }
+            }
+            else
+            if (Application.isIntent(runApplicationData)) {
+                //TODO intent
+            } else {
+                String packageName = Application.getPackageName(runApplicationData);
+                appIntent = packageManager.getLaunchIntentForPackage(packageName);
+                if (appIntent != null) {
+                    appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        context.startActivity(appIntent);
+                    } catch (Exception ignored) {
                     }
                 }
             }

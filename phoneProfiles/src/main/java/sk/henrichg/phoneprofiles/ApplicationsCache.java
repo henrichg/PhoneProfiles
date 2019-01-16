@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-class ApplicationsCache {
+public class ApplicationsCache {
 
     private class SortList implements Comparator<Application> {
 
@@ -38,10 +38,11 @@ class ApplicationsCache {
     private LruCache<Object, Object> applicationIconsLru;
     private ArrayList<Application> applicationsNoShortcutsList;
     private LruCache<Object, Object> applicationNoShortcutIconsLru;
+
     boolean cached;
     private boolean cancelled;
 
-    ApplicationsCache()
+    public ApplicationsCache()
     {
         applicationsList = new ArrayList<>();
         applicationIconsLru = new LruCache<>(5 * 1024 * 1024); //Max is 5MB
@@ -50,7 +51,7 @@ class ApplicationsCache {
         cached = false;
     }
 
-    void getApplicationsList(Context context)
+    void cacheApplicationsList(Context context)
     {
         if (cached) return;
 
@@ -75,7 +76,7 @@ class ApplicationsCache {
             {
                 Application newInfo = new Application();
 
-                newInfo.shortcut = false;
+                newInfo.type = Application.TYPE_APPLICATION;
                 newInfo.appLabel = applicationInfo.loadLabel(packageManager).toString();
                 newInfo.packageName = applicationInfo.activityInfo.applicationInfo.packageName;
                 newInfo.activityName = applicationInfo.activityInfo.name;
@@ -117,6 +118,7 @@ class ApplicationsCache {
                         }
                     }
                 }
+
             }
 
             if (cancelled)
@@ -141,7 +143,7 @@ class ApplicationsCache {
                     (packageManager.getLaunchIntentForPackage(shortcutInfo.activityInfo.applicationInfo.packageName) != null)) {
                 Application newInfo = new Application();
 
-                newInfo.shortcut = true;
+                newInfo.type = Application.TYPE_SHORTCUT;
                 newInfo.appLabel = shortcutInfo.loadLabel(packageManager).toString();
                 newInfo.packageName = shortcutInfo.activityInfo.applicationInfo.packageName;
                 newInfo.activityName = shortcutInfo.activityInfo.name;
@@ -177,21 +179,7 @@ class ApplicationsCache {
         cached = true;
     }
 
-    /*
-    int getLength(boolean noShortcuts)
-    {
-        if (cached) {
-            if (noShortcuts)
-                return applicationsNoShortcutsList.size();
-            else
-                return applicationsList.size();
-        }
-        else
-            return 0;
-    }
-    */
-
-    List<Application> getList(boolean noShortcuts)
+    List<Application> getApplicationList(boolean noShortcuts)
     {
         if (cached) {
             if (noShortcuts)
@@ -203,20 +191,6 @@ class ApplicationsCache {
             return null;
     }
 
-    /*
-    Application getApplication(int position, boolean noShortcuts)
-    {
-        if (cached) {
-            if (noShortcuts)
-                return applicationsNoShortcutsList.get(position);
-            else
-                return applicationsList.get(position);
-        }
-        else
-            return null;
-    }
-    */
-
     Bitmap getApplicationIcon(Application application, boolean noShortcuts) {
         if (cached) {
             if (noShortcuts)
@@ -227,20 +201,6 @@ class ApplicationsCache {
         else
             return null;
     }
-
-    /*
-    public String getPackageName(int position, boolean noShortcuts)
-    {
-        if (cached) {
-            if (noShortcuts)
-                return applicationsNoShortcutsList.get(position).packageName;
-            else
-                return applicationsList.get(position).packageName;
-        }
-        else
-            return "";
-    }
-    */
 
     void clearCache(boolean nullList)
     {
@@ -257,150 +217,9 @@ class ApplicationsCache {
         cached = false;
     }
 
-    /*
-    boolean isCached()
-    {
-        return cached;
-    }
-    */
-
     void cancelCaching()
     {
         cancelled = true;
-    }
-
-    static boolean isShortcut(String value) {
-        if (value.length() > 2) {
-            String shortcut = value.substring(0, 3);
-            return shortcut.equals("(s)");
-        }
-        return false;
-    }
-
-    public static String getPackageName(String value) {
-        if (value.length() > 2) {
-            String packageName;
-            String shortcut;
-            String[] splits2 = value.split("/");
-            if (splits2.length == 2) {
-                shortcut = splits2[0].substring(0, 3);
-                packageName = splits2[0];
-            }
-            else {
-                shortcut = value.substring(0, 3);
-                packageName = value;
-            }
-            if (shortcut.equals("(s)")) {
-                return packageName.substring(3);
-            }
-            return packageName;
-        }
-        else
-            return "";
-    }
-
-    static String getActivityName(String value) {
-        if (value.length() > 2) {
-            String activityName;
-            String[] splits2 = value.split("/");
-            if (splits2.length == 2) {
-                String[] splits3 = splits2[1].split("#");
-                activityName = splits3[0];
-            }
-            else
-                activityName = "";
-            return activityName;
-        }
-        else
-            return "";
-    }
-
-    static long getShortcutId(String value) {
-        if (value.length() > 2) {
-            long shortcutId = 0;
-            String[] splits2 = value.split("/");
-            if (splits2.length == 2) {
-                // activity exists
-                String shortcut = splits2[0].substring(0, 3);
-                //packageName = splits2[0];
-                String[] splits4 = splits2[1].split("#"); // shortcut id, startApplicationDelay
-                //activityName = splits4[0];
-                if (shortcut.equals("(s)")) {
-                    if (splits4.length >= 2)
-                        try {
-                            shortcutId = Long.parseLong(splits4[1]);
-                        } catch (Exception ignored) {}
-                    //if (splits4.length >= 3)
-                    //    startApplicationDelay = splits4[2];
-                }
-                //else {
-                //    if (splits4.length >= 2)
-                //        startApplicationDelay = splits4[1];
-                //}
-            } /*else {
-                // activity not exists
-                shortcut = value.substring(0, 3);
-                String[] splits4 = value.split("#"); // startApplicationDelay
-                if (splits4.length >= 2) {
-                    packageName = splits4[0];
-                    startApplicationDelay = splits4[1];
-                }
-                else {
-                    packageName = split;
-                }
-                activityName = "";
-            }*/
-            return shortcutId;
-        }
-        else
-            return 0;
-    }
-
-    static int getStartApplicationDelay(String value) {
-        if (value.length() > 2) {
-            int startApplicationDelay = 0;
-            String[] splits2 = value.split("/");
-            if (splits2.length == 2) {
-                // activity exists
-                String shortcut = splits2[0].substring(0, 3);
-                //packageName = splits2[0];
-                String[] splits4 = splits2[1].split("#"); // shortcut id, startApplicationDelay
-                //activityName = splits4[0];
-                if (shortcut.equals("(s)")) {
-                    //if (splits4.length >= 2)
-                    //    try {
-                    //        shortcutId = Long.parseLong(splits4[1]);
-                    //    } catch (Exception ignored) {}
-                    if (splits4.length >= 3)
-                        try {
-                            startApplicationDelay = Integer.parseInt(splits4[2]);
-                        } catch (Exception ignored) {}
-                }
-                else {
-                    if (splits4.length >= 2)
-                        try {
-                            startApplicationDelay = Integer.parseInt(splits4[1]);
-                        } catch (Exception ignored) {}
-                }
-            } else {
-                // activity not exists
-                //shortcut = value.substring(0, 3);
-                String[] splits4 = value.split("#"); // startApplicationDelay
-                if (splits4.length >= 2) {
-                    //packageName = splits4[0];
-                    try {
-                        startApplicationDelay = Integer.parseInt(splits4[1]);
-                    } catch (Exception ignored) {}
-                }
-                //else {
-                //    packageName = split;
-                //}
-                //activityName = "";
-            }
-            return startApplicationDelay;
-        }
-        else
-            return 0;
     }
 
 }
