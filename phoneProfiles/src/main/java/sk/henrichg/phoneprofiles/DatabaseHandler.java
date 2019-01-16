@@ -32,7 +32,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1460;
+    private static final int DATABASE_VERSION = 1470;
 
     // Database Name
     private static final String DATABASE_NAME = "phoneProfilesManager";
@@ -130,6 +130,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Intents Columns names
     private static final String KEY_IN_ID = "_id";
+    private static final String KEY_IN_NAME = "_name";
     private static final String KEY_IN_PACKAGE_NAME = "packageName";
     private static final String KEY_IN_CLASS_NAME = "className";
     private static final String KEY_IN_ACTION = "_action";
@@ -328,7 +329,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_IN_EXTRA_VALUE_10 + " TEXT,"
                 + KEY_IN_EXTRA_TYPE_10 + " INTEGER,"
                 + KEY_IN_CATEGORIES + " TEXT,"
-                + KEY_IN_FLAGS + " TEXT"
+                + KEY_IN_FLAGS + " TEXT,"
+                + KEY_IN_NAME + " TEXT"
                 + ")";
         db.execSQL(CREATE_INTENTS_TABLE);
 
@@ -905,6 +907,14 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     + ")";
             db.execSQL(CREATE_INTENTS_TABLE);
         }
+
+        if (oldVersion < 1470)
+        {
+            db.execSQL("ALTER TABLE " + TABLE_INTENTS + " ADD COLUMN " + KEY_IN_NAME + " TEXT");
+
+            db.execSQL("UPDATE " + TABLE_INTENTS + " SET " + KEY_IN_NAME + "=\"\"");
+        }
+
     }
 
     @Override
@@ -2584,6 +2594,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 ContentValues values = new ContentValues();
                 values.put(KEY_IN_ID, intent._id);
+                values.put(KEY_IN_NAME, intent._name);
                 values.put(KEY_IN_PACKAGE_NAME, intent._packageName);
                 values.put(KEY_IN_CLASS_NAME, intent._className);
                 values.put(KEY_IN_ACTION, intent._action);
@@ -2654,6 +2665,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 // Select All Query
                 final String selectQuery = "SELECT " + KEY_IN_ID + "," +
+                        KEY_IN_NAME + ", " +
                         KEY_IN_PACKAGE_NAME + ", " +
                         KEY_IN_CLASS_NAME + ", " +
                         KEY_IN_ACTION + ", " +
@@ -2703,6 +2715,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                     do {
                         PPIntent ppIntent = new PPIntent(
                                 Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_IN_ID))),
+                                cursor.getString(cursor.getColumnIndex(KEY_IN_NAME)),
                                 cursor.getString(cursor.getColumnIndex(KEY_IN_PACKAGE_NAME)),
                                 cursor.getString(cursor.getColumnIndex(KEY_IN_CLASS_NAME)),
                                 cursor.getString(cursor.getColumnIndex(KEY_IN_ACTION)),
@@ -2766,6 +2779,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 SQLiteDatabase db = getMyWritableDatabase();
 
                 ContentValues values = new ContentValues();
+                values.put(KEY_IN_NAME, intent._name);
                 values.put(KEY_IN_PACKAGE_NAME, intent._packageName);
                 values.put(KEY_IN_CLASS_NAME, intent._className);
                 values.put(KEY_IN_ACTION, intent._action);
@@ -3247,9 +3261,9 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             }
 
                                             // for non existent fields set default value
-                                            /*if (exportedDBObj.getVersion() < 2130) {
-                                                values.put(KEY_NT_UID, "");
-                                            }*/
+                                            if (exportedDBObj.getVersion() < 1470) {
+                                                values.put(KEY_IN_NAME, "");
+                                            }
 
                                             // Inserting Row do db z SQLiteOpenHelper
                                             db.insert(TABLE_INTENTS, null, values);
