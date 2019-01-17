@@ -22,7 +22,7 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
     @Override
     public ApplicationEditorDialogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.applications_editor_dialog_list_item, parent, false);
-        return new ApplicationEditorDialogViewHolder(view, dialog);
+        return new ApplicationEditorDialogViewHolder(view, /*context,*/ dialog);
     }
 
     @Override
@@ -46,10 +46,14 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
 
     @Override
     public int getItemCount() {
-        if (dialog.cachedApplicationList == null)
+        /*if (dialog.cachedApplicationList == null) {
+            //PPApplication.logE("ApplicationEditorDialogAdapter.getItemCount", "getItemCount=0");
             return 0;
-        else
+        }
+        else*/ {
+            //PPApplication.logE("ApplicationEditorDialogAdapter.getItemCount", "getItemCount="+dialog.applicationList.size());
             return dialog.applicationList.size();
+        }
     }
 
     /*
