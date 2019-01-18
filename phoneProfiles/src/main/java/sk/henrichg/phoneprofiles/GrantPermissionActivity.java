@@ -28,7 +28,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     private int grantType;
     private ArrayList<Permissions.PermissionType> permissions;
-    //private boolean onlyNotification;
+    private boolean onlyNotification;
     private boolean forceGrant;
     //private boolean mergedNotification;
     //private boolean forGUI;
@@ -45,6 +45,17 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     private boolean started = false;
 
+    private boolean showRequestWriteSettings = false;
+    private boolean showRequestAccessNotificationPolicy = false;
+    private boolean showRequestDrawOverlays = false;
+    private boolean showRequestReadExternalStorage = false;
+    private boolean showRequestReadPhoneState = false;
+    private boolean showRequestWriteExternalStorage = false;
+    private boolean showRequestAccessCoarseLocation = false;
+    private boolean showRequestAccessFineLocation = false;
+
+    boolean[][] whyPermissionType = null;
+
     private static final int WRITE_SETTINGS_REQUEST_CODE = 9090;
     private static final int PERMISSIONS_REQUEST_CODE = 9091;
     private static final int ACCESS_NOTIFICATION_POLICY_REQUEST_CODE = 9092;
@@ -59,7 +70,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         grantType = intent.getIntExtra(Permissions.EXTRA_GRANT_TYPE, 0);
-        //onlyNotification = intent.getBooleanExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+        onlyNotification = intent.getBooleanExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
         forceGrant = intent.getBooleanExtra(Permissions.EXTRA_FORCE_GRANT, false);
         permissions = intent.getParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES);
         /*mergedNotification = false;
@@ -84,6 +95,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
             profile = dataWrapper.getProfileById(profile_id, false, false);
         else
             profile = Profile.getSharedProfile(getApplicationContext());
+
+        if (onlyNotification) {
+            showNotification();
+            started = true;
+        }
     }
 
     @Override
@@ -157,13 +173,40 @@ public class GrantPermissionActivity extends AppCompatActivity {
         boolean showRequestWriteSettings = false;
         boolean showRequestAccessNotificationPolicy = false;
         boolean showRequestDrawOverlays = false;
-        boolean showRequestReadExternalStorage = false;
-        boolean showRequestReadPhoneState = false;
-        boolean showRequestWriteExternalStorage = false;
-        boolean showRequestAccessCoarseLocation = false;
-        boolean showRequestAccessFineLocation = false;
 
-        boolean[][] whyPermissionType = new boolean[9][100];
+        for (Permissions.PermissionType permissionType : permissions) {
+            if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
+                showRequestWriteSettings = Permissions.getShowRequestWriteSettingsPermission(context) || forceGrant;
+            }
+            if (permissionType.permission.equals(Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+                showRequestAccessNotificationPolicy = Permissions.getShowRequestAccessNotificationPolicyPermission(context) || forceGrant;
+            }
+            if (permissionType.permission.equals(Manifest.permission.SYSTEM_ALERT_WINDOW)) {
+                showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context) || forceGrant;
+            }
+        }
+
+        int iteration = 4;
+        if (showRequestWriteSettings)
+            iteration = 1;
+        else if (showRequestAccessNotificationPolicy)
+            iteration = 2;
+        else if (showRequestDrawOverlays)
+            iteration = 3;
+        requestPermissions(iteration);
+    }
+
+    private boolean canShowRationale(final Context context) {
+        showRequestWriteSettings = false;
+        showRequestAccessNotificationPolicy = false;
+        showRequestDrawOverlays = false;
+        showRequestReadExternalStorage = false;
+        showRequestReadPhoneState = false;
+        showRequestWriteExternalStorage = false;
+        showRequestAccessCoarseLocation = false;
+        showRequestAccessFineLocation = false;
+
+        whyPermissionType = new boolean[9][100];
 
         for (Permissions.PermissionType permissionType : permissions) {
             if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
@@ -179,181 +222,190 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 whyPermissionType[2][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                showRequestReadExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) || forceGrant;
+                showRequestReadExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                 whyPermissionType[3][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.READ_PHONE_STATE)) {
-                showRequestReadPhoneState = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE) || forceGrant;
+                showRequestReadPhoneState = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                 whyPermissionType[4][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                showRequestWriteExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) || forceGrant;
+                showRequestWriteExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                 whyPermissionType[6][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                showRequestAccessCoarseLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION) || forceGrant;
+                showRequestAccessCoarseLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                 whyPermissionType[7][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) || forceGrant;
+                showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                 whyPermissionType[8][permissionType.type] = true;
             }
         }
 
-        if (showRequestWriteSettings ||
+        return (showRequestWriteSettings ||
                 showRequestReadExternalStorage ||
                 showRequestReadPhoneState ||
                 showRequestWriteExternalStorage ||
                 showRequestAccessNotificationPolicy ||
                 showRequestAccessCoarseLocation ||
                 showRequestAccessFineLocation ||
-                showRequestDrawOverlays) {
+                showRequestDrawOverlays);
+
+    }
+
+    private void showRationale(final Context context) {
+        if (canShowRationale(context)) {
 
             /*if (onlyNotification) {
                 showNotification(context);
             }
             else {*/
-                String showRequestString;
+            String showRequestString;
 
-                if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
-                    showRequestString = context.getString(R.string.permissions_for_install_tone_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
-                    showRequestString = context.getString(R.string.permissions_for_wallpaper_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
-                    showRequestString = context.getString(R.string.permissions_for_custom_profile_icon_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_EXPORT)
-                    showRequestString = context.getString(R.string.permissions_for_export_app_data_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_IMPORT)
-                    showRequestString = context.getString(R.string.permissions_for_import_app_data_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
-                    showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
-                else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
-                    showRequestString = context.getString(R.string.permissions_for_log_to_file_text1) + "<br><br>";
-                else {
+            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
+                showRequestString = context.getString(R.string.permissions_for_install_tone_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+                showRequestString = context.getString(R.string.permissions_for_wallpaper_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
+                showRequestString = context.getString(R.string.permissions_for_custom_profile_icon_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_EXPORT)
+                showRequestString = context.getString(R.string.permissions_for_export_app_data_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_IMPORT)
+                showRequestString = context.getString(R.string.permissions_for_import_app_data_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
+                showRequestString = context.getString(R.string.permissions_for_brightness_dialog_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
+                showRequestString = context.getString(R.string.permissions_for_log_to_file_text1) + "<br><br>";
+            else {
                     /*if (mergedNotification) {
                         showRequestString = context.getString(R.string.permissions_for_profile_text1m) + " ";
                         showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text2) + "<br><br>";
                     }
                     else {*/
-                        showRequestString = context.getString(R.string.permissions_for_profile_text1) + " ";
-                        if (profile != null)
-                            showRequestString = showRequestString + "\"" + profile._name + "\" ";
-                        showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text2) + "<br><br>";
-                    //}
-                }
+                showRequestString = context.getString(R.string.permissions_for_profile_text1) + " ";
+                if (profile != null)
+                    showRequestString = showRequestString + "\"" + profile._name + "\" ";
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text2) + "<br><br>";
+                //}
+            }
 
-                if (showRequestWriteSettings) {
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_write_settings) + "</b>";
-                    String whyPermissionString = getWhyPermissionString(whyPermissionType[0]);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestReadExternalStorage || showRequestWriteExternalStorage) {
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
-                    boolean[] permissionTypes = new boolean[100];
-                    for (int i = 0; i < 100; i++) {
-                        permissionTypes[i] = whyPermissionType[3][i] || whyPermissionType[6][i];
-                    }
-                    String whyPermissionString = getWhyPermissionString(permissionTypes);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestReadPhoneState) {
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
-                    boolean[] permissionTypes = new boolean[100];
-                    for (int i = 0; i < 100; i++) {
-                        permissionTypes[i] = whyPermissionType[4][i] || whyPermissionType[5][i];
-                    }
-                    String whyPermissionString = getWhyPermissionString(permissionTypes);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestAccessCoarseLocation || showRequestAccessFineLocation) {
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_location) + "</b>";
-                    boolean[] permissionTypes = new boolean[100];
-                    for (int i = 0; i < 100; i++) {
-                        permissionTypes[i] = whyPermissionType[7][i] || whyPermissionType[8][i];
-                    }
-                    String whyPermissionString = getWhyPermissionString(permissionTypes);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestAccessNotificationPolicy) {
-                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_access_notification_policy) + "</b>";
-                    String whyPermissionString = getWhyPermissionString(whyPermissionType[1]);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-                if (showRequestDrawOverlays) {
-                    if (!PPApplication.romIsMIUI)
-                        showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays) + "</b>";
-                    else
-                        showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays_miui) + "</b>";
-                    String whyPermissionString = getWhyPermissionString(whyPermissionType[2]);
-                    if (whyPermissionString != null)
-                        showRequestString = showRequestString + whyPermissionString;
-                    showRequestString = showRequestString + "<br>";
-                }
-
+            if (showRequestWriteSettings) {
+                showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_write_settings) + "</b>";
+                String whyPermissionString = getWhyPermissionString(whyPermissionType[0]);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
                 showRequestString = showRequestString + "<br>";
-
-                if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_install_tone_text2);
-                else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_wallpaper_text2);
-                else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_custom_profile_icon_text2);
-                else if (grantType == Permissions.GRANT_TYPE_EXPORT)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_export_app_data_text2);
-                else if (grantType == Permissions.GRANT_TYPE_IMPORT)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_import_app_data_text2);
-                else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_brightness_dialog_text2);
-                else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_log_to_file_text2);
+            }
+            if (showRequestReadExternalStorage || showRequestWriteExternalStorage) {
+                showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_storage) + "</b>";
+                boolean[] permissionTypes = new boolean[100];
+                for (int i = 0; i < 100; i++) {
+                    permissionTypes[i] = whyPermissionType[3][i] || whyPermissionType[6][i];
+                }
+                String whyPermissionString = getWhyPermissionString(permissionTypes);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
+                showRequestString = showRequestString + "<br>";
+            }
+            if (showRequestReadPhoneState) {
+                showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_phone) + "</b>";
+                boolean[] permissionTypes = new boolean[100];
+                for (int i = 0; i < 100; i++) {
+                    permissionTypes[i] = whyPermissionType[4][i] || whyPermissionType[5][i];
+                }
+                String whyPermissionString = getWhyPermissionString(permissionTypes);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
+                showRequestString = showRequestString + "<br>";
+            }
+            if (showRequestAccessCoarseLocation || showRequestAccessFineLocation) {
+                showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_location) + "</b>";
+                boolean[] permissionTypes = new boolean[100];
+                for (int i = 0; i < 100; i++) {
+                    permissionTypes[i] = whyPermissionType[7][i] || whyPermissionType[8][i];
+                }
+                String whyPermissionString = getWhyPermissionString(permissionTypes);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
+                showRequestString = showRequestString + "<br>";
+            }
+            if (showRequestAccessNotificationPolicy) {
+                showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_access_notification_policy) + "</b>";
+                String whyPermissionString = getWhyPermissionString(whyPermissionType[1]);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
+                showRequestString = showRequestString + "<br>";
+            }
+            if (showRequestDrawOverlays) {
+                if (!PPApplication.romIsMIUI)
+                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays) + "</b>";
                 else
-                    showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text3);
+                    showRequestString = showRequestString + "<b>" + "\u2022 " + context.getString(R.string.permission_group_name_draw_overlays_miui) + "</b>";
+                String whyPermissionString = getWhyPermissionString(whyPermissionType[2]);
+                if (whyPermissionString != null)
+                    showRequestString = showRequestString + whyPermissionString;
+                showRequestString = showRequestString + "<br>";
+            }
 
-                // set theme and language for dialog alert ;-)
-                // not working on Android 2.3.x
-                GlobalGUIRoutines.setTheme(this, true, true);
-                GlobalGUIRoutines.setLanguage(this.getBaseContext());
+            showRequestString = showRequestString + "<br>";
 
-                final boolean _showRequestWriteSettings = showRequestWriteSettings;
-                final boolean _showRequestAccessNotificationPolicy = showRequestAccessNotificationPolicy;
-                final boolean _showRequestDrawOverlays = showRequestDrawOverlays;
+            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_install_tone_text2);
+            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_wallpaper_text2);
+            else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_custom_profile_icon_text2);
+            else if (grantType == Permissions.GRANT_TYPE_EXPORT)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_export_app_data_text2);
+            else if (grantType == Permissions.GRANT_TYPE_IMPORT)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_import_app_data_text2);
+            else if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_brightness_dialog_text2);
+            else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_log_to_file_text2);
+            else
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_profile_text3);
 
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                dialogBuilder.setTitle(R.string.permissions_alert_title);
-                dialogBuilder.setMessage(GlobalGUIRoutines.fromHtml(showRequestString));
-                dialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int iteration = 4;
-                        if (_showRequestWriteSettings)
-                            iteration = 1;
-                        else if (_showRequestAccessNotificationPolicy)
-                            iteration = 2;
-                        else if (_showRequestDrawOverlays)
-                            iteration = 3;
-                        requestPermissions(iteration);
-                    }
-                });
-                dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        finish();
-                        //Permissions.releaseReferences();
-                        /*if (mergedNotification)
-                            Permissions.clearMergedPermissions(context);*/
-                    }
-                });
-                AlertDialog dialog = dialogBuilder.create();
+            // set theme and language for dialog alert ;-)
+            // not working on Android 2.3.x
+            GlobalGUIRoutines.setTheme(this, true, true);
+            GlobalGUIRoutines.setLanguage(this.getBaseContext());
+
+            final boolean _showRequestWriteSettings = showRequestWriteSettings;
+            final boolean _showRequestAccessNotificationPolicy = showRequestAccessNotificationPolicy;
+            final boolean _showRequestDrawOverlays = showRequestDrawOverlays;
+
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(R.string.permissions_alert_title);
+            dialogBuilder.setMessage(GlobalGUIRoutines.fromHtml(showRequestString));
+            dialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    int iteration = 4;
+                    if (_showRequestWriteSettings)
+                        iteration = 1;
+                    else if (_showRequestAccessNotificationPolicy)
+                        iteration = 2;
+                    else if (_showRequestDrawOverlays)
+                        iteration = 3;
+                    requestPermissions(iteration);
+                }
+            });
+            dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    int iteration = 4;
+                    if (_showRequestWriteSettings)
+                        iteration = 1;
+                    else if (_showRequestAccessNotificationPolicy)
+                        iteration = 2;
+                    else if (_showRequestDrawOverlays)
+                        iteration = 3;
+                    requestPermissions(iteration);
+                }
+            });
+            AlertDialog dialog = dialogBuilder.create();
                 /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialog) {
@@ -363,15 +415,17 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         if (negative != null) negative.setAllCaps(false);
                     }
                 });*/
-                if (!isFinishing())
-                    dialog.show();
+            if (!isFinishing())
+                dialog.show();
             //}
         }
         else {
-            /*if (onlyNotification)
-                showNotification(context);
-            else*/
-                requestPermissions(4);
+            Toast msg = Toast.makeText(context,
+                    context.getResources().getString(R.string.app_name) + ": " +
+                            context.getResources().getString(R.string.toast_permissions_not_granted),
+                    Toast.LENGTH_SHORT);
+            msg.show();
+            finish();
         }
     }
 
@@ -463,78 +517,72 @@ public class GrantPermissionActivity extends AppCompatActivity {
             return "<br>" + "&nbsp;&nbsp;&nbsp;- " + s;
     }
 
-    static void showNotification(int grantType, List<Permissions.PermissionType> permissions,
-                                 @SuppressWarnings("SameParameterValue") boolean forceGrant,
-                                 int startupSource, boolean interactive,
-                                 Profile profile, boolean activateProfile, Context context) {
-        int notificationID;
-        NotificationCompat.Builder mBuilder;
+    void showNotification() {
+        final Context context = getApplicationContext();
+        if (canShowRationale(context)) {
+            int notificationID;
+            NotificationCompat.Builder mBuilder;
 
-        PPApplication.createGrantPermissionNotificationChannel(context);
+            PPApplication.createGrantPermissionNotificationChannel(context);
 
-        Intent intent = new Intent(context, GrantPermissionActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
-        if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
-            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-            String nText = context.getString(R.string.permissions_for_install_tone_big_text_notification);
-            if (android.os.Build.VERSION.SDK_INT < 24) {
-                nTitle = context.getString(R.string.app_name);
-                nText = context.getString(R.string.permissions_for_install_tone_text_notification)+": "+
-                        context.getString(R.string.permissions_for_install_tone_big_text_notification);
-            }
-            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
-                    .setColor(ContextCompat.getColor(context, R.color.primary))
-                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                    .setContentTitle(nTitle) // title for notification
-                    .setContentText(nText)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
-                    .setAutoCancel(true); // clear notification after click
-            notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
-        }
-        else
-        if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
-            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-            String nText = context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
-            if (android.os.Build.VERSION.SDK_INT < 24) {
-                nTitle = context.getString(R.string.app_name);
-                nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
-                        context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
-            }
-            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
-                    .setColor(ContextCompat.getColor(context, R.color.primary))
-                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                    .setContentTitle(nTitle) // title for notification
-                    .setContentText(nText)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
-                    .setAutoCancel(true); // clear notification after click
-            notificationID = PPApplication.GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID;
-        }
-        else
-        if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
-            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-            String nText = context.getString(R.string.permissions_for_log_to_file_big_text_notification);
-            if (android.os.Build.VERSION.SDK_INT < 24) {
-                nTitle = context.getString(R.string.app_name);
-                nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
-                        context.getString(R.string.permissions_for_log_to_file_big_text_notification);
-            }
-            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
-                    .setColor(ContextCompat.getColor(context, R.color.primary))
-                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                    .setContentTitle(nTitle) // title for notification
-                    .setContentText(nText)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
-                    .setAutoCancel(true); // clear notification after click
-            notificationID = PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID;
-        }
-        else {
-            String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
-            String nText = "";
-            if (android.os.Build.VERSION.SDK_INT < 24) {
-                nTitle = context.getString(R.string.app_name);
-                nText = context.getString(R.string.permissions_for_profile_text_notification)+": ";
-            }
+            Intent intent = new Intent(context, GrantPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
+            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
+                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nText = context.getString(R.string.permissions_for_install_tone_big_text_notification);
+                if (android.os.Build.VERSION.SDK_INT < 24) {
+                    nTitle = context.getString(R.string.app_name);
+                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                            context.getString(R.string.permissions_for_install_tone_big_text_notification);
+                }
+                mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                        .setColor(ContextCompat.getColor(context, R.color.primary))
+                        .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                        .setContentTitle(nTitle) // title for notification
+                        .setContentText(nText)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
+                        .setAutoCancel(true); // clear notification after click
+                notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
+            } else if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
+                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nText = context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
+                if (android.os.Build.VERSION.SDK_INT < 24) {
+                    nTitle = context.getString(R.string.app_name);
+                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                            context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
+                }
+                mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                        .setColor(ContextCompat.getColor(context, R.color.primary))
+                        .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                        .setContentTitle(nTitle) // title for notification
+                        .setContentText(nText)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
+                        .setAutoCancel(true); // clear notification after click
+                notificationID = PPApplication.GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID;
+            } else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
+                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nText = context.getString(R.string.permissions_for_log_to_file_big_text_notification);
+                if (android.os.Build.VERSION.SDK_INT < 24) {
+                    nTitle = context.getString(R.string.app_name);
+                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                            context.getString(R.string.permissions_for_log_to_file_big_text_notification);
+                }
+                mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                        .setColor(ContextCompat.getColor(context, R.color.primary))
+                        .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                        .setContentTitle(nTitle) // title for notification
+                        .setContentText(nText)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
+                        .setAutoCancel(true); // clear notification after click
+                notificationID = PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID;
+            } else {
+                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nText = "";
+                if (android.os.Build.VERSION.SDK_INT < 24) {
+                    nTitle = context.getString(R.string.app_name);
+                    nText = context.getString(R.string.permissions_for_profile_text_notification) + ": ";
+                }
             /*if (mergedNotification) {
                 nText = nText + context.getString(R.string.permissions_for_profile_text1m) + " " +
                         context.getString(R.string.permissions_for_profile_big_text_notification);
@@ -544,54 +592,52 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 if (profile != null)
                     nText = nText + "\"" + profile._name + "\" ";
                 nText = nText + context.getString(R.string.permissions_for_profile_big_text_notification);
-            //}
-            mBuilder =   new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
-                    .setColor(ContextCompat.getColor(context, R.color.primary))
-                    .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
-                    .setContentTitle(nTitle) // title for notification
-                    .setContentText(nText) // message for notification
-                    .setAutoCancel(true); // clear notification after click
-            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
+                //}
+                mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
+                        .setColor(ContextCompat.getColor(context, R.color.primary))
+                        .setSmallIcon(R.drawable.ic_exclamation_notify) // notification icon
+                        .setContentTitle(nTitle) // title for notification
+                        .setContentText(nText) // message for notification
+                        .setAutoCancel(true); // clear notification after click
+                mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
 
-            Intent deleteIntent = new Intent(NOTIFICATION_DELETED_ACTION);
-            PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);
-            mBuilder.setDeleteIntent(deletePendingIntent);
+                Intent deleteIntent = new Intent(NOTIFICATION_DELETED_ACTION);
+                PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);
+                mBuilder.setDeleteIntent(deletePendingIntent);
 
-            //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
-            //intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
-            //intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
+                //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
+                //intent.putExtra(Permissions.EXTRA_MONOCHROME, monochrome);
+                //intent.putExtra(Permissions.EXTRA_MONOCHROME_VALUE, monochromeValue);
 
-            if (profile != null) {
-                intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
-                notificationID = 9999 + (int)profile._id;
+                if (profile != null) {
+                    intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
+                    notificationID = 9999 + (int) profile._id;
+                } else
+                    notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
             }
-            else
-                notificationID = PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID;
-        }
-        //permissions.clear();
-        intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
-        intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
-        //intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
-        intent.putExtra(Permissions.EXTRA_FROM_NOTIFICATION, true);
-        intent.putExtra(Permissions.EXTRA_FORCE_GRANT, forceGrant);
-        intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
-        intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
-        intent.putExtra(Permissions.EXTRA_ACTIVATE_PROFILE, activateProfile);
+            //permissions.clear();
+            intent.putExtra(Permissions.EXTRA_GRANT_TYPE, grantType);
+            intent.putParcelableArrayListExtra(Permissions.EXTRA_PERMISSION_TYPES, (ArrayList<Permissions.PermissionType>) permissions);
+            //intent.putExtra(Permissions.EXTRA_ONLY_NOTIFICATION, false);
+            intent.putExtra(Permissions.EXTRA_FROM_NOTIFICATION, true);
+            intent.putExtra(Permissions.EXTRA_FORCE_GRANT, forceGrant);
+            intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
+            intent.putExtra(Permissions.EXTRA_INTERACTIVE, interactive);
+            intent.putExtra(Permissions.EXTRA_ACTIVATE_PROFILE, activateProfile);
 
-        PendingIntent pi = PendingIntent.getActivity(context, grantType, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(pi);
-        mBuilder.setPriority(Notification.PRIORITY_MAX);
-        mBuilder.setOnlyAlertOnce(true);
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-        {
-            mBuilder.setCategory(Notification.CATEGORY_RECOMMENDATION);
-            mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
+            PendingIntent pi = PendingIntent.getActivity(context, grantType, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(pi);
+            mBuilder.setPriority(Notification.PRIORITY_MAX);
+            mBuilder.setOnlyAlertOnce(true);
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                mBuilder.setCategory(Notification.CATEGORY_RECOMMENDATION);
+                mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
+            }
+            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (mNotificationManager != null)
+                mNotificationManager.notify(notificationID, mBuilder.build());
         }
-        NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (mNotificationManager != null)
-            mNotificationManager.notify(notificationID, mBuilder.build());
-
-        //finish();
+        finish();
     }
 
     @Override
@@ -613,20 +659,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 if (allGranted) {
                     finishGrant();
                 } else {
-                    //if (!onlyNotification) {
-                        Context context = getApplicationContext();
-                        Toast msg = Toast.makeText(context,
-                                context.getResources().getString(R.string.app_name) + ": " +
-                                        context.getResources().getString(R.string.toast_permissions_not_granted),
-                                Toast.LENGTH_SHORT);
-                        msg.show();
-                    //}
-                    finish();
-                    //Permissions.releaseReferences();
-                    /*if (mergedNotification)
-                        Permissions.clearMergedPermissions(getApplicationContext());*/
+                    showRationale(getApplicationContext());
                 }
-                //return;
                 break;
             }
 
