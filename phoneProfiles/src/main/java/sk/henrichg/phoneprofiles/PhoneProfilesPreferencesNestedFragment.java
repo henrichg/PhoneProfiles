@@ -189,6 +189,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
+                        Permissions.saveAllPermissions(getActivity().getApplicationContext(), false);
                         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         //intent.addCategory(Intent.CATEGORY_DEFAULT);
                         intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
@@ -1284,7 +1285,7 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                     //Profile activatedProfile = dataWrapper.getActivatedProfile(true, true);
                     //dataWrapper.refreshProfileIcon(activatedProfile);
                     PPApplication.showProfileNotification(context);
-                    ActivateProfileHelper.updateGUI(context, true);
+                    ActivateProfileHelper.updateGUI(context, !finishActivity);
 
                     if (finishActivity) {
                         getActivity().setResult(Activity.RESULT_CANCELED);

@@ -75,7 +75,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         showEditorHeader = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
 
-        Permissions.disablePermissionsChanged(this);
+        //Permissions.disablePermissionsChanged(this);
 
         PhoneProfilesPreferencesNestedFragment fragment = createFragment(false);
 
