@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -210,35 +211,35 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         for (Permissions.PermissionType permissionType : permissions) {
             if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
-                showRequestWriteSettings = Permissions.getShowRequestWriteSettingsPermission(context) || forceGrant;
+                showRequestWriteSettings = Permissions.getShowRequestWriteSettingsPermission(context);
                 whyPermissionType[0][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
-                showRequestAccessNotificationPolicy = Permissions.getShowRequestAccessNotificationPolicyPermission(context) || forceGrant;
+                showRequestAccessNotificationPolicy = Permissions.getShowRequestAccessNotificationPolicyPermission(context);
                 whyPermissionType[1][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.SYSTEM_ALERT_WINDOW)) {
-                showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context) || forceGrant;
+                showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context);
                 whyPermissionType[2][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                showRequestReadExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                showRequestReadExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission);
                 whyPermissionType[3][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.READ_PHONE_STATE)) {
-                showRequestReadPhoneState = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                showRequestReadPhoneState = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission);
                 whyPermissionType[4][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                showRequestWriteExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                showRequestWriteExternalStorage = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission);
                 whyPermissionType[6][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                showRequestAccessCoarseLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                showRequestAccessCoarseLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission);
                 whyPermissionType[7][permissionType.type] = true;
             }
             if (permissionType.permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission);
                 whyPermissionType[8][permissionType.type] = true;
             }
         }
@@ -420,12 +421,30 @@ public class GrantPermissionActivity extends AppCompatActivity {
             //}
         }
         else {
-            Toast msg = Toast.makeText(context,
-                    context.getResources().getString(R.string.app_name) + ": " +
-                            context.getResources().getString(R.string.toast_permissions_not_granted),
-                    Toast.LENGTH_SHORT);
-            msg.show();
-            finish();
+            if (forceGrant) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                //intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
+                if (GlobalGUIRoutines.activityIntentExists(intent, getApplicationContext())) {
+                    startActivityForResult(intent, Permissions.REQUEST_CODE + grantType);
+                }
+                else {
+                    Toast msg = Toast.makeText(context,
+                            context.getResources().getString(R.string.app_name) + ": " +
+                                    context.getResources().getString(R.string.toast_permissions_not_granted),
+                            Toast.LENGTH_SHORT);
+                    msg.show();
+                    finish();
+                }
+            }
+            else {
+                Toast msg = Toast.makeText(context,
+                        context.getResources().getString(R.string.app_name) + ": " +
+                                context.getResources().getString(R.string.toast_permissions_not_granted),
+                        Toast.LENGTH_SHORT);
+                msg.show();
+                finish();
+            }
         }
     }
 
@@ -819,6 +838,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 Permissions.setShowRequestDrawOverlaysPermission(context, true);
                 requestPermissions(4);
             }
+        }
+        if (requestCode == Permissions.REQUEST_CODE + grantType) {
+            setResult(Activity.RESULT_OK);
+            finish();
         }
     }
 
