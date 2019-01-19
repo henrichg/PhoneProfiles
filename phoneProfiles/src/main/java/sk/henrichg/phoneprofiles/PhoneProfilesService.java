@@ -137,10 +137,10 @@ public class PhoneProfilesService extends Service {
             showProfileNotification();
             stopSelf();
         }*/
-        if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
+        //if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
             showProfileNotification();
-            stopSelf();
-        }
+        //    stopSelf();
+        //}
     }
 
     @Override
@@ -364,10 +364,10 @@ public class PhoneProfilesService extends Service {
             showProfileNotification();
         //}
 
-        if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
+        /*if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
             stopSelf();
             return START_NOT_STICKY;
-        }
+        }*/
 
         if (intent != null) {
             if (intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false)) {

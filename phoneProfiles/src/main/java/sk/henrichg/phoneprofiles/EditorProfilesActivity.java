@@ -238,6 +238,37 @@ public class EditorProfilesActivity extends AppCompatActivity
     }*/
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        // this is for list widget header
+        if (!PPApplication.getApplicationStarted(getApplicationContext(), true))
+        {
+            // start PhoneProfilesService
+            //PPApplication.firstStartServiceStarted = false;
+            PPApplication.setApplicationStarted(getApplicationContext(), true);
+            Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+            serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+            serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
+            serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_PACKAGE_REPLACE, false);
+            PPApplication.startPPService(this, serviceIntent);
+        }
+        else
+        {
+            if ((PhoneProfilesService.getInstance() == null) || (!PhoneProfilesService.getInstance().getServiceHasFirstStart())) {
+                // start PhoneProfilesService
+                //PPApplication.firstStartServiceStarted = false;
+                Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_PACKAGE_REPLACE, false);
+                PPApplication.startPPService(this, serviceIntent);
+            }
+        }
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();
