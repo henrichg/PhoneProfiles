@@ -1153,7 +1153,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             }
 
             if (permList.size() > 0) {
-                if (!withRationale) {
+                if (!withRationale && rationaleAlreadyShown) {
                     Permissions.saveAllPermissions(getApplicationContext(), false);
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     //intent.addCategory(Intent.CATEGORY_DEFAULT);
