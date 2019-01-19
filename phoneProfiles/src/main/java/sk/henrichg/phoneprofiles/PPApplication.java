@@ -1225,7 +1225,7 @@ public class PPApplication extends Application {
     }
 
     public static void exitApp(final Context context, /*DataWrapper dataWrapper,*/ final Activity activity,
-                               boolean shutdown, boolean killProcess) {
+                               boolean shutdown/*, boolean killProcess*/) {
         try {
             // remove alarm for profile duration
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
@@ -1278,7 +1278,7 @@ public class PPApplication extends Application {
                     };
                     _handler.post(r);
                 }
-                if (killProcess) {
+                /*if (killProcess) {
                     Handler _handler = new Handler(context.getMainLooper());
                     Runnable r = new Runnable() {
                         public void run() {
@@ -1286,7 +1286,7 @@ public class PPApplication extends Application {
                         }
                     };
                     _handler.postDelayed(r, 1000);
-                }
+                }*/
             }
         } catch (Exception ignored) {
 

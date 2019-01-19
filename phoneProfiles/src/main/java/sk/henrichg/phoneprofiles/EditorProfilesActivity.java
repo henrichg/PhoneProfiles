@@ -411,7 +411,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         PPApplication.exitApp(getApplicationContext(), /*getDataWrapper(),*/ EditorProfilesActivity.this,
-                                false, true);
+                                false/*, true*/);
                     }
                 });
                 dialogBuilder.setNegativeButton(R.string.alert_button_no, null);

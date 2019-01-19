@@ -320,6 +320,9 @@ public class PhoneProfilesService extends Service {
 
                         dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
                     }
+
+                    serviceHasFirstStart = true;
+
                     if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
                         PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
                         if (ApplicationPreferences.applicationActivate(appContext))
@@ -333,8 +336,6 @@ public class PhoneProfilesService extends Service {
                     }
 
                     dataWrapper.invalidateDataWrapper();
-
-                    serviceHasFirstStart = true;
 
                     PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
 

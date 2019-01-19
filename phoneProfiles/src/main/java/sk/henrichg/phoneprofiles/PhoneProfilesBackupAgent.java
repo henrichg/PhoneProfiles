@@ -24,7 +24,7 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
 
         //DataWrapper dataWrapper = new DataWrapper(appContext, true, false, 0);
 
-        PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false, false);
+        PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false/*, false*/);
 
         Intent intent = new Intent("FinishActivatorBroadcastReceiver");
         LocalBroadcastManager.getInstance(appContext).sendBroadcast(intent);
