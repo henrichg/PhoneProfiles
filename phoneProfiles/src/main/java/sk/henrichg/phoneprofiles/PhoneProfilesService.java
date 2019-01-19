@@ -239,110 +239,112 @@ public class PhoneProfilesService extends Service {
 
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
-                    if (powerManager != null) {
-                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PhoneProfilesService.doForFirstStart.2");
-                        wakeLock.acquire(10 * 60 * 1000);
-                    }
+                    try {
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":PhoneProfilesService.doForFirstStart.2");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
 
-                    // is called from PPApplication
-                    //PPApplication.initRoot();
-                    if (!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) {
-                        // grant root
-                        PPApplication.isRootGranted();
-                    }
-                    //PPApplication.getSUVersion();
-                    PPApplication.settingsBinaryExists(false);
-                    PPApplication.serviceBinaryExists(false);
-                    PPApplication.getServicesList();
+                        // is called from PPApplication
+                        //PPApplication.initRoot();
+                        if (!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) {
+                            // grant root
+                            PPApplication.isRootGranted();
+                        }
+                        //PPApplication.getSUVersion();
+                        PPApplication.settingsBinaryExists(false);
+                        PPApplication.serviceBinaryExists(false);
+                        PPApplication.getServicesList();
 
-                    GlobalGUIRoutines.setLanguage(appContext);
+                        GlobalGUIRoutines.setLanguage(appContext);
 
-                    if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
-                        // restart first start
-                        serviceHasFirstStart = false;
-                    }
+                        if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
+                            // restart first start
+                            serviceHasFirstStart = false;
+                        }
 
-                    //if (PPApplication.getApplicationStarted(appContext, false)) {
-                    if (serviceHasFirstStart) {
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application already started");
+                        //if (PPApplication.getApplicationStarted(appContext, false)) {
+                        if (serviceHasFirstStart) {
+                            PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application already started");
+                            if ((wakeLock != null) && wakeLock.isHeld()) {
+                                try {
+                                    wakeLock.release();
+                                } catch (Exception ignored) {
+                                }
+                            }
+                            PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
+                            return;
+                        }
+
+                        DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
+
+                        PPApplication.createNotificationChannels(appContext);
+                        dataWrapper.setDynamicLauncherShortcuts();
+
+                        if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
+                            PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application not started, start it");
+
+                            //Permissions.clearMergedPermissions(appContext);
+
+                            //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
+
+                            //TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
+
+                            ActivateProfileHelper.setLockScreenDisabled(appContext, false);
+
+                            ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, true);
+
+                            AudioManager audioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
+                            if (audioManager != null) {
+                                ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
+                                ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                                RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
+                                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+                                PPNotificationListenerService.setZenMode(appContext, audioManager);
+                                InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext, audioManager);
+                            }
+
+                            // show info notification
+                            ImportantInfoNotification.showInfoNotification(appContext);
+
+                            ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
+                            Profile.setActivatedProfileForDuration(appContext, 0);
+
+                            LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
+                        }
+
+                        if (PhoneProfilesService.getInstance() != null)
+                            PhoneProfilesService.getInstance().registerReceivers();
+                        AboutApplicationJob.scheduleJob(appContext, false);
+
+                        if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
+                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
+
+                            dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
+                        }
+
+                        serviceHasFirstStart = true;
+
+                        if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
+                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
+                            if (ApplicationPreferences.applicationActivate(appContext)) {
+                                Profile profile = DatabaseHandler.getInstance(appContext).getActivatedProfile();
+                                long profileId = 0;
+                                if (profile != null)
+                                    profileId = profile._id;
+                                dataWrapper.activateProfile(profileId, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
+                            }
+                        }
+
+                        dataWrapper.invalidateDataWrapper();
+
+                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
+                    } finally {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
                                 wakeLock.release();
                             } catch (Exception ignored) {}
                         }
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
-                        return;
-                    }
-
-                    DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
-
-                    PPApplication.createNotificationChannels(appContext);
-                    dataWrapper.setDynamicLauncherShortcuts();
-
-                    if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
-                        PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", " application not started, start it");
-
-                        //Permissions.clearMergedPermissions(appContext);
-
-                        //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
-
-                        //TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
-
-                        ActivateProfileHelper.setLockScreenDisabled(appContext, false);
-
-                        ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, true);
-
-                        AudioManager audioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
-                        if (audioManager != null) {
-                            ActivateProfileHelper.setRingerVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_RING));
-                            ActivateProfileHelper.setNotificationVolume(appContext, audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-                            RingerModeChangeReceiver.setRingerMode(appContext, audioManager);
-                            //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-                            PPNotificationListenerService.setZenMode(appContext, audioManager);
-                            InterruptionFilterChangedBroadcastReceiver.setZenMode(appContext, audioManager);
-                        }
-
-                        // show info notification
-                        ImportantInfoNotification.showInfoNotification(appContext);
-
-                        ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
-                        Profile.setActivatedProfileForDuration(appContext, 0);
-
-                        LockDeviceActivityFinishBroadcastReceiver.removeAlarm(appContext);
-                    }
-
-                    if (PhoneProfilesService.getInstance() != null)
-                        PhoneProfilesService.getInstance().registerReceivers();
-                    AboutApplicationJob.scheduleJob(appContext, false);
-
-                    if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
-                        PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
-
-                        dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
-                    }
-
-                    serviceHasFirstStart = true;
-
-                    if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
-                        PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
-                        if (ApplicationPreferences.applicationActivate(appContext))
-                        {
-                            Profile profile = DatabaseHandler.getInstance(appContext).getActivatedProfile();
-                            long profileId = 0;
-                            if (profile != null)
-                                profileId = profile._id;
-                            dataWrapper.activateProfile(profileId, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
-                        }
-                    }
-
-                    dataWrapper.invalidateDataWrapper();
-
-                    PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 END");
-
-                    if ((wakeLock != null) && wakeLock.isHeld()) {
-                        try {
-                            wakeLock.release();
-                        } catch (Exception ignored) {}
                     }
                 }
             });

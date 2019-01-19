@@ -36,39 +36,41 @@ public class WifiStateChangedBroadcastReceiver extends BroadcastReceiver {
                 public void run() {
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
-                    if (powerManager != null) {
-                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":WifiStateChangedBroadcastReceiver.onReceive");
-                        wakeLock.acquire(10 * 60 * 1000);
-                    }
+                    try {
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":WifiStateChangedBroadcastReceiver.onReceive");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
 
-                    if (wifiState == WifiManager.WIFI_STATE_ENABLED) {
-                        // refresh configured networks list
-                        WifiSSIDData.fillWifiConfigurationList(appContext);
+                        if (wifiState == WifiManager.WIFI_STATE_ENABLED) {
+                            // refresh configured networks list
+                            WifiSSIDData.fillWifiConfigurationList(appContext);
 
-                        if (PhoneProfilesService.getInstance() != null) {
-                            if (!PhoneProfilesService.getInstance().connectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
-                                WifiManager wifiManager = (WifiManager) appContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                                if (wifiManager != null) {
-                                    List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-                                    if (list != null) {
-                                        for (WifiConfiguration i : list) {
-                                            if (i.SSID != null && i.SSID.equals(PhoneProfilesService.getInstance().connectToSSID)) {
-                                                //wifiManager.disconnect();
-                                                wifiManager.enableNetwork(i.networkId, true);
-                                                //wifiManager.reconnect();
-                                                break;
+                            if (PhoneProfilesService.getInstance() != null) {
+                                if (!PhoneProfilesService.getInstance().connectToSSID.equals(Profile.CONNECTTOSSID_JUSTANY)) {
+                                    WifiManager wifiManager = (WifiManager) appContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                                    if (wifiManager != null) {
+                                        List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+                                        if (list != null) {
+                                            for (WifiConfiguration i : list) {
+                                                if (i.SSID != null && i.SSID.equals(PhoneProfilesService.getInstance().connectToSSID)) {
+                                                    //wifiManager.disconnect();
+                                                    wifiManager.enableNetwork(i.networkId, true);
+                                                    //wifiManager.reconnect();
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-
-                    if ((wakeLock != null) && wakeLock.isHeld()) {
-                        try {
-                            wakeLock.release();
-                        } catch (Exception ignored) {}
+                    } finally {
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
                     }
                 }
             });

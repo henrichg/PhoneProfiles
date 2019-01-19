@@ -53,22 +53,24 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
             public void run() {
                 PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
-                if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PhoneProfilesBackupAgent.onRestoreFinished");
-                    wakeLock.acquire(10 * 60 * 1000);
-                }
+                try {
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":PhoneProfilesBackupAgent.onRestoreFinished");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
 
-                PPApplication.setSavedVersionCode(appContext, 0);
+                    PPApplication.setSavedVersionCode(appContext, 0);
 
-                Permissions.setAllShowRequestPermissions(appContext, true);
+                    Permissions.setAllShowRequestPermissions(appContext, true);
 
-                //ActivateProfileHelper.setScreenUnlocked(appContext, true);
-                ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, true);
-
-                if ((wakeLock != null) && wakeLock.isHeld()) {
-                    try {
-                        wakeLock.release();
-                    } catch (Exception ignored) {}
+                    //ActivateProfileHelper.setScreenUnlocked(appContext, true);
+                    ActivateProfileHelper.setMergedRingNotificationVolumes(appContext, true);
+                } finally {
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             }
         });

@@ -624,17 +624,19 @@ public class DataWrapper {
 
                 PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
-                if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper._activateProfile.1");
-                    wakeLock.acquire(10 * 60 * 1000);
-                }
+                try {
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":DataWrapper._activateProfile.1");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
 
-                ActivateProfileHelper.execute(_context, profile/*, _interactive*/);
-
-                if ((wakeLock != null) && wakeLock.isHeld()) {
-                    try {
-                        wakeLock.release();
-                    } catch (Exception ignored) {}
+                    ActivateProfileHelper.execute(_context, profile/*, _interactive*/);
+                } finally {
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             }
         });
@@ -664,18 +666,20 @@ public class DataWrapper {
                 public void run() {
                     PowerManager powerManager = (PowerManager) _context.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
-                    if (powerManager != null) {
-                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper._activateProfile.2");
-                        wakeLock.acquire(10 * 60 * 1000);
-                    }
+                    try {
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":DataWrapper._activateProfile.2");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
 
-                    DatabaseHandler.getInstance(_context).increaseActivationByUserCount(_profile);
-                    dataWrapper.setDynamicLauncherShortcuts();
-
-                    if ((wakeLock != null) && wakeLock.isHeld()) {
-                        try {
-                            wakeLock.release();
-                        } catch (Exception ignored) {
+                        DatabaseHandler.getInstance(_context).increaseActivationByUserCount(_profile);
+                        dataWrapper.setDynamicLauncherShortcuts();
+                    } finally {
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {
+                            }
                         }
                     }
                 }
@@ -1111,17 +1115,19 @@ public class DataWrapper {
             public void run() {
                 PowerManager powerManager = (PowerManager) dataWrapper.context.getSystemService(POWER_SERVICE);
                 PowerManager.WakeLock wakeLock = null;
-                if (powerManager != null) {
-                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":DataWrapper.setDynamicLauncherShortcutsFromMainThread");
-                    wakeLock.acquire(10 * 60 * 1000);
-                }
+                try {
+                    if (powerManager != null) {
+                        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":DataWrapper.setDynamicLauncherShortcutsFromMainThread");
+                        wakeLock.acquire(10 * 60 * 1000);
+                    }
 
-                dataWrapper.setDynamicLauncherShortcuts();
-
-                if ((wakeLock != null) && wakeLock.isHeld()) {
-                    try {
-                        wakeLock.release();
-                    } catch (Exception ignored) {}
+                    dataWrapper.setDynamicLauncherShortcuts();
+                } finally {
+                    if ((wakeLock != null) && wakeLock.isHeld()) {
+                        try {
+                            wakeLock.release();
+                        } catch (Exception ignored) {}
+                    }
                 }
             }
         });

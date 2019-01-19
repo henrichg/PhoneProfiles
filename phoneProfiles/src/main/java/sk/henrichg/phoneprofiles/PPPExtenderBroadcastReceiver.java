@@ -49,19 +49,21 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
                         public void run() {
                             PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                             PowerManager.WakeLock wakeLock = null;
-                            if (powerManager != null) {
-                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":PPPExtenderBroadcastReceiver.onReceive");
-                                wakeLock.acquire(10 * 60 * 1000);
-                            }
+                            try {
+                                if (powerManager != null) {
+                                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":PPPExtenderBroadcastReceiver.onReceive");
+                                    wakeLock.acquire(10 * 60 * 1000);
+                                }
 
-                            Profile profile = DatabaseHandler.getInstance(appContext).getProfile(profileId);
-                            if (profile != null)
-                                ActivateProfileHelper.executeForInteractivePreferences(profile, appContext);
-
-                            if ((wakeLock != null) && wakeLock.isHeld()) {
-                                try {
-                                    wakeLock.release();
-                                } catch (Exception ignored) {}
+                                Profile profile = DatabaseHandler.getInstance(appContext).getProfile(profileId);
+                                if (profile != null)
+                                    ActivateProfileHelper.executeForInteractivePreferences(profile, appContext);
+                            } finally {
+                                if ((wakeLock != null) && wakeLock.isHeld()) {
+                                    try {
+                                        wakeLock.release();
+                                    } catch (Exception ignored) {}
+                                }
                             }
                         }
                     });

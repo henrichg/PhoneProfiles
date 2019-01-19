@@ -30,51 +30,50 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
                         PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = null;
-                        if (powerManager != null) {
-                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME+":ProfileDurationAlarmBroadcastReceiver.onReceive");
-                            wakeLock.acquire(10 * 60 * 1000);
-                        }
+                        try {
+                            if (powerManager != null) {
+                                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":ProfileDurationAlarmBroadcastReceiver.onReceive");
+                                wakeLock.acquire(10 * 60 * 1000);
+                            }
 
-                        DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
+                            DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
 
-                        Profile profile = dataWrapper.getProfileById(profileId, false, false);
-                        Profile activatedProfile = dataWrapper.getActivatedProfile(false, false);
+                            Profile profile = dataWrapper.getProfileById(profileId, false, false);
+                            Profile activatedProfile = dataWrapper.getActivatedProfile(false, false);
 
-                        if ((profile != null) && (activatedProfile != null) &&
-                                (activatedProfile._id == profile._id) &&
-                                (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING))
-                        {
-                            // alarm is from activated profile
+                            if ((profile != null) && (activatedProfile != null) &&
+                                    (activatedProfile._id == profile._id) &&
+                                    (profile._afterDurationDo != Profile.AFTERDURATIONDO_NOTHING)) {
+                                // alarm is from activated profile
 
-                            if (!profile._durationNotificationSound.isEmpty() || profile._durationNotificationVibrate) {
-                                if (PhoneProfilesService.getInstance() != null) {
-                                    PPApplication.logE("##### ProfileDurationAlarmBroadcastReceiver.onReceive", "play notification");
-                                    PhoneProfilesService.getInstance().playNotificationSound(profile._durationNotificationSound, profile._durationNotificationVibrate);
-                                    //PPApplication.sleep(500);
+                                if (!profile._durationNotificationSound.isEmpty() || profile._durationNotificationVibrate) {
+                                    if (PhoneProfilesService.getInstance() != null) {
+                                        PPApplication.logE("##### ProfileDurationAlarmBroadcastReceiver.onReceive", "play notification");
+                                        PhoneProfilesService.getInstance().playNotificationSound(profile._durationNotificationSound, profile._durationNotificationVibrate);
+                                        //PPApplication.sleep(500);
+                                    }
                                 }
+
+                                long activateProfileId = 0;
+                                if (profile._afterDurationDo == Profile.AFTERDURATIONDO_BACKGROUNPROFILE) {
+                                    activateProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(appContext));
+                                    if (activateProfileId == Profile.PROFILE_NO_ACTIVATE)
+                                        activateProfileId = 0;
+                                }
+                                if (profile._afterDurationDo == Profile.AFTERDURATIONDO_UNDOPROFILE) {
+                                    activateProfileId = Profile.getActivatedProfileForDuration(appContext);
+                                }
+
+                                dataWrapper.activateProfileAfterDuration(activateProfileId);
                             }
 
-                            long activateProfileId = 0;
-                            if (profile._afterDurationDo == Profile.AFTERDURATIONDO_BACKGROUNPROFILE)
-                            {
-                                activateProfileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(appContext));
-                                if (activateProfileId == Profile.PROFILE_NO_ACTIVATE)
-                                    activateProfileId = 0;
+                            dataWrapper.invalidateDataWrapper();
+                        } finally {
+                            if ((wakeLock != null) && wakeLock.isHeld()) {
+                                try {
+                                    wakeLock.release();
+                                } catch (Exception ignored) {}
                             }
-                            if (profile._afterDurationDo == Profile.AFTERDURATIONDO_UNDOPROFILE)
-                            {
-                                activateProfileId = Profile.getActivatedProfileForDuration(appContext);
-                            }
-
-                            dataWrapper.activateProfileAfterDuration(activateProfileId);
-                        }
-
-                        dataWrapper.invalidateDataWrapper();
-
-                        if ((wakeLock != null) && wakeLock.isHeld()) {
-                            try {
-                                wakeLock.release();
-                            } catch (Exception ignored) {}
                         }
                     }
                 }
