@@ -140,10 +140,13 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
     }
 
     private void startService(Context context) {
-        context.stopService(new Intent(context, PhoneProfilesService.class));
+        boolean isStarted = PPApplication.getApplicationStarted(context, false);
 
-        if (PPApplication.getApplicationStarted(context, false)) {
-            PPApplication.sleep(5000);
+        PPApplication.exitApp(context, null, false/*, false, true*/);
+
+        if (isStarted)
+        {
+            PPApplication.sleep(2000);
 
             // start PhoneProfilesService
             PPApplication.logE("@@@ PackageReplacedReceiver.startService", "xxx");
