@@ -316,7 +316,7 @@ public class EditorProfileListFragment extends Fragment
                 if (defaultProfilesGenerated)
                 {
                     ActivateProfileHelper.updateGUI(fragment.activityDataWrapper.context, true);
-                    Toast msg = Toast.makeText(fragment.activityDataWrapper.context,
+                    Toast msg = Toast.makeText(fragment.activityDataWrapper.context.getApplicationContext(),
                             fragment.getResources().getString(R.string.toast_default_profiles_generated),
                             Toast.LENGTH_SHORT);
                     msg.show();

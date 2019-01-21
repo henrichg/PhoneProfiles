@@ -700,7 +700,7 @@ public class DataWrapper {
 
     private void showToastAfterActivation(Profile profile)
     {
-        Toast msg = Toast.makeText(context,
+        Toast msg = Toast.makeText(context.getApplicationContext(),
                 context.getResources().getString(R.string.toast_profile_activated_0) + ": " + profile._name + " " +
                         context.getResources().getString(R.string.toast_profile_activated_1),
                 Toast.LENGTH_SHORT);
