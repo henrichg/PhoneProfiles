@@ -1226,8 +1226,8 @@ public class PhoneProfilesService extends Service {
                         notificationIsPlayed = false;
                         notificationMediaPlayer = null;
 
-                        PPApplication.startHandlerThread();
-                        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                        PPApplication.startHandlerThreadInternalChangeToFalse();
+                        final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -1242,8 +1242,8 @@ public class PhoneProfilesService extends Service {
             } catch (SecurityException e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
                 stopPlayNotificationSound();
-                PPApplication.startHandlerThread();
-                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                PPApplication.startHandlerThreadInternalChangeToFalse();
+                final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -1254,8 +1254,8 @@ public class PhoneProfilesService extends Service {
             } catch (Exception e) {
                 PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
                 stopPlayNotificationSound();
-                PPApplication.startHandlerThread();
-                final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                PPApplication.startHandlerThreadInternalChangeToFalse();
+                final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

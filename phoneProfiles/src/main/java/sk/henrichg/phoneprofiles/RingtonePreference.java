@@ -542,8 +542,8 @@ public class RingtonePreference extends DialogPreference {
                                 ringtoneIsPlayed = false;
                                 mediaPlayer = null;
 
-                                PPApplication.startHandlerThreadPlayTone();
-                                final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
+                                PPApplication.startHandlerThreadInternalChangeToFalse();
+                                final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -558,8 +558,8 @@ public class RingtonePreference extends DialogPreference {
                     } catch (SecurityException e) {
                         PPApplication.logE("RingtonePreference.playRingtone", "security exception");
                         stopPlayRingtone();
-                        PPApplication.startHandlerThreadPlayTone();
-                        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
+                        PPApplication.startHandlerThreadInternalChangeToFalse();
+                        final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -569,8 +569,8 @@ public class RingtonePreference extends DialogPreference {
                     } catch (Exception e) {
                         PPApplication.logE("RingtonePreference.playRingtone", "exception");
                         stopPlayRingtone();
-                        PPApplication.startHandlerThreadPlayTone();
-                        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
+                        PPApplication.startHandlerThreadInternalChangeToFalse();
+                        final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {

@@ -979,8 +979,8 @@ class ActivateProfileHelper {
                             //SystemClock.sleep(500);
                             PPApplication.sleep(500);
 
-                            PPApplication.startHandlerThread();
-                            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+                            PPApplication.startHandlerThreadInternalChangeToFalse();
+                            final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -2211,8 +2211,8 @@ class ActivateProfileHelper {
                 break;
         }
         setActivatedProfileScreenTimeout(context, 0);
-        PPApplication.startHandlerThread();
-        final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+        PPApplication.startHandlerThreadInternalChangeToFalse();
+        final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -158,6 +158,7 @@ public class PPApplication extends Application {
     //static private FirebaseAnalytics mFirebaseAnalytics;
 
     public static HandlerThread handlerThread = null;
+    public static HandlerThread handlerThreadInternalChangeToFalse = null;
     public static HandlerThread handlerThreadWidget = null;
     public static HandlerThread handlerThreadProfileNotification = null;
     public static HandlerThread handlerThreadPlayTone = null;
@@ -254,6 +255,7 @@ public class PPApplication extends Application {
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(PPApplication.dashClockBroadcastReceiver, new IntentFilter("DashClockBroadcastReceiver"));
 
         startHandlerThread();
+        startHandlerThreadInternalChangeToFalse();
         startHandlerThreadWidget();
         startHandlerThreadProfileNotification();
         startHandlerThreadPlayTone();
@@ -1297,6 +1299,13 @@ public class PPApplication extends Application {
         if (handlerThread == null) {
             handlerThread = new HandlerThread("PPHandlerThread");
             handlerThread.start();
+        }
+    }
+
+    static void startHandlerThreadInternalChangeToFalse() {
+        if (handlerThreadInternalChangeToFalse == null) {
+            handlerThreadInternalChangeToFalse = new HandlerThread("PPHandlerThreadInternalChangeToFalse");
+            handlerThreadInternalChangeToFalse.start();
         }
     }
 
