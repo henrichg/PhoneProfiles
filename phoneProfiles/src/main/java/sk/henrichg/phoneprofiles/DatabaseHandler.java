@@ -2957,7 +2957,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting single intent
-    void deleteIntent(PPIntent intent) {
+    void deleteIntent(long intentId) {
         importExportLock.lock();
         try {
             try {
@@ -2971,7 +2971,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 try {
                     // delete geofence
                     db.delete(TABLE_INTENTS, KEY_IN_ID + " = ?",
-                            new String[]{String.valueOf(intent._id)});
+                            new String[]{String.valueOf(intentId)});
 
                     db.setTransactionSuccessful();
 
