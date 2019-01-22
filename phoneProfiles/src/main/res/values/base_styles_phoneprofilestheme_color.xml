@@ -47,6 +47,7 @@
         <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP</item>
         <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP</item>
         <item name="buttonBackground">@drawable/pp_button_background_color</item>
+        <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_dark</item>
 
     </style>
 

@@ -73,5 +73,6 @@
     <attr name="fastScrollPopupTextPP" format="reference" />
     <attr name="bottomToolbarTheme" format="reference" />
     <attr name="buttonBackground" format="reference" />
+    <attr name="infoPreferenceIcon" format="reference" />
 
 </resources>
