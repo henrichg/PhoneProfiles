@@ -33,6 +33,8 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.Toast;
 
+import me.drakeet.support.toast.ToastCompat;
+
 public class ProfilePreferencesNestedFragment extends PreferenceFragment
                                         implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -504,7 +506,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                         if (!TonesHandler.isToneInstalled(TonesHandler.TONE_ID, getActivity().getApplicationContext()))
                             TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, getActivity().getApplicationContext());
                         else {
-                            Toast msg = Toast.makeText(context.getApplicationContext(),
+                            Toast msg = ToastCompat.makeText(context.getApplicationContext(),
                                     context.getResources().getString(R.string.profile_preferences_installSilentTone_installed_summary),
                                     Toast.LENGTH_SHORT);
                             msg.show();
@@ -1857,7 +1859,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     String text = context.getResources().getString(R.string.profileicon_pref_dialog_custom_icon_image_too_large);
                     text = text + " " + (width * BitmapManipulator.ICON_BITMAP_SIZE_MULTIPLIER);
                     text = text + "x" + (height * BitmapManipulator.ICON_BITMAP_SIZE_MULTIPLIER);
-                    Toast msg = Toast.makeText(context.getApplicationContext(), text, Toast.LENGTH_LONG);
+                    Toast msg = ToastCompat.makeText(context.getApplicationContext(), text, Toast.LENGTH_LONG);
                     msg.show();
                 }
             }

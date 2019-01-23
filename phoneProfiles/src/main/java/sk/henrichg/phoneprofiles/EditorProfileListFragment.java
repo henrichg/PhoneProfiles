@@ -37,6 +37,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.drakeet.support.toast.ToastCompat;
+
 public class EditorProfileListFragment extends Fragment
                                         implements OnStartDragItemListener {
 
@@ -316,7 +318,7 @@ public class EditorProfileListFragment extends Fragment
                 if (defaultProfilesGenerated)
                 {
                     ActivateProfileHelper.updateGUI(fragment.activityDataWrapper.context, true);
-                    Toast msg = Toast.makeText(fragment.activityDataWrapper.context.getApplicationContext(),
+                    Toast msg = ToastCompat.makeText(fragment.activityDataWrapper.context.getApplicationContext(),
                             fragment.getResources().getString(R.string.toast_default_profiles_generated),
                             Toast.LENGTH_SHORT);
                     msg.show();

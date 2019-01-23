@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import me.drakeet.support.toast.ToastCompat;
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
 
@@ -426,7 +427,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/henrichg/PhoneProfiles/wiki"));
                     startActivity(myIntent);
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getApplicationContext(), "No application can handle this request."
+                    ToastCompat.makeText(getApplicationContext(), "No application can handle this request."
                         + " Please install a web browser",  Toast.LENGTH_LONG).show();
                 }
                 return true;*/
@@ -882,7 +883,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError))) {
                         // toast notification
-                        Toast msg = Toast.makeText(this.dataWrapper.context.getApplicationContext(),
+                        Toast msg = ToastCompat.makeText(this.dataWrapper.context.getApplicationContext(),
                                 getResources().getString(R.string.toast_import_ok),
                                 Toast.LENGTH_SHORT);
                         msg.show();
@@ -1119,7 +1120,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (result == 1) {
 
                         // toast notification
-                        Toast msg = Toast.makeText(this.dataWrapper.context.getApplicationContext(),
+                        Toast msg = ToastCompat.makeText(this.dataWrapper.context.getApplicationContext(),
                                 getResources().getString(R.string.toast_export_ok),
                                 Toast.LENGTH_SHORT);
                         msg.show();

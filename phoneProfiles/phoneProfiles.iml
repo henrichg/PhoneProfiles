@@ -132,6 +132,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-compat:27.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:answers:1.4.6@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: me.drakeet.support:toastcompat:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:beta:1.2.10@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.billingclient:billing:1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2@jar" level="project" />
@@ -142,42 +143,6 @@
     <orderEntry type="library" name="Gradle: com.readystatesoftware.systembartint:systembartint:1.0.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.simplecityapps:recyclerview-fastscroll:1.0.20@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:gridlayout-v7:27.1.1@aar" level="project" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
-    <orderEntry type="module" module-name="taptargetview" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="appkillermanager" />
-    <orderEntry type="module" module-name="time-duration-picker" />
-    <orderEntry type="module" module-name="android-job" />
-    <orderEntry type="module" module-name="RootTools" />
     <orderEntry type="module" module-name="taptargetview" />
     <orderEntry type="module" module-name="RootShell" />
     <orderEntry type="module" module-name="appkillermanager" />
