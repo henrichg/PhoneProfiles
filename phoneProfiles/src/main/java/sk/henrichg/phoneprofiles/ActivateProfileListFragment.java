@@ -296,21 +296,9 @@ public class ActivateProfileListFragment extends Fragment {
     private void doOnStart()
     {
         //noinspection ConstantConditions
-        if (!PPApplication.getApplicationStarted(getActivity().getApplicationContext(), false))
-        {
-            PPApplication.logE("ActivateProfileListFragment.doOnStart","application not started");
-
-            // start PhoneProfilesService
-            PPApplication.startPPService(getActivity(), new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-        }
-        else
+        if (PPApplication.getApplicationStarted(getActivity().getApplicationContext(), true))
         {
             PPApplication.logE("ActivateProfileListFragment.doOnStart", "xxx");
-
-            if (PhoneProfilesService.getInstance() == null) {
-                // start PhoneProfilesService
-                PPApplication.startPPService(getActivity(), new Intent(getActivity().getApplicationContext(), PhoneProfilesService.class));
-            }
 
             Profile profile = activityDataWrapper.getActivatedProfile(true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
             updateHeader(profile);

@@ -118,6 +118,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         super.onStop();
 
         Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
+        serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, false);
         serviceIntent.putExtra(PhoneProfilesService.EXTRA_CLEAR_SERVICE_FOREGROUND, true);
         PPApplication.startPPService(this, serviceIntent);
 
@@ -128,6 +129,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
             public void run() {
                 //Profile activatedProfile = dataWrapper.getActivatedProfile();
                 Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, false);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_SET_SERVICE_FOREGROUND, true);
                 PPApplication.startPPService(context, serviceIntent);
             }

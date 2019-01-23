@@ -1908,6 +1908,7 @@ class ActivateProfileHelper {
                             // start PhoneProfilesService
                             //PPApplication.firstStartServiceStarted = false;
                             Intent serviceIntent = new Intent(context, PhoneProfilesService.class);
+                            serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, false);
                             serviceIntent.putExtra(PhoneProfilesService.EXTRA_SWITCH_KEYGUARD, true);
                             PPApplication.startPPService(context, serviceIntent);
                         } catch (Exception ignored) {

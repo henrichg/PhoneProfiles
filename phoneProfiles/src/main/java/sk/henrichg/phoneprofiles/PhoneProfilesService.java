@@ -609,6 +609,14 @@ public class PhoneProfilesService extends Service {
         if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
             unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
             pppExtenderForceStopApplicationBroadcastReceiver = null;
+            Intent intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+            intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+            intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_UNREGISTER);
+            sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+        }
+        if (pppExtenderBroadcastReceiver != null) {
+            unregisterReceiver(pppExtenderBroadcastReceiver);
+            pppExtenderBroadcastReceiver = null;
         }
 
         if (settingsContentObserver != null) {
