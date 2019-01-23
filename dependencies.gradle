@@ -8,8 +8,8 @@
 // 3100 = separated preferences for single row widget
 
 ext.ppVersions = [
-    publishVersion: '4.6.6.3b',
-    publishVersionCode: 3151,
+    publishVersion: '4.6.6.3',
+    publishVersionCode: 3160,
 
     minSdk: 19,
     targetSdk: 27,
