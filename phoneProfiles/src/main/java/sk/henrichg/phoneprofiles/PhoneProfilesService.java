@@ -1067,15 +1067,13 @@ public class PhoneProfilesService extends Service {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (PhoneProfilesService.getInstance() != null) {
-                    DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0, false);
-                    Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    synchronized (PhoneProfilesService.class) {
-                        if (instance != null) {
-                            instance._showProfileNotification(profile, true);
-                        }
+                synchronized (PhoneProfilesService.class) {
+                    if (instance != null) {
+                        DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0, false);
+                        Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
+                        instance._showProfileNotification(profile, true);
+                        dataWrapper.invalidateDataWrapper();
                     }
-                    dataWrapper.invalidateDataWrapper();
                 }
             }
         });
