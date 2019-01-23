@@ -56,7 +56,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private boolean showRequestWriteExternalStorage = false;
     private boolean showRequestAccessCoarseLocation = false;
     private boolean showRequestAccessFineLocation = false;
-    boolean[][] whyPermissionType = null;
+    private boolean[][] whyPermissionType = null;
     private boolean rationaleAlreadyShown = false;
 
     private boolean restoredInstanceState;
@@ -542,7 +542,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             return "<br>" + "&nbsp;&nbsp;&nbsp;- " + s;
     }
 
-    void showNotification() {
+    private void showNotification() {
         final Context context = getApplicationContext();
         if (canShowRationale(context, false)) {
             int notificationID;
@@ -1170,7 +1170,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     //intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
                     if (GlobalGUIRoutines.activityIntentExists(intent, getApplicationContext())) {
-                        intent.putExtra(EXTRA_WITH_RATIONALE, withRationale);
+                        intent.putExtra(EXTRA_WITH_RATIONALE, false);
                         startActivityForResult(intent, Permissions.REQUEST_CODE/*_FORCE_GRANT*/ + grantType);
                     }
                     else
