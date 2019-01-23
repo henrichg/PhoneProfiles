@@ -84,10 +84,10 @@ public class PPApplication extends Application {
                                             //+"|ActivateProfilesHelper.executeForForceStopApplications"
                                             //+"|DataWrapper.setDynamicLauncherShortcuts"
 
-                                            +"|ActivateProfileHelper.execute"
-                                            +"|ActivateProfileHelper.setScreenTimeout"
-                                            +"|ActivateProfileHelper.screenTimeoutLock"
-                                            +"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
+                                            //+"|ActivateProfileHelper.execute"
+                                            //+"|ActivateProfileHelper.setScreenTimeout"
+                                            //+"|ActivateProfileHelper.screenTimeoutLock"
+                                            //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";

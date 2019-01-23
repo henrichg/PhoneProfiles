@@ -144,7 +144,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
     private void startService(Context context) {
         boolean isStarted = PPApplication.getApplicationStarted(context, false);
 
-        PPApplication.exitApp(context, null, false/*, false, true*/);
+        //PPApplication.exitApp(context, null, false/*, false, true*/);
 
         if (isStarted)
         {
