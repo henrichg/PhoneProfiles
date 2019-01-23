@@ -1029,8 +1029,10 @@ public class PhoneProfilesService extends Service {
                     setAlarmForNotificationCancel(appContext);
                 }
 
-                if ((Build.VERSION.SDK_INT >= 26) || notificationStatusBarPermanent)
+                if ((Build.VERSION.SDK_INT >= 26) || notificationStatusBarPermanent) {
                     startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
+                    runningInForeground = true;
+                }
                 else {
                     NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
                     if (notificationManager != null)
@@ -1057,10 +1059,8 @@ public class PhoneProfilesService extends Service {
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
         dataWrapper.invalidateDataWrapper();
 
-        if (!runningInForeground) {
+        if (!runningInForeground)
             _showProfileNotification(profile, false);
-            runningInForeground = true;
-        }
 
         PPApplication.startHandlerThreadProfileNotification();
         final Handler handler = new Handler(PPApplication.handlerThreadProfileNotification.getLooper());
@@ -1070,8 +1070,11 @@ public class PhoneProfilesService extends Service {
                 if (PhoneProfilesService.getInstance() != null) {
                     DataWrapper dataWrapper = new DataWrapper(PhoneProfilesService.getInstance().getApplicationContext(), false, 0, false);
                     Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
-                    if (PhoneProfilesService.getInstance() != null)
-                        PhoneProfilesService.getInstance()._showProfileNotification(profile, true);
+                    synchronized (PhoneProfilesService.class) {
+                        if (instance != null) {
+                            instance._showProfileNotification(profile, true);
+                        }
+                    }
                     dataWrapper.invalidateDataWrapper();
                 }
             }
