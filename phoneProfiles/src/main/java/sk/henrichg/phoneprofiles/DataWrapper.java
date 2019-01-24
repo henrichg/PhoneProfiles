@@ -613,7 +613,7 @@ public class DataWrapper {
             Profile.setActivatedProfileForDuration(context, 0);
         ProfileDurationAlarmBroadcastReceiver.setAlarm(profile, context);
 
-        PPApplication.showProfileNotification(context);
+        PPApplication.showProfileNotification(/*context*/);
         ActivateProfileHelper.updateGUI(context, true);
 
         final Context _context = context;
@@ -955,7 +955,7 @@ public class DataWrapper {
         }
         else
         {
-            PPApplication.showProfileNotification(context);
+            PPApplication.showProfileNotification(/*context*/);
             ActivateProfileHelper.updateGUI(context, true);
 
             // for startActivityForResult
@@ -980,7 +980,7 @@ public class DataWrapper {
             // remove last configured profile duration alarm
             ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
             Profile.setActivatedProfileForDuration(context, 0);
-            PPApplication.showProfileNotification(context);
+            PPApplication.showProfileNotification(/*context*/);
             ActivateProfileHelper.updateGUI(context, true);
             return;
         }

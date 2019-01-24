@@ -705,13 +705,15 @@ public class PPApplication extends Application {
         PPApplication.createGrantPermissionNotificationChannel(appContext);
     }
 
-    static void showProfileNotification(Context context) {
+    static void showProfileNotification(/*Context context*/) {
         try {
             PPApplication.logE("PPApplication.showProfileNotification", "xxx");
-            Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
+            /*Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, false);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_SHOW_PROFILE_NOTIFICATION, true);
-            PPApplication.startPPService(context, serviceIntent);
+            PPApplication.startPPService(context, serviceIntent);*/
+            if (PhoneProfilesService.getInstance() != null)
+                PhoneProfilesService.getInstance().showProfileNotification();
         } catch (Exception ignored) {}
     }
 

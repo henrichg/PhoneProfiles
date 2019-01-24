@@ -1053,7 +1053,7 @@ public class PhoneProfilesService extends Service {
         }*/
     }
 
-    private void showProfileNotification() {
+    void showProfileNotification() {
         final Context appContext = getApplicationContext();
         final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);

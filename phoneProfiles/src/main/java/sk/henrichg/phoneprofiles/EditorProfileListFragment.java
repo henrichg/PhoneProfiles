@@ -432,7 +432,7 @@ public class EditorProfileListFragment extends Fragment
         profileListAdapter.notifyDataSetChanged();
         Profile _profile = profileListAdapter.getActivatedProfile();
         updateHeader(_profile);
-        PPApplication.showProfileNotification(activityDataWrapper.context);
+        PPApplication.showProfileNotification(/*activityDataWrapper.context*/);
         ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
 
         activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();
@@ -531,7 +531,7 @@ public class EditorProfileListFragment extends Fragment
                     listView.getRecycledViewPool().clear();
                     profileListAdapter.notifyDataSetChanged();
                     updateHeader(null);
-                    PPApplication.showProfileNotification(activityDataWrapper.context);
+                    PPApplication.showProfileNotification(/*activityDataWrapper.context*/);
                     ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
 
                     activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();

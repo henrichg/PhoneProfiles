@@ -61,7 +61,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                             //DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
                             //dataWrapper.getActivateProfileHelper().removeNotification();
                             //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                            PPApplication.showProfileNotification(appContext);
+                            PPApplication.showProfileNotification(/*appContext*/);
                             //dataWrapper.invalidateDataWrapper();
                         }
                     }
@@ -73,7 +73,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                                 ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                             //dataWrapper.getActivateProfileHelper().removeNotification();
                             //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                            PPApplication.showProfileNotification(appContext);
+                            PPApplication.showProfileNotification(/*appContext*/);
                         }
 
                         // change screen timeout
@@ -116,7 +116,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                             //DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
                             //dataWrapper.getActivateProfileHelper().removeNotification();
                             //dataWrapper.getActivateProfileHelper().setAlarmForRecreateNotification();
-                            PPApplication.showProfileNotification(appContext);
+                            PPApplication.showProfileNotification(/*appContext*/);
                             //dataWrapper.invalidateDataWrapper();
                         }
                     }

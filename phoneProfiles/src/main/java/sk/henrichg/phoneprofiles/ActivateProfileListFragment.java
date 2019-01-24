@@ -307,7 +307,7 @@ public class ActivateProfileListFragment extends Fragment {
             {
                 // activity not started from notification or widget
                 // for activated profile, update notification and widgets
-                PPApplication.showProfileNotification(activityDataWrapper.context);
+                PPApplication.showProfileNotification(/*activityDataWrapper.context*/);
                 ActivateProfileHelper.updateGUI(activityDataWrapper.context, true);
             }
         }
