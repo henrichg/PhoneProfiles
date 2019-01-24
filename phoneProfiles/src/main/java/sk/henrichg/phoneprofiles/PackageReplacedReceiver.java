@@ -87,7 +87,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                     PPApplication.logE("PackageReplacedReceiver.onReceive", "donation alarm restart");
                                     PPApplication.setDaysAfterFirstStart(appContext, 0);
                                     PPApplication.setDonationNotificationCount(appContext, 0);
-                                    AboutApplicationJob.scheduleJob(appContext, true);
+                                    DonationNotificationJob.scheduleJob(appContext, true);
                                 }
                                 if (actualVersionCode <= 2900) {
                                     SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);

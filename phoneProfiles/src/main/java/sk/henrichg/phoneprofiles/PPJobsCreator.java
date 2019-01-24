@@ -10,8 +10,8 @@ class PPJobsCreator implements JobCreator {
     @Override
     public Job create(@NonNull String tag) {
         switch (tag) {
-            case AboutApplicationJob.JOB_TAG:
-                return new AboutApplicationJob();
+            case DonationNotificationJob.JOB_TAG:
+                return new DonationNotificationJob();
 
             default:
                 return null;
