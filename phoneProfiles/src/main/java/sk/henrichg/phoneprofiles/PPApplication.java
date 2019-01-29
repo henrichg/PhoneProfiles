@@ -66,7 +66,7 @@ public class PPApplication extends Application {
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
-    private static final boolean logIntoLogCat = false;
+    private static final boolean logIntoLogCat = true;
     static final boolean logIntoFile = false;
     private static final boolean rootToolsDebug = false;
     private static final String logFilterTags = "##### PPApplication.onCreate"
@@ -304,8 +304,7 @@ public class PPApplication extends Application {
                 PPApplication.logE("##### PPApplication.onCreate", "start service");
                 Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
-                // do not change data in shared preferences and do not activate profile
-                serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, false);
+                serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
                 startPPService(getApplicationContext(), serviceIntent);
             } catch (Exception ignored) {
             }
@@ -1266,9 +1265,7 @@ public class PPApplication extends Application {
 
             //ActivateProfileHelper.setScreenUnlocked(context.getApplicationContext(), true);
 
-            if (PhoneProfilesService.getInstance() != null) {
-                context.stopService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
-            }
+            context.stopService(new Intent(context.getApplicationContext(), PhoneProfilesService.class));
 
             PPApplication.setApplicationStarted(context, false);
 
@@ -1292,8 +1289,8 @@ public class PPApplication extends Application {
                     _handler.postDelayed(r, 1000);
                 }*/
             }
-        } catch (Exception ignored) {
-
+        } catch (Exception e) {
+            PPApplication.logE("PPApplication._exitApp", Log.getStackTraceString(e));
         }
     }
 

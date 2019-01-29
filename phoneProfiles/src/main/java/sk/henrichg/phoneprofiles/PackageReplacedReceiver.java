@@ -11,10 +11,14 @@ import android.os.PowerManager;
 
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
+    static boolean restartService;
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("PackageReplacedReceiver.onReceive", "xxx");
         if ((intent != null) && (intent.getAction() != null) && intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
+            PPApplication.logE("PackageReplacedReceiver.onReceive", "xxx");
+
+            restartService = false;
 
             // start delayed boot up broadcast
             PPApplication.startedOnBoot = true;
@@ -76,18 +80,24 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                     editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
                                     editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
                                     editor.apply();
+
+                                    restartService = true;
                                 }
                                 if (actualVersionCode <= 2500) {
                                     ApplicationPreferences.getSharedPreferences(appContext);
                                     SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
                                     editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
                                     editor.apply();
+
+                                    restartService = true;
                                 }
                                 if (actualVersionCode <= 2700) {
                                     PPApplication.logE("PackageReplacedReceiver.onReceive", "donation alarm restart");
                                     PPApplication.setDaysAfterFirstStart(appContext, 0);
                                     PPApplication.setDonationNotificationCount(appContext, 0);
                                     DonationNotificationJob.scheduleJob(appContext, true);
+
+                                    restartService = true;
                                 }
                                 if (actualVersionCode <= 2900) {
                                     SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
@@ -97,6 +107,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putInt(Profile.PREF_PROFILE_DEVICE_WIFI_AP, 0);
                                         editor.apply();
+
+                                        restartService = true;
                                     }
                                 }
                                 if (actualVersionCode <= 3000) {
@@ -105,6 +117,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putInt(Profile.PREF_PROFILE_LOCK_DEVICE, 1);
                                         editor.apply();
+
+                                        restartService = true;
                                     }
                                 }
                                 if (actualVersionCode <= 3100) {
@@ -121,14 +135,14 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         editor.putBoolean(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_BACKGROUND_TYPE, ApplicationPreferences.applicationWidgetListBackgroundType(appContext));
                                         editor.putString(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_BACKGROUND_COLOR, ApplicationPreferences.applicationWidgetListBackgroundColor(appContext));
                                         editor.apply();
+
+                                        restartService = true;
                                     }
                                 }
                             }
+
                         } catch (Exception ignored) {
                         }
-
-                        PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "start PhoneProfilesService");
-                        startService(appContext);
                     } finally {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
@@ -138,13 +152,45 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                     }
                 }
             });
+
+            PPApplication.startHandlerThread();
+            final Handler handler3 = new Handler(PPApplication.handlerThread.getLooper());
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    PowerManager powerManager = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
+                    PowerManager.WakeLock wakeLock = null;
+                    try {
+                        if (powerManager != null) {
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":PackageReplacedReceiver.onReceive.2");
+                            wakeLock.acquire(10 * 60 * 1000);
+                        }
+
+                        if (restartService) {
+                            //PPApplication.sleep(3000);
+                            if (PPApplication.getApplicationStarted(appContext, true)) {
+                                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "restart PhoneProfilesService");
+                                startService(appContext);
+                            }
+                        }
+                    } finally {
+                        if ((wakeLock != null) && wakeLock.isHeld()) {
+                            try {
+                                wakeLock.release();
+                            } catch (Exception ignored) {}
+                        }
+                    }
+                }
+            }, 5000);
         }
     }
 
     private void startService(Context context) {
         boolean isStarted = PPApplication.getApplicationStarted(context, false);
 
-        //PPApplication.exitApp(context, null, false/*, false, true*/);
+        //PPApplication.sleep(3000);
+
+        PPApplication.exitApp(context, null, false/*, false, true*/);
 
         if (isStarted)
         {
