@@ -74,7 +74,7 @@ public class PhoneProfilesService extends Service {
     private boolean notificationIsPlayed = false;
     private Timer notificationPlayTimer = null;
 
-    static final String EXTRA_SHOW_PROFILE_NOTIFICATION = "show_profile_notification";
+    //static final String EXTRA_SHOW_PROFILE_NOTIFICATION = "show_profile_notification";
     static final String EXTRA_START_ON_BOOT = "start_on_boot";
     static final String EXTRA_START_ON_PACKAGE_REPLACE = "start_on_package_replace";
     static final String EXTRA_ONLY_START = "only_start";
@@ -387,12 +387,12 @@ public class PhoneProfilesService extends Service {
 
         if (!doForFirstStart(intent/*, flags, startId*/)) {
             if (intent != null) {
-                if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
+                /*if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
                     // not needed, is already called in start of onStartCommand
                     //showProfileNotification();
                 }
-                else
+                else*/
                 if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
                     clearProfileNotification(/*this*/);
