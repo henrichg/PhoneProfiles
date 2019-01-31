@@ -12,6 +12,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -476,6 +477,12 @@ public class PhoneProfilesService extends Service {
         return null;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        showProfileNotification();
+    }
+
     private void registerReceivers() {
         //Context appContext = getApplicationContext();
 
@@ -677,6 +684,23 @@ public class PhoneProfilesService extends Service {
 
             RemoteViews contentView = null;
             RemoteViews contentViewLarge;
+
+            /*UiModeManager uiModeManager = (UiModeManager) appContext.getSystemService(Context.UI_MODE_SERVICE);
+            if (uiModeManager != null) {
+                uiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO);
+            }*/
+
+            int nightModeFlags =
+                    appContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (nightModeFlags) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    notificationDarkBackground = true;
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                    break;
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                    break;
+            }
 
             boolean useDecorator = (!PPApplication.romIsMIUI) || (Build.VERSION.SDK_INT >= 26);
             useDecorator = useDecorator && notificationUseDecoration;
