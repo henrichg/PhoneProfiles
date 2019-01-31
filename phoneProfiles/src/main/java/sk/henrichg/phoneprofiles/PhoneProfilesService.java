@@ -481,6 +481,7 @@ public class PhoneProfilesService extends Service {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         showProfileNotification();
+        ActivateProfileHelper.updateGUI(getApplicationContext(), true);
     }
 
     private void registerReceivers() {

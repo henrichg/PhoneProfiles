@@ -27,11 +27,19 @@
         </Preference>
         <sk.henrichg.phoneprofiles.MaterialListPreference
             android:title="@string/phone_profiles_pref_applicationTheme"
-            android:summary="@string/phone_profiles_pref_applicationTheme_dlight"
+            android:summary="@string/phone_profiles_pref_applicationTheme_color"
             android:key="applicationTheme"
             android:defaultValue="@string/array_pref_value_color"
             android:entries="@array/themeArray"
             android:entryValues="@array/themeValues"
+            android:layout="@layout/mp_preference_material_widget" />
+        <sk.henrichg.phoneprofiles.MaterialListPreference
+            android:title="@string/phone_profiles_pref_nightModeOffApplicationTheme"
+            android:summary="@string/phone_profiles_pref_applicationTheme_color"
+            android:key="applicationNightModeOffTheme"
+            android:defaultValue="@string/array_pref_value_color"
+            android:entries="@array/nightModeOffThemeArray"
+            android:entryValues="@array/nightModeOffThemeValues"
             android:layout="@layout/mp_preference_material_widget" />
     </PreferenceScreen>
 

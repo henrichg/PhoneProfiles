@@ -24,6 +24,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
     private boolean showEditorHeader;
     private String activeLanguage;
     private String activeTheme;
+    private String activeNightModeOffTheme;
     //private String activeBackgroundProfile;
 
     private boolean invalidateEditor = false;
@@ -75,6 +76,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         ApplicationPreferences.getSharedPreferences(this);
         activeLanguage = ApplicationPreferences.preferences.getString(ApplicationPreferences.PREF_APPLICATION_LANGUAGE, "system");
         activeTheme = ApplicationPreferences.preferences.getString(ApplicationPreferences.PREF_APPLICATION_THEME, "color");
+        activeNightModeOffTheme = ApplicationPreferences.preferences.getString(ApplicationPreferences.PREF_APPLICATION_NIGHT_MODE_OFF_THEME, "color");
         showEditorPrefIndicator = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_PREF_INDICATOR, true);
         showEditorHeader = ApplicationPreferences.preferences.getBoolean(ApplicationPreferences.PREF_APPLICATION_EDITOR_HEADER, true);
         //activeBackgroundProfile = preferences.getString(PPApplication.PREF_APPLICATION_BACKGROUND_PROFILE, "-999");
@@ -162,6 +164,12 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
         }
         else
         if (!activeTheme.equals(ApplicationPreferences.applicationTheme(getApplicationContext(), false)))
+        {
+            //EditorProfilesActivity.setTheme(this, false);
+            invalidateEditor = true;
+        }
+        else
+        if (!activeNightModeOffTheme.equals(ApplicationPreferences.applicationNightModeOffTheme(getApplicationContext())))
         {
             //EditorProfilesActivity.setTheme(this, false);
             invalidateEditor = true;
