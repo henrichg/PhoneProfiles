@@ -110,92 +110,82 @@ class GlobalGUIRoutines {
     }
 
     private static int getTheme(boolean forPopup, boolean withToolbar, Context context) {
-        if (ApplicationPreferences.applicationTheme(context).equals("color"))
-        {
-            if (forPopup)
-            {
-                if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_color;
+        switch (ApplicationPreferences.applicationTheme(context, true)) {
+            case "color":
+                if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_color;
+                    else
+                        return R.style.PopupTheme_color;
+                }
                 else
-                    return R.style.PopupTheme_color;
-            }
-            else
-            {
-                if (withToolbar)
-                    return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_color;
+                }
+            case "white":
+                if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_white;
+                    else
+                        return R.style.PopupTheme_white;
+                }
                 else
-                    return R.style.Theme_PhoneProfilesTheme_color;
-            }
-        }
-        else
-        if (ApplicationPreferences.applicationTheme(context).equals("white"))
-        {
-            if (forPopup)
-            {
-                if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_white;
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_white;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_white;
+                }
+            case "dark":
+                if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_dark;
+                    else
+                        return R.style.PopupTheme_dark;
+                }
                 else
-                    return R.style.PopupTheme_white;
-            }
-            else
-            {
-                if (withToolbar)
-                    return R.style.Theme_PhoneProfilesTheme_withToolbar_white;
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_dark;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_dark;
+                }
+            case "dlight":
+                if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_dlight;
+                    else
+                        return R.style.PopupTheme_dlight;
+                }
                 else
-                    return R.style.Theme_PhoneProfilesTheme_white;
-            }
-        }
-        else
-        if (ApplicationPreferences.applicationTheme(context).equals("dark"))
-        {
-            if (forPopup)
-            {
-                if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_dark;
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_dlight;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_dlight;
+                }
+            default:
+                if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_color;
+                    else
+                        return R.style.PopupTheme_color;
+                }
                 else
-                    return R.style.PopupTheme_dark;
-            }
-            else
-            {
-                if (withToolbar)
-                    return R.style.Theme_PhoneProfilesTheme_withToolbar_dark;
-                else
-                    return R.style.Theme_PhoneProfilesTheme_dark;
-            }
-        }
-        else
-        if (ApplicationPreferences.applicationTheme(context).equals("dlight"))
-        {
-            if (forPopup)
-            {
-                if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_dlight;
-                else
-                    return R.style.PopupTheme_dlight;
-            }
-            else
-            {
-                if (withToolbar)
-                    return R.style.Theme_PhoneProfilesTheme_withToolbar_dlight;
-                else
-                    return R.style.Theme_PhoneProfilesTheme_dlight;
-            }
-        }
-        else {
-            if (forPopup)
-            {
-                if (withToolbar)
-                    return R.style.PopupTheme_withToolbar_color;
-                else
-                    return R.style.PopupTheme_color;
-            }
-            else
-            {
-                if (withToolbar)
-                    return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
-                else
-                    return R.style.Theme_PhoneProfilesTheme_color;
-            }
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_color;
+                }
         }
     }
 

@@ -150,7 +150,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             // enable status bar tint
             tintManager.setStatusBarTintEnabled(true);
             // set a custom tint color for status bar
-            switch (ApplicationPreferences.applicationTheme(getApplicationContext())) {
+            switch (ApplicationPreferences.applicationTheme(getApplicationContext(), true)) {
                 case "color":
                     tintManager.setStatusBarTintColor(ContextCompat.getColor(getBaseContext(), R.color.primary));
                     break;
@@ -364,10 +364,16 @@ public class EditorProfilesActivity extends AppCompatActivity
         MenuItem menuItem = menu.findItem(R.id.menu_dark_theme);
         if (menuItem != null)
         {
-            if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
-                menuItem.setTitle(R.string.menu_dark_theme_off);
+            String appTheme = ApplicationPreferences.applicationTheme(getApplicationContext(), false);
+            if (!appTheme.equals("night_mode")) {
+                menuItem.setVisible(true);
+                if (appTheme.equals("dark"))
+                    menuItem.setTitle(R.string.menu_dark_theme_off);
+                else
+                    menuItem.setTitle(R.string.menu_dark_theme_on);
+            }
             else
-                menuItem.setTitle(R.string.menu_dark_theme_on);
+                menuItem.setVisible(false);
         }
 
         onNextLayout(editorToolbar, new Runnable() {
@@ -393,22 +399,23 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 return true;
             case R.id.menu_dark_theme:
-                String theme = ApplicationPreferences.applicationTheme(getApplicationContext());
-                if (theme.equals("dark")) {
-                    SharedPreferences preferences = ApplicationPreferences.getSharedPreferences(getApplicationContext());
-                    theme = preferences.getString(ApplicationPreferences.PREF_APPLICATION_NOT_DARK_THEME, "color");
-                    Editor editor = preferences.edit();
-                    editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, theme);
-                    editor.apply();
+                String theme = ApplicationPreferences.applicationTheme(getApplicationContext(), false);
+                if (!theme.equals("night_mode")) {
+                    if (theme.equals("dark")) {
+                        SharedPreferences preferences = ApplicationPreferences.getSharedPreferences(getApplicationContext());
+                        theme = preferences.getString(ApplicationPreferences.PREF_APPLICATION_NOT_DARK_THEME, "color");
+                        Editor editor = preferences.edit();
+                        editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, theme);
+                        editor.apply();
+                    } else {
+                        SharedPreferences preferences = ApplicationPreferences.getSharedPreferences(getApplicationContext());
+                        Editor editor = preferences.edit();
+                        editor.putString(ApplicationPreferences.PREF_APPLICATION_NOT_DARK_THEME, theme);
+                        editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, "dark");
+                        editor.apply();
+                    }
+                    GlobalGUIRoutines.reloadActivity(this, true);
                 }
-                else {
-                    SharedPreferences preferences = ApplicationPreferences.getSharedPreferences(getApplicationContext());
-                    Editor editor = preferences.edit();
-                    editor.putString(ApplicationPreferences.PREF_APPLICATION_NOT_DARK_THEME, theme);
-                    editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, "dark");
-                    editor.apply();
-                }
-                GlobalGUIRoutines.reloadActivity(this, true);
                 return true;
             case R.id.menu_export:
                 exportData();
@@ -1318,13 +1325,14 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 //final Display display = getWindowManager().getDefaultDisplay();
 
+                String appTheme = ApplicationPreferences.applicationTheme(getApplicationContext(), true);
                 int circleColor = R.color.tabTargetHelpCircleColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("dark"))
+                if (appTheme.equals("dark"))
                     circleColor = R.color.tabTargetHelpCircleColor_dark;
                 int textColor = R.color.tabTargetHelpTextColor;
-                if (ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white"))
+                if (appTheme.equals("white"))
                     textColor = R.color.tabTargetHelpTextColor_white;
-                boolean tintTarget = !ApplicationPreferences.applicationTheme(getApplicationContext()).equals("white");
+                boolean tintTarget = !appTheme.equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
                 List<TapTarget> targets = new ArrayList<>();

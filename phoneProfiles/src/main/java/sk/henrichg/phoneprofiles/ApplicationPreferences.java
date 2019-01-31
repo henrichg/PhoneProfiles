@@ -2,6 +2,7 @@ package sk.henrichg.phoneprofiles;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 
 class ApplicationPreferences {
 
@@ -121,7 +122,7 @@ class ApplicationPreferences {
         return getSharedPreferences(context).getString(PREF_APPLICATION_LANGUAGE, "system");
     }
 
-    static public String applicationTheme(Context context) {
+    static public String applicationTheme(Context context, boolean useNightMode) {
         String applicationTheme = getSharedPreferences(context).getString(PREF_APPLICATION_THEME, "color");
         if (applicationTheme.equals("light")){
             applicationTheme = "color";
@@ -134,6 +135,21 @@ class ApplicationPreferences {
             SharedPreferences.Editor editor = getSharedPreferences(context).edit();
             editor.putString(PREF_APPLICATION_THEME, applicationTheme);
             editor.apply();
+        }
+        if (applicationTheme.equals("night_mode") && useNightMode) {
+            int nightModeFlags =
+                    context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (nightModeFlags) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    applicationTheme = "dark";
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                    applicationTheme = getSharedPreferences(context).getString(PREF_APPLICATION_NOT_DARK_THEME, "color");
+                    break;
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                    applicationTheme = getSharedPreferences(context).getString(PREF_APPLICATION_NOT_DARK_THEME, "color");
+                    break;
+            }
         }
         return applicationTheme;
     }
