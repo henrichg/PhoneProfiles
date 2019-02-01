@@ -76,6 +76,8 @@ public class BootUpReceiver extends BroadcastReceiver {
                                 PPApplication.logE("BootUpReceiver.onReceive", "activate profiles");
                                 final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
                                 dataWrapper.activateProfileOnBoot();
+                                PPApplication.showProfileNotification(/*context*/);
+                                ActivateProfileHelper.updateGUI(appContext, true);
                             }
                         } else {
                             PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false/*, true*/);

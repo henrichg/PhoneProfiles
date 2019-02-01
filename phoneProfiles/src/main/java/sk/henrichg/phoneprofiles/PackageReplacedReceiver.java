@@ -190,6 +190,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 PPApplication.logE("PackageReplacedReceiver.onReceive", "activate profiles");
                                 final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
                                 dataWrapper.activateProfileOnBoot();
+                                PPApplication.showProfileNotification(/*context*/);
+                                ActivateProfileHelper.updateGUI(appContext, true);
                             }
                         }
                     } finally {
