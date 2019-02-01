@@ -85,12 +85,14 @@ public class PhoneCallBroadcastReceiver extends PhoneCallReceiver {
 
     private static void setLinkUnlinkNotificationVolume(final int linkMode, final Context context) {
         if (ActivateProfileHelper.getMergedRingNotificationVolumes(context) && ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) {
-            DataWrapper dataWrapper = new DataWrapper(context, false, 0, false);
-            final Profile profile = dataWrapper.getActivatedProfile(false, false);
-            if (profile != null) {
-                ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
+            if (ActivateProfileHelper.isAudibleSystemRingerMode(audioManager, context)) {
+                DataWrapper dataWrapper = new DataWrapper(context, false, 0, false);
+                final Profile profile = dataWrapper.getActivatedProfile(false, false);
+                if (profile != null) {
+                    ActivateProfileHelper.executeForVolumes(context, profile, linkMode, false);
+                }
+                dataWrapper.invalidateDataWrapper();
             }
-            dataWrapper.invalidateDataWrapper();
         }
     }
 
