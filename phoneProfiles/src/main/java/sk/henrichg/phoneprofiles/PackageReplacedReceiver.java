@@ -180,8 +180,16 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                         if (restartService) {
                             //PPApplication.sleep(3000);
                             if (PPApplication.getApplicationStarted(appContext, true)) {
-                                PPApplication.logE("@@@ PackageReplacedReceiver.onReceive", "restart PhoneProfilesService");
+                                PPApplication.logE("PackageReplacedReceiver.onReceive", "restart PhoneProfilesService");
                                 startService(appContext);
+                            }
+                        }
+                        else {
+                            //PPApplication.sleep(3000);
+                            if (PPApplication.getApplicationStarted(appContext, true)) {
+                                PPApplication.logE("PackageReplacedReceiver.onReceive", "activate profiles");
+                                final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
+                                dataWrapper.activateProfileOnBoot();
                             }
                         }
                     } finally {
@@ -208,11 +216,12 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
             PPApplication.sleep(2000);
 
             // start PhoneProfilesService
-            PPApplication.logE("@@@ PackageReplacedReceiver.startService", "xxx");
+            PPApplication.logE("PackageReplacedReceiver.startService", "xxx");
             PPApplication.setApplicationStarted(context, true);
             Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
+            serviceIntent.putExtra(PhoneProfilesService.EXTRA_ACTIVATE_PROFILES, true);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_PACKAGE_REPLACE, true);
             PPApplication.startPPService(context, serviceIntent);
         }

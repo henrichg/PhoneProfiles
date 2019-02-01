@@ -80,6 +80,7 @@ public class PhoneProfilesService extends Service {
     static final String EXTRA_START_ON_PACKAGE_REPLACE = "start_on_package_replace";
     static final String EXTRA_ONLY_START = "only_start";
     static final String EXTRA_INITIALIZE_START = "initialize_start";
+    static final String EXTRA_ACTIVATE_PROFILES = "activate_profiles";
     static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
     static final String EXTRA_SWITCH_KEYGUARD = "switch_keyguard";
@@ -186,12 +187,14 @@ public class PhoneProfilesService extends Service {
 
         boolean onlyStart = true;
         boolean initializeStart = false;
+        boolean activateProfiles = false;
         boolean startOnBoot = false;
         boolean startOnPackageReplace = false;
 
         if (intent != null) {
             onlyStart = intent.getBooleanExtra(EXTRA_ONLY_START, true);
             initializeStart = intent.getBooleanExtra(EXTRA_INITIALIZE_START, false);
+            activateProfiles = intent.getBooleanExtra(EXTRA_ACTIVATE_PROFILES, false);
             startOnBoot = intent.getBooleanExtra(EXTRA_START_ON_BOOT, false);
             startOnPackageReplace = intent.getBooleanExtra(EXTRA_START_ON_PACKAGE_REPLACE, false);
         }
@@ -200,6 +203,8 @@ public class PhoneProfilesService extends Service {
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_ONLY_START");
         if (initializeStart)
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_INITIALIZE_START");
+        if (activateProfiles)
+            PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_ACTIVATE_PROFILES");
         if (startOnBoot)
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "EXTRA_START_ON_BOOT");
         if (startOnPackageReplace)
@@ -233,6 +238,7 @@ public class PhoneProfilesService extends Service {
             final boolean _startOnBoot = startOnBoot;
             final boolean _startOnPackageReplace = startOnPackageReplace;
             final boolean _initializeStart = initializeStart;
+            final boolean _activateProfiles = activateProfiles;
             PPApplication.startHandlerThread();
             final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
             handler.post(new Runnable() {
@@ -323,21 +329,17 @@ public class PhoneProfilesService extends Service {
                         DonationNotificationJob.scheduleJob(appContext, false);
 
                         if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
-                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
-
-                            dataWrapper.activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null);
-                        }
-
-                        if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
-                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
-                            if (ApplicationPreferences.applicationActivate(appContext)) {
-                                Profile profile = DatabaseHandler.getInstance(appContext).getActivatedProfile();
-                                long profileId = 0;
-                                if (profile != null)
-                                    profileId = profile._id;
-                                dataWrapper.activateProfile(profileId, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
+                            if (_activateProfiles) {
+                                PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
+                                dataWrapper.activateProfileOnBoot();
                             }
                         }
+                        /*
+                        if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
+                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
+                                dataWrapper.activateProfileOnBoot();
+                        }
+                        */
 
                         dataWrapper.invalidateDataWrapper();
 

@@ -991,6 +991,26 @@ public class DataWrapper {
         }
     }
 
+    void activateProfileOnBoot()
+    {
+        if (ApplicationPreferences.applicationActivate(context))
+        {
+            Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
+            long profileId;
+            if (profile != null)
+                profileId = profile._id;
+            else
+            {
+                profileId = Long.valueOf(ApplicationPreferences.applicationBackgroundProfile(context));
+                if (profileId == Profile.PROFILE_NO_ACTIVATE)
+                    profileId = 0;
+            }
+            activateProfile(profileId, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
+        }
+        else
+            activateProfile(0, PPApplication.STARTUP_SOURCE_BOOT, null/*, ""*/);
+    }
+
     @TargetApi(Build.VERSION_CODES.N_MR1)
     private ShortcutInfo createShortcutInfo(Profile profile) {
         boolean isIconResourceID;
