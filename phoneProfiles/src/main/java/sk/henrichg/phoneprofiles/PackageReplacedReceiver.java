@@ -179,14 +179,19 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                         if (restartService) {
                             //PPApplication.sleep(3000);
-                            if (PPApplication.getApplicationStarted(appContext, true)) {
-                                PPApplication.logE("PackageReplacedReceiver.onReceive", "restart PhoneProfilesService");
-                                startService(appContext);
+                            if (PPApplication.getApplicationStarted(appContext, false)) {
+                                // application was started before upgrade
+                                if (!PPApplication.getApplicationStarted(appContext, true)) {
+                                    // service is not started, start it
+                                    PPApplication.logE("PackageReplacedReceiver.onReceive", "restart PhoneProfilesService");
+                                    startService(appContext);
+                                }
                             }
                         }
                         else {
                             //PPApplication.sleep(3000);
                             if (PPApplication.getApplicationStarted(appContext, true)) {
+                                // service is started by PPApplication
                                 PPApplication.logE("PackageReplacedReceiver.onReceive", "activate profiles");
                                 final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
                                 dataWrapper.activateProfileOnBoot();

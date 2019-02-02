@@ -60,10 +60,11 @@ public class BootUpReceiver extends BroadcastReceiver {
                         }
 
                         if (ApplicationPreferences.applicationStartOnBoot(appContext)) {
-                            PPApplication.sleep(3000);
+                            PPApplication.logE("BootUpReceiver.onReceive", "PhoneProfilesService.getInstance()=" + PhoneProfilesService.getInstance());
 
+                            PPApplication.sleep(3000);
                             if (!PPApplication.getApplicationStarted(appContext, true)) {
-                                // start service
+                                // service is not started, start it
                                 PPApplication.setApplicationStarted(appContext, true);
                                 Intent serviceIntent = new Intent(appContext, PhoneProfilesService.class);
                                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
@@ -71,8 +72,8 @@ public class BootUpReceiver extends BroadcastReceiver {
                                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_ACTIVATE_PROFILES, true);
                                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_START_ON_BOOT, true);
                                 PPApplication.startPPService(appContext, serviceIntent);
-                            }
-                            else {
+                            } else {
+                                // service is started by PPApplication
                                 PPApplication.logE("BootUpReceiver.onReceive", "activate profiles");
                                 final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
                                 dataWrapper.activateProfileOnBoot();

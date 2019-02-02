@@ -329,8 +329,9 @@ public class PhoneProfilesService extends Service {
                         DonationNotificationJob.scheduleJob(appContext, false);
 
                         if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
+                            PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
+
                             if (_activateProfiles) {
-                                PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
                                 dataWrapper.activateProfileOnBoot();
                             }
                         }
