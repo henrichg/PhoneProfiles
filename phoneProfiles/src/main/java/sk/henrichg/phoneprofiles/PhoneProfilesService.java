@@ -1099,8 +1099,11 @@ public class PhoneProfilesService extends Service {
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
         dataWrapper.invalidateDataWrapper();
 
-        if (!runningInForeground)
-            _showProfileNotification(profile, false);
+        synchronized (PhoneProfilesService.class) {
+            if (!runningInForeground || (instance == null)) {
+                _showProfileNotification(profile, false);
+            }
+        }
 
         PPApplication.startHandlerThreadProfileNotification();
         final Handler handler = new Handler(PPApplication.handlerThreadProfileNotification.getLooper());
