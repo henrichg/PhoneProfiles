@@ -8,12 +8,14 @@ import android.media.AudioManager;
 public class RingerModeChangeReceiver extends BroadcastReceiver {
 
     public static boolean internalChange = false;
+    public static boolean notUnlinkVolumes = false;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (!internalChange) {
             final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             setRingerMode(context, audioManager);
+            notUnlinkVolumes = true;
         }
 
         //setAlarmForDisableInternalChange(context);

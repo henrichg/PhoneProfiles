@@ -1128,8 +1128,7 @@ class ActivateProfileHelper {
                         profile._volumeRingerMode = Profile.RINGERMODE_SILENT;
                     }
                 }
-            }
-            else {
+            } else {
                 if ((profile._volumeRingerMode == 0) && (audioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT)) {
                     // change ringer mode to Ringing
                     PPApplication.logE("ActivateProfileHelper.changeRingerModeForVolumeEqual0", "changed to ringing");
