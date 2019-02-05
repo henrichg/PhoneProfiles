@@ -47,12 +47,12 @@ class SettingsContentObserver  extends ContentObserver {
         {
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING) {
-                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
                     RingerModeChangeReceiver.notUnlinkVolumes = true;
+                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
                 }
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
-                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
                     RingerModeChangeReceiver.notUnlinkVolumes = true;
+                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
                 }
             }
         }
@@ -60,12 +60,12 @@ class SettingsContentObserver  extends ContentObserver {
         {
             if (!RingerModeChangeReceiver.internalChange) {
                 if (volumeStream == AudioManager.STREAM_RING) {
-                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
                     RingerModeChangeReceiver.notUnlinkVolumes = true;
+                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
                 }
                 if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
-                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
                     RingerModeChangeReceiver.notUnlinkVolumes = true;
+                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
                 }
             }
         }

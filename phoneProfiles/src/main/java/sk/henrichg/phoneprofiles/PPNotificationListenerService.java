@@ -88,6 +88,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
                         break;
                 }
                 if (zenMode != 0) {
+                    RingerModeChangeReceiver.notUnlinkVolumes = true;
                     ActivateProfileHelper.setRingerMode(getApplicationContext(), 5);
                     ActivateProfileHelper.setZenMode(getApplicationContext(), zenMode);
                 }

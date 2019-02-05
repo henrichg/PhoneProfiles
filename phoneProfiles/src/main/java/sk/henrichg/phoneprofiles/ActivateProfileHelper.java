@@ -775,6 +775,7 @@ class ActivateProfileHelper {
             if ((zenMode != ZENMODE_SILENT) && canChangeZenMode(context, false)) {
 
                 if (ringerMode != -1) {
+                    RingerModeChangeReceiver.notUnlinkVolumes = false;
                     audioManager.setRingerMode(ringerMode);
                     //try { Thread.sleep(500); } catch (InterruptedException e) { }
                     //SystemClock.sleep(500);
@@ -782,6 +783,7 @@ class ActivateProfileHelper {
                 }
 
                 if ((zenMode != systemZenMode) || (zenMode == ZENMODE_PRIORITY)) {
+                    RingerModeChangeReceiver.notUnlinkVolumes = false;
                     PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
                     InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
                 }
@@ -796,13 +798,16 @@ class ActivateProfileHelper {
                             //audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                             if ((systemZenMode != ZENMODE_ALL) && canChangeZenMode(context, false)) {
                                 PPApplication.logE("ActivateProfileHelper.setZenMode", "change zen mode");
+                                RingerModeChangeReceiver.notUnlinkVolumes = false;
                                 PPNotificationListenerService.requestInterruptionFilter(context, ZENMODE_ALL);
                                 InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, ZENMODE_ALL);
                                 PPApplication.sleep(500);
                             }
+                            RingerModeChangeReceiver.notUnlinkVolumes = false;
                             audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                             break;
                         default:
+                            RingerModeChangeReceiver.notUnlinkVolumes = false;
                             audioManager.setRingerMode(ringerMode);
                     }
                 } catch (Exception ignored) {
@@ -815,8 +820,10 @@ class ActivateProfileHelper {
                 }
             }
         }
-        else
+        else {
+            RingerModeChangeReceiver.notUnlinkVolumes = false;
             audioManager.setRingerMode(ringerMode);
+        }
     }
 
     private static void setVibrateWhenRinging(Context context, Profile profile, int value) {
@@ -942,8 +949,6 @@ class ActivateProfileHelper {
                         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":ActivateProfileHelper.executeForVolumes");
                         wakeLock.acquire(10 * 60 * 1000);
                     }
-
-                    RingerModeChangeReceiver.notUnlinkVolumes = false;
 
                     // link, unlink volumes during activation of profile
                     int linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
