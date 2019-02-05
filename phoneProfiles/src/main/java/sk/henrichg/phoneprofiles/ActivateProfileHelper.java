@@ -943,6 +943,8 @@ class ActivateProfileHelper {
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
+                    RingerModeChangeReceiver.notUnlinkVolumes = false;
+
                     // link, unlink volumes during activation of profile
                     int linkUnlink = PhoneCallBroadcastReceiver.LINKMODE_NONE;
                     if (ActivateProfileHelper.getMergedRingNotificationVolumes(appContext) &&
