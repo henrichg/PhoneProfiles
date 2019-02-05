@@ -597,12 +597,16 @@ class ActivateProfileHelper {
     private static void setVolumes(Context context, Profile profile, AudioManager audioManager, int linkUnlink, boolean forProfileActivation)
     {
         if (profile.getVolumeRingtoneChange()) {
-            if (forProfileActivation)
+            if (forProfileActivation) {
+                RingerModeChangeReceiver.notUnlinkVolumes = false;
                 setRingerVolume(context, profile.getVolumeRingtoneValue());
+            }
         }
         if (profile.getVolumeNotificationChange()) {
-            if (forProfileActivation)
+            if (forProfileActivation) {
+                RingerModeChangeReceiver.notUnlinkVolumes = false;
                 setNotificationVolume(context, profile.getVolumeNotificationValue());
+            }
         }
 
         int ringerMode = getRingerMode(context);
@@ -616,10 +620,11 @@ class ActivateProfileHelper {
 
                 if (forProfileActivation) {
                     if (profile.getVolumeSystemChange()) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
                         try {
-                        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, profile.getVolumeSystemValue(), 0);
-                        //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
-                        //correctVolume0(/*profile, */audioManager, linkUnlink);
+                            audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, profile.getVolumeSystemValue(), 0);
+                            //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_SYSTEM, profile.getVolumeSystemValue());
+                            //correctVolume0(/*profile, */audioManager, linkUnlink);
                         } catch (Exception ignored) { }
                     }
                 }
