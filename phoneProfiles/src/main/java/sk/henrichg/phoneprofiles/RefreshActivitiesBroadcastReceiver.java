@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
-public class RefreshGUIBroadcastReceiver extends BroadcastReceiver {
+public class RefreshActivitiesBroadcastReceiver extends BroadcastReceiver {
 
     static final String EXTRA_REFRESH_ICONS = "refresh_icons";
     static final String EXTRA_REFRESH_ALSO_EDITOR = "refresh_also_editor";

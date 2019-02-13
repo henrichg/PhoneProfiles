@@ -2417,8 +2417,8 @@ class ActivateProfileHelper {
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent3);
 
         // activities
-        Intent intent5 = new Intent("RefreshGUIBroadcastReceiver");
-        intent5.putExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ALSO_EDITOR, alsoEditor);
+        Intent intent5 = new Intent("RefreshActivitiesBroadcastReceiver");
+        intent5.putExtra(RefreshActivitiesBroadcastReceiver.EXTRA_REFRESH_ALSO_EDITOR, alsoEditor);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent5);
 
         // Samsung edge panel

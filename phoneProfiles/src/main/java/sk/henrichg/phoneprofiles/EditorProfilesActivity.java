@@ -99,7 +99,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     private final BroadcastReceiver refreshGUIBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent ) {
-            boolean refreshIcons = intent.getBooleanExtra(RefreshGUIBroadcastReceiver.EXTRA_REFRESH_ICONS, false);
+            boolean refreshIcons = intent.getBooleanExtra(RefreshActivitiesBroadcastReceiver.EXTRA_REFRESH_ICONS, false);
             // not change selection in editor if refresh is outside editor
             EditorProfilesActivity.this.refreshGUI(refreshIcons, false);
         }
