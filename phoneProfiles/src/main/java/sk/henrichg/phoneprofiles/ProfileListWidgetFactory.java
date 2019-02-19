@@ -58,9 +58,9 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
     }
 
     public void onDestroy() {
-        if (dataWrapper != null)
+        /*if (dataWrapper != null)
             dataWrapper.invalidateDataWrapper();
-        dataWrapper = null;
+        dataWrapper = null;*/
     }
 
     public int getCount() {
@@ -203,10 +203,10 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
 
         List<Profile> newProfileList = dataWrapper.getNewProfileList(true,
                 ApplicationPreferences.applicationWidgetListPrefIndicator(context));
-        if (dataWrapper != null) {
+        //if (dataWrapper != null) {
             dataWrapper.clearProfileList();
             dataWrapper.setProfileList(newProfileList);
             profileList = newProfileList;
-        }
+        //}
     }
 }
