@@ -278,7 +278,9 @@ class ActivateProfileListAdapter extends BaseAdapter
                         public void run() {
                             if (ActivatorTargetHelpsActivity.activity != null) {
                                 //Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
-                                ActivatorTargetHelpsActivity.activity.finish();
+                                try {
+                                    ActivatorTargetHelpsActivity.activity.finish();
+                                } catch (Exception ignored) {};
                                 ActivatorTargetHelpsActivity.activity = null;
                                 //ActivatorTargetHelpsActivity.activatorActivity = null;
                             }
@@ -300,7 +302,9 @@ class ActivateProfileListAdapter extends BaseAdapter
                         public void run() {
                             if (ActivatorTargetHelpsActivity.activity != null) {
                                 //Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
-                                ActivatorTargetHelpsActivity.activity.finish();
+                                try {
+                                    ActivatorTargetHelpsActivity.activity.finish();
+                                } catch (Exception ignored) {};
                                 ActivatorTargetHelpsActivity.activity = null;
                                 //ActivatorTargetHelpsActivity.activatorActivity = null;
                             }
@@ -320,7 +324,9 @@ class ActivateProfileListAdapter extends BaseAdapter
                 public void run() {
                     if (ActivatorTargetHelpsActivity.activity != null) {
                         //Log.d("ActivateProfileListAdapter.showTargetHelps", "finish activity");
-                        ActivatorTargetHelpsActivity.activity.finish();
+                        try {
+                            ActivatorTargetHelpsActivity.activity.finish();
+                        } catch (Exception ignored) {};
                         ActivatorTargetHelpsActivity.activity = null;
                         //ActivatorTargetHelpsActivity.activatorActivity = null;
                     }

@@ -855,7 +855,9 @@ public class DataWrapper {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    activity.finish();
+                    try {
+                        activity.finish();
+                    } catch (Exception ignored) {};
                 }
             });
         }

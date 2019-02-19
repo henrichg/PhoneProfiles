@@ -253,7 +253,9 @@ public class ActivateProfileListFragment extends Fragment {
                     intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR_START);
                     fragment.getActivity().startActivity(intent);
 
-                    fragment.getActivity().finish();
+                    try {
+                        fragment.getActivity().finish();
+                    } catch (Exception ignored) {};
 
                     return;
                 }
@@ -547,7 +549,9 @@ public class ActivateProfileListFragment extends Fragment {
                 public void run() {
                     if (ActivatorTargetHelpsActivity.activity != null) {
                         //Log.d("ActivateProfileListFragment.showTargetHelps", "finish activity");
-                        ActivatorTargetHelpsActivity.activity.finish();
+                        try {
+                            ActivatorTargetHelpsActivity.activity.finish();
+                        } catch (Exception ignored) {};
                         ActivatorTargetHelpsActivity.activity = null;
                         //ActivatorTargetHelpsActivity.activatorActivity = null;
                     }
@@ -589,7 +593,9 @@ public class ActivateProfileListFragment extends Fragment {
                 public void run() {
                     if (ActivatorTargetHelpsActivity.activity != null) {
                         //Log.d("ActivateProfileListFragment.showAdapterTargetHelps", "finish activity");
-                        ActivatorTargetHelpsActivity.activity.finish();
+                        try {
+                            ActivatorTargetHelpsActivity.activity.finish();
+                        } catch (Exception ignored) {};
                         ActivatorTargetHelpsActivity.activity = null;
                         //ActivatorTargetHelpsActivity.activatorActivity = null;
                     }
