@@ -337,6 +337,15 @@ class GlobalGUIRoutines {
         return value.data;
     }
 
+    static int getThemeActivatorGridDividerColor(final boolean show, final Context context) {
+        final TypedValue value = new TypedValue();
+        if (show)
+            context.getTheme().resolveAttribute(android.R.attr.listDivider, value, false);
+        else
+            context.getTheme().resolveAttribute(R.attr.activityBackgroundColor, value, false);
+        return value.data;
+    }
+
     /*
     static int getResourceId(String pVariableName, String pResourceName, Context context)
     {
