@@ -467,7 +467,8 @@ public class EditorProfileListFragment extends Fragment
                 if (negative != null) negative.setAllCaps(false);
             }
         });*/
-        dialog.show();
+        if (!getActivity().isFinishing())
+            dialog.show();
     }
 
     public void showEditMenu(View view)
@@ -551,7 +552,8 @@ public class EditorProfileListFragment extends Fragment
                     if (negative != null) negative.setAllCaps(false);
                 }
             });*/
-            dialog.show();
+            if (!getActivity().isFinishing())
+                dialog.show();
         }
     }
 

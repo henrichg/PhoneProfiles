@@ -230,7 +230,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                         if (negative != null) negative.setAllCaps(false);
                                     }
                                 });*/
-                                dialog.show();
+                                if (!getActivity().isFinishing())
+                                    dialog.show();
                             }
                         /*}
                         else {
@@ -323,7 +324,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                             if (negative != null) negative.setAllCaps(false);
                                         }
                                     });*/
-                                    dialog.show();
+                                    if (!getActivity().isFinishing())
+                                        dialog.show();
                                 }
                             /*}
                             else {
@@ -394,7 +396,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                     if (negative != null) negative.setAllCaps(false);
                                 }
                             });*/
-                            dialog.show();
+                            if (!getActivity().isFinishing())
+                                dialog.show();
                         }
                         return false;
                     }
@@ -487,7 +490,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                             //        if (negative != null) negative.setAllCaps(false);
                             //    }
                             //});
-                            dialog.show();
+                            if (!getActivity().isFinishing())
+                                dialog.show();
                         }
                         return false;
                     }
@@ -603,7 +607,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                                     if (negative != null) negative.setAllCaps(false);
                                 }
                             });*/
-                            dialog.show();
+                            if (!getActivity().isFinishing())
+                                dialog.show();
                         }
                         return false;
                     }
@@ -633,7 +638,8 @@ public class PhoneProfilesPreferencesNestedFragment extends PreferenceFragment
                             //        if (negative != null) negative.setAllCaps(false);
                             //    }
                             //});
-                            dialog.show();
+                            if (!getActivity().isFinishing())
+                                dialog.show();
                         }
                         return false;
                     }

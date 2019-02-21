@@ -206,7 +206,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
                     if (iValue < mMin) iValue = mMin;
                     if (iValue > mMax) iValue = mMax;
                     mValueDialog.setDuration(iValue * 1000);
-                    mValueDialog.show();
+                    if (!mActivity.isFinishing())
+                        mValueDialog.show();
                 }
             }
         );
@@ -331,7 +332,8 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
     }
 
     public void show() {
-        mDialog.show();
+        if (!mActivity.isFinishing())
+            mDialog.show();
     }
 
 }

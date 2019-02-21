@@ -102,7 +102,8 @@ public class ProfilePreference extends DialogPreference {
             mDialog.onRestoreInstanceState(state);
 
         mDialog.setOnDismissListener(this);
-        mDialog.show();
+        if (!((Activity)prefContext).isFinishing())
+            mDialog.show();
     }
 
     //@Override

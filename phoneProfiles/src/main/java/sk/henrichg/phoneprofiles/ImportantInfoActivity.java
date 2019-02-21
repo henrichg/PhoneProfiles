@@ -169,7 +169,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                 if (negative != null) negative.setAllCaps(false);
                             }
                         });*/
-                        dialog.show();
+                        if (!activity.isFinishing())
+                            dialog.show();
                     }
                 }
             });
@@ -212,7 +213,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                         if (negative != null) negative.setAllCaps(false);
                                     }
                                 });*/
-                                dialog.show();
+                                if (!activity.isFinishing())
+                                    dialog.show();
                             }
                         }
                     });
@@ -256,7 +258,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                     if (negative != null) negative.setAllCaps(false);
                                 }
                             });*/
-                            dialog.show();
+                            if (!activity.isFinishing())
+                                dialog.show();
                         }
                     }
                 });
@@ -322,7 +325,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
                                     if (negative != null) negative.setAllCaps(false);
                                 }
                             });*/
-                        dialog.show();
+                        if (!activity.isFinishing())
+                            dialog.show();
                     }
                 }
             });

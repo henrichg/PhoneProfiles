@@ -1585,7 +1585,8 @@ public class Permissions {
                             if (negative != null) negative.setAllCaps(false);
                         }
                     });*/
-                    dialog2.show();
+                    if (!activity.isFinishing())
+                        dialog2.show();
                 }
             }
         });
@@ -1607,7 +1608,8 @@ public class Permissions {
                 if (negative != null) negative.setAllCaps(false);
             }
         });*/
-        dialog.show();
+        if (!activity.isFinishing())
+            dialog.show();
     }
 
 }
