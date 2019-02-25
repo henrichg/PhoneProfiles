@@ -414,16 +414,8 @@ public class PhoneProfilesService extends Service {
                     Context appContext = getApplicationContext();
 
                     boolean isScreenOn;
-                    //if (android.os.Build.VERSION.SDK_INT >= 20)
-                    //{
-                    //    Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-                    //    isScreenOn = display.getState() == Display.STATE_ON;
-                    //}
-                    //else
-                    //{
                     PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-                    isScreenOn = ((pm != null) && pm.isScreenOn());
-                    //}
+                    isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
 
                     boolean secureKeyguard;
                     if (keyguardManager == null)

@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.PowerManager;
 import android.support.multidex.MultiDex;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -1145,6 +1146,14 @@ public class PPApplication extends Application {
     */
 
     // others ------------------------------------------------------------------
+
+    static boolean isScreenOn(PowerManager powerManager) {
+        if (Build.VERSION.SDK_INT >= 20)
+            return powerManager.isInteractive();
+        else
+            //noinspection deprecation
+            return powerManager.isScreenOn();
+    }
 
     public static void sleep(long ms) {
         /*long start = SystemClock.uptimeMillis();
