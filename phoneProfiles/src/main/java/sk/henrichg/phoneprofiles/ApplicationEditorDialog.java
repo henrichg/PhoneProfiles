@@ -85,7 +85,7 @@ class ApplicationEditorDialog
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //if (cachedApplicationList != null) {
-                    ApplicationEditorDialog.this.preference.updateApplication(editedApplication, selectedApplication, startApplicationDelay);
+                ApplicationEditorDialog.this.preference.updateApplication(editedApplication, selectedApplication, startApplicationDelay);
                 //}
             }
         });
@@ -122,13 +122,13 @@ class ApplicationEditorDialog
             }
         }, startApplicationDelay * 1000, TimeDurationPicker.HH_MM_SS);
         delayValueRoot.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mDelayValueDialog.setDuration(startApplicationDelay * 1000);
-                    if (!ApplicationEditorDialog.this.activity.isFinishing())
-                            mDelayValueDialog.show();
-                }
-            }
+                                              @Override
+                                              public void onClick(View view) {
+                                                  mDelayValueDialog.setDuration(startApplicationDelay * 1000);
+                                                  if (!ApplicationEditorDialog.this.activity.isFinishing())
+                                                      mDelayValueDialog.show();
+                                              }
+                                          }
         );
 
         mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -257,7 +257,8 @@ class ApplicationEditorDialog
                                 break;
                         }
                     }
-                    PPApplication.logE("ApplicationEditorDialog.fillApplicationList", "_application="+_application);
+                    PPApplication.logE("ApplicationEditorDialog.fillApplicationList", "_application.intentId="+_application.intentId);
+                    PPApplication.logE("ApplicationEditorDialog.fillApplicationList", "_application.appLabel="+_application.appLabel);
                     applicationList.add(_application);
                     pos++;
                 }
@@ -454,13 +455,17 @@ class ApplicationEditorDialog
 
         if (position == selectedPosition) {
             Button positive = mDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            positive.setEnabled(true);
+            positive.setEnabled(false);
             selectedPosition = -1;
             updateSelectedAppViews();
+            if (editedApplication != null)
+                editedApplication.intentId = 0;
         }
 
         listView.getRecycledViewPool().clear();
         listAdapter.notifyDataSetChanged();
+
+        ApplicationEditorDialog.this.preference.updateGUI();
     }
 
     public void show() {
