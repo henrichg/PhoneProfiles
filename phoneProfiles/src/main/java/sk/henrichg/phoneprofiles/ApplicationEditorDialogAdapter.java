@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEditorDialogViewHolder>
-        implements FastScrollRecyclerView.SectionedAdapter
+                                                implements FastScrollRecyclerView.SectionedAdapter
 {
     private final ApplicationEditorDialog dialog;
 
@@ -33,8 +33,10 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
     @Override
     public void onBindViewHolder(@NonNull ApplicationEditorDialogViewHolder holder, int position) {
         // Application to display
+        //PPApplication.logE("ApplicationEditorDialogAdapter.onCreateViewHolder", "dialog.applicationList.size="+dialog.applicationList.size());
         Application application = dialog.applicationList.get(position);
-        //System.out.println(String.valueOf(position));
+        //PPApplication.logE("ApplicationEditorDialogAdapter.onCreateViewHolder", "position="+position);
+        //PPApplication.logE("ApplicationEditorDialogAdapter.onCreateViewHolder", "application="+application);
 
         holder.bindApplication(application, position);
     }
@@ -46,7 +48,7 @@ class ApplicationEditorDialogAdapter extends RecyclerView.Adapter<ApplicationEdi
         /*if (application.checked)
             return "*";
         else*/
-        return application.appLabel.substring(0, 1);
+            return application.appLabel.substring(0, 1);
     }
 
     @Override

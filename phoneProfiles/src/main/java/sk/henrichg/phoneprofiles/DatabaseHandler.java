@@ -2637,7 +2637,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
                 try {
                     // Inserting Row
-                    db.insert(TABLE_INTENTS, null, values);
+                    intent._id = db.insert(TABLE_INTENTS, null, values);
 
                     db.setTransactionSuccessful();
 

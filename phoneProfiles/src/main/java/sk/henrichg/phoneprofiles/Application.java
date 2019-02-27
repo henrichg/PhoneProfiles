@@ -1,6 +1,10 @@
 package sk.henrichg.phoneprofiles;
 
-class Application {
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
+class Application  implements Parcelable {
     int type = TYPE_APPLICATION;
     String appLabel = "";
     String packageName = "";
@@ -14,9 +18,10 @@ class Application {
     static final int TYPE_SHORTCUT = 2;
     static final int TYPE_INTENT = 3;
 
-    public Application() {
+    Application() {
     }
 
+    @NonNull
     public String toString() {
         return appLabel;
     }
@@ -42,6 +47,7 @@ class Application {
     }
 
     public static String getPackageName(String value) {
+        PPApplication.logE("@ Application.getPackageName", "value="+value);
         if (value.length() > 2) {
             String packageName = "";
             String shortcutIntent;
@@ -67,6 +73,7 @@ class Application {
                     // application
                     packageName = value;
             }
+            PPApplication.logE("@ Application.getPackageName", "packageName="+packageName);
             return packageName;
         }
         else
@@ -74,6 +81,7 @@ class Application {
     }
 
     static String getActivityName(String value) {
+        PPApplication.logE("@ Application.getActivityName", "value="+value);
         if (value.length() > 2) {
             String activityName = "";
             String[] packageNameActivity = value.split("/");
@@ -86,6 +94,7 @@ class Application {
                     activityName = activityShortcutIdDelay[0];
                 }
             }
+            PPApplication.logE("@ Application.getActivityName", "activityName="+activityName);
             return activityName;
         }
         else
@@ -93,6 +102,7 @@ class Application {
     }
 
     static long getShortcutId(String value) {
+        PPApplication.logE("@ Application.getShortcutId", "value="+value);
         if (value.length() > 2) {
             long shortcutId = 0;
             String[] packageNameActivity = value.split("/");
@@ -108,6 +118,7 @@ class Application {
                         } catch (Exception ignored) {}
                 }
             }
+            PPApplication.logE("@ Application.getShortcutId", "shortcutId="+shortcutId);
             return shortcutId;
         }
         else
@@ -115,6 +126,7 @@ class Application {
     }
 
     static long getIntentId(String value) {
+        PPApplication.logE("@ Application.getIntentId", "value="+value);
         if (value.length() > 2) {
             long intentId = 0;
             String[] intentIdDelay = value.split("#");
@@ -125,6 +137,7 @@ class Application {
                     intentId = Long.parseLong(intentIdDelay[0].substring(3));
                 } catch (Exception ignored) {}
             }
+            PPApplication.logE("@ Application.getIntentId", "intentId="+intentId);
             return intentId;
         }
         else
@@ -132,6 +145,7 @@ class Application {
     }
 
     static int getStartApplicationDelay(String value) {
+        PPApplication.logE("@ Application.getStartApplicationDelay", "value="+value);
         if (value.length() > 2) {
             String shortcutIntent;
             int startApplicationDelay = 0;
@@ -183,10 +197,50 @@ class Application {
                     }
                 }
             }
+            PPApplication.logE("@ Application.getStartApplicationDelay", "startApplicationDelay="+startApplicationDelay);
             return startApplicationDelay;
         }
         else
             return 0;
     }
+
+    Application(Parcel in) {
+        this.type = in.readInt();
+        this.appLabel = in.readString();
+        this.packageName = in.readString();
+        this.activityName = in.readString();
+        this.shortcutId = in.readLong();
+        this.intentId = in.readLong();
+        this.checked = in.readBoolean();
+        this.startApplicationDelay = in.readInt();
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.type);
+        dest.writeString(this.appLabel);
+        dest.writeString(this.packageName);
+        dest.writeString(this.activityName);
+        dest.writeLong(this.shortcutId);
+        dest.writeLong(this.intentId);
+        dest.writeBoolean(this.checked);
+        dest.writeInt(this.startApplicationDelay);
+    }
+
+    public static final Parcelable.Creator<Application> CREATOR = new Parcelable.Creator<Application>() {
+        public Application createFromParcel(Parcel source) {
+            return new Application(source);
+        }
+
+        public Application[] newArray(int size) {
+            return new Application[size];
+        }
+    };
 
 }
