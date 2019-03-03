@@ -602,6 +602,11 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                     // update profile
                     DatabaseHandler.getInstance(getApplicationContext()).updateProfile(profile);
                 }
+
+                if ((activatedProfile != null) && (activatedProfile._id == profile._id))
+                    //dataWrapper.activateProfileFromMainThread(profile, false, startupSource, false, null);
+                    dataWrapper._activateProfile(profile, startupSource, false, null);
+
             }
         }
     }
