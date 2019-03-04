@@ -1550,6 +1550,23 @@ class ActivateProfileHelper {
                                     }
                                 } else if (Application.isIntent(split)) {
                                     //TODO intnet
+                                    long intentId = Application.getIntentId(split);
+                                    if (intentId > 0) {
+                                        PPIntent ppIntent = DatabaseHandler.getInstance(appContext).getIntent(intentId);
+                                        if (ppIntent != null) {
+                                            intent = ApplicationEditorIntentActivity.createIntent(ppIntent);
+                                            if (intent != null) {
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                try {
+                                                    appContext.startActivity(intent);
+                                                    //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                                                    //SystemClock.sleep(1000);
+                                                    PPApplication.sleep(1000);
+                                                } catch (Exception ignored) {
+                                                }
+                                            }
+                                        }
+                                    }
                                 } else {
                                     intent = packageManager.getLaunchIntentForPackage(Application.getPackageName(split));
                                     if (intent != null) {
