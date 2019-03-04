@@ -49,8 +49,11 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity
         toolbar = findViewById(R.id.mp_toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setElevation(GlobalGUIRoutines.dpToPx(1));
+        }
     }
 
     @Override
