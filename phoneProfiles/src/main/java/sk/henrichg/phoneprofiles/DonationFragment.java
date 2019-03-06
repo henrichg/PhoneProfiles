@@ -138,7 +138,8 @@ public class DonationFragment extends Fragment {
     private void donateGoogleOnClick(/*View view*/) {
         final int index = mGoogleSpinner.getSelectedItemPosition();
 
-        mBillingProvider.getBillingManager().startPurchaseFlow(SKU_DETAILS.get(index).getSku(), BillingClient.SkuType.INAPP);
+        mBillingProvider.getBillingManager().startPurchaseFlow(SKU_DETAILS.get(index));
+        //mBillingProvider.getBillingManager().startPurchaseFlow(SKU_DETAILS.get(index).getSku(), BillingClient.SkuType.INAPP);
     }
 
     public void updateGUIAfterBillingConnected() {
