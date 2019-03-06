@@ -459,7 +459,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                                     //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                                     try {
                                         ActivatorTargetHelpsActivity.activity.finish();
-                                    } catch (Exception ignored) {};
+                                    } catch (Exception ignored) {}
                                     ActivatorTargetHelpsActivity.activity = null;
                                     //ActivatorTargetHelpsActivity.activatorActivity = null;
                                 }
@@ -506,7 +506,7 @@ public class ActivateProfileActivity extends AppCompatActivity {
                         //Log.d("ActivateProfilesActivity.showTargetHelps", "finish activity");
                         try {
                             ActivatorTargetHelpsActivity.activity.finish();
-                        } catch (Exception ignored) {};
+                        } catch (Exception ignored) {}
                         ActivatorTargetHelpsActivity.activity = null;
                         //ActivatorTargetHelpsActivity.activatorActivity = null;
                     }

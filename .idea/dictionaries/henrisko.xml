@@ -1,11 +1,19 @@
 <component name="ProjectDictionaryState">
   <dictionary name="henrisko">
     <words>
+      <w>acos</w>
+      <w>asin</w>
+      <w>atan</w>
+      <w>browsable</w>
       <w>emui</w>
       <w>exitcode</w>
+      <w>lerp</w>
       <w>linkunlink</w>
       <w>offhook</w>
+      <w>pppe</w>
+      <w>recents</w>
       <w>remoteviews</w>
+      <w>sendto</w>
     </words>
   </dictionary>
 </component>

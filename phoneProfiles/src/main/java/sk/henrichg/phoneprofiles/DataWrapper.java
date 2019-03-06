@@ -133,6 +133,7 @@ public class DataWrapper {
 
     static Profile getNonInitializedProfile(String name, String icon, int order)
     {
+        //noinspection ConstantConditions
         return new Profile(
                 name,
                 icon + Profile.defaultValuesString.get("prf_pref_profileIcon_withoutIcon"),
@@ -857,7 +858,7 @@ public class DataWrapper {
                 public void run() {
                     try {
                         activity.finish();
-                    } catch (Exception ignored) {};
+                    } catch (Exception ignored) {}
                 }
             });
         }

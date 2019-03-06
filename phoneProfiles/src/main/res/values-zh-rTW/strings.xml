@@ -149,7 +149,6 @@
   <string name="default_profile_name_work">工作</string>
   <string name="default_profile_name_meeting">會議</string>
   <string name="default_profile_name_sleep">睡眠</string>
-  <string name="phone_profiles_pref_applicationAutoCloseDrawer">自動隱藏導覽抽屜</string>
   <string name="alert_button_yes">是</string>
   <string name="alert_button_no">否</string>
   <string name="profile_preferences_deviceAutoRotation">螢幕旋轉</string>
@@ -453,7 +452,6 @@
   <string name="permissions_for_event_big_text_notification">需要一些要授予的許可權。</string>
   <string name="permission_group_name_calendar">行事曆</string>
   <string name="permission_group_name_contacts">聯絡人</string>
-  <string name="permission_group_name_sms">簡訊/多媒體訊息</string>
   <string name="permission_group_name_location">位置</string>
   <string name="permissions_for_wifi_bt_scan_dialog_text1">Wi-fi/藍牙掃描需要某些許可權。</string>
   <string name="permissions_for_wifi_bt_scan_dialog_text2">請在下一個對話方塊中授予他們。然後將執行重新掃描。</string>
@@ -602,9 +600,6 @@
   <string name="permissions_for_play_ringtone_notification_text1">您選擇了存放在 SD 卡上的鈴聲/通知音效. 音效無法被播放因為這需要某些許可權.</string>
   <string name="permissions_for_play_ringtone_notification_text2">請在下一個對話方塊中授予許可權. 音效即可被播放.</string>
   <string name="permissions_for_play_ringtone_notification_big_text_notification">播放選擇的鈴聲/通知需要被授予某些許可權.</string>
-  <string name="profile_preferences_deviceRunApplicationsShortcutsPackageName">應用程式, 捷徑</string>
-  <string name="profile_preferences_deviceRunApplicationsShortcutsChange">執行應用程式, 捷徑</string>
-  <string name="applications_editor_dialog_title">設定應用程式, 捷徑</string>
   <string name="important_info_profile_interactive">部分設定檔偏好設定是可互動的. 這些偏好設定將會顯示系統設定畫面, 並且以 \"(I)\" 標記.</string>
   <string name="important_info_orange_text">註: 此資訊中的橘色文字可點擊. 點擊後將開啟相關設定頁面.</string>
   <string name="default_event_name_night_call">夜晚來電</string>
@@ -700,7 +695,7 @@
   <string name="donation_google_android_market">Google Play Store</string>
   <string name="donation_google_android_market_text">How much?</string>
   <string name="donation_google_android_market_donate_button">贊助</string>
-  <string name="about_application_releases">Releases</string>
+  <string name="about_application_releases">Releases:</string>
   <string name="permission_group_name_draw_overlays">Draw over apps</string>
   <string name="permissions_draw_overlays_not_allowed_confirm">您尚未啟用 \"顯示在其他應用程式上層\". 是否不再詢問?</string>
   <string name="phone_profiles_pref_drawOverlaysPermissions">顯示在其他應用程式上層</string>
@@ -778,7 +773,6 @@
   <string name="event_preference_sensor_orientation_summary">本感應器將在手機翻轉時啟動事件. 參數: 螢幕 (朝上, 朝下), 邊緣 (水平, 某側邊朝上), 距離 (近, 遠; 使用 proximity sensor), 忽略應用程式 (在前景).</string>
   <string name="event_preference_sensor_nfc_summary">This sensor will start an event by NFC tags. Parameters: NFC tags, Permanent run, Duration (event run duration).</string>
   <string name="editor_activity_targetHelps_navigationIcon_title">\"Views\" side panel</string>
-  <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe left-to-right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>
   <string name="editor_activity_targetHelps_applicationMenu_title">Application menu</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">Click this to open Application menu, where you can change application Settings.</string>
   <string name="editor_activity_targetHelps_restartEvents_title">重新啟動事件</string>
@@ -865,7 +859,6 @@
   <string name="important_info_profile_zenModeM">\"Do not disturb\" in profile \"Ringer mode\" requires enabling PhoneProfiles in \"Notification access\" system settings. Click here and enable.</string>
   <string name="profile_preferences_volumeVibrateWhenRingingRootInfoM_summary">在 Android 6: 此系統設定只能在有 root 的裝置上修改. 這影響到鈴聲模式和請勿打擾類型.</string>
   <string name="setting_screen_not_found_alert">Setting screen not found.</string>
-  <string name="action_for_external_application_notification_title">External app support (Tasker)</string>
   <string name="action_for_external_application_notification_no_profile_text">Parameter profile_name is missing or empty.</string>
   <string name="action_for_external_application_notification_no_event_text">Parameter event_name is missing or empty.</string>
   <string name="array_pref_wifiModeArray_on_ignoreHotspot">On (ignore hotspot)</string>
@@ -961,7 +954,6 @@
   <string name="array_event_pref_missed_call">未接來電</string>
   <string name="start_event_notification_title">事件已開始</string>
   <string name="start_event_notification_text1">事件名稱</string>
-  <string name="start_event_notification_text2">Clear this notification to stop notifying it.</string>
   <string name="event_preferences_notificationRepeat">Repeat notification</string>
   <string name="event_preferences_notificationRepeatInterval">Repeat notification interval</string>
   <string name="duration_pref_dlg_activation_hours_label">Hours:</string>
@@ -1222,7 +1214,6 @@
     <string name="permission_why_event_call_preferences">for read contacts, detect ringing call (for \"night call\") in Call sensor</string>
     <string name="important_info_accessibility_service_text3">Due to a change of rules by Google, about usage of permissions for receive calls, you must install PhoneProfilesPlusExtender to use the Call event sensor. Check the parameters of this sensor for more information.</string>
 
-    <string name="phone_profiles_pref_notificationDarkBackground">Dark background</string>
     <string name="phone_profiles_pref_notificationUseDecoration">Use decoration</string>
     <string name="phone_profiles_pref_notificationLayoutType">Layout type</string>
     <string name="phone_profiles_pref_notificationLayoutType_expandable">Expandable</string>
@@ -1252,6 +1243,60 @@
     <string name="phone_profiles_pref_applicationTheme_nightMode">By night mode</string>
     <string name="important_info_profile_mobileCellsScanning_location">In Android 9+, for Mobile cells scanning to work, you must enable Location settings.</string>
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary">Please enable Location in System Settings. Without this, Mobile cells scanning will not work.</string>
+
+    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>
+    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>
+    <string name="action_for_external_application_notification_title">External applications support (Tasker)</string>
+    <string name="start_event_notification_text2">Clear this notification to stop displaying it.</string>
+
+    <string name="event_preferences_battery_plugged">Charger type</string>
+    <string name="array_pref_battery_plugged_ac">Accumulator</string>
+    <string name="array_pref_battery_plugged_usb">USB</string>
+    <string name="array_pref_battery_plugged_wireless">Wireless</string>
+    <string name="pref_dlg_info_about_wildcards_5">Use \"!\" at the beginning of the string when the string should not be present.</string>
+    <string name="pref_dlg_info_about_wildcards_6">\"!\" at the beginning of the string</string>
+    <string name="phone_profiles_pref_applicationEventScanningLocationSettingsDisabled_summary">Location disabled</string>
+    <string name="phone_profiles_pref_applicationEventScanningLocationSettingsEnabled_summary">Location enabled</string>
+
+    <string name="preference_not_allowed_reason_no_sim_card">no SIM card</string>
+    <string name="preference_not_allowed_reason_not_granted_g1_permission">not granted permission WRITE_SECURE_SETTINGS</string>
+    <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings_setToAlways_summary">Set to Always</string>
+    <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings_notSetToAlways_summary">Not set to Always</string>
+    <string name="event_preferences_notificationsAccessSettings_enabled_summary">Notification access enabled</string>
+    <string name="event_preferences_notificationsAccessSettings_disabled_summary">Notification access disabled</string>
+    <string name="application_editor_intent_intent_name">Intent name:</string>
+    <string name="application_editor_intent_intent_name_hint">Intent name</string>
+    <string name="application_editor_intent_package_name">Package name:</string>
+    <string name="application_editor_intent_package_name_hint">Package name</string>
+    <string name="application_editor_intent_class_name">Class name:</string>
+    <string name="application_editor_intent_class_name_hint">Class name</string>
+    <string name="application_editor_intent_action">Action:</string>
+    <string name="application_editor_intent_action_hint">Action</string>
+    <string name="application_editor_intent_data">Data:</string>
+    <string name="application_editor_intent_data_hint">Data</string>
+    <string name="application_editor_intent_mime_type">Mime type:</string>
+    <string name="application_editor_intent_mime_type_hint">Mime type</string>
+    <string name="application_editor_intent_extras">Parameters:</string>
+    <string name="application_editor_intent_categories">Categories:</string>
+    <string name="application_editor_intent_categories_dlg_title">Categories</string>
+    <string name="application_editor_intent_flags">Flags:</string>
+    <string name="application_editor_intent_flags_dlg_title">Flags</string>
+    <string name="application_editor_intent_test_button">Test</string>
+    <string name="application_editor_intent_extra_key">Key name</string>
+    <string name="application_editor_intent_extra_value">Key value</string>
+    <string name="application_editor_intent_extra_type">Key type:</string>
+    <string name="application_editor_intent_extra_select_categories">Select categories</string>
+    <string name="application_editor_intent_extra_select_flags">Select flags</string>
+    <string name="application_editor_intent_test_title">Test</string>
+    <string name="application_editor_intent_test_activity_bad_data">Bad data. Error during start of activity.</string>
+    <string name="application_editor_intent_intent_type">Intent type:</string>
+    <string name="array_intent_type_activity">Activity</string>
+    <string name="array_intent_type_broadcast">Broadcast</string>
+    <string name="application_editor_intent_test_broadcast_bad_data">Bad data. Error during send of broadcast.</string>
+
+    <string name="profile_preferences_deviceRunApplicationsShortcutsPackageName">Applications, shortcuts, intents to run it</string>
+    <string name="profile_preferences_deviceRunApplicationsShortcutsChange">Run applications, shortcuts, intents</string>
+    <string name="applications_editor_dialog_title">Set application, shortcut, intent</string>
 
 
 

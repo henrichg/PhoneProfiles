@@ -1066,7 +1066,7 @@ public class PPApplication extends Application {
                 while (iField < length) {
                     Field field = declaredFields2[iField];
                     String name = field.getName();
-                    if (name == null || !name.equals("TRANSACTION_" + method)) {
+                    if (/*name == null ||*/ !name.equals("TRANSACTION_" + method)) {
                         iField++;
                     } else {
                         try {
@@ -1317,7 +1317,7 @@ public class PPApplication extends Application {
                         if (activity != null) {
                             try {
                                 activity.finish();
-                            } catch (Exception ignored) {};
+                            } catch (Exception ignored) {}
                         }
                     }
                 };
