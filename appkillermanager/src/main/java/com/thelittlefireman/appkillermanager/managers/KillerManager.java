@@ -36,6 +36,7 @@ public class KillerManager {
         return sDevice;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static void init(@SuppressWarnings("unused") Context context) {
         // log error into a distant request bin logs for helps to debug
         // please do no change the adress

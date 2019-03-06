@@ -129,8 +129,9 @@ public class TapTarget {
   }
 
   /** Return a tap target for the navigation button (back, up, etc) from the given toolbar **/
+  @SuppressWarnings("WeakerAccess")
   public static TapTarget forToolbarNavigationIcon(Toolbar toolbar, CharSequence title,
-                                                          @Nullable CharSequence description) {
+                                                   @Nullable CharSequence description) {
     return new ToolbarTapTarget(toolbar, true, title, description);
   }
 
