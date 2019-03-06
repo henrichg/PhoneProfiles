@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016 Keepsafe Software, Inc.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,87 +71,99 @@ public class TapTargetView extends View {
   private boolean isDismissing = false;
   private boolean isInteractable = true;
 
+  @SuppressWarnings("WeakerAccess")
   final int TARGET_PADDING;
+  @SuppressWarnings("WeakerAccess")
   final int TARGET_RADIUS;
+  @SuppressWarnings("WeakerAccess")
   final int TARGET_PULSE_RADIUS;
+  @SuppressWarnings("WeakerAccess")
   final int TEXT_PADDING;
+  @SuppressWarnings("WeakerAccess")
   final int TEXT_SPACING;
+  @SuppressWarnings("WeakerAccess")
   final int TEXT_MAX_WIDTH;
+  @SuppressWarnings("WeakerAccess")
   final int TEXT_POSITIONING_BIAS;
+  @SuppressWarnings("WeakerAccess")
   final int CIRCLE_PADDING;
+  @SuppressWarnings("WeakerAccess")
   final int GUTTER_DIM;
+  @SuppressWarnings("WeakerAccess")
   final int SHADOW_DIM;
+  @SuppressWarnings("WeakerAccess")
   final int SHADOW_JITTER_DIM;
 
   @Nullable
-  final ViewGroup boundingParent;
-  final ViewManager parent;
+  //private final ViewGroup boundingParent;
+  private final ViewManager parent;
   final TapTarget target;
-  final Rect targetBounds;
+  private final Rect targetBounds;
 
-  final TextPaint titlePaint;
-  final TextPaint descriptionPaint;
-  final Paint outerCirclePaint;
-  final Paint outerCircleShadowPaint;
-  final Paint targetCirclePaint;
-  final Paint targetCirclePulsePaint;
+  private final TextPaint titlePaint;
+  private final TextPaint descriptionPaint;
+  private final Paint outerCirclePaint;
+  private final Paint outerCircleShadowPaint;
+  private final Paint targetCirclePaint;
+  private final Paint targetCirclePulsePaint;
 
-  CharSequence title;
+  private CharSequence title;
   @Nullable
-  StaticLayout titleLayout;
+  private StaticLayout titleLayout;
   @Nullable
-  CharSequence description;
+  private CharSequence description;
   @Nullable
-  StaticLayout descriptionLayout;
-  boolean isDark;
-  boolean debug;
-  boolean shouldTintTarget;
-  boolean shouldDrawShadow;
+  private StaticLayout descriptionLayout;
+  //private boolean isDark;
+  private boolean debug;
+  private boolean shouldTintTarget;
+  private boolean shouldDrawShadow;
   boolean cancelable;
-  boolean visible;
+  private boolean visible;
 
   // Debug related variables
   @Nullable
-  SpannableStringBuilder debugStringBuilder;
+  private SpannableStringBuilder debugStringBuilder;
   @Nullable
-  DynamicLayout debugLayout;
+  private DynamicLayout debugLayout;
   @Nullable
-  TextPaint debugTextPaint;
+  private TextPaint debugTextPaint;
   @Nullable
-  Paint debugPaint;
+  private Paint debugPaint;
 
   // Drawing properties
-  Rect drawingBounds;
-  Rect textBounds;
+  private Rect drawingBounds;
+  private Rect textBounds;
 
-  Path outerCirclePath;
-  float outerCircleRadius;
-  int calculatedOuterCircleRadius;
-  int[] outerCircleCenter;
-  int outerCircleAlpha;
+  private Path outerCirclePath;
+  private float outerCircleRadius;
+  private int calculatedOuterCircleRadius;
+  private int[] outerCircleCenter;
+  private int outerCircleAlpha;
 
-  float targetCirclePulseRadius;
-  int targetCirclePulseAlpha;
+  private float targetCirclePulseRadius;
+  private int targetCirclePulseAlpha;
 
-  float targetCircleRadius;
-  int targetCircleAlpha;
+  private float targetCircleRadius;
+  private int targetCircleAlpha;
 
-  int textAlpha;
-  int dimColor;
+  private int textAlpha;
+  private int dimColor;
 
-  float lastTouchX;
-  float lastTouchY;
+  private float lastTouchX;
+  private float lastTouchY;
 
-  int topBoundary;
-  int bottomBoundary;
+  private int topBoundary;
+  private int bottomBoundary;
 
-  Bitmap tintedTarget;
+  private Bitmap tintedTarget;
 
-  Listener listener;
+  private Listener listener;
 
   @Nullable
-  ViewOutlineProvider outlineProvider;
+  private ViewOutlineProvider outlineProvider;
 
+  @SuppressWarnings("unused")
   public static TapTargetView showFor(Activity activity, TapTarget target) {
     return showFor(activity, target, null);
   }
@@ -162,13 +174,14 @@ public class TapTargetView extends View {
     final ViewGroup decor = (ViewGroup) activity.getWindow().getDecorView();
     final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-    final ViewGroup content = (ViewGroup) decor.findViewById(android.R.id.content);
+    final ViewGroup content = decor.findViewById(android.R.id.content);
     final TapTargetView tapTargetView = new TapTargetView(activity, decor, content, target, listener);
     decor.addView(tapTargetView, layoutParams);
 
     return tapTargetView;
   }
 
+  @SuppressWarnings("unused")
   public static TapTargetView showFor(Dialog dialog, TapTarget target) {
     return showFor(dialog, target, null);
   }
@@ -189,7 +202,8 @@ public class TapTargetView extends View {
     params.height = WindowManager.LayoutParams.MATCH_PARENT;
 
     final TapTargetView tapTargetView = new TapTargetView(context, windowManager, null, target, listener);
-    windowManager.addView(tapTargetView, params);
+    if (windowManager != null)
+        windowManager.addView(tapTargetView, params);
 
     return tapTargetView;
   }
@@ -201,7 +215,7 @@ public class TapTargetView extends View {
     }
 
     /** Signals that the user has long clicked inside of the target **/
-    public void onTargetLongClick(TapTargetView view) {
+    void onTargetLongClick(TapTargetView view) {
       onTargetClick(view);
     }
 
@@ -219,11 +233,12 @@ public class TapTargetView extends View {
      * Signals that the tap target has been dismissed
      * @param userInitiated Whether the user caused this action
      */
-    public void onTargetDismissed(TapTargetView view, boolean userInitiated) {
+    @SuppressWarnings({"EmptyMethod", "unused"})
+    void onTargetDismissed(TapTargetView view, boolean userInitiated) {
     }
   }
 
-  final FloatValueAnimatorBuilder.UpdateListener expandContractUpdateListener = new FloatValueAnimatorBuilder.UpdateListener() {
+  private final FloatValueAnimatorBuilder.UpdateListener expandContractUpdateListener = new FloatValueAnimatorBuilder.UpdateListener() {
     @Override
     public void onUpdate(float lerpTime) {
       final float newOuterCircleRadius = calculatedOuterCircleRadius * lerpTime;
@@ -259,7 +274,7 @@ public class TapTargetView extends View {
     }
   };
 
-  final ValueAnimator expandAnimation = new FloatValueAnimatorBuilder()
+  private final ValueAnimator expandAnimation = new FloatValueAnimatorBuilder()
       .duration(250)
       .delayBy(250)
       .interpolator(new AccelerateDecelerateInterpolator())
@@ -278,7 +293,7 @@ public class TapTargetView extends View {
       })
       .build();
 
-  final ValueAnimator pulseAnimation = new FloatValueAnimatorBuilder()
+  private final ValueAnimator pulseAnimation = new FloatValueAnimatorBuilder()
       .duration(1000)
       .repeat(ValueAnimator.INFINITE)
       .interpolator(new AccelerateDecelerateInterpolator())
@@ -300,7 +315,7 @@ public class TapTargetView extends View {
       })
       .build();
 
-  final ValueAnimator dismissAnimation = new FloatValueAnimatorBuilder(true)
+  private final ValueAnimator dismissAnimation = new FloatValueAnimatorBuilder(true)
       .duration(250)
       .interpolator(new AccelerateDecelerateInterpolator())
       .onUpdate(new FloatValueAnimatorBuilder.UpdateListener() {
@@ -345,7 +360,7 @@ public class TapTargetView extends View {
       })
       .build();
 
-  private ValueAnimator[] animators = new ValueAnimator[]
+  private final ValueAnimator[] animators = new ValueAnimator[]
       {expandAnimation, pulseAnimation, dismissConfirmAnimation, dismissAnimation};
 
   private final ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
@@ -365,8 +380,9 @@ public class TapTargetView extends View {
    * @param target The {@link TapTarget} to target
    * @param userListener Optional. The {@link Listener} instance for this view
    */
+  @SuppressWarnings("WeakerAccess")
   public TapTargetView(final Context context,
-                       final ViewManager parent,
+                       @Nullable final ViewManager parent,
                        @Nullable final ViewGroup boundingParent,
                        final TapTarget target,
                        @Nullable final Listener userListener) {
@@ -375,7 +391,7 @@ public class TapTargetView extends View {
 
     this.target = target;
     this.parent = parent;
-    this.boundingParent = boundingParent;
+    //ViewGroup boundingParent = boundingParent;
     this.listener = userListener != null ? userListener : new Listener();
     this.title = target.title;
     this.description = target.description;
@@ -464,28 +480,30 @@ public class TapTargetView extends View {
               final WindowManager windowManager
                   = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
               final DisplayMetrics displayMetrics = new DisplayMetrics();
-              windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+              if (windowManager != null) {
+                  windowManager.getDefaultDisplay().getMetrics(displayMetrics);
 
-              final Rect rect = new Rect();
-              boundingParent.getWindowVisibleDisplayFrame(rect);
-              int[] parentLocation = new int[2];
-              boundingParent.getLocationInWindow(parentLocation);
+                  final Rect rect = new Rect();
+                  boundingParent.getWindowVisibleDisplayFrame(rect);
+                  int[] parentLocation = new int[2];
+                  boundingParent.getLocationInWindow(parentLocation);
 
-              if (translucentStatusBar) {
-                rect.top = parentLocation[1];
-              }
-              if (translucentNavigationBar) {
-                rect.bottom = parentLocation[1] + boundingParent.getHeight();
-              }
+                  if (translucentStatusBar) {
+                      rect.top = parentLocation[1];
+                  }
+                  if (translucentNavigationBar) {
+                      rect.bottom = parentLocation[1] + boundingParent.getHeight();
+                  }
 
-              // We bound the boundaries to be within the screen's coordinates to
-              // handle the case where the flag FLAG_LAYOUT_NO_LIMITS is set
-              if (layoutNoLimits) {
-                topBoundary = Math.max(0, rect.top);
-                bottomBoundary = Math.min(rect.bottom, displayMetrics.heightPixels);
-              } else {
-                topBoundary = rect.top;
-                bottomBoundary = rect.bottom;
+                  // We bound the boundaries to be within the screen's coordinates to
+                  // handle the case where the flag FLAG_LAYOUT_NO_LIMITS is set
+                  if (layoutNoLimits) {
+                      topBoundary = Math.max(0, rect.top);
+                      bottomBoundary = Math.min(rect.bottom, displayMetrics.heightPixels);
+                  } else {
+                      topBoundary = rect.top;
+                      bottomBoundary = rect.bottom;
+                  }
               }
             }
 
@@ -549,6 +567,7 @@ public class TapTargetView extends View {
     }
   }
 
+  @SuppressWarnings("WeakerAccess")
   protected void applyTargetOptions(Context context) {
     shouldTintTarget = !target.transparentTarget && target.tintTarget;
     shouldDrawShadow = target.drawShadow;
@@ -576,14 +595,14 @@ public class TapTargetView extends View {
       setElevation(SHADOW_DIM);
     }
 
-    if (shouldDrawShadow && outlineProvider == null && Build.VERSION.SDK_INT < 18) {
+    /*if (shouldDrawShadow && outlineProvider == null && Build.VERSION.SDK_INT < 18) {
       setLayerType(LAYER_TYPE_SOFTWARE, null);
-    } else {
+    } else {*/
       setLayerType(LAYER_TYPE_HARDWARE, null);
-    }
+    //}
 
     final Resources.Theme theme = context.getTheme();
-    isDark = UiUtil.themeIntAttr(context, "isLightTheme") == 0;
+    boolean isDark = UiUtil.themeIntAttr(context, "isLightTheme") == 0;
 
     final Integer outerCircleColor = target.outerCircleColorInt(context);
     if (outerCircleColor != null) {
@@ -643,6 +662,7 @@ public class TapTargetView extends View {
     onDismiss(false);
   }
 
+  @SuppressWarnings("WeakerAccess")
   void onDismiss(boolean userInitiated) {
     if (isDismissed) return;
 
@@ -662,6 +682,7 @@ public class TapTargetView extends View {
     }
   }
 
+  @SuppressWarnings("IntegerDivisionInFloatingPointContext")
   @Override
   protected void onDraw(Canvas c) {
     if (isDismissed || outerCircleCenter == null) return;
@@ -731,6 +752,7 @@ public class TapTargetView extends View {
     }
   }
 
+  @SuppressLint("ClickableViewAccessibility")
   @Override
   public boolean onTouchEvent(MotionEvent e) {
     lastTouchX = e.getX();
@@ -792,6 +814,7 @@ public class TapTargetView extends View {
   }
 
   /** Specify whether to draw a wireframe around the view, useful for debugging **/
+  @SuppressWarnings("unused")
   public void setDrawDebug(boolean status) {
     if (debug != status) {
       debug = status;
@@ -800,10 +823,12 @@ public class TapTargetView extends View {
   }
 
   /** Returns whether this view is visible or not **/
+  @SuppressWarnings("WeakerAccess")
   public boolean isVisible() {
     return !isDismissed && visible;
   }
 
+  @SuppressWarnings("WeakerAccess")
   void drawJitteredShadow(Canvas c) {
     final float baseAlpha = 0.20f * outerCircleAlpha;
     outerCircleShadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -818,6 +843,7 @@ public class TapTargetView extends View {
     }
   }
 
+  @SuppressWarnings("WeakerAccess")
   void drawDebugInformation(Canvas c) {
     if (debugPaint == null) {
       debugPaint = new Paint();
@@ -857,7 +883,8 @@ public class TapTargetView extends View {
     }
 
     if (debugLayout == null) {
-      debugLayout = new DynamicLayout(debugText, debugTextPaint, getWidth(), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+        //noinspection deprecation
+        debugLayout = new DynamicLayout(debugText, debugTextPaint, getWidth(), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
     }
 
     final int saveCount = c.save();
@@ -871,6 +898,7 @@ public class TapTargetView extends View {
     c.restoreToCount(saveCount);
   }
 
+  @SuppressWarnings("WeakerAccess")
   void drawTintedTarget() {
     final Drawable icon = target.icon;
     if (!shouldTintTarget || icon == null) {
@@ -889,23 +917,27 @@ public class TapTargetView extends View {
     icon.setColorFilter(null);
   }
 
+  @SuppressWarnings("WeakerAccess")
   void updateTextLayouts() {
     final int textWidth = Math.min(getWidth(), TEXT_MAX_WIDTH) - TEXT_PADDING * 2;
     if (textWidth <= 0) {
       return;
     }
 
-    titleLayout = new StaticLayout(title, titlePaint, textWidth,
+      //noinspection deprecation
+      titleLayout = new StaticLayout(title, titlePaint, textWidth,
             Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
 
     if (description != null) {
-      descriptionLayout = new StaticLayout(description, descriptionPaint, textWidth,
+        //noinspection deprecation
+        descriptionLayout = new StaticLayout(description, descriptionPaint, textWidth,
               Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
     } else {
       descriptionLayout = null;
     }
   }
 
+  @SuppressWarnings("WeakerAccess")
   float halfwayLerp(float lerp) {
     if (lerp < 0.5f) {
       return lerp / 0.5f;
@@ -914,6 +946,7 @@ public class TapTargetView extends View {
     return (1.0f - lerp) / 0.5f;
   }
 
+  @SuppressWarnings("WeakerAccess")
   float delayedLerp(float lerp, float threshold) {
     if (lerp < threshold) {
       return 0.0f;
@@ -922,12 +955,14 @@ public class TapTargetView extends View {
     return (lerp - threshold) / (1.0f - threshold);
   }
 
+  @SuppressWarnings("WeakerAccess")
   void calculateDimensions() {
     textBounds = getTextBounds();
     outerCircleCenter = getOuterCircleCenterPoint();
     calculatedOuterCircleRadius = getOuterCircleRadius(outerCircleCenter[0], outerCircleCenter[1], textBounds, targetBounds);
   }
 
+  @SuppressWarnings("WeakerAccess")
   void calculateDrawingBounds() {
     if (outerCircleCenter == null) {
       // Called dismiss before we got a chance to display the tap target
@@ -942,6 +977,7 @@ public class TapTargetView extends View {
         outerCircleCenter[1] + outerCircleRadius + CIRCLE_PADDING);
   }
 
+  @SuppressWarnings("WeakerAccess")
   int getOuterCircleRadius(int centerX, int centerY, Rect textBounds, Rect targetBounds) {
     final int targetCenterX = targetBounds.centerX();
     final int targetCenterY = targetBounds.centerY();
@@ -954,6 +990,7 @@ public class TapTargetView extends View {
     return Math.max(textRadius, targetRadius) + CIRCLE_PADDING;
   }
 
+  @SuppressWarnings("WeakerAccess")
   Rect getTextBounds() {
     final int totalTextHeight = getTotalTextHeight();
     final int totalTextWidth = getTotalTextWidth();
@@ -973,6 +1010,7 @@ public class TapTargetView extends View {
     return new Rect(left, top, right, top + totalTextHeight);
   }
 
+  @SuppressWarnings("WeakerAccess")
   int[] getOuterCircleCenterPoint() {
     if (inGutter(targetBounds.centerY())) {
       return new int[]{targetBounds.centerX(), targetBounds.centerY()};
@@ -994,6 +1032,7 @@ public class TapTargetView extends View {
     return new int[] { (left + right) / 2, centerY };
   }
 
+  @SuppressWarnings("WeakerAccess")
   int getTotalTextHeight() {
     if (titleLayout == null) {
       return 0;
@@ -1006,6 +1045,7 @@ public class TapTargetView extends View {
     return titleLayout.getHeight() + descriptionLayout.getHeight() + TEXT_SPACING;
   }
 
+  @SuppressWarnings("WeakerAccess")
   int getTotalTextWidth() {
     if (titleLayout == null) {
       return 0;
@@ -1018,6 +1058,7 @@ public class TapTargetView extends View {
     return Math.max(titleLayout.getWidth(), descriptionLayout.getWidth());
   }
 
+  @SuppressWarnings("WeakerAccess")
   boolean inGutter(int y) {
     if (bottomBoundary > 0) {
       return y < GUTTER_DIM || y > bottomBoundary - GUTTER_DIM;
@@ -1026,6 +1067,7 @@ public class TapTargetView extends View {
     }
   }
 
+  @SuppressWarnings("WeakerAccess")
   int maxDistanceToPoints(int x1, int y1, Rect bounds) {
     final double tl = distance(x1, y1, bounds.left, bounds.top);
     final double tr = distance(x1, y1, bounds.right, bounds.top);
@@ -1034,12 +1076,15 @@ public class TapTargetView extends View {
     return (int) Math.max(tl, Math.max(tr, Math.max(bl, br)));
   }
 
+  @SuppressWarnings("WeakerAccess")
   double distance(int x1, int y1, int x2, int y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   }
 
+  @SuppressWarnings("WeakerAccess")
   void invalidateViewAndOutline(Rect bounds) {
-    invalidate(bounds);
+      //noinspection deprecation
+      invalidate(bounds);
     if (outlineProvider != null && Build.VERSION.SDK_INT >= 21) {
       invalidateOutline();
     }

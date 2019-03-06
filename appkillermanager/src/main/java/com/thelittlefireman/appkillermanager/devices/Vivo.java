@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class Vivo extends DeviceAbstract {
 // TODO multiple intent in a same actions !
     // Starting: Intent { cmp=com.vivo.permissionmanager/.activity.BgStartUpManagerActivity }
@@ -18,7 +19,7 @@ public class Vivo extends DeviceAbstract {
 
     private final String VIVO_ACTION_AUTOSTART_V1[] = {"com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"};
 
-    // "com.vivo.abe", "com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity"
+   // "com.vivo.abe", "com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity"
     //com.iqoo.secure.MainGuideActivity ??
     @Override
 

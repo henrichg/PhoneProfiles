@@ -140,7 +140,7 @@ public abstract class Job {
      *
      * @param newJobId The new ID of the rescheduled {@link JobRequest}.
      */
-    @SuppressWarnings("UnusedParameters")
+    @SuppressWarnings({"UnusedParameters","EmptyMethod"})
     @WorkerThread
     protected void onReschedule(int newJobId) {
         // override me
@@ -327,7 +327,8 @@ public abstract class Job {
         return mResult;
     }
 
-    /*package*/ final boolean isDeleted() {
+    /*package*/ @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    final boolean isDeleted() {
         synchronized (mMonitor) {
             return mDeleted;
         }
@@ -348,6 +349,7 @@ public abstract class Job {
         return mParams.hashCode();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
         return "job{"
@@ -368,7 +370,7 @@ public abstract class Job {
 
         private final JobRequest mRequest;
         private PersistableBundleCompat mExtras;
-        private Bundle mTransientExtras;
+        private final Bundle mTransientExtras;
 
         private Params(@NonNull JobRequest request, @NonNull Bundle transientExtras) {
             mRequest = request;
