@@ -2595,6 +2595,7 @@ class ActivateProfileHelper {
                 return false;
         }
         else
+        if (android.os.Build.VERSION.SDK_INT < 28)
         {
             Method getDataEnabledMethod;
             Class<?> telephonyManagerClass;
@@ -2616,10 +2617,15 @@ class ActivateProfileHelper {
             else
                 return false;
         }
+        else
+            return CmdMobileData.isEnabled(context);
     }
 
     static boolean canSetMobileData(Context context)
     {
+        if (android.os.Build.VERSION.SDK_INT >= 28)
+            return true;
+        else
         if (android.os.Build.VERSION.SDK_INT >= 22)
         {
             Class<?> telephonyManagerClass;
@@ -2689,7 +2695,7 @@ class ActivateProfileHelper {
         {
             // adb shell pm grant sk.henrichg.phoneprofiles android.permission.MODIFY_PHONE_STATE
             // not working :-/
-            if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
+            /*if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
                 if (android.os.Build.VERSION.SDK_INT == 21)
                 {
                     Method dataConnSwitchMethod;
@@ -2735,7 +2741,7 @@ class ActivateProfileHelper {
                     }
                 }
             }
-            else
+            else*/
             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
                     (PPApplication.isRooted(false)))
             {
