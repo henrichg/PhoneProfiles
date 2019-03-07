@@ -399,7 +399,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
                 else
                 if ((action != null) &&
                         (action.equalsIgnoreCase(INTENT_REFRESH_LISTWIDGET)))
-                    updateWidgets(context);
+                    _updateWidgets(context);
 
                 if (dataWrapper != null)
                     dataWrapper.invalidateDataWrapper();
@@ -524,7 +524,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    private void updateWidgets(Context context) {
+    private void _updateWidgets(Context context) {
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int appWidgetIds[] = appWidgetManager.getAppWidgetIds(new ComponentName(context, ProfileListWidgetProvider.class));
@@ -535,7 +535,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         } catch (Exception ignored) {}
     }
 
-    void updateWidgets(final Context context, final int[] appWidgetIds) {
+    void updateWidgets(final Context context) {
         PPApplication.startHandlerThreadWidget();
         final Handler handler = new Handler(PPApplication.handlerThreadWidget.getLooper());
         handler.post(new Runnable() {
@@ -544,7 +544,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
 
                 createProfilesDataWrapper(context);
 
-                updateWidgets(context);
+                _updateWidgets(context);
 
                 if (dataWrapper != null)
                     dataWrapper.invalidateDataWrapper();

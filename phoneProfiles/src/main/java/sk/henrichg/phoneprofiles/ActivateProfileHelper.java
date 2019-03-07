@@ -2461,10 +2461,22 @@ class ActivateProfileHelper {
             int ids2[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, ProfileListWidgetProvider.class));
             intent2.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids2);
             context.sendBroadcast(intent2);*/
-            int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, ProfileListWidgetProvider.class));
+            //int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, ProfileListWidgetProvider.class));
             ProfileListWidgetProvider myWidget = new ProfileListWidgetProvider();
-            myWidget.updateWidgets(context, ids);
+            myWidget.updateWidgets(context);
         } catch (Exception ignored) {}
+
+        // Samsung edge panel
+        if ((PPApplication.sLook != null) && PPApplication.sLookCocktailPanelEnabled) {
+            try {
+                /*Intent intent2 = new Intent(context, SamsungEdgeProvider.class);
+                intent2.setAction(SamsungEdgeProvider.INTENT_REFRESH_EDGEPANEL);
+                context.sendBroadcast(intent2);*/
+                SamsungEdgeProvider myWidget = new SamsungEdgeProvider();
+                myWidget.updateWidgets(context);
+            } catch (Exception ignored) {
+            }
+        }
 
         // dash clock extension
         Intent intent3 = new Intent("DashClockBroadcastReceiver");
@@ -2474,16 +2486,6 @@ class ActivateProfileHelper {
         Intent intent5 = new Intent("RefreshActivitiesBroadcastReceiver");
         intent5.putExtra(RefreshActivitiesBroadcastReceiver.EXTRA_REFRESH_ALSO_EDITOR, alsoEditor);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent5);
-
-        // Samsung edge panel
-        if ((PPApplication.sLook != null) && PPApplication.sLookCocktailPanelEnabled) {
-            try {
-                Intent intent2 = new Intent(context, SamsungEdgeProvider.class);
-                intent2.setAction(SamsungEdgeProvider.INTENT_REFRESH_EDGEPANEL);
-                context.sendBroadcast(intent2);
-            } catch (Exception ignored) {
-            }
-        }
     }
 
 

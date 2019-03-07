@@ -286,7 +286,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
                 if ((action != null) &&
                         (action.equalsIgnoreCase(INTENT_REFRESH_EDGEPANEL)))
-                    updateWidgets(context);
+                    _updateWidgets(context);
 
                 if (dataWrapper != null)
                     dataWrapper.invalidateDataWrapper();
@@ -308,7 +308,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
         } catch (Exception ignored) {}
     }
 
-    private void updateWidgets(Context context) {
+    private void _updateWidgets(Context context) {
         try {
             SlookCocktailManager cocktailManager = SlookCocktailManager.getInstance(context);
             int cocktailIds[] = cocktailManager.getCocktailIds(new ComponentName(context, SamsungEdgeProvider.class));
@@ -324,6 +324,24 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
     @Override
     public void onVisibilityChanged(Context context, int cocktailId, int visibility) {
         //isVisible = (visibility == SlookCocktailManager.COCKTAIL_VISIBILITY_SHOW);
+    }
+
+    void updateWidgets(final Context context) {
+        PPApplication.startHandlerThreadWidget();
+        final Handler handler = new Handler(PPApplication.handlerThreadWidget.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                createProfilesDataWrapper(context);
+
+                _updateWidgets(context);
+
+                if (dataWrapper != null)
+                    dataWrapper.invalidateDataWrapper();
+                dataWrapper = null;
+            }
+        });
     }
 
 }
