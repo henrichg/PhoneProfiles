@@ -527,12 +527,13 @@ class ActivateProfileHelper {
         // In AOSP, when systemZenMode == ActivateProfileHelper.ZENMODE_PRIORITY, systemRingerMode == AudioManager.RINGER_MODE_SILENT :-/
         if (systemZenMode == ActivateProfileHelper.ZENMODE_PRIORITY) {
             audibleRingerMode = (systemRingerMode == AudioManager.RINGER_MODE_NORMAL) ||
-                    (systemRingerMode == AudioManager.RINGER_MODE_SILENT);
+                                (systemRingerMode == AudioManager.RINGER_MODE_SILENT);
         }
         else
             audibleRingerMode = systemRingerMode == AudioManager.RINGER_MODE_NORMAL;
-        boolean audibleZenMode = (systemZenMode == ActivateProfileHelper.ZENMODE_ALL) ||
-                (systemZenMode == ActivateProfileHelper.ZENMODE_PRIORITY);
+        boolean audibleZenMode = (systemZenMode == -1) ||
+                                 (systemZenMode == ActivateProfileHelper.ZENMODE_ALL) ||
+                                 (systemZenMode == ActivateProfileHelper.ZENMODE_PRIORITY);
         return audibleRingerMode && audibleZenMode;
     }
 
