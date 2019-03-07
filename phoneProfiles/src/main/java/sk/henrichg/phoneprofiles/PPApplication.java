@@ -1310,6 +1310,8 @@ public class PPApplication extends Application {
 
             PPApplication.setApplicationStarted(context, false);
 
+            ActivateProfileHelper.updateGUI(context, false);
+
             if (!shutdown) {
                 Handler _handler = new Handler(context.getMainLooper());
                 Runnable r = new Runnable() {
