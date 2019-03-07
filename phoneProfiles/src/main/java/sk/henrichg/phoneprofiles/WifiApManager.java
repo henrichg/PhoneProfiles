@@ -15,21 +15,22 @@ import java.lang.reflect.Method;
 final class WifiApManager {
     //private static final int WIFI_AP_STATE_FAILED = 4;
     private final WifiManager mWifiManager;
-    private Method wifiControlMethod;
-    private Method wifiApConfigurationMethod;
+    private final String TAG = "Wifi Access Manager";
+    private Method wifiControlMethod = null;
+    private Method wifiApConfigurationMethod = null;
     //private Method wifiApState;
-    private Method wifiApEnabled;
+    private Method wifiApEnabled = null;
 
     private ConnectivityManager mConnectivityManager;
     private String packageName;
-
-    private final String TAG = "Wifi Access Manager";
 
     @SuppressLint("PrivateApi")
     WifiApManager(Context context) throws SecurityException, NoSuchMethodException {
         mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (mWifiManager != null)
             wifiApEnabled = mWifiManager.getClass().getDeclaredMethod("isWifiApEnabled");
+        PPApplication.logE("$$$ WifiAP", "WifiApManager.WifiApManager-mWifiManager=" + mWifiManager);
+        PPApplication.logE("$$$ WifiAP", "WifiApManager.WifiApManager-wifiApEnabled=" + wifiApEnabled);
         if (Build.VERSION.SDK_INT >= 26) {
             mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             packageName = context.getPackageName();
@@ -40,11 +41,17 @@ final class WifiApManager {
                 wifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration"/*,null*/);
                 //wifiApState = mWifiManager.getClass().getMethod("getWifiApState");
             }
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.WifiApManager-wifiControlMethod=" + wifiControlMethod);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.WifiApManager-wifiApConfigurationMethod=" + wifiApConfigurationMethod);
         }
     }
 
     private void setWifiApState(WifiConfiguration config, boolean enabled) {
         try {
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.setWifiApState-config="+config);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.setWifiApState-enabled="+enabled);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.setWifiApState-mWifiManager="+mWifiManager);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.setWifiApState-wifiControlMethod="+wifiControlMethod);
             if (enabled) {
                 if (mWifiManager != null) {
                     int wifiState = mWifiManager.getWifiState();
@@ -54,18 +61,20 @@ final class WifiApManager {
                 }
             }
             wifiControlMethod.setAccessible(true);
-            /*return (Boolean) */wifiControlMethod.invoke(mWifiManager, config, enabled);
+            wifiControlMethod.invoke(mWifiManager, config, enabled);
         } catch (Exception e) {
             Log.e(TAG, "", e);
-            //return false;
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.setWifiApState-exception="+e);
         }
     }
 
     void setWifiApState(boolean enabled) {
         WifiConfiguration wifiConfiguration = getWifiApConfiguration();
-        /*return */setWifiApState(wifiConfiguration, enabled);
+        /*return*/ setWifiApState(wifiConfiguration, enabled);
     }
 
+    // not working in Android 8+ :-/
+    // https://stackoverflow.com/questions/46392277/changing-android-hotspot-settings
     private WifiConfiguration getWifiApConfiguration()
     {
         try{
@@ -74,7 +83,7 @@ final class WifiApManager {
         }
         catch(Exception e)
         {
-            Log.e(TAG, "", e);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.getWifiApConfiguration-exception="+e);
             return null;
         }
     }
@@ -97,6 +106,7 @@ final class WifiApManager {
             return (Boolean) wifiApEnabled.invoke(mWifiManager);
         } catch (Exception e) {
             Log.e(TAG, "", e);
+            PPApplication.logE("$$$ WifiAP", "WifiApManager.isWifiAPEnabled-exception="+e);
             return false;
         }
 
@@ -151,7 +161,7 @@ final class WifiApManager {
                 Method stopTetheringMethod = ConnectivityManager.class.getDeclaredMethod("stopTethering", int.class);
                 stopTetheringMethod.invoke(mConnectivityManager, 0);
             } catch (Exception e) {
-                Log.e("WifiApManager.startTethering", Log.getStackTraceString(e));
+                Log.e("WifiApManager.stopTethering", Log.getStackTraceString(e));
             }
         }
     }
