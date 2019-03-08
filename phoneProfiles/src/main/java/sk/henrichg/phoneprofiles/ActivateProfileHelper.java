@@ -3527,21 +3527,35 @@ class ActivateProfileHelper {
                     }
 
                     switch (profile._lockDevice) {
-                        case 2:
-                        /*if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
-                                (PPApplication.isRooted())) {
-                            //String command1 = "input keyevent 26";
-                            Command command = new Command(0, false, command1);
-                            try {
-                                RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
-                                commandWait(command);
-                            } catch (RootDeniedException e) {
-                                PPApplication.rootMutex.rootGranted = false;
-                                Log.e("ActivateProfileHelper.lockDevice", Log.getStackTraceString(e));
-                            } catch (Exception e) {
-                                Log.e("ActivateProfileHelper.lockDevice", Log.getStackTraceString(e));
+                        case 1:
+                            if (PhoneProfilesService.getInstance() != null) {
+                                if (Permissions.checkLockDevice(appContext) && (PhoneProfilesService.getInstance().lockDeviceActivity == null)) {
+                                    try {
+                                        Intent intent = new Intent(appContext, LockDeviceActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                        appContext.startActivity(intent);
+                                    } catch (Exception ignore) {
+                                    }
+                                }
                             }
-                        }*/
+                            break;
+                        case 2:
+                            /*if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
+                                    (PPApplication.isRooted())) {
+                                //String command1 = "input keyevent 26";
+                                Command command = new Command(0, false, command1);
+                                try {
+                                    RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
+                                    commandWait(command);
+                                } catch (RootDeniedException e) {
+                                    PPApplication.rootMutex.rootGranted = false;
+                                    Log.e("ActivateProfileHelper.lockDevice", Log.getStackTraceString(e));
+                                } catch (Exception e) {
+                                    Log.e("ActivateProfileHelper.lockDevice", Log.getStackTraceString(e));
+                                }
+                            }*/
                             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
                                     (PPApplication.isRooted(false))) {
                                 synchronized (PPApplication.rootMutex) {
@@ -3561,20 +3575,9 @@ class ActivateProfileHelper {
                                 }
                             }
                             break;
-                        case 1:
                         case 3:
-                            if (PhoneProfilesService.getInstance() != null) {
-                                if (Permissions.checkLockDevice(appContext) && (PhoneProfilesService.getInstance().lockDeviceActivity == null)) {
-                                    try {
-                                        Intent intent = new Intent(appContext, LockDeviceActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                        appContext.startActivity(intent);
-                                    } catch (Exception ignore) {
-                                    }
-                                }
-                            }
+                            Intent intent = new Intent(PPApplication.ACTION_LOCK_DEVICE);
+                            appContext.sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
                             break;
                     }
                 } finally {

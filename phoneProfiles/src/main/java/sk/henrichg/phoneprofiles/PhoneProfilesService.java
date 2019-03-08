@@ -574,6 +574,15 @@ public class PhoneProfilesService extends Service {
         registerReceiver(pppExtenderForceStopApplicationBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
+        intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_LOCK_DEVICE_UNREGISTER);
+        sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+        intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
+        intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_LOCK_DEVICE_REGISTER);
+        sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
+
         if (settingsContentObserver != null) {
             getContentResolver().unregisterContentObserver(settingsContentObserver);
             settingsContentObserver = null;

@@ -63,7 +63,8 @@ public class PPApplication extends Application {
     //static final int VERSION_CODE_EXTENDER_1_0_4 = 60;
     //static final int VERSION_CODE_EXTENDER_2_0 = 100;
     static final int VERSION_CODE_EXTENDER_3_0 = 200;
-    static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_3_0;
+    static final int VERSION_CODE_EXTENDER_4_0 = 400;
+    static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_4_0;
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
@@ -148,12 +149,15 @@ public class PPApplication extends Application {
     static final String ACTION_REGISTER_PPPE_FUNCTION = "sk.henrichg.phoneprofilesplusextender.ACTION_REGISTER_PPPE_FUNCTION";
     static final String ACTION_FORCE_STOP_APPLICATIONS_START = "sk.henrichg.phoneprofilesplusextender.ACTION_FORCE_STOP_APPLICATIONS_START";
     static final String ACTION_FORCE_STOP_APPLICATIONS_END = "sk.henrichg.phoneprofilesplusextender.ACTION_FORCE_STOP_APPLICATIONS_END";
+    static final String ACTION_LOCK_DEVICE = "sk.henrichg.phoneprofilesplusextender.ACTION_LOCK_DEVICE";
     static final String ACCESSIBILITY_SERVICE_PERMISSION = "sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION";
 
     static final String EXTRA_REGISTRATION_APP = "registration_app";
     static final String EXTRA_REGISTRATION_TYPE = "registration_type";
     static final int REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_REGISTER = 1;
     static final int REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_UNREGISTER = -1;
+    static final int REGISTRATION_TYPE_LOCK_DEVICE_REGISTER = 5;
+    static final int REGISTRATION_TYPE_LOCK_DEVICE_UNREGISTER = -5;
 
     static final String EXTRA_APPLICATIONS = "extra_applications";
 
