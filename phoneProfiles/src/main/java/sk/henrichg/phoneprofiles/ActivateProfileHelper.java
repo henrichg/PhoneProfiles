@@ -3104,7 +3104,7 @@ class ActivateProfileHelper {
     private static void setNFC(Context context, boolean enable)
     {
         if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-            CmdNfc.run(enable);
+            CmdNfc.setNFC(enable);
         }
         else
         if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
