@@ -238,7 +238,8 @@ public class VolumeDialogPreference extends
                 volume = Math.round(maximumMediaValue / 100.0f * percentage);
             }
 
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+            ActivateProfileHelper.setMediaVolume(_context, audioManager, volume);
+
             try {
                 mediaPlayer.start();
             } catch (Exception ignore) { }
@@ -337,7 +338,7 @@ public class VolumeDialogPreference extends
             @Override
             public void run() {
                 if (audioManager != null) {
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, defaultValueMusic, 0);
+                    ActivateProfileHelper.setMediaVolume(_context, audioManager, defaultValueMusic);
                     if (mediaPlayer != null) {
                         try {
                             if (mediaPlayer.isPlaying())

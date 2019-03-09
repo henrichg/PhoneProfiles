@@ -461,7 +461,7 @@ public class RingtonePreference extends DialogPreference {
                 mediaPlayer = null;
 
                 if (oldMediaVolume > -1)
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
+                    ActivateProfileHelper.setMediaVolume(prefContext, audioManager, oldMediaVolume);
             }
         }
     }
@@ -517,7 +517,7 @@ public class RingtonePreference extends DialogPreference {
 
                         PPApplication.logE("RingtonePreference.playRingtone", "mediaVolume=" + mediaVolume);
 
-                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
+                        ActivateProfileHelper.setMediaVolume(prefContext, audioManager, mediaVolume);
 
                         mediaPlayer.start();
                         ringtoneIsPlayed = true;
@@ -536,7 +536,7 @@ public class RingtonePreference extends DialogPreference {
                                     }
 
                                     if (oldMediaVolume > -1)
-                                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
+                                        ActivateProfileHelper.setMediaVolume(prefContext, audioManager, oldMediaVolume);
                                     PPApplication.logE("RingtonePreference.playRingtone", "play stopped");
                                 }
 
