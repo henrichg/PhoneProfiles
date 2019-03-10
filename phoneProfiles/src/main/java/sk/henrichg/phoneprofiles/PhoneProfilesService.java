@@ -92,7 +92,7 @@ public class PhoneProfilesService extends Service {
 
         PPApplication.logE("PhoneProfilesService.onCreate", "xxx");
 
-        synchronized (PhoneProfilesService.class) {
+        synchronized (PPApplication.phoneProfilesServiceMutex) {
             instance = this;
         }
 
@@ -162,7 +162,7 @@ public class PhoneProfilesService extends Service {
                 notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
         }
 
-        synchronized (PhoneProfilesService.class) {
+        synchronized (PPApplication.phoneProfilesServiceMutex) {
             instance = null;
         }
 
@@ -174,7 +174,9 @@ public class PhoneProfilesService extends Service {
     }
 
     static PhoneProfilesService getInstance() {
-        return instance;
+        synchronized (PPApplication.phoneProfilesServiceMutex) {
+            return instance;
+        }
     }
 
     boolean getServiceHasFirstStart() {
@@ -1104,7 +1106,7 @@ public class PhoneProfilesService extends Service {
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
         dataWrapper.invalidateDataWrapper();
 
-        synchronized (PhoneProfilesService.class) {
+        synchronized (PPApplication.phoneProfilesServiceMutex) {
             if (!runningInForeground || (instance == null)) {
                 _showProfileNotification(profile, false);
             }
@@ -1115,7 +1117,7 @@ public class PhoneProfilesService extends Service {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                synchronized (PhoneProfilesService.class) {
+                synchronized (PPApplication.phoneProfilesServiceMutex) {
                     if (instance != null) {
                         DataWrapper dataWrapper = new DataWrapper(instance.getApplicationContext(), false, 0, false);
                         Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
