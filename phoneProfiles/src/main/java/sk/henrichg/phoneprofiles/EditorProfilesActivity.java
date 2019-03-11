@@ -832,7 +832,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         importProgressDialog.show();
 
                     if (PhoneProfilesService.getInstance() != null) {
-                        stopService(new Intent(getApplicationContext(), PhoneProfilesService.class));
+                        PhoneProfilesService.stop(getApplicationContext());
                     }
 
                     EditorProfileListFragment fragment = (EditorProfileListFragment) getSupportFragmentManager().findFragmentById(R.id.editor_profile_list);

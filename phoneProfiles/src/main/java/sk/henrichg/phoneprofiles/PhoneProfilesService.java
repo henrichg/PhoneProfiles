@@ -9,6 +9,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -85,6 +86,20 @@ public class PhoneProfilesService extends Service {
     static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
     static final String EXTRA_SWITCH_KEYGUARD = "switch_keyguard";
 
+    //--------------------------
+
+    private static final String ACTION_STOP = "sk.henrichg.phoneprofilesplus.ACTION_STOP";
+
+    private final BroadcastReceiver stopReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            context.removeStickyBroadcast(intent);
+            stopForeground(true);
+            stopSelf();
+        }
+    };
+
+
     @Override
     public void onCreate()
     {
@@ -103,6 +118,9 @@ public class PhoneProfilesService extends Service {
         if (Build.VERSION.SDK_INT >= 26)
             // show empty notification to avoid ANR
             showProfileNotification();
+
+        registerReceiver(
+                stopReceiver, new IntentFilter(ACTION_STOP));
 
         final Context appContext = getApplicationContext();
 
@@ -150,6 +168,7 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("PhoneProfilesService.onDestroy", "xxx");
 
+        unregisterReceiver(stopReceiver);
         unregisterReceivers();
 
         reenableKeyguard();
@@ -177,6 +196,10 @@ public class PhoneProfilesService extends Service {
         synchronized (PPApplication.phoneProfilesServiceMutex) {
             return instance;
         }
+    }
+
+    public static void stop(Context context) {
+        context.sendStickyBroadcast(new Intent(ACTION_STOP));
     }
 
     boolean getServiceHasFirstStart() {
