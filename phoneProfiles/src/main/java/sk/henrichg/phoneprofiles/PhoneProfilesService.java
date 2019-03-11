@@ -30,6 +30,7 @@ import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -82,13 +83,21 @@ public class PhoneProfilesService extends Service {
     static final String EXTRA_ONLY_START = "only_start";
     static final String EXTRA_INITIALIZE_START = "initialize_start";
     static final String EXTRA_ACTIVATE_PROFILES = "activate_profiles";
-    static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
-    static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
+    //static final String EXTRA_SET_SERVICE_FOREGROUND = "set_service_foreground";
+    //static final String EXTRA_CLEAR_SERVICE_FOREGROUND = "clear_service_foreground";
     static final String EXTRA_SWITCH_KEYGUARD = "switch_keyguard";
 
     //--------------------------
 
-    private static final String ACTION_STOP = "sk.henrichg.phoneprofilesplus.ACTION_STOP";
+    static final String ACTION_COMMAND = "sk.henrichg.phoneprofilesplus.PhoneProfilesService.ACTION_COMMAND";
+    private static final String ACTION_STOP = "sk.henrichg.phoneprofilesplus.PhoneProfilesService.ACTION_STOP";
+
+    private final BroadcastReceiver commandReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            doCommand(intent);
+        }
+    };
 
     private final BroadcastReceiver stopReceiver = new BroadcastReceiver() {
         @Override
@@ -99,6 +108,7 @@ public class PhoneProfilesService extends Service {
         }
     };
 
+    //--------------------------
 
     @Override
     public void onCreate()
@@ -119,8 +129,8 @@ public class PhoneProfilesService extends Service {
             // show empty notification to avoid ANR
             showProfileNotification();
 
-        registerReceiver(
-                stopReceiver, new IntentFilter(ACTION_STOP));
+        registerReceiver(stopReceiver, new IntentFilter(ACTION_STOP));
+        LocalBroadcastManager.getInstance(this).registerReceiver(commandReceiver, new IntentFilter(ACTION_COMMAND));
 
         final Context appContext = getApplicationContext();
 
@@ -168,6 +178,7 @@ public class PhoneProfilesService extends Service {
     {
         PPApplication.logE("PhoneProfilesService.onDestroy", "xxx");
 
+        unregisterReceiver(commandReceiver);
         unregisterReceiver(stopReceiver);
         unregisterReceivers();
 
@@ -207,7 +218,7 @@ public class PhoneProfilesService extends Service {
     }
 
     // start service for first start
-    private boolean doForFirstStart(Intent intent/*, int flags, int startId*/) {
+    private void /*boolean*/ doForFirstStart(Intent intent/*, int flags, int startId*/) {
         PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart START");
 
         boolean onlyStart = true;
@@ -240,7 +251,7 @@ public class PhoneProfilesService extends Service {
         if (serviceRunning && onlyStart && !startOnBoot && !startOnPackageReplace && !initializeStart) {
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "only EXTRA_ONLY_START, service already running");
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart END");
-            return true;
+            return;// true;
         }
 
         /*
@@ -383,7 +394,7 @@ public class PhoneProfilesService extends Service {
 
         PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart END");
 
-        return onlyStart;
+        //return onlyStart;
     }
 
     @Override
@@ -414,64 +425,68 @@ public class PhoneProfilesService extends Service {
             }
         }*/
 
-        if (!doForFirstStart(intent/*, flags, startId*/)) {
-            if (intent != null) {
-                /*if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
-                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
-                    // not needed, is already called in start of onStartCommand
-                    //showProfileNotification();
-                }
-                else*/
-                if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
-                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
-                    clearProfileNotification(/*this*/);
-                }
-                else
-                if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
-                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SET_SERVICE_FOREGROUND");
-                    // not needed, is already called in start of onStartCommand
-                    //showProfileNotification();
-                }
-                else
-                if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
-                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
+        /*if (!doForFirstStart(intent)) {
+        }*/
+        doForFirstStart(intent);
 
-                    Context appContext = getApplicationContext();
+        // We want this service to continue running until it is explicitly
+        // stopped, so return sticky.
+        return START_STICKY;
+    }
 
-                    boolean isScreenOn;
-                    PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-                    isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
+    private void doCommand(Intent intent) {
+        if (intent != null) {
+            /*if (intent.getBooleanExtra(EXTRA_SHOW_PROFILE_NOTIFICATION, false)) {
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SHOW_PROFILE_NOTIFICATION");
+                // not needed, is already called in start of onStartCommand
+                //showProfileNotification();
+            }
+            else
+            if (intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false)) {
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_CLEAR_SERVICE_FOREGROUND");
+                clearProfileNotification();
+            }
+            else
+            if (intent.getBooleanExtra(EXTRA_SET_SERVICE_FOREGROUND, false)) {
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SET_SERVICE_FOREGROUND");
+                // not needed, is already called in start of onStartCommand
+                //showProfileNotification();
+            }
+            else*/
+            if (intent.getBooleanExtra(EXTRA_SWITCH_KEYGUARD, false)) {
+                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "EXTRA_SWITCH_KEYGUARD");
 
-                    boolean secureKeyguard;
-                    if (keyguardManager == null)
-                        keyguardManager = (KeyguardManager) appContext.getSystemService(Activity.KEYGUARD_SERVICE);
-                    if (keyguardManager != null) {
-                        secureKeyguard = keyguardManager.isKeyguardSecure();
-                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "secureKeyguard=" + secureKeyguard);
-                        if (!secureKeyguard) {
-                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
+                Context appContext = getApplicationContext();
 
-                            if (isScreenOn) {
-                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
+                boolean isScreenOn;
+                PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
+                isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
 
-                                if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
-                                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.disable(), START_STICKY");
-                                    reenableKeyguard();
-                                    disableKeyguard();
-                                } else {
-                                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
-                                    reenableKeyguard();
-                                }
+                boolean secureKeyguard;
+                if (keyguardManager == null)
+                    keyguardManager = (KeyguardManager) appContext.getSystemService(Activity.KEYGUARD_SERVICE);
+                if (keyguardManager != null) {
+                    secureKeyguard = keyguardManager.isKeyguardSecure();
+                    PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "secureKeyguard=" + secureKeyguard);
+                    if (!secureKeyguard) {
+                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
+
+                        if (isScreenOn) {
+                            PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
+
+                            if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
+                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.disable(), START_STICKY");
+                                reenableKeyguard();
+                                disableKeyguard();
+                            } else {
+                                PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "Keyguard.reenable(), stopSelf(), START_NOT_STICKY");
+                                reenableKeyguard();
                             }
                         }
                     }
                 }
             }
         }
-
-        // We want this service to continue running until it is explicitly
-        // stopped, so return sticky.
-        return START_STICKY;
     }
 
     @Override
@@ -1152,7 +1167,7 @@ public class PhoneProfilesService extends Service {
         });
     }
 
-    private void clearProfileNotification(/*Context context, boolean onlyEmpty*/)
+    void clearProfileNotification(/*Context context, boolean onlyEmpty*/)
     {
         /*if (onlyEmpty) {
             final Context appContext = getApplicationContext();

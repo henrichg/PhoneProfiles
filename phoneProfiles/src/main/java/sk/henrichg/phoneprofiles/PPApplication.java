@@ -407,6 +407,11 @@ public class PPApplication extends Application {
             context.getApplicationContext().startForegroundService(serviceIntent);
     }
 
+    static void runCommand(Context context, Intent intent) {
+        PPApplication.logE("PPApplication.runCommand", "xxx");
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
+
     //--------------------------------------------------------------
 
     static public boolean getApplicationStarted(Context context, boolean testService)

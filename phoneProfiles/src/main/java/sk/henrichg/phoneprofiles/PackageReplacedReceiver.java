@@ -177,9 +177,10 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                             wakeLock.acquire(10 * 60 * 1000);
                         }
 
-                        if (restartService) {
+                        //if (restartService) {
                             //PPApplication.sleep(3000);
                             if (PPApplication.getApplicationStarted(appContext, false)) {
+                                restartService = true;
                                 // application was started before upgrade
                                 if (!PPApplication.getApplicationStarted(appContext, true)) {
                                     // service is not started, start it
@@ -189,7 +190,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 else
                                     restartService = false;
                             }
-                        }
+                        //}
                         if (!restartService) {
                             //PPApplication.sleep(3000);
                             if (PPApplication.getApplicationStarted(appContext, true)) {
