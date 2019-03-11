@@ -338,7 +338,7 @@ public class PPApplication extends Application {
             try {
                 PPApplication.logE("##### PPApplication.onCreate", "start service");
                 Intent serviceIntent = new Intent(getApplicationContext(), PhoneProfilesService.class);
-                serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+                //serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
                 serviceIntent.putExtra(PhoneProfilesService.EXTRA_ACTIVATE_PROFILES, false);
                 startPPService(getApplicationContext(), serviceIntent);
