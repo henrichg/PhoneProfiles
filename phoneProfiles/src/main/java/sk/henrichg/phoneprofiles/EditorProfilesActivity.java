@@ -765,12 +765,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                             ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), true, prefEdit);
                     }
 
-                    if (what == 2) {
+                    /*if (what == 2) {
                         if (key.equals(Profile.PREF_PROFILE_LOCK_DEVICE)) {
                             if (v.equals("3"))
                                 prefEdit.putString(Profile.PREF_PROFILE_LOCK_DEVICE, "1");
                         }
-                    }
+                    }*/
                 }
                 prefEdit.apply();
                 if (what == 1) {

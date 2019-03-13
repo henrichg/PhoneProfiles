@@ -111,7 +111,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         restartService = true;
                                     }
                                 }
-                                if (actualVersionCode <= 3000) {
+                                /*if (actualVersionCode <= 3000) {
                                     SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
                                     if (preferences.getInt(Profile.PREF_PROFILE_LOCK_DEVICE, 0) == 3) {
                                         SharedPreferences.Editor editor = preferences.edit();
@@ -120,7 +120,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                                         restartService = true;
                                     }
-                                }
+                                }*/
                                 if (actualVersionCode <= 3100) {
                                     ApplicationPreferences.getSharedPreferences(appContext);
                                     if (!ApplicationPreferences.preferences.contains(ApplicationPreferences.PREF_APPLICATION_WIDGET_ONE_ROW_PREF_INDICATOR)) {

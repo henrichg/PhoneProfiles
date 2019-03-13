@@ -1666,6 +1666,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                         else
                             categorySummary = changeSummary;
                     }
+                    else
+                        categorySummary = changeSummary;
 
                     listPreference.setSummary(changeSummary);
                     setTitleStyle(listPreference, index > 0, false, false);
