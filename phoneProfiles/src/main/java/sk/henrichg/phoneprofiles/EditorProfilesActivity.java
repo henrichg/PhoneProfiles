@@ -565,7 +565,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                         Profile mappedProfile = Profile.getMappedProfile(profile, getApplicationContext());
                         Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
-                                /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false, false);
+                                /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, true, false);
                     }
                 }
                 else
@@ -576,7 +576,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     Profile sharedProfile = Profile.getSharedProfile(getApplicationContext());
                     Permissions.grantProfilePermissions(getApplicationContext(), sharedProfile, false,
-                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, false, false);
+                            /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, true, false);
 
                 }
             }
