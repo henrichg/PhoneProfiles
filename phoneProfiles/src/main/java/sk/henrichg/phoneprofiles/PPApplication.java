@@ -189,9 +189,10 @@ public class PPApplication extends Application {
     private static final ServiceListMutex serviceListMutex = new ServiceListMutex();
     public static final ScanResultsMutex scanResultsMutex = new ScanResultsMutex();
 
-    public static boolean startedOnBoot = false;
-
     //public static final RootMutex rootMutex = new RootMutex();
+
+    // !! this must be here
+    public static boolean blockProfileEventActions = false;
 
     // Samsung Look instance
     public static Slook sLook = null;
@@ -1447,6 +1448,27 @@ public class PPApplication extends Application {
             handlerThreadNotificationLed.start();
         }
     }
+
+    static void setBlockProfileEventActions(boolean enable) {
+        // if blockProfileEventActions = true, do not perform any actions, for example ActivateProfileHelper.lockDevice()
+        PPApplication.blockProfileEventActions = enable;
+        if (enable) {
+            PPApplication.startHandlerThread();
+            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    PPApplication.logE("PPApplication.startHandlerThread", "START run - from=PPApplication.setBlockProfileEventActions");
+
+                    PPApplication.logE("PPApplication.setBlockProfileEventActions", "delayed boot up");
+                    PPApplication.blockProfileEventActions = false;
+
+                    PPApplication.logE("PPApplication.startHandlerThread", "END run - from=PPApplication.setBlockProfileEventActions");
+                }
+            }, 30000);
+        }
+    }
+
 
     // Google Analytics ----------------------------------------------------------------------------
 

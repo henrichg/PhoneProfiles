@@ -604,6 +604,7 @@ public class ProfilePreferencesActivity extends PreferenceActivity
                 }
 
                 if ((activatedProfile != null) && (activatedProfile._id == profile._id))
+                    PPApplication.setBlockProfileEventActions(true);
                     //dataWrapper.activateProfileFromMainThread(profile, false, startupSource, false, null);
                     dataWrapper._activateProfile(profile, startupSource, false, null);
 

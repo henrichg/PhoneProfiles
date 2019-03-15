@@ -1581,6 +1581,9 @@ class ActivateProfileHelper {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
+                    if (PPApplication.blockProfileEventActions)
+                        // not start application after boot
+                        return;
 
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
@@ -1635,8 +1638,7 @@ class ActivateProfileHelper {
                                                         PPApplication.sleep(1000);
                                                     } catch (Exception ignored) {
                                                     }
-                                                }
-                                                else {
+                                                } else {
                                                     try {
                                                         appContext.sendBroadcast(intent);
                                                         //try { Thread.sleep(1000); } catch (InterruptedException e) { }
@@ -1668,7 +1670,8 @@ class ActivateProfileHelper {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
                             try {
                                 wakeLock.release();
-                            } catch (Exception ignored) {}
+                            } catch (Exception ignored) {
+                            }
                         }
                     }
                 }
@@ -1678,7 +1681,8 @@ class ActivateProfileHelper {
 
     private static void executeForForceStopApplications(final Profile profile, Context context) {
         PPApplication.logE("ActivateProfilesHelper.executeForForceStopApplications", "xxx");
-        if (PPApplication.startedOnBoot)
+
+        if (PPApplication.blockProfileEventActions)
             // not force stop applications after boot
             return;
 
@@ -2182,7 +2186,8 @@ class ActivateProfileHelper {
 
         // close all applications
         if (profile._deviceCloseAllApplications == 1) {
-            if (!PPApplication.startedOnBoot) {
+            //if (!PPApplication.startedOnBoot) {
+            if (!PPApplication.blockProfileEventActions) {
                 try {
                     Intent startMain = new Intent(Intent.ACTION_MAIN);
                     startMain.addCategory(Intent.CATEGORY_HOME);
@@ -3532,7 +3537,7 @@ class ActivateProfileHelper {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (PPApplication.startedOnBoot)
+                if (PPApplication.blockProfileEventActions)
                     // not lock device after boot
                     return;
 

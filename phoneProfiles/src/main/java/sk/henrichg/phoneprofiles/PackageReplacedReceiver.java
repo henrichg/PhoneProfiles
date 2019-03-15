@@ -20,17 +20,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
             restartService = false;
 
-            // start delayed boot up broadcast
-            PPApplication.startedOnBoot = true;
-            PPApplication.startHandlerThread();
-            final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    PPApplication.logE("PackageReplacedReceiver.onReceive", "delayed boot up");
-                    PPApplication.startedOnBoot = false;
-                }
-            }, 30001);
+            PPApplication.setBlockProfileEventActions(true);
 
             final Context appContext = context.getApplicationContext();
 

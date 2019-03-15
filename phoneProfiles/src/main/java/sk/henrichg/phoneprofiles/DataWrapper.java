@@ -712,6 +712,8 @@ public class DataWrapper {
 
     private void activateProfileWithAlert(Profile profile, int startupSource, /*boolean interactive,*/ Activity activity)
     {
+        PPApplication.setBlockProfileEventActions(false);
+
         if (/*interactive &&*/ (ApplicationPreferences.applicationActivateWithAlert(context) ||
                             (startupSource == PPApplication.STARTUP_SOURCE_EDITOR)))
         {
