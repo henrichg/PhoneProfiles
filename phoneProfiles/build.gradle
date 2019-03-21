@@ -52,13 +52,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.0'
 
-    implementation "com.android.support:appcompat-v7:$ppVersions.supportLib"
-    implementation "com.android.support:gridlayout-v7:$ppVersions.supportLib"
-    implementation "com.android.support:cardview-v7:$ppVersions.supportLib"
-    implementation "com.android.support:recyclerview-v7:$ppVersions.supportLib"
-    implementation "com.android.support:design:$ppVersions.supportLib"
+    implementation "androidx.appcompat:appcompat:$ppVersions.supportLib"
+    implementation "androidx.gridlayout:gridlayout:$ppVersions.supportLib"
+    implementation "androidx.cardview:cardview:$ppVersions.supportLib"
+    implementation "androidx.recyclerview:recyclerview:$ppVersions.supportLib"
+    implementation "com.google.android.material:material:$ppVersions.supportLib"
 
     implementation 'com.android.billingclient:billing:1.2.2'
     implementation 'com.google.code.gson:gson:2.8.2'

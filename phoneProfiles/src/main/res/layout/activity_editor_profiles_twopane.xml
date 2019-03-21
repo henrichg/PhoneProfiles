@@ -21,7 +21,7 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/editor_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -29,7 +29,7 @@
         android:theme="?attr/toolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/editor_list_bottom_bar"
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"

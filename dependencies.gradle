@@ -8,13 +8,13 @@
 // 3100 = separated preferences for single row widget
 
 ext.ppVersions = [
-    publishVersion: '4.6.8b',
-    publishVersionCode: 3261,
+    publishVersion: '4.7b',
+    publishVersionCode: 3262,
 
     minSdk: 21,
     targetSdk: 27, // do not set it to 28! wifi hotspot and other cmdXXX not working with 28.
     compileSdk: 28,
     buildTools: '28.0.3',
 
-    supportLib: '28.0.0'
+    supportLib: '1.0.0'
 ]

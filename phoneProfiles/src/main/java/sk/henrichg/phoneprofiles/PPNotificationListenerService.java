@@ -10,7 +10,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.text.TextUtils;
 
 import java.util.Set;
