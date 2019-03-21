@@ -5,7 +5,7 @@
     <dimen name="important_info_right_margin">25dp</dimen>
     <dimen name="important_info_bottom_margin">25dp</dimen>
 
-    <dimen name="toolbar_dropShadow_height">2dp</dimen>
+    <dimen name="toolbar_dropShadow_height">1dp</dimen>
 
     <dimen name="popup_corner_radius">4dp</dimen>
     <dimen name="button_corner_radius">4dp</dimen>

@@ -6,7 +6,8 @@
         <item>@string/array_pref_ringerModeArray_ring</item>
         <item>@string/array_pref_ringerModeArray_ring_and_vibrate</item>
         <item>@string/array_pref_ringerModeArray_vibrate</item>
-        <item>@string/array_pref_ringerModeArray_silent</item>
+        <item>@string/array_pref_ringerModeArray_silentL</item>
+        <item>@string/array_pref_ringerModeArray_ZenMode</item>
     </string-array>
     <string-array name="ringerModeValues" tools:ignore="InconsistentArrays">
         <item>0</item>
@@ -15,6 +16,7 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
     <string-array name="hardwareModeArray">
         <item>@string/array_pref_no_change</item>
@@ -248,7 +250,8 @@
         <item>@string/array_pref_ringerModeArray_ring</item>
         <item>@string/array_pref_ringerModeArray_ring_and_vibrate</item>
         <item>@string/array_pref_ringerModeArray_vibrate</item>
-        <item>@string/array_pref_ringerModeArray_silent</item>
+        <item>@string/array_pref_ringerModeArray_silentL</item>
+        <item>@string/array_pref_ringerModeArray_ZenMode</item>
     </string-array>
     <string-array name="ringerModeDPValues" tools:ignore="InconsistentArrays">
         <item>0</item>
@@ -256,6 +259,7 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
     <string-array name="hardwareModeDPArray">
         <item>@string/array_pref_no_change</item>

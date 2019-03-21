@@ -6,13 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.crashlytics.android.Crashlytics;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class PhoneProfilesPreferencesActivity extends PreferenceActivity
                             implements PreferenceFragment.OnCreateNestedPreferenceFragment
@@ -43,7 +39,8 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
 
         //setContentView(R.layout.activity_phone_profiles_preferences);
 
-        if (/*(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) &&*/ (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
+        /*
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Window w = getWindow(); // in Activity's onCreate() for instance
             //w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -65,6 +62,7 @@ public class PhoneProfilesPreferencesActivity extends PreferenceActivity
                     break;
             }
         }
+        */
 
         invalidateEditor = false;
 

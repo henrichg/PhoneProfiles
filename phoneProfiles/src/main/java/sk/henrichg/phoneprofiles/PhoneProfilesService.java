@@ -102,6 +102,7 @@ public class PhoneProfilesService extends Service {
     private final BroadcastReceiver stopReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            //noinspection deprecation
             context.removeStickyBroadcast(intent);
             stopForeground(true);
             stopSelf();
@@ -214,6 +215,7 @@ public class PhoneProfilesService extends Service {
     }
 
     public static void stop(Context context) {
+        //noinspection deprecation
         context.sendStickyBroadcast(new Intent(ACTION_STOP));
     }
 

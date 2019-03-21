@@ -12,11 +12,9 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,13 +24,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -140,7 +135,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_editor_profile_list);
 
-        if (/*(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) &&*/ (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)) {
+        /*
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Window w = getWindow(); // in Activity's onCreate() for instance
             //w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -162,6 +158,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     break;
             }
         }
+        */
 
         // add profile list into list container
         EditorProfileListFragment listFragment = new EditorProfileListFragment();

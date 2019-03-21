@@ -572,6 +572,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
             cursor.close();
         }
 
+        /*
         if (oldVersion < 1175)
         {
             if (android.os.Build.VERSION.SDK_INT < 21)
@@ -612,6 +613,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
+        */
 
         if (oldVersion < 1180)
         {
@@ -3250,6 +3252,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                             value = percentage + "|" + splits[1] + "|" + splits[2] + "|0";
                                                     }
                                                 }
+                                                /*
                                                 if (exportedDBObj.getVersion() < 1175) {
                                                     if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
                                                         if (android.os.Build.VERSION.SDK_INT < 21) {
@@ -3269,6 +3272,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                         }
                                                     }
                                                 }
+                                                */
                                                 if (applicationDataPath.equals(GlobalGUIRoutines.REMOTE_EXPORT_PATH)) {
                                                     if (columnNamesExportedDB[i].equals(KEY_AFTER_DURATION_DO)) {
                                                         // in PhoneProfiles value=3 is restart events
