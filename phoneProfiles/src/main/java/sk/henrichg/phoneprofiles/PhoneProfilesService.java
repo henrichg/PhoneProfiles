@@ -893,11 +893,11 @@ public class PhoneProfilesService extends Service {
                     notificationBuilder.setPriority(Notification.PRIORITY_MIN);
             }
 
-            if (android.os.Build.VERSION.SDK_INT >= 21)
-            {
+            //if (android.os.Build.VERSION.SDK_INT >= 21)
+            //{
                 notificationBuilder.setCategory(Notification.CATEGORY_STATUS);
                 notificationBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
-            }
+            //}
 
             //notificationBuilder.setTicker(profileName);
 

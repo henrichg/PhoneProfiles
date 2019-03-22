@@ -492,8 +492,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
         if (oldVersion < 1156)
         {
-            if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-            {
+            //if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+            //{
                 final String selectQuery = "SELECT " + KEY_ID + "," +
                                                 KEY_DEVICE_BRIGHTNESS +
                                             " FROM " + TABLE_PROFILES;
@@ -526,7 +526,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 }
 
                 cursor.close();
-            }
+            //}
         }
 
         if (oldVersion < 1160)
@@ -3221,8 +3221,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                 }
                                                 if (exportedDBObj.getVersion() < 1156) {
                                                     if (columnNamesExportedDB[i].equals(KEY_DEVICE_BRIGHTNESS)) {
-                                                        if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-                                                        {
+                                                        //if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
+                                                        //{
                                                             //value|noChange|automatic|sharedProfile
                                                             String[] splits = value.split("\\|");
 
@@ -3234,7 +3234,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                                                 else
                                                                     value = Profile.BRIGHTNESS_ADAPTIVE_BRIGHTNESS_NOT_SET + "|" + splits[1] + "|" + splits[2] + "|0";
                                                             }
-                                                        }
+                                                        //}
                                                     }
                                                 }
                                                 if (exportedDBObj.getVersion() < 1165) {

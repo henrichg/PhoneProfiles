@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.WallpaperManager;
@@ -848,8 +847,8 @@ class ActivateProfileHelper {
 
     private static void setZenMode(Context context, int zenMode, AudioManager audioManager, int ringerMode)
     {
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-        {
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
+        //{
             int systemZenMode = getSystemZenMode(context/*, -1*/);
             PPApplication.logE("ActivateProfileHelper.setZenMode", "systemZenMode=" + systemZenMode);
             int systemRingerMode = audioManager.getRingerMode();
@@ -902,11 +901,11 @@ class ActivateProfileHelper {
                     // GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context) returns false.
                 }
             }
-        }
-        else {
-            RingerModeChangeReceiver.notUnlinkVolumes = false;
-            audioManager.setRingerMode(ringerMode);
-        }
+        //}
+        //else {
+        //    RingerModeChangeReceiver.notUnlinkVolumes = false;
+        //    audioManager.setRingerMode(ringerMode);
+        //}
     }
 
     private static void setVibrateWhenRinging(Context context, Profile profile, int value) {
@@ -1162,7 +1161,7 @@ class ActivateProfileHelper {
 
                     if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, null, false, appContext).allowed
                             == PreferenceAllowed.PREFERENCE_ALLOWED) {
-                        if (android.os.Build.VERSION.SDK_INT >= 21) {
+                        //if (android.os.Build.VERSION.SDK_INT >= 21) {
                             if (Permissions.hasPermission(appContext, Manifest.permission.WRITE_SECURE_SETTINGS)) {
                                 Settings.Global.putInt(appContext.getContentResolver(), "heads_up_notifications_enabled", value);
                             } else {
@@ -1185,7 +1184,7 @@ class ActivateProfileHelper {
                                     }
                                 }
                             }
-                        }
+                        //}
                     }
                 } finally {
                     if ((wakeLock != null) && wakeLock.isHeld()) {
@@ -1247,9 +1246,9 @@ class ActivateProfileHelper {
                 return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
         }
         else
-        if (android.os.Build.VERSION.SDK_INT >= 21)
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
             return PPNotificationListenerService.isNotificationListenerServiceEnabled(context);
-        return false;
+        //return false;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -1288,7 +1287,8 @@ class ActivateProfileHelper {
                 }
             }
         }
-        if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
+        else {
+        //if ((android.os.Build.VERSION.SDK_INT >= 21) && (android.os.Build.VERSION.SDK_INT < 23)) {
             int interruptionFilter = Settings.Global.getInt(context.getContentResolver(), "zen_mode", -1);
             switch (interruptionFilter) {
                 case 0:
@@ -1403,7 +1403,7 @@ class ActivateProfileHelper {
                     break;
                 case Profile.RINGERMODE_SILENT:
                     PPApplication.logE("ActivateProfileHelper.setRingerMode", "ringer mode=SILENT");
-                    if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    //if (android.os.Build.VERSION.SDK_INT >= 21) {
                         /*int systemRingerMode = audioManager.getRingerMode();
                         //int systemZenMode = getSystemZenMode(context);
                         PPApplication.logE("ActivateProfileHelper.setRingerMode", "systemRingerMode="+systemRingerMode);
@@ -1413,7 +1413,7 @@ class ActivateProfileHelper {
                             setZenMode(context, ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_NORMAL);
                         }*/
                         setZenMode(context, ZENMODE_SILENT, audioManager, AudioManager.RINGER_MODE_SILENT);
-                    }
+                    /*}
                     else {
                         setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_SILENT);
                         try {
@@ -1426,7 +1426,7 @@ class ActivateProfileHelper {
                             audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);
                         } catch (Exception ignored) {
                         }
-                    }
+                    }*/
                     setVibrateWhenRinging(context, null, 0);
                     break;
                 case Profile.RINGERMODE_ZENMODE:
@@ -2228,12 +2228,12 @@ class ActivateProfileHelper {
         mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
-        mBuilder.setPriority(Notification.PRIORITY_MAX);
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-        {
-            mBuilder.setCategory(Notification.CATEGORY_RECOMMENDATION);
-            mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
-        }
+        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
+        //{
+            mBuilder.setCategory(NotificationCompat.CATEGORY_RECOMMENDATION);
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        //}
         NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (mNotificationManager != null)
             mNotificationManager.notify(notificationId, mBuilder.build());
@@ -2706,7 +2706,7 @@ class ActivateProfileHelper {
                 return false;
         }
         else
-        if (android.os.Build.VERSION.SDK_INT >= 21)
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
         {
             Class<?> telephonyManagerClass;
 
@@ -2725,7 +2725,7 @@ class ActivateProfileHelper {
             else
                 return false;
         }
-        else
+        /*else
         {
             ConnectivityManager connectivityManager = null;
             try {
@@ -2746,13 +2746,13 @@ class ActivateProfileHelper {
             }
             else
                 return false;
-        }
+        }*/
     }
 
     private static void setMobileData(Context context, boolean enable)
     {
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-        {
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
+        //{
             // adb shell pm grant sk.henrichg.phoneprofiles android.permission.MODIFY_PHONE_STATE
             // not working :-/
             /*if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
@@ -2866,7 +2866,7 @@ class ActivateProfileHelper {
                 }
                 */
             }
-        }
+        /*}
         else {
             ConnectivityManager connectivityManager = null;
             try {
@@ -2906,7 +2906,7 @@ class ActivateProfileHelper {
                     }
                 }
             }
-        }
+        }*/
     }
 
     /*
@@ -3496,7 +3496,7 @@ class ActivateProfileHelper {
                                     }
                                     if (_setPowerSaveMode) {
                                         if (Permissions.hasPermission(appContext, Manifest.permission.WRITE_SECURE_SETTINGS)) {
-                                            if (android.os.Build.VERSION.SDK_INT >= 21)
+                                            //if (android.os.Build.VERSION.SDK_INT >= 21)
                                                 Settings.Global.putInt(appContext.getContentResolver(), "low_power", ((_isPowerSaveMode) ? 1 : 0));
                                         } else if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
                                                 (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {

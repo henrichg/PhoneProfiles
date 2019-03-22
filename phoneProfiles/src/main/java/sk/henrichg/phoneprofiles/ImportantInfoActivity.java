@@ -175,7 +175,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         if (news1622) {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
+            //if (android.os.Build.VERSION.SDK_INT >= 21) {
                 TextView infoText14 = findViewById(R.id.activity_info_notification_profile_zenMode);
                 infoText14.setVisibility(View.GONE);
 
@@ -218,7 +218,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                     });
                     news = true;
                 }
-            }
+            //}
         }
         else {
             TextView infoText13 = findViewById(R.id.activity_info_notification_profile_zenMode_news);

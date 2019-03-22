@@ -134,8 +134,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
 
         setPermissionsPreference();
 
-        if (android.os.Build.VERSION.SDK_INT >= 21)
-        {
+        //if (android.os.Build.VERSION.SDK_INT >= 21)
+        //{
             ListPreference ringerModePreference = (ListPreference) prefMng.findPreference(Profile.PREF_PROFILE_VOLUME_RINGER_MODE);
 
             /*
@@ -281,7 +281,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     }
                 });
             }
-        }
+        /*}
         else
         {
             // remove zen mode preferences from preferences screen
@@ -304,7 +304,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 PreferenceScreen preferenceCategory = (PreferenceScreen) findPreference("prf_pref_soundProfileCategory");
                 preferenceCategory.removePreference(preference);
             }
-        }
+        }*/
         if ((android.os.Build.VERSION.SDK_INT < 23) || (android.os.Build.VERSION.SDK_INT > 23)) {
             Preference preference = prefMng.findPreference("prf_pref_volumeVibrateWhenRingingRootInfo");
             if (preference != null) {
@@ -1150,8 +1150,8 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         }
         if (key.equals(Profile.PREF_PROFILE_VOLUME_ZEN_MODE))
         {
-            if (android.os.Build.VERSION.SDK_INT >= 21)
-            {
+            //if (android.os.Build.VERSION.SDK_INT >= 21)
+            //{
                 /*final boolean canEnableZenMode =
                         (PPNotificationListenerService.isNotificationListenerServiceEnabled(context.getApplicationContext()) ||
                          (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists())
@@ -1207,7 +1207,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                         listPreference.setEnabled(iRingerMode == 5);
                     }
                 }
-            }
+            //}
         }
         if (key.equals(Profile.PREF_PROFILE_SOUND_RINGTONE_CHANGE) ||
             key.equals(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE) ||
@@ -1249,13 +1249,13 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                 // set mobile data preference title
                 ListPreference mobileDataPreference = (ListPreference)prefMng.findPreference(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA);
                 if (mobileDataPreference != null) {
-                    if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    //if (android.os.Build.VERSION.SDK_INT >= 21) {
                         mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData_21);
                         mobileDataPreference.setDialogTitle(R.string.profile_preferences_deviceMobileData_21);
-                    } else {
+                    /*} else {
                         mobileDataPreference.setTitle(R.string.profile_preferences_deviceMobileData);
                         mobileDataPreference.setDialogTitle(R.string.profile_preferences_deviceMobileData);
-                    }
+                    }*/
                 }
             }
             PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
@@ -1790,7 +1790,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
         }
         if (key.equals(Profile.PREF_PROFILE_VOLUME_RINGER_MODE) ||
                 key.equals(Profile.PREF_PROFILE_VOLUME_ZEN_MODE)) {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
+            //if (android.os.Build.VERSION.SDK_INT >= 21) {
                 String ringerMode = preferences.getString(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, "0");
                 String zenMode = preferences.getString(Profile.PREF_PROFILE_VOLUME_ZEN_MODE, "0");
                 boolean enabled = false;
@@ -1805,7 +1805,7 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                         preference.setValue(Profile.NO_CHANGE_VALUE_STR);
                     preference.setEnabled(enabled);
                 }
-            }
+            //}
         }
 
         if (key.equals(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE)) {
