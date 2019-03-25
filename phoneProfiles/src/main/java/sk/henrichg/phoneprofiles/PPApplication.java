@@ -625,7 +625,7 @@ public class PPApplication extends Application {
     static void createProfileNotificationChannel(/*Profile profile, */Context context) {
         if (Build.VERSION.SDK_INT >= 26) {
             int importance;
-            if (ApplicationPreferences.notificationShowInStatusBar(context)) {
+            //if (ApplicationPreferences.notificationShowInStatusBar(context)) {
                 /*KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
                 if (myKM != null) {
                     //boolean screenUnlocked = !myKM.inKeyguardRestrictedInputMode();
@@ -638,9 +638,10 @@ public class PPApplication extends Application {
                         importance = NotificationManager.IMPORTANCE_LOW;
                 }
                 else*/
-                    importance = NotificationManager.IMPORTANCE_DEFAULT;
-            } else
-                importance = NotificationManager.IMPORTANCE_MIN;
+            //        importance = NotificationManager.IMPORTANCE_DEFAULT;
+            //} else
+            //    importance = NotificationManager.IMPORTANCE_MIN;
+            importance = NotificationManager.IMPORTANCE_LOW;
 
             // The user-visible name of the channel.
             CharSequence name = context.getString(R.string.notification_channel_activated_profile);

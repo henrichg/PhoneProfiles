@@ -1104,6 +1104,8 @@ public class PhoneProfilesService extends Service {
                 notificationBuilder.addAction(actionBuilder.build());
             }
 
+            notificationBuilder.setOnlyAlertOnce(true);
+
             try {
                 Notification notification = notificationBuilder.build();
 
