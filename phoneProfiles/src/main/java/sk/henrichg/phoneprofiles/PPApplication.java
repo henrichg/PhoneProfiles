@@ -23,6 +23,7 @@ import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.evernote.android.job.JobApi;
 import com.evernote.android.job.JobConfig;
 import com.evernote.android.job.JobManager;
 import com.samsung.android.sdk.SsdkUnsupportedException;
@@ -315,6 +316,7 @@ public class PPApplication extends Application {
         PPApplication.initRoot();
 
         JobConfig.setForceAllowApi14(true); // https://github.com/evernote/android-job/issues/197
+        JobConfig.setApiEnabled(JobApi.GCM, false); // is only important for Android 4.X
         JobManager.create(this).addJobCreator(new PPJobsCreator());
 
         //Log.d("PPApplication.onCreate", "memory usage (after create activateProfileHelper)=" + Debug.getNativeHeapAllocatedSize());
