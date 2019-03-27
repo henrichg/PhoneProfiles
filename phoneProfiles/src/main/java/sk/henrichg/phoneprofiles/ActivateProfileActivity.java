@@ -178,11 +178,11 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         //PPApplication.getMeasuredRunTime(nanoTimeStart, "ActivateProfileActivity.onCreate - setContentView");
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        //if (Build.VERSION.SDK_INT >= 21) {
             View toolbarShadow = findViewById(R.id.activate_profile_toolbar_shadow);
             if (toolbarShadow != null)
                 toolbarShadow.setVisibility(View.GONE);
-        }
+        //}
 
         toolbar = findViewById(R.id.act_prof_toolbar);
         setSupportActionBar(toolbar);

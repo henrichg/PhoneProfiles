@@ -3473,7 +3473,7 @@ class ActivateProfileHelper {
                             if (powerManager != null) {
                                 if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, false, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                                     boolean _isPowerSaveMode = false;
-                                    if (Build.VERSION.SDK_INT >= 21)
+                                    //if (Build.VERSION.SDK_INT >= 21)
                                         _isPowerSaveMode = powerManager.isPowerSaveMode();
                                     boolean _setPowerSaveMode = false;
                                     switch (profile._devicePowerSaveMode) {

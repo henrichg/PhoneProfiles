@@ -871,7 +871,7 @@ public class PhoneProfilesService extends Service {
             notificationBuilder = new Notification.Builder(appContext);
             notificationBuilder.setContentIntent(pIntent);
 
-            if (Build.VERSION.SDK_INT >= 21)
+            //if (Build.VERSION.SDK_INT >= 21)
                 notificationBuilder.setColor(ContextCompat.getColor(appContext, R.color.primary));
 
             if (Build.VERSION.SDK_INT >= 26) {
