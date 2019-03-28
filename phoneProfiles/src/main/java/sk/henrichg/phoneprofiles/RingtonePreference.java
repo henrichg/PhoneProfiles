@@ -291,6 +291,7 @@ public class RingtonePreference extends DialogPreference {
         setRingtone("", true);
     }
 
+    @SuppressLint("StaticFieldLeak")
     void setRingtone(String newRingtoneUri, boolean onlySetName)
     {
         PPApplication.logE("RingtonePreference.setRingtone", "ringtoneUri="+ringtoneUri);
@@ -332,6 +333,7 @@ public class RingtonePreference extends DialogPreference {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     void refreshListView() {
         if ((mDialog != null) && mDialog.isShowing()) {
 
