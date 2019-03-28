@@ -93,6 +93,8 @@ public class PPApplication extends Application {
                                             //+"|ActivateProfileHelper.setScreenTimeout"
                                             //+"|ActivateProfileHelper.screenTimeoutLock"
                                             //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
+                                            +"|Profile.isProfilePreferenceAllowed"
+                                            +"|PPApplication.hasSystemFeature"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -503,7 +505,8 @@ public class PPApplication extends Application {
             buf.flush();
             buf.close();
         }
-        catch (IOException ignored) {
+        catch (IOException e) {
+            Log.e("PPApplication.logIntoFile", Log.getStackTraceString(e));
         }
     }
 
@@ -1278,6 +1281,7 @@ public class PPApplication extends Application {
             PackageManager packageManager = context.getPackageManager();
             return packageManager.hasSystemFeature(feature);
         } catch (Exception e) {
+            PPApplication.logE("PPApplication.hasSystemFeature", Log.getStackTraceString(e));
             return false;
         }
     }

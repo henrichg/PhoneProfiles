@@ -2249,22 +2249,31 @@ public class Profile {
 
         if ((profile != null) || preferenceKey.equals(Profile.PREF_PROFILE_DEVICE_GPS))
         {
+            PPApplication.logE("Profile.isProfilePreferenceAllowed", "GPS");
+
             if (PPApplication.hasSystemFeature(context, PackageManager.FEATURE_LOCATION_GPS))
             {
+                PPApplication.logE("Profile.isProfilePreferenceAllowed", "device has GPS");
+
                 // device has gps
                 // adb shell pm grant sk.henrichg.phoneprofiles android.permission.WRITE_SECURE_SETTINGS
                 if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
+                    PPApplication.logE("Profile.isProfilePreferenceAllowed", "WRITE_SECURE_SETTINGS granted");
+
                     if (ActivateProfileHelper.canSetMobileData(context))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                 }
                 else
                 if (PPApplication.isRooted(fromUIThread))
                 {
+                    PPApplication.logE("Profile.isProfilePreferenceAllowed", "device is rooted");
+
                     // device is rooted
 
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._deviceGPS != 0) {
+                            PPApplication.logE("Profile.isProfilePreferenceAllowed", "applicationNeverAskForGrantRoot="+applicationNeverAskForGrantRoot);
                             if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
@@ -2273,21 +2282,30 @@ public class Profile {
                         }
                     }
 
-                    if (PPApplication.settingsBinaryExists(fromUIThread))
+                    if (PPApplication.settingsBinaryExists(fromUIThread)) {
+                        PPApplication.logE("Profile.isProfilePreferenceAllowed", "settingsBinaryExists=true");
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
-                    else
+                    }
+                    else {
+                        PPApplication.logE("Profile.isProfilePreferenceAllowed", "settingsBinaryExists=false");
                         preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_SETTINGS_NOT_FOUND;
+                    }
                 }
                 else
                 if (ActivateProfileHelper.canExploitGPS(context))
                 {
+                    PPApplication.logE("Profile.isProfilePreferenceAllowed", "can exploit GPS");
                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                 }
-                else
+                else {
+                    PPApplication.logE("Profile.isProfilePreferenceAllowed", "WRITE_SECURE_SETTINGS NOT granted");
                     preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NOT_GRANTED_G1_PERMISSION;
+                }
             }
-            else
+            else {
+                PPApplication.logE("Profile.isProfilePreferenceAllowed", "device NOT has GPS");
                 preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+            }
             checked = true;
         }
         if (checked && (profile == null))
