@@ -89,8 +89,8 @@ public class PhoneProfilesService extends Service {
 
     //--------------------------
 
-    static final String ACTION_COMMAND = "sk.henrichg.phoneprofilesplus.PhoneProfilesService.ACTION_COMMAND";
-    private static final String ACTION_STOP = "sk.henrichg.phoneprofilesplus.PhoneProfilesService.ACTION_STOP";
+    static final String ACTION_COMMAND = "sk.henrichg.phoneprofiles.PhoneProfilesService.ACTION_COMMAND";
+    private static final String ACTION_STOP = "sk.henrichg.phoneprofiles.PhoneProfilesService.ACTION_STOP_SERVICE";
 
     private final BroadcastReceiver commandReceiver = new BroadcastReceiver() {
         @Override
@@ -217,10 +217,13 @@ public class PhoneProfilesService extends Service {
     }
 
     public static void stop(Context context) {
-        try {
-            //noinspection deprecation
-            context.sendStickyBroadcast(new Intent(ACTION_STOP));
-        } catch (Exception ignored) {}
+        if ((PhoneProfilesService.getInstance() != null) && PhoneProfilesService.getInstance().getServiceHasFirstStart()) {
+            try {
+                //noinspection deprecation
+                context.sendStickyBroadcast(new Intent(ACTION_STOP));
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     boolean getServiceHasFirstStart() {
