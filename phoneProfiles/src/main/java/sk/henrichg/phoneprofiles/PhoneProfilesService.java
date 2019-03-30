@@ -217,7 +217,7 @@ public class PhoneProfilesService extends Service {
     }
 
     public static void stop(Context context) {
-        if (PhoneProfilesService.getInstance() != null) {
+        if (instance != null) {
             try {
                 //noinspection deprecation
                 context.sendStickyBroadcast(new Intent(ACTION_STOP));
