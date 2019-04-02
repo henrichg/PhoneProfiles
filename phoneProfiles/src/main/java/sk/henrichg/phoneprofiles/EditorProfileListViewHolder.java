@@ -34,7 +34,6 @@ class EditorProfileListViewHolder extends RecyclerView.ViewHolder
         this.editorFragment = editorFragment;
 
         dragHandle = itemView.findViewById(R.id.main_list_drag_handle);
-        //listItemRoot = itemView.findViewById(R.id.main_list_item_root);
         profileName = itemView.findViewById(R.id.main_list_item_profile_name);
         profileIcon = itemView.findViewById(R.id.main_list_item_profile_icon);
         profileItemEditMenu = itemView.findViewById(R.id.main_list_item_edit_menu);

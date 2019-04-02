@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -13,17 +14,17 @@ import java.util.List;
 class AddProfileAdapter extends BaseAdapter {
 
     private final List<Profile> profileList;
-    //private AddProfileDialog dialog;
+    private AddProfileDialog dialog;
 
     private final Context context;
 
     private final LayoutInflater inflater;
 
-    AddProfileAdapter(/*AddProfileDialog dialog, */Context c, List<Profile> profileList)
+    AddProfileAdapter(AddProfileDialog dialog, Context c, List<Profile> profileList)
     {
         context = c;
 
-        //this.dialog = dialog;
+        this.dialog = dialog;
         this.profileList = profileList;
 
         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,6 +45,7 @@ class AddProfileAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+        RadioButton radioButton;
         ImageView profileIcon;
         TextView profileLabel;
         ImageView profileIndicator;
@@ -66,6 +68,7 @@ class AddProfileAdapter extends BaseAdapter {
                 vi = inflater.inflate(R.layout.add_profile_list_item_no_indicator, parent, false);
 
             holder = new ViewHolder();
+            holder.radioButton = vi.findViewById(R.id.profile_pref_dlg_item_radio_button);
             holder.profileIcon = vi.findViewById(R.id.profile_pref_dlg_item_icon);
             holder.profileLabel = vi.findViewById(R.id.profile_pref_dlg_item_label);
             if (applicationEditorPrefIndicator)
@@ -119,6 +122,14 @@ class AddProfileAdapter extends BaseAdapter {
                 holder.profileIndicator.setImageResource(R.drawable.ic_empty);
             }
         }
+
+        holder.radioButton.setTag(position);
+        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RadioButton rb = (RadioButton) v;
+                dialog.doOnItemSelected((Integer)rb.getTag());
+            }
+        });
 
         return vi;
     }
