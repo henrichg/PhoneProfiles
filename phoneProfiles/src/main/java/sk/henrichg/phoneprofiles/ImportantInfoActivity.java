@@ -293,7 +293,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(getBaseContext(), PhoneProfilesPrefsActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(PhoneProfilesPrefsActivity.EXTRA_SCROLL_TO, "categorySystem");
+                    intent.putExtra(PhoneProfilesPrefsActivity.EXTRA_SCROLL_TO, "categorySystemRoot");
                     startActivity(intent);
                 }
             });
