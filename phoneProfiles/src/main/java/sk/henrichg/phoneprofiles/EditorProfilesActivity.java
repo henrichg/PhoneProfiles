@@ -392,8 +392,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
-
+                //intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
+                intent = new Intent(getBaseContext(), PhoneProfilesPrefsActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_APPLICATION_PREFERENCES);
 
                 return true;
@@ -580,7 +580,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
             else
             if (data != null) {
-                boolean restart = data.getBooleanExtra(PhoneProfilesPreferencesActivity.EXTRA_RESET_EDITOR, false);
+                boolean restart = data.getBooleanExtra(PhoneProfilesPrefsActivity.EXTRA_RESET_EDITOR, false);
                 if (restart) {
                     // refresh activity for special changes
                     GlobalGUIRoutines.reloadActivity(this, true);
@@ -592,7 +592,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         {
             if ((resultCode == RESULT_OK) && (data != null))
             {
-                boolean restart = data.getBooleanExtra(PhoneProfilesPreferencesActivity.EXTRA_RESET_EDITOR, false);
+                boolean restart = data.getBooleanExtra(PhoneProfilesPrefsActivity.EXTRA_RESET_EDITOR, false);
 
                 if (restart)
                 {

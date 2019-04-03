@@ -134,8 +134,17 @@
             android:name=".ProfilePreferencesActivity"
             android:label="@string/title_activity_profile_preferences">
         </activity>
-        <activity
+        <!--<activity
             android:name=".PhoneProfilesPreferencesActivity"
+            android:label="@string/title_activity_phone_profiles_preferences">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES"/>
+            </intent-filter>
+        </activity>-->
+        <activity
+            android:name=".PhoneProfilesPrefsActivity"
             android:label="@string/title_activity_phone_profiles_preferences">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

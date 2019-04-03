@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:key="categorySystem"
+    app:title="@string/phone_profiles_pref_category_system">
+
+    <SwitchPreferenceCompat
+        app:key="applicationUnlinkRingerNotificationVolumes"
+        app:title="@string/phone_profiles_pref_applicationUnlinkRingerNotificationVolumes"
+        app:summary="@string/phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary"
+        app:defaultValue="false"
+        app:layout="@layout/mp_preference_material_widget" />
+    <!--<Preference
+        app:key="applicationRingerNotificationVolumesUnlinkedInfo"
+        app:title="@string/phone_profiles_pref_applicationRingerNotificationVolumesUnlinked"
+        app:summary="@string/phone_profiles_pref_applicationRingerNotificationVolumesUnlinked_info"
+        app:widgetLayout="@layout/info_preference"
+        app:layout="@layout/mp_preference_material_widget" />-->
+    <Preference
+        app:key="applicationForceSetMergeRingNotificationVolumesInfo"
+        app:title="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes"
+        app:summary="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes_info"
+        app:widgetLayout="@layout/info_preference"
+        app:layout="@layout/mp_preference_material_widget" />
+    <ListPreference
+        app:key="applicationForceSetMergeRingNotificationVolumes"
+        app:title="@string/phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes"
+        app:summary="@string/array_pref_forceSetMergeRingNotificationVolumes_keepDetected"
+        app:defaultValue="0"
+        app:entries="@array/forceSetMergeRingNotificationVolumesArray"
+        app:entryValues="@array/forceSetMergeRingNotificationVolumesValues"
+        app:layout="@layout/mp_preference_material_widget" />
+    <Preference
+        app:key="applicationBatteryOptimization"
+        app:title="@string/phone_profiles_pref_applicationBatteryOptimization"
+        app:summary="@string/phone_profiles_pref_applicationBatteryOptimization_summary"
+        app:widgetLayout="@layout/start_activity_preference"
+        app:layout="@layout/mp_preference_material_widget">
+    </Preference>
+    <Preference
+        app:key="applicationPowerManager"
+        app:title="@string/phone_profiles_pref_applicationPowerManager"
+        app:summary="@string/phone_profiles_pref_applicationPowerManager_summary"
+        app:widgetLayout="@layout/start_activity_preference"
+        app:layout="@layout/mp_preference_material_widget">
+    </Preference>
+
+</androidx.preference.PreferenceScreen>

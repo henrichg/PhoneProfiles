@@ -291,9 +291,9 @@ public class ImportantInfoActivity extends AppCompatActivity {
             infoText3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getBaseContext(), PhoneProfilesPreferencesActivity.class);
+                    Intent intent = new Intent(getBaseContext(), PhoneProfilesPrefsActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
+                    intent.putExtra(PhoneProfilesPrefsActivity.EXTRA_SCROLL_TO, "categorySystem");
                     startActivity(intent);
                 }
             });

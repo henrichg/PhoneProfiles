@@ -18,5 +18,6 @@ ext.ppVersions = [
 
     coreXLib: '1.0.0',
     appcompatXLib: '1.0.2',
+    preferenceXLib: '1.1.0-alpha04',
     otherXLib: '1.0.0'
 ]
