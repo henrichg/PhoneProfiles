@@ -28,6 +28,7 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -79,32 +80,36 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
     @Override
     public void onDisplayPreferenceDialog(Preference preference)
     {
-        DialogFragment dialogFragment = null;
+        PreferenceDialogFragmentCompat dialogFragment = null;
 
         if (preference instanceof DurationDialogPreferenceX)
         {
-            dialogFragment = new DurationDialogPreferenceFragmentX();
+            ((DurationDialogPreferenceX)preference).fragment = new DurationDialogPreferenceFragmentX();
+            dialogFragment = ((DurationDialogPreferenceX)preference).fragment;
             Bundle bundle = new Bundle(1);
             bundle.putString("key", preference.getKey());
             dialogFragment.setArguments(bundle);
         }
         if (preference instanceof ProfilePreferenceX)
         {
-            dialogFragment = new ProfilePreferenceFragmentX();
+            ((ProfilePreferenceX)preference).fragment = new ProfilePreferenceFragmentX();
+            dialogFragment = ((ProfilePreferenceX)preference).fragment;
             Bundle bundle = new Bundle(1);
             bundle.putString("key", preference.getKey());
             dialogFragment.setArguments(bundle);
         }
         if (preference instanceof RingtonePreferenceX)
         {
-            dialogFragment = new RingtonePreferenceFragmentX();
+            ((RingtonePreferenceX)preference).fragment = new RingtonePreferenceFragmentX();
+            dialogFragment = ((RingtonePreferenceX)preference).fragment;
             Bundle bundle = new Bundle(1);
             bundle.putString("key", preference.getKey());
             dialogFragment.setArguments(bundle);
         }
         if (preference instanceof ColorChooserPreferenceX)
         {
-            dialogFragment = new ColorChooserPreferenceFragmentX();
+            ((ColorChooserPreferenceX)preference).fragment = new ColorChooserPreferenceFragmentX();
+            dialogFragment = ((ColorChooserPreferenceX)preference).fragment;
             Bundle bundle = new Bundle(1);
             bundle.putString("key", preference.getKey());
             dialogFragment.setArguments(bundle);

@@ -32,7 +32,7 @@ public class LogUtils {
             ;
 
     @SuppressWarnings("WeakerAccess")
-    public static final String EXPORT_PATH = "/PhoneProfilesPlus";
+    public static final String EXPORT_PATH = "/PhoneProfiles";
     private static final String LOG_FILENAME = "log.txt";
 
     static private void resetLog()

@@ -807,7 +807,7 @@ class ActivateProfileHelper {
             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_MUSIC, profile.getVolumeMediaValue());
         } catch (SecurityException e) {
             PPApplication.logE("ActivateProfileHelper.setMediaVolume", Log.getStackTraceString(e));
-            // adb shell pm grant sk.henrichg.phoneprofilesplus android.permission.WRITE_SECURE_SETTINGS
+            // adb shell pm grant sk.henrichg.phoneprofiles android.permission.WRITE_SECURE_SETTINGS
             if (Permissions.hasPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)) {
                 try {
                     PPApplication.logE("ActivateProfileHelper.setMediaVolume", "disable safe volume without root");
