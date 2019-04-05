@@ -63,7 +63,8 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
         PPApplication.logE("PhoneProfilesPrefsFragment.onCreate", "xxx");
 
-        //setRetainInstance(true);
+        // is requred for to not call onCreate and onDestroy on orientation change
+        setRetainInstance(true);
 
         initPreferenceFragment(savedInstanceState);
         //prefMng = getPreferenceManager();
