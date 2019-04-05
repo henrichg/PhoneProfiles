@@ -65,7 +65,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
         //setRetainInstance(true);
 
-        initPreferenceFragment();
+        initPreferenceFragment(savedInstanceState);
         //prefMng = getPreferenceManager();
         //preferences = prefMng.getSharedPreferences();
 
@@ -1035,7 +1035,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
     }
 
 
-    private void initPreferenceFragment() {
+    private void initPreferenceFragment(Bundle savedInstanceState) {
         prefMng = getPreferenceManager();
 
         //prefMng.setSharedPreferencesName(PPApplication.APPLICATION_PREFS_NAME);
@@ -1045,12 +1045,14 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
         PPApplication.logE("PhoneProfilesPrefsFragment.initPreferenceFragment", "getContext()="+getContext());
 
-        if (getContext() != null) {
-            appPrefNameSharedPreferences = getContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+        if (savedInstanceState == null) {
+            if (getContext() != null) {
+                appPrefNameSharedPreferences = getContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
 
-            SharedPreferences.Editor editor = preferences.edit();
-            updateSharedPreferences(editor, appPrefNameSharedPreferences);
-            editor.apply();
+                SharedPreferences.Editor editor = preferences.edit();
+                updateSharedPreferences(editor, appPrefNameSharedPreferences);
+                editor.apply();
+            }
         }
 
         preferences.registerOnSharedPreferenceChangeListener(this);
