@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
@@ -42,7 +40,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
     private SharedPreferences appPrefNameSharedPreferences;
 
     boolean scrollToSet = false;
-    boolean nestedFragment = false;
+    private boolean nestedFragment = false;
 
     private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
     private static final int RESULT_APPLICATION_PERMISSIONS = 1990;
@@ -818,7 +816,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         setSummary(key);
     }
 
-    public void doOnActivityResult(int requestCode, int resultCode/*, Intent data*/)
+    void doOnActivityResult(int requestCode, @SuppressWarnings("unused") int resultCode/*, Intent data*/)
     {
         PPApplication.logE("PhoneProfilesPrefsFragment.doOnActivityResult", "xxx");
         PPApplication.logE("PhoneProfilesPrefsFragment.doOnActivityResult", "requestCode="+requestCode);
