@@ -51,8 +51,14 @@ public class RingtonePreferenceFragmentX extends PreferenceDialogFragmentCompat 
         preference.initRingtoneUri();
 
         if (Permissions.grantRingtonePreferenceDialogPermissions(prefContext)) {
-            preference.oldRingtoneUri = preference.ringtoneUri;
-            preference.refreshListView();
+            Handler handler = new Handler(prefContext.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    preference.oldRingtoneUri = preference.ringtoneUri;
+                    preference.refreshListView();
+                }
+            }, 200);
         }
 
     }
