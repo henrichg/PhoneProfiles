@@ -33,7 +33,6 @@ public class RingtonePreferenceX extends DialogPreference {
 
     String ringtoneUri;
     String oldRingtoneUri;
-    private String ringtoneName;
 
     private final String ringtoneType;
     private final boolean showSilent;
@@ -82,49 +81,6 @@ public class RingtonePreferenceX extends DialogPreference {
         prefContext = context;
 
         typedArray.recycle();
-    }
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        PPApplication.startHandlerThreadPlayTone();
-        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                stopPlayRingtone();
-            }
-        });
-
-        final Parcelable superState = super.onSaveInstanceState();
-
-        final SavedState myState = new SavedState(superState);
-        myState.isDialogShowing = true;
-
-        return myState;
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        PPApplication.startHandlerThreadPlayTone();
-        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                stopPlayRingtone();
-            }
-        });
-
-        if (state == null || !state.getClass().equals(SavedState.class)) {
-            // Didn't save state for us in onSaveInstanceState
-            super.onRestoreInstanceState(state);
-            return;
-        }
-
-        SavedState myState = (SavedState) state;
-        super.onRestoreInstanceState(myState.getSuperState());
-        //if (myState.isDialogShowing) {
-        //    showDialog(myState.dialogBundle);
-        //}
     }
 
     @Override
@@ -275,6 +231,8 @@ public class RingtonePreferenceX extends DialogPreference {
             ringtoneUri = newRingtoneUri;
 
         new AsyncTask<Void, Integer, Void>() {
+
+            private String ringtoneName;
 
             @Override
             protected Void doInBackground(Void... params) {
@@ -486,6 +444,51 @@ public class RingtonePreferenceX extends DialogPreference {
         }
     }
 
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        PPApplication.startHandlerThreadPlayTone();
+        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                stopPlayRingtone();
+            }
+        });
+
+        final Parcelable superState = super.onSaveInstanceState();
+
+        final SavedState myState = new SavedState(superState);
+        myState.ringtoneUri = ringtoneUri;
+        myState.oldRingtoneUri = oldRingtoneUri;
+
+        return myState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        PPApplication.startHandlerThreadPlayTone();
+        final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                stopPlayRingtone();
+            }
+        });
+
+        if (state == null || !state.getClass().equals(SavedState.class)) {
+            // Didn't save state for us in onSaveInstanceState
+            super.onRestoreInstanceState(state);
+            setRingtone("", true);
+            return;
+        }
+
+        SavedState myState = (SavedState) state;
+        super.onRestoreInstanceState(myState.getSuperState());
+
+        setRingtone("", true);
+    }
+
     // From DialogPreference
     private static class SavedState extends BaseSavedState {
 
@@ -499,12 +502,15 @@ public class RingtonePreferenceX extends DialogPreference {
                         return new RingtonePreferenceX.SavedState[size];
                     }
                 };
-        boolean isDialogShowing;
+
+        String ringtoneUri;
+        String oldRingtoneUri;
 
         @SuppressLint("ParcelClassLoader")
         SavedState(Parcel source) {
             super(source);
-            isDialogShowing = source.readInt() == 1;
+            ringtoneUri = source.readString();
+            oldRingtoneUri = source.readString();
         }
 
         SavedState(Parcelable superState) {
@@ -514,7 +520,8 @@ public class RingtonePreferenceX extends DialogPreference {
         @Override
         public void writeToParcel(@NonNull Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
-            dest.writeInt(isDialogShowing ? 1 : 0);
+            dest.writeString(ringtoneUri);
+            dest.writeString(oldRingtoneUri);
         }
     }
 
