@@ -182,7 +182,7 @@ class ActivateProfileHelper {
                             setWifiAP(context, wifiApManager, isWifiAPEnabled);
                             //try { Thread.sleep(200); } catch (InterruptedException e) { }
                             //SystemClock.sleep(200);
-                            PPApplication.sleep(200);
+                            PPApplication.sleep(1000);
                         }
                     }
                 }
@@ -214,7 +214,7 @@ class ActivateProfileHelper {
                         CmdWifiAP.setWifiAP(isWifiAPEnabled);
                         //try { Thread.sleep(200); } catch (InterruptedException e) { }
                         //SystemClock.sleep(200);
-                        PPApplication.sleep(200);
+                        PPApplication.sleep(1000);
                     }
                 }
             }
