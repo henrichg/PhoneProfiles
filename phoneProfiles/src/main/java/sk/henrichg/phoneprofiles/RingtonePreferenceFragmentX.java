@@ -86,6 +86,8 @@ public class RingtonePreferenceFragmentX extends PreferenceDialogFragmentCompat 
         else {
             preference.setRingtone(preference.oldRingtoneUri, false);
         }
+
+        preference.fragment = null;
     }
 
 }

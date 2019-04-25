@@ -147,6 +147,8 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
                 preference.setSummaryDDP();
             }
         }
+
+        preference.fragment = null;
     }
 
     @Override
