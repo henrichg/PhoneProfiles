@@ -7,6 +7,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MenuInflater;
@@ -719,6 +721,82 @@ public class ApplicationsDialogPreferenceX extends DialogPreference {
 
         if (fragment != null)
             fragment.updateGUI();
+    }
+
+
+    @Override
+    protected Parcelable onSaveInstanceState()
+    {
+        final Parcelable superState = super.onSaveInstanceState();
+        /*if (isPersistent()) {
+            // save is not needed, is already saved persistent
+            return superState;
+        }*/
+
+        final ApplicationsDialogPreferenceX.SavedState myState = new ApplicationsDialogPreferenceX.SavedState(superState);
+        myState.value = value;
+        return myState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state)
+    {
+        if (!state.getClass().equals(ApplicationsDialogPreferenceX.SavedState.class)) {
+            // Didn't save state for us in onSaveInstanceState
+            super.onRestoreInstanceState(state);
+            getValueAMSDP();
+            setSummaryAMSDP();
+            return;
+        }
+
+        // restore instance state
+        ApplicationsDialogPreferenceX.SavedState myState = (ApplicationsDialogPreferenceX.SavedState)state;
+        super.onRestoreInstanceState(myState.getSuperState());
+        value = myState.value;
+
+        getValueAMSDP();
+        setSummaryAMSDP();
+    }
+
+    // SavedState class
+    private static class SavedState extends BaseSavedState
+    {
+        String value;
+
+        SavedState(Parcel source)
+        {
+            super(source);
+
+            value = source.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags)
+        {
+            super.writeToParcel(dest, flags);
+
+            dest.writeString(value);
+        }
+
+        SavedState(Parcelable superState)
+        {
+            super(superState);
+        }
+
+        @SuppressWarnings("unused")
+        public static final Creator<ApplicationsDialogPreferenceX.SavedState> CREATOR =
+                new Creator<ApplicationsDialogPreferenceX.SavedState>() {
+                    public ApplicationsDialogPreferenceX.SavedState createFromParcel(Parcel in)
+                    {
+                        return new ApplicationsDialogPreferenceX.SavedState(in);
+                    }
+                    public ApplicationsDialogPreferenceX.SavedState[] newArray(int size)
+                    {
+                        return new ApplicationsDialogPreferenceX.SavedState[size];
+                    }
+
+                };
+
     }
 
 }
