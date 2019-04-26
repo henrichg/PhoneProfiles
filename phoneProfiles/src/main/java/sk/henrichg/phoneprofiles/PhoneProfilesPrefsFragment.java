@@ -37,7 +37,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
     private PreferenceManager prefMng;
     private SharedPreferences preferences;
-    private SharedPreferences appPrefNameSharedPreferences;
+    private SharedPreferences applicationPreferences;
 
     boolean scrollToSet = false;
     private boolean nestedFragment = false;
@@ -799,7 +799,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         try {
             preferences.unregisterOnSharedPreferenceChangeListener(this);
 
-            SharedPreferences.Editor editor = appPrefNameSharedPreferences.edit();
+            SharedPreferences.Editor editor = applicationPreferences.edit();
             updateSharedPreferences(editor, preferences);
             editor.apply();
 
@@ -962,10 +962,10 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
         if (savedInstanceState == null) {
             if (getContext() != null) {
-                appPrefNameSharedPreferences = getContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
+                applicationPreferences = getContext().getSharedPreferences(PPApplication.APPLICATION_PREFS_NAME, Activity.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor = preferences.edit();
-                updateSharedPreferences(editor, appPrefNameSharedPreferences);
+                updateSharedPreferences(editor, applicationPreferences);
                 editor.apply();
             }
         }
