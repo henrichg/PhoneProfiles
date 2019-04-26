@@ -392,9 +392,9 @@ public class ProfilePreferencesNestedFragment extends PreferenceFragment
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         // start preferences activity for default profile
-                        Intent intent = new Intent(getActivity().getBaseContext(), PhoneProfilesPreferencesActivity.class);
-                        intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO, "categorySystem");
-                        intent.putExtra(PhoneProfilesPreferencesActivity.EXTRA_SCROLL_TO_TYPE, "screen");
+                        Intent intent = new Intent(getActivity().getBaseContext(), PhoneProfilesPrefsActivity.class);
+                        intent.putExtra(PhoneProfilesPrefsActivity.EXTRA_SCROLL_TO, "categorySystem");
+                        //intent.putExtra(PhoneProfilesPrefsActivity.EXTRA_SCROLL_TO_TYPE, "screen");
                         getActivity().startActivityForResult(intent, RESULT_UNLINK_VOLUMES_APP_PREFERENCES);
                         return false;
                     }
