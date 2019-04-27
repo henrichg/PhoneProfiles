@@ -40,7 +40,7 @@
         <item name="dialogTheme">@style/DialogStyleWhite</item>
         <item name="toolbarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
         <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="actionSharedProfileIcon">@drawable/ic_action_shared_profile_white</item>
+<!--        <item name="actionSharedProfileIcon">@drawable/ic_action_shared_profile_white</item> -->
         <item name="actionHelpIcon">@drawable/ic_action_help_white</item>
         <item name="fastScrollTrackPP">@color/fastScrollTrackPP</item>
         <item name="fastScrollThumbPP">@color/fastScrollThumbPP</item>
