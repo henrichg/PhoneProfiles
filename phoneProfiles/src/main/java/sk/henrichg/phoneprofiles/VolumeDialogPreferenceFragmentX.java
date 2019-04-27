@@ -23,7 +23,7 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
     private SeekBar seekBar = null;
     private TextView valueText = null;
     private CheckBox noChangeChBox = null;
-    private CheckBox sharedProfileChBox = null;
+    //private CheckBox sharedProfileChBox = null;
 
     @SuppressLint("InflateParams")
     @Override
@@ -58,7 +58,7 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
 
         PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "value="+preference.value);
         PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "noChange="+preference.noChange);
-        PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "sharedProfile="+preference.sharedProfile);
+        //PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "sharedProfile="+preference.sharedProfile);
 
         //noinspection ConstantConditions
         seekBar = view.findViewById(R.id.volumePrefDialogSeekbar);
@@ -66,8 +66,8 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
         valueText = view.findViewById(R.id.volumePrefDialogValueText);
         //noinspection ConstantConditions
         noChangeChBox = view.findViewById(R.id.volumePrefDialogNoChange);
-        //noinspection ConstantConditions
-        sharedProfileChBox = view.findViewById(R.id.volumePrefDialogSharedProfile);
+        /*//noinspection ConstantConditions
+        sharedProfileChBox = view.findViewById(R.id.volumePrefDialogSharedProfile);*/
 
         seekBar.setKeyProgressIncrement(preference.stepSize);
         seekBar.setMax(preference.maximumValue - preference.minimumValue);
@@ -77,20 +77,20 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
 
         noChangeChBox.setChecked((preference.noChange == 1));
 
-        sharedProfileChBox.setChecked((preference.sharedProfile == 1));
-        sharedProfileChBox.setEnabled(preference.disableSharedProfile == 0);
+        //sharedProfileChBox.setChecked((preference.sharedProfile == 1));
+        //sharedProfileChBox.setEnabled(preference.disableSharedProfile == 0);
 
-        if (preference.noChange == 1)
-            sharedProfileChBox.setChecked(false);
-        if (preference.sharedProfile == 1)
-            noChangeChBox.setChecked(false);
+        //if (preference.noChange == 1)
+        //    sharedProfileChBox.setChecked(false);
+        //if (preference.sharedProfile == 1)
+        //    noChangeChBox.setChecked(false);
 
-        valueText.setEnabled((preference.noChange == 0) && (preference.sharedProfile == 0));
-        seekBar.setEnabled((preference.noChange == 0) && (preference.sharedProfile == 0));
+        valueText.setEnabled((preference.noChange == 0) /*&& (preference.sharedProfile == 0)*/);
+        seekBar.setEnabled((preference.noChange == 0) /*&& (preference.sharedProfile == 0)*/);
 
         seekBar.setOnSeekBarChangeListener(this);
         noChangeChBox.setOnCheckedChangeListener(this);
-        sharedProfileChBox.setOnCheckedChangeListener(this);
+        //sharedProfileChBox.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -128,12 +128,13 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
         {
             preference.noChange = (isChecked)? 1 : 0;
 
-            valueText.setEnabled((preference.noChange == 0) && (preference.sharedProfile == 0));
-            seekBar.setEnabled((preference.noChange == 0) && (preference.sharedProfile == 0));
-            if (isChecked)
-                sharedProfileChBox.setChecked(false);
+            valueText.setEnabled((preference.noChange == 0) /*&& (preference.sharedProfile == 0)*/);
+            seekBar.setEnabled((preference.noChange == 0) /*&& (preference.sharedProfile == 0)*/);
+            //if (isChecked)
+            //    sharedProfileChBox.setChecked(false);
         }
 
+        /*
         if (buttonView.getId() == R.id.volumePrefDialogSharedProfile)
         {
             preference.sharedProfile = (isChecked)? 1 : 0;
@@ -143,6 +144,7 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
             if (isChecked)
                 noChangeChBox.setChecked(false);
         }
+        */
 
         preference.callChangeListener(preference.getSValue());
     }

@@ -93,8 +93,8 @@ public class ConnectToSSIDDialogPreferenceFragmentX extends PreferenceDialogFrag
 
                 Collections.sort(_SSIDList, new ConnectToSSIDDialogPreferenceFragmentX.SortList());
 
-                if (preference.disableSharedProfile == 0)
-                    _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_SHAREDPROFILE, ""/*, false*/));
+                //if (preference.disableSharedProfile == 0)
+                //    _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_SHAREDPROFILE, ""/*, false*/));
                 _SSIDList.add(0, new WifiSSIDData(Profile.CONNECTTOSSID_JUSTANY, ""/*, false*/));
 
                 return null;
