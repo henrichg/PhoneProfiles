@@ -253,9 +253,9 @@ public class Profile {
     static final long PROFILE_NO_ACTIVATE = -999;
 
     static final int NO_CHANGE_VALUE = 0;
-    static final int SHARED_PROFILE_VALUE = 99;
+    //static final int SHARED_PROFILE_VALUE = 99;
     static final String NO_CHANGE_VALUE_STR = "0";
-    static final String SHARED_PROFILE_VALUE_STR = "99";
+    //static final String SHARED_PROFILE_VALUE_STR = "99";
 
     private static final String PREF_ACTIVATED_PROFILE_FOR_DURATION = "activatedProfileForDuration";
     private static final String PREF_ACTIVATED_PROFILE_END_DURATION_TIME = "activatedProfileEndDurationTime";
