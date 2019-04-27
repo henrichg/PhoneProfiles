@@ -842,6 +842,13 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
+                    File sd = Environment.getExternalStorageDirectory();
+                    File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
+                    appSettingsError = !importApplicationPreferences(exportFile, 1);
+                    exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
+                    if (exportFile.exists())
+                        sharedProfileError = !importApplicationPreferences(exportFile, 2);
+
                     dbError = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
                     if (dbError == DatabaseHandler.IMPORT_OK) {
                         // check for hardware capability and update data
@@ -849,12 +856,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                         this.dataWrapper.clearProfileList();
                         DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
                     }
-
-                    File sd = Environment.getExternalStorageDirectory();
-                    File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
-                    appSettingsError = !importApplicationPreferences(exportFile, 1);
-                    exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
-                    sharedProfileError = !importApplicationPreferences(exportFile, 2);
 
                     PPApplication.logE("EditorProfilesActivity.doImportData", "dbError="+dbError);
                     PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError="+appSettingsError);
