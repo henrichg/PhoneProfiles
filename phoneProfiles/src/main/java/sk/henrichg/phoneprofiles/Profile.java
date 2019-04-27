@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -250,7 +249,7 @@ public class Profile {
     static final String CONNECTTOSSID_SHAREDPROFILE = "^default_profile^";
 
     static final String PROFILE_ICON_DEFAULT = "ic_profile_default";
-    static final long SHARED_PROFILE_ID = -999L;
+    //static final long SHARED_PROFILE_ID = -999L;
     static final long PROFILE_NO_ACTIVATE = -999;
 
     static final int NO_CHANGE_VALUE = 0;
@@ -1057,6 +1056,7 @@ public class Profile {
         return getVolumeRingtoneChange(_volumeRingtone);
     }
 
+    /*
     private boolean getVolumeRingtoneSharedProfile()
     {
         int value;
@@ -1068,6 +1068,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeRingtoneValue(@SuppressWarnings("SameParameterValue") int value) {
@@ -1109,6 +1110,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getVolumeNotificationSharedProfile()
     {
         int value;
@@ -1120,6 +1122,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeNotificationValue(@SuppressWarnings("SameParameterValue") int value) {
@@ -1161,6 +1164,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getVolumeMediaSharedProfile()
     {
         int value;
@@ -1172,6 +1176,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     int getVolumeAlarmValue()
     {
@@ -1197,6 +1202,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getVolumeAlarmSharedProfile()
     {
         int value;
@@ -1208,6 +1214,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     int getVolumeSystemValue()
     {
@@ -1233,6 +1240,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getVolumeSystemSharedProfile()
     {
         int value;
@@ -1244,6 +1252,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     int getVolumeVoiceValue()
     {
@@ -1269,6 +1278,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getVolumeVoiceSharedProfile()
     {
         int value;
@@ -1280,6 +1290,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     int getDeviceBrightnessValue()
     {
@@ -1309,6 +1320,7 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    /*
     private boolean getDeviceBrightnessSharedProfile()
     {
         int value;
@@ -1320,6 +1332,7 @@ public class Profile {
         }
         return value == 1;
     }
+    */
 
     boolean getDeviceBrightnessAutomatic()
     {
@@ -1786,12 +1799,15 @@ public class Profile {
         return timeDate.concat(AmPm);
     }
 
+    /*
     private static String getVolumeLevelString(int percentage, int maxValue)
     {
         Double dValue = maxValue / 100.0 * percentage;
         return String.valueOf(dValue.intValue());
     }
+    */
 
+    /*
     static Profile getSharedProfile(Context context)
     {
         int	maximumValueRing = 7;
@@ -1876,7 +1892,9 @@ public class Profile {
 
         return profile;
     }
+    */
 
+    /*
     static Profile getMappedProfile(Profile profile, Context context)
     {
         if (profile != null)
@@ -2067,6 +2085,7 @@ public class Profile {
         else
             return null;
     }
+    */
 
     // ----- Check if preference is allowed in device -------------------------------------
 

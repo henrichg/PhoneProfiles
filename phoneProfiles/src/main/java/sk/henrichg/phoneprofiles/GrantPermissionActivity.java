@@ -98,15 +98,15 @@ public class GrantPermissionActivity extends AppCompatActivity {
         startupSource = intent.getIntExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
         interactive = intent.getBooleanExtra(Permissions.EXTRA_INTERACTIVE, true);
         applicationDataPath = intent.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH);
-        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) && (profile_id != Profile.SHARED_PROFILE_ID);
+        activateProfile = intent.getBooleanExtra(Permissions.EXTRA_ACTIVATE_PROFILE, true) /*&& (profile_id != Profile.SHARED_PROFILE_ID)*/;
 
         fromNotification = intent.getBooleanExtra(Permissions.EXTRA_FROM_NOTIFICATION, false);
 
         dataWrapper = new DataWrapper(getApplicationContext(), /*forGUI,*/ false, 0, false);
-        if (profile_id != Profile.SHARED_PROFILE_ID)
+        //if (profile_id != Profile.SHARED_PROFILE_ID)
             profile = dataWrapper.getProfileById(profile_id, false, false);
-        else
-            profile = Profile.getSharedProfile(getApplicationContext());
+        //else
+        //    profile = Profile.getSharedProfile(getApplicationContext());
 
         restoredInstanceState = savedInstanceState != null;
 
@@ -723,6 +723,8 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.M)
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         final Context context = getApplicationContext();
         final boolean withRationale = (data == null) || data.getBooleanExtra(EXTRA_WITH_RATIONALE, true);
         if ((requestCode == WRITE_SETTINGS_REQUEST_CODE)/* || (requestCode == WRITE_SETTINGS_REQUEST_CODE_FORCE_GRANT)*/) {

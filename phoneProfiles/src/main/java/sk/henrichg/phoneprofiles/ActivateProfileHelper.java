@@ -1894,7 +1894,7 @@ class ActivateProfileHelper {
         // separate ringing and notification - is marked with @Hide :-(
         //Settings.System.putInt(context.getContentResolver(), Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 0);
 
-        final Profile profile = Profile.getMappedProfile(_profile, context);
+        final Profile profile = _profile; //Profile.getMappedProfile(_profile, context);
 
         // setup volume and ringer mode
         ActivateProfileHelper.executeForVolumes(context, profile, PhoneCallBroadcastReceiver.LINKMODE_NONE, true);

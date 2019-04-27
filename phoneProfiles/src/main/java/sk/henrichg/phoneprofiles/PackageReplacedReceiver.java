@@ -89,7 +89,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                                     restartService = true;
                                 }
-                                if (actualVersionCode <= 2900) {
+                                /*if (actualVersionCode <= 2900) {
                                     SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
                                     if ((preferences.getInt(Profile.PREF_PROFILE_DEVICE_WIFI_AP, 0) == 3) &&
                                             (Build.VERSION.SDK_INT >= 26)) {
@@ -100,7 +100,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
 
                                         restartService = true;
                                     }
-                                }
+                                }*/
                                 /*if (actualVersionCode <= 3000) {
                                     SharedPreferences preferences = appContext.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
                                     if (preferences.getInt(Profile.PREF_PROFILE_LOCK_DEVICE, 0) == 3) {

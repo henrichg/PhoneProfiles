@@ -610,7 +610,7 @@ public class DataWrapper {
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
 
-        final Profile profile = Profile.getMappedProfile(_profile, context);
+        final Profile profile = _profile; //Profile.getMappedProfile(_profile, context);
 
         // get currently activated profile
         Profile activatedProfile = getActivatedProfile(false, false);

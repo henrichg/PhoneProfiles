@@ -40,15 +40,15 @@ public class BrightnessDialogPreference extends
     private TextView valueText = null;
     private CheckBox noChangeChBox = null;
     private CheckBox automaticChBox = null;
-    private CheckBox sharedProfileChBox = null;
+    //private CheckBox sharedProfileChBox = null;
     private CheckBox changeLevelChBox = null;
     private TextView levelText = null;
 
     // Custom xml attributes.
     private int noChange;
     private int automatic;
-    private int sharedProfile;
-    private int disableSharedProfile;
+    //private int sharedProfile;
+    //private int disableSharedProfile;
     private int changeLevel;
 
     private final int defaultValue = 50;
@@ -60,7 +60,7 @@ public class BrightnessDialogPreference extends
     private int value = 0;
 
     private final boolean adaptiveAllowed;
-    private final Profile _sharedProfile;
+    //private final Profile _sharedProfile;
 
     private final int savedBrightness;
     private float savedAdaptiveBrightness;
@@ -78,16 +78,16 @@ public class BrightnessDialogPreference extends
                 R.styleable.BrightnessDialogPreference_bNoChange, 1);
         automatic = typedArray.getInteger(
                 R.styleable.BrightnessDialogPreference_bAutomatic, 1);
-        sharedProfile = typedArray.getInteger(
+        /*sharedProfile = typedArray.getInteger(
                 R.styleable.BrightnessDialogPreference_bSharedProfile, 0);
         disableSharedProfile = typedArray.getInteger(
-                R.styleable.BrightnessDialogPreference_bDisableSharedProfile, 0);
+                R.styleable.BrightnessDialogPreference_bDisableSharedProfile, 0);*/
         changeLevel = typedArray.getInteger(
                 R.styleable.BrightnessDialogPreference_bChangeLevel, 1);
 
         typedArray.recycle();
 
-        _sharedProfile = Profile.getSharedProfile(_context);
+        //_sharedProfile = Profile.getSharedProfile(_context);
 
         adaptiveAllowed = (android.os.Build.VERSION.SDK_INT <= 21) ||
                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, true, _context).allowed
@@ -120,7 +120,7 @@ public class BrightnessDialogPreference extends
                     persistString(Integer.toString(value + minimumValue)
                             + "|" + Integer.toString(noChange)
                             + "|" + Integer.toString(automatic)
-                            + "|" + Integer.toString(sharedProfile)
+                            + "|" + "0"
                             + "|" + Integer.toString(changeLevel));
                     setSummaryBDP();
                 }
@@ -149,8 +149,8 @@ public class BrightnessDialogPreference extends
         noChangeChBox = layout.findViewById(R.id.brightnessPrefDialogNoChange);
         //noinspection ConstantConditions
         automaticChBox = layout.findViewById(R.id.brightnessPrefDialogAutomatic);
-        //noinspection ConstantConditions
-        sharedProfileChBox = layout.findViewById(R.id.brightnessPrefDialogSharedProfile);
+        /*//noinspection ConstantConditions
+        sharedProfileChBox = layout.findViewById(R.id.brightnessPrefDialogSharedProfile);*/
         //noinspection ConstantConditions
         changeLevelChBox = layout.findViewById(R.id.brightnessPrefDialogLevel);
         //noinspection ConstantConditions
@@ -175,17 +175,17 @@ public class BrightnessDialogPreference extends
         automaticChBox.setOnCheckedChangeListener(this);
         automaticChBox.setChecked(automatic == 1);
 
-        sharedProfileChBox.setOnCheckedChangeListener(this);
-        sharedProfileChBox.setChecked((sharedProfile == 1));
-        sharedProfileChBox.setEnabled(disableSharedProfile == 0);
+        //sharedProfileChBox.setOnCheckedChangeListener(this);
+        //sharedProfileChBox.setChecked((sharedProfile == 1));
+        //sharedProfileChBox.setEnabled(disableSharedProfile == 0);
 
         changeLevelChBox.setOnCheckedChangeListener(this);
         changeLevelChBox.setChecked(changeLevel == 1);
 
-        if (noChange == 1)
-            sharedProfileChBox.setChecked(false);
-        if (sharedProfile == 1)
-            noChangeChBox.setChecked(false);
+        //if (noChange == 1)
+        //    sharedProfileChBox.setChecked(false);
+        //if (sharedProfile == 1)
+        //    noChangeChBox.setChecked(false);
 
         //enableViews();
 
@@ -212,18 +212,18 @@ public class BrightnessDialogPreference extends
     void enableViews() {
         if ((mDialog != null) && mDialog.isShowing()) {
             if (Permissions.checkScreenBrightness(_context, null)) {
-                valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (sharedProfile == 0) && (changeLevel != 0));
-                seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (sharedProfile == 0) && (changeLevel != 0));
-                automaticChBox.setEnabled((noChange == 0) && (sharedProfile == 0));
-                changeLevelChBox.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && (sharedProfile == 0));
+                valueText.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && /*(sharedProfile == 0) &&*/ (changeLevel != 0));
+                seekBar.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) && /*(sharedProfile == 0) &&*/ (changeLevel != 0));
+                automaticChBox.setEnabled((noChange == 0) /*&& (sharedProfile == 0)*/);
+                changeLevelChBox.setEnabled((adaptiveAllowed || automatic == 0) && (noChange == 0) /*&& (sharedProfile == 0)*/);
                 if (adaptiveAllowed) {
                     //if (android.os.Build.VERSION.SDK_INT >= 21) { // for Android 5.0: adaptive brightness
                         levelText.setText(R.string.brightness_pref_dialog_adaptive_level_may_not_working);
-                        levelText.setEnabled((automatic != 0) && (noChange == 0) && (sharedProfile == 0) && (changeLevel != 0));
+                        levelText.setEnabled((automatic != 0) && (noChange == 0) && /*(sharedProfile == 0) &&*/ (changeLevel != 0));
                     //} else
                     //    levelText.setVisibility(View.GONE);
                 } else {
-                    levelText.setEnabled((automatic != 0) && (noChange == 0) && (sharedProfile == 0) && (changeLevel != 0));
+                    levelText.setEnabled((automatic != 0) && (noChange == 0) && /*(sharedProfile == 0) &&*/ (changeLevel != 0));
                 }
             } else {
                 valueText.setEnabled(false);
@@ -275,13 +275,13 @@ public class BrightnessDialogPreference extends
 
             enableViews();
 
-            if (isChecked)
-                sharedProfileChBox.setChecked(false);
+            //if (isChecked)
+            //    sharedProfileChBox.setChecked(false);
         }
 
         if (buttonView.getId() == R.id.brightnessPrefDialogSharedProfile)
         {
-            sharedProfile = (isChecked)? 1 : 0;
+            //sharedProfile = (isChecked)? 1 : 0;
 
             enableViews();
 
@@ -308,13 +308,13 @@ public class BrightnessDialogPreference extends
         int _noChange = noChange;
         int _value = value;
         int _changeLevel = changeLevel;
-        if (sharedProfile == 1)
+        /*if (sharedProfile == 1)
         {
             _automatic = (_sharedProfile.getDeviceBrightnessAutomatic()) ? 1 : 0;
             _noChange = (_sharedProfile.getDeviceBrightnessChange()) ? 0 : 1;
             _value = _sharedProfile.getDeviceBrightnessValue();
             _changeLevel = (_sharedProfile.getDeviceBrightnessChangeLevel()) ? 1 : 0;
-        }
+        }*/
 
         if (_noChange == 1)
         {
@@ -431,12 +431,12 @@ public class BrightnessDialogPreference extends
             value = this.defaultValue;
             noChange = 1;
             automatic = 1;
-            sharedProfile = 0;
+            //sharedProfile = 0;
             changeLevel = 1;
             persistString(Integer.toString(value + minimumValue)
                     + "|" + Integer.toString(noChange)
                     + "|" + Integer.toString(automatic)
-                    + "|" + Integer.toString(sharedProfile)
+                    + "|" + "0"
                     + "|" + Integer.toString(changeLevel));
         }
         setSummaryBDP();
@@ -472,11 +472,11 @@ public class BrightnessDialogPreference extends
         } catch (Exception e) {
             automatic = 1;
         }
-        try {
+        /*try {
             sharedProfile = Integer.parseInt(splits[3]);
         } catch (Exception e) {
             sharedProfile = 0;
-        }
+        }*/
         try {
             changeLevel = Integer.parseInt(splits[4]);
         } catch (Exception e) {
@@ -496,9 +496,9 @@ public class BrightnessDialogPreference extends
         String prefVolumeDataSummary;
         if (noChange == 1)
             prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_no_change);
-        else
+        /*else
         if (sharedProfile == 1)
-            prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_default_profile);
+            prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_default_profile);*/
         else
         {
             if (automatic == 1)
@@ -599,8 +599,8 @@ public class BrightnessDialogPreference extends
         myState.value = value;
         myState.noChange = noChange;
         myState.automatic = automatic;
-        myState.sharedProfile = sharedProfile;
-        myState.disableSharedProfile = disableSharedProfile;
+        //myState.sharedProfile = sharedProfile;
+        //myState.disableSharedProfile = disableSharedProfile;
         myState.changeLevel = changeLevel;
         return myState;
 
@@ -622,8 +622,8 @@ public class BrightnessDialogPreference extends
         value = myState.value;
         noChange = myState.noChange;
         automatic = myState.automatic;
-        sharedProfile = myState.sharedProfile;
-        disableSharedProfile = myState.disableSharedProfile;
+        //sharedProfile = myState.sharedProfile;
+        //disableSharedProfile = myState.disableSharedProfile;
         changeLevel = myState.changeLevel;
 
         setSummaryBDP();
@@ -638,8 +638,8 @@ public class BrightnessDialogPreference extends
         int value = 0;
         int noChange = 0;
         int automatic = 0;
-        int sharedProfile = 0;
-        int disableSharedProfile = 0;
+        //int sharedProfile = 0;
+        //int disableSharedProfile = 0;
         int changeLevel = 0;
 
         @SuppressLint("ParcelClassLoader")
@@ -653,8 +653,8 @@ public class BrightnessDialogPreference extends
             value = source.readInt();
             noChange = source.readInt();
             automatic = source.readInt();
-            sharedProfile = source.readInt();
-            disableSharedProfile = source.readInt();
+            //sharedProfile = source.readInt();
+            //disableSharedProfile = source.readInt();
             changeLevel = source.readInt();
         }
 
@@ -669,8 +669,8 @@ public class BrightnessDialogPreference extends
             dest.writeInt(value);
             dest.writeInt(noChange);
             dest.writeInt(automatic);
-            dest.writeInt(sharedProfile);
-            dest.writeInt(disableSharedProfile);
+            //dest.writeInt(sharedProfile);
+            //dest.writeInt(disableSharedProfile);
             dest.writeInt(changeLevel);
         }
 
