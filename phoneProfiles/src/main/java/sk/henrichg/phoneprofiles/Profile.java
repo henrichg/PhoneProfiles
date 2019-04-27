@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -1056,7 +1057,6 @@ public class Profile {
         return getVolumeRingtoneChange(_volumeRingtone);
     }
 
-    /*
     private boolean getVolumeRingtoneSharedProfile()
     {
         int value;
@@ -1068,7 +1068,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeRingtoneValue(@SuppressWarnings("SameParameterValue") int value) {
@@ -1110,7 +1109,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getVolumeNotificationSharedProfile()
     {
         int value;
@@ -1122,7 +1120,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     @SuppressWarnings("StringConcatenationInLoop")
     void setVolumeNotificationValue(@SuppressWarnings("SameParameterValue") int value) {
@@ -1164,7 +1161,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getVolumeMediaSharedProfile()
     {
         int value;
@@ -1176,7 +1172,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     int getVolumeAlarmValue()
     {
@@ -1202,7 +1197,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getVolumeAlarmSharedProfile()
     {
         int value;
@@ -1214,7 +1208,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     int getVolumeSystemValue()
     {
@@ -1240,7 +1233,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getVolumeSystemSharedProfile()
     {
         int value;
@@ -1252,7 +1244,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     int getVolumeVoiceValue()
     {
@@ -1278,7 +1269,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getVolumeVoiceSharedProfile()
     {
         int value;
@@ -1290,9 +1280,8 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
-    int getDeviceBrightnessValue()
+    private int getDeviceBrightnessValue()
     {
         int maximumValue = 100;
         int defaultValue = 50;
@@ -1320,7 +1309,6 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
-    /*
     private boolean getDeviceBrightnessSharedProfile()
     {
         int value;
@@ -1332,7 +1320,6 @@ public class Profile {
         }
         return value == 1;
     }
-    */
 
     boolean getDeviceBrightnessAutomatic()
     {
@@ -1799,15 +1786,12 @@ public class Profile {
         return timeDate.concat(AmPm);
     }
 
-    /*
     private static String getVolumeLevelString(int percentage, int maxValue)
     {
         Double dValue = maxValue / 100.0 * percentage;
         return String.valueOf(dValue.intValue());
     }
-    */
 
-    /*
     static Profile getSharedProfile(Context context)
     {
         int	maximumValueRing = 7;
@@ -1826,11 +1810,11 @@ public class Profile {
             maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
         }
 
-        SharedPreferences preferences = context.getSharedPreferences(PPApplication.SHARED_PROFILE_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("profile_preferences_default_profile", Context.MODE_PRIVATE);
 
         Profile profile = new Profile();
-        profile._id = SHARED_PROFILE_ID;
-        profile._name = context.getResources().getString(R.string.default_profile_name);
+        profile._id = -999L;
+        profile._name = "Profile";
         profile._icon = PROFILE_ICON_DEFAULT + "|1|0|0";
         profile._checked = false;
         profile._porder = 0;
@@ -1892,14 +1876,15 @@ public class Profile {
 
         return profile;
     }
-    */
 
-    /*
-    static Profile getMappedProfile(Profile profile, Context context)
+    static Profile getMappedProfile(Profile profile, Profile sharedProfile/*, Context context*/)
     {
+        final int SHARED_PROFILE_VALUE = 99;
+        final String CONNECTTOSSID_SHAREDPROFILE = "^default_profile^";
+
         if (profile != null)
         {
-            Profile sharedProfile = getSharedProfile(context);
+            //Profile sharedProfile = getSharedProfile(context);
 
             Profile mappedProfile = new Profile(
                     profile._id,
@@ -2055,7 +2040,7 @@ public class Profile {
                 mappedProfile._vibrateWhenRinging = sharedProfile._vibrateWhenRinging;
             if (profile._lockDevice == SHARED_PROFILE_VALUE)
                 mappedProfile._lockDevice = sharedProfile._lockDevice;
-            if ((profile._deviceConnectToSSID != null) && (profile._deviceConnectToSSID.equals(Profile.CONNECTTOSSID_SHAREDPROFILE)))
+            if ((profile._deviceConnectToSSID != null) && (profile._deviceConnectToSSID.equals(CONNECTTOSSID_SHAREDPROFILE)))
                 mappedProfile._deviceConnectToSSID = sharedProfile._deviceConnectToSSID;
             if (profile._deviceWiFiAPPrefs == SHARED_PROFILE_VALUE)
                 mappedProfile._deviceWiFiAPPrefs = sharedProfile._deviceWiFiAPPrefs;
@@ -2085,7 +2070,6 @@ public class Profile {
         else
             return null;
     }
-    */
 
     // ----- Check if preference is allowed in device -------------------------------------
 
@@ -2178,7 +2162,6 @@ public class Profile {
                                     if (Build.VERSION.SDK_INT < 28) {
                                         NetworkInfo ntkInfo = connManager.getNetworkInfo(network);
                                         if (ntkInfo != null) {
-                                            //noinspection deprecation
                                             if (ntkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                                                 mobileDataSupported = true;
                                                 break;
