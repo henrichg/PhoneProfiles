@@ -81,6 +81,26 @@ public class ProfilesPrefsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (showSaveMenu) {
+            // for shared profile is not needed, for shared profile is used PPApplication.SHARED_PROFILE_PREFS_NAME
+            // and this is used in Profile.getSharedProfile()
+            //if (profile_id != Profile.SHARED_PROFILE_ID) {
+            toolbar.inflateMenu(R.menu.profile_preferences_save);
+            //}
+        }
+        else {
+            // no menu for shared profile
+            //if (profile_id != Profile.SHARED_PROFILE_ID) {
+            toolbar.inflateMenu(R.menu.profile_preferences);
+            //}
+        }
+        return true;
+    }
+
     private static void onNextLayout(final View view, final Runnable runnable) {
         final ViewTreeObserver observer = view.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -127,15 +147,48 @@ public class ProfilesPrefsActivity extends AppCompatActivity {
         return ret;
     }
 
+    private void finishActivity() {
+        if (showSaveMenu) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(R.string.not_saved_changes_alert_title);
+            dialogBuilder.setMessage(R.string.not_saved_changes_alert_message);
+            dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    savePreferences(newProfileMode, predefinedProfileIndex);
+                    resultCode = RESULT_OK;
+                    finish();
+                }
+            });
+            dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog dialog = dialogBuilder.create();
+                /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                        if (positive != null) positive.setAllCaps(false);
+                        Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                        if (negative != null) negative.setAllCaps(false);
+                    }
+                });*/
+            if (!isFinishing())
+                dialog.show();
+        }
+        else
+            finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0)
+                    finishActivity();
+                else
                     getSupportFragmentManager().popBackStack();
-                } else {
-                    finish();
-                }
                 return true;
             case R.id.profile_preferences_save:
                 savePreferences(newProfileMode, predefinedProfileIndex);
@@ -156,55 +209,12 @@ public class ProfilesPrefsActivity extends AppCompatActivity {
             ((ProfilesPrefsFragment)fragment).doOnActivityResult(requestCode, resultCode, data);
     }
 
-    private Fragment getTopFragment() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            return null;
-        }
-        String fragmentTag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
-        return getSupportFragmentManager().findFragmentByTag(fragmentTag);
-    }
-
     @Override
     public void onBackPressed() {
-        if (!showSaveMenu)
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0)
+            finishActivity();
+        else
             super.onBackPressed();
-        else {
-            boolean nested = false;
-            ProfilesPrefsFragment fragment = (ProfilesPrefsFragment)getTopFragment();
-            if (fragment != null)
-                nested = fragment.nestedFragment;
-            if (!nested) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                dialogBuilder.setTitle(R.string.not_saved_changes_alert_title);
-                dialogBuilder.setMessage(R.string.not_saved_changes_alert_message);
-                dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        savePreferences(newProfileMode, predefinedProfileIndex);
-                        resultCode = RESULT_OK;
-                        finish();
-                    }
-                });
-                dialogBuilder.setNegativeButton(R.string.alert_button_no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        ProfilesPrefsActivity.super.onBackPressed();
-                    }
-                });
-                AlertDialog dialog = dialogBuilder.create();
-                /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                        if (positive != null) positive.setAllCaps(false);
-                        Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                        if (negative != null) negative.setAllCaps(false);
-                    }
-                });*/
-                if (!isFinishing())
-                    dialog.show();
-            }
-            else
-                super.onBackPressed();
-        }
     }
 
     @Override
