@@ -17,9 +17,11 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.TypedValue;
 
 import java.lang.reflect.Method;
@@ -262,6 +264,35 @@ class GlobalGUIRoutines {
                 /*if (underline)
                     sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);*/
                 if (errorColor)
+                    sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                preference.setTitle(sbt);
+            } else {
+                preference.setTitle(sbt);
+            }
+        }
+    }
+
+    static void setPreferenceTitleStyleX(androidx.preference.Preference preference, boolean enabled, boolean bold, boolean underline, boolean errorColor, boolean systemSettings)
+    {
+        if (preference != null) {
+            CharSequence title = preference.getTitle();
+            if (systemSettings) {
+                String s = title.toString();
+                if (!s.contains("(S)"))
+                    title = TextUtils.concat("(S) ", title);
+            }
+            Spannable sbt = new SpannableString(title);
+            Object[] spansToRemove = sbt.getSpans(0, title.length(), Object.class);
+            for (Object span : spansToRemove) {
+                if (span instanceof CharacterStyle)
+                    sbt.removeSpan(span);
+            }
+            if (bold || underline) {
+                if (bold)
+                    sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (underline)
+                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (errorColor && enabled)
                     sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 preference.setTitle(sbt);
             } else {

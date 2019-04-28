@@ -134,6 +134,10 @@
             android:name=".ProfilePreferencesActivity"
             android:label="@string/title_activity_profile_preferences">
         </activity>
+        <activity
+            android:name=".ProfilesPrefsActivity"
+            android:label="@string/title_activity_profile_preferences">
+        </activity>
         <!--<activity
             android:name=".PhoneProfilesPreferencesActivity"
             android:label="@string/title_activity_phone_profiles_preferences">

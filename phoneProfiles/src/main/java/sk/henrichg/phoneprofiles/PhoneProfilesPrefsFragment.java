@@ -30,7 +30,7 @@ import androidx.preference.PreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -525,7 +525,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        Permissions.grantRoot(null, getActivity());
+                        Permissions.grantRootX(null, getActivity());
                         return false;
                     }
                 });
@@ -1096,24 +1096,24 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
             boolean notificationStatusBarPermanent = preferences.getBoolean(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, true);
             PreferenceScreen preferenceCategoryNotifications = findPreference("categoryNotificationsRoot");
             if (!(notificationStatusBar && notificationStatusBarPermanent)) {
-                GlobalGUIRoutines.setPreferenceTitleStyleX(preferenceCategoryNotifications, true, true);
+                GlobalGUIRoutines.setPreferenceTitleStyleX(preferenceCategoryNotifications, false, true, false, true, false);
                 if (preferenceCategoryNotifications != null) {
                     String summary = getString(R.string.phone_profiles_pref_notificationStatusBarNotEnabled_summary) + " " +
                             getString(R.string.phone_profiles_pref_notificationStatusBarRequired) + "\n\n";
                     setCategorySummary(preferenceCategoryNotifications, summary);
                 }
             } else {
-                GlobalGUIRoutines.setPreferenceTitleStyleX(preferenceCategoryNotifications, false, false);
+                GlobalGUIRoutines.setPreferenceTitleStyleX(preferenceCategoryNotifications, false, false, false, false, false);
                 if (preferenceCategoryNotifications != null) {
                     String summary = "";
                     setCategorySummary(preferenceCategoryNotifications, summary);
                 }
             }
             if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR)) {
-                GlobalGUIRoutines.setPreferenceTitleStyleX(preference, !notificationStatusBar, !notificationStatusBar);
+                GlobalGUIRoutines.setPreferenceTitleStyleX(preference, false, !notificationStatusBar, false, !notificationStatusBar, false);
             }
             if (key.equals(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT)) {
-                GlobalGUIRoutines.setPreferenceTitleStyleX(preference, !notificationStatusBarPermanent, !notificationStatusBarPermanent);
+                GlobalGUIRoutines.setPreferenceTitleStyleX(preference, false, !notificationStatusBarPermanent, false, !notificationStatusBarPermanent, false);
             }
         }
 
@@ -1236,7 +1236,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         }
 
         // Do not bind toggles.
-        if (preference instanceof CheckBoxPreference || preference instanceof TwoStatePreference) {
+        if (preference instanceof CheckBoxPreference || preference instanceof SwitchPreferenceCompat) {
             return;
         }
 
