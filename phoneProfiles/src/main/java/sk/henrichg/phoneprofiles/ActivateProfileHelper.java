@@ -381,10 +381,14 @@ class ActivateProfileHelper {
                             break;
                     }
                     if (setBluetoothState) {
-                        if (isBluetoothEnabled)
-                            bluetoothAdapter.enable();
-                        else
-                            bluetoothAdapter.disable();
+                        try {
+                            if (isBluetoothEnabled)
+                                bluetoothAdapter.enable();
+                            else
+                                bluetoothAdapter.disable();
+                        } catch (Exception e) {
+                            Log.e("ActivateProfileHelper.doExecuteForRadio", Log.getStackTraceString(e));
+                        }
                     }
                 }
             }
