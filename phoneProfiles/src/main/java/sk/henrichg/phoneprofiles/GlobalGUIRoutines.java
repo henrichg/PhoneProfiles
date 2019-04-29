@@ -11,8 +11,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -24,7 +22,6 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.TypedValue;
 
-import java.lang.reflect.Method;
 import java.text.Collator;
 import java.util.Calendar;
 import java.util.List;
