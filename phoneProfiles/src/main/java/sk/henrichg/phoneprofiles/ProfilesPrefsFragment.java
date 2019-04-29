@@ -922,40 +922,48 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
     }
     */
 
-    private String getTitleWhenPreferenceChanged(String key, boolean systemSettings, Context context) {
-        Preference preference = prefMng.findPreference(key);
+    private String getTitleWhenPreferenceChanged(String key, int preferenceTitleId, boolean systemSettings, Context context) {
+        //Preference preference = prefMng.findPreference(key);
         String title = "";
-        if ((preference != null) && (preference.isEnabled())) {
-            if (key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
+        //if ((preference != null) && (preference.isEnabled())) {
+        if (Profile.isProfilePreferenceAllowed(key, null, preferences, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (//key.equals(Profile.PREF_PROFILE_SHOW_IN_ACTIVATOR) ||
+                    key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
                             key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE)) {
                 /*boolean defaultValue =
                         getResources().getBoolean(
-                                GlobalGUIRoutines.getResourceId(preference.getKey(), "bool", context));*/
+                                GlobalGUIRoutines.getResourceId(key, "bool", context));*/
                 //noinspection ConstantConditions
-                boolean defaultValue = Profile.defaultValuesBoolean.get(preference.getKey());
+                boolean defaultValue = Profile.defaultValuesBoolean.get(key);
                 if (preferences.getBoolean(key, defaultValue) != defaultValue)
-                    title = preference.getTitle().toString();
+                    title = getString(preferenceTitleId);
             }
             else {
                 /*String defaultValue =
                         getResources().getString(
-                                GlobalGUIRoutines.getResourceId(preference.getKey(), "string", context));*/
-                String defaultValue = Profile.defaultValuesString.get(preference.getKey());
-                String value = preferences.getString(preference.getKey(), defaultValue);
+                                GlobalGUIRoutines.getResourceId(key, "string", context));*/
+                String defaultValue = Profile.defaultValuesString.get(key);
+                String value = preferences.getString(key, defaultValue);
                 if (value != null) {
-                    if (preference instanceof VolumeDialogPreferenceX) {
+                    if (key.equals(Profile.PREF_PROFILE_VOLUME_RINGTONE) ||
+                            key.equals(Profile.PREF_PROFILE_VOLUME_NOTIFICATION) ||
+                            key.equals(Profile.PREF_PROFILE_VOLUME_MEDIA) ||
+                            key.equals(Profile.PREF_PROFILE_VOLUME_ALARM) ||
+                            key.equals(Profile.PREF_PROFILE_VOLUME_SYSTEM) ||
+                            key.equals(Profile.PREF_PROFILE_VOLUME_VOICE)) {
                         if (VolumeDialogPreference.changeEnabled(value))
-                            title = preference.getTitle().toString();
-                    } else if (preference instanceof BrightnessDialogPreferenceX) {
+                            title = getString(preferenceTitleId);
+                    } else
+                    if (key.equals(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS)) {
                         if (BrightnessDialogPreference.changeEnabled(value))
-                            title = preference.getTitle().toString();
+                            title = getString(preferenceTitleId);
                     } else {
                         if (!value.equals(defaultValue)) {
                             if (key.equals(Profile.PREF_PROFILE_VOLUME_ZEN_MODE) &&
                                     (android.os.Build.VERSION.SDK_INT >= 23))
                                 title = context.getString(R.string.profile_preferences_volumeZenModeM);
                             else
-                                title = preference.getTitle().toString();
+                                title = getString(preferenceTitleId);
                         }
                     }
                 }
@@ -984,27 +992,29 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_SOUND) ||
                 key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE)) {*/
         if (key.equals("prf_pref_activationDurationCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION, false, context);
-            String afterDurationDoTitle = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_AFTER_DURATION_DO, false, context);
-            if (!title.isEmpty()) {
-                _bold = true;
-                summary = summary + title + " • ";
-                summary = summary + afterDurationDoTitle;
+            String title;
+            String askForDurationTitle = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_ASK_FOR_DURATION, R.string.profile_preferences_askForDuration, false, context);
+            if (askForDurationTitle.isEmpty()) {
+                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION, R.string.profile_preferences_duration, false, context);
+                String afterDurationDoTitle = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_AFTER_DURATION_DO, R.string.profile_preferences_afterDurationDo, false, context);
+                if (!title.isEmpty()) {
+                    _bold = true;
+                    summary = summary + title + " • ";
+                    summary = summary + afterDurationDoTitle;
+                }
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_ASK_FOR_DURATION, false, context);
-            if (!title.isEmpty()) {
+            else {
                 _bold = true;
-                if (!summary.isEmpty()) summary = summary +" • ";
-                summary = summary + title;
+                summary = summary + askForDurationTitle;
             }
             if (_bold) {
                 // any of duration preferences are set
-                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION_NOTIFICATION_SOUND, false, context);
+                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION_NOTIFICATION_SOUND, R.string.profile_preferences_durationNotificationSound, false, context);
                 if (!title.isEmpty()) {
                     if (!summary.isEmpty()) summary = summary + " • ";
                     summary = summary + title;
                 }
-                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE, false, context);
+                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE, R.string.profile_preferences_durationNotificationVibrate, false, context);
                 if (!title.isEmpty()) {
                     if (!summary.isEmpty()) summary = summary + " • ";
                     summary = summary + title;
@@ -1016,7 +1026,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_VOLUME_ZEN_MODE) ||
                 key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING)) {*/
         if (key.equals("prf_pref_soundProfileCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_RINGER_MODE, R.string.profile_preferences_volumeRingerMode, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
@@ -1025,13 +1035,13 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             @SuppressLint("InlinedApi")
             boolean addS = !((android.os.Build.VERSION.SDK_INT >= 23) && (!a60) &&
                     GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, context));
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_ZEN_MODE, addS, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_ZEN_MODE, R.string.profile_preferences_volumeZenMode, addS, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, R.string.profile_preferences_vibrateWhenRinging, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1047,7 +1057,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_VOLUME_VOICE) ||
                 key.equals(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE)) {*/
         if (key.equals("prf_pref_volumeCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_RINGTONE, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_RINGTONE, R.string.profile_preferences_volumeRingtone, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
@@ -1055,38 +1065,38 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             String ringtoneValue = preferences.getString(Profile.PREF_PROFILE_VOLUME_RINGTONE, "");
             if ((!ActivateProfileHelper.getMergedRingNotificationVolumes(context) || ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context)) &&
                     getEnableVolumeNotificationByRingtone(ringtoneValue)) {
-                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_NOTIFICATION, false, context);
+                title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_NOTIFICATION, R.string.profile_preferences_volumeNotification, false, context);
                 if (!title.isEmpty()) {
                     _bold = true;
                     if (!summary.isEmpty()) summary = summary + " • ";
                     summary = summary + title;
                 }
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_MEDIA, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_MEDIA, R.string.profile_preferences_volumeMedia, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_ALARM, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_ALARM, R.string.profile_preferences_volumeAlarm, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_SYSTEM, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_SYSTEM, R.string.profile_preferences_volumeSystem, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_VOICE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_VOICE, R.string.profile_preferences_volumeVoiceCall, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE, R.string.profile_preferences_volumeSpeakerPhone, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1101,20 +1111,20 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_SOUND_ALARM_CHANGE)) {
             //key.equals(Profile.PREF_PROFILE_SOUND_ALARM)) {*/
         if (key.equals("prf_pref_soundsCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_RINGTONE_CHANGE, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_RINGTONE_CHANGE, R.string.profile_preferences_soundRingtoneChange, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
             //_bold = _bold || isBold(Profile.PREF_PROFILE_SOUND_RINGTONE);
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, R.string.profile_preferences_soundNotificationChange, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
             //_bold = _bold || isBold(Profile.PREF_PROFILE_SOUND_NOTIFICATION);
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_ALARM_CHANGE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_ALARM_CHANGE, R.string.profile_preferences_soundAlarmChange, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1127,19 +1137,19 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING) ||
                 key.equals(Profile.PREF_PROFILE_SOUND_ON_TOUCH)) {*/
         if (key.equals("prf_pref_touchEffectsCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_ON_TOUCH, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SOUND_ON_TOUCH, R.string.profile_preferences_soundOnTouch, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATION_ON_TOUCH, R.string.profile_preferences_vibrationOnTouch, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING, R.string.profile_preferences_dtmfToneWhenDialing, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1162,84 +1172,84 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID)) {*/
         if (key.equals("prf_pref_radiosCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE, R.string.profile_preferences_deviceAirplaneMode, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AUTOSYNC, false, context);
-            if (!title.isEmpty()) {
-                _bold = true;
-                if (!summary.isEmpty()) summary = summary +" • ";
-                summary = summary + title;
-            }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AUTOSYNC, R.string.profile_preferences_deviceAutosync, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE, R.string.profile_preferences_deviceNetworkType, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE_PREFS, R.string.profile_preferences_deviceNetworkTypePrefs, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA, R.string.profile_preferences_deviceMobileData, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA_PREFS, R.string.profile_preferences_deviceMobileDataPrefs, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI, R.string.profile_preferences_deviceWiFi, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI_AP, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_CONNECT_TO_SSID, R.string.profile_preferences_deviceConnectToSSID, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI_AP, R.string.profile_preferences_deviceWiFiAP, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WIFI_AP_PREFS, R.string.profile_preferences_deviceWiFiAPPrefs, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_GPS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, R.string.profile_preferences_deviceBluetooth, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_GPS, R.string.profile_preferences_deviceGPS, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NFC, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS, R.string.profile_preferences_deviceLocationServicePrefs, false, context);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_NFC, R.string.profile_preferences_deviceNFC, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1255,47 +1265,47 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS) ||
                 key.equals(Profile.PREF_PROFILE_SCREEN_NIGHT_MODE)) {*/
         if (key.equals("prf_pref_screenCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_SCREEN_TIMEOUT, R.string.profile_preferences_deviceScreenTimeout, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_KEYGUARD, false, context);
-            if (!title.isEmpty()) {
-                _bold = true;
-                if (!summary.isEmpty()) summary = summary +" • ";
-                summary = summary + title;
-            }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_KEYGUARD, R.string.profile_preferences_deviceKeyguard, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AUTOROTATE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS, R.string.profile_preferences_deviceBrightness, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_NOTIFICATION_LED, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_AUTOROTATE, R.string.profile_preferences_deviceAutoRotation,false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_NOTIFICATION_LED, R.string.profile_preferences_notificationLed, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SCREEN_NIGHT_MODE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_HEADS_UP_NOTIFICATIONS, R.string.profile_preferences_headsUpNotifications, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
+            /*title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_SCREEN_NIGHT_MODE, R.string.profile_preferences_screenNightMode, false, context);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }*/
         }
 
         /*if (key.equals(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE) ||
@@ -1305,36 +1315,36 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 key.equals(Profile.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE) ||
                 key.equals(Profile.PREF_PROFILE_LOCK_DEVICE)) {*/
         if (key.equals("prf_pref_othersCategoryRoot")) {
-            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, false, context);
+            String title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, R.string.profile_preferences_devicePowerSaveMode, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, false, context);
-            if (!title.isEmpty()) {
-                _bold = true;
-                if (!summary.isEmpty()) summary = summary +" • ";
-                summary = summary + title;
-            }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_CLOSE_ALL_APPLICATIONS, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE, R.string.profile_preferences_deviceRunApplicationsShortcutsChange, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_CLOSE_ALL_APPLICATIONS, R.string.profile_preferences_deviceCloseAllApplications, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, R.string.profile_preferences_deviceForceStopApplicationsChange, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
                 summary = summary + title;
             }
-            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_LOCK_DEVICE, false, context);
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_DEVICE_WALLPAPER_CHANGE, R.string.profile_preferences_deviceWallpaperChange, false, context);
+            if (!title.isEmpty()) {
+                _bold = true;
+                if (!summary.isEmpty()) summary = summary +" • ";
+                summary = summary + title;
+            }
+            title = getTitleWhenPreferenceChanged(Profile.PREF_PROFILE_LOCK_DEVICE, R.string.profile_preferences_lockDevice, false, context);
             if (!title.isEmpty()) {
                 _bold = true;
                 if (!summary.isEmpty()) summary = summary +" • ";
@@ -1504,7 +1514,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                     }*/
                 }
             }
-            PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
+            PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, preferences,true, context);
             if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED)
             {
                 Preference preference = prefMng.findPreference(key);
@@ -1545,7 +1555,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         {
             ListPreference listPreference = prefMng.findPreference(key);
             if (listPreference != null) {
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, preferences,true, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -1604,7 +1614,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         {
             PreferenceAllowed preferenceAllowed;
             if (key.equals(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING))
-                preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
+                preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, preferences,true, context);
             else {
                 preferenceAllowed = new PreferenceAllowed();
                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -1645,7 +1655,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                     listPreference.setTitle(R.string.profile_preferences_notificationLed);
                     listPreference.setDialogTitle(R.string.profile_preferences_notificationLed);
                 }
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, preferences,true, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -1668,7 +1678,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         {
             ListPreference listPreference = prefMng.findPreference(key);
             if (listPreference != null) {
-                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, true, context);
+                PreferenceAllowed preferenceAllowed = Profile.isProfilePreferenceAllowed(key, null, preferences,true, context);
                 if (preferenceAllowed.allowed != PreferenceAllowed.PREFERENCE_ALLOWED) {
                     listPreference.setEnabled(false);
                     if (preferenceAllowed.allowed == PreferenceAllowed.PREFERENCE_NOT_ALLOWED)
@@ -2171,7 +2181,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_WIFI_AP))
         {
-            if (Profile.isProfilePreferenceAllowed(key, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed(key, null, preferences,true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 boolean enabled = !sValue.equals(ON);
                 ListPreference preference = prefMng.findPreference(Profile.PREF_PROFILE_DEVICE_WIFI);
                 if (preference != null) {
@@ -2188,7 +2198,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             String zenMode = preferences.getString(Profile.PREF_PROFILE_VOLUME_ZEN_MODE, "0");
             boolean enabled = false;
             // also look at Profile.mergeProfiles()
-            if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
+            if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, null, preferences,true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
                     ringerMode.equals("5")) {
                 if (zenMode.equals("1") || zenMode.equals("2"))
                     enabled = true;
@@ -2299,7 +2309,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             }
 
             // not enabled grant root
-            if (Profile.isProfilePreferenceAllowed("-", profile, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+            if (Profile.isProfilePreferenceAllowed("-", profile, null,true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 Preference preference = prefMng.findPreference(PRF_GRANT_ROOT);
                 if (preference != null) {
                     PreferenceScreen preferenceCategory = findPreference("rootScreen");

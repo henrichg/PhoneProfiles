@@ -2074,6 +2074,7 @@ public class Profile {
     // ----- Check if preference is allowed in device -------------------------------------
 
     static PreferenceAllowed isProfilePreferenceAllowed(String preferenceKey, Profile profile,
+                                                        SharedPreferences sharedPreferences,
                                                         boolean fromUIThread, Context context)
     {
         PreferenceAllowed preferenceAllowed = new PreferenceAllowed();
