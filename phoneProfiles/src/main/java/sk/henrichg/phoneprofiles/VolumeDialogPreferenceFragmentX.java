@@ -22,7 +22,7 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
 
     private SeekBar seekBar = null;
     private TextView valueText = null;
-    private CheckBox noChangeChBox = null;
+    //private CheckBox noChangeChBox = null;
     //private CheckBox sharedProfileChBox = null;
 
     @SuppressLint("InflateParams")
@@ -60,12 +60,9 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
         PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "noChange="+preference.noChange);
         //PPApplication.logE("VolumeDialogPreferenceFragmentX.onBindDialogView", "sharedProfile="+preference.sharedProfile);
 
-        //noinspection ConstantConditions
         seekBar = view.findViewById(R.id.volumePrefDialogSeekbar);
-        //noinspection ConstantConditions
         valueText = view.findViewById(R.id.volumePrefDialogValueText);
-        //noinspection ConstantConditions
-        noChangeChBox = view.findViewById(R.id.volumePrefDialogNoChange);
+        CheckBox noChangeChBox = view.findViewById(R.id.volumePrefDialogNoChange);
         /*//noinspection ConstantConditions
         sharedProfileChBox = view.findViewById(R.id.volumePrefDialogSharedProfile);*/
 
@@ -179,6 +176,7 @@ public class VolumeDialogPreferenceFragmentX extends PreferenceDialogFragmentCom
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (preference.mediaPlayer != null) {
             int volume;
+            //noinspection ConstantConditions
             if (preference.volumeType.equalsIgnoreCase("MEDIA"))
                 volume = preference.value;
             else {

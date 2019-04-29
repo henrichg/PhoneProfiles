@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
@@ -20,12 +18,15 @@ import android.widget.TextView;
 
 import com.thelittlefireman.appkillermanager.managers.KillerManager;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ImportantInfoActivity extends AppCompatActivity {
 
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // must by called before super.onCreate() for PreferenceActivity
+        // must by called before super.onCreate()
         GlobalGUIRoutines.setTheme(this, false, false); // must by called before super.onCreate()
         GlobalGUIRoutines.setLanguage(this);
 
@@ -424,7 +425,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

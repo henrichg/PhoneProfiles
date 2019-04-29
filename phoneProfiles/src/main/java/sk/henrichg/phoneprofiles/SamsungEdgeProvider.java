@@ -311,7 +311,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
     private void _updateWidgets(Context context) {
         try {
             SlookCocktailManager cocktailManager = SlookCocktailManager.getInstance(context);
-            int cocktailIds[] = cocktailManager.getCocktailIds(new ComponentName(context, SamsungEdgeProvider.class));
+            int[] cocktailIds = cocktailManager.getCocktailIds(new ComponentName(context, SamsungEdgeProvider.class));
 
             if (cocktailIds != null) {
                 for (int cocktailId : cocktailIds) {

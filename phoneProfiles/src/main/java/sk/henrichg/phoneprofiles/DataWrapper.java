@@ -17,7 +17,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
-import androidx.appcompat.app.AlertDialog;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import me.drakeet.support.toast.ToastCompat;
 
 import static android.content.Context.POWER_SERVICE;
@@ -604,19 +604,19 @@ public class DataWrapper {
 
 //----- Activate profile ---------------------------------------------------------------------------------------------
 
-    void _activateProfile(final Profile _profile, int startupSource, final boolean interactive, Activity _activity)
+    void _activateProfile(final Profile profile, int startupSource, final boolean interactive, Activity _activity)
     {
         // remove last configured profile duration alarm
         ProfileDurationAlarmBroadcastReceiver.removeAlarm(context);
         Profile.setActivatedProfileForDuration(context, 0);
 
-        final Profile profile = _profile; //Profile.getMappedProfile(_profile, context);
+        //final Profile profile = _profile; //Profile.getMappedProfile(_profile, context);
 
         // get currently activated profile
         Profile activatedProfile = getActivatedProfile(false, false);
 
-        DatabaseHandler.getInstance(context).activateProfile(_profile);
-        setProfileActive(_profile);
+        DatabaseHandler.getInstance(context).activateProfile(profile);
+        setProfileActive(profile);
 
         if (activatedProfile != null) {
             long profileId = activatedProfile._id;
@@ -687,7 +687,7 @@ public class DataWrapper {
                             wakeLock.acquire(10 * 60 * 1000);
                         }
 
-                        DatabaseHandler.getInstance(_context).increaseActivationByUserCount(_profile);
+                        DatabaseHandler.getInstance(_context).increaseActivationByUserCount(profile);
                         dataWrapper.setDynamicLauncherShortcuts();
                     } finally {
                         if ((wakeLock != null) && wakeLock.isHeld()) {
@@ -705,7 +705,7 @@ public class DataWrapper {
         if (_activity != null)
         {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, _profile._id);
+            returnIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
             returnIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, startupSource);
             _activity.setResult(Activity.RESULT_OK,returnIntent);
         }
@@ -1042,7 +1042,6 @@ public class DataWrapper {
         useCustomColor = profile.getUseCustomColorForIcon();
 
         if (isIconResourceID) {
-            //noinspection ConstantConditions
             if (profile._iconBitmap != null)
                 profileBitmap = profile._iconBitmap;
             else {
@@ -1089,7 +1088,6 @@ public class DataWrapper {
         shortcutIntent = new Intent(context.getApplicationContext(), BackgroundActivateProfileActivity.class);
         shortcutIntent.setAction(Intent.ACTION_MAIN);
         shortcutIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_SHORTCUT);
-        //noinspection ConstantConditions
         shortcutIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
 
         String profileName = profile._name;

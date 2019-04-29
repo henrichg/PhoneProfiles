@@ -3,12 +3,11 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import sk.henrichg.phoneprofiles.billing.BillingManager;
 import sk.henrichg.phoneprofiles.billing.BillingProvider;
 
@@ -87,7 +86,7 @@ public class DonationActivity extends AppCompatActivity implements BillingProvid
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

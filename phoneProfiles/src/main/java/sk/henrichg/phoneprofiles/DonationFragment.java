@@ -1,8 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import me.drakeet.support.toast.ToastCompat;
 import sk.henrichg.phoneprofiles.billing.BillingProvider;
 
@@ -56,7 +56,6 @@ public class DonationFragment extends Fragment {
         PPApplication.logE(TAG, "onCreateView");
         View root = inflater.inflate(R.layout.donation_fragment, container, true);
 
-        //noinspection ConstantConditions
         mLoadingView = root.findViewById(R.id.donation_google_android_market_loading);
 
         /*

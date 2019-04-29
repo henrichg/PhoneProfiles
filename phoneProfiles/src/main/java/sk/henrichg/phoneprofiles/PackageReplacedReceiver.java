@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
-import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 
@@ -67,8 +66,8 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                     editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, false);
                                     editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, false);
                                     editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, false);
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, false);
+                                    editor.putBoolean(ProfilesPrefsActivity.PREF_START_TARGET_HELPS, false);
+                                    editor.putBoolean(ProfilesPrefsActivity.PREF_START_TARGET_HELPS_SAVE, false);
                                     editor.apply();
 
                                     restartService = true;
@@ -76,7 +75,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                 if (actualVersionCode <= 2500) {
                                     ApplicationPreferences.getSharedPreferences(appContext);
                                     SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
-                                    editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
+                                    editor.putBoolean(ProfilesPrefsActivity.PREF_START_TARGET_HELPS, true);
                                     editor.apply();
 
                                     restartService = true;

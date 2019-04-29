@@ -82,8 +82,7 @@ class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
             System.exit(2);
     }
 
-    @SuppressWarnings({"SameParameterValue", "UnusedAssignment"})
-    @SuppressLint("SimpleDateFormat")
+    @SuppressWarnings("SameParameterValue")
     private void logIntoFile(String type, String tag, String text)
     {
         if (PPApplication.logIntoFile) {
@@ -107,6 +106,7 @@ class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
                 //BufferedWriter for performance, true to set append to file flag
                 BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
                 String log = "";
+                @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat sdf = new SimpleDateFormat("d.MM.yy HH:mm:ss:S");
                 String time = sdf.format(Calendar.getInstance().getTimeInMillis());
                 log = log + time + "--" + type + "-----" + tag + "------" + text;

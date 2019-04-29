@@ -31,7 +31,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // must by called before super.onCreate() for PreferenceActivity
+        // must by called before super.onCreate()
         GlobalGUIRoutines.setTheme(this, false, true); // must by called before super.onCreate()
         GlobalGUIRoutines.setLanguage(this);
 
@@ -109,7 +109,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
                     preferenceFragment = new PhoneProfilesPrefsSamsungEdgePanel();
                     break;
             }
-            preferenceFragment.scrollToSet = true;
+            //preferenceFragment.scrollToSet = true;
         }
 
         if (savedInstanceState == null) {
@@ -149,6 +149,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
             case android.R.id.home:
                 if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -164,6 +165,8 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        super.onActivityResult(requestCode, resultCode, data);
+
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activity_preferences_settings);
         if (fragment != null)
             ((PhoneProfilesPrefsFragment)fragment).doOnActivityResult(requestCode, resultCode);

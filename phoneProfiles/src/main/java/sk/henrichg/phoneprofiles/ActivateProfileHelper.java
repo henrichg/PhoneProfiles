@@ -39,9 +39,6 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -57,9 +54,12 @@ import com.stericson.RootShell.execution.Shell;
 import com.stericson.RootTools.RootTools;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -290,7 +290,6 @@ class ActivateProfileHelper {
                                     boolean wifiConnected = false;
                                     if (Build.VERSION.SDK_INT < 28) {
                                         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-                                        //noinspection deprecation
                                         wifiConnected = (activeNetwork != null) &&
                                                 (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) &&
                                                 activeNetwork.isConnected();
@@ -440,7 +439,7 @@ class ActivateProfileHelper {
                         case 3:
                             if (!nfcAdapter.isEnabled()) {
                                 setNFC(context, true);
-                            } else if (nfcAdapter.isEnabled()) {
+                            } else {
                                 setNFC(context, false);
                             }
                             break;
@@ -871,26 +870,23 @@ class ActivateProfileHelper {
                 }
             } else {
                 try {
-                    switch (zenMode) {
-                        case ZENMODE_SILENT:
-                            //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                            //try { Thread.sleep(1000); } catch (InterruptedException e) { }
-                            //SystemClock.sleep(1000);
-                            //PPApplication.sleep(1000);
-                            //audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                            if ((systemZenMode != ZENMODE_ALL) && canChangeZenMode(context, false)) {
-                                PPApplication.logE("ActivateProfileHelper.setZenMode", "change zen mode");
-                                RingerModeChangeReceiver.notUnlinkVolumes = false;
-                                PPNotificationListenerService.requestInterruptionFilter(context, ZENMODE_ALL);
-                                InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, ZENMODE_ALL);
-                                PPApplication.sleep(500);
-                            }
+                    if (zenMode == ZENMODE_SILENT) {//audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                        //try { Thread.sleep(1000); } catch (InterruptedException e) { }
+                        //SystemClock.sleep(1000);
+                        //PPApplication.sleep(1000);
+                        //audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        if ((systemZenMode != ZENMODE_ALL) && canChangeZenMode(context, false)) {
+                            PPApplication.logE("ActivateProfileHelper.setZenMode", "change zen mode");
                             RingerModeChangeReceiver.notUnlinkVolumes = false;
-                            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                            break;
-                        default:
-                            RingerModeChangeReceiver.notUnlinkVolumes = false;
-                            audioManager.setRingerMode(ringerMode);
+                            PPNotificationListenerService.requestInterruptionFilter(context, ZENMODE_ALL);
+                            InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, ZENMODE_ALL);
+                            PPApplication.sleep(500);
+                        }
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    } else {
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
+                        audioManager.setRingerMode(ringerMode);
                     }
                 } catch (Exception ignored) {
                     // may be produced this exception:
@@ -1310,7 +1306,6 @@ class ActivateProfileHelper {
             ringerMode = audioManager.getRingerMode();
         int vibrateType = -999;
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
-            //noinspection deprecation
             vibrateType = audioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
         //int vibrateWhenRinging;
         //if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
@@ -1322,7 +1317,6 @@ class ActivateProfileHelper {
         PPApplication.logE("PPApplication.vibrationIsOn", "vibrateType="+vibrateType);
         //PPApplication.logE("PPApplication.vibrationIsOn", "vibrateWhenRinging="+vibrateWhenRinging);
 
-        //noinspection deprecation
         return (ringerMode == AudioManager.RINGER_MODE_VIBRATE) ||
                 (vibrateType == AudioManager.VIBRATE_SETTING_ON) ||
                 (vibrateType == AudioManager.VIBRATE_SETTING_ONLY_SILENT);// ||
@@ -1358,12 +1352,10 @@ class ActivateProfileHelper {
                     setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
                     } catch (Exception ignored) {
                     }
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);
                     } catch (Exception ignored) {
                     }
@@ -1374,12 +1366,10 @@ class ActivateProfileHelper {
                     setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_NORMAL);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL); not needed, called from setZenMode
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
                     } catch (Exception ignored) {
                     }
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_ON);
                     } catch (Exception ignored) {
                     }
@@ -1390,12 +1380,10 @@ class ActivateProfileHelper {
                     setZenMode(context, ZENMODE_ALL, audioManager, AudioManager.RINGER_MODE_VIBRATE);
                     //audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE); not needed, called from setZenMode
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
                     } catch (Exception ignored) {
                     }
                     try {
-                        //noinspection deprecation
                         audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_ON);
                     } catch (Exception ignored) {
                     }
@@ -1627,7 +1615,7 @@ class ActivateProfileHelper {
                                     if (intentId > 0) {
                                         PPIntent ppIntent = DatabaseHandler.getInstance(appContext).getIntent(intentId);
                                         if (ppIntent != null) {
-                                            intent = ApplicationEditorIntentActivity.createIntent(ppIntent);
+                                            intent = ApplicationEditorIntentActivityX.createIntent(ppIntent);
                                             if (intent != null) {
                                                 if (ppIntent._intentType == 0) {
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1863,7 +1851,7 @@ class ActivateProfileHelper {
                             (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
                         synchronized (PPApplication.rootMutex) {
                             String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
-                                    Float.toString(profile.getDeviceBrightnessAdaptiveValue(appContext));
+                                    profile.getDeviceBrightnessAdaptiveValue(appContext);
                             //if (PPApplication.isSELinuxEnforcing())
                             //	command1 = PPApplication.getSELinuxEnforceCommand(command1, Shell.ShellContext.SYSTEM_APP);
                             Command command = new Command(0, false, command1); //, command2);
@@ -3081,7 +3069,7 @@ class ActivateProfileHelper {
                     if (serviceManager != null) {
                         transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setWifiApEnabled");
                     }
-                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-serviceManager="+String.valueOf(serviceManager));
+                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-serviceManager="+serviceManager);
                     PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-transactionCode="+transactionCode);
 
                     if (transactionCode != -1) {
@@ -3472,7 +3460,7 @@ class ActivateProfileHelper {
 
                             if (powerManager != null) {
                                 if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_POWER_SAVE_MODE, null, null, false, appContext).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
-                                    boolean _isPowerSaveMode = false;
+                                    boolean _isPowerSaveMode;
                                     //if (Build.VERSION.SDK_INT >= 21)
                                         _isPowerSaveMode = powerManager.isPowerSaveMode();
                                     boolean _setPowerSaveMode = false;

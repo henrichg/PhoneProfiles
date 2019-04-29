@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LaunchShortcutActivity extends AppCompatActivity {
@@ -55,6 +56,8 @@ public class LaunchShortcutActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 100) {
             if ((resultCode == RESULT_OK) && (data != null)) {
                 data.putExtra(EXTRA_DIALOG_PREFERENCE_POSITION, dialogPreferencePosition);

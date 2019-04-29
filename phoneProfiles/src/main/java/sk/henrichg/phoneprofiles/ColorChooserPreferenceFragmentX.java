@@ -41,7 +41,6 @@ public class ColorChooserPreferenceFragmentX extends PreferenceDialogFragmentCom
             }
         }
 
-        //noinspection ConstantConditions
         final GridLayout list = view.findViewById(R.id.dialog_color_chooser_grid);
 
         for (int i = 0; i < list.getChildCount(); i++) {

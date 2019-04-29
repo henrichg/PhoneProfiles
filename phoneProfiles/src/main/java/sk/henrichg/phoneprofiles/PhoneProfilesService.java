@@ -29,8 +29,6 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -40,6 +38,9 @@ import com.crashlytics.android.Crashlytics;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
 public class PhoneProfilesService extends Service {
@@ -154,8 +155,8 @@ public class PhoneProfilesService extends Service {
         editor.putBoolean(EditorProfilesActivity.PREF_START_TARGET_HELPS, true);
         editor.putBoolean(EditorProfileListFragment.PREF_START_TARGET_HELPS, true);
         editor.putBoolean(EditorProfileListAdapter.PREF_START_TARGET_HELPS, true);
-        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS, true);
-        editor.putBoolean(ProfilePreferencesActivity.PREF_START_TARGET_HELPS_SAVE, true);
+        editor.putBoolean(ProfilesPrefsActivity.PREF_START_TARGET_HELPS, true);
+        editor.putBoolean(ProfilesPrefsActivity.PREF_START_TARGET_HELPS_SAVE, true);
         editor.apply();
         */
 

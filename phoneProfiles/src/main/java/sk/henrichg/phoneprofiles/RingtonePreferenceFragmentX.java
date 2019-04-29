@@ -33,7 +33,6 @@ public class RingtonePreferenceFragmentX extends PreferenceDialogFragmentCompat 
     {
         super.onBindDialogView(view);
 
-        //noinspection ConstantConditions
         preference.listView = view.findViewById(R.id.ringtone_pref_dlg_listview);
 
         preference.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -197,7 +197,7 @@ class GlobalGUIRoutines {
         }
     }
 
-    static void reloadActivity(Activity activity, boolean newIntent)
+    static void reloadActivity(Activity activity, @SuppressWarnings("SameParameterValue") boolean newIntent)
     {
         if (newIntent)
         {
@@ -224,55 +224,10 @@ class GlobalGUIRoutines {
             activity.recreate();
     }
 
-    static void setPreferenceTitleStyle(Preference preference, boolean bold, /*boolean underline,*/ boolean errorColor)
-    {
-        if (preference != null) {
-            CharSequence title = preference.getTitle();
-            Spannable sbt = new SpannableString(title);
-            Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
-            for (Object span : spansToRemove) {
-                if (span instanceof CharacterStyle)
-                    sbt.removeSpan(span);
-            }
-            if (bold/* || underline*/) {
-                //if (bold)
-                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                /*if (underline)
-                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);*/
-                if (errorColor)
-                    sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                preference.setTitle(sbt);
-            } else {
-                preference.setTitle(sbt);
-            }
-        }
-    }
-
-    static void setPreferenceTitleStyleX(androidx.preference.Preference preference, boolean bold, /*boolean underline,*/ boolean errorColor)
-    {
-        if (preference != null) {
-            CharSequence title = preference.getTitle();
-            Spannable sbt = new SpannableString(title);
-            Object spansToRemove[] = sbt.getSpans(0, title.length(), Object.class);
-            for (Object span : spansToRemove) {
-                if (span instanceof CharacterStyle)
-                    sbt.removeSpan(span);
-            }
-            if (bold/* || underline*/) {
-                //if (bold)
-                sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                /*if (underline)
-                    sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);*/
-                if (errorColor)
-                    sbt.setSpan(new ForegroundColorSpan(Color.RED), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                preference.setTitle(sbt);
-            } else {
-                preference.setTitle(sbt);
-            }
-        }
-    }
-
-    static void setPreferenceTitleStyleX(androidx.preference.Preference preference, boolean enabled, boolean bold, boolean underline, boolean errorColor, boolean systemSettings)
+    static void setPreferenceTitleStyleX(androidx.preference.Preference preference,
+                                         boolean enabled, boolean bold,
+                                         @SuppressWarnings("SameParameterValue") boolean underline,
+                                         boolean errorColor, boolean systemSettings)
     {
         if (preference != null) {
             CharSequence title = preference.getTitle();
@@ -422,6 +377,7 @@ class GlobalGUIRoutines {
         return value.data;
     }
 
+    /*
     static int getThemeActivatorGridDividerColor(final boolean show, final Context context) {
         final TypedValue value = new TypedValue();
         if (show)
@@ -430,6 +386,7 @@ class GlobalGUIRoutines {
             context.getTheme().resolveAttribute(R.attr.activityBackgroundColor, value, false);
         return value.data;
     }
+    */
 
     /*
     static int getResourceId(String pVariableName, String pResourceName, Context context)
@@ -458,38 +415,6 @@ class GlobalGUIRoutines {
             return activities.size() > 0;
         } catch (Exception e) {
             return false;
-        }
-    }
-
-    @SuppressLint("PrivateApi")
-    static void registerOnActivityDestroyListener(
-        Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
-        try {
-            PreferenceManager pm = preference.getPreferenceManager();
-            Method method =
-                    pm.getClass()
-                            .getDeclaredMethod(
-                                    "registerOnActivityDestroyListener",
-                                    PreferenceManager.OnActivityDestroyListener.class);
-            method.setAccessible(true);
-            method.invoke(pm, listener);
-        } catch (Exception ignored) {
-        }
-    }
-
-    @SuppressLint("PrivateApi")
-    static void unregisterOnActivityDestroyListener(
-        Preference preference, PreferenceManager.OnActivityDestroyListener listener) {
-        try {
-            PreferenceManager pm = preference.getPreferenceManager();
-            Method method =
-                    pm.getClass()
-                            .getDeclaredMethod(
-                                    "unregisterOnActivityDestroyListener",
-                                    PreferenceManager.OnActivityDestroyListener.class);
-            method.setAccessible(true);
-            method.invoke(pm, listener);
-        } catch (Exception ignored) {
         }
     }
 

@@ -26,7 +26,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -268,7 +267,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                      (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists())
                     );*/
         final boolean canEnableZenMode = ActivateProfileHelper.canChangeZenMode(context.getApplicationContext(), false);
-        PPApplication.logE("ProfilePreferencesNestedFragment.onActivityCreated","canEnableZenMode="+canEnableZenMode);
+        PPApplication.logE("ProfilesPrefsFragment.onActivityCreated","canEnableZenMode="+canEnableZenMode);
 
         ListPreference zenModePreference = prefMng.findPreference(Profile.PREF_PROFILE_VOLUME_ZEN_MODE);
         if (zenModePreference != null) {
@@ -717,7 +716,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             setPermissionsPreference();
         }
         /*if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT) {
-            Log.e("------ ProfilePreferencesNestedFragment.doOnActivityResult", "requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT");
+            Log.e("------ ProfilesPrefsFragment.doOnActivityResult", "requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_GRANT_ROOT");
             PPApplication.isRootGranted();
             setPermissionsPreference();
         }*/
@@ -733,17 +732,17 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                         ContentResolver resolver = getActivity().getContentResolver();
                         resolver.takePersistableUriPermission(selectedImage, takeFlags);
                     } catch (Exception e) {
-                        Log.e("ProfilePreferencesNestedFragment.doOnActivityResult", Log.getStackTraceString(e));
+                        Log.e("ProfilesPrefsFragment.doOnActivityResult", Log.getStackTraceString(e));
                     }
                 //}*/
                 WallpaperViewPreferenceX preference = prefMng.findPreference(Profile.PREF_PROFILE_DEVICE_WALLPAPER);
                 if (preference != null)
                     preference.setImageIdentifier(selectedImage.toString());
                 /*
-                if (ProfilePreferencesFragment.changedWallpaperViewPreference != null) {
+                if (ProfilesPrefsFragment.changedWallpaperViewPreference != null) {
                     // set image identifier for get bitmap path
-                    ProfilePreferencesFragment.changedWallpaperViewPreference.setImageIdentifier(selectedImage.toString());
-                    ProfilePreferencesFragment.changedWallpaperViewPreference = null;
+                    ProfilesPrefsFragment.changedWallpaperViewPreference.setImageIdentifier(selectedImage.toString());
+                    ProfilesPrefsFragment.changedWallpaperViewPreference = null;
                 }
                 */
             }
@@ -760,7 +759,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                         ContentResolver resolver = getActivity().getContentResolver();
                         resolver.takePersistableUriPermission(selectedImage, takeFlags);
                     } catch (Exception e) {
-                        Log.e("ProfilePreferencesNestedFragment.doOnActivityResult", Log.getStackTraceString(e));
+                        Log.e("ProfilesPrefsFragment.doOnActivityResult", Log.getStackTraceString(e));
                     }
                 //}*/
 
@@ -773,11 +772,11 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                         preference.dismissDialog();
                         preference.setImageIdentifierAndType(selectedImage.toString(), false, true);
                     }
-                    /*if (ProfilePreferencesFragment.changedProfileIconPreference != null) {
+                    /*if (ProfilesPrefsFragment.changedProfileIconPreference != null) {
                         // set image identifier ant type for get bitmap path
-                        ProfilePreferencesFragment.changedProfileIconPreference.dismissDialog();
-                        ProfilePreferencesFragment.changedProfileIconPreference.setImageIdentifierAndType(selectedImage.toString(), false, true);
-                        ProfilePreferencesFragment.changedProfileIconPreference = null;
+                        ProfilesPrefsFragment.changedProfileIconPreference.dismissDialog();
+                        ProfilesPrefsFragment.changedProfileIconPreference.setImageIdentifierAndType(selectedImage.toString(), false, true);
+                        ProfilesPrefsFragment.changedProfileIconPreference = null;
                     }*/
                 }
                 else {
@@ -812,14 +811,14 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                         data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, 0));
             }
             /*
-            if (ProfilePreferencesFragment.applicationsDialogPreference != null) {
-                ProfilePreferencesFragment.applicationsDialogPreference.updateShortcut(
+            if (ProfilesPrefsFragment.applicationsDialogPreference != null) {
+                ProfilesPrefsFragment.applicationsDialogPreference.updateShortcut(
                         (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
                         data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
                         data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_POSITION, -1),
                         data.getIntExtra(LaunchShortcutActivity.EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, 0));
 
-                ProfilePreferencesFragment.applicationsDialogPreference = null;
+                ProfilesPrefsFragment.applicationsDialogPreference = null;
             }*/
         }
         if (requestCode == ApplicationEditorDialogX.RESULT_INTENT_EDITOR) {
@@ -944,11 +943,11 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                             key.equals(Profile.PREF_PROFILE_VOLUME_ALARM) ||
                             key.equals(Profile.PREF_PROFILE_VOLUME_SYSTEM) ||
                             key.equals(Profile.PREF_PROFILE_VOLUME_VOICE)) {
-                        if (VolumeDialogPreference.changeEnabled(value))
+                        if (VolumeDialogPreferenceX.changeEnabled(value))
                             title = getString(preferenceTitleId);
                     } else
                     if (key.equals(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS)) {
-                        if (BrightnessDialogPreference.changeEnabled(value))
+                        if (BrightnessDialogPreferenceX.changeEnabled(value))
                             title = getString(preferenceTitleId);
                     } else {
                         if (!value.equals(defaultValue)) {
@@ -1838,7 +1837,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             Preference preference = prefMng.findPreference(key);
             if (preference != null) {
                 String sValue = value.toString();
-                boolean change = VolumeDialogPreference.changeEnabled(sValue);
+                boolean change = VolumeDialogPreferenceX.changeEnabled(sValue);
                 GlobalGUIRoutines.setPreferenceTitleStyleX(preference, true, change, false, false, false);
                 //setCategorySummary(preference, change, context);
             }
@@ -1851,7 +1850,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             Preference preference = prefMng.findPreference(key);
             if (preference != null) {
                 String sValue = value.toString();
-                boolean change = BrightnessDialogPreference.changeEnabled(sValue);
+                boolean change = BrightnessDialogPreferenceX.changeEnabled(sValue);
                 GlobalGUIRoutines.setPreferenceTitleStyleX(preference, true, change, false, false, false);
                 //setCategorySummary(preference, change, context);
             }
@@ -1967,7 +1966,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
 
     }
 
-    void setSummary(String key) {
+    private void setSummary(String key) {
         String value;
         if (key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||
                 key.equals(Profile.PREF_PROFILE_DURATION_NOTIFICATION_VIBRATE) ||
@@ -2030,7 +2029,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         setSummary(Profile.PREF_PROFILE_DEVICE_RUN_APPLICATION_CHANGE);
         setSummary(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE);
         setSummary(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME);
-        setSummary(ProfilePreferencesNestedFragment.PREF_FORCE_STOP_APPLICATIONS_INSTALL_EXTENDER);
+        setSummary(PREF_FORCE_STOP_APPLICATIONS_INSTALL_EXTENDER);
         setSummary(Profile.PREF_PROFILE_DEVICE_LOCATION_SERVICE_PREFS);
         setSummary(Profile.PREF_PROFILE_VOLUME_SPEAKER_PHONE);
         setSummary(Profile.PREF_PROFILE_DEVICE_NFC);
@@ -2058,7 +2057,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         setSummary(Profile.PREF_PROFILE_SCREEN_NIGHT_MODE);
         setSummary(Profile.PREF_PROFILE_DTMF_TONE_WHEN_DIALING);
         setSummary(Profile.PREF_PROFILE_SOUND_ON_TOUCH);
-        setSummary(ProfilePreferencesNestedFragment.PREF_LOCK_DEVICE_INSTALL_EXTENDER);
+        setSummary(PREF_LOCK_DEVICE_INSTALL_EXTENDER);
     }
 
     private boolean getEnableVolumeNotificationByRingtone(String ringtoneValue) {

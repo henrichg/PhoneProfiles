@@ -41,10 +41,8 @@ public class ProfilePreferenceFragmentX extends PreferenceDialogFragmentCompat {
     {
         super.onBindDialogView(view);
 
-        //noinspection ConstantConditions
         linlaProgress = view.findViewById(R.id.profile_pref_dlg_linla_progress);
 
-        //noinspection ConstantConditions
         listView = view.findViewById(R.id.profile_pref_dlg_listview);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

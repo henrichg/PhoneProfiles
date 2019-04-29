@@ -39,7 +39,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
     private SharedPreferences preferences;
     private SharedPreferences applicationPreferences;
 
-    boolean scrollToSet = false;
+    //boolean scrollToSet = false;
     private boolean nestedFragment = false;
 
     private static final String PREF_APPLICATION_PERMISSIONS = "permissionsApplicationPermissions";
@@ -585,7 +585,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         }
         long jobMinInterval = TimeUnit.MILLISECONDS.toMinutes(JobRequest.MIN_INTERVAL);
         String summary = getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary1) + " " +
-                Long.toString(jobMinInterval) + " " +
+                jobMinInterval + " " +
                 getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary2);
         preference = findPreference("applicationEventLocationUpdateIntervalInfo");
         if (preference != null) {
@@ -747,28 +747,29 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
             if (KillerManager.isActionAvailable(getActivity(), KillerManager.Actions.ACTION_POWERSAVING)) {
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                    @SuppressWarnings({"SingleStatementInBlock", "ConstantConditions"})
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         try {
                             KillerManager.doActionPowerSaving(getActivity());
                         }catch (Exception e) {
-                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-                            dialogBuilder.setMessage(R.string.setting_screen_not_found_alert);
-                            //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
-                            dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                            AlertDialog dialog = dialogBuilder.create();
-                            //dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                            //    @Override
-                            //    public void onShow(DialogInterface dialog) {
-                            //        Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                            //        if (positive != null) positive.setAllCaps(false);
-                            //        Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                            //        if (negative != null) negative.setAllCaps(false);
-                            //    }
-                            //});
-                            if (!getActivity().isFinishing())
-                                dialog.show();
+                            if (getActivity() != null) {
+                                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+                                dialogBuilder.setMessage(R.string.setting_screen_not_found_alert);
+                                //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+                                dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                                AlertDialog dialog = dialogBuilder.create();
+                                //dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                //    @Override
+                                //    public void onShow(DialogInterface dialog) {
+                                //        Button positive = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                                //        if (positive != null) positive.setAllCaps(false);
+                                //        Button negative = ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                                //        if (negative != null) negative.setAllCaps(false);
+                                //    }
+                                //});
+                                if (!getActivity().isFinishing())
+                                    dialog.show();
+                            }
                         }
                         return false;
                     }

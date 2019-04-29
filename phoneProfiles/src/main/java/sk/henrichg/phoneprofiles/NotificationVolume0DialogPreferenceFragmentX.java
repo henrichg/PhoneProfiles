@@ -12,7 +12,7 @@ import androidx.preference.PreferenceDialogFragmentCompat;
 
 public class NotificationVolume0DialogPreferenceFragmentX  extends PreferenceDialogFragmentCompat {
 
-    NotificationVolume0DialogPreferenceX preference;
+    private NotificationVolume0DialogPreferenceX preference;
 
     @NonNull
     @Override

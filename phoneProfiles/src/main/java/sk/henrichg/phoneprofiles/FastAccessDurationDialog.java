@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.appcompat.app.AlertDialog;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 
@@ -125,18 +125,12 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
 
         mDialog = dialogBuilder.create();
 
-        //noinspection ConstantConditions
         TextView mTextViewRange = layout.findViewById(R.id.duration_pref_dlg_range);
 
-        //noinspection ConstantConditions
         mValue = layout.findViewById(R.id.duration_pref_dlg_value);
-        //noinspection ConstantConditions
         mSeekBarHours = layout.findViewById(R.id.duration_pref_dlg_hours);
-        //noinspection ConstantConditions
         mSeekBarMinutes = layout.findViewById(R.id.duration_pref_dlg_minutes);
-        //noinspection ConstantConditions
         mSeekBarSeconds = layout.findViewById(R.id.duration_pref_dlg_seconds);
-        //noinspection ConstantConditions
         mEnds = layout.findViewById(R.id.duration_pref_dlg_ends);
 
         //mSeekBarHours.setRotation(180);

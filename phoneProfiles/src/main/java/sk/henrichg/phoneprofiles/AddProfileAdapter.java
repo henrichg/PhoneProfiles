@@ -14,7 +14,7 @@ import java.util.List;
 class AddProfileAdapter extends BaseAdapter {
 
     private final List<Profile> profileList;
-    private AddProfileDialog dialog;
+    private final AddProfileDialog dialog;
 
     private final Context context;
 

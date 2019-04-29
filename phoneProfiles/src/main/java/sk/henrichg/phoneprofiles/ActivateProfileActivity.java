@@ -1,18 +1,13 @@
 package sk.henrichg.phoneprofiles;
 
-import androidx.fragment.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -26,6 +21,11 @@ import com.getkeepsafe.taptargetview.TapTargetSequence;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class ActivateProfileActivity extends AppCompatActivity {
 
@@ -286,18 +286,19 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
-        case R.id.menu_edit_profiles:
-            Intent intent = new Intent(getApplicationContext(), EditorProfilesActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
-            getApplicationContext().startActivity(intent);
+            case R.id.menu_edit_profiles:
+                Intent intent = new Intent(getApplicationContext(), EditorProfilesActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_ACTIVATOR);
+                getApplicationContext().startActivity(intent);
 
-            finish();
+                finish();
 
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

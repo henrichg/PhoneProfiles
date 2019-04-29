@@ -42,7 +42,6 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
     {
         super.onBindDialogView(view);
 
-        //noinspection ConstantConditions
         TextView mTextViewRange = view.findViewById(R.id.duration_pref_dlg_range);
 
         mValue = view.findViewById(R.id.duration_pref_dlg_value);

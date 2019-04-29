@@ -10,10 +10,11 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-import androidx.core.app.NotificationManagerCompat;
 import android.text.TextUtils;
 
 import java.util.Set;
+
+import androidx.core.app.NotificationManagerCompat;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class PPNotificationListenerService extends NotificationListenerService {

@@ -16,8 +16,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
-import androidx.multidex.MultiDex;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.Pair;
 
@@ -46,6 +44,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.multidex.MultiDex;
 import io.fabric.sdk.android.Fabric;
 
 //import com.google.firebase.analytics.FirebaseAnalytics;
@@ -399,7 +399,6 @@ public class PPApplication extends Application {
     */
 
     static int getVersionCode(PackageInfo pInfo) {
-        //noinspection deprecation
         return pInfo.versionCode;
     }
 
@@ -468,8 +467,6 @@ public class PPApplication extends Application {
         logFile.delete();
     }
 
-    @SuppressWarnings("UnusedAssignment")
-    @SuppressLint("SimpleDateFormat")
     static private void logIntoFile(String type, String tag, String text)
     {
         if (!logIntoFile)
@@ -497,6 +494,7 @@ public class PPApplication extends Application {
             //BufferedWriter for performance, true to set append to file flag
             BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
             String log = "";
+            @SuppressLint("SimpleDateFormat")
             SimpleDateFormat sdf = new SimpleDateFormat("d.MM.yy HH:mm:ss:S");
             String time = sdf.format(Calendar.getInstance().getTimeInMillis());
             log = log + time + "--" + type + "-----" + tag + "------" + text;
@@ -523,9 +521,7 @@ public class PPApplication extends Application {
         return contains;
     }
 
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
     static public boolean logEnabled() {
-        //noinspection ConstantConditions
         return (logIntoLogCat || logIntoFile);
     }
 

@@ -30,7 +30,7 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
     // Layout widgets.
     private SeekBar seekBar = null;
     private TextView valueText = null;
-    private CheckBox noChangeChBox = null;
+    //private CheckBox noChangeChBox = null;
     private CheckBox automaticChBox = null;
     //private CheckBox sharedProfileChBox = null;
     private CheckBox changeLevelChBox = null;
@@ -55,7 +55,7 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
 
         seekBar = view.findViewById(R.id.brightnessPrefDialogSeekbar);
         valueText = view.findViewById(R.id.brightnessPrefDialogValueText);
-        noChangeChBox = view.findViewById(R.id.brightnessPrefDialogNoChange);
+        CheckBox noChangeChBox = view.findViewById(R.id.brightnessPrefDialogNoChange);
         automaticChBox = view.findViewById(R.id.brightnessPrefDialogAutomatic);
         //sharedProfileChBox = view.findViewById(R.id.brightnessPrefDialogSharedProfile);
         changeLevelChBox = view.findViewById(R.id.brightnessPrefDialogLevel);
@@ -90,7 +90,8 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
         //if (preference.sharedProfile == 1)
         //    noChangeChBox.setChecked(false);
 
-        enableViews();
+        if (Permissions.grantBrightnessDialogPermissions(context))
+            enableViews();
     }
 
     @Override

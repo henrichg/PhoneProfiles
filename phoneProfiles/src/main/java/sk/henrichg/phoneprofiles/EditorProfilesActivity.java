@@ -2,8 +2,6 @@ package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,10 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +35,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import me.drakeet.support.toast.ToastCompat;
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
 import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
@@ -74,8 +75,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     // request code for startActivityForResult with intent BackgroundActivateProfileActivity
     static final int REQUEST_CODE_ACTIVATE_PROFILE = 6220;
-    // request code for startActivityForResult with intent ProfilePreferencesActivity
-    static final int REQUEST_CODE_PROFILE_PREFERENCES = 6221;
+    // request code for startActivityForResult with intent ProfilesPrefsActivity
+    private static final int REQUEST_CODE_PROFILE_PREFERENCES = 6221;
     // request code for startActivityForResult with intent PhoneProfilesActivity
     private static final int REQUEST_CODE_APPLICATION_PREFERENCES = 6229;
     // request code for startActivityForResult with intent "phoneprofiles.intent.action.EXPORTDATA"
@@ -499,7 +500,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     */
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         savedInstanceStateChanged = true;
@@ -553,18 +554,17 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 if (profile_id > 0)
                 {
-                    //noinspection ConstantConditions
                     Profile profile = DatabaseHandler.getInstance(getApplicationContext()).getProfile(profile_id);
                     if (profile != null) {
                         // generate bitmaps
                         profile.generateIconBitmap(getBaseContext(), false, 0, false);
                         profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
-                        // redraw list fragment , notifications, widgets after finish ProfilePreferencesActivity
+                        // redraw list fragment , notifications, widgets after finish ProfilesPrefsActivity
                         redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex/*, true*/);
 
-                        Profile mappedProfile = profile; //Profile.getMappedProfile(profile, getApplicationContext());
-                        Permissions.grantProfilePermissions(getApplicationContext(), mappedProfile, false,
+                        //Profile mappedProfile = profile; //Profile.getMappedProfile(profile, getApplicationContext());
+                        Permissions.grantProfilePermissions(getApplicationContext(), profile, false,
                                 /*true, false, 0,*/ PPApplication.STARTUP_SOURCE_EDITOR, false, true, false);
                     }
                 }
@@ -1155,7 +1155,7 @@ public class EditorProfilesActivity extends AppCompatActivity
     }
 
     private void startProfilePreferenceActivity(Profile profile, int editMode, int predefinedProfileIndex) {
-        Intent intent = new Intent(getBaseContext(), ProfilePreferencesActivity.class);
+        Intent intent = new Intent(getBaseContext(), ProfilesPrefsActivity.class);
         if (editMode == EditorProfileListFragment.EDIT_MODE_INSERT)
             intent.putExtra(PPApplication.EXTRA_PROFILE_ID, 0L);
         else

@@ -1,7 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -14,7 +12,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +21,9 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Comparator;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class ActivateProfileListFragment extends Fragment {
 

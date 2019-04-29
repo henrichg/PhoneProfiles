@@ -1,8 +1,5 @@
 package sk.henrichg.phoneprofiles.billing;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
@@ -17,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import sk.henrichg.phoneprofiles.DonationFragment;
 import sk.henrichg.phoneprofiles.PPApplication;
 
