@@ -2103,6 +2103,16 @@ public class Profile {
                             }
                         }
                     }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
 
                     if (PPApplication.settingsBinaryExists(fromUIThread))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2213,6 +2223,16 @@ public class Profile {
                                 }
                             }
                         }
+                        else
+                        if (sharedPreferences != null) {
+                            if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                                if (applicationNeverAskForGrantRoot) {
+                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                    // not needed to test all parameters
+                                    return preferenceAllowed;
+                                }
+                            }
+                        }
 
                         //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2284,6 +2304,16 @@ public class Profile {
                             }
                         }
                     }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
 
                     if (PPApplication.settingsBinaryExists(fromUIThread)) {
                         PPApplication.logE("Profile.isProfilePreferenceAllowed", "settingsBinaryExists=true");
@@ -2337,6 +2367,16 @@ public class Profile {
                             }
                         }
                     }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
 
                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
                 }
@@ -2373,6 +2413,16 @@ public class Profile {
                         if (profile != null) {
                             // test if grant root is disabled
                             if (profile._deviceWiFiAP != 0) {
+                                if (applicationNeverAskForGrantRoot) {
+                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                    // not needed to test all parameters
+                                    return preferenceAllowed;
+                                }
+                            }
+                        }
+                        else
+                        if (sharedPreferences != null) {
+                            if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
                                 if (applicationNeverAskForGrantRoot) {
                                     preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                     // not needed to test all parameters
@@ -2423,6 +2473,16 @@ public class Profile {
                             }
                         }
                     }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
 
                     if (PPApplication.settingsBinaryExists(fromUIThread))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2458,6 +2518,10 @@ public class Profile {
                                 }
                             }
                         }
+                        else
+                        if (sharedPreferences != null) {
+
+                        }
 
                         if (PPApplication.settingsBinaryExists(fromUIThread))
                             preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
@@ -2492,6 +2556,16 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._devicePowerSaveMode != 0) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
                             if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
@@ -2538,6 +2612,16 @@ public class Profile {
                                     }
                                 }
                             }
+                            else
+                            if (sharedPreferences != null) {
+                                if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                                    if (applicationNeverAskForGrantRoot) {
+                                        preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                        // not needed to test all parameters
+                                        return preferenceAllowed;
+                                    }
+                                }
+                            }
 
                             if (ActivateProfileHelper.telephonyServiceExists(Profile.PREF_PROFILE_DEVICE_NETWORK_TYPE)) {
                                 if (PPApplication.serviceBinaryExists(fromUIThread))
@@ -2577,6 +2661,16 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._notificationLed != 0) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
                             if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
@@ -2661,6 +2755,16 @@ public class Profile {
                     if (profile != null) {
                         // test if grant root is disabled
                         if (profile._headsUpNotifications != 0) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
+                    else
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
                             if (applicationNeverAskForGrantRoot) {
                                 preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
                                 // not needed to test all parameters
