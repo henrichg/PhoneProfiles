@@ -934,6 +934,11 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                             activity.setResult(Activity.RESULT_CANCELED);
                             activity.finishAffinity();
                         } else {
+                            setSummary(PREF_APPLICATION_PERMISSIONS);
+                            setSummary(PREF_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
+                            setSummary(PREF_ACCESS_NOTIFICATION_POLICY_PERMISSIONS);
+                            setSummary(PREF_DRAW_OVERLAYS_PERMISSIONS);
+
                             activity.setResult(Activity.RESULT_OK);
                         }
                     } else
