@@ -1309,6 +1309,18 @@ public class Profile {
         return value == 0; // in preference dialog is checked=No change
     }
 
+    private static boolean getDeviceBrightnessChange(String _deviceBrightness)
+    {
+        int value;
+        try {
+            String[] splits = _deviceBrightness.split("\\|");
+            value = Integer.parseInt(splits[1]);
+        } catch (Exception e) {
+            value = 1;
+        }
+        return value == 0; // in preference dialog is checked=No change
+    }
+
     private boolean getDeviceBrightnessSharedProfile()
     {
         int value;
@@ -1322,6 +1334,18 @@ public class Profile {
     }
 
     boolean getDeviceBrightnessAutomatic()
+    {
+        int value;
+        try {
+            String[] splits = _deviceBrightness.split("\\|");
+            value = Integer.parseInt(splits[2]);
+        } catch (Exception e) {
+            value = 1;
+        }
+        return value == 1;
+    }
+
+    private static boolean getDeviceBrightnessAutomatic(String _deviceBrightness)
     {
         int value;
         try {
@@ -2520,7 +2544,14 @@ public class Profile {
                         }
                         else
                         if (sharedPreferences != null) {
-
+                            String value = sharedPreferences.getString(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS, Profile.defaultValuesString.get(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS));
+                            if (Profile.getDeviceBrightnessChange(value) && Profile.getDeviceBrightnessAutomatic(value)) {
+                                if (applicationNeverAskForGrantRoot) {
+                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                    // not needed to test all parameters
+                                    return preferenceAllowed;
+                                }
+                            }
                         }
 
                         if (PPApplication.settingsBinaryExists(fromUIThread))
