@@ -11,7 +11,7 @@
     <color name="activityCommandBackgroundColor">#1F000000</color>
 
     <color name="activityPopupBackground">#FFd0d0d0</color>
-    <color name="dialog_divider">#10000000</color>
+    <color name="dialog_divider">#17000000</color>
 
     <color name="tabTargetHelpCircleColor">#FFFFFFFF</color>
     <color name="tabTargetHelpTextColor">#FFFFFFFF</color>
