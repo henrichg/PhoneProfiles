@@ -18,7 +18,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.TypedValue;
@@ -27,6 +26,8 @@ import java.text.Collator;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.preference.Preference;
 
 class GlobalGUIRoutines {
 
@@ -222,8 +223,8 @@ class GlobalGUIRoutines {
             activity.recreate();
     }
 
-    static void setPreferenceTitleStyleX(androidx.preference.Preference preference,
-                                         boolean enabled, boolean bold,
+    static void setPreferenceTitleStyleX(Preference preference,
+                                         boolean enabled, boolean bold, boolean addBullet,
                                          @SuppressWarnings("SameParameterValue") boolean underline,
                                          boolean errorColor, boolean systemSettings)
     {
@@ -231,8 +232,23 @@ class GlobalGUIRoutines {
             CharSequence title = preference.getTitle();
             if (systemSettings) {
                 String s = title.toString();
-                if (!s.contains("(S)"))
-                    title = TextUtils.concat("(S) ", title);
+                if (!s.contains("(S)")) {
+                    if (bold && addBullet)
+                        title = TextUtils.concat("• (S) ", title);
+                    else
+                        title = TextUtils.concat("(S) ", title);
+                }
+            }
+            if (addBullet) {
+                if (bold) {
+                    String s = title.toString();
+                    if (!s.startsWith("• "))
+                        title = TextUtils.concat("• ", title);
+                } else {
+                    String s = title.toString();
+                    if (s.startsWith("• "))
+                        title = TextUtils.replace(title, new String[]{"• "}, new CharSequence[]{""});
+                }
             }
             Spannable sbt = new SpannableString(title);
             Object[] spansToRemove = sbt.getSpans(0, title.length(), Object.class);
@@ -243,7 +259,7 @@ class GlobalGUIRoutines {
             if (bold || underline) {
                 if (bold) {
                     sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    sbt.setSpan(new RelativeSizeSpan(1.05f), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    //sbt.setSpan(new RelativeSizeSpan(1.05f), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 if (underline)
                     sbt.setSpan(new UnderlineSpan(), 0, sbt.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
