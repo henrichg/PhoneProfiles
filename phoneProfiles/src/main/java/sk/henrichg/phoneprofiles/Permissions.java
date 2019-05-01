@@ -596,6 +596,17 @@ public class Permissions {
                     if (grantedWriteSettings)
                         setShowRequestWriteSettingsPermission(context, true);
                 }
+                if (grantedWriteSettings) {
+                    if (profile._deviceBluetooth != 0) {
+                        if (PPApplication.romIsEMUI) {
+                            if (android.os.Build.VERSION.SDK_INT >= 28) {
+                                grantedWriteSettings = Settings.System.canWrite(context);
+                                if (grantedWriteSettings)
+                                    setShowRequestWriteSettingsPermission(context, true);
+                            }
+                        }
+                    }
+                }
                 boolean grantedReadPhoneState = true;
                 if ((profile._deviceMobileData != 0) || (profile._deviceNetworkType != 0))
                     grantedReadPhoneState = (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED);

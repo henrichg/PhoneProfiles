@@ -479,7 +479,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         s = getString(R.string.permission_why_profile_wallpaper);
                         break;
                     case Permissions.PERMISSION_PROFILE_RADIO_PREFERENCES:
-                        s = getString(R.string.permission_why_profile_radio_preferences);
+                        if (PPApplication.romIsEMUI && (Build.VERSION.SDK_INT >= 28))
+                            s = getString(R.string.permission_why_profile_radio_preferences_emui);
+                        else
+                            s = getString(R.string.permission_why_profile_radio_preferences);
                         break;
                     case Permissions.PERMISSION_PROFILE_PHONE_STATE_BROADCAST:
                         s = getString(R.string.permission_why_profile_phone_state_broadcast);
