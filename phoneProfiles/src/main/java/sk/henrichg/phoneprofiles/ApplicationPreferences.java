@@ -257,17 +257,12 @@ class ApplicationPreferences {
         return getSharedPreferences(context).getBoolean(PREF_APPLICATION_ACTIVATOR_GRID_LAYOUT, true);
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean applicationWidgetListGridLayout(Context context) {
         return getSharedPreferences(context).getBoolean(PREF_APPLICATION_WIDGET_LIST_GRID_LAYOUT, true);
     }
 
     static boolean applicationWidgetIconHideProfileName(Context context) {
         return getSharedPreferences(context).getBoolean(PREF_APPLICATION_WIDGET_ICON_HIDE_PROFILE_NAME, false);
-    }
-
-    static boolean applicationUnlinkRingerNotificationVolumes(Context context) {
-        return getSharedPreferences(context).getBoolean(PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES, false);
     }
 
     static boolean applicationShortcutEmblem(Context context) {
@@ -284,6 +279,10 @@ class ApplicationPreferences {
 
     static String applicationWidgetIconLightnessT(Context context) {
         return getSharedPreferences(context).getString(PREF_APPLICATION_WIDGET_ICON_LIGHTNESS_T, "100");
+    }
+
+    static boolean applicationUnlinkRingerNotificationVolumes(Context context) {
+        return getSharedPreferences(context).getBoolean(PREF_APPLICATION_UNLINK_RINGER_NOTIFICATION_VOLUMES, false);
     }
 
     static int applicationForceSetMergeRingNotificationVolumes(Context context) {
