@@ -287,7 +287,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
         */
 
-        if (ActivateProfileHelper.getMergedRingNotificationVolumes(context)) {
+        if (ApplicationPreferences.preferences.getBoolean(ActivateProfileHelper.PREF_MERGED_RING_NOTIFICATION_VOLUMES, true)) {
+            // detection of volumes merge = volumes are merged
             TextView infoText3 = findViewById(R.id.activity_info_notification_unlink_ringer_notification_volumes);
             infoText3.setOnClickListener(new View.OnClickListener() {
                 @Override
