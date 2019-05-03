@@ -771,7 +771,7 @@ public class PPApplication extends Application {
 
     // root -----------------------------------------------------
 
-    private static synchronized void initRoot() {
+    static synchronized void initRoot() {
         synchronized (PPApplication.rootMutex) {
             rootMutex.rootChecked = false;
             rootMutex.rooted = false;
