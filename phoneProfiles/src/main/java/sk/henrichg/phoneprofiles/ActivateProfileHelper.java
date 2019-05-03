@@ -698,6 +698,7 @@ class ActivateProfileHelper {
 
                 if (forProfileActivation) {
                     if (profile.getVolumeDTMFChange()) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
                         try {
                             audioManager.setStreamVolume(AudioManager.STREAM_DTMF /* 8 */, profile.getVolumeDTMFValue(), 0);
                             //Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_DTMF, profile.getVolumeDTMFValue());
