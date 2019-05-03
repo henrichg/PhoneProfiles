@@ -93,6 +93,8 @@ public class Profile {
     int _screenNightMode;
     int _dtmfToneWhenDialing;
     int _soundOnTouch;
+    String _volumeDTMF;
+    String _volumeAccessibility;
 
     Bitmap _iconBitmap;
     Bitmap _preferencesIndicator;
@@ -158,6 +160,8 @@ public class Profile {
     static final String PREF_PROFILE_SCREEN_NIGHT_MODE = "prf_pref_screenNightMode";
     static final String PREF_PROFILE_DTMF_TONE_WHEN_DIALING = "prf_pref_dtmfToneWhenDialing";
     static final String PREF_PROFILE_SOUND_ON_TOUCH = "prf_pref_soundOnTouch";
+    static final String PREF_PROFILE_VOLUME_DTMF = "prf_pref_volumeDTMF";
+    static final String PREF_PROFILE_VOLUME_ACCESSIBILITY = "prf_pref_volumeAccessibility";
 
     static final HashMap<String, Boolean> defaultValuesBoolean;
     static {
@@ -225,6 +229,8 @@ public class Profile {
         defaultValuesString.put("prf_pref_screenNightMode", "0");
         defaultValuesString.put("prf_pref_dtmfToneWhenDialing", "0");
         defaultValuesString.put("prf_pref_soundOnTouch", "0");
+        defaultValuesString.put("prf_pref_volumeDTMF", "-1|1|0");
+        defaultValuesString.put("prf_pref_volumeAccessibility", "-1|1|0");
     }
 
     static final int RINGERMODE_RING = 1;
@@ -705,7 +711,9 @@ public class Profile {
                    int deviceCloseAllApplications,
                    int screenNightMode,
                    int dtmfToneWhenDialing,
-                   int soundOnTouch)
+                   int soundOnTouch,
+                   String volumeDTMF,
+                   String volumeAccessibility)
     {
         this._id = id;
         this._name = name;
@@ -768,6 +776,8 @@ public class Profile {
         this._screenNightMode = screenNightMode;
         this._dtmfToneWhenDialing = dtmfToneWhenDialing;
         this._soundOnTouch = soundOnTouch;
+        this._volumeDTMF = volumeDTMF;
+        this._volumeAccessibility = volumeAccessibility;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -835,7 +845,9 @@ public class Profile {
                    int deviceCloseAllApplications,
                    int screenNightMode,
                    int dtmfToneWhenDialing,
-                   int soundOnTouch)
+                   int soundOnTouch,
+                   String volumeDTMF,
+                   String volumeAccessibility)
     {
         this._name = name;
         this._icon = icon;
@@ -897,6 +909,8 @@ public class Profile {
         this._screenNightMode = screenNightMode;
         this._dtmfToneWhenDialing = dtmfToneWhenDialing;
         this._soundOnTouch = soundOnTouch;
+        this._volumeDTMF = volumeDTMF;
+        this._volumeAccessibility = volumeAccessibility;
 
         this._iconBitmap = null;
         this._preferencesIndicator = null;
@@ -966,6 +980,8 @@ public class Profile {
         this._screenNightMode = profile._screenNightMode;
         this._dtmfToneWhenDialing = profile._dtmfToneWhenDialing;
         this._soundOnTouch = profile._soundOnTouch;
+        this._volumeDTMF = profile._volumeDTMF;
+        this._volumeAccessibility = profile._volumeAccessibility;
 
         this._iconBitmap = profile._iconBitmap;
         this._preferencesIndicator = profile._preferencesIndicator;
@@ -1274,6 +1290,78 @@ public class Profile {
         int value;
         try {
             String[] splits = _volumeVoice.split("\\|");
+            value = Integer.parseInt(splits[2]);
+        } catch (Exception e) {
+            value = 0;
+        }
+        return value == 1;
+    }
+
+    int getVolumeDTMFValue()
+    {
+        int value;
+        try {
+            String[] splits = _volumeDTMF.split("\\|");
+            value = Integer.parseInt(splits[0]);
+        } catch (Exception e) {
+            value = 0;
+        }
+        return value;
+    }
+
+    boolean getVolumeDTMFChange()
+    {
+        int value;
+        try {
+            String[] splits = _volumeDTMF.split("\\|");
+            value = Integer.parseInt(splits[1]);
+        } catch (Exception e) {
+            value = 1;
+        }
+        return value == 0; // in preference dialog is checked=No change
+    }
+
+    private boolean getVolumeDTMFSharedProfile()
+    {
+        int value;
+        try {
+            String[] splits = _volumeDTMF.split("\\|");
+            value = Integer.parseInt(splits[2]);
+        } catch (Exception e) {
+            value = 0;
+        }
+        return value == 1;
+    }
+
+    int getVolumeAccessibilityValue()
+    {
+        int value;
+        try {
+            String[] splits = _volumeAccessibility.split("\\|");
+            value = Integer.parseInt(splits[0]);
+        } catch (Exception e) {
+            value = 0;
+        }
+        return value;
+    }
+
+    boolean getVolumeAccessibilityChange()
+    {
+        int value;
+        try {
+            String[] splits = _volumeAccessibility.split("\\|");
+            value = Integer.parseInt(splits[1]);
+        } catch (Exception e) {
+            value = 1;
+        }
+        return value == 0; // in preference dialog is checked=No change
+    }
+
+    private boolean getVolumeAccessibilitySharedProfile()
+    {
+        int value;
+        try {
+            String[] splits = _volumeAccessibility.split("\\|");
             value = Integer.parseInt(splits[2]);
         } catch (Exception e) {
             value = 0;
@@ -1824,6 +1912,8 @@ public class Profile {
         int	maximumValueAlarm = 7;
         int	maximumValueSystem = 7;
         int	maximumValueVoiceCall = 7;
+        int maximumValueDTMF = 7;
+        int maximumValueAccessibility = 7;
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
             maximumValueRing = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
@@ -1832,6 +1922,9 @@ public class Profile {
             maximumValueAlarm = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
             maximumValueSystem = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
             maximumValueVoiceCall = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+            maximumValueDTMF = audioManager.getStreamMaxVolume(AudioManager.STREAM_DTMF);
+            if (Build.VERSION.SDK_INT >= 26)
+                maximumValueAccessibility = audioManager.getStreamMaxVolume(AudioManager.STREAM_ACCESSIBILITY);
         }
 
         SharedPreferences preferences = context.getSharedPreferences("profile_preferences_default_profile", Context.MODE_PRIVATE);
@@ -1897,6 +1990,8 @@ public class Profile {
         profile._screenNightMode = Integer.parseInt(preferences.getString(PREF_PROFILE_SCREEN_NIGHT_MODE, "0"));
         profile._dtmfToneWhenDialing = Integer.parseInt(preferences.getString(PREF_PROFILE_DTMF_TONE_WHEN_DIALING, "0"));
         profile._soundOnTouch = Integer.parseInt(preferences.getString(PREF_PROFILE_SOUND_ON_TOUCH, "0"));
+        profile._volumeDTMF = preferences.getString(PREF_PROFILE_VOLUME_DTMF, getVolumeLevelString(70, maximumValueDTMF)+"|0|0");
+        profile._volumeAccessibility = preferences.getString(PREF_PROFILE_VOLUME_ACCESSIBILITY, getVolumeLevelString(80, maximumValueAccessibility)+"|0|0");
 
         return profile;
     }
@@ -1972,7 +2067,9 @@ public class Profile {
                     profile._deviceCloseAllApplications,
                     profile._screenNightMode,
                     profile._dtmfToneWhenDialing,
-                    profile._soundOnTouch);
+                    profile._soundOnTouch,
+                    profile._volumeDTMF,
+                    profile._volumeAccessibility);
 
             boolean zenModeMapped = false;
             if (profile._volumeRingerMode == SHARED_PROFILE_VALUE) {
@@ -2085,6 +2182,10 @@ public class Profile {
                 mappedProfile._dtmfToneWhenDialing = sharedProfile._dtmfToneWhenDialing;
             if (profile._soundOnTouch == SHARED_PROFILE_VALUE)
                 mappedProfile._soundOnTouch = sharedProfile._soundOnTouch;
+            if (profile.getVolumeDTMFSharedProfile())
+                mappedProfile._volumeDTMF = sharedProfile._volumeDTMF;
+            if (profile.getVolumeAccessibilitySharedProfile())
+                mappedProfile._volumeAccessibility = sharedProfile._volumeAccessibility;
 
             mappedProfile._iconBitmap = profile._iconBitmap;
             mappedProfile._preferencesIndicator = profile._preferencesIndicator;
@@ -2854,6 +2955,20 @@ public class Profile {
             }
             else
                 preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+            checked = true;
+        }
+        if (checked && (profile == null))
+            return preferenceAllowed;
+
+        if (preferenceKey.equals(Profile.PREF_PROFILE_VOLUME_ACCESSIBILITY))
+        {
+            if (android.os.Build.VERSION.SDK_INT >= 26) {
+                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
+            }
+            else {
+                preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_old_android);
+            }
             checked = true;
         }
         if (checked && (profile == null))

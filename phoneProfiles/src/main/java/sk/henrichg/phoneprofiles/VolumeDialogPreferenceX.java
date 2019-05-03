@@ -1,9 +1,11 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -24,7 +26,7 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     final String volumeType;
     int noChange;
     //int sharedProfile;
-    //int disableSharedProfile;
+    //final int disableSharedProfile;
 
     int maximumValue = 7;
     final int minimumValue = 0;
@@ -35,23 +37,26 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     private int defaultValueAlarm = 0;
     private int defaultValueSystem = 0;
     private int defaultValueVoice = 0;
+    private int defaultValueDTMF = 0;
+    private int defaultValueAccessibility = 0;
     final int stepSize = 1;
 
     private String sValue = "0|1";
     int value = 0;
 
+    @SuppressLint("InlinedApi")
     public VolumeDialogPreferenceX(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         _context = context;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
-            R.styleable.VolumeDialogPreference);
+                R.styleable.VolumeDialogPreference);
 
         volumeType = typedArray.getString(
-            R.styleable.VolumeDialogPreference_volumeType);
+                R.styleable.VolumeDialogPreference_volumeType);
         noChange = typedArray.getInteger(
-            R.styleable.VolumeDialogPreference_vNoChange, 1);
+                R.styleable.VolumeDialogPreference_vNoChange, 1);
         /*sharedProfile = typedArray.getInteger(
                 R.styleable.VolumeDialogPreference_vSharedProfile, 0);
         disableSharedProfile = typedArray.getInteger(
@@ -74,6 +79,10 @@ public class VolumeDialogPreferenceX extends DialogPreference {
                 maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
             else if (volumeType.equalsIgnoreCase("VOICE"))
                 maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+            else if (volumeType.equalsIgnoreCase("DTMF"))
+                maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_DTMF);
+            else if ((Build.VERSION.SDK_INT >= 26) && volumeType.equalsIgnoreCase("ACCESSIBILITY"))
+                maximumValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_ACCESSIBILITY);
             maximumMediaValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
             // get actual values from audio manager
@@ -83,6 +92,9 @@ public class VolumeDialogPreferenceX extends DialogPreference {
             defaultValueAlarm = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
             defaultValueSystem = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
             defaultValueVoice = audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
+            defaultValueDTMF = audioManager.getStreamVolume(AudioManager.STREAM_DTMF);
+            if (Build.VERSION.SDK_INT >= 26)
+                defaultValueAccessibility = audioManager.getStreamVolume(AudioManager.STREAM_ACCESSIBILITY);
         }
 
         typedArray.recycle();
@@ -124,6 +136,12 @@ public class VolumeDialogPreferenceX extends DialogPreference {
                 else
                 if (volumeType.equalsIgnoreCase("VOICE"))
                     value =  defaultValueVoice;
+                else
+                if (volumeType.equalsIgnoreCase("DTMF"))
+                    value =  defaultValueDTMF;
+                else
+                if (volumeType.equalsIgnoreCase("ACCESSIBILITY"))
+                    value =  defaultValueAccessibility;
             }
         } catch (Exception e) {
             PPApplication.logE("VolumeDialogPreferenceX.getValueVDP", Log.getStackTraceString(e));
@@ -166,7 +184,8 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     }
 
     String getSValue() {
-        return (value + minimumValue)
+        int _value = value + minimumValue;
+        return _value
                 + "|" + noChange
                 + "|" + "0";
     }
@@ -235,7 +254,6 @@ public class VolumeDialogPreferenceX extends DialogPreference {
         {
             super(source);
 
-            // restore profileId
             sValue = source.readString();
         }
 
@@ -244,7 +262,6 @@ public class VolumeDialogPreferenceX extends DialogPreference {
         {
             super.writeToParcel(dest, flags);
 
-            // save profileId
             dest.writeString(sValue);
         }
 
