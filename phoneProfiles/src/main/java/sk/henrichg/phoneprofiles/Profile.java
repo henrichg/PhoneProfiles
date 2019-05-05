@@ -1429,6 +1429,22 @@ public class Profile {
         return value;
     }
 
+    static int getDeviceBrightnessValue(String _deviceBrightness)
+    {
+        int maximumValue = 100;
+        int defaultValue = 50;
+        int value;
+        try {
+            String[] splits = _deviceBrightness.split("\\|");
+            value = Integer.parseInt(splits[0]);
+            if ((value < 0) || (value > maximumValue))
+                value = defaultValue;
+        } catch (Exception e) {
+            value = defaultValue;
+        }
+        return value;
+    }
+
     boolean getDeviceBrightnessChange()
     {
         int value;
@@ -1477,7 +1493,7 @@ public class Profile {
         return value == 1;
     }
 
-    private static boolean getDeviceBrightnessAutomatic(String _deviceBrightness)
+    static boolean getDeviceBrightnessAutomatic(String _deviceBrightness)
     {
         int value;
         try {
@@ -1490,6 +1506,18 @@ public class Profile {
     }
 
     boolean getDeviceBrightnessChangeLevel()
+    {
+        int value;
+        try {
+            String[] splits = _deviceBrightness.split("\\|");
+            value = Integer.parseInt(splits[4]);
+        } catch (Exception e) {
+            value = 1;
+        }
+        return value == 1;
+    }
+
+    static boolean getDeviceBrightnessChangeLevel(String _deviceBrightness)
     {
         int value;
         try {
