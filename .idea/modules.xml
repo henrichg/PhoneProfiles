@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/RootShell/RootShell.iml" filepath="$PROJECT_DIR$/RootShell/RootShell.iml" />
       <module fileurl="file://$PROJECT_DIR$/RootTools/RootTools.iml" filepath="$PROJECT_DIR$/RootTools/RootTools.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-job/android-job.iml" filepath="$PROJECT_DIR$/android-job/android-job.iml" />
       <module fileurl="file://$PROJECT_DIR$/appkillermanager/appkillermanager.iml" filepath="$PROJECT_DIR$/appkillermanager/appkillermanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" filepath="$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" />
