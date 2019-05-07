@@ -16,7 +16,7 @@ public class RefreshActivitiesBroadcastReceiver extends BroadcastReceiver {
         boolean refreshIcons = intent.getBooleanExtra(EXTRA_REFRESH_ICONS, false);
         boolean refreshAlsoEditor = intent.getBooleanExtra(EXTRA_REFRESH_ALSO_EDITOR, true);
 
-        Intent refreshIntent = new Intent("RefreshActivatorGUIBroadcastReceiver");
+        Intent refreshIntent = new Intent(PPApplication.PACKAGE_NAME + ".RefreshActivatorGUIBroadcastReceiver");
         refreshIntent.putExtra(EXTRA_REFRESH_ICONS, refreshIcons);
         LocalBroadcastManager.getInstance(context).sendBroadcast(refreshIntent);
         /*ActivateProfileActivity activateProfileActivity = ActivateProfileActivity.getInstance();
@@ -24,7 +24,7 @@ public class RefreshActivitiesBroadcastReceiver extends BroadcastReceiver {
             activateProfileActivity.refreshGUI(refreshIcons);*/
 
         if (refreshAlsoEditor) {
-            refreshIntent = new Intent("RefreshEditorGUIBroadcastReceiver");
+            refreshIntent = new Intent(PPApplication.PACKAGE_NAME + ".RefreshEditorGUIBroadcastReceiver");
             refreshIntent.putExtra(EXTRA_REFRESH_ICONS, refreshIcons);
             LocalBroadcastManager.getInstance(context).sendBroadcast(refreshIntent);
             /*EditorProfilesActivity editorProfilesActivity = EditorProfilesActivity.getInstance();

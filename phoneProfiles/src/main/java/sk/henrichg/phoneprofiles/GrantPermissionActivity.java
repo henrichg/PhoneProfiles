@@ -69,9 +69,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
     //private static final int ACCESS_NOTIFICATION_POLICY_REQUEST_CODE_FORCE_GRANT = 9095;
     //private static final int DRAW_OVERLAYS_REQUEST_CODE_FORCE_GRANT = 9096;
 
-    private static final String EXTRA_WITH_RATIONALE = "sk.henrichg.phoneprofiles.EXTRA_WITH_RATIONALE";
+    private static final String EXTRA_WITH_RATIONALE = PPApplication.PACKAGE_NAME + ".EXTRA_WITH_RATIONALE";
 
-    private static final String NOTIFICATION_DELETED_ACTION = "sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED";
+    private static final String NOTIFICATION_DELETED_ACTION = PPApplication.PACKAGE_NAME + ".PERMISSIONS_NOTIFICATION_DELETED";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

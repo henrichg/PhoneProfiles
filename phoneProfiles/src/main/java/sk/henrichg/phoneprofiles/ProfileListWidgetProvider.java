@@ -23,7 +23,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
 
     private DataWrapper dataWrapper;
 
-    private static final String INTENT_REFRESH_LISTWIDGET = "sk.henrichg.phoneprofiles.REFRESH_LISTWIDGET";
+    private static final String INTENT_REFRESH_LISTWIDGET = PPApplication.PACKAGE_NAME + ".REFRESH_LISTWIDGET";
 
     private boolean isLargeLayout;
     private boolean isKeyguard;

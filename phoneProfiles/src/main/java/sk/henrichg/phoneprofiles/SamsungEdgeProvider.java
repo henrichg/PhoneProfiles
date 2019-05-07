@@ -18,7 +18,7 @@ public class SamsungEdgeProvider extends SlookCocktailProvider {
 
     private DataWrapper dataWrapper;
 
-    private static final String INTENT_REFRESH_EDGEPANEL = "sk.henrichg.phoneprofiles.REFRESH_EDGEPANEL";
+    private static final String INTENT_REFRESH_EDGEPANEL = PPApplication.PACKAGE_NAME + ".REFRESH_EDGEPANEL";
 
     //private static boolean isVisible = false;
 

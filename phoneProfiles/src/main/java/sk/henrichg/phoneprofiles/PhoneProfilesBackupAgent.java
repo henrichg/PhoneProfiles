@@ -27,9 +27,9 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
 
         PPApplication.exitApp(appContext, /*dataWrapper,*/ null, false/*, false*/);
 
-        Intent intent = new Intent("FinishActivatorBroadcastReceiver");
+        Intent intent = new Intent(PPApplication.PACKAGE_NAME + ".FinishActivatorBroadcastReceiver");
         LocalBroadcastManager.getInstance(appContext).sendBroadcast(intent);
-        intent = new Intent("FinishEditorBroadcastReceiver");
+        intent = new Intent(PPApplication.PACKAGE_NAME + ".FinishEditorBroadcastReceiver");
         LocalBroadcastManager.getInstance(appContext).sendBroadcast(intent);
         /*
         ActivateProfileActivity activateProfileActivity = ActivateProfileActivity.getInstance();

@@ -90,8 +90,8 @@ public class PhoneProfilesService extends Service {
 
     //--------------------------
 
-    static final String ACTION_COMMAND = "sk.henrichg.phoneprofiles.PhoneProfilesService.ACTION_COMMAND";
-    private static final String ACTION_STOP = "sk.henrichg.phoneprofiles.PhoneProfilesService.ACTION_STOP_SERVICE";
+    static final String ACTION_COMMAND = PPApplication.PACKAGE_NAME + ".PhoneProfilesService.ACTION_COMMAND";
+    private static final String ACTION_STOP = PPApplication.PACKAGE_NAME + ".PhoneProfilesService.ACTION_STOP_SERVICE";
 
     private final BroadcastReceiver commandReceiver = new BroadcastReceiver() {
         @Override

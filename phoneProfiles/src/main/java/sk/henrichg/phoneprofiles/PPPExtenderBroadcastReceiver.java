@@ -97,7 +97,7 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
     static int isExtenderInstalled(Context context) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            ApplicationInfo appInfo = packageManager.getApplicationInfo("sk.henrichg.phoneprofilesplusextender", 0);
+            ApplicationInfo appInfo = packageManager.getApplicationInfo(PPApplication.PACKAGE_NAME_EXTENDER, 0);
             boolean installed = appInfo.enabled;
             if (installed) {
                 PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=true");
