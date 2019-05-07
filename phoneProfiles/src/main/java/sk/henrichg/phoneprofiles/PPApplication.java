@@ -170,6 +170,8 @@ public class PPApplication extends Application {
     //@SuppressWarnings("SpellCheckingInspection")
     //static private FirebaseAnalytics mFirebaseAnalytics;
 
+    public static boolean isScreenOn;
+
     public static HandlerThread handlerThread = null;
     public static HandlerThread handlerThreadInternalChangeToFalse = null;
     public static HandlerThread handlerThreadWidget = null;
@@ -289,6 +291,12 @@ public class PPApplication extends Application {
         }
         Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(getApplicationContext(), actualVersionCode));
         //}
+
+        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+        if (pm != null)
+            isScreenOn = pm.isInteractive();
+        else
+            isScreenOn = false;
 
         //	Debug.startMethodTracing("phoneprofiles");
 
@@ -1167,12 +1175,14 @@ public class PPApplication extends Application {
 
     // others ------------------------------------------------------------------
 
+    /*
     static boolean isScreenOn(PowerManager powerManager) {
         //if (Build.VERSION.SDK_INT >= 20)
             return powerManager.isInteractive();
         //else
         //    return powerManager.isScreenOn();
     }
+    */
 
     public static void sleep(long ms) {
         /*long start = SystemClock.uptimeMillis();

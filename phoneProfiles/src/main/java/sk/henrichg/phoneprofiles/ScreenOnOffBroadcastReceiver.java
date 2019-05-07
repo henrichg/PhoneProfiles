@@ -37,10 +37,13 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         wakeLock.acquire(10 * 60 * 1000);
                     }
 
-                    if ((action != null) && action.equals(Intent.ACTION_SCREEN_ON))
+                    if ((action != null) && action.equals(Intent.ACTION_SCREEN_ON)) {
                         PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+                        PPApplication.isScreenOn = true;
+                    }
                     else if ((action != null) && action.equals(Intent.ACTION_SCREEN_OFF)) {
                         PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
+                        PPApplication.isScreenOn = false;
 
                         final Handler handler = new Handler(appContext.getMainLooper());
                         handler.post(new Runnable() {

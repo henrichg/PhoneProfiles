@@ -473,8 +473,8 @@ public class PhoneProfilesService extends Service {
                 Context appContext = getApplicationContext();
 
                 boolean isScreenOn;
-                PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-                isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
+                //PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
+                //isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
 
                 boolean secureKeyguard;
                 if (keyguardManager == null)
@@ -485,7 +485,7 @@ public class PhoneProfilesService extends Service {
                     if (!secureKeyguard) {
                         PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
 
-                        if (isScreenOn) {
+                        if (PPApplication.isScreenOn) {
                             PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
 
                             if (ActivateProfileHelper.getLockScreenDisabled(appContext)) {
