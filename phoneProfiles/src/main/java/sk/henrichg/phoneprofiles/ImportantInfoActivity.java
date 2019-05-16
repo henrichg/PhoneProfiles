@@ -432,7 +432,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
         PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
 
-        if (scrollTo != 0) {
+        if ((scrollTo != 0) && (savedInstanceState == null)) {
             final ScrollView scrollView = findViewById(R.id.important_info_scroll_view);
             final View viewToScroll = findViewById(scrollTo);
             new Handler().postDelayed(new Runnable() {
