@@ -1402,7 +1402,6 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void setCategorySummary(Preference preferenceCategory, String summary) {
         if (getActivity() == null)
             return;
@@ -1411,7 +1410,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
 
         String key = preferenceCategory.getKey();
 
-        boolean addEnd = true;
+        //boolean addEnd = true;
 
         if (key.equals("applicationInterfaceCategoryRoot")) {
             summary = summary + getString(R.string.phone_profiles_pref_applicationLanguage);
@@ -1586,10 +1585,10 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
             }
         }
 
-        if (addEnd) {
+        /*if (addEnd) {
             if (!summary.isEmpty()) summary = summary + " • ";
             summary = summary + "…";
-        }
+        }*/
 
         preferenceCategory.setSummary(summary);
     }
