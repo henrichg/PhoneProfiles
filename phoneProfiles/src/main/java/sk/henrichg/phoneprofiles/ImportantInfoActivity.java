@@ -8,12 +8,14 @@ import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.thelittlefireman.appkillermanager.managers.KillerManager;
@@ -22,6 +24,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ImportantInfoActivity extends AppCompatActivity {
+
+    static final String EXTRA_SCROLL_TO = "extra_important_info_activity_scroll_to";
+
+    int scrollTo = 0;
 
     @SuppressLint("InlinedApi")
     @Override
@@ -420,6 +426,20 @@ public class ImportantInfoActivity extends AppCompatActivity {
         if (!news) {
             TextView infoTextNews = findViewById(R.id.activity_info_notification_news);
             infoTextNews.setVisibility(View.GONE);
+        }
+
+        Intent intent = getIntent();
+        scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
+
+        if (scrollTo != 0) {
+            final ScrollView scrollView = findViewById(R.id.important_info_scroll_view);
+            final View viewToScroll = findViewById(scrollTo);
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.scrollTo(0, viewToScroll.getTop());
+                }
+            });
         }
 
     }
