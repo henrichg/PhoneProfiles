@@ -430,18 +430,25 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
+        PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
 
         if (scrollTo != 0) {
             final ScrollView scrollView = findViewById(R.id.important_info_scroll_view);
             final View viewToScroll = findViewById(scrollTo);
-            new Handler().post(new Runnable() {
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    PPApplication.logE("ImportantInfoActivity.onStart.handler", "scrollView="+scrollView);
+                    PPApplication.logE("ImportantInfoActivity.onStart.handler", "viewToScroll="+viewToScroll);
                     scrollView.scrollTo(0, viewToScroll.getTop());
                 }
-            });
+            }, 200);
         }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

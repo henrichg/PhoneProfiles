@@ -98,6 +98,9 @@ public class PPApplication extends Application {
                                             //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
                                             +"|Profile.isProfilePreferenceAllowed"
                                             +"|PPApplication.hasSystemFeature"
+
+                                            +"|InfoDialogPreferenceFragmentX"
+                                            +"|ImportantInfoActivity"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
