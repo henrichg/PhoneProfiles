@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
@@ -101,6 +102,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         clickableSpan = new ClickableSpan() {
             @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
+            @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://crowdin.com/project/phoneprofilesplus";
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -111,7 +118,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
         */
@@ -129,6 +136,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
+            @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://sites.google.com/site/phoneprofiles/home/privacy-policy";
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -139,7 +152,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -149,6 +162,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt = new SpannableString(str2);
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         clickableSpan = new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
             @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://github.com/henrichg/PhoneProfiles/releases";
@@ -160,7 +179,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -170,6 +189,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt = new SpannableString(str2);
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         clickableSpan = new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
             @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://github.com/henrichg/PhoneProfiles";
@@ -181,7 +206,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -191,6 +216,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt = new SpannableString(str2);
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         clickableSpan = new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
             @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://forum.xda-developers.com/android/apps-games/phone-profile-plus-t3799429";
@@ -202,7 +233,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -214,6 +245,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         clickableSpan = new ClickableSpan() {
             @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
+            @Override
             public void onClick(@NonNull View textView) {
                 String url = "https://plus.google.com/communities/100282006628784777672";
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -224,7 +261,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, str1.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), str1.length()+1, str2.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
         */
@@ -233,6 +270,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         str1 = getString(R.string.about_application_rate_in_googlePlay);
         sbt = new SpannableString(str1);
         clickableSpan = new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
             @Override
             public void onClick(@NonNull View textView) {
                 Uri uri = Uri.parse("market://details?id=" + getPackageName());
@@ -257,7 +300,7 @@ public class AboutApplicationActivity extends AppCompatActivity {
             }
         };
         sbt.setSpan(clickableSpan, 0, str1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sbt.setSpan(new UnderlineSpan(), 0, str1.length(), 0);
+        //sbt.setSpan(new UnderlineSpan(), 0, str1.length(), 0);
         text.setText(sbt);
         text.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -294,6 +337,12 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, strNoLink.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(ds.linkColor);    // you can use custom color
+                ds.setUnderlineText(false);    // this remove the underline
+            }
+
+            @Override
             public void onClick(@NonNull View textView) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -319,8 +368,8 @@ public class AboutApplicationActivity extends AppCompatActivity {
         sbt.setSpan(clickableSpan, strNoLink.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         if (boldLink)
             sbt.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), strNoLink.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        else
-            sbt.setSpan(new UnderlineSpan(), strNoLink.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //else
+        //    sbt.setSpan(new UnderlineSpan(), strNoLink.length()+1, str2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(sbt);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }

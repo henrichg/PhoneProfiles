@@ -3,6 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.preference.DialogPreference;
 
@@ -21,6 +22,8 @@ public class InfoDialogPreferenceX extends DialogPreference {
         infoText = typedArray.getString(R.styleable.InfoDialogPreference_infoText);
 
         typedArray.recycle();
+
+        setNegativeButtonText(null);
     }
 
     @Override
