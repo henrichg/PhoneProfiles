@@ -11,13 +11,13 @@
         app:defaultValue="@string/array_pref_value_system"
         app:entries="@array/languageArray"
         app:entryValues="@array/languageValues"
-        app:iconSpaceReserved="false" />
+        app:layout="@layout/mp_preference_material_widget" />
     <!--<Preference
         app:key="applicationLanguage24"
         app:title="@string/phone_profiles_pref_applicationLanguage"
         app:summary="@string/phone_profiles_pref_systemLanguage_summary"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false">
+        app:layout="@layout/mp_preference_material_widget">
     </Preference>-->
     <ListPreference
         app:title="@string/phone_profiles_pref_applicationTheme"
@@ -26,7 +26,7 @@
         app:defaultValue="@string/array_pref_value_color"
         app:entries="@array/themeArray"
         app:entryValues="@array/themeValues"
-        app:iconSpaceReserved="false" />
+        app:layout="@layout/mp_preference_material_widget" />
     <ListPreference
         app:title="@string/phone_profiles_pref_nightModeOffApplicationTheme"
         app:summary="@string/phone_profiles_pref_applicationTheme_color"
@@ -34,6 +34,6 @@
         app:defaultValue="@string/array_pref_value_color"
         app:entries="@array/nightModeOffThemeArray"
         app:entryValues="@array/nightModeOffThemeValues"
-        app:iconSpaceReserved="false" />
+        app:layout="@layout/mp_preference_material_widget" />
     
 </androidx.preference.PreferenceScreen>

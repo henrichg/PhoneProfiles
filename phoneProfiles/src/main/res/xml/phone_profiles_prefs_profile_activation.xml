@@ -8,12 +8,12 @@
         app:defaultValue="-999"
         app:key="applicationBackgroundProfile"
         app:title="@string/phone_profiles_pref_applicationEventBackgroundProfile"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:addNoActivateItem="1" />
     <SwitchPreferenceCompat
         app:key="applicationAlert"
         app:title="@string/phone_profiles_pref_applicationAlert"
         app:defaultValue="true"
-        app:iconSpaceReserved="false" />
+        app:layout="@layout/mp_preference_material_widget" />
 
 </androidx.preference.PreferenceScreen>

@@ -8,84 +8,84 @@
         app:title="@string/phone_profiles_pref_category_gui"
         app:key="applicationInterfaceCategoryRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsInterface" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_start"
         app:key="categoryApplicationStartRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsApplicationStart" />
 
     <Preference
         app:key="categorySystemRoot"
         app:title="@string/phone_profiles_pref_category_system"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsSystem" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_permissions"
         app:key="categoryPermissionsRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsPermissions" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_notifications"
         app:key="categoryNotificationsRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsNotifications" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_activation"
         app:key="profileActivationCategoryRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsProfileActivation" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_activator"
         app:key="categoryActivatorRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsActivator" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_editor"
         app:key="categoryEditorRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsEditor" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_widget_list"
         app:key="categoryWidgetListRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsWidgetList" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_widget_one_row"
         app:key="categoryWidgetOneRowRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsWidgetOneRow" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_widget_icon_shortcut"
         app:key="categoryWidgetIconRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsWidgetIcon" />
 
     <Preference
         app:title="@string/phone_profiles_pref_category_samsung_edge_panel"
         app:key="categorySamsungEdgePanelRoot"
         app:widgetLayout="@layout/start_activity_preference"
-        app:iconSpaceReserved="false"
+        app:layout="@layout/mp_preference_material_widget"
         app:fragment="sk.henrichg.phoneprofiles.PhoneProfilesPrefsActivity$PhoneProfilesPrefsSamsungEdgePanel" />
 
 </androidx.preference.PreferenceScreen>
