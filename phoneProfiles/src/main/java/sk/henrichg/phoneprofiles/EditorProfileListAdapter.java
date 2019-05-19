@@ -310,13 +310,15 @@ class EditorProfileListAdapter extends RecyclerView.Adapter<EditorProfileListVie
                 int[] screenLocation = new int[2];
                 listItemView.getLocationOnScreen(screenLocation);
                 //listItemView.getLocationInWindow(screenLocation);
-                profileItemTarget.offset(screenLocation[0] + listItemView.getWidth() / 2 - listItemView.getHeight() / 2, screenLocation[1]);
+                View dragHandle = listItemView.findViewById(R.id.main_list_drag_handle);
+                profileItemTarget.offset(screenLocation[0] + 100 + dragHandle.getWidth(), screenLocation[1]);
 
                 final TapTargetSequence sequence = new TapTargetSequence(activity);
 
                 sequence.targets(
                         TapTarget.forBounds(profileItemTarget, activity.getString(R.string.editor_activity_targetHelps_profilePreferences_title), activity.getString(R.string.editor_activity_targetHelps_profilePreferences_description))
                                 .transparentTarget(true)
+                                .targetCircleColor(circleColor)
                                 .textColor(textColor)
                                 .tintTarget(tintTarget)
                                 .drawShadow(true)
