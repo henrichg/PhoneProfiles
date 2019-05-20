@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:background="?attr/activityPopupBackground"
     tools:context=".EditorProfilesActivity"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="false" >
     
     <!--
     This layout is a two-pane layout for the Profiles

@@ -3,7 +3,7 @@
     android:id="@+id/important_info_scroll_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="false" >
 
     <LinearLayout
         android:layout_width="wrap_content"
