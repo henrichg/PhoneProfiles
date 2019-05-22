@@ -13,7 +13,7 @@ import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 
 public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentCompat
-                                implements SeekBar.OnSeekBarChangeListener {
+        implements SeekBar.OnSeekBarChangeListener {
 
     private TextView mValue;
     private SeekBar mSeekBarHours;
@@ -91,6 +91,8 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
                 if (iValue > preference.mMax)
                     iValue = preference.mMax;
 
+                preference.value = String.valueOf(iValue);
+
                 mValue.setText(GlobalGUIRoutines.getDurationString(iValue));
 
                 int hours = iValue / 3600;
@@ -103,21 +105,21 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
             }
         }, iValue * 1000, TimeDurationPicker.HH_MM_SS);
         mValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    int hours = mSeekBarHours.getProgress();
-                    int minutes = mSeekBarMinutes.getProgress();
-                    int seconds = mSeekBarSeconds.getProgress();
+                                      @Override
+                                      public void onClick(View view) {
+                                          int hours = mSeekBarHours.getProgress();
+                                          int minutes = mSeekBarMinutes.getProgress();
+                                          int seconds = mSeekBarSeconds.getProgress();
 
-                    int iValue = (hours * 3600 + minutes * 60 + seconds);
-                    if (iValue < preference.mMin) iValue = preference.mMin;
-                    if (iValue > preference.mMax) iValue = preference.mMax;
+                                          int iValue = (hours * 3600 + minutes * 60 + seconds);
+                                          if (iValue < preference.mMin) iValue = preference.mMin;
+                                          if (iValue > preference.mMax) iValue = preference.mMax;
 
-                    mValueDialog.setDuration(iValue * 1000);
-                    if (!((Activity)context).isFinishing())
-                        mValueDialog.show();
-                }
-            }
+                                          mValueDialog.setDuration(iValue * 1000);
+                                          if (!((Activity)context).isFinishing())
+                                              mValueDialog.show();
+                                      }
+                                  }
         );
 
         mSeekBarHours.setOnSeekBarChangeListener(this);
@@ -160,6 +162,8 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
             int iValue = (hours * 3600 + minutes * 60 + seconds);
             if (iValue < preference.mMin) iValue = preference.mMin;
             if (iValue > preference.mMax) iValue = preference.mMax;
+
+            preference.value = String.valueOf(iValue);
 
             mValue.setText(GlobalGUIRoutines.getDurationString(iValue));
         }
