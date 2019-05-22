@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
-
 import androidx.preference.DialogPreference;
 
 public class BrightnessDialogPreferenceX extends DialogPreference {
@@ -28,6 +27,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
     final int stepSize = 1;
 
     private String sValue = "";
+    String defaultValue;
     int value = 0;
 
     final boolean adaptiveAllowed;
@@ -58,7 +58,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
 
         typedArray.recycle();
 
-        //_sharedProfile = Profile.getSharedProfile(_context);
+        //_sharedProfile = Profile.getProfileFromSharedPreferences(_context, PPApplication.SHARED_PROFILE_PREFS_NAME);
 
         adaptiveAllowed = (android.os.Build.VERSION.SDK_INT <= 21) ||
                 (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, null, true, _context).allowed
@@ -87,6 +87,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
     {
         // Get the persistent value and correct it for the minimum value.
         sValue = getPersistedString((String) defaultValue);
+        this.defaultValue = (String)defaultValue;
 
         PPApplication.logE("VolumeDialogPreferenceX.getValueVDP", "form onSetInitialValue");
         getValueBDP();
@@ -152,7 +153,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
             if (automatic == 1)
             {
                 //if (android.os.Build.VERSION.SDK_INT >= 21) // for Android 5.0: adaptive brightness
-                    prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_adaptiveBrightness);
+                prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_adaptiveBrightness);
                 //else
                 //    prefVolumeDataSummary = _context.getResources().getString(R.string.preference_profile_autoBrightness);
             }
@@ -183,6 +184,13 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
         }
     }
 
+    void resetSummary() {
+        sValue = getPersistedString((String) defaultValue);
+
+        getValueBDP();
+        setSummaryBDP();
+    }
+
     static boolean changeEnabled(String value) {
         String[] splits = value.split("\\|");
         if (splits.length > 1) {
@@ -207,6 +215,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
 
         final BrightnessDialogPreferenceX.SavedState myState = new BrightnessDialogPreferenceX.SavedState(superState);
         myState.sValue = sValue;
+        myState.defaultValue = defaultValue;
         return myState;
     }
 
@@ -225,6 +234,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
         BrightnessDialogPreferenceX.SavedState myState = (BrightnessDialogPreferenceX.SavedState)state;
         super.onRestoreInstanceState(myState.getSuperState());
         sValue = myState.sValue;
+        defaultValue = myState.defaultValue;
 
         getValueBDP();
         setSummaryBDP();
@@ -234,12 +244,14 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
     private static class SavedState extends BaseSavedState
     {
         String sValue;
+        String defaultValue;
 
         SavedState(Parcel source)
         {
             super(source);
 
             sValue = source.readString();
+            defaultValue = source.readString();
         }
 
         @Override
@@ -248,6 +260,7 @@ public class BrightnessDialogPreferenceX extends DialogPreference {
             super.writeToParcel(dest, flags);
 
             dest.writeString(sValue);
+            dest.writeString(defaultValue);
         }
 
         SavedState(Parcelable superState)
