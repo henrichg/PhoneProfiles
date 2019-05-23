@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">nécessite certaines autorisations.</string>
   <string name="permissions_for_install_tone_text1">Installation de la sonnerie « PhoneProfiles silencieux » ne sera pas exécutée, parce que ceci exige certaines autorisations.</string>
   <string name="permissions_for_install_tone_text2">S\'il vous plaît validez les boîtes de dialogues suivantes pour que « tone » soit installé.</string>
-  <string name="permissions_for_install_tone_text_notification">Demande d\'autorisation</string>
+  <string name="permissions_notification_text">Demande d\'autorisation</string>
   <string name="permissions_for_install_tone_big_text_notification">L\'installation de « tone » « PhoneProfiles silencieux » nécessite des autorisations.</string>
   <string name="menu_install_tone">Installer « tone » « PhoneProfiles silencieux »</string>
   <string name="toast_tone_installation_installed_ok">« tone » « PhoneProfiles silencieux » installé.</string>

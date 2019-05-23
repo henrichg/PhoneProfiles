@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">требует дополнительные разрешения.</string>
   <string name="permissions_for_install_tone_text1">Установка звука \"PhoneProfiles Silent\" не будет выполнена, не хватает требуемых разрешений.</string>
   <string name="permissions_for_install_tone_text2">Предоставьте их в следующем диалоговом окне. После этого звук будет установлен.</string>
-  <string name="permissions_for_install_tone_text_notification">Запрос разрешений</string>
+  <string name="permissions_notification_text">Запрос разрешений</string>
   <string name="permissions_for_install_tone_big_text_notification">Установка звука \"PhoneProfiles Silent\" требует дополнительных разрешений.</string>
   <string name="menu_install_tone">Установить звук \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">Звук \"PhoneProfiles Silent\" установлен.</string>

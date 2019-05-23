@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">membutuhkan beberapa izin untuk diberikan.</string>
   <string name="permissions_for_install_tone_text1">Pemasangan nada \"PhoneProfiles Silent\" tidak bisa dijalankan karena membutuhkan beberapa izin.</string>
   <string name="permissions_for_install_tone_text2">Tolong beri mereka di dialog berikutnya. Nada kemudian akan dipasang.</string>
-  <string name="permissions_for_install_tone_text_notification">Permintaan izin</string>
+  <string name="permissions_notification_text">Permintaan izin</string>
   <string name="permissions_for_install_tone_big_text_notification">Pemasangan nada \"PhoneProfiles Silent\" membutuhkan beberapa izin untuk diberikan.</string>
   <string name="menu_install_tone">Pasang nada \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">Nada \"PhoneProfiles Silent\" terpasang.</string>

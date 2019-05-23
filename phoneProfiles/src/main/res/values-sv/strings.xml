@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">kräver att vissa behörigheter beviljas.</string>
   <string name="permissions_for_install_tone_text1">Installation av ljudet \"PhoneProfiles tyst\" körs inte, eftersom detta kräver vissa behörigheter.</string>
   <string name="permissions_for_install_tone_text2">Vänligen ge dem i nästa fönster. Då ljudet kommer att installeras.</string>
-  <string name="permissions_for_install_tone_text_notification">Begäran om behörigheter</string>
+  <string name="permissions_notification_text">Begäran om behörigheter</string>
   <string name="permissions_for_install_tone_big_text_notification">Installation av ljudet \"PhoneProfiles tyst\" kräver beviljande av vissa behörigheter.</string>
   <string name="menu_install_tone">Installera ljudet \"PhoneProfiles tyst\"</string>
   <string name="toast_tone_installation_installed_ok">Ljudet \"PhoneProfiles tyst\" installerat.</string>

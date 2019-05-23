@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">requires some permissions to be granted.</string>
   <string name="permissions_for_install_tone_text1">Installation of tone \"PhoneProfiles Silent\" cannot be executed because it requires some permissions.</string>
   <string name="permissions_for_install_tone_text2">Please grant them in the next dialog. Tone will then be installed.</string>
-  <string name="permissions_for_install_tone_text_notification">Zahteva za dovoljenje</string>
+  <string name="permissions_notification_text">Zahteva za dovoljenje</string>
   <string name="permissions_for_install_tone_big_text_notification">Namestitev tona \"PhoneProfiles tiho\" zahteva odobritev določenih dovoljenj.</string>
   <string name="menu_install_tone">Namesti ton \"PhoneProfiles tiho\"</string>
   <string name="toast_tone_installation_installed_ok">Ton \"PhoneProfiles tiho\" je nameščen.</string>

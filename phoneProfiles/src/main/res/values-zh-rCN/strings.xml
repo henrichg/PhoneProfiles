@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">需要授予某些权限。</string>
   <string name="permissions_for_install_tone_text1">将不会执行铃声“PhoneProfiles 无声”的安装，因为此操作需要某些特定权限。</string>
   <string name="permissions_for_install_tone_text2">请在下一个对话框中授权，然后铃声将被安装。</string>
-  <string name="permissions_for_install_tone_text_notification">权限请求</string>
+  <string name="permissions_notification_text">权限请求</string>
   <string name="permissions_for_install_tone_big_text_notification">铃声“PhoneProfiles 无声”的安装需要授予某些特定权限。</string>
   <string name="menu_install_tone">安装铃声“PhoneProfiles 无声”</string>
   <string name="toast_tone_installation_installed_ok">铃声“PhoneProfiles 无声”已安装</string>

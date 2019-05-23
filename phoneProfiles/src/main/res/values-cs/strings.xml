@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">vyžaduje udělení některých povolení.</string>
   <string name="permissions_for_install_tone_text1">Instalace zvuku \"PhoneProfiles Silent\" se neprovede, protože to vyžaduje některá povolení.</string>
   <string name="permissions_for_install_tone_text2">Prosím, povolte je v následujících dialogových oknech. Pak se zvuk nainstaluje.</string>
-  <string name="permissions_for_install_tone_text_notification">Vyžaduje se povolení</string>
+  <string name="permissions_notification_text">Vyžaduje se povolení</string>
   <string name="permissions_for_install_tone_big_text_notification">Instalace zvuku \"PhoneProfiles Silent\" vyžaduje udělení některých povolení.</string>
   <string name="menu_install_tone">Instalace zvuku \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">Zvuk \"PhoneProfiles Silent\" nainstalován.</string>

@@ -424,7 +424,7 @@
     <string name="permissions_for_profile_big_text_notification">bazı izinlerin verilmiş olması lazımdır.</string>
     <string name="permissions_for_install_tone_text1">\"PhoneProfiles Sessiz\" tonu kurulumu yürütülemiyor. Çünkü bazı izinler verilmemiş.</string>
     <string name="permissions_for_install_tone_text2">Lütfen sonraki iletişim kutularında izinleri verin. Sonra ton kurulacak.</string>
-    <string name="permissions_for_install_tone_text_notification">İzin isteği</string>
+    <string name="permissions_notification_text">İzin isteği</string>
     <string name="permissions_for_install_tone_big_text_notification">\"PhoneProfiles Sessiz\" tonunun kurulabilmesi için bazı izinler lazımdır.</string>
     <string name="menu_install_tone">\"PhoneProfiles Sessiz\" tonunu kurun</string>
     <string name="toast_tone_installation_installed_ok">\"PhoneProfiles Sessiz\" tonu kuruldu.</string>

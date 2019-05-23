@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">engedéllyel kell rendelkeznie.</string>
   <string name="permissions_for_install_tone_text1">A hangok telepítése a \"Csendes PhoneProfiles\"-ban nem lesz végrehajtva, mert ehhez bizonyos engedélyekre van szükség.</string>
   <string name="permissions_for_install_tone_text2">Végezd el a beállításokat. Majd a hang telepítve lesz.</string>
-  <string name="permissions_for_install_tone_text_notification">Engedély kérelem</string>
+  <string name="permissions_notification_text">Engedély kérelem</string>
   <string name="permissions_for_install_tone_big_text_notification">\"Csendes PhoneProfiles\" hang telepítéséhez néhány dolgot engedélyezni kell.</string>
   <string name="menu_install_tone">Telepítse a \"Csendes PhoneProfiles\" hangokat</string>
   <string name="toast_tone_installation_installed_ok">\"Csendes PhoneProfiles\" hangok telepítve.</string>

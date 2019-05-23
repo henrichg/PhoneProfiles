@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">wymaga pewnych uprawnień przyznawanych.</string>
   <string name="permissions_for_install_tone_text1">Instalacja tonu \"PhoneProfiles Silent\" nie zostanie wykonana, bo to wymaga pewnych uprawnień.</string>
   <string name="permissions_for_install_tone_text2">Proszę przyznaj je w oknach dialogowych, które zaraz zobaczysz. Potem dźwięk zostanie zainstalowany.</string>
-  <string name="permissions_for_install_tone_text_notification">Prośba o uprawnienia</string>
+  <string name="permissions_notification_text">Prośba o uprawnienia</string>
   <string name="permissions_for_install_tone_big_text_notification">Instalacja dźwięku \"PhoneProfiles Silent\" wymaga przyznania pewnych uprawnień.</string>
   <string name="menu_install_tone">Zainstaluj dźwięk \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">Dźwięk \"PhoneProfiles Silent\" zainstalowany.</string>

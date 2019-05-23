@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">נדרשת התרה של הרשאות מסוימות.</string>
   <string name="permissions_for_install_tone_text1">התקנת הצליל \"PhoneProfiles Silent\" לא תבוצע, כי פעולה זו דורשת הרשאות מסוימות.</string>
   <string name="permissions_for_install_tone_text2">אנא התירו אותן בתיבות דו-שיח הבאות, ואז הצליל יותקן.</string>
-  <string name="permissions_for_install_tone_text_notification">בקשת הרשאות</string>
+  <string name="permissions_notification_text">בקשת הרשאות</string>
   <string name="permissions_for_install_tone_big_text_notification">התקנת הצליל \"PhoneProfiles Silent\" דורשת התרת הרשאות מסוימות.</string>
   <string name="menu_install_tone">התקנת הצליל \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">הצליל \"PhoneProfiles Silent\" הותקן.</string>

@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">कुछ अनुमतियां दी जाने की आवश्यकता है ।</string>
   <string name="permissions_for_install_tone_text1">टोन की स्थापना \"PhoneProfiles मूक\" क्योंकि यह कुछ अनुमतियों की आवश्यकता है निष्पादित नहीं किया जा सकता है ।</string>
   <string name="permissions_for_install_tone_text2">कृपया उंहें अगले संवाद में अनुदान । प्रोफ़ाइल फिर सक्रिय हो जाएगा ।</string>
-  <string name="permissions_for_install_tone_text_notification">अनुमति अनुरोधित</string>
+  <string name="permissions_notification_text">अनुमति अनुरोधित</string>
   <string name="permissions_for_install_tone_big_text_notification">टोन की स्थापना \"PhoneProfiles मूक\" कुछ अनुमति दी जा करने की आवश्यकता है ।</string>
   <string name="menu_install_tone">टोन स्थापित करें \"PhoneProfiles मूक\"</string>
   <string name="toast_tone_installation_installed_ok">टोन \"PhoneProfiles मूक\" स्थापित ।</string>

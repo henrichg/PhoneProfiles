@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">需要一些要授予的許可權。</string>
   <string name="permissions_for_install_tone_text1">安裝 \"PhoneProfiles 無聲\" 將不會執行，因為這需要某些許可權。</string>
   <string name="permissions_for_install_tone_text2">請在下一個對話方塊中授予他們。然後音調將會安裝。</string>
-  <string name="permissions_for_install_tone_text_notification">許可權請求</string>
+  <string name="permissions_notification_text">許可權請求</string>
   <string name="permissions_for_install_tone_big_text_notification">安裝音調 \"PhoneProfiles 無聲\" 需要一些要授予許可權。</string>
   <string name="menu_install_tone">安裝 \"PhoneProfiles 無聲\" 音調</string>
   <string name="toast_tone_installation_installed_ok">音調 \"PhoneProfiles 無聲\" 已安裝。</string>

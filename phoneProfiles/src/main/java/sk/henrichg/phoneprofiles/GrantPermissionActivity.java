@@ -556,11 +556,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
             /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
-                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nTitle = context.getString(R.string.permissions_notification_text);
                 String nText = context.getString(R.string.permissions_for_install_tone_big_text_notification);
                 if (android.os.Build.VERSION.SDK_INT < 24) {
                     nTitle = context.getString(R.string.app_name);
-                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                    nText = context.getString(R.string.permissions_notification_text) + ": " +
                             context.getString(R.string.permissions_for_install_tone_big_text_notification);
                 }
                 mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
@@ -572,11 +572,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         .setAutoCancel(true); // clear notification after click
                 notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
             } else*/ if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
-                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nTitle = context.getString(R.string.permissions_notification_text);
                 String nText = context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
                 if (android.os.Build.VERSION.SDK_INT < 24) {
                     nTitle = context.getString(R.string.app_name);
-                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                    nText = context.getString(R.string.permissions_notification_text) + ": " +
                             context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
                 }
                 mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
@@ -588,11 +588,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         .setAutoCancel(true); // clear notification after click
                 notificationID = PPApplication.GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID;
             } else if (grantType == Permissions.GRANT_TYPE_LOG_TO_FILE) {
-                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nTitle = context.getString(R.string.permissions_notification_text);
                 String nText = context.getString(R.string.permissions_for_log_to_file_big_text_notification);
                 if (android.os.Build.VERSION.SDK_INT < 24) {
                     nTitle = context.getString(R.string.app_name);
-                    nText = context.getString(R.string.permissions_for_install_tone_text_notification) + ": " +
+                    nText = context.getString(R.string.permissions_notification_text) + ": " +
                             context.getString(R.string.permissions_for_log_to_file_big_text_notification);
                 }
                 mBuilder = new NotificationCompat.Builder(context, PPApplication.GRANT_PERMISSION_NOTIFICATION_CHANNEL)
@@ -604,7 +604,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         .setAutoCancel(true); // clear notification after click
                 notificationID = PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID;
             } else {
-                String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
+                String nTitle = context.getString(R.string.permissions_notification_text);
                 String nText = "";
                 if (android.os.Build.VERSION.SDK_INT < 24) {
                     nTitle = context.getString(R.string.app_name);

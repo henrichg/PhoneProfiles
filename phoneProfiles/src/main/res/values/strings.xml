@@ -461,7 +461,7 @@
     <string name="permissions_for_profile_big_text_notification">requires some permissions to be granted.</string>
     <string name="permissions_for_install_tone_text1">Installation of tone \"PhoneProfiles Silent\" cannot be executed because it requires some permissions.</string>
     <string name="permissions_for_install_tone_text2">Please grant them in the next dialog. Tone will then be installed.</string>
-    <string name="permissions_for_install_tone_text_notification">Permissions request</string>
+    <string name="permissions_notification_text">Permissions request</string>
     <string name="permissions_for_install_tone_big_text_notification">Installation of tone \"PhoneProfiles Silent\" requires some permissions to be granted.</string>
     <string name="menu_install_tone">Install tone \"PhoneProfiles Silent\"</string>
     <string name="toast_tone_installation_installed_ok">Tone \"PhoneProfiles Silent\" installed.</string>

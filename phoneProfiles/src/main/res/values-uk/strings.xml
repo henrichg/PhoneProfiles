@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">потребує додаткових дозволів.</string>
   <string name="permissions_for_install_tone_text1">Встановлення звуку \"PhoneProfiles Silent\" не буде виконано, бракує необхідних дозволів.</string>
   <string name="permissions_for_install_tone_text2">Надайте дозвіл у наступному діалоговому вікні. Після цього буде встановлено звук.</string>
-  <string name="permissions_for_install_tone_text_notification">Запит дозволів</string>
+  <string name="permissions_notification_text">Запит дозволів</string>
   <string name="permissions_for_install_tone_big_text_notification">Встановлення звуку «PhoneProfiles Silent» потребує додаткових дозволів.</string>
   <string name="menu_install_tone">Встановити звук «PhoneProfiles Silent»</string>
   <string name="toast_tone_installation_installed_ok">Звук «PhoneProfiles Silent» встановлено.</string>

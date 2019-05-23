@@ -424,7 +424,7 @@
   <string name="permissions_for_profile_big_text_notification">vereist dat sommige machtigingen worden verleend.</string>
   <string name="permissions_for_install_tone_text1">De beltoon \"Silent PhoneProfiles\" wordt niet geïnstalleerd, omdat hiervoor bepaalde machtigingen nodig zijn.</string>
   <string name="permissions_for_install_tone_text2">Sta het toe in de volgende schermen. Dan zal Toon geïnstalleerd worden.</string>
-  <string name="permissions_for_install_tone_text_notification">Toestemming aanvragen</string>
+  <string name="permissions_notification_text">Toestemming aanvragen</string>
   <string name="permissions_for_install_tone_big_text_notification">Installatie van geluid \"PhoneProfiles Silent\" vereist een aantal machtigingen.</string>
   <string name="menu_install_tone">Installeer geluid \"PhoneProfiles Silent\"</string>
   <string name="toast_tone_installation_installed_ok">Geluid \"PhoneProfiles Silente\" geïnstalleerd.</string>
