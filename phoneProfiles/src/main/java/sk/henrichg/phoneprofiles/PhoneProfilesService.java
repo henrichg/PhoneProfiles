@@ -472,7 +472,7 @@ public class PhoneProfilesService extends Service {
 
                 Context appContext = getApplicationContext();
 
-                boolean isScreenOn;
+                //boolean isScreenOn;
                 //PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
                 //isScreenOn = ((pm != null) && PPApplication.isScreenOn(pm));
 

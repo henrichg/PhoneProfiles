@@ -29,7 +29,7 @@ import me.drakeet.support.toast.ToastCompat;
 
 import static android.content.Context.POWER_SERVICE;
 
-public class DataWrapper {
+class DataWrapper {
 
     public final Context context;
     //private boolean forGUI = false;

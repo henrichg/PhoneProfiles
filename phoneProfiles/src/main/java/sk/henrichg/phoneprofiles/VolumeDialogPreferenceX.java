@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.media.AudioManager;
@@ -47,6 +48,7 @@ public class VolumeDialogPreferenceX extends DialogPreference {
 
     int value = 0;
 
+    @SuppressLint("InlinedApi")
     public VolumeDialogPreferenceX(Context context, AttributeSet attrs) {
         super(context, attrs);
 

@@ -72,7 +72,7 @@ class ActivateProfileHelper {
     static boolean disableScreenTimeoutInternalChange = false;
 
     // bluetooth calls volume stream
-    static int STREAM_BLUETOOTH_SCO = 6;
+    static final int STREAM_BLUETOOTH_SCO = 6;
 
     static final String ADAPTIVE_BRIGHTNESS_SETTING_NAME = "screen_auto_brightness_adj";
 
@@ -2024,7 +2024,7 @@ class ActivateProfileHelper {
                 break;
         }
         if (setLockScreen) {
-            boolean isScreenOn;
+            //boolean isScreenOn;
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             if (pm != null) {
                 //isScreenOn = PPApplication.isScreenOn(pm);

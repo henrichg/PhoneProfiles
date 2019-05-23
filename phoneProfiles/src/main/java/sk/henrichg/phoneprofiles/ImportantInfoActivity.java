@@ -27,7 +27,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
     static final String EXTRA_SCROLL_TO = "extra_important_info_activity_scroll_to";
 
-    int scrollTo = 0;
+    private int scrollTo = 0;
 
     @SuppressLint("InlinedApi")
     @Override
@@ -446,11 +446,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 }, 200);
             }
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override

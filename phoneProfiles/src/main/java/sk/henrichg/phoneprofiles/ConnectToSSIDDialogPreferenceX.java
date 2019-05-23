@@ -18,7 +18,7 @@ public class ConnectToSSIDDialogPreferenceX extends DialogPreference {
     private final Context context;
 
     String value = "";
-    String defaultValue;
+    private String defaultValue;
     private boolean savedInstanceState;
 
     //final int disableSharedProfile;

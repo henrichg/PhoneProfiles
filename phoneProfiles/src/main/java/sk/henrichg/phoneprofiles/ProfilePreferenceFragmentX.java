@@ -1,6 +1,7 @@
 package sk.henrichg.phoneprofiles;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class ProfilePreferenceFragmentX extends PreferenceDialogFragmentCompat {
             protected void onPreExecute()
             {
                 super.onPreExecute();
+                GlobalGUIRoutines.lockScreenOrientation((Activity)prefContext);
                 listView.setVisibility(View.GONE);
                 linlaProgress.setVisibility(View.VISIBLE);
             }
@@ -112,6 +114,9 @@ public class ProfilePreferenceFragmentX extends PreferenceDialogFragmentCompat {
                         position = 0;
                 }
                 listView.setSelection(position);
+
+                if (!prefContext.isFinishing())
+                    GlobalGUIRoutines.unlockScreenOrientation((Activity)prefContext);
             }
 
         }.execute();
