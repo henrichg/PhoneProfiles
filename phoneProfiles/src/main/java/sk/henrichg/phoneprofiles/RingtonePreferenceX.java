@@ -32,6 +32,9 @@ public class RingtonePreferenceX extends DialogPreference {
     RingtonePreferenceFragmentX fragment;
 
     String ringtoneUri;
+    String defaultValue;
+    boolean savedInstanceState;
+
     //String oldRingtoneUri;
 
     private final String ringtoneType;
@@ -87,17 +90,13 @@ public class RingtonePreferenceX extends DialogPreference {
     protected void onSetInitialValue(Object defaultValue)
     {
         // set ringtone uri from preference value
-        String value;
-        try {
-            value = getPersistedString((String) defaultValue);
-        } catch  (Exception e) {
-            value = (String) defaultValue;
-        }
-        ringtoneUri = value;
+        ringtoneUri = getPersistedString((String) defaultValue);
+        this.defaultValue = (String)defaultValue;
         setSummary("");
         setRingtone("", true);
     }
 
+    @SuppressLint("StaticFieldLeak")
     void refreshListView() {
         PPApplication.logE("RingtonePreferenceX.refreshListView", "fragment="+fragment);
         if (fragment != null) {
@@ -230,6 +229,7 @@ public class RingtonePreferenceX extends DialogPreference {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     void setRingtone(String newRingtoneUri, boolean onlySetName)
     {
         if (!onlySetName)
@@ -437,9 +437,19 @@ public class RingtonePreferenceX extends DialogPreference {
         }
     }
 
+    void resetSummary() {
+        if (!savedInstanceState) {
+            ringtoneUri = getPersistedString(defaultValue);
+            setSummary("");
+            setRingtone("", true);
+        }
+        savedInstanceState = false;
+    }
 
     @Override
     protected Parcelable onSaveInstanceState() {
+        savedInstanceState = true;
+
         PPApplication.startHandlerThreadPlayTone();
         final Handler handler = new Handler(PPApplication.handlerThreadPlayTone.getLooper());
         handler.post(new Runnable() {
@@ -453,6 +463,7 @@ public class RingtonePreferenceX extends DialogPreference {
 
         final SavedState myState = new SavedState(superState);
         myState.ringtoneUri = ringtoneUri;
+        myState.defaultValue = defaultValue;
         //myState.oldRingtoneUri = oldRingtoneUri;
 
         return myState;
@@ -479,6 +490,7 @@ public class RingtonePreferenceX extends DialogPreference {
         SavedState myState = (SavedState) state;
         super.onRestoreInstanceState(myState.getSuperState());
         ringtoneUri = myState.ringtoneUri;
+        defaultValue = myState.defaultValue;
         //oldRingtoneUri = myState.oldRingtoneUri;
 
         PPApplication.logE("RingtonePreferenceX.onRestoreInstanceState", "ringtoneUri="+ringtoneUri);
@@ -501,12 +513,15 @@ public class RingtonePreferenceX extends DialogPreference {
                 };
 
         String ringtoneUri;
+        String defaultValue;
+
         //String oldRingtoneUri;
 
         @SuppressLint("ParcelClassLoader")
         SavedState(Parcel source) {
             super(source);
             ringtoneUri = source.readString();
+            defaultValue = source.readString();
             //oldRingtoneUri = source.readString();
         }
 
@@ -518,6 +533,7 @@ public class RingtonePreferenceX extends DialogPreference {
         public void writeToParcel(@NonNull Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeString(ringtoneUri);
+            dest.writeString(defaultValue);
             //dest.writeString(oldRingtoneUri);
         }
     }

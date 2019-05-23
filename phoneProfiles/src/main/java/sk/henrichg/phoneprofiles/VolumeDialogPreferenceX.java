@@ -1,6 +1,5 @@
 package sk.henrichg.phoneprofiles;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.media.AudioManager;
@@ -43,9 +42,11 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     final int stepSize = 1;
 
     private String sValue = "0|1";
+    private String defaultValue;
+    private boolean savedInstanceState;
+
     int value = 0;
 
-    @SuppressLint("InlinedApi")
     public VolumeDialogPreferenceX(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -113,7 +114,7 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     {
         // Get the persistent value and correct it for the minimum value.
         sValue = getPersistedString((String) defaultValue);
-
+        this.defaultValue = (String)defaultValue;
         PPApplication.logE("VolumeDialogPreferenceX.getValueVDP", "form onSetInitialValue");
         getValueVDP();
         setSummaryVDP();
@@ -208,6 +209,15 @@ public class VolumeDialogPreferenceX extends DialogPreference {
         }
     }
 
+    void resetSummary() {
+        if (!savedInstanceState) {
+            sValue = getPersistedString(defaultValue);
+            getValueVDP();
+            setSummaryVDP();
+        }
+        savedInstanceState = false;
+    }
+
     static boolean changeEnabled(String value) {
         String[] splits = value.split("\\|");
         if (splits.length > 1) {
@@ -224,13 +234,16 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     @Override
     protected Parcelable onSaveInstanceState()
     {
+        savedInstanceState = true;
+
         final Parcelable superState = super.onSaveInstanceState();
         /*if (isPersistent()) {
             return superState;
         }*/
 
         final VolumeDialogPreferenceX.SavedState myState = new VolumeDialogPreferenceX.SavedState(superState);
-        myState.sValue = sValue;
+        myState.sValue = getSValue();
+        myState.defaultValue = defaultValue;
         return myState;
     }
 
@@ -250,6 +263,7 @@ public class VolumeDialogPreferenceX extends DialogPreference {
         VolumeDialogPreferenceX.SavedState myState = (VolumeDialogPreferenceX.SavedState)state;
         super.onRestoreInstanceState(myState.getSuperState());
         sValue = myState.sValue;
+        defaultValue = myState.defaultValue;
 
         PPApplication.logE("VolumeDialogPreferenceX.getValueVDP", "form onRestoreInstanceState");
         getValueVDP();
@@ -260,12 +274,14 @@ public class VolumeDialogPreferenceX extends DialogPreference {
     private static class SavedState extends BaseSavedState
     {
         String sValue;
+        String defaultValue;
 
         SavedState(Parcel source)
         {
             super(source);
 
             sValue = source.readString();
+            defaultValue = source.readString();
         }
 
         @Override
@@ -274,6 +290,7 @@ public class VolumeDialogPreferenceX extends DialogPreference {
             super.writeToParcel(dest, flags);
 
             dest.writeString(sValue);
+            dest.writeString(defaultValue);
         }
 
         SavedState(Parcelable superState)
