@@ -19,7 +19,7 @@ public class ConnectToSSIDDialogPreferenceX extends DialogPreference {
 
     String value = "";
     String defaultValue;
-    private boolean restoredInstanceState;
+    private boolean savedInstanceState;
 
     //final int disableSharedProfile;
 
@@ -77,16 +77,18 @@ public class ConnectToSSIDDialogPreferenceX extends DialogPreference {
     }
 
     void resetSummary() {
-        if (!restoredInstanceState) {
+        if (!savedInstanceState) {
             value = getPersistedString(defaultValue);
             setSummaryCTSDP();
         }
-        restoredInstanceState = false;
+        savedInstanceState = false;
     }
 
     @Override
     protected Parcelable onSaveInstanceState()
     {
+        savedInstanceState = true;
+
         final Parcelable superState = super.onSaveInstanceState();
         /*if (isPersistent()) {
             return superState;
@@ -101,8 +103,6 @@ public class ConnectToSSIDDialogPreferenceX extends DialogPreference {
     @Override
     protected void onRestoreInstanceState(Parcelable state)
     {
-        restoredInstanceState = true;
-
         if (!state.getClass().equals(ConnectToSSIDDialogPreferenceX.SavedState.class)) {
             // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);

@@ -21,6 +21,10 @@ public class ProfileIconPreferenceX extends DialogPreference {
 
     ProfileIconPreferenceFragmentX fragment;
 
+    String value;
+    String defaultValue;
+    boolean savedInstanceState;
+
     String imageIdentifier;
     boolean isImageResourceID;
     boolean useCustomColor;
@@ -48,7 +52,6 @@ public class ProfileIconPreferenceX extends DialogPreference {
         imageSource = typedArray.getString(
             R.styleable.ProfileIconPreference_iconSource);
         */
-
 
         imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
         isImageResourceID = true;
@@ -86,8 +89,7 @@ public class ProfileIconPreferenceX extends DialogPreference {
         return BitmapManipulator.resampleBitmapUri(imageIdentifier, width, height, true, false, prefContext);
     }
 
-    private void getValuePIDP() {
-        String value = getPersistedString(imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor);
+    void getValuePIDP() {
         String[] splits = value.split("\\|");
         try {
             imageIdentifier = splits[0];
@@ -118,57 +120,30 @@ public class ProfileIconPreferenceX extends DialogPreference {
 
     void persistIcon() {
         if (shouldPersist()) {
-            setImageIdentifierAndType("", true, true);
+            //setImageIdentifierAndType("", true, true);
+            setValue(true);
         }
+    }
+
+    void resetSummary() {
+        PPApplication.logE("ProfileIconPreferenceX.resetSummary", "savedInstanceState="+savedInstanceState);
+
+        if (!savedInstanceState) {
+            value = getPersistedString(defaultValue);
+            getValuePIDP();
+            updateIcon(false);
+        }
+        savedInstanceState = false;
     }
 
     @Override
     protected void onSetInitialValue(Object defaultValue)
     {
+        value = getPersistedString((String)defaultValue);
+        this.defaultValue = (String)defaultValue;
+
         getValuePIDP();
     }
-
-    /*
-    @Override
-    protected Parcelable onSaveInstanceState()
-    {
-        final Parcelable superState = super.onSaveInstanceState();
-        if (isPersistent()) {
-            return superState;
-        }
-
-        final SavedState myState = new SavedState(superState);
-        myState.imageIdentifierAndType = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0");
-        return myState;
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Parcelable state)
-    {
-        if (!state.getClass().equals(SavedState.class)) {
-            // Didn't save state for us in onSaveInstanceState
-            super.onRestoreInstanceState(state);
-            return;
-        }
-
-        // restore instance state
-        SavedState myState = (SavedState)state;
-        super.onRestoreInstanceState(myState.getSuperState());
-        String value = (String) myState.imageIdentifierAndType;
-        String[] splits = value.split("\\|");
-        try {
-            imageIdentifier = splits[0];
-        } catch (Exception e) {
-            imageIdentifier = PPApplication.PROFILE_ICON_DEFAULT;
-        }
-        try {
-            isImageResourceID = splits[1].equals("1");
-        } catch (Exception e) {
-            isImageResourceID = true;
-        }
-        notifyChanged();
-    }
-    */
 
     /*
     public String getImageIdentifier()
@@ -182,51 +157,54 @@ public class ProfileIconPreferenceX extends DialogPreference {
     }
     */
 
-    void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID, boolean saveToPreference)
+    void setImageIdentifierAndType(String newImageIdentifier, boolean newIsImageResourceID)
     {
         String newValue = newImageIdentifier+"|"+((newIsImageResourceID) ? "1" : "0");
 
-        if (!saveToPreference) {
-            if (!imageIdentifier.equals(newImageIdentifier)) {
-                useCustomColor = false;
-                customColor = 0;
-            }
-            String[] splits = newValue.split("\\|");
-            try {
-                imageIdentifier = splits[0];
-            } catch (Exception e) {
-                imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
-            }
-            try {
-                isImageResourceID = splits[1].equals("1");
-            } catch (Exception e) {
-                isImageResourceID = true;
-            }
+        if (!imageIdentifier.equals(newImageIdentifier)) {
+            useCustomColor = false;
+            customColor = 0;
+        }
+        String[] splits = newValue.split("\\|");
+        try {
+            imageIdentifier = splits[0];
+        } catch (Exception e) {
+            imageIdentifier = Profile.PROFILE_ICON_DEFAULT;
+        }
+        try {
+            isImageResourceID = splits[1].equals("1");
+        } catch (Exception e) {
+            isImageResourceID = true;
         }
 
-        if (saveToPreference) {
-            if (!newIsImageResourceID) {
-                imageIdentifier = newImageIdentifier;
-                isImageResourceID = false;
-                useCustomColor = false;
-                customColor = 0;
-                //Log.d("---- ProfileIconPreference.setImageIdentifierAndType","getBitmap");
-                //getBitmap();
-            }
-            newValue = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor;
-            if (callChangeListener(newValue)) {
-                persistString(newValue);
-                notifyChanged();
-            }
-        }
-
+        setValue(false);
     }
 
     void setCustomColor(boolean newUseCustomColor, int newCustomColor) {
         useCustomColor = newUseCustomColor;
         customColor = newCustomColor;
-        adapter.setCustomColor(useCustomColor, customColor);
+        adapter.setCustomColor(/*useCustomColor, customColor*/);
         updateIcon(true);
+        setValue(false);
+    }
+
+    void setValue(boolean saveToPreference) {
+        /*if (!newIsImageResourceID) {
+            imageIdentifier = newImageIdentifier;
+            isImageResourceID = false;
+            useCustomColor = false;
+            customColor = 0;
+            //Log.d("---- ProfileIconPreference.setImageIdentifierAndType","getBitmap");
+            //getBitmap();
+        }*/
+        value = imageIdentifier+"|"+((isImageResourceID) ? "1" : "0")+"|"+((useCustomColor) ? "1" : "0")+"|"+customColor;
+        if (saveToPreference) {
+            updateIcon(false);
+            if (callChangeListener(value)) {
+                persistString(value);
+                notifyChanged();
+            }
+        }
     }
 
     void startGallery()
@@ -234,10 +212,10 @@ public class ProfileIconPreferenceX extends DialogPreference {
         Intent intent;
         try {
             //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-                intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
-                intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+            intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
             //}else
             //    intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
@@ -339,22 +317,27 @@ public class ProfileIconPreferenceX extends DialogPreference {
     @Override
     protected Parcelable onSaveInstanceState()
     {
+        PPApplication.logE("ProfileIconPreferenceX.onSaveInstanceState", "xxx");
+
+        savedInstanceState = true;
+
         final Parcelable superState = super.onSaveInstanceState();
         /*if (isPersistent()) {
             return superState;
         }*/
 
         final ProfileIconPreferenceX.SavedState myState = new ProfileIconPreferenceX.SavedState(superState);
-        myState.imageIdentifier = imageIdentifier;
-        myState.isImageResourceID = isImageResourceID;
-        myState.useCustomColor = useCustomColor;
-        myState.customColor = customColor;
+        setValue(false);
+        myState.value = value;
+        myState.defaultValue = defaultValue;
         return myState;
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state)
     {
+        PPApplication.logE("ProfileIconPreferenceX.onRestoreInstanceState", "xxx");
+
         //if (dataWrapper == null)
         //    dataWrapper = new DataWrapper(prefContext, false, 0, false);
 
@@ -367,28 +350,25 @@ public class ProfileIconPreferenceX extends DialogPreference {
         // restore instance state
         ProfileIconPreferenceX.SavedState myState = (ProfileIconPreferenceX.SavedState)state;
         super.onRestoreInstanceState(myState.getSuperState());
-        imageIdentifier = myState.imageIdentifier;
-        isImageResourceID = myState.isImageResourceID;
-        useCustomColor = myState.useCustomColor;
-        customColor = myState.customColor;
+        value = myState.value;
+        defaultValue = myState.defaultValue;
+
+        getValuePIDP();
+        //updateIcon(true);
     }
 
     // SavedState class
     private static class SavedState extends BaseSavedState
     {
-        String imageIdentifier;
-        boolean isImageResourceID;
-        boolean useCustomColor;
-        int customColor;
+        String value;
+        String defaultValue;
 
         SavedState(Parcel source)
         {
             super(source);
 
-            imageIdentifier = source.readString();
-            isImageResourceID = source.readInt() == 1;
-            useCustomColor = source.readInt() == 1;
-            customColor = source.readInt();
+            value = source.readString();
+            defaultValue = source.readString();
         }
 
         @Override
@@ -396,10 +376,8 @@ public class ProfileIconPreferenceX extends DialogPreference {
         {
             super.writeToParcel(dest, flags);
 
-            dest.writeString(imageIdentifier);
-            dest.writeInt(isImageResourceID ? 1 : 0);
-            dest.writeInt(useCustomColor ? 1 : 0);
-            dest.writeInt(customColor);
+            dest.writeString(value);
+            dest.writeString(defaultValue);
         }
 
         SavedState(Parcelable superState)
