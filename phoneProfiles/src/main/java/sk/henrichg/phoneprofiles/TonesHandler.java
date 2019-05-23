@@ -77,7 +77,7 @@ class TonesHandler {
             //Log.d("TonesHandler.isToneInstalled","not writable shared storage");
             return false;
         }*/
-
+        /*
         //File path = Environment.getExternalStoragePublicDirectory(directory);
         File path = context.getFilesDir();
         // Make sure the directory exists
@@ -90,6 +90,7 @@ class TonesHandler {
             Log.e("TonesHandler.isToneInstalled","file not exists");
             return false;
         }
+        */
 
         /*
         String outAbsPath = outFile.getAbsolutePath();
