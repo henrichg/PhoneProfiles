@@ -39,7 +39,7 @@ public class Permissions {
     static final int PERMISSION_PROFILE_RADIO_PREFERENCES = 8;
     static final int PERMISSION_PROFILE_PHONE_STATE_BROADCAST = 9;
     static final int PERMISSION_PROFILE_CUSTOM_PROFILE_ICON = 10;
-    static final int PERMISSION_INSTALL_TONE = 11;
+    //static final int PERMISSION_INSTALL_TONE = 11;
     static final int PERMISSION_EXPORT = 12;
     static final int PERMISSION_IMPORT = 13;
     static final int PERMISSION_PROFILE_NOTIFICATION_LED = 15;
@@ -56,7 +56,7 @@ public class Permissions {
     static final int PERMISSION_LOG_TO_FILE = 26;
 
     static final int GRANT_TYPE_PROFILE = 1;
-    static final int GRANT_TYPE_INSTALL_TONE = 2;
+    //static final int GRANT_TYPE_INSTALL_TONE = 2;
     static final int GRANT_TYPE_WALLPAPER = 3;
     static final int GRANT_TYPE_CUSTOM_PROFILE_ICON = 4;
     static final int GRANT_TYPE_EXPORT = 5;
@@ -235,7 +235,7 @@ public class Permissions {
             return true;
     }
     */
-
+    /*
     static boolean checkInstallTone(Context context, ArrayList<PermissionType>  permissions) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -255,7 +255,7 @@ public class Permissions {
             return false;
         }
     }
-
+    */
     static boolean checkProfileVibrationOnTouch(Context context, Profile profile, ArrayList<PermissionType>  permissions) {
         if (profile == null) return true;
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -990,7 +990,7 @@ public class Permissions {
         else
             return true;
     }
-
+    /*
     static boolean grantInstallTonePermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             ArrayList<PermissionType> permissions = new ArrayList<>();
@@ -1013,7 +1013,7 @@ public class Permissions {
         else
             return true;
     }
-
+    */
     static boolean grantWallpaperPermissions(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             boolean granted = checkGallery(context);
@@ -1254,14 +1254,14 @@ public class Permissions {
         if (notificationManager != null)
             notificationManager.cancel(PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
     }
-
+    /*
     static void removeInstallToneNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null)
             notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
     }
-
+    */
     static void removeLogToFileNotification(Context context)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -1274,7 +1274,7 @@ public class Permissions {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             notificationManager.cancel(PPApplication.GRANT_PROFILE_PERMISSIONS_NOTIFICATION_ID);
-            notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
+            //notificationManager.cancel(PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID);
             notificationManager.cancel(PPApplication.GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID);
         }
     }

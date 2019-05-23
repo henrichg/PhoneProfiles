@@ -132,7 +132,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
         if (fromNotification) {
             // called from notification - recheck permissions
-            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
+            /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
                 boolean granted = Permissions.checkInstallTone(context, permissions);
                 if (granted) {
                     Toast msg = ToastCompat.makeText(context.getApplicationContext(),
@@ -143,7 +143,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     return;
                 }
             }
-            else
+            else*/
             if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
                 boolean granted = Permissions.checkPlayRingtoneNotification(context, permissions);
                 if (granted) {
@@ -269,9 +269,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
             else {*/
             String showRequestString;
 
-            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
+            /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                 showRequestString = context.getString(R.string.permissions_for_install_tone_text1) + "<br><br>";
-            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+            else*/ if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
                 showRequestString = context.getString(R.string.permissions_for_wallpaper_text1) + "<br><br>";
             else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
                 showRequestString = context.getString(R.string.permissions_for_custom_profile_icon_text1) + "<br><br>";
@@ -356,9 +356,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
             showRequestString = showRequestString + "<br>";
 
-            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
+            /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_install_tone_text2);
-            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+            else*/ if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_wallpaper_text2);
             else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_custom_profile_icon_text2);
@@ -490,9 +490,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     case Permissions.PERMISSION_PROFILE_CUSTOM_PROFILE_ICON:
                         s = getString(R.string.permission_why_profile_custom_profile_icon);
                         break;
-                    case Permissions.PERMISSION_INSTALL_TONE:
+                    /*case Permissions.PERMISSION_INSTALL_TONE:
                         s = getString(R.string.permission_why_install_tone);
-                        break;
+                        break;*/
                     case Permissions.PERMISSION_EXPORT:
                         s = getString(R.string.permission_why_export);
                         break;
@@ -555,7 +555,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             Intent intent = new Intent(context, GrantPermissionActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);  // this close all activities with same taskAffinity
-            if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
+            /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
                 String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
                 String nText = context.getString(R.string.permissions_for_install_tone_big_text_notification);
                 if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -571,7 +571,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(nText))
                         .setAutoCancel(true); // clear notification after click
                 notificationID = PPApplication.GRANT_INSTALL_TONE_PERMISSIONS_NOTIFICATION_ID;
-            } else if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
+            } else*/ if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
                 String nTitle = context.getString(R.string.permissions_for_install_tone_text_notification);
                 String nText = context.getString(R.string.permissions_for_play_ringtone_notification_big_text_notification);
                 if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -1242,13 +1242,13 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
         */
 
-        if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
+        /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE) {
             //finishAffinity();
             finish();
             Permissions.removeInstallToneNotification(context);
             TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, context);
         }
-        else
+        else*/
         if (grantType == Permissions.GRANT_TYPE_WALLPAPER) {
             setResult(Activity.RESULT_OK);
             finish();

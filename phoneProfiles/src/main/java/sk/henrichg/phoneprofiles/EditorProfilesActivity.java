@@ -877,12 +877,12 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     doImport = false;
 
+                    GlobalGUIRoutines.unlockScreenOrientation(activity);
+
                     if ((importProgressDialog != null) && importProgressDialog.isShowing()) {
                         importProgressDialog.dismiss();
                         importProgressDialog = null;
                     }
-                    if (!isFinishing())
-                        GlobalGUIRoutines.unlockScreenOrientation(activity);
 
                     ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
