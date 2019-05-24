@@ -347,9 +347,10 @@ public class PhoneProfilesService extends Service {
 
                             //Permissions.clearMergedPermissions(appContext);
 
-                            //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
+                            if (!TonesHandler.isToneInstalled(TonesHandler.TONE_ID, appContext))
+                                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext);
 
-                            //TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext, false);
+                            //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
                             ActivateProfileHelper.setLockScreenDisabled(appContext, false);
 
