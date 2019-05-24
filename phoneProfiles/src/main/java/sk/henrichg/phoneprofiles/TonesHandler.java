@@ -8,6 +8,7 @@ import android.media.MediaScannerConnection;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -37,8 +38,8 @@ class TonesHandler {
 
                 String uriId = uri + "/" + id;
 
-                Log.e("TonesHandler.getPhoneProfilesSilentNotificationUri", "title="+title);
-                Log.e("TonesHandler.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
+                PPApplication.logE("TonesHandler.getPhoneProfilesSilentNotificationUri", "title="+title);
+                PPApplication.logE("TonesHandler.getPhoneProfilesSilentNotificationUri", "uriId="+uriId);
 
                 if (title.equals(TONE_NAME) || title.equals("phoneprofiles_silent"))
                     return uriId;
@@ -70,6 +71,25 @@ class TonesHandler {
                 return title;
         }
         return "";
+    }
+
+    static boolean isPhoneProfilesSilent(Uri uri, Context appContext) {
+        String displayName = "";
+        try {
+            Cursor cursor = appContext.getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    displayName = cursor.getString(nameIndex);
+                }
+
+                PPApplication.logE("TonesHandler.isPhoneProfilesSilent", "displayName=" + displayName);
+
+                cursor.close();
+            }
+        } catch (Exception ignored) {}
+        String filename = appContext.getResources().getResourceEntryName(TonesHandler.TONE_ID) + ".ogg";
+        return displayName.equals(filename);
     }
 
     private static boolean  isToneInstalled(int resID, /*String directory,*/ int type, Context context) {
@@ -116,11 +136,11 @@ class TonesHandler {
         */
 
         if (getPhoneProfilesSilentUri(context, type).isEmpty()) {
-            Log.e("TonesHandler.isToneInstalled","not in ringtone manager");
+            PPApplication.logE("TonesHandler.isToneInstalled","not in ringtone manager");
             return false;
         }
 
-        Log.e("TonesHandler.isToneInstalled","tone installed");
+        PPApplication.logE("TonesHandler.isToneInstalled","tone installed");
 
         return true;
     }
@@ -179,7 +199,7 @@ class TonesHandler {
 
         //File path = Environment.getExternalStoragePublicDirectory(directory);
         File path = context.getFilesDir();
-        Log.e("TonesHandler._installTone", "path=" + path.getAbsolutePath());
+        PPApplication.logE("TonesHandler._installTone", "path=" + path.getAbsolutePath());
         // Make sure the directory exists
         //noinspection ResultOfMethodCallIgnored
         path.mkdirs();
@@ -270,9 +290,9 @@ class TonesHandler {
                             //new MediaScannerConnection.OnScanCompletedListener() {
                             //    @Override
                             //    public void onScanCompleted(String path, Uri uri) {
-                            //        Log.e("TonesHandler._installTone","scanFile completed");
-                            //        Log.e("TonesHandler._installTone","path="+path);
-                            //        Log.e("TonesHandler._installTone","uri="+uri);
+                            //        PPApplication.logE("TonesHandler._installTone","scanFile completed");
+                            //        PPApplication.logE("TonesHandler._installTone","path="+path);
+                            //        PPApplication.logE("TonesHandler._installTone","uri="+uri);
                             //    }
                             //}
                     );
@@ -290,11 +310,11 @@ class TonesHandler {
                 Cursor cursor = context.getContentResolver().query(contentUri,
                         new String[]{MediaStore.MediaColumns.DATA},
                         MediaStore.MediaColumns.DATA + "=\"" + outAbsPath + "\"", null, null);
-                Log.e("TonesHandler._installTone", "cursor=" + cursor);
+                PPApplication.logE("TonesHandler._installTone", "cursor=" + cursor);
                 if (cursor != null) {
                     if (!cursor.moveToFirst()) {
                         // not exists in content
-                        Log.e("TonesHandler._installTone", "not exists in content resolver");
+                        PPApplication.logE("TonesHandler._installTone", "not exists in content resolver");
 
                         cursor.close();
 
@@ -327,9 +347,9 @@ class TonesHandler {
                                     //new MediaScannerConnection.OnScanCompletedListener() {
                                     //    @Override
                                     //    public void onScanCompleted(String path, Uri uri) {
-                                    //        Log.e("TonesHandler._installTone","scanFile completed");
-                                    //        Log.e("TonesHandler._installTone","path="+path);
-                                    //        Log.e("TonesHandler._installTone","uri="+uri);
+                                    //        PPApplication.logE("TonesHandler._installTone","scanFile completed");
+                                    //        PPApplication.logE("TonesHandler._installTone","path="+path);
+                                    //        PPApplication.logE("TonesHandler._installTone","uri="+uri);
                                     //    }
                                     //}
                             );
@@ -356,7 +376,7 @@ class TonesHandler {
         }
 
         if (!isError)
-            Log.e("TonesHandler._installTone", "Tone installed: " + filename);
+            PPApplication.logE("TonesHandler._installTone", "Tone installed: " + filename);
 
         return !isError;
     }

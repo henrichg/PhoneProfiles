@@ -996,8 +996,9 @@ class ActivateProfileHelper {
             if (profile._soundRingtoneChange == 1) {
                 if (!profile._soundRingtone.isEmpty()) {
                     try {
-                        //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, profile._soundRingtone);
-                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, Uri.parse(profile._soundRingtone));
+                        String[] splits = profile._soundRingtone.split("\\|");
+                        //Settings.System.putString(context.getContentResolver(), Settings.System.RINGTONE, splits[0]);
+                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, Uri.parse(splits[0]));
                     }
                     catch (Exception ignored){ }
                 } else {
@@ -1012,8 +1013,9 @@ class ActivateProfileHelper {
             if (profile._soundNotificationChange == 1) {
                 if (!profile._soundNotification.isEmpty()) {
                     try {
-                        //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, profile._soundNotification);
-                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, Uri.parse(profile._soundNotification));
+                        String[] splits = profile._soundNotification.split("\\|");
+                        //Settings.System.putString(context.getContentResolver(), Settings.System.NOTIFICATION_SOUND, splits[0]);
+                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION, Uri.parse(splits[0]));
                     }
                     catch (Exception ignored){ }
                 } else {
@@ -1028,8 +1030,9 @@ class ActivateProfileHelper {
             if (profile._soundAlarmChange == 1) {
                 if (!profile._soundAlarm.isEmpty()) {
                     try {
-                        //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, profile._soundAlarm);
-                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, Uri.parse(profile._soundAlarm));
+                        String[] splits = profile._soundAlarm.split("\\|");
+                        //Settings.System.putString(context.getContentResolver(), Settings.System.ALARM_ALERT, splits[0]);
+                        RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM, Uri.parse(splits[0]));
                     }
                     catch (Exception ignored){ }
                 } else {
