@@ -27,8 +27,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
     static final String EXTRA_SCROLL_TO = "extra_important_info_activity_scroll_to";
 
-    private int scrollTo = 0;
-
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -429,7 +427,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
+        int scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
         PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
 
         if ((scrollTo != 0) && (savedInstanceState == null)) {
