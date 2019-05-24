@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -142,6 +143,7 @@ class TonesHandler {
         //}
     }
 
+    @SuppressLint("SetWorldReadable")
     private static boolean _installTone(int resID, /*int type,*/ String title, Context context) {
         /*try {
             // Make sure the shared storage is currently writable
@@ -186,46 +188,50 @@ class TonesHandler {
 
         boolean isError = false;
 
-        if (!outFile.exists()) {
+        //if (!outFile.exists()) {
 
-            // Write the file
-            InputStream inputStream = null;
-            FileOutputStream outputStream = null;
-            //noinspection TryFinallyCanBeTryWithResources
-            try {
-                inputStream = context.getResources().openRawResource(resID);
-                outputStream = new FileOutputStream(outFile);
+        // Write the file
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        //noinspection TryFinallyCanBeTryWithResources
+        try {
+            inputStream = context.getResources().openRawResource(resID);
+            outputStream = new FileOutputStream(outFile);
 
 
-                // Write in 1024-byte chunks
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                // Keep writing until `inputStream.read()` returns -1, which means we reached the
-                //  end of the stream
-                while ((bytesRead = inputStream.read(buffer)) > 0) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-
-            } catch (Exception e) {
-                Log.e("TonesHandler._installTone", "Error writing " + filename, e);
-                isError = true;
-            } finally {
-                // Close the streams
-                try {
-                    if (inputStream != null)
-                        inputStream.close();
-                    if (outputStream != null)
-                        outputStream.close();
-                } catch (IOException e) {
-                    // Means there was an error trying to close the streams, so do nothing
-                }
+            // Write in 1024-byte chunks
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            // Keep writing until `inputStream.read()` returns -1, which means we reached the
+            //  end of the stream
+            while ((bytesRead = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, bytesRead);
             }
 
-            if (!outFile.exists()) {
-                Log.e("TonesHandler._installTone", "Error writing " + filename);
-                isError = true;
+        } catch (Exception e) {
+            Log.e("TonesHandler._installTone", "Error writing " + filename, e);
+            isError = true;
+        } finally {
+            // Close the streams
+            try {
+                if (inputStream != null)
+                    inputStream.close();
+                if (outputStream != null)
+                    outputStream.close();
+            } catch (IOException e) {
+                // Means there was an error trying to close the streams, so do nothing
             }
         }
+
+        if (!outFile.exists()) {
+            Log.e("TonesHandler._installTone", "Error writing " + filename);
+            isError = true;
+        }
+        else {
+            if (!outFile.setReadable(true, false))
+                Log.e("TonesHandler._installTone", "Error setting readable to all " + filename);
+        }
+        //}
 
         if (!isError) {
 
@@ -348,6 +354,9 @@ class TonesHandler {
                 isError = true;
             }
         }
+
+        if (!isError)
+            Log.e("TonesHandler._installTone", "Tone installed: " + filename);
 
         return !isError;
     }
