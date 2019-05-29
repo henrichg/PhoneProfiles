@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Parameter aktivasi</string>
   <string name="profile_preferences_category_profileDeviceParameters">Parameter perangkat</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Ubah nada notifikasi</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Nada pemberitahuan \"PhoneProfiles Silent\" dikonfigurasi.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Nada pemberitahuan \"PhoneProfiles Silent\" dikonfigurasi.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Untuk volume notifikasi diam-diam, konfigurasikan nada pemberitahuan ke \"PhoneProfiles Silent\".</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">Konfigurasikan nada pemberitahuan ke \"PhoneProfiles Silent\"?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Nada pemberitahuan \"PhoneProfiles Silent\" tidak terpasang. Pasanglah dari menu Editor dan coba lagi.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Gunakan prioritas</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Aktifkan penggunaan parameter \"Prioritas\" dalam pengaturan aplikasi.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Pemberitahuan status bar</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Saat ini dikonfigurasi:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Saat ini dikonfigurasi:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Ringtone volume = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Jika volume nada dering diatur ke \"0\", ini akan mengonfigurasi perangkat untuk mode senyap. Volume notifikasi diabaikan.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Informasi penting!</string>

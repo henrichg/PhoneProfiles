@@ -739,7 +739,7 @@
     <string name="profile_preferences_category_profileActivationParameters">Faaliyet değerleri</string>
     <string name="profile_preferences_category_profileDeviceParameters">Cihaz değerleri</string>
     <string name="profile_preferences_volumeNotificationVolume0_title">Bildirim sesini değiştir</string>
-    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Bildirim sesi \"PhoneProfiles Sessiz\" olarak ayarlandı.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Bildirim sesi \"PhoneProfiles Sessiz\" olarak ayarlandı.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Gerçek sessiz bildirimleri için bildirim ses hacmi = 0 şartı \"PhoneProfiles sessiz\"i bildirim sesi olarak ayarlanmaktır.</string>
     <string name="profile_preferences_volumeNotificationVolume0_question">Bildirim sesi \"PhoneProfiles Sessiz\" olarak ayarlansın mı?</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Bildirim sesi \"PhoneProfiles Sessiz\" yüklü değil. Lütfen Düzenleyici menüsünden tekrar yüklemeyi bir deneyin.</string>
@@ -748,7 +748,7 @@
     <string name="phone_profiles_pref_eventUsePriorityAppSettings">Öncelik kullan</string>
     <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Uygulama ayarlarında \"Öncelik\" değerini kullanmaya izin verin.</string>
     <string name="phone_profiles_pref_notificationStatusBarNew">Durum çubuğu bildirimi</string>
-    <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Şu anda ayarlanan:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Şu anda ayarlanan:</string>
     <string name="profile_preferences_volumeRingtone0Info_title">Zil sesi hacmi = 0</string>
     <string name="profile_preferences_volumeRingtone0Info_summary">Zil sesi hacmi = 0 cihazı sessiz moda ayarlar. Bildirim hacmi göz ardı edilir.</string>
     <string name="phone_profiles_pref_notificationStatusBarInfo_title">Mühim malumat!</string>

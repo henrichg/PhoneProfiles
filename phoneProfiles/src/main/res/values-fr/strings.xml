@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Paramètres d’activation</string>
   <string name="profile_preferences_category_profileDeviceParameters">Paramètres de l’appareil</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Changement de Tonalité de notification</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Tonalité de notification « PhoneProfiles silencieux » est configurée.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Tonalité de notification « PhoneProfiles silencieux » est configurée.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Pour que le volume de notification soit = 0 configurer les notifications à « PhoneProfiles silencieux » pour des notifications réellement silencieuses.</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">Configurer les notifications à « PhoneProfiles silencieux » ?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Tonalité de notification « PhoneProfiles silencieux » n’est pas installée. Veuillez l’installer depuis le menu éditeur et essayer à nouveau.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Priorité d\'utilisation</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Activer l’utilisation du paramètre « Priorité » dans les paramètres de l’application.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Notification de barre d’État</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Actuellement configuré :</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Actuellement configuré :</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Volume de sonnerie = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Volume de sonnerie = 0 configure l’appareil en mode silencieux. Le volume de notification est ignoré.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Information importante!</string>

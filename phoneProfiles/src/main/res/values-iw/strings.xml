@@ -742,7 +742,7 @@
   <string name="profile_preferences_category_profileActivationParameters">פרמטרים של הפעלה</string>
   <string name="profile_preferences_category_profileDeviceParameters">פרמטרי ההתקן</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">שינוי צליל ההתראה</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">צליל ההתראה \"PhoneProfilesשקט\" מוגדר.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">צליל ההתראה \"PhoneProfilesשקט\" מוגדר.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">כדי שעוצמת צליל ההתראה תהיה = 0, הגדירו את צליל ההתראה \"PhoneProfiles שקט\" לשקט אמיתי מהתראות.</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">להגדיר את צליל ההתראות ל\"PhoneProfiles שקט\"?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">צליל ההתראות \"PhoneProfiles שקט\" אינו מותקן. אנא התקינו אותו מהתפריט העורך ונסו שוב.</string>
@@ -751,7 +751,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">השתמש בעדיפות</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">איפשור שימוש בפרמטר \"עדיפות\" בהגדרות יישום.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">הודעות בשורת הסטטוס</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">ההגדרות כעת:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">ההגדרות כעת:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">עוצמת צלצול = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">עוצמת צלצול = 0 מגדירה את המכשיר למצב שקט. המערכת מתעלמת מעוצמת צליל ההודעות.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">מידע חשוב!</string>

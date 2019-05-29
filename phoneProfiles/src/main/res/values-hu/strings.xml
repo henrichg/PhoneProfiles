@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Aktiválási paraméterek</string>
   <string name="profile_preferences_category_profileDeviceParameters">Készülék paraméterek</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Értesítési hang módosítása</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">\"Csendes PhoneProfiles\" értesítési hang van konfigurálva.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">\"Csendes PhoneProfiles\" értesítési hang van konfigurálva.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Értesítés hangerő = 0-t beállításával, \"Csendes PhoneProfiles\" lesz az igazi csendes értesítés.</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">Értesítési hangot \"Csendes PhoneProfiles\" beállítja?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Értesítési hang \"Csendes PhoneProfiles\" nincs telepítve. Kérlek telepítsd a Szerkesztés menüből és próbáld újra.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Prioritás használata</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Az alkalmazás beállításaiba a \"Prioritás\" paraméter használata engedélyezve.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Állapotsáv-értesítések megjelenítése</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Jelenleg konfigurálva:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Jelenleg konfigurálva:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Csengőhang hangereje = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Csengetési hangerő = 0 beállítása a készüléken a csendes módhoz. Értesítési hangerő kihagyva.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Fontos információ!</string>

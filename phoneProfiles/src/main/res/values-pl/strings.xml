@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Parametry aktywacji</string>
   <string name="profile_preferences_category_profileDeviceParameters">Parametry urządzenia</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Zmień dźwięk powiadomień</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Dźwięk powiadomień \"PhoneProfiles Silent\" jest skonfigurowany.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Dźwięk powiadomień \"PhoneProfiles Silent\" jest skonfigurowany.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Dla naprawdę cichej głośności powiadomień, skonfiguruj dźwięk powiadomień na \"PhoneProfiles Silent\".</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">Skonfigurować sygnał powiadomień do \"PhoneProfiles Silent\"?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Dźwięk powiadomień \"PhoneProfiles Silent\" nie jest zainstalowany. Proszę zainstalować go z menu edytora i spróbować ponownie.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Użyj priorytetu</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Włącz użycie parametru \"Priorytet\" w ustawieniach aplikacji.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Powiadomienia na pasku statusu</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Obecnie skonfigurowane:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Obecnie skonfigurowane:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Głośność dzwonka = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Jeśli głośność dzwonka jest ustawiona na \"0\" konfiguruje to urządzenie w tryb cichy. Dźwięk powiadomień jest ignorowany.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Ważne informacje!</string>

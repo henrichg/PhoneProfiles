@@ -739,7 +739,7 @@
     <string name="profile_preferences_category_profileActivationParameters">Aktivierungsparameter</string>
     <string name="profile_preferences_category_profileDeviceParameters">Geräte-Parameter</string>
     <string name="profile_preferences_volumeNotificationVolume0_title">Benachrichtigungston ändern</string>
-    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Benachrichtigungston \"PhoneProfiles Silent\" ist konfiguriert.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Benachrichtigungston \"PhoneProfiles Silent\" ist konfiguriert.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Für die Benachrichtigungslautstärke 0 wähle den Benachrichtigungston \"PhoneProfiles Silent\", um Benachrichtigungen wirklich stumm zu stellen.</string>
     <string name="profile_preferences_volumeNotificationVolume0_question">\"PhoneProfiles Silent\" als Benachrichtigungston einstellen?</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Benachrichtigungston \"PhoneProfiles Silent\" ist nicht installiert. Bitte installiere ihn vom Editor-Menü.</string>
@@ -748,7 +748,7 @@
     <string name="phone_profiles_pref_eventUsePriorityAppSettings">Prioritäten verwenden</string>
     <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Aktiviere die Nutzung von Prioritäten in den App-Einstellungen.</string>
     <string name="phone_profiles_pref_notificationStatusBarNew">Benachrichtigung in der Statusleiste</string>
-    <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Derzeit eingestellt:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Derzeit eingestellt:</string>
     <string name="profile_preferences_volumeRingtone0Info_title">Klingeltonlautstärke = 0</string>
     <string name="profile_preferences_volumeRingtone0Info_summary">Anruflautstärke = 0 schaltet das Gerät in den \"Bitte nicht stören\"-Modus. Die Benachrichtigungslautstärke wird ignoriert.</string>
     <string name="phone_profiles_pref_notificationStatusBarInfo_title">Wichtige Information!</string>

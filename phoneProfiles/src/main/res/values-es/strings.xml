@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Parámetros de activación</string>
   <string name="profile_preferences_category_profileDeviceParameters">Parámetros de dispositivos</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Cambiar el tono de notificación</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Tono de notificación de \"PhoneProfiles Silent\" ha sido configurado.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Tono de notificación de \"PhoneProfiles Silent\" ha sido configurado.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Para notificaciones silenciosas, configure el tono de notificación a \"PhoneProfiles Silent\".</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">¿Configurar el tono de notificación a \"PhoneProfiles Silent\"?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">El timbre de notificación \"PhoneProfiles Silent\" no está instalado. Por favor instálalo desde el menú de editor e intentelo de nuevo.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Utilizar prioridad</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Habilitar uso del parámetro \"Prioridad\" en los ajustes de aplicación.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Notificación de barra de estado</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Configurados actualmente:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Configurados actualmente:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Volumen del tono de llamada = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Si el volumen del tono de llamada se coloca en \"0\", se configura el dispositivo a modo silencioso. El volumen de notificación es ignorado.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Información importante!</string>

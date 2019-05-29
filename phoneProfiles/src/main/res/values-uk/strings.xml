@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Параметри активації</string>
   <string name="profile_preferences_category_profileDeviceParameters">Параметри пристрою</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Змінити сигнал сповіщення</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigured">Сигнал сповіщення «PhoneProfiles Silent» встановлено.</string>
+  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Сигнал сповіщення «PhoneProfiles Silent» встановлено.</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Щоб сповіщення було по справжньому безшумним, встановіть сигнал сповіщення на \"PhoneProfiles Silent\".</string>
   <string name="profile_preferences_volumeNotificationVolume0_question">Налаштувати сигнал сповіщення на \"PhoneProfiles Silent\"?</string>
   <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Сигнал сповіщення \"PhoneProfiles Silent\" не налаштовано. Будь ласка, встановіть його з меню Редактора і спробуйте ще раз.</string>
@@ -748,7 +748,7 @@
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Пріоритет використання</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary">Увімкнути використання параметра «Пріоритет» в налаштуваннях додатку.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Сповіщення в рядку стану</string>
-  <string name="profile_preferences_volumeNotificationVolume0_questionNowConfigured">Поточні налаштування:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Поточні налаштування:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Гучність дзвінка = 0</string>
   <string name="profile_preferences_volumeRingtone0Info_summary">Гучність дзвінка = 0 переводить пристрій у тихий режим. Гучність сповіщення ігнорується.</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Важлива інформація!</string>
