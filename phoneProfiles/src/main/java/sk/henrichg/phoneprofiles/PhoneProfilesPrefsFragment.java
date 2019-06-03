@@ -515,7 +515,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                         preferenceScreen.removePreference(preferenceCategory);
             }
 
-            PreferenceScreen preferenceCategory = findPreference("categorySystem");
+            PreferenceCategory preferenceCategory = findPreference("applicationPowerParametersCategory");
             Preference preference = findPreference(PREF_BATTERY_OPTIMIZATION_SYSTEM_SETTINGS);
             if ((preferenceCategory != null) && (preference != null))
                 preferenceCategory.removePreference(preference);
@@ -777,7 +777,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                     }
                 });
             } else {
-                PreferenceScreen preferenceCategory = findPreference("categorySystem");
+                PreferenceCategory preferenceCategory = findPreference("applicationPowerParametersCategory");
                 if (preferenceCategory != null)
                     preferenceCategory.removePreference(preference);
             }
