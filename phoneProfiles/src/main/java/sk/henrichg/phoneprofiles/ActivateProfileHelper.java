@@ -886,20 +886,21 @@ class ActivateProfileHelper {
             PPApplication.logE("ActivateProfileHelper.setZenMode", "systemRingerMode=" + systemRingerMode);
 
             if ((zenMode != ZENMODE_SILENT) && canChangeZenMode(context, false)) {
+                try {
+                    if (ringerMode != -1) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
+                        audioManager.setRingerMode(ringerMode);
+                        //try { Thread.sleep(500); } catch (InterruptedException e) { }
+                        //SystemClock.sleep(500);
+                        PPApplication.sleep(500);
+                    }
 
-                if (ringerMode != -1) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = false;
-                    audioManager.setRingerMode(ringerMode);
-                    //try { Thread.sleep(500); } catch (InterruptedException e) { }
-                    //SystemClock.sleep(500);
-                    PPApplication.sleep(500);
-                }
-
-                if ((zenMode != systemZenMode) || (zenMode == ZENMODE_PRIORITY)) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = false;
-                    PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
-                    InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
-                }
+                    if ((zenMode != systemZenMode) || (zenMode == ZENMODE_PRIORITY)) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = false;
+                        PPNotificationListenerService.requestInterruptionFilter(context, zenMode);
+                        InterruptionFilterChangedBroadcastReceiver.requestInterruptionFilter(context, zenMode);
+                    }
+                } catch (Exception ignored) {}
             } else {
                 try {
                     if (zenMode == ZENMODE_SILENT) {//audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
