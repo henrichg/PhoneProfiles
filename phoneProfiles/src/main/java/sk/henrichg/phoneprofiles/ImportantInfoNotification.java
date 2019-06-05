@@ -18,6 +18,8 @@ class ImportantInfoNotification {
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START = "show_info_notification_on_start";
     private static final String PREF_SHOW_INFO_NOTIFICATION_ON_START_VERSION = "show_info_notification_on_start_version";
 
+    static final String EXTRA_FIRST_INSTALLATION = "first_installation";
+
     static void showInfoNotification(Context context) {
         int packageVersionCode = 0;
         int savedVersionCode = 0;
@@ -37,7 +39,7 @@ class ImportantInfoNotification {
 
         if ((savedVersionCode == 0) || getShowInfoNotificationOnStart(context, packageVersionCode)) {
 
-            showNotification(context,
+            showNotification(context, savedVersionCode == 0,
                     context.getString(R.string.info_notification_title),
                     context.getString(R.string.info_notification_text));
 
@@ -80,7 +82,7 @@ class ImportantInfoNotification {
         return news;
     }
 
-    static private void showNotification(Context context, String title, String text) {
+    static private void showNotification(Context context, boolean firstInstallation, String title, String text) {
         String nTitle = title;
         String nText = text;
         if (android.os.Build.VERSION.SDK_INT < 24) {
@@ -97,6 +99,7 @@ class ImportantInfoNotification {
         mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
         Intent intent = new Intent(context, ImportantInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(EXTRA_FIRST_INSTALLATION, firstInstallation);
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
         mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);

@@ -72,6 +72,9 @@ public class ImportantInfoActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(GlobalGUIRoutines.dpToPx(1));
         }
 
+        Intent intent = getIntent();
+        boolean firstInstallation = intent.getBooleanExtra(ImportantInfoNotification.EXTRA_FIRST_INSTALLATION, false);
+
         int versionCode = 0;
         Context context = getApplicationContext();
         try {
@@ -82,15 +85,15 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         boolean news = false;
-        boolean newsLatest = (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
+        boolean newsLatest = (!firstInstallation) && (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "newsLatest="+newsLatest);
-        boolean news2755 = ((versionCode >= 2755) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean news2755 = (!firstInstallation) && ((versionCode >= 2755) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2755);
-        boolean news2690 = ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean news2690 = (!firstInstallation) && ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2690);
-        boolean news1634 = ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean news1634 = (!firstInstallation) && ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1634="+news1634);
-        boolean news1622 = ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
+        boolean news1622 = (!firstInstallation) && ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
         PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1622="+news1622);
 
         //noinspection StatementWithEmptyBody
@@ -426,7 +429,6 @@ public class ImportantInfoActivity extends AppCompatActivity {
             infoTextNews.setVisibility(View.GONE);
         }
 
-        Intent intent = getIntent();
         int scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
         PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
 
