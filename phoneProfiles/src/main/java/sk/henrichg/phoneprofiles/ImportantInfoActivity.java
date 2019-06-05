@@ -399,7 +399,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
 
         int extenderVersion = PPPExtenderBroadcastReceiver.isExtenderInstalled(context);
 
-        if ((extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_LATEST)) {
+        if ((!firstInstallation) && (extenderVersion != 0) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_LATEST)) {
             news = true;
             TextView infoText1 = findViewById(R.id.activity_info_notification_accessibility_service_new_version);
             infoText1.setVisibility(View.VISIBLE);
