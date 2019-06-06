@@ -24,7 +24,7 @@
   <string name="toast_profile_activated_0">Profil</string>
   <string name="toast_profile_activated_1">activé</string>
   <string name="preference_profile_no_change">Ne pas changer</string>
-  <string name="preference_profile_autoBrightness">Automatique</string>
+  <!--<string name="preference_profile_autoBrightness">Automatique</string>-->
   <string name="title_activity_phone_profiles_preferences">Paramètres de l\'application</string>
   <string name="menu_exit">Sortie</string>
   <string name="activate_profile_alert_message">Activer le profil ?</string>
@@ -377,7 +377,6 @@
   <string name="array_pref_ringerModeArray_silentL">Mode priorité</string>
   <string name="menu_import_export">Sauvegarde/Restauration</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 minutes</string>
-  <string name="info_notification_event_not_started">L\'événement n\'est pas commencé quand : \n1. Vous avez désactivé globalement les évènements (\"feu rouge\") - activer-les dans le menu éditeur avec « Activer les évènements ». \n2. Vous avez activé manuellement le profil ( « feu orange ») - vous devez redémarrer les événements. Utilisez l\'icône redémarrer les événements de l\'activateur. Les profils activés manuellement  sont indiqués par «[M] » devant le nom du profil. Il y a une exception quand l\'événement a la case « ignorer activation manuelle » cochée. \n3. Vous avez désactivé les évènements dans les préférences des événements. \nNote: « Le Feu » est dans la barre de titre.</string>
   <string name="important_info_profiles">Profils</string>
   <string name="important_info_events">Événements</string>
   <string name="important_info_system">Système</string>
@@ -422,11 +421,11 @@
   <string name="permissions_for_profile_text3">Veuillez les accorder dans des boîtes de dialogue suivantes. Le profil sera activé après.</string>
   <string name="permissions_for_profile_text_notification">Demande d\'autorisation</string>
   <string name="permissions_for_profile_big_text_notification">nécessite certaines autorisations.</string>
-  <string name="permissions_for_install_tone_text1">Installation de la sonnerie « PhoneProfiles silencieux » ne sera pas exécutée, parce que ceci exige certaines autorisations.</string>
-  <string name="permissions_for_install_tone_text2">S\'il vous plaît validez les boîtes de dialogues suivantes pour que « tone » soit installé.</string>
+<!--  <string name="permissions_for_install_tone_text1">Installation de la sonnerie « PhoneProfiles silencieux » ne sera pas exécutée, parce que ceci exige certaines autorisations.</string>-->
+<!--  <string name="permissions_for_install_tone_text2">S\'il vous plaît validez les boîtes de dialogues suivantes pour que « tone » soit installé.</string>-->
   <string name="permissions_notification_text">Demande d\'autorisation</string>
-  <string name="permissions_for_install_tone_big_text_notification">L\'installation de « tone » « PhoneProfiles silencieux » nécessite des autorisations.</string>
-  <string name="menu_install_tone">Installer « tone » « PhoneProfiles silencieux »</string>
+<!--  <string name="permissions_for_install_tone_big_text_notification">L\'installation de « tone » « PhoneProfiles silencieux » nécessite des autorisations.</string>-->
+  <!--<string name="menu_install_tone">Installer « tone » « PhoneProfiles silencieux »</string>-->
   <string name="toast_tone_installation_installed_ok">« tone » « PhoneProfiles silencieux » installé.</string>
   <string name="toast_tone_installation_installed_error">Erreur lors de l\'installation de « tone » « PhoneProfiles silencieux » !</string>
   <string name="toast_permissions_granted">Les permissions sont déjà octroyées</string>
@@ -468,8 +467,8 @@
   <string name="event_preferences_battery_power_save_mode">Mode économie d\'énergie</string>
   <string name="phone_profiles_pref_applicationPowerSaveMode">Paramètres du mode économie d\'énergie</string>
   <string name="array_pref_powerSaveMode_off">Désativé</string>
-  <string name="array_pref_powerSaveMode_5" formatted="false">Mettre en marche à 5 % de batterie</string>
-  <string name="array_pref_powerSaveMode_15" formatted="false">Mettre en marche à 5 % de batterie</string>
+  <string name="array_pref_powerSaveMode_5" formatted="false">Mettre en marche à 5% de batterie</string>
+  <string name="array_pref_powerSaveMode_15" formatted="false">Mettre en marche à 15% de batterie</string>
   <string name="important_info_profile_ringerMode_root">Dans Android 6, il n\'est pas possible de changer le réglage « Vibrer avec la sonnerie » sur un téléphone non rooté.</string>
   <string name="important_info_profile_adaptiveBrightness_root">Dans Android 6+, il n\'est pas possible de changer le réglage « Éclairage automatique» sur un téléphone non rooté.</string>
   <string name="important_info_profile_wifiScanning_location">Dans Android 6+, pour pouvoir scanner le wifi il faut valider la localisation wifi dans les paramètre de localisation.</string>
@@ -493,15 +492,15 @@
   <string name="event_preferences_applications_AccessibilitySettings_title">Paramètres d\'accessibilité</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Pour modifier le niveau adaptatif, le ROOT est requis.</string>
   <string name="important_info_profile_activation_text1">Le profil peut être activé dans deux modes :</string>
-  <string name="important_info_profile_activation_text2">1. activation manuelle - activée dans le raccourci Éditeur, notification, widget. Un profil activé manuellement est signalé par «[M] » devant le nom du profil.</string>
-  <string name="important_info_profile_activation_text3">2. activation d\'événement - activée par l\'événement.</string>
+  <string name="important_info_profile_activation_text2">Activation manuelle - activée dans le raccourci Éditeur, notification, widget. Un profil activé manuellement est signalé par «[M] » devant le nom du profil.</string>
+  <string name="important_info_profile_activation_text3">Activation d\'événement - activée par l\'événement.</string>
   <string name="important_info_profile_activation_text4">Activation manuelle arrête tous les événements et les événements ne démarre jamais. Vous devez redémarrer les événements pour les réactiver.</string>
   <string name="important_info_profile_activation_text5">Exceptions à cette règle si l\'événement a la valeur « Ignorer l\'activation manuelle ».</string>
   <string name="important_info_profile_activation_text6">Le redémarrage des événements peut être demandé depuis l\'Activateur, l\'éditeur ou la notification.</string>
   <string name="important_info_profile_activation_text8">Un feu de circulation s\'affiche dans le titre de l\'activateur et de l\'éditeur.</string>
-  <string name="important_info_profile_activation_text9">- Vert : les événements peuvent être démarrés.</string>
-  <string name="important_info_profile_activation_text10">- Orange : Les événements ne peuvent pas démarrer - le profil est activé manuellement.</string>
-  <string name="important_info_profile_activation_text11">- Rouge : les événements sont arrêtés - on peut lancer les événements dans le menu de l\'éditeur.</string>
+  <string name="important_info_profile_activation_text9">Vert : les événements peuvent être démarrés.</string>
+  <string name="important_info_profile_activation_text10">Orange : Les événements ne peuvent pas démarrer - le profil est activé manuellement.</string>
+  <string name="important_info_profile_activation_text11">Rouge : les événements sont arrêtés - on peut lancer les événements dans le menu de l\'éditeur.</string>
   <string name="important_info_profile_activation_restart_events_icon">Icône de redémarrage des événements :</string>
   <string name="important_info_profile_activation_traffic_light_icon">Icône « Feu » :</string>
   <string name="important_info_android_doze_mode">Depuis Android 6 il y a les mode « Veille » et « application en attente ». Lorsque vous rencontrez des problèmes avec l\'activation du profil par les événements, si vous laisse un appareil débranché et fixes pour une période de temps, avec l\'écran éteint, ajoutez PhoneProfiles dans \"Battery\"→\"optimisation de batterie\"→\"pas optimisé\".</string>
@@ -611,7 +610,7 @@
   <string name="about_application_source_code">Code source :</string>
   <string name="about_application_translations">Traductions :</string>
   <string name="about_application_rate_in_googlePlay">Merci d\'évaluer cette application dans Google Play</string>
-  <string name="phone_profiles_pref_systemLanguage_summary">L\'application utilise la langue configurée dans le système.</string>
+  <!--<string name="phone_profiles_pref_systemLanguage_summary">L\'application utilise la langue configurée dans le système.</string>-->
   <string name="permission_group_name_access_notification_policy">Ne pas perturber les accès</string>
   <string name="permissions_access_notification_policy_not_allowed_confirm">Vous n’avez pas activé « Ne pas perturber les accès ». Ne plus demander à pour cela ?</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Ne pas perturber les accès</string>
@@ -656,7 +655,7 @@
   <string name="bluetooth_name_pref_dlg_all_bt_names_chb">Tous les noms de Bluetooth</string>
   <string name="editor_drawer_list_item_events_start_order">Ordre de départ</string>
   <string name="editor_drawer_order_start_order">Ordre de départ</string>
-  <string name="info_notification_event_priority_new">4. chaque événement a une « Priorité ». Un événement ne démarrera pas, si un autre événement s\'exécute avec une priorité plus élevée.</string>
+  <string name="info_notification_event_priority_new">chaque événement a une « Priorité ». Un événement ne démarrera pas, si un autre événement s\'exécute avec une priorité plus élevée.</string>
   <string name="info_notification_event_start_order">Événements s\'exécutent dans \"ordre de démarrage\". Vous pouvez définir l\'ordre de démarrage des événements dans l’éditeur dans la vue « Ordre de démarrage » de l\'éditeur. Dans cette vue, vous pouvez faire glisser l’événement vers le haut ou vers le bas.</string>
   <string name="info_notification_event_start_order_handler_icon">Gestionnaire d\'ordre:</string>
   <string name="info_notification_activate_profile_from_tasker">Vous pouvez activer le profil depuis le gestionnaire de tache. Configurer la tâche « Système » / « Envoyer » avec des paramètres :</string>
@@ -667,10 +666,10 @@
   <string name="phone_profiles_pref_applicationWidgetIconLightnessT">Luminosité du texte (widget)</string>
   <string name="altype_eventStop">arrêt de l’événement</string>
   <string name="info_notification_manage_events_from_tasker">Vous pouvez activer le profil depuis le gestionnaire de tache. Configurer la tâche « Système » / « Envoyer » avec des paramètres :</string>
-  <string name="info_notification_manage_events_from_tasker_restart_events">-Redémarrez des événements :</string>
-  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">- Autoriser le lancement pour l’événement :</string>
-  <string name="info_notification_manage_events_from_tasker_pause_event">-pauser l\'événement :</string>
-  <string name="info_notification_manage_events_from_tasker_stop_event">- Arrêter l\'événement :</string>
+  <string name="info_notification_manage_events_from_tasker_restart_events">redémarrez des événements :</string>
+  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">autoriser le lancement pour l’événement :</string>
+  <string name="info_notification_manage_events_from_tasker_pause_event">pauser l\'événement :</string>
+  <string name="info_notification_manage_events_from_tasker_stop_event">arrêter l\'événement :</string>
   <string name="phone_profiles_pref_category_eventRun">Lancer l\'événement</string>
   <string name="phone_profiles_pref_eventRunUsePriority">Utilisez le paramètre « Priorité » de l’événement</string>
   <string name="event_preferences_priority_notUse">Non utilisé</string>
@@ -716,7 +715,7 @@
   <string name="editor_event_list_item_profile_end_icon">Icône de fin d’événements</string>
 <!--  <string name="profile_preferences_sourceProfileInfo_summary">Vous pouvez configurer chaque paramètre de profil pour qu\'il utilise le \"Profil partagé\" et pendant l\'activation, les valeurs seront utilisées à partir du profil partagé. Cliquez ici pour configurer les paramètres du profil partagé.</string> -->
   <string name="run_stop_events_indicator">Activer/arrêter l\'indicateur d’événement en cours</string>
-  <string name="run_stop_indicator_popup_window_important_info">Pour plus d’informations, consultez l’écran « Informations importantes », via l’icône \"point d’interrogation\" dans la barre d’outils.</string>
+<!--  <string name="run_stop_indicator_popup_window_important_info">Pour plus d’informations, consultez l’écran « Informations importantes », via l’icône \"point d’interrogation\" dans la barre d’outils.</string>-->
   <string name="important_info_how_to_show">Cette information importante peut être vu dans l’éditeur en cliquant sur l’icône point d’interrogation dans la barre d’outils.</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">non pris en charge par l’application</string>
   <string name="preference_not_allowed_reason_detail_old_android">ancienne version Android</string>
@@ -740,9 +739,6 @@
   <string name="profile_preferences_category_profileDeviceParameters">Paramètres de l’appareil</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Changement de Tonalité de notification</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Tonalité de notification « PhoneProfiles silencieux » est configurée.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Pour que le volume de notification soit = 0 configurer les notifications à « PhoneProfiles silencieux » pour des notifications réellement silencieuses.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_question">Configurer les notifications à « PhoneProfiles silencieux » ?</string>
-  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Tonalité de notification « PhoneProfiles silencieux » n’est pas installée. Veuillez l’installer depuis le menu éditeur et essayer à nouveau.</string>
   <string name="info_notification_unlink_ringer_notification_volumes">Votre appareil a fusionné le volume de la sonnerie d’appel et les notifications. Vous pouvez utiliser « dissocier le volume de sonnerie et de notification ». Cliquez ici pour le configurer.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Votre appareil a fusionné le volume de la sonnerie d’appel et les notifications. Activer ce paramètre pour les dissocier.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Priorité d\'utilisation</string>
@@ -772,7 +768,7 @@
   <string name="event_preference_sensor_application_summary">Ce capteur est pour démarrer un événement par l’application au premier plan. Paramètres : Applications.</string>
   <string name="event_preference_sensor_orientation_summary">Ce capteur est pour démarrer un événement selon l’orientation de l’appareil. Paramètres : Affichage (haut, bas), côtés (horizontale, vers le haut), Distance (près, loin, utilisé le capteur de proximité), ignorer pour des applications (au premier plan).</string>
   <string name="event_preference_sensor_nfc_summary">Ce capteur est pour démarrer un événement par étiquette NFC. Paramètres : étiquette  NFC, exécution permanente, durée.</string>
-  <string name="editor_activity_targetHelps_navigationIcon_title">Panneau latéral « Vues »</string>
+<!--  <string name="editor_activity_targetHelps_navigationIcon_title">Panneau latéral « Vues »</string>-->
   <string name="editor_activity_targetHelps_applicationMenu_title">Menu de l’application</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">Cliquez sur ce bouton pour ouvrir le menu d’Application. Dans ce menu on trouve les paramètres de l\'application.</string>
   <string name="editor_activity_targetHelps_restartEvents_title">Redémarrez l\'événement</string>
@@ -876,37 +872,37 @@
   <string name="event_preferences_notificationVibrate">Notifier par vibration</string>
   <string name="important_info_profile_grant">Certaines préférences de profil requièrent l’autorisation WRITE_SECURE_SETTINGS. Le Root n’est pas nécessaire. Ces préférences sont marqués avec « (G1) ».</string>
   <string name="important_info_profile_grant_lookSectionProfiles">Pour plus d’informations, reportez-vous à la section « Profils » plus loin ci-dessous.</string>
-  <string name="profile_preferences_typesInfoGrant">Pour plus d’informations regardez « Informations importantes », section « Profils ».</string>
+<!--  <string name="profile_preferences_typesInfoGrant">Pour plus d’informations regardez « Informations importantes », section « Profils ».</string>-->
   <string name="important_info_profile_grant_1_howTo_1">Vous pouvez accorder l’autorisation pour PhoneProfiles requise pour les paramètres de profil marqués avec (G1). Ceci nécessite un PC avec adb installé.</string>
   <string name="important_info_profile_grant_1_howTo_2">Si vous n’avez pas installé adb sur un PC :</string>
-  <string name="important_info_profile_grant_1_howTo_3">1. Télécharger le SDK Platform Tools sur :</string>
+  <string name="important_info_profile_grant_1_howTo_3">Télécharger le SDK Platform Tools sur :</string>
   <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
-  <string name="important_info_profile_grant_1_howTo_4">2. Extrayez le fichier zip.</string>
+  <string name="important_info_profile_grant_1_howTo_4">Extrayez le fichier zip.</string>
   <string name="important_info_profile_grant_1_howTo_5">Comment faire pour accorder l’autorisation WRITE_SECURE_SETTINGS :</string>
-  <string name="important_info_profile_grant_1_howTo_6">1. dans le téléphone, allez dans Réglages &gt; à propos du téléphone &gt; informations sur le logiciel et cliquez sur numéro de Build 7 fois, vous avez maintenant un menu développeur dans les paramètres.</string>
-  <string name="important_info_profile_grant_1_howTo_7">2. dans le téléphone, allez dans Paramètres &gt; Options développeur et activer le débogage USB.</string>
-  <string name="important_info_profile_grant_1_howTo_8">3. dans le PC, démarrer CMD (Windows), Terminal (Linux, OSX), accédez au dossier dans lequel est installée adb, lancez cette commande :</string>
-  <string name="important_info_profile_grant_1_howTo_10">4. après l’exécution réussie, tous les paramètres de profil avec la marque (G1) seront activées.</string>
+  <string name="important_info_profile_grant_1_howTo_6">dans le téléphone, allez dans Réglages &gt; à propos du téléphone &gt; informations sur le logiciel et cliquez sur numéro de Build 7 fois, vous avez maintenant un menu développeur dans les paramètres.</string>
+  <string name="important_info_profile_grant_1_howTo_7">dans le téléphone, allez dans Paramètres &gt; Options développeur et activer le débogage USB.</string>
+  <string name="important_info_profile_grant_1_howTo_8">dans le PC, démarrer CMD (Windows), Terminal (Linux, OSX), accédez au dossier dans lequel est installée adb, lancez cette commande :</string>
+  <string name="important_info_profile_grant_1_howTo_10">après l’exécution réussie, tous les paramètres de profil avec la marque (G1) seront activées.</string>
   <string name="important_info_activity_title">Information importante</string>
   <string name="important_info_quick_guide_tab">Guide rapide</string>
   <string name="important_info_important_info_tab">Information importante</string>
   <string name="important_info_quick_guide_1">PhoneProfiles (PP) comporte deux volets :</string>
-  <string name="important_info_quick_guide_2">1. <b>PROFILS:</b> spécifie comment modifier les paramètres du périphérique.</string>
-  <string name="important_info_quick_guide_3">2. <b>ÉVÉNEMENTS:</b> spécifie quand changer les paramètres du périphérique.</string>
+  <string name="important_info_quick_guide_2"><![CDATA[<b>PROFILS:</b> spécifie comment modifier les paramètres du périphérique.]]></string>
+  <string name="important_info_quick_guide_3"><![CDATA[<b>ÉVÉNEMENTS:</b> spécifie quand changer les paramètres du périphérique.]]></string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILS:</b> Permet de configurer les paramètres de périphérique comme le mode de sonnerie, les volumes, sonnerie et notification des sons, radio (Wi-Fi, Bluetooth, mobile, etc.). Lorsqu’un profil est activé, les paramètres correspondants sont permanents. Si vous souhaitez modifier les paramètres, un autre profil doit être activé.</string>
   <string name="important_info_quick_guide_profiles_2">Les Profils peuvent être activés manuellement, ou par un événement.</string>
   <string name="important_info_quick_guide_profiles_3">Vous pouvez activer manuellement un profil par l’intermédiaire de l’activateur de PP (fenêtre pop-up avec la liste des profils disponibles). L’activateur peut être affiché via l’icône Accueil de PP, la notification de PP, le widget PP et, pour les appareils Samsung, depuis le panneau Edge. Vous pouvez également directement activer un profil via le widget PP 4x4 , un raccourci vers le profil ou, pour les appareils Samsung, depuis le panneau Edge.</string>
   <string name="important_info_quick_guide_events_1"><b>ÉVÉNEMENTS:</b> Vous permettent de configurer lorsqu’un profil est activé. Les événements ont un début et une fin. Vous pouvez configurer ce qui va arriver au début d’un événement, et ce qui se passera-t-il lorsque l’événement se terminera.</string>
   <string name="important_info_quick_guide_events_2">Les événements contiennent des paramètres de configuration des capteurs importants, qui doivent toutes être satisfaits avant qu\'un événement soit déclenché. Si certains capteurs ne sont plus actifs, l’événement se terminera (pause).</string>
   <string name="important_info_quick_guide_sensors_1">Exemples de capteur :</string>
-  <string name="important_info_quick_guide_sensors_2"><b>• Capteur Temps :</b> Démarrer et arrêter sur un jour de la semaine ou une heure spécifique.</string>
-  <string name="important_info_quick_guide_sensors_3"><b>• Capteur Wi-Fi :</b> Arrêter ou démarrer via un SSID Wifi (connecté ou à proximité de). La fonctionnalité \"a proximité\" est utile pour détecter l\'emplacement du périphérique. Par exemple : Démarrer l\'évènement si le périphérique est à proximité du wi-fi de votre domicile.</string>
-  <string name="important_info_quick_guide_sensors_4"><b>• Capteur Bluetooth :</b> Similaire au capteur Wifi. Utile pour les voitures.</string>
-  <string name="important_info_quick_guide_sensors_5"><b>• Capteur de position:</b> Démarré et arrêter par la position de l\'appareil (GPS). Vous devez activer les services de localisation dans les paramètres du système de l\'appareil.</string>
-  <string name="important_info_quick_guide_sensors_6"><b>• Capteur de cellules mobiles:</b> Démarré et arrêter par connexion ou déconnexion des antennes de mobiles.</string>
-  <string name="important_info_quick_guide_sensors_7"><b>• Capteur d\'appel:</b> Démarré et arrêter par contacts configurés. Par exemple, lors de la sonnerie.</string>
-  <string name="important_info_quick_guide_sensors_8"><b>• Capteur d\'accessoires :</b> Démarrer un événement lorsque, par exemple, des écouteurs sont connectés.</string>
-  <string name="important_info_quick_guide_sensors_9"><b>• Capteur NFC:</b> Lancer un événement via les balises NFC.</string>
+  <string name="important_info_quick_guide_sensors_2"><![CDATA[<b>Capteur Temps :</b> Démarrer et arrêter sur un jour de la semaine ou une heure spécifique.]]></string>
+  <string name="important_info_quick_guide_sensors_3"><![CDATA[<b>Capteur Wi-Fi :</b> Arrêter ou démarrer via un SSID Wifi (connecté ou à proximité de). La fonctionnalité \"a proximité\" est utile pour détecter l\'emplacement du périphérique. Par exemple : Démarrer l\'évènement si le périphérique est à proximité du wi-fi de votre domicile.]]></string>
+  <string name="important_info_quick_guide_sensors_4"><![CDATA[<b>Capteur Bluetooth :</b> Similaire au capteur Wifi. Utile pour les voitures.]]></string>
+  <string name="important_info_quick_guide_sensors_5"><![CDATA[<b>Capteur de position:</b> Démarré et arrêter par la position de l\'appareil (GPS). Vous devez activer les services de localisation dans les paramètres du système de l\'appareil.]]></string>
+  <string name="important_info_quick_guide_sensors_6"><![CDATA[<b>Capteur de cellules mobiles:</b> Démarré et arrêter par connexion ou déconnexion des antennes de mobiles.]]></string>
+  <string name="important_info_quick_guide_sensors_7"><![CDATA[<b>Capteur d\'appel:</b> Démarré et arrêter par contacts configurés. Par exemple, lors de la sonnerie.]]></string>
+  <string name="important_info_quick_guide_sensors_8"><![CDATA[<b>Capteur d\'accessoires :</b> Démarrer un événement lorsque, par exemple, des écouteurs sont connectés.]]></string>
+  <string name="important_info_quick_guide_sensors_9"><![CDATA[<b>Capteur NFC:</b> Lancer un événement via les balises NFC.]]></string>
   <string name="important_info_quick_guide_events_3">Si vous activez manuellement un profil (et non par un événement), tous les événements en cours sont arrêtés (en pause). Événements ne démarreront pas suite à l’activation manuelle de profil. Toutefois, vous pouvez surclasser ce comportement par le paramètre « Ignorer l’activation manuelle » dans les paramètres de l’événement.</string>
   <string name="important_info_quick_guide_editor_1">Profils et événements sont configurés dans l’éditeur que vous pouvez appeler par le biais de l’activateur. Dans l’éditeur, vous pouvez ajouter, dupliquer, mettre à jour et supprimer des profils et des événements. L’éditeur a un panneau latéral gauche, qui vous permet de modifier l’affichage de l’éditeur. Il permet de commuter entre les profils et les événements.</string>
   <string name="event_preferences_noPauseByManualActivation">Ne pas mettre en pause lors de l\'activation manuelle</string>
@@ -1016,7 +1012,7 @@
   <string name="notification_channel_grant_permission_description">Affiche les permissions à donner.</string>
   <string name="notification_channel_notify_event_start">Notification de début d\'événement</string>
   <string name="notification_channel_notify_event_start_description">Affiche la notification du début de l\'événement.</string>
-  <string name="editor_drawer_open">Ouvrir le tiroir de navigation</string>
+<!--  <string name="editor_drawer_open">Ouvrir le tiroir de navigation</string>-->
   <string name="important_info_accessibility_service_new_version">Veuillez installer la nouvelle version de PhoneProfilesPlusExtender. Les informations d\'installation sont présentes dans les paramètres qui en ont besoin.</string>
   <string name="important_info_accessibility_service_new_version_2">Cliquez ici pour afficher les mise à jour de PhoneProfilesPlusExtender dans GitHub.</string>
   <string name="array_pref_no_force_stop">Ne pas forcer l\'arrêt</string>
@@ -1128,7 +1124,7 @@
   <string name="permission_why_profile_radio_preferences">pour activer/désactiver les données mobiles, changer le type de réseau mobile, se connecter au SSID</string>
   <string name="permission_why_profile_phone_state_broadcast">pour délier les volumes de sonnerie et de notification, activer/désactiver le haut-parleur pendant l\'appel</string>
   <string name="permission_why_profile_custom_profile_icon">pour l\'icône de profil personnalisé</string>
-  <string name="permission_why_install_tone">pour l\'enregistrement de la tonalité</string>
+<!--  <string name="permission_why_install_tone">pour l\'enregistrement de la tonalité</string>-->
   <string name="permission_why_export">pour sauvegarder les données dans la mémoire</string>
   <string name="permission_why_import">pour charger les données de sauvegarde</string>
   <string name="permission_why_event_calendar_preferences">pour lire les données du calendrier dans le capteur Calendrier</string>
@@ -1193,8 +1189,8 @@
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
 
-    <string name="profile_preferences_installSilentTone_summary">Cliquez ici pour installer tone. </string>
-    <string name="profile_preferences_installSilentTone_installed_summary">Tone est installée. </string>
+    <!--<string name="profile_preferences_installSilentTone_summary">Cliquez ici pour installer tone. </string>-->
+    <!--<string name="profile_preferences_installSilentTone_installed_summary">Tone est installée. </string>-->
     <string name="permissions_for_log_to_file_text1">Info de débogage dans log.txt et crash.txt </string>
     <string name="permissions_for_log_to_file_text2">Veuillez les accorder dans la boîte de dialogue suivante. Le journal de débogage sera alors écrit. </string>
     <string name="permission_why_log_to_file">pour écrire le journal de débogage dans log.txt et crash.txt </string>
@@ -1238,8 +1234,8 @@
     <string name="phone_profiles_pref_applicationTheme_nightMode">By night mode</string>
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary">Please enable Location in System Settings. Without this, Mobile cells scanning will not work.</string>
 
-    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>
-    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>
+<!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>-->
+<!--    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>-->
     <string name="action_for_external_application_notification_title">External applications support (Tasker)</string>
     <string name="start_event_notification_text2">Clear this notification to stop displaying it.</string>
 
@@ -1303,6 +1299,44 @@
     <string name="array_pref_lockDevice_extender">Use PhoneProfilesPlusExtender</string>
 
     <string name="important_info_profile_mobileCellsScanning_location">In Android 9+, for Mobile cells scanning to work, you must enable Location in system settings.</string>
+
+    <string name="info_notification_event_not_started_1">L\'événement n\'est pas commencé quand :</string>
+    <string name="info_notification_event_not_started_2">Vous avez désactivé globalement les évènements (\"feu rouge\") - activer-les dans le menu éditeur avec « Activer les évènements ».</string>
+    <string name="info_notification_event_not_started_3">Vous avez activé manuellement le profil ( « feu orange ») - vous devez redémarrer les événements. Utilisez l\'icône redémarrer les événements de l\'activateur. Les profils activés manuellement  sont indiqués par «[M] » devant le nom du profil. Il y a une exception quand l\'événement a la case « ignorer activation manuelle » cochée.</string>
+    <string name="info_notification_event_not_started_4">Vous avez désactivé les évènements dans les préférences des événements. Note: « Le Feu » est dans la barre de titre.</string>
+
+    <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettingsNotA9_summary">If Mobile cells scanning not working, enable Location in System Settings.</string>
+    <string name="permission_why_profile_radio_preferences_emui">for enable/disable mobile data, change mobile network type, connect to SSID, enable/disable Bluetooth</string>
+    <string name="permission_why_event_bluetooth_preferences_emui">for switch Bluetooth ON/OFF in Bluetooth sensor</string>
+    <string name="event_preferences_priority_appSettings_enabled">Priority is enabled</string>
+    <string name="event_preferences_priority_appSettings_disabled">Priority is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Unlink volumes is enabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_disabled">Unlink volumes is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_merged">Your device has linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_not_merged">Your device does not have linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="phone_profiles_pref_applicationPowerParametersCategory">Battery and power</string>
+    <string name="phone_profiles_pref_applicationOtherParametersCategory">Other</string>
+    <string name="activity_log_header_log_time">Log time</string>
+    <string name="activity_log_header_data_type">Data type</string>
+    <string name="activity_log_header_data">Data</string>
+    <string name="profile_preferences_volumeDTMF">DTMF tones volume</string>
+    <string name="profile_preferences_volumeAccessibility">Accessibility prompts volume</string>
+    <string name="profile_preferences_volumeBluetoothSCO">Bluetooth call volume</string>
+    <string name="profile_preferences_enabled">Enabled</string>
+    <string name="profile_preferences_preferenceTypesInfo_summary">Click here to show information about types of preferences: (G1), (R), (S), (I).</string>
+    <string name="profile_preferences_types_G1_show_info">Click here to show more information.</string>
+    <string name="popup_window_events_status_show_info">Click here to show more information.</string>
+    <string name="editor_activity_targetHelps_filterSpinner_title">Views filter</string>
+    <string name="editor_activity_targetHelps_filterSpinner_description">Click this to switch between Profiles and Events views.</string>
+    <string name="important_info_profile_type_of_preferences">Type of preferences:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+    <!--
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Pour que le volume de notification soit = 0 configurer les notifications à « PhoneProfiles silencieux » pour des notifications réellement silencieuses.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Tonalité de notification « PhoneProfiles silencieux » n’est pas installée. Veuillez l’installer depuis le menu éditeur et essayer à nouveau.</string>
+    -->
 
     <!-- **************************************************************************************** -->
 

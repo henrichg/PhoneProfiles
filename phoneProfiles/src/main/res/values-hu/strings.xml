@@ -24,7 +24,7 @@
   <string name="toast_profile_activated_0">Profil</string>
   <string name="toast_profile_activated_1">aktiválva</string>
   <string name="preference_profile_no_change">Nem változik</string>
-  <string name="preference_profile_autoBrightness">Automatikus</string>
+  <!--<string name="preference_profile_autoBrightness">Automatikus</string>-->
   <string name="title_activity_phone_profiles_preferences">Alkalmazás beállításai</string>
   <string name="menu_exit">Kilépés</string>
   <string name="activate_profile_alert_message">Aktiválod a profilt?</string>
@@ -377,7 +377,6 @@
   <string name="array_pref_ringerModeArray_silentL">Prioritás mód</string>
   <string name="menu_import_export">Biztonsági mentés és visszaállítás</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 perc</string>
-  <string name="info_notification_event_not_started">Esemény nem indul el akkor:\n1. Az összes esemény futtatását kikapcsoltad (piros \"lámpa\") - Ezt a Szerkesztő menüben \"Esemény indítás engedélyezés\".\n2. Kézi aktiválás esetén az aktív profil mellett (\"Sárga lámpa\") - az esemény újra indítása szükséges. Használt az esemény újra indítás ikont a Profilokban, Szerkesztőben vagy az eseményekben. Kézzel aktivált profil jelzése \"[M]\" a profil neve előtt. Exception from this is, when event has checked preference \"Ignore manual activation\".\n3. You have disabled event run in event preferences - event preference \"Enable run\" must by checked.\nNote: \"Traffic light\" is in title of Activator and Editor.</string>
   <string name="important_info_profiles">Profilok</string>
   <string name="important_info_events">Események</string>
   <string name="important_info_system">Rendszer</string>
@@ -422,11 +421,11 @@
   <string name="permissions_for_profile_text3">Végezd el a beállításokat. Akkor aktiválódik a profil.</string>
   <string name="permissions_for_profile_text_notification">Engedély kérelem</string>
   <string name="permissions_for_profile_big_text_notification">engedéllyel kell rendelkeznie.</string>
-  <string name="permissions_for_install_tone_text1">A hangok telepítése a \"Csendes PhoneProfiles\"-ban nem lesz végrehajtva, mert ehhez bizonyos engedélyekre van szükség.</string>
-  <string name="permissions_for_install_tone_text2">Végezd el a beállításokat. Majd a hang telepítve lesz.</string>
+<!--  <string name="permissions_for_install_tone_text1">A hangok telepítése a \"Csendes PhoneProfiles\"-ban nem lesz végrehajtva, mert ehhez bizonyos engedélyekre van szükség.</string>-->
+<!--  <string name="permissions_for_install_tone_text2">Végezd el a beállításokat. Majd a hang telepítve lesz.</string>-->
   <string name="permissions_notification_text">Engedély kérelem</string>
-  <string name="permissions_for_install_tone_big_text_notification">\"Csendes PhoneProfiles\" hang telepítéséhez néhány dolgot engedélyezni kell.</string>
-  <string name="menu_install_tone">Telepítse a \"Csendes PhoneProfiles\" hangokat</string>
+<!--  <string name="permissions_for_install_tone_big_text_notification">\"Csendes PhoneProfiles\" hang telepítéséhez néhány dolgot engedélyezni kell.</string>-->
+  <!--<string name="menu_install_tone">Telepítse a \"Csendes PhoneProfiles\" hangokat</string>-->
   <string name="toast_tone_installation_installed_ok">\"Csendes PhoneProfiles\" hangok telepítve.</string>
   <string name="toast_tone_installation_installed_error">Hiba történt a \"Csendes PhoneProfiles\" hang telepítésénél!</string>
   <string name="toast_permissions_granted">Már engedélyezett</string>
@@ -493,15 +492,15 @@
   <string name="event_preferences_applications_AccessibilitySettings_title">Kisegítő lehetőségek beállításai</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Adaptív szint változtatáshoz, ROOT jogosultság kell.</string>
   <string name="important_info_profile_activation_text1">A profil aktiválás két módja:</string>
-  <string name="important_info_profile_activation_text2">1. kézi aktiválás - aktiválja a Profilt, szerkesztőt, értesítést, widget, parancsikont. Kézzel aktivált profilt \"[M]\" jelöli a profil neve előtt.</string>
-  <string name="important_info_profile_activation_text3">2. esemény aktiválás: - aktiválás esemény által.</string>
+  <string name="important_info_profile_activation_text2">Kézi aktiválás - aktiválja a Profilt, szerkesztőt, értesítést, widget, parancsikont. Kézzel aktivált profilt \"[M]\" jelöli a profil neve előtt.</string>
+  <string name="important_info_profile_activation_text3">Esemény aktiválás: - aktiválás esemény által.</string>
   <string name="important_info_profile_activation_text4">Kézi aktiválás után az esemény vezérlés megáll, és nem indul újra. Az eseményeket újra kell indítani.</string>
   <string name="important_info_profile_activation_text5">E szabály alól kivétel, ha az eseménybe beállatásra kerül \"Figyelmen kívül hagyja a kézi aktiválást\".</string>
   <string name="important_info_profile_activation_text6">Újraindítja az eseményt a Profilokból, Szerkesztőből és az értesítésekből.</string>
   <string name="important_info_profile_activation_text8">Profil és a szerkesztő címe jelölve van a \"lámpával\".</string>
-  <string name="important_info_profile_activation_text9">-zöld szín: esemény indítva.</string>
-  <string name="important_info_profile_activation_text10">-narancssárga szín: esemény nem indítható - profil kézi aktiválva van.</string>
-  <string name="important_info_profile_activation_text11">-piros szín: esemény megállt - indítás események engedélyezhető a szerkesztő menüpont \"Esemény futtatás engedélyezni\".</string>
+  <string name="important_info_profile_activation_text9">Zöld szín: esemény indítva.</string>
+  <string name="important_info_profile_activation_text10">Narancssárga szín: esemény nem indítható - profil kézi aktiválva van.</string>
+  <string name="important_info_profile_activation_text11">Piros szín: esemény megállt - indítás események engedélyezhető a szerkesztő menüpont \"Esemény futtatás engedélyezni\".</string>
   <string name="important_info_profile_activation_restart_events_icon">Indítsa újra, esemény ikon:</string>
   <string name="important_info_profile_activation_traffic_light_icon">\"Lámpa\" ikon:</string>
   <string name="important_info_android_doze_mode">Az Android 6+ pedig megvalósított \"Alvó mód\" \"Készenléti mód\". Amikor profil aktiválási problémák vannak az események aktiválásánál az eseményekből, ha egy eszközt kihúz és helyben marad egy ideig, a képernyő kikapcsol, hozzáad PhoneProfiles-hoz \"Akkumulátor\"→\"akkumulátor optimalizált\"→\"Nem optimalizált\".</string>
@@ -611,7 +610,7 @@
   <string name="about_application_source_code">Forráskód:</string>
   <string name="about_application_translations">Fordítások:</string>
   <string name="about_application_rate_in_googlePlay">Kérjük, értékelje ezt az alkalmazást a Google Playen</string>
-  <string name="phone_profiles_pref_systemLanguage_summary">Az alkalmazás a rendszer által konfigurált nyelvet használja.</string>
+  <!--<string name="phone_profiles_pref_systemLanguage_summary">Az alkalmazás a rendszer által konfigurált nyelvet használja.</string>-->
   <string name="permission_group_name_access_notification_policy">Ne zavarjanak mód</string>
   <string name="permissions_access_notification_policy_not_allowed_confirm">Nincs engedélyezve \"Ne zavarjanak mód\". Ne kérdezze újra?</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Ne zavarjanak mód</string>
@@ -656,7 +655,7 @@
   <string name="bluetooth_name_pref_dlg_all_bt_names_chb">Minden Bluetooth-név</string>
   <string name="editor_drawer_list_item_events_start_order">Indítási sorrend</string>
   <string name="editor_drawer_order_start_order">Indítási sorrend</string>
-  <string name="info_notification_event_priority_new">4. minden esemény \"elsőbbséget\" élvez. Esemény nem indul el, ha a magasabb prioritású esemény fut.</string>
+  <string name="info_notification_event_priority_new">Minden esemény \"elsőbbséget\" élvez. Esemény nem indul el, ha a magasabb prioritású esemény fut.</string>
   <string name="info_notification_event_start_order">Események \"Indítási sorrend\" szerint futnak. Beállíthatja a sorrendet az esemény szerkesztőben \"Indítási sorrend\". Ebben a nézetben húzza fel/le \"rendezés kezelő\".</string>
   <string name="info_notification_event_start_order_handler_icon">Sorrend kezelő:</string>
   <string name="info_notification_activate_profile_from_tasker">Aktiválhatod a profilt a \"Tasker\"-ből. Feladat beállítása \"Rendszer\"/\"Küldési szándék\" paraméterekkel:</string>
@@ -667,10 +666,10 @@
   <string name="phone_profiles_pref_applicationWidgetIconLightnessT">Szöveg világosság (widget)</string>
   <string name="altype_eventStop">esemény leállítás</string>
   <string name="info_notification_manage_events_from_tasker">Eseményeket kezelheti a Tasker-ben. Állítsa be \"Rendszer\" / \"Küldés szándék\" paraméterekkel:</string>
-  <string name="info_notification_manage_events_from_tasker_restart_events">- esemény újraindítás:</string>
-  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">- futtatás engedélyezés az eseményhez:</string>
-  <string name="info_notification_manage_events_from_tasker_pause_event">- esemény szüneteltetés:</string>
-  <string name="info_notification_manage_events_from_tasker_stop_event">- esemény leállítás:</string>
+  <string name="info_notification_manage_events_from_tasker_restart_events">esemény újraindítás:</string>
+  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">futtatás engedélyezés az eseményhez:</string>
+  <string name="info_notification_manage_events_from_tasker_pause_event">esemény szüneteltetés:</string>
+  <string name="info_notification_manage_events_from_tasker_stop_event">esemény leállítás:</string>
   <string name="phone_profiles_pref_category_eventRun">Esemény fut</string>
   <string name="phone_profiles_pref_eventRunUsePriority">\"Prioritás\" esemény paraméter használata</string>
   <string name="event_preferences_priority_notUse">Nem használható</string>
@@ -716,7 +715,7 @@
   <string name="editor_event_list_item_profile_end_icon">Esemény végződés ikon</string>
 <!--  <string name="profile_preferences_sourceProfileInfo_summary">A profil paramétereket megoszthatja a megosztandó paramétereket jelölheti \"Megosztott profil\" Az aktiválás során használt értékek, közös profil lesz és konfigurálható minden profil paraméter. Kattintson ide, hogy a Megosztott profil paramétereket beállítása.</string> -->
   <string name="run_stop_events_indicator">Endegélyezet/álló esemény futási visszajelzését</string>
-  <string name="run_stop_indicator_popup_window_important_info">További információért tekintse át a \"Fontos tudnivalók\" megjelenítheti a szerkesztőn keresztül a kérdőjel ikonra kattint az eszköztáron.</string>
+<!--  <string name="run_stop_indicator_popup_window_important_info">További információért tekintse át a \"Fontos tudnivalók\" megjelenítheti a szerkesztőn keresztül a kérdőjel ikonra kattint az eszköztáron.</string>-->
   <string name="important_info_how_to_show">Fontos információ megtekinthető a szerkesztőn keresztül, ha a kérdőjel ikonra kattintasz az eszköztáron.</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">alkalmazás által nem támogatott</string>
   <string name="preference_not_allowed_reason_detail_old_android">régi Android verzió</string>
@@ -740,9 +739,6 @@
   <string name="profile_preferences_category_profileDeviceParameters">Készülék paraméterek</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Értesítési hang módosítása</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">\"Csendes PhoneProfiles\" értesítési hang van konfigurálva.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Értesítés hangerő = 0-t beállításával, \"Csendes PhoneProfiles\" lesz az igazi csendes értesítés.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_question">Értesítési hangot \"Csendes PhoneProfiles\" beállítja?</string>
-  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Értesítési hang \"Csendes PhoneProfiles\" nincs telepítve. Kérlek telepítsd a Szerkesztés menüből és próbáld újra.</string>
   <string name="info_notification_unlink_ringer_notification_volumes">A készülék egyesíti a csengetési és értesítési hangerőket. Akarod a \"Csengetési és értesítési hangerők szétválasztását\". Kattintson ide a változtatáshoz.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">A készülék összevonta a csengetési és értesítési hangerőket. Ha akarja szétválaszthatja a hangerő paramétereket.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Prioritás használata</string>
@@ -772,7 +768,7 @@
   <string name="event_preference_sensor_application_summary">Az esemény elindul ha egy alkalmazás az előtérbe kerül. Paraméterek: Alkalmazások.</string>
   <string name="event_preference_sensor_orientation_summary">Esemény kezdéséhez a készülék bizonyos pozíciója kell. Paraméterek: Kijelző (fel, le), Oldalak (vízszintes, oldalsó fel), a távolság (közel, távol, használ a közelség érzékelőt), figyelmen kívül hagyása ha az alkalmazások (az előtérben van).</string>
   <string name="event_preference_sensor_nfc_summary">NFC címkéhez köti az esemény kezdetét. Paraméterek: NFC címke, Láthatatlan futás, állandó időtartama (esemény időtartama alatt fut).</string>
-  <string name="editor_activity_targetHelps_navigationIcon_title">\"Nézetek\" oldalsó panel</string>
+<!--  <string name="editor_activity_targetHelps_navigationIcon_title">\"Nézetek\" oldalsó panel</string>-->
   <string name="editor_activity_targetHelps_applicationMenu_title">Alkalmazás menü</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">Ide kattintva megnyílik az alkalmazás menü. Ebben a menüben az alkalmazást beállíthatja.</string>
   <string name="editor_activity_targetHelps_restartEvents_title">Események újraindítása</string>
@@ -876,37 +872,37 @@
   <string name="event_preferences_notificationVibrate">Értesítés rezgéssel</string>
   <string name="important_info_profile_grant">Néhány profil tulajdonsághoz WRITE_SECURE_SETTINGS engedélyre van szükségük. ROOT nem szükséges. Ezeket a beállításokat \"(G1)\" jelöli.</string>
   <string name="important_info_profile_grant_lookSectionProfiles">További információért tekintse meg a \"Profilok\" szakasz alatt.</string>
-  <string name="profile_preferences_typesInfoGrant">Több információhoz nézd a \"Fontos információ\", \"Profilok\" részt.</string>
+<!--  <string name="profile_preferences_typesInfoGrant">Több információhoz nézd a \"Fontos információ\", \"Profilok\" részt.</string>-->
   <string name="important_info_profile_grant_1_howTo_1">Profil paraméterek (G1) jelöléssel külön engedély kell PhoneProfilesPlushoz. Ehhez a számítógépre telepített adb szükséges.</string>
   <string name="important_info_profile_grant_1_howTo_2">Ha nincs a számítógépre telepített adb:</string>
-  <string name="important_info_profile_grant_1_howTo_3">1. Töltse le az SDK eszközöket \"SDK Platform Tools\":</string>
+  <string name="important_info_profile_grant_1_howTo_3">Töltse le az SDK eszközöket \"SDK Platform Tools\":</string>
   <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
-  <string name="important_info_profile_grant_1_howTo_4">2. Csomagolja ki a zip-pelt tartalmat.</string>
+  <string name="important_info_profile_grant_1_howTo_4">Csomagolja ki a zip-pelt tartalmat.</string>
   <string name="important_info_profile_grant_1_howTo_5">Hogyan adja meg a WRITE_SECURE_SETTINGS engedélyt:</string>
-  <string name="important_info_profile_grant_1_howTo_6">(1) a készüléken, menjen a Beállítások &gt; Névjegy &gt; Szoftver Információ és kattintás build number 7-szer. Ez kinyitja a fejlesztő lehetőségeket a Beállítások menüben.</string>
-  <string name="important_info_profile_grant_1_howTo_7">2. Lépjen a Beállítások menü &gt; Fejlesztői Beállítások és engedélyezze az USB hibakeresést.</string>
-  <string name="important_info_profile_grant_1_howTo_8">(3) a PC nyisson egy parancssort (Windows), illetve a terminál (Linux, OSX). Lépjen be abba a könyvtárban ahova az adb file-okat kicsomagolta dosszié hol vagy kivonat a adb fájlokat, és pontosan írja be a következő parancsot:</string>
-  <string name="important_info_profile_grant_1_howTo_10">4. a sikeres végrehajtása után minden profil paraméter amit (G1) jelölt engedélyezve lesz.</string>
+  <string name="important_info_profile_grant_1_howTo_6">A készüléken, menjen a Beállítások &gt; Névjegy &gt; Szoftver Információ és kattintás build number 7-szer. Ez kinyitja a fejlesztő lehetőségeket a Beállítások menüben.</string>
+  <string name="important_info_profile_grant_1_howTo_7">Lépjen a Beállítások menü &gt; Fejlesztői Beállítások és engedélyezze az USB hibakeresést.</string>
+  <string name="important_info_profile_grant_1_howTo_8">A PC nyisson egy parancssort (Windows), illetve a terminál (Linux, OSX). Lépjen be abba a könyvtárban ahova az adb file-okat kicsomagolta dosszié hol vagy kivonat a adb fájlokat, és pontosan írja be a következő parancsot:</string>
+  <string name="important_info_profile_grant_1_howTo_10">A sikeres végrehajtása után minden profil paraméter amit (G1) jelölt engedélyezve lesz.</string>
   <string name="important_info_activity_title">Fontos információ</string>
   <string name="important_info_quick_guide_tab">Gyors útmutató</string>
   <string name="important_info_important_info_tab">Fontos információ</string>
   <string name="important_info_quick_guide_1">PhoneProfiles (PP) két részből áll:</string>
-  <string name="important_info_quick_guide_2">(1) <b>PROFILOK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.</string>
-  <string name="important_info_quick_guide_3">(1) <b>ESEMÉNYEK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.</string>
+  <string name="important_info_quick_guide_2"><![CDATA[<b>PROFILOK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.]]></string>
+  <string name="important_info_quick_guide_3"><![CDATA[<b>ESEMÉNYEK:</b> Itt adhatja meg, hogyan lehet megváltoztatni készüléke beállításait.]]></string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFILOK:</b> Segítségével megadhatók az eszközök beállításai között a csengetési mód, a hangerőt, a csengőhang és értesítési hangok, rádió váltás (Wi-Fi, Bluetooth, mobil adat, stb.). A profil aktiválásakor a megfelelő beállítások is állandósulnak. Ha a beállításokat módosításítani akarja, egy másik profilt is aktiválni kell.</string>
   <string name="important_info_quick_guide_profiles_2">Profilokat lehet aktiválni kézzel, vagy egy eseménnyel.</string>
   <string name="important_info_quick_guide_profiles_3">Egy profil a PP-aktivátoron keresztül (előugró ablak a rendelkezésre álló profilok listájával) kézzel aktiválhatja. Az aktiválás otthon PP-ikon, a PP-értesítés, PP widget keresztül, és a széle panelről a Samsung EDGE eszközökön jeleníthetők meg. Közvetlenül is aktiválhatja a profil révén a PP 4 x 4 widget, a profilokon vagy az Edge panelen keresztül a Samsung Edge eszközökön.</string>
   <string name="important_info_quick_guide_events_1"><b>ESEMÉNYEK:</b> Segítségével konfigurálhatja a profil aktiválásának lefolyását. Eseményeknek van kezdete és vége. Beállíthatja, mi történjen az esemény kezdetekor, és mi fog történni, amikor a esemény véget ér.</string>
   <string name="important_info_quick_guide_events_2">Események tartalmaznak fontos szenzor konfigurációs paramétereket, amelyek az esemény kezdete előtt megfelelő értéket kell adnia. Ha néhány szenzor nem felel meg, az esemény véget ér (szünet).</string>
   <string name="important_info_quick_guide_sensors_1">Szenzor példák:</string>
-  <string name="important_info_quick_guide_sensors_2"><b>• idő-érzékelő:</b> kezdete és vége egy a hét megadott napján, vagy egy meghatározott időpontban.</string>
-  <string name="important_info_quick_guide_sensors_3"><b>• Wi-Fi-érzékelő:</b> kezdete és vége a Wi-Fi SSID (csatlakozva, készülék közeli). A közeli opció hasznos lehet a készülék helyének meghatározásához. Például: az esemény indítása mikor a készülék az otthoni Wi-Fi hálózat tartományán belül van.</string>
-  <string name="important_info_quick_guide_sensors_4"><b>• Bluetooth-érzékelő:</b> hasonló, mint Wi-Fi érzékelő. Hasznos Bluetooth autóban.</string>
-  <string name="important_info_quick_guide_sensors_5"><b>• helyérzékelő:</b> kezdete és vége a készülék helye szerint (GPS). Engedélyeznie kell a helymeghatározással kapcsolatos szolgáltatásokat a készülék rendszerbeállításaiban.</string>
-  <string name="important_info_quick_guide_sensors_6"><b>• mobil cella érzékelő:</b> kezdete és vége, kapcsolódás, vagy megszakad a kapcsolat a mobil cellával.</string>
-  <string name="important_info_quick_guide_sensors_7"><b>• hívás-érzékelő:</b> kezdete és a vége a beállított kapcsolatokon keresztül. Például, amikor cseng.</string>
-  <string name="important_info_quick_guide_sensors_8"><b>• tartozékok-érzékelő:</b> kezdeni egy eseményt, ha például a fülhallgatót csatlakoztatja.</string>
-  <string name="important_info_quick_guide_sensors_9"><b>• NFC érzékelő:</b> Eseményt indít ha adott NFC címkét érzékel.</string>
+  <string name="important_info_quick_guide_sensors_2"><![CDATA[<b>idő-érzékelő:</b> kezdete és vége egy a hét megadott napján, vagy egy meghatározott időpontban.]]></string>
+  <string name="important_info_quick_guide_sensors_3"><![CDATA[<b>Wi-Fi-érzékelő:</b> kezdete és vége a Wi-Fi SSID (csatlakozva, készülék közeli). A közeli opció hasznos lehet a készülék helyének meghatározásához. Például: az esemény indítása mikor a készülék az otthoni Wi-Fi hálózat tartományán belül van.]]></string>
+  <string name="important_info_quick_guide_sensors_4"><![CDATA[<b>Bluetooth-érzékelő:</b> hasonló, mint Wi-Fi érzékelő. Hasznos Bluetooth autóban.]]></string>
+  <string name="important_info_quick_guide_sensors_5"><![CDATA[<b>helyérzékelő:</b> kezdete és vége a készülék helye szerint (GPS). Engedélyeznie kell a helymeghatározással kapcsolatos szolgáltatásokat a készülék rendszerbeállításaiban.]]></string>
+  <string name="important_info_quick_guide_sensors_6"><![CDATA[<b>mobil cella érzékelő:</b> kezdete és vége, kapcsolódás, vagy megszakad a kapcsolat a mobil cellával.]]></string>
+  <string name="important_info_quick_guide_sensors_7"><![CDATA[<b>hívás-érzékelő:</b> kezdete és a vége a beállított kapcsolatokon keresztül. Például, amikor cseng.]]></string>
+  <string name="important_info_quick_guide_sensors_8"><![CDATA[<b>tartozékok-érzékelő:</b> kezdeni egy eseményt, ha például a fülhallgatót csatlakoztatja.]]></string>
+  <string name="important_info_quick_guide_sensors_9"><![CDATA[<b>NFC érzékelő:</b> Eseményt indít ha adott NFC címkét érzékel.]]></string>
   <string name="important_info_quick_guide_events_3">Ha manuálisan aktiválja a profilt (nem az esemény által), minden futó eseményt leallít (felfüggesztett). Események nem indulnak addig amíg manuális profil aktiválva van. Azonban felülírhatja ezt a viselkedést a \"Kézi aktiválás figyelmen kívül hagyása\" paraméter beállításával az eseményekben.</string>
   <string name="important_info_quick_guide_editor_1">Profilok és Események beállítása, a Szerkesztőben, amire a Profilokon keresztül hivatkozhat. A szerkesztőben hozzáadhat, másolhat, frissíthet és törölhet profilokat és eseményeket. A szerkesztő a bal oldali panelen van, amely lehetővé teszi, hogy változtathasson a szerkesztő nézeten. Használhatja ezt a Profilok és Események listájának átváltásához.</string>
   <string name="event_preferences_noPauseByManualActivation">Nem szüneteltethető ha kézzel aktiválta</string>
@@ -1016,7 +1012,7 @@
   <string name="notification_channel_grant_permission_description">Azt mutatja, hogy melyikhez kell engedélyt adni.</string>
   <string name="notification_channel_notify_event_start">Állapotsáv értesítések megjelenítés indítása</string>
   <string name="notification_channel_notify_event_start_description">Esemény megkezdéséről értesítést mutat.</string>
-  <string name="editor_drawer_open">Irányító fiók megnyitása</string>
+<!--  <string name="editor_drawer_open">Irányító fiók megnyitása</string>-->
   <string name="important_info_accessibility_service_new_version">Kérjük, telepítse az új verzióját a PhoneProfilesPlusExtender-nek. További információt a paraméterek telepítéséhez, a PhoneProfilesPlusExtender szükséges.</string>
   <string name="important_info_accessibility_service_new_version_2">Kattintson ide, hogy a PhoneProfilesPlusExtender-t jelenítse meg a GitHub-on.</string>
   <string name="array_pref_no_force_stop">Ne erőltesse a leállítást</string>
@@ -1127,7 +1123,7 @@
   <string name="permission_why_profile_radio_preferences">ahhoz, hogy engedélyezze /tiltsa mobil adat forgalmat, mobil hálózatot, csatlakozást egy SSID-hez</string>
   <string name="permission_why_profile_phone_state_broadcast">for unlink ringing and notification volumes, enable/disable speakerphone during call</string>
   <string name="permission_why_profile_custom_profile_icon">for custom profile icon</string>
-  <string name="permission_why_install_tone">for save tone into storage</string>
+<!--  <string name="permission_why_install_tone">for save tone into storage</string>-->
   <string name="permission_why_export">for save backup data into storage</string>
   <string name="permission_why_import">for load backup data from storage</string>
   <string name="permission_why_event_calendar_preferences">for read calendar data in Calendar sensor</string>
@@ -1193,8 +1189,8 @@
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
 
-    <string name="profile_preferences_installSilentTone_summary">Click here to install tone.</string>
-    <string name="profile_preferences_installSilentTone_installed_summary">Tone is installed.</string>
+    <!--<string name="profile_preferences_installSilentTone_summary">Click here to install tone.</string>-->
+    <!--<string name="profile_preferences_installSilentTone_installed_summary">Tone is installed.</string>-->
     <string name="permissions_for_log_to_file_text1">Debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_text2">Please grant them in next dialog. Debug log will then be write.</string>
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
@@ -1237,8 +1233,8 @@
     <string name="phone_profiles_pref_applicationTheme_nightMode">By night mode</string>
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary">Please enable Location in System Settings. Without this, Mobile cells scanning will not work.</string>
 
-    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>
-    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>
+<!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>-->
+<!--    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>-->
     <string name="action_for_external_application_notification_title">External applications support (Tasker)</string>
     <string name="start_event_notification_text2">Clear this notification to stop displaying it.</string>
 
@@ -1302,6 +1298,44 @@
     <string name="array_pref_lockDevice_extender">Use PhoneProfilesPlusExtender</string>
 
     <string name="important_info_profile_mobileCellsScanning_location">In Android 9+, for Mobile cells scanning to work, you must enable Location in system settings.</string>
+
+    <string name="info_notification_event_not_started_1">Esemény nem indul el akkor:</string>
+    <string name="info_notification_event_not_started_2">Az összes esemény futtatását kikapcsoltad (piros \"lámpa\") - Ezt a Szerkesztő menüben \"Esemény indítás engedélyezés\".</string>
+    <string name="info_notification_event_not_started_3">Kézi aktiválás esetén az aktív profil mellett (\"Sárga lámpa\") - az esemény újra indítása szükséges. Használt az esemény újra indítás ikont a Profilokban, Szerkesztőben vagy az eseményekben. Kézzel aktivált profil jelzése \"[M]\" a profil neve előtt. Exception from this is, when event has checked preference \"Ignore manual activation\".</string>
+    <string name="info_notification_event_not_started_4">You have disabled event run in event preferences - event preference \"Enable run\" must by checked. Note: \"Traffic light\" is in title of Activator and Editor.</string>
+
+    <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettingsNotA9_summary">If Mobile cells scanning not working, enable Location in System Settings.</string>
+    <string name="permission_why_profile_radio_preferences_emui">for enable/disable mobile data, change mobile network type, connect to SSID, enable/disable Bluetooth</string>
+    <string name="permission_why_event_bluetooth_preferences_emui">for switch Bluetooth ON/OFF in Bluetooth sensor</string>
+    <string name="event_preferences_priority_appSettings_enabled">Priority is enabled</string>
+    <string name="event_preferences_priority_appSettings_disabled">Priority is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Unlink volumes is enabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_disabled">Unlink volumes is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_merged">Your device has linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_not_merged">Your device does not have linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="phone_profiles_pref_applicationPowerParametersCategory">Battery and power</string>
+    <string name="phone_profiles_pref_applicationOtherParametersCategory">Other</string>
+    <string name="activity_log_header_log_time">Log time</string>
+    <string name="activity_log_header_data_type">Data type</string>
+    <string name="activity_log_header_data">Data</string>
+    <string name="profile_preferences_volumeDTMF">DTMF tones volume</string>
+    <string name="profile_preferences_volumeAccessibility">Accessibility prompts volume</string>
+    <string name="profile_preferences_volumeBluetoothSCO">Bluetooth call volume</string>
+    <string name="profile_preferences_enabled">Enabled</string>
+    <string name="profile_preferences_preferenceTypesInfo_summary">Click here to show information about types of preferences: (G1), (R), (S), (I).</string>
+    <string name="profile_preferences_types_G1_show_info">Click here to show more information.</string>
+    <string name="popup_window_events_status_show_info">Click here to show more information.</string>
+    <string name="editor_activity_targetHelps_filterSpinner_title">Views filter</string>
+    <string name="editor_activity_targetHelps_filterSpinner_description">Click this to switch between Profiles and Events views.</string>
+    <string name="important_info_profile_type_of_preferences">Type of preferences:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+    <!--
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Értesítés hangerő = 0-t beállításával, \"Csendes PhoneProfiles\" lesz az igazi csendes értesítés.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Értesítési hang \"Csendes PhoneProfiles\" nincs telepítve. Kérlek telepítsd a Szerkesztés menüből és próbáld újra.</string>
+    -->
 
     <!-- **************************************************************************************** -->
 

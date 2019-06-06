@@ -24,7 +24,7 @@
   <string name="toast_profile_activated_0">情景</string>
   <string name="toast_profile_activated_1">已激活</string>
   <string name="preference_profile_no_change">不要更改</string>
-  <string name="preference_profile_autoBrightness">自动</string>
+  <!--<string name="preference_profile_autoBrightness">自动</string>-->
   <string name="title_activity_phone_profiles_preferences">应用设置</string>
   <string name="menu_exit">退出</string>
   <string name="activate_profile_alert_message">确定激活情景？</string>
@@ -377,7 +377,6 @@
   <string name="array_pref_ringerModeArray_silentL">优先模式</string>
   <string name="menu_import_export">备份/恢复</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 分钟</string>
-  <string name="info_notification_event_not_started">以下情况事件将不会启动：n1. 你禁用了全局事件运行 (显示红灯) - 请在编辑器菜单中点击“允许运行事件”以启用事件运行功能。n2. 你手工激活了情景 (显示黄灯) - 必须重新运行事件。使用激活清单、编辑器或通知中的“重新启动事件”图标。手动激活的情景在情景名称前用“[M]”标记。例外的情况：如果事件设置中选中了“忽略手工激活”，则事件仍会运行。n3. 你在事件设置中禁止了事件运行 - 必须在事件设置中选中“允许运行”选项n注意：“红绿灯”在激活清单和编辑器的标题中显示。</string>
   <string name="important_info_profiles">情景</string>
   <string name="important_info_events">事件</string>
   <string name="important_info_system">系统</string>
@@ -422,11 +421,11 @@
   <string name="permissions_for_profile_text3">请在下一个对话框中授权，然后情景将被激活。</string>
   <string name="permissions_for_profile_text_notification">权限请求</string>
   <string name="permissions_for_profile_big_text_notification">需要授予某些权限。</string>
-  <string name="permissions_for_install_tone_text1">将不会执行铃声“PhoneProfiles 无声”的安装，因为此操作需要某些特定权限。</string>
-  <string name="permissions_for_install_tone_text2">请在下一个对话框中授权，然后铃声将被安装。</string>
+<!--  <string name="permissions_for_install_tone_text1">将不会执行铃声“PhoneProfiles 无声”的安装，因为此操作需要某些特定权限。</string>-->
+<!--  <string name="permissions_for_install_tone_text2">请在下一个对话框中授权，然后铃声将被安装。</string>-->
   <string name="permissions_notification_text">权限请求</string>
-  <string name="permissions_for_install_tone_big_text_notification">铃声“PhoneProfiles 无声”的安装需要授予某些特定权限。</string>
-  <string name="menu_install_tone">安装铃声“PhoneProfiles 无声”</string>
+<!--  <string name="permissions_for_install_tone_big_text_notification">铃声“PhoneProfiles 无声”的安装需要授予某些特定权限。</string>-->
+  <!--<string name="menu_install_tone">安装铃声“PhoneProfiles 无声”</string>-->
   <string name="toast_tone_installation_installed_ok">铃声“PhoneProfiles 无声”已安装</string>
   <string name="toast_tone_installation_installed_error">安装铃声“PhoneProfiles 无声”时发生错误！</string>
   <string name="toast_permissions_granted">已授予权限</string>
@@ -468,8 +467,8 @@
   <string name="event_preferences_battery_power_save_mode">省电模式</string>
   <string name="phone_profiles_pref_applicationPowerSaveMode">省电模式设置</string>
   <string name="array_pref_powerSaveMode_off">关闭</string>
-  <string name="array_pref_powerSaveMode_5" formatted="false">剩余 5% 电量时启用</string>
-  <string name="array_pref_powerSaveMode_15" formatted="false">剩余 15% 电量时启用</string>
+  <string name="array_pref_powerSaveMode_5" formated="false">剩余 5% 电量时启用</string>
+  <string name="array_pref_powerSaveMode_15" formated="false">剩余 15% 电量时启用</string>
   <string name="important_info_profile_ringerMode_root">在未 root 的 Android 6 设备中，不能更改系统设置“响铃时震动”。</string>
   <string name="important_info_profile_adaptiveBrightness_root">在未 root 的 Android 6+ 设备中，不能更改系统设置“自适应亮度”。</string>
   <string name="important_info_profile_wifiScanning_location">在 Android 6+ 设备中，必须在定位设置中启用定位和“Wi-Fi 扫描”选项以启用 Wi-Fi 扫描。</string>
@@ -493,15 +492,15 @@
   <string name="event_preferences_applications_AccessibilitySettings_title">辅助功能设置</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">必须 root 才能更改自适应级别。</string>
   <string name="important_info_profile_activation_text1">情景可以通过两种模式激活：</string>
-  <string name="important_info_profile_activation_text2">1. 手动激活 - 在激活清单、编辑器、通知、小部件和快捷方式中激活。手动激活的情景在情景名称前以“[M]”表示。</string>
-  <string name="important_info_profile_activation_text3">2. 事件激活 - 以事件激活。</string>
+  <string name="important_info_profile_activation_text2">手动激活 - 在激活清单、编辑器、通知、小部件和快捷方式中激活。手动激活的情景在情景名称前以“[M]”表示。</string>
+  <string name="important_info_profile_activation_text3">事件激活 - 以事件激活。</string>
   <string name="important_info_profile_activation_text4">手动激活会暂停所有事件，事件将永远不会开始。您必须重新开启事件以恢复开始事件。</string>
   <string name="important_info_profile_activation_text5">此规则的例外情况是，如果该事件在设置设置为“忽略手动激活”。</string>
   <string name="important_info_profile_activation_text6">可以从激活清单、 编辑器和通知调用中重新启动事件。</string>
   <string name="important_info_profile_activation_text8">在激活清单和编辑器的标题中显示的是“红绿灯”。</string>
-  <string name="important_info_profile_activation_text9">- 绿色: 事件可以启动。</string>
-  <string name="important_info_profile_activation_text10">- 橙色: 事件不能启动 - 已手动激活情景。</string>
-  <string name="important_info_profile_activation_text11">- 红色: 事件已停止 - 可以在编辑器功能菜单项目“激活事件运行”来执行。</string>
+  <string name="important_info_profile_activation_text9">绿色: 事件可以启动。</string>
+  <string name="important_info_profile_activation_text10">橙色: 事件不能启动 - 已手动激活情景。</string>
+  <string name="important_info_profile_activation_text11">红色: 事件已停止 - 可以在编辑器功能菜单项目“激活事件运行”来执行。</string>
   <string name="important_info_profile_activation_restart_events_icon">重新启动事件图标：</string>
   <string name="important_info_profile_activation_traffic_light_icon">“红绿灯”图标：</string>
   <string name="important_info_android_doze_mode">在 Android 6+ 中实现了“打盹模式”和“应用程序待机”。如果把设备限制一段时间后屏幕熄灭，事件激活情景遇到问题，请把 PhoneProfiles 添加到“电池”→“电池优化”→“未优化”中。</string>
@@ -611,7 +610,7 @@
   <string name="about_application_source_code">源代码：</string>
   <string name="about_application_translations">翻译：</string>
   <string name="about_application_rate_in_googlePlay">请在 Google Play 中为此应用程序打分</string>
-  <string name="phone_profiles_pref_systemLanguage_summary">应用程序使用系统中设置的语言。</string>
+  <!--<string name="phone_profiles_pref_systemLanguage_summary">应用程序使用系统中设置的语言。</string>-->
   <string name="permission_group_name_access_notification_policy">访问“勿扰模式”</string>
   <string name="permissions_access_notification_policy_not_allowed_confirm">您没有启用“访问勿扰模式”，是否以后不再询问？</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">访问“勿扰模式”</string>
@@ -656,7 +655,7 @@
   <string name="bluetooth_name_pref_dlg_all_bt_names_chb">所有的蓝牙名称</string>
   <string name="editor_drawer_list_item_events_start_order">启动顺序</string>
   <string name="editor_drawer_order_start_order">启动顺序</string>
-  <string name="info_notification_event_priority_new">4. 每个事件都有“优先权”。如果正在运行具有较高优先级的事件，本事件将不会启动。</string>
+  <string name="info_notification_event_priority_new">每个事件都有“优先权”。如果正在运行具有较高优先级的事件，本事件将不会启动。</string>
   <string name="info_notification_event_start_order">事件以“开始订单”运行。您可以在事件视图“开始订单”中的编辑器中修改启动顺序。您只需通过“订单处理程序”向上/向下拖动事件。</string>
   <string name="info_notification_event_start_order_handler_icon">排序手柄：</string>
   <string name="info_notification_activate_profile_from_tasker">您可以从 Tasker 激活情景，以如下参数配置 Tasker 任务“系统”/“发送Intent”：</string>
@@ -667,10 +666,10 @@
   <string name="phone_profiles_pref_applicationWidgetIconLightnessT">文本亮度 (小部件)</string>
   <string name="altype_eventStop">事件停止</string>
   <string name="info_notification_manage_events_from_tasker">您可以从 Tasker 管理情景，以如下参数配置 Tasker 任务“系统”/“发送Intent”：</string>
-  <string name="info_notification_manage_events_from_tasker_restart_events">- 重新启动事件：</string>
-  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">- 启用事件运行：</string>
-  <string name="info_notification_manage_events_from_tasker_pause_event">- 暂停事件：</string>
-  <string name="info_notification_manage_events_from_tasker_stop_event">- 停止事件：</string>
+  <string name="info_notification_manage_events_from_tasker_restart_events">重新启动事件：</string>
+  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">启用事件运行：</string>
+  <string name="info_notification_manage_events_from_tasker_pause_event">暂停事件：</string>
+  <string name="info_notification_manage_events_from_tasker_stop_event">停止事件：</string>
   <string name="phone_profiles_pref_category_eventRun">事件运行</string>
   <string name="phone_profiles_pref_eventRunUsePriority">使用“优先级”事件参数</string>
   <string name="event_preferences_priority_notUse">不使用</string>
@@ -716,7 +715,7 @@
   <string name="editor_event_list_item_profile_end_icon">事件情景结束图标</string>
 <!--  <string name="profile_preferences_sourceProfileInfo_summary">您可以将每个配置文件参数配置用于“共享配置文件”，并且在激活期间将使用共享配置文件中的值。单击此处配置共享配置文件参数。</string> -->
   <string name="run_stop_events_indicator">启用/停止事件运行指示器</string>
-  <string name="run_stop_indicator_popup_window_important_info">有关详细信息，请通过工具栏中的问号图标查看编辑器中的“重要信息”屏幕。</string>
+<!--  <string name="run_stop_indicator_popup_window_important_info">有关详细信息，请通过工具栏中的问号图标查看编辑器中的“重要信息”屏幕。</string>-->
   <string name="important_info_how_to_show">此重要信息可以通过点击编辑器底部工具栏中的问号图标查看。</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">应用程序不支持</string>
   <string name="preference_not_allowed_reason_detail_old_android">旧的 Android 版本</string>
@@ -740,9 +739,6 @@
   <string name="profile_preferences_category_profileDeviceParameters">设备参数</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">更改通知提示音</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">已设置通知提示音为“PhoneProfiles 无声”</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">对于真正无声的通知音量，请将通知音配置为“PhoneProfiles Silent”。</string>
-  <string name="profile_preferences_volumeNotificationVolume0_question">要设置通知提示音为“PhoneProfiles 无声”吗？</string>
-  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">未安装通知提示音“PhoneProfiles 无声”。请从编辑器菜单安装后再重试。</string>
   <string name="info_notification_unlink_ringer_notification_volumes">您的设备已关联铃声和通知的音量级别。您可以使用“取消链接振铃和通知卷”。单击此处进行配置。</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">您的设备已关联铃声和通知音量。如果要取消关联音量，请启用此参数。</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">使用优先级</string>
@@ -772,7 +768,7 @@
   <string name="event_preference_sensor_application_summary">此传感器用于按前台运行的应用程序启动事件。参数：应用程序。</string>
   <string name="event_preference_sensor_orientation_summary">此传感器用于按设备的方向启动事件。参数：显示 (向上，向下)，Sides (Horizontal, side up)，距离 (远，近，使用距离传感器检测)，忽略应用程序 (前台)。</string>
   <string name="event_preference_sensor_nfc_summary">此传感器用于按 NFC 标签启动事件。参数：NFC 标签，常驻运行，时间段 (时间运行时间段)。</string>
-  <string name="editor_activity_targetHelps_navigationIcon_title">“视图”侧面板</string>
+<!--  <string name="editor_activity_targetHelps_navigationIcon_title">“视图”侧面板</string>-->
   <string name="editor_activity_targetHelps_applicationMenu_title">应用程序菜单</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">单击此按钮打开“应用程序”菜单，您可以在其中更改应用程。</string>
   <string name="editor_activity_targetHelps_restartEvents_title">重新启动事件</string>
@@ -876,37 +872,37 @@
   <string name="event_preferences_notificationVibrate">通过振动通知</string>
   <string name="important_info_profile_grant">某些配置文件首选项需要WRITE_SECURE_SETTINGS权限。 ROOT不是必需的。这些首选项标有“(G1)”。</string>
   <string name="important_info_profile_grant_lookSectionProfiles">有关更多信息，请查看下面的“配置文件”部分。</string>
-  <string name="profile_preferences_typesInfoGrant">有关详细信息，请参阅“重要信息”，“配置文件”部分。</string>
+<!--  <string name="profile_preferences_typesInfoGrant">有关详细信息，请参阅“重要信息”，“配置文件”部分。</string>-->
   <string name="important_info_profile_grant_1_howTo_1">标有(G1)的配置文件参数需要PhoneProfilesPlus的特殊权限。这是通过安装了adb的PC完成的。</string>
   <string name="important_info_profile_grant_1_howTo_2">如果您的PC上没有安装adb：</string>
-  <string name="important_info_profile_grant_1_howTo_3">1.从以下位置下载SDK平台工具：</string>
+  <string name="important_info_profile_grant_1_howTo_3">从以下位置下载SDK平台工具：</string>
   <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
-  <string name="important_info_profile_grant_1_howTo_4">2.提取zip内容。</string>
+  <string name="important_info_profile_grant_1_howTo_4">提取zip内容。</string>
   <string name="important_info_profile_grant_1_howTo_5">如何授予 WRITE_SECURE_SETTINGS 权限：</string>
-  <string name="important_info_profile_grant_1_howTo_6">1. 在您的设备上，进入设置 &gt; 关于 &gt; 软件信息，然后单击“版本号”7 次。这将在设置中解锁和显示开发人员选项。</string>
-  <string name="important_info_profile_grant_1_howTo_7">2. 进入设置 &gt; 开发人员选项并启用 USB 调试。</string>
-  <string name="important_info_profile_grant_1_howTo_8">3. 在你的 PC 上，打开命令提示符 (Windows) 或终端 (Linux，OSX)，导航到您解压adb文件的文件夹，并准确执行以下命令：</string>
-  <string name="important_info_profile_grant_1_howTo_10">4. 成功执行后，将启用标记为 (G1) 的所有配置文件参数。</string>
+  <string name="important_info_profile_grant_1_howTo_6">在您的设备上，进入设置 &gt; 关于 &gt; 软件信息，然后单击“版本号”7 次。这将在设置中解锁和显示开发人员选项。</string>
+  <string name="important_info_profile_grant_1_howTo_7">进入设置 &gt; 开发人员选项并启用 USB 调试。</string>
+  <string name="important_info_profile_grant_1_howTo_8">在你的 PC 上，打开命令提示符 (Windows) 或终端 (Linux，OSX)，导航到您解压adb文件的文件夹，并准确执行以下命令：</string>
+  <string name="important_info_profile_grant_1_howTo_10">成功执行后，将启用标记为 (G1) 的所有配置文件参数。</string>
   <string name="important_info_activity_title">重要信息</string>
   <string name="important_info_quick_guide_tab">快速指南</string>
   <string name="important_info_important_info_tab">重要信息</string>
   <string name="important_info_quick_guide_1">PhoneProfiles (PP) 有两个组件：</string>
-  <string name="important_info_quick_guide_2">1.<b>配置文件</b>：指定如何更改设备设置。</string>
-  <string name="important_info_quick_guide_3">2.<b>事件</b>：指定何时更改设备设置。</string>
+  <string name="important_info_quick_guide_2"><![CDATA[<b>配置文件</b>：指定如何更改设备设置。]]></string>
+  <string name="important_info_quick_guide_3"><![CDATA[<b>事件</b>：指定何时更改设备设置。]]></string>
   <string name="important_info_quick_guide_profiles_1"><b>配置文件</b>：允许您更改设备设置，如响铃模式、音量级别、铃声和通知声音、网络设置 (Wi-Fi、蓝牙、移动数据等)。当配置文件被激活时，相应的设置将被永久更改。如果要更改设置，则必须激活另一个配置文件。</string>
   <string name="important_info_quick_guide_profiles_2">配置文件可手动激活，或者由事件激活。</string>
   <string name="important_info_quick_guide_profiles_3">您可以通过PPP激活器(带有可用配置文件列表的弹出窗口)手动激活配置文件。 Activator可以通过PPP主页图标，PPP通知，PPP小部件以及Samsung Edge设备从Edge面板显示。您还可以通过PPP 4x4小部件(配置文件的快捷方式)或在Samsung Edge设备上通过“边缘”面板直接激活配置文件。</string>
   <string name="important_info_quick_guide_events_1"><b>事件</b>：允许您在配置文件激活时进行配置。每个事件有开始和结束。您可以配置事件开始时将发生的情况，以及事件结束时将发生的情况。</string>
   <string name="important_info_quick_guide_events_2">事件包含重要的传感器配置参数，在触发事件之前都必须满足。如果有任何传感器没有通过，则事件将结束 (暂停)。</string>
   <string name="important_info_quick_guide_sensors_1">传感器示例：</string>
-  <string name="important_info_quick_guide_sensors_2"><b>·时间传感器</b>：在一周的指定日期或指定时间开始和结束。</string>
-  <string name="important_info_quick_guide_sensors_3"><b>· Wi-Fi 传感器</b>：由 Wi-Fi SSID (连接的，附近的设备) 启动和结束。附近的设备功能用于检测设备位置。例如：当设备位于家庭 Wi-Fi 网络的扫描范围内时启动事件。</string>
-  <string name="important_info_quick_guide_sensors_4"><b>·蓝牙传感器</b>：类似于 Wi-Fi 传感器。适用于车载蓝牙。</string>
-  <string name="important_info_quick_guide_sensors_5"><b>·位置传感器</b>：按设备位置 (GPS) 启动和结束。必须在系统设置中启用位置服务。</string>
-  <string name="important_info_quick_guide_sensors_6"><b>·移动网络传感器</b>：通过连接到或断开移动网络基站来启动和结束。</string>
-  <string name="important_info_quick_guide_sensors_7"><b>·呼叫传感器</b>：通过配置的联系人启动和结束。例如，在铃声响起时。</string>
-  <string name="important_info_quick_guide_sensors_8"><b>·附件传感器</b>：当附件连接时启动事件，例如连接到耳机启动。</string>
-  <string name="important_info_quick_guide_sensors_9"><b>• NFC 传感器</b>：通过 NFC 标签启动事件。</string>
+  <string name="important_info_quick_guide_sensors_2"><![CDATA[<b>时间传感器</b>：在一周的指定日期或指定时间开始和结束。]]></string>
+  <string name="important_info_quick_guide_sensors_3"><![CDATA[<b>Wi-Fi 传感器</b>：由 Wi-Fi SSID (连接的，附近的设备) 启动和结束。附近的设备功能用于检测设备位置。例如：当设备位于家庭 Wi-Fi 网络的扫描范围内时启动事件。]]></string>
+  <string name="important_info_quick_guide_sensors_4"><![CDATA[<b>蓝牙传感器</b>：类似于 Wi-Fi 传感器。适用于车载蓝牙。]]></string>
+  <string name="important_info_quick_guide_sensors_5"><![CDATA[<b>位置传感器</b>：按设备位置 (GPS) 启动和结束。必须在系统设置中启用位置服务。]]></string>
+  <string name="important_info_quick_guide_sensors_6"><![CDATA[<b>移动网络传感器</b>：通过连接到或断开移动网络基站来启动和结束。]]></string>
+  <string name="important_info_quick_guide_sensors_7"><![CDATA[<b>呼叫传感器</b>：通过配置的联系人启动和结束。例如，在铃声响起时。]]></string>
+  <string name="important_info_quick_guide_sensors_8"><![CDATA[<b>附件传感器</b>：当附件连接时启动事件，例如连接到耳机启动。]]></string>
+  <string name="important_info_quick_guide_sensors_9"><![CDATA[<b>NFC 传感器</b>：通过 NFC 标签启动事件。]]></string>
   <string name="important_info_quick_guide_events_3">如果手动激活配置文件(而非事件)，则所有正在运行的事件都将结束(暂停)。手动配置文件激活期间不会启动事件。但是，您可以通过事件参数中的“忽略手动激活”设置来覆盖此行为。</string>
   <string name="important_info_quick_guide_editor_1">配置文件和事件在编辑器中配置，您可以通过激活器调用。在编辑器中，您可以添加，复制，更新和删除配置文件和事件。编辑器有一个左侧面板，允许您更改编辑器视图。使用它在配置文件和事件列表之间切换。</string>
   <string name="event_preferences_noPauseByManualActivation">手动激活时不要暂停</string>
@@ -1016,7 +1012,7 @@
   <string name="notification_channel_grant_permission_description">显示需要的权限授予它。</string>
   <string name="notification_channel_notify_event_start">开始事件通知</string>
   <string name="notification_channel_notify_event_start_description">显示有关事件开始的通知。</string>
-  <string name="editor_drawer_open">打开侧边栏导航菜单</string>
+<!--  <string name="editor_drawer_open">打开侧边栏导航菜单</string>-->
   <string name="important_info_accessibility_service_new_version">请安装新版本的PhoneProfilesPlusExtender。有关安装的更多信息是参数，其中需要PhoneProfilesPlusExtender。</string>
   <string name="important_info_accessibility_service_new_version_2">单击此处以在GitHub中显示PhoneProfilesPlusExtender版本。</string>
   <string name="array_pref_no_force_stop">不要强制停止</string>
@@ -1123,7 +1119,7 @@
   <string name="permission_why_profile_radio_preferences">用于启用/禁用移动数据，更改移动网络类型，连接到SSID</string>
   <string name="permission_why_profile_phone_state_broadcast">要取消链接振铃和通知音量，请在通话期间启用/禁用免提通话</string>
   <string name="permission_why_profile_custom_profile_icon">自定义配置文件图标</string>
-  <string name="permission_why_install_tone">用于保存铃声到存储</string>
+<!--  <string name="permission_why_install_tone">用于保存铃声到存储</string>-->
   <string name="permission_why_export">用于将备份数据保存到存储中</string>
   <string name="permission_why_import">用于从存储加载备份数据</string>
   <string name="permission_why_event_calendar_preferences">用于在日历传感器中读取日历数据</string>
@@ -1189,8 +1185,8 @@
     <string name="about_application_support2">联系：</string>
     <string name="about_application_support_subject">支持</string>
 
-    <string name="profile_preferences_installSilentTone_summary">点击这里安装铃声。</string>
-    <string name="profile_preferences_installSilentTone_installed_summary">铃声已安装.</string>
+    <!--<string name="profile_preferences_installSilentTone_summary">点击这里安装铃声。</string>-->
+    <!--<string name="profile_preferences_installSilentTone_installed_summary">铃声已安装.</string>-->
     <string name="permissions_for_log_to_file_text1">调试登录到log.txt和crash.txt</string>
     <string name="permissions_for_log_to_file_text2">请在下一个对话框中授予它们。然后将调试调试日志。</string>
     <string name="permission_why_log_to_file">用于将调试日志写入log.txt和crash.txt</string>
@@ -1233,8 +1229,8 @@
     <string name="phone_profiles_pref_applicationTheme_nightMode">按夜间模式</string>
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary">请在系统设置中启用位置。如果没有这个，移动基站扫描将无法工作。</string>
 
-    <string name="phone_profiles_pref_applicationAutoCloseDrawer">自动隐藏侧面板</string>
-    <string name="editor_activity_targetHelps_navigationIcon_description">单击此按钮或从左侧屏幕一侧向右滑动以打开“视图”侧面板，您可以在其中切换“个人档案”和“事件”视图。</string>
+<!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">自动隐藏侧面板</string>-->
+<!--    <string name="editor_activity_targetHelps_navigationIcon_description">单击此按钮或从左侧屏幕一侧向右滑动以打开“视图”侧面板，您可以在其中切换“个人档案”和“事件”视图。</string>-->
     <string name="action_for_external_application_notification_title">外部应用程序支持(Tasker)</string>
     <string name="start_event_notification_text2">清除此通知以停止显示它。</string>
 
@@ -1297,7 +1293,43 @@
 
     <string name="important_info_profile_mobileCellsScanning_location">在Android 9+中，要扫描移动基站，您必须在系统设置中启用位置。</string>
 
+    <string name="info_notification_event_not_started_1">以下情况事件将不会启动：</string>
+    <string name="info_notification_event_not_started_2">你禁用了全局事件运行 (显示红灯) - 请在编辑器菜单中点击“允许运行事件”以启用事件运行功能。</string>
+    <string name="info_notification_event_not_started_3">你手工激活了情景 (显示黄灯) - 必须重新运行事件。使用激活清单、编辑器或通知中的“重新启动事件”图标。手动激活的情景在情景名称前用“[M]”标记。例外的情况：如果事件设置中选中了“忽略手工激活”，则事件仍会运行。</string>
+    <string name="info_notification_event_not_started_4">你在事件设置中禁止了事件运行 - 必须在事件设置中选中“允许运行”选项n注意：“红绿灯”在激活清单和编辑器的标题中显示。</string>
+
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettingsNotA9_summary">If Mobile cells scanning not working, enable Location in System Settings.</string>
+    <string name="permission_why_profile_radio_preferences_emui">for enable/disable mobile data, change mobile network type, connect to SSID, enable/disable Bluetooth</string>
+    <string name="permission_why_event_bluetooth_preferences_emui">for switch Bluetooth ON/OFF in Bluetooth sensor</string>
+    <string name="event_preferences_priority_appSettings_enabled">Priority is enabled</string>
+    <string name="event_preferences_priority_appSettings_disabled">Priority is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Unlink volumes is enabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_disabled">Unlink volumes is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_merged">Your device has linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_not_merged">Your device does not have linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="phone_profiles_pref_applicationPowerParametersCategory">Battery and power</string>
+    <string name="phone_profiles_pref_applicationOtherParametersCategory">Other</string>
+    <string name="activity_log_header_log_time">Log time</string>
+    <string name="activity_log_header_data_type">Data type</string>
+    <string name="activity_log_header_data">Data</string>
+    <string name="profile_preferences_volumeDTMF">DTMF tones volume</string>
+    <string name="profile_preferences_volumeAccessibility">Accessibility prompts volume</string>
+    <string name="profile_preferences_volumeBluetoothSCO">Bluetooth call volume</string>
+    <string name="profile_preferences_enabled">Enabled</string>
+    <string name="profile_preferences_preferenceTypesInfo_summary">Click here to show information about types of preferences: (G1), (R), (S), (I).</string>
+    <string name="profile_preferences_types_G1_show_info">Click here to show more information.</string>
+    <string name="popup_window_events_status_show_info">Click here to show more information.</string>
+    <string name="editor_activity_targetHelps_filterSpinner_title">Views filter</string>
+    <string name="editor_activity_targetHelps_filterSpinner_description">Click this to switch between Profiles and Events views.</string>
+    <string name="important_info_profile_type_of_preferences">Type of preferences:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+    <!--
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">对于真正无声的通知音量，请将通知音配置为“PhoneProfiles Silent”。</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">未安装通知提示音“PhoneProfiles 无声”。请从编辑器菜单安装后再重试。</string>
+    -->
 
     <!-- **************************************************************************************** -->
 

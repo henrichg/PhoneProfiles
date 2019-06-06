@@ -24,7 +24,7 @@
   <string name="toast_profile_activated_0">Profiel</string>
   <string name="toast_profile_activated_1">geactiveerd</string>
   <string name="preference_profile_no_change">Niet wijzigen</string>
-  <string name="preference_profile_autoBrightness">Automatisch</string>
+  <!--<string name="preference_profile_autoBrightness">Automatisch</string>-->
   <string name="title_activity_phone_profiles_preferences">Programmainstellingen</string>
   <string name="menu_exit">Afsluiten</string>
   <string name="activate_profile_alert_message">Profiel activeren?</string>
@@ -377,7 +377,6 @@
   <string name="array_pref_ringerModeArray_silentL">Prioriteitsmodus</string>
   <string name="menu_import_export">Back-up/Herstel</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 minuten</string>
-  <string name="info_notification_event_not_started">Event wordt niet gestart wanneer:\n1. Je de events globaal hebt uitgeschakeld (rood verkeerslicht) - Zet deze in de editor aan met \"Events activeren\". \n2. Je handmatig een profiel hebt geactiveerd (oranje verkeerslicht) - herstart de events. Gebruik de \"Events herstarten\" knop in de header van de activator, de editor of in de notificatie. Handmatig geactiveerde profielen zijn ook herkenbaar aan de \"[M]\" voor de profielnaam. De enige uitzondering is wanneer er in een event de optie \"Negeer handmatige activatie\" is geselecteerd. \n3. Je een of meerdere events niet hebt geactiveerd, activeer deze per event in de editor door \"Uitvoeren inschakelen\" te selecteren.\nNoot: het \"verkeerslicht\" is zichtbaar in de header van de activator en de editor.</string>
   <string name="important_info_profiles">Profielen</string>
   <string name="important_info_events">Events</string>
   <string name="important_info_system">Systeem</string>
@@ -422,11 +421,11 @@
   <string name="permissions_for_profile_text3">Sta het toe in de volgende schermen. Vervolgens wordt profiel geactiveerd.</string>
   <string name="permissions_for_profile_text_notification">Toestemming aanvragen</string>
   <string name="permissions_for_profile_big_text_notification">vereist dat sommige machtigingen worden verleend.</string>
-  <string name="permissions_for_install_tone_text1">De beltoon \"Silent PhoneProfiles\" wordt niet geïnstalleerd, omdat hiervoor bepaalde machtigingen nodig zijn.</string>
-  <string name="permissions_for_install_tone_text2">Sta het toe in de volgende schermen. Dan zal Toon geïnstalleerd worden.</string>
+<!--  <string name="permissions_for_install_tone_text1">De beltoon \"Silent PhoneProfiles\" wordt niet geïnstalleerd, omdat hiervoor bepaalde machtigingen nodig zijn.</string>-->
+<!--  <string name="permissions_for_install_tone_text2">Sta het toe in de volgende schermen. Dan zal Toon geïnstalleerd worden.</string>-->
   <string name="permissions_notification_text">Toestemming aanvragen</string>
-  <string name="permissions_for_install_tone_big_text_notification">Installatie van geluid \"PhoneProfiles Silent\" vereist een aantal machtigingen.</string>
-  <string name="menu_install_tone">Installeer geluid \"PhoneProfiles Silent\"</string>
+<!--  <string name="permissions_for_install_tone_big_text_notification">Installatie van geluid \"PhoneProfiles Silent\" vereist een aantal machtigingen.</string>-->
+  <!--<string name="menu_install_tone">Installeer geluid \"PhoneProfiles Silent\"</string>-->
   <string name="toast_tone_installation_installed_ok">Geluid \"PhoneProfiles Silente\" geïnstalleerd.</string>
   <string name="toast_tone_installation_installed_error">Fout bij het installeren van geluid \"PhoneProfiles Silent\"!</string>
   <string name="toast_permissions_granted">Machtigingen zijn al toegekend</string>
@@ -493,15 +492,15 @@
   <string name="event_preferences_applications_AccessibilitySettings_title">Instellingen voor toegankelijkheid</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Voor wijzigen van Adaptieve helderheid is ROOT nodig.</string>
   <string name="important_info_profile_activation_text1">Profiel kan worden geactiveerd in twee modi:</string>
-  <string name="important_info_profile_activation_text2">1. handmatige activering - geactiveerd in Activator, Editor, notificatie, widget, snelkoppeling. Handmatig geactiveerd profiel wordt aangeduid met \"[M]\" voor de profielnaam.</string>
-  <string name="important_info_profile_activation_text3">2. gebeurtenis activeren - geactiveerd door een event.</string>
+  <string name="important_info_profile_activation_text2">Handmatige activering - geactiveerd in Activator, Editor, notificatie, widget, snelkoppeling. Handmatig geactiveerd profiel wordt aangeduid met \"[M]\" voor de profielnaam.</string>
+  <string name="important_info_profile_activation_text3">Gebeurtenis activeren - geactiveerd door een event.</string>
   <string name="important_info_profile_activation_text4">Handmatige activering pauzeert alle events en event zal nooit worden gestart. Je moet events opnieuw starten om het starten van events te hervatten.</string>
   <string name="important_info_profile_activation_text5">Uitzonderingen op deze regel is als het event een voorkeur heeft van \'Handmatige activering negeren\'.</string>
   <string name="important_info_profile_activation_text6">Herstarten van events kan vanuit Activator, Editor en notificatie.</string>
   <string name="important_info_profile_activation_text8">In de titel van Activator en Editor is het \"verkeerslicht\".</string>
-  <string name="important_info_profile_activation_text9">-groene kleur: events kunnen worden gestart.</string>
-  <string name="important_info_profile_activation_text10">-oranje kleur: events kunnen niet gestart worden - profiel handmatig is geactiveerd.</string>
-  <string name="important_info_profile_activation_text11">-rode kleur: events zijn gestopt - events kunnen ingeschakeld worden in het Editor menu-item \"Activeer Events uitvoeren\".</string>
+  <string name="important_info_profile_activation_text9">Groene kleur: events kunnen worden gestart.</string>
+  <string name="important_info_profile_activation_text10">Oranje kleur: events kunnen niet gestart worden - profiel handmatig is geactiveerd.</string>
+  <string name="important_info_profile_activation_text11">Rode kleur: events zijn gestopt - events kunnen ingeschakeld worden in het Editor menu-item \"Activeer Events uitvoeren\".</string>
   <string name="important_info_profile_activation_restart_events_icon">Herstart events icoon:</string>
   <string name="important_info_profile_activation_traffic_light_icon">\"Verkeerslicht\" icoon:</string>
   <string name="important_info_android_doze_mode">In Android 6+ is \"Doze mode\" en \"App standby\" geïmplementeerd. Je kunt problemen krijgen met profiel activering vanuit events wanneer je apparaat niet oplaadt en stil ligt voor een periode met het scherm uit. Los dit op door PhoneProfiles in \"Batterij\"→\"Batterij optimalisatie\"→\"Niet optimaliseren\" toe te voegen.</string>
@@ -611,7 +610,7 @@
   <string name="about_application_source_code">Broncode:</string>
   <string name="about_application_translations">Vertalingen:</string>
   <string name="about_application_rate_in_googlePlay">Beoordeel dit programma in Google Play</string>
-  <string name="phone_profiles_pref_systemLanguage_summary">Programma maakt gebruik van talen in het systeem.</string>
+  <!--<string name="phone_profiles_pref_systemLanguage_summary">Programma maakt gebruik van talen in het systeem.</string>-->
   <string name="permission_group_name_access_notification_policy">Toegang niet storen</string>
   <string name="permissions_access_notification_policy_not_allowed_confirm">U hebt niet \"Toegang niet storen\" ingeschakeld. Niet opnieuw vragen?</string>
   <string name="phone_profiles_pref_accessNotificationPolicyPermissions">Toegang niet storen</string>
@@ -656,7 +655,7 @@
   <string name="bluetooth_name_pref_dlg_all_bt_names_chb">Alle Bluetooth namen</string>
   <string name="editor_drawer_list_item_events_start_order">Startvolgorde</string>
   <string name="editor_drawer_order_start_order">Startvolgorde</string>
-  <string name="info_notification_event_priority_new">4. Elk evenement heeft een \"Prioriteit\". Gebeurtenis start niet als een gebeurtenis wordt uitgevoerd met hogere prioriteit.</string>
+  <string name="info_notification_event_priority_new">Elk evenement heeft een \"Prioriteit\". Gebeurtenis start niet als een gebeurtenis wordt uitgevoerd met hogere prioriteit.</string>
   <string name="info_notification_event_start_order">Gebeurtenissen draaien in \"Startvolgorde\". Je kunt de startvolgorde van events in de evenementen weergave instellen bij \"Startvolgorde\". In deze weergave kunt u events omhoog/omlaag slepen door de \"volgorde handler\" te slepen.</string>
   <string name="info_notification_event_start_order_handler_icon">Volgorde afhandelaar:</string>
   <string name="info_notification_activate_profile_from_tasker">Je kunt een profiel activeren vanuit Tasker. Configureer taak \"System\" / \"Send Intent\" met parameters:</string>
@@ -667,10 +666,10 @@
   <string name="phone_profiles_pref_applicationWidgetIconLightnessT">Tekst lichtheid (widget)</string>
   <string name="altype_eventStop">event stop</string>
   <string name="info_notification_manage_events_from_tasker">Je kunt events beheren vanuit Tasker. Configureer taak \"System\"/\"Send Intent\" met parameters:</string>
-  <string name="info_notification_manage_events_from_tasker_restart_events">- Events herstarten:</string>
-  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">- Inschakelen uitvoeren voor event:</string>
-  <string name="info_notification_manage_events_from_tasker_pause_event">- Pauzeer event:</string>
-  <string name="info_notification_manage_events_from_tasker_stop_event">- Stop event:</string>
+  <string name="info_notification_manage_events_from_tasker_restart_events">events herstarten:</string>
+  <string name="info_notification_manage_events_from_tasker_enable_run_for_event">inschakelen uitvoeren voor event:</string>
+  <string name="info_notification_manage_events_from_tasker_pause_event">pauzeer event:</string>
+  <string name="info_notification_manage_events_from_tasker_stop_event">stop event:</string>
   <string name="phone_profiles_pref_category_eventRun">Event uitvoeren</string>
   <string name="phone_profiles_pref_eventRunUsePriority">Gebruik \"Prioriteit\" event parameter</string>
   <string name="event_preferences_priority_notUse">Niet gebruiken</string>
@@ -716,7 +715,7 @@
   <string name="editor_event_list_item_profile_end_icon">Einde van de event profiel icoon</string>
 <!--  <string name="profile_preferences_sourceProfileInfo_summary">Je kunt elke profiel parameter instellen om het \"Gedeeld profiel\" te gebruiken. Bij activering worden de waarden gebruikt vanuit het \"Gedeeld profiel\". Klik hier om de Gedeelde profielparameters te configureren.</string> -->
   <string name="run_stop_events_indicator">Inschakelen/stop event uitvoeren indicator</string>
-  <string name="run_stop_indicator_popup_window_important_info">Voor meer informatie ga je naar het ”belangrijke informatie” scherm. Tik op het vraagteken-pictogram in de menubalk.</string>
+<!--  <string name="run_stop_indicator_popup_window_important_info">Voor meer informatie ga je naar het ”belangrijke informatie” scherm. Tik op het vraagteken-pictogram in de menubalk.</string>-->
   <string name="important_info_how_to_show">Deze belangrijke informatie kan worden bekeken in de Editor via het vraagteken-pictogram in de werkbalk.</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">niet ondersteund door programma</string>
   <string name="preference_not_allowed_reason_detail_old_android">oude Android versie</string>
@@ -740,9 +739,6 @@
   <string name="profile_preferences_category_profileDeviceParameters">Apparaat parameters</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Wijzig notificatie toon</string>
   <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Notificatie toon \"PhoneProfiles Stil\" geconfigureerd.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Voor notificatie volume = 0 configureer de \"PhoneProfiles Stil\" toon voor echt stille meldingen.</string>
-  <string name="profile_preferences_volumeNotificationVolume0_question">Zet notificatie toon op \"PhoneProfiles Silent\"?</string>
-  <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notificatie toon \"PhoneProfiles Stil\" is niet geïnstalleerd. Installeer het vanuit het Editor menu en probeer opnieuw.</string>
   <string name="info_notification_unlink_ringer_notification_volumes">Je apparaat heeft een samengevoegd volume voor beltoon en notificatie toon. Je kunt \"Volume ontkoppelen\" instellen. Tik hier om te configureren.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Je apparaat heeft een samengevoegd volume voor beltoon en notificatie toon. Als je ontkoppeld volume wilt, deze parameter aanvinken.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Gebruik prioriteit</string>
@@ -772,7 +768,7 @@
   <string name="event_preference_sensor_application_summary">Deze sensor is voor event start door programma op de voorgrond. Parameters: Programma.</string>
   <string name="event_preference_sensor_orientation_summary">Deze sensor is voor event start door oriëntatie van apparaat. Parameters: Scherm (Boven, onder), Zijden (Horizontaal, zijkant boven), Afstand (Nabij, veraf; gebruikt de nabijheidssensor), Negeer voor programma\'s (in de voorgrond).</string>
   <string name="event_preference_sensor_nfc_summary">Deze sensor is voor event start door NFC-tags. Parameters; NFC-tags, Voortdurend ingeschakeld, Duur (event-inschakelduur).</string>
-  <string name="editor_activity_targetHelps_navigationIcon_title">\"Weergaven\" zijpaneel</string>
+<!--  <string name="editor_activity_targetHelps_navigationIcon_title">\"Weergaven\" zijpaneel</string>-->
   <string name="editor_activity_targetHelps_applicationMenu_title">Programmamenu</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">Klik hier om het Programmamenu te openen. Hier vind je de Programma-instellingen.</string>
   <string name="editor_activity_targetHelps_restartEvents_title">Events herstarten</string>
@@ -876,37 +872,37 @@
   <string name="event_preferences_notificationVibrate">Notificatie door trillen</string>
   <string name="important_info_profile_grant">Enkele profiel voorkeuren vereisen de machtiging WRITE_SECURE_SETTINGS. ROOT is niet vereist. Deze voorkeuren zijn gemarkeerd met \"(G1)\".</string>
   <string name="important_info_profile_grant_lookSectionProfiles">Voor meer informatie, kijk verder bij de \"Profielen\" sectie hieronder.</string>
-  <string name="profile_preferences_typesInfoGrant">Voor meer informatie kijk bij \"Important information\", sectie \"Profiles\".</string>
+<!--  <string name="profile_preferences_typesInfoGrant">Voor meer informatie kijk bij \"Important information\", sectie \"Profiles\".</string>-->
   <string name="important_info_profile_grant_1_howTo_1">Je kunt permissie geven voor de machtigingen van PhoneProfiles voor de profiel parameters gemarkeerd met (G1). Dit vereist een PC met adb geïnstalleerd.</string>
   <string name="important_info_profile_grant_1_howTo_2">Als je nog geen adb hebt geïnstalleerd op de PC:</string>
-  <string name="important_info_profile_grant_1_howTo_3">1. Download het SDK Platform Tools van:</string>
+  <string name="important_info_profile_grant_1_howTo_3">Download het SDK Platform Tools van:</string>
   <string name="important_info_profile_grant_1_howTo_11">https://developer.android.com/studio/releases/platform-tools.html</string>
-  <string name="important_info_profile_grant_1_howTo_4">2. Pak zip bestand uit.</string>
+  <string name="important_info_profile_grant_1_howTo_4">Pak zip bestand uit.</string>
   <string name="important_info_profile_grant_1_howTo_5">Hoe de machtig geven voor WRITE_SECURE_SETTINGS:</string>
-  <string name="important_info_profile_grant_1_howTo_6">1. In de telefoon, ga naar instellingen &gt; over telefoon &gt; Software-informatie en tik 7 keer op Build versie. Je hebt nu de Ontwikkelaar Opties bij Instellingen.</string>
-  <string name="important_info_profile_grant_1_howTo_7">2. In de telefoon, ga naar instellingen &gt; Opties voor Developer en zet USB Debugging aan.</string>
-  <string name="important_info_profile_grant_1_howTo_8">3. Op de PC, start (Windows), CMD Terminal (Linux, OSX), ga naar de map waarin adb is geïnstalleerd en geef deze opdracht:</string>
-  <string name="important_info_profile_grant_1_howTo_10">4. Na succesvolle uitvoering worden alle parameters van het profiel met (G1) mark ingeschakeld.</string>
+  <string name="important_info_profile_grant_1_howTo_6">In de telefoon, ga naar instellingen &gt; over telefoon &gt; Software-informatie en tik 7 keer op Build versie. Je hebt nu de Ontwikkelaar Opties bij Instellingen.</string>
+  <string name="important_info_profile_grant_1_howTo_7">In de telefoon, ga naar instellingen &gt; Opties voor Developer en zet USB Debugging aan.</string>
+  <string name="important_info_profile_grant_1_howTo_8">Op de PC, start (Windows), CMD Terminal (Linux, OSX), ga naar de map waarin adb is geïnstalleerd en geef deze opdracht:</string>
+  <string name="important_info_profile_grant_1_howTo_10">Na succesvolle uitvoering worden alle parameters van het profiel met (G1) mark ingeschakeld.</string>
   <string name="important_info_activity_title">Belangrijke informatie</string>
   <string name="important_info_quick_guide_tab">Snelstart gids</string>
   <string name="important_info_important_info_tab">Belangrijke informatie</string>
   <string name="important_info_quick_guide_1">PhoneProfiles (PP) bestaat uit twee onderdelen:</string>
-  <string name="important_info_quick_guide_2">1. <b>PROFIELEN:</b> geeft aan hoe apparaatinstellingen te wijzigen.</string>
-  <string name="important_info_quick_guide_3">2. <b>EVENTS:</b> Geeft aan hoe apparaatinstellingen te wijzigen.</string>
+  <string name="important_info_quick_guide_2"><![CDATA[<b>PROFIELEN:</b> geeft aan hoe apparaatinstellingen te wijzigen.]]></string>
+  <string name="important_info_quick_guide_3"><![CDATA[<b>EVENTS:</b> Geeft aan hoe apparaatinstellingen te wijzigen.]]></string>
   <string name="important_info_quick_guide_profiles_1"><b>PROFIELEN:</b> Je kunt apparaatinstellingen wijzigen zoals Beltoonmodus, volumeniveaus, beltoon en notificatiegeluid configureren, radio schakelaar (Wi-Fi, Bluetooth, mobiele data, enz.). Wanneer je profiel activeert worden de corresponderende instellingen permanent. Als je de instellingen wilt wijzigen moet je een ander profiel activeren.</string>
   <string name="important_info_quick_guide_profiles_2">Profielen kunnen handmatig of door een Event worden geactiveerd.</string>
   <string name="important_info_quick_guide_profiles_3">Je kunt handmatig een profiel activeren met de PP-Activator (pop-up venster met de lijst met beschikbare profielen). De Activator kun je tonen via het PP \' thuis \' icoon, de PP notificatie, PP-widgets en voor Samsung Edge-apparaten via het Edge-deelvenster. Je kunt ook direct een profiel via de PP-4 x 4 widget activeren, een snelkoppeling naar het profiel of op Samsung Edge-apparaten, via het Configuratiescherm van de rand.</string>
   <string name="important_info_quick_guide_events_1"><b>Events:</b> Kun je configureren bij activeren van een profiel. Events hebben een begin en eind. Je kunt de actie configureren bij de start van een event en de actie bij het eindigen van een event.</string>
   <string name="important_info_quick_guide_events_2">Events bevatten belangrijke sensor configuratie parameters die allemaal voorwaardelijk zijn om een event te starten. Als een sensor parameter afwijkt zal het event eindigen (pauze).</string>
   <string name="important_info_quick_guide_sensors_1">Sensor voorbeelden:</string>
-  <string name="important_info_quick_guide_sensors_2"><b>• Tijd sensor:</b> Start en Stop op een bepaalde dag van de week, of op een opgegeven tijdstip.</string>
-  <string name="important_info_quick_guide_sensors_3"><b>• Wi-Fi sensor:</b> Start en Stop per Wi-Fi SSID (verbonden, apparaat dichtbij). De functie Dichtbij is handig om je apparaat locatie te detecteren. Bijvoorbeeld: Start event wanneer je apparaat binnen het bereik van je huis Wi-Fi-netwerk is.</string>
-  <string name="important_info_quick_guide_sensors_4"><b>• Bluetooth sensor:</b> Vergelijkbaar aan Wi-Fi-sensor. Nuttig voor auto Bluetooth.</string>
-  <string name="important_info_quick_guide_sensors_5"><b>• Locatie sensor:</b> Start en stop op de locatie van het apparaat (GPS). Bij Systeem instellingen Locatie Service inschakelen.</string>
-  <string name="important_info_quick_guide_sensors_6"><b>• Zendmast cel sensor:</b> Start en Stop door verbinden of verbreken van verbinding met zendmast cel.</string>
-  <string name="important_info_quick_guide_sensors_7"><b>• Oproep sensor:</b> Start en Stop door geconfigureerde contactpersonen. Bijvoorbeeld: wanneer die belt.</string>
-  <string name="important_info_quick_guide_sensors_8"><b>• Accessoire sensor:</b> Start event wanneer bijvoorbeeld je een koptelefoon aansluit.</string>
-  <string name="important_info_quick_guide_sensors_9"><b>• NFC sensor:</b> Start een gebeurtenis via NFC tags.</string>
+  <string name="important_info_quick_guide_sensors_2"><![CDATA[<b>Tijd sensor:</b> Start en Stop op een bepaalde dag van de week, of op een opgegeven tijdstip.]]></string>
+  <string name="important_info_quick_guide_sensors_3"><![CDATA[<b>Wi-Fi sensor:</b> Start en Stop per Wi-Fi SSID (verbonden, apparaat dichtbij). De functie Dichtbij is handig om je apparaat locatie te detecteren. Bijvoorbeeld: Start event wanneer je apparaat binnen het bereik van je huis Wi-Fi-netwerk is.]]></string>
+  <string name="important_info_quick_guide_sensors_4"><![CDATA[<b>Bluetooth sensor:</b> Vergelijkbaar aan Wi-Fi-sensor. Nuttig voor auto Bluetooth.]]></string>
+  <string name="important_info_quick_guide_sensors_5"><![CDATA[<b>Locatie sensor:</b> Start en stop op de locatie van het apparaat (GPS). Bij Systeem instellingen Locatie Service inschakelen.]]></string>
+  <string name="important_info_quick_guide_sensors_6"><![CDATA[<b>Zendmast cel sensor:</b> Start en Stop door verbinden of verbreken van verbinding met zendmast cel.]]></string>
+  <string name="important_info_quick_guide_sensors_7"><![CDATA[<b>Oproep sensor:</b> Start en Stop door geconfigureerde contactpersonen. Bijvoorbeeld: wanneer die belt.]]></string>
+  <string name="important_info_quick_guide_sensors_8"><![CDATA[<b>Accessoire sensor:</b> Start event wanneer bijvoorbeeld je een koptelefoon aansluit.]]></string>
+  <string name="important_info_quick_guide_sensors_9"><![CDATA[<b>NFC sensor:</b> Start een gebeurtenis via NFC tags.]]></string>
   <string name="important_info_quick_guide_events_3">Als je handmatig een profiel activeert (niet door een event) stoppen alle events (onderbroken). Events starten niet bij handmatig profiel activeren. Je kunt deze instelling via de \"Handmatig activeren wijzigen bij de event parameters.</string>
   <string name="important_info_quick_guide_editor_1">Profielen en evenementen configureer je in de Editor die je via de Activator kunt starten. Binnen de Editor kun je toevoegen, dupliceren, bijwerken en verwijderen van profielen en evenementen. De Editor heeft links een zijpaneel waarmee je de weergave van de Editor kunt wijzigen. Gebruik dit om te schakelen tussen de profiel- en eventlijsten.</string>
   <string name="event_preferences_noPauseByManualActivation">Pauzeer niet door handmatige activering</string>
@@ -1016,7 +1012,7 @@
   <string name="notification_channel_grant_permission_description">Toont machtiging die nodig is om te geven.</string>
   <string name="notification_channel_notify_event_start">Start event notificatie</string>
   <string name="notification_channel_notify_event_start_description">Toont notificatie over start van event.</string>
-  <string name="editor_drawer_open">Open navigatiebalk</string>
+<!--  <string name="editor_drawer_open">Open navigatiebalk</string>-->
   <string name="important_info_accessibility_service_new_version">Installeer de nieuwe versie van PhoneProfilesPlusExtender. Meer informatie over de installatie vind je bij de opties die PhoneProfilesPlusExtender gebruiken.</string>
   <string name="important_info_accessibility_service_new_version_2">Klik hier voor het weergeven van PhoneProfilesPlusExtender releases op GitHub.</string>
   <string name="array_pref_no_force_stop">Stoppen niet forceren</string>
@@ -1127,7 +1123,7 @@
   <string name="permission_why_profile_radio_preferences">voor het aan-/uitzetten van mobiele data, mobiele netwerk type, SSID connectie</string>
   <string name="permission_why_profile_phone_state_broadcast">voor verbreken link bel en notificatie volume, aan-/uitzetten speakerphone tijdens bellen</string>
   <string name="permission_why_profile_custom_profile_icon">voor aangepast profiel icoon</string>
-  <string name="permission_why_install_tone">voor opslaan geluid in de opslag</string>
+<!--  <string name="permission_why_install_tone">voor opslaan geluid in de opslag</string>-->
   <string name="permission_why_export">voor bewaren backup data in de storage</string>
   <string name="permission_why_import">voor laden backup data vanuit de opslag</string>
   <string name="permission_why_event_calendar_preferences">voor lezen kalender data in Kalender sensor</string>
@@ -1193,8 +1189,8 @@
     <string name="about_application_support2">contact:</string>
     <string name="about_application_support_subject">support</string>
 
-    <string name="profile_preferences_installSilentTone_summary">Click here to install tone.</string>
-    <string name="profile_preferences_installSilentTone_installed_summary">Tone is installed.</string>
+    <!--<string name="profile_preferences_installSilentTone_summary">Click here to install tone.</string>-->
+    <!--<string name="profile_preferences_installSilentTone_installed_summary">Tone is installed.</string>-->
     <string name="permissions_for_log_to_file_text1">Debug log into log.txt and crash.txt</string>
     <string name="permissions_for_log_to_file_text2">Please grant them in next dialog. Debug log will then be write.</string>
     <string name="permission_why_log_to_file">for write debug log into log.txt and crash.txt</string>
@@ -1237,8 +1233,8 @@
     <string name="phone_profiles_pref_applicationTheme_nightMode">By night mode</string>
     <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary">Please enable Location in System Settings. Without this, Mobile cells scanning will not work.</string>
 
-    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>
-    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>
+<!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Auto-hide side panel</string>-->
+<!--    <string name="editor_activity_targetHelps_navigationIcon_description">Click this or swipe from left screen side to right to open \"Views\" side panel, where you can switch between Profiles and Events views.</string>-->
     <string name="action_for_external_application_notification_title">External applications support (Tasker)</string>
     <string name="start_event_notification_text2">Clear this notification to stop displaying it.</string>
 
@@ -1302,6 +1298,44 @@
     <string name="array_pref_lockDevice_extender">Use PhoneProfilesPlusExtender</string>
 
     <string name="important_info_profile_mobileCellsScanning_location">In Android 9+, for Mobile cells scanning to work, you must enable Location in system settings.</string>
+
+    <string name="info_notification_event_not_started_1">Event wordt niet gestart wanneer:</string>
+    <string name="info_notification_event_not_started_2">Je de events globaal hebt uitgeschakeld (rood verkeerslicht) - Zet deze in de editor aan met \"Events activeren\".</string>
+    <string name="info_notification_event_not_started_3">Je handmatig een profiel hebt geactiveerd (oranje verkeerslicht) - herstart de events. Gebruik de \"Events herstarten\" knop in de header van de activator, de editor of in de notificatie. Handmatig geactiveerde profielen zijn ook herkenbaar aan de \"[M]\" voor de profielnaam. De enige uitzondering is wanneer er in een event de optie \"Negeer handmatige activatie\" is geselecteerd.</string>
+    <string name="info_notification_event_not_started_4">Je een of meerdere events niet hebt geactiveerd, activeer deze per event in de editor door \"Uitvoeren inschakelen\" te selecteren. Noot: het \"verkeerslicht\" is zichtbaar in de header van de activator en de editor.</string>
+
+    <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettingsNotA9_summary">If Mobile cells scanning not working, enable Location in System Settings.</string>
+    <string name="permission_why_profile_radio_preferences_emui">for enable/disable mobile data, change mobile network type, connect to SSID, enable/disable Bluetooth</string>
+    <string name="permission_why_event_bluetooth_preferences_emui">for switch Bluetooth ON/OFF in Bluetooth sensor</string>
+    <string name="event_preferences_priority_appSettings_enabled">Priority is enabled</string>
+    <string name="event_preferences_priority_appSettings_disabled">Priority is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Unlink volumes is enabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_disabled">Unlink volumes is disabled</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_merged">Your device has linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_not_merged">Your device does not have linked volume levels for ringtone and notifications. Click here to configure unlink.</string>
+    <string name="phone_profiles_pref_applicationPowerParametersCategory">Battery and power</string>
+    <string name="phone_profiles_pref_applicationOtherParametersCategory">Other</string>
+    <string name="activity_log_header_log_time">Log time</string>
+    <string name="activity_log_header_data_type">Data type</string>
+    <string name="activity_log_header_data">Data</string>
+    <string name="profile_preferences_volumeDTMF">DTMF tones volume</string>
+    <string name="profile_preferences_volumeAccessibility">Accessibility prompts volume</string>
+    <string name="profile_preferences_volumeBluetoothSCO">Bluetooth call volume</string>
+    <string name="profile_preferences_enabled">Enabled</string>
+    <string name="profile_preferences_preferenceTypesInfo_summary">Click here to show information about types of preferences: (G1), (R), (S), (I).</string>
+    <string name="profile_preferences_types_G1_show_info">Click here to show more information.</string>
+    <string name="popup_window_events_status_show_info">Click here to show more information.</string>
+    <string name="editor_activity_targetHelps_filterSpinner_title">Views filter</string>
+    <string name="editor_activity_targetHelps_filterSpinner_description">Click this to switch between Profiles and Events views.</string>
+    <string name="important_info_profile_type_of_preferences">Type of preferences:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+    <!--
+    <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Voor notificatie volume = 0 configureer de \"PhoneProfiles Stil\" toon voor echt stille meldingen.</string>
+    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notificatie toon \"PhoneProfiles Stil\" is niet geïnstalleerd. Installeer het vanuit het Editor menu en probeer opnieuw.</string>
+    -->
 
     <!-- **************************************************************************************** -->
 
