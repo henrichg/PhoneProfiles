@@ -354,7 +354,7 @@ class GlobalGUIRoutines {
         }
     }*/
 
-    static Spanned fromHtml(String source, boolean forBullets) {
+    static Spanned fromHtml(String source, @SuppressWarnings("SameParameterValue") boolean forBullets) {
         Spanned htmlSpanned;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
