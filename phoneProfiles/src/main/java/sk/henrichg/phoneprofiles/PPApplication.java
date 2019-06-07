@@ -98,11 +98,11 @@ public class PPApplication extends Application {
                                             //+"|ActivateProfileHelper.setScreenTimeout"
                                             //+"|ActivateProfileHelper.screenTimeoutLock"
                                             //+"|@@@ ScreenOnOffBroadcastReceiver.onReceive"
-                                            +"|Profile.isProfilePreferenceAllowed"
-                                            +"|PPApplication.hasSystemFeature"
+                                            //+"|Profile.isProfilePreferenceAllowed"
+                                            //+"|PPApplication.hasSystemFeature"
 
-                                            +"|InfoDialogPreferenceFragmentX"
-                                            +"|ImportantInfoActivity"
+                                            //+"|InfoDialogPreferenceFragmentX"
+                                            //+"|ImportantInfoActivity"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
