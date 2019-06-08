@@ -139,6 +139,16 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         restartService = true;
                                     }
                                 }
+                                if (actualVersionCode <= 3400) {
+                                    ApplicationPreferences.getSharedPreferences(appContext);
+                                    SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
+
+                                    String theme = ApplicationPreferences.applicationTheme(appContext, false);
+                                    if (!(theme.equals("white") || theme.equals("dark")))
+                                        editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, "white");
+
+                                    editor.apply();
+                                }
                             }
 
                         } catch (Exception ignored) {

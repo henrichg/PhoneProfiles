@@ -129,17 +129,13 @@
         <item>1</item>
     </string-array>
     <string-array name="themeArray">
-        <item>@string/phone_profiles_pref_applicationTheme_color</item>
-        <item>@string/phone_profiles_pref_applicationTheme_dark</item>
-        <item>@string/phone_profiles_pref_applicationTheme_dlight</item>
         <item>@string/phone_profiles_pref_applicationTheme_white</item>
+        <item>@string/phone_profiles_pref_applicationTheme_dark</item>
         <item>@string/phone_profiles_pref_applicationTheme_nightMode</item>
     </string-array>
     <string-array name="themeValues">
-        <item>@string/array_pref_value_color</item>
-        <item>@string/array_pref_value_dark</item>
-        <item>@string/array_pref_value_dlight</item>
         <item>@string/array_pref_value_white</item>
+        <item>@string/array_pref_value_dark</item>
         <item>@string/array_pref_value_nightMode</item>
     </string-array>
     <string-array name="widgetBackgroundArray">
@@ -406,18 +402,6 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-    <!--
-    <string-array name="notificationThemeArray">
-        <item>@string/array_pref_color_native</item>
-        <item>@string/array_pref_color_dark</item>
-        <item>@string/array_pref_color_light</item>
-    </string-array>
-    <string-array name="notificationThemeValues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-    -->
     <string-array name="lockDeviceArray" tools:ignore="InconsistentArrays">
         <item>@string/array_pref_no_change</item>
         <item>@string/array_pref_lockDevice_screenOff</item>
@@ -566,7 +550,7 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-    <string-array name="nightModeOffThemeArray">
+<!--    <string-array name="nightModeOffThemeArray">
         <item>@string/phone_profiles_pref_applicationTheme_color</item>
         <item>@string/phone_profiles_pref_applicationTheme_dlight</item>
         <item>@string/phone_profiles_pref_applicationTheme_white</item>
@@ -575,7 +559,7 @@
         <item>@string/array_pref_value_color</item>
         <item>@string/array_pref_value_dlight</item>
         <item>@string/array_pref_value_white</item>
-    </string-array>
+    </string-array> -->
     <string-array name="applicationEditorIntentActionArray">
         <item>[None]</item>
         <item>[Custom]</item>

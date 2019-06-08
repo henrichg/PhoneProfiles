@@ -6,10 +6,11 @@
 // 2900 = Wi-Fi AP = Toggle is not supported fro Android 8+
 // 3000 = show Important info on first application start
 // 3100 = separated preferences for single row widget
+// 3400 = removed color and dark-light theme
 
 ext.ppVersions = [
     publishVersion: '4.7b',
-    publishVersionCode: 3268,
+    publishVersionCode: 3268, // 3400
 
     minSdk: 21,
     targetSdk: 28,
