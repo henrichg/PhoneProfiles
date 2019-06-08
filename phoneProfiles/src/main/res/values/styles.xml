@@ -48,7 +48,7 @@
     </style>
     <style name="AlertDialogStyleWhite" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/activityBackgroundColor_white</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorAccent">@color/accent_white</item>
     </style>
 
     <!--<style name="DialogStyleColor" parent="Theme.AppCompat.Light.Dialog">-->
@@ -65,7 +65,7 @@
     </style>
     <style name="DialogStyleWhite" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">@color/activityBackgroundColor_white</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorAccent">@color/accent_white</item>
     </style>
 
 </resources>
