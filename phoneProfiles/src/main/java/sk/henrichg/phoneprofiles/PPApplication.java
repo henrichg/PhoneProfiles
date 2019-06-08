@@ -88,6 +88,7 @@ public class PPApplication extends Application {
                                             +"|BootUpReceiver"
                                             +"|PackageReplacedReceiver"
                                             +"|ShutdownBroadcastReceiver"
+                                            +"|DataWrapper.activateProfileOnBoot"
 
                                             //+"|ProfileDurationAlarmBroadcastReceiver"
 

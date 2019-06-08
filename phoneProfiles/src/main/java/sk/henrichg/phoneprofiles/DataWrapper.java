@@ -1013,6 +1013,7 @@ class DataWrapper {
 
     void activateProfileOnBoot()
     {
+        PPApplication.logE("DataWrapper.activateProfileOnBoot", "applicationActivate="+ApplicationPreferences.applicationActivate(context));
         if (ApplicationPreferences.applicationActivate(context))
         {
             Profile profile = DatabaseHandler.getInstance(context).getActivatedProfile();
