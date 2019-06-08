@@ -62,7 +62,7 @@
     <attr name="actionNewProfileIcon" format="reference" />
     <attr name="actionDeleteAllIcon" format="reference" />
     <attr name="actionEditProfilesIcon" format="reference" />
-    <attr name="activityPopupBackground" format="reference" />
+<!--    <attr name="activityPopupBackground" format="reference" />-->
     <attr name="dragHandleIcon" format="reference" />
     <attr name="actionProfilePrefSave" format="reference" />
     <attr name="actionProfilePrefCancel" format="reference" />

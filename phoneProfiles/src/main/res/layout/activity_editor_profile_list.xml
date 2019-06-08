@@ -15,7 +15,7 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/toolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu"
-        android:elevation="1dp"
+        android:elevation="0dp"
         tools:ignore="UnusedAttribute" />
 
     <androidx.appcompat.widget.Toolbar
@@ -43,7 +43,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_dropShadow_height"
-            android:background="@drawable/bottombar_dropshadow"
+            android:background="?attr/dialogDivider"
             android:layout_gravity="bottom" />
 
     </FrameLayout>

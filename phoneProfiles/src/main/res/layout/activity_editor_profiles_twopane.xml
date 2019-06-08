@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="horizontal"
-    android:background="?attr/activityPopupBackground"
     tools:context=".EditorProfilesActivity"
     android:fitsSystemWindows="false" >
     
@@ -37,7 +36,7 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/bottomToolbarTheme"
         app:popupTheme="?attr/toolbarPopupMenu"
-        android:elevation="1dp"
+        android:elevation="0dp"
         tools:ignore="UnusedAttribute" />
 
     <FrameLayout
@@ -73,7 +72,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_dropShadow_height"
-            android:background="@drawable/bottombar_dropshadow"
+            android:background="?attr/dialogDivider"
             android:layout_gravity="bottom" />
 
     </FrameLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_white">#F7F7F7</color>
+    <!--<color name="primary_white">#F7F7F7</color>-->
+    <color name="primary_white">#FFFFFF</color>
     <color name="primaryDark_white">#A7A7A7</color>
     <color name="accent_white">#DC8160</color>
     <color name="accent_white_disabled">#70DC8160</color>
@@ -10,7 +11,7 @@
     <color name="activityTextColor_white">#FF000000</color>
     <color name="activityCommandBackgroundColor_white">#1F000000</color>
 
-    <color name="activityPopupBackground_white">#FFd0d0d0</color>
+<!--    <color name="activityPopupBackground_white">#FFd0d0d0</color>-->
     <color name="dialog_divider_white">#17000000</color>
 
     <!--<color name="tabTargetHelpCircleColor_white">#FFFFFFFF</color>-->
