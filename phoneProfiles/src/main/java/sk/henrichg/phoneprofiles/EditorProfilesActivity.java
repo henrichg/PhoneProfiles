@@ -756,10 +756,8 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                     if (what == 1) {
                         if (key.equals(ApplicationPreferences.PREF_APPLICATION_THEME)) {
-                            if (v.equals("light"))
+                            if (v.equals("light") || v.equals("material") || v.equals("color") || v.equals("dlight"))
                                 prefEdit.putString(key, "white");
-                            if (v.equals("material"))
-                                prefEdit.putString(key, "color");
                         }
                         if (key.equals(ActivateProfileHelper.PREF_MERGED_RING_NOTIFICATION_VOLUMES))
                             ActivateProfileHelper.setMergedRingNotificationVolumes(getApplicationContext(), true, prefEdit);

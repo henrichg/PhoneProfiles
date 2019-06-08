@@ -127,7 +127,7 @@ class GlobalGUIRoutines {
 
     private static int getTheme(boolean forPopup, boolean withToolbar, Context context) {
         switch (ApplicationPreferences.applicationTheme(context, true)) {
-            case "color":
+            /*case "color":
                 if (forPopup)
                 {
                     if (withToolbar)
@@ -141,7 +141,7 @@ class GlobalGUIRoutines {
                         return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
                     else
                         return R.style.Theme_PhoneProfilesTheme_color;
-                }
+                }*/
             case "white":
                 if (forPopup)
                 {
@@ -172,7 +172,7 @@ class GlobalGUIRoutines {
                     else
                         return R.style.Theme_PhoneProfilesTheme_dark;
                 }
-            case "dlight":
+            /*case "dlight":
                 if (forPopup)
                 {
                     if (withToolbar)
@@ -186,9 +186,23 @@ class GlobalGUIRoutines {
                         return R.style.Theme_PhoneProfilesTheme_withToolbar_dlight;
                     else
                         return R.style.Theme_PhoneProfilesTheme_dlight;
-                }
+                }*/
             default:
                 if (forPopup)
+                {
+                    if (withToolbar)
+                        return R.style.PopupTheme_withToolbar_white;
+                    else
+                        return R.style.PopupTheme_white;
+                }
+                else
+                {
+                    if (withToolbar)
+                        return R.style.Theme_PhoneProfilesTheme_withToolbar_white;
+                    else
+                        return R.style.Theme_PhoneProfilesTheme_white;
+                }
+                /*if (forPopup)
                 {
                     if (withToolbar)
                         return R.style.PopupTheme_withToolbar_color;
@@ -201,7 +215,7 @@ class GlobalGUIRoutines {
                         return R.style.Theme_PhoneProfilesTheme_withToolbar_color;
                     else
                         return R.style.Theme_PhoneProfilesTheme_color;
-                }
+                }*/
         }
     }
 
