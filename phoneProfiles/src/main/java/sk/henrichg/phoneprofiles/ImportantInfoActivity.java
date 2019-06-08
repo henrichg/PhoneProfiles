@@ -294,6 +294,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
         */
 
+        /*
         if (ApplicationPreferences.preferences.getBoolean(ActivateProfileHelper.PREF_MERGED_RING_NOTIFICATION_VOLUMES, true)) {
             // detection of volumes merge = volumes are merged
             TextView infoText3 = findViewById(R.id.activity_info_notification_unlink_ringer_notification_volumes);
@@ -311,6 +312,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
             TextView infoText3 = findViewById(R.id.activity_info_notification_unlink_ringer_notification_volumes);
             infoText3.setVisibility(View.GONE);
         }
+        */
 
         if (KillerManager.isActionAvailable(getBaseContext(), KillerManager.Actions.ACTION_POWERSAVING)) {
             TextView infoText = findViewById(R.id.activity_info_notification_power_manager);
