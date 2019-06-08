@@ -755,9 +755,12 @@ public class EditorProfileListFragment extends Fragment
                 editor.apply();
 
                 String appTheme = ApplicationPreferences.applicationTheme(getActivity(), true);
-                int circleColor = R.color.tabTargetHelpCircleColor_white;
+                int outerCircleColor = R.color.tabTargetHelpOuterCircleColor_white;
                 if (appTheme.equals("dark"))
-                    circleColor = R.color.tabTargetHelpCircleColor_dark;
+                    outerCircleColor = R.color.tabTargetHelpOuterCircleColor_dark;
+                int targetCircleColor = R.color.tabTargetHelpTargetCircleColor_white;
+                if (appTheme.equals("dark"))
+                    targetCircleColor = R.color.tabTargetHelpTargetCircleColor_dark;
                 int textColor = R.color.tabTargetHelpTextColor_white;
                 if (appTheme.equals("dark"))
                     textColor = R.color.tabTargetHelpTextColor_dark;
@@ -769,7 +772,8 @@ public class EditorProfileListFragment extends Fragment
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_add_profile, getString(R.string.editor_activity_targetHelps_newProfileButton_title), getString(R.string.editor_activity_targetHelps_newProfileButton_description))
-                                    .targetCircleColor(circleColor)
+                                    .outerCircleColor(outerCircleColor)
+                                    .targetCircleColor(targetCircleColor)
                                     .textColor(textColor)
                                     .tintTarget(tintTarget)
                                     .drawShadow(true)
@@ -780,7 +784,8 @@ public class EditorProfileListFragment extends Fragment
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(bottomToolbar, R.id.menu_delete_all_profiles, getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_title), getString(R.string.editor_activity_targetHelps_deleteAllProfilesButton_description))
-                                    .targetCircleColor(circleColor)
+                                    .outerCircleColor(outerCircleColor)
+                                    .targetCircleColor(targetCircleColor)
                                     .textColor(textColor)
                                     .tintTarget(tintTarget)
                                     .drawShadow(true)

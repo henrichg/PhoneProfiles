@@ -1335,9 +1335,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                 //final Display display = getWindowManager().getDefaultDisplay();
 
                 String appTheme = ApplicationPreferences.applicationTheme(getApplicationContext(), true);
-                int circleColor = R.color.tabTargetHelpCircleColor_white;
+                int outerCircleColor = R.color.tabTargetHelpOuterCircleColor_white;
                 if (appTheme.equals("dark"))
-                    circleColor = R.color.tabTargetHelpCircleColor_dark;
+                    outerCircleColor = R.color.tabTargetHelpOuterCircleColor_dark;
+                int targetCircleColor = R.color.tabTargetHelpTargetCircleColor_white;
+                if (appTheme.equals("dark"))
+                    targetCircleColor = R.color.tabTargetHelpTargetCircleColor_dark;
                 int textColor = R.color.tabTargetHelpTextColor_white;
                 if (appTheme.equals("dark"))
                     textColor = R.color.tabTargetHelpTextColor_dark;
@@ -1347,7 +1350,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 List<TapTarget> targets = new ArrayList<>();
                 targets.add(
                         TapTarget.forToolbarOverflow(editorToolbar, getString(R.string.editor_activity_targetHelps_applicationMenu_title), getString(R.string.editor_activity_targetHelps_applicationMenu_description))
-                                .targetCircleColor(circleColor)
+                                .outerCircleColor(outerCircleColor)
+                                .targetCircleColor(targetCircleColor)
                                 .textColor(textColor)
                                 .tintTarget(tintTarget)
                                 .drawShadow(true)
@@ -1358,7 +1362,8 @@ public class EditorProfilesActivity extends AppCompatActivity
                 try {
                     targets.add(
                             TapTarget.forToolbarMenuItem(editorToolbar, R.id.important_info, getString(R.string.editor_activity_targetHelps_importantInfoButton_title), getString(R.string.editor_activity_targetHelps_importantInfoButton_description))
-                                    .targetCircleColor(circleColor)
+                                    .outerCircleColor(outerCircleColor)
+                                    .targetCircleColor(targetCircleColor)
                                     .textColor(textColor)
                                     .tintTarget(tintTarget)
                                     .drawShadow(true)
