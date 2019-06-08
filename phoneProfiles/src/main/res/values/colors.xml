@@ -15,14 +15,14 @@
 
     <color name="notificationDecorationColor">#237e9f</color>
 
-    <color name="tabTargetHelpCircleColor">#FFFFFFFF</color>
-    <color name="tabTargetHelpTextColor">#FFFFFFFF</color>
+    <!--<color name="tabTargetHelpCircleColor">#FFFFFFFF</color>-->
+    <!--<color name="tabTargetHelpTextColor">#FFFFFFFF</color>-->
 
     <color name="lockDevice_textColor">#FFFFFFFF</color>
 
-    <color name="fastScrollTrackPP">#FFEFEFEF</color>
-    <color name="fastScrollThumbPP">#FFDC8160</color>
-    <color name="fastScrollPopupBackgroundPP">#FFDC8160</color>
-    <color name="fastScrollPopupTextPP">#FFFFFFFF</color>
+    <!--<color name="fastScrollTrackPP">#FFEFEFEF</color>-->
+    <!--<color name="fastScrollThumbPP">#FFDC8160</color>-->
+    <!--<color name="fastScrollPopupBackgroundPP">#FFDC8160</color>-->
+    <!--<color name="fastScrollPopupTextPP">#FFFFFFFF</color>-->
 
 </resources>

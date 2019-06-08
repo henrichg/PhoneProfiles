@@ -42,10 +42,10 @@
         <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Light</item>
 <!--        <item name="actionSharedProfileIcon">@drawable/ic_action_shared_profile_white</item> -->
         <item name="actionHelpIcon">@drawable/ic_action_help_white</item>
-        <item name="fastScrollTrackPP">@color/fastScrollTrackPP</item>
-        <item name="fastScrollThumbPP">@color/fastScrollThumbPP</item>
-        <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP</item>
-        <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP</item>
+        <item name="fastScrollTrackPP">@color/fastScrollTrackPP_white</item>
+        <item name="fastScrollThumbPP">@color/fastScrollThumbPP_white</item>
+        <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP_white</item>
+        <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP_white</item>
         <item name="buttonBackground">@drawable/pp_button_background_white</item>
         <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_dark</item>
 

@@ -1335,12 +1335,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                 //final Display display = getWindowManager().getDefaultDisplay();
 
                 String appTheme = ApplicationPreferences.applicationTheme(getApplicationContext(), true);
-                int circleColor = R.color.tabTargetHelpCircleColor;
+                int circleColor = R.color.tabTargetHelpCircleColor_white;
                 if (appTheme.equals("dark"))
                     circleColor = R.color.tabTargetHelpCircleColor_dark;
-                int textColor = R.color.tabTargetHelpTextColor;
-                if (appTheme.equals("white"))
-                    textColor = R.color.tabTargetHelpTextColor_white;
+                int textColor = R.color.tabTargetHelpTextColor_white;
+                if (appTheme.equals("dark"))
+                    textColor = R.color.tabTargetHelpTextColor_dark;
                 boolean tintTarget = !appTheme.equals("white");
 
                 final TapTargetSequence sequence = new TapTargetSequence(this);
