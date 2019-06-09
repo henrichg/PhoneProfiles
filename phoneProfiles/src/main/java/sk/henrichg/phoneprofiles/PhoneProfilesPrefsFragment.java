@@ -225,7 +225,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
             Preference preference = findPreference("applicationUnlinkRingerNotificationVolumesInfo");
             if (preference != null) {
                 //preference.setEnabled(false);
-                preference.setSummary(R.string.phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary);
+                preference.setTitle(R.string.phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary);
                 //systemCategory.removePreference(preference);
             }
         }
@@ -793,6 +793,18 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
             preference = findPreference(ApplicationPreferences.PREF_NOTIFICATION_SHOW_BUTTON_EXIT);
             if ((preferenceCategory != null) && (preference != null))
                 preferenceCategory.removePreference(preference);
+        }
+        preference = findPreference("applicationUnlinkRingerNotificationVolumesImportantInfo");
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intentLaunch = new Intent(getActivity(), ImportantInfoActivity.class);
+                    intentLaunch.putExtra(ImportantInfoActivity.EXTRA_SCROLL_TO, R.id.activity_info_notification_how_does_volume_separation_work_title);
+                    startActivity(intentLaunch);
+                    return false;
+                }
+            });
         }
     }
 
