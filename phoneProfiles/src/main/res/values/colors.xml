@@ -25,4 +25,6 @@
     <!--<color name="fastScrollPopupBackgroundPP">#FFDC8160</color>-->
     <!--<color name="fastScrollPopupTextPP">#FFFFFFFF</color>-->
 
+    <color name="navigationBar">#000000</color>
+
 </resources>
