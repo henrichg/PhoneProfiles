@@ -20,6 +20,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_info_how_to_show"
             android:id="@+id/activity_info_notification_how_to_show"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
 
         <TextView
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_orange_text"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_orange_text" />
 
         <TextView
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_contact"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_contact" />
 
         <TextView
@@ -41,6 +44,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_translations"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_translations" />
 
         <!-- NEWS -->
@@ -52,6 +56,7 @@
             android:text="@string/important_info_news"
             android:id="@+id/activity_info_notification_news"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/important_info_title_size"
             android:textStyle="bold" />
 
         <TextView
@@ -60,6 +65,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_info_privacy_policy_backup_files"
             android:id="@+id/activity_info_notification_privacy_policy_backup_files_news"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -68,6 +74,7 @@
             android:text="@string/important_info_privacy_policy_backup_files_2"
             android:id="@+id/activity_info_notification_privacy_policy_backup_files_2_news"
             android:textStyle="bold"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent" />
 
         <TextView
@@ -76,6 +83,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_info_accessibility_service_new_version"
             android:id="@+id/activity_info_notification_accessibility_service_new_version"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -84,6 +92,7 @@
             android:text="@string/important_info_accessibility_service_new_version_2"
             android:id="@+id/activity_info_notification_accessibility_service_new_version_2"
             android:textStyle="bold"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent" />
 
         <TextView
@@ -91,6 +100,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_ringerMode_root"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_ringerMode_root_news" />
 
         <TextView
@@ -98,6 +108,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_adaptiveBrightness_root"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_adaptiveBrightness_root_news" />
 
         <TextView
@@ -106,18 +117,21 @@
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_zenMode"
             android:id="@+id/activity_info_notification_profile_zenMode_news"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_news" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_grant_lookSectionProfiles"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_lookSectionProfiles_news" />
 
         <!-- SYSTEM -->
@@ -129,6 +143,7 @@
             android:text="@string/important_info_system"
             android:id="@+id/activity_info_notification_system"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/important_info_title_size"
             android:textStyle="bold" />
 
         <TextView
@@ -138,6 +153,7 @@
             android:text="@string/important_info_android_doze_mode"
             android:id="@+id/activity_info_notification_app_standby"
             android:textStyle="bold"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent" />
 
         <TextView
@@ -147,6 +163,7 @@
             android:text="@string/important_info_power_manager"
             android:id="@+id/activity_info_notification_power_manager"
             android:textStyle="bold"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent" />
 
         <TextView
@@ -155,6 +172,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_into_sony_stamina_mode"
             android:id="@+id/activity_info_notification_sony_stamina_mode"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
 
         <!--
@@ -164,6 +182,7 @@
             android:paddingBottom="5dp"
             android:text="@string/important_into_samsung_no_save_power"
             android:id="@+id/activity_info_notification_dialog_info_text10b"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -171,6 +190,7 @@
             android:paddingBottom="5dp"
             android:text="@string/important_into_sony_stamina_mode"
             android:id="@+id/activity_info_notification_dialog_info_text10c"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -178,6 +198,7 @@
             android:paddingBottom="5dp"
             android:text="@string/important_into_huawei_protected_apps"
             android:id="@+id/activity_info_notification_dialog_info_text10d"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
@@ -185,6 +206,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_into_xiaomi_no_restrictions"
             android:id="@+id/activity_info_notification_dialog_info_text10e"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         -->
 
@@ -197,6 +219,7 @@
             android:text="@string/important_info_profiles"
             android:id="@+id/activity_info_notification_profiles"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/important_info_title_size"
             android:textStyle="bold" />
 
         <TextView
@@ -204,24 +227,28 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_grant"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_root"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_root" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_settings"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_settings" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_interactive"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_interactive" />
 
         <TextView
@@ -229,16 +256,19 @@
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_1"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_1"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_2"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_3"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_3" />
         <TextView
             android:layout_width="wrap_content"
@@ -248,33 +278,39 @@
             android:fontFamily="monospace"
             android:text="@string/important_info_profile_grant_1_howTo_11"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_11"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_grant_1_howTo_4"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_4" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_5"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_5"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_6"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_6" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_7"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_7" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_profile_grant_1_howTo_8"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_8" />
         <TextView
             android:layout_width="wrap_content"
@@ -284,12 +320,14 @@
             android:fontFamily="monospace"
             android:text="@string/empty_string"
             android:id="@+id/activity_info_notification_dialog_info_grant_1_command"
+            android:textSize="@dimen/important_info_text_size"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_grant_1_howTo_10"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_grant_1_howTo_10" />
 
         <!--<TextView
@@ -297,18 +335,21 @@
             android:layout_height="wrap_content"
             android:text="@string/info_notification_unlink_ringer_notification_volumes"
             android:id="@+id/activity_info_notification_unlink_ringer_notification_volumes"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent" />-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/important_info_how_does_volume_separation_work_title"
             android:textStyle="bold"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_how_does_volume_separation_work_title" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_how_does_volume_separation_work"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_how_does_volume_separation_work" />
 
         <TextView
@@ -316,6 +357,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_ringerMode_root"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_ringerMode_root" />
 
         <TextView
@@ -324,6 +366,7 @@
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_zenMode"
             android:id="@+id/activity_info_notification_profile_zenMode"
+            android:textSize="@dimen/important_info_text_size"
             android:textColor="?attr/colorAccent"/>
 
         <TextView
@@ -331,12 +374,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@string/important_info_profile_adaptiveBrightness_root"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_notification_profile_adaptiveBrightness_root" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/info_notification_activate_profile_from_tasker"
+            android:textSize="@dimen/important_info_text_size"
             android:id="@+id/activity_info_activate_profile_from_tasker" />
         <TextView
             android:layout_width="wrap_content"
@@ -344,6 +389,7 @@
             android:paddingBottom="10dp"
             android:text="@string/empty_string"
             android:id="@+id/activity_info_activate_profile_from_tasker_params"
+            android:textSize="@dimen/important_info_text_size"
             android:fontFamily="monospace"
             android:textIsSelectable="true"
             android:focusable="true"
