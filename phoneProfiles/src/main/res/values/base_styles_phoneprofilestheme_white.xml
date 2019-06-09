@@ -26,7 +26,7 @@
         <item name="actionDeleteAllIcon">@drawable/ic_action_delete_all_white</item>
         <item name="actionEditProfilesIcon">@drawable/ic_action_edit_profiles_white</item>
         <!--<item name="activityPopupBackground">@color/activityPopupBackground_white</item>-->
-        <item name="dragHandleIcon">@drawable/ic_drag_handle</item>
+        <item name="dragHandleIcon">@drawable/ic_drag_handle_white</item>
         <item name="actionProfilePrefSave">@drawable/ic_action_profile_pref_save_white</item>
         <item name="actionProfilePrefCancel">@drawable/ic_action_profile_pref_cancel_white</item>
         <item name="actionProfileButtonTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
@@ -47,7 +47,7 @@
         <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP_white</item>
         <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP_white</item>
         <item name="buttonBackground">@drawable/pp_button_background_white</item>
-        <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_dark</item>
+        <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_white</item>
 
     </style>
 

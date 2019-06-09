@@ -42,13 +42,13 @@
         <item name="toolbarPopupMenu">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="bottomToolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 <!--        <item name="actionSharedProfileIcon">@drawable/ic_action_shared_profile</item> -->
-        <item name="actionHelpIcon">@drawable/ic_action_help</item>
+        <item name="actionHelpIcon">@drawable/ic_action_help_dark</item>
         <item name="fastScrollTrackPP">@color/fastScrollTrackPP_dark</item>
         <item name="fastScrollThumbPP">@color/fastScrollThumbPP_dark</item>
         <item name="fastScrollPopupBackgroundPP">@color/fastScrollPopupBackgroundPP_dark</item>
         <item name="fastScrollPopupTextPP">@color/fastScrollPopupTextPP_dark</item>
         <item name="buttonBackground">@drawable/pp_button_background_dark</item>
-        <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_white</item>
+        <item name="infoPreferenceIcon">@drawable/ic_info_preference_icon_dark</item>
 
     </style>
 
