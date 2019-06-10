@@ -14,7 +14,7 @@
 <!--    <color name="activityPopupBackground_dark">#FF2A2A2A</color>-->
     <color name="dialog_divider_dark">#20FFFFFF</color>
 
-    <color name="tabTargetHelpOuterCircleColor_dark">#FF252525</color>
+    <color name="tabTargetHelpOuterCircleColor_dark">#FF272727</color>
     <color name="tabTargetHelpTargetCircleColor_dark">#FF7F7F7F</color>
     <color name="tabTargetHelpTextColor_dark">#FFFFFFFF</color>
 
