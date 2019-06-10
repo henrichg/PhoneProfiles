@@ -139,7 +139,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                         restartService = true;
                                     }
                                 }
-                                if (actualVersionCode <= 3410) {
+                                if (actualVersionCode <= 3420) {
                                     ApplicationPreferences.getSharedPreferences(appContext);
                                     SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
 
