@@ -186,5 +186,9 @@
     <orderEntry type="module" module-name="appkillermanager" />
     <orderEntry type="module" module-name="time-duration-picker" />
     <orderEntry type="module" module-name="RootTools" />
+    <orderEntry type="module" module-name="RootShell" />
+    <orderEntry type="module" module-name="appkillermanager" />
+    <orderEntry type="module" module-name="time-duration-picker" />
+    <orderEntry type="module" module-name="RootTools" />
   </component>
 </module>
