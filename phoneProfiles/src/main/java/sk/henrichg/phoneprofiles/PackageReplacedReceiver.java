@@ -144,7 +144,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
                                     SharedPreferences.Editor editor = ApplicationPreferences.preferences.edit();
 
                                     String theme = ApplicationPreferences.applicationTheme(appContext, false);
-                                    if (!(theme.equals("white") || theme.equals("dark")))
+                                    if (!(theme.equals("white") || theme.equals("dark") || theme.equals("night_mode")))
                                         editor.putString(ApplicationPreferences.PREF_APPLICATION_THEME, "white");
 
                                     editor.apply();
