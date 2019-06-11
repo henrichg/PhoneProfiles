@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.preference.Preference;
+import mobi.upod.timedurationpicker.TimeDurationPicker;
 
 class GlobalGUIRoutines {
 
@@ -582,6 +583,23 @@ class GlobalGUIRoutines {
         return value.data;
     }
     */
+
+    static void setThemeTimeDurationPickerDisplay(TimeDurationPicker timeDurationPicker, final Activity activity) {
+        if (ApplicationPreferences.applicationTheme(activity, true).equals("white")) {
+            timeDurationPicker.setDisplayTextAppearance(R.style.TextAppearance_TimeDurationPicker_Display);
+            timeDurationPicker.setUnitTextAppearance(R.style.TextAppearance_TimeDurationPicker_Unit);
+            timeDurationPicker.setBackspaceIcon(activity.getResources().getDrawable(R.drawable.ic_backspace_light_tdp));
+            timeDurationPicker.setClearIcon(activity.getResources().getDrawable(R.drawable.ic_clear_light_tdp));
+        }
+        else {
+            timeDurationPicker.setDisplayTextAppearance(R.style.TextAppearance_TimeDurationPicker_Display_Dark);
+            timeDurationPicker.setUnitTextAppearance(R.style.TextAppearance_TimeDurationPicker_Unit_Dark);
+            timeDurationPicker.setBackspaceIcon(activity.getResources().getDrawable(R.drawable.ic_backspace_tdp));
+            timeDurationPicker.setClearIcon(activity.getResources().getDrawable(R.drawable.ic_clear_tdp));
+        }
+        timeDurationPicker.setDurationDisplayBackgroundColor(Color.TRANSPARENT);
+        //timeDurationPicker.setSeparatorColor(GlobalGUIRoutines.getThemeDialogDividerColor(activity));
+    }
 
     /*
     static int getResourceId(String pVariableName, String pResourceName, Context context)
