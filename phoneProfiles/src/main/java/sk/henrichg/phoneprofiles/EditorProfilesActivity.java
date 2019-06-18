@@ -51,8 +51,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                                                OnStartProfilePreferencesFromDetail
 {
 
-    //private static volatile EditorProfilesActivity instance;
-
     private static boolean savedInstanceStateChanged;
 
     private static ApplicationsCache applicationsCache;
@@ -125,10 +123,6 @@ public class EditorProfilesActivity extends AppCompatActivity
         GlobalGUIRoutines.setLanguage(this);
 
         super.onCreate(savedInstanceState);
-
-        /*synchronized (EditorProfilesActivity.class) {
-            instance = this;
-        }*/
 
         savedInstanceStateChanged = (savedInstanceState != null);
 
@@ -219,6 +213,12 @@ public class EditorProfilesActivity extends AppCompatActivity
             //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.title_activity_editor);
         }
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(refreshGUIBroadcastReceiver,
                 new IntentFilter(PPApplication.PACKAGE_NAME + ".RefreshEditorGUIBroadcastReceiver"));
@@ -229,17 +229,6 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         LocalBroadcastManager.getInstance(this).registerReceiver(finishBroadcastReceiver,
                 new IntentFilter(PPApplication.PACKAGE_NAME + ".FinishEditorBroadcastReceiver"));
-    }
-
-    /*public static EditorProfilesActivity getInstance()
-    {
-        return instance;
-    }*/
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
 
         // this is for list widget header
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true))
@@ -272,29 +261,13 @@ public class EditorProfilesActivity extends AppCompatActivity
     {
         super.onStop();
 
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(refreshGUIBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(showTargetHelpsBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
+
         if ((addProfileDialog != null) && (addProfileDialog.mDialog != null) && addProfileDialog.mDialog.isShowing())
             addProfileDialog.mDialog.dismiss();
-
-        /*synchronized (EditorProfilesActivity.class) {
-            instance = null;
-        }*/
     }
-
-    /*
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
-        if (EditorProfilesActivity.getInstance() == null)
-        {
-            synchronized (EditorProfilesActivity.class) {
-                instance = this;
-            }
-            refreshGUI(false, false);
-        }
-    }
-    */
 
     @Override
     protected void onDestroy()
@@ -322,10 +295,6 @@ public class EditorProfilesActivity extends AppCompatActivity
                 applicationsCache.clearCache(true);
             applicationsCache = null;
         }
-
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(refreshGUIBroadcastReceiver);
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(showTargetHelpsBroadcastReceiver);
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
 
         super.onDestroy();
     }

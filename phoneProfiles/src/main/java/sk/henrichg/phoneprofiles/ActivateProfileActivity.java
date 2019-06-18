@@ -29,8 +29,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class ActivateProfileActivity extends AppCompatActivity {
 
-    //private static volatile ActivateProfileActivity instance;
-
     private Toolbar toolbar;
 
     public boolean targetHelpsSequenceStarted;
@@ -73,10 +71,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*synchronized (ActivateProfileActivity.class) {
-            instance = this;
-        }*/
 
         GlobalGUIRoutines.setTheme(this, true, true);
         GlobalGUIRoutines.setLanguage(this);
@@ -196,6 +190,13 @@ public class ActivateProfileActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.title_activity_activator);
         }
 
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
         LocalBroadcastManager.getInstance(this).registerReceiver(refreshGUIBroadcastReceiver,
                 new IntentFilter(PPApplication.PACKAGE_NAME + ".RefreshActivatorGUIBroadcastReceiver"));
         LocalBroadcastManager.getInstance(this).registerReceiver(showTargetHelpsBroadcastReceiver,
@@ -205,18 +206,6 @@ public class ActivateProfileActivity extends AppCompatActivity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(finishBroadcastReceiver,
                 new IntentFilter(PPApplication.PACKAGE_NAME + ".FinishActivatorBroadcastReceiver"));
-
-    }
-
-    /*public static ActivateProfileActivity getInstance()
-    {
-        return instance;
-    }*/
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
 
         if (!PPApplication.getApplicationStarted(getApplicationContext(), true))
         {
@@ -243,41 +232,14 @@ public class ActivateProfileActivity extends AppCompatActivity {
         }
     }
 
-    /*
     @Override
     protected void onStop()
     {
         super.onStop();
-        synchronized (ActivateProfileActivity.class) {
-            instance = null;
-        }
-        //ActivatorTargetHelpsActivity.activatorActivity = null;
-    }*/
 
-    /*
-    @Override
-    protected void onResume()
-    {
-        //Debug.stopMethodTracing();
-        super.onResume();
-
-        if (ActivateProfileActivity.getInstance() == null)
-        {
-            synchronized (ActivateProfileActivity.class) {
-                instance = this;
-            }
-            refreshGUI(false);
-        }
-    }*/
-
-    @Override
-    protected void onDestroy()
-    {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(refreshGUIBroadcastReceiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(showTargetHelpsBroadcastReceiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
-
-        super.onDestroy();
     }
 
     @Override
