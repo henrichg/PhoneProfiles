@@ -62,6 +62,8 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
                                 }
                                 if (profile._afterDurationDo == Profile.AFTERDURATIONDO_UNDOPROFILE) {
                                     activateProfileId = Profile.getActivatedProfileForDuration(appContext);
+                                    if (activateProfileId == activatedProfile._id)
+                                        activateProfileId = 0;
                                 }
 
                                 dataWrapper.activateProfileAfterDuration(activateProfileId);
