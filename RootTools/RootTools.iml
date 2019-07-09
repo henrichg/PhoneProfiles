@@ -101,6 +101,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/library_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/library_java_res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/library_manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint_jar" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_jni_libs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_shaders" />
@@ -141,13 +142,6 @@
     <orderEntry type="library" name="Gradle: androidx.activity:activity:1.0.0-rc01@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0-rc01@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
-    <orderEntry type="module" module-name="RootShell" />
     <orderEntry type="module" module-name="RootShell" />
   </component>
 </module>
