@@ -53,7 +53,10 @@ public class BillingManager implements PurchasesUpdatedListener {
     public BillingManager(AppCompatActivity activity) {
         PPApplication.logE(TAG, "start client");
         mActivity = activity;
-        mBillingClient = BillingClient.newBuilder(mActivity).setListener(this).build();
+        mBillingClient = BillingClient.newBuilder(mActivity)
+                .enablePendingPurchases()
+                .setListener(this)
+                .build();
         startServiceConnectionIfNeeded(null);
     }
 
