@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsResponseListener;
@@ -144,15 +145,15 @@ public class DonationFragment extends Fragment {
                 inAppSkus,
                 new SkuDetailsResponseListener() {
                     @Override
-                    public void onSkuDetailsResponse(int responseCode,
-                                                     List<SkuDetails> skuDetailsList) {
+                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                        int responseCode = billingResult.getResponseCode();
                         PPApplication.logE(TAG, "onSkuDetailsResponse responseCode="+responseCode);
 
                         String[] prices = new String[]{"1 €", "2 €", "3 €", "5 €", "8 €", "13 €", "20 €"};
 
                         if (skuDetailsList != null)
                             PPApplication.logE(TAG, "onSkuDetailsResponse skuDetailsList="+skuDetailsList.size());
-                        if (responseCode == BillingClient.BillingResponse.OK && skuDetailsList != null) {
+                        if (responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
                             if (skuDetailsList.size() > 0) {
                                 SKU_DETAILS = new ArrayList<>();
                                 for (int i = 0; i < inAppSkus.size(); i++) {
@@ -167,7 +168,7 @@ public class DonationFragment extends Fragment {
                                 }
 
                                 // update the UI
-                                displayAnErrorIfNeeded(BillingClient.BillingResponse.OK);
+                                displayAnErrorIfNeeded(BillingClient.BillingResponseCode.OK);
 
                                 if (getActivity() != null) {
                                     ArrayAdapter<CharSequence> adapter;
@@ -179,7 +180,7 @@ public class DonationFragment extends Fragment {
                                 }
                             }
                             else {
-                                displayAnErrorIfNeeded(BillingClient.BillingResponse.FEATURE_NOT_SUPPORTED);
+                                displayAnErrorIfNeeded(BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED);
                             }
                         }
                     }
@@ -247,37 +248,37 @@ public class DonationFragment extends Fragment {
 
         setWaitScreen(false);
         if (mErrorTextView != null) {
-            if (response != BillingClient.BillingResponse.OK) {
+            if (response != BillingClient.BillingResponseCode.OK) {
                 mErrorTextView.setVisibility(View.VISIBLE);
                 switch (response) {
-                    case BillingClient.BillingResponse.BILLING_UNAVAILABLE:
+                    case BillingClient.BillingResponseCode.BILLING_UNAVAILABLE:
                         mErrorTextView.setText(R.string.donation_google_android_market_not_supported);
                         break;
-                    case BillingClient.BillingResponse.DEVELOPER_ERROR:
+                    case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.ERROR:
+                    case BillingClient.BillingResponseCode.ERROR:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.FEATURE_NOT_SUPPORTED:
+                    case BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED:
                         mErrorTextView.setText(R.string.donation_google_android_market_not_supported);
                         break;
-                    case BillingClient.BillingResponse.ITEM_ALREADY_OWNED:
+                    case BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.ITEM_NOT_OWNED:
+                    case BillingClient.BillingResponseCode.ITEM_NOT_OWNED:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.ITEM_UNAVAILABLE:
+                    case BillingClient.BillingResponseCode.ITEM_UNAVAILABLE:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.SERVICE_DISCONNECTED:
+                    case BillingClient.BillingResponseCode.SERVICE_DISCONNECTED:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.SERVICE_UNAVAILABLE:
+                    case BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;
-                    case BillingClient.BillingResponse.USER_CANCELED:
+                    case BillingClient.BillingResponseCode.USER_CANCELED:
                         mErrorTextView.setVisibility(View.GONE);
                         break;
                 }

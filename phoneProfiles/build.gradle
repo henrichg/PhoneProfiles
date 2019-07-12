@@ -61,10 +61,10 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0-beta01"
     implementation "com.google.android.material:material:1.1.0-alpha07"
 
-    implementation "androidx.work:work-runtime:2.0.1"
+    implementation 'androidx.work:work-runtime:2.1.0'
 
-    implementation 'com.android.billingclient:billing:1.2.2'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.billingclient:billing:2.0.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     //implementation 'com.google.firebase:firebase-core:16.0.3'
     //implementation('com.crashlytics.sdk.android:crashlytics:2.9.6@aar') {
