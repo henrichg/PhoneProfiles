@@ -58,10 +58,10 @@ dependencies {
     implementation "androidx.preference:preference:1.1.0-rc01"
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0-beta01"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-beta03"
     implementation "com.google.android.material:material:1.1.0-alpha09"
 
-    implementation 'androidx.work:work-runtime:2.1.0'
+    implementation 'androidx.work:work-runtime:2.2.0'
 
     implementation 'com.android.billingclient:billing:2.0.3'
     implementation 'com.google.code.gson:gson:2.8.5'
