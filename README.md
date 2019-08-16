@@ -11,19 +11,32 @@ Android application - manually change device settings like ringer mode, sounds, 
 
 [Privacy Policy](https://sites.google.com/site/phoneprofiles/home/privacy-policy)
 
+Supported Android SDK
+----------------------
+
+- minSdkVersion = 21
+- targetSdkVersion = 28
+
 Required external libs
 ----------------------
 
-- Android support library: core, appcompat, gridlayout, cardview, recyclerview
-- Google Billing library: donations
-- Samsung Look - http://developer.samsung.com/galaxy/edge
-- RootTools - https://github.com/Stericson/RootTools
-- android-hidden-api - https://github.com/anggrayudi/android-hidden-api 
-- SystemBarTint - https://github.com/jgilfelt/SystemBarTint
+- AndroidX library: appcompat, preferences, gridlayout, cardview, recyclerview, workmanager
+- Google Material library
+- Google Play services library (GMS): location, maps
+- Google Billing library
+- Firebase Crashlytics library  
 - google-gson - https://code.google.com/p/google-gson/
-- RelativePopupWindow - https://github.com/kakajika/RelativePopupWindow
 - TapTargetView - https://github.com/KeepSafe/TapTargetView
-- Crashlytics - https://fabric.io/kits/android/crashlytics
 - RecyclerView-FastScroll - https://github.com/timusus/RecyclerView-FastScroll
-- time-duration-picker - https://github.com/svenwiegand/time-duration-picker
-- AppKillerManager - https://github.com/thelittlefireman/AppKillerManager
+- android-job - https://github.com/evernote/android-job
+- doki - https://github.com/DoubleDotLabs/doki
+- Samsung Look - http://developer.samsung.com/galaxy/edge
+- dashclock - https://github.com/romannurik/dashclock
+- ToastCompat - https://github.com/PureWriter/ToastCompat  
+- RootTools (as module, code modified) - https://github.com/Stericson/RootTools
+- RootShell (as module, code modified) - https://github.com/Stericson/RootShell
+- time-duration-picker (as module, code modified) - https://github.com/svenwiegand/time-duration-picker
+- AppKillerManager - (as module, code modified) - https://github.com/thelittlefireman/AppKillerManager
+- RelativePopupWindow (only modified RelativePopupWindow class) - https://github.com/kakajika/RelativePopupWindow  
+- android-hidden-api (downloaded android.jar copied into folder \<android-sdk\>/android-XX) - https://github.com/anggrayudi/android-hidden-api   
+- FreeReflection (only code from https://github.com/tiann/FreeReflection/blob/master/library/src/main/java/me/weishu/reflection/Reflection.java) - https://github.com/tiann/FreeReflection  
