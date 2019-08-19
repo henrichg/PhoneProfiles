@@ -424,7 +424,11 @@ class GlobalGUIRoutines {
                 break;
             ++index;
         }
-        return arrayStrings[index];
+        try {
+            return arrayStrings[index];
+        } catch (Exception e) {
+            return context.getString(R.string.array_pref_no_change);
+        }
     }
 
     static String getZenModePreferenceString(String value, Context context) {
@@ -437,7 +441,11 @@ class GlobalGUIRoutines {
                 break;
             ++index;
         }
-        return arrayStrings[index] + " - " + arraySummaryStrings[Integer.valueOf(value)-1];
+        try {
+            return arrayStrings[index] + " - " + arraySummaryStrings[Integer.valueOf(value) - 1];
+        } catch (Exception e) {
+            return context.getString(R.string.array_pref_no_change);
+        }
     }
 
     static void setRingtonePreferenceSummary(final String initSummary, final String ringtoneUri,
