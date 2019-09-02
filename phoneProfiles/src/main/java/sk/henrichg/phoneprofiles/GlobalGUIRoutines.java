@@ -143,21 +143,6 @@ class GlobalGUIRoutines {
                     else
                         return R.style.Theme_PhoneProfilesTheme_color;
                 }*/
-            case "white":
-                if (forPopup)
-                {
-                    if (withToolbar)
-                        return R.style.PopupTheme_withToolbar_white;
-                    else
-                        return R.style.PopupTheme_white;
-                }
-                else
-                {
-                    if (withToolbar)
-                        return R.style.Theme_PhoneProfilesTheme_withToolbar_white;
-                    else
-                        return R.style.Theme_PhoneProfilesTheme_white;
-                }
             case "dark":
                 if (forPopup)
                 {
@@ -188,6 +173,7 @@ class GlobalGUIRoutines {
                     else
                         return R.style.Theme_PhoneProfilesTheme_dlight;
                 }*/
+            case "white":
             default:
                 if (forPopup)
                 {

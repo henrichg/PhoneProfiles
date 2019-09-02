@@ -202,6 +202,7 @@ class DataWrapper {
             );
     }
 
+    @SuppressWarnings("WrapperTypeMayBePrimitive")
     private String getVolumeLevelString(int percentage, int maxValue)
     {
         Double dValue = maxValue / 100.0 * percentage;

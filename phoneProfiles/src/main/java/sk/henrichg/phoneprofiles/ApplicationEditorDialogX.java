@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -148,12 +147,10 @@ class ApplicationEditorDialogX
             case "dark":
                 filterSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dark);
                 break;
-            case "white":
-                filterSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
-                break;
             /*case "dlight":
                 filterSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dlight);
                 break;*/
+            case "white":
             default:
                 filterSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
                 break;

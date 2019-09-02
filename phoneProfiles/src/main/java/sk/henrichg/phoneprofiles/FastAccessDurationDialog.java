@@ -3,7 +3,6 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -219,12 +218,10 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
             case "dark":
                 afterDoSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dark);
                 break;
-            case "white":
-                afterDoSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
-                break;
             /*case "dlight":
                 afterDoSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dlight);
                 break;*/
+            case "white":
             default:
                 afterDoSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
                 break;

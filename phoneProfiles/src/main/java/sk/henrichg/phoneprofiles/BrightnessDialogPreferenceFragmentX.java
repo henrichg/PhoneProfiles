@@ -21,6 +21,7 @@ import com.stericson.RootTools.RootTools;
 
 import androidx.preference.PreferenceDialogFragmentCompat;
 
+@SuppressWarnings("WeakerAccess")
 public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmentCompat
                 implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener{
 
@@ -68,7 +69,7 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
 
         seekBar.setOnSeekBarChangeListener(this);
         seekBar.setKeyProgressIncrement(preference.stepSize);
-        seekBar.setMax(preference.maximumValue - preference.minimumValue);
+        seekBar.setMax(preference.maximumValue/* - preference.minimumValue*/);
 
         seekBar.setProgress(preference.value);
 
@@ -199,8 +200,8 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
                     //PPApplication.logE("BrightnessDialogPreference.onCheckedChanged", "putInt value="+
                     //        Profile.convertPercentsToBrightnessManualValue(_value + minimumValue, _context));
                     Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
-                            Profile.convertPercentsToBrightnessManualValue(_value + preference.minimumValue, context));
-                    setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(_value + preference.minimumValue, context));
+                            Profile.convertPercentsToBrightnessManualValue(_value/* + preference.minimumValue*/, context));
+                    setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(_value/* + preference.minimumValue*/, context));
                 }
             }
 
@@ -210,7 +211,7 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
                 layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             else {
                 if (_changeLevel == 1)
-                    layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(_value + preference.minimumValue, context) / (float) 255;
+                    layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(_value/* + preference.minimumValue*/, context) / (float) 255;
                 else
                     layoutParams.screenBrightness = preference.savedBrightness / (float) 255;
             }
@@ -328,8 +329,8 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
                 Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
             if (preference.changeLevel == 1) {
                 Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,
-                        Profile.convertPercentsToBrightnessManualValue(value + preference.minimumValue, context));
-                setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value + preference.minimumValue, context));
+                        Profile.convertPercentsToBrightnessManualValue(value/* + preference.minimumValue*/, context));
+                setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value/* + preference.minimumValue*/, context));
             }
         }
 
@@ -339,7 +340,7 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
             layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
         else {
             if (preference.changeLevel == 1)
-                layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(value + preference.minimumValue, context) / (float) 255;
+                layoutParams.screenBrightness = Profile.convertPercentsToBrightnessManualValue(value/* + preference.minimumValue*/, context) / (float) 255;
             else
                 layoutParams.screenBrightness = preference.savedBrightness / (float) 255;
         }

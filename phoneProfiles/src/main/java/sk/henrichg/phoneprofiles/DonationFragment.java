@@ -74,12 +74,10 @@ public class DonationFragment extends Fragment {
             case "dark":
                 mGoogleSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dark);
                 break;
-            case "white":
-                mGoogleSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
-                break;
             /*case "dlight":
                 mGoogleSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dlight);
                 break;*/
+            case "white":
             default:
                 mGoogleSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_white);
                 break;
@@ -252,29 +250,15 @@ public class DonationFragment extends Fragment {
                 mErrorTextView.setVisibility(View.VISIBLE);
                 switch (response) {
                     case BillingClient.BillingResponseCode.BILLING_UNAVAILABLE:
-                        mErrorTextView.setText(R.string.donation_google_android_market_not_supported);
-                        break;
-                    case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
-                    case BillingClient.BillingResponseCode.ERROR:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
                     case BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED:
                         mErrorTextView.setText(R.string.donation_google_android_market_not_supported);
                         break;
+                    case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
+                    case BillingClient.BillingResponseCode.ERROR:
                     case BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
                     case BillingClient.BillingResponseCode.ITEM_NOT_OWNED:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
                     case BillingClient.BillingResponseCode.ITEM_UNAVAILABLE:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
                     case BillingClient.BillingResponseCode.SERVICE_DISCONNECTED:
-                        mErrorTextView.setText(R.string.donation_google_error);
-                        break;
                     case BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE:
                         mErrorTextView.setText(R.string.donation_google_error);
                         break;

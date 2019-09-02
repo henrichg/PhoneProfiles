@@ -1970,6 +1970,7 @@ public class Profile {
         return timeDate.concat(AmPm);
     }
 
+    @SuppressWarnings("WrapperTypeMayBePrimitive")
     private static String getVolumeLevelString(int percentage, int maxValue)
     {
         Double dValue = maxValue / 100.0 * percentage;

@@ -2268,9 +2268,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             ringerMode = 1;
                                             break;
                                         case 2:
-                                            ringerMode = 4;
-                                            break;
                                         case 3:
+                                        case 6:
                                             ringerMode = 4;
                                             break;
                                         case 4:
@@ -2278,9 +2277,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
                                             break;
                                         case 5:
                                             ringerMode = 3;
-                                            break;
-                                        case 6:
-                                            ringerMode = 4;
                                             break;
                                     }
                                     values.clear();

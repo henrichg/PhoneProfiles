@@ -769,7 +769,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             @SuppressLint("StaticFieldLeak")
             class ImportAsyncTask extends AsyncTask<Void, Integer, Integer> {
-                private DataWrapper dataWrapper;
+                private final DataWrapper dataWrapper;
                 private int dbError = DatabaseHandler.IMPORT_OK;
                 private boolean appSettingsError = false;
                 private boolean sharedProfileError = false;
@@ -811,31 +811,35 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    File sd = Environment.getExternalStorageDirectory();
-                    File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
-                    appSettingsError = !importApplicationPreferences(exportFile, 1);
-                    exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
-                    if (exportFile.exists())
-                        sharedProfileError = !importApplicationPreferences(exportFile, 2);
+                    if (this.dataWrapper != null) {
+                        File sd = Environment.getExternalStorageDirectory();
+                        File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
+                        appSettingsError = !importApplicationPreferences(exportFile, 1);
+                        exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
+                        if (exportFile.exists())
+                            sharedProfileError = !importApplicationPreferences(exportFile, 2);
 
-                    dbError = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
-                    if (dbError == DatabaseHandler.IMPORT_OK) {
-                        // check for hardware capability and update data
-                        DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences();
-                        this.dataWrapper.clearProfileList();
-                        DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
+                        dbError = DatabaseHandler.getInstance(this.dataWrapper.context).importDB(_applicationDataPath);
+                        if (dbError == DatabaseHandler.IMPORT_OK) {
+                            // check for hardware capability and update data
+                            DatabaseHandler.getInstance(this.dataWrapper.context).disableNotAllowedPreferences();
+                            this.dataWrapper.clearProfileList();
+                            DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
+                        }
+
+                        PPApplication.logE("EditorProfilesActivity.doImportData", "dbError=" + dbError);
+                        PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError=" + appSettingsError);
+                        PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError=" + sharedProfileError);
+
+                        if (!appSettingsError) {
+                            Permissions.setAllShowRequestPermissions(getApplicationContext(), true);
+                        }
+
+                        if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError)))
+                            return 1;
+                        else
+                            return 0;
                     }
-
-                    PPApplication.logE("EditorProfilesActivity.doImportData", "dbError="+dbError);
-                    PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError="+appSettingsError);
-                    PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError="+sharedProfileError);
-
-                    if (!appSettingsError) {
-                        Permissions.setAllShowRequestPermissions(getApplicationContext(), true);
-                    }
-
-                    if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError)))
-                        return 1;
                     else
                         return 0;
                 }
@@ -853,16 +857,18 @@ public class EditorProfilesActivity extends AppCompatActivity
                         importProgressDialog = null;
                     }
 
-                    ActivateProfileHelper.updateGUI(dataWrapper.context, true);
+                    if (dataWrapper != null) {
+                        ActivateProfileHelper.updateGUI(dataWrapper.context, true);
 
-                    PPApplication.setApplicationStarted(this.dataWrapper.context, true);
-                    Intent serviceIntent = new Intent(this.dataWrapper.context, PhoneProfilesService.class);
-                    //serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
-                    serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
-                    serviceIntent.putExtra(PhoneProfilesService.EXTRA_ACTIVATE_PROFILES, true);
-                    PPApplication.startPPService(activity, serviceIntent);
+                        PPApplication.setApplicationStarted(this.dataWrapper.context, true);
+                        Intent serviceIntent = new Intent(this.dataWrapper.context, PhoneProfilesService.class);
+                        //serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, true);
+                        serviceIntent.putExtra(PhoneProfilesService.EXTRA_INITIALIZE_START, true);
+                        serviceIntent.putExtra(PhoneProfilesService.EXTRA_ACTIVATE_PROFILES, true);
+                        PPApplication.startPPService(activity, serviceIntent);
+                    }
 
-                    if ((dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError))) {
+                    if ((dataWrapper != null) && (dbError == DatabaseHandler.IMPORT_OK) && (!(appSettingsError || sharedProfileError))) {
                         // toast notification
                         Toast msg = ToastCompat.makeText(this.dataWrapper.context.getApplicationContext(),
                                 getResources().getString(R.string.toast_import_ok),
@@ -1060,7 +1066,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             @SuppressLint("StaticFieldLeak")
             class ExportAsyncTask extends AsyncTask<Void, Integer, Integer> {
-                private DataWrapper dataWrapper;
+                private final DataWrapper dataWrapper;
 
                 private ExportAsyncTask() {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -1089,21 +1095,24 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    int ret = DatabaseHandler.getInstance(this.dataWrapper.context).exportDB();
-                    if (ret == 1) {
-                        File sd = Environment.getExternalStorageDirectory();
-                        File exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
-                        if (exportApplicationPreferences(exportFile/*, 1*/)) {
+                    if (this.dataWrapper != null) {
+                        int ret = DatabaseHandler.getInstance(this.dataWrapper.context).exportDB();
+                        if (ret == 1) {
+                            File sd = Environment.getExternalStorageDirectory();
+                            File exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
+                            if (exportApplicationPreferences(exportFile/*, 1*/)) {
                             /*exportFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);
                             if (!exportApplicationPreferences(exportFile, 2))
                                 ret = 0;*/
-                            ret = 1;
+                                ret = 1;
+                            } else
+                                ret = 0;
                         }
-                        else
-                            ret = 0;
-                    }
 
-                    return ret;
+                        return ret;
+                    }
+                    else
+                        return 0;
                 }
 
                 @Override
@@ -1117,7 +1126,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                     if (!isFinishing())
                         GlobalGUIRoutines.unlockScreenOrientation(activity);
 
-                    if (result == 1) {
+                    if ((dataWrapper != null) && (result == 1)) {
 
                         // toast notification
                         Toast msg = ToastCompat.makeText(this.dataWrapper.context.getApplicationContext(),
