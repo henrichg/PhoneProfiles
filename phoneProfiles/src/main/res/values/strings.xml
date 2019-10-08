@@ -1406,6 +1406,8 @@
 
     <string name="phone_profiles_pref_UnlinkRingerNotificationVolumesImportantInfo_importantInfo_summary">Click here to show how \"Unlink ringer and notification volumes\" works.</string>
 
+    <string name="notification_channel_donation">Donation</string>
+
     <!-- **************************************************************************************** -->
 
     <string name="extender_app_name">PhoneProfilesPlusExtender</string>

@@ -14,10 +14,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.evernote.android.job.JobRequest;
 import com.thelittlefireman.appkillermanager.managers.KillerManager;
-
-import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -587,28 +584,6 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                 if (preferenceCategory != null)
                     preferenceCategory.removePreference(preference);
             }
-        }
-        long jobMinInterval = TimeUnit.MILLISECONDS.toMinutes(JobRequest.MIN_INTERVAL);
-        String summary = getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary1) + " " +
-                jobMinInterval + " " +
-                getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary2);
-        preference = findPreference("applicationEventLocationUpdateIntervalInfo");
-        if (preference != null) {
-            preference.setSummary(summary);
-        }
-        preference = findPreference("applicationEventWifiScanIntervalInfo");
-        if (preference != null) {
-            preference.setSummary(summary);
-        }
-        preference = findPreference("applicationEventBluetoothScanIntervalInfo");
-        if (preference != null) {
-            preference.setSummary(summary);
-        }
-        preference = findPreference("applicationEventOrientationScanIntervalInfo");
-        if (preference != null) {
-            summary = getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary1) + " 10 " +
-                    getString(R.string.phone_profiles_pref_applicationEventScanIntervalInfo_summary3);
-            preference.setSummary(summary);
         }
         Preference _preference;
         preference = findPreference(ApplicationPreferences.PREF_APPLICATION_WIDGET_LIST_BACKGROUND_TYPE);

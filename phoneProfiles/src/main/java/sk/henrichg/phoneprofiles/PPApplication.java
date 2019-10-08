@@ -20,9 +20,6 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
-import com.evernote.android.job.JobApi;
-import com.evernote.android.job.JobConfig;
-import com.evernote.android.job.JobManager;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
@@ -75,7 +72,6 @@ public class PPApplication extends Application {
 
     @SuppressWarnings("PointlessBooleanExpression")
     private static final boolean logIntoLogCat = true && BuildConfig.DEBUG;
-    @SuppressWarnings("WeakerAccess")
     static final boolean logIntoFile = false;
     @SuppressWarnings("PointlessBooleanExpression")
     static final boolean crashIntoFile = true && BuildConfig.DEBUG;
@@ -129,6 +125,7 @@ public class PPApplication extends Application {
     static final String INFORMATION_NOTIFICATION_CHANNEL = "phoneProfiles_information";
     static final String EXCLAMATION_NOTIFICATION_CHANNEL = "phoneProfiles_exclamation";
     static final String GRANT_PERMISSION_NOTIFICATION_CHANNEL = "phoneProfiles_grant_permission";
+    static final String DONATION_CHANNEL = "phoneProfilesPlus_donation";
 
     static final int PROFILE_NOTIFICATION_ID = 700420;
     static final int IMPORTANT_INFO_NOTIFICATION_ID = 700422;
@@ -154,6 +151,7 @@ public class PPApplication extends Application {
     private static final String PREF_DAYS_AFTER_FIRST_START = "days_after_first_start";
     private static final String PREF_DONATION_NOTIFICATION_COUNT = "donation_notification_count";
     private static final String PREF_DONATION_DONATED = "donation_donated";
+    private static final String PREF_DAYS_FOR_NEXT_DONATION_NOTIFICATION = "days_for_next_donation_notification";
 
     static final String EXTENDER_ACCESSIBILITY_SERVICE_ID = "sk.henrichg.phoneprofilesplusextender/.PPPEAccessibilityService";
 
@@ -164,6 +162,7 @@ public class PPApplication extends Application {
     static final String ACTION_FORCE_STOP_APPLICATIONS_END = PPApplication.PACKAGE_NAME_EXTENDER + ".ACTION_FORCE_STOP_APPLICATIONS_END";
     static final String ACTION_LOCK_DEVICE = PPApplication.PACKAGE_NAME_EXTENDER + ".ACTION_LOCK_DEVICE";
     static final String ACCESSIBILITY_SERVICE_PERMISSION = PPApplication.PACKAGE_NAME_EXTENDER + ".ACCESSIBILITY_SERVICE_PERMISSION";
+    static final String ACTION_DONATION = PPApplication.PACKAGE_NAME_EXTENDER + ".ACTION_DONATION";
 
     static final String EXTRA_REGISTRATION_APP = "registration_app";
     static final String EXTRA_REGISTRATION_TYPE = "registration_type";
@@ -358,11 +357,6 @@ public class PPApplication extends Application {
         //loadPreferences(this);
 
         PPApplication.initRoot();
-
-        JobConfig.setApiEnabled(JobApi.WORK_MANAGER, true);
-        //JobConfig.setForceAllowApi14(true); // https://github.com/evernote/android-job/issues/197
-        JobConfig.setApiEnabled(JobApi.GCM, false); // is only important for Android 4.X
-        JobManager.create(this).addJobCreator(new PPJobsCreator());
 
         //Log.d("PPApplication.onCreate", "memory usage (after create activateProfileHelper)=" + Debug.getNativeHeapAllocatedSize());
 
@@ -648,6 +642,20 @@ public class PPApplication extends Application {
         editor.apply();
     }
 
+    static public int getDaysForNextDonationNotification(Context context)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        return ApplicationPreferences.preferences.getInt(PREF_DAYS_FOR_NEXT_DONATION_NOTIFICATION, 0);
+    }
+
+    static public void setDaysForNextDonationNotification(Context context, int days)
+    {
+        ApplicationPreferences.getSharedPreferences(context);
+        Editor editor = ApplicationPreferences.preferences.edit();
+        editor.putInt(PREF_DAYS_FOR_NEXT_DONATION_NOTIFICATION, days);
+        editor.apply();
+    }
+
     static public boolean getDonationDonated(Context context)
     {
         ApplicationPreferences.getSharedPreferences(context);
@@ -787,11 +795,37 @@ public class PPApplication extends Application {
         }
     }
 
+    static void createDonationNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            // The user-visible name of the channel.
+            CharSequence name = context.getString(R.string.notification_channel_donation);
+            // The user-visible description of the channel.
+            String description = context.getString(R.string.empty_string);
+
+            NotificationChannel channel = new NotificationChannel(DONATION_CHANNEL, name, NotificationManager.IMPORTANCE_LOW);
+
+            // Configure the notification channel.
+            //channel.setImportance(importance);
+            channel.setDescription(description);
+            channel.enableLights(false);
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            //channel.setLightColor(Color.RED);
+            channel.enableVibration(false);
+            //channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null)
+                notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     static void createNotificationChannels(Context appContext) {
         PPApplication.createProfileNotificationChannel(appContext);
         PPApplication.createInformationNotificationChannel(appContext);
         PPApplication.createExclamationNotificationChannel(appContext);
         PPApplication.createGrantPermissionNotificationChannel(appContext);
+        PPApplication.createDonationNotificationChannel(appContext);
     }
 
     static void showProfileNotification(/*Context context*/) {

@@ -68,6 +68,7 @@ public class PhoneProfilesService extends Service {
     private WifiStateChangedBroadcastReceiver wifiStateChangedBroadcastReceiver = null;
     private PPPExtenderBroadcastReceiver pppExtenderForceStopApplicationBroadcastReceiver = null;
     private PPPExtenderBroadcastReceiver pppExtenderBroadcastReceiver = null;
+    private DonationBroadcastReceiver donationBroadcastReceiver = null;
 
     private SettingsContentObserver settingsContentObserver = null;
 
@@ -379,7 +380,7 @@ public class PhoneProfilesService extends Service {
 
                         if (PhoneProfilesService.getInstance() != null)
                             PhoneProfilesService.getInstance().registerReceivers();
-                        DonationNotificationJob.scheduleJob(appContext, false);
+                        DonationBroadcastReceiver.setAlarm(appContext);
 
                         if (_startOnBoot || _startOnPackageReplace || _initializeStart) {
                             PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "application started");
@@ -612,6 +613,15 @@ public class PhoneProfilesService extends Service {
         registerReceiver(pppExtenderBroadcastReceiver, intentFilter23,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
+        if (donationBroadcastReceiver != null) {
+            unregisterReceiver(donationBroadcastReceiver);
+            donationBroadcastReceiver = null;
+        }
+        donationBroadcastReceiver = new DonationBroadcastReceiver();
+        IntentFilter intentFilter30 = new IntentFilter();
+        intentFilter30.addAction(PPApplication.ACTION_DONATION);
+        registerReceiver(donationBroadcastReceiver, intentFilter30);
+
         if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
             unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
             pppExtenderForceStopApplicationBroadcastReceiver = null;
@@ -688,6 +698,10 @@ public class PhoneProfilesService extends Service {
         if (pppExtenderBroadcastReceiver != null) {
             unregisterReceiver(pppExtenderBroadcastReceiver);
             pppExtenderBroadcastReceiver = null;
+        }
+        if (donationBroadcastReceiver != null) {
+            unregisterReceiver(donationBroadcastReceiver);
+            donationBroadcastReceiver = null;
         }
 
         if (settingsContentObserver != null) {
