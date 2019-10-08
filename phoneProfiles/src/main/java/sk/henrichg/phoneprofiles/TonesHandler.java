@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.media.MediaScannerConnection;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -157,7 +158,6 @@ class TonesHandler {
         return true;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isToneInstalled(/*@SuppressWarnings("SameParameterValue") int resID,*/
                                    Context context) {
         //if (Permissions.checkInstallTone(context, null)) {
@@ -211,7 +211,11 @@ class TonesHandler {
         }*/
 
         //File path = Environment.getExternalStoragePublicDirectory(directory);
-        File path = context.getFilesDir();
+        File path;
+        if (Build.VERSION.SDK_INT < 29)
+            path = context.getFilesDir();
+        else
+            path = context.getExternalFilesDir(null);
         PPApplication.logE("TonesHandler._installTone", "path=" + path.getAbsolutePath());
         // Make sure the directory exists
         //noinspection ResultOfMethodCallIgnored
@@ -274,8 +278,11 @@ class TonesHandler {
                 // Set the file metadata
                 String outAbsPath = outFile.getAbsolutePath();
 
-                //Uri contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
-                Uri contentUri = MediaStore.Audio.Media.INTERNAL_CONTENT_URI;
+                Uri contentUri;
+                if (Build.VERSION.SDK_INT < 29)
+                    contentUri = MediaStore.Audio.Media.INTERNAL_CONTENT_URI;
+                else
+                    contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
 
                 // Add the metadata to the file in the database
                 ContentValues contentValues = new ContentValues();
