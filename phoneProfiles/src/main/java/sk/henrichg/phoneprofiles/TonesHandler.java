@@ -70,6 +70,8 @@ class TonesHandler {
         manager.setType(type);
         Cursor cursor = manager.getCursor();
 
+        PPApplication.logE("TonesHandler.getToneName", "_uri="+_uri);
+
         while (cursor.moveToNext()) {
             String id = cursor.getString(RingtoneManager.ID_COLUMN_INDEX);
             String uri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
@@ -87,21 +89,24 @@ class TonesHandler {
     }
 
     static boolean isPhoneProfilesSilent(Uri uri, Context appContext) {
+        PPApplication.logE("TonesHandler.isPhoneProfilesSilent", "xxx");
         String displayName = "";
+        PPApplication.logE("TonesHandler.isPhoneProfilesSilent", "uri="+uri);
         try {
             Cursor cursor = appContext.getContentResolver().query(uri, null, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    displayName = cursor.getString(nameIndex);
+                    if (nameIndex != -1)
+                        displayName = cursor.getString(nameIndex);
                 }
-
                 PPApplication.logE("TonesHandler.isPhoneProfilesSilent", "displayName=" + displayName);
 
                 cursor.close();
             }
         } catch (Exception ignored) {}
         String filename = appContext.getResources().getResourceEntryName(TonesHandler.TONE_ID) + ".ogg";
+        PPApplication.logE("TonesHandler.isPhoneProfilesSilent", "END");
         return (displayName != null) && displayName.equals(filename);
     }
 
@@ -159,7 +164,7 @@ class TonesHandler {
     }
 
     static boolean isToneInstalled(/*@SuppressWarnings("SameParameterValue") int resID,*/
-                                   Context context) {
+            Context context) {
         //if (Permissions.checkInstallTone(context, null)) {
         //boolean ringtone = isToneInstalled(resID, Environment.DIRECTORY_RINGTONES, context);
         //boolean notification = isToneInstalled(resID, Environment.DIRECTORY_NOTIFICATIONS, context);
@@ -217,7 +222,6 @@ class TonesHandler {
         else
             path = context.getExternalFilesDir(null);
         PPApplication.logE("TonesHandler._installTone", "path=" + path.getAbsolutePath());
-        // Make sure the directory exists
         //noinspection ResultOfMethodCallIgnored
         path.mkdirs();
         String filename = context.getResources().getResourceEntryName(resID) + ".ogg";

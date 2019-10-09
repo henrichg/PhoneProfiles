@@ -318,7 +318,7 @@ public class RingtonePreferenceX extends DialogPreference {
                         if (TonesHandler.isPhoneProfilesSilent(_ringtoneUri, appContext)) {
                             String filename = appContext.getResources().getResourceEntryName(TonesHandler.TONE_ID) + ".ogg";
                             File soundFile = new File(appContext.getFilesDir(), filename);
-                            // /data/user/0/sk.henrichg.phoneprofilesplus/files
+                            // /data/user/0/sk.henrichg.phoneprofiles/files
                             PPApplication.logE("RingtonePreferenceX.playRingtone", "soundFile=" + soundFile);
                             mediaPlayer.setDataSource(soundFile.getAbsolutePath());
                         }

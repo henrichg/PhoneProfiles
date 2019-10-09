@@ -1,34 +1,64 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
       xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:henrichg="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
     <item android:id="@+id/important_info"
           android:title="@string/info_notification_title"
           android:orderInCategory="190"
-          henrichg:showAsAction="always"
+          app:showAsAction="always"
           android:icon="?attr/actionHelpIcon"
           tools:ignore="AlwaysShowAction"/>
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="200"
-        henrichg:showAsAction="never" />
+        app:showAsAction="never" />
     <item android:id="@+id/menu_dark_theme"
           android:title="@string/menu_dark_theme_on"
           android:orderInCategory="201"
-          henrichg:showAsAction="never" />
-    <item android:id="@+id/menu_export"
-        android:title="@string/menu_export"
-        android:orderInCategory="210"
-        henrichg:showAsAction="never" />
-    <item android:id="@+id/menu_import"
-        android:title="@string/menu_import"
-        android:orderInCategory="220"
-        henrichg:showAsAction="never" />
+          app:showAsAction="never" />
+    <item android:id="@+id/menu_import_export"
+        android:title="@string/menu_import_export"
+        android:orderInCategory="230"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/menu_export"
+                android:title="@string/menu_export"
+                android:orderInCategory="100"
+                app:showAsAction="never" />
+            <item android:id="@+id/menu_export_and_email"
+                android:title="@string/menu_export_and_email"
+                android:orderInCategory="101"
+                app:showAsAction="never" />
+            <item android:id="@+id/menu_import"
+                android:title="@string/menu_import"
+                android:orderInCategory="110"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+    <item android:id="@+id/menu_support"
+        android:title="@string/menu_support"
+        android:orderInCategory="240"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/menu_email_to_author"
+                android:title="@string/menu_email_to_author"
+                android:orderInCategory="100"
+                app:showAsAction="never" />
+            <item android:id="@+id/menu_export_and_email_to_author"
+                android:title="@string/menu_export_and_email_to_author"
+                android:orderInCategory="101"
+                app:showAsAction="never" />
+            <item android:id="@+id/menu_email_debug_logs_to_author"
+                android:title="@string/menu_email_debug_logs_to_author"
+                android:orderInCategory="102"
+                app:showAsAction="never" />
+        </menu>
+    </item>
     <item android:id="@+id/menu_about"
           android:title="@string/menu_about_application"
           android:orderInCategory="235"
-          henrichg:showAsAction="never" />
+          app:showAsAction="never" />
     <item android:id="@+id/menu_exit"
         android:title="@string/menu_exit"
         android:orderInCategory="240"
-        henrichg:showAsAction="never" />
+        app:showAsAction="never" />
 </menu>

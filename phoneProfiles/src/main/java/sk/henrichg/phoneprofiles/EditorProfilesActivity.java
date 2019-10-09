@@ -3,18 +3,24 @@ package sk.henrichg.phoneprofiles;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageInfo;
+import android.content.pm.ResolveInfo;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -390,10 +397,93 @@ public class EditorProfilesActivity extends AppCompatActivity
                 }
                 return true;
             case R.id.menu_export:
-                exportData();
+                exportData(false, false);
+
+                return true;
+            case R.id.menu_export_and_email:
+                exportData(true, false);
+
                 return true;
             case R.id.menu_import:
                 importData();
+                return true;
+            case R.id.menu_email_to_author:
+                intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                String[] email = { "henrich.gron@gmail.com" };
+                intent.putExtra(Intent.EXTRA_EMAIL, email);
+                String packageVersion = "";
+                try {
+                    PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    packageVersion = " - v" + pInfo.versionName + " (" + PPApplication.getVersionCode(pInfo) + ")";
+                } catch (Exception ignored) {
+                }
+                intent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion + " - " + getString(R.string.about_application_support_subject));
+                intent.putExtra(Intent.EXTRA_TEXT, AboutApplicationActivity.getEmailBodyText(AboutApplicationActivity.EMAIL_BODY_SUPPORT, this));
+                try {
+                    startActivity(Intent.createChooser(intent, getString(R.string.email_chooser)));
+                } catch (Exception ignored) {}
+
+                return true;
+            case R.id.menu_export_and_email_to_author:
+                exportData(true, true);
+
+                return true;
+            case R.id.menu_email_debug_logs_to_author:
+                ArrayList<Uri> uris = new ArrayList<>();
+
+                File sd = getApplicationContext().getExternalFilesDir(null);
+
+                File logFile = new File(sd, PPApplication.LOG_FILENAME);
+                if (logFile.exists()) {
+                    Uri fileUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", logFile);
+                    uris.add(fileUri);
+                }
+
+                File crashFile = new File(sd, TopExceptionHandler.CRASH_FILENAME);
+                if (crashFile.exists()) {
+                    Uri fileUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", crashFile);
+                    uris.add(fileUri);
+                }
+
+                if (uris.size() != 0) {
+                    String emailAddress = "henrich.gron@gmail.com";
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                            "mailto", emailAddress, null));
+
+                    packageVersion = "";
+                    try {
+                        PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                        packageVersion = " - v" + pInfo.versionName + " (" + PPApplication.getVersionCode(pInfo) + ")";
+                    } catch (Exception ignored) {}
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion + " - " + getString(R.string.email_debug_log_files_subject));
+                    emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                    List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(emailIntent, 0);
+                    List<LabeledIntent> intents = new ArrayList<>();
+                    for (ResolveInfo info : resolveInfos) {
+                        intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                        intent.setComponent(new ComponentName(info.activityInfo.packageName, info.activityInfo.name));
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion + " - " + getString(R.string.email_debug_log_files_subject));
+                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris); //ArrayList<Uri> of attachment Uri's
+                        intents.add(new LabeledIntent(intent, info.activityInfo.packageName, info.loadLabel(getPackageManager()), info.icon));
+                    }
+                    try {
+                        Intent chooser = Intent.createChooser(intents.remove(intents.size() - 1), getString(R.string.email_chooser));
+                        //noinspection ToArrayCallWithZeroLengthArrayArgument
+                        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents.toArray(new LabeledIntent[intents.size()]));
+                        startActivity(chooser);
+                    } catch (Exception ignored) {}
+                }
+                else {
+                    // toast notification
+                    Toast msg = ToastCompat.makeText(getApplicationContext(), getString(R.string.toast_debug_log_files_not_exists),
+                            Toast.LENGTH_SHORT);
+                    msg.show();
+                }
+
                 return true;
             case R.id.important_info:
                 intent = new Intent(getBaseContext(), ImportantInfoActivity.class);
@@ -598,13 +688,25 @@ public class EditorProfilesActivity extends AppCompatActivity
         else
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_EXPORT) {
             if (resultCode == RESULT_OK) {
-                doExportData();
+                doExportData(false, false);
+            }
+        }
+        else
+        if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_EXPORT_AND_EMAIL) {
+            if (resultCode == RESULT_OK) {
+                doExportData(true, false);
             }
         }
         else
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_IMPORT) {
             if ((resultCode == RESULT_OK) && (data != null)) {
                 doImportData(data.getStringExtra(Permissions.EXTRA_APPLICATION_DATA_PATH));
+            }
+        }
+        else
+        if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_EXPORT_AND_EMAIL_TO_AUTHOR) {
+            if (resultCode == RESULT_OK) {
+                doExportData(true, true);
             }
         }
     }
@@ -1029,18 +1131,18 @@ public class EditorProfilesActivity extends AppCompatActivity
         return res;
     }
 
-    private void exportData()
+    private void exportData(final boolean email, final boolean toAuthor)
     {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle(R.string.export_profiles_alert_title);
         dialogBuilder.setMessage(getString(R.string.export_profiles_alert_message) + " \"" + PPApplication.EXPORT_PATH + "\".\n\n" +
-                                 getString(R.string.export_profiles_alert_message_note));
+                getString(R.string.export_profiles_alert_message_note));
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
 
         dialogBuilder.setPositiveButton(R.string.alert_button_backup, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                doExportData();
+                doExportData(email, toAuthor);
             }
         });
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
@@ -1058,11 +1160,11 @@ public class EditorProfilesActivity extends AppCompatActivity
             dialog.show();
     }
 
-    private void doExportData()
+    private void doExportData(final boolean email, final boolean toAuthor)
     {
         final EditorProfilesActivity activity = this;
 
-        if (Permissions.grantExportPermissions(activity.getApplicationContext(), activity)) {
+        if (Permissions.grantExportPermissions(activity.getApplicationContext(), activity, email, toAuthor)) {
 
             @SuppressLint("StaticFieldLeak")
             class ExportAsyncTask extends AsyncTask<Void, Integer, Integer> {
@@ -1095,6 +1197,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
                 @Override
                 protected Integer doInBackground(Void... params) {
+
                     if (this.dataWrapper != null) {
                         int ret = DatabaseHandler.getInstance(this.dataWrapper.context).exportDB();
                         if (ret == 1) {
@@ -1119,32 +1222,86 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected void onPostExecute(Integer result) {
                     super.onPostExecute(result);
 
-                    if ((exportProgressDialog != null) && exportProgressDialog.isShowing()) {
-                        exportProgressDialog.dismiss();
-                        exportProgressDialog = null;
-                    }
-                    if (!isFinishing())
+                    if (!isFinishing()) {
+                        if ((exportProgressDialog != null) && exportProgressDialog.isShowing()) {
+                            if (!isDestroyed())
+                                exportProgressDialog.dismiss();
+                            exportProgressDialog = null;
+                        }
                         GlobalGUIRoutines.unlockScreenOrientation(activity);
+                    }
 
                     if ((dataWrapper != null) && (result == 1)) {
 
+                        Context context = this.dataWrapper.context.getApplicationContext();
                         // toast notification
-                        Toast msg = ToastCompat.makeText(this.dataWrapper.context.getApplicationContext(),
-                                getResources().getString(R.string.toast_export_ok),
-                                Toast.LENGTH_SHORT);
+                        Toast msg = ToastCompat.makeText(context, getString(R.string.toast_export_ok), Toast.LENGTH_SHORT);
                         msg.show();
+
+                        if (email) {
+                            // email backup
+
+                            ArrayList<Uri> uris = new ArrayList<>();
+
+                            File sd = Environment.getExternalStorageDirectory();
+
+                            File exportedDB = new File(sd, PPApplication.EXPORT_PATH + "/" + DatabaseHandler.EXPORT_DBFILENAME);
+                            Uri fileUri = FileProvider.getUriForFile(activity, context.getPackageName() + ".provider", exportedDB);
+                            uris.add(fileUri);
+
+                            File appSettingsFile = new File(sd, PPApplication.EXPORT_PATH + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
+                            fileUri = FileProvider.getUriForFile(activity, context.getPackageName() + ".provider", appSettingsFile);
+                            uris.add(fileUri);
+
+                            String emailAdress = "";
+                            if (toAuthor)
+                                emailAdress = "henrich.gron@gmail.com";
+                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", emailAdress, null));
+
+                            String packageVersion = "";
+                            try {
+                                PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+                                packageVersion = " - v" + pInfo.versionName + " (" + PPApplication.getVersionCode(pInfo) + ")";
+                            } catch (Exception e) {
+                                Log.e("EditorProfilesActivity.doExportData", Log.getStackTraceString(e));
+                            }
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion + " - " + getString(R.string.menu_export));
+                            emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                            List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(emailIntent, 0);
+                            List<LabeledIntent> intents = new ArrayList<>();
+                            for (ResolveInfo info : resolveInfos) {
+                                Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                                intent.setComponent(new ComponentName(info.activityInfo.packageName, info.activityInfo.name));
+                                if (!emailAdress.isEmpty())
+                                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAdress});
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "PhoneProfiles" + packageVersion + " - " + getString(R.string.menu_export));
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris); //ArrayList<Uri> of attachment Uri's
+                                intents.add(new LabeledIntent(intent, info.activityInfo.packageName, info.loadLabel(getPackageManager()), info.icon));
+                            }
+                            try {
+                                Intent chooser = Intent.createChooser(intents.remove(intents.size() - 1), context.getString(R.string.email_chooser));
+                                //noinspection ToArrayCallWithZeroLengthArrayArgument
+                                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents.toArray(new LabeledIntent[intents.size()]));
+                                startActivity(chooser);
+                            } catch (Exception e) {
+                                Log.e("EditorProfilesActivity.doExportData", Log.getStackTraceString(e));
+                            }
+                        }
 
                     } else {
                         if (!isFinishing())
-                            importExportErrorDialog(2, 0, 0,0);
+                            importExportErrorDialog(2, 0, 0, 0);
                     }
                 }
 
             }
 
             exportAsyncTask = new ExportAsyncTask().execute();
-
         }
+
     }
 
     private void startProfilePreferenceActivity(Profile profile, int editMode, int predefinedProfileIndex) {

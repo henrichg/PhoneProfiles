@@ -52,6 +52,8 @@ import io.fabric.sdk.android.Fabric;
 
 public class PPApplication extends Application {
 
+    private static PPApplication instance;
+
     //static final String romManufacturer = getROMManufacturer();
     static final boolean romIsMIUI = isMIUI();
     static final boolean romIsEMUI = isEMUI();
@@ -68,7 +70,7 @@ public class PPApplication extends Application {
     static final int VERSION_CODE_EXTENDER_LATEST = VERSION_CODE_EXTENDER_4_0;
 
     public static final String EXPORT_PATH = "/PhoneProfiles";
-    private static final String LOG_FILENAME = "log.txt";
+    static final String LOG_FILENAME = "log.txt";
 
     @SuppressWarnings("PointlessBooleanExpression")
     private static final boolean logIntoLogCat = true && BuildConfig.DEBUG;
@@ -220,6 +222,8 @@ public class PPApplication extends Application {
     public void onCreate()
     {
         super.onCreate();
+
+        instance = this;
 
         PPApplication.logE("##### PPApplication.onCreate", "romManufacturer="+Build.MANUFACTURER);
         PPApplication.logE("##### PPApplication.onCreate", "romIsMIUI="+romIsMIUI);
@@ -509,25 +513,32 @@ public class PPApplication extends Application {
         if (!logIntoFile)
             return;
 
-        try
-        {
-            // warnings when logIntoFile == false
-            File sd = Environment.getExternalStorageDirectory();
+        if (instance == null)
+            return;
+
+        try {
+            File path = instance.getApplicationContext().getExternalFilesDir(null);
+            //Log.e("PPApplication.logIntoFile", "----- path=" + path.getAbsolutePath());
+
+            /*File sd = Environment.getExternalStorageDirectory();
             File exportDir = new File(sd, PPApplication.EXPORT_PATH);
             if (!(exportDir.exists() && exportDir.isDirectory()))
                 //noinspection ResultOfMethodCallIgnored
                 exportDir.mkdirs();
 
             File logFile = new File(sd, EXPORT_PATH + "/" + LOG_FILENAME);
+            */
+
+            File logFile = new File(path, LOG_FILENAME);
 
             if (logFile.length() > 1024 * 10000)
                 resetLog();
 
-            if (!logFile.exists())
-            {
+            if (!logFile.exists()) {
                 //noinspection ResultOfMethodCallIgnored
                 logFile.createNewFile();
             }
+
             //BufferedWriter for performance, true to set append to file flag
             BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
             String log = "";
@@ -539,8 +550,7 @@ public class PPApplication extends Application {
             buf.newLine();
             buf.flush();
             buf.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("PPApplication.logIntoFile", Log.getStackTraceString(e));
         }
     }
