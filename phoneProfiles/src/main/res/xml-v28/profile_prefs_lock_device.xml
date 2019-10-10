@@ -15,13 +15,13 @@
     <Preference
         app:key="prf_pref_lockDeviceInstallExtender"
         app:title="@string/extender_app_name"
-        app:summary="@string/profile_preferences_lockDevice_PPPExtender_install_summary"
+        app:summary="@string/profile_preferences_lockDevice_PPExtender_install_summary"
         app:widgetLayout="@layout/start_activity_preference"
         app:layout="@layout/mp_preference_material_widget" />
     <Preference
         app:key="prf_pref_lockDeviceInstallExtenderInfo"
-        app:title="@string/event_preferences_PPPExtenderInstallInfo_text"
-        app:summary="@string/event_preferences_PPPExtenderInstallInfo_summary"
+        app:title="@string/event_preferences_PPExtenderInstallInfo_text"
+        app:summary="@string/event_preferences_PPExtenderInstallInfo_summary"
         app:widgetLayout="@layout/info_preference"
         app:layout="@layout/mp_preference_material_widget" />
     <Preference
