@@ -197,12 +197,12 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
             invalidateEditor = true;
         }
 
-        /*if (!activeLanguage.equals(ApplicationPreferences.applicationLanguage(appContext)))
+        if (!activeLanguage.equals(ApplicationPreferences.applicationLanguage(appContext)))
         {
             GlobalGUIRoutines.setLanguage(this);
             invalidateEditor = true;
         }
-        else*/
+        else
         if (!activeTheme.equals(ApplicationPreferences.applicationTheme(appContext, false)))
         {
             //EditorProfilesActivity.setTheme(this, false);
