@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Build;
 
 
 class ProfilePreferencesIndicator {
@@ -397,9 +398,15 @@ class ProfilePreferencesIndicator {
             }
             // force stop application
             if (profile._deviceForceStopApplicationChange == 1) {
-                if ((Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, null, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) &&
-                        PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_3_0))
-                    drawables[countDrawables++] = R.drawable.ic_profile_pref_force_stop_application;
+                if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, null, null, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                    boolean enabled;
+                    if (Build.VERSION.SDK_INT >= 29)
+                        enabled = PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_5_1_2);
+                    else
+                        enabled = PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_3_0);
+                    if (enabled)
+                        drawables[countDrawables++] = R.drawable.ic_profile_pref_force_stop_application;
+                }
             }
             // wallpaper
             if (profile._deviceWallpaperChange == 1) {
