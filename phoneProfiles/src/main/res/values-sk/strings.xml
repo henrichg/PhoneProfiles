@@ -1336,6 +1336,16 @@
 
     <string name="phone_profiles_pref_UnlinkRingerNotificationVolumesImportantInfo_importantInfo_summary">Kliknite sem pre zobrazenie ako funguje \"Oddeľ hlasitosť zvonenia a notifikácií\.</string>
 
+    <string name="notification_channel_donation">Donation</string>
+
+    <string name="menu_export_and_email">Backup and e-mail settings</string>
+    <string name="menu_export_and_email_to_author">Backup and e-mail settings to author</string>
+    <string name="menu_email_debug_logs_to_author">E-mail debug log files to author</string>
+    <string name="menu_support">Support</string>
+    <string name="email_debug_log_files_subject">Debug log files</string>
+    <string name="toast_debug_log_files_not_exists">Debug log files not exists</string>
+    <string name="menu_email_to_author">E-mail to author</string>
+
     <!-- **************************************************************************************** -->
 
     <string name="extender_app_name">PhoneProfilesPlusExtender</string>
