@@ -39,4 +39,5 @@ Required external libs
 - AppKillerManager - (as module, code modified) - https://github.com/thelittlefireman/AppKillerManager
 - RelativePopupWindow (only modified RelativePopupWindow class) - https://github.com/kakajika/RelativePopupWindow  
 - android-hidden-api (downloaded android.jar copied into folder \<android-sdk\>/android-XX) - https://github.com/anggrayudi/android-hidden-api   
-- FreeReflection (only code from https://github.com/tiann/FreeReflection/blob/master/library/src/main/java/me/weishu/reflection/Reflection.java) - https://github.com/tiann/FreeReflection  
+- FreeReflection (only code from https://github.com/tiann/FreeReflection/blob/master/library/src/main/java/me/weishu/reflection/Reflection.java) - https://github.com/tiann/FreeReflection
+- HuaWeiVerifier (for fix "java.lang.IllegalArgumentException: register too many Broadcast Receivers") - https://github.com/llew2011/HuaWeiVerifier  
