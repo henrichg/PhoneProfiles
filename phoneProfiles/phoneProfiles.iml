@@ -161,7 +161,6 @@
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:answers:1.4.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: io.fabric.sdk.android:fabric:1.4.8@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.simplecityapps:recyclerview-fastscroll:2.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.llew.huawei:verifier:1.1.2@aar" level="project" />
     <orderEntry type="module" module-name="RootTools" />
     <orderEntry type="module" module-name="time-duration-picker" />
     <orderEntry type="module" module-name="appkillermanager" />

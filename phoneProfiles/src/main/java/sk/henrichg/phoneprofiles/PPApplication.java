@@ -20,7 +20,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
-import com.llew.huawei.verifier.LoadedApkHuaWei;
+//import com.llew.huawei.verifier.LoadedApkHuaWei;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
@@ -255,7 +255,7 @@ public class PPApplication extends Application {
         //////////////////////////////////////////
 
         // Fix for FC: java.lang.IllegalArgumentException: register too many Broadcast Receivers
-        LoadedApkHuaWei.hookHuaWeiVerifier(this);
+        //LoadedApkHuaWei.hookHuaWeiVerifier(this);
 
         if (logIntoFile || crashIntoFile)
             Permissions.grantLogToFilePermissions(getApplicationContext());
