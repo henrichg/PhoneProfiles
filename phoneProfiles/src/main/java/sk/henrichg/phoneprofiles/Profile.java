@@ -1638,6 +1638,9 @@ public class Profile {
         int _settingsValue = settingsValue;
         if (PPApplication.romIsOnePlus && (Build.VERSION.SDK_INT >= 26))
             _settingsValue = Math.round(settingsValue / 4f); // convert from 1024 to 256
+        else
+        if (PPApplication.romIsMIUI && (Build.VERSION.SDK_INT >= 28))
+            _settingsValue = Math.round(settingsValue / 16f); // convert from 4096 to 256
         int percentage = BrightnessLookup.lookup(_settingsValue, true);
 
         PPApplication.logE("Profile.getBrightnessPercentage_A9", "settingsValue="+settingsValue);
@@ -1666,6 +1669,9 @@ public class Profile {
         int systemValue = BrightnessLookup.lookup(percentage, false);
         if (PPApplication.romIsOnePlus && (Build.VERSION.SDK_INT >= 26))
             systemValue = systemValue * 4; // convert from 256 to 1024
+        else
+        if (PPApplication.romIsMIUI && (Build.VERSION.SDK_INT >= 28))
+            systemValue = systemValue * 16; // convert from 256 to 4096
 
         PPApplication.logE("Profile.getBrightnessValue_A9", "percentage="+percentage);
         PPApplication.logE("Profile.getBrightnessValue_A9", "systemValue="+systemValue);
@@ -1688,6 +1694,9 @@ public class Profile {
         maximumValue = 255;
         if (PPApplication.romIsOnePlus && (Build.VERSION.SDK_INT >= 26))
             maximumValue = 1023;
+        else
+        if (PPApplication.romIsMIUI && (Build.VERSION.SDK_INT >= 28))
+            maximumValue = 4096;
         //}
 
         int value;
@@ -1697,6 +1706,9 @@ public class Profile {
             int defaultValue = 128;
             if (PPApplication.romIsOnePlus && (Build.VERSION.SDK_INT >= 26))
                 defaultValue = 512;
+            else
+            if (PPApplication.romIsMIUI && (Build.VERSION.SDK_INT >= 28))
+                defaultValue = 2048;
             if (Build.VERSION.SDK_INT > 28) {
                 PPApplication.logE("Profile.convertPercentsToBrightnessManualValue", "getBrightnessValue_A9 called - SDK_INT > 28");
                 defaultValue = getBrightnessValue_A9(50/*, minimumValue, maximumValue*/);
@@ -1802,6 +1814,9 @@ public class Profile {
 
                 if (PPApplication.romIsOnePlus)
                     value = (getBrightnessValue_A9(percentage/*, minimumValue, maximumValue*/) - 512) / 512f;
+                else
+                if (PPApplication.romIsMIUI)
+                    value = (getBrightnessValue_A9(percentage/*, minimumValue, maximumValue*/) - 2048) / 2048f;
                 else
                     value = (getBrightnessValue_A9(percentage/*, minimumValue, maximumValue*/) - 128) / 128f;
             }
