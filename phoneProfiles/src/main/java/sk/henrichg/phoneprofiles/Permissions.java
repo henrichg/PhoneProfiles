@@ -165,6 +165,8 @@ public class Permissions {
     static ArrayList<PermissionType> recheckPermissions(Context context, ArrayList<PermissionType> _permissions) {
         ArrayList<PermissionType>  permissions = new ArrayList<>();
         if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (_permissions == null)
+                return permissions;
             for (PermissionType _permission : _permissions) {
                 if (_permission.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
                     if (!Settings.System.canWrite(context))
