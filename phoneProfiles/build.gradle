@@ -54,10 +54,10 @@ android {
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation "com.google.android.material:material:1.1.0-beta01" // !!! DO NOT USE 1.2.0-alpha01. Big problem with it in Settings (ANR).
+    implementation "com.google.android.material:material:1.2.0-alpha01" // !!! DO NOT USE 1.2.0-alpha01. Big problem with it in Settings (ANR).
 
     implementation "androidx.appcompat:appcompat:$ppVersions.appcompatXLib"
-    implementation "androidx.recyclerview:recyclerview:1.1.0-beta04" // !!! DO NOT USE beta05. Big problem with it in Settings (ANR).
+    implementation "androidx.recyclerview:recyclerview:1.1.0-beta05" // !!! DO NOT USE beta05. Big problem with it in Settings (ANR).
     implementation "androidx.preference:preference:1.1.0"
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
