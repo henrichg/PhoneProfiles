@@ -108,8 +108,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
         //    profile = Profile.getSharedProfile(getApplicationContext());
 
         restoredInstanceState = savedInstanceState != null;
+        if (restoredInstanceState) {
+            started = savedInstanceState.getBoolean("started", false);
+        }
 
-        if (onlyNotification) {
+        if (!started && onlyNotification) {
             showNotification();
             started = true;
         }
@@ -119,6 +122,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     protected void onStart()
     {
         super.onStart();
+        GlobalGUIRoutines.lockScreenOrientation(this);
 
         if (started) return;
         started = true;
@@ -197,6 +201,18 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GlobalGUIRoutines.unlockScreenOrientation(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean("started", started);
+    }
+
     private boolean canShowRationale(final Context context, boolean forceGrant) {
         showRequestWriteSettings = false;
         showRequestAccessNotificationPolicy = false;
@@ -273,7 +289,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
             /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                 showRequestString = context.getString(R.string.permissions_for_install_tone_text1) + "<br><br>";
-            else*/ if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+            else*/ if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION)
+                showRequestString = context.getString(R.string.permissions_for_play_ringtone_notification_text1) + "<br><br>";
+            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
                 showRequestString = context.getString(R.string.permissions_for_wallpaper_text1) + "<br><br>";
             else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
                 showRequestString = context.getString(R.string.permissions_for_custom_profile_icon_text1) + "<br><br>";
@@ -373,7 +391,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
             /*if (grantType == Permissions.GRANT_TYPE_INSTALL_TONE)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_install_tone_text2);
-            else*/ if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
+            else*/ if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION)
+                showRequestString = showRequestString + context.getString(R.string.permissions_for_play_ringtone_notification_text2);
+            else if (grantType == Permissions.GRANT_TYPE_WALLPAPER)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_wallpaper_text2);
             else if (grantType == Permissions.GRANT_TYPE_CUSTOM_PROFILE_ICON)
                 showRequestString = showRequestString + context.getString(R.string.permissions_for_custom_profile_icon_text2);
@@ -650,7 +670,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nText));
 
                 Intent deleteIntent = new Intent(NOTIFICATION_DELETED_ACTION);
-                PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, 0);
+                PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, grantType, deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 mBuilder.setDeleteIntent(deletePendingIntent);
 
                 //intent.putExtra(Permissions.EXTRA_FOR_GUI, forGUI);
@@ -1277,6 +1297,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
             TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, context);
         }
         else*/
+        if (grantType == Permissions.GRANT_TYPE_PLAY_RINGTONE_NOTIFICATION) {
+            //finishAffinity();
+            finish();
+            Permissions.removePlayRingtoneNotificationNotification(context);
+        }
+        else
         if (grantType == Permissions.GRANT_TYPE_WALLPAPER) {
             setResult(Activity.RESULT_OK);
             finish();
@@ -1305,13 +1331,6 @@ public class GrantPermissionActivity extends AppCompatActivity {
             //    Permissions.editorActivity.doExportData();
         }
         else
-        if (grantType == Permissions.GRANT_TYPE_EXPORT_AND_EMAIL_TO_AUTHOR) {
-            setResult(Activity.RESULT_OK);
-            finish();
-            //if (Permissions.editorActivity != null)
-            //    Permissions.editorActivity.doExportData();
-        }
-        else
         if (grantType == Permissions.GRANT_TYPE_IMPORT) {
             Intent returnIntent = new Intent();
             returnIntent.putExtra(Permissions.EXTRA_APPLICATION_DATA_PATH, applicationDataPath);
@@ -1319,6 +1338,13 @@ public class GrantPermissionActivity extends AppCompatActivity {
             finish();
             /*if (Permissions.editorActivity != null)
                 Permissions.editorActivity.doImportData(applicationDataPath);*/
+        }
+        else
+        if (grantType == Permissions.GRANT_TYPE_EXPORT_AND_EMAIL_TO_AUTHOR) {
+            setResult(Activity.RESULT_OK);
+            finish();
+            //if (Permissions.editorActivity != null)
+            //    Permissions.editorActivity.doExportData();
         }
         else
         if (grantType == Permissions.GRANT_TYPE_BRIGHTNESS_DIALOG) {
