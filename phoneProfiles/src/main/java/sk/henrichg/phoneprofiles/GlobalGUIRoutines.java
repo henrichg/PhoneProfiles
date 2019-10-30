@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 
@@ -66,18 +67,18 @@ class GlobalGUIRoutines {
                 else
                     appLocale = new Locale(langSplit[0], langSplit[1]);
             } else {
-                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                //    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
-                //else
-                appLocale = Resources.getSystem().getConfiguration().locale;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+                else
+                    appLocale = Resources.getSystem().getConfiguration().locale;
             }
 
             Locale.setDefault(appLocale);
             Configuration appConfig = new Configuration();
-            //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            //    appConfig.setLocale(appLocale);
-            //else
-            appConfig.locale = appLocale;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                appConfig.setLocale(appLocale);
+            else
+                appConfig.locale = appLocale;
 
             //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             //    Context context  = context.createConfigurationContext(appConfig);
@@ -104,11 +105,10 @@ class GlobalGUIRoutines {
                 else
                     appLocale = new Locale(langSplit[0], langSplit[1]);
             } else {
-                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                //    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
-                //} else {
-                appLocale = Resources.getSystem().getConfiguration().locale;
-                //}
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    appLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+                else
+                    appLocale = Resources.getSystem().getConfiguration().locale;
             }
             // get collator for application locale
             return Collator.getInstance(appLocale);
@@ -582,14 +582,14 @@ class GlobalGUIRoutines {
         if (ApplicationPreferences.applicationTheme(activity, true).equals("white")) {
             timeDurationPicker.setDisplayTextAppearance(R.style.TextAppearance_TimeDurationPicker_Display);
             timeDurationPicker.setUnitTextAppearance(R.style.TextAppearance_TimeDurationPicker_Unit);
-            timeDurationPicker.setBackspaceIcon(activity.getResources().getDrawable(R.drawable.ic_backspace_light_tdp));
-            timeDurationPicker.setClearIcon(activity.getResources().getDrawable(R.drawable.ic_clear_light_tdp));
+            timeDurationPicker.setBackspaceIcon(ContextCompat.getDrawable(activity, R.drawable.ic_backspace_light_tdp));
+            timeDurationPicker.setClearIcon(ContextCompat.getDrawable(activity, R.drawable.ic_clear_light_tdp));
         }
         else {
             timeDurationPicker.setDisplayTextAppearance(R.style.TextAppearance_TimeDurationPicker_Display_Dark);
             timeDurationPicker.setUnitTextAppearance(R.style.TextAppearance_TimeDurationPicker_Unit_Dark);
-            timeDurationPicker.setBackspaceIcon(activity.getResources().getDrawable(R.drawable.ic_backspace_tdp));
-            timeDurationPicker.setClearIcon(activity.getResources().getDrawable(R.drawable.ic_clear_tdp));
+            timeDurationPicker.setBackspaceIcon(ContextCompat.getDrawable(activity, R.drawable.ic_backspace_tdp));
+            timeDurationPicker.setClearIcon(ContextCompat.getDrawable(activity, R.drawable.ic_clear_tdp));
         }
         timeDurationPicker.setDurationDisplayBackgroundColor(Color.TRANSPARENT);
         //timeDurationPicker.setSeparatorColor(GlobalGUIRoutines.getThemeDialogDividerColor(activity));

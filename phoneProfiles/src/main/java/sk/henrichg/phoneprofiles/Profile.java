@@ -1952,16 +1952,6 @@ public class Profile {
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
             Bitmap bitmap = BitmapManipulator.resampleResource(resources, iconResource, width, height);
             _iconBitmap = BitmapManipulator.monochromeBitmap(bitmap, monochromeValue/*, context*/);
-            // getIsIconResourceID must return false
-            //_icon = getIconIdentifier() + "|0";
-            /*Drawable drawable;
-            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-                drawable = context.getResources().getDrawable(iconResource, context.getTheme());
-            } else {
-                drawable = context.getResources().getDrawable(iconResource);
-            }
-            _iconDrawable = BitmapManipulator.tintDrawableByValue(drawable, monochromeValue);
-            _iconBitmap = null;*/
         }
         else
         if (getUseCustomColorForIcon()) {
@@ -1972,8 +1962,6 @@ public class Profile {
             int width = (int) resources.getDimension(android.R.dimen.app_icon_size);
             Bitmap bitmap = BitmapManipulator.resampleResource(resources, iconResource, width, height);
             _iconBitmap = BitmapManipulator.recolorBitmap(bitmap, getIconCustomColor());
-            // getIsIconResourceID must return false
-            //_icon = getIconIdentifier() + "|0";
         }
         else
             _iconBitmap = null;
