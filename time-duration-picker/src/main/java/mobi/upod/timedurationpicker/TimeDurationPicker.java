@@ -418,7 +418,7 @@ public class TimeDurationPicker extends FrameLayout {
 
         // measure the numPad
         // if we have more space available, we can try to grow the num pad
-        final int numPadWidth = Math.max(minNumPadHeight, displayRowWidth);
+        final int numPadWidth = Math.max(minNumPadWidth, displayRowWidth);
         final int numPadHeight = Math.max(minNumPadHeight, preferredHeight - displayRowHeight);
         numPad.measure(MeasureSpec.makeMeasureSpec(numPadWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(numPadHeight, MeasureSpec.EXACTLY));
 
