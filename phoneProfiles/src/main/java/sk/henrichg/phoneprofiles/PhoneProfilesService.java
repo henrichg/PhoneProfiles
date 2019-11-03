@@ -1124,7 +1124,7 @@ public class PhoneProfilesService extends Service {
                 PendingIntent pExitAppIntent = PendingIntent.getActivity(appContext, 0, exitAppIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 Notification.Action.Builder actionBuilder = new Notification.Action.Builder(
-                        Icon.createWithResource(appContext, R.drawable.ic_action_exit_app_white),
+                        R.drawable.ic_action_exit_app_white,
                         appContext.getString(R.string.menu_exit),
                         pExitAppIntent);
                 notificationBuilder.addAction(actionBuilder.build());
