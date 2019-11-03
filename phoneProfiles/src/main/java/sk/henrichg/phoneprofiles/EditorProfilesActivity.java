@@ -53,11 +53,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import me.drakeet.support.toast.ToastCompat;
 import sk.henrichg.phoneprofiles.EditorProfileListFragment.OnStartProfilePreferences;
-import sk.henrichg.phoneprofiles.ProfileDetailsFragment.OnStartProfilePreferencesFromDetail;
 
 public class EditorProfilesActivity extends AppCompatActivity
-                                    implements OnStartProfilePreferences,
-                                               OnStartProfilePreferencesFromDetail
+                                    implements OnStartProfilePreferences
 {
 
     private static boolean savedInstanceStateChanged;
@@ -70,9 +68,9 @@ public class EditorProfilesActivity extends AppCompatActivity
     private AlertDialog importProgressDialog = null;
     private AlertDialog exportProgressDialog = null;
 
-    private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
-    private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
-    private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detail_predefined_profile_index";
+    //private static final String SP_PROFILE_DETAILS_PROFILE_ID = "profile_detail_profile_id";
+    //private static final String SP_PROFILE_DETAILS_EDIT_MODE = "profile_detail_edit_mode";
+    //private static final String SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX = "profile_detail_predefined_profile_index";
 
     public boolean targetHelpsSequenceStarted;
     public static final String PREF_START_TARGET_HELPS = "editor_profiles_activity_start_target_helps";
@@ -93,7 +91,7 @@ public class EditorProfilesActivity extends AppCompatActivity
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
-    private static boolean mTwoPane;
+    //private static boolean mTwoPane;
 
     private Toolbar editorToolbar;
 
@@ -172,6 +170,7 @@ public class EditorProfilesActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
             .replace(R.id.editor_profile_list, listFragment, "EditorProfileListFragment").commit();
 
+        /*
         if (findViewById(R.id.editor_profile_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -202,9 +201,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                         .replace(R.id.editor_profile_detail_container, fragment, "ProfileDetailsFragment").commit();
             }
         }
-        else
+        else*/
         {
-            mTwoPane = false;
+            //mTwoPane = false;
             FragmentManager fragmentManager = getSupportFragmentManager();
             Fragment fragment = fragmentManager.findFragmentByTag("ProfileDetailsFragment");
             if (fragment != null)
@@ -566,7 +565,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
         savedInstanceStateChanged = true;
 
-        if (mTwoPane) {
+        /*if (mTwoPane) {
             ApplicationPreferences.getSharedPreferences(this);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -579,7 +578,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 //editor.putInt(SP_PROFILE_DETAILS_PREDEFINED_PROFILE_INDEX, ((ProfileDetailsFragment) fragment).predefinedProfileIndex);
                 editor.apply();
             }
-        }
+        }*/
     }
 
     /*
@@ -611,7 +610,7 @@ public class EditorProfilesActivity extends AppCompatActivity
             {
                 long profile_id = data.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
                 int newProfileMode = data.getIntExtra(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, EditorProfileListFragment.EDIT_MODE_UNDEFINED);
-                int predefinedProfileIndex = data.getIntExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
+                //int predefinedProfileIndex = data.getIntExtra(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, 0);
 
                 if (profile_id > 0)
                 {
@@ -622,7 +621,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                         profile.generatePreferencesIndicator(getBaseContext(), false, 0);
 
                         // redraw list fragment , notifications, widgets after finish ProfilesPrefsActivity
-                        redrawProfileListFragment(profile, newProfileMode, predefinedProfileIndex/*, true*/);
+                        redrawProfileListFragment(profile, newProfileMode/*, predefinedProfileIndex*/);
 
                         //Profile mappedProfile = profile; //Profile.getMappedProfile(profile, getApplicationContext());
                         Permissions.grantProfilePermissions(getApplicationContext(), profile, false,
@@ -1317,7 +1316,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     public void onStartProfilePreferences(Profile profile, int editMode, int predefinedProfileIndex/*, boolean startTargetHelps*/) {
 
-        if (mTwoPane) {
+        /*if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
@@ -1333,7 +1332,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, editMode);
                 arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true/*startTargetHelps*/);
+                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction()
@@ -1350,7 +1349,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 }
             }
 
-        } else {
+        } else*/ {
             // In single-pane mode, simply start the profile preferences activity
             // for the profile id.
             if (((profile != null) ||
@@ -1361,12 +1360,14 @@ public class EditorProfilesActivity extends AppCompatActivity
         }
     }
 
+    /*
     @Override
     public void onStartProfilePreferencesFromDetail(Profile profile) {
         startProfilePreferenceActivity(profile, EditorProfileListFragment.EDIT_MODE_EDIT, 0);
     }
-
-    private void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/) {
+    */
+    /*
+    private void redrawProfilePreferences(Profile profile, int newProfileMode, int predefinedProfileIndex) {
         if (mTwoPane) {
             if (profile != null)
             {
@@ -1375,7 +1376,7 @@ public class EditorProfilesActivity extends AppCompatActivity
                 arguments.putLong(PPApplication.EXTRA_PROFILE_ID, profile._id);
                 arguments.putInt(EditorProfilesActivity.EXTRA_NEW_PROFILE_MODE, newProfileMode);
                 arguments.putInt(EditorProfilesActivity.EXTRA_PREDEFINED_PROFILE_INDEX, predefinedProfileIndex);
-                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true/*startTargetHelps*/);
+                arguments.putBoolean(EditorProfileListFragment.START_TARGET_HELPS_ARGUMENT, true);
                 ProfileDetailsFragment fragment = new ProfileDetailsFragment();
                 fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction()
@@ -1392,8 +1393,9 @@ public class EditorProfilesActivity extends AppCompatActivity
             }
         }
     }
+    */
 
-    private void redrawProfileListFragment(Profile profile, int newProfileMode, int predefinedProfileIndex/*, boolean startTargetHelps*/)
+    private void redrawProfileListFragment(Profile profile, int newProfileMode/*, int predefinedProfileIndex*/)
     {
         // redraw list fragment header, notification and widgets
         final EditorProfileListFragment fragment = (EditorProfileListFragment) getSupportFragmentManager().findFragmentById(R.id.editor_profile_list);
@@ -1414,7 +1416,7 @@ public class EditorProfilesActivity extends AppCompatActivity
 
             fragment.activityDataWrapper.setDynamicLauncherShortcutsFromMainThread();
         }
-        redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
+        //redrawProfilePreferences(profile, newProfileMode, predefinedProfileIndex/*, startTargetHelps*/);
     }
 
     public static ApplicationsCache getApplicationsCache()
