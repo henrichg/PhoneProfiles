@@ -375,7 +375,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
             }
             if (showRequestDrawOverlays) {
                 whyString = whyString + "<li>";
-                if (!PPApplication.romIsMIUI)
+                if (!(PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI))
                     whyString = whyString + "<b>" + context.getString(R.string.permission_group_name_draw_overlays) + "</b>";
                 else
                     whyString = whyString + "<b>" + context.getString(R.string.permission_group_name_draw_overlays_miui) + "</b>";
@@ -520,7 +520,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         s = getString(R.string.permission_why_profile_wallpaper);
                         break;
                     case Permissions.PERMISSION_PROFILE_RADIO_PREFERENCES:
-                        if (PPApplication.romIsEMUI && (Build.VERSION.SDK_INT >= 28))
+                        if (PPApplication.deviceIsHuawei && PPApplication.romIsEMUI && (Build.VERSION.SDK_INT >= 28))
                             s = getString(R.string.permission_why_profile_radio_preferences_emui);
                         else
                             s = getString(R.string.permission_why_profile_radio_preferences);
@@ -923,7 +923,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                     dialogBuilder.setTitle(R.string.permissions_alert_title);
-                    if (!PPApplication.romIsMIUI)
+                    if (!(PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI))
                         dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm);
                     else
                         dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm_miui);

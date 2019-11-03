@@ -788,11 +788,11 @@ public class PhoneProfilesService extends Service {
                 }
             }
 
-            boolean useDecorator = (!PPApplication.romIsMIUI) || (Build.VERSION.SDK_INT >= 26);
+            boolean useDecorator = (!(PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI)) || (Build.VERSION.SDK_INT >= 26);
             useDecorator = useDecorator && notificationUseDecoration;
             useDecorator = useDecorator && (!notificationDarkBackground) && (!notificationBackgroundColor.equals("2"));
 
-            if (PPApplication.romIsMIUI) {
+            if (PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI) {
                 if (android.os.Build.VERSION.SDK_INT >= 24) {
                     if (!useDecorator)
                         contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_miui_no_decorator);
@@ -808,7 +808,7 @@ public class PhoneProfilesService extends Service {
                 PPApplication.logE("PhoneProfilesService.showProfileNotification", "miui");
             }
             else
-            if (PPApplication.romIsEMUI) {
+            if (PPApplication.deviceIsHuawei && PPApplication.romIsEMUI) {
                 if (android.os.Build.VERSION.SDK_INT >= 24) {
                     if (!useDecorator)
                         contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_emui_no_decorator);
@@ -823,7 +823,7 @@ public class PhoneProfilesService extends Service {
                     contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_emui);
             }
             else
-            if (PPApplication.romIsSamsung) {
+            if (PPApplication.deviceIsSamsung) {
                 if (android.os.Build.VERSION.SDK_INT >= 24) {
                     if (!useDecorator)
                         contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_samsung_no_decorator);

@@ -20,25 +20,24 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
-//import com.llew.huawei.verifier.LoadedApkHuaWei;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
 import com.stericson.RootShell.RootShell;
 import com.stericson.RootShell.execution.Command;
 import com.stericson.RootTools.RootTools;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,11 +56,13 @@ public class PPApplication extends Application {
     private static PPApplication instance;
 
     //static final String romManufacturer = getROMManufacturer();
-    static final boolean romIsMIUI = isMIUI();
-    static final boolean romIsEMUI = isEMUI();
-    static final boolean romIsSamsung = isSamsung();
-    static final boolean romIsLG = isLG();
-    static final boolean romIsOnePlus = isOnePlus();
+    static final boolean deviceIsXiaomi = isXiaomi();
+    static final boolean deviceIsHuawei = isHuawei();
+    static final boolean deviceIsSamsung = isSamsung();
+    static final boolean deviceIsLG = isLG();
+    static final boolean deviceIsOnePlus = isOnePlus();
+    static final boolean romIsMIUI = isMIUIROM();
+    static final boolean romIsEMUI = isEMUIROM();
 
     static final String PACKAGE_NAME = "sk.henrichg.phoneprofiles";
     static final String PACKAGE_NAME_EXTENDER = "sk.henrichg.phoneprofilesplusextender";
@@ -232,11 +233,16 @@ public class PPApplication extends Application {
         instance = this;
 
         PPApplication.logE("##### PPApplication.onCreate", "romManufacturer="+Build.MANUFACTURER);
+
+        PPApplication.logE("##### PPApplication.onCreate", "deviceIsXiaomi="+deviceIsXiaomi);
+        PPApplication.logE("##### PPApplication.onCreate", "deviceIsHuawei="+deviceIsHuawei);
+        PPApplication.logE("##### PPApplication.onCreate", "deviceIsSamsung="+deviceIsSamsung);
+        PPApplication.logE("##### PPApplication.onCreate", "deviceIsLG="+deviceIsLG);
+        PPApplication.logE("##### PPApplication.onCreate", "deviceIsOnePlus="+deviceIsOnePlus);
+
         PPApplication.logE("##### PPApplication.onCreate", "romIsMIUI="+romIsMIUI);
         PPApplication.logE("##### PPApplication.onCreate", "romIsEMUI="+romIsEMUI);
-        PPApplication.logE("##### PPApplication.onCreate", "romIsSamsung="+romIsSamsung);
-        PPApplication.logE("##### PPApplication.onCreate", "romIsLG="+romIsLG);
-        PPApplication.logE("##### PPApplication.onCreate", "romIsOnePlus="+romIsOnePlus);
+
         PPApplication.logE("##### PPApplication.onCreate", "model="+Build.MODEL);
 
         if (checkAppReplacingState())
@@ -1310,65 +1316,83 @@ public class PPApplication extends Application {
     }
     */
 
-    private static boolean isMIUI() {
-        boolean miuiRom = false;
-        try {
-            Properties prop = new Properties();
-            prop.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
-            miuiRom = prop.getProperty("ro.miui.ui.version.code", null) != null
-                    || prop.getProperty("ro.miui.ui.version.name", null) != null
-                    || prop.getProperty("ro.miui.internal.storage", null) != null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return miuiRom ||
-                Build.BRAND.equalsIgnoreCase("xiaomi") ||
+    private static boolean isXiaomi() {
+        return Build.BRAND.equalsIgnoreCase("xiaomi") ||
                 Build.MANUFACTURER.equalsIgnoreCase("xiaomi") ||
                 Build.FINGERPRINT.toLowerCase().contains("xiaomi");
     }
 
-    private static String getEmuiRomName() {
+    private static boolean isMIUIROM() {
+        boolean miuiRom1 = false;
+        boolean miuiRom2 = false;
+        boolean miuiRom3 = false;
+
+        String line;
+        BufferedReader input;
         try {
-            String line;
-            //BufferedReader input = null;
-            try {
-                /*java.lang.Process p = Runtime.getRuntime().exec("getprop " + propName);
+            java.lang.Process p = Runtime.getRuntime().exec("getprop ro.miui.ui.version.code");
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
+            line = input.readLine();
+            miuiRom1 = line.length() != 0;
+            input.close();
+
+            if (!miuiRom1) {
+                p = Runtime.getRuntime().exec("getprop ro.miui.ui.version.name");
                 input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
                 line = input.readLine();
-                input.close();*/
-                Properties prop = new Properties();
-                prop.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
-                line = prop.getProperty("ro.build.version.emui", null);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                return null;
-            }/* finally {
-                if (input != null) {
-                    try {
-                        input.close();
-                    } catch (IOException e) {
-                        Log.e("PPApplication.getSystemProperty", "Exception while closing InputStream", e);
-                    }
-                }
-            }*/
+                miuiRom2 = line.length() != 0;
+                input.close();
+            }
+
+            if (!miuiRom1 && !miuiRom2) {
+                p = Runtime.getRuntime().exec("getprop ro.miui.internal.storage");
+                input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
+                line = input.readLine();
+                miuiRom3 = line.length() != 0;
+                input.close();
+            }
+
+        } catch (IOException ex) {
+            PPApplication.logE("PPApplication.isMIUIROM", Log.getStackTraceString(ex));
+        }
+
+        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom1="+miuiRom1);
+        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom2="+miuiRom2);
+        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom3="+miuiRom3);
+
+        return miuiRom1 || miuiRom2 || miuiRom3;
+    }
+
+    private static String getEmuiRomName() {
+        String line;
+        BufferedReader input;
+        try {
+            java.lang.Process p = Runtime.getRuntime().exec("getprop ro.build.version.emui");
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
+            line = input.readLine();
+            input.close();
             return line;
-        } catch (Exception e) {
+        } catch (IOException ex) {
+            PPApplication.logE("PPApplication.getEmuiRomName", Log.getStackTraceString(ex));
             return "";
         }
     }
 
-    private static boolean isEMUI() {
+    private static boolean isHuawei() {
+        return Build.BRAND.equalsIgnoreCase("huawei") ||
+                Build.MANUFACTURER.equalsIgnoreCase("huawei") ||
+                Build.FINGERPRINT.toLowerCase().contains("huawei");
+    }
+
+    private static boolean isEMUIROM() {
         String emuiRomName = getEmuiRomName();
-        PPApplication.logE("PPApplication.isEMUI", "emuiRomName="+emuiRomName);
+        PPApplication.logE("PPApplication.isEMUIROM", "emuiRomName="+emuiRomName);
         String romName = "";
         if (emuiRomName != null)
             romName = emuiRomName.toLowerCase();
 
         return (romName.indexOf("emotionui_") == 0) ||
-                Build.DISPLAY.toLowerCase().contains("emui2.3") || "EMUI 2.3".equalsIgnoreCase(emuiRomName) ||
-                Build.BRAND.equalsIgnoreCase("huawei") ||
-                Build.MANUFACTURER.equalsIgnoreCase("huawei") ||
-                Build.FINGERPRINT.toLowerCase().contains("huawei");
+                Build.DISPLAY.toLowerCase().contains("emui2.3") || "EMUI 2.3".equalsIgnoreCase(emuiRomName);
     }
 
     private static boolean isSamsung() {
