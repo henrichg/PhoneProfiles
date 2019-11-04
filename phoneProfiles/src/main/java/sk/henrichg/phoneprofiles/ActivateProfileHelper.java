@@ -353,14 +353,14 @@ class ActivateProfileHelper {
         if (profile._deviceBluetooth != 0) {
             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_BLUETOOTH, null, null, false, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
                 BluetoothAdapter bluetoothAdapter;
-                /*if (android.os.Build.VERSION.SDK_INT < 18)
+                //if (android.os.Build.VERSION.SDK_INT < 18)
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                else {*/
-                    BluetoothManager bluetoothManager = (BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE);
+                //else {
+                    /*BluetoothManager bluetoothManager = (BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE);
                     if (bluetoothManager != null)
                         bluetoothAdapter = bluetoothManager.getAdapter();
                     else
-                        bluetoothAdapter = null;
+                        bluetoothAdapter = null;*/
                 //}
                 if (bluetoothAdapter != null) {
                     boolean isBluetoothEnabled = bluetoothAdapter.isEnabled();
