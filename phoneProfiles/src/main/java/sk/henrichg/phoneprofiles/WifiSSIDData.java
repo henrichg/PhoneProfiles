@@ -12,9 +12,13 @@ import java.util.List;
 
 class WifiSSIDData {
 
-    final String ssid;
-    final String bssid;
+    String ssid;
+    String bssid;
     //private boolean custom;
+
+    // constructor is required for GSon !!!
+    @SuppressWarnings("unused")
+    WifiSSIDData() {}
 
     WifiSSIDData(String ssid, String bssid/*, boolean custom*/)
     {
