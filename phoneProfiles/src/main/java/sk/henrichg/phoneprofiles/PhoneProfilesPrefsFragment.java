@@ -261,7 +261,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                         Permissions.saveAllPermissions(getActivity().getApplicationContext(), false);
                         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         //intent.addCategory(Intent.CATEGORY_DEFAULT);
-                        intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
+                        intent.setData(Uri.parse("package:"+getActivity().getPackageName()));
                         if (GlobalGUIRoutines.activityIntentExists(intent, getActivity().getApplicationContext())) {
                             startActivityForResult(intent, RESULT_APPLICATION_PERMISSIONS);
                         }
@@ -301,7 +301,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                         if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_MANAGE_WRITE_SETTINGS, getActivity().getApplicationContext())) {
                             @SuppressLint("InlinedApi")
                             Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                            intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
+                            intent.setData(Uri.parse("package:" + getActivity().getPackageName()));
                             //intent.addCategory(Intent.CATEGORY_DEFAULT);
                             startActivityForResult(intent, RESULT_WRITE_SYSTEM_SETTINGS_PERMISSIONS);
                         } else {
@@ -398,7 +398,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                         if (GlobalGUIRoutines.activityActionExists(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, getActivity().getApplicationContext())) {
                             @SuppressLint("InlinedApi")
                             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                            intent.setData(Uri.parse("package:sk.henrichg.phoneprofiles"));
+                            intent.setData(Uri.parse("package:" + getActivity().getPackageName()));
                             //intent.addCategory(Intent.CATEGORY_DEFAULT);
                             startActivityForResult(intent, RESULT_DRAW_OVERLAYS_POLICY_PERMISSIONS);
                         } else {
