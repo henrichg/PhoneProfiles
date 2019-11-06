@@ -9,7 +9,6 @@ import android.app.PendingIntent;
 import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -3098,32 +3097,51 @@ class ActivateProfileHelper {
     }
 
     private static void setWifiAP(Context context, WifiApManager wifiApManager, boolean enable) {
-        if (Build.VERSION.SDK_INT < 26)
+        PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-enable="+enable);
+
+        if (Build.VERSION.SDK_INT < 26) {
+            PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-API < 26");
             wifiApManager.setWifiApState(enable);
-        else {
+        }
+        else
+        if (Build.VERSION.SDK_INT < 28) {
+            PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-API >= 26");
+            if (WifiApManager.canExploitWifiTethering(context)) {
+                if (enable)
+                    wifiApManager.startTethering();
+                else
+                    wifiApManager.stopTethering();
+            }
+            else
             if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(context)) &&
                     (PPApplication.isRooted(false) && PPApplication.serviceBinaryExists(false))) {
+                PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-rooted");
                 try {
                     Object serviceManager = PPApplication.getServiceManager("wifi");
                     int transactionCode = -1;
                     if (serviceManager != null) {
                         transactionCode = PPApplication.getTransactionCode(String.valueOf(serviceManager), "setWifiApEnabled");
                     }
-                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-serviceManager="+serviceManager);
-                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-transactionCode="+transactionCode);
+                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-serviceManager=" + serviceManager);
+                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-transactionCode=" + transactionCode);
 
                     if (transactionCode != -1) {
                         if (enable) {
                             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                            PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-wifiManager=" + wifiManager);
                             if (wifiManager != null) {
                                 int wifiState = wifiManager.getWifiState();
                                 boolean isWifiEnabled = ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_ENABLING));
-                                if (isWifiEnabled)
+                                PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-isWifiEnabled=" + isWifiEnabled);
+                                if (isWifiEnabled) {
+                                    PPApplication.logE("#### setWifiEnabled", "from ActivateProfileHelper.setWifiAP");
                                     wifiManager.setWifiEnabled(false);
+                                    PPApplication.sleep(1000);
+                                }
                             }
                         }
                         synchronized (PPApplication.rootMutex) {
-                            //String command1 = "service call phone " + transactionCode + " i32 " + networkType;
+                            PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-start root command");
                             String command1 = PPApplication.getServiceCommand("wifi", transactionCode, 0, (enable) ? 1 : 0);
                             if (command1 != null) {
                                 PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-command1=" + command1);
@@ -3131,24 +3149,28 @@ class ActivateProfileHelper {
                                 try {
                                     RootTools.getShell(true, Shell.ShellContext.SYSTEM_APP).add(command);
                                     PPApplication.commandWait(command);
-                                /*} catch (RootDeniedException e) {
-                                    PPApplication.rootMutex.rootGranted = false;
-                                    Log.e("ActivateProfileHelper.setWifiAP", Log.getStackTraceString(e));*/
+                                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-root command end");
+                            /*} catch (RootDeniedException e) {
+                                PPApplication.rootMutex.rootGranted = false;
+                                Log.e("ActivateProfileHelper.setWifiAP", Log.getStackTraceString(e));*/
                                 } catch (Exception e) {
                                     Log.e("ActivateProfileHelper.setWifiAP", Log.getStackTraceString(e));
+                                    PPApplication.logE("$$$ WifiAP", "ActivateProfileHelper.setWifiAP-root command error");
                                 }
                             }
                         }
                     }
-                } catch(Exception ignored) {
+                } catch (Exception e) {
+                    Log.e("ActivateProfileHelper.setWifiAP", Log.getStackTraceString(e));
+                    PPApplication.logE("$$$ WifiAP", Log.getStackTraceString(e));
                 }
             }
-            else {
-                if (enable)
-                    wifiApManager.startTethering();
-                else
-                    wifiApManager.stopTethering();
-            }
+        }
+        else {
+            if (enable)
+                wifiApManager.startTethering();
+            else
+                wifiApManager.stopTethering();
         }
     }
 
