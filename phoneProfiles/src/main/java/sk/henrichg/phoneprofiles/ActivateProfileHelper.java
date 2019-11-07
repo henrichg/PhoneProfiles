@@ -2060,50 +2060,52 @@ class ActivateProfileHelper {
         // setup brightness
         if (Permissions.checkProfileScreenBrightness(context, profile, null)) {
             if (profile.getDeviceBrightnessChange()) {
-                if (profile.getDeviceBrightnessAutomatic()) {
-                    Settings.System.putInt(context.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-                    if (profile.getDeviceBrightnessChangeLevel()) {
+                try {
+                    if (profile.getDeviceBrightnessAutomatic()) {
                         Settings.System.putInt(context.getContentResolver(),
-                                Settings.System.SCREEN_BRIGHTNESS,
-                                profile.getDeviceBrightnessManualValue(context));
-                        if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, null, true, context).allowed
-                                == PreferenceAllowed.PREFERENCE_ALLOWED) {
-                            if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
-                                Settings.System.putFloat(context.getContentResolver(),
-                                        ADAPTIVE_BRIGHTNESS_SETTING_NAME,
-                                        profile.getDeviceBrightnessAdaptiveValue(context));
-                            else {
-                                try {
+                                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                                Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                        if (profile.getDeviceBrightnessChangeLevel()) {
+                            Settings.System.putInt(context.getContentResolver(),
+                                    Settings.System.SCREEN_BRIGHTNESS,
+                                    profile.getDeviceBrightnessManualValue(context));
+                            if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, null, true, context).allowed
+                                    == PreferenceAllowed.PREFERENCE_ALLOWED) {
+                                if (android.os.Build.VERSION.SDK_INT < 23)    // Not working in Android M (exception)
                                     Settings.System.putFloat(context.getContentResolver(),
                                             ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                             profile.getDeviceBrightnessAdaptiveValue(context));
-                                } catch (Exception ee) {
-                                    ActivateProfileHelper.executeRootForAdaptiveBrightness(context, profile);
+                                else {
+                                    try {
+                                        Settings.System.putFloat(context.getContentResolver(),
+                                                ADAPTIVE_BRIGHTNESS_SETTING_NAME,
+                                                profile.getDeviceBrightnessAdaptiveValue(context));
+                                    } catch (Exception ee) {
+                                        ActivateProfileHelper.executeRootForAdaptiveBrightness(context, profile);
+                                    }
                                 }
                             }
                         }
-                    }
-                } else {
-                    Settings.System.putInt(context.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                    if (profile.getDeviceBrightnessChangeLevel()) {
+                    } else {
                         Settings.System.putInt(context.getContentResolver(),
-                                Settings.System.SCREEN_BRIGHTNESS,
-                                profile.getDeviceBrightnessManualValue(context));
-                    }
-                }
-
-                if (PPApplication.brightnessHandler != null) {
-                    PPApplication.brightnessHandler.post(new Runnable() {
-                        public void run() {
-                            createBrightnessView(profile, context);
+                                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                        if (profile.getDeviceBrightnessChangeLevel()) {
+                            Settings.System.putInt(context.getContentResolver(),
+                                    Settings.System.SCREEN_BRIGHTNESS,
+                                    profile.getDeviceBrightnessManualValue(context));
                         }
-                    });
-                }// else
-                //    createBrightnessView(profile, context);
+                    }
+
+                    if (PPApplication.brightnessHandler != null) {
+                        PPApplication.brightnessHandler.post(new Runnable() {
+                            public void run() {
+                                createBrightnessView(profile, context);
+                            }
+                        });
+                    }// else
+                    //    createBrightnessView(profile, context);
+                } catch (Exception ignored) {}
             }
         }
 
