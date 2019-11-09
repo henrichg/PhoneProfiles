@@ -2488,79 +2488,92 @@ public class Profile {
                 }
                 if (connManager != null) {
                     //if (android.os.Build.VERSION.SDK_INT >= 21) {
-                        Network[] networks = connManager.getAllNetworks();
-                        if ((networks != null) && (networks.length > 0)) {
-                            for (Network network : networks) {
-                                try {
-                                    if (Build.VERSION.SDK_INT < 28) {
-                                        NetworkInfo ntkInfo = connManager.getNetworkInfo(network);
-                                        if (ntkInfo != null) {
-                                            if (ntkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                                                mobileDataSupported = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        NetworkCapabilities networkCapabilities = connManager.getNetworkCapabilities(network);
-                                        if ((networkCapabilities != null) && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Network[] networks = connManager.getAllNetworks();
+                    if ((networks != null) && (networks.length > 0)) {
+                        for (Network network : networks) {
+                            try {
+                                if (Build.VERSION.SDK_INT < 28) {
+                                    NetworkInfo ntkInfo = connManager.getNetworkInfo(network);
+                                    if (ntkInfo != null) {
+                                        if (ntkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                                             mobileDataSupported = true;
                                             break;
                                         }
                                     }
-                                } catch (Exception ignored) {
                                 }
+                                else {
+                                    NetworkCapabilities networkCapabilities = connManager.getNetworkCapabilities(network);
+                                    if ((networkCapabilities != null) && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                                        mobileDataSupported = true;
+                                        break;
+                                    }
+                                }
+                            } catch (Exception ignored) {
                             }
                         }
-                    //} else {
-                    //    NetworkInfo ni = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-                    //    mobileDataSupported = ni != null;
-                    //}
+                    }
+                    /*} else {
+                        //noinspection deprecation
+                        NetworkInfo ni = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                        mobileDataSupported = ni != null;
+                    }*/
                 }
                 //else
                 //    mobileDataSupported = false;
             }
             else
                 mobileDataSupported = true;
-            if (mobileDataSupported) {
+            if (mobileDataSupported)
+            {
+                //Log.d("Profile.isProfilePreferenceAllowed", "mobile data supported");
                 //if (android.os.Build.VERSION.SDK_INT >= 21)
                 //{
-                    // adb shell pm grant sk.henrichg.phoneprofiles android.permission.MODIFY_PHONE_STATE
-                    // not working :-/
-                    if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
-                        if (ActivateProfileHelper.canSetMobileData(context))
-                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
-                    }
-                    else
-                    if (PPApplication.isRooted(fromUIThread)) {
-                        // device is rooted
-
-                        if (profile != null) {
-                            // test if grant root is disabled
-                            if (profile._deviceMobileData != 0) {
-                                if (applicationNeverAskForGrantRoot) {
-                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
-                                    // not needed to test all parameters
-                                    return preferenceAllowed;
-                                }
-                            }
-                        }
-                        else
-                        if (sharedPreferences != null) {
-                            if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
-                                if (applicationNeverAskForGrantRoot) {
-                                    preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
-                                    // not needed to test all parameters
-                                    return preferenceAllowed;
-                                }
-                            }
-                        }
-
-                        //if (serviceBinaryExists() && telephonyServiceExists(context, PREF_PROFILE_DEVICE_MOBILE_DATA))
+                // adb shell pm grant sk.henrichg.phoneprofilesplus android.permission.MODIFY_PHONE_STATE
+                // not working :-/
+                if (Permissions.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
+                    if (ActivateProfileHelper.canSetMobileData(context))
                         preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
+                }
+                else
+                if (PPApplication.isRooted(fromUIThread)) {
+                    // device is rooted
+
+                    if (profile != null) {
+                        // test if grant root is disabled
+                        if (profile._deviceMobileData != 0) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
                     }
                     else
-                        preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
+                    if (sharedPreferences != null) {
+                        if (!sharedPreferences.getString(preferenceKey, "0").equals("0")) {
+                            if (applicationNeverAskForGrantRoot) {
+                                preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_NOT_ALLOWED;
+                                // not needed to test all parameters
+                                return preferenceAllowed;
+                            }
+                        }
+                    }
+
+                    //preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
+
+                    if (ActivateProfileHelper.telephonyServiceExists(Profile.PREF_PROFILE_DEVICE_MOBILE_DATA)) {
+                        if (PPApplication.serviceBinaryExists(fromUIThread))
+                            preferenceAllowed.allowed = PreferenceAllowed.PREFERENCE_ALLOWED;
+                        else
+                            preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_SERVICE_NOT_FOUND;
+                    } else {
+                        preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NOT_SUPPORTED_BY_SYSTEM;
+                        preferenceAllowed.notAllowedReasonDetail = context.getString(R.string.preference_not_allowed_reason_detail_cant_be_change);
+                    }
+
+                }
+                else
+                    preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NOT_ROOTED;
                 /*}
                 else
                 {
@@ -2572,8 +2585,10 @@ public class Profile {
                     }
                 }*/
             }
-            else
+            else {
+                //Log.d("Profile.isProfilePreferenceAllowed", "mobile data not supported");
                 preferenceAllowed.notAllowedReason = PreferenceAllowed.PREFERENCE_NOT_ALLOWED_NO_HARDWARE;
+            }
             checked = true;
         }
         if (checked && (profile == null))
