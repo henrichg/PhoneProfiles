@@ -94,6 +94,9 @@ public class PPApplication extends Application {
                                             +"|ShutdownBroadcastReceiver"
                                             +"|DataWrapper.activateProfileOnBoot"
 
+                                            // for list of TRANSACTION_* for "phone" service
+                                            //+"|[LIST] PPApplication.getTransactionCode"
+
                                             //+"|ProfileDurationAlarmBroadcastReceiver"
 
                                             //+"|ActivateProfilesHelper.executeForForceStopApplications"
@@ -1141,17 +1144,45 @@ public class PPApplication extends Application {
             else
                 serviceListMutex.serviceList.clear();
         }
+
+        try
+        {
+            //noinspection RegExpRedundantEscape
+            Pattern compile = Pattern.compile("^[0-9]+\\s+([a-zA-Z0-9_\\-\\.]+): \\[(.*)\\]$");
+            Process p=Runtime.getRuntime().exec("service list");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Matcher matcher = compile.matcher(line);
+                if (matcher.find()) {
+                    synchronized (PPApplication.serviceListMutex) {
+                        //serviceListMutex.serviceList.add(new Pair(matcher.group(1), matcher.group(2)));
+                        serviceListMutex.serviceList.add(Pair.create(matcher.group(1), matcher.group(2)));
+                        //PPApplication.logE("$$$ WifiAP", "PhoneProfilesService.getServicesList - matcher.group(1)="+matcher.group(1));
+                        //PPApplication.logE("$$$ WifiAP", "PhoneProfilesService.getServicesList - matcher.group(2)="+matcher.group(2));
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            Log.e("PPApplication.getServicesList", Log.getStackTraceString(e));
+        }
+
+        /*
         synchronized (PPApplication.rootMutex) {
             //noinspection RegExpRedundantEscape
             final Pattern compile = Pattern.compile("^[0-9]+\\s+([a-zA-Z0-9_\\-\\.]+): \\[(.*)\\]$");
             Command command = new Command(0, false, "service list") {
                 @Override
                 public void commandOutput(int id, String line) {
+                    //PPApplication.logE("$$$ WifiAP", "PhoneProfilesService.getServicesList - line="+line);
                     Matcher matcher = compile.matcher(line);
                     if (matcher.find()) {
                         synchronized (PPApplication.serviceListMutex) {
                             //serviceListMutex.serviceList.add(new Pair(matcher.group(1), matcher.group(2)));
                             serviceListMutex.serviceList.add(Pair.create(matcher.group(1), matcher.group(2)));
+                            //PPApplication.logE("$$$ WifiAP", "PhoneProfilesService.getServicesList - matcher.group(1)="+matcher.group(1));
+                            //PPApplication.logE("$$$ WifiAP", "PhoneProfilesService.getServicesList - matcher.group(2)="+matcher.group(2));
                         }
                     }
                     super.commandOutput(id, line);
@@ -1164,6 +1195,7 @@ public class PPApplication extends Application {
                 Log.e("PPApplication.getServicesList", Log.getStackTraceString(e));
             }
         }
+        */
     }
 
     static Object getServiceManager(String serviceType) {
