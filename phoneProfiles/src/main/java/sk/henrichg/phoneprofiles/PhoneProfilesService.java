@@ -48,7 +48,7 @@ public class PhoneProfilesService extends Service {
     private static volatile PhoneProfilesService instance = null;
     private boolean serviceHasFirstStart = false;
     private boolean serviceRunning = false;
-    private boolean runningInForeground = false;
+    //private boolean runningInForeground = false;
 
     private KeyguardManager keyguardManager = null;
     @SuppressWarnings("deprecation")
@@ -128,11 +128,9 @@ public class PhoneProfilesService extends Service {
 
         serviceHasFirstStart = false;
         serviceRunning = false;
-        runningInForeground = false;
+        //runningInForeground = false;
 
-        if (Build.VERSION.SDK_INT >= 26)
-            // show empty notification to avoid ANR
-            showProfileNotification();
+        showProfileNotification(true);
 
         registerReceiver(stopReceiver, new IntentFilter(ACTION_STOP));
         LocalBroadcastManager.getInstance(this).registerReceiver(commandReceiver, new IntentFilter(ACTION_COMMAND));
@@ -173,7 +171,7 @@ public class PhoneProfilesService extends Service {
             stopSelf();
         }*/
         //if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
-            showProfileNotification();
+        //    showProfileNotification();
         //    stopSelf();
         //}
     }
@@ -207,7 +205,7 @@ public class PhoneProfilesService extends Service {
 
         serviceHasFirstStart = false;
         serviceRunning = false;
-        runningInForeground = false;
+        //runningInForeground = false;
 
         super.onDestroy();
     }
@@ -431,7 +429,7 @@ public class PhoneProfilesService extends Service {
         //if ((intent == null) || (!intent.getBooleanExtra(EXTRA_CLEAR_SERVICE_FOREGROUND, false))) {
             // do not call this from handlerThread. In Android 8 handlerThread is not called
             // when for service is not displayed foreground notification
-            showProfileNotification();
+            showProfileNotification(true);
         //}
 
         /*if (!PPApplication.getApplicationStarted(getApplicationContext(), false)) {
@@ -541,7 +539,7 @@ public class PhoneProfilesService extends Service {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        showProfileNotification();
+        showProfileNotification(false);
         ActivateProfileHelper.updateGUI(getApplicationContext(), true);
     }
 
@@ -1158,7 +1156,7 @@ public class PhoneProfilesService extends Service {
 
                 if ((Build.VERSION.SDK_INT >= 26) || notificationStatusBarPermanent) {
                     startForeground(PPApplication.PROFILE_NOTIFICATION_ID, notification);
-                    runningInForeground = true;
+                    //runningInForeground = true;
                 }
                 else {
                     NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -1180,14 +1178,15 @@ public class PhoneProfilesService extends Service {
         }*/
     }
 
-    void showProfileNotification() {
+    void showProfileNotification(boolean forServiceStart) {
         final Context appContext = getApplicationContext();
         final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
         final Profile profile = dataWrapper.getActivatedProfileFromDB(false, false);
         dataWrapper.invalidateDataWrapper();
 
         synchronized (PPApplication.phoneProfilesServiceMutex) {
-            if (!runningInForeground || (instance == null)) {
+            //if (!runningInForeground || (instance == null)) {
+            if (forServiceStart) {
                 _showProfileNotification(profile, false);
             }
         }
@@ -1227,7 +1226,7 @@ public class PhoneProfilesService extends Service {
                 if (notificationManager != null)
                     notificationManager.cancel(PPApplication.PROFILE_NOTIFICATION_ID);
             }
-            runningInForeground = false;
+            //runningInForeground = false;
         }
     }
 

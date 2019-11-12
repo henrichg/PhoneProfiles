@@ -870,7 +870,7 @@ public class PPApplication extends Application {
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_SHOW_PROFILE_NOTIFICATION, true);
             PPApplication.startPPService(context, serviceIntent);*/
             if (PhoneProfilesService.getInstance() != null)
-                PhoneProfilesService.getInstance().showProfileNotification();
+                PhoneProfilesService.getInstance().showProfileNotification(false);
         } catch (Exception ignored) {}
     }
 
