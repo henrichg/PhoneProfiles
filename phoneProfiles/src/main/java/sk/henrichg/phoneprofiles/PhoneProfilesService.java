@@ -277,7 +277,7 @@ public class PhoneProfilesService extends Service {
 
         serviceRunning = true;
 
-        //final Context appContext = getApplicationContext();
+        final Context appContext = getApplicationContext();
 
         //if (onlyStart) {
             //if (startOnPackageReplace) {
@@ -294,8 +294,6 @@ public class PhoneProfilesService extends Service {
                 @Override
                 public void run() {
                     PPApplication.logE("PhoneProfilesService.doForFirstStart - handler", "PhoneProfilesService.doForFirstStart.2 START");
-
-                    Context appContext = getApplicationContext();
 
                     PowerManager powerManager = (PowerManager) appContext.getSystemService(POWER_SERVICE);
                     PowerManager.WakeLock wakeLock = null;
