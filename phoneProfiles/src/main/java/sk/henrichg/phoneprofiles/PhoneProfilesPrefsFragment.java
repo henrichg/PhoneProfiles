@@ -684,6 +684,8 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
                     @TargetApi(Build.VERSION_CODES.O)
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
+                        PPApplication.createProfileNotificationChannel(getActivity().getApplicationContext());
+
                         Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
                         intent.putExtra(Settings.EXTRA_CHANNEL_ID, PPApplication.PROFILE_NOTIFICATION_CHANNEL);
                         intent.putExtra(Settings.EXTRA_APP_PACKAGE, getActivity().getPackageName());
