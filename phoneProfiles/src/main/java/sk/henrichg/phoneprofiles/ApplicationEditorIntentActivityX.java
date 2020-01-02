@@ -470,6 +470,9 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
     }
 
     private void saveIntent() {
+        if (ppIntent == null)
+            return;
+
         if (intentNameEditText.getText() != null)
             ppIntent._name = intentNameEditText.getText().toString();
         else
