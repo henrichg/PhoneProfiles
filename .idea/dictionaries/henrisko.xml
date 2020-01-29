@@ -4,16 +4,35 @@
       <w>acos</w>
       <w>asin</w>
       <w>atan</w>
+      <w>bahasa</w>
+      <w>brasil</w>
       <w>browsable</w>
+      <w>català</w>
+      <w>deutsch</w>
       <w>emui</w>
+      <w>emuirom</w>
+      <w>español</w>
       <w>exitcode</w>
+      <w>français</w>
+      <w>italiano</w>
       <w>lerp</w>
       <w>linkunlink</w>
+      <w>miuirom</w>
+      <w>nederlands</w>
       <w>offhook</w>
+      <w>oneplus</w>
+      <w>polski</w>
+      <w>português</w>
       <w>pppe</w>
       <w>recents</w>
       <w>remoteviews</w>
+      <w>română</w>
       <w>sendto</w>
+      <w>slovenčina</w>
+      <w>slovenščina</w>
+      <w>svenska</w>
+      <w>türkçe</w>
+      <w>čeština</w>
     </words>
   </dictionary>
 </component>

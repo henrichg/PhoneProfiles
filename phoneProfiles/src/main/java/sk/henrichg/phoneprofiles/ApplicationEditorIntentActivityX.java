@@ -1,5 +1,6 @@
 package sk.henrichg.phoneprofiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -496,6 +497,7 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
         savedInstanceState.putInt(EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, startApplicationDelay);
     }
 
+    @SuppressLint("InlinedApi")
     private void saveIntent() {
         if (ppIntent == null)
             return;
@@ -757,6 +759,7 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
         okButton.setEnabled(enableOK);
     }
 
+    @SuppressLint("InlinedApi")
     static Intent createIntent(PPIntent ppIntent) {
         /*
         intent = new Intent("android.intent.action.MAIN");
