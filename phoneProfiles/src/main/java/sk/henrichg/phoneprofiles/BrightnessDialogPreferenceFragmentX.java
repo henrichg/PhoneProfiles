@@ -106,9 +106,11 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
         }
 
         if (Permissions.checkScreenBrightness(context, null)) {
-            Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, preference.savedBrightnessMode);
-            Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, preference.savedBrightness);
-            setAdaptiveBrightness(preference.savedAdaptiveBrightness);
+            try {
+                Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, preference.savedBrightnessMode);
+                Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, preference.savedBrightness);
+                setAdaptiveBrightness(preference.savedAdaptiveBrightness);
+            } catch (Exception ignored) {}
         }
 
         Window win = ((Activity)context).getWindow();
