@@ -294,6 +294,9 @@ public class RingtonePreferenceX extends DialogPreference {
     }
 
     void playRingtone() {
+        if ((ringtoneUri == null) || ringtoneUri.isEmpty())
+            return;
+
         final AudioManager audioManager = (AudioManager)prefContext.getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
 
