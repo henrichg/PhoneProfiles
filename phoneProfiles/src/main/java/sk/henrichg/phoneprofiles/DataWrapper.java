@@ -1092,6 +1092,7 @@ class DataWrapper {
 
         shortcutIntent = new Intent(context.getApplicationContext(), BackgroundActivateProfileActivity.class);
         shortcutIntent.setAction(Intent.ACTION_MAIN);
+        shortcutIntent.addCategory(Intent.ACTION_DEFAULT);
         shortcutIntent.putExtra(PPApplication.EXTRA_STARTUP_SOURCE, PPApplication.STARTUP_SOURCE_SHORTCUT);
         shortcutIntent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
 
@@ -1140,7 +1141,8 @@ class DataWrapper {
                     }
                 }
 
-                shortcutManager.setDynamicShortcuts(shortcuts);
+                if (shortcuts.size() > 0)
+                    shortcutManager.setDynamicShortcuts(shortcuts);
             }
         }
     }
