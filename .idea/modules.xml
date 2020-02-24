@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RootShell/RootShell.iml" filepath="$PROJECT_DIR$/RootShell/RootShell.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RootTools/RootTools.iml" filepath="$PROJECT_DIR$/RootTools/RootTools.iml" />
-      <module fileurl="file://$PROJECT_DIR$/appkillermanager/appkillermanager.iml" filepath="$PROJECT_DIR$/appkillermanager/appkillermanager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" />
-      <module fileurl="file://$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" filepath="$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PhoneProfiles.iml" filepath="$PROJECT_DIR$/PhoneProfiles.iml" group="PhoneProfiles" />
+      <module fileurl="file://$PROJECT_DIR$/RootShell/RootShell.iml" filepath="$PROJECT_DIR$/RootShell/RootShell.iml" group="PhoneProfiles/RootShell" />
+      <module fileurl="file://$PROJECT_DIR$/RootTools/RootTools.iml" filepath="$PROJECT_DIR$/RootTools/RootTools.iml" group="PhoneProfiles/RootTools" />
+      <module fileurl="file://$PROJECT_DIR$/appkillermanager/appkillermanager.iml" filepath="$PROJECT_DIR$/appkillermanager/appkillermanager.iml" group="PhoneProfiles/appkillermanager" />
+      <module fileurl="file://$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" filepath="$PROJECT_DIR$/phoneProfiles/phoneProfiles.iml" group="PhoneProfiles/phoneProfiles" />
+      <module fileurl="file://$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" filepath="$PROJECT_DIR$/time-duration-picker/time-duration-picker.iml" group="PhoneProfiles/time-duration-picker" />
     </modules>
   </component>
 </project>
