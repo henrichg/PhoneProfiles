@@ -248,6 +248,7 @@ class Installer
     protected String getStreamSignature(InputStream is)
     {
         String signature = "";
+        //noinspection TryWithIdenticalCatches
         try
         {
             MessageDigest md = MessageDigest.getInstance("MD5");

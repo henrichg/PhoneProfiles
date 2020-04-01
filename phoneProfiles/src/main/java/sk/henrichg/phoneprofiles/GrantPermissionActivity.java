@@ -273,6 +273,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @TargetApi(Build.VERSION_CODES.M)
     private void showRationale(final Context context) {
         if (rationaleAlreadyShown)

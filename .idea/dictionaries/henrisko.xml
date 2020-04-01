@@ -2,36 +2,108 @@
   <dictionary name="henrisko">
     <words>
       <w>acos</w>
+      <w>alongwith</w>
+      <w>anbuild</w>
+      <w>aplet</w>
+      <w>appcontrol</w>
+      <w>appkillermanager</w>
+      <w>appsec</w>
+      <w>appspec</w>
       <w>asin</w>
+      <w>asus</w>
       <w>atan</w>
+      <w>autoboot</w>
+      <w>autorun</w>
+      <w>avoiddirpath</w>
       <w>bahasa</w>
+      <w>bootapp</w>
+      <w>boxapplets</w>
       <w>brasil</w>
       <w>browsable</w>
+      <w>busybox</w>
       <w>català</w>
+      <w>chainlaunch</w>
+      <w>coloros</w>
+      <w>conponent</w>
+      <w>dalvikvm</w>
+      <w>dcard</w>
+      <w>desourced</w>
       <w>deutsch</w>
+      <w>emotionui</w>
       <w>emui</w>
       <w>emuirom</w>
       <w>español</w>
       <w>exitcode</w>
+      <w>failsafe</w>
       <w>français</w>
+      <w>fuelgaue</w>
+      <w>getevent</w>
+      <w>gsym</w>
+      <w>heartyservice</w>
+      <w>hhmm</w>
+      <w>hhmmss</w>
+      <w>informations</w>
+      <w>iqoo</w>
+      <w>islog</w>
       <w>italiano</w>
+      <w>justcreatedfilesdirectory</w>
+      <w>landingpage</w>
       <w>lerp</w>
+      <w>letv</w>
+      <w>letvsafe</w>
       <w>linkunlink</w>
+      <w>lool</w>
+      <w>macosx</w>
+      <w>meizu</w>
       <w>miuirom</w>
+      <w>mmss</w>
+      <w>mobi</w>
+      <w>mobilemanager</w>
+      <w>nativetools</w>
       <w>nederlands</w>
+      <w>notificationmanager</w>
+      <w>occured</w>
       <w>offhook</w>
       <w>oneplus</w>
+      <w>oppo</w>
+      <w>oppoguardelf</w>
+      <w>pacakge</w>
+      <w>pdisplay</w>
+      <w>permissionmanager</w>
+      <w>phoneoptimize</w>
+      <w>pids</w>
+      <w>pitroad</w>
+      <w>pkgname</w>
       <w>polski</w>
       <w>português</w>
+      <w>powerkeeper</w>
+      <w>powermanager</w>
+      <w>powersave</w>
+      <w>powersaving</w>
+      <w>powerui</w>
       <w>pppe</w>
+      <w>proc</w>
       <w>recents</w>
       <w>remoteviews</w>
+      <w>remounter</w>
       <w>română</w>
+      <w>safecenter</w>
       <w>sendto</w>
       <w>slovenčina</w>
       <w>slovenščina</w>
+      <w>specifiy</w>
+      <w>startupapp</w>
+      <w>stericson</w>
       <w>svenska</w>
+      <w>systemmanager</w>
+      <w>thelittlefireman</w>
+      <w>timedurationpicker</w>
+      <w>toybox</w>
       <w>türkçe</w>
+      <w>upod</w>
+      <w>userid</w>
+      <w>vivo</w>
+      <w>xbin</w>
       <w>čeština</w>
     </words>
   </dictionary>

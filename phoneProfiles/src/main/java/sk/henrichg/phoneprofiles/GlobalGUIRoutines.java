@@ -428,7 +428,7 @@ class GlobalGUIRoutines {
             ++index;
         }
         try {
-            return arrayStrings[index] + " - " + arraySummaryStrings[Integer.valueOf(value) - 1];
+            return arrayStrings[index] + " - " + arraySummaryStrings[Integer.parseInt(value) - 1];
         } catch (Exception e) {
             return context.getString(R.string.array_pref_no_change);
         }
@@ -625,6 +625,7 @@ class GlobalGUIRoutines {
         }
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     static void lockScreenOrientation(Activity activity) {
         try {
             int currentOrientation = activity.getResources().getConfiguration().orientation;

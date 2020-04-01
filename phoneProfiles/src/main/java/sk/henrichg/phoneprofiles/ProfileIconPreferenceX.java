@@ -106,7 +106,7 @@ public class ProfileIconPreferenceX extends DialogPreference {
             useCustomColor = false;
         }
         try {
-            customColor = Integer.valueOf(splits[3]);
+            customColor = Integer.parseInt(splits[3]);
         } catch (Exception e) {
             customColor = ProfileIconPreferenceAdapterX.getIconColor(imageIdentifier/*, prefContext*/);
         }

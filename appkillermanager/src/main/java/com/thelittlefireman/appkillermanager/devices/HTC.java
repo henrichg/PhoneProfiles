@@ -48,11 +48,13 @@ public class HTC extends DeviceAbstract {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;
     }
 
+    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode(){
         return true;

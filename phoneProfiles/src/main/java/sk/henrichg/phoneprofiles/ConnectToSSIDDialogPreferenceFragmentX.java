@@ -81,6 +81,7 @@ public class ConnectToSSIDDialogPreferenceFragmentX extends PreferenceDialogFrag
 
                 WifiSSIDData.fillWifiConfigurationList(prefContext);
                 List<WifiSSIDData> wifiConfigurationList = WifiSSIDData.getWifiConfigurationList(prefContext);
+                //noinspection ConstantConditions
                 if (wifiConfigurationList != null)
                 {
                     for (WifiSSIDData wifiConfiguration : wifiConfigurationList)
@@ -136,6 +137,7 @@ public class ConnectToSSIDDialogPreferenceFragmentX extends PreferenceDialogFrag
         preference.fragment = null;
     }
 
+    @SuppressWarnings("InnerClassMayBeStatic")
     private class SortList implements Comparator<WifiSSIDData> {
 
         public int compare(WifiSSIDData lhs, WifiSSIDData rhs) {

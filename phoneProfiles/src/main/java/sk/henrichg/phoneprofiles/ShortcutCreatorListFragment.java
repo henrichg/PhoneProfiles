@@ -30,6 +30,7 @@ import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 
+@SuppressWarnings("WeakerAccess")
 public class ShortcutCreatorListFragment extends Fragment {
 
     private DataWrapper activityDataWrapper;
@@ -108,6 +109,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         final boolean applicationActivatorPrefIndicator;
 
+        @SuppressWarnings("InnerClassMayBeStatic")
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {
                 if (GlobalGUIRoutines.collator != null)

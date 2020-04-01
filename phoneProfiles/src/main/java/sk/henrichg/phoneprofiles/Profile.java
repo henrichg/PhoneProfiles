@@ -1041,7 +1041,7 @@ public class Profile {
         int value;
         try {
             String[] splits = _icon.split("\\|");
-            value = Integer.valueOf(splits[3]);
+            value = Integer.parseInt(splits[3]);
         } catch (Exception e) {
             value = 0;
         }

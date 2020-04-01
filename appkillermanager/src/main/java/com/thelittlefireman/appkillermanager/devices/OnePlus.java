@@ -17,6 +17,7 @@ public class OnePlus extends DeviceAbstract {
     }
 
     // This is mandatory for new oneplus version android 8
+    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode(){
         return true;

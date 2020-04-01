@@ -281,7 +281,7 @@ class ApplicationPreferences {
     }
 
     static int applicationForceSetMergeRingNotificationVolumes(Context context) {
-        return Integer.valueOf(getSharedPreferences(context).getString(PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES, "0"));
+        return Integer.parseInt(getSharedPreferences(context).getString(PREF_APPLICATION_FORCE_SET_MERGE_RINGER_NOTIFICATION_VOLUMES, "0"));
     }
 
     /*

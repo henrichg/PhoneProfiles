@@ -1149,16 +1149,16 @@ public class PhoneProfilesService extends Service {
                 PendingIntent pExitAppIntent = PendingIntent.getActivity(appContext, 0, exitAppIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 Notification.Action.Builder actionBuilder;
-                if (Build.VERSION.SDK_INT >= 23)
+                //if (Build.VERSION.SDK_INT >= 23)
                     actionBuilder = new Notification.Action.Builder(
                             Icon.createWithResource(appContext, R.drawable.ic_action_exit_app_white),
                             appContext.getString(R.string.menu_exit),
                             pExitAppIntent);
-                else
+                /*else
                     actionBuilder = new Notification.Action.Builder(
                             R.drawable.ic_action_exit_app_white,
                             appContext.getString(R.string.menu_exit),
-                            pExitAppIntent);
+                            pExitAppIntent);*/
                 /*Notification.Action.Builder actionBuilder = new Notification.Action.Builder(
                         R.drawable.ic_action_exit_app_white,
                         appContext.getString(R.string.menu_exit),
@@ -1276,7 +1276,7 @@ public class PhoneProfilesService extends Service {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
-            long time = SystemClock.elapsedRealtime() + Integer.valueOf(notificationStatusBarCancel) * 1000;
+            long time = SystemClock.elapsedRealtime() + Integer.parseInt(notificationStatusBarCancel) * 1000;
 
             alarmManager.set(AlarmManager.ELAPSED_REALTIME, time, pendingIntent);
         }

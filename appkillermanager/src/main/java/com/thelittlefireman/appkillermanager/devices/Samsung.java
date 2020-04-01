@@ -39,6 +39,7 @@ public class Samsung extends DeviceAbstract {
         return Manufacturer.SAMSUNG;
     }
 
+    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode() {
         return true;
@@ -98,6 +99,7 @@ public class Samsung extends DeviceAbstract {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0; //R.drawable.samsung;

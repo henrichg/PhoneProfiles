@@ -231,7 +231,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
         afterDoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mAfterDo = Integer.valueOf(afterDoValues[position]);
+                mAfterDo = Integer.parseInt(afterDoValues[position]);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

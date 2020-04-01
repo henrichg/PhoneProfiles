@@ -25,6 +25,7 @@ import java.util.Comparator;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+@SuppressWarnings("WeakerAccess")
 public class ActivateProfileListFragment extends Fragment {
 
     private DataWrapper activityDataWrapper;
@@ -185,6 +186,7 @@ public class ActivateProfileListFragment extends Fragment {
         private final boolean applicationActivatorPrefIndicator;
         private final boolean applicationActivatorGridLayout;
 
+        @SuppressWarnings("InnerClassMayBeStatic")
         private class ProfileComparator implements Comparator<Profile> {
             public int compare(Profile lhs, Profile rhs) {
                 int res = 0;

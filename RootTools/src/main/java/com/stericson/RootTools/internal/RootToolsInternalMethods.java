@@ -110,7 +110,7 @@ public final class RootToolsInternalMethods {
         return null;
     }
 
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "ConstantConditions"})
     public int parsePermissions(String permission) {
         permission = permission.toLowerCase(Locale.US);
         int tmp;
@@ -599,7 +599,7 @@ public final class RootToolsInternalMethods {
                 }
                 sb.append(spaceStr.charAt(i));
             }
-            return (long) Math.ceil(Double.valueOf(sb.toString()) * multiplier);
+            return (long) Math.ceil(Double.parseDouble(sb.toString()) * multiplier);
         } catch (Exception e) {
             return -1;
         }

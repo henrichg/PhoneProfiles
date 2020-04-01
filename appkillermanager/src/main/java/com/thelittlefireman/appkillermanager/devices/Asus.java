@@ -66,12 +66,14 @@ public class Asus extends DeviceAbstract {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageAutoStart(){
         return 0; //R.drawable.asus_autostart;
     }
 
+    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageNotification(){

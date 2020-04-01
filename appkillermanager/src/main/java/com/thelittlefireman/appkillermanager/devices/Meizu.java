@@ -104,6 +104,7 @@ public class Meizu extends DeviceAbstract {
         return stringBuilder.toString();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;

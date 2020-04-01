@@ -57,6 +57,7 @@ public class Letv extends DeviceAbstract {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;

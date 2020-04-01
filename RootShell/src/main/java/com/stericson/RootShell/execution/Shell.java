@@ -158,7 +158,7 @@ public class Shell {
                     (display != null) &&
                     (internal != null) &&
                     (display.endsWith("SUPERSU")) &&
-                    (Integer.valueOf(internal) >= 190)) {
+                    (Integer.parseInt(internal) >= 190)) {
                 cmd += " --context " + this.shellContext.getValue();
             } else {
                 RootShell.log("Su binary --context switch not supported!");
@@ -434,6 +434,7 @@ public class Shell {
      *                 internal version
      * @return String containing the su version or null
      */
+    @SuppressWarnings("TryWithIdenticalCatches")
     private synchronized String getSuVersion(boolean internal) {
         int idx = internal ? 0 : 1;
         if (suVersion[idx] == null) {

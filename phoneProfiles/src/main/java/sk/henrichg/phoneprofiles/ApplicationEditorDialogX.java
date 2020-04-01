@@ -175,7 +175,7 @@ class ApplicationEditorDialogX
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedFilter = Integer.valueOf(filterValues[position]);
+                selectedFilter = Integer.parseInt(filterValues[position]);
                 if (selectedFilter == 2)
                     addButton.setVisibility(View.VISIBLE);
                 else

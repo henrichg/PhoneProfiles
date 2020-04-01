@@ -162,6 +162,7 @@ public class Huawei extends DeviceAbstract {
         return stringBuilder.toString();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0; //R.drawable.huawei_powersaving;

@@ -53,7 +53,7 @@ public class ColorChooserPreferenceX extends DialogPreference {
 
         FrameLayout layout = (FrameLayout)holder.findViewById(R.id.dialog_color_chooser_pref_color);
 
-        int color = Integer.valueOf(value);
+        int color = Integer.parseInt(value);
 
         Drawable selector = createSelector(color);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

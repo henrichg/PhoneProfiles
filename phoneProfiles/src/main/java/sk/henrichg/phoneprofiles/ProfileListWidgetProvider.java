@@ -102,7 +102,7 @@ public class ProfileListWidgetProvider extends AppWidgetProvider {
         int green;
         int blue;
         if (applicationWidgetListBackgroundType) {
-            int bgColor = Integer.valueOf(applicationWidgetListBackgroundColor);
+            int bgColor = Integer.parseInt(applicationWidgetListBackgroundColor);
             red = Color.red(bgColor);
             green = Color.green(bgColor);
             blue = Color.blue(bgColor);

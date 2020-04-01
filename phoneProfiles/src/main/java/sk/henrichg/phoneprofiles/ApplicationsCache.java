@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 public class ApplicationsCache {
 
+    @SuppressWarnings("InnerClassMayBeStatic")
     private class SortList implements Comparator<Application> {
 
         public int compare(Application lhs, Application rhs) {
