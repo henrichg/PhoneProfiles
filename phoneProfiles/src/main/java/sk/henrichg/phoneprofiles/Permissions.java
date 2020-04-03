@@ -281,7 +281,23 @@ public class Permissions {
                         if (permissions != null)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATION_ON_TOUCH, permission.WRITE_SETTINGS));
                     }
-                    return granted;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+                        //granted = granted && grantedDrawOverlays;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATION_ON_TOUCH, permission.SYSTEM_ALERT_WINDOW));
+
+                        return granted && grantedDrawOverlays;
+                    }
+                    else
+                        return granted;
                 } else
                     return true;
             } catch (Exception e) {
@@ -307,6 +323,20 @@ public class Permissions {
                         if (permissions != null)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATE_WHEN_RINGING, permission.WRITE_SETTINGS));
                     }
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+                        //granted = granted && grantedDrawOverlays;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_VIBRATE_WHEN_RINGING, permission.SYSTEM_ALERT_WINDOW));
+                    }
+
                     //return granted;
                 } /*else
                     return true;*/
@@ -349,6 +379,19 @@ public class Permissions {
                     //    granted = true;
                     if ((permissions != null) && (!granted))
                         permissions.add(new PermissionType(PERMISSION_PROFILE_NOTIFICATION_LED, permission.WRITE_SETTINGS));
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_NOTIFICATION_LED, permission.SYSTEM_ALERT_WINDOW));
+                    }
+
                     //return granted;
                 }// else
                 //    return/* true*/;
@@ -380,7 +423,23 @@ public class Permissions {
                         if (!grantedStorage)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_RINGTONES, permission.READ_EXTERNAL_STORAGE));
                     }
-                    return grantedSystemSettings && grantedStorage;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+                        //granted = granted && grantedDrawOverlays;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_RINGTONES, permission.SYSTEM_ALERT_WINDOW));
+
+                        return grantedSystemSettings && grantedStorage && grantedDrawOverlays;
+                    }
+                    else
+                        return grantedSystemSettings && grantedStorage;
                 } else
                     return true;
             } catch (Exception e) {
@@ -504,6 +563,7 @@ public class Permissions {
                         if (!grantedDrawOverlays)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_SCREEN_BRIGHTNESS, permission.SYSTEM_ALERT_WINDOW));
                     }
+
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
                     return true;
@@ -528,7 +588,22 @@ public class Permissions {
                     //    granted = true;
                     if ((permissions != null) && (!granted))
                         permissions.add(new PermissionType(PERMISSION_PROFILE_AUTOROTATION, permission.WRITE_SETTINGS));
-                    return granted;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_AUTOROTATION, permission.SYSTEM_ALERT_WINDOW));
+
+                        return granted && grantedDrawOverlays;
+                    }
+                    else
+                        return granted;
                 } else
                     return true;
             } catch (Exception e) {
@@ -547,7 +622,23 @@ public class Permissions {
                     boolean granted = ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                     if ((permissions != null) && (!granted))
                         permissions.add(new PermissionType(PERMISSION_PROFILE_WALLPAPER, permission.READ_EXTERNAL_STORAGE));
-                    return granted;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+                        //granted = granted && grantedDrawOverlays;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_WALLPAPER, permission.SYSTEM_ALERT_WINDOW));
+
+                        return granted && grantedDrawOverlays;
+                    }
+                    else
+                        return granted;
                 } else
                     return true;
             } else {
@@ -690,6 +781,20 @@ public class Permissions {
                         permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_FINE_LOCATION));
                     }
                 }
+
+                if (Build.VERSION.SDK_INT >= 29) {
+                    boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                    if (grantedDrawOverlays)
+                        setShowRequestDrawOverlaysPermission(context, true);
+                    //else
+                    //if (!getShowRequestDrawOverlaysPermission(context))
+                    //    grantedDrawOverlays = true;
+                    //granted = granted && grantedDrawOverlays;
+
+                    if ((permissions != null) && (!grantedDrawOverlays))
+                        permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.SYSTEM_ALERT_WINDOW));
+                }
+
                 //return grantedWriteSettings && grantedReadPhoneState && grantedLocation;
             } catch (Exception ignored) {
                 //return false;
@@ -725,6 +830,19 @@ public class Permissions {
                         /*if (!grantedOutgoingCall)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.PROCESS_OUTGOING_CALLS));*/
                     }
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_PHONE_STATE_BROADCAST, permission.SYSTEM_ALERT_WINDOW));
+                    }
+
                     //return grantedOutgoingCall && grantedReadPhoneState;
                 }// else
                  //   return true;
@@ -756,9 +874,25 @@ public class Permissions {
                         //    if (!getShowRequestAccessNotificationPolicyPermission(context))
                         //        granted = true;
                         //}
+
                         if ((permissions != null) && (!granted))
                             permissions.add(new PermissionType(PERMISSION_PROFILE_ACCESS_NOTIFICATION_POLICY, permission.ACCESS_NOTIFICATION_POLICY));
-                        return granted;
+
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                            if (grantedDrawOverlays)
+                                setShowRequestDrawOverlaysPermission(context, true);
+                            //else
+                            //if (!getShowRequestDrawOverlaysPermission(context))
+                            //    grantedDrawOverlays = true;
+
+                            if ((permissions != null) && (!grantedDrawOverlays))
+                                permissions.add(new PermissionType(PERMISSION_PROFILE_ACCESS_NOTIFICATION_POLICY, permission.SYSTEM_ALERT_WINDOW));
+
+                            return granted && grantedDrawOverlays;
+                        }
+                        else
+                            return granted;
                     } else
                         return true;
                 } else
@@ -845,6 +979,7 @@ public class Permissions {
                         if (!grantedDrawOverlays)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_LOCK_DEVICE, permission.SYSTEM_ALERT_WINDOW));
                     }
+
                     return grantedWriteSettings && grantedDrawOverlays;
                 } else
                     return true;
@@ -952,11 +1087,27 @@ public class Permissions {
                     //else
                     //if (!getShowRequestWriteSettingsPermission(context))
                     //    granted = true;
+
                     if (!granted) {
                         if (permissions != null)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_DTMF_TONE_WHEN_DIALING, permission.WRITE_SETTINGS));
                     }
-                    return granted;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_DTMF_TONE_WHEN_DIALING, permission.SYSTEM_ALERT_WINDOW));
+
+                        return granted & grantedDrawOverlays;
+                    }
+                    else
+                        return granted;
                 } else
                     return true;
             } catch (Exception e) {
@@ -982,7 +1133,23 @@ public class Permissions {
                         if (permissions != null)
                             permissions.add(new PermissionType(PERMISSION_PROFILE_SOUND_ON_TOUCH, permission.WRITE_SETTINGS));
                     }
-                    return granted;
+
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        boolean grantedDrawOverlays = Settings.canDrawOverlays(context);
+                        if (grantedDrawOverlays)
+                            setShowRequestDrawOverlaysPermission(context, true);
+                        //else
+                        //if (!getShowRequestDrawOverlaysPermission(context))
+                        //    grantedDrawOverlays = true;
+                        //granted = granted && grantedDrawOverlays;
+
+                        if ((permissions != null) && (!grantedDrawOverlays))
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_SOUND_ON_TOUCH, permission.SYSTEM_ALERT_WINDOW));
+
+                        return granted && grantedDrawOverlays;
+                    }
+                    else
+                        return granted;
                 } else
                     return true;
             } catch (Exception e) {
@@ -1532,6 +1699,7 @@ public class Permissions {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         editor.putBoolean(PREF_NOTIFICATION_POLICY_PERMISSION, (mNotificationManager != null) && (mNotificationManager.isNotificationPolicyAccessGranted()));
         editor.putBoolean(PREF_DRAW_OVERLAY_PERMISSION, Settings.canDrawOverlays(context));
+
         editor.putBoolean(PREF_CALENDAR_PERMISSION, Permissions.checkCalendar(context));
         editor.putBoolean(PREF_CAMERA_PERMISSION, Permissions.checkCamera(context));
         editor.putBoolean(PREF_CONTACTS_PERMISSION, Permissions.checkContacts(context));
