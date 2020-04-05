@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -53,8 +52,8 @@ public class LockDeviceActivity extends AppCompatActivity {
             params.format = -1;
             params.screenBrightness = 0f;
 
-            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.activity_lock_device, null);
+            //LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = getLayoutInflater().inflate(R.layout.activity_lock_device, null);
             view.setSystemUiVisibility(5894);
             view.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
                 @Override

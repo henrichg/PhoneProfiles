@@ -197,7 +197,7 @@ public class BillingManager implements PurchasesUpdatedListener {
                 ConsumeParams consumeParams =
                         ConsumeParams.newBuilder()
                                 .setPurchaseToken(purchase.getPurchaseToken())
-                                .setDeveloperPayload(purchase.getDeveloperPayload())
+                                //.setDeveloperPayload(purchase.getDeveloperPayload())
                                 .build();
 
                 mBillingClient.consumeAsync(consumeParams,

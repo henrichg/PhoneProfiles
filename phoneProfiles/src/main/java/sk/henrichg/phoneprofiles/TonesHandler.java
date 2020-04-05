@@ -221,114 +221,113 @@ class TonesHandler {
             path = context.getFilesDir();
         else
             path = context.getExternalFilesDir(null);
-        PPApplication.logE("TonesHandler._installTone", "path=" + path.getAbsolutePath());
-        //noinspection ResultOfMethodCallIgnored
-        path.mkdirs();
-        String filename = context.getResources().getResourceEntryName(resID) + ".ogg";
-        File outFile = new File(path, filename);
+        if (path != null) {
+            //PPApplication.logE("TonesHandler._installTone", "path=" + path.getAbsolutePath());
+            //noinspection ResultOfMethodCallIgnored
+            path.mkdirs();
+            String filename = context.getResources().getResourceEntryName(resID) + ".ogg";
+            File outFile = new File(path, filename);
 
-        boolean isError = false;
+            boolean isError = false;
 
-        //if (!outFile.exists()) {
+            //if (!outFile.exists()) {
 
-        // Write the file
-        InputStream inputStream = null;
-        FileOutputStream outputStream = null;
-        //noinspection TryFinallyCanBeTryWithResources
-        try {
-            inputStream = context.getResources().openRawResource(resID);
-            outputStream = new FileOutputStream(outFile);
+            // Write the file
+            InputStream inputStream = null;
+            FileOutputStream outputStream = null;
+            //noinspection TryFinallyCanBeTryWithResources
+            try {
+                inputStream = context.getResources().openRawResource(resID);
+                outputStream = new FileOutputStream(outFile);
 
 
-            // Write in 1024-byte chunks
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            // Keep writing until `inputStream.read()` returns -1, which means we reached the
-            //  end of the stream
-            while ((bytesRead = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, bytesRead);
+                // Write in 1024-byte chunks
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                // Keep writing until `inputStream.read()` returns -1, which means we reached the
+                //  end of the stream
+                while ((bytesRead = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+            } catch (Exception e) {
+                Log.e("TonesHandler._installTone", "Error writing " + filename, e);
+                isError = true;
+            } finally {
+                // Close the streams
+                try {
+                    if (inputStream != null)
+                        inputStream.close();
+                    if (outputStream != null)
+                        outputStream.close();
+                } catch (IOException e) {
+                    // Means there was an error trying to close the streams, so do nothing
+                }
             }
 
-        } catch (Exception e) {
-            Log.e("TonesHandler._installTone", "Error writing " + filename, e);
-            isError = true;
-        } finally {
-            // Close the streams
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-                if (outputStream != null)
-                    outputStream.close();
-            } catch (IOException e) {
-                // Means there was an error trying to close the streams, so do nothing
+            if (!outFile.exists()) {
+                Log.e("TonesHandler._installTone", "Error writing " + filename);
+                isError = true;
+            } else {
+                if (!outFile.setReadable(true, false))
+                    Log.e("TonesHandler._installTone", "Error setting readable to all " + filename);
             }
-        }
+            //}
 
-        if (!outFile.exists()) {
-            Log.e("TonesHandler._installTone", "Error writing " + filename);
-            isError = true;
-        }
-        else {
-            if (!outFile.setReadable(true, false))
-                Log.e("TonesHandler._installTone", "Error setting readable to all " + filename);
-        }
-        //}
+            if (!isError) {
 
-        if (!isError) {
+                try {
+                    String mimeType = "audio/ogg";
 
-            try {
-                String mimeType = "audio/ogg";
+                    // Set the file metadata
+                    String outAbsPath = outFile.getAbsolutePath();
 
-                // Set the file metadata
-                String outAbsPath = outFile.getAbsolutePath();
+                    Uri contentUri;
+                    if (Build.VERSION.SDK_INT < 29)
+                        contentUri = MediaStore.Audio.Media.INTERNAL_CONTENT_URI;
+                    else
+                        contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
 
-                Uri contentUri;
-                if (Build.VERSION.SDK_INT < 29)
-                    contentUri = MediaStore.Audio.Media.INTERNAL_CONTENT_URI;
-                else
-                    contentUri = MediaStore.Audio.Media.getContentUriForPath(outAbsPath);
+                    // Add the metadata to the file in the database
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(MediaStore.MediaColumns.DATA, outAbsPath);
+                    contentValues.put(MediaStore.MediaColumns.TITLE, title);
+                    contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+                    contentValues.put(MediaStore.MediaColumns.SIZE, outFile.length());
 
-                // Add the metadata to the file in the database
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(MediaStore.MediaColumns.DATA, outAbsPath);
-                contentValues.put(MediaStore.MediaColumns.TITLE, title);
-                contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-                contentValues.put(MediaStore.MediaColumns.SIZE, outFile.length());
+                    contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_MUSIC, false);
+                    context.getContentResolver().delete(contentUri, MediaStore.MediaColumns.DATA + "='" + outAbsPath + "'", null);
+                    Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
 
-                contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
-                contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
-                contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
-                contentValues.put(MediaStore.Audio.Media.IS_MUSIC, false);
-                context.getContentResolver().delete(contentUri, MediaStore.MediaColumns.DATA + "='" + outAbsPath + "'", null);
-                Uri newUri = context.getContentResolver().insert(contentUri, contentValues);
+                    if (newUri != null) {
+                        //Log.d("TonesHandler","inserted to resolver");
 
-                if (newUri != null) {
-                    //Log.d("TonesHandler","inserted to resolver");
+                        // Tell the media scanner about the new ringtone
+                        MediaScannerConnection.scanFile(
+                                context,
+                                new String[]{newUri.toString()},
+                                new String[]{mimeType},
+                                null
+                                //new MediaScannerConnection.OnScanCompletedListener() {
+                                //    @Override
+                                //    public void onScanCompleted(String path, Uri uri) {
+                                //        PPApplication.logE("TonesHandler._installTone","scanFile completed");
+                                //        PPApplication.logE("TonesHandler._installTone","path="+path);
+                                //        PPApplication.logE("TonesHandler._installTone","uri="+uri);
+                                //    }
+                                //}
+                        );
 
-                    // Tell the media scanner about the new ringtone
-                    MediaScannerConnection.scanFile(
-                            context,
-                            new String[]{newUri.toString()},
-                            new String[]{mimeType},
-                            null
-                            //new MediaScannerConnection.OnScanCompletedListener() {
-                            //    @Override
-                            //    public void onScanCompleted(String path, Uri uri) {
-                            //        PPApplication.logE("TonesHandler._installTone","scanFile completed");
-                            //        PPApplication.logE("TonesHandler._installTone","path="+path);
-                            //        PPApplication.logE("TonesHandler._installTone","uri="+uri);
-                            //    }
-                            //}
-                    );
-
-                    //try { Thread.sleep(300); } catch (InterruptedException e) { }
-                    //SystemClock.sleep(300);
-                    PPApplication.sleep(500);
-                }
-                else {
-                    Log.e("TonesHandler._installTone","newUri is empty");
-                    isError = true;
-                }
+                        //try { Thread.sleep(300); } catch (InterruptedException e) { }
+                        //SystemClock.sleep(300);
+                        PPApplication.sleep(500);
+                    } else {
+                        Log.e("TonesHandler._installTone", "newUri is empty");
+                        isError = true;
+                    }
 
                 /*
                 Cursor cursor = context.getContentResolver().query(contentUri,
@@ -393,16 +392,19 @@ class TonesHandler {
                     }
                 }
                 */
-            } catch (Exception e) {
-                Log.e("TonesHandler._installTone", "Error installing tone " + filename, e);
-                isError = true;
+                } catch (Exception e) {
+                    Log.e("TonesHandler._installTone", "Error installing tone " + filename, e);
+                    isError = true;
+                }
             }
+
+            if (!isError)
+                PPApplication.logE("TonesHandler._installTone", "Tone installed: " + filename);
+
+            return !isError;
         }
-
-        if (!isError)
-            PPApplication.logE("TonesHandler._installTone", "Tone installed: " + filename);
-
-        return !isError;
+        else
+            return false;
     }
 
     static void installTone(@SuppressWarnings("SameParameterValue") int resID,

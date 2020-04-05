@@ -2670,13 +2670,19 @@ class ActivateProfileHelper {
                     Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
                     getITelephonyMethod.setAccessible(true);
                     ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-                    ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
 
-                    getDataEnabledMethod = ITelephonyClass.getDeclaredMethod("getDataEnabled");
+                    if (ITelephonyStub != null) {
+                        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
 
-                    getDataEnabledMethod.setAccessible(true);
+                        getDataEnabledMethod = ITelephonyClass.getDeclaredMethod("getDataEnabled");
 
-                    return (Boolean) getDataEnabledMethod.invoke(ITelephonyStub);
+                        getDataEnabledMethod.setAccessible(true);
+
+                        //noinspection ConstantConditions
+                        return (Boolean) getDataEnabledMethod.invoke(ITelephonyStub);
+                    }
+                    else
+                        return false;
 
                 } catch (Exception e) {
                     return false;
@@ -2699,6 +2705,7 @@ class ActivateProfileHelper {
                     getDataEnabledMethod = telephonyManagerClass.getDeclaredMethod("getDataEnabled");
                     getDataEnabledMethod.setAccessible(true);
 
+                    //noinspection ConstantConditions
                     return (Boolean) getDataEnabledMethod.invoke(telephonyManager);
 
                 } catch (Exception e) {

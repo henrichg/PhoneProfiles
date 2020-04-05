@@ -177,8 +177,7 @@ public class EditorProfileListFragment extends Fragment
         progressBar = view.findViewById(R.id.editor_profiles_list_linla_progress);
 
         /*
-        View footerView =  ((LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-                .inflate(R.layout.editor_list_footer, null, false);
+        View footerView =  getActivity().getLayoutInflater().inflate(R.layout.editor_list_footer, null, false);
         listView.addFooterView(footerView, null, false);
         */
 
