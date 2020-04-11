@@ -32,16 +32,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            firebaseCrashlytics {
+            /*firebaseCrashlytics {
                 mappingFileUploadEnabled true
-            }
+            }*/
         }
         debug {
             // Disable fabric build ID generation for debug builds
             ext.enableCrashlytics = false
-            firebaseCrashlytics {
+            /*firebaseCrashlytics {
                 mappingFileUploadEnabled true
-            }
+            }*/
         }
     }
 
