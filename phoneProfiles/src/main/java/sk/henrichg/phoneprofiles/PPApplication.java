@@ -19,7 +19,6 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.util.Pair;
 
-//import com.crashlytics.android.Crashlytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.look.Slook;
@@ -45,6 +44,8 @@ import java.util.regex.Pattern;
 import androidx.core.content.pm.PackageInfoCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.multidex.MultiDex;
+
+//import com.crashlytics.android.Crashlytics;
 //import io.fabric.sdk.android.Fabric;
 
 //import com.google.firebase.analytics.FirebaseAnalytics;
@@ -336,7 +337,7 @@ public class PPApplication extends Application {
         */
 
         try {
-            FirebaseCrashlytics.getInstance().setCustomKey("DEBUG", BuildConfig.DEBUG);
+            PPApplication.setCustomKey("DEBUG", BuildConfig.DEBUG);
             //Crashlytics.setBool("DEBUG", BuildConfig.DEBUG);
         } catch (Exception ignored) {}
 
@@ -1651,6 +1652,42 @@ public class PPApplication extends Application {
         }
     }
 
+    // Firebase Crashlytics -------------------------------------------------------------------------
+
+    @SuppressWarnings("unused")
+    static void recordException(Throwable ex) {
+        try {
+            FirebaseCrashlytics.getInstance().recordException(ex);
+        } catch (Exception ignored) {}
+    }
+
+    @SuppressWarnings("unused")
+    static void logToCrashlytics(String s) {
+        try {
+            FirebaseCrashlytics.getInstance().log(s);
+        } catch (Exception ignored) {}
+    }
+
+    @SuppressWarnings({"SameParameterValue", "unused"})
+    static void setCustomKey(String key, int value) {
+        try {
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value);
+        } catch (Exception ignored) {}
+    }
+
+    @SuppressWarnings({"SameParameterValue", "unused"})
+    static void setCustomKey(String key, String value) {
+        try {
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value);
+        } catch (Exception ignored) {}
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    static void setCustomKey(String key, boolean value) {
+        try {
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value);
+        } catch (Exception ignored) {}
+    }
 
     // Google Analytics ----------------------------------------------------------------------------
 

@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
+
 import androidx.preference.DialogPreference;
 
 public class BrightnessDialogPreferenceX extends DialogPreference {

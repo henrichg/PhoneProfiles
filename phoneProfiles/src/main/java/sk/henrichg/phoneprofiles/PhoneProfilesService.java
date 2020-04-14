@@ -34,15 +34,13 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.widget.RemoteViews;
 
-//import com.crashlytics.android.Crashlytics;
-
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+//import com.crashlytics.android.Crashlytics;
 
 
 public class PhoneProfilesService extends Service {
@@ -141,10 +139,10 @@ public class PhoneProfilesService extends Service {
 
         try {
             if ((Build.VERSION.SDK_INT < 26)) {
-                FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
-                crashlytics.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
-                crashlytics.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
-                crashlytics.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));
+                //FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
+                PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
+                PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
+                PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));
                 /*Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
                 Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));*/
