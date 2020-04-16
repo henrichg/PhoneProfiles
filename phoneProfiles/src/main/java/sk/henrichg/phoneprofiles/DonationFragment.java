@@ -68,8 +68,7 @@ public class DonationFragment extends Fragment {
         mErrorTextView = root.findViewById(R.id.donation_google_android_market_error_textview);
 
         // choose donation amount
-        mGoogleSpinner = root.findViewById(
-                R.id.donation_google_android_market_spinner);
+        mGoogleSpinner = root.findViewById(R.id.donation_google_android_market_spinner);
         switch (ApplicationPreferences.applicationTheme(getActivity(), true)) {
             case "dark":
                 mGoogleSpinner.setPopupBackgroundResource(R.drawable.popupmenu_background_dark);
@@ -114,6 +113,20 @@ public class DonationFragment extends Fragment {
         */
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button closeButton = view.findViewById(R.id.donation_activity_close);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null)
+                    getActivity().finish();
+            }
+        });
     }
 
     /**
@@ -171,7 +184,7 @@ public class DonationFragment extends Fragment {
                                 if (getActivity() != null) {
                                     ArrayAdapter<CharSequence> adapter;
                                     adapter = new ArrayAdapter<CharSequence>(getActivity(),
-                                            android.R.layout.simple_spinner_item, prices);
+                                            R.layout.donation_spinner, prices);
                                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     mGoogleSpinner.setAdapter(adapter);
                                     btGoogle.setEnabled(true);

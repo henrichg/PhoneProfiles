@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="15dp" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="15dp">
 
     <!--<View
         android:layout_width="match_parent"
@@ -74,8 +75,10 @@
             android:layout_weight="1"
             android:text="@string/donation_google_android_market_donate_button"
             android:textColor="@color/action_button_text_color"
-            android:background="?attr/selectableItemBackground"
-            android:enabled="false" />
+            android:background="?attr/buttonBackground"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:enabled="false"
+            tools:ignore="UnusedAttribute" />
 
     </LinearLayout>
 
@@ -109,6 +112,26 @@
 
     </LinearLayout>
     -->
+
+    <View
+        android:id="@+id/donation_activity_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="40dp"
+        android:background="?attr/dialogDivider"/>
+
+    <Button
+        android:id="@+id/donation_activity_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="?attr/buttonBackground"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/donation_activity_close"
+        tools:ignore="UnusedAttribute"/>
 
 </LinearLayout>
 
