@@ -1346,6 +1346,8 @@
     <string name="toast_debug_log_files_not_exists">Debug log files not exists</string>
     <string name="menu_email_to_author">E-mail to author</string>
 
+    <string name="donation_activity_close">Zatvori</string>
+
     <!-- **************************************************************************************** -->
 
     <string name="extender_app_name">PhoneProfilesPlusExtender</string>

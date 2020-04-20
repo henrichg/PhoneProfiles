@@ -29,7 +29,7 @@
             android:background="@drawable/topbar_dropshadow"
             android:layout_gravity="top" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/activate_profile_list"
             android:name="sk.henrichg.phoneprofiles.ActivateProfileListFragment"
             android:layout_width="match_parent"

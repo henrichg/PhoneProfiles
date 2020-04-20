@@ -186,11 +186,11 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
 
         if (dialogFragment != null)
         {
-            FragmentManager fragmentManager = getFragmentManager();
-            if (fragmentManager != null) {
+            FragmentManager fragmentManager = getParentFragmentManager();//getFragmentManager();
+            //if (fragmentManager != null) {
                 dialogFragment.setTargetFragment(this, 0);
                 dialogFragment.show(fragmentManager, "sk.henrichg.phoneprofiles.ProfilesPrefsActivity.DIALOG");
-            }
+            //}
         }
         else
         {
