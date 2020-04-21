@@ -807,6 +807,11 @@ class DataWrapper {
         }
         else
         {
+            // set theme and language for dialog alert ;-)
+            // not working on Android 2.3.x
+            GlobalGUIRoutines.setTheme(activity, true, true);
+            GlobalGUIRoutines.setLanguage(activity);
+
             if (profile._askForDuration/* && interactive*/) {
                 if (!activity.isFinishing()) {
                     FastAccessDurationDialog dlg = new FastAccessDurationDialog(activity, profile, this,
@@ -817,10 +822,6 @@ class DataWrapper {
             else {
                 boolean granted;
                 //if (interactive) {
-                    // set theme and language for dialog alert ;-)
-                    // not working on Android 2.3.x
-                    GlobalGUIRoutines.setTheme(activity, true, true);
-                    GlobalGUIRoutines.setLanguage(activity);
 
                     granted = Permissions.grantProfilePermissions(context, profile, false,
                             /*true, monochrome, monochromeValue,*/
