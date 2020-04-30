@@ -51,12 +51,12 @@ public class ApplicationsMultiSelectDialogPreferenceX extends DialogPreference
         applicationList = new ArrayList<>();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.ApplicationsMultiSelectDialogPreference);
+                R.styleable.PPApplicationsMultiSelectDialogPreference);
 
         removePPApplications = typedArray.getInteger(
-                R.styleable.ApplicationsMultiSelectDialogPreference_removePPApplications, 0);
+                R.styleable.PPApplicationsMultiSelectDialogPreference_removePPApplications, 0);
         systemSettings = typedArray.getString(
-                R.styleable.ApplicationsMultiSelectDialogPreference_systemSettings);
+                R.styleable.PPApplicationsMultiSelectDialogPreference_systemSettings);
 
         typedArray.recycle();
 

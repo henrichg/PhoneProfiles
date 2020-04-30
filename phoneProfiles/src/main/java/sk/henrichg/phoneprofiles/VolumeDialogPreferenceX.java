@@ -55,12 +55,12 @@ public class VolumeDialogPreferenceX extends DialogPreference {
         _context = context;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.VolumeDialogPreference);
+                R.styleable.PPVolumeDialogPreference);
 
         volumeType = typedArray.getString(
-                R.styleable.VolumeDialogPreference_volumeType);
+                R.styleable.PPVolumeDialogPreference_volumeType);
         noChange = typedArray.getInteger(
-                R.styleable.VolumeDialogPreference_vNoChange, 1);
+                R.styleable.PPVolumeDialogPreference_vNoChange, 1);
         /*sharedProfile = typedArray.getInteger(
                 R.styleable.VolumeDialogPreference_vSharedProfile, 0);
         disableSharedProfile = typedArray.getInteger(

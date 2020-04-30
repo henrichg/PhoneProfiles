@@ -54,11 +54,11 @@ public class RingtonePreferenceX extends DialogPreference {
     {
         super(context, attrs);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RingtonePreference);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PPRingtonePreference);
 
-        ringtoneType = typedArray.getString(R.styleable.RingtonePreference_ringtoneType);
-        showSilent = typedArray.getBoolean(R.styleable.RingtonePreference_showSilent, false);
-        showDefault = typedArray.getBoolean(R.styleable.RingtonePreference_showDefault, false);
+        ringtoneType = typedArray.getString(R.styleable.PPRingtonePreference_ringtoneType);
+        showSilent = typedArray.getBoolean(R.styleable.PPRingtonePreference_showSilent, false);
+        showDefault = typedArray.getBoolean(R.styleable.PPRingtonePreference_showDefault, false);
 
         // set ringtoneUri to default
         ringtoneUri = "";
