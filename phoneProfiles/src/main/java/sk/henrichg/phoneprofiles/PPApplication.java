@@ -45,9 +45,6 @@ import androidx.core.content.pm.PackageInfoCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.multidex.MultiDex;
 
-//import com.crashlytics.android.Crashlytics;
-//import io.fabric.sdk.android.Fabric;
-
 //import com.google.firebase.analytics.FirebaseAnalytics;
 
 //import com.github.anrwatchdog.ANRError;
@@ -237,47 +234,6 @@ public class PPApplication extends Application {
 
         instance = this;
 
-/*        try {
-            // Obtain the FirebaseAnalytics instance.
-            //mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-            // Set up Crashlytics, disabled for debug builds
-            //Crashlytics crashlyticsKit = new Crashlytics.Builder()
-            //        .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-            //        .build();
-
-            //Fabric.with(this, crashlyticsKit);
-
-            if (!BuildConfig.DEBUG) {
-                Fabric.with(this, new Crashlytics());
-            }            // Crashlytics.getInstance().core.logException(exception); -- this log will be associated with crash log.
-        } catch (Exception e) {
-
-//            java.lang.IllegalStateException:
-//              at android.app.ContextImpl.getSharedPreferences (ContextImpl.java:447)
-//              at android.app.ContextImpl.getSharedPreferences (ContextImpl.java:432)
-//              at android.content.ContextWrapper.getSharedPreferences (ContextWrapper.java:174)
-//              at io.fabric.sdk.android.services.persistence.PreferenceStoreImpl.<init> (PreferenceStoreImpl.java:39)
-//              at io.fabric.sdk.android.services.common.AdvertisingInfoProvider.<init> (AdvertisingInfoProvider.java:37)
-//              at io.fabric.sdk.android.services.common.IdManager.<init> (IdManager.java:114)
-//              at io.fabric.sdk.android.Fabric$Builder.build (Fabric.java:289)
-//              at io.fabric.sdk.android.Fabric.with (Fabric.java:340)
-//
-//              This exception occurs, when storage is protected and PPP is started via LOCKED_BOOT_COMPLETED
-//
-//              Code from android.app.ContextImpl:
-//                if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O) {
-//                    if (isCredentialProtectedStorage()
-//                            && !getSystemService(UserManager.class)
-//                                    .isUserUnlockingOrUnlocked(UserHandle.myUserId())) {
-//                        throw new IllegalStateException("SharedPreferences in credential encrypted "
-//                                + "storage are not available until after user is unlocked");
-//                    }
-//                }
-
-            Log.e("PPPEApplication.onCreate", Log.getStackTraceString(e));
-        }*/
-
         PPApplication.logE("##### PPApplication.onCreate", "romManufacturer="+Build.MANUFACTURER);
 
         PPApplication.logE("##### PPApplication.onCreate", "deviceIsXiaomi="+deviceIsXiaomi);
@@ -338,7 +294,6 @@ public class PPApplication extends Application {
 
         try {
             PPApplication.setCustomKey("DEBUG", BuildConfig.DEBUG);
-            //Crashlytics.setBool("DEBUG", BuildConfig.DEBUG);
         } catch (Exception ignored) {}
 
         //if (BuildConfig.DEBUG) {

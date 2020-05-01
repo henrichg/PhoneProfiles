@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-//import com.crashlytics.android.Crashlytics;
-
 public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
     private boolean showEditorPrefIndicator;
@@ -185,13 +183,9 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
         try {
             if ((Build.VERSION.SDK_INT < 26)) {
-                //FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
                 PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
                 PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
                 PPApplication.setCustomKey(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));
-                /*Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR, ApplicationPreferences.notificationStatusBar(this));
-                Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_STATUS_BAR_PERMANENT, ApplicationPreferences.notificationStatusBarPermanent(this));
-                Crashlytics.setBool(ApplicationPreferences.PREF_NOTIFICATION_SHOW_IN_STATUS_BAR, ApplicationPreferences.notificationShowInStatusBar(this));*/
             }
         } catch (Exception ignored) {}
 
