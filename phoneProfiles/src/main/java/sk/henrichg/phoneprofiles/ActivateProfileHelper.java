@@ -27,7 +27,6 @@ import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -290,24 +289,24 @@ class ActivateProfileHelper {
                                 }
                                 if (connManager != null) {
                                     boolean wifiConnected = false;
-                                    if (Build.VERSION.SDK_INT < 28) {
+                                    /*if (Build.VERSION.SDK_INT < 28) {
                                         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
                                         wifiConnected = (activeNetwork != null) &&
                                                 (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) &&
                                                 activeNetwork.isConnected();
                                     }
-                                    else {
+                                    else */{
                                         Network[] activeNetworks=connManager.getAllNetworks();
                                         for(Network network : activeNetworks){
                                             try {
-                                                NetworkInfo networkInfo = connManager.getNetworkInfo(network);
-                                                if ((networkInfo != null) && networkInfo.isConnected()) {
+                                                //NetworkInfo networkInfo = connManager.getNetworkInfo(network);
+                                                //if ((networkInfo != null) && networkInfo.isConnected()) {
                                                     NetworkCapabilities networkCapabilities = connManager.getNetworkCapabilities(network);
                                                     if ((networkCapabilities != null) && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                                                        wifiConnected = true;
+                                                        wifiConnected = PPWifiNetworkCallback.connected;
                                                         break;
                                                     }
-                                                }
+                                                //}
                                             } catch (Exception ignored) {}
                                         }
                                     }

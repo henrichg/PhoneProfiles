@@ -17,7 +17,6 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -318,14 +317,14 @@ public class RingtonePreferenceX extends DialogPreference {
 
                         Context appContext = prefContext.getApplicationContext();
 
-                        if (TonesHandler.isPhoneProfilesSilent(_ringtoneUri, appContext)) {
+                        /*if (TonesHandler.isPhoneProfilesSilent(_ringtoneUri, appContext)) {
                             String filename = appContext.getResources().getResourceEntryName(TonesHandler.TONE_ID) + ".ogg";
                             File soundFile = new File(appContext.getFilesDir(), filename);
                             // /data/user/0/sk.henrichg.phoneprofiles/files
                             PPApplication.logE("RingtonePreferenceX.playRingtone", "soundFile=" + soundFile);
                             mediaPlayer.setDataSource(soundFile.getAbsolutePath());
                         }
-                        else
+                        else*/
                             mediaPlayer.setDataSource(appContext, _ringtoneUri);
 
                         mediaPlayer.prepare();

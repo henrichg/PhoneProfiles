@@ -20,6 +20,9 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -68,6 +71,7 @@ public class PhoneProfilesService extends Service {
     private DonationBroadcastReceiver donationBroadcastReceiver = null;
 
     private SettingsContentObserver settingsContentObserver = null;
+    private PPWifiNetworkCallback wifiConnectionCallback = null;
 
     String connectToSSID = Profile.CONNECTTOSSID_JUSTANY;
 
@@ -351,10 +355,9 @@ public class PhoneProfilesService extends Service {
 
                             //Permissions.clearMergedPermissions(appContext);
 
-                            if (!TonesHandler.isToneInstalled(/*TonesHandler.TONE_ID,*/ appContext)) {
-                                TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext);
-                                DatabaseHandler.getInstance(appContext).fixPhoneProfilesSilentInProfiles();
-                            }
+                            //if (!TonesHandler.isToneInstalled(/*TonesHandler.TONE_ID,*/ appContext))
+                            //    TonesHandler.installTone(TonesHandler.TONE_ID, TonesHandler.TONE_NAME, appContext);
+                            DatabaseHandler.getInstance(appContext).fixPhoneProfilesSilentInProfiles();
 
                             //int startType = intent.getStringExtra(PPApplication.EXTRA_FIRST_START_TYPE);
 
@@ -662,6 +665,27 @@ public class PhoneProfilesService extends Service {
             settingsContentObserver = new SettingsContentObserver(this, new Handler());
             getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
         } catch (Exception ignored) {}
+
+        if (wifiConnectionCallback != null) {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivityManager != null) {
+                connectivityManager.unregisterNetworkCallback(wifiConnectionCallback);
+            }
+            wifiConnectionCallback = null;
+        }
+        else {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivityManager != null) {
+                NetworkRequest networkRequest = new NetworkRequest.Builder()
+                        .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                        .build();
+
+                wifiConnectionCallback = new PPWifiNetworkCallback();
+                connectivityManager.registerNetworkCallback(networkRequest, wifiConnectionCallback);
+            }
+        }
     }
 
     private void unregisterReceivers() {
@@ -710,6 +734,15 @@ public class PhoneProfilesService extends Service {
         if (settingsContentObserver != null) {
             getContentResolver().unregisterContentObserver(settingsContentObserver);
             settingsContentObserver = null;
+        }
+
+        if (wifiConnectionCallback != null) {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivityManager != null) {
+                connectivityManager.unregisterNetworkCallback(wifiConnectionCallback);
+            }
+            wifiConnectionCallback = null;
         }
     }
 

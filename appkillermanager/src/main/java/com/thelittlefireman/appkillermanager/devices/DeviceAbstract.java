@@ -11,7 +11,6 @@ import androidx.annotation.DrawableRes;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.LogUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
-import com.thelittlefireman.appkillermanager.utils.SystemUtils;
 
 public abstract class DeviceAbstract implements DeviceBase {
 
@@ -84,64 +83,19 @@ public abstract class DeviceAbstract implements DeviceBase {
     @Override
     public boolean isActionPowerSavingAvailable(Context context) {
         Intent intent = getActionPowerSaving(context);
-        boolean intentAvailable = ActionsUtils.isIntentAvailable(context, intent);
-        if (LogUtils.logEnabled()) {
-            if (!intentAvailable) {
-                LogUtils.logE("KillerManager.isActionPowerSavingAvailable", "INTENT NOT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-            else {
-                LogUtils.logE("KillerManager.isActionPowerSavingAvailable", "INTENT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-        }
-        return intentAvailable;
+        return ActionsUtils.isIntentAvailable(context, intent);
     }
 
     @Override
     public boolean isActionAutoStartAvailable(Context context) {
         Intent intent = getActionAutoStart(context);
-        boolean intentAvailable = ActionsUtils.isIntentAvailable(context, intent);
-        if (LogUtils.logEnabled()) {
-            if (!intentAvailable) {
-                LogUtils.logE("KillerManager.isActionAutoStartAvailable", "INTENT NOT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-            else {
-                LogUtils.logE("KillerManager.isActionAutoStartAvailable", "INTENT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-        }
-        return intentAvailable;
+        return ActionsUtils.isIntentAvailable(context, intent);
     }
 
     @Override
     public boolean isActionNotificationAvailable(Context context) {
         Intent intent = getActionNotification(context);
-        boolean intentAvailable = ActionsUtils.isIntentAvailable(context, intent);
-        if (LogUtils.logEnabled()) {
-            if (!intentAvailable) {
-                LogUtils.logE("KillerManager.isActionNotificationAvailable", "INTENT NOT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-            else {
-                LogUtils.logE("KillerManager.isActionNotificationAvailable", "INTENT AVAILABLE\n" +
-                        "INTENT:\n   " + ActionsUtils.getExtrasDebugInformations(intent) + "\n" +
-                        "SYSTEM UTILS:\n   " + SystemUtils.getDefaultDebugInformation() + "\n" +
-                        "DEVICE:\n" + getExtraDebugInformations(context));
-            }
-        }
-        return intentAvailable;
+        return ActionsUtils.isIntentAvailable(context, intent);
     }
 
 }

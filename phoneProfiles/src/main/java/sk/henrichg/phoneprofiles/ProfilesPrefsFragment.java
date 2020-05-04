@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -1879,15 +1878,15 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             preferenceScreen.setSummary("");
     }
 
-    private void setSummaryForNotificationVolume0(Context context) {
+    private void setSummaryForNotificationVolume0(/*Context context*/) {
         Preference preference = prefMng.findPreference(PREF_VOLUME_NOTIFICATION_VOLUME0);
         if (preference != null) {
             String notificationToneChange = preferences.getString(Profile.PREF_PROFILE_SOUND_NOTIFICATION_CHANGE, "0");
             String notificationTone = preferences.getString(Profile.PREF_PROFILE_SOUND_NOTIFICATION, "");
-            String uriId = TonesHandler.getPhoneProfilesSilentUri(context, RingtoneManager.TYPE_NOTIFICATION);
+            /*String uriId = TonesHandler.getPhoneProfilesSilentUri(context, RingtoneManager.TYPE_NOTIFICATION);
             if (notificationToneChange.equals("1") && notificationTone.equals(uriId))
                 preference.setSummary(R.string.profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured);
-            else
+            else*/
             if (notificationToneChange.equals("1") && (notificationTone.isEmpty() ||
                     notificationTone.equals(TonesHandler.NOTIFICATION_TONE_URI_NONE)))
                 preference.setSummary(R.string.profile_preferences_volumeNotificationVolume0_summaryNoneConfigured);
@@ -2038,13 +2037,13 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 listPreference.setSummary(summary);
                 GlobalGUIRoutines.setPreferenceTitleStyleX(listPreference, true, index > 0, true, false, false, false);
             }
-            setSummaryForNotificationVolume0(context);
+            setSummaryForNotificationVolume0();
         }
         if (key.equals(Profile.PREF_PROFILE_SOUND_RINGTONE) ||
                 key.equals(Profile.PREF_PROFILE_SOUND_NOTIFICATION) ||
                 key.equals(Profile.PREF_PROFILE_SOUND_ALARM))
         {
-            setSummaryForNotificationVolume0(context);
+            setSummaryForNotificationVolume0();
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_AIRPLANE_MODE) ||
                 key.equals(Profile.PREF_PROFILE_DEVICE_AUTOSYNC) ||
@@ -2310,7 +2309,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             }
         }
         if (key.equals(PREF_VOLUME_NOTIFICATION_VOLUME0)) {
-            setSummaryForNotificationVolume0(context);
+            setSummaryForNotificationVolume0();
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_BRIGHTNESS))
         {

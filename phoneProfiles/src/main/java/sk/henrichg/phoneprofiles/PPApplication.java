@@ -12,7 +12,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
@@ -481,13 +480,17 @@ public class PPApplication extends Application {
 
     static private void resetLog()
     {
-        File sd = Environment.getExternalStorageDirectory();
+        /*File sd = Environment.getExternalStorageDirectory();
         File exportDir = new File(sd, PPApplication.EXPORT_PATH);
         if (!(exportDir.exists() && exportDir.isDirectory()))
             //noinspection ResultOfMethodCallIgnored
             exportDir.mkdirs();
 
-        File logFile = new File(sd, EXPORT_PATH + "/" + LOG_FILENAME);
+        File logFile = new File(sd, EXPORT_PATH + "/" + LOG_FILENAME);*/
+
+        File path = instance.getApplicationContext().getExternalFilesDir(null);
+        File logFile = new File(path, LOG_FILENAME);
+
         //noinspection ResultOfMethodCallIgnored
         logFile.delete();
     }

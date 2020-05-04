@@ -14,7 +14,6 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -2492,7 +2491,7 @@ public class Profile {
                     if ((networks != null) && (networks.length > 0)) {
                         for (Network network : networks) {
                             try {
-                                if (Build.VERSION.SDK_INT < 28) {
+                                /*if (Build.VERSION.SDK_INT < 28) {
                                     NetworkInfo ntkInfo = connManager.getNetworkInfo(network);
                                     if (ntkInfo != null) {
                                         if (ntkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
@@ -2501,7 +2500,7 @@ public class Profile {
                                         }
                                     }
                                 }
-                                else {
+                                else*/ {
                                     NetworkCapabilities networkCapabilities = connManager.getNetworkCapabilities(network);
                                     if ((networkCapabilities != null) && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                                         mobileDataSupported = true;
