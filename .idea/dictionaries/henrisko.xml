@@ -2,7 +2,9 @@
   <dictionary name="henrisko">
     <words>
       <w>acos</w>
+      <w>afterdurationdo</w>
       <w>alongwith</w>
+      <w>altype</w>
       <w>anbuild</w>
       <w>aplet</w>
       <w>appcontrol</w>
@@ -13,52 +15,91 @@
       <w>asus</w>
       <w>atan</w>
       <w>autoboot</w>
+      <w>autorotation</w>
       <w>autorun</w>
+      <w>autostart</w>
+      <w>autosync</w>
       <w>avoiddirpath</w>
+      <w>backgrounprofile</w>
       <w>bahasa</w>
+      <w>bluetoothsco</w>
       <w>bootapp</w>
       <w>boxapplets</w>
       <w>brasil</w>
       <w>browsable</w>
+      <w>bssid</w>
       <w>busybox</w>
       <w>català</w>
+      <w>cdma</w>
+      <w>chainfire</w>
       <w>chainlaunch</w>
       <w>coloros</w>
+      <w>connecttossid</w>
       <w>conponent</w>
+      <w>crashlytics</w>
+      <w>crowdin</w>
       <w>dalvikvm</w>
+      <w>dashclock</w>
+      <w>dbfilename</w>
       <w>dcard</w>
       <w>desourced</w>
       <w>deutsch</w>
+      <w>dlight</w>
+      <w>dropshadow</w>
+      <w>dtmf</w>
+      <w>edgepanel</w>
       <w>emotionui</w>
       <w>emui</w>
       <w>emuirom</w>
       <w>español</w>
+      <w>evernote</w>
       <w>exitcode</w>
       <w>failsafe</w>
       <w>français</w>
       <w>fuelgaue</w>
+      <w>geofence</w>
       <w>getevent</w>
+      <w>getprop</w>
+      <w>gridview</w>
+      <w>gron</w>
       <w>gsym</w>
       <w>heartyservice</w>
+      <w>henrich</w>
+      <w>henrichg</w>
       <w>hhmm</w>
       <w>hhmmss</w>
+      <w>hight</w>
+      <w>homescreen</w>
+      <w>huawei</w>
+      <w>imageview</w>
+      <w>incall</w>
       <w>informations</w>
       <w>iqoo</w>
       <w>islog</w>
       <w>italiano</w>
+      <w>justany</w>
       <w>justcreatedfilesdirectory</w>
       <w>landingpage</w>
       <w>lerp</w>
       <w>letv</w>
       <w>letvsafe</w>
+      <w>linkmode</w>
       <w>linkunlink</w>
+      <w>linla</w>
+      <w>linlayout</w>
+      <w>listview</w>
+      <w>listwidget</w>
+      <w>lockscreen</w>
       <w>lool</w>
       <w>macosx</w>
+      <w>magisk</w>
       <w>meizu</w>
+      <w>miui</w>
       <w>miuirom</w>
       <w>mmss</w>
       <w>mobi</w>
       <w>mobilemanager</w>
+      <w>multiselect</w>
       <w>nativetools</w>
       <w>nederlands</w>
       <w>notificationmanager</w>
@@ -67,43 +108,78 @@
       <w>oneplus</w>
       <w>oppo</w>
       <w>oppoguardelf</w>
+      <w>outcall</w>
       <w>pacakge</w>
+      <w>paypal</w>
       <w>pdisplay</w>
+      <w>permcenter</w>
       <w>permissionmanager</w>
       <w>phoneoptimize</w>
+      <w>phoneprofiles</w>
+      <w>phoneprofilesplus</w>
+      <w>phoneprofilesplusextender</w>
       <w>pids</w>
       <w>pitroad</w>
       <w>pkgname</w>
       <w>polski</w>
+      <w>popupmenu</w>
+      <w>porder</w>
       <w>português</w>
       <w>powerkeeper</w>
       <w>powermanager</w>
+      <w>poweron</w>
       <w>powersave</w>
       <w>powersaving</w>
       <w>powerui</w>
       <w>pppe</w>
       <w>proc</w>
+      <w>profileicon</w>
+      <w>quickboot</w>
+      <w>radiobtn</w>
       <w>recents</w>
+      <w>reenable</w>
+      <w>rella</w>
       <w>remoteviews</w>
       <w>remounter</w>
+      <w>ringermode</w>
+      <w>ringtones</w>
       <w>română</w>
       <w>safecenter</w>
+      <w>samsung</w>
+      <w>securitycenter</w>
+      <w>seekbar</w>
+      <w>selinux</w>
       <w>sendto</w>
+      <w>sharedpref</w>
+      <w>sharedprofile</w>
+      <w>skus</w>
       <w>slovenčina</w>
       <w>slovenščina</w>
       <w>specifiy</w>
+      <w>ssid</w>
+      <w>ssids</w>
       <w>startupapp</w>
       <w>stericson</w>
+      <w>supersu</w>
       <w>svenska</w>
       <w>systemmanager</w>
+      <w>tasker</w>
+      <w>textview</w>
       <w>thelittlefireman</w>
       <w>timedurationpicker</w>
+      <w>topbar</w>
+      <w>topjohnwu</w>
       <w>toybox</w>
       <w>türkçe</w>
+      <w>undoprofile</w>
+      <w>unselect</w>
       <w>upod</w>
       <w>userid</w>
       <w>vivo</w>
+      <w>wcdma</w>
       <w>xbin</w>
+      <w>xiaomi</w>
+      <w>zenmode</w>
       <w>čeština</w>
     </words>
   </dictionary>

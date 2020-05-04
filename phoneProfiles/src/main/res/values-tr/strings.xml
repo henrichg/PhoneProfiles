@@ -426,8 +426,8 @@
     <string name="permissions_notification_text">İzin isteği</string>
 <!--    <string name="permissions_for_install_tone_big_text_notification">\"PhoneProfiles Sessiz\" tonunun kurulabilmesi için bazı izinler lazımdır.</string>-->
     <!--<string name="menu_install_tone">\"PhoneProfiles Sessiz\" tonunu kurun</string>-->
-    <string name="toast_tone_installation_installed_ok">\"PhoneProfiles Sessiz\" tonu kuruldu.</string>
-    <string name="toast_tone_installation_installed_error">\"PhoneProfiles Sessiz\" tonu kurulurken hata!</string>
+<!--    <string name="toast_tone_installation_installed_ok">\"PhoneProfiles Sessiz\" tonu kuruldu.</string>-->
+<!--    <string name="toast_tone_installation_installed_error">\"PhoneProfiles Sessiz\" tonu kurulurken hata!</string>-->
     <string name="toast_permissions_granted">İzinleri zaten verilmiş</string>
     <string name="toast_permissions_not_granted">İzinler verilmemiş</string>
     <string name="permissions_for_wallpaper_text1">Duvar kağıdı seçilebilmesi bazı izinlere ihtiyaç duyar.</string>
@@ -739,7 +739,7 @@
     <string name="profile_preferences_category_profileActivationParameters">Faaliyet değerleri</string>
     <string name="profile_preferences_category_profileDeviceParameters">Cihaz değerleri</string>
     <string name="profile_preferences_volumeNotificationVolume0_title">Bildirim sesini değiştir</string>
-    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Bildirim sesi \"PhoneProfiles Sessiz\" olarak ayarlandı.</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Bildirim sesi \"PhoneProfiles Sessiz\" olarak ayarlandı.</string>-->
     <string name="info_notification_unlink_ringer_notification_volumes">Cihazınızın zil ve bildirim ses hacimleri birleştirilmiş. \"Zil ve bildirim ses hacimlerini ayır\"ı kullanabilirsiniz. Ayarlamak için buraya dokunun.</string>
     <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Cihazınızın zil ve bildirim ses hacimleri birleştirilmiş. Ses hacimlerini ayırmak isterseniz bu değeri işaretleyin.</string>
     <string name="phone_profiles_pref_eventUsePriorityAppSettings">Öncelik kullan</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>-->
     <!--
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Gerçek sessiz bildirimleri için bildirim ses hacmi = 0 şartı \"PhoneProfiles sessiz\"i bildirim sesi olarak ayarlanmaktır.</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Bildirim sesi \"PhoneProfiles Sessiz\" yüklü değil. Lütfen Düzenleyici menüsünden tekrar yüklemeyi bir deneyin.</string>

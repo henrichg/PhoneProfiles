@@ -426,8 +426,8 @@
   <string name="permissions_notification_text">Запрос разрешений</string>
 <!--  <string name="permissions_for_install_tone_big_text_notification">Установка звука \"PhoneProfiles Silent\" требует дополнительных разрешений.</string>-->
 <!--<string name="menu_install_tone">Установить звук \"PhoneProfiles Silent\"</string>-->
-  <string name="toast_tone_installation_installed_ok">Мелодия уведомления \"PhoneProfiles Silent\" установлена.</string>
-  <string name="toast_tone_installation_installed_error">При установке мелодии уведомления \"PhoneProfiles Silent\" произошла ошибка!</string>
+<!--  <string name="toast_tone_installation_installed_ok">Мелодия уведомления \"PhoneProfiles Silent\" установлена.</string>-->
+<!--  <string name="toast_tone_installation_installed_error">При установке мелодии уведомления \"PhoneProfiles Silent\" произошла ошибка!</string>-->
   <string name="toast_permissions_granted">Разрешения предоставлены</string>
   <string name="toast_permissions_not_granted">Разрешения не предоставлены</string>
   <string name="permissions_for_wallpaper_text1">Выбор обоев требует дополнительных разрешений.</string>
@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Параметры активации</string>
   <string name="profile_preferences_category_profileDeviceParameters">Параметры устройства</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Изменить мелодию уведомления</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Мелодия уведомления \"PhoneProfiles Silent\" установлена.</string>
+<!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Мелодия уведомления \"PhoneProfiles Silent\" установлена.</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">В вашем устройстве уровни громкости мелодии звонка и уведомлений объединены. Вы можете разделить их. Нажмите сюда, чтобы настроить разделение.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Уровни громкости мелодии звонка и уведомлений в вашем устройстве объединены. Если Вы хотите разделить их, включите этот параметр.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings" tools:ignore="UnusedResources">Использовать приоритет</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Установить мелодию уведомления:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Мелодия уведомления \"None\" установлена.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Чтобы уведомление было по-настоящему бесшумным, настройте мелодию уведомления на \"PhoneProfiles Silent\" или \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Мелодия уведомления \"PhoneProfiles Silent\" не установлена. Установите её, пожалуйста, в параметре профиля \"Звуки\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Мелодия уведомления \"PhoneProfiles Silent\" не установлена. Установите её, пожалуйста, в параметре профиля \"Звуки\".</string>-->
     
     <string name="phone_profiles_pref_UnlinkRingerNotificationVolumesImportantInfo_importantInfo_summary">Нажмите сюда, чтобы узнать, как работает разделение уровней громкости звонка и уведомлений.</string>
 

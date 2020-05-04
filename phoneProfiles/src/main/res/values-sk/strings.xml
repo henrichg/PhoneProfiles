@@ -426,8 +426,8 @@
   <string name="permissions_notification_text">Vyžaduje sa povolenie</string>
 <!--  <string name="permissions_for_install_tone_big_text_notification">Inštalácia tónu \"PhoneProfiles Silent\" vyžaduje udelenie niektorých povolení.</string>-->
   <!--<string name="menu_install_tone">Nainštaluj tón \"PhoneProfiles Silent\"</string>-->
-  <string name="toast_tone_installation_installed_ok">Tón \"PhoneProfiles Silent\" je nainštalovaný.</string>
-  <string name="toast_tone_installation_installed_error">Chyba pri inštalácii tónu \"PhoneProfiles Silent\"!</string>
+<!--  <string name="toast_tone_installation_installed_ok">Tón \"PhoneProfiles Silent\" je nainštalovaný.</string>-->
+<!--  <string name="toast_tone_installation_installed_error">Chyba pri inštalácii tónu \"PhoneProfiles Silent\"!</string>-->
   <string name="toast_permissions_granted">Povolenia sú už udelené</string>
   <string name="toast_permissions_not_granted">Povolenia nie sú udelené</string>
   <string name="permissions_for_wallpaper_text1">Zmena tapety vyžaduje niektoré povolenia.</string>
@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Parametre aktivácie</string>
   <string name="profile_preferences_category_profileDeviceParameters">Parametre zariadenia</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Zmena tónu notifikácie</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Tón notifikácie \"PhoneProfiles Silent\" je nakonfigurovaný.</string>
+<!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Tón notifikácie \"PhoneProfiles Silent\" je nakonfigurovaný.</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">Vaše zariadenie má zlúčenú hlasitosť zvonenia hovorov a notifikácií. Môžete použiť \"Oddeľ hlasitosť zvonenia a notif.\" Kliknite sem pre jej nakonfigurovanie.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Vaše zariadenie má zlúčenú hlasitosť zvonenia hovorov a notifikácií. Ak chcete hlasitosti rozdeliť, zaškrtnite tento parameter.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Používať prioritu</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Nakonfigurovať tón notifikácie na:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Tón notifikácie \"Žiadny\" je nakonfigurovaný.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Pre úplne tichú hlasitosť notifikácií, nakonfigurujte tón notifikácie na \"PhoneProfiles Silent\" alebo \"Žiadny\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Tón notifikácie \"PhoneProfiles Silent\" nie je nainštalovaný. Prosím nainštalujte ho v parametri profilu \"Tóny\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Tón notifikácie \"PhoneProfiles Silent\" nie je nainštalovaný. Prosím nainštalujte ho v parametri profilu \"Tóny\".</string>-->
 
     <string name="phone_profiles_pref_UnlinkRingerNotificationVolumesImportantInfo_importantInfo_summary">Kliknite sem pre zobrazenie ako funguje \"Oddeľ hlasitosť zvonenia a notifikácií\.</string>
 

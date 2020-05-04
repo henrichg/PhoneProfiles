@@ -426,8 +426,8 @@
   <string name="permissions_notification_text">Toestemming aanvragen</string>
 <!--  <string name="permissions_for_install_tone_big_text_notification">Installatie van geluid \"PhoneProfiles Silent\" vereist een aantal machtigingen.</string>-->
   <!--<string name="menu_install_tone">Installeer geluid \"PhoneProfiles Silent\"</string>-->
-  <string name="toast_tone_installation_installed_ok">Geluid \"PhoneProfiles Silente\" geïnstalleerd.</string>
-  <string name="toast_tone_installation_installed_error">Fout bij het installeren van geluid \"PhoneProfiles Silent\"!</string>
+<!--  <string name="toast_tone_installation_installed_ok">Geluid \"PhoneProfiles Silente\" geïnstalleerd.</string>-->
+<!--  <string name="toast_tone_installation_installed_error">Fout bij het installeren van geluid \"PhoneProfiles Silent\"!</string>-->
   <string name="toast_permissions_granted">Machtigingen zijn al toegekend</string>
   <string name="toast_permissions_not_granted">Machtigingen zijn niet toegekend</string>
   <string name="permissions_for_wallpaper_text1">Selecteren van achtergrond vereist machtigingen.</string>
@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Activatie parameters</string>
   <string name="profile_preferences_category_profileDeviceParameters">Apparaat parameters</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Wijzig notificatie toon</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Notificatie toon \"PhoneProfiles Stil\" geconfigureerd.</string>
+<!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Notificatie toon \"PhoneProfiles Stil\" geconfigureerd.</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">Je apparaat heeft een samengevoegd volume voor beltoon en notificatie toon. Je kunt \"Volume ontkoppelen\" instellen. Tik hier om te configureren.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Je apparaat heeft een samengevoegd volume voor beltoon en notificatie toon. Als je ontkoppeld volume wilt, deze parameter aanvinken.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Gebruik prioriteit</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>-->
     <!--
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Voor notificatie volume = 0 configureer de \"PhoneProfiles Stil\" toon voor echt stille meldingen.</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notificatie toon \"PhoneProfiles Stil\" is niet geïnstalleerd. Installeer het vanuit het Editor menu en probeer opnieuw.</string>

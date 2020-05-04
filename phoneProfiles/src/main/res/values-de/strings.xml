@@ -426,8 +426,8 @@
     <string name="permissions_notification_text">Berechtigungsanforderung</string>
 <!--    <string name="permissions_for_install_tone_big_text_notification">Installation des Tons \"PhoneProfiles Silent\" erfordert einige Berechtigungen.</string>-->
     <!--<string name="menu_install_tone">Ton \"PhoneProfiles Silent\" installieren</string>-->
-    <string name="toast_tone_installation_installed_ok">Ton \"PhoneProfiles Silent\" installiert.</string>
-    <string name="toast_tone_installation_installed_error">Fehler bei der Installation des Tons \"PhoneProfiles Silent\"!</string>
+<!--    <string name="toast_tone_installation_installed_ok">Ton \"PhoneProfiles Silent\" installiert.</string>-->
+<!--    <string name="toast_tone_installation_installed_error">Fehler bei der Installation des Tons \"PhoneProfiles Silent\"!</string>-->
     <string name="toast_permissions_granted">Berechtigungen sind bereits erteilt.</string>
     <string name="toast_permissions_not_granted">Berechtigungen wurden nicht erteilt.</string>
     <string name="permissions_for_wallpaper_text1">Die Einstellung des Hintergrundbildes erfordert Berechtigungen.</string>
@@ -739,7 +739,7 @@
     <string name="profile_preferences_category_profileActivationParameters">Aktivierungsparameter</string>
     <string name="profile_preferences_category_profileDeviceParameters">Geräte-Parameter</string>
     <string name="profile_preferences_volumeNotificationVolume0_title">Benachrichtigungston ändern</string>
-    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Benachrichtigungston \"PhoneProfiles Silent\" ist konfiguriert.</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Benachrichtigungston \"PhoneProfiles Silent\" ist konfiguriert.</string>-->
     <string name="info_notification_unlink_ringer_notification_volumes">Dein Gerät hat verbundene Anruf- und Benachrichtigungs-Lautstärke. Klicke hier, wenn du sie trennen willst.</string>
     <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Dein Gerät hat verbundene Anruf- und Benachrichtigungs-Lautstärke. Aktiviere diese Option, wenn du sie trennen willst.</string>
     <string name="phone_profiles_pref_eventUsePriorityAppSettings">Prioritäten verwenden</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>-->
     <!--
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Für die Benachrichtigungslautstärke 0 wähle den Benachrichtigungston \"PhoneProfiles Silent\", um Benachrichtigungen wirklich stumm zu stellen.</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Benachrichtigungston \"PhoneProfiles Silent\" ist nicht installiert. Bitte installiere ihn vom Editor-Menü.</string>

@@ -426,8 +426,8 @@
   <string name="permissions_notification_text">Zahteva za dovoljenje</string>
 <!--  <string name="permissions_for_install_tone_big_text_notification">Namestitev tona \"PhoneProfiles tiho\" zahteva odobritev določenih dovoljenj.</string>-->
   <!--<string name="menu_install_tone">Namesti ton \"PhoneProfiles tiho\"</string>-->
-  <string name="toast_tone_installation_installed_ok">Ton \"PhoneProfiles tiho\" je nameščen.</string>
-  <string name="toast_tone_installation_installed_error">Napaka pri nameščanju tona \"PhoneProfiles tiho\"!</string>
+<!--  <string name="toast_tone_installation_installed_ok">Ton \"PhoneProfiles tiho\" je nameščen.</string>-->
+<!--  <string name="toast_tone_installation_installed_error">Napaka pri nameščanju tona \"PhoneProfiles tiho\"!</string>-->
   <string name="toast_permissions_granted">Dovoljenja so že odobrena</string>
   <string name="toast_permissions_not_granted">Dovoljenja niso odobrena</string>
   <string name="permissions_for_wallpaper_text1">Izbira ozadja zahteva določena dovoljenja.</string>
@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">Activation parameters</string>
   <string name="profile_preferences_category_profileDeviceParameters">Device parameters</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Change notification tone</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Notification tone \"PhoneProfiles Silent\" is configured.</string>
+<!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Notification tone \"PhoneProfiles Silent\" is configured.</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">Your device has linked volume levels for ringtone and notifications. You can use \"Unlink ringer and notification volumes\". Click here to configure it.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Your device has linked volumes for ringtone and notifications. If you want unlinked volumes, enable this parameter.</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">Use priority</string>
@@ -1332,7 +1332,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>-->
 
     <string name="phone_profiles_pref_UnlinkRingerNotificationVolumesImportantInfo_importantInfo_summary">Click here to show how \"Unlink ringer and notification volumes\" works.</string>
 

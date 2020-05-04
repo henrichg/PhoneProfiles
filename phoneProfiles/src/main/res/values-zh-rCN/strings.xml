@@ -426,8 +426,8 @@
   <string name="permissions_notification_text">权限请求</string>
 <!--  <string name="permissions_for_install_tone_big_text_notification">铃声“PhoneProfiles 无声”的安装需要授予某些特定权限。</string>-->
   <!--<string name="menu_install_tone">安装铃声“PhoneProfiles 无声”</string>-->
-  <string name="toast_tone_installation_installed_ok">铃声“PhoneProfiles 无声”已安装</string>
-  <string name="toast_tone_installation_installed_error">安装铃声“PhoneProfiles 无声”时发生错误！</string>
+<!--  <string name="toast_tone_installation_installed_ok">铃声“PhoneProfiles 无声”已安装</string>-->
+<!--  <string name="toast_tone_installation_installed_error">安装铃声“PhoneProfiles 无声”时发生错误！</string>-->
   <string name="toast_permissions_granted">已授予权限</string>
   <string name="toast_permissions_not_granted">已授予权限</string>
   <string name="permissions_for_wallpaper_text1">选择壁纸需要某些权限。</string>
@@ -739,7 +739,7 @@
   <string name="profile_preferences_category_profileActivationParameters">激活参数</string>
   <string name="profile_preferences_category_profileDeviceParameters">设备参数</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">更改通知提示音</string>
-  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">已设置通知提示音为“PhoneProfiles 无声”</string>
+<!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">已设置通知提示音为“PhoneProfiles 无声”</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">您的设备已关联铃声和通知的音量级别。您可以使用“取消链接振铃和通知卷”。单击此处进行配置。</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">您的设备已关联铃声和通知音量。如果要取消关联音量，请启用此参数。</string>
   <string name="phone_profiles_pref_eventUsePriorityAppSettings">使用优先级</string>
@@ -1326,7 +1326,7 @@
     <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Configure notification tone to:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Notification tone \"None\" is configured.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">For truly silent notification volume, configure notification tone to \"PhoneProfiles Silent\" or \"None\".</string>
-    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>
+<!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Notification tone \"PhoneProfiles Silent\" is not installed. Please install it in profile parameter \"Sounds\".</string>-->
     <!--
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">对于真正无声的通知音量，请将通知音配置为“PhoneProfiles Silent”。</string>
     <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">未安装通知提示音“PhoneProfiles 无声”。请从编辑器菜单安装后再重试。</string>
