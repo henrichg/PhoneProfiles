@@ -15,7 +15,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -96,12 +95,12 @@ public class RingtonePreferenceX extends DialogPreference {
 
     @SuppressLint("StaticFieldLeak")
     void refreshListView() {
-        PPApplication.logE("RingtonePreferenceX.refreshListView", "fragment="+fragment);
-        if (fragment != null) {
+        //PPApplication.logE("RingtonePreferenceX.refreshListView", "fragment="+fragment);
+        /*if (fragment != null) {
             PPApplication.logE("RingtonePreferenceX.refreshListView", "fragment.getDialog()=" + fragment.getDialog());
             if (fragment.getDialog() != null)
                 PPApplication.logE("RingtonePreferenceX.refreshListView", "fragment.getDialog().isShowing()=" + fragment.getDialog().isShowing());
-        }
+        }*/
         if ((fragment != null) && (fragment.getDialog() != null) && fragment.getDialog().isShowing()) {
             if (Permissions.checkRingtonePreference(prefContext)) {
 
@@ -350,14 +349,14 @@ public class RingtonePreferenceX extends DialogPreference {
                                 break;
                         }
 
-                        PPApplication.logE("RingtonePreferenceX.playRingtone", "ringtoneVolume=" + ringtoneVolume);
+                        //PPApplication.logE("RingtonePreferenceX.playRingtone", "ringtoneVolume=" + ringtoneVolume);
 
                         int maximumMediaValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
                         float percentage = (float) ringtoneVolume / maximumRingtoneValue * 100.0f;
                         int mediaVolume = Math.round(maximumMediaValue / 100.0f * percentage);
 
-                        PPApplication.logE("RingtonePreferenceX.playRingtone", "mediaVolume=" + mediaVolume);
+                        //PPApplication.logE("RingtonePreferenceX.playRingtone", "mediaVolume=" + mediaVolume);
 
                         ActivateProfileHelper.setMediaVolume(prefContext, audioManager, mediaVolume);
 
@@ -379,7 +378,7 @@ public class RingtonePreferenceX extends DialogPreference {
 
                                     if (oldMediaVolume > -1)
                                         ActivateProfileHelper.setMediaVolume(prefContext, audioManager, oldMediaVolume);
-                                    PPApplication.logE("RingtonePreferenceX.playRingtone", "play stopped");
+                                    //PPApplication.logE("RingtonePreferenceX.playRingtone", "play stopped");
                                 }
 
                                 ringtoneIsPlayed = false;
@@ -400,8 +399,8 @@ public class RingtonePreferenceX extends DialogPreference {
                             }
                         }, mediaPlayer.getDuration());
 
-                    } catch (SecurityException e) {
-                        PPApplication.logE("RingtonePreferenceX.playRingtone", "security exception");
+/*                    } catch (SecurityException e) {
+                        //PPApplication.logE("RingtonePreferenceX.playRingtone", "security exception");
                         stopPlayRingtone();
                         PPApplication.startHandlerThreadInternalChangeToFalse();
                         final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
@@ -413,8 +412,9 @@ public class RingtonePreferenceX extends DialogPreference {
                         }, 3000);
                         //PostDelayedBroadcastReceiver.setAlarm(
                         //        PostDelayedBroadcastReceiver.ACTION_RINGER_MODE_INTERNAL_CHANGE_TO_FALSE, 3, prefContext);
+ */
                     } catch (Exception e) {
-                        PPApplication.logE("RingtonePreferenceX.playRingtone", Log.getStackTraceString(e));
+                        //PPApplication.logE("RingtonePreferenceX.playRingtone", Log.getStackTraceString(e));
                         stopPlayRingtone();
                         PPApplication.startHandlerThreadInternalChangeToFalse();
                         final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
@@ -507,7 +507,7 @@ public class RingtonePreferenceX extends DialogPreference {
         defaultValue = myState.defaultValue;
         //oldRingtoneUri = myState.oldRingtoneUri;
 
-        PPApplication.logE("RingtonePreferenceX.onRestoreInstanceState", "ringtoneUri="+ringtoneUri);
+        //PPApplication.logE("RingtonePreferenceX.onRestoreInstanceState", "ringtoneUri="+ringtoneUri);
 
         setRingtone("", true);
     }

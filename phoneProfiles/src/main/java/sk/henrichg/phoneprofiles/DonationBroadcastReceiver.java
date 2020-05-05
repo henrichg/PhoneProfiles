@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateFormat;
 
 import java.util.Calendar;
 
@@ -16,7 +15,7 @@ import androidx.core.content.ContextCompat;
 public class DonationBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("##### DonationBroadcastReceiver.onReceive", "xxx");
+        //PPApplication.logE("##### DonationBroadcastReceiver.onReceive", "xxx");
 
         if (PPApplication.getApplicationStarted(context, true)) {
 
@@ -47,29 +46,29 @@ public class DonationBroadcastReceiver extends BroadcastReceiver {
                     //PPApplication.setDaysAfterFirstStart(context, daysAfterFirstStart);
                 }
 
-                PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysAfterFirstStart=" + daysAfterFirstStart);
-                PPApplication.logE("DonationBroadcastReceiver.onReceive", "donationNotificationCount=" + donationNotificationCount);
-                PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
-                PPApplication.logE("DonationBroadcastReceiver.onReceive", "donationDonated="+donationDonated);
+                //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysAfterFirstStart=" + daysAfterFirstStart);
+                //PPApplication.logE("DonationBroadcastReceiver.onReceive", "donationNotificationCount=" + donationNotificationCount);
+                //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
+                //PPApplication.logE("DonationBroadcastReceiver.onReceive", "donationDonated="+donationDonated);
 
                 boolean notify = false;
                 if (donationNotificationCount == 3) {
                     daysForNextNotification = daysAfterFirstStart + 90;
                     PPApplication.setDaysForNextDonationNotification(appContext, daysForNextNotification);
-                    PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
+                    //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
 
                     if (daysAfterFirstStart > 7+14+21+42+30) {
                         // notify old users after 114 days
-                        PPApplication.logE("DonationBroadcastReceiver.onReceive", "notify old users after 114 days");
+                        //PPApplication.logE("DonationBroadcastReceiver.onReceive", "notify old users after 114 days");
                         notify = true;
 
                         daysForNextNotification = daysAfterFirstStart + 90;
                         PPApplication.setDaysForNextDonationNotification(appContext, daysForNextNotification);
-                        PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
+                        //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
                     }
                     else {
                         PPApplication.setDonationNotificationCount(appContext, donationNotificationCount+1);
-                        PPApplication.logE("DonationBroadcastReceiver.onReceive", "do not notify when donationNotificationCount is 3");
+                        //PPApplication.logE("DonationBroadcastReceiver.onReceive", "do not notify when donationNotificationCount is 3");
                     }
                 }
                 else {
@@ -79,14 +78,14 @@ public class DonationBroadcastReceiver extends BroadcastReceiver {
                         if (notify) {
                             daysForNextNotification = daysAfterFirstStart + 90;
                             PPApplication.setDaysForNextDonationNotification(appContext, daysForNextNotification);
-                            PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
+                            //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForNextNotification=" + daysForNextNotification);
                         }
                     } else {
                         daysForOneNotification = 7;
                         for (int i = 1; i <= donationNotificationCount; i++) {
                             daysForOneNotification = daysForOneNotification + 7 * (i + 1);
                         }
-                        PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForOneNotification=" + daysForOneNotification);
+                        //PPApplication.logE("DonationBroadcastReceiver.onReceive", "daysForOneNotification=" + daysForOneNotification);
 
                         notify = (daysAfterFirstStart > 0) && (daysAfterFirstStart >= daysForOneNotification);
 
@@ -94,12 +93,12 @@ public class DonationBroadcastReceiver extends BroadcastReceiver {
                                 ((donationNotificationCount == 0) ||
                                         (donationNotificationCount == 1))) {
                             PPApplication.setDonationNotificationCount(appContext, donationNotificationCount+1);
-                            PPApplication.logE("DonationBroadcastReceiver.onReceive", "do not notify when donationNotificationCount is 0, 1");
+                            //PPApplication.logE("DonationBroadcastReceiver.onReceive", "do not notify when donationNotificationCount is 0, 1");
                             notify = false;
                         }
                     }
                 }
-                PPApplication.logE("DonationBroadcastReceiver.onReceive", "notify=" + notify);
+                //PPApplication.logE("DonationBroadcastReceiver.onReceive", "notify=" + notify);
 
                 if (!donationDonated/* && (donationNotificationCount < MAX_DONATION_NOTIFICATION_COUNT)*/) {
 
@@ -172,9 +171,9 @@ public class DonationBroadcastReceiver extends BroadcastReceiver {
 
         long alarmTime = now.getTimeInMillis();
 
-        PPApplication.logE("DonationBroadcastReceiver.setAlarm",
+        /*PPApplication.logE("DonationBroadcastReceiver.setAlarm",
                 "alarmTime=" + DateFormat.getDateFormat(context).format(alarmTime) +
-                        " " + DateFormat.getTimeFormat(context).format(alarmTime));
+                        " " + DateFormat.getTimeFormat(context).format(alarmTime));*/
 
         //Intent intent = new Intent(_context, DonationBroadcastReceiver.class);
         Intent intent = new Intent();
@@ -196,7 +195,7 @@ public class DonationBroadcastReceiver extends BroadcastReceiver {
 
     static private void removeAlarm(Context context)
     {
-        PPApplication.logE("DonationBroadcastReceiver.removeAlarm", "xxx");
+        //PPApplication.logE("DonationBroadcastReceiver.removeAlarm", "xxx");
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {

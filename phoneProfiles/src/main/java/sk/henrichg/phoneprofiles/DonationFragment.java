@@ -37,7 +37,7 @@ public class DonationFragment extends Fragment {
     private BillingProvider mBillingProvider;
 
     // Debug tag, for logging
-    private static final String TAG = "DonationFragment";
+    //private static final String TAG = "DonationFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class DonationFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        PPApplication.logE(TAG, "onCreateView");
+        //PPApplication.logE(TAG, "onCreateView");
         View root = inflater.inflate(R.layout.donation_fragment, container, true);
 
         mLoadingView = root.findViewById(R.id.donation_google_android_market_loading);
@@ -149,7 +149,7 @@ public class DonationFragment extends Fragment {
 
     public void updateGUIAfterBillingConnected() {
         // Start querying for SKUs
-        PPApplication.logE(TAG, "handleManagerAndUiReady");
+        //PPApplication.logE(TAG, "handleManagerAndUiReady");
         final List<String> inAppSkus = mBillingProvider.getBillingManager()
                 .getSkus(/*!mDebug, */BillingClient.SkuType.INAPP);
         mBillingProvider.getBillingManager().querySkuDetailsAsync(BillingClient.SkuType.INAPP,
@@ -158,19 +158,19 @@ public class DonationFragment extends Fragment {
                     @Override
                     public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
                         int responseCode = billingResult.getResponseCode();
-                        PPApplication.logE(TAG, "onSkuDetailsResponse responseCode="+responseCode);
+                        //PPApplication.logE(TAG, "onSkuDetailsResponse responseCode="+responseCode);
 
                         String[] prices = new String[]{"1 €", "2 €", "3 €", "5 €", "8 €", "13 €", "20 €"};
 
-                        if (skuDetailsList != null)
-                            PPApplication.logE(TAG, "onSkuDetailsResponse skuDetailsList="+skuDetailsList.size());
+                        //if (skuDetailsList != null)
+                        //    PPApplication.logE(TAG, "onSkuDetailsResponse skuDetailsList="+skuDetailsList.size());
                         if (responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
                             if (skuDetailsList.size() > 0) {
                                 SKU_DETAILS = new ArrayList<>();
                                 for (int i = 0; i < inAppSkus.size(); i++) {
                                     for (int j = 0; j < skuDetailsList.size(); j++) {
                                         if (skuDetailsList.get(j).getSku().equals(inAppSkus.get(i))) {
-                                            PPApplication.logE(TAG, "Found sku: " + skuDetailsList.get(j));
+                                            //PPApplication.logE(TAG, "Found sku: " + skuDetailsList.get(j));
                                             SKU_DETAILS.add(skuDetailsList.get(j));
                                             prices[i] = skuDetailsList.get(j).getPrice();
                                             break;
@@ -203,12 +203,13 @@ public class DonationFragment extends Fragment {
             for (Purchase purchase : purchases) {
                 String sku = purchase.getSku();
                 for (SkuDetails skuDetail : SKU_DETAILS) {
+                    //noinspection StatementWithEmptyBody
                     if (skuDetail.getSku().equals(sku)) {
-                        PPApplication.logE(TAG, "purchaseSuccessful - sku=" + sku);
-                        PPApplication.logE(TAG, "purchaseSuccessful - currency=" + skuDetail.getPriceCurrencyCode());
-                        PPApplication.logE(TAG, "purchaseSuccessful - priceS=" + skuDetail.getPrice());
-                        PPApplication.logE(TAG, "purchaseSuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
-                        PPApplication.logE(TAG, "purchaseSuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
+                        //PPApplication.logE(TAG, "purchaseSuccessful - sku=" + sku);
+                        //PPApplication.logE(TAG, "purchaseSuccessful - currency=" + skuDetail.getPriceCurrencyCode());
+                        //PPApplication.logE(TAG, "purchaseSuccessful - priceS=" + skuDetail.getPrice());
+                        //PPApplication.logE(TAG, "purchaseSuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
+                        //PPApplication.logE(TAG, "purchaseSuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
                         /*Answers.getInstance().logPurchase(new PurchaseEvent()
                                 .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000.0))
                                 .putCurrency(Currency.getInstance(skuDetail.getPriceCurrencyCode()))
@@ -232,12 +233,13 @@ public class DonationFragment extends Fragment {
             for (Purchase purchase : purchases) {
                 String sku = purchase.getSku();
                 for (SkuDetails skuDetail : SKU_DETAILS) {
+                    //noinspection StatementWithEmptyBody
                     if (skuDetail.getSku().equals(sku)) {
-                        PPApplication.logE(TAG, "purchaseUnsuccessful - sku=" + sku);
-                        PPApplication.logE(TAG, "purchaseUnsuccessful - currency=" + skuDetail.getPriceCurrencyCode());
-                        PPApplication.logE(TAG, "purchaseUnsuccessful - priceS=" + skuDetail.getPrice());
-                        PPApplication.logE(TAG, "purchaseUnsuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
-                        PPApplication.logE(TAG, "purchaseUnsuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
+                        //PPApplication.logE(TAG, "purchaseUnsuccessful - sku=" + sku);
+                        //PPApplication.logE(TAG, "purchaseUnsuccessful - currency=" + skuDetail.getPriceCurrencyCode());
+                        //PPApplication.logE(TAG, "purchaseUnsuccessful - priceS=" + skuDetail.getPrice());
+                        //PPApplication.logE(TAG, "purchaseUnsuccessful - priceMicros=" + skuDetail.getPriceAmountMicros());
+                        //PPApplication.logE(TAG, "purchaseUnsuccessful - price=" + skuDetail.getPriceAmountMicros() / 1000000.0);
                         /*Answers.getInstance().logPurchase(new PurchaseEvent()
                                 .putItemPrice(BigDecimal.valueOf(skuDetail.getPriceAmountMicros() / 1000000.0))
                                 .putCurrency(Currency.getInstance(skuDetail.getPriceCurrencyCode()))
@@ -253,7 +255,7 @@ public class DonationFragment extends Fragment {
 
     public void displayAnErrorIfNeeded(int response) {
         if (getActivity() == null || getActivity().isFinishing()) {
-            PPApplication.logE(TAG, "No need to show an error - activity is finishing already");
+            //PPApplication.logE(TAG, "No need to show an error - activity is finishing already");
             return;
         }
 

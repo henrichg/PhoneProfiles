@@ -311,7 +311,7 @@ public class ActivateProfileListFragment extends Fragment {
         //noinspection ConstantConditions
         if (PPApplication.getApplicationStarted(getActivity().getApplicationContext(), true))
         {
-            PPApplication.logE("ActivateProfileListFragment.doOnStart", "xxx");
+            //PPApplication.logE("ActivateProfileListFragment.doOnStart", "xxx");
 
             Profile profile = activityDataWrapper.getActivatedProfile(true, ApplicationPreferences.applicationActivatorPrefIndicator(activityDataWrapper.context));
             updateHeader(profile);

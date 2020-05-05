@@ -14,7 +14,7 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("##### RunApplicationWithDelayBroadcastReceiver.onReceive", "xxx");
+        //PPApplication.logE("##### RunApplicationWithDelayBroadcastReceiver.onReceive", "xxx");
 
         Context appContext = context.getApplicationContext();
 
@@ -119,7 +119,7 @@ public class RunApplicationWithDelayBroadcastReceiver extends BroadcastReceiver 
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
             if (pendingIntent != null) {
-                PPApplication.logE("RunApplicationWithDelayBroadcastReceiver.removeDelayAlarm", "alarm found");
+                //PPApplication.logE("RunApplicationWithDelayBroadcastReceiver.removeDelayAlarm", "alarm found");
 
                 alarmManager.cancel(pendingIntent);
                 pendingIntent.cancel();

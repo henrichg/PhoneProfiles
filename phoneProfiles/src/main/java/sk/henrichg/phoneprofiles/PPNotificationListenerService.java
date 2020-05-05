@@ -22,7 +22,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
     private static final String ACTION_REQUEST_INTERRUPTION_FILTER = PPApplication.PACKAGE_NAME + ".ACTION_REQUEST_INTERRUPTION_FILTER";
     private static final String EXTRA_FILTER = "filter";
 
-    private static final String TAG = PPNotificationListenerService.class.getSimpleName();
+    //private static final String TAG = PPNotificationListenerService.class.getSimpleName();
 
     private NLServiceReceiver nlservicereceiver;
 
@@ -103,7 +103,7 @@ public class PPNotificationListenerService extends NotificationListenerService {
         // convert to profile zenMode
         int zenMode = 0;
         int systemZenMode = ActivateProfileHelper.getSystemZenMode(context/*, -1*/);
-        PPApplication.logE(TAG, "getZenMode(" + systemZenMode + ')');
+        //PPApplication.logE(TAG, "getZenMode(" + systemZenMode + ')');
         switch (systemZenMode) {
             case ActivateProfileHelper.ZENMODE_ALL:
                 if (ActivateProfileHelper.vibrationIsOn(audioManager, true))

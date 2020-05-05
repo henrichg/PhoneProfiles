@@ -268,13 +268,11 @@ public class PhoneProfilesService extends Service {
             return;// true;
         }
 
-        /*
-        if ((!startOnPackageReplace) && PPApplication.isNewVersion(getApplicationContext())) {
+        /*if ((!startOnPackageReplace) && PPApplication.isNewVersion(getApplicationContext())) {
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "is new version but not EXTRA_START_ON_PACKAGE_REPLACE");
             PPApplication.logE("PhoneProfilesService.doForFirstStart", "PhoneProfilesService.doForFirstStart END");
             return true;
-        }
-        */
+        }*/
 
         serviceRunning = true;
 
@@ -395,12 +393,12 @@ public class PhoneProfilesService extends Service {
                                 dataWrapper.activateProfileOnBoot();
                             }
                         }
-                        /*
+
                         if (!_startOnBoot && !_startOnPackageReplace && !_initializeStart) {
                             PPApplication.logE("$$$ PhoneProfilesService.doForFirstStart - handler", "###### not initialize start ######");
                                 dataWrapper.activateProfileOnBoot();
                         }
-                        */
+
 
                         dataWrapper.invalidateDataWrapper();
 
@@ -493,7 +491,7 @@ public class PhoneProfilesService extends Service {
                     secureKeyguard = keyguardManager.isKeyguardSecure();
                     PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "secureKeyguard=" + secureKeyguard);
                     if (!secureKeyguard) {
-                        PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
+                        //PPApplication.logE("$$$ PhoneProfilesService.onStartCommand xxx", "getLockScreenDisabled=" + ActivateProfileHelper.getLockScreenDisabled(appContext));
 
                         if (PPApplication.isScreenOn) {
                             PPApplication.logE("$$$ PhoneProfilesService.onStartCommand", "screen on");
@@ -513,10 +511,12 @@ public class PhoneProfilesService extends Service {
         }
     }
 
+    /*
+    DO NOT CALL THIS !!! THIS IS CALLED ALSO WHEN, FOR EXAMPLE, ACTIVATOR GETS DISPLAYED !!!
     @Override
     public void onTaskRemoved(Intent rootIntent)
     {
-        PPApplication.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxx");
+        //PPApplication.logE("$$$ PhoneProfilesService.onTaskRemoved", "xxx");
 
         if (PPApplication.screenTimeoutHandler != null) {
             PPApplication.screenTimeoutHandler.post(new Runnable() {
@@ -529,6 +529,7 @@ public class PhoneProfilesService extends Service {
 
         super.onTaskRemoved(rootIntent);
     }
+    */
 
     @Override
     public IBinder onBind(Intent intent)
@@ -791,7 +792,7 @@ public class PhoneProfilesService extends Service {
     @SuppressLint("NewApi")
     private void _showProfileNotification(Profile profile, boolean inHandlerThread)
     {
-        PPApplication.logE("PhoneProfilesService.showProfileNotification", "xxx");
+        //PPApplication.logE("PhoneProfilesService.showProfileNotification", "xxx");
 
         /*
         if (ActivateProfileHelper.lockRefresh)
@@ -803,7 +804,7 @@ public class PhoneProfilesService extends Service {
 
         if ((Build.VERSION.SDK_INT >= 26) || ApplicationPreferences.notificationStatusBar(appContext))
         {
-            PPApplication.logE("PhoneProfilesService.showProfileNotification", "show");
+            //PPApplication.logE("PhoneProfilesService.showProfileNotification", "show");
 
             boolean notificationShowInStatusBar = ApplicationPreferences.notificationShowInStatusBar(appContext);
             boolean notificationStatusBarPermanent = ApplicationPreferences.notificationStatusBarPermanent(appContext);
@@ -884,7 +885,7 @@ public class PhoneProfilesService extends Service {
                 }
                 else
                     contentViewLarge = new RemoteViews(appContext.getPackageName(), R.layout.notification_drawer_miui);
-                PPApplication.logE("PhoneProfilesService.showProfileNotification", "miui");
+                //PPApplication.logE("PhoneProfilesService.showProfileNotification", "miui");
             }
             else
             if (PPApplication.deviceIsHuawei && PPApplication.romIsEMUI) {
@@ -1358,14 +1359,14 @@ public class PhoneProfilesService extends Service {
 
     private void disableKeyguard()
     {
-        PPApplication.logE("$$$ Keyguard.disable","keyguardLock="+keyguardLock);
+        //PPApplication.logE("$$$ Keyguard.disable","keyguardLock="+keyguardLock);
         if ((keyguardLock != null) && Permissions.hasPermission(getApplicationContext(), Manifest.permission.DISABLE_KEYGUARD))
             keyguardLock.disableKeyguard();
     }
 
     private void reenableKeyguard()
     {
-        PPApplication.logE("$$$ Keyguard.reenable","keyguardLock="+keyguardLock);
+        //PPApplication.logE("$$$ Keyguard.reenable","keyguardLock="+keyguardLock);
         if ((keyguardLock != null) && Permissions.hasPermission(getApplicationContext(), Manifest.permission.DISABLE_KEYGUARD))
             keyguardLock.reenableKeyguard();
     }
@@ -1394,7 +1395,7 @@ public class PhoneProfilesService extends Service {
         if (notificationVibrate) {
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             if ((vibrator != null) && vibrator.hasVibrator()) {
-                PPApplication.logE("PhoneProfilesService.playNotificationSound", "vibration");
+                //PPApplication.logE("PhoneProfilesService.playNotificationSound", "vibration");
                 try {
                     if (Build.VERSION.SDK_INT >= 26) {
                         vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -1459,7 +1460,7 @@ public class PhoneProfilesService extends Service {
                             } catch (Exception ignored) {}
 
                             //audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, oldMediaVolume, 0);
-                            PPApplication.logE("PhoneProfilesService.playNotificationSound", "notification stopped");
+                            //PPApplication.logE("PhoneProfilesService.playNotificationSound", "notification stopped");
                         }
 
                         notificationIsPlayed = false;
@@ -1479,7 +1480,7 @@ public class PhoneProfilesService extends Service {
                 }, notificationMediaPlayer.getDuration());
 
             } catch (SecurityException e) {
-                PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
+                //PPApplication.logE("PhoneProfilesService.playNotificationSound", "security exception");
                 stopPlayNotificationSound();
                 PPApplication.startHandlerThreadInternalChangeToFalse();
                 final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());
@@ -1491,7 +1492,7 @@ public class PhoneProfilesService extends Service {
                 }, 3000);
                 Permissions.grantPlayRingtoneNotificationPermissions(this);
             } catch (Exception e) {
-                PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
+                //PPApplication.logE("PhoneProfilesService.playNotificationSound", "exception");
                 stopPlayNotificationSound();
                 PPApplication.startHandlerThreadInternalChangeToFalse();
                 final Handler handler = new Handler(PPApplication.handlerThreadInternalChangeToFalse.getLooper());

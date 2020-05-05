@@ -5,7 +5,6 @@ import android.net.wifi.IWifiManager;
 import android.net.wifi.WifiManager;
 import android.os.ResultReceiver;
 import android.os.ServiceManager;
-import android.util.Log;
 
 @SuppressWarnings("WeakerAccess")
 public class CmdWifiAP {
@@ -50,10 +49,10 @@ public class CmdWifiAP {
             boolean enabled;
             IWifiManager adapter = IWifiManager.Stub.asInterface(ServiceManager.getService("wifi")); // service list | grep IWifiManager
             enabled = adapter.getWifiApEnabledState() == WifiManager.WIFI_AP_STATE_ENABLED;
-            PPApplication.logE("CmdWifiAP.isEnabled", "enabled="+enabled);
+            //PPApplication.logE("CmdWifiAP.isEnabled", "enabled="+enabled);
             return enabled;
         } catch (Throwable e) {
-            PPApplication.logE("CmdWifiAP.isEnabled", Log.getStackTraceString(e));
+            //PPApplication.logE("CmdWifiAP.isEnabled", Log.getStackTraceString(e));
             return false;
         }
     }

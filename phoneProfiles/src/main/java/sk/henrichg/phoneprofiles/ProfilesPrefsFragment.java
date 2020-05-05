@@ -68,13 +68,13 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
 
         super.onCreate(savedInstanceState);
 
-        PPApplication.logE("ProfilesPrefsFragment.onCreate", "xxx");
+        //PPApplication.logE("ProfilesPrefsFragment.onCreate", "xxx");
 
         // is requred for to not call onCreate and onDestroy on orientation change
         setRetainInstance(true);
 
         nestedFragment = !(this instanceof ProfilesPrefsActivity.ProfilesPrefsRoot);
-        PPApplication.logE("ProfilesPrefsFragment.onCreate", "nestedFragment="+nestedFragment);
+        //PPApplication.logE("ProfilesPrefsFragment.onCreate", "nestedFragment="+nestedFragment);
 
         initPreferenceFragment(savedInstanceState);
 
@@ -97,7 +97,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
     @Override
     public void onDisplayPreferenceDialog(Preference preference)
     {
-        PPApplication.logE("ProfilesPrefsFragment.onDisplayPreferenceDialog", "xxx");
+        //PPApplication.logE("ProfilesPrefsFragment.onDisplayPreferenceDialog", "xxx");
 
         PreferenceDialogFragmentCompat dialogFragment = null;
 
@@ -201,7 +201,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        PPApplication.logE("ProfilesPrefsFragment.onActivityCreated", "xxx");
+        //PPApplication.logE("ProfilesPrefsFragment.onActivityCreated", "xxx");
 
         if (getActivity() == null)
             return;
@@ -279,7 +279,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                      (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists())
                     );*/
         final boolean canEnableZenMode = ActivateProfileHelper.canChangeZenMode(context.getApplicationContext(), false);
-        PPApplication.logE("ProfilesPrefsFragment.onActivityCreated","canEnableZenMode="+canEnableZenMode);
+        //PPApplication.logE("ProfilesPrefsFragment.onActivityCreated","canEnableZenMode="+canEnableZenMode);
 
         ListPreference zenModePreference = prefMng.findPreference(Profile.PREF_PROFILE_VOLUME_ZEN_MODE);
         if (zenModePreference != null) {
@@ -676,7 +676,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             editor.apply();
             */
 
-            PPApplication.logE("ProfilesPrefsFragment.onDestroy", "xxx");
+            //PPApplication.logE("ProfilesPrefsFragment.onDestroy", "xxx");
 
         } catch (Exception ignored) {}
 
@@ -685,7 +685,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        PPApplication.logE("ProfilesPrefsFragment.onSharedPreferenceChanged", "xxx");
+        //PPApplication.logE("ProfilesPrefsFragment.onSharedPreferenceChanged", "xxx");
 
         String value;
         if (key.equals(Profile.PREF_PROFILE_NAME)) {
@@ -732,8 +732,8 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
     }
 
     void doOnActivityResult(int requestCode, int resultCode, Intent data) {
-        PPApplication.logE("ProfilesPrefsFragment.doOnActivityResult", "xxx");
-        PPApplication.logE("ProfilesPrefsFragment.doOnActivityResult", "requestCode=" + requestCode);
+        //PPApplication.logE("ProfilesPrefsFragment.doOnActivityResult", "xxx");
+        //PPApplication.logE("ProfilesPrefsFragment.doOnActivityResult", "requestCode=" + requestCode);
 
         if (requestCode == Permissions.REQUEST_CODE + Permissions.GRANT_TYPE_PROFILE) {
             setPermissionsPreference();
@@ -1868,9 +1868,9 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
             forceSet = true;
         }
 
-        PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "key="+key);
-        PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "preferenceScreen="+preferenceScreen);
-        PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "_bold="+_bold);
+        //PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "key="+key);
+        //PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "preferenceScreen="+preferenceScreen);
+        //PPApplication.logE("ProfilesPrefsFragment.setCategorySummary", "_bold="+_bold);
         GlobalGUIRoutines.setPreferenceTitleStyleX(preferenceScreen, true, _bold, true, false, false, false);
         if (_bold || forceSet)
             preferenceScreen.setSummary(summary);

@@ -12,12 +12,12 @@ public class PhoneProfilesBackupAgent extends BackupAgentHelper {
 
     @Override
     public void onCreate() {
-        PPApplication.logE("PhoneProfilesBackupAgent","onCreate");
+        //PPApplication.logE("PhoneProfilesBackupAgent","onCreate");
     }
 
     @Override
     public void onRestoreFinished() {
-        PPApplication.logE("PhoneProfilesBackupAgent","onRestoreFinished");
+        //PPApplication.logE("PhoneProfilesBackupAgent","onRestoreFinished");
 
         final Context appContext = getApplicationContext();
 

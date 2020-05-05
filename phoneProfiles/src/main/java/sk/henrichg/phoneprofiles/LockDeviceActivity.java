@@ -109,13 +109,13 @@ public class LockDeviceActivity extends AppCompatActivity {
             // change screen timeout
             final DataWrapper dataWrapper = new DataWrapper(appContext, false, 0, false);
             final int screenTimeout = ActivateProfileHelper.getActivatedProfileScreenTimeout(appContext);
-            PPApplication.logE("LockDeviceActivity.onDestroy", "screenTimeout="+screenTimeout);
+            //PPApplication.logE("LockDeviceActivity.onDestroy", "screenTimeout="+screenTimeout);
             if ((screenTimeout > 0) && (Permissions.checkScreenTimeout(appContext))) {
-                PPApplication.logE("LockDeviceActivity.onDestroy", "permission ok");
+                //PPApplication.logE("LockDeviceActivity.onDestroy", "permission ok");
                 if (PPApplication.screenTimeoutHandler != null) {
                     PPApplication.screenTimeoutHandler.post(new Runnable() {
                         public void run() {
-                            PPApplication.logE("LockDeviceActivity.onDestroy", "call ActivateProfileHelper.setScreenTimeout");
+                            //PPApplication.logE("LockDeviceActivity.onDestroy", "call ActivateProfileHelper.setScreenTimeout");
                             ActivateProfileHelper.setScreenTimeout(screenTimeout, appContext);
                         }
                     });

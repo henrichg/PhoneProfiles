@@ -11,7 +11,7 @@ import android.os.SystemClock;
 public class LockDeviceActivityFinishBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("##### LockDeviceActivityFinishBroadcastReceiver.onReceive", "xxx");
+        //PPApplication.logE("##### LockDeviceActivityFinishBroadcastReceiver.onReceive", "xxx");
 
         if (PhoneProfilesService.getInstance() != null) {
             if (PhoneProfilesService.getInstance().lockDeviceActivity != null) {
@@ -28,7 +28,7 @@ public class LockDeviceActivityFinishBroadcastReceiver extends BroadcastReceiver
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
             if (pendingIntent != null) {
-                PPApplication.logE("LockDeviceActivityFinishBroadcastReceiver.removeAlarm", "alarm found");
+                //PPApplication.logE("LockDeviceActivityFinishBroadcastReceiver.removeAlarm", "alarm found");
 
                 alarmManager.cancel(pendingIntent);
                 pendingIntent.cancel();

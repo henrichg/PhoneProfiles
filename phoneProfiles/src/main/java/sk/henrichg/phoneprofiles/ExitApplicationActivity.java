@@ -13,7 +13,7 @@ public class ExitApplicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
 
-        PPApplication.logE("ExitApplicationActivity.onCreate", "xxx");
+        //PPApplication.logE("ExitApplicationActivity.onCreate", "xxx");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ExitApplicationActivity extends AppCompatActivity {
         GlobalGUIRoutines.setTheme(this, true, false);
         GlobalGUIRoutines.setLanguage(this);
 
-        PPApplication.logE("ExitApplicationActivity.onStart", "xxx");
+        //PPApplication.logE("ExitApplicationActivity.onStart", "xxx");
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle(R.string.exit_application_alert_title);
@@ -34,7 +34,7 @@ public class ExitApplicationActivity extends AppCompatActivity {
         //dialogBuilder.setIcon(android.R.drawable.ic_dialog_alert);
         dialogBuilder.setPositiveButton(R.string.alert_button_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                PPApplication.logE("ExitApplicationActivity.onStart", "exit");
+                //PPApplication.logE("ExitApplicationActivity.onStart", "exit");
                 PPApplication.exitApp(getApplicationContext(), ExitApplicationActivity.this, false/*, true*/);
             }
         });

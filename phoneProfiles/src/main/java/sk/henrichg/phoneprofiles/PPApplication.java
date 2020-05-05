@@ -49,6 +49,7 @@ import androidx.multidex.MultiDex;
 //import com.github.anrwatchdog.ANRError;
 //import com.github.anrwatchdog.ANRWatchDog;
 
+@SuppressWarnings("WeakerAccess")
 public class PPApplication extends Application {
 
     private static PPApplication instance;
@@ -110,7 +111,7 @@ public class PPApplication extends Application {
                                             //+"|InfoDialogPreferenceFragmentX"
                                             //+"|ImportantInfoActivity"
 
-                                            +"|[BRS] SettingsContentObserver.onChange"
+                                            //+"|[BRS] SettingsContentObserver.onChange"
             ;
 
     static final String EXTRA_PROFILE_ID = "profile_id";
@@ -436,7 +437,7 @@ public class PPApplication extends Application {
     }
 
     static void runCommand(Context context, Intent intent) {
-        PPApplication.logE("PPApplication.runCommand", "xxx");
+        //PPApplication.logE("PPApplication.runCommand", "xxx");
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
@@ -555,6 +556,7 @@ public class PPApplication extends Application {
         return contains;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static public boolean logEnabled() {
         return (logIntoLogCat || logIntoFile);
     }
@@ -827,7 +829,7 @@ public class PPApplication extends Application {
 
     static void showProfileNotification(/*Context context*/) {
         try {
-            PPApplication.logE("PPApplication.showProfileNotification", "xxx");
+            //PPApplication.logE("PPApplication.showProfileNotification", "xxx");
             /*Intent serviceIntent = new Intent(context.getApplicationContext(), PhoneProfilesService.class);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_ONLY_START, false);
             serviceIntent.putExtra(PhoneProfilesService.EXTRA_SHOW_PROFILE_NOTIFICATION, true);
@@ -865,14 +867,15 @@ public class PPApplication extends Application {
             return rootMutex.rooted;
 
         try {
-            PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
+            //PPApplication.logE("PPApplication._isRooted", "start isRootAvailable");
             //if (RootTools.isRootAvailable()) {
+            //noinspection RedundantIfStatement
             if (RootToolsSmall.isRooted()) {
                 // device is rooted
-                PPApplication.logE("PPApplication._isRooted", "root available");
+                //PPApplication.logE("PPApplication._isRooted", "root available");
                 rootMutex.rooted = true;
             } else {
-                PPApplication.logE("PPApplication._isRooted", "root NOT available");
+                //PPApplication.logE("PPApplication._isRooted", "root NOT available");
                 rootMutex.rooted = false;
                 //rootMutex.settingsBinaryExists = false;
                 //rootMutex.settingsBinaryChecked = false;
@@ -914,15 +917,16 @@ public class PPApplication extends Application {
         if (isRooted(false)) {
             synchronized (PPApplication.rootMutex) {
                 try {
-                    PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
+                    //PPApplication.logE("PPApplication.isRootGranted", "start isAccessGiven");
+                    //noinspection StatementWithEmptyBody
                     if (RootTools.isAccessGiven()) {
                         // root is granted
-                        PPApplication.logE("PPApplication.isRootGranted", "root granted");
+                        //PPApplication.logE("PPApplication.isRootGranted", "root granted");
                         //rootMutex.rootGranted = true;
                         //rootMutex.grantRootChecked = true;
                     } else {
                         // grant denied
-                        PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
+                        //PPApplication.logE("PPApplication.isRootGranted", "root NOT granted");
                         //rootMutex.rootGranted = false;
                         //rootMutex.grantRootChecked = true;
                     }
@@ -932,9 +936,9 @@ public class PPApplication extends Application {
                 }
                 //return rootMutex.rootGranted;
             }
-        } else {
+        } /*else {
             PPApplication.logE("PPApplication.isRootGranted", "not rooted");
-        }
+        }*/
         //return false;
     }
 
@@ -950,11 +954,11 @@ public class PPApplication extends Application {
 
         synchronized (PPApplication.rootMutex) {
             if (!rootMutex.settingsBinaryChecked) {
-                PPApplication.logE("PPApplication.settingsBinaryExists", "start");
+                //PPApplication.logE("PPApplication.settingsBinaryExists", "start");
                 rootMutex.settingsBinaryExists = RootToolsSmall.hasSettingBin();
                 rootMutex.settingsBinaryChecked = true;
             }
-            PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists=" + rootMutex.settingsBinaryExists);
+            //PPApplication.logE("PPApplication.settingsBinaryExists", "settingsBinaryExists=" + rootMutex.settingsBinaryExists);
             return rootMutex.settingsBinaryExists;
         }
     }
@@ -971,11 +975,11 @@ public class PPApplication extends Application {
 
         synchronized (PPApplication.rootMutex) {
             if (!rootMutex.serviceBinaryChecked) {
-                PPApplication.logE("PPApplication.serviceBinaryExists", "start");
+                //PPApplication.logE("PPApplication.serviceBinaryExists", "start");
                 rootMutex.serviceBinaryExists = RootToolsSmall.hasServiceBin();
                 rootMutex.serviceBinaryChecked = true;
             }
-            PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists=" + rootMutex.serviceBinaryExists);
+            //PPApplication.logE("PPApplication.serviceBinaryExists", "serviceBinaryExists=" + rootMutex.serviceBinaryExists);
             return rootMutex.serviceBinaryExists;
         }
     }
@@ -1348,12 +1352,12 @@ public class PPApplication extends Application {
             }
 
         } catch (IOException ex) {
-            PPApplication.logE("PPApplication.isMIUIROM", Log.getStackTraceString(ex));
+            //PPApplication.logE("PPApplication.isMIUIROM", Log.getStackTraceString(ex));
         }
 
-        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom1="+miuiRom1);
-        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom2="+miuiRom2);
-        PPApplication.logE("PPApplication.isMIUIROM", "miuiRom3="+miuiRom3);
+        //PPApplication.logE("PPApplication.isMIUIROM", "miuiRom1="+miuiRom1);
+        //PPApplication.logE("PPApplication.isMIUIROM", "miuiRom2="+miuiRom2);
+        //PPApplication.logE("PPApplication.isMIUIROM", "miuiRom3="+miuiRom3);
 
         return miuiRom1 || miuiRom2 || miuiRom3;
     }
@@ -1368,7 +1372,7 @@ public class PPApplication extends Application {
             input.close();
             return line;
         } catch (IOException ex) {
-            PPApplication.logE("PPApplication.getEmuiRomName", Log.getStackTraceString(ex));
+            //PPApplication.logE("PPApplication.getEmuiRomName", Log.getStackTraceString(ex));
             return "";
         }
     }
@@ -1381,7 +1385,7 @@ public class PPApplication extends Application {
 
     private static boolean isEMUIROM() {
         String emuiRomName = getEmuiRomName();
-        PPApplication.logE("PPApplication.isEMUIROM", "emuiRomName="+emuiRomName);
+        //PPApplication.logE("PPApplication.isEMUIROM", "emuiRomName="+emuiRomName);
 
         return (emuiRomName.length() != 0) ||
                 Build.DISPLAY.toLowerCase().contains("emui2.3");// || "EMUI 2.3".equalsIgnoreCase(emuiRomName);
@@ -1416,7 +1420,7 @@ public class PPApplication extends Application {
             PackageManager packageManager = context.getPackageManager();
             return packageManager.hasSystemFeature(feature);
         } catch (Exception e) {
-            PPApplication.logE("PPApplication.hasSystemFeature", Log.getStackTraceString(e));
+            //PPApplication.logE("PPApplication.hasSystemFeature", Log.getStackTraceString(e));
             return false;
         }
     }
@@ -1488,7 +1492,7 @@ public class PPApplication extends Application {
                 }*/
             }
         } catch (Exception e) {
-            PPApplication.logE("PPApplication._exitApp", Log.getStackTraceString(e));
+            //PPApplication.logE("PPApplication._exitApp", Log.getStackTraceString(e));
         }
     }
 
@@ -1599,12 +1603,12 @@ public class PPApplication extends Application {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    PPApplication.logE("PPApplication.startHandlerThread", "START run - from=PPApplication.setBlockProfileEventActions");
+                    //PPApplication.logE("PPApplication.startHandlerThread", "START run - from=PPApplication.setBlockProfileEventActions");
 
-                    PPApplication.logE("PPApplication.setBlockProfileEventActions", "delayed boot up");
+                    //PPApplication.logE("PPApplication.setBlockProfileEventActions", "delayed boot up");
                     PPApplication.blockProfileEventActions = false;
 
-                    PPApplication.logE("PPApplication.startHandlerThread", "END run - from=PPApplication.setBlockProfileEventActions");
+                    //PPApplication.logE("PPApplication.startHandlerThread", "END run - from=PPApplication.setBlockProfileEventActions");
                 }
             }, 30000);
         }

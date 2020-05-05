@@ -35,7 +35,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        PPApplication.logE("PhoneProfilesPrefsActivity.onCreate", "savedInstanceState="+savedInstanceState);
+        //PPApplication.logE("PhoneProfilesPrefsActivity.onCreate", "savedInstanceState="+savedInstanceState);
 
         setContentView(R.layout.activity_preferences);
 
@@ -121,13 +121,6 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        PPApplication.logE("PhoneProfilesPrefsActivity.onStart", "xxx");
-        //GlobalGUIRoutines.lockScreenOrientation(this);
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
 
@@ -141,7 +134,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
                 PPApplication.showProfileNotification();
             }
         }, 500);
-        PPApplication.logE("ActivateProfileHelper.updateGUI", "from PhoneProfilesPrefsActivity.onStop");
+        //PPApplication.logE("ActivateProfileHelper.updateGUI", "from PhoneProfilesPrefsActivity.onStop");
         ActivateProfileHelper.updateGUI(getApplicationContext(), true);
 
         //GlobalGUIRoutines.unlockScreenOrientation(this);
@@ -301,7 +294,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle bundle, String rootKey) {
             setPreferencesFromResource(R.xml.phone_profiles_prefs_notifications, rootKey);
-            PPApplication.logE("PhoneProfilesPrefsNotifications.onCreatePreferences", "xxx");
+            //PPApplication.logE("PhoneProfilesPrefsNotifications.onCreatePreferences", "xxx");
         }
 
         @Override

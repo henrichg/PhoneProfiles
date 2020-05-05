@@ -9,7 +9,7 @@ public class PermissionsNotificationDeletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("### PermissionsNotificationDeletedReceiver","xxx");
+        //PPApplication.logE("### PermissionsNotificationDeletedReceiver","xxx");
 
         //Permissions.clearMergedPermissions(context.getApplicationContext());
 

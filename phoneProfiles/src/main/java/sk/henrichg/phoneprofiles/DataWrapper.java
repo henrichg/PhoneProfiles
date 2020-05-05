@@ -1124,7 +1124,7 @@ class DataWrapper {
                 ArrayList<ShortcutInfo> shortcuts = new ArrayList<>();
 
                 for (Profile profile : countedProfiles) {
-                    PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "countedProfile=" + profile._name);
+                    //PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "countedProfile=" + profile._name);
                     profile.generateIconBitmap(context, monochrome, monochromeValue, useMonochromeValueForCustomIcon);
                     shortcuts.add(createShortcutInfo(profile));
                 }
@@ -1132,7 +1132,7 @@ class DataWrapper {
                 int shortcutsCount = countedProfiles.size();
                 if (shortcutsCount < limit) {
                     for (Profile profile : notCountedProfiles) {
-                        PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "notCountedProfile=" + profile._name);
+                        //PPApplication.logE("DataWrapper.setDynamicLauncherShortcuts", "notCountedProfile=" + profile._name);
                         profile.generateIconBitmap(context, monochrome, monochromeValue, useMonochromeValueForCustomIcon);
                         shortcuts.add(createShortcutInfo(profile));
 
@@ -1150,7 +1150,7 @@ class DataWrapper {
 
     void setDynamicLauncherShortcutsFromMainThread()
     {
-        PPApplication.logE("DataWrapper.setDynamicLauncherShortcutsFromMainThread", "start");
+        //PPApplication.logE("DataWrapper.setDynamicLauncherShortcutsFromMainThread", "start");
         final DataWrapper dataWrapper = copyDataWrapper();
 
         PPApplication.startHandlerThread();

@@ -111,12 +111,14 @@ class SettingsContentObserver  extends ContentObserver {
         }
         previousScreenTimeout = screenTimeout;
 
+        /*
         int value = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, -1);
         PPApplication.logE("[BRS] SettingsContentObserver.onChange","brightness mode="+value);
         value = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1);
         PPApplication.logE("[BRS] SettingsContentObserver.onChange","manual brightness value="+value);
         float fValue = Settings.System.getFloat(context.getContentResolver(), ActivateProfileHelper.ADAPTIVE_BRIGHTNESS_SETTING_NAME, -1);
         PPApplication.logE("[BRS] SettingsContentObserver.onChange","adaptive brightness value="+fValue);
+        */
 
         /////////////
     }

@@ -479,9 +479,9 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 }
             }
 
-            PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestWriteSettings="+showRequestWriteSettings);
-            PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestAccessNotificationPolicy="+showRequestAccessNotificationPolicy);
-            PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestDrawOverlays="+showRequestDrawOverlays);
+            //PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestWriteSettings="+showRequestWriteSettings);
+            //PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestAccessNotificationPolicy="+showRequestAccessNotificationPolicy);
+            //PPApplication.logE("GrantPermissionActivity.showRationale", "showRequestDrawOverlays="+showRequestDrawOverlays);
 
             int iteration = 4;
             if (showRequestWriteSettings)
@@ -989,69 +989,69 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
             boolean calendarPermission = Permissions.checkCalendar(context);
             permissionsChanged = Permissions.getCalendarPermission(context) != calendarPermission;
-            PPApplication.logE("GrantPermissionActivity.onActivityResult", "calendarPermission="+permissionsChanged);
+            //PPApplication.logE("GrantPermissionActivity.onActivityResult", "calendarPermission="+permissionsChanged);
             // finish Editor when permission is disabled
             finishActivity = permissionsChanged && (!calendarPermission);
             if (!permissionsChanged) {
                 boolean contactsPermission = Permissions.checkContacts(context);
                 permissionsChanged = Permissions.getContactsPermission(context) != contactsPermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "contactsPermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "contactsPermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!contactsPermission);
             }
             if (!permissionsChanged) {
                 boolean locationPermission = Permissions.checkLocation(context);
                 permissionsChanged = Permissions.getLocationPermission(context) != locationPermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "locationPermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "locationPermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!locationPermission);
             }
             if (!permissionsChanged) {
                 boolean smsPermission = Permissions.checkSMS(context);
                 permissionsChanged = Permissions.getSMSPermission(context) != smsPermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "smsPermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "smsPermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!smsPermission);
             }
             if (!permissionsChanged) {
                 boolean phonePermission = Permissions.checkPhone(context);
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "phonePermission="+phonePermission);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "phonePermission="+phonePermission);
                 permissionsChanged = Permissions.getPhonePermission(context) != phonePermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "permissionsChanged="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "permissionsChanged="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!phonePermission);
             }
             if (!permissionsChanged) {
                 boolean storagePermission = Permissions.checkStorage(context);
                 permissionsChanged = Permissions.getStoragePermission(context) != storagePermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "storagePermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "storagePermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!storagePermission);
             }
             if (!permissionsChanged) {
                 boolean cameraPermission = Permissions.checkCamera(context);
                 permissionsChanged = Permissions.getCameraPermission(context) != cameraPermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "cameraPermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "cameraPermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!cameraPermission);
             }
             if (!permissionsChanged) {
                 boolean microphonePermission = Permissions.checkMicrophone(context);
                 permissionsChanged = Permissions.getMicrophonePermission(context) != microphonePermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "microphonePermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "microphonePermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!microphonePermission);
             }
             if (!permissionsChanged) {
                 boolean sensorsPermission = Permissions.checkSensors(context);
                 permissionsChanged = Permissions.getSensorsPermission(context) != sensorsPermission;
-                PPApplication.logE("GrantPermissionActivity.onActivityResult", "sensorsPermission="+permissionsChanged);
+                //PPApplication.logE("GrantPermissionActivity.onActivityResult", "sensorsPermission="+permissionsChanged);
                 // finish Editor when permission is disabled
                 finishActivity = permissionsChanged && (!sensorsPermission);
             }
 
             Permissions.saveAllPermissions(context, permissionsChanged);
-            PPApplication.logE("GrantPermissionActivity.onActivityResult", "permissionsChanged="+permissionsChanged);
+            //PPApplication.logE("GrantPermissionActivity.onActivityResult", "permissionsChanged="+permissionsChanged);
 
             if (permissionsChanged) {
                 PPApplication.showProfileNotification(/*context*/);

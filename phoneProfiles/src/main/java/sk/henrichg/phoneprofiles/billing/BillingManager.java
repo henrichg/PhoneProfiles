@@ -20,14 +20,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import sk.henrichg.phoneprofiles.DonationFragment;
-import sk.henrichg.phoneprofiles.PPApplication;
 
 public class BillingManager implements PurchasesUpdatedListener {
 
     private final BillingClient mBillingClient;
     private final AppCompatActivity mActivity;
 
-    private final static String TAG = "BillingManager";
+    //private final static String TAG = "BillingManager";
 
     private static final HashMap<String, List<String>> SKUS;
     static
@@ -51,7 +50,7 @@ public class BillingManager implements PurchasesUpdatedListener {
     */
 
     public BillingManager(AppCompatActivity activity) {
-        PPApplication.logE(TAG, "start client");
+        //PPApplication.logE(TAG, "start client");
         mActivity = activity;
         mBillingClient = BillingClient.newBuilder(mActivity)
                 .enablePendingPurchases()
@@ -66,7 +65,7 @@ public class BillingManager implements PurchasesUpdatedListener {
     }
 
     private void startServiceConnectionIfNeeded(final Runnable executeOnSuccess) {
-        PPApplication.logE(TAG, "startServiceConnectionIfNeeded");
+        //PPApplication.logE(TAG, "startServiceConnectionIfNeeded");
         if (mBillingClient.isReady()) {
             if (executeOnSuccess != null) {
                 executeOnSuccess.run();
@@ -106,7 +105,7 @@ public class BillingManager implements PurchasesUpdatedListener {
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
         int responseCode = billingResult.getResponseCode();
-        PPApplication.logE(TAG, "onPurchasesUpdated() response: " + responseCode);
+        //PPApplication.logE(TAG, "onPurchasesUpdated() response: " + responseCode);
         if (responseCode == BillingClient.BillingResponseCode.OK) {
             getFragment().purchaseSuccessful(purchases);
 
@@ -160,7 +159,7 @@ public class BillingManager implements PurchasesUpdatedListener {
                         .setSkuDetails(skuDetails)
                         .build();
                 int responseCode = mBillingClient.launchBillingFlow(mActivity, billingFlowParams).getResponseCode();
-                PPApplication.logE(TAG, "startPurchaseFlow responseCode="+responseCode);
+                //PPApplication.logE(TAG, "startPurchaseFlow responseCode="+responseCode);
                 getFragment().displayAnErrorIfNeeded(responseCode);
             }
         };
@@ -204,7 +203,7 @@ public class BillingManager implements PurchasesUpdatedListener {
                         new ConsumeResponseListener() {
                             @Override
                             public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
-                                PPApplication.logE(TAG, "onConsumeResponse() response: " + billingResult.getResponseCode());
+                                //PPApplication.logE(TAG, "onConsumeResponse() response: " + billingResult.getResponseCode());
                                 /*if (responseCode == BillingClient.BillingResponse.OK) {
                                     // Handle the success of the consume operation.
                                     // For example, increase the number of player's coins,

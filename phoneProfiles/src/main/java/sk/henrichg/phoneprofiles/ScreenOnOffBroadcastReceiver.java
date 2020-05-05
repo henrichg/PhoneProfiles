@@ -11,7 +11,7 @@ import static android.content.Context.POWER_SERVICE;
 public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
+        //PPApplication.logE("ScreenOnOffBroadcastReceiver.onReceive","xxx");
 
         final Context appContext = context.getApplicationContext();
 
@@ -23,7 +23,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
 
         final String action = intent.getAction();
 
-        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "before start handler");
+        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "before start handler");
         PPApplication.startHandlerThread();
         final Handler handler = new Handler(PPApplication.handlerThread.getLooper());
         handler.post(new Runnable() {
@@ -38,11 +38,11 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     }
 
                     if ((action != null) && action.equals(Intent.ACTION_SCREEN_ON)) {
-                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
                         PPApplication.isScreenOn = true;
                     }
                     else if ((action != null) && action.equals(Intent.ACTION_SCREEN_OFF)) {
-                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
+                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen off");
                         PPApplication.isScreenOn = false;
 
                         final Handler handler = new Handler(appContext.getMainLooper());
@@ -69,7 +69,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                         }
                     }
                     if ((action != null) && action.equals(Intent.ACTION_USER_PRESENT)) {
-                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
+                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen unlock");
                         //ActivateProfileHelper.setScreenUnlocked(appContext, true);
 
                         if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
@@ -84,13 +84,13 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     /*if (lockDeviceEnabled && Permissions.checkLockDevice(appContext))
                         Settings.System.putInt(appContext.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, PPApplication.screenTimeoutBeforeDeviceLock);*/
                         final int screenTimeout = ActivateProfileHelper.getActivatedProfileScreenTimeout(appContext);
-                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screenTimeout=" + screenTimeout);
+                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screenTimeout=" + screenTimeout);
                         if ((screenTimeout > 0) && (Permissions.checkScreenTimeout(appContext))) {
-                            PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "permission ok");
+                            //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "permission ok");
                             if (PPApplication.screenTimeoutHandler != null) {
                                 PPApplication.screenTimeoutHandler.post(new Runnable() {
                                     public void run() {
-                                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "call ActivateProfileHelper.setScreenTimeout");
+                                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "call ActivateProfileHelper.setScreenTimeout");
                                         ActivateProfileHelper.setScreenTimeout(screenTimeout, appContext);
                                     }
                                 });
@@ -117,7 +117,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                     }
 
                     if ((action != null) && action.equals(Intent.ACTION_SCREEN_ON)) {
-                        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
+                        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "screen on");
                         if (ApplicationPreferences.notificationShowInStatusBar(appContext) &&
                                 ApplicationPreferences.notificationHideInLockScreen(appContext)) {
                             //DataWrapper dataWrapper = new DataWrapper(appContext, false, 0);
@@ -136,7 +136,7 @@ public class ScreenOnOffBroadcastReceiver extends BroadcastReceiver {
                 }
             }
         });
-        PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "after start handler");
+        //PPApplication.logE("@@@ ScreenOnOffBroadcastReceiver.onReceive", "after start handler");
 
     }
 

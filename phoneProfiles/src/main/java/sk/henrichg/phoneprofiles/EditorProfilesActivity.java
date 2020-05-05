@@ -928,9 +928,9 @@ public class EditorProfilesActivity extends AppCompatActivity
                             DatabaseHandler.getInstance(this.dataWrapper.context).deactivateProfile();
                         }
 
-                        PPApplication.logE("EditorProfilesActivity.doImportData", "dbError=" + dbError);
-                        PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError=" + appSettingsError);
-                        PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError=" + sharedProfileError);
+                        //PPApplication.logE("EditorProfilesActivity.doImportData", "dbError=" + dbError);
+                        //PPApplication.logE("EditorProfilesActivity.doImportData", "appSettingsError=" + appSettingsError);
+                        //PPApplication.logE("EditorProfilesActivity.doImportData", "sharedProfileError=" + sharedProfileError);
 
                         if (!appSettingsError) {
                             Permissions.setAllShowRequestPermissions(getApplicationContext(), true);

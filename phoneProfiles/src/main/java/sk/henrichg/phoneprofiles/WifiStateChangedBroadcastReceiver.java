@@ -16,7 +16,7 @@ public class WifiStateChangedBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PPApplication.logE("##### WifiStateChangedBroadcastReceiver.onReceive", "xxx");
+        //PPApplication.logE("##### WifiStateChangedBroadcastReceiver.onReceive", "xxx");
 
         final Context appContext = context.getApplicationContext();
 
@@ -25,7 +25,7 @@ public class WifiStateChangedBroadcastReceiver extends BroadcastReceiver {
             return;
 
         final int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
-        PPApplication.logE("$$$ WifiStateChangedBroadcastReceiver.onReceive","state="+wifiState);
+        //PPApplication.logE("$$$ WifiStateChangedBroadcastReceiver.onReceive","state="+wifiState);
 
         if ((wifiState == WifiManager.WIFI_STATE_ENABLED) || (wifiState == WifiManager.WIFI_STATE_DISABLED))
         {

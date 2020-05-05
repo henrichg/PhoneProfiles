@@ -51,9 +51,9 @@ public class InfoDialogPreferenceFragmentX extends PreferenceDialogFragmentCompa
         if (importantInfoTagBeginIndex != -1) {
             String importantInfoTagDataString = _infoText.substring(importantInfoTagBeginIndex + beginTag.length(), importantInfoTagEndIndex);
 
-            PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagBeginIndex=" + importantInfoTagBeginIndex);
-            PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagEndIndex=" + importantInfoTagEndIndex);
-            PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagDataString=" + importantInfoTagDataString);
+            //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagBeginIndex=" + importantInfoTagBeginIndex);
+            //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagEndIndex=" + importantInfoTagEndIndex);
+            //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "importantInfoTagDataString=" + importantInfoTagDataString);
 
             beginTag = "<II" + tagIndex + " [" + importantInfoTagDataString + "]>";
             //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "beginTag="+beginTag);
@@ -63,13 +63,13 @@ public class InfoDialogPreferenceFragmentX extends PreferenceDialogFragmentCompa
             importantInfoTagBeginIndex = _infoText.indexOf(beginTag);
             importantInfoTagEndIndex = _infoText.indexOf(endTag);
 
-            String clickableString = _infoText.substring(importantInfoTagBeginIndex + beginTag.length(), importantInfoTagEndIndex);
-            PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "clickableString=" + clickableString);
+            //String clickableString = _infoText.substring(importantInfoTagBeginIndex + beginTag.length(), importantInfoTagEndIndex);
+            //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "clickableString=" + clickableString);
 
             _infoText = _infoText.replace(beginTag, "");
             _infoText = _infoText.replace(endTag, "");
 
-            PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "_infoText=" + _infoText);
+            //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView", "_infoText=" + _infoText);
 
             final String _tagType = beginTag.substring(1, 3);
             final String _importantInfoTagDataString = importantInfoTagDataString;
@@ -90,15 +90,15 @@ public class InfoDialogPreferenceFragmentX extends PreferenceDialogFragmentCompa
 
                 @Override
                 public void onClick(@NonNull View textView) {
-                    PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "_tagType=" + _tagType);
-                    PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "_importantInfoTagDataString=" + _importantInfoTagDataString);
+                    //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "_tagType=" + _tagType);
+                    //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "_importantInfoTagDataString=" + _importantInfoTagDataString);
 
                     String[] splits = _importantInfoTagDataString.split(",");
-                    int page = Integer.parseInt(splits[0]);
+                    //int page = Integer.parseInt(splits[0]);
                     int resource = Integer.parseInt(splits[1]);
 
-                    PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "page=" + page);
-                    PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "resource=" + resource);
+                    //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "page=" + page);
+                    //PPApplication.logE("InfoDialogPreferenceFragmentX.onBindDialogView.onClick", "resource=" + resource);
 
                     if (_tagType.equals("II")) {
                         Intent intentLaunch = new Intent(context, ImportantInfoActivity.class);

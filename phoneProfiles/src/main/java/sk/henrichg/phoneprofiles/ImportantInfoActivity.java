@@ -80,21 +80,21 @@ public class ImportantInfoActivity extends AppCompatActivity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             versionCode = PPApplication.getVersionCode(pInfo);
-            PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "versionCode="+versionCode);
+            //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "versionCode="+versionCode);
         } catch (Exception ignored) {
         }
 
         boolean news = false;
         boolean newsLatest = (!firstInstallation) && (versionCode >= ImportantInfoNotification.VERSION_CODE_FOR_NEWS);
-        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "newsLatest="+newsLatest);
+        //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "newsLatest="+newsLatest);
         boolean news2755 = (!firstInstallation) && ((versionCode >= 2755) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
-        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2755);
+        //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2755);
         boolean news2690 = (!firstInstallation) && ((versionCode >= 2690) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
-        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2690);
+        //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news2690="+news2690);
         boolean news1634 = (!firstInstallation) && ((versionCode >= 1634) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
-        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1634="+news1634);
+        //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1634="+news1634);
         boolean news1622 = (!firstInstallation) && ((versionCode >= 1622) && (versionCode < ImportantInfoNotification.VERSION_CODE_FOR_NEWS));
-        PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1622="+news1622);
+        //PPApplication.logE("ImportantInfoHelpFragment.onViewCreated", "news1622="+news1622);
 
         //noinspection StatementWithEmptyBody
         if (newsLatest) {
@@ -432,7 +432,7 @@ public class ImportantInfoActivity extends AppCompatActivity {
         }
 
         int scrollTo = intent.getIntExtra(EXTRA_SCROLL_TO, 0);
-        PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
+        //PPApplication.logE("ImportantInfoActivity.onCreate", "scrollTo="+scrollTo);
 
         if ((scrollTo != 0) && (savedInstanceState == null)) {
             final ScrollView scrollView = findViewById(R.id.important_info_scroll_view);
@@ -441,8 +441,8 @@ public class ImportantInfoActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        PPApplication.logE("ImportantInfoActivity.onStart.handler", "scrollView=" + scrollView);
-                        PPApplication.logE("ImportantInfoActivity.onStart.handler", "viewToScroll=" + viewToScroll);
+                        //PPApplication.logE("ImportantInfoActivity.onStart.handler", "scrollView=" + scrollView);
+                        //PPApplication.logE("ImportantInfoActivity.onStart.handler", "viewToScroll=" + viewToScroll);
                         scrollView.scrollTo(0, viewToScroll.getTop());
                     }
                 }, 200);

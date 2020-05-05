@@ -30,7 +30,7 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
         if ((intent == null) || (intent.getAction() == null))
             return;
 
-        PPApplication.logE("PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
+        //PPApplication.logE("PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
 
         switch (intent.getAction()) {
             case PPApplication.ACTION_ACCESSIBILITY_SERVICE_CONNECTED:
@@ -80,17 +80,17 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
 
             for (AccessibilityServiceInfo service : runningServices) {
                 if (service != null) {
-                    PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "serviceId=" + service.getId());
+                    //PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "serviceId=" + service.getId());
                     if (PPApplication.EXTENDER_ACCESSIBILITY_SERVICE_ID.equals(service.getId())) {
-                        PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "true");
+                        //PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "true");
                         return true;
                     }
                 }
             }
-            PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
+            //PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
             return false;
         }
-        PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
+        //PPApplication.logE("PPPExtenderBroadcastReceiver.isAccessibilityServiceEnabled", "false");
         return false;
     }
 
@@ -100,19 +100,20 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
             ApplicationInfo appInfo = packageManager.getApplicationInfo(PPApplication.PACKAGE_NAME_EXTENDER, 0);
             boolean installed = appInfo.enabled;
             if (installed) {
-                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=true");
+                //PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=true");
                 PackageInfo pInfo = packageManager.getPackageInfo(appInfo.packageName, 0);
+                //noinspection UnnecessaryLocalVariable
                 int version = PPApplication.getVersionCode(pInfo);
-                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "version="+version);
+                //PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "version="+version);
                 return version;
             }
             else {
-                PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=false");
+                //PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "installed=false");
                 return 0;
             }
         }
         catch (Exception e) {
-            PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "exception");
+            //PPApplication.logE("PPPExtenderBroadcastReceiver.isExtenderInstalled", "exception");
             return 0;
         }
     }

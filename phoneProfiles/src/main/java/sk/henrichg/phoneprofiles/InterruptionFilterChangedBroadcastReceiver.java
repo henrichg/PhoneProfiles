@@ -10,7 +10,7 @@ import android.os.Build;
 
 public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceiver {
 
-    private static final String TAG = InterruptionFilterChangedBroadcastReceiver.class.getSimpleName();
+    //private static final String TAG = InterruptionFilterChangedBroadcastReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -50,7 +50,7 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
                                 zenMode = 1;
                                 break;
                         }
-                        PPApplication.logE(TAG, "onReceive(zenMode=" + zenMode + ')');
+                        //PPApplication.logE(TAG, "onReceive(zenMode=" + zenMode + ')');
                         if (zenMode != 0) {
                             RingerModeChangeReceiver.notUnlinkVolumes = true;
                             ActivateProfileHelper.setRingerMode(context.getApplicationContext(), 5);
@@ -71,7 +71,7 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
         NotificationManager mNotificationManager = (NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (mNotificationManager != null) {
             int interruptionFilter = mNotificationManager.getCurrentInterruptionFilter();
-            PPApplication.logE(TAG, "getZenMode(interruptionFilter=" + interruptionFilter + ')');
+            //PPApplication.logE(TAG, "getZenMode(interruptionFilter=" + interruptionFilter + ')');
             switch (interruptionFilter) {
                 case NotificationManager.INTERRUPTION_FILTER_ALL:
                     if (ActivateProfileHelper.vibrationIsOn(audioManager, true))
@@ -95,7 +95,7 @@ public class InterruptionFilterChangedBroadcastReceiver extends BroadcastReceive
                     zenMode = 1;
                     break;
             }
-            PPApplication.logE(TAG, "getZenMode(zenMode=" + zenMode + ')');
+            //PPApplication.logE(TAG, "getZenMode(zenMode=" + zenMode + ')');
         }
         return zenMode;
     }

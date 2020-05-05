@@ -48,7 +48,7 @@ public class ProfileDurationAlarmBroadcastReceiver extends BroadcastReceiver {
 
                                 if (!profile._durationNotificationSound.isEmpty() || profile._durationNotificationVibrate) {
                                     if (PhoneProfilesService.getInstance() != null) {
-                                        PPApplication.logE("##### ProfileDurationAlarmBroadcastReceiver.onReceive", "play notification");
+                                        //PPApplication.logE("##### ProfileDurationAlarmBroadcastReceiver.onReceive", "play notification");
                                         PhoneProfilesService.getInstance().playNotificationSound(profile._durationNotificationSound, profile._durationNotificationVibrate);
                                         //PPApplication.sleep(500);
                                     }

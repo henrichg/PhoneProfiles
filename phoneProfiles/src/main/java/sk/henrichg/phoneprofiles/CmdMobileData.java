@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.ServiceManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import com.android.internal.telephony.ITelephony;
 
@@ -56,8 +55,8 @@ public class CmdMobileData {
                                 int subscriptionId = subscriptionInfo.getSubscriptionId();
                                 enabled = adapter.getDataEnabled(subscriptionId);
                                 ok = true;
-                                PPApplication.logE("CmdMobileData.isEnabled", "subscriptionId="+subscriptionId);
-                                PPApplication.logE("CmdMobileData.isEnabled", "enabled="+enabled);
+                                //PPApplication.logE("CmdMobileData.isEnabled", "subscriptionId="+subscriptionId);
+                                //PPApplication.logE("CmdMobileData.isEnabled", "enabled="+enabled);
                                 if (enabled)
                                     break;
                             }
@@ -67,12 +66,12 @@ public class CmdMobileData {
             }
             if (!ok) {
                 enabled = adapter.getDataEnabled(1);
-                PPApplication.logE("CmdMobileData.isEnabled", "subscriptionId=0");
-                PPApplication.logE("CmdMobileData.isEnabled", "enabled="+enabled);
+                //PPApplication.logE("CmdMobileData.isEnabled", "subscriptionId=0");
+                //PPApplication.logE("CmdMobileData.isEnabled", "enabled="+enabled);
             }
             return enabled;
         } catch (Throwable e) {
-            PPApplication.logE("CmdMobileData.isEnabled", Log.getStackTraceString(e));
+            //PPApplication.logE("CmdMobileData.isEnabled", Log.getStackTraceString(e));
             return false;
         }
     }

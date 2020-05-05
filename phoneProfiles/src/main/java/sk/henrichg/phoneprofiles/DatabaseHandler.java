@@ -352,8 +352,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-        PPApplication.logE("DatabaseHandler.onDowngrade", "oldVersion="+oldVersion);
-        PPApplication.logE("DatabaseHandler.onDowngrade", "newVersion="+newVersion);
+        //PPApplication.logE("DatabaseHandler.onDowngrade", "oldVersion="+oldVersion);
+        //PPApplication.logE("DatabaseHandler.onDowngrade", "newVersion="+newVersion);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROFILES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHORTCUTS);
@@ -1135,7 +1135,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Adding new profile
     void addProfile(Profile profile) {
-        PPApplication.logE("DatabaseHandler.addProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.addProfile", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -1227,7 +1227,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting single profile
     Profile getProfile(long profile_id) {
-        PPApplication.logE("DatabaseHandler.getProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.getProfile", "xxx");
         importExportLock.lock();
         try {
             Profile profile = null;
@@ -1394,7 +1394,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Profiles
     List<Profile> getAllProfiles() {
-        PPApplication.logE("DatabaseHandler.getAllProfiles", "xxx");
+        //PPApplication.logE("DatabaseHandler.getAllProfiles", "xxx");
         importExportLock.lock();
         try {
             List<Profile> profileList = new ArrayList<>();
@@ -1563,7 +1563,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Updating single profile
     void updateProfile(Profile profile) {
-        PPApplication.logE("DatabaseHandler.updateProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.updateProfile", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -1652,7 +1652,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Deleting single profile
     void deleteProfile(Profile profile) {
-        PPApplication.logE("DatabaseHandler.deleteProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.deleteProfile", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -1695,7 +1695,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Deleting all profile2
     void deleteAllProfiles() {
-        PPApplication.logE("DatabaseHandler.deleteAllProfiles", "xxx");
+        //PPApplication.logE("DatabaseHandler.deleteAllProfiles", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -1730,7 +1730,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting profiles Count
     int getProfilesCount() {
-        PPApplication.logE("DatabaseHandler.getProfilesCount", "xxx");
+        //PPApplication.logE("DatabaseHandler.getProfilesCount", "xxx");
         importExportLock.lock();
         try {
             int r = 0;
@@ -1764,7 +1764,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting max(porder)
     private int getMaxPOrder() {
-        PPApplication.logE("DatabaseHandler.getMaxPOrder", "xxx");
+        //PPApplication.logE("DatabaseHandler.getMaxPOrder", "xxx");
         importExportLock.lock();
         try {
             int r = 0;
@@ -1797,7 +1797,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     private void doActivateProfile(Profile profile, boolean activate)
     {
-        PPApplication.logE("DatabaseHandler.doActivateProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.doActivateProfile", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -1853,7 +1853,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     public Profile getActivatedProfile()
     {
-        PPApplication.logE("DatabaseHandler.getActivatedProfile", "xxx");
+        //PPApplication.logE("DatabaseHandler.getActivatedProfile", "xxx");
         importExportLock.lock();
         try {
             Profile profile = null;
@@ -2075,7 +2075,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     void setPOrder(List<Profile> list)
     {
-        PPApplication.logE("DatabaseHandler.setPOrder", "xxx");
+        //PPApplication.logE("DatabaseHandler.setPOrder", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -2114,7 +2114,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     void getProfileIcon(Profile profile)
     {
-        PPApplication.logE("DatabaseHandler.getProfileIcon", "xxx");
+        //PPApplication.logE("DatabaseHandler.getProfileIcon", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -2145,7 +2145,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     void disableNotAllowedPreferences()
     {
-        PPApplication.logE("DatabaseHandler.disableNotAllowedPreferences", "xxx");
+        //PPApplication.logE("DatabaseHandler.disableNotAllowedPreferences", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -2377,7 +2377,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private void changePictureFilePathToUri(SQLiteDatabase database/*, boolean lock*/) {
-        PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "xxx");
+        //PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "xxx");
         //if (lock)
         //    importExportLock.lock();
         //try {
@@ -2772,7 +2772,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Adding new shortcut
     void addShortcut(Shortcut shortcut) {
-        PPApplication.logE("DatabaseHandler.addShortcut", "xxx");
+        //PPApplication.logE("DatabaseHandler.addShortcut", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -2809,7 +2809,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting single shortcut
     Shortcut getShortcut(long shortcutId) {
-        PPApplication.logE("DatabaseHandler.getShortcut", "xxx");
+        //PPApplication.logE("DatabaseHandler.getShortcut", "xxx");
         importExportLock.lock();
         try {
             Shortcut shortcut = null;
@@ -2854,7 +2854,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
 
     // Deleting single shortcut
     void deleteShortcut(long shortcutId) {
-        PPApplication.logE("DatabaseHandler.deleteShortcut", "xxx");
+        //PPApplication.logE("DatabaseHandler.deleteShortcut", "xxx");
         importExportLock.lock();
         try {
             try {
@@ -3439,7 +3439,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     //@SuppressWarnings("resource")
     int importDB(String applicationDataPath)
     {
-        PPApplication.logE("DatabaseHandler.importDB", "xxx");
+        //PPApplication.logE("DatabaseHandler.importDB", "xxx");
         importExportLock.lock();
         try {
             int ret = IMPORT_ERROR_BUG;

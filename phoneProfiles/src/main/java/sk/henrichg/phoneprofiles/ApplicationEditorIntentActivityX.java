@@ -124,10 +124,10 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
             ppIntent = savedInstanceState.getParcelable(ApplicationEditorDialogX.EXTRA_PP_INTENT);
             startApplicationDelay = savedInstanceState.getInt(EXTRA_DIALOG_PREFERENCE_START_APPLICATION_DELAY, 0);
         }
-        if (ppIntent == null)
+        /*if (ppIntent == null)
             PPApplication.logE("ApplicationEditorIntentActivity.onCreate", "ppIntent=null");
         else
-            PPApplication.logE("ApplicationEditorIntentActivity.onCreate", "ppIntent._id="+ppIntent._id);
+            PPApplication.logE("ApplicationEditorIntentActivity.onCreate", "ppIntent._id="+ppIntent._id);*/
 
         okButton = findViewById(R.id.application_editor_intent_ok);
         //intentScrollView = findViewById(R.id.application_editor_intent_scroll_view);
@@ -1142,7 +1142,7 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
             intent = null;
         }
 
-        PPApplication.logE("ApplicationEditorIntentActivity.createIntent", "intent="+intent);
+        //PPApplication.logE("ApplicationEditorIntentActivity.createIntent", "intent="+intent);
         return intent;
     }
 
