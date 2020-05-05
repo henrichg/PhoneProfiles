@@ -547,8 +547,12 @@ public class PhoneProfilesService extends Service {
         //Context appContext = getApplicationContext();
 
         if (shutdownBroadcastReceiver != null) {
-            unregisterReceiver(shutdownBroadcastReceiver);
-            shutdownBroadcastReceiver = null;
+            try {
+                unregisterReceiver(shutdownBroadcastReceiver);
+                shutdownBroadcastReceiver = null;
+            } catch (Exception e) {
+                shutdownBroadcastReceiver = null;
+            }
         }
         shutdownBroadcastReceiver = new ShutdownBroadcastReceiver();
         IntentFilter intentFilter50 = new IntentFilter();
@@ -556,8 +560,12 @@ public class PhoneProfilesService extends Service {
         registerReceiver(shutdownBroadcastReceiver, intentFilter50);
 
         if (screenOnOffReceiver != null) {
-            unregisterReceiver(screenOnOffReceiver);
-            screenOnOffReceiver = null;
+            try {
+                unregisterReceiver(screenOnOffReceiver);
+                screenOnOffReceiver = null;
+            } catch (Exception e) {
+                screenOnOffReceiver = null;
+            }
         }
         screenOnOffReceiver = new ScreenOnOffBroadcastReceiver();
         IntentFilter intentFilter5 = new IntentFilter();
@@ -568,8 +576,12 @@ public class PhoneProfilesService extends Service {
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             if (interruptionFilterChangedReceiver != null) {
-                unregisterReceiver(interruptionFilterChangedReceiver);
-                interruptionFilterChangedReceiver = null;
+                try {
+                    unregisterReceiver(interruptionFilterChangedReceiver);
+                    interruptionFilterChangedReceiver = null;
+                } catch (Exception e) {
+                    interruptionFilterChangedReceiver = null;
+                }
             }
             boolean no60 = !Build.VERSION.RELEASE.equals("6.0");
             if (no60 && GlobalGUIRoutines.activityActionExists(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS, this)) {
@@ -581,8 +593,12 @@ public class PhoneProfilesService extends Service {
         }
 
         if (phoneCallBroadcastReceiver != null) {
-            unregisterReceiver(phoneCallBroadcastReceiver);
-            phoneCallBroadcastReceiver = null;
+            try {
+                unregisterReceiver(phoneCallBroadcastReceiver);
+                phoneCallBroadcastReceiver = null;
+            } catch (Exception e) {
+                phoneCallBroadcastReceiver = null;
+            }
         }
         phoneCallBroadcastReceiver = new PhoneCallBroadcastReceiver();
         IntentFilter intentFilter6 = new IntentFilter();
@@ -592,8 +608,12 @@ public class PhoneProfilesService extends Service {
         registerReceiver(phoneCallBroadcastReceiver, intentFilter6);
 
         if (ringerModeChangeReceiver != null) {
-            unregisterReceiver(ringerModeChangeReceiver);
-            ringerModeChangeReceiver = null;
+            try {
+                unregisterReceiver(ringerModeChangeReceiver);
+                ringerModeChangeReceiver = null;
+            } catch (Exception e) {
+                ringerModeChangeReceiver = null;
+            }
         }
         ringerModeChangeReceiver = new RingerModeChangeReceiver();
         IntentFilter intentFilter7 = new IntentFilter();
@@ -601,8 +621,12 @@ public class PhoneProfilesService extends Service {
         registerReceiver(ringerModeChangeReceiver, intentFilter7);
 
         if (wifiStateChangedBroadcastReceiver != null) {
-            unregisterReceiver(wifiStateChangedBroadcastReceiver);
-            wifiStateChangedBroadcastReceiver = null;
+            try {
+                unregisterReceiver(wifiStateChangedBroadcastReceiver);
+                wifiStateChangedBroadcastReceiver = null;
+            } catch (Exception e) {
+                wifiStateChangedBroadcastReceiver = null;
+            }
         }
         wifiStateChangedBroadcastReceiver = new WifiStateChangedBroadcastReceiver();
         IntentFilter intentFilter8 = new IntentFilter();
@@ -610,8 +634,12 @@ public class PhoneProfilesService extends Service {
         registerReceiver(wifiStateChangedBroadcastReceiver, intentFilter8);
 
         if (pppExtenderBroadcastReceiver != null) {
-            unregisterReceiver(pppExtenderBroadcastReceiver);
-            pppExtenderBroadcastReceiver = null;
+            try {
+                unregisterReceiver(pppExtenderBroadcastReceiver);
+                pppExtenderBroadcastReceiver = null;
+            } catch (Exception e) {
+                pppExtenderBroadcastReceiver = null;
+            }
         }
         pppExtenderBroadcastReceiver = new PPPExtenderBroadcastReceiver();
         IntentFilter intentFilter23 = new IntentFilter();
@@ -620,8 +648,12 @@ public class PhoneProfilesService extends Service {
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
         if (donationBroadcastReceiver != null) {
-            unregisterReceiver(donationBroadcastReceiver);
-            donationBroadcastReceiver = null;
+            try {
+                unregisterReceiver(donationBroadcastReceiver);
+                donationBroadcastReceiver = null;
+            } catch (Exception e) {
+                donationBroadcastReceiver = null;
+            }
         }
         donationBroadcastReceiver = new DonationBroadcastReceiver();
         IntentFilter intentFilter30 = new IntentFilter();
@@ -629,8 +661,12 @@ public class PhoneProfilesService extends Service {
         registerReceiver(donationBroadcastReceiver, intentFilter30);
 
         if (pppExtenderForceStopApplicationBroadcastReceiver != null) {
-            unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
-            pppExtenderForceStopApplicationBroadcastReceiver = null;
+            try {
+                unregisterReceiver(pppExtenderForceStopApplicationBroadcastReceiver);
+                pppExtenderForceStopApplicationBroadcastReceiver = null;
+            } catch (Exception e) {
+                pppExtenderForceStopApplicationBroadcastReceiver = null;
+            }
             Intent intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);
             intent.putExtra(PPApplication.EXTRA_REGISTRATION_APP, "PhoneProfiles");
             intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_UNREGISTER);
@@ -657,8 +693,12 @@ public class PhoneProfilesService extends Service {
         sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
 
         if (settingsContentObserver != null) {
-            getContentResolver().unregisterContentObserver(settingsContentObserver);
-            settingsContentObserver = null;
+            try {
+                getContentResolver().unregisterContentObserver(settingsContentObserver);
+                settingsContentObserver = null;
+            } catch (Exception e) {
+                settingsContentObserver = null;
+            }
         }
         try {
             //settingsContentObserver = new SettingsContentObserver(this, new Handler(getMainLooper()));
