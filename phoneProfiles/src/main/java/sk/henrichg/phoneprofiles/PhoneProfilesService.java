@@ -708,23 +708,32 @@ public class PhoneProfilesService extends Service {
         } catch (Exception ignored) {}
 
         if (wifiConnectionCallback != null) {
-            ConnectivityManager connectivityManager =
-                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivityManager != null) {
-                connectivityManager.unregisterNetworkCallback(wifiConnectionCallback);
+            try {
+                ConnectivityManager connectivityManager =
+                        (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivityManager != null) {
+                    connectivityManager.unregisterNetworkCallback(wifiConnectionCallback);
+                }
+                wifiConnectionCallback = null;
+            } catch (Exception e) {
+                wifiConnectionCallback = null;
             }
-            wifiConnectionCallback = null;
         }
         else {
-            ConnectivityManager connectivityManager =
-                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivityManager != null) {
-                NetworkRequest networkRequest = new NetworkRequest.Builder()
-                        .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-                        .build();
+            try {
+                ConnectivityManager connectivityManager =
+                        (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivityManager != null) {
+                    NetworkRequest networkRequest = new NetworkRequest.Builder()
+                            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                            .build();
 
-                wifiConnectionCallback = new PPWifiNetworkCallback();
-                connectivityManager.registerNetworkCallback(networkRequest, wifiConnectionCallback);
+                    wifiConnectionCallback = new PPWifiNetworkCallback();
+                    connectivityManager.registerNetworkCallback(networkRequest, wifiConnectionCallback);
+                }
+            } catch (Exception e) {
+                wifiConnectionCallback = null;
+                PPApplication.recordException(e);
             }
         }
     }
