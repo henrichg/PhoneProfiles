@@ -236,7 +236,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     whyPermissionType[1][permissionType.type] = true;
                 }
                 if (permissionType.permission.equals(Manifest.permission.SYSTEM_ALERT_WINDOW)) {
-                    showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context) || forceGrant;
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        showRequestDrawOverlays = true;
+                    }
+                    else {
+                        showRequestDrawOverlays = Permissions.getShowRequestDrawOverlaysPermission(context) || forceGrant;
+                    }
                     whyPermissionType[2][permissionType.type] = true;
                 }
                 if (permissionType.permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -924,36 +929,50 @@ public class GrantPermissionActivity extends AppCompatActivity {
 
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                     dialogBuilder.setTitle(R.string.permissions_alert_title);
-                    if (!(PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI))
-                        dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm);
-                    else
-                        dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm_miui);
-                    dialogBuilder.setPositiveButton(R.string.permission_not_ask_button, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Permissions.setShowRequestDrawOverlaysPermission(context, false);
-                            if (rationaleAlreadyShown)
-                                removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
-                            requestPermissions(4, withRationale);
-                        }
-                    });
-                    dialogBuilder.setNegativeButton(R.string.permission_ask_button, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Permissions.setShowRequestDrawOverlaysPermission(context, true);
-                            if (rationaleAlreadyShown)
-                                removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
-                            requestPermissions(4, withRationale);
-                        }
-                    });
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_alway_required);
+                        dialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Permissions.setShowRequestDrawOverlaysPermission(context, true);
+                                if (rationaleAlreadyShown)
+                                    removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
+                                requestPermissions(4, withRationale);
+                            }
+                        });
+                    }
+                    else {
+                        if (!(PPApplication.deviceIsXiaomi && PPApplication.romIsMIUI))
+                            dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm);
+                        else
+                            dialogBuilder.setMessage(R.string.permissions_draw_overlays_not_allowed_confirm_miui);
+                        dialogBuilder.setPositiveButton(R.string.permission_not_ask_button, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Permissions.setShowRequestDrawOverlaysPermission(context, false);
+                                if (rationaleAlreadyShown)
+                                    removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
+                                requestPermissions(4, withRationale);
+                            }
+                        });
+                        dialogBuilder.setNegativeButton(R.string.permission_ask_button, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Permissions.setShowRequestDrawOverlaysPermission(context, true);
+                                if (rationaleAlreadyShown)
+                                    removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
+                                requestPermissions(4, withRationale);
+                            }
+                        });
+                    }
                     dialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            if (rationaleAlreadyShown)
-                                removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
-                            requestPermissions(4, withRationale);
-                        }
-                    });
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        if (rationaleAlreadyShown)
+                            removePermission(Manifest.permission.SYSTEM_ALERT_WINDOW);
+                        requestPermissions(4, withRationale);
+                    }
+                });
                     AlertDialog dialog = dialogBuilder.create();
                     /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
