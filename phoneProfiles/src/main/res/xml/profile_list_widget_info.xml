@@ -10,6 +10,6 @@
                     android:initialLayout="@layout/profile_list_widget"
                     android:resizeMode="horizontal|vertical"
                     android:updatePeriodMillis="0"
-                    android:widgetCategory="keyguard|home_screen"
+                    android:widgetCategory="home_screen"
                     tools:ignore="UnusedAttribute">
 </appwidget-provider>
