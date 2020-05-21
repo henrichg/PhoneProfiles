@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Build;
 import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 
 import java.util.Set;
@@ -26,6 +25,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
 
     private NLServiceReceiver nlservicereceiver;
 
+    private static boolean connected;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,6 +35,8 @@ public class PPNotificationListenerService extends NotificationListenerService {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_REQUEST_INTERRUPTION_FILTER);
         registerReceiver(nlservicereceiver, filter);
+
+        connected = false;
     }
 
     @Override
@@ -41,22 +44,39 @@ public class PPNotificationListenerService extends NotificationListenerService {
         super.onDestroy();
 
         unregisterReceiver(nlservicereceiver);
+
+        connected = false;
     }
 
+    /*
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+        super.onNotificationPosted(sbn);
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
+        super.onNotificationRemoved(sbn);
     }
-
-    // Android 5.0 Lollipop
+    */
 
     @Override public void onListenerConnected() {
+        super.onListenerConnected();
+        connected = true;
     }
-    @Override public void onListenerHintsChanged(int hints) {
+
+    @Override
+    public void onListenerDisconnected() {
+        super.onListenerDisconnected();
+        connected = false;
     }
+
+    /*
+    @Override
+    public void onListenerHintsChanged(int hints) {
+        super.onListenerHintsChanged(hints);
+    }
+    */
 
     @Override
     public void onInterruptionFilterChanged(int interruptionFilter) {
@@ -160,13 +180,15 @@ public class PPNotificationListenerService extends NotificationListenerService {
         String packageName = context.getPackageName();
 
         //if (packageNames != null) {
-            for (String pkgName : packageNames) {
+            return packageNames.contains(packageName) && connected;
+
+            /*for (String pkgName : packageNames) {
                 //if (className.contains(pkgName)) {
                 if (packageName.equals(pkgName)) {
                     return true;
                 }
             }
-            return false;
+            return false;*/
         //}
         //else
         //    return false;
