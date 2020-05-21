@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -2376,112 +2375,82 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    // this is called only from onUpgrade and importDB
+    // for this, is not needed calling importExportLock.lock();
     private void changePictureFilePathToUri(SQLiteDatabase database/*, boolean lock*/) {
-        //PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "xxx");
-        //if (lock)
-        //    importExportLock.lock();
-        //try {
+        try {
+            SQLiteDatabase db;
+            if (database == null) {
+                //SQLiteDatabase db = this.getWritableDatabase();
+                db = getMyWritableDatabase();
+            } else
+                db = database;
+
+            final String selectQuery = "SELECT " + KEY_ID + "," +
+                    KEY_ICON + "," +
+                    KEY_DEVICE_WALLPAPER_CHANGE + "," +
+                    KEY_DEVICE_WALLPAPER +
+                    " FROM " + TABLE_PROFILES;
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (database == null)
+                db.beginTransaction();
+            //noinspection TryFinallyCanBeTryWithResources
             try {
-                //if (lock)
-                //    startRunningCommand();
 
-                SQLiteDatabase db;
-                if (database == null) {
-                    //SQLiteDatabase db = this.getWritableDatabase();
-                    db = getMyWritableDatabase();
-                } else
-                    db = database;
+                if (cursor.moveToFirst()) {
+                    do {
+                        long id = cursor.getLong(cursor.getColumnIndex(KEY_ID));
+                        String icon = cursor.getString(cursor.getColumnIndex(KEY_ICON));
+                        int wallpaperChange = cursor.getInt(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE));
 
-                final String selectQuery = "SELECT " + KEY_ID + "," +
-                        KEY_ICON + "," +
-                        KEY_DEVICE_WALLPAPER_CHANGE + "," +
-                        KEY_DEVICE_WALLPAPER +
-                        " FROM " + TABLE_PROFILES;
+                        /*if (PPApplication.logEnabled()) {
+                            PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "id=" + id);
+                            PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "icon=" + icon);
+                            PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "wallpaperChange=" + wallpaperChange);
+                        }*/
 
-                Cursor cursor = db.rawQuery(selectQuery, null);
+                        ContentValues values = new ContentValues();
 
-                if (database == null)
-                    db.beginTransaction();
-
-                //noinspection TryFinallyCanBeTryWithResources
-                try {
-
-                    if (cursor.moveToFirst()) {
-                        do {
-                            long id = cursor.getLong(cursor.getColumnIndex(KEY_ID));
-                            String icon = cursor.getString(cursor.getColumnIndex(KEY_ICON));
-
-                            int wallpaperChange = cursor.getInt(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER_CHANGE));
-                            String wallpaper = cursor.getString(cursor.getColumnIndex(KEY_DEVICE_WALLPAPER));
-
-                            ContentValues values = new ContentValues();
-
-                            try {
-                                String[] splits = icon.split("\\|");
-                                String iconIdentifier = splits[0];
-                                String isIconResourceId = splits[1];
-                                String useCustomColorForIcon = "0";
-                                String iconCustomColor = "0";
-                                if (splits.length == 4) {
-                                    useCustomColorForIcon = splits[2];
-                                    iconCustomColor = splits[3];
-                                }
-
-                                if (!isIconResourceId.equals("1")) {
-                                    Uri imageUri = WallpaperViewPreferenceX.getImageContentUri(context, iconIdentifier);
-                                    if (imageUri != null)
-                                        values.put(KEY_ICON, imageUri.toString() + "|" +
-                                                isIconResourceId + "|" +
-                                                useCustomColorForIcon + "|" +
-                                                iconCustomColor);
-                                    else
-                                        values.put(KEY_ICON, "ic_profile_default|1|0|0");
-                                }
-                            } catch (Exception e) {
+                        try {
+                            String[] splits = icon.split("\\|");
+                            String isIconResourceId = splits[1];
+                            //PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "isIconResourceId=" + isIconResourceId);
+                            if (!isIconResourceId.equals("1")) {
                                 values.put(KEY_ICON, "ic_profile_default|1|0|0");
                             }
-                            if (wallpaperChange == 1) {
-                                try {
-                                    String[] splits = wallpaper.split("\\|");
-                                    Uri imageUri = WallpaperViewPreferenceX.getImageContentUri(context, splits[0]);
-                                    if (imageUri != null)
-                                        values.put(KEY_DEVICE_WALLPAPER, imageUri.toString());
-                                    else {
-                                        values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
-                                        values.put(KEY_DEVICE_WALLPAPER, "-");
-                                    }
-                                } catch (Exception e) {
-                                    values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
-                                    values.put(KEY_DEVICE_WALLPAPER, "-");
-                                }
-                            } else
-                                values.put(KEY_DEVICE_WALLPAPER, "-");
+                        } catch (Exception e) {
+                            values.put(KEY_ICON, "ic_profile_default|1|0|0");
+                        }
+                        if (wallpaperChange == 1) {
+                            values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
+                            values.put(KEY_DEVICE_WALLPAPER, "-");
+                        } else
+                            values.put(KEY_DEVICE_WALLPAPER, "-");
 
-                            if (values.size() > 0)
-                                db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+                        //PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "values.size()=" + values.size());
+                        if (values.size() > 0) {
+                            db.update(TABLE_PROFILES, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+                        }
 
-                        } while (cursor.moveToNext());
-                    }
-
-                    if (database == null)
-                        db.setTransactionSuccessful();
-
-                } catch (Exception e) {
-                    //Error in between database transaction
-                } finally {
-                    if (database == null)
-                        db.endTransaction();
-                    cursor.close();
+                    } while (cursor.moveToNext());
                 }
 
-                //db.close();
+                if (database == null)
+                    db.setTransactionSuccessful();
 
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                //Error in between database transaction
+            } finally {
+                if (database == null)
+                    db.endTransaction();
+                cursor.close();
             }
-        //} finally {
-        //    if (lock)
-        //        stopRunningCommand();
-        //}
+
+            //db.close();
+        } catch (Exception ignored) {
+        }
     }
 
     /*

@@ -241,6 +241,7 @@ public class WallpaperViewPreferenceX extends Preference {
 
 //---------------------------------------------------------------------------------------------
 
+    /*
     static Uri getImageContentUri(Context context, String imageFile) {
         Cursor cursor = context.getApplicationContext().getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
@@ -265,11 +266,11 @@ public class WallpaperViewPreferenceX extends Preference {
                 //noinspection UnnecessaryLocalVariable
                 Uri uri = context.getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
-                    ContentResolver resolver = context.getApplicationContext().getContentResolver();
-                    resolver.takePersistableUriPermission(uri, takeFlags);
-                }*/
+                //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                //    final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
+                //    ContentResolver resolver = context.getApplicationContext().getContentResolver();
+                //    resolver.takePersistableUriPermission(uri, takeFlags);
+                //}
                 //PPApplication.logE("WallpaperViewPreference.getImageContentUri","uri2="+uri);
                 return uri;
             } else {
@@ -277,5 +278,6 @@ public class WallpaperViewPreferenceX extends Preference {
             }
         }
     }
+    */
 
 }
