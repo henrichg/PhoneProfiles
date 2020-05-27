@@ -381,8 +381,8 @@ public class PhoneProfilesDashClockExtension extends DashClockExtension {
                 if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE, null, null, true, this).allowed == PreferenceAllowed.PREFERENCE_ALLOWED)
                 {
                     boolean enabled;
-                    if (Build.VERSION.SDK_INT >= 29)
-                        enabled = PPPExtenderBroadcastReceiver.isEnabled(this, PPApplication.VERSION_CODE_EXTENDER_5_1_2);
+                    if (Build.VERSION.SDK_INT >= 28)
+                        enabled = PPPExtenderBroadcastReceiver.isEnabled(this, PPApplication.VERSION_CODE_EXTENDER_5_1_3_1);
                     else
                         enabled = PPPExtenderBroadcastReceiver.isEnabled(this, PPApplication.VERSION_CODE_EXTENDER_3_0);
                     if (enabled)

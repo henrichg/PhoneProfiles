@@ -1785,13 +1785,13 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                         ": " + getString(R.string.preference_not_allowed_reason_not_extender_installed);
             }
             else
-            if ((Build.VERSION.SDK_INT < 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0)) {
+            if ((Build.VERSION.SDK_INT < 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0)) {
                 ok = false;
                 summary = getResources().getString(R.string.profile_preferences_device_not_allowed) +
                         ": " + getString(R.string.preference_not_allowed_reason_extender_not_upgraded);
             }
             else
-            if ((Build.VERSION.SDK_INT >= 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_2)) {
+            if ((Build.VERSION.SDK_INT >= 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_3_1)) {
                 ok = false;
                 summary = getResources().getString(R.string.profile_preferences_device_not_allowed) +
                         ": " + getString(R.string.preference_not_allowed_reason_extender_not_upgraded);
@@ -2328,10 +2328,10 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 if (extenderVersion == 0)
                     preference.setSummary(R.string.profile_preferences_deviceForceStopApplications_PPPExtender_install_summary);
                 else
-                if ((Build.VERSION.SDK_INT < 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0))
+                if ((Build.VERSION.SDK_INT < 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0))
                     preference.setSummary(R.string.event_preferences_applications_PPPExtender_new_version_summary);
                 else
-                if ((Build.VERSION.SDK_INT >= 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_2))
+                if ((Build.VERSION.SDK_INT >= 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_3_1))
                     preference.setSummary(R.string.event_preferences_applications_PPPExtender_new_version_summary);
                 else
                     preference.setSummary(R.string.event_preferences_applications_PPPExtender_upgrade_summary);
@@ -2352,13 +2352,13 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                             ": " + getString(R.string.preference_not_allowed_reason_not_extender_installed);
                 }
                 else
-                if ((Build.VERSION.SDK_INT < 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0)) {
+                if ((Build.VERSION.SDK_INT < 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0)) {
                     ok = false;
                     changeSummary = getResources().getString(R.string.profile_preferences_device_not_allowed) +
                             ": " + getString(R.string.preference_not_allowed_reason_extender_not_upgraded);
                 }
                 else
-                if ((Build.VERSION.SDK_INT >= 29) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_2)) {
+                if ((Build.VERSION.SDK_INT >= 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_3_1)) {
                     ok = false;
                     changeSummary = getResources().getString(R.string.profile_preferences_device_not_allowed) +
                             ": " + getString(R.string.preference_not_allowed_reason_extender_not_upgraded);
@@ -2658,8 +2658,8 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         if (key.equals(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE)) {
             setSummary(PREF_FORCE_STOP_APPLICATIONS_INSTALL_EXTENDER);
             boolean enabled;
-            if (Build.VERSION.SDK_INT >= 29)
-                enabled = PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_5_1_2);
+            if (Build.VERSION.SDK_INT >= 28)
+                enabled = PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_5_1_3_1);
             else
                 enabled = PPPExtenderBroadcastReceiver.isEnabled(context, PPApplication.VERSION_CODE_EXTENDER_3_0);
 
