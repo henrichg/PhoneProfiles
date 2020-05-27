@@ -1716,6 +1716,7 @@ class ActivateProfileHelper {
         String applications = profile._deviceForceStopApplicationPackageName;
         if (!(applications.isEmpty() || (applications.equals("-")))) {
             Intent intent = new Intent(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_START);
+            intent.putExtra(PPApplication.EXTRA_PROFILE_ID, profile._id);
             intent.putExtra(PPApplication.EXTRA_APPLICATIONS, applications);
             context.sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
         }

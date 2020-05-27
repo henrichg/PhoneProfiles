@@ -681,7 +681,7 @@ public class PhoneProfilesService extends Service {
         IntentFilter intentFilter24 = new IntentFilter();
         intentFilter24.addAction(PPApplication.ACTION_ACCESSIBILITY_SERVICE_UNBIND);
         intentFilter24.addAction(PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END);
-        registerReceiver(pppExtenderForceStopApplicationBroadcastReceiver, intentFilter23,
+        registerReceiver(pppExtenderForceStopApplicationBroadcastReceiver, intentFilter24,
                 PPApplication.ACCESSIBILITY_SERVICE_PERMISSION, null);
 
         intent = new Intent(PPApplication.ACTION_REGISTER_PPPE_FUNCTION);

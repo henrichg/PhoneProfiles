@@ -21,6 +21,8 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //PPApplication.logE("[***] PPPExtenderBroadcastReceiver.onReceive", "xxx");
+
         final Context appContext = context.getApplicationContext();
 
         if (!PPApplication.getApplicationStarted(appContext, true))
@@ -30,7 +32,7 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
         if ((intent == null) || (intent.getAction() == null))
             return;
 
-        //PPApplication.logE("PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
+        //PPApplication.logE("[***] PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
 
         switch (intent.getAction()) {
             case PPApplication.ACTION_ACCESSIBILITY_SERVICE_CONNECTED:
@@ -41,6 +43,7 @@ class PPPExtenderBroadcastReceiver extends BroadcastReceiver {
                 break;
             case PPApplication.ACTION_FORCE_STOP_APPLICATIONS_END:
                 final long profileId = intent.getLongExtra(PPApplication.EXTRA_PROFILE_ID, 0);
+                //PPApplication.logE("[***] PPPExtenderBroadcastReceiver,onReceive", "profileId="+profileId);
                 if (profileId != 0) {
                     PPApplication.startHandlerThread();
                     final Handler handler = new Handler(PPApplication.handlerThread.getLooper());

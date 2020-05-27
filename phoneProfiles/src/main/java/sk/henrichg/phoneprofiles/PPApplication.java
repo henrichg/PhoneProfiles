@@ -93,6 +93,8 @@ public class PPApplication extends Application {
                                             +"|ShutdownBroadcastReceiver"
                                             +"|DataWrapper.activateProfileOnBoot"
 
+                                            //+"|PPPExtenderBroadcastReceiver"
+
                                             // for list of TRANSACTION_* for "phone" service
                                             //+"|[LIST] PPApplication.getTransactionCode"
 
