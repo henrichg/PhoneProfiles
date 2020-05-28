@@ -559,7 +559,6 @@ public class PPApplication extends Application {
         return contains;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static public boolean logEnabled() {
         return (logIntoLogCat || logIntoFile);
     }
