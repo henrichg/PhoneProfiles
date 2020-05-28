@@ -169,6 +169,7 @@ final class WifiApManager {
 
     @SuppressWarnings({"unchecked", "JavaReflectionMemberAccess"})
     private void callStartTethering(Object internalConnectivityManager) throws ReflectiveOperationException {
+        //noinspection rawtypes
         Class internalConnectivityManagerClass = Class.forName("android.net.IConnectivityManager");
 
         ResultReceiver dummyResultReceiver = new ResultReceiver(null);
@@ -204,6 +205,7 @@ final class WifiApManager {
         try {
             canExploitWifiAP(context);
             ConnectivityManager.class.getDeclaredField("mService");
+            @SuppressWarnings("rawtypes")
             Class internalConnectivityManagerClass = Class.forName("android.net.IConnectivityManager");
             try {
                 internalConnectivityManagerClass.getDeclaredMethod("startTethering",

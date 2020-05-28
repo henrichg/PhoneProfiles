@@ -2425,9 +2425,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                         }
                         if (wallpaperChange == 1) {
                             values.put(KEY_DEVICE_WALLPAPER_CHANGE, 0);
-                            values.put(KEY_DEVICE_WALLPAPER, "-");
-                        } else
-                            values.put(KEY_DEVICE_WALLPAPER, "-");
+                        }
+                        values.put(KEY_DEVICE_WALLPAPER, "-");
 
                         //PPApplication.logE("DatabaseHandler.changePictureFilePathToUri", "values.size()=" + values.size());
                         if (values.size() > 0) {

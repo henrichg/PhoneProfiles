@@ -62,7 +62,9 @@ public class EditorProfilesActivity extends AppCompatActivity
 
     private static ApplicationsCache applicationsCache;
 
+    @SuppressWarnings("rawtypes")
     private AsyncTask importAsyncTask = null;
+    @SuppressWarnings("rawtypes")
     private AsyncTask exportAsyncTask = null;
     static boolean doImport = false;
     private AlertDialog importProgressDialog = null;

@@ -17,6 +17,6 @@
 #}
 
 # TabTargetView
--keep class android.support.v7.widget.Toolbar { *** mMenuView; }
--keep class android.support.v7.widget.ActionMenuView { *** mPresenter; }
--keep class android.support.v7.widget.ActionMenuPresenter { *** mOverflowButton; }
+#-keep class android.support.v7.widget.Toolbar { *** mMenuView; }
+#-keep class android.support.v7.widget.ActionMenuView { *** mPresenter; }
+#-keep class android.support.v7.widget.ActionMenuPresenter { *** mOverflowButton; }

@@ -70,10 +70,8 @@ public final class RootTools {
     private static final RootToolsInternalMethods getInternals() {
         if (rim == null) {
             RootToolsInternalMethods.getInstance();
-            return rim;
-        } else {
-            return rim;
         }
+        return rim;
     }
 
     // --------------------

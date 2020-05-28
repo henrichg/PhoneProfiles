@@ -217,10 +217,8 @@ public class Permissions {
             checkProfileLockDevice(context, profile, permissions);
             checkProfileDtmfToneWhenDialing(context, profile, permissions);
             checkProfileSoundOnTouch(context, profile, permissions);
-            return permissions;
         }
-        else
-            return permissions;
+        return permissions;
     }
 
     /*
@@ -1162,9 +1160,9 @@ public class Permissions {
 
     static boolean checkCamera(@SuppressWarnings("unused") Context context) {
         try {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                return true;
-            } else
+            //if (android.os.Build.VERSION.SDK_INT >= 23) {
+            //    return true;
+            //} else
                 return true;
         } catch (Exception e) {
             return false;
@@ -1173,9 +1171,9 @@ public class Permissions {
 
     static boolean checkMicrophone(@SuppressWarnings("unused") Context context) {
         try {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                return true;
-            } else
+            //if (android.os.Build.VERSION.SDK_INT >= 23) {
+            //    return true;
+            //} else
                 return true;
         } catch (Exception e) {
             return false;
@@ -1184,9 +1182,9 @@ public class Permissions {
 
     static boolean checkSensors(@SuppressWarnings("unused") Context context) {
         try {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                return true;
-            } else
+            //if (android.os.Build.VERSION.SDK_INT >= 23) {
+            //    return true;
+            //} else
                 return true;
         } catch (Exception e) {
             return false;

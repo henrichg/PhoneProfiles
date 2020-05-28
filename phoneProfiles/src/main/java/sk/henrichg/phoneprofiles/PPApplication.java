@@ -1171,6 +1171,7 @@ public class PPApplication extends Application {
     static Object getServiceManager(String serviceType) {
         synchronized (PPApplication.serviceListMutex) {
             if (serviceListMutex.serviceList != null) {
+                //noinspection rawtypes
                 for (Pair pair : serviceListMutex.serviceList) {
                     if (serviceType.equals(pair.first)) {
                         return pair.second;
@@ -1184,6 +1185,7 @@ public class PPApplication extends Application {
     static int getTransactionCode(String serviceManager, String method) {
         int code = -1;
         try {
+            //noinspection rawtypes
             for (Class declaredFields : Class.forName(serviceManager).getDeclaredClasses()) {
                 Field[] declaredFields2 = declaredFields.getDeclaredFields();
                 int length = declaredFields2.length;

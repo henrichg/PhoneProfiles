@@ -30,6 +30,7 @@ public class ApplicationsDialogPreferenceFragmentX extends PreferenceDialogFragm
     private LinearLayout linlaProgress;
     private RelativeLayout rellaDialog;
 
+    @SuppressWarnings("rawtypes")
     private AsyncTask asyncTask = null;
 
     @SuppressLint("InflateParams")

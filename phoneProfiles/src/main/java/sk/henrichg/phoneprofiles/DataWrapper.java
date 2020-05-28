@@ -432,9 +432,7 @@ class DataWrapper {
     public Profile getActivatedProfile(boolean generateIcon, boolean generateIndicators)
     {
         synchronized (profileList) {
-            if (!profileListFilled) {
-                return getActivatedProfileFromDB(generateIcon, generateIndicators);
-            } else {
+            if (profileListFilled) {
                 //noinspection ForLoopReplaceableByForEach
                 for (Iterator<Profile> it = profileList.iterator(); it.hasNext(); ) {
                     Profile profile = it.next();
@@ -443,8 +441,8 @@ class DataWrapper {
                     }
                 }
                 // when profile not found, get profile from db
-                return getActivatedProfileFromDB(generateIcon, generateIndicators);
             }
+            return getActivatedProfileFromDB(generateIcon, generateIndicators);
         }
     }
 

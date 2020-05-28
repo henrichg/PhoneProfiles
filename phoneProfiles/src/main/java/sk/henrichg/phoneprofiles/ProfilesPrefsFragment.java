@@ -1095,6 +1095,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 if (!title.isEmpty()) {
                     final boolean canEnableZenMode = ActivateProfileHelper.canChangeZenMode(context.getApplicationContext(), false);
                     if ((ringerMode != null) && (ringerMode.equals("5")) && canEnableZenMode) {
+                        //noinspection ConstantConditions
                         if (!summary.isEmpty()) summary = summary + " • ";
 
                         String value = GlobalGUIRoutines.getZenModePreferenceString(zenMode, context);
@@ -1105,6 +1106,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                 title = getCategoryTitleWhenPreferenceChanged(Profile.PREF_PROFILE_VIBRATE_WHEN_RINGING, R.string.profile_preferences_vibrateWhenRinging, false, context);
                 if (!title.isEmpty()) {
                     if ((zenMode != null) && (zenMode.equals("1") || zenMode.equals("2"))) {
+                        //noinspection ConstantConditions
                         if (!summary.isEmpty()) summary = summary + " • ";
 
                         String value = GlobalGUIRoutines.getListPreferenceString(
@@ -1752,6 +1754,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
 
                 summary = summary + title + ": " + value;
 
+                //noinspection ConstantConditions
                 if (!summary.isEmpty()) summary = summary +" • ";
 
                 value = GlobalGUIRoutines.getListPreferenceString(
