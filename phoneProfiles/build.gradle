@@ -63,7 +63,9 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.1.0'
 
+    //noinspection GradleDependency
     implementation "androidx.appcompat:appcompat:$ppVersions.appcompatXLib"
+    //noinspection GradleDependency
     implementation "androidx.appcompat:appcompat-resources:$ppVersions.appcompatXLib"
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
