@@ -2072,6 +2072,7 @@ class ActivateProfileHelper {
                         Settings.System.putInt(context.getContentResolver(),
                                 Settings.System.SCREEN_BRIGHTNESS_MODE,
                                 Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness set to system");
                         if (profile.getDeviceBrightnessChangeLevel()) {
                             PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level configured");
                             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, null, true, context).allowed
@@ -2081,7 +2082,7 @@ class ActivateProfileHelper {
                                 Settings.System.putInt(context.getContentResolver(),
                                         Settings.System.SCREEN_BRIGHTNESS,
                                         profile.getDeviceBrightnessManualValue(context));
-                                PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness level changed");
+                                PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness level changed in system");
 
                                 if (android.os.Build.VERSION.SDK_INT < 23) {   // Not working in Android M (exception)
                                     Settings.System.putFloat(context.getContentResolver(),
@@ -2103,13 +2104,17 @@ class ActivateProfileHelper {
                             }
                         }
                     } else {
+                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness disabled");
                         Settings.System.putInt(context.getContentResolver(),
                                 Settings.System.SCREEN_BRIGHTNESS_MODE,
                                 Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                        PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness set to system");
                         if (profile.getDeviceBrightnessChangeLevel()) {
+                            PPApplication.logE("[***] ActivateProfileHelper.execute", ",manual brightness level configured");
                             Settings.System.putInt(context.getContentResolver(),
                                     Settings.System.SCREEN_BRIGHTNESS,
                                     profile.getDeviceBrightnessManualValue(context));
+                            PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness level set to system");
                         }
                     }
 
