@@ -205,9 +205,14 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
                 if (_changeLevel == 1) {
                     //PPApplication.logE("BrightnessDialogPreference.onCheckedChanged", "putInt value="+
                     //        Profile.convertPercentsToBrightnessManualValue(_value + minimumValue, _context));
-                    int __value = Profile.convertPercentsToBrightnessManualValue(_value, context);
-                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, __value);
-                    setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(_value, context));
+                    boolean allowed = true;
+                    if (_automatic == 1)
+                        allowed = preference.adaptiveAllowed;
+                    if (allowed) {
+                        int __value = Profile.convertPercentsToBrightnessManualValue(_value, context);
+                        Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, __value);
+                        setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(__value, context));
+                    }
                 }
             }
 
@@ -333,9 +338,14 @@ public class BrightnessDialogPreferenceFragmentX extends PreferenceDialogFragmen
             else
                 Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
             if (preference.changeLevel == 1) {
-                int __value = Profile.convertPercentsToBrightnessManualValue(value, context);
-                Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, __value);
-                setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value, context));
+                boolean allowed = true;
+                if (preference.automatic == 1)
+                    allowed = preference.adaptiveAllowed;
+                if (allowed) {
+                    int __value = Profile.convertPercentsToBrightnessManualValue(value, context);
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, __value);
+                    setAdaptiveBrightness(Profile.convertPercentsToBrightnessAdaptiveValue(value, context));
+                }
             }
         }
 
