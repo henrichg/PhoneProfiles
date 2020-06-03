@@ -1885,7 +1885,7 @@ class ActivateProfileHelper {
 
                     if ((!ApplicationPreferences.applicationNeverAskForGrantRoot(appContext)) &&
                             (PPApplication.isRooted(false) && PPApplication.settingsBinaryExists(false))) {
-                        PPApplication.logE("[***] ActivateProfileHelper.executeRootForAdaptiveBrightness", "set adaprive brightness via root");
+                        //PPApplication.logE("[***] ActivateProfileHelper.executeRootForAdaptiveBrightness", "set adaprive brightness via root");
                         synchronized (PPApplication.rootMutex) {
                             String command1 = "settings put system " + ADAPTIVE_BRIGHTNESS_SETTING_NAME + " " +
                                     profile.getDeviceBrightnessAdaptiveValue(appContext);
@@ -1899,8 +1899,8 @@ class ActivateProfileHelper {
                                 PPApplication.rootMutex.rootGranted = false;
                                 Log.e("ActivateProfileHelper.executeRootForAdaptiveBrightness", Log.getStackTraceString(e));*/
                             } catch (Exception e) {
-                                Log.e("[***] ActivateProfileHelper.executeRootForAdaptiveBrightness", Log.getStackTraceString(e));
-                                PPApplication.logE("[***] ActivateProfileHelper.executeRootForAdaptiveBrightness", Log.getStackTraceString(e));
+                                Log.e("ActivateProfileHelper.executeRootForAdaptiveBrightness", Log.getStackTraceString(e));
+                                //PPApplication.logE("[***] ActivateProfileHelper.executeRootForAdaptiveBrightness", Log.getStackTraceString(e));
                             }
                         }
                     }
@@ -2063,58 +2063,58 @@ class ActivateProfileHelper {
 
         // setup brightness
         if (Permissions.checkProfileScreenBrightness(context, profile, null)) {
-            PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness permissions OK");
+            //PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness permissions OK");
             if (profile.getDeviceBrightnessChange()) {
-                PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness change enabled");
+                //PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness change enabled");
                 try {
                     if (profile.getDeviceBrightnessAutomatic()) {
-                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness enabled");
+                        //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness enabled");
                         Settings.System.putInt(context.getContentResolver(),
                                 Settings.System.SCREEN_BRIGHTNESS_MODE,
                                 Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness set to system");
+                        //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness set to system");
                         if (profile.getDeviceBrightnessChangeLevel()) {
-                            PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level configured");
+                            //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level configured");
                             if (Profile.isProfilePreferenceAllowed(Profile.PREF_PROFILE_DEVICE_ADAPTIVE_BRIGHTNESS, null, null, true, context).allowed
                                     == PreferenceAllowed.PREFERENCE_ALLOWED) {
-                                PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level allowed");
+                                //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level allowed");
 
                                 Settings.System.putInt(context.getContentResolver(),
                                         Settings.System.SCREEN_BRIGHTNESS,
                                         Math.round(profile.getDeviceBrightnessAdaptiveValue(context)));
-                                PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness level changed in system");
+                                //PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness level changed in system");
 
                                 if (android.os.Build.VERSION.SDK_INT < 23) {   // Not working in Android M (exception)
                                     Settings.System.putFloat(context.getContentResolver(),
                                             ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                             profile.getDeviceBrightnessAdaptiveValue(context));
-                                    PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level changed in system (api < 23)");
+                                    //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level changed in system (api < 23)");
                                 }
                                 else {
                                     try {
                                         Settings.System.putFloat(context.getContentResolver(),
                                                 ADAPTIVE_BRIGHTNESS_SETTING_NAME,
                                                 profile.getDeviceBrightnessAdaptiveValue(context));
-                                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level changed in system (api >= 23)");
+                                        //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness level changed in system (api >= 23)");
                                     } catch (Exception ee) {
-                                        PPApplication.logE("[***] ActivateProfileHelper.execute", Log.getStackTraceString(ee));
+                                        //PPApplication.logE("[***] ActivateProfileHelper.execute", Log.getStackTraceString(ee));
                                         ActivateProfileHelper.executeRootForAdaptiveBrightness(context, profile);
                                     }
                                 }
                             }
                         }
                     } else {
-                        PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness disabled");
+                        //PPApplication.logE("[***] ActivateProfileHelper.execute", "adaptive brightness disabled");
                         Settings.System.putInt(context.getContentResolver(),
                                 Settings.System.SCREEN_BRIGHTNESS_MODE,
                                 Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                        PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness set to system");
+                        //PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness set to system");
                         if (profile.getDeviceBrightnessChangeLevel()) {
-                            PPApplication.logE("[***] ActivateProfileHelper.execute", ",manual brightness level configured");
+                            //PPApplication.logE("[***] ActivateProfileHelper.execute", ",manual brightness level configured");
                             Settings.System.putInt(context.getContentResolver(),
                                     Settings.System.SCREEN_BRIGHTNESS,
                                     profile.getDeviceBrightnessManualValue(context));
-                            PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness level set to system");
+                            //PPApplication.logE("[***] ActivateProfileHelper.execute", "manual brightness level set to system");
                         }
                     }
 
