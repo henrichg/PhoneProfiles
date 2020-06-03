@@ -2081,7 +2081,7 @@ class ActivateProfileHelper {
 
                                 Settings.System.putInt(context.getContentResolver(),
                                         Settings.System.SCREEN_BRIGHTNESS,
-                                        profile.getDeviceBrightnessManualValue(context));
+                                        Math.round(profile.getDeviceBrightnessAdaptiveValue(context)));
                                 PPApplication.logE("[***] ActivateProfileHelper.execute", "brightness level changed in system");
 
                                 if (android.os.Build.VERSION.SDK_INT < 23) {   // Not working in Android M (exception)
@@ -2118,13 +2118,14 @@ class ActivateProfileHelper {
                         }
                     }
 
-                    if (PPApplication.brightnessHandler != null) {
+                    /*if (PPApplication.brightnessHandler != null) {
                         PPApplication.brightnessHandler.post(new Runnable() {
                             public void run() {
                                 createBrightnessView(profile, context);
                             }
                         });
-                    }// else
+                    }*/
+                    // else
                     //    createBrightnessView(profile, context);
                 } catch (Exception ignored) {}
             }
