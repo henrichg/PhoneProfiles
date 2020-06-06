@@ -916,6 +916,12 @@ public class EditorProfilesActivity extends AppCompatActivity
                 protected Integer doInBackground(Void... params) {
                     if (this.dataWrapper != null) {
                         File sd = Environment.getExternalStorageDirectory();
+                        File exportDir = new File(sd, PPApplication.EXPORT_PATH);
+                        if (!(exportDir.exists() && exportDir.isDirectory())) {
+                            //noinspection ResultOfMethodCallIgnored
+                            exportDir.mkdirs();
+                        }
+
                         File exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_APP_PREF_FILENAME);
                         appSettingsError = !importApplicationPreferences(exportFile, 1);
                         exportFile = new File(sd, _applicationDataPath + "/" + GlobalGUIRoutines.EXPORT_DEF_PROFILE_PREF_FILENAME);

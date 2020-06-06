@@ -3989,14 +3989,6 @@ class DatabaseHandler extends SQLiteOpenHelper {
                             // close db
                             close();
 
-                            /*
-                            File exportDir = new File(sd, PPApplication.EXPORT_PATH);
-                            if (!(exportDir.exists() && exportDir.isDirectory())) {
-                                //noinspection ResultOfMethodCallIgnored
-                                exportDir.mkdirs();
-                            }
-                            */
-
                             src = new FileInputStream(dataDB);
                             dst = new FileOutputStream(exportedDB);
 
