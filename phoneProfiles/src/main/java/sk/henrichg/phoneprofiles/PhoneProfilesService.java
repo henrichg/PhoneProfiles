@@ -26,6 +26,7 @@ import android.net.NetworkRequest;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -37,6 +38,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.widget.RemoteViews;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -300,6 +302,13 @@ public class PhoneProfilesService extends Service {
                         if (powerManager != null) {
                             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, PPApplication.PACKAGE_NAME + ":PhoneProfilesService.doForFirstStart.2");
                             wakeLock.acquire(10 * 60 * 1000);
+                        }
+
+                        File sd = Environment.getExternalStorageDirectory();
+                        File exportDir = new File(sd, PPApplication.EXPORT_PATH);
+                        if (!(exportDir.exists() && exportDir.isDirectory())) {
+                            //noinspection ResultOfMethodCallIgnored
+                            exportDir.mkdirs();
                         }
 
                         // is called from PPApplication
