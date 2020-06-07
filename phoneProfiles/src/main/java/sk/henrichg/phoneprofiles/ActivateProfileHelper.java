@@ -2457,6 +2457,7 @@ class ActivateProfileHelper {
         //PPApplication.logE("@@@ createScreenTimeoutAlwaysOnView.unlock", "xxx");
     }
 
+    /*
     @SuppressLint("RtlHardcoded")
     private static void createBrightnessView(Profile profile, Context context)
     {
@@ -2482,13 +2483,13 @@ class ActivateProfileHelper {
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         1, 1,
                         type,
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE*/,
-                        PixelFormat.TRANSLUCENT
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE //| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        , PixelFormat.TRANSLUCENT
                 );
-                /*if (android.os.Build.VERSION.SDK_INT < 17)
-                    params.gravity = Gravity.RIGHT | Gravity.TOP;
-                else
-                    params.gravity = Gravity.END | Gravity.TOP;*/
+                //if (android.os.Build.VERSION.SDK_INT < 17)
+                //    params.gravity = Gravity.RIGHT | Gravity.TOP;
+                //else
+                //    params.gravity = Gravity.END | Gravity.TOP;
                 if (profile.getDeviceBrightnessAutomatic() || (!profile.getDeviceBrightnessChangeLevel()))
                     params.screenBrightness = LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
                 else
@@ -2521,6 +2522,7 @@ class ActivateProfileHelper {
             }
         }
     }
+    */
 
     static void removeBrightnessView(Context context) {
         if (PhoneProfilesService.getInstance() != null) {
