@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -77,7 +78,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 
             mBillingClient.startConnection(new BillingClientStateListener() {
                 @Override
-                public void onBillingSetupFinished(BillingResult billingResult) {
+                public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                         //Log.i(TAG, "onBillingSetupFinished() response: " + billingResponse);
 
@@ -139,7 +140,7 @@ public class BillingManager implements PurchasesUpdatedListener {
                 mBillingClient.querySkuDetailsAsync(skuDetailsParams,
                         new SkuDetailsResponseListener() {
                             @Override
-                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
                                 listener.onSkuDetailsResponse(billingResult, skuDetailsList);
                             }
                         });
@@ -202,7 +203,7 @@ public class BillingManager implements PurchasesUpdatedListener {
                 mBillingClient.consumeAsync(consumeParams,
                         new ConsumeResponseListener() {
                             @Override
-                            public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
+                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String purchaseToken) {
                                 //PPApplication.logE(TAG, "onConsumeResponse() response: " + billingResult.getResponseCode());
                                 /*if (responseCode == BillingClient.BillingResponse.OK) {
                                     // Handle the success of the consume operation.

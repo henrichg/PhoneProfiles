@@ -156,7 +156,7 @@ public class DonationFragment extends Fragment {
                 inAppSkus,
                 new SkuDetailsResponseListener() {
                     @Override
-                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
                         int responseCode = billingResult.getResponseCode();
                         //PPApplication.logE(TAG, "onSkuDetailsResponse responseCode="+responseCode);
 
