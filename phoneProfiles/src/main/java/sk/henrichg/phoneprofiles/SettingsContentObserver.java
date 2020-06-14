@@ -38,38 +38,38 @@ class SettingsContentObserver  extends ContentObserver {
     }
 
     private int volumeChangeDetect(int volumeStream, int previousVolume, AudioManager audioManager) {
+        try {
+            int currentVolume = audioManager.getStreamVolume(volumeStream);
 
-        int currentVolume = audioManager.getStreamVolume(volumeStream);
+            int delta = previousVolume - currentVolume;
 
-        int delta=previousVolume-currentVolume;
-
-        if(delta>0)
-        {
-            if (!RingerModeChangeReceiver.internalChange) {
-                if (volumeStream == AudioManager.STREAM_RING) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = true;
-                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
+            if (delta > 0) {
+                if (!RingerModeChangeReceiver.internalChange) {
+                    if (volumeStream == AudioManager.STREAM_RING) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = true;
+                        ActivateProfileHelper.setRingerVolume(context, currentVolume);
+                    }
+                    if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = true;
+                        ActivateProfileHelper.setNotificationVolume(context, currentVolume);
+                    }
                 }
-                if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = true;
-                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
+            } else if (delta < 0) {
+                if (!RingerModeChangeReceiver.internalChange) {
+                    if (volumeStream == AudioManager.STREAM_RING) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = true;
+                        ActivateProfileHelper.setRingerVolume(context, currentVolume);
+                    }
+                    if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
+                        RingerModeChangeReceiver.notUnlinkVolumes = true;
+                        ActivateProfileHelper.setNotificationVolume(context, currentVolume);
+                    }
                 }
             }
+            return currentVolume;
+        } catch (Exception e) {
+            return -1;
         }
-        else if(delta<0)
-        {
-            if (!RingerModeChangeReceiver.internalChange) {
-                if (volumeStream == AudioManager.STREAM_RING) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = true;
-                    ActivateProfileHelper.setRingerVolume(context, currentVolume);
-                }
-                if (volumeStream == AudioManager.STREAM_NOTIFICATION) {
-                    RingerModeChangeReceiver.notUnlinkVolumes = true;
-                    ActivateProfileHelper.setNotificationVolume(context, currentVolume);
-                }
-            }
-        }
-        return currentVolume;
     }
 
     @Override
@@ -82,8 +82,12 @@ class SettingsContentObserver  extends ContentObserver {
             int audioMode = audioManager.getMode();
 
             if ((audioMode == AudioManager.MODE_NORMAL) || (audioMode == AudioManager.MODE_RINGTONE)) {
-                previousVolumeRing = volumeChangeDetect(AudioManager.STREAM_RING, previousVolumeRing, audioManager);
-                previousVolumeNotification = volumeChangeDetect(AudioManager.STREAM_NOTIFICATION, previousVolumeNotification, audioManager);
+                int newVolumeRing = volumeChangeDetect(AudioManager.STREAM_RING, previousVolumeRing, audioManager);
+                int newVolumeNotification = volumeChangeDetect(AudioManager.STREAM_NOTIFICATION, previousVolumeNotification, audioManager);
+                if ((newVolumeRing != -1) && (newVolumeNotification != -1)) {
+                    previousVolumeRing = newVolumeRing;
+                    previousVolumeNotification = newVolumeNotification;
+                }
                 //previousVolumeMusic = volumeChangeDetect(AudioManager.STREAM_MUSIC, previousVolumeMusic, audioManager);
                 //previousVolumeAlarm = volumeChangeDetect(AudioManager.STREAM_ALARM, previousVolumeAlarm, audioManager);
                 //previousVolumeSystem = volumeChangeDetect(AudioManager.STREAM_SYSTEM, previousVolumeSystem, audioManager);
