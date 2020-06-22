@@ -55,6 +55,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
     private boolean showRequestWriteExternalStorage = false;
     private boolean showRequestAccessCoarseLocation = false;
     private boolean showRequestAccessFineLocation = false;
+    private boolean showRequestAccessBackgroundLocation = false;
     private boolean[][] whyPermissionType = null;
     private boolean rationaleAlreadyShown = false;
 
@@ -224,7 +225,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
         showRequestAccessFineLocation = false;
 
         if (permissions != null) {
-            whyPermissionType = new boolean[9][100];
+            whyPermissionType = new boolean[20][100];
 
             for (Permissions.PermissionType permissionType : permissions) {
                 if (permissionType.permission.equals(Manifest.permission.WRITE_SETTINGS)) {
@@ -264,6 +265,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                     whyPermissionType[8][permissionType.type] = true;
                 }
+                if (Build.VERSION.SDK_INT >= 29) {
+                    if (permissionType.permission.equals(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                        showRequestAccessBackgroundLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
+                        whyPermissionType[9][permissionType.type] = true;
+                    }
+                }
             }
         }
 
@@ -274,6 +281,7 @@ public class GrantPermissionActivity extends AppCompatActivity {
                 showRequestAccessNotificationPolicy ||
                 showRequestAccessCoarseLocation ||
                 showRequestAccessFineLocation ||
+                showRequestAccessBackgroundLocation ||
                 showRequestDrawOverlays);
 
     }
@@ -359,12 +367,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     whyString = whyString + whyPermissionString;
                 whyString = whyString + "</li>";
             }
-            if (showRequestAccessCoarseLocation || showRequestAccessFineLocation) {
+            if (showRequestAccessCoarseLocation || showRequestAccessFineLocation || showRequestAccessBackgroundLocation) {
                 whyString = whyString + "<li>";
                 whyString = whyString + "<b>" + context.getString(R.string.permission_group_name_location) + "</b>";
                 boolean[] permissionTypes = new boolean[100];
                 for (int i = 0; i < 100; i++) {
-                    permissionTypes[i] = whyPermissionType[7][i] || whyPermissionType[8][i];
+                    permissionTypes[i] = whyPermissionType[7][i] || whyPermissionType[8][i] || whyPermissionType[9][i];
                 }
                 String whyPermissionString = getWhyPermissionString(permissionTypes);
                 if (whyPermissionString != null)
@@ -500,10 +508,10 @@ public class GrantPermissionActivity extends AppCompatActivity {
         }
     }
 
-    private String getWhyPermissionString(boolean[] permissionTypes) {
+    private String getWhyPermissionString(boolean[] whyPermissionTypes) {
         String s = "";
         for (int permissionType = 0; permissionType < 100; permissionType++) {
-            if (permissionTypes[permissionType]) {
+            if (whyPermissionTypes[permissionType]) {
                 switch (permissionType) {
                     //case Permissions.PERMISSION_PROFILE_VOLUME_PREFERENCES:
                     //    break;
@@ -1100,6 +1108,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         }
                         if (permissionType.permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
                             granted = (ContextCompat.checkSelfPermission(context, permissionType.permission) == PackageManager.PERMISSION_GRANTED);
+                        }
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            if (permissionType.permission.equals(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                                granted = (ContextCompat.checkSelfPermission(context, permissionType.permission) == PackageManager.PERMISSION_GRANTED);
+                            }
                         }
                     }
                 }
