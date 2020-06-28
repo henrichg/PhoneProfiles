@@ -230,7 +230,7 @@ class ActivateProfileHelper {
                         isWifiAPEnabled = WifiApManager.isWifiAPEnabled(context);
                     else
                         isWifiAPEnabled = CmdWifiAP.isEnabled();
-                    if ((!isWifiAPEnabled) || (profile._deviceWiFi == 4)) { // only when wifi AP is not enabled, change wifi
+                    if ((!isWifiAPEnabled) || (profile._deviceWiFi >= 4)) { // only when wifi AP is not enabled, change wifi
                         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                         if (wifiManager != null) {
                             int wifiState = wifiManager.getWifiState();
