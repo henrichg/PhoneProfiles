@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Főképernyő</string>
   <string name="array_pref_device_wallpaper_lockscreen">Képernyőzár</string>
   <string name="array_pref_device_wallpaper_all">Fő és képernyőzár</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) új cella, (C) cellához kapcsolódva.</string>
   <string name="preference_not_allowed_reason_no_hardware">nincs hardver</string>
   <string name="preference_not_allowed_reason_not_rooted">nem root-olt</string>
   <string name="preference_not_allowed_reason_settings_not_found">nem található \"beállítások\" segédprogram</string>

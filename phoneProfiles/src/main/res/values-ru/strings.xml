@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Домашний экран</string>
   <string name="array_pref_device_wallpaper_lockscreen">Экран блокировки</string>
   <string name="array_pref_device_wallpaper_all">Домашний экран и экран блокировки</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther,UnusedResources">(N) новая вышка, (C) подключённая вышка.</string>
   <string name="preference_not_allowed_reason_no_hardware">нет оборудования</string>
   <string name="preference_not_allowed_reason_not_rooted">нет root прав</string>
   <string name="preference_not_allowed_reason_settings_not_found">утилита \"Настройки\" не найдена</string>

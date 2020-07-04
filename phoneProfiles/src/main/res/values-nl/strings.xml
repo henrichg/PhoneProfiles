@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Beginscherm</string>
   <string name="array_pref_device_wallpaper_lockscreen">Vergrendel scherm</string>
   <string name="array_pref_device_wallpaper_all">Begin- en vergrendelscherm</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) Nieuwe cel, (C) verbonden met cel.</string>
   <string name="preference_not_allowed_reason_no_hardware">geen hardware</string>
   <string name="preference_not_allowed_reason_not_rooted">niet geroot</string>
   <string name="preference_not_allowed_reason_settings_not_found">\"instellingen\" optie niet gevonden</string>

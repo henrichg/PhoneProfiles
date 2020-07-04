@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Ekran główny</string>
   <string name="array_pref_device_wallpaper_lockscreen">Ekran blokady</string>
   <string name="array_pref_device_wallpaper_all">Ekran główny i blokady</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) nowa komórka, (C) podłączony do komórki.</string>
   <string name="preference_not_allowed_reason_no_hardware">brak sprzętu</string>
   <string name="preference_not_allowed_reason_not_rooted">urządzenie niezrootowane</string>
   <string name="preference_not_allowed_reason_settings_not_found">nie znaleziono usługi \"ustawienia\"</string>

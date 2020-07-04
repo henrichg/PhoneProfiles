@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Domovská obrazovka</string>
   <string name="array_pref_device_wallpaper_lockscreen">Zámek obrazovky</string>
   <string name="array_pref_device_wallpaper_all">Domovská a uzamykací obrazovka</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) nová buňka, (C) připojeno k buňce.</string>
   <string name="preference_not_allowed_reason_no_hardware">není hardware</string>
   <string name="preference_not_allowed_reason_not_rooted">není root</string>
   <string name="preference_not_allowed_reason_settings_not_found">utilita \"settings\" nebyla nalezena</string>

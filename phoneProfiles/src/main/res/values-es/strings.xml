@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Pantalla de inicio</string>
   <string name="array_pref_device_wallpaper_lockscreen">Pantalla de bloqueo</string>
   <string name="array_pref_device_wallpaper_all">Pantalla de inicio y bloqueo</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) nuevo celular, (C) conectado a celular.</string>
   <string name="preference_not_allowed_reason_no_hardware">sin hardware</string>
   <string name="preference_not_allowed_reason_not_rooted">no está rooteado</string>
   <string name="preference_not_allowed_reason_settings_not_found">utilidad \"ajustes\" no encontrada</string>

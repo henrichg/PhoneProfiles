@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Home screen</string>
   <string name="array_pref_device_wallpaper_lockscreen">Lock screen</string>
   <string name="array_pref_device_wallpaper_all">Home and lock screen</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) new cell, (C) connected to cell.</string>
   <string name="preference_not_allowed_reason_no_hardware">no hardware</string>
   <string name="preference_not_allowed_reason_not_rooted">not rooted</string>
   <string name="preference_not_allowed_reason_settings_not_found">\"settings\" utility not found</string>

@@ -291,7 +291,6 @@
     <string name="array_pref_device_wallpaper_homescreen">Startbildschirm</string>
     <string name="array_pref_device_wallpaper_lockscreen">Sperrbildschirm</string>
     <string name="array_pref_device_wallpaper_all">beides</string>
-    <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) neue Zelle, (C) mit Zelle verbunden.</string>
     <string name="preference_not_allowed_reason_no_hardware">keine Hardware</string>
     <string name="preference_not_allowed_reason_not_rooted">nicht gerootet</string>
     <string name="preference_not_allowed_reason_settings_not_found">\"Einstellungen\" konnten nicht gefunden werden</string>

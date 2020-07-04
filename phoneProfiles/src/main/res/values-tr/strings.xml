@@ -291,7 +291,6 @@
     <string name="array_pref_device_wallpaper_homescreen">Ana ekran</string>
     <string name="array_pref_device_wallpaper_lockscreen">Kilit ekranı</string>
     <string name="array_pref_device_wallpaper_all">Ana ekran ve Kilit ekranı</string>
-    <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) yeni hücre, (C) hücreye bağlı.</string>
     <string name="preference_not_allowed_reason_no_hardware">cihaz yok</string>
     <string name="preference_not_allowed_reason_not_rooted">kök erişimi yok</string>
     <string name="preference_not_allowed_reason_settings_not_found">\"ayarlar\" aracı bulunamadı</string>

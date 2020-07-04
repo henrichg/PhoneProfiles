@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">מסך הבית</string>
   <string name="array_pref_device_wallpaper_lockscreen">מסך הנעילה</string>
   <string name="array_pref_device_wallpaper_all">מסכי הבית והנעילה</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) תא חדש, (C) מחובר לתא.</string>
   <string name="preference_not_allowed_reason_no_hardware">אין חומרה</string>
   <string name="preference_not_allowed_reason_not_rooted">ללא הרשאות Root</string>
   <string name="preference_not_allowed_reason_settings_not_found">השירות \"הגדרות\" לא נמצא</string>

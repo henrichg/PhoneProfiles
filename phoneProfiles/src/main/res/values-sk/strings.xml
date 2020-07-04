@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Domovská obrazovka</string>
   <string name="array_pref_device_wallpaper_lockscreen">Uzamykacia obrazovka</string>
   <string name="array_pref_device_wallpaper_all">Domovská a uzamykacia obrazovka</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) Nová bunka, (C) pripojené k bunke.</string>
   <string name="preference_not_allowed_reason_no_hardware">nie je hardvér</string>
   <string name="preference_not_allowed_reason_not_rooted">nie je root</string>
   <string name="preference_not_allowed_reason_settings_not_found">utilita \"settings\" nebola nájdená</string>

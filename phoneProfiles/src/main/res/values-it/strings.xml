@@ -291,7 +291,6 @@
     <string name="array_pref_device_wallpaper_homescreen">Schermata iniziale</string>
     <string name="array_pref_device_wallpaper_lockscreen">Schermata di blocco</string>
     <string name="array_pref_device_wallpaper_all">Schermate principale e di blocco</string>
-    <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) nuova cella, (C) collegato alla cella.</string>
     <string name="preference_not_allowed_reason_no_hardware">hardware non disponibile</string>
     <string name="preference_not_allowed_reason_not_rooted">accesso root non disponibile</string>
     <string name="preference_not_allowed_reason_settings_not_found">funzione \"impostazioni\" non trovata</string>

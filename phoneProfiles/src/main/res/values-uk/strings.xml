@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Домашній екран</string>
   <string name="array_pref_device_wallpaper_lockscreen">Екран блокування</string>
   <string name="array_pref_device_wallpaper_all">Домашній екран та екран блокування</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) Нова вишка, (C) підключений до вишки.</string>
   <string name="preference_not_allowed_reason_no_hardware">приладдя відсутнє</string>
   <string name="preference_not_allowed_reason_not_rooted">немає root прав</string>
   <string name="preference_not_allowed_reason_settings_not_found">утиліту «налаштування» не знайдено</string>

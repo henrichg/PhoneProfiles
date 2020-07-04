@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Tampilan depan</string>
   <string name="array_pref_device_wallpaper_lockscreen">Layar kunci</string>
   <string name="array_pref_device_wallpaper_all">Rumah dan layar kunci</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">(N) sel baru, (C) terhubung ke sel.</string>
   <string name="preference_not_allowed_reason_no_hardware">tidak ada perangkat keras</string>
   <string name="preference_not_allowed_reason_not_rooted">tidak berakar</string>
   <string name="preference_not_allowed_reason_settings_not_found">utilitas \"pengaturan\" tidak ditemukan</string>

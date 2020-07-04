@@ -291,7 +291,6 @@
   <string name="array_pref_device_wallpaper_homescreen">Écran d\'accueil</string>
   <string name="array_pref_device_wallpaper_lockscreen">Écran de verrouillage</string>
   <string name="array_pref_device_wallpaper_all">Accueil et verrouiller l’écran</string>
-  <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther">Nouvelle cellule (N), (C) connecté à la cellule.</string>
   <string name="preference_not_allowed_reason_no_hardware">aucun matériel</string>
   <string name="preference_not_allowed_reason_not_rooted">pas rooté</string>
   <string name="preference_not_allowed_reason_settings_not_found">utilitaire \"paramètres\" introuvable</string>
