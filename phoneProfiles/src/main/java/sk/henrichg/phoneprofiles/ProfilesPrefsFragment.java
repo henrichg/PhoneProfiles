@@ -2332,12 +2332,12 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                     preference.setSummary(R.string.profile_preferences_deviceForceStopApplications_PPPExtender_install_summary);
                 else
                 if ((Build.VERSION.SDK_INT < 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_3_0))
-                    preference.setSummary(R.string.event_preferences_applications_PPPExtender_new_version_summary);
+                    preference.setSummary(R.string.profile_preferences_applications_PPPExtender_new_version_summary);
                 else
                 if ((Build.VERSION.SDK_INT >= 28) && (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_5_1_3_1))
-                    preference.setSummary(R.string.event_preferences_applications_PPPExtender_new_version_summary);
+                    preference.setSummary(R.string.profile_preferences_applications_PPPExtender_new_version_summary);
                 else
-                    preference.setSummary(R.string.event_preferences_applications_PPPExtender_upgrade_summary);
+                    preference.setSummary(R.string.profile_preferences_applications_PPPExtender_upgrade_summary);
             }
         }
         if (key.equals(Profile.PREF_PROFILE_DEVICE_FORCE_STOP_APPLICATION_CHANGE)) {
@@ -2394,9 +2394,9 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
                     preference.setSummary(R.string.profile_preferences_lockDevice_PPPExtender_install_summary);
                 else
                 if (extenderVersion < PPApplication.VERSION_CODE_EXTENDER_4_0)
-                    preference.setSummary(R.string.event_preferences_applications_PPPExtender_new_version_summary);
+                    preference.setSummary(R.string.profile_preferences_applications_PPPExtender_new_version_summary);
                 else
-                    preference.setSummary(R.string.event_preferences_applications_PPPExtender_upgrade_summary);
+                    preference.setSummary(R.string.profile_preferences_applications_PPPExtender_upgrade_summary);
             }
         }
         if (key.equals(Profile.PREF_PROFILE_LOCK_DEVICE)) {

@@ -7,20 +7,14 @@
   <string name="menu_settings">Настройки</string>
   <string name="title_activity_phone_profiles">PhoneProfiles</string>
   <string name="title_activity_profile_preferences">Настройки профиля</string>
-  <string name="title_activity_event_preferences" tools:ignore="UnusedResources">Настройки события</string>
   <string name="menu_new_profile">Новый профиль</string>
   <string name="menu_delete_all_profiles">Удалить все профили</string>
-  <string name="menu_new_event" tools:ignore="UnusedResources">Новое событие</string>
-  <string name="menu_delete_all_events" tools:ignore="UnusedResources">Удалить все события</string>
   <string name="profiles_header_profile_name_no_activated">Нет активированных профилей</string>
   <string name="profile_name_default">Профиль</string>
-  <string name="event_name_default" tools:ignore="UnusedResources">Событие</string>
   <string name="profile_context_item_edit">Редактировать</string>
   <string name="profile_context_item_delete">Удалить</string>
   <string name="profile_string_0">Профиль</string>
-  <string name="event_string_0" tools:ignore="UnusedResources">Событие</string>
   <string name="delete_profile_alert_message">Удалить профиль?</string>
-  <string name="delete_event_alert_message" tools:ignore="UnusedResources">Удалить событие?</string>
   <string name="toast_profile_activated_0">Профиль</string>
   <string name="toast_profile_activated_1">активирован</string>
   <string name="preference_profile_no_change">Не изменять</string>
@@ -104,19 +98,11 @@
   <string name="phone_profiles_pref_applicationLongClickActivation">Активация профиля долгим нажатием</string>
   <string name="alert_title_delete_all_profiles">Удалить все профили</string>
   <string name="alert_message_delete_all_profiles">Вы уверены?</string>
-  <string name="alert_title_delete_all_events" tools:ignore="UnusedResources">Удалить все события</string>
-  <string name="alert_message_delete_all_events" tools:ignore="UnusedResources">Вы уверены?</string>
   <string name="phone_profiles_pref_applicationTheme">Тема приложения</string>
   <!--<string name="phone_profiles_pref_applicationTheme_color">Цветная</string>-->
   <string name="phone_profiles_pref_applicationTheme_dark">Тёмная</string>
   <!--<string name="phone_profiles_pref_applicationTheme_dlight">Светлая с тёмным названием</string>-->
   <string name="phone_preferences_actionMode_save">Сохранить</string>
-  <string name="profile_preferences_showInActivator" tools:ignore="UnusedResources">Показывать в Активаторе</string>
-  <string name="event_type_time" tools:ignore="UnusedResources">Время</string>
-  <string name="event_preferences_category_eventIdentification" tools:ignore="UnusedResources">Идентификация события</string>
-  <string name="event_preferences_eventEnabled" tools:ignore="UnusedResources">Разрешить запуск</string>
-  <string name="event_preferences_eventName" tools:ignore="UnusedResources">Название события</string>
-  <string name="event_preferences_eventProfileStart" tools:ignore="UnusedResources">Активировать профиль</string>
   <string name="phone_profiles_pref_applicationWidgetBackground">Непрозрачность фона</string>
   <string name="phone_profiles_pref_applicationWidgetLightnessB">Яркость фона</string>
   <string name="phone_profiles_pref_applicationWidgetLightnessT">Яркость текста</string>
@@ -125,24 +111,7 @@
   <string name="array_pref_widgetColor_monochrome">Монохромная</string>
   <string name="phone_profiles_pref_applicationWidgetIconColor">Тип иконки</string>
   <string name="profile_list_empty">Нет профилей</string>
-  <string name="event_list_empty" tools:ignore="UnusedResources">Нет событий</string>
-  <string name="event_preferences_time_timeDays" tools:ignore="UnusedResources">Дни недели</string>
-  <string name="event_preferences_time_startTime" tools:ignore="UnusedResources">Время начала</string>
-  <string name="event_preferences_time_endTime" tools:ignore="UnusedResources">Время окончания</string>
-  <string name="array_pref_event_all" tools:ignore="UnusedResources">Все</string>
-  <string name="editor_drawer_title_profiles" tools:ignore="UnusedResources">Профили</string>
-  <string name="editor_drawer_title_events" tools:ignore="UnusedResources">События</string>
-  <string name="editor_drawer_list_item_profiles_all" tools:ignore="UnusedResources">Все</string>
-  <string name="editor_drawer_list_item_profiles_show_in_activator" tools:ignore="UnusedResources">Показываемые в Активаторе</string>
-  <string name="editor_drawer_list_item_profiles_no_show_in_activator" tools:ignore="UnusedResources">Непоказываемые в Активаторе</string>
-  <string name="editor_drawer_list_item_events_all" tools:ignore="UnusedResources">Все</string>
-  <string name="editor_drawer_list_item_events_running" tools:ignore="UnusedResources">Активные</string>
-  <string name="editor_drawer_list_item_events_paused" tools:ignore="UnusedResources">Приостановленные</string>
-  <string name="editor_drawer_list_item_events_stopped" tools:ignore="UnusedResources">Неактивные</string>
   <string name="profile_preferences_deviceAutosync">Автосинхронизация</string>
-  <string name="editor_drawer_order_label" tools:ignore="UnusedResources">Сортировать события по:</string>
-  <string name="editor_drawer_order_event_name" tools:ignore="UnusedResources">Названию события</string>
-  <string name="editor_drawer_order_profile_name" tools:ignore="UnusedResources">Названию профиля</string>
   <string name="toast_default_profiles_generated">Профили по умолчанию созданы</string>
   <string name="default_profile_name_home">Дом</string>
   <string name="default_profile_name_outdoor">Улица</string>
@@ -154,8 +123,6 @@
   <string name="profile_preferences_deviceAutoRotation">Ориентация экрана</string>
   <string name="title_activity_activator">Активатор</string>
   <string name="title_activity_editor">Редактор</string>
-  <string name="menu_run_events" tools:ignore="UnusedResources">Разрешить запуск событий</string>
-  <string name="menu_stop_events" tools:ignore="UnusedResources">Приостановить события</string>
   <string name="array_pref_0_percent" formatted="false">0%</string>
   <string name="array_pref_25_percent" formatted="false">25%</string>
   <string name="array_pref_50_percent" formatted="false">50%</string>
@@ -179,142 +146,21 @@
   <string name="profile_list_item_menu_activate">Активировать</string>
   <string name="profile_list_item_menu_duplicate">Создать копию</string>
   <string name="profile_list_item_menu_delete">Удалить</string>
-  <string name="event_list_item_menu_run" tools:ignore="UnusedResources">Разрешить запуск</string>
-  <string name="event_list_item_menu_stop" tools:ignore="UnusedResources">Приостановить событие</string>
-  <string name="event_list_item_menu_duplicate" tools:ignore="UnusedResources">Создать копию</string>
-  <string name="event_list_item_menu_delete" tools:ignore="UnusedResources">Удалить</string>
-  <string name="phone_profiles_pref_applicationEditorSaveEditorState" tools:ignore="UnusedResources">Сохранять состояние Редактора</string>
   <string name="phone_profiles_pref_notificationPrefIndicator">Показывать индикатор настроек</string>
-  <string name="phone_profiles_pref_applicationHomeLauncher" tools:ignore="UnusedResources">Запуск с домашнего экрана</string>
-  <string name="phone_profiles_pref_applicationWidgetLauncher" tools:ignore="UnusedResources">Запуск из виджета</string>
-  <string name="phone_profiles_pref_notificationLauncher" tools:ignore="UnusedResources">Запуск из уведомления</string>
-  <string name="array_pref_launcher_activator" tools:ignore="UnusedResources">Активатор</string>
-  <string name="array_pref_launcher_editor" tools:ignore="UnusedResources">Редактор</string>
   <string name="profile_preferences_deviceLocationServicePrefs">(I) Настройки местоположения</string>
-  <string name="event_type_battery" tools:ignore="UnusedResources">Батарея</string>
   <string name="profile_preferences_volumeSpeakerPhone">Динамик</string>
-  <string name="event_preferences_notificationSound" tools:ignore="UnusedResources">Звук уведомлений</string>
-  <string name="event_preferences_battery_level_low" tools:ignore="UnusedResources">Нижний уровень</string>
-  <string name="event_preferences_battery_level_hight" tools:ignore="UnusedResources">Верхний уровень</string>
-  <string name="event_preferences_battery_charging" tools:ignore="UnusedResources">Зарядка</string>
-  <string name="pref_event_battery_level" tools:ignore="UnusedResources">Уровень</string>
-  <string name="pref_event_battery_charging" tools:ignore="UnusedResources">Зарядка</string>
-  <string name="event_preferences_category_eventTimeParameters" tools:ignore="UnusedResources">Датчик времени</string>
-  <string name="event_preferences_category_eventBatteryParameters" tools:ignore="UnusedResources">Датчик батареи</string>
-  <string name="contacts_multiselect_summary_text_selected" tools:ignore="UnusedResources">Выбранные</string>
-  <string name="contacts_multiselect_summary_text_not_selected" tools:ignore="UnusedResources">Не выбраны</string>
-  <string name="event_preferences_category_eventCallParameters" tools:ignore="UnusedResources">Датчик вызовов</string>
-  <string name="event_preferences_call_contacts" tools:ignore="UnusedResources">Контакты</string>
-  <string name="event_preferences_call_event" tools:ignore="UnusedResources">Состояние и тип звонка</string>
-  <string name="array_event_pref_ringing" tools:ignore="UnusedResources">Входящий вызов</string>
-  <string name="array_event_pref_incall_started" tools:ignore="UnusedResources">Входящий вызов принят</string>
-  <string name="array_event_pref_outcall_answered" tools:ignore="UnusedResources">Исходящий вызов начат</string>
-  <string name="event_preferences_contactListType" tools:ignore="UnusedResources">Тип списка контактов</string>
-  <string name="array_event_pref_contact_list_type_white_list" tools:ignore="UnusedResources">Белый список</string>
-  <string name="array_event_pref_contact_list_type_black_list" tools:ignore="UnusedResources">Чёрный список</string>
-  <string name="array_event_pref_contact_list_type_not_use" tools:ignore="UnusedResources">Не использовать</string>
-  <string name="event_type_call" tools:ignore="UnusedResources">Вызов</string>
-  <string name="pref_event_call_event" tools:ignore="UnusedResources">Событие</string>
-  <string name="pref_event_call_contactListType" tools:ignore="UnusedResources">Список</string>
-  <string name="event_preferences_battery_level_bad_value" tools:ignore="UnusedResources">Неверное значение</string>
-  <string name="event_preferences_eventProfileEnd" tools:ignore="UnusedResources">Активировать профиль</string>
-  <string name="menu_restart_events" tools:ignore="UnusedResources">Перезапустить события</string>
-  <string name="event_preferences_ForceRun" tools:ignore="UnusedResources">Игнорировать ручную активацию</string>
-  <string name="restart_events_alert_title" tools:ignore="UnusedResources">Перезапустить события</string>
-  <string name="restart_events_alert_message" tools:ignore="UnusedResources">Вы уверены?</string>
-  <string name="event_preferences_ForceRun_summary" tools:ignore="UnusedResources">Запуск события несмотря на то, что профиль был активирован вручную</string>
-  <string name="event_preferences_category_startOfEvent" tools:ignore="UnusedResources">Начало события</string>
-  <string name="event_preferences_category_endOfEvent" tools:ignore="UnusedResources">Завершение события</string>
-  <string name="event_preference_profile_undone" tools:ignore="UnusedResources">Аннулировать</string>
-  <string name="event_preferences_priority" tools:ignore="UnusedResources">Приоритет</string>
-  <string name="array_event_pref_priorityVeryHigh" tools:ignore="UnusedResources">[P:9] Очень высокий</string>
-  <string name="array_event_pref_priorityHigh" tools:ignore="UnusedResources">[P:7] Высокий</string>
-  <string name="array_event_pref_priorityMedium" tools:ignore="UnusedResources">[P:5] Средний</string>
-  <string name="array_event_pref_priorityLow" tools:ignore="UnusedResources">[P:3] Низкий</string>
-  <string name="array_event_pref_priorityVeryLow" tools:ignore="UnusedResources">[P:1] Очень низкий</string>
-  <string name="editor_drawer_order_priority" tools:ignore="UnusedResources">Приоритету</string>
-  <string name="event_type_peripheral" tools:ignore="UnusedResources">Аксессуары</string>
-  <string name="array_event_pref_peripheralType_deskDock" tools:ignore="UnusedResources">Док-станция</string>
-  <string name="array_event_pref_peripheralType_carDock" tools:ignore="UnusedResources">Автомобильный комплект</string>
-  <string name="event_preferences_category_eventPeripheralParameters" tools:ignore="UnusedResources">Датчик аксессуаров</string>
-  <string name="event_preferences_peripheral_type" tools:ignore="UnusedResources">Тип аксессуаров</string>
-  <string name="array_event_pref_peripheralType_wired_headset" tools:ignore="UnusedResources">Проводная гарнитура</string>
-  <string name="array_event_pref_peripheralType_bluetooth_headset" tools:ignore="UnusedResources">Bluetooth-гарнитура</string>
-  <string name="toast_default_events_generated" tools:ignore="UnusedResources">События по умолчанию созданы</string>
-  <string name="default_event_name_during_the_week" tools:ignore="UnusedResources">В течение недели</string>
-  <string name="default_event_name_weekend" tools:ignore="UnusedResources">Выходные дни</string>
-  <string name="default_event_name_during_the_work" tools:ignore="UnusedResources">На работе</string>
-  <string name="default_event_name_overnight" tools:ignore="UnusedResources">Ночью</string>
-  <string name="default_event_name_low_battery" tools:ignore="UnusedResources">Низкий заряд батареи</string>
   <string name="default_profile_name_battery_low">Низкий заряд батареи</string>
-  <string name="calendars_multiselect_summary_text_selected" tools:ignore="UnusedResources">Выбранные</string>
-  <string name="calendars_multiselect_summary_text_not_selected" tools:ignore="UnusedResources">Не выбрано</string>
-  <string name="event_preferences_category_eventCalendarParameters" tools:ignore="UnusedResources">Датчик календаря</string>
-  <string name="event_preferences_calendar_calendars" tools:ignore="UnusedResources">Календари</string>
-  <string name="event_type_calendar" tools:ignore="UnusedResources">Календарь</string>
-  <string name="event_preferences_calendar_search_field" tools:ignore="UnusedResources">Искать в</string>
-  <string name="array_event_pref_calendarSearchField_eventName" tools:ignore="UnusedResources">Названии мероприятия</string>
-  <string name="array_event_pref_calendarSearchField_description" tools:ignore="UnusedResources">Описании</string>
-  <string name="event_preferences_calendar_search_string" tools:ignore="UnusedResources">Искомая строка</string>
-  <string name="event_preferences_calendar_no_event" tools:ignore="UnusedResources">Нет мероприятия</string>
-  <string name="array_event_pref_priorityLowest" tools:ignore="UnusedResources">[0] Наименьший</string>
-  <string name="array_event_pref_priorityLower" tools:ignore="UnusedResources">[P:2] Ниже</string>
-  <string name="array_event_pref_priorityLowerMedium" tools:ignore="UnusedResources">[P:4] Ниже среднего</string>
-  <string name="array_event_pref_priorityUpperMedium" tools:ignore="UnusedResources">[P:6] Выше среднего</string>
-  <string name="array_event_pref_priorityHigher" tools:ignore="UnusedResources">[P:8] Выше</string>
-  <string name="array_event_pref_priorityHighest" tools:ignore="UnusedResources">[P:10] Наивысший</string>
-  <string name="event_type_wifi" tools:ignore="UnusedResources">Wi-Fi</string>
-  <string name="event_preferences_category_eventWifiParameters" tools:ignore="UnusedResources">Датчик Wi-Fi</string>
-  <string name="event_preferences_wifi_ssid" tools:ignore="UnusedResources">SSID</string>
-  <string name="pref_event_wifi_ssid" tools:ignore="UnusedResources">SSID</string>
-  <string name="pref_event_wifi_connectionType" tools:ignore="UnusedResources">Подключение</string>
-  <string name="array_event_pref_wifiConnectionType_connected" tools:ignore="UnusedResources">Подключено</string>
-  <string name="array_event_pref_wifiConnectionType_inFront" tools:ignore="UnusedResources">Рядом (в диапазоне сканирования)</string>
-  <string name="event_preferences_wifi_connection_type" tools:ignore="UnusedResources">Тип соединения</string>
-  <string name="phone_profiles_pref_applicationEventWifiScanInterval" tools:ignore="UnusedResources">Интервал сканирования Wi-Fi (мин)</string>
   <string name="phone_profiles_pref_applicationEventBackgroundProfile">Профиль по умолчанию</string>
   <string name="profile_preference_profile_end_no_activate">Не активировать</string>
   <string name="profile_preference_profile_not_set">Профиль не выбран</string>
-  <string name="event_type_screen" tools:ignore="UnusedResources">Экран</string>
-  <string name="event_preferences_category_eventScreenParameters" tools:ignore="UnusedResources">Датчик экрана</string>
-  <string name="event_preferences_screen_event_type" tools:ignore="UnusedResources">Тип события</string>
-  <string name="event_preferences_delayStart" tools:ignore="UnusedResources">Задержка</string>
   <string name="profile_preferences_duration">Продолжительность</string>
   <string name="profile_preferences_afterDurationDo">По окончании действия профиля</string>
   <string name="array_pref_afterProfileDurationDo_nothing">Ничего не делать</string>
   <string name="array_pref_afterProfileDurationDo_undoProfile">Отменить данный профиль</string>
   <string name="array_pref_afterProfileDurationDo_backgroundProfile">Активировать профиль по умолчанию</string>
   <string name="phone_profiles_pref_applicationGridLayout">В виде сетки</string>
-  <string name="menu_help" tools:ignore="UnusedResources">Помощь</string>
-  <string name="array_event_pref_eventScreenEventType_screenOn" tools:ignore="UnusedResources">Включение экрана</string>
-  <string name="array_event_pref_eventScreenEventType_screenOff" tools:ignore="UnusedResources">Выключение экрана</string>
-  <string name="pref_event_screen_startWhenUnlocked" tools:ignore="UnusedResources">Запускать при разблокировке экрана</string>
-  <string name="pref_event_screen_endWhenUnlocked" tools:ignore="UnusedResources">Окончание после разблокировки экрана</string>
-  <string name="event_preferences_screen_start_when_unlocked" tools:ignore="UnusedResources">Запуск после разблокировки</string>
-  <string name="event_preferences_screen_end_when_unlocked" tools:ignore="UnusedResources">Завершать при разблокировке</string>
-  <string name="event_type_bluetooth" tools:ignore="UnusedResources">Bluetooth</string>
-  <string name="event_preferences_category_eventBluetoothParameters" tools:ignore="UnusedResources">Датчик Bluetooth</string>
-  <string name="event_preferences_bluetooth_adapter_name" tools:ignore="UnusedResources">Имя Bluetooth-устройства</string>
-  <string name="pref_event_bluetooth_adapterName" tools:ignore="UnusedResources">Имя Bluetooth-устройства</string>
-  <string name="pref_event_bluetooth_connectionType" tools:ignore="UnusedResources">Подключение</string>
-  <string name="array_event_pref_bluetoothConnectionType_connected" tools:ignore="UnusedResources">Подключено</string>
-  <string name="array_event_pref_bluetoothConnectionType_inFront" tools:ignore="UnusedResources">Рядом (в диапазоне сканирования)</string>
-  <string name="event_preferences_bluetooth_connection_type" tools:ignore="UnusedResources">Тип соединения</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothScanInterval" tools:ignore="UnusedResources">Интервал сканирования Bluetooth (мин)</string>
-  <string name="bluetooth_name_pref_dlg_rescan_button" tools:ignore="UnusedResources">Пересканировать</string>
-  <string name="wifi_ssid_pref_dlg_rescan_button" tools:ignore="UnusedResources">Пересканировать</string>
-  <string name="event_type_sms" tools:ignore="UnusedResources">SMS</string>
-  <string name="pref_event_sms_contactListType" tools:ignore="UnusedResources">Список</string>
-  <string name="event_preferences_category_eventSMSParameters" tools:ignore="UnusedResources">Датчик SMS/MMS</string>
-  <string name="event_preferences_sms_contacts" tools:ignore="UnusedResources">Контакты</string>
-  <string name="toast_events_restarted" tools:ignore="UnusedResources">События перезапущены</string>
   <string name="phone_profiles_pref_notificationStatusBarPermanent">Показывать уведомление постоянно</string>
   <string name="phone_profiles_pref_notificationStatusBarCancel">Убрать уведомление через</string>
-  <string name="event_name_background_profile" tools:ignore="UnusedResources">Профиль по умолчанию</string>
-  <string name="phone_profiles_pref_applicationEventWifiRescan" tools:ignore="UnusedResources">Пересканировать Wi-Fi</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothRescan" tools:ignore="UnusedResources">Пересканировать Bluetooth</string>
-  <string name="phone_profiles_pref_applicationEventRescan_screenOn" tools:ignore="UnusedResources">Включение экрана</string>
-  <string name="phone_profiles_pref_applicationEventRescan_screenOnAndRestartEvents" tools:ignore="UnusedResources">При включении экрана и перезапуске событий</string>
   <string name="array_pref_ringerModeArray_ZenMode">Режимы оповещения</string>
   <string name="profile_preferences_volumeZenMode">Типы режима оповещения</string>
   <string name="array_pref_zenModeArray_all">Все</string>
@@ -324,49 +170,9 @@
   <string name="preference_profile_adaptiveBrightness">Адаптивная</string>
   <string name="profile_preferences_deviceKeyguard">Блокировка экрана</string>
   <string name="phone_profiles_pref_applicationWidgetIconHideProfileName">Скрыть имя профиля (виджет)</string>
-  <string name="array_pref_afterProfileDurationDo_restartEvents" tools:ignore="UnusedResources">Перезапустить события</string>
-  <string name="array_event_pref_wifiConnectionType_notConnected" tools:ignore="UnusedResources">Не подключено</string>
-  <string name="array_event_pref_wifiConnectionType_notInFront" tools:ignore="UnusedResources">Далеко (вне диапазона сканирования)</string>
-  <string name="array_event_pref_bluetoothConnectionType_notConnected" tools:ignore="UnusedResources">Не подключено</string>
-  <string name="array_event_pref_bluetoothConnectionType_notInFront" tools:ignore="UnusedResources">Далеко (вне диапазона сканирования)</string>
-  <string name="event_preferences_call_contact_groups" tools:ignore="UnusedResources">Группы контактов</string>
-  <string name="event_preferences_sms_contact_groups" tools:ignore="UnusedResources">Группы контактов</string>
-  <string name="title_activity_activity_log" tools:ignore="UnusedResources">Журнал событий</string>
-  <string name="menu_activity_log" tools:ignore="UnusedResources">Журнал событий</string>
-  <string name="altype_profileActivation" tools:ignore="UnusedResources">Активация профиля</string>
-  <string name="altype_afterDuration_undoProfile" tools:ignore="UnusedResources">По окончании - отменить профиль</string>
-  <string name="altype_afterDuration_backgroundProfile" tools:ignore="UnusedResources">По окончании - профиль по умолчанию</string>
-  <string name="altype_afterDuration_restartEvents" tools:ignore="UnusedResources">По окончании - перезапустить события</string>
-  <string name="altype_eventStart" tools:ignore="UnusedResources">Запуск события</string>
-  <string name="altype_eventStartDelay" tools:ignore="UnusedResources">Запуск события с задержкой</string>
-  <string name="altype_eventEnd_none" tools:ignore="UnusedResources">Приостановка события</string>
-  <string name="altype_eventEnd_activateProfile" tools:ignore="UnusedResources">Приостановка события - активация профиля</string>
-  <string name="altype_eventEnd_undoProfile" tools:ignore="UnusedResources">Приостановка события - отмена профиля</string>
-  <string name="altype_eventEnd_activateProfile_undoProfile" tools:ignore="UnusedResources">Приостановка события - активация и отмена профиля</string>
-  <string name="altype_restartEvents" tools:ignore="UnusedResources">Перезапустить события</string>
-  <string name="altype_runEvents_disable" tools:ignore="UnusedResources">Остановить события</string>
-  <string name="altype_runEvents_enable" tools:ignore="UnusedResources">Разрешить запуск событий</string>
-  <string name="altype_applicationStart" tools:ignore="UnusedResources">Запуск приложения</string>
-  <string name="altype_applicationExit" tools:ignore="UnusedResources">Выход из приложения</string>
-  <string name="altype_dataImport" tools:ignore="UnusedResources">восстановление настроек</string>
-  <string name="array_event_pref_calendarSearchField_location" tools:ignore="UnusedResources">Местоположении</string>
   <string name="profile_preferences_vibrationOnTouch">Вибрация при нажатии</string>
   <string name="phone_profiles_pref_notificationShowInStatusBar">Показывать в строке состояния</string>
   <string name="phone_profiles_pref_notificationShowInStatusBarAndLockscreen">Показывать в строке состояния и на экране блокировки</string>
-  <string name="menu_activity_log_reload" tools:ignore="UnusedResources">Перезагрузить</string>
-  <string name="event_preferences_atEndDo" tools:ignore="UnusedResources">И выполнить</string>
-  <string name="array_pref_atEndDo_none" tools:ignore="UnusedResources">Ничего</string>
-  <string name="array_pref_atEndDo_undoneProfile" tools:ignore="UnusedResources">Отменить данный профиль</string>
-  <string name="array_pref_atEndDo_restartEvents" tools:ignore="UnusedResources">Перезапустить события</string>
-  <string name="event_preference_profile_restartEvents" tools:ignore="UnusedResources">Перезапустить</string>
-  <string name="altype_eventEnd_restartEvents" tools:ignore="UnusedResources">Приостановить событие - перезапустить события</string>
-  <string name="altype_eventEnd_activateProfile_restartEvents" tools:ignore="UnusedResources">Приостановка события - активация профиля и перезапуск событий</string>
-  <string name="event_preference_calendar_availability" tools:ignore="UnusedResources">Доступность</string>
-  <string name="array_event_pref_calendarAvailability_noCheck" tools:ignore="UnusedResources">Не проверять</string>
-  <string name="array_event_pref_calendarAvailability_busy" tools:ignore="UnusedResources">Занят</string>
-  <string name="array_event_pref_calendarAvailability_free" tools:ignore="UnusedResources">Свободен</string>
-  <string name="array_event_pref_calendarAvailability_tentative" tools:ignore="UnusedResources">Не ясно</string>
-  <string name="event_preferences_manualProfileActivation" tools:ignore="UnusedResources">[M] Активация профиля вручную</string>
   <string name="profileicon_pref_dialog_customColor_button">Изменить цвет</string>
   <string name="colorChooser_pref_dialog_title">Выбрать цвет</string>
   <string name="phone_profiles_pref_category_system">Системные</string>
@@ -378,17 +184,9 @@
   <string name="menu_import_export">Резервное копирование/Восстановление</string>
   <string name="array_pref_screenTimeoutArray_5minutes">5 минут</string>
   <string name="important_info_profiles">Профили</string>
-  <string name="important_info_events" tools:ignore="UnusedResources">События</string>
   <string name="important_info_system">Системные</string>
   <string name="important_info_profile_root">Для некоторых настроек профиля требуются права Суперпользователя. Эти настройки отмечены буквой \"(R)\".</string>
-  <string name="event_preferences_eventStartWhenActivatedProfile" tools:ignore="UnusedResources">[#] Начать только когда активирован профиль</string>
   <string name="profile_preference_do_not_apply">Не применять</string>
-  <string name="pref_dlg_info_about_wildcards_1" tools:ignore="UnusedResources">Можно использовать подстановочные знаки: \"%\" = любые символы, \"_\" = один любой символ.</string>
-  <string name="pref_dlg_info_about_wildcards_2" tools:ignore="UnusedResources">Если у вас есть \"%\" или \"_\"</string>
-  <string name="wifi_ssid_pref_dlg_info_about_wildcards" tools:ignore="UnusedResources">в имени SSID,</string>
-  <string name="bluetooth_name_pref_dlg_info_about_wildcards" tools:ignore="UnusedResources">в имени Bluetooth,</string>
-  <string name="calendar_pref_dlg_info_about_wildcards" tools:ignore="UnusedResources">в строке поиска,</string>
-  <string name="pref_dlg_info_about_wildcards_3" tools:ignore="UnusedResources">добавьте перед этими символами \"\\\".</string>
   <string name="important_into_sony_stamina_mode">Для устройств Sony включите, пожалуйста, режим «Stamina» в «Управлении питанием». Также добавьте PhoneProfiles в список «Приложения, активные в режиме ожидания». Без этого приложение не будет работать правильно.</string>
   <string name="important_info_profile_settings">Некоторые настройки профиля требуют изменений в системных настройках. Эти настройки отмечены «(S)».</string>
   <string name="profile_preferences_volumeNotificationsAccessSettings_title">Доступ к уведомлениям</string>
@@ -400,14 +198,8 @@
   <string name="profile_preferences_zenMode_none_summary">Не беспокоить</string>
   <string name="profile_preferences_zenMode_priority_summary">Только важные оповещения</string>
   <string name="profile_preferences_zenMode_all_summary">Оповещать всегда</string>
-  <string name="event_preferences_duration" tools:ignore="UnusedResources">Продолжительность</string>
-  <string name="pref_event_duration" tools:ignore="UnusedResources">Продолжительность</string>
   <string name="applications_multiselect_summary_text_selected">Выбрано</string>
   <string name="applications_multiselect_summary_text_not_selected">Не выбрано</string>
-  <string name="event_type_notifications" tools:ignore="UnusedResources">Уведомления</string>
-  <string name="event_preferences_category_eventNotificationsParameters" tools:ignore="UnusedResources">Датчик уведомлений</string>
-  <string name="event_preferences_notifications_applications" tools:ignore="UnusedResources">Приложения</string>
-  <string name="event_preferences_volumeNotificationsAccessSettings_summary" tools:ignore="UnusedResources">Для активации датчика уведомлений разрешите PhoneProfiles доступ к уведомлениям в настройках системы.</string>
   <string name="array_pref_zenModeArray_alarms">Только уведомления</string>
   <string name="profile_preferences_zenMode_alarms_summary">Только оповещения</string>
   <string name="phone_profiles_pref_applicationShortcutEmblem">Добавить иконку на ярлык</string>
@@ -416,7 +208,6 @@
   <string name="permission_group_name_phone">Номер телефона</string>
   <string name="permissions_alert_title">Запрос разрешений</string>
   <string name="permissions_for_profile_text1">Для активации профиля</string>
-  <string name="permissions_for_profile_text1m" tools:ignore="UnusedResources">Другие профили</string>
   <string name="permissions_for_profile_text2">требуются разрешения:</string>
   <string name="permissions_for_profile_text3">Предоставьте их в следующем диалоговом окне. После этого профиль будет активирован.</string>
   <string name="permissions_for_profile_text_notification">Запрос разрешений</string>
@@ -444,155 +235,36 @@
   <string name="phone_profiles_pref_writeSystemSettingPermissions_summary">Найдите приложение PhoneProfiles и разрешите доступ.</string>
   <string name="phone_profiles_pref_applicationPermissions">Разрешения для приложения</string>
   <string name="phone_profiles_pref_applicationPermissions_summary">Пожалуйста, дайте разрешения приложению в разделе \"Разрешения\".</string>
-  <string name="permissions_for_event_text1" tools:ignore="UnusedResources">События</string>
-  <string name="permissions_for_event_text2" tools:ignore="UnusedResources">требуются разрешения:</string>
-  <string name="permissions_for_event_text3" tools:ignore="UnusedResources">Разрешить в следующих диалоговых окнах. События будут перезапущены.</string>
-  <string name="permissions_for_event_text_notification" tools:ignore="UnusedResources">Запрос разрешений</string>
-  <string name="permissions_for_event_big_text_notification" tools:ignore="UnusedResources">требует дополнительные разрешения.</string>
-  <string name="permission_group_name_calendar" tools:ignore="UnusedResources">Календарь</string>
-  <string name="permission_group_name_contacts" tools:ignore="UnusedResources">Контакты</string>
   <string name="permission_group_name_location">Местоположение</string>
-  <string name="permissions_for_wifi_bt_scan_dialog_text1" tools:ignore="UnusedResources">Сканирование Wi-Fi/Bluetooth требует дополнительных разрешений.</string>
-  <string name="permissions_for_wifi_bt_scan_dialog_text2" tools:ignore="UnusedResources">Разрешите в следующих диалоговых окнах. Затем будет выполнено сканирование.</string>
-  <string name="permissions_for_calendar_dialog_text1" tools:ignore="UnusedResources">Получение списка календарей требует дополнительных разрешений.</string>
-  <string name="permissions_for_calendar_dialog_text2" tools:ignore="UnusedResources">Разрешите в следующих диалоговых окнах. Затем будет показан список календаря.</string>
-  <string name="permissions_for_contacts_dialog_text1" tools:ignore="UnusedResources">Получение списка контактов требует дополнительных разрешений.</string>
-  <string name="permissions_for_contacts_dialog_text2" tools:ignore="UnusedResources">Разрешите в следующих диалоговых окнах. Затем будет показан список контактов.</string>
-  <string name="phone_profiles_pref_applicationEventWifiScanInPowerSaveMode" tools:ignore="UnusedResources">Сканирование Wi-Fi в режиме энергосбережения</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothScanInPowerSaveMode" tools:ignore="UnusedResources">Сканирование Bluetooth в режиме энергосбережения</string>
-  <string name="array_pref_scanInPowerSaveMode_1xInterval" tools:ignore="UnusedResources">1x интервал</string>
-  <string name="array_pref_scanInPowerSaveMode_2xInterval" tools:ignore="UnusedResources">2x интервал</string>
-  <string name="array_pref_scanInPowerSaveMode_noScan" tools:ignore="UnusedResources">Не сканировать</string>
-  <string name="pref_event_battery_power_save_mode" tools:ignore="UnusedResources">Режим энергосбережения</string>
-  <string name="event_preferences_battery_power_save_mode" tools:ignore="UnusedResources">Режим энергосбережения</string>
-  <string name="phone_profiles_pref_applicationPowerSaveMode" tools:ignore="UnusedResources">Настройки режима энергосбережения</string>
-  <string name="array_pref_powerSaveMode_off" tools:ignore="UnusedResources">Выключить</string>
-  <string name="array_pref_powerSaveMode_5" formated="false" tools:ignore="UnusedResources">Включить при 5% заряде батареи</string>
-  <string name="array_pref_powerSaveMode_15" formated="false" tools:ignore="UnusedResources">Включить при 15% заряде батареи</string>
   <string name="important_info_profile_ringerMode_root">В Android 6 невозможно изменить системную настройку \"Вибрация при звонке\" без прав Суперпользователя.</string>
   <string name="important_info_profile_adaptiveBrightness_root">В Android 6+ невозможно изменить системную настройку \"Адаптивная регулировка\" без прав Суперпользователя.</string>
-  <string name="important_info_profile_wifiScanning_location" tools:ignore="UnusedResources">В Android 6+ для Wi-Fi сканирования должен быть включен режим \"По всем источникам\" в настройках \"Местоположение\".</string>
-  <string name="important_info_profile_bluetoothScanning_location" tools:ignore="UnusedResources">В Android 6+ для Bluetooth LE сканирования должен быть включен режим \"По всем источникам\" в настройках \"Местоположение\".</string>
   <string name="profile_preferences_devicePowerSaveMode">(G1)(R) Режим энергосбережения</string>
-  <string name="event_preferences_bluetooth_devices_type" tools:ignore="UnusedResources">Тип сканируемых устройств</string>
-  <string name="array_event_pref_bluetoothDevicesType_classic" tools:ignore="UnusedResources">Classic [CL]</string>
-  <string name="array_event_pref_bluetoothDevicesType_le" tools:ignore="UnusedResources">Low energy [LE]</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothLEScanDuration" tools:ignore="UnusedResources">Длительность сканирования Bluetooth LE (сек)</string>
-  <string name="phone_profiles_pref_category_wifi_scanning" tools:ignore="UnusedResources">Сканирование Wi-Fi</string>
-  <string name="phone_profiles_pref_category_bluetooth_scanning" tools:ignore="UnusedResources">Сканирование Bluetooth</string>
   <string name="profile_preferences_category_activation_duration">Продолжительность активации</string>
   <string name="profile_preferences_category_sound_profile">Звук профиля</string>
   <string name="profile_preferences_category_radios">Параметры радиомодулей</string>
   <string name="profile_preferences_category_screen">Экран</string>
   <string name="profile_preferences_category_others">Прочие</string>
-  <string name="event_preferences_category_startOfEventOthers" tools:ignore="UnusedResources">Прочие параметры</string>
-  <string name="event_type_applications" tools:ignore="UnusedResources">Приложения</string>
-  <string name="event_preferences_category_eventApplicationsParameters" tools:ignore="UnusedResources">Датчик приложений</string>
-  <string name="event_preferences_applications_applications" tools:ignore="UnusedResources">Приложения</string>
-  <string name="event_preferences_applications_AccessibilitySettings_title" tools:ignore="UnusedResources">Настройки доступности</string>
   <string name="brightness_pref_dialog_adaptive_level_root_required">Для изменения адаптивного уровня требуются права Суперпользователя.</string>
-  <string name="important_info_profile_activation_text1" tools:ignore="UnusedResources">Профиль может быть активирован в двух режимах:</string>
-  <string name="important_info_profile_activation_text2" tools:ignore="UnusedResources">Ручная активация - активирован через Активатор, Редактор, уведомление, виджет, ярлык. Активированный вручную профиль отображается с «[M]» перед названием профиля.</string>
-  <string name="important_info_profile_activation_text3" tools:ignore="UnusedResources">Активация по событию - выполняется по событию.</string>
-  <string name="important_info_profile_activation_text4" tools:ignore="UnusedResources">Ручная активация приостанавливает все события и они никогда не будет запущены повторно. Вам необходимо перезапустить события, чтобы возобновить их.</string>
-  <string name="important_info_profile_activation_text5" tools:ignore="UnusedResources">Исключение из этого правила - когда событиям установлено \"Игнорировать ручную активацию\".</string>
-  <string name="important_info_profile_activation_text6" tools:ignore="UnusedResources">Перезапуск событий может быть вызван из Активатора, Редактора и уведомлений.</string>
-  <string name="important_info_profile_activation_text8" tools:ignore="UnusedResources">В шапках и Активатора, и Редактора показывается «светофор».</string>
-  <string name="important_info_profile_activation_text9" tools:ignore="UnusedResources">Зелёный цвет: события могут быть запущены.</string>
-  <string name="important_info_profile_activation_text10" tools:ignore="UnusedResources">Оранжевый цвет: события не выполняются - профиль активирован вручную.</string>
-  <string name="important_info_profile_activation_text11" tools:ignore="UnusedResources">Красный цвет: события остановлены - запуск событий может быть возобновлён с помощью пункта меню редактора \"Разрешить запуск событий\".</string>
-  <string name="important_info_profile_activation_restart_events_icon" tools:ignore="UnusedResources">Иконка перезапуска событий:</string>
-  <string name="important_info_profile_activation_traffic_light_icon" tools:ignore="UnusedResources">Значок «Светофор»:</string>
   <string name="important_info_android_doze_mode">В Android 6+ реализован режим \"Doze\" и \"App Standby\". Если вы столкнулись с проблемами с активацией профиля из событий, когда устройство отключилось после выключения экрана, добавьте PhoneProfiles в список \"Батарея\"→\"Экономия заряда батареи\"→\"Не экономят заряд\".</string>
   <string name="profile_preferences_volumeVibrateWhenRingingRootInfo_title">Вибрация при звонке</string>
-  <string name="info_notification_event_states" tools:ignore="UnusedResources">Событие может находиться в одном из 6 состояний:</string>
-  <string name="info_notification_event_states_running" tools:ignore="UnusedResources">Выполняется: событие запущено и работает. Параметры событий удовлетворены.</string>
-  <string name="info_notification_event_states_paused" tools:ignore="UnusedResources">Приостановлено: событие не выполняется. Параметры события не удовлетворяются. Событие ожидает удовлетворения параметров.</string>
-  <string name="info_notification_event_states_stopped" tools:ignore="UnusedResources">Остановлено: событие остановлено и не может быть запущено. Параметр события \"Разрешить выполнение\" не отмечен.</string>
-  <string name="info_notification_event_states_paused_delay" tools:ignore="UnusedResources">Приостановлено с задержкой: событие выполняется, но отложено. Параметры событий удовлетворены.</string>
-  <string name="event_preferences_calendar_ignore_all_day_events" tools:ignore="UnusedResources">Игнорировать события \"Весь день\"</string>
-  <string name="important_info_default_profile" tools:ignore="UnusedResources">Когда ни одно событие не выполняется, активируется \"Профиль по умолчанию\", если он настроен. Профиль по умолчанию можно настроить в настройках приложения в разделе \"Активация профиля\". Нажмите здесь, чтобы настроить его.</string>
   <string name="important_info_how_does_volume_separation_work_title">Как работает разделение уровней громкости звонка и уведомлений:</string>
   <string name="important_info_how_does_volume_separation_work">Активация профиля устанавливает громкость устройства по уровню громкости уведомлений этого профиля. При обнаружении вызова уровень громкости звонка устанавливается в зависимости от настроек профиля. После окончания вызова восстанавливается уровень громкости уведомлений запущенного профиля.</string>
-  <string name="event_type_locations" tools:ignore="UnusedResources">Местоположение</string>
-  <string name="event_preferences_category_eventLocationsParameters" tools:ignore="UnusedResources">Датчик местоположения</string>
-  <string name="event_preferences_locations_location" tools:ignore="UnusedResources">Местоположение</string>
-  <string name="event_preferences_locations_location_not_selected" tools:ignore="UnusedResources">Не выбрано</string>
-  <string name="event_preferences_locations_cant_delete_location_title" tools:ignore="UnusedResources">Удалить местоположение</string>
-  <string name="event_preferences_locations_cant_delete_location_text" tools:ignore="UnusedResources">Невозможно удалить, местоположение используется в данный момент.</string>
-  <string name="location_editor_title" tools:ignore="UnusedResources">Редактирование местоположения</string>
-  <string name="permissions_for_location_geofence_editor_activity_text1" tools:ignore="UnusedResources">Местоположение запрашивает дополнительные права.</string>
-  <string name="permissions_for_location_geofence_editor_activity_text2" tools:ignore="UnusedResources">Предоставьте их, пожалуйста, в следующем диалоговом окне. После этого будет проведена проверка изменения местоположения.</string>
-  <string name="event_preferences_location_new_location_name" tools:ignore="UnusedResources">Местоположение</string>
-  <string name="event_preferences_location_no_address_found" tools:ignore="UnusedResources">Адрес не найден</string>
-  <string name="event_preferences_location_google_api_connection_error_title" tools:ignore="UnusedResources">Ошибка сервиса Google Play</string>
-  <string name="event_preferences_location_google_api_connection_error_text" tools:ignore="UnusedResources">Подключение к Google Play не удалось. Нажмите сюда для решения.</string>
-  <string name="event_preferences_location_radius" tools:ignore="UnusedResources">Радиус:</string>
-  <string name="event_preferences_location_when_outside_pref_name" tools:ignore="UnusedResources">Запускать ВНЕ этого местоположения</string>
-  <string name="event_preferences_location_when_outside_description" tools:ignore="UnusedResources">Когда вне местоположения</string>
   <string name="new_empty_profile">Пустой профиль</string>
   <string name="new_profile_predefined_profiles_dialog">Шаблоны профилей</string>
-  <string name="new_empty_event" tools:ignore="UnusedResources">Пустое событие</string>
-  <string name="new_event_predefined_events_dialog" tools:ignore="UnusedResources">Шаблоны событий</string>
-  <string name="menu_activity_log_clear" tools:ignore="UnusedResources">Очистить журнал</string>
-  <string name="activity_log_clear_alert_title" tools:ignore="UnusedResources">Очистить текущий журнал</string>
-  <string name="activity_log_clear_alert_message" tools:ignore="UnusedResources">Вы уверены?</string>
-  <string name="phone_profiles_pref_category_location" tools:ignore="UnusedResources">Сканирование местоположения</string>
-  <string name="phone_profiles_pref_eventLocationAppSettings_summary" tools:ignore="UnusedResources">Установить параметры местоположения в настройках приложения.</string>
-  <string name="phone_profiles_pref_applicationEventLocationScanInterval" tools:ignore="UnusedResources">Интервал сканирования местоположения (мин)</string>
-  <string name="phone_profiles_pref_applicationEventLocationScanInPowerSaveMode" tools:ignore="UnusedResources">Сканирование местоположения в режиме энергосбережения</string>
-  <string name="phone_profiles_pref_eventLocationSystemSettings" tools:ignore="UnusedResources">Системные настройки местоположения</string>
-  <string name="phone_profiles_pref_eventLocationSystemSettings_summary" tools:ignore="UnusedResources">Пожалуйста, включите Настройки -> Местоположение. Без этого сканирование местоположения не будет работать.</string>
   <string name="array_pref_ringerModeArray_silentM">Только уведомления</string>
-  <string name="phone_profiles_pref_applicationEventLocationsEditor" tools:ignore="UnusedResources">Редактирование местоположения</string>
-  <string name="phone_profiles_pref_applicationEventLocationsUseGPS" tools:ignore="UnusedResources">Использовать GPS, когда НЕ ВКЛЮЧЁН режим энергосбережения</string>
-  <string name="menu_activity_log_pause" tools:ignore="UnusedResources">Приостановить логирование</string>
-  <string name="menu_activity_log_play" tools:ignore="UnusedResources">Запустить логирование</string>
-  <string name="altype_pausedLogging" tools:ignore="UnusedResources">Логирование приостановлено</string>
-  <string name="altype_startedLogging" tools:ignore="UnusedResources">Логирование запущено</string>
-  <string name="event_pref_dialog_help" tools:ignore="UnusedResources">(*) Профиль не найден</string>
   <string name="permissions_for_brightness_dialog_text1">Выбор яркости требует дополнительных разрешений.</string>
   <string name="permissions_for_brightness_dialog_text2">Добавьте разрешения в следующих диалогах.</string>
-  <string name="event_preferences_category_sensors" tools:ignore="UnusedResources">Параметры датчиков</string>
-  <string name="altype_eventEndDelay" tools:ignore="UnusedResources">Остановка события с задержкой</string>
-  <string name="info_notification_event_states_running_delay" tools:ignore="UnusedResources">Запущено с задержкой: событие запущено, но параметры не соответствуют условиям. Событие в состоянии ожидания.</string>
   <string name="profile_preferences_askForDuration">Запрос продолжительности</string>
   <string name="phone_profiles_pref_applicationBatteryOptimization">Экономия заряда батареи</string>
-  <string name="phone_profiles_pref_applicationEventLocationRescan" tools:ignore="UnusedResources">Переопределять местоположение</string>
   <string name="profile_preferences_deviceNetworkType">(R) Тип мобильной сети</string>
-  <string name="array_pref_powerSaveMode_useSystem" tools:ignore="UnusedResources">Экономия батареи</string>
-  <string name="phone_profiles_pref_applicationBatterySaver" tools:ignore="UnusedResources">Режим энергосбережения</string>
-  <string name="phone_profiles_pref_applicationBatterySaver_system" tools:ignore="UnusedResources">Системные настройки</string>
   <string name="phone_profiles_pref_notificationTextColor">Цвет текста</string>
   <string name="array_pref_color_white">Белый</string>
   <string name="array_pref_color_black">Чёрный</string>
   <string name="profile_preferences_notificationLed">LED-уведомление</string>
   <string name="profile_preferences_notificationLed_23">(R) LED-уведомление</string>
   <string name="profile_preferences_notificationLedInfo_summary">Экспериментально. Может не работать на вашем устройстве</string>
-  <string name="event_type_orientation" tools:ignore="UnusedResources">Автоповорот</string>
-  <string name="event_preferences_category_eventOrientationParameters" tools:ignore="UnusedResources">Датчик ориентации</string>
-  <string name="event_preferences_orientation_display" tools:ignore="UnusedResources">Экран</string>
-  <string name="event_preferences_orientation_sides" tools:ignore="UnusedResources">Стороны</string>
-  <string name="array_event_pref_orientationSides_displayUp" tools:ignore="UnusedResources">Экраном вверх</string>
-  <string name="array_event_pref_orientationSides_displayDown" tools:ignore="UnusedResources">Экраном вниз</string>
-  <string name="array_event_pref_orientationSides_horizontal" tools:ignore="UnusedResources">Горизонтально (верхняя или нижняя сторона вверху)</string>
-  <string name="array_event_pref_orientationSides_rightSide" tools:ignore="UnusedResources">Правая сторона вверху</string>
-  <string name="array_event_pref_orientationSides_leftSide" tools:ignore="UnusedResources">Левая сторона вверху</string>
-  <string name="array_event_pref_orientationSides_upSide" tools:ignore="UnusedResources">Верхняя сторона вверху</string>
-  <string name="array_event_pref_orientationSides_downSide" tools:ignore="UnusedResources">Нижняя сторона вверху</string>
-  <string name="event_preferences_orientation_distance" tools:ignore="UnusedResources">Расстояние</string>
-  <string name="array_event_pref_orientationDistanceType_noCheck" tools:ignore="UnusedResources">Не проверять</string>
-  <string name="array_event_pref_orientationDistanceType_near" tools:ignore="UnusedResources">Рядом</string>
-  <string name="array_event_pref_orientationDistanceType_far" tools:ignore="UnusedResources">Далеко</string>
-  <string name="event_preferences_orientation_ignoreForApplications" tools:ignore="UnusedResources">Игнорировать для приложений</string>
   <string name="applications_preference_applicationType_application">приложение</string>
   <string name="applications_preference_applicationType_shortcut">ярлык</string>
-  <string name="phone_profiles_pref_eventWifiAppSettings_summary" tools:ignore="UnusedResources">Установите параметры сканирования Wi-Fi в настройках приложения.</string>
-  <string name="phone_profiles_pref_eventBluetoothAppSettings_summary" tools:ignore="UnusedResources">Установите параметры сканирования Bluetooth в настройках приложения.</string>
-  <string name="phone_profiles_pref_category_orientation_scanning" tools:ignore="UnusedResources">Определение положения</string>
-  <string name="phone_profiles_pref_applicationEventOrientationScanInterval" tools:ignore="UnusedResources">Интервал определения положения (сек)</string>
-  <string name="phone_profiles_pref_applicationEventOrientationScanInPowerSaveMode" tools:ignore="UnusedResources">Сканирование положения в режиме энергосбережения</string>
-  <string name="phone_profiles_pref_eventOrientationAppSettings_summary" tools:ignore="UnusedResources">Установите параметры сканирования ориентации в настройках приложения.</string>
   <string name="array_pref_screenTimeoutArray_24hours">24 часа</string>
   <string name="array_pref_screenTimeoutArray_alwaysOn">Включено всегда</string>
   <string name="profile_preferences_deviceScreenTimeoutInfo_summary">Если опция \"24 часа\" не работает на вашем устройстве (LG), попробуйте использовать вариант \"Включено всегда\". Опция \"Включено всегда\" может не работать на вашем устройстве (Samsung), попробуйте использовать вариант \"24 часа\".</string>
@@ -602,8 +274,6 @@
   <string name="permissions_for_play_ringtone_notification_big_text_notification">Воспроизведение выбранного звонка/уведомления требует дополнительных разрешений.</string>
   <string name="important_info_profile_interactive">Некоторые параметры профиля являются интерактивными. Они показывают окно системных настроек. Эти параметры отмечены «(I)».</string>
   <string name="important_info_orange_text">Примечание: оранжевый текст в этой информации является активным. Нажмите на него, чтобы открыть соответствующие настройки.</string>
-  <string name="default_event_name_night_call" tools:ignore="UnusedResources">Ночной звонок</string>
-  <string name="alert_message_enable_event" tools:ignore="UnusedResources">Запуск события не разрешён. Разрешить?</string>
   <string name="menu_about_application">О приложении</string>
   <string name="about_application_title">Сведения о приложении</string>
   <string name="about_application_version">версия:</string>
@@ -621,74 +291,17 @@
   <string name="array_pref_device_wallpaper_homescreen">Домашний экран</string>
   <string name="array_pref_device_wallpaper_lockscreen">Экран блокировки</string>
   <string name="array_pref_device_wallpaper_all">Домашний экран и экран блокировки</string>
-  <string name="event_type_mobile_cells" tools:ignore="UnusedResources">Мобильные вышки</string>
-  <string name="event_preferences_category_eventMobileCellsParameters" tools:ignore="UnusedResources">Датчик мобильных вышек</string>
-  <string name="event_preferences_mobile_cells_cells" tools:ignore="UnusedResources">Вышки</string>
-  <string name="event_preferences_mobile_cells_when_outside_pref_name" tools:ignore="UnusedResources">Запускать вне этих вышек</string>
-  <string name="event_preferences_mobile_cells_when_outside_description" tools:ignore="UnusedResources">Вне местоположения</string>
-  <string name="permissions_for_mobile_cells_scan_dialog_text1" tools:ignore="UnusedResources">Сканирование мобильных вышек требует дополнительных разрешений.</string>
-  <string name="mobile_cells_pref_dlg_rescan_button" tools:ignore="UnusedResources">Пересканировать</string>
   <string name="mobile_cells_pref_dlg_help" tools:ignore="TypographyOther,UnusedResources">(N) новая вышка, (C) подключённая вышка.</string>
-  <string name="mobile_cells_pref_dlg_cell_name_hint" tools:ignore="UnusedResources">Имя вышки</string>
-  <string name="mobile_cells_pref_dlg_cell_rename_title" tools:ignore="UnusedResources">Переименовать вышки</string>
-  <string name="phone_profiles_pref_eventMobileCellsAppSettings_summary" tools:ignore="UnusedResources">Установите параметры сканирования мобильных вышек в настройках приложения.</string>
-  <string name="phone_profiles_pref_category_mobile_cells_scanning" tools:ignore="UnusedResources">Настройки мобильных вышек</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellsRegistration" tools:ignore="UnusedResources">Регистрация вышек</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellsScanInPowerSaveMode" tools:ignore="UnusedResources">Сканирование мобильных вышек в режиме энергосбережения</string>
-  <string name="array_pref_scanInPowerSaveMode_scan" tools:ignore="UnusedResources">Сканировать</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellsRescan" tools:ignore="UnusedResources">Пересканировать мобильные вышки</string>
-  <string name="mobile_cells_registration_pref_dlg_start_button" tools:ignore="UnusedResources">Старт</string>
-  <string name="mobile_cells_registration_pref_dlg_stop_button" tools:ignore="UnusedResources">Стоп</string>
-  <string name="mobile_cells_registration_pref_dlg_status_started" tools:ignore="UnusedResources">Запущено</string>
-  <string name="mobile_cells_registration_pref_dlg_status_stopped" tools:ignore="UnusedResources">Остановлено</string>
-  <string name="mobile_cells_registration_pref_dlg_status_remaining_time" tools:ignore="UnusedResources">Оставшееся время</string>
-  <string name="array_pref_mobile_cells_rename_new" tools:ignore="UnusedResources">Новые (N)</string>
-  <string name="array_pref_mobile_cells_rename_selected" tools:ignore="UnusedResources">Выбранные</string>
   <string name="preference_not_allowed_reason_no_hardware">нет оборудования</string>
   <string name="preference_not_allowed_reason_not_rooted">нет root прав</string>
   <string name="preference_not_allowed_reason_settings_not_found">утилита \"Настройки\" не найдена</string>
   <string name="preference_not_allowed_reason_service_not_found">утилита \"Настройки\" не найдена</string>
   <string name="preference_not_allowed_reason_not_supported">не поддерживается системой</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellsRegistration_notification" tools:ignore="UnusedResources">Регистрация мобильных вышек</string>
-  <string name="wifi_ssid_pref_dlg_configured_ssids_chb" tools:ignore="UnusedResources">Все SSID, настроенные в системе</string>
-  <string name="bluetooth_name_pref_dlg_configured_bt_names_chb" tools:ignore="UnusedResources">Все имена, настроенные в системе</string>
-  <string name="wifi_ssid_pref_dlg_all_ssids_chb" tools:ignore="UnusedResources">Все SSID</string>
-  <string name="bluetooth_name_pref_dlg_all_bt_names_chb" tools:ignore="UnusedResources">Все имена Bluetooth-устройств</string>
-  <string name="editor_drawer_list_item_events_start_order" tools:ignore="UnusedResources">В порядке запуска</string>
-  <string name="editor_drawer_order_start_order" tools:ignore="UnusedResources">Времени начала</string>
-  <string name="info_notification_event_priority_new" tools:ignore="UnusedResources">Каждое событие имеет \"Приоритет\". Событие не запустится, если уже выполняется событие с более высоким приоритетом.</string>
-  <string name="info_notification_event_start_order" tools:ignore="UnusedResources">События запускаются в \"Порядке запуска\". Порядок запуска можно изменить в Редакторе, выбрав в левом боковом меню \"В порядке запуска\". События можно перетащить вверх/вниз с помощью \"упорядочивателя\".</string>
-  <string name="info_notification_event_start_order_handler_icon" tools:ignore="UnusedResources">Упорядочиватель:</string>
   <string name="info_notification_activate_profile_from_tasker">Вы можете активировать профиль из Tasker. Настройте задачу \"System\"/\"Send Intent\" с параметрами:</string>
   <string name="phone_profiles_pref_notificationHideInLockscreen">Не показывать на экране блокировки</string>
-  <string name="phone_profiles_pref_deleteOldActivityLogs" tools:ignore="UnusedResources">Удалять журналы старше (дней)</string>
   <string name="phone_profiles_pref_applicationWidgetIconBackground">Непрозрачность фона (виджет)</string>
   <string name="phone_profiles_pref_applicationWidgetIconLightnessB">Яркость фона (виджет)</string>
   <string name="phone_profiles_pref_applicationWidgetIconLightnessT">Яркость текста (виджет)</string>
-  <string name="altype_eventStop" tools:ignore="UnusedResources">событие остановки</string>
-  <string name="info_notification_manage_events_from_tasker" tools:ignore="UnusedResources">Вы можете управлять событиями из Tasker. Настройте задачу \"System\"/\"Send Intent\" с параметрами:</string>
-  <string name="info_notification_manage_events_from_tasker_restart_events" tools:ignore="UnusedResources">перезапустить события:</string>
-  <string name="info_notification_manage_events_from_tasker_enable_run_for_event" tools:ignore="UnusedResources">разрешить запуск для событий:</string>
-  <string name="info_notification_manage_events_from_tasker_pause_event" tools:ignore="UnusedResources">приостановить событие:</string>
-  <string name="info_notification_manage_events_from_tasker_stop_event" tools:ignore="UnusedResources">остановить событие:</string>
-  <string name="phone_profiles_pref_category_eventRun" tools:ignore="UnusedResources">Запуск события</string>
-  <string name="phone_profiles_pref_eventRunUsePriority" tools:ignore="UnusedResources">Использовать параметр события \"Приоритет\"</string>
-  <string name="event_preferences_priority_notUse" tools:ignore="UnusedResources">Не использовать</string>
-  <string name="event_type_nfc" tools:ignore="UnusedResources">NFC</string>
-  <string name="event_preferences_category_eventNFCParameters" tools:ignore="UnusedResources">Датчик NFC</string>
-  <string name="event_preferences_nfc_nfcTags" tools:ignore="UnusedResources">NFC-метки</string>
-  <string name="nfc_tag_pref_dlg_hint" tools:ignore="UnusedResources">Имя метки</string>
-  <string name="nfc_tag_pref_dlg_help" tools:ignore="UnusedResources">Вы должны присвоить метке имя. Пункт \"Запись NFC-метки\" находится в меню для каждой метки.</string>
-  <string name="nfc_tag_pref_dlg_menu_writeToNfcTag" tools:ignore="UnusedResources">Запись NFC-метки</string>
-  <string name="nfc_tag_pref_dlg_writeToNfcTag_touch" tools:ignore="UnusedResources">Приложите телефон к NFC-метке. Запись будет запущена.</string>
-  <string name="nfc_tag_pref_dlg_writeToNfcTag_nfcNotEnabled" tools:ignore="UnusedResources">NFC выключено. Пожалуйста, включите NFC и попробуйте еще раз.</string>
-  <string name="nfc_tag_pref_dlg_writeTagTitle" tools:ignore="UnusedResources">Запись NFC-метки</string>
-  <string name="write_nfc_tag_written" tools:ignore="UnusedResources">Метка записана</string>
-  <string name="write_nfc_tag_error" tools:ignore="UnusedResources">Ошибка при записи метки</string>
-  <string name="read_nfc_tag_read" tools:ignore="UnusedResources">Метка прочитана</string>
-  <string name="pref_event_permanentRun" tools:ignore="UnusedResources">Постоянный запуск</string>
-  <string name="nfc_tag_pref_dlg_writeToNfcTag_writable" tools:ignore="UnusedResources">Метка перезаписываемая</string>
-  <string name="nfc_tag_pref_dlg_writeToNfcTag_not_writable" tools:ignore="UnusedResources">Метка не записываемая</string>
   <string name="about_application_donate_button">Поддержать проект</string>
   <string name="donation_activity_title">Вознаграждение</string>
   <string name="donation_description">Вам понравилось это приложение? \nПоддержите его развитие, отправив пожертвование разработчику.</string>
@@ -701,49 +314,27 @@
   <string name="phone_profiles_pref_drawOverlaysPermissions">Отображать поверх других приложений</string>
   <string name="phone_profiles_pref_drawOverlaysPermissions_summary">Найдите приложение «PhoneProfiles» и разрешите доступ.</string>
   <string name="preference_not_allowed_reason_not_configured_in_system_settings">не настроено в параметрах системы</string>
-  <string name="mobile_cells_pref_dlg_last_connected" tools:ignore="UnusedResources">подключена:</string>
-  <string name="bluetooth_name_pref_dlg_add_bt_name_icon" tools:ignore="UnusedResources">Добавить Bluetooth</string>
-  <string name="mobile_cells_pref_dlg_rename_icon" tools:ignore="UnusedResources">Переименовать</string>
-  <string name="nfc_tag_pref_dlg_add_icon" tools:ignore="UnusedResources">Добавить NFC-метку</string>
-  <string name="wifi_ssid_pref_dlg_add_wifi_ssid_icon" tools:ignore="UnusedResources">Добавить Wi-Fi SSID</string>
   <string name="about_application_application_icon">Иконка PhoneProfiles</string>
   <string name="applications_editor_dialog_item_icon">Иконка приложения</string>
   <string name="preference_item_edit_menu">Редактировать меню</string>
   <string name="preference_item_drag_handle">Порядок изменения дескриптора</string>
-  <string name="contacts_multiselect_pref_dlg_contact_photo" tools:ignore="UnusedResources">Фотография контакта</string>
-  <string name="editor_event_list_item_event_status" tools:ignore="UnusedResources">Индикатор состояния события</string>
-  <string name="editor_event_list_item_profile_start_icon" tools:ignore="UnusedResources">Значок начала события</string>
-  <string name="editor_event_list_item_profile_end_icon" tools:ignore="UnusedResources">Значок окончания события</string>
-<!--  <string name="profile_preferences_sourceProfileInfo_summary">При настройке каждого параметра профиля вы можете выбрать значение \"Исходный профиль\", и тогда при активации будут использованы значения этого параметра из Исходного профиля. Нажмите сюда, чтобы настроить параметры Исходного профиля.</string> -->
-  <string name="run_stop_events_indicator" tools:ignore="UnusedResources">Включить/остановить индикатор запуска событий</string>
-<!--  <string name="run_stop_indicator_popup_window_important_info">Дополнительную информацию можно посмотреть на экране \"Важная информация\"; для этого надо нажать на вопросительный знак на панели инструментов.</string>-->
+  <!--  <string name="profile_preferences_sourceProfileInfo_summary">При настройке каждого параметра профиля вы можете выбрать значение \"Исходный профиль\", и тогда при активации будут использованы значения этого параметра из Исходного профиля. Нажмите сюда, чтобы настроить параметры Исходного профиля.</string> -->
+  <!--  <string name="run_stop_indicator_popup_window_important_info">Дополнительную информацию можно посмотреть на экране \"Важная информация\"; для этого надо нажать на вопросительный знак на панели инструментов.</string>-->
   <string name="important_info_how_to_show">Эта важная информация может быть просмотрена в Редакторе при нажатии на значке вопросительного знака в панели инструментов.</string>
   <string name="preference_not_allowed_reason_not_supported_by_application">не поддерживается приложением</string>
   <string name="preference_not_allowed_reason_detail_old_android">старая версия Android</string>
   <string name="preference_not_allowed_reason_detail_network_type">неподдерживаемый тип сети или не может быть изменено</string>
   <string name="preference_not_allowed_reason_detail_secure_lock">не поддерживается безопасная блокировка</string>
   <string name="preference_not_allowed_reason_detail_cant_be_change">нельзя изменить</string>
-  <string name="event_preferences_sensorsInfo_title" tools:ignore="UnusedResources">Функциональность датчиков</string>
-  <string name="event_preferences_sensorsInfo_summary" tools:ignore="UnusedResources">Событие будет запущено, только если параметры всех включённых датчиков будут выполнены. Запущенное событие завершится, если какие-либо параметры включённых датчиков не выполняются. Проверяйте только те датчики, которые нужны для этого события. Названия включённых датчиков указаны жирным текстом.\n\nНекоторые параметры датчика являются обязательными. Обязательные параметры помечены подчёркиванием. Если какие-либо обязательные параметры не заданы, событие не запустится и параметр \"Включить датчик\" будет сброшен.</string>
   <string name="phone_profiles_pref_notificationStatusBarStyleInfo_title">Цветная иконка</string>
   <string name="phone_profiles_pref_notificationStatusBarStyleInfo_summary">Некоторые устройства не поддерживают цветные иконки в панели уведомлений.</string>
-  <string name="pref_dlg_change_selection_title" tools:ignore="UnusedResources">Изменить выбор</string>
-  <string name="array_pref_change_selection_unselect_all" tools:ignore="UnusedResources">Снять все отметки</string>
-  <string name="array_pref_change_selection_mobile_cells_select_by_name" tools:ignore="UnusedResources">Выбрать по имени вышки</string>
   <string name="pref_dlg_change_selection_button_unselect_all">Убрать все</string>
-  <string name="array_pref_change_selection_wifi_ssid_select_by_name" tools:ignore="UnusedResources">Выбрать по имени SSID</string>
-  <string name="array_pref_change_selection_bluetooth_name_select_by_name" tools:ignore="UnusedResources">Выбрать по имени Bluetooth</string>
-  <string name="array_pref_change_selection_nfc_tags_select_by_name" tools:ignore="UnusedResources">Выбрать по имени NFC-тега</string>
-  <string name="event_preferences_enable_sensor" tools:ignore="UnusedResources">Включить датчик</string>
-  <string name="info_preference_click_here" tools:ignore="UnusedResources">Нажмите для просмотра информации</string>
   <string name="profile_preferences_category_profileActivationParameters">Параметры активации</string>
   <string name="profile_preferences_category_profileDeviceParameters">Параметры устройства</string>
   <string name="profile_preferences_volumeNotificationVolume0_title">Изменить мелодию уведомления</string>
 <!--  <string name="profile_preferences_volumeNotificationVolume0_summaryPhoneProfilesSilentConfigured">Мелодия уведомления \"PhoneProfiles Silent\" установлена.</string>-->
   <string name="info_notification_unlink_ringer_notification_volumes">В вашем устройстве уровни громкости мелодии звонка и уведомлений объединены. Вы можете разделить их. Нажмите сюда, чтобы настроить разделение.</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumes_summary">Уровни громкости мелодии звонка и уведомлений в вашем устройстве объединены. Если Вы хотите разделить их, включите этот параметр.</string>
-  <string name="phone_profiles_pref_eventUsePriorityAppSettings" tools:ignore="UnusedResources">Использовать приоритет</string>
-  <string name="phone_profiles_pref_eventUsePriorityAppSettings_summary" tools:ignore="UnusedResources">Включить использование параметра \"Приоритет\" в настройках приложения.</string>
   <string name="phone_profiles_pref_notificationStatusBarNew">Уведомление в строке состояния</string>
   <string name="profile_preferences_volumeNotificationVolume0_NowConfigured">Текущие настройки:</string>
   <string name="profile_preferences_volumeRingtone0Info_title">Громкость звонка = 0</string>
@@ -751,86 +342,34 @@
   <string name="phone_profiles_pref_notificationStatusBarInfo_title">Важная информация!</string>
   <string name="phone_profiles_pref_notificationStatusBarInfo_summary">Чтобы служба PhoneProfilesService работала правильно, ей требуется постоянное наличие уведомления в строке состояния. С ним PhoneProfilesService становится службой переднего плана. Этот тип службы система Android не завершает. Служба PhoneProfilesService должна работать постоянно.</string>
   <string name="phone_profiles_pref_notificationStatusBarRequired">Требуется для фоновой службы PhoneProfilesService</string>
-  <string name="event_preferences_event_priorityInfo_summary" tools:ignore="UnusedResources">Приоритет: событие не будет запущено, если выполняется событие с более высоким приоритетом.</string>
   <string name="profile_preferences_preferenceTypesInfo_title">Типы параметров</string>
-  <string name="event_preference_bluetooth_bt_types" tools:ignore="UnusedResources">Типы Bluetooth: [CL] обычный, [LE] с низким энергопотреблением, [DU] двойной.</string>
-  <string name="event_preference_sensor_time_summary" tools:ignore="UnusedResources">Этот датчик предназначен для начала события по времени. Параметры: Время начала, время окончания, дни недели.</string>
-  <string name="event_preference_sensor_calendar_summary" tools:ignore="UnusedResources">Этот датчик предназначен для запуска события по мероприятию из календаря. Параметры: \"Календари\", \"Искать в\" (названии мероприятия, описании и т.д.), \"Искомая строка\", \"Игнорировать события «Весь день»\", \"Доступность\" (занят, свободен и т.д.).</string>
-  <string name="event_preference_sensor_battery_summary" tools:ignore="UnusedResources">Этот датчик предназначен для событий уровня заряда аккумулятора. Параметры: \"Нижний уровень\", \"Верхний уровень\", \"Зарядка\", \"Режим энергосбережения\".</string>
-  <string name="event_preference_sensor_call_summary" tools:ignore="UnusedResources">Этот датчик обрабатывает события вызова контактов. Параметры: \"Состояние и тип звонка\" (звонок, исходящий звонок и т.д.), \"Группы контактов\", \"Контакты\", \"Тип списка контактов\" (белый/чёрный список).</string>
-  <string name="event_preference_sensor_sms_summary" tools:ignore="UnusedResources">Этот датчик обрабатывает события приёма SMS/MMS от контактов. Параметры: \"Группы контактов\", \"Контакты\", \"Тип списка контактов\" (белый/чёрный список), \"Постоянный запуск\", \"Продолжительность\" (события).</string>
-  <string name="event_preference_sensor_location_summary" tools:ignore="UnusedResources">Этот датчик запускает событие по местоположению устройства. Параметры: \"Местоположение\", \"Запускать вне этого местоположения\".</string>
-  <string name="event_preference_sensor_wifi_summary" tools:ignore="UnusedResources">Этот датчик запускает события по Wi-Fi SSID. Параметры: \"Тип соединения\" (рядом, подключено и т.д.), \"SSID\".</string>
-  <string name="event_preference_sensor_bluetooth_summary" tools:ignore="UnusedResources">Этот датчик обрабатывает события Bluetooth. Параметры: \"Тип соединения\" (рядом, подключено и т.д.), \"Тип сканируемых устройств\" (обычные, с низким энергопотреблением и т.д.), \"Имя Bluetooth-устройства\".</string>
-  <string name="event_preference_sensor_mobile_cells_summary" tools:ignore="UnusedResources">Этот датчик запускает события по подключённым мобильным сотам (вышкам). Параметры: \"Вышки\", \"Запускать вне этих вышек\".</string>
-  <string name="event_preference_sensor_accessories_summary" tools:ignore="UnusedResources">Этот датчик запускает события по подключённому аксессуару (док-станция, гарнитура, наушники и т.д.). Параметры: \"Тип аксессуаров\".</string>
-  <string name="event_preference_sensor_screen_summary" tools:ignore="UnusedResources">Этот датчик обрабатывает события вкл./выкл. экрана. Параметры: \"Тип события\" (включение экрана, выключение экрана), \"Завершать при разблокировке\" (когда устройство разблокируется, событие завершается).</string>
-  <string name="event_preference_sensor_notification_summary" tools:ignore="UnusedResources">Этот датчик обрабатывает события уведомлений от приложений. Параметры: \"Приложения\", \"Завершать при удалении\" (при удалении уведомления событие завершается), \"Постоянный запуск\", \"Продолжительность\" (события запуска).</string>
-  <string name="event_preference_sensor_application_summary" tools:ignore="UnusedResources">Этот датчик запускает событие по приложению на переднем плане. Параметры: \"Приложения\".</string>
-  <string name="event_preference_sensor_orientation_summary" tools:ignore="UnusedResources">Этот датчик запускает событие по ориентации устройства. Параметры: \"Экран\" (экраном вверх, экраном вниз), \"Стороны\" (горизонтально, определённой стороной вверх), \"Расстояние\" (рядом, далеко; используется датчик приближения), \"Игнорировать для приложений\" (на переднем плане).</string>
-  <string name="event_preference_sensor_nfc_summary" tools:ignore="UnusedResources">Этот датчик запускает событие по NFC-меткам. Параметры: \"NFC-метки\", \"Постоянный запуск\", \"Продолжительность\" (события запуска).</string>
-<!--  <string name="editor_activity_targetHelps_navigationIcon_title">Боковое меню</string>-->
+  <!--  <string name="editor_activity_targetHelps_navigationIcon_title">Боковое меню</string>-->
   <string name="editor_activity_targetHelps_applicationMenu_title">Меню приложения</string>
   <string name="editor_activity_targetHelps_applicationMenu_description">Нажмите сюда для открытия меню приложения. В этом меню находятся параметры приложения.</string>
-  <string name="editor_activity_targetHelps_restartEvents_title" tools:ignore="UnusedResources">Перезапуск событий</string>
-  <string name="editor_activity_targetHelps_restartEvents_description" tools:ignore="UnusedResources">Нажмите кнопку для перезапуска событий. Вы должны перезапустить события, если профиль был активирован вручную.</string>
-  <string name="editor_activity_targetHelps_activityLog_title" tools:ignore="UnusedResources">Журнал активности</string>
-  <string name="editor_activity_targetHelps_activityLog_description" tools:ignore="UnusedResources">Нажмите сюда для открытия журнала. В журнале ведётся учёт запуска/приостановки/остановки событий, активации профилей, запуска приложений и т.д.</string>
   <string name="editor_activity_targetHelps_newProfileButton_title">Новый профиль</string>
   <string name="editor_activity_targetHelps_newProfileButton_description">Нажмите здесь для добавления нового профиля.</string>
   <string name="editor_activity_targetHelps_deleteAllProfilesButton_title">Удалить все профили</string>
   <string name="editor_activity_targetHelps_deleteAllProfilesButton_description">Нажмите здесь для удаления всех профилей.</string>
   <string name="editor_activity_targetHelps_importantInfoButton_title">Важная информация</string>
   <string name="editor_activity_targetHelps_importantInfoButton_description">Нажмите эту кнопку для отображения важной информации. Пожалуйста, прочитайте эту информацию.</string>
-  <string name="editor_activity_targetHelps_newEventButton_title" tools:ignore="UnusedResources">Новое событие</string>
-  <string name="editor_activity_targetHelps_newEventButton_description" tools:ignore="UnusedResources">Нажмите здесь для добавления нового события.</string>
-  <string name="editor_activity_targetHelps_deleteAllEventsButton_title" tools:ignore="UnusedResources">Удалить все события</string>
-  <string name="editor_activity_targetHelps_deleteAllEventsButton_description" tools:ignore="UnusedResources">Нажмите здесь для удаления всех событий.</string>
   <string name="editor_activity_targetHelps_profilePreferences_title">Настройки профиля</string>
   <string name="editor_activity_targetHelps_profilePreferences_description">Нажмите эту кнопку для открытия настроек профиля и их редактирования.</string>
   <string name="editor_activity_targetHelps_profileMenu_title">Меню профиля</string>
   <string name="editor_activity_targetHelps_profileMenu_description">Нажмите эту кнопку для открытия меню профиля с опциями: Активировать, Дублировать и Удалить профиль.</string>
   <string name="editor_activity_targetHelps_profileOrderHandler_title">Упорядочиватель</string>
   <string name="editor_activity_targetHelps_profileOrderHandler_description">Перетащите профиль вверх/вниз, чтобы изменить его расположение в Активаторе.</string>
-  <string name="editor_activity_targetHelps_eventPreferences_title" tools:ignore="UnusedResources">Настройки события</string>
-  <string name="editor_activity_targetHelps_eventPreferences_description" tools:ignore="UnusedResources">Нажмите эту кнопку для открытия настроек событий и их редактирования.</string>
-  <string name="editor_activity_targetHelps_eventMenu_title" tools:ignore="UnusedResources">Меню события</string>
-  <string name="editor_activity_targetHelps_eventMenu_description" tools:ignore="UnusedResources">Нажмите эту кнопку для открытия событий меню с вариантами: Включить/Остановить, Дублировать и Удалить событие.</string>
-  <string name="editor_activity_targetHelps_eventOrderHandler_title" tools:ignore="UnusedResources">Упорядочиватель</string>
-  <string name="editor_activity_targetHelps_eventOrderHandler_description" tools:ignore="UnusedResources">Перетащите событие вверх/вниз, чтобы изменить его порядок запуска.</string>
   <string name="activator_activity_targetHelps_editor_title" tools:keep="@string/activator_activity_targetHelps_editor_title">Редактор</string>
-  <string name="activator_activity_targetHelps_editor_description_ppp" tools:ignore="UnusedResources">Нажмите, чтобы открыть Редактор. В Редакторе Вы можете настроить профили и события, изменить настройки приложения и т.д.</string>
   <string name="activator_activity_targetHelps_editor_description_pp">Нажмите здесь для открытия Редактора. В редакторе можно настроить профили, изменить параметры приложения…</string>
   <string name="activator_activity_targetHelps_activateProfile_title">Активировать профиль</string>
   <string name="activator_activity_targetHelps_activateProfile_description">Нажмите здесь для активации профиля.</string>
   <string name="profile_preference_activity_targetHelps_save_title">Сохранить профиль</string>
   <string name="profile_preference_activity_targetHelps_save_description">Нажмите здесь для сохранения настроек профиля.</string>
-  <string name="event_preference_activity_targetHelps_save_title" tools:ignore="UnusedResources">Сохранить событие</string>
-  <string name="event_preference_activity_targetHelps_save_description" tools:ignore="UnusedResources">Нажмите здесь для сохранения изменений настроек событий.</string>
   <string name="about_application_privacy_policy">Конфиденциальность:</string>
-  <string name="phone_profiles_pref_applicationBackgroundProfileInfo_summary" tools:ignore="UnusedResources">Этот профиль будет активирован, если нет каких-либо событий.</string>
-  <string name="altype_applicationStartOnBoot" tools:ignore="UnusedResources">запуск при загрузке</string>
   <string name="profile_preferences_hideStatusBarIcon">Скрыть значок строки состояния</string>
   <string name="profile_preferences_lockDevice">Блокировка устройства</string>
   <string name="array_pref_lockDevice_root">(R) Использовать Суперпользователя (устройство должно быть рутовано)</string>
   <string name="array_pref_lockDevice_screenOff">Использовать быстрое выключение экрана</string>
   <string name="lockDevice_screenOff_text">Быстрый экран выключения блокировки</string>
-  <string name="event_preferences_calendar_start_before_event" tools:ignore="UnusedResources">Перед началом события</string>
-  <string name="event_preferences_startBeforeEvent" tools:ignore="UnusedResources">Ожидать перед началом события</string>
-  <string name="event_preferences_category_eventRadioSwitchParameters" tools:ignore="UnusedResources">Датчик радиомодулей</string>
-  <string name="event_preference_sensor_radioSwitch_summary" tools:ignore="UnusedResources">Этот датчик предназначен для запуска события переключением радиомодулей (вкл./выкл.). Параметры: \"Wi-Fi\", \"Bluetooth\", \"Мобильные данные\", \"GPS\", \"NFC\", \"Режим полёта\".</string>
-  <string name="event_type_radioSwitch" tools:ignore="UnusedResources">Радиомодули</string>
-  <string name="array_pref_radioSwitch_notDetect" tools:ignore="UnusedResources">Не определять</string>
-  <string name="array_pref_radioSwitch_on" tools:ignore="UnusedResources">Вкл.</string>
-  <string name="array_pref_radioSwitch_off" tools:ignore="UnusedResources">Выкл.</string>
-  <string name="event_preferences_radioSwitch_wifi" tools:ignore="UnusedResources">Wi-Fi</string>
-  <string name="event_preferences_radioSwitch_bluetooth" tools:ignore="UnusedResources">Bluetooth</string>
-  <string name="event_preferences_radioSwitch_mobileData" tools:ignore="UnusedResources">Мобильные данные</string>
-  <string name="event_preferences_radioSwitch_gps" tools:ignore="UnusedResources">GPS</string>
-  <string name="event_preferences_radioSwitch_nfc" tools:ignore="UnusedResources">NFC</string>
-  <string name="event_preferences_radioSwitch_airplaneMode" tools:ignore="UnusedResources">Режим полета</string>
-  <string name="event_preferences_radioSwitch_info_title" tools:ignore="UnusedResources">Конфигурация датчиков</string>
-  <string name="event_preferences_radioSwitch_info_summary" tools:ignore="UnusedResources">Для запуска события выбранные состояния ВСЕХ настроенных ниже радиомодулей должны совпадать с фактическими. Настройте только те радиомодули, которые вам необходимы.</string>
   <string name="connect_to_ssid_pref_dlg_summary_text_just_any">Любой</string>
   <string name="profile_preferences_deviceConnectToSSID">Подключение к SSID</string>
   <string name="phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes">Задать объединённость уровней громкости</string>
@@ -838,9 +377,6 @@
   <string name="array_pref_forceSetMergeRingNotificationVolumes_merged">Уровни громкости объединены</string>
   <string name="array_pref_forceSetMergeRingNotificationVolumes_notMerged">Уровни громкости разделены</string>
   <string name="phone_profiles_pref_applicationForceSetMergeRingNotificationVolumes_info">Используйте, если объединённость определяется неправильно.</string>
-  <string name="profile_preferences_category_application" tools:ignore="UnusedResources">Функции приложения</string>
-  <string name="profile_preferences_applicationDisableWifiScanning" tools:ignore="UnusedResources">Отключить сканирование Wi-Fi</string>
-  <string name="profile_preferences_applicationDisableBluetoothScanning" tools:ignore="UnusedResources">Отключить сканирование Bluetooth</string>
   <string name="array_pref_ringerModeArray_ZenModeM">Не беспокоить</string>
   <string name="profile_preferences_volumeZenModeM">Тип \"Не беспокоить\"</string>
   <string name="array_pref_zenModeArray_off">Выключить</string>
@@ -848,8 +384,6 @@
   <string name="array_pref_zenModeArray_totalSilence">Полная тишина</string>
   <string name="profile_preferences_zenMode_off_summary">Показывать все уведомления</string>
   <string name="profile_preferences_zenMode_totalSilence_summary">Удалить все уведомления</string>
-  <string name="array_pref_applicationDisableScanning_disabled" tools:ignore="UnusedResources">Сканирование отключено</string>
-  <string name="array_pref_applicationDisableScanning_enabled" tools:ignore="UnusedResources">Сканирование включено</string>
   <string name="phone_profiles_pref_notificationStatusBarNotEnabled_summary">Уведомления в строке состояния не разрешены!</string>
   <string name="duration_pref_dlg_duration_label">Продолжительность:</string>
   <string name="duration_pref_dlg_activation_end_label">Окончание активации:</string>
@@ -857,20 +391,16 @@
   <string name="profile_preferences_volumeVibrateWhenRingingRootInfoM_summary">В Android 6 системные параметры, такие как режим звонка и вибрация, могут быть изменены только на разблокированных устройствах, имеющих права Суперпользователя.</string>
   <string name="setting_screen_not_found_alert">Настройки экрана не найдены.</string>
   <string name="action_for_external_application_notification_no_profile_text">Параметр profile_name отсутствует или является пустым.</string>
-  <string name="action_for_external_application_notification_no_event_text" tools:ignore="UnusedResources">Параметр event_name отсутствует или является пустым.</string>
   <string name="array_pref_wifiModeArray_on_ignoreHotspot">Включить (игнорировать точку доступа)</string>
   <string name="array_pref_wifiModeArray_toggle_ignoreHotspot">Переключить (игнорировать точку доступа)</string>
   <string name="samsung_edge_name">PhoneProfiles</string>
   <string name="samsung_edge_description">Активатор как панель</string>
   <string name="phone_profiles_pref_category_samsung_edge_panel">Панель Samsung</string>
-  <string name="action_for_external_application_notification_bad_action" tools:ignore="UnusedResources">Не поддерживаемое действие.</string>
-  <string name="action_for_external_application_notification_no_action" tools:ignore="UnusedResources">Действие не определено.</string>
   <string name="ringtone_preference_not_set">Не задано</string>
   <string name="ringtone_preference_default_ringtone">Мелодия по умолчанию</string>
   <string name="ringtone_preference_default_notification">Звук уведомлений по умолчанию</string>
   <string name="ringtone_preference_default_alarm">Мелодия будильника по умолчанию</string>
   <string name="ringtone_preference_none">Без звука</string>
-  <string name="event_preferences_notificationVibrate" tools:ignore="UnusedResources">Уведомлять вибрацией</string>
   <string name="important_info_profile_grant">Некоторые настройки профиля требуют разрешение WRITE_SECURE_SETTINGS. ROOT не требуется. Эти настройки отмечены \"(G1)\".</string>
   <string name="important_info_profile_grant_lookSectionProfiles">Для получения дополнительной информации смотрите ниже в разделе «Профили».</string>
 <!--  <string name="profile_preferences_typesInfoGrant">Для получения дополнительной информации смотрите раздел \"Профили\" в \"Важной информации\".</string>-->
@@ -884,84 +414,22 @@
   <string name="important_info_profile_grant_1_howTo_7">Зайдите в Настройки &gt; Для разработчиков и включите Отладку по USB.</string>
   <string name="important_info_profile_grant_1_howTo_8">На своём ПК откройте командную строку (в Windows) или терминал (в Linux, OSX). Перейдите в папку, в которую вы извлекли ваши файлы adb, и В ТОЧНОСТИ выполните следующую команду:</string>
   <string name="important_info_profile_grant_1_howTo_10">После успешного выполнения все параметры профиля, помеченные (G1), будут включены.</string>
-  <string name="important_info_activity_title" tools:ignore="UnusedResources">Важная информация</string>
-  <string name="important_info_quick_guide_tab" tools:ignore="UnusedResources">Краткое руководство</string>
-  <string name="important_info_important_info_tab" tools:ignore="UnusedResources">Важная информация</string>
-  <string name="important_info_quick_guide_1" tools:ignore="UnusedResources">PhoneProfiles (PP) состоит из двух компонентов:</string>
-  <string name="important_info_quick_guide_2" tools:ignore="UnusedResources"><![CDATA[<b>ПРОФИЛИ:</b> указывает, как изменить настройки устройства.]]></string>
-  <string name="important_info_quick_guide_3" tools:ignore="UnusedResources"><![CDATA[<b>СОБЫТИЯ:</b> указывает, когда следует изменить настройки устройства.]]></string>
-  <string name="important_info_quick_guide_profiles_1" tools:ignore="UnusedResources"><b>ПРОФИЛИ:</b> Позволяют вам настроить параметры устройства, такие как режим звонка, уровни громкости, мелодию звонка и звуки уведомлений, переключение радиомодулей (Wi-Fi, Bluetooth, мобильные данные и т.д.). Когда профиль активирован, соответствующие ему параметры постоянны. Если вы хотите изменить какой-то параметр, нужно активировать другой профиль.</string>
-  <string name="important_info_quick_guide_profiles_2" tools:ignore="UnusedResources">Профили можно активировать вручную или событием.</string>
-  <string name="important_info_quick_guide_profiles_3" tools:ignore="UnusedResources">Вы можете вручную активировать профиль через Активатор (всплывающее окно со списком доступных профилей). Активатор можно вызвать нажатием на иконку приложения на домашнем экране, через виджеты приложения и, для устройств Samsung Edge, из панели Edge. Также вы можете напрямую активировать нужный профиль через виджет приложения 4x4, ярлык профиля или, на устройствах Samsung Edge, из панели Edge.</string>
-  <string name="important_info_quick_guide_events_1" tools:ignore="UnusedResources"><b>СОБЫТИЯ:</b> Позволяют вам настроить, когда активируется профиль. У событий есть начало и конец. Вы можете настроить, что произойдёт в начале события, и что произойдёт, когда событие завершится.</string>
-  <string name="important_info_quick_guide_events_2" tools:ignore="UnusedResources">События содержат важные параметры настройки датчика, и все они должны быть удовлетворены до запуска события. Если хоть один параметр хоть одного датчика не выполняется, событие завершится (приостановится).</string>
-  <string name="important_info_quick_guide_sensors_1" tools:ignore="UnusedResources">Примеры датчиков:</string>
-  <string name="important_info_quick_guide_sensors_2" tools:ignore="UnusedResources"><![CDATA[<b>Датчик времени:</b> Начало и завершение события в заданный день недели или в заданное время.]]></string>
-  <string name="important_info_quick_guide_sensors_3" tools:ignore="UnusedResources"><![CDATA[<b>Датчик Wi-Fi:</b> Начало и завершение события по Wi-Fi SSID (подключено, устройство рядом). Функция \"Рядом\" полезна для определения местоположения устройства. Например: запустить событие, когда устройство находится в диапазоне сканирования домашней Wi-Fi-сети.]]></string>
-  <string name="important_info_quick_guide_sensors_4" tools:ignore="UnusedResources"><![CDATA[<b>Датчик Bluetooth:</b> Аналогичен датчику Wi-Fi. Полезен при пользовании автомобильным Bluetooth.]]></string>
-  <string name="important_info_quick_guide_sensors_5" tools:ignore="UnusedResources"><![CDATA[<b>Датчик местоположения:</b> Начало и завершение события по местоположению устройства (GPS). Вы должны включить службы местоположения в системных настройках устройства.]]></string>
-  <string name="important_info_quick_guide_sensors_6" tools:ignore="UnusedResources"><![CDATA[<b>Датчик мобильных вышек:</b> Начало и завершение события по подключению или отключению от вышек сотовой связи.]]></string>
-  <string name="important_info_quick_guide_sensors_7" tools:ignore="UnusedResources"><![CDATA[<b>Датчик вызовов:</b> Начало и завершение события в зависимости от указанного контакта. Например, когда он звонит.]]></string>
-  <string name="important_info_quick_guide_sensors_8" tools:ignore="UnusedResources"><![CDATA[<b>Датчик аксессуаров:</b> Запуск события, когда, например, подключены наушники.]]></string>
-  <string name="important_info_quick_guide_sensors_9" tools:ignore="UnusedResources"><![CDATA[<b>Датчик NFC:</b> Запуск события посредством NFC-меток.]]></string>
-  <string name="important_info_quick_guide_events_3" tools:ignore="UnusedResources">Если вы активируете профиль вручную (не по событию), все запущенные события завершаются (приостанавливаются). Во время работы вручную активированного профиля события начинаться не будут. Тем не менее, вы можете переопределить это поведение, используя опцию \"Игнорировать ручную активацию\" в параметрах события.</string>
-  <string name="important_info_quick_guide_editor_1" tools:ignore="UnusedResources">Профили и События настраиваются в Редакторе, который можно вызвать через Активатор. В Редакторе можно добавлять, дублировать, обновлять и удалять профили и события. С помощью левой боковой панели Редактора можно изменить его содержимое. Используйте её для переключения между списками профилей и событий.</string>
-  <string name="event_preferences_noPauseByManualActivation" tools:ignore="UnusedResources">Не приостанавливать вручную</string>
-  <string name="event_preferences_noPauseByManualActivation_summary" tools:ignore="UnusedResources">Не приостанавливать это запущенное событие при ручной активации профиля</string>
-  <string name="nfc_tag_pref_dlg_writeToNfcTag_emptyTagName" tools:ignore="UnusedResources">Имя метки не настроено.</string>
-  <string name="phone_profiles_pref_applicationStartEvents" tools:ignore="UnusedResources">Запуск событий при старте</string>
-  <string name="phone_profiles_pref_applicationEventScanOnlyWhenScreenIsOn" tools:ignore="UnusedResources">Сканировать, только когда экран включён</string>
-  <string name="phone_profiles_pref_applicationRestartEventsAlert" tools:ignore="UnusedResources">Подтверждать перезапуск событий</string>
   <string name="applications_editor_dialog_startApplicationDelay">Задержка запуска:</string>
-  <string name="number_picker_min_error" tools:ignore="UnusedResources">Пожалуйста, введите число больше или равно чем %1$s</string>
-  <string name="number_picker_max_error" tools:ignore="UnusedResources">Пожалуйста, введите число меньше или равно чем %1$s</string>
-  <string name="number_picker_min_max_error" tools:ignore="UnusedResources">Пожалуйста, введите число между %1$s и %2$s</string>
   <string name="email_chooser">Отправлять почту с помощью</string>
   <string name="web_browser_chooser">Просмотр веб-ссылки с помощью</string>
   <string name="google_play_chooser">Просмотр Google Play с помощью</string>
   <string name="preference_not_allowed_reason_not_extender_installed">не установлен PhoneProfilesPlusExtender</string>
   <string name="preference_not_allowed_reason_not_enabled_accessibility_settings_for_extender">не включены параметры специальных возможностей для PhoneProfilesPlusExtender</string>
-  <string name="event_preferences_applications_AccessibilitySettingsForExtender_summary" tools:ignore="UnusedResources">Чтобы включить параметр \"Приложения\", разрешите доступ службе PhoneProfilesPlusExtender в разделе \"Спец. возможности\" системных настроек.</string>
-  <string name="event_preferences_orientation_AccessibilitySettingsForExtender_summary" tools:ignore="UnusedResources">Чтобы включить параметр \"Игнорировать для приложений\", разрешите доступ службе PhoneProfilesPlusExtender в разделе \"Спец. возможности\" системных настроек.</string>
-  <string name="event_preferences_applications_PPPExtender_install_summary" tools:ignore="UnusedResources">Чтобы включить параметр \"Приложения\", нажмите сюда для установки PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_orientation_PPPExtender_install_summary" tools:ignore="UnusedResources">Чтобы включить параметр \"Игнорировать для приложений\", нажмите сюда для установки PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_applications_PPPExtender_upgrade_summary">Нажмите сюда, чтобы проверить изменения и обновить PhoneProfilesPlusExtender.</string>
-  <string name="important_info_accessibility_service_text1" tools:ignore="UnusedResources">Из-за изменения Google\'ом правил использования служб Спец. возможностей, для использования Датчика приложений и Датчика ориентации нужно установить PhoneProfilesPlusExtender. Более подробную информацию можно посмотреть в параметрах этих датчиков.</string>
-  <string name="about_application_extender_source_code" tools:ignore="UnusedResources">Исходный код - Extender:</string>
-  <string name="pref_dlg_info_about_wildcards_4" tools:ignore="UnusedResources">Можно настроить несколько строк. Разделитель - \"|\".</string>
-<!--  <string name="profile_preferences_sourceProfileInfoX_title">Назначение Исходного профиля.</string> -->
+  <string name="profile_preferences_applications_PPPExtender_upgrade_summary">Нажмите сюда, чтобы проверить изменения и обновить PhoneProfilesPlusExtender.</string>
+  <!--  <string name="profile_preferences_sourceProfileInfoX_title">Назначение Исходного профиля.</string> -->
 <!--  <string name="profile_preferences_sourceProfileInfoX_summary">Для каждого параметра профиля вы можете выбрать опцию \"Исходный профиль\", и тогда во время активации значения этого параметра будут подставлены из него.</string> -->
-  <string name="editor_activity_targetHelps_backgroundProfileButton_title" tools:ignore="UnusedResources">Профиль по умолчанию</string>
-  <string name="editor_activity_targetHelps_backgroundProfileButton_description" tools:ignore="UnusedResources">Этот профиль будет активирован, когда никакое событие не выполняется. Нажмите здесь, чтобы настроить его.</string>
-  <string name="mobile_cell_names_dialog_title" tools:ignore="UnusedResources">Имя вышки</string>
-  <string name="mobile_cell_names_dialog_filter_title" tools:ignore="UnusedResources">Фильтр вышек по имени</string>
-  <string name="mobile_cell_names_dialog_item_show_selected" tools:ignore="UnusedResources">[Выбранные]</string>
-  <string name="mobile_cell_names_dialog_item_show_without_name" tools:ignore="UnusedResources">[Без имени]</string>
-  <string name="mobile_cell_names_dialog_item_show_new" tools:ignore="UnusedResources">[Новые (N)]</string>
-  <string name="mobile_cell_names_dialog_item_show_all" tools:ignore="UnusedResources">[Все]</string>
-  <string name="array_pref_change_selection_mobile_cells_select_all_visible" tools:ignore="UnusedResources">Выбрать все видимые</string>
-  <string name="array_pref_mobile_cells_rename_all_visible" tools:ignore="UnusedResources">Все видимые</string>
   <string name="import_profiles_alert_error_database_newer_version">Резервная копия базы данных имеет более позднюю версию.</string>
-  <string name="phone_profiles_pref_backgroundProfileNotificationSound" tools:ignore="UnusedResources">Профиль по умолчанию: звук уведомлений</string>
-  <string name="phone_profiles_pref_backgroundProfileNotificationVibrate" tools:ignore="UnusedResources">Профиль по умолчанию: уведомлять вибрацией</string>
   <string name="profile_preferences_durationNotificationSound">Окончание: звуковое уведомление</string>
   <string name="profile_preferences_durationNotificationVibrate">Окончание: вибро уведомление</string>
-  <string name="array_event_pref_missed_call" tools:ignore="UnusedResources">Пропущенный вызов</string>
-  <string name="start_event_notification_title" tools:ignore="UnusedResources">Событие перезапущено</string>
-  <string name="start_event_notification_text1" tools:ignore="UnusedResources">Название события</string>
-  <string name="event_preferences_notificationRepeat" tools:ignore="UnusedResources">Повторение уведомления</string>
-  <string name="event_preferences_notificationRepeatInterval" tools:ignore="UnusedResources">Интервал повтора уведомлений</string>
   <string name="duration_pref_dlg_activation_hours_label">Часы:</string>
   <string name="duration_pref_dlg_activation_minutes_label">Минуты:</string>
   <string name="duration_pref_dlg_activation_seconds_label">Секунды:</string>
   <string name="preferences_durationNotificationSoundInfo_summary">Это уведомление использует канал \"Медиа\" и, соответственно, его уровень громкости.</string>
-  <string name="phone_profiles_pref_eventWiFiLocationSystemSettings_summary" tools:ignore="UnusedResources">Пожалуйста, включите Местоположение и сканирование Wi-Fi в Настройках устройства. Без этого сканирование Wi-Fi работать не будет.</string>
-  <string name="phone_profiles_pref_eventBluetoothLocationSystemSettings_summary" tools:ignore="UnusedResources">Пожалуйста, включите Местоположение и сканирование Bluetooth в Настройках устройства. Без этого сканирование Bluetooth работать не будет.</string>
-  <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings" tools:ignore="UnusedResources">Системная настройка \"Работа Wi-Fi в режиме сна\"</string>
-  <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings_summary" tools:ignore="UnusedResources">Настройте, пожалуйста, параметр \"Работа Wi-Fi в режиме сна\" на \"Всегда работает\". Без этого сканирование Wi-Fi не будет работать в спящем режиме.</string>
-  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary1" tools:ignore="UnusedResources">Пожалуйста, не устанавливайте интервал для значения меньше, чем</string>
-  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary2" tools:ignore="UnusedResources">минут. Это значительно увеличивает расход батареи.</string>
-  <string name="phone_profiles_pref_applicationEventScanIntervalInfo_summary3" tools:ignore="UnusedResources">секунд. Это значительно увеличивает расход батареи.</string>
   <string name="phone_profiles_pref_applicationWidgetIconRoundedCorners">Скруглённые углы (виджет)</string>
   <string name="phone_profiles_pref_applicationWidgetRoundedCorners">Скруглённые углы</string>
   <string name="preference_not_allowed_reason_extender_not_upgraded">PhoneProfilesPlusExtender не обновлён</string>
@@ -969,51 +437,27 @@
   <string name="profile_activation_interactive_preference_notification_text">Нажмите сюда, чтобы открыть:</string>
   <string name="profile_preferences_deviceWiFiAPPrefs">(I) Настройки точки доступа Wi-Fi</string>
   <string name="preference_not_allowed_reason_not_supported_android_version">неподдерживаемая версия Android</string>
-  <string name="event_preferences_notifications_inCall" tools:ignore="UnusedResources">Входящий вызов</string>
-  <string name="event_preferences_notifications_missedCall" tools:ignore="UnusedResources">Пропущенный вызов</string>
   <string name="colorChooser_pref_dialog_defaultIconColor">Цвет иконки по умолчанию</string>
   <string name="phone_profiles_pref_applicationWidgetBackgroundType">Цветной фон</string>
   <string name="phone_profiles_pref_applicationWidgetColorB">Цвет фона</string>
   <string name="phone_profiles_pref_applicationWidgetIconBackgroundType">Цветной фон (виджет)</string>
   <string name="phone_profiles_pref_applicationWidgetIconColorB">Цвет фона (виджет)</string>
-  <string name="phone_profiles_pref_applicationEventWifiEnableScanning" tools:ignore="UnusedResources">Включить сканирование Wi-Fi</string>
-  <string name="phone_profiles_pref_applicationEventWifiScanIfWifiOff" tools:ignore="UnusedResources">Сканировать, даже если Wi-Fi отключён</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothEnableScanning" tools:ignore="UnusedResources">Включить сканирование Bluetooth</string>
-  <string name="phone_profiles_pref_applicationEventBluetoothScanIfBluetoothOff" tools:ignore="UnusedResources">Сканировать, даже если Bluetooth отключён</string>
-  <string name="phone_profiles_pref_applicationEventLocationEnableScanning" tools:ignore="UnusedResources">Включить сканирование местоположения</string>
-  <string name="profile_preferences_applicationDisableLocationScanning" tools:ignore="UnusedResources">Отключить сканирование местоположения</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellEnableScanning" tools:ignore="UnusedResources">Включить сканирование мобильных вышек</string>
-  <string name="phone_profiles_pref_applicationEventOrientationEnableScanning" tools:ignore="UnusedResources">Включить сканирование ориентации</string>
-  <string name="phone_profiles_pref_applicationEventScanningDisabled" tools:ignore="UnusedResources">Сканирование отключено!</string>
-  <string name="profile_preferences_applicationDisableMobileCellScanning" tools:ignore="UnusedResources">Отключить сканирование мобильных вышек</string>
-  <string name="profile_preferences_applicationDisableOrientationScanning" tools:ignore="UnusedResources">Отключить сканирование ориентации</string>
   <string name="profile_preferences_headsUpNotifications">(G1)(R) Всплывающие уведомления</string>
   <string name="event_preferences_PPPExtenderInstallInfo_text">Как установить PhoneProfilesPlusExtender</string>
   <string name="event_preferences_PPPExtenderInstallInfo_summary">Загрузите последнюю версию PhoneProfilesPlusExtender.apk с GitHub. Затем нажмите на уведомление о загруженном apk и установите его.</string>
   <string name="donation_thanks_dialog">Спасибо за помощь.\nЯ действительно ценю это.</string>
   <string name="donation_google_android_market_not_supported">В приложении пожертвования не поддерживаются. Google Play Store установлен правильно?</string>
   <string name="donation_google_error">Ошибка.</string>
-  <string name="button_close" tools:ignore="UnusedResources">Закрыть</string>
   <string name="fast_access_duration_activate_without_button_2">Активировать бессрочно</string>
   <string name="profileicon_pref_dlg_customIconButton">Пользовательская иконка</string>
-  <string name="mobile_cells_registration_cell_name_hint" tools:ignore="UnusedResources">Нажмите, чтобы задать имя вышки</string>
   <string name="profile_preferences_deviceWiFiAPInfo_summary">Подключение к точке доступа с других устройств может не работать.</string>
-  <string name="array_event_pref_battery_charging_not_use" tools:ignore="UnusedResources">Не использовать</string>
-  <string name="array_event_pref_battery_charging_start_when_charging" tools:ignore="UnusedResources">Запускать при зарядке</string>
-  <string name="array_event_pref_battery_charging_stop_when_charging" tools:ignore="UnusedResources">Останавливать при зарядке</string>
-  <string name="profile_multiselect_summary_text_selected" tools:ignore="UnusedResources">Выбрано</string>
-  <string name="profile_multiselect_summary_text_not_selected" tools:ignore="UnusedResources">Не выбраны</string>
   <string name="notification_channel_activated_profile">Активированный профиль</string>
-  <string name="notification_channel_activated_profile_description_ppp" tools:ignore="UnusedResources">Показывает активированный профиль и начатое событие.</string>
   <string name="notification_channel_activated_profile_description_pp">Показывает активированный профиль.</string>
-  <string name="notification_channel_mobile_cells_registration_description" tools:ignore="UnusedResources">Показывает время, оставшееся до окончания регистрации мобильных вышек.</string>
   <string name="notification_channel_information">Информация</string>
   <string name="notification_channel_exclamation">Предупреждение</string>
   <string name="notification_channel_grant_permission">Предоставление разрешения</string>
   <string name="notification_channel_grant_permission_description">Показывает разрешение, которое нужно предоставить.</string>
-  <string name="notification_channel_notify_event_start" tools:ignore="UnusedResources">Уведомление о начале события</string>
-  <string name="notification_channel_notify_event_start_description" tools:ignore="UnusedResources">Показывает уведомление о начале события.</string>
-<!--  <string name="editor_drawer_open">Открыть боковое меню</string>-->
+  <!--  <string name="editor_drawer_open">Открыть боковое меню</string>-->
   <string name="important_info_accessibility_service_new_version">Установите, пожалуйста, новую версию PhoneProfilesPlusExtender. Дополнительные сведения об установке - в параметрах, для которых требуется PhoneProfilesPlusExtender.</string>
   <string name="important_info_accessibility_service_new_version_2">Нажмите сюда для просмотра релизов PhoneProfilesPlusExtender на GitHub.</string>
   <string name="array_pref_no_force_stop">Не останавливать принудительно</string>
@@ -1021,7 +465,7 @@
   <string name="profile_preferences_deviceForceStopApplicationsChange">Принудительная остановка приложений</string>
   <string name="profile_preferences_deviceForceStopApplicationsPackageName">Приложения, которые нужно принудительно останавливать</string>
   <string name="profile_preferences_deviceForceStopApplications_PPPExtender_install_summary">Чтобы включить параметр \"Принудительная остановка приложений\", нажмите сюда для установки PhoneProfilesPlusExtender.</string>
-  <string name="event_preferences_applications_PPPExtender_new_version_summary">Требуется новая версия PhoneProfilesPlusExtender. Нажмите сюда для обновления.</string>
+  <string name="profile_preferences_applications_PPPExtender_new_version_summary">Требуется новая версия PhoneProfilesPlusExtender. Нажмите сюда для обновления.</string>
   <string name="profile_preferences_deviceForceStopApplications_AccessibilitySettings_title">Настройки специальных возможностей</string>
   <string name="profile_preferences_deviceForceStopApplications_AccessibilitySettingsForExtender_summary">Чтобы включить параметр \"Принудительная остановка приложений\", разрешите доступ службе PhoneProfilesPlusExtender в разделе \"Спец. возможности\" системных настроек.</string>
   <string name="shortcut_activate_profile">Активировать профиль:</string>
@@ -1032,11 +476,6 @@
   <string name="array_pref_do_not_close">Не закрывать</string>
   <string name="array_pref_close">Закрыть</string>
   <string name="profile_preferences_deviceCloseAllApplicationsInfo_summary">Имитирует нажатие кнопки Home на панели навигации.</string>
-  <string name="phone_profiles_pref_applicationEventLocation_info" tools:ignore="UnusedResources">Эти настройки - для Датчика местоположения.</string>
-  <string name="phone_profiles_pref_applicationEventWifi_info" tools:ignore="UnusedResources">Эти настройки - для Датчика Wi-Fi.</string>
-  <string name="phone_profiles_pref_applicationEventBluetooth_info" tools:ignore="UnusedResources">Эти настройки - для Датчика Bluetooth.</string>
-  <string name="phone_profiles_pref_applicationEventMobileCell_info" tools:ignore="UnusedResources">Эти настройки - для Датчика мобильных вышек.</string>
-  <string name="phone_profiles_pref_applicationEventOrientation_info" tools:ignore="UnusedResources">Эти настройки - для Датчика ориентации.</string>
   <string name="profileicon_pref_dialog_custom_icon_image_too_large">Пользовательская иконка слишком большая. Макс. разрешение - </string>
   <string name="profile_preferences_category_touchEffects">Эффекты нажатия</string>
   <string name="profile_preferences_soundOnTouch">Звук при нажатии</string>
@@ -1054,19 +493,6 @@
   <string name="array_pref_auto_rotate_off">Автоповорот выкл.</string>
   <string name="brightness_pref_dialog_adaptive_level_may_not_working">Изменение адаптивного уровня может не работать на вашем устройстве (например, на устройствах Samsung).</string>
   <string name="about_application_xda_developers_community">Сообщество XDA-developers:</string>
-  <string name="mobile_cells_pref_dlg_connected_cell" tools:ignore="UnusedResources">Подключённая вышка:</string>
-  <string name="permissions_for_mobile_cells_registration_dialog_text1" tools:ignore="UnusedResources">Регистрация мобильных вышек требует некоторых разрешений.</string>
-  <string name="mobile_cells_registration_pref_dlg_status_new_cells_count" tools:ignore="UnusedResources">Новых вышек:</string>
-  <string name="phone_profiles_pref_applicationEventMobileCellsRegistration_stop" tools:ignore="UnusedResources">Остановить</string>
-  <string name="mobile_cells_registration_pref_dlg_add_event_button" tools:ignore="UnusedResources">Добавить событие</string>
-  <string name="mobile_cells_registration_pref_dlg_remove_event_button" tools:ignore="UnusedResources">Удалить событие</string>
-  <string name="altype_eventPreferencesChanged" tools:ignore="UnusedResources">Настройки события изменены</string>
-  <string name="altype_eventDeleted" tools:ignore="UnusedResources">Событие удалено</string>
-  <string name="altype_profileDeleted" tools:ignore="UnusedResources">Профиль удалён</string>
-  <string name="altype_profilePreferencesChanged" tools:ignore="UnusedResources">Настройки профиля изменены</string>
-  <string name="altype_sharedProfilePreferencesChanged" tools:ignore="UnusedResources">Настройки Исходного профиля изменены</string>
-  <string name="altype_allEventsDeleted" tools:ignore="UnusedResources">Все события удалены</string>
-  <string name="altype_allProfilesDeleted" tools:ignore="UnusedResources">Все профили удалены</string>
   <string name="event_preference_wifi_ssidName_type" tools:ignore="TypographyOther,UnusedResources">(C) настроено в системе, (S) возвращено сканером.</string>
   <string name="event_preference_bluetooth_btName_type" tools:ignore="TypographyOther,UnusedResources">(C) настроено в системе, (S) возвращено сканером.</string>
   <string name="import_profiles_alert_error_database_bug">Ошибка при восстановлении базы данных.</string>
@@ -1077,38 +503,21 @@
   <string name="permission_not_ask_button">Не спрашивать</string>
   <string name="brightness_pref_dialog_level_chb">Изменить уровень</string>
   <string name="preference_profile_manual_brightness">Ручная</string>
-  <string name="important_info_event_system_settings" tools:ignore="UnusedResources">Некоторые настройки события требуют изменений в настройках системы. Эти настройки события отмечены значком \"(S)\".</string>
   <string name="preferences_grantPermissions_title">Непредоставленные разрешения</string>
   <string name="preferences_grantPermissions_summary">Некоторые разрешения не предоставлены. Нажмите сюда, чтобы предоставить их.</string>
-  <string name="event_preferences_no_sensor_is_enabled" tools:ignore="UnusedResources">Ни один датчик не включён!</string>
-  <string name="info_notification_event_states_manual_profile_activation" tools:ignore="UnusedResources">Приостановлено: профиль активирован вручную, а параметр события \"Игнорировать ручную активацию\" не включён.</string>
-  <string name="phone_profiles_pref_applicationEventScanningDisabledByProfile" tools:ignore="UnusedResources">Сканирование отключено профилем.</string>
   <string name="alert_message_enable_event_check_box">Больше не спрашивать</string>
-  <string name="phone_profiles_pref_applicationUseAlarmClock" tools:ignore="UnusedResources">Использовать будильник</string>
-  <string name="phone_profiles_pref_applicationUseAlarmClock_summary" tools:ignore="UnusedResources">Когда экран выключен, продолжительность профилей и событий, датчики времени и календаря, задержки начала и завершения событий неточны. Чтобы сделать их точными, включите этот параметр. В строке состояния появится иконка будильника.</string>
-  <string name="important_info_useAlarmClock" tools:ignore="UnusedResources">Когда экран выключен, продолжительность профилей и событий, датчики времени и календаря, задержки начала и завершения событий неточны. Чтобы сделать их точными, включите в настройках программы \"Системные\"→\"Использовать будильник\". В строке состояния появится иконка будильника.</string>
   <!--<string name="nfc_tag_pref_dlg_read_tag_editor_title">Read NFC Tag</string>
     <string name="nfc_tag_pref_dlg_readNfcTag_touch">Attach your device to an NFC tag. Read will be started.</string>
     <string name="nfc_tag_pref_dlg_tag_uid_empty">Tag UID is not read from tag.</string>-->
-  <string name="nfc_tag_pref_dlg_change_tag_name" tools:ignore="UnusedResources">Изменить имя</string>
   <!--<string name="nfc_tag_pref_dlg_read_tag_uid">Read tag UID</string>-->
-  <string name="event_preferences_not_set_underlined_parameters" tools:ignore="UnusedResources">Некоторые подчёркнутые параметры не настроены!</string>
   <string name="permission_group_name_draw_overlays_miui">Отображать всплывающее окно</string>
   <string name="permissions_draw_overlays_not_allowed_confirm_miui">Вы не разрешили отображать всплывающие окна. Больше не спрашивать?</string>
-  <string name="stop_events_alert_title" tools:ignore="UnusedResources">Остановить события</string>
-  <string name="stop_events_alert_message" tools:ignore="UnusedResources">Вы уверены?</string>
-  <string name="array_event_pref_incall_ended" tools:ignore="UnusedResources">Входящий вызов завершён</string>
-  <string name="array_event_pref_outcall_ended" tools:ignore="UnusedResources">Исходящий вызов завершён</string>
   <string name="phone_profiles_pref_applicationPowerManager">Диспетчер питания</string>
   <string name="phone_profiles_pref_applicationPowerManager_summary">Разрешите PhoneProfiles работать в фоновом режиме, добавьте программу в неоптимизируемые/неотслеживаемые приложения. Без этого PhoneProfiles в фоновом режиме работать не будет.</string>
   <string name="phone_profiles_pref_systemAutoStartManager">Менеджер автозапуска</string>
   <string name="phone_profiles_pref_systemAutoStartManager_summary">Нажмите сюда, чтобы включить автозапуск PhoneProfiles</string>
   <string name="important_info_power_manager">Если вы сталкиваетесь с проблемами при работе PhoneProfiles в фоновом режиме, нажмите сюда, чтобы разрешить работу PhoneProfiles в фоне, добавьте программу в неоптимизируемые/неотслеживаемые приложения.</string>
   <string name="array_pref_screenTimeoutArray_30minutes">30 минут</string>
-  <string name="event_preferences_calendar_all_events" tools:ignore="UnusedResources">Все события календаря</string>
-  <string name="event_preference_sensor_alarm_clock_summary" tools:ignore="UnusedResources">Этот датчик запускает события по будильнику. Параметры: \"Постоянный запуск\", \"Продолжительность\" (события).</string>
-  <string name="event_type_alarm_clock" tools:ignore="UnusedResources">Будильник</string>
-  <string name="event_preferences_category_eventAlarmClockParameters" tools:ignore="UnusedResources">Датчик будильника</string>
   <string name="phone_profiles_pref_grantRootPermission">Предоставить права Суперпользователя</string>
   <string name="phone_profiles_pref_grantRootPermission_summary">Предоставьте, пожалуйста, для PhoneProfiles права Суперпользователя - они нужны для работы параметров профилей и событий, которые их требуют.</string>
   <string name="phone_profiles_pref_grantRootPermission_summary_pp">Предоставьте, пожалуйста, для PhoneProfiles права Суперпользователя - они нужны для работы требующих их параметров профилей.</string>
@@ -1127,13 +536,6 @@
 <!--  <string name="permission_why_install_tone">для сохранения мелодии в хранилище</string>-->
   <string name="permission_why_export">для сохранения резервных копий в хранилище</string>
   <string name="permission_why_import">для загрузки резервных копий из хранилища</string>
-  <string name="permission_why_event_calendar_preferences" tools:ignore="UnusedResources">для чтения данных календаря в Датчике календаря</string>
-  <string name="permission_why_event_orientation_preferences" tools:ignore="UnusedResources">для определения телефонных звонков в Датчике ориентации (чтобы не менять ориентацию во время звонка)</string>
-  <string name="permission_why_event_location_preferences" tools:ignore="UnusedResources">для использования данных о местоположении в Датчике местоположения</string>
-  <string name="permission_why_event_wifi_preferences" tools:ignore="UnusedResources">для использования данных о местоположении в Датчике Wi-Fi</string>
-  <string name="permission_why_event_bluetooth_preferences" tools:ignore="UnusedResources">для использования данных о местоположении в Датчике Bluetooth</string>
-  <string name="permission_why_event_mobile_cells_preferences" tools:ignore="UnusedResources">для использования данных о местоположении в Датчике мобильных вышек</string>
-  <string name="permission_why_event_contacts_preference" tools:ignore="UnusedResources">для чтения контактов во время настройки</string>
   <string name="permission_why_profile_notification_led">для включения/отключения LED-уведомления</string>
   <string name="permission_why_profile_vibrate_when_ringing">для включения/отключения вибрации при звонке</string>
   <string name="permission_why_play_ringtone_notification">для воспроизведения звуков звонка и уведомлений</string>
@@ -1145,12 +547,9 @@
   <string name="permission_why_brightness_preference">для изменения яркости во время настройки</string>
   <string name="permission_why_wallpaper_preference">для загрузки обоев из хранилища</string>
   <string name="permission_why_custom_profile_icon_preference">для загрузки пользовательских иконок из хранилища</string>
-  <string name="permission_why_location_preference" tools:ignore="UnusedResources">для чтения данных о местоположении во время настройки</string>
-  <string name="permission_why_calendar_preference" tools:ignore="UnusedResources">для чтения данных календаря во время настройки</string>
   <string name="exit_application_alert_title">Выйти из приложения</string>
   <string name="exit_application_alert_message">Вы уверены?</string>
   <string name="phone_profiles_pref_notificationShowButtonExit">Показывать кнопку \"Выход\"</string>
-  <string name="altype_applicationUpgrade" tools:ignore="UnusedResources">обновление приложения</string>
   <string name="phone_profiles_pref_applicationUnlinkRingerNotificationVolumesUnlinked_summary">Уровни громкости для звонка и уведомлений в вашем устройстве не объединены.</string>
 
     <string name="phone_profiles_pref_category_widget_list">Виджет: Список</string>
@@ -1160,18 +559,12 @@
     <string name="widget_label_one_row">Однострочный</string>
     <string name="widget_label_list">Список</string>
 
-    <string name="phone_profiles_pref_backgroundProfileUsage" tools:ignore="UnusedResources">Когда активировать профиль по умолчанию</string>
-    <string name="phone_profiles_pref_backgroundProfileUsage_summary" tools:ignore="UnusedResources">Активировать, только если по завершении события не активирован ни один профиль, а также при перезапуске событий.</string>
-    <string name="phone_profiles_pref_manualProfileActivation" tools:ignore="UnusedResources">Ручная активация профиля</string>
-    <string name="phone_profiles_pref_category_widget_one_row">Виджет: Однострочный</string>
+  <string name="phone_profiles_pref_category_widget_one_row">Виджет: Однострочный</string>
     <string name="phone_profiles_pref_applicationWidgetLightnessBorder">Яркость рамки</string>
     <string name="phone_profiles_pref_applicationWidgetIconLightnessBorder">Яркость рамки (виджет)</string>
     <string name="phone_profiles_pref_applicationWidgetShowBorder">Показывать рамку</string>
     <string name="phone_profiles_pref_applicationWidgetIconShowBorder">Показывать рамку (виджет)</string>
-    <string name="event_preferences_sms_AccessibilitySettingsForExtender_summary" tools:ignore="UnusedResources">Разрешите службу PhoneProfilesPlusExtender в разделе \"Спец. возможности\" настроек системы. Функция спец. возможностей не используется, запущенная служба необходима для получения SMS и MMS.</string>
-    <string name="event_preferences_sms_PPPExtender_install_summary" tools:ignore="UnusedResources">Нажмите сюда, чтобы установить PhoneProfilesPlusExtender. Эта служба нужна для получения SMS и MMS.</string>
-    <string name="important_info_accessibility_service_text2" tools:ignore="UnusedResources">Из-за изменения компанией Google правил использования разрешений на получение SMS и MMS, для использования Датчика SMS/MMS вам необходимо установить PhoneProfilesPlusExtender. Дополнительная информация - в параметрах этого датчика.</string>
-    <string name="permission_not_granted">Не предоставлено</string>
+  <string name="permission_not_granted">Не предоставлено</string>
     <string name="permission_granted">Предоставлено</string>
     <string name="menu_dark_theme_on">Включить тёмную тему</string>
     <string name="menu_dark_theme_off">Выключить тёмную тему</string>
@@ -1199,28 +592,14 @@
     <string name="dashclock_extension_description">Отображает активный профиль с индикатором настроек. Открывает Активатор по прикосновению.</string>
     <string name="phone_profiles_pref_applicationWidgetIconCustomIconLightness">Использовать яркость иконки для пользовательских иконок профиля</string>
 
-    <string name="preferences_not_enabled_accessibility_service_title" tools:ignore="UnusedResources">Служба спец. возможностей не включена!</string>
-    <string name="profile_preferences_volumeVoiceCall">Громкость голосового вызова</string>
-    <string name="pref_event_permanentRun_summary" tools:ignore="UnusedResources">Приостановить событие после ручной активации профиля и перезапуска событий</string>
-    <string name="event_preferences_call_AccessibilitySettingsForExtender_summary" tools:ignore="UnusedResources">Разрешите доступ службе PhoneProfilesPlusExtender в разделе \"Спец. возможности\" системных настроек. Функция спец. возможностей не используется; для получения звонков нужна запущенная служба.</string>
-    <string name="event_preferences_call_PPPExtender_install_summary" tools:ignore="UnusedResources">Нажмите сюда, чтобы установить PhoneProfilesPlusExtender. Эта запущенная служба нужна для получения звонков.</string>
-    <string name="permission_why_event_sms_preferences" tools:ignore="UnusedResources">для чтения контактов в Датчике SMS/MMS</string>
-    <string name="permission_why_event_call_preferences" tools:ignore="UnusedResources">для чтения контактов, определения мелодии звонка (для \"ночного звонка\") в Датчике вызовов</string>
-    <string name="important_info_accessibility_service_text3" tools:ignore="UnusedResources">Из-за изменения компанией Google правил использования разрешений на приём вызовов, для использования Датчика вызовов вам необходимо установить PhoneProfilesPlusExtender. Дополнительная информация - в параметрах этого датчика.</string>
+  <string name="profile_preferences_volumeVoiceCall">Громкость голосового вызова</string>
 
-    <string name="phone_profiles_pref_notificationUseDecoration">Использовать оформление</string>
+  <string name="phone_profiles_pref_notificationUseDecoration">Использовать оформление</string>
     <string name="phone_profiles_pref_notificationLayoutType">Тип макета</string>
     <string name="phone_profiles_pref_notificationLayoutType_expandable">Расширяемый</string>
     <string name="phone_profiles_pref_notificationLayoutType_large">Большой</string>
     <string name="phone_profiles_pref_notificationLayoutType_small">Маленький</string>
-    <string name="event_preferences_applications_LaunchExtender_title" tools:ignore="UnusedResources">Запустить PhoneProfilesPlusExtender</string>
-    <string name="event_preferences_call_LaunchExtender_summary" tools:ignore="UnusedResources">Предоставьте, пожалуйста, PhoneProfilesPlusExtender разрешение \"Телефон\". Оно требуется для получения звонков.</string>
-    <string name="event_preferences_sms_LaunchExtender_summary" tools:ignore="UnusedResources">Предоставьте, пожалуйста, PhoneProfilesPlusExtender разрешение \"SMS\". Оно требуется для получения SMS/MMS.</string>
-    <string name="event_preferences_extender_not_installed" tools:ignore="UnusedResources">PhoneProfilesPlusExtender не установлен.</string>
-    <string name="array_event_pref_peripheralType_headphones" tools:ignore="UnusedResources">Наушники без микрофона</string>
-    <string name="preferences_not_installed_PPPExtender_title" tools:ignore="UnusedResources">PhoneProfilesPlusExtender не установлен!</string>
-    <string name="preferences_old_version_PPPExtender_title" tools:ignore="UnusedResources">Установлена не новейшая версия PhoneProfilesPlusExtender!</string>
-    <string name="default_profile_name_battery_ok">Батарея заряжена</string>
+  <string name="default_profile_name_battery_ok">Батарея заряжена</string>
     <string name="array_pref_applicationsEditorDialogFilter_applications">(A) Приложения</string>
     <string name="array_pref_applicationsEditorDialogFilter_shortcuts">(S) Ярлыки</string>
 
@@ -1230,32 +609,15 @@
     <string name="phone_profiles_pref_notificationBackgroundColor_android">Родной (Android)</string>
     <string name="phone_profiles_pref_notificationBackgroundColor_dark">Тёмный</string>
     <string name="phone_profiles_pref_notificationBackgroundColor_nightMode">По ночному режиму</string>
-    <string name="phone_profiles_pref_nightModeOffApplicationTheme" tools:ignore="UnusedResources">Тема при отключении ночного режима</string>
-    <string name="phone_profiles_pref_applicationTheme_nightMode">По ночному режиму</string>
-    <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettings_summary" tools:ignore="UnusedResources">Включите, пожалуйста, определение местоположения в настройках системы. Без этого сканирование мобильных вышек работать не будет.</string>
+  <string name="phone_profiles_pref_applicationTheme_nightMode">По ночному режиму</string>
 
-<!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Автоскрытие бокового меню</string>-->
+  <!--    <string name="phone_profiles_pref_applicationAutoCloseDrawer">Автоскрытие бокового меню</string>-->
 <!--    <string name="editor_activity_targetHelps_navigationIcon_description">Нажмите сюда или проведите пальцем слева направо для открытия боковой панели, в которой вы можете переключаться между списками профилей и событий.</string>-->
     <string name="action_for_external_application_notification_title">Поддержка внешних приложений (Tasker)</string>
-    <string name="start_event_notification_text2" tools:ignore="UnusedResources">Уберите это уведомление, чтобы перестать его показывать.</string>
 
-    <string name="event_preferences_battery_plugged" tools:ignore="UnusedResources">Тип зарядки</string>
-    <string name="array_pref_battery_plugged_ac" tools:ignore="UnusedResources">От аккумулятора</string>
-    <string name="array_pref_battery_plugged_usb" tools:ignore="UnusedResources">Через USB</string>
-    <string name="array_pref_battery_plugged_wireless" tools:ignore="UnusedResources">Беспроводная</string>
-    <string name="pref_dlg_info_about_wildcards_5" tools:ignore="UnusedResources">Если нужно, чтобы искомая строка в тексте отсутствовала, поставьте перед ней \"!\".</string>
-    <string name="pref_dlg_info_about_wildcards_6" tools:ignore="UnusedResources">\"!\" в начале строки</string>
-    <string name="phone_profiles_pref_applicationEventScanningLocationSettingsDisabled_summary" tools:ignore="UnusedResources">Определение местоположения отключено</string>
-    <string name="phone_profiles_pref_applicationEventScanningLocationSettingsEnabled_summary" tools:ignore="UnusedResources">Определение местоположения включено</string>
+  <string name="preference_not_allowed_reason_not_granted_g1_permission">не предоставлено разрешение WRITE_SECURE_SETTINGS</string>
 
-    <string name="preference_not_allowed_reason_no_sim_card" tools:ignore="UnusedResources">нет SIM-карты</string>
-	<string name="preference_not_allowed_reason_not_granted_g1_permission">не предоставлено разрешение WRITE_SECURE_SETTINGS</string>
-    <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings_setToAlways_summary" tools:ignore="UnusedResources">Установлено на \"Всегда работает\"</string>
-    <string name="phone_profiles_pref_eventWiFiKeepOnSystemSettings_notSetToAlways_summary" tools:ignore="UnusedResources">Не установлено на \"Всегда работает\"</string>
-    <string name="event_preferences_notificationsAccessSettings_enabled_summary" tools:ignore="UnusedResources">Доступ к уведомлениям разрешён</string>
-    <string name="event_preferences_notificationsAccessSettings_disabled_summary" tools:ignore="UnusedResources">Доступ к уведомлениям запрещён</string>
-
-    <!-- DO NOT TRANSLATE words "intent", "broadcast" -->
+  <!-- DO NOT TRANSLATE words "intent", "broadcast" -->
     <string name="applications_preference_applicationType_intent">intent</string>
     <string name="intent_editor_title">Редактор intent\'ов</string>
     <string name="array_pref_applicationsEditorDialogFilter_intents">(I) Intent\'ы</string>
@@ -1298,38 +660,19 @@
     <string name="profile_preferences_lockDevice_AccessibilitySettingsForExtender_summary">Для использования типа блокировки \"Использовать PhoneProfilesPlusExtender\" разрешите доступ службе PhoneProfilesPlusExtender в разделе \"Спец. возможности\" системных настроек.</string>
     <string name="array_pref_lockDevice_extender">Использовать PhoneProfilesPlusExtender</string>
 
-    <string name="important_info_profile_mobileCellsScanning_location" tools:ignore="UnusedResources">В Android 9+ для работы сканера мобильных вышек нужно включить определение местоположения в настройках системы.</string>
-
-    <string name="info_notification_event_not_started_1" tools:ignore="UnusedResources">Событие не начнётся, если:</string>
-    <string name="info_notification_event_not_started_2" tools:ignore="UnusedResources">Вы отключили запуск всех событий (красный цвет \"светофора\") - в меню Редактора нажмите \"Разрешить запуск событий\".</string>
-    <string name="info_notification_event_not_started_3" tools:ignore="UnusedResources">Вы активировали профиль вручную (оранжевый цвет \"светофора\") - необходимо перезапустить все события. В меню Активатора, Редактора или в уведомлении нажмите \"Перезапустить события\". Если профиль активирован вручную, то перед его названием появляется буква \"[M]\" (Manual). Исключение: в настройках события включено \"Игнорировать ручную активацию\".</string>
-    <string name="info_notification_event_not_started_4" tools:ignore="UnusedResources">Вы отключили запуск данного события в его настройках - включите \"Разрешить запуск\" в настройках данного события. Примечание: \"светофор\" показывается в шапках Активатора и Редактора.</string>
-
-    <string name="phone_profiles_pref_eventMobileCellsLocationSystemSettingsNotA9_summary" tools:ignore="UnusedResources">Если сканирование мобильных вышек не работает, включите определение местоположения в настройках системы.</string>
-    <string name="permission_why_profile_radio_preferences_emui">для включения/выключения мобильных данных, изменения типа мобильной сети, подключения к SSID, включения/выключения Bluetooth</string>
-    <string name="permission_why_event_bluetooth_preferences_emui" tools:ignore="UnusedResources">для переключения состояния Bluetooth в Датчике Bluetooth</string>
-    <string name="event_preferences_priority_appSettings_enabled" tools:ignore="UnusedResources">Приоритет включён</string>
-    <string name="event_preferences_priority_appSettings_disabled" tools:ignore="UnusedResources">Приоритет отключён</string>
-    <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Разделение уровней громкости включено</string>
+  <string name="permission_why_profile_radio_preferences_emui">для включения/выключения мобильных данных, изменения типа мобильной сети, подключения к SSID, включения/выключения Bluetooth</string>
+  <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_enabled">Разделение уровней громкости включено</string>
     <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_disabled">Разделение уровней громкости отключено</string>
     <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_merged">Уровни громкости мелодии звонка и уведомлений в вашем устройстве объединены. Нажмите сюда, чтобы разделить их.</string>
     <string name="profile_preferences_applicationUnlinkRingerNotificationVolumes_not_merged">Уровни громкости мелодии звонка и уведомлений в вашем устройстве разделены. Нажмите сюда, чтобы объединить их.</string>
     <string name="phone_profiles_pref_applicationPowerParametersCategory">Батарея и питание</string>
-    <string name="phone_profiles_pref_applicationOtherParametersCategory" tools:ignore="UnusedResources">Прочее</string>
-    <string name="activity_log_header_log_time" tools:ignore="UnusedResources">Время логирования</string>
-    <string name="activity_log_header_data_type" tools:ignore="UnusedResources">Тип данных</string>
-    <string name="activity_log_header_data" tools:ignore="UnusedResources">Данные</string>
-    <string name="profile_preferences_volumeDTMF">Уровень громкости тонального набора</string>
+  <string name="profile_preferences_volumeDTMF">Уровень громкости тонального набора</string>
     <string name="profile_preferences_volumeAccessibility">Уровень громкости запросов спец. возможностей</string>
     <string name="profile_preferences_volumeBluetoothSCO">Уровень громкости вызова через Bluetooth</string>
     <string name="profile_preferences_enabled">Вкл.</string>
     <string name="profile_preferences_preferenceTypesInfo_summary">Информация о типах настроек: (G1), (R), (S), (I).</string>
     <string name="profile_preferences_types_G1_show_info">Дополнительная информация.</string>
-    <string name="popup_window_events_status_show_info" tools:ignore="UnusedResources">Дополнительная информация.</string>
-    <string name="editor_activity_targetHelps_filterSpinner_title" tools:ignore="UnusedResources">Фильтр</string>
-    <string name="editor_activity_targetHelps_filterSpinner_description" tools:ignore="UnusedResources">Нажмите сюда, чтобы переключиться между Профилями и Событиями.</string>
-    <string name="important_info_profile_type_of_preferences" tools:ignore="UnusedResources">Типы настроек:</string>
-    <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Установить мелодию уведомления:</string>
+  <string name="profile_preferences_volumeNotificationVolume0_radioButtonsLabel">Установить мелодию уведомления:</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryNoneConfigured">Мелодия уведомления \"None\" установлена.</string>
     <string name="profile_preferences_volumeNotificationVolume0_summaryConfigureForVolume0">Чтобы уведомление было по-настоящему бесшумным, настройте мелодию уведомления на \"PhoneProfiles Silent\" или \"None\".</string>
 <!--    <string name="profile_preferences_volumeNotificationVolume0_toneNotInstalled">Мелодия уведомления \"PhoneProfiles Silent\" не установлена. Установите её, пожалуйста, в параметре профиля \"Звуки\".</string>-->

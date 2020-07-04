@@ -45,7 +45,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.vending.BILLING" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.BROADCAST_STICKY" /> -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION" /> <!-- for Samsung SLook -->
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
@@ -90,10 +91,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <service
-            android:name=".ExportPPDataService"
-            android:enabled="true"
-            android:exported="true"></service>
         <!--
          android:resizeableActivity="false"
            disabled multi window support
@@ -134,12 +131,12 @@
         <activity
             android:name=".EditorProfilesActivity"
             android:label="@string/title_activity_editor"
-            android:theme="@style/Theme.PhoneProfilesTheme_withToolbar_white"></activity>
+            android:theme="@style/Theme.PhoneProfilesTheme_withToolbar_white"/>
         <activity
             android:name=".ProfilesPrefsActivity"
-            android:label="@string/title_activity_profile_preferences"></activity>
+            android:label="@string/title_activity_profile_preferences"/>
         <!--
-<activity
+        <activity
             android:name=".PhoneProfilesPreferencesActivity"
             android:label="@string/title_activity_phone_profiles_preferences">
             <intent-filter>
@@ -197,42 +194,44 @@
         </activity>
         <activity
             android:name=".ImportantInfoActivity"
-            android:label="@string/info_notification_title"></activity>
+            android:label="@string/info_notification_title"/>
         <activity
             android:name=".GrantPermissionActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyAppCompatActivity"></activity>
+            android:theme="@style/EmptyAppCompatActivity"/>
         <activity
             android:name=".LaunchShortcutActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
-            android:theme="@style/EmptyAppCompatActivity"></activity>
+            android:theme="@style/EmptyAppCompatActivity"/>
         <activity
             android:name=".AboutApplicationActivity"
-            android:label="@string/about_application_title"></activity>
+            android:label="@string/about_application_title"/>
         <activity
             android:name=".ActivatorTargetHelpsActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/EmptyTargetHelpsActivity"></activity>
+            android:theme="@style/EmptyTargetHelpsActivity"/>
         <activity
             android:name=".LockDeviceActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/LockDeviceActivity"></activity>
+            android:theme="@style/LockDeviceActivity"/>
         <activity
             android:name=".DonationActivity"
-            android:label="@string/donation_activity_title"></activity>
+            android:label="@string/donation_activity_title"/>
         <activity
             android:name=".ExitApplicationActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
-            android:theme="@style/EmptyAppCompatActivity"></activity>
+            android:theme="@style/EmptyAppCompatActivity"/>
         <activity
             android:name=".ApplicationEditorIntentActivityX"
             android:label="@string/intent_editor_title"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity> <!-- implicit broadcast receivers, in Android O exception group -->
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
+        <!-- implicit broadcast receivers, in Android O exception group -->
         <!-- https://developer.android.com/preview/features/background-broadcasts.html -->
         <receiver
             android:name=".BootUpReceiver"
@@ -307,19 +306,21 @@
         <receiver
             android:name=".ProfileDurationAlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false"/>
         <receiver
             android:name=".NotificationCancelAlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false"/>
         <receiver
             android:name=".RunApplicationWithDelayBroadcastReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false"/>
         <receiver
             android:name=".LockDeviceActivityFinishBroadcastReceiver"
             android:enabled="true"
-            android:exported="false"></receiver> <!-- pending intents -->
+            android:exported="false"/>
+
+        <!-- pending intents -->
         <receiver
             android:name=".PermissionsNotificationDeletedReceiver"
             android:enabled="true"
@@ -378,10 +379,17 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service> <!-- main service -->
+
         <service
             android:name=".PhoneProfilesService"
             android:exported="false"
-            android:stopWithTask="false"></service>
+            android:stopWithTask="false" />
+
+        <service
+            android:name=".ExportPPDataService"
+            android:enabled="true"
+            android:stopWithTask="false" />
+
     </application>
 
 </manifest>
