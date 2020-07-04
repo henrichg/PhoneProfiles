@@ -95,13 +95,17 @@
          android:resizeableActivity="false"
            disabled multi window support
         -->
+
         <!-- support for 18.5:9 display (Samsung Galaxy S8, LG G6) -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4" /> <!-- Google Backup key -->
+            android:value="2.4" />
+
+        <!-- Google Backup key -->
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIPDE5lCqC-YETPSAegqVaD-swljLtPFibz6JOtg" />
+
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
@@ -252,7 +256,9 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver> <!-- non-implicit broadcast receivers -->
+        </receiver>
+
+        <!-- non-implicit broadcast receivers -->
         <receiver
             android:name=".PackageReplacedReceiver"
             android:enabled="true"
@@ -260,7 +266,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
-        </receiver> <!-- widget providers -->
+        </receiver>
+
+        <!-- widget providers -->
         <receiver
             android:name=".IconWidgetProvider"
             android:enabled="true"
@@ -302,7 +310,9 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/profile_list_widget_info" />
-        </receiver> <!-- alarms -->
+        </receiver>
+
+        <!-- alarms -->
         <receiver
             android:name=".ProfileDurationAlarmBroadcastReceiver"
             android:enabled="true"
@@ -328,7 +338,9 @@
             <intent-filter>
                 <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED" />
             </intent-filter>
-        </receiver> <!-- Samsung Edge Look provider -->
+        </receiver>
+
+        <!-- Samsung Edge Look provider -->
         <receiver
             android:name=".SamsungEdgeProvider"
             android:enabled="true"
@@ -341,7 +353,9 @@
             <meta-data
                 android:name="com.samsung.android.cocktail.provider"
                 android:resource="@xml/samsung_edge" />
-        </receiver> <!-- widget services -->
+        </receiver>
+
+        <!-- widget services -->
         <service
             android:name=".ProfileListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
@@ -368,7 +382,9 @@
         </service>
         <service
             android:name=".SamsungEdgeService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" /> <!-- other services -->
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- other services -->
         <service
             android:name=".PPNotificationListenerService"
             android:enabled="true"
@@ -378,16 +394,16 @@
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
-        </service> <!-- main service -->
-
-        <service
-            android:name=".PhoneProfilesService"
-            android:exported="false"
-            android:stopWithTask="false" />
-
+        </service>
         <service
             android:name=".ExportPPDataService"
             android:enabled="true"
+            android:stopWithTask="false" />
+
+        <!-- main service -->
+        <service
+            android:name=".PhoneProfilesService"
+            android:exported="false"
             android:stopWithTask="false" />
 
     </application>
