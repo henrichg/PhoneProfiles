@@ -1,88 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="sk.henrichg.phoneprofiles"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:installLocation="internalOnly">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="sk.henrichg.phoneprofiles"
+    android:installLocation="internalOnly">
 
     <!-- android:installLocation="internalOnly" is needed for working BOOT_COMPLETED broadcast -->
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
-        android:xlargeScreens="true"/>
+        android:xlargeScreens="true" />
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions"/>
+        tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.WRITE_SECURE_SETTINGS"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.MODIFY_PHONE_STATE"
-        tools:ignore="ProtectedPermissions"/>
-
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="com.android.vending.BILLING"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-<!--    <uses-permission android:name="android.permission.BROADCAST_STICKY" />-->
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.BROADCAST_STICKY" /> -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
-    <uses-permission android:name="sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION" />
-
-    <!-- for Samsung SLook -->
-    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+    <uses-permission android:name="sk.henrichg.phoneprofilesplusextender.ACCESSIBILITY_SERVICE_PERMISSION" /> <!-- for Samsung SLook -->
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
     <uses-feature
         android:name="android.hardware.telephony"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.front"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.wifi"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.bluetooth"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.location"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.location.network"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.location.gps"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="false"/>
+        android:required="false" />
 
     <application
         android:name=".PPApplication"
@@ -92,24 +86,25 @@
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/pp_app_name"
+        android:resizeableActivity="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:resizeableActivity="false"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <!-- android:resizeableActivity="false"
+        <service
+            android:name=".ExportPPDataService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <!--
+         android:resizeableActivity="false"
            disabled multi window support
         -->
-
         <!-- support for 18.5:9 display (Samsung Galaxy S8, LG G6) -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4"/>
-
-        <!-- Google Backup key -->
+            android:value="2.4" /> <!-- Google Backup key -->
         <meta-data
             android:name="com.google.android.backup.api_key"
-            android:value="AEdPqrEAAAAIPDE5lCqC-YETPSAegqVaD-swljLtPFibz6JOtg"/>
-
+            android:value="AEdPqrEAAAAIPDE5lCqC-YETPSAegqVaD-swljLtPFibz6JOtg" />
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
@@ -121,7 +116,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
@@ -131,21 +126,20 @@
             android:taskAffinity="sk.henrichg.phoneprofiles.popup"
             android:theme="@style/PopupTheme_white">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".EditorProfilesActivity"
             android:label="@string/title_activity_editor"
-            android:theme="@style/Theme.PhoneProfilesTheme_withToolbar_white">
-        </activity>
+            android:theme="@style/Theme.PhoneProfilesTheme_withToolbar_white"></activity>
         <activity
             android:name=".ProfilesPrefsActivity"
-            android:label="@string/title_activity_profile_preferences">
-        </activity>
-        <!--<activity
+            android:label="@string/title_activity_profile_preferences"></activity>
+        <!--
+<activity
             android:name=".PhoneProfilesPreferencesActivity"
             android:label="@string/title_activity_phone_profiles_preferences">
             <intent-filter>
@@ -153,14 +147,15 @@
 
                 <category android:name="android.intent.category.NOTIFICATION_PREFERENCES"/>
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity
             android:name=".PhoneProfilesPrefsActivity"
             android:label="@string/title_activity_phone_profiles_preferences">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES"/>
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
             </intent-filter>
         </activity>
         <activity
@@ -171,9 +166,9 @@
             android:taskAffinity="sk.henrichg.phoneprofiles.popup"
             android:theme="@style/PopupTheme_white">
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -183,9 +178,9 @@
             android:taskAffinity="sk.henrichg.phoneprofiles.shortcut"
             android:theme="@style/EmptyAppCompatActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -195,69 +190,58 @@
             android:taskAffinity="sk.henrichg.phoneprofiles.externalApp"
             android:theme="@style/EmptyAppCompatActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ImportantInfoActivity"
-            android:label="@string/info_notification_title">
-        </activity>
+            android:label="@string/info_notification_title"></activity>
         <activity
             android:name=".GrantPermissionActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
-            android:theme="@style/EmptyAppCompatActivity">
-        </activity>
+            android:theme="@style/EmptyAppCompatActivity"></activity>
         <activity
             android:name=".LaunchShortcutActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
-            android:theme="@style/EmptyAppCompatActivity">
-        </activity>
+            android:theme="@style/EmptyAppCompatActivity"></activity>
         <activity
             android:name=".AboutApplicationActivity"
-            android:label="@string/about_application_title">
-        </activity>
+            android:label="@string/about_application_title"></activity>
         <activity
             android:name=".ActivatorTargetHelpsActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/EmptyTargetHelpsActivity">
-        </activity>
+            android:theme="@style/EmptyTargetHelpsActivity"></activity>
         <activity
             android:name=".LockDeviceActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/LockDeviceActivity">
-        </activity>
+            android:theme="@style/LockDeviceActivity"></activity>
         <activity
             android:name=".DonationActivity"
-            android:label="@string/donation_activity_title">
-        </activity>
+            android:label="@string/donation_activity_title"></activity>
         <activity
             android:name=".ExitApplicationActivity"
             android:excludeFromRecents="true"
             android:label="@string/empty_string"
             android:taskAffinity="sk.henrichg.phoneprofiles.empty"
-            android:theme="@style/EmptyAppCompatActivity">
-        </activity>
+            android:theme="@style/EmptyAppCompatActivity"></activity>
         <activity
             android:name=".ApplicationEditorIntentActivityX"
             android:label="@string/intent_editor_title"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-
-        <!-- implicit broadcast receivers, in Android O exception group -->
+            android:windowSoftInputMode="stateAlwaysHidden"></activity> <!-- implicit broadcast receivers, in Android O exception group -->
         <!-- https://developer.android.com/preview/features/background-broadcasts.html -->
         <receiver
             android:name=".BootUpReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
         <receiver
@@ -265,23 +249,19 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver>
-
-        <!-- non-implicit broadcast receivers -->
+        </receiver> <!-- non-implicit broadcast receivers -->
         <receiver
             android:name=".PackageReplacedReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
-        </receiver>
-
-        <!-- widget providers -->
+        </receiver> <!-- widget providers -->
         <receiver
             android:name=".IconWidgetProvider"
             android:enabled="true"
@@ -289,12 +269,12 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/widget_label_icon">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/icon_widget_info"/>
+                android:resource="@xml/icon_widget_info" />
         </receiver>
         <receiver
             android:name=".OneRowWidgetProvider"
@@ -303,12 +283,12 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/widget_label_one_row">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/one_row_widget_info"/>
+                android:resource="@xml/one_row_widget_info" />
         </receiver>
         <receiver
             android:name=".ProfileListWidgetProvider"
@@ -317,65 +297,53 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/widget_label_list">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/profile_list_widget_info"/>
-        </receiver>
-
-        <!-- alarms -->
+                android:resource="@xml/profile_list_widget_info" />
+        </receiver> <!-- alarms -->
         <receiver
             android:name=".ProfileDurationAlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
         <receiver
             android:name=".NotificationCancelAlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
         <receiver
             android:name=".RunApplicationWithDelayBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
         <receiver
             android:name=".LockDeviceActivityFinishBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
-
-        <!-- pending intents -->
+            android:exported="false"></receiver> <!-- pending intents -->
         <receiver
             android:name=".PermissionsNotificationDeletedReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED"/>
+                <action android:name="sk.henrichg.phoneprofiles.PERMISSIONS_NOTIFICATION_DELETED" />
             </intent-filter>
-        </receiver>
-
-        <!-- Samsung Edge Look provider -->
+        </receiver> <!-- Samsung Edge Look provider -->
         <receiver
             android:name=".SamsungEdgeProvider"
             android:enabled="true"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE"/>
+                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="com.samsung.android.cocktail.provider"
-                android:resource="@xml/samsung_edge"/>
-        </receiver>
-
-        <!-- widget services -->
+                android:resource="@xml/samsung_edge" />
+        </receiver> <!-- widget services -->
         <service
             android:name=".ProfileListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service
             android:name=".PhoneProfilesDashClockExtension"
             android:enabled="true"
@@ -384,23 +352,22 @@
             android:label="@string/pp_app_name"
             android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
             <intent-filter>
-                <action android:name="com.google.android.apps.dashclock.Extension"/>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
             </intent-filter>
+
             <meta-data
                 android:name="protocolVersion"
-                android:value="2"/>
+                android:value="2" />
             <meta-data
                 android:name="worldReadable"
-                android:value="true"/>
+                android:value="true" />
             <meta-data
                 android:name="description"
-                android:value="@string/dashclock_extension_description"/>
+                android:value="@string/dashclock_extension_description" />
         </service>
         <service
             android:name=".SamsungEdgeService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
-
-        <!-- other services -->
+            android:permission="android.permission.BIND_REMOTEVIEWS" /> <!-- other services -->
         <service
             android:name=".PPNotificationListenerService"
             android:enabled="true"
@@ -408,17 +375,13 @@
             android:label="@string/pp_app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService"/>
+                <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
-        </service>
-
-        <!-- main service -->
+        </service> <!-- main service -->
         <service
             android:name=".PhoneProfilesService"
             android:exported="false"
-            android:stopWithTask="false">
-        </service>
-
+            android:stopWithTask="false"></service>
     </application>
 
 </manifest>

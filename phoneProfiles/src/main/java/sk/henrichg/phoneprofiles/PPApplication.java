@@ -140,7 +140,8 @@ public class PPApplication extends Application {
     static final String INFORMATION_NOTIFICATION_CHANNEL = "phoneProfiles_information";
     static final String EXCLAMATION_NOTIFICATION_CHANNEL = "phoneProfiles_exclamation";
     static final String GRANT_PERMISSION_NOTIFICATION_CHANNEL = "phoneProfiles_grant_permission";
-    static final String DONATION_CHANNEL = "phoneProfilesPlus_donation";
+    static final String DONATION_CHANNEL = "phoneProfiles_donation";
+    static final String EXPORT_PP_DATA_CHANNEL = "phoneProfiles_export_pp_data";
 
     static final int PROFILE_NOTIFICATION_ID = 700420;
     static final int IMPORTANT_INFO_NOTIFICATION_ID = 700422;
@@ -154,6 +155,7 @@ public class PPApplication extends Application {
     static final int PROFILE_ACTIVATION_NETWORK_TYPE_PREFS_NOTIFICATION_ID = 700430;
     static final int GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID = 700431;
     static final int GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID = 700432;
+    static final int EXPORT_PP_DATA_NOTIFICATION_ID = 700433;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     //static final String SHARED_PROFILE_PREFS_NAME = "profile_preferences_default_profile";
@@ -822,12 +824,39 @@ public class PPApplication extends Application {
         }
     }
 
+    static void createExportPPDataNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            // The user-visible name of the channel.
+            CharSequence name = context.getString(R.string.notification_channel_exportPPData);
+            // The user-visible description of the channel.
+            String description = context.getString(R.string.notification_channel_export_pp_data_description);
+
+            NotificationChannel channel = new NotificationChannel(EXPORT_PP_DATA_CHANNEL, name, NotificationManager.IMPORTANCE_LOW);
+
+            // Configure the notification channel.
+            //channel.setImportance(importance);
+            channel.setDescription(description);
+            channel.enableLights(false);
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            //channel.setLightColor(Color.RED);
+            channel.enableVibration(false);
+            //channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null)
+                notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
     static void createNotificationChannels(Context appContext) {
         PPApplication.createProfileNotificationChannel(appContext);
         PPApplication.createInformationNotificationChannel(appContext);
         PPApplication.createExclamationNotificationChannel(appContext);
         PPApplication.createGrantPermissionNotificationChannel(appContext);
         PPApplication.createDonationNotificationChannel(appContext);
+        PPApplication.createExportPPDataNotificationChannel(appContext);
     }
 
     static void showProfileNotification(/*Context context*/) {
