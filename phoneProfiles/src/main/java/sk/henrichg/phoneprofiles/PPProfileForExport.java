@@ -3,12 +3,12 @@ package sk.henrichg.phoneprofiles;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PPProfilesForExport implements Parcelable {
+public class PPProfileForExport implements Parcelable {
 
     long KEY_ID;
     String KEY_NAME;
     String KEY_ICON;
-    int KEY_CHECKED;
+    boolean KEY_CHECKED;
     int KEY_PORDER;
     int KEY_VOLUME_RINGER_MODE;
     String KEY_VOLUME_RINGTONE;
@@ -47,21 +47,21 @@ public class PPProfilesForExport implements Parcelable {
     int KEY_VIBRATE_ON_TOUCH;
     int KEY_DEVICE_WIFI_AP;
     int KEY_DEVICE_POWER_SAVE_MODE;
-    int KEY_ASK_FOR_DURATION;
+    boolean KEY_ASK_FOR_DURATION;
     int KEY_DEVICE_NETWORK_TYPE;
     int KEY_NOTIFICATION_LED;
     int KEY_VIBRATE_WHEN_RINGING;
     int KEY_DEVICE_WALLPAPER_FOR;
-    int KEY_HIDE_STATUS_BAR_ICON;
+    boolean KEY_HIDE_STATUS_BAR_ICON;
     int KEY_LOCK_DEVICE;
-    int KEY_DEVICE_CONNECT_TO_SSID;
+    String KEY_DEVICE_CONNECT_TO_SSID;
     String KEY_DURATION_NOTIFICATION_SOUND;
-    int KEY_DURATION_NOTIFICATION_VIBRATE;
+    boolean KEY_DURATION_NOTIFICATION_VIBRATE;
     int KEY_DEVICE_WIFI_AP_PREFS;
     int KEY_HEADS_UP_NOTIFICATIONS;
     int KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE;
     String KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME;
-    int KEY_ACTIVATION_BY_USER_COUNT;
+    long KEY_ACTIVATION_BY_USER_COUNT;
     int KEY_DEVICE_NETWORK_TYPE_PREFS;
     int KEY_DEVICE_CLOSE_ALL_APPLICATIONS;
     int KEY_SCREEN_NIGHT_MODE;
@@ -81,7 +81,7 @@ public class PPProfilesForExport implements Parcelable {
         dest.writeLong(this.KEY_ID);
         dest.writeString(this.KEY_NAME);
         dest.writeString(this.KEY_ICON);
-        dest.writeInt(this.KEY_CHECKED);
+        dest.writeBoolean(this.KEY_CHECKED);
         dest.writeInt(this.KEY_PORDER);
         dest.writeInt(this.KEY_VOLUME_RINGER_MODE);
         dest.writeString(this.KEY_VOLUME_RINGTONE);
@@ -120,21 +120,21 @@ public class PPProfilesForExport implements Parcelable {
         dest.writeInt(this.KEY_VIBRATE_ON_TOUCH);
         dest.writeInt(this.KEY_DEVICE_WIFI_AP);
         dest.writeInt(this.KEY_DEVICE_POWER_SAVE_MODE);
-        dest.writeInt(this.KEY_ASK_FOR_DURATION);
+        dest.writeBoolean(this.KEY_ASK_FOR_DURATION);
         dest.writeInt(this.KEY_DEVICE_NETWORK_TYPE);
         dest.writeInt(this.KEY_NOTIFICATION_LED);
         dest.writeInt(this.KEY_VIBRATE_WHEN_RINGING);
         dest.writeInt(this.KEY_DEVICE_WALLPAPER_FOR);
-        dest.writeInt(this.KEY_HIDE_STATUS_BAR_ICON);
+        dest.writeBoolean(this.KEY_HIDE_STATUS_BAR_ICON);
         dest.writeInt(this.KEY_LOCK_DEVICE);
-        dest.writeInt(this.KEY_DEVICE_CONNECT_TO_SSID);
+        dest.writeString(this.KEY_DEVICE_CONNECT_TO_SSID);
         dest.writeString(this.KEY_DURATION_NOTIFICATION_SOUND);
-        dest.writeInt(this.KEY_DURATION_NOTIFICATION_VIBRATE);
+        dest.writeBoolean(this.KEY_DURATION_NOTIFICATION_VIBRATE);
         dest.writeInt(this.KEY_DEVICE_WIFI_AP_PREFS);
         dest.writeInt(this.KEY_HEADS_UP_NOTIFICATIONS);
         dest.writeInt(this.KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE);
         dest.writeString(this.KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME);
-        dest.writeInt(this.KEY_ACTIVATION_BY_USER_COUNT);
+        dest.writeLong(this.KEY_ACTIVATION_BY_USER_COUNT);
         dest.writeInt(this.KEY_DEVICE_NETWORK_TYPE_PREFS);
         dest.writeInt(this.KEY_DEVICE_CLOSE_ALL_APPLICATIONS);
         dest.writeInt(this.KEY_SCREEN_NIGHT_MODE);
@@ -145,14 +145,14 @@ public class PPProfilesForExport implements Parcelable {
         dest.writeString(this.KEY_VOLUME_BLUETOOTH_SCO);
     }
 
-    public PPProfilesForExport() {
+    public PPProfileForExport() {
     }
 
-    protected PPProfilesForExport(Parcel in) {
+    protected PPProfileForExport(Parcel in) {
         this.KEY_ID = in.readLong();
         this.KEY_NAME = in.readString();
         this.KEY_ICON = in.readString();
-        this.KEY_CHECKED = in.readInt();
+        this.KEY_CHECKED = in.readBoolean();
         this.KEY_PORDER = in.readInt();
         this.KEY_VOLUME_RINGER_MODE = in.readInt();
         this.KEY_VOLUME_RINGTONE = in.readString();
@@ -191,21 +191,21 @@ public class PPProfilesForExport implements Parcelable {
         this.KEY_VIBRATE_ON_TOUCH = in.readInt();
         this.KEY_DEVICE_WIFI_AP = in.readInt();
         this.KEY_DEVICE_POWER_SAVE_MODE = in.readInt();
-        this.KEY_ASK_FOR_DURATION = in.readInt();
+        this.KEY_ASK_FOR_DURATION = in.readBoolean();
         this.KEY_DEVICE_NETWORK_TYPE = in.readInt();
         this.KEY_NOTIFICATION_LED = in.readInt();
         this.KEY_VIBRATE_WHEN_RINGING = in.readInt();
         this.KEY_DEVICE_WALLPAPER_FOR = in.readInt();
-        this.KEY_HIDE_STATUS_BAR_ICON = in.readInt();
+        this.KEY_HIDE_STATUS_BAR_ICON = in.readBoolean();
         this.KEY_LOCK_DEVICE = in.readInt();
-        this.KEY_DEVICE_CONNECT_TO_SSID = in.readInt();
+        this.KEY_DEVICE_CONNECT_TO_SSID = in.readString();
         this.KEY_DURATION_NOTIFICATION_SOUND = in.readString();
-        this.KEY_DURATION_NOTIFICATION_VIBRATE = in.readInt();
+        this.KEY_DURATION_NOTIFICATION_VIBRATE = in.readBoolean();
         this.KEY_DEVICE_WIFI_AP_PREFS = in.readInt();
         this.KEY_HEADS_UP_NOTIFICATIONS = in.readInt();
         this.KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE = in.readInt();
         this.KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME = in.readString();
-        this.KEY_ACTIVATION_BY_USER_COUNT = in.readInt();
+        this.KEY_ACTIVATION_BY_USER_COUNT = in.readLong();
         this.KEY_DEVICE_NETWORK_TYPE_PREFS = in.readInt();
         this.KEY_DEVICE_CLOSE_ALL_APPLICATIONS = in.readInt();
         this.KEY_SCREEN_NIGHT_MODE = in.readInt();
@@ -216,15 +216,15 @@ public class PPProfilesForExport implements Parcelable {
         this.KEY_VOLUME_BLUETOOTH_SCO = in.readString();
     }
 
-    public static final Parcelable.Creator<PPProfilesForExport> CREATOR = new Parcelable.Creator<PPProfilesForExport>() {
+    public static final Parcelable.Creator<PPProfileForExport> CREATOR = new Parcelable.Creator<PPProfileForExport>() {
         @Override
-        public PPProfilesForExport createFromParcel(Parcel source) {
-            return new PPProfilesForExport(source);
+        public PPProfileForExport createFromParcel(Parcel source) {
+            return new PPProfileForExport(source);
         }
 
         @Override
-        public PPProfilesForExport[] newArray(int size) {
-            return new PPProfilesForExport[size];
+        public PPProfileForExport[] newArray(int size) {
+            return new PPProfileForExport[size];
         }
     };
 }

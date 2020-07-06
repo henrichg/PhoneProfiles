@@ -3,7 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PPIntentsForExport implements Parcelable {
+public class PPIntentForExport implements Parcelable {
 
     long KEY_IN_ID;
     String KEY_IN_PACKAGE_NAME;
@@ -97,10 +97,10 @@ public class PPIntentsForExport implements Parcelable {
         dest.writeInt(this.KEY_IN_INTENT_TYPE);
     }
 
-    public PPIntentsForExport() {
+    public PPIntentForExport() {
     }
 
-    protected PPIntentsForExport(Parcel in) {
+    protected PPIntentForExport(Parcel in) {
         this.KEY_IN_ID = in.readLong();
         this.KEY_IN_PACKAGE_NAME = in.readString();
         this.KEY_IN_CLASS_NAME = in.readString();
@@ -144,15 +144,15 @@ public class PPIntentsForExport implements Parcelable {
         this.KEY_IN_INTENT_TYPE = in.readInt();
     }
 
-    public static final Parcelable.Creator<PPIntentsForExport> CREATOR = new Parcelable.Creator<PPIntentsForExport>() {
+    public static final Parcelable.Creator<PPIntentForExport> CREATOR = new Parcelable.Creator<PPIntentForExport>() {
         @Override
-        public PPIntentsForExport createFromParcel(Parcel source) {
-            return new PPIntentsForExport(source);
+        public PPIntentForExport createFromParcel(Parcel source) {
+            return new PPIntentForExport(source);
         }
 
         @Override
-        public PPIntentsForExport[] newArray(int size) {
-            return new PPIntentsForExport[size];
+        public PPIntentForExport[] newArray(int size) {
+            return new PPIntentForExport[size];
         }
     };
 }

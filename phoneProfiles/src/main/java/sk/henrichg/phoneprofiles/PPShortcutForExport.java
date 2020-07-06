@@ -3,7 +3,7 @@ package sk.henrichg.phoneprofiles;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PPShortcutsForExport implements Parcelable {
+public class PPShortcutForExport implements Parcelable {
 
     long KEY_S_ID;
     String KEY_S_INTENT;
@@ -21,24 +21,24 @@ public class PPShortcutsForExport implements Parcelable {
         dest.writeString(this.KEY_S_NAME);
     }
 
-    public PPShortcutsForExport() {
+    public PPShortcutForExport() {
     }
 
-    protected PPShortcutsForExport(Parcel in) {
+    protected PPShortcutForExport(Parcel in) {
         this.KEY_S_ID = in.readLong();
         this.KEY_S_INTENT = in.readString();
         this.KEY_S_NAME = in.readString();
     }
 
-    public static final Parcelable.Creator<PPShortcutsForExport> CREATOR = new Parcelable.Creator<PPShortcutsForExport>() {
+    public static final Parcelable.Creator<PPShortcutForExport> CREATOR = new Parcelable.Creator<PPShortcutForExport>() {
         @Override
-        public PPShortcutsForExport createFromParcel(Parcel source) {
-            return new PPShortcutsForExport(source);
+        public PPShortcutForExport createFromParcel(Parcel source) {
+            return new PPShortcutForExport(source);
         }
 
         @Override
-        public PPShortcutsForExport[] newArray(int size) {
-            return new PPShortcutsForExport[size];
+        public PPShortcutForExport[] newArray(int size) {
+            return new PPShortcutForExport[size];
         }
     };
 }

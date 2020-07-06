@@ -7,12 +7,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+
+import java.util.List;
 
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
@@ -229,6 +230,84 @@ public class ExportPPDataService extends Service {
     }
 
     private void exportProfiles() {
+        List<Profile> profileList = DatabaseHandler.getInstance(context).getAllProfiles();
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES_COUNT);
+        intent.putExtra(PPApplication.EXTRA_PP_PROFILES_COUNT, profileList.size());
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+
+        for (Profile profile : profileList) {
+            PPProfileForExport profileForExport = new PPProfileForExport();
+            profileForExport.KEY_ID = profile._id;
+            profileForExport.KEY_NAME = profile._name;
+            profileForExport.KEY_ICON = profile._icon;
+            profileForExport.KEY_CHECKED = profile._checked;
+            profileForExport.KEY_PORDER = profile._porder;
+            profileForExport.KEY_VOLUME_RINGER_MODE = profile._volumeRingerMode;
+            profileForExport.KEY_VOLUME_RINGTONE = profile._volumeRingtone;
+            profileForExport.KEY_VOLUME_NOTIFICATION = profile._volumeNotification;
+            profileForExport.KEY_VOLUME_MEDIA = profile._volumeMedia;
+            profileForExport.KEY_VOLUME_ALARM = profile._volumeAlarm;
+            profileForExport.KEY_VOLUME_SYSTEM = profile._volumeSystem;
+            profileForExport.KEY_VOLUME_VOICE = profile._volumeVoice;
+            profileForExport.KEY_SOUND_RINGTONE_CHANGE = profile._soundRingtoneChange;
+            profileForExport.KEY_SOUND_RINGTONE = profile._soundRingtone;
+            profileForExport.KEY_SOUND_NOTIFICATION_CHANGE = profile._soundNotificationChange;
+            profileForExport.KEY_SOUND_NOTIFICATION = profile._soundNotification;
+            profileForExport.KEY_SOUND_ALARM_CHANGE = profile._soundAlarmChange;
+            profileForExport.KEY_SOUND_ALARM = profile._soundAlarm;
+            profileForExport.KEY_DEVICE_AIRPLANE_MODE = profile._deviceAirplaneMode;
+            profileForExport.KEY_DEVICE_WIFI = profile._deviceWiFi;
+            profileForExport.KEY_DEVICE_BLUETOOTH = profile._deviceBluetooth;
+            profileForExport.KEY_DEVICE_SCREEN_TIMEOUT = profile._deviceScreenTimeout;
+            profileForExport.KEY_DEVICE_BRIGHTNESS = profile._deviceBrightness;
+            profileForExport.KEY_DEVICE_WALLPAPER_CHANGE = profile._deviceWallpaperChange;
+            profileForExport.KEY_DEVICE_WALLPAPER = profile._deviceWallpaper;
+            profileForExport.KEY_DEVICE_MOBILE_DATA = profile._deviceMobileData;
+            profileForExport.KEY_DEVICE_MOBILE_DATA_PREFS = profile._deviceMobileDataPrefs;
+            profileForExport.KEY_DEVICE_GPS = profile._deviceGPS;
+            profileForExport.KEY_DEVICE_RUN_APPLICATION_CHANGE = profile._deviceRunApplicationChange;
+            profileForExport.KEY_DEVICE_RUN_APPLICATION_PACKAGE_NAME = profile._deviceRunApplicationPackageName;
+            profileForExport.KEY_DEVICE_AUTOSYNC = profile._deviceAutoSync;
+            profileForExport.KEY_DEVICE_AUTOROTATE = profile._deviceAutoRotate;
+            profileForExport.KEY_DEVICE_LOCATION_SERVICE_PREFS = profile._deviceLocationServicePrefs;
+            profileForExport.KEY_VOLUME_SPEAKER_PHONE = profile._volumeSpeakerPhone;
+            profileForExport.KEY_DEVICE_NFC = profile._deviceNFC;
+            profileForExport.KEY_DURATION = profile._duration;
+            profileForExport.KEY_AFTER_DURATION_DO = profile._afterDurationDo;
+            profileForExport.KEY_VOLUME_ZEN_MODE = profile._volumeZenMode;
+            profileForExport.KEY_DEVICE_KEYGUARD = profile._deviceKeyguard;
+            profileForExport.KEY_VIBRATE_ON_TOUCH = profile._vibrationOnTouch;
+            profileForExport.KEY_DEVICE_WIFI_AP = profile._deviceWiFiAP;
+            profileForExport.KEY_DEVICE_POWER_SAVE_MODE = profile._devicePowerSaveMode;
+            profileForExport.KEY_ASK_FOR_DURATION = profile._askForDuration;
+            profileForExport.KEY_DEVICE_NETWORK_TYPE = profile._deviceNetworkType;
+            profileForExport.KEY_NOTIFICATION_LED = profile._notificationLed;
+            profileForExport.KEY_VIBRATE_WHEN_RINGING = profile._vibrateWhenRinging;
+            profileForExport.KEY_DEVICE_WALLPAPER_FOR = profile._deviceWallpaperFor;
+            profileForExport.KEY_HIDE_STATUS_BAR_ICON = profile._hideStatusBarIcon;
+            profileForExport.KEY_LOCK_DEVICE = profile._lockDevice;
+            profileForExport.KEY_DEVICE_CONNECT_TO_SSID = profile._deviceConnectToSSID;
+            profileForExport.KEY_DURATION_NOTIFICATION_SOUND = profile._durationNotificationSound;
+            profileForExport.KEY_DURATION_NOTIFICATION_VIBRATE = profile._durationNotificationVibrate;
+            profileForExport.KEY_DEVICE_WIFI_AP_PREFS = profile._deviceWiFiAPPrefs;
+            profileForExport.KEY_HEADS_UP_NOTIFICATIONS = profile._headsUpNotifications;
+            profileForExport.KEY_DEVICE_FORCE_STOP_APPLICATION_CHANGE = profile._deviceForceStopApplicationChange;
+            profileForExport.KEY_DEVICE_FORCE_STOP_APPLICATION_PACKAGE_NAME = profile._deviceForceStopApplicationPackageName;
+            profileForExport.KEY_ACTIVATION_BY_USER_COUNT = profile._activationByUserCount;
+            profileForExport.KEY_DEVICE_NETWORK_TYPE_PREFS = profile._deviceNetworkTypePrefs;
+            profileForExport.KEY_DEVICE_CLOSE_ALL_APPLICATIONS = profile._deviceCloseAllApplications;
+            profileForExport.KEY_SCREEN_NIGHT_MODE = profile._screenNightMode;
+            profileForExport.KEY_DTMF_TONE_WHEN_DIALING = profile._dtmfToneWhenDialing;
+            profileForExport.KEY_SOUND_ON_TOUCH = profile._soundOnTouch;
+            profileForExport.KEY_VOLUME_DTMF = profile._volumeDTMF;
+            profileForExport.KEY_VOLUME_ACCESSIBILITY = profile._volumeAccessibility;
+            profileForExport.KEY_VOLUME_BLUETOOTH_SCO = profile._volumeBluetoothSCO;
+
+            intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILE);
+            intent.putExtra(PPApplication.EXTRA_PP_PROFILE_DATA, profileForExport);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+
+        }
 
     }
 

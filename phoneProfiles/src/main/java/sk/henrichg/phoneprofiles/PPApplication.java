@@ -185,8 +185,12 @@ public class PPApplication extends Application {
     static final String ACTION_EXPORT_PP_DATA_STARTED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_STARTED";
     static final String ACTION_EXPORT_PP_DATA_ENDED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_ENDED";
     static final String ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES";
+    static final String ACTION_EXPORT_PP_DATA_PROFILES_COUNT = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_PROFILES_COUNT";
+    static final String ACTION_EXPORT_PP_DATA_PROFILE = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_PROFILE";
     static final String EXPORT_PP_DATA_PERMISSION = PPApplication.PACKAGE_NAME + ".EXPORT_PP_DATA_PERMISSION";
     static final String EXTRA_PP_APPLICATION_DATA = "extra_pp_application_data";
+    static final String EXTRA_PP_PROFILES_COUNT = "extra_pp_profiles_count";
+    static final String EXTRA_PP_PROFILE_DATA = "extra_pp_profile_data";
 
     static final String EXTRA_REGISTRATION_APP = "registration_app";
     static final String EXTRA_REGISTRATION_TYPE = "registration_type";
