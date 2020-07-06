@@ -72,6 +72,7 @@ public class PhoneProfilesService extends Service {
     private PPPExtenderBroadcastReceiver pppExtenderBroadcastReceiver = null;
     private DonationBroadcastReceiver donationBroadcastReceiver = null;
 
+    private ExportPPDataBroadcastReceiver exportPPDataBroadcastReceiver = null;
     private SettingsContentObserver settingsContentObserver = null;
     private PPWifiNetworkCallback wifiConnectionCallback = null;
 
@@ -702,6 +703,21 @@ public class PhoneProfilesService extends Service {
         intent.putExtra(PPApplication.EXTRA_REGISTRATION_TYPE, PPApplication.REGISTRATION_TYPE_LOCK_DEVICE_REGISTER);
         sendBroadcast(intent, PPApplication.ACCESSIBILITY_SERVICE_PERMISSION);
 
+        if (exportPPDataBroadcastReceiver != null) {
+            try {
+                unregisterReceiver(exportPPDataBroadcastReceiver);
+                exportPPDataBroadcastReceiver = null;
+            } catch (Exception e) {
+                exportPPDataBroadcastReceiver = null;
+            }
+        }
+        exportPPDataBroadcastReceiver = new ExportPPDataBroadcastReceiver();
+        intentFilter23 = new IntentFilter();
+        intentFilter23.addAction(PPApplication.ACTION_EXPORT_PP_DATA_START);
+        registerReceiver(exportPPDataBroadcastReceiver, intentFilter23,
+                PPApplication.EXPORT_PP_DATA_PERMISSION, null);
+
+
         if (settingsContentObserver != null) {
             try {
                 getContentResolver().unregisterContentObserver(settingsContentObserver);
@@ -788,6 +804,10 @@ public class PhoneProfilesService extends Service {
         if (donationBroadcastReceiver != null) {
             unregisterReceiver(donationBroadcastReceiver);
             donationBroadcastReceiver = null;
+        }
+        if (exportPPDataBroadcastReceiver != null) {
+            unregisterReceiver(exportPPDataBroadcastReceiver);
+            exportPPDataBroadcastReceiver = null;
         }
 
         if (settingsContentObserver != null) {

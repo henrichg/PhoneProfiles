@@ -181,6 +181,13 @@ public class PPApplication extends Application {
     static final String ACCESSIBILITY_SERVICE_PERMISSION = PPApplication.PACKAGE_NAME_EXTENDER + ".ACCESSIBILITY_SERVICE_PERMISSION";
     static final String ACTION_DONATION = PPApplication.PACKAGE_NAME_EXTENDER + ".ACTION_DONATION";
 
+    static final String ACTION_EXPORT_PP_DATA_START = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_START";
+    static final String ACTION_EXPORT_PP_DATA_STARTED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_STARTED";
+    static final String ACTION_EXPORT_PP_DATA_ENDED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_ENDED";
+    static final String ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES";
+    static final String EXPORT_PP_DATA_PERMISSION = PPApplication.PACKAGE_NAME + ".EXPORT_PP_DATA_PERMISSION";
+    static final String EXTRA_PP_APPLICATION_DATA = "extra_pp_application_data";
+
     static final String EXTRA_REGISTRATION_APP = "registration_app";
     static final String EXTRA_REGISTRATION_TYPE = "registration_type";
     static final int REGISTRATION_TYPE_FORCE_STOP_APPLICATIONS_REGISTER = 1;

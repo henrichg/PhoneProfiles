@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
@@ -47,6 +48,21 @@ public class ExportPPDataService extends Service {
             exportPPDataStopButtonBroadcastReceiver =
                     new ExportPPDataService.ExportPPDataStopButtonBroadcastReceiver();
             context.registerReceiver(exportPPDataStopButtonBroadcastReceiver, intentFilter);
+        }
+
+        if ((intent != null) && (intent.getAction() != null)) {
+            switch (intent.getAction()) {
+                case PPApplication.ACTION_EXPORT_PP_DATA_START:
+                    startOfExport();
+
+                    exportApplicationData();
+                    exportProfiles();
+                    exportShortcuts();
+                    exportIntents();
+
+                    endOfExport();
+                    break;
+            }
         }
 
         return START_STICKY;
@@ -115,6 +131,113 @@ public class ExportPPDataService extends Service {
         notification.defaults &= ~DEFAULT_SOUND;
         notification.defaults &= ~DEFAULT_VIBRATE;
         startForeground(PPApplication.EXPORT_PP_DATA_NOTIFICATION_ID, notification);
+    }
+
+    private void startOfExport() {
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_STARTED);
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+    }
+
+    private void endOfExport() {
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_ENDED);
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+    }
+
+    private void exportApplicationData() {
+        PPApplicationDataForExport applicationData = new PPApplicationDataForExport();
+        applicationData.applicationStartOnBoot = ApplicationPreferences.applicationStartOnBoot(context);
+        applicationData.applicationActivate = ApplicationPreferences.applicationActivate(context);
+        applicationData.applicationActivateWithAlert = ApplicationPreferences.applicationActivateWithAlert(context);
+        applicationData.applicationClose = ApplicationPreferences.applicationClose(context);
+        applicationData.applicationLongClickActivation = ApplicationPreferences.applicationLongClickActivation(context);
+        applicationData.applicationLanguage = ApplicationPreferences.applicationLanguage(context);
+        applicationData.applicationTheme = ApplicationPreferences.getSharedPreferences(context).getString(ApplicationPreferences.PREF_APPLICATION_THEME, "white");
+        applicationData.applicationActivatorPrefIndicator = ApplicationPreferences.applicationActivatorPrefIndicator(context);
+        applicationData.applicationEditorPrefIndicator = ApplicationPreferences.applicationEditorPrefIndicator(context);
+        applicationData.applicationActivatorHeader = ApplicationPreferences.applicationActivatorHeader(context);
+        applicationData.applicationEditorHeader = ApplicationPreferences.applicationEditorHeader(context);
+        applicationData.notificationsToast = ApplicationPreferences.notificationsToast(context);
+        applicationData.notificationStatusBar = ApplicationPreferences.notificationStatusBar(context);
+        applicationData.notificationStatusBarPermanent = ApplicationPreferences.notificationStatusBarPermanent(context);
+        applicationData.notificationStatusBarCancel = ApplicationPreferences.notificationStatusBarCancel(context);
+        applicationData.notificationStatusBarStyle = ApplicationPreferences.notificationStatusBarStyle(context);
+        applicationData.notificationShowInStatusBar = ApplicationPreferences.notificationShowInStatusBar(context);
+        applicationData.notificationTextColor = ApplicationPreferences.notificationTextColor(context);
+        applicationData.notificationHideInLockscreen = ApplicationPreferences.notificationHideInLockScreen(context);
+        applicationData.applicationWidgetListPrefIndicator = ApplicationPreferences.applicationWidgetListPrefIndicator(context);
+        applicationData.applicationWidgetListHeader = ApplicationPreferences.applicationWidgetListHeader(context);
+        applicationData.applicationWidgetListBackground = ApplicationPreferences.applicationWidgetListBackground(context);
+        applicationData.applicationWidgetListLightnessB = ApplicationPreferences.applicationWidgetListLightnessB(context);
+        applicationData.applicationWidgetListLightnessT = ApplicationPreferences.applicationWidgetListLightnessT(context);
+        applicationData.applicationWidgetIconColor = ApplicationPreferences.applicationWidgetIconColor(context);
+        applicationData.applicationWidgetIconLightness = ApplicationPreferences.applicationWidgetIconLightness(context);
+        applicationData.applicationWidgetListIconColor = ApplicationPreferences.applicationWidgetListIconColor(context);
+        applicationData.applicationWidgetListIconLightness = ApplicationPreferences.applicationWidgetListIconLightness(context);
+        applicationData.notificationPrefIndicator = ApplicationPreferences.notificationPrefIndicator(context);
+        applicationData.applicationBackgroundProfile = ApplicationPreferences.applicationBackgroundProfile(context);
+        applicationData.applicationActivatorGridLayout = ApplicationPreferences.applicationActivatorGridLayout(context);
+        applicationData.applicationWidgetListGridLayout = ApplicationPreferences.applicationWidgetListGridLayout(context);
+        applicationData.applicationWidgetIconHideProfileName = ApplicationPreferences.applicationWidgetIconHideProfileName(context);
+        applicationData.applicationShortcutEmblem = ApplicationPreferences.applicationShortcutEmblem(context);
+        applicationData.applicationWidgetIconBackground = ApplicationPreferences.applicationWidgetIconBackground(context);
+        applicationData.applicationWidgetIconLightnessB = ApplicationPreferences.applicationWidgetIconLightnessB(context);
+        applicationData.applicationWidgetIconLightnessT = ApplicationPreferences.applicationWidgetIconLightnessT(context);
+        applicationData.applicationUnlinkRingerNotificationVolumes = ApplicationPreferences.applicationUnlinkRingerNotificationVolumes(context);
+        applicationData.applicationForceSetMergeRingNotificationVolumes = ApplicationPreferences.applicationForceSetMergeRingNotificationVolumes(context);
+        applicationData.applicationSamsungEdgeHeader = ApplicationPreferences.applicationSamsungEdgeHeader(context);
+        applicationData.applicationSamsungEdgeBackground = ApplicationPreferences.applicationSamsungEdgeBackground(context);
+        applicationData.applicationSamsungEdgeLightnessB = ApplicationPreferences.applicationSamsungEdgeLightnessB(context);
+        applicationData.applicationSamsungEdgeLightnessT = ApplicationPreferences.applicationSamsungEdgeLightnessT(context);
+        applicationData.applicationSamsungEdgeIconColor = ApplicationPreferences.applicationSamsungEdgeIconColor(context);
+        applicationData.applicationSamsungEdgeIconLightness = ApplicationPreferences.applicationSamsungEdgeIconLightness(context);
+        applicationData.applicationWidgetListRoundedCorners = ApplicationPreferences.applicationWidgetListRoundedCorners(context);
+        applicationData.applicationWidgetIconRoundedCorners = ApplicationPreferences.applicationWidgetIconRoundedCorners(context);
+        applicationData.applicationWidgetListBackgroundType = ApplicationPreferences.applicationWidgetListBackgroundType(context);
+        applicationData.applicationWidgetListBackgroundColor = ApplicationPreferences.applicationWidgetListBackgroundColor(context);
+        applicationData.applicationWidgetIconBackgroundType = ApplicationPreferences.applicationWidgetIconBackgroundType(context);
+        applicationData.applicationWidgetIconBackgroundColor = ApplicationPreferences.applicationWidgetIconBackgroundColor(context);
+        applicationData.applicationSamsungEdgeBackgroundType = ApplicationPreferences.applicationSamsungEdgeBackgroundType(context);
+        applicationData.applicationSamsungEdgeBackgroundColor = ApplicationPreferences.applicationSamsungEdgeBackgroundColor(context);
+        applicationData.applicationNeverAskForGrantRoot = ApplicationPreferences.applicationNeverAskForGrantRoot(context);
+        applicationData.notificationShowButtonExit = ApplicationPreferences.notificationShowButtonExit(context);
+        applicationData.applicationWidgetOneRowPrefIndicator = ApplicationPreferences.applicationWidgetOneRowPrefIndicator(context);
+        applicationData.applicationWidgetOneRowBackground = ApplicationPreferences.applicationWidgetOneRowBackground(context);
+        applicationData.applicationWidgetOneRowLightnessB = ApplicationPreferences.applicationWidgetOneRowLightnessB(context);
+        applicationData.applicationWidgetOneRowLightnessT = ApplicationPreferences.applicationWidgetOneRowLightnessT(context);
+        applicationData.applicationWidgetOneRowIconColor = ApplicationPreferences.applicationWidgetOneRowIconColor(context);
+        applicationData.applicationWidgetOneRowIconLightness = ApplicationPreferences.applicationWidgetOneRowIconLightness(context);
+        applicationData.applicationWidgetOneRowRoundedCorners = ApplicationPreferences.applicationWidgetOneRowRoundedCorners(context);
+        applicationData.applicationWidgetOneRowBackgroundType = ApplicationPreferences.applicationWidgetOneRowBackgroundType(context);
+        applicationData.applicationWidgetOneRowBackgroundColor = ApplicationPreferences.applicationWidgetOneRowBackgroundColor(context);
+        applicationData.applicationWidgetListLightnessBorder = ApplicationPreferences.applicationWidgetListLightnessBorder(context);
+        applicationData.applicationWidgetOneRowLightnessBorder = ApplicationPreferences.applicationWidgetOneRowLightnessBorder(context);
+        applicationData.applicationWidgetIconLightnessBorder = ApplicationPreferences.applicationWidgetIconLightnessBorder(context);
+        applicationData.applicationWidgetListShowBorder = ApplicationPreferences.applicationWidgetListShowBorder(context);
+        applicationData.applicationWidgetOneRowShowBorder = ApplicationPreferences.applicationWidgetOneRowShowBorder(context);
+        applicationData.applicationWidgetIconShowBorder = ApplicationPreferences.applicationWidgetIconShowBorder(context);
+        applicationData.applicationWidgetListCustomIconLightness = ApplicationPreferences.applicationWidgetListCustomIconLightness(context);
+        applicationData.applicationWidgetOneRowCustomIconLightness = ApplicationPreferences.applicationWidgetOneRowCustomIconLightness(context);
+        applicationData.applicationWidgetIconCustomIconLightness = ApplicationPreferences.applicationWidgetIconCustomIconLightness(context);
+        applicationData.applicationSamsungEdgeCustomIconLightness = ApplicationPreferences.applicationSamsungEdgeCustomIconLightness(context);
+        applicationData.notificationUseDecoration = ApplicationPreferences.notificationUseDecoration(context);
+        applicationData.notificationLayoutType = ApplicationPreferences.notificationLayoutType(context);
+        applicationData.notificationBackgroundColor = ApplicationPreferences.notificationBackgroundColor(context);
+
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES);
+        intent.putExtra(PPApplication.EXTRA_PP_APPLICATION_DATA, applicationData);
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+    }
+
+    private void exportProfiles() {
+
+    }
+
+    private void exportShortcuts() {
+
+    }
+
+    private void exportIntents() {
+
     }
 
 
