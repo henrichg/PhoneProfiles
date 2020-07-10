@@ -142,6 +142,7 @@ public class ExportPPDataService extends Service {
     private void endOfExport() {
         Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_ENDED);
         context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+        stopSelf();
     }
 
     private void exportApplicationData() {
