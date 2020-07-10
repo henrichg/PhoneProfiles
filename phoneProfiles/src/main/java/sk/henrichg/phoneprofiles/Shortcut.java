@@ -6,4 +6,13 @@ class Shortcut {
     String _name;
 
     Shortcut() {}
+
+    Shortcut(long id,
+             String intent,
+             String name) {
+        this._id = id;
+        this._intent = intent;
+        this._name = name;
+    }
+
 }

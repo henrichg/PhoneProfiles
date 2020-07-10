@@ -303,22 +303,86 @@ public class ExportPPDataService extends Service {
             profileForExport.KEY_VOLUME_ACCESSIBILITY = profile._volumeAccessibility;
             profileForExport.KEY_VOLUME_BLUETOOTH_SCO = profile._volumeBluetoothSCO;
 
-            intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILE);
+            intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES);
             intent.putExtra(PPApplication.EXTRA_PP_PROFILE_DATA, profileForExport);
             context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
-
         }
 
     }
 
     private void exportShortcuts() {
+        List<Shortcut> shortcutList = DatabaseHandler.getInstance(context).getAllShortcuts();
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS_COUNT);
+        intent.putExtra(PPApplication.EXTRA_PP_SHORTCUTS_COUNT, shortcutList.size());
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
 
+        for (Shortcut shortcut : shortcutList) {
+            PPShortcutForExport shortcutForExport = new PPShortcutForExport();
+            shortcutForExport.KEY_S_ID = shortcut._id;
+            shortcutForExport.KEY_S_INTENT = shortcut._intent;
+            shortcutForExport.KEY_S_NAME = shortcut._name;
+
+            intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS);
+            intent.putExtra(PPApplication.EXTRA_PP_SHORTCUT_DATA, shortcutForExport);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+        }
     }
 
     private void exportIntents() {
+        List<PPIntent> intentList = DatabaseHandler.getInstance(context).getAllIntents();
+        Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS_COUNT);
+        intent.putExtra(PPApplication.EXTRA_PP_INTENTS_COUNT, intentList.size());
+        context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
 
+        for (PPIntent ppIntent : intentList) {
+            PPIntentForExport intentForExport = new PPIntentForExport();
+            intentForExport.KEY_IN_ID = ppIntent._id;
+            intentForExport.KEY_IN_PACKAGE_NAME = ppIntent._packageName;
+            intentForExport.KEY_IN_CLASS_NAME = ppIntent._className;
+            intentForExport.KEY_IN_ACTION = ppIntent._action;
+            intentForExport.KEY_IN_DATA = ppIntent._data;
+            intentForExport.KEY_IN_MIME_TYPE = ppIntent._mimeType;
+            intentForExport.KEY_IN_EXTRA_KEY_1 = ppIntent._extraKey1;
+            intentForExport.KEY_IN_EXTRA_VALUE_1 = ppIntent._extraValue1;
+            intentForExport.KEY_IN_EXTRA_TYPE_1 = ppIntent._extraType1;
+            intentForExport.KEY_IN_EXTRA_KEY_2 = ppIntent._extraKey2;
+            intentForExport.KEY_IN_EXTRA_VALUE_2 = ppIntent._extraValue2;
+            intentForExport.KEY_IN_EXTRA_TYPE_2 = ppIntent._extraType2;
+            intentForExport.KEY_IN_EXTRA_KEY_3 = ppIntent._extraKey3;
+            intentForExport.KEY_IN_EXTRA_VALUE_3 = ppIntent._extraValue3;
+            intentForExport.KEY_IN_EXTRA_TYPE_3 = ppIntent._extraType3;
+            intentForExport.KEY_IN_EXTRA_KEY_4 = ppIntent._extraKey4;
+            intentForExport.KEY_IN_EXTRA_VALUE_4 = ppIntent._extraValue4;
+            intentForExport.KEY_IN_EXTRA_TYPE_4 = ppIntent._extraType4;
+            intentForExport.KEY_IN_EXTRA_KEY_5 = ppIntent._extraKey5;
+            intentForExport.KEY_IN_EXTRA_VALUE_5 = ppIntent._extraValue5;
+            intentForExport.KEY_IN_EXTRA_TYPE_5 = ppIntent._extraType5;
+            intentForExport.KEY_IN_EXTRA_KEY_6 = ppIntent._extraKey6;
+            intentForExport.KEY_IN_EXTRA_VALUE_6 = ppIntent._extraValue6;
+            intentForExport.KEY_IN_EXTRA_TYPE_6 = ppIntent._extraType6;
+            intentForExport.KEY_IN_EXTRA_KEY_7 = ppIntent._extraKey7;
+            intentForExport.KEY_IN_EXTRA_VALUE_7 = ppIntent._extraValue7;
+            intentForExport.KEY_IN_EXTRA_TYPE_7 = ppIntent._extraType7;
+            intentForExport.KEY_IN_EXTRA_KEY_8 = ppIntent._extraKey8;
+            intentForExport.KEY_IN_EXTRA_VALUE_8 = ppIntent._extraValue8;
+            intentForExport.KEY_IN_EXTRA_TYPE_8 = ppIntent._extraType8;
+            intentForExport.KEY_IN_EXTRA_KEY_9 = ppIntent._extraKey9;
+            intentForExport.KEY_IN_EXTRA_VALUE_9 = ppIntent._extraValue9;
+            intentForExport.KEY_IN_EXTRA_TYPE_9 = ppIntent._extraType9;
+            intentForExport.KEY_IN_EXTRA_KEY_10 = ppIntent._extraKey10;
+            intentForExport.KEY_IN_EXTRA_VALUE_10 = ppIntent._extraValue10;
+            intentForExport.KEY_IN_EXTRA_TYPE_10 = ppIntent._extraType10;
+            intentForExport.KEY_IN_CATEGORIES = ppIntent._categories;
+            intentForExport.KEY_IN_FLAGS = ppIntent._flags;
+            intentForExport.KEY_IN_NAME = ppIntent._name;
+            intentForExport.KEY_IN_USED_COUNT = ppIntent._usedCount;
+            intentForExport.KEY_IN_INTENT_TYPE = ppIntent._intentType;
+
+            intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS);
+            intent.putExtra(PPApplication.EXTRA_PP_INTENT_DATA, intentForExport);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+        }
     }
-
 
     public class ExportPPDataStopButtonBroadcastReceiver extends BroadcastReceiver {
 

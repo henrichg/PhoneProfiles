@@ -2857,6 +2857,48 @@ class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    // Getting All intents
+    List<Shortcut> getAllShortcuts() {
+        importExportLock.lock();
+        try {
+            List<Shortcut> shortcutList = new ArrayList<>();
+            try {
+                startRunningCommand();
+
+                // Select All Query
+                final String selectQuery = "SELECT " + KEY_S_ID + "," +
+                        KEY_S_INTENT + ", " +
+                        KEY_S_NAME +
+                        " FROM " + TABLE_SHORTCUTS;
+
+                //SQLiteDatabase db = this.getReadableDatabase();
+                SQLiteDatabase db = getMyWritableDatabase();
+
+                Cursor cursor = db.rawQuery(selectQuery, null);
+
+                // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        Shortcut shortcut = new Shortcut(
+                                Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_S_ID))),
+                                cursor.getString(cursor.getColumnIndex(KEY_S_ID)),
+                                cursor.getString(cursor.getColumnIndex(KEY_S_NAME))
+                        );
+                        shortcutList.add(shortcut);
+                    } while (cursor.moveToNext());
+                }
+
+                cursor.close();
+                //db.close();
+
+            } catch (Exception ignored) {
+            }
+            return shortcutList;
+        } finally {
+            stopRunningCommand();
+        }
+    }
+
 // INTENTS ----------------------------------------------------------------------
 
     // Adding new intent
