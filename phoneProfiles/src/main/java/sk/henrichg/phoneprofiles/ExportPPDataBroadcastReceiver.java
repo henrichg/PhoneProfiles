@@ -25,7 +25,7 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
             case PPApplication.ACTION_EXPORT_PP_DATA_START:
                 // received start of export from PPP
                 try {
-                    // start registration service
+                    // start export service
                     Intent serviceIntent = new Intent(context.getApplicationContext(), ExportPPDataService.class);
                     PPApplication.startPPService(context, serviceIntent);
                 } catch (Exception e) {
