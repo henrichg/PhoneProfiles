@@ -23,6 +23,7 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
 
         switch (intent.getAction()) {
             case PPApplication.ACTION_EXPORT_PP_DATA_START:
+                // received start of export from PPP
                 try {
                     // start registration service
                     Intent serviceIntent = new Intent(context.getApplicationContext(), ExportPPDataService.class);
@@ -33,6 +34,7 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
 
                 break;
             case PPApplication.ACTION_EXPORT_PP_DATA_STOP:
+                // received stop of export from PPP
                 PPApplication.exportPPDataStopped = true;
                 break;
         }
