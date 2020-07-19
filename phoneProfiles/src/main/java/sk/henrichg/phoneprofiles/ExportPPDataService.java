@@ -69,6 +69,8 @@ public class ExportPPDataService extends Service {
                         exportIntents();
 
                         endOfExport();
+
+                        context.stopService(new Intent(context.getApplicationContext(), ExportPPDataService.class));
                     }
                 });
             }
@@ -154,7 +156,6 @@ public class ExportPPDataService extends Service {
             Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_ENDED);
             context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
         }
-        stopSelf();
     }
 
     private void exportApplicationData() {
@@ -416,7 +417,7 @@ public class ExportPPDataService extends Service {
         }
     }
 
-    public class ExportPPDataStopButtonBroadcastReceiver extends BroadcastReceiver {
+    public static class ExportPPDataStopButtonBroadcastReceiver extends BroadcastReceiver {
 
         ExportPPDataStopButtonBroadcastReceiver() {
             //this.preference = preference;
@@ -424,7 +425,7 @@ public class ExportPPDataService extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            stopSelf();
+            PPApplication.exportPPDataStopped = true;
         }
     }
 
