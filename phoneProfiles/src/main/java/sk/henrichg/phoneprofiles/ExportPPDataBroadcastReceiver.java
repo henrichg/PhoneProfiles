@@ -32,6 +32,9 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
                 }
 
                 break;
+            case PPApplication.ACTION_EXPORT_PP_DATA_STOP:
+                PPApplication.exportPPDataStopped = true;
+                break;
         }
     }
 

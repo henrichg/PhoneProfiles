@@ -184,6 +184,7 @@ public class PPApplication extends Application {
     static final String ACTION_EXPORT_PP_DATA_START = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_START";
     static final String ACTION_EXPORT_PP_DATA_STARTED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_STARTED";
     static final String ACTION_EXPORT_PP_DATA_ENDED = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_ENDED";
+    static final String ACTION_EXPORT_PP_DATA_STOP = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_STOP";
     static final String ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_APPLICATION_PREFERENCES";
     static final String ACTION_EXPORT_PP_DATA_PROFILES_COUNT = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_PROFILES_COUNT";
     static final String ACTION_EXPORT_PP_DATA_PROFILES = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_PROFILES";
@@ -219,6 +220,7 @@ public class PPApplication extends Application {
     public static HandlerThread handlerThreadWidget = null;
     public static HandlerThread handlerThreadProfileNotification = null;
     public static HandlerThread handlerThreadPlayTone = null;
+    public static HandlerThread handlerThreadExportPPData = null;
 
     public static HandlerThread handlerThreadVolumes = null;
     public static HandlerThread handlerThreadRadios = null;
@@ -248,6 +250,8 @@ public class PPApplication extends Application {
     public static Slook sLook = null;
     public static boolean sLookCocktailPanelEnabled = false;
     //public static boolean sLookCocktailBarEnabled = false;
+
+    public static boolean exportPPDataStopped = false;
 
     private static final RefreshActivitiesBroadcastReceiver refreshActivitiesBroadcastReceiver = new RefreshActivitiesBroadcastReceiver();
     private static final DashClockBroadcastReceiver dashClockBroadcastReceiver = new DashClockBroadcastReceiver();
@@ -351,6 +355,7 @@ public class PPApplication extends Application {
         startHandlerThreadWidget();
         startHandlerThreadProfileNotification();
         startHandlerThreadPlayTone();
+        startHandlerThreadExportPPData();
         startHandlerThreadVolumes();
         startHandlerThreadRadios();
         startHandlerThreadAdaptiveBrightness();
@@ -1581,6 +1586,13 @@ public class PPApplication extends Application {
         if (handlerThreadPlayTone == null) {
             handlerThreadPlayTone = new HandlerThread("PPHandlerThreadPlayTone");
             handlerThreadPlayTone.start();
+        }
+    }
+
+    static void startHandlerThreadExportPPData() {
+        if (handlerThreadExportPPData == null) {
+            handlerThreadExportPPData = new HandlerThread("PPHandlerThreadExportPPData");
+            handlerThreadExportPPData.start();
         }
     }
 
