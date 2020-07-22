@@ -1708,8 +1708,8 @@ class DatabaseHandler extends SQLiteOpenHelper {
                 try {
 
                     db.delete(TABLE_PROFILES, null, null);
-
                     db.delete(TABLE_SHORTCUTS, null, null);
+                    db.delete(TABLE_INTENTS, null, null);
 
                     db.setTransactionSuccessful();
                 } catch (Exception e) {
