@@ -9,7 +9,7 @@
 // 3400 = removed color and dark-light theme
 
 ext.ppVersions = [
-    publishVersion: '5.0.0.17b',
+    publishVersion: '5.0.1b',
     publishVersionCode: 3601,
 
     minSdk: 21,
