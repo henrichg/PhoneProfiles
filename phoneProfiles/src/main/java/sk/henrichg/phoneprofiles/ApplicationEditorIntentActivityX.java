@@ -594,6 +594,7 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
                     action = Intent.ACTION_INSERT_OR_EDIT;
                     break;
                 case "ACTION_INSTALL_PACKAGE":
+                    //noinspection deprecation
                     action = Intent.ACTION_INSTALL_PACKAGE;
                     break;
                 case "ACTION_MAIN":
@@ -660,6 +661,7 @@ public class ApplicationEditorIntentActivityX extends AppCompatActivity {
                     action = Intent.ACTION_SYSTEM_TUTORIAL;
                     break;
                 case "ACTION_UNINSTALL_PACKAGE":
+                    //noinspection deprecation
                     action = Intent.ACTION_UNINSTALL_PACKAGE;
                     break;
                 case "ACTION_VIEW":
