@@ -48,14 +48,14 @@ public class ExportPPDataService extends Service {
     {
         if (exportPPDataStopButtonBroadcastReceiver == null) {
             IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(ExportPPDataService.ACTION_EXPORT_PP_DATA_STOP_BUTTON);
+            intentFilter.addAction(ACTION_EXPORT_PP_DATA_STOP_BUTTON);
             exportPPDataStopButtonBroadcastReceiver =
                     new ExportPPDataService.ExportPPDataStopButtonBroadcastReceiver();
             context.registerReceiver(exportPPDataStopButtonBroadcastReceiver, intentFilter);
         }
 
-        if ((intent != null) && (intent.getAction() != null)) {
-            if (PPApplication.ACTION_EXPORT_PP_DATA_START.equals(intent.getAction())) {
+        //if ((intent != null) && (intent.getAction() != null)) {
+        //    if (PPApplication.ACTION_EXPORT_PP_DATA_START.equals(intent.getAction())) {
                 PPApplication.startHandlerThreadExportPPData();
                 final Handler handler = new Handler(PPApplication.handlerThreadExportPPData.getLooper());
                 handler.post(new Runnable() {
@@ -73,8 +73,8 @@ public class ExportPPDataService extends Service {
                         context.stopService(new Intent(context.getApplicationContext(), ExportPPDataService.class));
                     }
                 });
-            }
-        }
+        //    }
+        //}
 
         return START_STICKY;
     }
@@ -429,6 +429,8 @@ public class ExportPPDataService extends Service {
             // send stop into PPP
             Intent _intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_STOP);
             context.sendBroadcast(_intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+
+            context.stopService(new Intent(context.getApplicationContext(), ExportPPDataService.class));
         }
     }
 
