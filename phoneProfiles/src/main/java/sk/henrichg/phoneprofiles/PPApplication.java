@@ -156,6 +156,7 @@ public class PPApplication extends Application {
     static final int GRANT_PLAY_RINGTONE_NOTIFICATION_PERMISSIONS_NOTIFICATION_ID = 700431;
     static final int GRANT_LOG_TO_FILE_PERMISSIONS_NOTIFICATION_ID = 700432;
     static final int EXPORT_PP_DATA_NOTIFICATION_ID = 700433;
+    static final int NOT_MORE_MAINTAINED_NOTIFICATION_ID = 700434;
 
     static final String APPLICATION_PREFS_NAME = "phone_profile_preferences";
     //static final String SHARED_PROFILE_PREFS_NAME = "profile_preferences_default_profile";

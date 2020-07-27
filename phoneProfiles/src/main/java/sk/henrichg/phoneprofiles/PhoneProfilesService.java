@@ -385,6 +385,7 @@ public class PhoneProfilesService extends Service {
 
                             // show info notification
                             ImportantInfoNotification.showInfoNotification(appContext);
+                            NotMoreMaintainedNotification.showNotification(appContext);
 
                             ProfileDurationAlarmBroadcastReceiver.removeAlarm(appContext);
                             Profile.setActivatedProfileForDuration(appContext, 0);
