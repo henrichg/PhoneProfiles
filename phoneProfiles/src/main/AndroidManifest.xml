@@ -241,6 +241,13 @@
             android:name=".ApplicationEditorIntentActivityX"
             android:label="@string/intent_editor_title"
             android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".NotMoreMaintainedDisableActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/empty_string"
+            android:taskAffinity="sk.henrichg.phoneprofilesplus.empty"
+            android:theme="@style/EmptyAppCompatActivity">
+        </activity>
 
         <!-- implicit broadcast receivers, in Android O exception group -->
         <!-- https://developer.android.com/preview/features/background-broadcasts.html -->

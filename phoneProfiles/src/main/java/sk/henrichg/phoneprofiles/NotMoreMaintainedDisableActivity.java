@@ -16,7 +16,7 @@ public class NotMoreMaintainedDisableActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
 
-        //PPApplication.logE("RestartEventsFromGUIActivity.onCreate", "xxx");
+        PPApplication.logE("NotMoreMaintainedDisableActivity.onCreate", "xxx");
 
         // close notification drawer - broadcast pending intent not close it :-/
         Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
@@ -27,6 +27,8 @@ public class NotMoreMaintainedDisableActivity extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
+
+        PPApplication.logE("NotMoreMaintainedDisableActivity.onStart", "xxx");
 
         // set theme and language for dialog alert ;-)
         GlobalGUIRoutines.setTheme(this, true, false);
