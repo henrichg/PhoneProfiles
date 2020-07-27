@@ -714,7 +714,8 @@ public class PhoneProfilesService extends Service {
         }
         exportPPDataBroadcastReceiver = new ExportPPDataBroadcastReceiver();
         intentFilter23 = new IntentFilter();
-        intentFilter23.addAction(PPApplication.ACTION_EXPORT_PP_DATA_START);
+        intentFilter23.addAction(PPApplication.ACTION_EXPORT_PP_DATA_START_FROM_PPP);
+        intentFilter23.addAction(PPApplication.ACTION_EXPORT_PP_DATA_STOP_FROM_PPP);
         registerReceiver(exportPPDataBroadcastReceiver, intentFilter23,
                 PPApplication.EXPORT_PP_DATA_PERMISSION, null);
 

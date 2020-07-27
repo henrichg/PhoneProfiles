@@ -22,7 +22,7 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
         //PPApplication.logE("[***] PPPExtenderBroadcastReceiver.onReceive", "action="+intent.getAction());
 
         switch (intent.getAction()) {
-            case PPApplication.ACTION_EXPORT_PP_DATA_START:
+            case PPApplication.ACTION_EXPORT_PP_DATA_START_FROM_PPP:
                 // received start of export from PPP
                 try {
                     // start export service
@@ -33,9 +33,10 @@ class ExportPPDataBroadcastReceiver extends BroadcastReceiver {
                 }
 
                 break;
-            case PPApplication.ACTION_EXPORT_PP_DATA_STOP:
+            case PPApplication.ACTION_EXPORT_PP_DATA_STOP_FROM_PPP:
                 // received stop of export from PPP
                 PPApplication.exportPPDataStopped = true;
+                context.stopService(new Intent(context.getApplicationContext(), ExportPPDataService.class));
                 break;
         }
     }

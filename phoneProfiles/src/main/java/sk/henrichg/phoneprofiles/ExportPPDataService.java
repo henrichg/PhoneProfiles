@@ -427,7 +427,7 @@ public class ExportPPDataService extends Service {
         public void onReceive(Context context, Intent intent) {
             PPApplication.exportPPDataStopped = true;
             // send stop into PPP
-            Intent _intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_STOP);
+            Intent _intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_STOP_FROM_PP);
             context.sendBroadcast(_intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
 
             context.stopService(new Intent(context.getApplicationContext(), ExportPPDataService.class));
