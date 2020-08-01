@@ -692,4 +692,15 @@
 
     <string name="permissions_draw_overlays_not_allowed_alway_required">Nemate dozvolu za \" Pisanje preko aplikacija\". Ova je dozvola neophodna za Android 10. Omogućite je.</string>
 
+  <string name="phone_profiles_export_pp_data_notification">Izvoz u PhoneProfilesPlus</string>
+  <string name="notification_channel_exportPPData">Izvoz u PhoneProfilesPlus</string>
+  <string name="notification_channel_export_pp_data_description">Prikaži kada se radi izvoz podataka Profila telefona u PhoneProfilesPlus.</string>
+  <string name="export_pp_data_text">Izvoz u PhoneProfilesPlus je pokrenut</string>
+  <string name="phone_profiles_export_pp_data_stop">Zaustavi</string>
+  <string name="export_pp_data_permission">Izvoz podataka Profila telefona</string>
+  <string name="not_more_maintained_notification_title">Nije više podržano</string>
+  <string name="not_more_maintained_notification_text">Profili telefona nisu više podržani. Samo kritične greške će biti ispravljene. Ako želite, instalirajte PhoneProfilesPlus i u meniju Editor koristite funkciju \"Backup/restore\"/\" uvoz podataka iz Profila telefona\".\"</string>
+  <string name="not_more_maintained_notification_disable_button">Ne prikazuj ponovno</string>
+  <string name="not_more_maintained_confirm_notification_disable">Profili telefona nisu više podržani. Dali ste sigurni da ne želite da se ovo obaveštenje prikazuje u budućnosti?</string>
+
 </resources>

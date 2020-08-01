@@ -692,4 +692,15 @@
 
   <string name="permissions_draw_overlays_not_allowed_alway_required">Nemáte povolení \"Vykreslit přes další aplikace\". Ale toto povolení je vyžadováno pro Android 10. Prosim udělte ho.</string>
 
+  <string name="phone_profiles_export_pp_data_notification">Export do PhoneProfilesPlus</string>
+  <string name="notification_channel_exportPPData">Export do PhoneProfilesPlus</string>
+  <string name="notification_channel_export_pp_data_description">Zobrazí se, pokud běží export dat PhoneProfiles do PhoneProfilesPlus.</string>
+  <string name="export_pp_data_text">Export do PhoneProfilesPlus běží</string>
+  <string name="phone_profiles_export_pp_data_stop">Zastavit</string>
+  <string name="export_pp_data_permission">Export PhoneProfiles dat</string>
+  <string name="not_more_maintained_notification_title">Již se více neudržuje</string>
+  <string name="not_more_maintained_notification_text">PhoneProfiles se už více neudržuje. Pouze kritické chyby budou opravovány. Pokud chcete, nainstalujte PhoneProfilesPlus a v menu Editoru použijte funkci \"Záloha/Obnova\"/\"Import dat z PhoneProfiles\"</string>
+  <string name="not_more_maintained_notification_disable_button">Příště nezobrazovat</string>
+  <string name="not_more_maintained_confirm_notification_disable">PhoneProfiles již není udržován. Už nezobrazovat tuto notifikaci?</string>
+
 </resources>
