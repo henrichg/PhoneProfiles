@@ -248,9 +248,9 @@ public class ExportPPDataService extends Service {
     private void exportProfiles() {
         if (!PPApplication.exportPPDataStopped) {
             List<Profile> profileList = DatabaseHandler.getInstance(context).getAllProfiles();
-            Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES_COUNT);
+            /*Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES_COUNT);
             intent.putExtra(PPApplication.EXTRA_PP_PROFILES_COUNT, profileList.size());
-            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);*/
 
             for (Profile profile : profileList) {
                 if (!PPApplication.exportPPDataStopped) {
@@ -321,7 +321,7 @@ public class ExportPPDataService extends Service {
                     profileForExport.KEY_VOLUME_ACCESSIBILITY = profile._volumeAccessibility;
                     profileForExport.KEY_VOLUME_BLUETOOTH_SCO = profile._volumeBluetoothSCO;
 
-                    intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES);
+                    Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_PROFILES);
                     intent.putExtra(PPApplication.EXTRA_PP_PROFILE_DATA, profileForExport);
                     context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
                 }
@@ -334,9 +334,9 @@ public class ExportPPDataService extends Service {
     private void exportShortcuts() {
         if (!PPApplication.exportPPDataStopped) {
             List<Shortcut> shortcutList = DatabaseHandler.getInstance(context).getAllShortcuts();
-            Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS_COUNT);
+            /*Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS_COUNT);
             intent.putExtra(PPApplication.EXTRA_PP_SHORTCUTS_COUNT, shortcutList.size());
-            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);*/
 
             for (Shortcut shortcut : shortcutList) {
                 if (!PPApplication.exportPPDataStopped) {
@@ -345,7 +345,7 @@ public class ExportPPDataService extends Service {
                     shortcutForExport.KEY_S_INTENT = shortcut._intent;
                     shortcutForExport.KEY_S_NAME = shortcut._name;
 
-                    intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS);
+                    Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_SHORTCUTS);
                     intent.putExtra(PPApplication.EXTRA_PP_SHORTCUT_DATA, shortcutForExport);
                     context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
                 }
@@ -358,9 +358,9 @@ public class ExportPPDataService extends Service {
     private void exportIntents() {
         if (!PPApplication.exportPPDataStopped) {
             List<PPIntent> intentList = DatabaseHandler.getInstance(context).getAllIntents();
-            Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS_COUNT);
+            /*Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS_COUNT);
             intent.putExtra(PPApplication.EXTRA_PP_INTENTS_COUNT, intentList.size());
-            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
+            context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);*/
 
             for (PPIntent ppIntent : intentList) {
                 if (!PPApplication.exportPPDataStopped) {
@@ -407,7 +407,7 @@ public class ExportPPDataService extends Service {
                     intentForExport.KEY_IN_USED_COUNT = ppIntent._usedCount;
                     intentForExport.KEY_IN_INTENT_TYPE = ppIntent._intentType;
 
-                    intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS);
+                    Intent intent = new Intent(PPApplication.ACTION_EXPORT_PP_DATA_INTENTS);
                     intent.putExtra(PPApplication.EXTRA_PP_INTENT_DATA, intentForExport);
                     context.sendBroadcast(intent, PPApplication.EXPORT_PP_DATA_PERMISSION);
                 }
