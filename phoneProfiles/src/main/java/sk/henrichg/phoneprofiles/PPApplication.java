@@ -197,11 +197,11 @@ public class PPApplication extends Application {
     //static final String ACTION_EXPORT_PP_DATA_INTENTS_COUNT = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_INTENTS_COUNT";
     static final String ACTION_EXPORT_PP_DATA_INTENTS = PPApplication.PACKAGE_NAME + ".ACTION_EXPORT_PP_DATA_INTENTS";
     static final String EXTRA_PP_APPLICATION_DATA = "extra_pp_application_data";
-    static final String EXTRA_PP_PROFILES_COUNT = "extra_pp_profiles_count";
+    //static final String EXTRA_PP_PROFILES_COUNT = "extra_pp_profiles_count";
     static final String EXTRA_PP_PROFILE_DATA = "extra_pp_profile_data";
-    static final String EXTRA_PP_SHORTCUTS_COUNT = "extra_pp_shortcuts_count";
+    //static final String EXTRA_PP_SHORTCUTS_COUNT = "extra_pp_shortcuts_count";
     static final String EXTRA_PP_SHORTCUT_DATA = "extra_pp_shortcut_data";
-    static final String EXTRA_PP_INTENTS_COUNT = "extra_pp_intents_count";
+    //static final String EXTRA_PP_INTENTS_COUNT = "extra_pp_intents_count";
     static final String EXTRA_PP_INTENT_DATA = "extra_pp_intent_data";
     static final String EXPORT_PP_DATA_PERMISSION = PPApplication.PACKAGE_NAME + ".EXPORT_PP_DATA_PERMISSION";
 
