@@ -94,7 +94,7 @@ public class PPApplication extends Application {
                                             +"|ShutdownBroadcastReceiver"
                                             +"|DataWrapper.activateProfileOnBoot"
 
-                                            +"|NotMoreMaintainedDisableActivity"
+                                            //+"|NotMoreMaintainedDisableActivity"
 
                                             //+"|[***] ActivateProfileHelper"
                                             //+"|PPPExtenderBroadcastReceiver"
