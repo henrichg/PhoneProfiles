@@ -15,7 +15,7 @@ ext.ppVersions = [
     minSdk: 21,
     targetSdk: 28,
     compileSdk: 29,
-    buildTools: '29.0.3',
+    buildTools: '30.0.1',
 
     annotationXLib: '1.1.0',
     appcompatXLib: '1.1.0'
