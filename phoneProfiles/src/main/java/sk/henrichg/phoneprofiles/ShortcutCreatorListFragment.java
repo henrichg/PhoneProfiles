@@ -273,11 +273,11 @@ public class ShortcutCreatorListFragment extends Fragment {
                             shortcutOverlayBitmap = BitmapManipulator.resampleResource(resources, R.drawable.ic_shortcut_overlay, width, height);
                     }
 
-                    if (ApplicationPreferences.applicationWidgetIconColor(activityDataWrapper.context).equals("1")) {
+                    if (ApplicationPreferences.applicationWidgetIconColor(context).equals("1")) {
                         if (isIconResourceID || useCustomColor) {
                             // icon is from resource or colored by custom color
                             int monochromeValue = 0xFF;
-                            String applicationWidgetIconLightness = ApplicationPreferences.applicationWidgetIconLightness(activityDataWrapper.context);
+                            String applicationWidgetIconLightness = ApplicationPreferences.applicationWidgetIconLightness(context);
                             if (applicationWidgetIconLightness.equals("0")) monochromeValue = 0x00;
                             if (applicationWidgetIconLightness.equals("25")) monochromeValue = 0x40;
                             if (applicationWidgetIconLightness.equals("50")) monochromeValue = 0x80;
@@ -314,19 +314,21 @@ public class ShortcutCreatorListFragment extends Fragment {
             {
                 super.onPostExecute(result);
 
-                if (profile != null) {
-                    //intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-                    //context.sendBroadcast(intent);
+                if ((getActivity() != null) && !getActivity().isFinishing()) {
+                    if (profile != null) {
+                        //intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+                        //context.sendBroadcast(intent);
 
-                    ShortcutInfoCompat shortcutInfo = shortcutBuilder.build();
-                    Intent intent = ShortcutManagerCompat.createShortcutResultIntent(context, shortcutInfo);
+                        ShortcutInfoCompat shortcutInfo = shortcutBuilder.build();
+                        Intent intent = ShortcutManagerCompat.createShortcutResultIntent(context, shortcutInfo);
+
+                        //noinspection ConstantConditions
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                    }
 
                     //noinspection ConstantConditions
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().finish();
                 }
-
-                //noinspection ConstantConditions
-                getActivity().finish();
             }
 
         }.execute();
