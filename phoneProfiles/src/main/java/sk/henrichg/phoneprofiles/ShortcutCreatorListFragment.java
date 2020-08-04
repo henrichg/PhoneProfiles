@@ -298,7 +298,7 @@ public class ShortcutCreatorListFragment extends Fragment {
                     }
 
                     if (Build.VERSION.SDK_INT < 26)
-                        profileShortcutBitmap = combineImages(profileBitmap, shortcutOverlayBitmap);
+                        profileShortcutBitmap = combineImages(profileBitmap, shortcutOverlayBitmap, context);
                     else
                         profileShortcutBitmap = profileBitmap;
 
@@ -322,11 +322,9 @@ public class ShortcutCreatorListFragment extends Fragment {
                         ShortcutInfoCompat shortcutInfo = shortcutBuilder.build();
                         Intent intent = ShortcutManagerCompat.createShortcutResultIntent(context, shortcutInfo);
 
-                        //noinspection ConstantConditions
                         getActivity().setResult(Activity.RESULT_OK, intent);
                     }
 
-                    //noinspection ConstantConditions
                     getActivity().finish();
                 }
             }
@@ -334,7 +332,7 @@ public class ShortcutCreatorListFragment extends Fragment {
         }.execute();
     }
 
-    private Bitmap combineImages(Bitmap bitmap1, Bitmap bitmap2)
+    private Bitmap combineImages(Bitmap bitmap1, Bitmap bitmap2, Context context)
     {
         Bitmap combined;
 
@@ -348,7 +346,7 @@ public class ShortcutCreatorListFragment extends Fragment {
 
         Canvas canvas = new Canvas(combined);
         canvas.drawBitmap(bitmap1, 0f, 0f, null);
-        if (ApplicationPreferences.applicationShortcutEmblem(activityDataWrapper.context))
+        if (ApplicationPreferences.applicationShortcutEmblem(context))
             canvas.drawBitmap(bitmap2, 0f, 0f, null);
 
         return combined;
