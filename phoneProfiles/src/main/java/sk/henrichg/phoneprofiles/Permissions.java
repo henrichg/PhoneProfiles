@@ -721,11 +721,11 @@ public class Permissions {
     static boolean checkLocation(Context context) {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
-                if (Build.VERSION.SDK_INT >= 29)
+                /*if (Build.VERSION.SDK_INT >= 29)
                     return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
                             (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
                             (ContextCompat.checkSelfPermission(context, permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED);
-                else
+                else*/
                     return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) &&
                             (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
             } else
@@ -782,8 +782,8 @@ public class Permissions {
                     if (!grantedLocation) {
                         permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_COARSE_LOCATION));
                         permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_FINE_LOCATION));
-                        if (Build.VERSION.SDK_INT >= 29)
-                            permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_BACKGROUND_LOCATION));
+                        /*if (Build.VERSION.SDK_INT >= 29)
+                            permissions.add(new PermissionType(PERMISSION_PROFILE_RADIO_PREFERENCES, permission.ACCESS_BACKGROUND_LOCATION));*/
                     }
                 }
 

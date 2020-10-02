@@ -265,12 +265,12 @@ public class GrantPermissionActivity extends AppCompatActivity {
                     showRequestAccessFineLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                     whyPermissionType[8][permissionType.type] = true;
                 }
-                if (Build.VERSION.SDK_INT >= 29) {
+                /*if (Build.VERSION.SDK_INT >= 29) {
                     if (permissionType.permission.equals(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                         showRequestAccessBackgroundLocation = ActivityCompat.shouldShowRequestPermissionRationale(this, permissionType.permission) || forceGrant;
                         whyPermissionType[9][permissionType.type] = true;
                     }
-                }
+                }*/
             }
         }
 
@@ -1109,11 +1109,11 @@ public class GrantPermissionActivity extends AppCompatActivity {
                         if (permissionType.permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
                             granted = (ContextCompat.checkSelfPermission(context, permissionType.permission) == PackageManager.PERMISSION_GRANTED);
                         }
-                        if (Build.VERSION.SDK_INT >= 29) {
+                        /*if (Build.VERSION.SDK_INT >= 29) {
                             if (permissionType.permission.equals(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                                 granted = (ContextCompat.checkSelfPermission(context, permissionType.permission) == PackageManager.PERMISSION_GRANTED);
                             }
-                        }
+                        }*/
                     }
                 }
                 if (granted)
