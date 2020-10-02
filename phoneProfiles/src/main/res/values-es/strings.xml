@@ -703,7 +703,7 @@
   <string name="phone_profiles_export_pp_data_stop">Parar</string>
   <string name="export_pp_data_permission">Exportar datos de PhoneProfiles</string>
   <string name="not_more_maintained_notification_title">Ya no soportado</string>
-  <string name="not_more_maintained_notification_text">PhoneProfiles ya no está en desarrollo. Sólo se realizarán correcciones críticas de errores. Si lo deseas, instala PhoneProfilesPlus y en el menú del Editor utilice la función \"Copia de seguridad/restauración\"/\"Importar datos desde PhoneProfiles\".\"</string>
+  <string name="not_more_maintained_notification_text">PhoneProfiles ya no está en desarrollo. Sólo se realizarán correcciones críticas de errores. Si lo deseas, instala PhoneProfilesPlus y en el menú del Editor utilice la función \"Copia de seguridad/restauración\"/\"Importar datos desde PhoneProfiles\".</string>
   <string name="not_more_maintained_notification_disable_button">No mostrar de nuevo</string>
   <string name="not_more_maintained_confirm_notification_disable">PhoneProfiles ya no se desarroola. ¿Estás seguro de no querer ver más esta notificación en el futuro?</string>
 
