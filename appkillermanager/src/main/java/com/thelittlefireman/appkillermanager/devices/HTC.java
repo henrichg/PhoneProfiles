@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class HTC extends DeviceAbstract {
 
     private static final String HTC_PITROAD_PACKAGE_NAME = "com.htc.pitroad";
@@ -48,13 +49,11 @@ public class HTC extends DeviceAbstract {
         return null;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode(){
         return true;

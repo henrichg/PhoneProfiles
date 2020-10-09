@@ -18,6 +18,7 @@ import android.view.View;
  * @see TimeDurationPicker
  * @see TimeDurationPickerDialogFragment
  */
+@SuppressWarnings("unused")
 public class TimeDurationPickerDialog extends AlertDialog implements DialogInterface.OnClickListener {
     private static final String DURATION = "duration";
     private final TimeDurationPicker durationInputView;
@@ -32,7 +33,7 @@ public class TimeDurationPickerDialog extends AlertDialog implements DialogInter
          * @param view the picker view.
          * @param duration the duration that was entered.
          */
-        void onDurationSet(@SuppressWarnings("unused") TimeDurationPicker view, long duration);
+        void onDurationSet(TimeDurationPicker view, long duration);
     }
 
     /**
@@ -74,7 +75,6 @@ public class TimeDurationPickerDialog extends AlertDialog implements DialogInter
      * Gets the current entered duration.
      * @return the current duration in milliseconds.
      */
-    @SuppressWarnings("unused")
     public TimeDurationPicker getDurationInput() {
         return durationInputView;
     }

@@ -31,6 +31,7 @@ import com.stericson.RootTools.RootTools;
 
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 public class Runner extends Thread
 {
 

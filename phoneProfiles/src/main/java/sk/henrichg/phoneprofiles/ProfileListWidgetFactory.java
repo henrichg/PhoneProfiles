@@ -24,7 +24,7 @@ class ProfileListWidgetFactory implements RemoteViewsService.RemoteViewsFactory 
     //private int appWidgetId;
     private List<Profile> profileList = new ArrayList<>();
 
-    ProfileListWidgetFactory(Context context, @SuppressWarnings("unused") Intent intent) {
+    ProfileListWidgetFactory(Context context/*, Intent intent*/) {
         this.context = context;
         /*appWidgetId=intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                                        AppWidgetManager.INVALID_APPWIDGET_ID); */

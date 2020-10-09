@@ -17,6 +17,7 @@ import java.util.Locale;
  * the Lollipop stock timer app.
  *
  */
+@SuppressWarnings("unused")
 public class TimeDurationPicker extends FrameLayout {
 
     public static final int HH_MM_SS = 0;
@@ -207,7 +208,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets a listener to be informed of updates to the entered duration.
      * @param listener the listener to be informed or {@code null} if no one should be informed.
      */
-    @SuppressWarnings("unused")
     public void setOnDurationChangeListener(OnDurationChangedListener listener) {
         changeListener = listener;
     }
@@ -216,7 +216,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the text appearance for the entered duration (the large numbers in the upper area).
      * @param resId resource id of the style describing the text appearance.
      */
-    @SuppressWarnings("unused")
     public void setDisplayTextAppearance(int resId) {
         applyTextAppearance(getContext(), resId, displayViews);
     }
@@ -225,7 +224,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the text appearance for the small unit lables ("h", "m", "s") in the upper display area.
      * @param resId resource id of the style describing the text appearance.
      */
-    @SuppressWarnings("unused")
     public void setUnitTextAppearance(int resId) {
         applyTextAppearance(getContext(), resId, unitLabelViews);
     }
@@ -234,7 +232,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the text appearance for the number pad buttons.
      * @param resId resource id of the style describing the text appearance.
      */
-    @SuppressWarnings("unused")
     public void setButtonTextAppearance(int resId) {
         applyTextAppearance(getContext(), resId, numPadButtons);
     }
@@ -243,7 +240,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the icon to be shown on the backspace button.
      * @param icon backspace drawable
      */
-    @SuppressWarnings("unused")
     public void setBackspaceIcon(Drawable icon) {
         backspaceButton.setImageDrawable(icon);
     }
@@ -252,7 +248,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the icon for the clear button.
      * @param icon clear drawable
      */
-    @SuppressWarnings("unused")
     public void setClearIcon(Drawable icon) {
         clearButton.setImageDrawable(icon);
     }
@@ -261,7 +256,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the color of the separator line between the duration display and the number pad.
      * @param color color value
      */
-    @SuppressWarnings("unused")
     public void setSeparatorColor(int color) {
         separatorView.setBackgroundColor(color);
     }
@@ -270,7 +264,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the background color of the upper duration display area.
      * @param color color value
      */
-    @SuppressWarnings("unused")
     public void setDurationDisplayBackgroundColor(int color) {
         displayRow.setBackgroundColor(color);
     }
@@ -279,7 +272,6 @@ public class TimeDurationPicker extends FrameLayout {
      * Sets the padding to be used for the number pad buttons.
      * @param padding padding in pixels
      */
-    @SuppressWarnings("unused")
     public void setNumPadButtonPadding(int padding) {
         applyPadding(padding, numPadButtons);
     }
@@ -599,7 +591,6 @@ public class TimeDurationPicker extends FrameLayout {
             this.durationInput = durationInput;
         }
 
-        @SuppressWarnings("unused")
         public SavedState(Parcel source) {
             super(source);
             durationInput = source.readString();

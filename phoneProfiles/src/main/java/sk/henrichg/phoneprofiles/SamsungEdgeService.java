@@ -7,7 +7,7 @@ public class SamsungEdgeService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return(new SamsungEdgeFactory(this.getBaseContext(), intent));
+        return(new SamsungEdgeFactory(this.getBaseContext()/*, intent*/));
     }
 
 }

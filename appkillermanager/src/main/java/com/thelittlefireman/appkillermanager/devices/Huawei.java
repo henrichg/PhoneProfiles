@@ -10,6 +10,7 @@ import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
 import static com.thelittlefireman.appkillermanager.utils.SystemUtils.getEmuiRomName;
 
+@SuppressWarnings("unused")
 public class Huawei extends DeviceAbstract {
 
     private static final String HUAWEI_ACTION_POWERSAVING = "huawei.intent.action.HSM_PROTECTED_APPS";
@@ -162,7 +163,6 @@ public class Huawei extends DeviceAbstract {
         return stringBuilder.toString();
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0; //R.drawable.huawei_powersaving;

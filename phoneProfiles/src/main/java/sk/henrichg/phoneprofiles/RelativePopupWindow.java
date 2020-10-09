@@ -24,7 +24,7 @@ import androidx.core.widget.PopupWindowCompat;
  * @author kakajika
  * @since 2016/07/01
  */
-@SuppressWarnings({"WeakerAccess", "unused", "SpellCheckingInspection"})
+@SuppressWarnings({"WeakerAccess", "SpellCheckingInspection","unused"})
 public class RelativePopupWindow extends PopupWindow {
 
     @IntDef({

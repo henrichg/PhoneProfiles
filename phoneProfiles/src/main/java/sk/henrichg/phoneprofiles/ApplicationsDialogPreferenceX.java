@@ -807,7 +807,6 @@ public class ApplicationsDialogPreferenceX extends DialogPreference {
             super(superState);
         }
 
-        @SuppressWarnings("unused")
         public static final Creator<ApplicationsDialogPreferenceX.SavedState> CREATOR =
                 new Creator<ApplicationsDialogPreferenceX.SavedState>() {
                     public ApplicationsDialogPreferenceX.SavedState createFromParcel(Parcel in)

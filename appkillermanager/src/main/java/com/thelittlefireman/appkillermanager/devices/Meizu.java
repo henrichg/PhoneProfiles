@@ -11,6 +11,7 @@ import android.util.Log;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class Meizu extends DeviceAbstract {
 
     private static final String MEIZU_DEFAULT_ACTION_APPSPEC = "com.meizu.safe.security.SHOW_APPSEC";
@@ -104,7 +105,6 @@ public class Meizu extends DeviceAbstract {
         return stringBuilder.toString();
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;

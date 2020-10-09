@@ -49,7 +49,6 @@ import androidx.multidex.MultiDex;
 //import com.github.anrwatchdog.ANRError;
 //import com.github.anrwatchdog.ANRWatchDog;
 
-@SuppressWarnings("WeakerAccess")
 public class PPApplication extends Application {
 
     private static PPApplication instance;
@@ -620,7 +619,6 @@ public class PPApplication extends Application {
         }
     }
 
-    @SuppressWarnings("unused")
     static public void logE(String tag, String text)
     {
         if (!logEnabled())
@@ -1685,7 +1683,6 @@ public class PPApplication extends Application {
 
     // Firebase Crashlytics -------------------------------------------------------------------------
 
-    @SuppressWarnings("unused")
     static void recordException(Throwable ex) {
         try {
             FirebaseCrashlytics.getInstance().recordException(ex);
@@ -1699,14 +1696,14 @@ public class PPApplication extends Application {
         } catch (Exception ignored) {}
     }
 
-    @SuppressWarnings({"SameParameterValue", "unused"})
+    @SuppressWarnings({"SameParameterValue","unused"})
     static void setCustomKey(String key, int value) {
         try {
             FirebaseCrashlytics.getInstance().setCustomKey(key, value);
         } catch (Exception ignored) {}
     }
 
-    @SuppressWarnings({"SameParameterValue", "unused"})
+    @SuppressWarnings({"SameParameterValue","unused"})
     static void setCustomKey(String key, String value) {
         try {
             FirebaseCrashlytics.getInstance().setCustomKey(key, value);

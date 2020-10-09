@@ -10,6 +10,7 @@ import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
 // TODO TESTS
+@SuppressWarnings("unused")
 public class Asus extends DeviceAbstract {
 
     //new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(
@@ -66,14 +67,12 @@ public class Asus extends DeviceAbstract {
         return null;
     }
 
-    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageAutoStart(){
         return 0; //R.drawable.asus_autostart;
     }
 
-    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageNotification(){

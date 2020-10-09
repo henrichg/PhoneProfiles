@@ -2,6 +2,7 @@ package com.stericson.RootShell.execution;
 
 import android.content.Context;
 
+@SuppressWarnings("unused")
 public class JavaCommand extends Command
 {
     /**
@@ -9,7 +10,6 @@ public class JavaCommand extends Command
      *
      * @param context     needed to execute java command.
      */
-    @SuppressWarnings("unused")
     public JavaCommand(int id, Context context, String... command) {
         super(id, command);
         this.context = context;
@@ -21,7 +21,6 @@ public class JavaCommand extends Command
      *
      * @param context     needed to execute java command.
      */
-    @SuppressWarnings("unused")
     public JavaCommand(int id, boolean handlerEnabled, Context context, String... command) {
         super(id, handlerEnabled, command);
         this.context = context;
@@ -33,7 +32,6 @@ public class JavaCommand extends Command
      *
      * @param context     needed to execute java command.
      */
-    @SuppressWarnings("unused")
     public JavaCommand(int id, int timeout, Context context, String... command) {
         super(id, timeout, command);
         this.context = context;
@@ -48,14 +46,14 @@ public class JavaCommand extends Command
     }
     */
 
-    @SuppressWarnings({"EmptyMethod", "unused"})
+    @SuppressWarnings({"EmptyMethod"})
     @Override
     public void commandTerminated(int id, String reason)
     {
         // pass
     }
 
-    @SuppressWarnings({"EmptyMethod", "unused"})
+    @SuppressWarnings({"EmptyMethod"})
     @Override
     public void commandCompleted(int id, int exitCode)
     {

@@ -6,13 +6,13 @@ import androidx.annotation.DrawableRes;
 
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public interface DeviceBase {
     boolean isThatRom();
     Manufacturer getDeviceManufacturer();
     boolean isActionPowerSavingAvailable(Context context);
     boolean isActionAutoStartAvailable(Context context);
     boolean isActionNotificationAvailable(Context context);
-    @SuppressWarnings("unused")
     boolean needToUseAlongwithActionDoseMode();
     Intent getActionPowerSaving(Context context);
     Intent getActionAutoStart(Context context);
@@ -26,14 +26,12 @@ public interface DeviceBase {
      * @param context the current context
      * @return the Intent to open the doze mode settings
      */
-    @SuppressWarnings("unused")
     Intent getActionDozeMode(Context context);
-    @SuppressWarnings("unused")
     boolean isActionDozeModeNotNecessary(Context context);
-    @SuppressWarnings({"SameReturnValue", "unused"})
+    @SuppressWarnings({"SameReturnValue"})
     @DrawableRes int getHelpImagePowerSaving();
-    @SuppressWarnings({"SameReturnValue", "unused"})
+    @SuppressWarnings({"SameReturnValue"})
     @DrawableRes int getHelpImageAutoStart();
-    @SuppressWarnings({"SameReturnValue", "unused"})
+    @SuppressWarnings({"SameReturnValue"})
     @DrawableRes int getHelpImageNotification();
 }

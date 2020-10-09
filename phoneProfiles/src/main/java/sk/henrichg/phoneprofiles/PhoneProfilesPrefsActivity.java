@@ -162,7 +162,7 @@ public class PhoneProfilesPrefsActivity extends AppCompatActivity {
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activity_preferences_settings);
         if (fragment != null)
-            ((PhoneProfilesPrefsFragment)fragment).doOnActivityResult(requestCode, resultCode);
+            ((PhoneProfilesPrefsFragment)fragment).doOnActivityResult(requestCode/*, resultCode*/);
     }
 
     @Override

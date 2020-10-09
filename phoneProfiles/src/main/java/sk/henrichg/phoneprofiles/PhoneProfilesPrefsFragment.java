@@ -827,7 +827,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
         }
     }
 
-    void doOnActivityResult(int requestCode, @SuppressWarnings("unused") int resultCode/*, Intent data*/)
+    void doOnActivityResult(int requestCode/*, int resultCode, Intent data*/)
     {
         //PPApplication.logE("PhoneProfilesPrefsFragment.doOnActivityResult", "xxx");
         //PPApplication.logE("PhoneProfilesPrefsFragment.doOnActivityResult", "requestCode="+requestCode);
@@ -963,7 +963,7 @@ public class PhoneProfilesPrefsFragment extends PreferenceFragmentCompat
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        doOnActivityResult(requestCode, resultCode);
+        doOnActivityResult(requestCode/*, resultCode*/);
     }
 
 

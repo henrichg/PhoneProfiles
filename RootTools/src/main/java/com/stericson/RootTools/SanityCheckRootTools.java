@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+@SuppressWarnings("unused")
 public class SanityCheckRootTools extends Activity {
     private ScrollView mScrollView;
     private TextView mTextView;
@@ -126,7 +127,7 @@ public class SanityCheckRootTools extends Activity {
     private class SanityCheckThread extends Thread {
         private final Handler mHandler;
 
-        SanityCheckThread(@SuppressWarnings("unused") Context context, Handler handler) {
+        SanityCheckThread(Context context, Handler handler) {
             mHandler = handler;
         }
 
@@ -372,7 +373,6 @@ public class SanityCheckRootTools extends Activity {
 
                     }
 
-                    @SuppressWarnings("unused")
                     @Override
                     public void commandTerminated(int id, String reason) {
                         synchronized (SanityCheckRootTools.this) {
@@ -391,7 +391,6 @@ public class SanityCheckRootTools extends Activity {
                         }
                     }
 
-                    @SuppressWarnings("unused")
                     @Override
                     public void commandCompleted(int id, int exitCode) {
                         synchronized (SanityCheckRootTools.this) {

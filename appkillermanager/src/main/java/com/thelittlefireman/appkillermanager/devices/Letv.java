@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class Letv extends DeviceAbstract {
 
     private final String[] LETV_ACTION_POWERSAVE_V1 = {"com.letv.android.letvsafe", "com.letv.android.letvsafe.BackgroundAppManageActivity"};
@@ -57,7 +58,6 @@ public class Letv extends DeviceAbstract {
         return null;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;

@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@SuppressWarnings("unused")
 public class SystemUtils {
 
     public static String getDefaultDebugInformation(){
@@ -39,7 +40,6 @@ public class SystemUtils {
         return (String) (applicationInfo != null ? packageManager.getApplicationLabel(applicationInfo) : "Unknown");
     }
 
-    @SuppressWarnings("unused")
     public static String getMiuiRomName() {
         try {
             return SystemUtils.getSystemProperty("ro.miui.ui.version.name");
@@ -81,7 +81,6 @@ public class SystemUtils {
      * @param packageName  pacakge name of the target application (exemple: com.huawei.systemmanager)
      * @param activityPackage activity name of the target application (exemple: .optimize.process.ProtectActivity)
      */
-    @SuppressWarnings("unused")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void startActivityByAMSystem(Context context, String packageName, String activityPackage)
@@ -99,7 +98,6 @@ public class SystemUtils {
      * @param context current application Context
      * @param intentAction  action of the target application (exemple: com.huawei.systemmanager)
      */
-    @SuppressWarnings("unused")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void startActionByAMSystem(Context context, String intentAction)

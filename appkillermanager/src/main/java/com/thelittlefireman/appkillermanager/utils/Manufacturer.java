@@ -1,5 +1,6 @@
 package com.thelittlefireman.appkillermanager.utils;
 
+@SuppressWarnings("unused")
 public enum Manufacturer {
     XIAOMI("xiaomi"),
     SAMSUNG("samsung"),
@@ -13,7 +14,7 @@ public enum Manufacturer {
     ZTE("zte"),
     VIVO("vivo");
 
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    @SuppressWarnings({"FieldCanBeLocal"})
     private final String name;
 
     Manufacturer(String device){

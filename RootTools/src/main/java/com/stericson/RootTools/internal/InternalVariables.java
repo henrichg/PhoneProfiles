@@ -29,6 +29,7 @@ import com.stericson.RootTools.containers.Symlink;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("unused")
 class InternalVariables
 {
 
@@ -48,7 +49,7 @@ class InternalVariables
     protected static String[] space;
     @SuppressWarnings("WeakerAccess")
     protected static String getSpaceFor;
-    @SuppressWarnings({"WeakerAccess", "unused"})
+    @SuppressWarnings({"WeakerAccess"})
     protected static String busyboxVersion;
     @SuppressWarnings("WeakerAccess")
     protected static String pid_list = "";

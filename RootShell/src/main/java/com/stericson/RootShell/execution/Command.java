@@ -34,6 +34,7 @@ import com.stericson.RootShell.RootShell;
 
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 public class Command {
 
     //directly modified by JavaCommand
@@ -130,12 +131,10 @@ public class Command {
         totalOutputProcessed++;
     }
 
-    @SuppressWarnings("unused")
     public void commandTerminated(int id, String reason) {
         //pass
     }
 
-    @SuppressWarnings("unused")
     public void commandCompleted(int id, int exitcode) {
         //pass
     }
@@ -172,7 +171,6 @@ public class Command {
         }
     }
 
-    @SuppressWarnings("unused")
     public final void finish()
     {
         RootShell.log("Command finished at users request!");
@@ -233,7 +231,6 @@ public class Command {
         return executing;
     }
 
-    @SuppressWarnings("unused")
     public final boolean isHandlerEnabled() {
         return handlerEnabled;
     }
@@ -263,7 +260,6 @@ public class Command {
         executing = true;
     }
 
-    @SuppressWarnings("unused")
     public final void terminate()
     {
         RootShell.log("Terminating command at users request!");

@@ -83,6 +83,7 @@ public class DurationDialogPreferenceFragmentX extends PreferenceDialogFragmentC
         mValue.setText(GlobalGUIRoutines.getDurationString(iValue));
 
         mValueDialog = new TimeDurationPickerDialog(context, new TimeDurationPickerDialog.OnDurationSetListener() {
+            @SuppressWarnings("unused")
             @Override
             public void onDurationSet(TimeDurationPicker view, long duration) {
                 int iValue = (int) duration / 1000;

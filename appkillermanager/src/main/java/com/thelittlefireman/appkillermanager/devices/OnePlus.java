@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class OnePlus extends DeviceAbstract {
     @Override
     public boolean isThatRom() {
@@ -17,7 +18,6 @@ public class OnePlus extends DeviceAbstract {
     }
 
     // This is mandatory for new oneplus version android 8
-    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode(){
         return true;

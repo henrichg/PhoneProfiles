@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class ZTE extends DeviceAbstract {
 
     private static final String ZTE_HEARTYSERVICE_PACKAGE_NAME ="com.zte.heartyservice";
@@ -51,7 +52,6 @@ public class ZTE extends DeviceAbstract {
         return null;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0;

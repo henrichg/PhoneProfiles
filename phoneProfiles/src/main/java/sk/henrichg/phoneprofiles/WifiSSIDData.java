@@ -17,7 +17,6 @@ class WifiSSIDData {
     //private boolean custom;
 
     // constructor is required for GSon !!!
-    @SuppressWarnings("unused")
     WifiSSIDData() {}
 
     WifiSSIDData(String ssid, String bssid/*, boolean custom*/)

@@ -76,7 +76,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         nestedFragment = !(this instanceof ProfilesPrefsActivity.ProfilesPrefsRoot);
         //PPApplication.logE("ProfilesPrefsFragment.onCreate", "nestedFragment="+nestedFragment);
 
-        initPreferenceFragment(savedInstanceState);
+        initPreferenceFragment(/*savedInstanceState*/);
 
         updateAllSummary();
     }
@@ -912,7 +912,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         //outState.putInt("startupSource", startupSource);
     }
 
-    private void initPreferenceFragment(@SuppressWarnings("unused") Bundle savedInstanceState) {
+    private void initPreferenceFragment(/*Bundle savedInstanceState*/) {
         prefMng = getPreferenceManager();
 
         preferences = prefMng.getSharedPreferences();
@@ -943,6 +943,7 @@ public class ProfilesPrefsFragment extends PreferenceFragmentCompat
         //Preference preference = prefMng.findPreference(key);
         String title = "";
         //if ((preference != null) && (preference.isEnabled())) {
+        //noinspection IfStatementWithIdenticalBranches
         if (Profile.isProfilePreferenceAllowed(key, null, preferences, true, context).allowed == PreferenceAllowed.PREFERENCE_ALLOWED) {
             if (//key.equals(Profile.PREF_PROFILE_SHOW_IN_ACTIVATOR) ||
                     key.equals(Profile.PREF_PROFILE_ASK_FOR_DURATION) ||

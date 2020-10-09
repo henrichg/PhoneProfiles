@@ -8,6 +8,7 @@ import android.os.Build;
 import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public class Samsung extends DeviceAbstract {
     // crash "com.samsung.android.lool","com.samsung.android.sm.ui.battery.AppSleepListActivity"
     private static final String SAMSUNG_SYSTEMMANAGER_POWERSAVING_ACTION = "com.samsung.android.sm.ACTION_BATTERY";
@@ -39,7 +40,6 @@ public class Samsung extends DeviceAbstract {
         return Manufacturer.SAMSUNG;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode() {
         return true;
@@ -99,7 +99,6 @@ public class Samsung extends DeviceAbstract {
         return null;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public int getHelpImagePowerSaving() {
         return 0; //R.drawable.samsung;

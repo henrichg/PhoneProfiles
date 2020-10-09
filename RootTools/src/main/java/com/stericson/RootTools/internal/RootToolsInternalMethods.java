@@ -48,7 +48,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 
-@SuppressWarnings("JavaDoc")
+@SuppressWarnings({"JavaDoc","unused"})
 public final class RootToolsInternalMethods {
 
     // --------------------

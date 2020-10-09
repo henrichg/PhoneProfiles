@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 /* #ANNOTATIONS @SupportedAnnotationTypes("com.stericson.RootShell.containers.RootClass.Candidate") */
 /* #ANNOTATIONS @SupportedSourceVersion(SourceVersion.RELEASE_6) */
+@SuppressWarnings("unused")
 public class RootClass /* #ANNOTATIONS extends AbstractProcessor */ {
 
     /* #ANNOTATIONS
@@ -27,7 +28,6 @@ public class RootClass /* #ANNOTATIONS extends AbstractProcessor */ {
     }
     */
 
-    @SuppressWarnings("unused")
     static String PATH_TO_DX = "/Users/Chris/Projects/android-sdk-macosx/build-tools/18.0.1/dx";
 
     enum READ_STATE {
@@ -52,7 +52,6 @@ public class RootClass /* #ANNOTATIONS extends AbstractProcessor */ {
         classConstructor.newInstance(actualArgs);
     }
 
-    @SuppressWarnings("unused")
     public @interface Candidate {
 
     }

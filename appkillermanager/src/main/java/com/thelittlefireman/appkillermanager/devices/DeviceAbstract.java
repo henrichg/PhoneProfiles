@@ -12,36 +12,32 @@ import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.LogUtils;
 import com.thelittlefireman.appkillermanager.utils.Manufacturer;
 
+@SuppressWarnings("unused")
 public abstract class DeviceAbstract implements DeviceBase {
 
-    @SuppressWarnings("unused")
     @Override
     public boolean needToUseAlongwithActionDoseMode(){
         return false;
     }
 
-    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageAutoStart(){
         return 0;
     }
 
-    @SuppressWarnings("unused")
     @Override
     @DrawableRes
     public int getHelpImageNotification(){
         return 0;
     }
 
-    @SuppressWarnings("unused")
     @DrawableRes
     @Override
     public int getHelpImagePowerSaving() {
         return 0;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public boolean isActionDozeModeNotNecessary(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

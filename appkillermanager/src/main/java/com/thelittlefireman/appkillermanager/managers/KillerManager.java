@@ -10,6 +10,7 @@ import com.thelittlefireman.appkillermanager.utils.ActionsUtils;
 import com.thelittlefireman.appkillermanager.utils.LogUtils;
 import com.thelittlefireman.appkillermanager.utils.SystemUtils;
 
+@SuppressWarnings("unused")
 public class KillerManager {
 
     public enum Actions {
@@ -31,13 +32,12 @@ public class KillerManager {
 
     private static DeviceBase sDevice;
 
-    @SuppressWarnings("unused")
     public static DeviceBase getDevice() {
         return sDevice;
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static void init(@SuppressWarnings("unused") Context context) {
+    public static void init(Context context) {
         // log error into a distant request bin logs for helps to debug
         // please do no change the adress
         /*HyperLog.initialize(context);
@@ -140,7 +140,6 @@ public class KillerManager {
         doAction(context, Actions.ACTION_AUTOSTART);
     }
 
-    @SuppressWarnings("unused")
     public static void doActionNotification(Context context) {
         doAction(context, Actions.ACTION_NOTIFICATIONS);
     }

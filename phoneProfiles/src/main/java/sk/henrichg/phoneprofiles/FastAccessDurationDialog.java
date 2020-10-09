@@ -167,6 +167,7 @@ class FastAccessDurationDialog implements SeekBar.OnSeekBarChangeListener{
         mEnds.setText(GlobalGUIRoutines.getEndsAtString(iValue));
 
         mValueDialog = new TimeDurationPickerDialog(activity, new TimeDurationPickerDialog.OnDurationSetListener() {
+            @SuppressWarnings("unused")
             @Override
             public void onDurationSet(TimeDurationPicker view, long duration) {
                 int iValue = (int) duration / 1000;

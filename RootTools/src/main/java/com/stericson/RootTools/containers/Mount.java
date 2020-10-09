@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class Mount
 {
     @SuppressWarnings("WeakerAccess")
@@ -58,7 +59,6 @@ public class Mount
         return mMountPoint;
     }
 
-    @SuppressWarnings("unused")
     public String getType()
     {
         return mType;

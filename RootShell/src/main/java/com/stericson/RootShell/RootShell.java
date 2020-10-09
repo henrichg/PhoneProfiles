@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
-@SuppressWarnings("JavaDoc")
+@SuppressWarnings({"JavaDoc","unused"})
 public class RootShell {
 
     // --------------------
@@ -341,7 +341,6 @@ public class RootShell {
      * @param timeout      an <code>int</code> to Indicate the length of time to wait before giving up on opening a shell.
      * @param shellContext the context to execute the shell with
      */
-    @SuppressWarnings("unused")
     public static Shell getShell(boolean root, int timeout, Shell.ShellContext shellContext) throws IOException, TimeoutException, RootDeniedException {
         return getShell(root, timeout, shellContext, 3);
     }
@@ -353,7 +352,6 @@ public class RootShell {
      * @param root         a <code>boolean</code> to Indicate whether or not you want to open a root shell or a standard shell
      * @param shellContext the context to execute the shell with
      */
-    @SuppressWarnings("unused")
     public static Shell getShell(boolean root, Shell.ShellContext shellContext) throws IOException, TimeoutException, RootDeniedException {
         return getShell(root, 0, shellContext, 3);
     }
@@ -384,7 +382,6 @@ public class RootShell {
      * @return <code>true</code> if your app has been given root access.
      * @throws TimeoutException if this operation times out. (cannot determine if access is given)
      */
-    @SuppressWarnings("unused")
     public static boolean isAccessGiven() {
         return isAccessGiven(0, 3);
     }
@@ -534,7 +531,6 @@ public class RootShell {
      *
      * @return true if logging is enabled
      */
-    @SuppressWarnings("unused")
     public static boolean islog() {
         return debugMode;
     }
