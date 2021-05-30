@@ -7,6 +7,9 @@ PhoneProfiles
 [![License](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/henrichg/PhoneProfiles/blob/master/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/HenrichGron)
 
+**** THIS APPLICATION IS NOT MORE MAINTAINED. **** 
+Please look at PhoneProfilesPlus as replacement: https://github.com/henrichg/PhoneProfilesPlus
+
 Android application - manually change device settings like ringer mode, sounds, Wi-Fi, Bluetooth, launcher wallpaper, ...
 
 [Privacy Policy](https://sites.google.com/site/phoneprofiles/home/privacy-policy)
